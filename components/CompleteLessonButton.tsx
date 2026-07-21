@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 
 interface Props {
@@ -8,13 +9,14 @@ interface Props {
 }
 
 export default function CompleteLessonButton({ module, lesson }: Props) {
+  const { userId } = useAuth();
   const [status, setStatus] = useState<
     "idle" | "loading" | "done" | "error"
   >("idle");
   const [message, setMessage] = useState("");
 
   const handleComplete = async () => {
-    if (status !== "idle") return;
+    if (status !== "idle" || !userId) return;
 
     setStatus("loading");
 
@@ -23,7 +25,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: window.__clerk?.user?.id,
+          userId,
           moduleSlug: module,
           lessonSlug: lesson,
         }),
