@@ -9,6 +9,11 @@ const LessonCodeEditor = dynamic(
   { ssr: false },
 );
 
+const CompleteLessonButton = dynamic(
+  () => import("@/components/CompleteLessonButton"),
+  { ssr: false },
+);
+
 const components = {
   CodeEditor: LessonCodeEditor,
 };
@@ -37,6 +42,10 @@ export default async function LessonPage({ params }: Props) {
       <article className="bg-white rounded-lg shadow-md p-8 prose prose-lg max-w-none">
         <MDXRemote source={source} components={components} />
       </article>
+
+      <div className="mt-6 max-w-4xl mx-auto px-4">
+        <CompleteLessonButton module={module} lesson={slug} />
+      </div>
     </div>
   );
 }

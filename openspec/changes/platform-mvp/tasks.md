@@ -86,17 +86,18 @@ Solo `platform-mvp` mergea a main.
 
 ### Phase 6: Progress Tracking + Gamification
 
-- [ ] 6.1 Crear tabla Supabase `progress`: `id, user_id, module_slug, lesson_slug, completed (bool), xp_earned (int), completed_at (timestamptz)`
-- [ ] 6.2 Crear tabla Supabase `streaks`: `id, user_id, current_streak (int), longest_streak (int), last_active_date (date)`
-- [ ] 6.3 Crear `app/api/progress/route.ts` — endpoint POST que upsert progreso y actualiza streaks
-- [ ] 6.4 Crear `lib/gamification/utils.ts` — funciones: `calcXpForLesson()`, `calcLevel(totalXp)`, `updateStreak()`
-- [ ] 6.5 Crear `components/gamification/XPBar.tsx` — barra de progreso hacia el próximo nivel
-- [ ] 6.6 Crear `components/gamification/StreakBadge.tsx` — muestra racha actual con ícono de fuego
-- [ ] 6.7 Crear `components/gamification/LevelBadge.tsx` — muestra nivel actual del usuario
-- [ ] 6.8 Crear `components/gamification/ModuleProgress.tsx` — indicador de avance en el módulo actual
+- [x] 6.1 Tabla Supabase `progress` con RLS (merged en migration.sql)
+- [x] 6.2 Tabla Supabase `streaks` con RLS (merged en migration.sql)
+- [x] 6.3 API `POST /api/progress` — upsert progreso, actualiza streaks, devuelve XP
+- [x] 6.4 `lib/gamification/utils.ts` — calcXpForLesson(), calcLevel(), timestamps
+- [x] 6.5 `components/gamification/XPBar.tsx`
+- [x] 6.6 `components/gamification/StreakBadge.tsx`
+- [x] 6.7 `components/gamification/LevelBadge.tsx`
+- [x] 6.8 `components/gamification/ModuleProgress.tsx`
 
 ### Phase 7: Dashboard + Landing
 
-- [ ] 7.1 Crear `app/(dashboard)/dashboard/page.tsx` — página de progreso general: nivel, XP total, racha, módulos
-- [ ] 7.2 Crear `app/page.tsx` — landing que redirige a `/dashboard` si autenticado o a `/sign-in` si no
-- [ ] 7.3 Verificar que `app/layout.tsx` tenga ClerkProvider, configuración de tema y fuentes
+- [x] 7.1 Dashboard actualizado con LevelBadge, StreakBadge, XPBar, ModuleProgress
+- [x] 7.2 Landing verificado — auth-aware redirect funciona
+- [x] 7.3 Layout verificado — ClerkProvider presente
+- [x] Botón "Marcar como Completado" en lecciones conectado a POST /api/progress

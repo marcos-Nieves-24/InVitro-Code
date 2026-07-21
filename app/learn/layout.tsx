@@ -2,6 +2,11 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 
+interface Lesson {
+  slug: string;
+  title: string;
+}
+
 interface ModuleEntry {
   slug: string;
   name: string;
@@ -25,32 +30,7 @@ function getModules(): ModuleEntry[] {
   }
 }
 
-function getLessons(moduleSlug: string): { slug: string; title: string }[] {
-  const lessonDir = path.join(process.cwd(), "content/modules", moduleSlug);
-
-  try {
-    if (!fs.existsSync(lessonDir)) return [];
-
-    const files = fs.readdirSync(lessonDir);
-    return files
-      .filter((f) => f.endsWith(".mdx"))
-      .map((f) => ({
-        slug: f.replace(/\.mdx$/, ""),
-        title: formatLessonName(f.replace(/\.mdx$/, "")),
-      }));
-  } catch {
-    return [];
-  }
-}
-
 function formatModuleName(slug: string): string {
-  return slug
-    .split(/[-_]/)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
-function formatLessonName(slug: string): string {
   return slug
     .split(/[-_]/)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
@@ -62,8 +42,6 @@ export default function LearnLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const modules = getModules();
-
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -81,13 +59,13 @@ export default function LearnLayout({
           <h2 className="text-xl font-bold text-gray-800 mb-4">Módulos</h2>
 
           <nav>
-            {modules.length === 0 && (
+            {getModules().length === 0 && (
               <p className="text-sm text-gray-500">
                 No hay módulos disponibles aún.
               </p>
             )}
 
-            {modules.map((mod) => {
+            {getModules().map((mod) => {
               const lessons = getLessons(mod.slug);
               return (
                 <div key={mod.slug} className="mb-4">
@@ -117,4 +95,29 @@ export default function LearnLayout({
       <main className="flex-1 overflow-auto">{children}</main>
     </div>
   );
+}
+
+function getLessons(moduleSlug: string): Lesson[] {
+  const lessonDir = path.join(process.cwd(), "content/modules", moduleSlug);
+
+  try {
+    if (!fs.existsSync(lessonDir)) return [];
+
+    const files = fs.readdirSync(lessonDir);
+    return files
+      .filter((f) => f.endsWith(".mdx"))
+      .map((f) => ({
+        slug: f.replace(/\.mdx$/, ""),
+        title: formatLessonName(f.replace(/\.mdx$/, "")),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+function formatLessonName(slug: string): string {
+  return slug
+    .split(/[-_]/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 }
