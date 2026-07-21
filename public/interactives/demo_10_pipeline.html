@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 10: Pipeline Completo de Clasificaci&oacute;n con ML</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#222;line-height:1.6;padding:20px;max-width:1100px;margin:0 auto}
+h1{color:#1f77b4;font-size:1.6rem;margin-bottom:4px}
+h2{color:#444;font-size:1.1rem;font-weight:400;margin-bottom:16px}
+h3{color:#1f77b4;font-size:1.1rem;margin:16px 0 8px}
+.etiqueta{display:inline-block;background:#e8f0fe;color:#1f77b4;padding:4px 12px;border-radius:12px;font-size:.8rem;font-weight:600;margin-bottom:16px}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.1);padding:20px;margin-bottom:20px}
+.tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:8px 18px;background:#e8e8e8;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;font-size:.85rem;transition:all .2s}
+.tab:hover{background:#ddd}
+.tab.activo{background:#1f77b4;color:#fff}
+.tab-content{display:none}
+.tab-content.activo{display:block}
+#plot-paso{width:100%;height:450px}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+.controls label{font-weight:600;font-size:.9rem}
+.controls input[type=range]{width:200px}
+.controls .val{font-family:monospace;background:#eee;padding:2px 6px;border-radius:4px;font-size:.9rem}
+.controls button{background:#1f77b4;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem}
+.controls button:hover{background:#155a8a}
+.tabla-wrap{overflow-x:auto;margin:12px 0}
+.tabla-wrap table{width:100%;border-collapse:collapse;font-size:.85rem}
+.tabla-wrap th,.tabla-wrap td{padding:6px 10px;text-align:left;border-bottom:1px solid #ddd}
+.tabla-wrap th{background:#1f77b4;color:#fff;font-weight:600}
+.tabla-wrap tr:nth-child(even){background:#f5f8fc}
+.tabla-wrap .pos{background:#d4edda;color:#155724;padding:2px 8px;border-radius:4px;font-weight:600}
+.tabla-wrap .neg{background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:4px;font-weight:600}
+.mcq{background:#f0f4f8;border-radius:8px;padding:16px;margin:10px 0}
+.mcq p{font-weight:600;margin-bottom:8px}
+.mcq label{display:block;padding:6px 10px;margin:4px 0;border-radius:6px;cursor:pointer;transition:background .2s}
+.mcq label:hover{background:#e2e8f0}
+.mcq input[type=radio]{margin-right:8px}
+.mcq button{background:#1f77b4;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;margin-top:8px;font-size:.85rem}
+.mcq button:hover{background:#155a8a}
+.feedback{margin-top:8px;padding:8px 12px;border-radius:6px;display:none;font-size:.9rem}
+.feedback.ok{background:#d4edda;color:#155724;display:block}
+.feedback.err{background:#f8d7da;color:#721c24;display:block}
+</style>
+</head>
+<body>
+
+<h1>Pipeline Completo de Clasificaci&oacute;n con Machine Learning</h1>
+<h2>Clasificaci&oacute;n de conidias de <em>Aspergillus fumigatus</em> silvestres vs. mutantes</h2>
+<div class="etiqueta">simulaci&oacute;n educativa sobre datos sint&eacute;ticos</div>
+
+<div class="card">
+<p style="margin-bottom:12px"><strong>Contexto:</strong> Trabajamos con 30 muestras de conidias de <em>Aspergillus fumigatus</em>. Mediciones de &aacute;rea (&micro;m&sup2;), circularidad y textura se usan para clasificar entre cepas silvestres (WT) y mutantes (MUT). Recorreremos las 4 etapas de un pipeline de ML.</p>
+
+<h3>&#191;Antes de interactuar, qu&eacute; crees que pasar&aacute;?</h3>
+<div class="mcq">
+<p>En un proyecto real de ML, &#191;qu&eacute; paso crees que consume m&aacute;s tiempo: entrenar el modelo o preparar los datos?</p>
+<label><input type="radio" name="pred" value="A"> A) Entrenar el modelo, porque es lo m&aacute;s complejo</label>
+<label><input type="radio" name="pred" value="B"> B) Preparar los datos, porque incluye limpieza, an&aacute;lisis y transformaci&oacute;n</label>
+<label><input type="radio" name="pred" value="C"> C) Ambos toman el mismo tiempo</label>
+<label><input type="radio" name="pred" value="D"> D) Elegir el modelo, porque hay que probar muchos</label>
+<button onclick="(function(){var fb=document.querySelector('.feedback-pred');fb.style.display='block';fb.className='feedback ok';})()">Mostrar resultado</button>
+<div class="feedback feedback-pred">Respuesta correcta: B. En proyectos reales de ML, la preparaci&oacute;n de datos (limpieza, exploraci&oacute;n, transformaci&oacute;n, ingenier&iacute;a de caracter&iacute;sticas) consume 60-80% del tiempo. Entrenar el modelo suele ser r&aacute;pido una vez que los datos est&aacute;n listos.</div>
+</div>
+</div>
+
+<div class="card">
+<div class="tabs" id="tabs">
+<div class="tab activo" data-step="1" onclick="cambiarPaso(1)">1. DATOS</div>
+<div class="tab" data-step="2" onclick="cambiarPaso(2)">2. ENTRENAMIENTO</div>
+<div class="tab" data-step="3" onclick="cambiarPaso(3)">3. MODELO</div>
+<div class="tab" data-step="4" onclick="cambiarPaso(4)">4. EVALUACI&Oacute;N</div>
+</div>
+
+<div id="step-1" class="tab-content activo">
+<h3>Datos: 30 muestras de conidias</h3>
+<p style="font-size:.9rem;margin-bottom:8px">Tres caracter&iacute;sticas (features) por muestra y su etiqueta de clase.</p>
+<div class="tabla-wrap" id="tabla-datos"></div>
+</div>
+
+<div id="step-2" class="tab-content">
+<h3>Split Train / Test (70% / 30%)</h3>
+<p style="font-size:.85rem;margin-bottom:8px">Se separan los datos en entrenamiento (train) y prueba (test) para evaluar el modelo con datos no vistos.</p>
+<div id="plot-split" style="width:100%;height:300px"></div>
+</div>
+
+<div id="step-3" class="tab-content">
+<h3>Modelo: KNN (K-Vecinos m&aacute;s Cercanos)</h3>
+<p style="font-size:.85rem;margin-bottom:8px">Ajusta el valor de K con el slider y observa la frontera de decisi&oacute;n.</p>
+<div class="controls">
+<label>K (vecinos): <span id="k-val" class="val">3</span></label>
+<input type="range" id="k-slider" min="1" max="15" step="2" value="3">
+<span style="font-weight:600">Accuracy: <span id="acc-val" class="val" style="color:#d62728">--</span></span>
+</div>
+<div id="plot-knn" style="width:100%;height:450px"></div>
+</div>
+
+<div id="step-4" class="tab-content">
+<h3>Evaluaci&oacute;n del modelo</h3>
+<p style="font-size:.85rem;margin-bottom:8px">Matriz de confusi&oacute;n y m&eacute;tricas de rendimiento.</p>
+<div class="controls">
+<button id="resplit-btn">Re-ejecutar con nuevo split</button>
+</div>
+<div id="plot-mc" style="width:100%;height:380px"></div>
+<div id="metricas" style="margin-top:12px;padding:12px;background:#f0f4f8;border-radius:8px;font-size:.9rem"></div>
+</div>
+</div>
+
+<div style="background:#e8f4f8;border-radius:8px;padding:16px;font-size:.9rem;border-left:4px solid #1f77b4;margin-bottom:20px">
+<strong>&#191;Qu&eacute; aprendimos?</strong> Un pipeline de ML tiene 4 etapas: (1) datos con sus etiquetas, (2) separaci&oacute;n train/test, (3) entrenamiento del modelo KNN, y (4) evaluaci&oacute;n con matriz de confusi&oacute;n y m&eacute;tricas. Cada etapa es crucial para obtener un modelo confiable.
+</div>
+
+<h3>Checkpoint: Eval&uacute;a tu comprensi&oacute;n</h3>
+
+<div class="mcq">
+<p>1. &#191;Por qu&eacute; separamos los datos en entrenamiento y prueba?</p>
+<label><input type="radio" name="q1" value="A"> A) Para que el modelo tenga m&aacute;s datos</label>
+<label><input type="radio" name="q1" value="B"> B) Para evaluar si el modelo funciona con datos que nunca ha visto</label>
+<label><input type="radio" name="q1" value="C"> C) Porque es un requisito de Plotly</label>
+<label><input type="radio" name="q1" value="D"> D) Solo para visualizaci&oacute;n</label>
+<button onclick="mostrarFB('fb1','B')">Mostrar resultado</button>
+<div id="fb1" class="feedback">Respuesta correcta: B. Si evaluamos con los mismos datos de entrenamiento, no sabremos si el modelo realmente aprendi&oacute; patrones generalizables o solo memoriz&oacute;. El split test simula datos nuevos no vistos.</div>
+</div>
+
+<div class="mcq">
+<p>2. &#191;Qu&eacute; mide la exactitud (accuracy) en clasificaci&oacute;n?</p>
+<label><input type="radio" name="q2" value="A"> A) El n&uacute;mero de aciertos sobre el total de predicciones</label>
+<label><input type="radio" name="q2" value="B"> B) Solo los verdaderos positivos</label>
+<label><input type="radio" name="q2" value="C"> C) La velocidad del modelo</label>
+<label><input type="radio" name="q2" value="D"> D) Los errores del modelo</label>
+<button onclick="mostrarFB('fb2','A')">Mostrar resultado</button>
+<div id="fb2" class="feedback">Respuesta correcta: A. Accuracy = (VP + VN) / (VP + VN + FP + FN). Mide la proporci&oacute;n de predicciones correctas, tanto positivas como negativas.</div>
+</div>
+
+<div class="mcq">
+<p>3. &#191;Qu&eacute; representa cada celda en una matriz de confusi&oacute;n?</p>
+<label><input type="radio" name="q3" value="A"> A) Los valores de los datos de entrada</label>
+<label><input type="radio" name="q3" value="B"> B) La combinaci&oacute;n de clase real (filas) vs. clase predicha (columnas)</label>
+<label><input type="radio" name="q3" value="C"> C) Las distancias entre los vecinos m&aacute;s cercanos</label>
+<label><input type="radio" name="q3" value="D"> D) Los tiempos de entrenamiento</label>
+<button onclick="mostrarFB('fb3','B')">Mostrar resultado</button>
+<div id="fb3" class="feedback">Respuesta correcta: B. La matriz de confusi&oacute;n cruza las etiquetas reales (eje Y) contra las predichas (eje X). La diagonal son aciertos; fuera de la diagonal son errores.</div>
+</div>
+
+<script>
+const datosCompletos = [
+  {area:12.3,cir:0.85,tex:0.32,label:'WT'},{area:14.1,cir:0.88,tex:0.35,label:'WT'},{area:11.8,cir:0.82,tex:0.30,label:'WT'},
+  {area:13.5,cir:0.87,tex:0.33,label:'WT'},{area:10.9,cir:0.80,tex:0.28,label:'WT'},{area:14.8,cir:0.90,tex:0.36,label:'WT'},
+  {area:12.7,cir:0.84,tex:0.31,label:'WT'},{area:11.5,cir:0.81,tex:0.29,label:'WT'},{area:13.2,cir:0.86,tex:0.34,label:'WT'},
+  {area:15.1,cir:0.91,tex:0.37,label:'WT'},{area:9.8,cir:0.78,tex:0.25,label:'WT'},{area:13.9,cir:0.89,tex:0.34,label:'WT'},
+  {area:16.2,cir:0.72,tex:0.55,label:'MUT'},{area:17.8,cir:0.68,tex:0.62,label:'MUT'},{area:15.5,cir:0.75,tex:0.52,label:'MUT'},
+  {area:18.3,cir:0.65,tex:0.65,label:'MUT'},{area:14.9,cir:0.73,tex:0.50,label:'MUT'},{area:19.1,cir:0.62,tex:0.68,label:'MUT'},
+  {area:16.8,cir:0.70,tex:0.58,label:'MUT'},{area:17.2,cir:0.69,tex:0.60,label:'MUT'},{area:15.8,cir:0.74,tex:0.53,label:'MUT'},
+  {area:20.1,cir:0.60,tex:0.72,label:'MUT'},{area:14.2,cir:0.77,tex:0.48,label:'MUT'},{area:18.9,cir:0.64,tex:0.66,label:'MUT'},
+  {area:11.2,cir:0.79,tex:0.75,label:'MUT'},{area:13.0,cir:0.83,tex:0.26,label:'WT'},{area:10.5,cir:0.76,tex:0.40,label:'MUT'},
+  {area:12.0,cir:0.82,tex:0.30,label:'WT'},{area:16.5,cir:0.71,tex:0.56,label:'MUT'},{area:14.5,cir:0.86,tex:0.33,label:'WT'}
+];
+
+function generarSplit() {
+  const shuffled = [...datosCompletos];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const splitIdx = Math.floor(shuffled.length * 0.7);
+  return {train: shuffled.slice(0, splitIdx), test: shuffled.slice(splitIdx)};
+}
+
+let splitActual = generarSplit();
+let kActual = 3;
+
+function mostrarTabla() {
+  const html = ['<table><thead><tr><th>#</th><th>&Aacute;rea (&micro;m&sup2;)</th><th>Circularidad</th><th>Textura</th><th>Clase</th></tr></thead><tbody>'];
+  datosCompletos.forEach((d,i) => {
+    html.push(`<tr><td>${i+1}</td><td>${d.area.toFixed(1)}</td><td>${d.cir.toFixed(2)}</td><td>${d.tex.toFixed(2)}</td><td><span class="${d.label==='WT'?'pos':'neg'}">${d.label}</span></td></tr>`);
+  });
+  html.push('</tbody></table>');
+  document.getElementById('tabla-datos').innerHTML = html.join('');
+}
+
+function mostrarSplit() {
+  const trainCount = splitActual.train.length;
+  const testCount = splitActual.test.length;
+  const data = [{
+    type:'bar',
+    x:['Entrenamiento (Train)','Prueba (Test)'],
+    y:[trainCount, testCount],
+    text:[`${trainCount} muestras (${Math.round(trainCount/30*100)}%)`, `${testCount} muestras (${Math.round(testCount/30*100)}%)`],
+    textposition:'outside',
+    marker:{color:['#1f77b4','#d62728']},
+    hovertemplate:'%{x}: %{y} muestras<extra></extra>'
+  }];
+  Plotly.newReact('plot-split', data, {
+    title:{text:'Distribuci&oacute;n Train/Test (70/30)', font:{size:13}},
+    yaxis:{title:'Cantidad de muestras'},
+    margin:{l:50,r:20,t:40,b:50},
+    paper_bgcolor:'rgba(0,0,0,0)',
+    showlegend:false
+  }, {responsive:true});
+  
+  // Show distribution chart by class
+  const trainWT = splitActual.train.filter(d=>d.label==='WT').length;
+  const trainMUT = splitActual.train.length - trainWT;
+  const testWT = splitActual.test.filter(d=>d.label==='WT').length;
+  const testMUT = splitActual.test.length - testWT;
+  
+  const distData = [{
+    type:'bar',
+    x:['WT','MUT','WT','MUT'],
+    y:[trainWT, trainMUT, testWT, testMUT],
+    text:[`Train: ${trainWT}`, `Train: ${trainMUT}`, `Test: ${testWT}`, `Test: ${testMUT}`],
+    textposition:'outside',
+    marker:{color:['#1f77b4','#1f77b4','#d62728','#d62728'], opacity:[0.8,0.8,0.8,0.8]},
+    hovertemplate:'%{text}<extra></extra>',
+    xbins: {start:-0.5, end:3.5}
+  }];
+  // We'll skip this second plot for simplicity, just use the first one
+}
+
+function knnClassify(k, train, point) {
+  const dists = train.map(d => ({
+    dist: Math.sqrt((d.area-point.area)**2 + (d.cir-point.cir)**2 + (d.tex-point.tex)**2),
+    label: d.label
+  }));
+  dists.sort((a,b) => a.dist - b.dist);
+  const nearest = dists.slice(0, k);
+  const wtCount = nearest.filter(d => d.label === 'WT').length;
+  return wtCount > k/2 ? 'WT' : 'MUT';
+}
+
+function mostrarKNN() {
+  kActual = parseInt(document.getElementById('k-slider').value);
+  document.getElementById('k-val').textContent = kActual;
+  
+  const train = splitActual.train;
+  const test = splitActual.test;
+  
+  // Calcular accuracy
+  let correctos = 0;
+  test.forEach(d => {
+    const pred = knnClassify(kActual, train, d);
+    if (pred === d.label) correctos++;
+  });
+  const accuracy = (correctos / test.length * 100).toFixed(1);
+  document.getElementById('acc-val').textContent = accuracy + '%';
+  
+  // Scatter plot de los datos de entrenamiento coloreados por clase
+  const trainWT = train.filter(d => d.label === 'WT').map(d => ({x:d.area, y:d.cir, tex:d.tex}));
+  const trainMUT = train.filter(d => d.label === 'MUT').map(d => ({x:d.area, y:d.cir, tex:d.tex}));
+  const testWT = test.filter(d => d.label === 'WT').map(d => ({x:d.area, y:d.cir, tex:d.tex}));
+  const testMUT = test.filter(d => d.label === 'MUT').map(d => ({x:d.area, y:d.cir, tex:d.tex}));
+
+  const trainWTTrace = {
+    x:trainWT.map(d=>d.x), y:trainWT.map(d=>d.y), mode:'markers', type:'scatter',
+    marker:{color:'#1f77b4', size:10, symbol:'circle', line:{color:'#fff',width:1}},
+    name:'Train WT', text:trainWT.map(d=>'Textura: '+d.tex.toFixed(2))
+  };
+  const trainMUTTrace = {
+    x:trainMUT.map(d=>d.x), y:trainMUT.map(d=>d.y), mode:'markers', type:'scatter',
+    marker:{color:'#d62728', size:10, symbol:'circle', line:{color:'#fff',width:1}},
+    name:'Train MUT', text:trainMUT.map(d=>'Textura: '+d.tex.toFixed(2))
+  };
+  const testWTTrace = {
+    x:testWT.map(d=>d.x), y:testWT.map(d=>d.y), mode:'markers', type:'scatter',
+    marker:{color:'#1f77b4', size:12, symbol:'diamond', line:{color:'#333',width:1.5}},
+    name:'Test WT (real)', text:testWT.map(d=>'Textura: '+d.tex.toFixed(2))
+  };
+  const testMUTTrace = {
+    x:testMUT.map(d=>d.x), y:testMUT.map(d=>d.y), mode:'markers', type:'scatter',
+    marker:{color:'#d62728', size:12, symbol:'diamond', line:{color:'#333',width:1.5}},
+    name:'Test MUT (real)', text:testMUT.map(d=>'Textura: '+d.tex.toFixed(2))
+  };
+  
+  // Frontera de decision (simulada con grid)
+  const xRange = [8, 22], yRange = [0.55, 0.95];
+  const gridX = [], gridY = [], gridZ = [];
+  for (let i = 0; i < 30; i++) {
+    for (let j = 0; j < 30; j++) {
+      const px = xRange[0] + (xRange[1]-xRange[0])*i/29;
+      const py = yRange[0] + (yRange[1]-yRange[0])*j/29;
+      gridX.push(px);
+      gridY.push(py);
+      gridZ.push(knnClassify(kActual, train, {area:px, cir:py, tex:0.5}) === 'WT' ? 1 : 0);
+    }
+  }
+  
+  const frontierTrace = {
+    type:'scatter', x:gridX, y:gridY, mode:'markers',
+    marker:{
+      size:4, color:gridZ, colorscale:[[0,'rgba(214,39,40,0.15)'],[1,'rgba(31,119,180,0.15)']],
+      showscale:false
+    },
+    name:'Frontera', hoverinfo:'skip'
+  };
+  
+  Plotly.newReact('plot-knn', [frontierTrace, trainWTTrace, trainMUTTrace, testWTTrace, testMUTTrace], {
+    title:{text:'KNN: Frontera de decisi&oacute;n (&Aacute;rea vs. Circularidad) &mdash; C&iacute;rculos=Train, Diamantes=Test', font:{size:12}},
+    xaxis:{title:'&Aacute;rea (&micro;m&sup2;)', range:[8,22]},
+    yaxis:{title:'Circularidad', range:[0.55,0.95]},
+    margin:{l:50,r:20,t:50,b:50},
+    paper_bgcolor:'rgba(0,0,0,0)',
+    plot_bgcolor:'rgba(0,0,0,0)',
+    hovermode:'closest',
+    showlegend:true, legend:{orientation:'h',y:-0.25,font:{size:9}}
+  }, {responsive:true});
+}
+
+function mostrarEvaluacion() {
+  const train = splitActual.train;
+  const test = splitActual.test;
+  
+  // Predicciones
+  const preds = test.map(d => ({real:d.label, pred:knnClassify(kActual, train, d)}));
+  
+  // Matriz de confusion
+  let VP=0,VN=0,FP=0,FN=0;
+  preds.forEach(p => {
+    if (p.real==='WT' && p.pred==='WT') VN++;
+    else if (p.real==='WT' && p.pred==='MUT') FP++;
+    else if (p.real==='MUT' && p.pred==='MUT') VP++;
+    else if (p.real==='MUT' && p.pred==='WT') FN++;
+  });
+  
+  const matrixData = [{
+    type:'heatmap', z:[[VN, FP], [FN, VP]],
+    x:['Pred. WT', 'Pred. MUT'], y:['Real WT', 'Real MUT'],
+    colorscale:[[0,'#f8d7da'],[0.5,'#fff'],[1,'#d4edda']],
+    zmin:0, zmax:Math.max(VP,VN,FP,FN)+1,
+    text:[[String(VN), String(FP)], [String(FN), String(VP)]],
+    texttemplate:'<b>%{text}</b>',
+    hovertemplate:'%{x}<br>%{y}: %{text}<extra></extra>',
+    showscale:false
+  }];
+  
+  Plotly.newReact('plot-mc', matrixData, {
+    title:{text:'Matriz de Confusi&oacute;n', font:{size:13}},
+    xaxis:{title:'Clase Predicha', side:'bottom'},
+    yaxis:{title:'Clase Real', autorange:'reversed'},
+    margin:{l:80,r:20,t:50,b:60},
+    paper_bgcolor:'rgba(0,0,0,0)',
+    annotations:[
+      {x:'Pred. WT',y:'Real WT',text:'VN',showarrow:false,font:{size:1,color:'transparent'}},
+      {x:'Pred. MUT',y:'Real WT',text:'FP',showarrow:false,font:{size:1,color:'transparent'}},
+      {x:'Pred. WT',y:'Real MUT',text:'FN',showarrow:false,font:{size:1,color:'transparent'}},
+      {x:'Pred. MUT',y:'Real MUT',text:'VP',showarrow:false,font:{size:1,color:'transparent'}}
+    ]
+  }, {responsive:true});
+  
+  const total = preds.length;
+  const accuracy = ((VP+VN)/total*100).toFixed(1);
+  const precision = VP+FP>0 ? (VP/(VP+FP)*100).toFixed(1) : 'N/A';
+  const recall = VP+FN>0 ? (VP/(VP+FN)*100).toFixed(1) : 'N/A';
+  const f1 = precision!=='N/A'&&recall!=='N/A' ? (2*parseFloat(precision)*parseFloat(recall)/(parseFloat(precision)+parseFloat(recall))).toFixed(1) : 'N/A';
+  
+  document.getElementById('metricas').innerHTML =
+    `<strong>M&eacute;tricas (K=${kActual}):</strong><br>` +
+    `<strong>Accuracy:</strong> ${accuracy}% &bull; ` +
+    `<strong>Precision:</strong> ${precision}% &bull; ` +
+    `<strong>Recall:</strong> ${recall}% &bull; ` +
+    `<strong>F1-Score:</strong> ${f1}%<br>` +
+    `<span style="font-size:.8rem;color:#666">VP=${VP}, VN=${VN}, FP=${FP}, FN=${FN} &mdash; Total: ${total} muestras</span>`;
+}
+
+function cambiarPaso(paso) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('activo'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('activo'));
+  document.querySelector(`.tab[data-step="${paso}"]`).classList.add('activo');
+  document.getElementById(`step-${paso}`).classList.add('activo');
+  
+  if (paso === 1) mostrarTabla();
+  else if (paso === 2) mostrarSplit();
+  else if (paso === 3) mostrarKNN();
+  else if (paso === 4) mostrarEvaluacion();
+}
+
+document.getElementById('k-slider').addEventListener('input', function() {
+  if (document.getElementById('step-3').classList.contains('activo')) mostrarKNN();
+});
+
+document.getElementById('resplit-btn').addEventListener('click', function() {
+  splitActual = generarSplit();
+  mostrarEvaluacion();
+});
+
+mostrarTabla();
+
+function mostrarFB(id, correcta) {
+  const mcqDiv = document.getElementById(id).parentElement;
+  const seleccionado = mcqDiv.querySelector('input[type=radio]:checked');
+  const fb = document.getElementById(id);
+  if (!seleccionado) {
+    fb.textContent = 'Selecciona una opci\u00f3n primero.';
+    fb.className = 'feedback err';
+    fb.style.display = 'block';
+    return;
+  }
+  if (seleccionado.value === correcta) {
+    fb.className = 'feedback ok';
+  } else {
+    fb.className = 'feedback err';
+    const msgs = {'fb1B':'Incorrecto. El split test es necesario para evaluar generalizaci\u00f3n.',
+      'fb2A':'Incorrecto. Accuracy = (VP+VN)/Total.',
+      'fb3B':'Incorrecto. La matriz cruza valor real vs. predicho.'};
+    fb.innerHTML = msgs[id+correcta] || 'Incorrecto. Revisa el concepto e intenta de nuevo.';
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>

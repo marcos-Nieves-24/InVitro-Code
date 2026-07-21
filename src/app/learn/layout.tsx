@@ -98,17 +98,22 @@ export default function LearnLayout({
 }
 
 function getLessons(moduleSlug: string): Lesson[] {
-  const lessonDir = path.join(process.cwd(), "src/content/modules", moduleSlug);
+  const lessonDir = path.join(
+    process.cwd(),
+    "src/content/modules",
+    moduleSlug,
+    "lessons",
+  );
 
   try {
     if (!fs.existsSync(lessonDir)) return [];
 
-    const files = fs.readdirSync(lessonDir);
-    return files
-      .filter((f) => f.endsWith(".mdx"))
-      .map((f) => ({
-        slug: f.replace(/\.mdx$/, ""),
-        title: formatLessonName(f.replace(/\.mdx$/, "")),
+    const entries = fs.readdirSync(lessonDir, { withFileTypes: true });
+    return entries
+      .filter((e) => e.isDirectory())
+      .map((e) => ({
+        slug: e.name,
+        title: formatLessonName(e.name),
       }));
   } catch {
     return [];
@@ -117,6 +122,7 @@ function getLessons(moduleSlug: string): Lesson[] {
 
 function formatLessonName(slug: string): string {
   return slug
+    .replace(/^lesson\d+_/, "") // strip "lesson01_" prefix
     .split(/[-_]/)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");

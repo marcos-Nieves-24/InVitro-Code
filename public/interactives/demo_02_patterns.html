@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 02: Reconocimiento visual de patrones</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #222; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; color: #1f77b4; margin-bottom: 4px; }
+  .subtitle { font-size: 0.9rem; color: #555; margin-bottom: 16px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+  .badge-sim { background: #fff3cd; color: #856404; }
+  .predict-box { background: #e8f4f8; border-left: 4px solid #1f77b4; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .predict-box h3 { font-size: 0.95rem; margin-bottom: 8px; color: #1f77b4; }
+  .predict-box label { display: block; font-size: 0.85rem; margin: 4px 0; cursor: pointer; }
+  .predict-box input { margin-right: 6px; }
+  .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0; }
+  .grid-item { background: #fff; border-radius: 8px; padding: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .grid-item .plot-mini { width: 100%; height: 150px; }
+  .grid-item .species-select { display: flex; gap: 4px; margin-top: 6px; justify-content: center; }
+  .grid-item .species-select button { padding: 4px 10px; font-size: 0.75rem; border: 2px solid #ccc; border-radius: 4px; cursor: pointer; background: #fff; font-weight: 600; transition: all 0.15s; }
+  .grid-item .species-select button.selected-aspergillus { border-color: #1f77b4; background: #1f77b4; color: #fff; }
+  .grid-item .species-select button.selected-penicillium { border-color: #d62728; background: #d62728; color: #fff; }
+  .grid-item .label-id { text-align: center; font-size: 0.75rem; color: #888; margin-bottom: 4px; }
+  #result-area { margin: 16px 0; padding: 12px; border-radius: 8px; display: none; text-align: center; font-size: 1rem; font-weight: 600; }
+  .result-pass { background: #d4edda; color: #155724; }
+  .result-fail { background: #f8d7da; color: #721c24; }
+  .btn { padding: 8px 20px; border: none; border-radius: 6px; font-size: 0.9rem; cursor: pointer; background: #1f77b4; color: #fff; margin: 4px; }
+  .btn:hover { opacity: 0.9; }
+  .btn-secondary { background: #6c757d; }
+  .checkpoint { background: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 20px; }
+  .checkpoint h3 { font-size: 1rem; margin-bottom: 10px; color: #d62728; }
+  .mcq { margin: 10px 0; padding: 10px; background: #fff; border-radius: 6px; }
+  .mcq p { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .mcq label { display: block; font-size: 0.85rem; margin: 3px 0; cursor: pointer; }
+  .mcq input { margin-right: 6px; }
+  .feedback { margin-top: 6px; padding: 8px; border-radius: 6px; font-size: 0.85rem; display: none; }
+  .correct { background: #d4edda; color: #155724; }
+  .incorrect { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Reconocimiento visual de patrones</h1>
+  <div class="subtitle">¿Puedes distinguir Aspergillus de Penicillium observando patrones?</div>
+  <span class="badge badge-sim">simulación educativa</span>
+
+  <div class="predict-box">
+    <h3>Antes de interactuar, ¿qué crees que pasará?</h3>
+    <p style="font-size:0.85rem;margin-bottom:6px;">¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?</p>
+    <label><input type="radio" name="pred_q1" value="a"> Sí, el humano siempre será mejor reconociendo patrones visuales</label>
+    <label><input type="radio" name="pred_q1" value="b"> No, un algoritmo simple puede superar al humano si los patrones son numéricos</label>
+    <label><input type="radio" name="pred_q1" value="c"> Depende del número de muestras</label>
+  </div>
+
+  <p style="font-size:0.85rem;margin-bottom:8px;color:#555;">Cada grid de 5×5 representa los píxels de una imagen de conidia. Los valores son 0 (fondo) y 1 (conidia). Selecciona si crees que es <strong>Aspergillus</strong> o <strong>Penicillium</strong> para cada patrón.</p>
+
+  <div class="grid-container" id="grid"></div>
+
+  <div style="text-align:center;margin:12px 0;">
+    <button class="btn" id="submit-btn" onclick="checkAnswers()">Verificar respuestas</button>
+    <button class="btn btn-secondary" onclick="resetGame()">Reiniciar</button>
+  </div>
+
+  <div id="result-area"></div>
+
+  <div class="checkpoint">
+    <h3>Checkpoint: Reconocimiento de patrones</h3>
+    <div class="mcq">
+      <p>1. ¿Qué hace un humano cuando reconoce visualmente un patrón?</p>
+      <label><input type="radio" name="cq1" value="a"> Cuenta píxels uno por uno</label>
+      <label><input type="radio" name="cq1" value="b"> Identifica características visuales como forma, textura y distribución</label>
+      <label><input type="radio" name="cq1" value="c"> Ejecuta un algoritmo matemático mentalmente</label>
+      <button class="btn" onclick="showFeedback('cq1')">Mostrar resultado</button>
+      <div id="fb-cq1" class="feedback"></div>
+    </div>
+    <div class="mcq">
+      <p>2. ¿Por qué una máquina necesita datos numéricos para clasificar?</p>
+      <label><input type="radio" name="cq2" value="a"> Porque las máquinas solo procesan números, no formas visuales</label>
+      <label><input type="radio" name="cq2" value="b"> Porque los números son más precisos que las imágenes</label>
+      <label><input type="radio" name="cq2" value="c"> Porque las imágenes no contienen información útil</label>
+      <button class="btn" onclick="showFeedback('cq2')">Mostrar resultado</button>
+      <div id="fb-cq2" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const patterns = [
+  {id:1,grid:[[0,0,1,1,0],[0,1,1,1,1],[1,1,1,1,1],[1,1,1,1,0],[0,1,1,0,0]],correct:'Aspergillus'},
+  {id:2,grid:[[1,1,0,0,0],[1,1,1,0,0],[1,1,1,1,0],[1,1,1,1,1],[0,1,1,1,1]],correct:'Penicillium'},
+  {id:3,grid:[[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[1,1,1,0,0],[1,1,0,0,0]],correct:'Aspergillus'},
+  {id:4,grid:[[1,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]],correct:'Penicillium'},
+  {id:5,grid:[[1,0,0,0,0],[1,1,0,0,0],[1,1,1,1,0],[1,1,1,1,1],[0,1,1,1,1]],correct:'Aspergillus'},
+  {id:6,grid:[[0,0,0,1,1],[0,0,1,1,1],[0,1,1,1,1],[1,1,1,1,0],[1,1,0,0,0]],correct:'Penicillium'},
+  {id:7,grid:[[0,0,1,1,1],[0,1,1,1,1],[1,1,1,1,1],[1,1,1,1,0],[1,1,1,0,0]],correct:'Aspergillus'},
+  {id:8,grid:[[1,1,1,1,0],[1,1,1,1,0],[0,1,1,1,0],[0,0,1,1,1],[0,0,1,1,1]],correct:'Penicillium'}
+];
+
+let userAnswers = {};
+
+function renderGrids() {
+  const container = document.getElementById('grid');
+  container.innerHTML = '';
+  patterns.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'grid-item';
+    div.innerHTML = `<div class="label-id">Conidia #${p.id}</div><div id="mini-plot-${idx}" class="plot-mini"></div><div class="species-select" id="sel-${idx}"><button data-idx="${idx}" data-species="Aspergillus" onclick="selectSpecies(${idx},'Aspergillus')">Aspergillus</button><button data-idx="${idx}" data-species="Penicillium" onclick="selectSpecies(${idx},'Penicillium')">Penicillium</button></div>`;
+    container.appendChild(div);
+  });
+  patterns.forEach((p, idx) => {
+    const z = [...p.grid].reverse();
+    const trace = {z:z, type:'heatmap', colorscale:[[0,'#f0f0f0'],[1,'#1f77b4']], showscale:false, xgap:2, ygap:2};
+    const layout = {margin:{l:0,r:0,t:0,b:0}, plot_bgcolor:'#fff', paper_bgcolor:'rgba(0,0,0,0)', xaxis:{showticklabels:false,showgrid:false,zeroline:false,range:[-0.5,4.5]}, yaxis:{showticklabels:false,showgrid:false,zeroline:false,range:[-0.5,4.5],scaleanchor:'x'}, width:null, height:null, autosize:true};
+    Plotly.newPlot(`mini-plot-${idx}`, [trace], layout, {responsive:true,displayModeBar:false});
+  });
+}
+
+function selectSpecies(idx, species) {
+  userAnswers[idx] = species;
+  const btns = document.querySelectorAll(`#sel-${idx} button`);
+  btns.forEach(b => {
+    b.className = '';
+    if (b.dataset.species === species) {
+      b.className = species === 'Aspergillus' ? 'selected-aspergillus' : 'selected-penicillium';
+    }
+  });
+}
+
+function checkAnswers() {
+  let correct = 0;
+  patterns.forEach((p, idx) => {
+    if (userAnswers[idx] === p.correct) correct++;
+  });
+  const total = patterns.length;
+  const pct = Math.round(correct/total*100);
+  const el = document.getElementById('result-area');
+  el.style.display = 'block';
+  if (pct >= 75) {
+    el.className = 'result-pass';
+    el.innerHTML = `¡Acertaste ${correct} de ${total} (${pct}%)! Tienes buen ojo para patrones de conidias.`;
+  } else {
+    el.className = 'result-fail';
+    el.innerHTML = `Acertaste ${correct} de ${total} (${pct}%). Los patrones no siempre son fáciles de distinguir visualmente.`;
+  }
+}
+
+function resetGame() {
+  userAnswers = {};
+  document.getElementById('result-area').style.display = 'none';
+  patterns.forEach((_, idx) => {
+    const btns = document.querySelectorAll(`#sel-${idx} button`);
+    btns.forEach(b => b.className = '');
+  });
+}
+
+renderGrids();
+
+function showFeedback(id) {
+  const radios = document.getElementsByName(id);
+  let selected = null;
+  for (const r of radios) { if (r.checked) { selected = r.value; break; } }
+  const fb = document.getElementById('fb-' + id);
+  if (!selected) { fb.className = 'feedback incorrect'; fb.textContent = 'Selecciona una opción primero.'; fb.style.display = 'block'; return; }
+  const answers = {
+    'cq1': {correct:'b', msg:'¡Correcto! El cerebro humano reconoce patrones mediante características visuales como bordes, texturas y formas, no cuenta píxels individuales.'},
+    'cq2': {correct:'a', msg:'¡Correcto! Las máquinas convierten imágenes en números (matrices de píxels) y procesan esos valores matemáticamente.'}
+  };
+  const ans = answers[id];
+  if (selected === ans.correct) { fb.className = 'feedback correct'; fb.textContent = ans.msg; }
+  else {
+    let extra = (id === 'cq1') ? 'El reconocimiento visual humano es holístico, no algorítmico.' : 'Sin datos numéricos, las máquinas no pueden aplicar modelos matemáticos.';
+    fb.className = 'feedback incorrect'; fb.textContent = 'No es correcto. ' + extra;
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>

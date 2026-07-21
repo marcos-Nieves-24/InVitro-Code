@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 03: Reglas fijas vs IA</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #222; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; color: #1f77b4; margin-bottom: 4px; }
+  .subtitle { font-size: 0.9rem; color: #555; margin-bottom: 16px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+  .badge-sim { background: #fff3cd; color: #856404; }
+  .predict-box { background: #e8f4f8; border-left: 4px solid #1f77b4; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .predict-box h3 { font-size: 0.95rem; margin-bottom: 8px; color: #1f77b4; }
+  .predict-box label { display: block; font-size: 0.85rem; margin: 4px 0; cursor: pointer; }
+  .predict-box input { margin-right: 6px; }
+  #plot { width: 100%; height: 450px; }
+  .slider-row { display: flex; gap: 20px; margin: 12px 0; flex-wrap: wrap; }
+  .slider-group { flex: 1; min-width: 200px; }
+  .slider-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+  .slider-group input { width: 100%; }
+  .slider-group .val { font-size: 0.8rem; color: #555; }
+  .stats { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
+  .stat-card { background: #fff; padding: 10px 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); flex:1; min-width:120px; text-align:center; }
+  .stat-card .num { font-size: 1.5rem; font-weight: 700; }
+  .stat-card .num.good { color: #28a745; }
+  .stat-card .num.bad { color: #d62728; }
+  .stat-card .lbl { font-size: 0.75rem; color: #666; }
+  .rule-display { background: #f0f0f0; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; margin: 8px 0; }
+  .checkpoint { background: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 20px; }
+  .checkpoint h3 { font-size: 1rem; margin-bottom: 10px; color: #d62728; }
+  .mcq { margin: 10px 0; padding: 10px; background: #fff; border-radius: 6px; }
+  .mcq p { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .mcq label { display: block; font-size: 0.85rem; margin: 3px 0; cursor: pointer; }
+  .mcq input { margin-right: 6px; }
+  .btn { padding: 6px 16px; border: none; border-radius: 6px; font-size: 0.85rem; cursor: pointer; background: #1f77b4; color: #fff; }
+  .btn:hover { opacity: 0.9; }
+  .feedback { margin-top: 6px; padding: 8px; border-radius: 6px; font-size: 0.85rem; display: none; }
+  .correct { background: #d4edda; color: #155724; }
+  .incorrect { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Reglas fijas vs Aprendizaje Automático</h1>
+  <div class="subtitle">Clasificador manual por umbrales: ¿podemos separar las conidias con reglas simples?</div>
+  <span class="badge badge-sim">simulación educativa</span>
+
+  <div class="predict-box">
+    <h3>Antes de interactuar, ¿qué crees que pasará?</h3>
+    <p style="font-size:0.85rem;margin-bottom:6px;">Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?</p>
+    <label><input type="radio" name="pred_q1" value="a"> Sí, con las reglas adecuadas podemos clasificar todas</label>
+    <label><input type="radio" name="pred_q1" value="b"> No, porque las reglas fijas no capturan toda la variabilidad natural</label>
+    <label><input type="radio" name="pred_q1" value="c"> Sí, solo necesitamos una regla con área</label>
+  </div>
+
+  <div class="rule-display" id="rule-display">Regla: SI área &gt; 35.0 Y circularidad &gt; 0.80 ENTONCES Aspergillus, SINO Penicillium</div>
+
+  <div id="plot"></div>
+
+  <div class="slider-row">
+    <div class="slider-group">
+      <label>Umbral de área: <span id="area-val" class="val">35.0</span> µm²</label>
+      <input type="range" id="area-slider" min="20" max="50" step="0.5" value="35">
+    </div>
+    <div class="slider-group">
+      <label>Umbral de circularidad: <span id="circ-val" class="val">0.80</span></label>
+      <input type="range" id="circ-slider" min="0.5" max="1.0" step="0.01" value="0.80">
+    </div>
+  </div>
+
+  <div class="stats" id="stats">
+    <div class="stat-card"><div class="num good" id="accuracy-display">0%</div><div class="lbl">Accuracy</div></div>
+    <div class="stat-card"><div class="num good" id="tp-display">0</div><div class="lbl">Aspergillus correctos</div></div>
+    <div class="stat-card"><div class="num good" id="tn-display">0</div><div class="lbl">Penicillium correctos</div></div>
+    <div class="stat-card"><div class="num bad" id="fp-display">0</div><div class="lbl">Falsos positivos</div></div>
+  </div>
+
+  <div class="checkpoint">
+    <h3>Checkpoint: Reglas fijas vs ML</h3>
+    <div class="mcq">
+      <p>1. ¿Cuál es la principal limitación de un clasificador basado en reglas fijas?</p>
+      <label><input type="radio" name="cq1" value="a"> Es demasiado lento para ejecutarse</label>
+      <label><input type="radio" name="cq1" value="b"> No encuentra umbrales óptimos y no se adapta a nuevos datos</label>
+      <label><input type="radio" name="cq1" value="c"> Solo funciona con datos categóricos</label>
+      <button class="btn" onclick="showFeedback('cq1')">Mostrar resultado</button>
+      <div id="fb-cq1" class="feedback"></div>
+    </div>
+    <div class="mcq">
+      <p>2. ¿Qué ventaja tiene el aprendizaje automático sobre las reglas fijas?</p>
+      <label><input type="radio" name="cq2" value="a"> El ML puede encontrar patrones complejos que las reglas manuales no capturan</label>
+      <label><input type="radio" name="cq2" value="b"> El ML siempre tiene 100% de precisión</label>
+      <label><input type="radio" name="cq2" value="c"> El ML no necesita datos para entrenar</label>
+      <button class="btn" onclick="showFeedback('cq2')">Mostrar resultado</button>
+      <div id="fb-cq2" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const samples = [
+  {area:38.2,circ:0.71,especie:'Aspergillus'},{area:32.1,circ:0.85,especie:'Aspergillus'},{area:45.3,circ:0.62,especie:'Aspergillus'},
+  {area:28.7,circ:0.88,especie:'Penicillium'},{area:41.6,circ:0.68,especie:'Aspergillus'},{area:26.4,circ:0.91,especie:'Penicillium'},
+  {area:35.9,circ:0.79,especie:'Aspergillus'},{area:30.2,circ:0.83,especie:'Penicillium'},{area:39.8,circ:0.74,especie:'Aspergillus'},
+  {area:33.5,circ:0.77,especie:'Penicillium'},{area:47.1,circ:0.58,especie:'Aspergillus'},{area:25.1,circ:0.93,especie:'Penicillium'},
+  {area:36.8,circ:0.81,especie:'Aspergillus'},{area:29.6,circ:0.86,especie:'Penicillium'},{area:42.3,circ:0.64,especie:'Aspergillus'},
+  {area:31.8,circ:0.75,especie:'Penicillium'},{area:37.4,circ:0.78,especie:'Aspergillus'},{area:27.9,circ:0.89,especie:'Penicillium'},
+  {area:44.0,circ:0.61,especie:'Aspergillus'},{area:34.2,circ:0.82,especie:'Aspergillus'},{area:29.1,circ:0.84,especie:'Penicillium'},
+  {area:40.5,circ:0.70,especie:'Aspergillus'},{area:32.7,circ:0.76,especie:'Penicillium'},{area:36.2,circ:0.80,especie:'Aspergillus'},
+  {area:26.8,circ:0.90,especie:'Penicillium'},{area:43.7,circ:0.66,especie:'Aspergillus'},{area:30.8,circ:0.78,especie:'Penicillium'},
+  {area:38.9,circ:0.73,especie:'Aspergillus'},{area:28.3,circ:0.87,especie:'Penicillium'},{area:35.1,circ:0.69,especie:'Penicillium'}
+];
+
+function classify(areaThresh, circThresh, sample) {
+  return (sample.area > areaThresh && sample.circ > circThresh) ? 'Aspergillus' : 'Penicillium';
+}
+
+function updatePlot() {
+  const areaThresh = parseFloat(document.getElementById('area-slider').value);
+  const circThresh = parseFloat(document.getElementById('circ-slider').value);
+  document.getElementById('area-val').textContent = areaThresh.toFixed(1);
+  document.getElementById('circ-val').textContent = circThresh.toFixed(2);
+  document.getElementById('rule-display').textContent = `Regla: SI área > ${areaThresh.toFixed(1)} Y circularidad > ${circThresh.toFixed(2)} ENTONCES Aspergillus, SINO Penicillium`;
+
+  let tp = 0, tn = 0, fp = 0, fn = 0;
+  const colors = [];
+  const predicted = samples.map(s => {
+    const pred = classify(areaThresh, circThresh, s);
+    if (pred === 'Aspergillus' && s.especie === 'Aspergillus') { tp++; colors.push('#1f77b4'); }
+    else if (pred === 'Penicillium' && s.especie === 'Penicillium') { tn++; colors.push('#d62728'); }
+    else if (pred === 'Aspergillus' && s.especie === 'Penicillium') { fp++; colors.push('#ff9896'); }
+    else { fn++; colors.push('#9ecae1'); }
+    return pred;
+  });
+
+  const total = samples.length;
+  const accuracy = total > 0 ? Math.round((tp + tn) / total * 100) : 0;
+
+  document.getElementById('accuracy-display').textContent = accuracy + '%';
+  document.getElementById('accuracy-display').className = 'num ' + (accuracy >= 70 ? 'good' : 'bad');
+  document.getElementById('tp-display').textContent = tp;
+  document.getElementById('tn-display').textContent = tn;
+  document.getElementById('fp-display').textContent = fp;
+
+  const trace = {
+    x: samples.map(s => s.area),
+    y: samples.map(s => s.circ),
+    mode: 'markers',
+    type: 'scatter',
+    marker: { size: 9, color: colors, line: { color: '#333', width: 0.5 } },
+    text: samples.map((s, i) => `Real: ${s.especie}<br>Predicho: ${predicted[i]}<br>Área: ${s.area}<br>Circ: ${s.circ}`),
+    hoverinfo: 'text'
+  };
+
+  const shapes = [
+    {type:'line', x0:areaThresh, y0:0, x1:areaThresh, y1:1, line:{color:'#333', width:1.5, dash:'dash'}},
+    {type:'line', x0:20, y0:circThresh, x1:50, y1:circThresh, line:{color:'#333', width:1.5, dash:'dash'}}
+  ];
+
+  const layout = {
+    title: 'Clasificación por reglas (30 conidias)',
+    xaxis: {title: 'Área (µm²)', range: [20, 50], gridcolor: '#eee'},
+    yaxis: {title: 'Circularidad', range: [0.5, 1.0], gridcolor: '#eee'},
+    plot_bgcolor: '#fff', paper_bgcolor: 'rgba(0,0,0,0)',
+    margin: {l: 60, r: 40, t: 40, b: 60},
+    shapes: shapes,
+    annotations: [
+      {x: 22, y: 0.96, text: 'Penicillium', showarrow:false, font:{color:'#d62728',size:11}},
+      {x: 44, y: 0.54, text: 'Aspergillus', showarrow:false, font:{color:'#1f77b4',size:11}}
+    ]
+  };
+
+  Plotly.newPlot('plot', [trace], layout, {responsive:true});
+}
+
+document.getElementById('area-slider').addEventListener('input', updatePlot);
+document.getElementById('circ-slider').addEventListener('input', updatePlot);
+updatePlot();
+
+function showFeedback(id) {
+  const radios = document.getElementsByName(id);
+  let selected = null;
+  for (const r of radios) { if (r.checked) { selected = r.value; break; } }
+  const fb = document.getElementById('fb-' + id);
+  if (!selected) { fb.className = 'feedback incorrect'; fb.textContent = 'Selecciona una opción primero.'; fb.style.display = 'block'; return; }
+  const answers = {
+    'cq1': {correct:'b', msg:'¡Correcto! Las reglas fijas requieren ajuste manual de umbrales y no se adaptan automáticamente a nuevos datos ni a relaciones complejas.'},
+    'cq2': {correct:'a', msg:'¡Correcto! El ML puede aprender relaciones complejas y no lineales entre múltiples variables, algo que las reglas if-else difícilmente capturan.'}
+  };
+  const ans = answers[id];
+  if (selected === ans.correct) { fb.className = 'feedback correct'; fb.textContent = ans.msg; }
+  else {
+    let extra = (id === 'cq1') ? 'Las reglas fijas requieren intervención humana constante.' : 'El ML tampoco es perfecto, pero encuentra patrones que las reglas manuales no pueden.';
+    fb.className = 'feedback incorrect'; fb.textContent = 'No es correcto. ' + extra;
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>

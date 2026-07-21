@@ -28,7 +28,9 @@ export default async function LessonPage({ params }: Props) {
     process.cwd(),
     "src/content/modules",
     module,
-    `${slug}.mdx`,
+    "lessons",
+    slug,
+    "lesson.md",
   );
 
   if (!fs.existsSync(filePath)) {
