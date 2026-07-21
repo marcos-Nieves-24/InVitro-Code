@@ -94,19 +94,6 @@ Functions can return:
 - **Local scope**: Variables defined inside a function are only accessible there
 - **Global scope**: Variables defined outside any function are accessible everywhere
 
-```python
-x = 10  # global
-
-def my_func():
-    y = 5  # local
-    print(x)  # can access global
-    print(y)  # can access local
-
-my_func()
-print(x)  # works
-print(y)  # NameError
-```
-
 ### Lambda Functions
 
 Lambda functions are anonymous, single-expression functions:
@@ -146,78 +133,145 @@ def calculate_bmi(weight, height):
     return weight / (height ** 2)
 ```
 
-## Visual Explanation
+## Ejercicios interactivos
 
-```
-┌─────────────────────────────────────────────────────┐
-│                    Function Flow                     │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  Caller: result = add(3, 5)                         │
-│                                                     │
-│         ┌──────────────────────────────────┐         │
-│  3 ────→│ def add(x, y):                  │         │
-│         │     """Add two numbers."""      │         │
-│  5 ────→│     return x + y                │──→ 8    │
-│         └──────────────────────────────────┘         │
-│                                                     │
-│  Parameters: x=3, y=5    Return: 8                  │
-└─────────────────────────────────────────────────────┘
-```
+### Ejercicio 1: Tu primera función
 
-## Python Implementation
+Escribí una función `celsius_to_fahrenheit(c)` que convierta grados Celsius a Fahrenheit usando la fórmula: F = C * 9/5 + 32. Después llamala con 0, 37 y 100.
 
-```python
-# Basic function
-def calculate_gc_content(dna_sequence):
-    """Calculate the GC content of a DNA sequence."""
-    sequence = dna_sequence.upper()
-    gc_count = sequence.count("G") + sequence.count("C")
-    return (gc_count / len(sequence)) * 100
+<CodeEditor
+  defaultValue={`# Escribí tu función acá
+def celsius_to_fahrenheit(c):
+    return c * 9 / 5 + 32
 
-# Call the function
-gc = calculate_gc_content("ATCGGCTAGCTAGCATCG")
-print(f"GC content: {gc:.1f}%")
-```
+# Probala
+print(f"0°C = {celsius_to_fahrenheit(0)}°F")
+print(f"37°C = {celsius_to_fahrenheit(37)}°F")
+print(f"100°C = {celsius_to_fahrenheit(100)}°F")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "0°C = 32.0°F", note: "0°C debería ser 32°F" },
+      { input: "", expectedOutput: "37°C = 98.6°F", note: "37°C debería ser 98.6°F" },
+      { input: "", expectedOutput: "100°C = 212.0°F", note: "100°C debería ser 212°F" },
+    ]
+  }}
+/>
 
-```python
-# Function with multiple parameters and default values
-def analyze_sequence(sequence, min_length=10, gc_threshold=50.0):
-    """Analyze a DNA sequence for quality."""
-    seq_len = len(sequence)
-    gc = (sequence.count("G") + sequence.count("C")) / seq_len * 100
-    is_long = seq_len >= min_length
-    is_gc_ok = gc >= gc_threshold
-    
-    return {
-        "length": seq_len,
-        "gc_content": gc,
-        "passes_quality": is_long and is_gc_ok
-    }
+### Ejercicio 2: Múltiples parámetros y return
 
-result = analyze_sequence("ATCGATCGATCG")
-print(result)
-```
+Escribí una función `bmi_category(weight, height)` que calcule el IMC y devuelva tanto el valor como la categoría.
 
-```python
-# Lambda functions in practice
-sequences = ["ATCG", "GGCC", "AATT", "CGAT"]
-sorted_by_gc = sorted(sequences, key=lambda seq: seq.count("G") + seq.count("C"))
-print(sorted_by_gc)
-```
+<CodeEditor
+  defaultValue={`def bmi_category(weight, height):
+    bmi = weight / (height ** 2)
+    if bmi < 18.5:
+        category = "underweight"
+    elif bmi < 25:
+        category = "normal"
+    elif bmi < 30:
+        category = "overweight"
+    else:
+        category = "obese"
+    return bmi, category
+
+# Probala
+bmi, cat = bmi_category(70, 1.75)
+print(f"BMI: {bmi:.1f}, Category: {cat}")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "BMI: 22.9", note: "70kg / 1.75m² = 22.9" },
+      { input: "", expectedOutput: "Category: normal", note: "22.9 está en rango normal" },
+    ]
+  }}
+/>
+
+### Ejercicio 3: Parámetros con valor default
+
+<CodeEditor
+  defaultValue={`def create_report(patient_name, age, blood_type="Unknown"):
+    return f"Patient: {patient_name}, Age: {age}, Blood Type: {blood_type}"
+
+# Probá con y sin el tercer parámetro
+print(create_report("Alice", 30, "A+"))
+print(create_report("Bob", 25))`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "Blood Type: A+", note: "Alice debería tener tipo A+" },
+      { input: "", expectedOutput: "Blood Type: Unknown", note: "Bob debería tener el default Unknown" },
+    ]
+  }}
+/>
+
+### Ejercicio 4: Lambda functions
+
+Usá lambda para ordenar una lista, filtrar pares, y elevar al cuadrado.
+
+<CodeEditor
+  defaultValue={`numbers = [5, 2, 8, 1, 9, 3]
+
+# Orden descendente
+sorted_desc = sorted(numbers, key=lambda x: -x)
+print(f"Sorted descending: {sorted_desc}")
+
+# Filtrar pares
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(f"Evens: {evens}")
+
+# Elevar al cuadrado
+squares = list(map(lambda x: x ** 2, numbers))
+print(f"Squares: {squares}")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "Sorted descending: [9, 8, 5, 3, 2, 1]", note: "Orden descendente de mayor a menor" },
+      { input: "", expectedOutput: "Evens: [2, 8]", note: "Números pares: 2 y 8" },
+    ]
+  }}
+/>
+
+### Ejercicio 5: Scope (ámbito de variables)
+
+<CodeEditor
+  defaultValue={`x = "global"
+
+def test_scope():
+    x = "local"
+    print(f"Inside function: {x}")
+
+test_scope()
+print(f"Outside function: {x}")
+
+def modify_global():
+    global x
+    x = "modified"
+
+modify_global()
+print(f"After modification: {x}")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "Inside function: local", note: "Dentro de la función, x es 'local'" },
+      { input: "", expectedOutput: "Outside function: global", note: "Afuera, x sigue siendo 'global'" },
+      { input: "", expectedOutput: "After modification: modified", note: "Después de usar global, x cambia" },
+    ]
+  }}
+/>
 
 ## Biotechnology Example
 
-**Scenario**: A bioinformatics pipeline for quality-checking DNA sequences.
+**Scenario:** A bioinformatics pipeline for DNA sequence analysis.
 
-```python
-def reverse_complement(sequence):
+<CodeEditor
+  defaultValue={`def reverse_complement(sequence):
     """Return the reverse complement of a DNA sequence."""
     complement = {"A": "T", "T": "A", "C": "G", "G": "C"}
     return "".join(complement[base] for base in reversed(sequence.upper()))
 
 def has_restriction_site(sequence, enzyme_site="GAATTC"):
-    """Check if a restriction enzyme site exists in the sequence."""
+    """Check if a restriction enzyme site exists."""
     return enzyme_site in sequence.upper()
 
 # Usage
@@ -227,42 +281,15 @@ has_site = has_restriction_site(dna)
 
 print(f"Original: {dna}")
 print(f"Reverse complement: {rc}")
-print(f"Contains EcoRI site (GAATTC): {has_site}")
-```
-
-## SaaS Example
-
-**Scenario**: Customer metrics calculation for a SaaS dashboard.
-
-```python
-def calculate_arpu(revenue, active_users):
-    """Calculate Average Revenue Per User."""
-    if active_users == 0:
-        return 0.0
-    return revenue / active_users
-
-def churn_rate(lost_customers, start_customers):
-    """Calculate customer churn rate as a percentage."""
-    if start_customers == 0:
-        return 0.0
-    return (lost_customers / start_customers) * 100
-
-def customer_health_score(logins, support_tickets, days_active):
-    """Calculate a composite customer health score (0-100)."""
-    login_score = min(logins * 10, 50)
-    ticket_penalty = min(support_tickets * 5, 30)
-    activity_score = min(days_active / 30 * 50, 50)
-    return max(login_score + activity_score - ticket_penalty, 0)
-
-# Usage
-revenue = 125000
-users = 15420
-lost = 540
-health = customer_health_score(logins=45, support_tickets=2, days_active=180)
-print(f"ARPU: ${calculate_arpu(revenue, users):.2f}")
-print(f"Churn: {churn_rate(lost, users):.1f}%")
-print(f"Health Score: {health}/100")
-```
+print(f"Contains EcoRI site (GAATTC): {has_site}")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "Reverse complement: CTAGCTAGCTAGCGAATTCAT", note: "El complemento reverso de ATGAATTCGCTAGCTAGCTAG" },
+      { input: "", expectedOutput: "Contains EcoRI site (GAATTC): True", note: "La secuencia original contiene GAATTC" },
+    ]
+  }}
+/>
 
 ## Common Mistakes
 
@@ -301,30 +328,28 @@ print(f"Health Score: {health}/100")
 - **Docstring**: Documentation string for functions
 - **DRY**: Don't Repeat Yourself principle
 
-## Exercises
-
-### Level 1: Basic
-
-1. What is the difference between a parameter and an argument?
-2. What does a function return if it has no `return` statement?
-3. What is the purpose of a docstring?
-
-### Level 2: Implementation
-
-4. Write a function `is_palindrome(s)` that checks if a string is a palindrome (reads the same forward and backward).
-5. Write a function `mean(numbers)` that calculates the mean of a list of numbers without using `statistics.mean()`.
-
-### Level 3: Critical Thinking
-
-6. Why are mutable default arguments (like `def f(x=[])`) dangerous? What is the recommended alternative?
-7. Compare and contrast functions in Python with functions in mathematics. How are they similar? How are they different?
-
 ## Coding Challenge
 
-Write a module `sequence_tools.py` with these functions:
-1. `gc_content(sequence)` — calculates GC percentage
-2. `reverse_complement(sequence)` — returns reverse complement
-3. `has_motif(sequence, motif)` — checks if a motif exists
-4. `filter_sequences(sequences, min_gc=40, max_gc=60)` — filters a list of sequences by GC content range
+Escribí una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluí un docstring y probala con diferentes secuencias.
 
-Include docstrings for each function and a `if __name__ == "__main__":` block that demonstrates usage.
+<CodeEditor
+  defaultValue={`# Escribí tu función acá
+def gc_content(sequence):
+    \"\"\"Calculate GC content percentage of a DNA sequence.\"\"\"
+    seq = sequence.upper()
+    gc = seq.count("G") + seq.count("C")
+    return (gc / len(seq)) * 100
+
+# Probala
+print(f"GC: {gc_content('ATCGATCG'):.1f}%")
+print(f"GC: {gc_content('GGGGCCCC'):.1f}%")
+print(f"GC: {gc_content('AAAAATTT'):.1f}%")`}
+  exercise={{
+    lessonId: "lesson06_functions",
+    testCases: [
+      { input: "", expectedOutput: "GC: 50.0%", note: "ATCGATCG tiene 50% GC" },
+      { input: "", expectedOutput: "GC: 100.0%", note: "GGGGCCCC tiene 100% GC" },
+      { input: "", expectedOutput: "GC: 0.0%", note: "AAAAATTT tiene 0% GC" },
+    ]
+  }}
+/>

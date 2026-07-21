@@ -45,15 +45,42 @@ name = "Alice" # Assign string "Alice" to variable name
 pi = 3.14159   # Assign float 3.14159 to variable pi
 ```
 
+**Probálo vos mismo.** Escribí tres variables: una para el nombre de una especie, otra para el número de cromosomas, y otra para el tamaño del genoma. Después mostralas con `print()`.
+
+<CodeEditor
+  defaultValue={`# Asigná tus variables acá
+species = "Homo sapiens"
+chromosome_count = 46
+genome_size = 3.1
+
+# Mostrá cada variable
+print(species)
+print(chromosome_count)
+print(genome_size)`}
+/>
+
 ### Dynamic Typing
 
 Python is **dynamically typed** — variables can change type during execution. The type is inferred from the value:
 
-```python
-value = 10     # value is an int
-value = 3.14   # now value is a float
-value = "text" # now value is a string
-```
+<CodeEditor
+  defaultValue={`value = 10
+print(value, type(value))
+
+value = 3.14
+print(value, type(value))
+
+value = "texto"
+print(value, type(value))`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "<class 'int'>", note: "¿El primer type() muestra int?" },
+      { input: "", expectedOutput: "<class 'float'>", note: "¿El segundo type() muestra float?" },
+      { input: "", expectedOutput: "<class 'str'>", note: "¿El tercer type() muestra str?" },
+    ]
+  }}
+/>
 
 ### Naming Conventions
 
@@ -86,6 +113,25 @@ a, b, c = 1, 2, 3
 x = y = z = 0  # All three variables get the value 0
 ```
 
+**Probá el swapping de variables** — una forma pitónica de intercambiar valores:
+
+<CodeEditor
+  defaultValue={`# Variable swapping
+a = 5
+b = 10
+print(f"Antes: a={a}, b={b}")
+
+a, b = b, a  # Swap
+print(f"Después: a={a}, b={b}")`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "Después: a=10", note: "¿a debería ser 10 después del swap?" },
+      { input: "", expectedOutput: "b=5", note: "¿b debería ser 5 después del swap?" },
+    ]
+  }}
+/>
+
 ### Basic Input/Output
 
 ```python
@@ -97,104 +143,69 @@ print("Value:", 42)
 name = input("Enter your name: ")
 ```
 
-## Visual Explanation
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Variable in Memory                    │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│   Variable Name:  temperature                           │
-│   Memory Address: 0x7f8a2b3c4d5e                        │
-│   Value:          36.6                                  │
-│   Type:           float                                 │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-
-Assignment Flow:
-┌─────────┐     ┌──────────────┐     ┌─────────────────┐
-│ Value   │ ──→ │ = Operator   │ ──→ │ Variable in     │
-│ 36.6    │     │ temperature  │     │ Memory          │
-└─────────┘     └──────────────┘     └─────────────────┘
-```
+> ⚠️ **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
 
 ## Python Implementation
 
-```python
-# Variable assignment
+**Ejercicio 1:** Asigná una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
+
+<CodeEditor
+  defaultValue={`# Variable assignment
 dna_sequence = "ATCGATCGATCG"
 gene_count = 25000
 mutation_rate = 0.001
 
 print(dna_sequence)
 print(gene_count)
-print(mutation_rate)
-```
+print(mutation_rate)`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "ATCGATCGATCG", note: "¿Mostrás dna_sequence?" },
+      { input: "", expectedOutput: "25000", note: "¿Mostrás gene_count?" },
+      { input: "", expectedOutput: "0.001", note: "¿Mostrás mutation_rate?" },
+    ]
+  }}
+/>
 
-```python
-# Dynamic typing demonstration
+**Ejercicio 2:** Demostración de dynamic typing. Creá una variable, mostrá su tipo, reasignala con otro tipo, y volvé a mostrar.
+
+<CodeEditor
+  defaultValue={`# Dynamic typing demonstration
 data = 42
-print(type(data))  # <class 'int'>
+print(data, type(data))
 
 data = 3.14
-print(type(data))  # <class 'float'>
+print(data, type(data))
 
 data = "DNA"
-print(type(data))  # <class 'str'>
-```
-
-```python
-# Input and output
-name = input("Enter patient name: ")
-age = int(input("Enter age: "))  # Convert string to int
-temperature = float(input("Enter body temperature: "))
-
-print(f"Patient: {name}")
-print(f"Age: {age}")
-print(f"Temperature: {temperature}°C")
-```
-
-```python
-# Swapping variables
-a = 5
-b = 10
-a, b = b, a  # Swap — very Pythonic!
-print(a, b)   # 10 5
-```
+print(data, type(data))`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "42 <class 'int'>", note: "¿El primer print muestra 42 y <class 'int'>?" },
+      { input: "", expectedOutput: "3.14 <class 'float'>", note: "¿El segundo print muestra 3.14 y <class 'float'>?" },
+    ]
+  }}
+/>
 
 ## Biotechnology Example
 
-**Scenario**: Tracking patient vital signs in a clinical trial.
+**Scenario:** Calculating GC content of a DNA sequence.
 
-```python
-patient_id = "P-0042"
-age = 45
-heart_rate = 72
-systolic_bp = 120
-diastolic_bp = 80
-diagnosis = "Hypertension"
-
-print(f"Patient {patient_id}: Age {age}, HR {heart_rate}, BP {systolic_bp}/{diastolic_bp}")
-print(f"Diagnosis: {diagnosis}")
-```
-
-## SaaS Example
-
-**Scenario**: Tracking SaaS business metrics.
-
-```python
-company_name = "DataCloud Inc."
-monthly_revenue = 125000
-active_users = 15420
-churn_rate = 0.035  # 3.5%
-average_revenue_per_user = monthly_revenue / active_users
-
-print(f"Company: {company_name}")
-print(f"Monthly Revenue: ${monthly_revenue:,.2f}")
-print(f"Active Users: {active_users:,}")
-print(f"Churn Rate: {churn_rate:.1%}")
-print(f"ARPU: ${average_revenue_per_user:.2f}")
-```
+<CodeEditor
+  defaultValue={`sequence_id = "SEQ001"
+sequence = "AGCTTCGATCG"
+gc_count = sequence.count("G") + sequence.count("C")
+gc_percent = (gc_count / len(sequence)) * 100
+print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "GC content = 50.0%", note: "El GC content de AGCTTCGATCG debería ser 50.0%" },
+    ]
+  }}
+/>
 
 ## Common Mistakes
 
@@ -232,29 +243,29 @@ print(f"ARPU: ${average_revenue_per_user:.2f}")
 - **Type inference**: Python deduces the type from the value
 - **NameError**: Exception raised when using an undefined variable
 
-## Exercises
-
-### Level 1: Basic
-
-1. Which of the following are valid Python variable names? `2nd_place`, `my_var`, `class`, `_count`, `user-name`
-2. What is the type of `x` after `x = "3.14"`?
-3. What does `print()` do?
-
-### Level 2: Implementation
-
-4. Write a program that asks for the user's height in meters and weight in kilograms, then calculates and prints BMI (weight / height²).
-5. Create three variables with different types and use `type()` to verify each.
-
-### Level 3: Critical Thinking
-
-6. Why is dynamic typing both a strength and a weakness of Python? Provide an example of a bug that dynamic typing could cause.
-7. In large codebases, why is using descriptive variable names more important than writing short code?
-
 ## Coding Challenge
 
-Write a program that:
-1. Asks for a gene name, expression level, and p-value
-2. Stores these values in variables
-3. Prints a formatted summary: "Gene: [name], Expression: [level], p-value: [p]"
-4. Determines if the result is significant (p-value < 0.05) and stores the boolean result
-5. Prints "Significant: True/False"
+Escribí un programa que calcule el **GC content** de una secuencia de ADN más larga. Usá variables para cada paso.
+
+<CodeEditor
+  defaultValue={`# Calculá el GC content de esta secuencia
+dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
+
+# Paso 1: contá G y C
+# Paso 2: calculá el porcentaje
+# Paso 3: mostrá el resultado
+
+# Ejemplo:
+# gc_count = dna.count("G") + dna.count("C")
+# gc_percent = (gc_count / len(dna)) * 100
+# print(f"GC content: {gc_percent:.1f}%")
+`}
+  exercise={{
+    lessonId: "lesson03_variables",
+    testCases: [
+      { input: "", expectedOutput: "GC content:", note: "Mostrá el resultado como 'GC content: X.X%'" },
+    ]
+  }}
+/>
+
+> **Pista:** Usá `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
