@@ -23,6 +23,10 @@
 *.tsbuildinfo
 next-env.d.ts
 
+# project docs
+idea-projecto.md
+plan-estudio.docx
+
 # IDE
 .vscode/*
 !.vscode/settings.json

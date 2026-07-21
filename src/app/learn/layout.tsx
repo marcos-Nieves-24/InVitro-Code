@@ -13,7 +13,7 @@ interface ModuleEntry {
 }
 
 function getModules(): ModuleEntry[] {
-  const modulesDir = path.join(process.cwd(), "content/modules");
+  const modulesDir = path.join(process.cwd(), "src/content/modules");
 
   try {
     if (!fs.existsSync(modulesDir)) return [];
@@ -98,7 +98,7 @@ export default function LearnLayout({
 }
 
 function getLessons(moduleSlug: string): Lesson[] {
-  const lessonDir = path.join(process.cwd(), "content/modules", moduleSlug);
+  const lessonDir = path.join(process.cwd(), "src/content/modules", moduleSlug);
 
   try {
     if (!fs.existsSync(lessonDir)) return [];

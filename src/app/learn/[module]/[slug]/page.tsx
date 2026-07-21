@@ -26,7 +26,7 @@ export default async function LessonPage({ params }: Props) {
   const { module, slug } = await params;
   const filePath = path.join(
     process.cwd(),
-    "content/modules",
+    "src/content/modules",
     module,
     `${slug}.mdx`,
   );

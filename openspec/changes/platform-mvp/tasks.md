@@ -6,32 +6,29 @@
 |-------|-------|
 | Estimated changed lines | ~2500-3500 |
 | 400-line budget risk | High |
-| Chained PRs recommended | Yes |
-| Suggested split | PR #1 (scaffold+auth) → PR #2 (lessons+editor) → PR #3 (gamification+dashboard) |
+| Chained delivery recommended | Yes |
+| Suggested milestones | scaffold-auth → lessons-editor → gamification-dashboard |
 | Delivery strategy | force-chained |
-| Chain strategy | feature-branch-chain |
+| Chain strategy | feature-branch-chain (tracker: `platform-mvp`) |
 
 Decision needed before apply: No
-Chained PRs recommended: Yes
+Chained delivery recommended: Yes
 Chain strategy: feature-branch-chain
 400-line budget risk: High
 
-### Suggested Work Units
+### Delivery Chain
 
-| Unit | Goal | PR | Focused test | Rollback |
-|------|------|----|-------------|----------|
-| 1 | Scaffold + Auth + Supabase DB | PR #1 | `npm run build && npm run dev` | Revert Vercel deploy |
-| 2 | MDX Reader + Monaco + Pyodide | PR #2 | Abrir lección, correr `print("hola")` | Revert merge |
-| 3 | Gamificación + Dashboard | PR #3 | Completar lección, ver XP + streak | Revert merge |
+| Milestone | Branch | Base | Validation |
+|-----------|--------|------|------------|
+| Scaffold + Auth | `feat/scaffold-auth` | `platform-mvp` | `npm run build && npm run dev` |
+| Lessons + Editor | `feat/lessons-editor` | `feat/scaffold-auth` | Open lesson, run `print("hola")` |
+| Gamification + Dashboard | `feat/gamification-dashboard` | `feat/lessons-editor` | Complete lesson, verify XP + streak |
 
-PR #1 base = `main` (feature branch `platform-mvp`)
-PR #2 base = rama PR #1
-PR #3 base = rama PR #2
-Solo `platform-mvp` mergea a main.
+Only the `platform-mvp` tracker branch merges to `main`.
 
 ---
 
-## PR #1 — Fundación: Scaffold + Auth + Base de datos
+## Milestone 1 — Fundación: Scaffold + Auth + Base de datos
 
 ### Phase 1: Project Scaffold
 
@@ -55,7 +52,7 @@ Solo `platform-mvp` mergea a main.
 
 ---
 
-## PR #2 — Core educativo: Lecciones + Editor + Pyodide
+## Milestone 2 — Core educativo: Lecciones + Editor + Pyodide
 
 ### Phase 3: MDX Lesson Reader
 
@@ -82,7 +79,7 @@ Solo `platform-mvp` mergea a main.
 
 ---
 
-## PR #3 — Gamificación + Dashboard
+## Milestone 3 — Gamificación + Dashboard
 
 ### Phase 6: Progress Tracking + Gamification
 
