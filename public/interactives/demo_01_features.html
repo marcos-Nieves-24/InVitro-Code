@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 01: Características de conidias</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #222; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; color: #1f77b4; margin-bottom: 4px; }
+  .subtitle { font-size: 0.9rem; color: #555; margin-bottom: 16px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+  .badge-sim { background: #fff3cd; color: #856404; }
+  .badge-real { background: #d4edda; color: #155724; }
+  .predict-box { background: #e8f4f8; border-left: 4px solid #1f77b4; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .predict-box h3 { font-size: 0.95rem; margin-bottom: 8px; color: #1f77b4; }
+  .predict-box label { display: block; font-size: 0.85rem; margin: 4px 0; cursor: pointer; }
+  .predict-box input { margin-right: 6px; }
+  #plot { width: 100%; height: 500px; }
+  .controls { margin: 12px 0; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .controls label { font-size: 0.85rem; font-weight: 600; }
+  .controls select { padding: 6px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.85rem; }
+  .checkpoint { background: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 20px; }
+  .checkpoint h3 { font-size: 1rem; margin-bottom: 10px; color: #d62728; }
+  .mcq { margin: 10px 0; padding: 10px; background: #fff; border-radius: 6px; }
+  .mcq p { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .mcq label { display: block; font-size: 0.85rem; margin: 3px 0; cursor: pointer; }
+  .mcq input { margin-right: 6px; }
+  .btn { padding: 6px 16px; border: none; border-radius: 6px; font-size: 0.85rem; cursor: pointer; background: #1f77b4; color: #fff; }
+  .btn:hover { opacity: 0.9; }
+  .feedback { margin-top: 6px; padding: 8px; border-radius: 6px; font-size: 0.85rem; display: none; }
+  .correct { background: #d4edda; color: #155724; }
+  .incorrect { background: #f8d7da; color: #721c24; }
+  .info-text { font-size: 0.8rem; color: #666; margin-top: 8px; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Características (features) de conidias</h1>
+  <div class="subtitle">Introducción al concepto de características en aprendizaje automático</div>
+  <span class="badge badge-sim">simulación educativa</span>
+
+  <div class="predict-box">
+    <h3>Antes de interactuar, ¿qué crees que pasará?</h3>
+    <p style="font-size:0.85rem;margin-bottom:6px;">Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</p>
+    <label><input type="radio" name="pred_q1" value="a"> Sí, el área es suficiente para clasificar</label>
+    <label><input type="radio" name="pred_q1" value="b"> No, porque los rangos pueden solaparse</label>
+    <label><input type="radio" name="pred_q1" value="c"> Solo si usamos también la textura</label>
+  </div>
+
+  <div class="controls">
+    <label for="feature-select">Características a comparar:</label>
+    <select id="feature-select">
+      <option value="0">Área vs Circularidad</option>
+      <option value="1">Área vs Textura</option>
+      <option value="2">Circularidad vs Textura</option>
+    </select>
+  </div>
+
+  <div id="plot"></div>
+  <p class="info-text">Cada punto representa una conidia. Pase el mouse sobre un punto para ver sus valores. El color indica la textura (más oscuro = textura más rugosa).</p>
+
+  <div class="checkpoint">
+    <h3>Checkpoint: Características en ML</h3>
+    <div class="mcq">
+      <p>1. ¿Qué es una "característica" (feature) en aprendizaje automático?</p>
+      <label><input type="radio" name="cq1" value="a"> Una etiqueta que asigna la clase de un objeto</label>
+      <label><input type="radio" name="cq1" value="b"> Una propiedad medible del objeto que usamos para clasificar</label>
+      <label><input type="radio" name="cq1" value="c"> El algoritmo que procesa los datos</label>
+      <button class="btn" onclick="showFeedback('cq1')">Mostrar resultado</button>
+      <div id="fb-cq1" class="feedback"></div>
+    </div>
+    <div class="mcq">
+      <p>2. ¿Por qué necesitamos múltiples características para clasificar conidias?</p>
+      <label><input type="radio" name="cq2" value="a"> Porque una sola característica puede no separar bien las clases</label>
+      <label><input type="radio" name="cq2" value="b"> Porque el algoritmo requiere al menos dos variables</label>
+      <label><input type="radio" name="cq2" value="c"> Porque las conidias tienen exactamente tres propiedades</label>
+      <button class="btn" onclick="showFeedback('cq2')">Mostrar resultado</button>
+      <div id="fb-cq2" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {"area":32.1,"circularidad":0.85,"textura":0.32,"especie":"Aspergillus"},
+  {"area":28.4,"circularidad":0.79,"textura":0.28,"especie":"Penicillium"},
+  {"area":38.7,"circularidad":0.72,"textura":0.45,"especie":"Aspergillus"},
+  {"area":41.2,"circularidad":0.68,"textura":0.52,"especie":"Aspergillus"},
+  {"area":26.9,"circularidad":0.88,"textura":0.22,"especie":"Penicillium"},
+  {"area":34.5,"circularidad":0.83,"textura":0.35,"especie":"Aspergillus"},
+  {"area":29.8,"circularidad":0.76,"textura":0.30,"especie":"Penicillium"},
+  {"area":36.1,"circularidad":0.81,"textura":0.38,"especie":"Aspergillus"},
+  {"area":31.5,"circularidad":0.74,"textura":0.33,"especie":"Penicillium"},
+  {"area":43.0,"circularidad":0.65,"textura":0.55,"especie":"Aspergillus"},
+  {"area":27.2,"circularidad":0.90,"textura":0.20,"especie":"Penicillium"},
+  {"area":39.4,"circularidad":0.70,"textura":0.48,"especie":"Aspergillus"},
+  {"area":33.8,"circularidad":0.77,"textura":0.36,"especie":"Penicillium"},
+  {"area":35.9,"circularidad":0.84,"textura":0.34,"especie":"Aspergillus"},
+  {"area":30.2,"circularidad":0.82,"textura":0.29,"especie":"Penicillium"},
+  {"area":37.6,"circularidad":0.69,"textura":0.42,"especie":"Aspergillus"},
+  {"area":25.5,"circularidad":0.87,"textura":0.24,"especie":"Penicillium"},
+  {"area":40.8,"circularidad":0.66,"textura":0.50,"especie":"Aspergillus"},
+  {"area":32.7,"circularidad":0.80,"textura":0.31,"especie":"Aspergillus"},
+  {"area":28.1,"circularidad":0.78,"textura":0.26,"especie":"Penicillium"}
+];
+
+const labels = {
+  0: {x: 'Área (µm²)', y: 'Circularidad', xKey: 'area', yKey: 'circularidad'},
+  1: {x: 'Área (µm²)', y: 'Textura', xKey: 'area', yKey: 'textura'},
+  2: {x: 'Circularidad', y: 'Textura', xKey: 'circularidad', yKey: 'textura'}
+};
+
+function buildPlot(sel) {
+  const l = labels[sel];
+  const trace = {
+    x: data.map(d => d[l.xKey]),
+    y: data.map(d => d[l.yKey]),
+    mode: 'markers',
+    type: 'scatter',
+    marker: {
+      size: 10,
+      color: data.map(d => d.textura),
+      colorscale: [[0, '#d62728'], [1, '#1f77b4']],
+      showscale: true,
+      colorbar: {title: 'Textura', thickness: 15}
+    },
+    text: data.map(d => `Especie: ${d.especie}<br>Área: ${d.area} µm²<br>Circularidad: ${d.circularidad}<br>Textura: ${d.textura}`),
+    hoverinfo: 'text'
+  };
+  const layout = {
+    title: `${l.x} vs ${l.y}`,
+    xaxis: {title: l.x, gridcolor: '#eee'},
+    yaxis: {title: l.y, gridcolor: '#eee'},
+    plot_bgcolor: '#fff',
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    margin: {l: 60, r: 40, t: 50, b: 60}
+  };
+  Plotly.newPlot('plot', [trace], layout, {responsive: true});
+}
+
+document.getElementById('feature-select').addEventListener('change', function() {
+  buildPlot(parseInt(this.value));
+});
+
+buildPlot(0);
+
+function showFeedback(id) {
+  const radios = document.getElementsByName(id);
+  let selected = null;
+  for (const r of radios) {
+    if (r.checked) { selected = r.value; break; }
+  }
+  const fb = document.getElementById('fb-' + id);
+  if (!selected) {
+    fb.className = 'feedback incorrect';
+    fb.textContent = 'Selecciona una opción primero.';
+    fb.style.display = 'block';
+    return;
+  }
+  const answers = {
+    'cq1': {correct: 'b', msg: '¡Correcto! Una característica es cualquier propiedad medible (área, circularidad, textura) que usamos como entrada para un modelo de ML.'},
+    'cq2': {correct: 'a', msg: '¡Correcto! Una sola variable rara vez separa las clases perfectamente. Múltiples características permiten al modelo encontrar patrones más complejos.'}
+  };
+  const ans = answers[id];
+  if (selected === ans.correct) {
+    fb.className = 'feedback correct';
+    fb.textContent = ans.msg;
+  } else {
+    let extra = '';
+    if (id === 'cq1') extra = 'Área, circularidad, textura, color, forma, etc. son ejemplos de características.';
+    if (id === 'cq2') extra = 'Observa en el gráfico cómo los valores de área se solapan entre especies.';
+    fb.className = 'feedback incorrect';
+    fb.textContent = 'No es correcto. ' + extra;
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>

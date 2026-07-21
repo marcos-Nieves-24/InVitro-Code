@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 06: Regresi&oacute;n Lineal Simple</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#222;line-height:1.6;padding:20px;max-width:1000px;margin:0 auto}
+h1{color:#1f77b4;font-size:1.6rem;margin-bottom:4px}
+h2{color:#444;font-size:1.1rem;font-weight:400;margin-bottom:16px}
+h3{color:#1f77b4;font-size:1.1rem;margin:16px 0 8px}
+.etiqueta{display:inline-block;background:#e8f0fe;color:#1f77b4;padding:4px 12px;border-radius:12px;font-size:.8rem;font-weight:600;margin-bottom:16px}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.1);padding:20px;margin-bottom:20px}
+#plot{width:100%;height:500px}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+.controls label{font-weight:600;font-size:.9rem}
+.controls input[type=range]{width:200px}
+.controls .val{font-family:monospace;background:#eee;padding:2px 6px;border-radius:4px;font-size:.9rem}
+.controls button{background:#1f77b4;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem}
+.controls button:hover{background:#155a8a}
+.controls button.rojo{background:#d62728}
+.controls button.rojo:hover{background:#a01f1f}
+.prediccion-box{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.prediccion-box input{padding:6px 10px;border:1px solid #ccc;border-radius:6px;width:120px;font-size:.9rem}
+.prediccion-box span{font-weight:600;font-family:monospace;font-size:1.1rem;color:#d62728}
+.mcq{background:#f0f4f8;border-radius:8px;padding:16px;margin:10px 0}
+.mcq p{font-weight:600;margin-bottom:8px}
+.mcq label{display:block;padding:6px 10px;margin:4px 0;border-radius:6px;cursor:pointer;transition:background .2s}
+.mcq label:hover{background:#e2e8f0}
+.mcq input[type=radio]{margin-right:8px}
+.mcq button{background:#1f77b4;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;margin-top:8px;font-size:.85rem}
+.mcq button:hover{background:#155a8a}
+.feedback{margin-top:8px;padding:8px 12px;border-radius:6px;display:none;font-size:.9rem}
+.feedback.ok{background:#d4edda;color:#155724;display:block}
+.feedback.err{background:#f8d7da;color:#721c24;display:block}
+.resumen{margin-top:20px;padding:16px;background:#e8f4f8;border-radius:8px;font-size:.9rem;border-left:4px solid #1f77b4}
+</style>
+</head>
+<body>
+
+<h1>Regresi&oacute;n Lineal Simple</h1>
+<h2>Concentraci&oacute;n de f&aacute;rmaco antif&uacute;ngico vs. halo de inhibici&oacute;n</h2>
+<div class="etiqueta">modelo sobre datos reales simulados</div>
+
+<div class="card">
+<p style="margin-bottom:12px"><strong>Contexto:</strong> Se midi&oacute; el di&aacute;metro del halo de inhibici&oacute;n (mm) producido por un f&aacute;rmaco antif&uacute;ngico a diferentes concentraciones (&#956;M) en cultivos de <em>Candida albicans</em>. Usaremos regresi&oacute;n lineal para modelar la relaci&oacute;n entre concentraci&oacute;n y efecto.</p>
+
+<h3>&#191;Antes de interactuar, qu&eacute; crees que pasar&aacute;?</h3>
+<div class="mcq">
+<p>Si duplicamos la concentraci&oacute;n de un f&aacute;rmaco, &#191;esperas que el efecto inhibitorio se duplique exactamente?</p>
+<label><input type="radio" name="pred" value="A"> A) S&iacute;, la relaci&oacute;n siempre es perfectamente lineal</label>
+<label><input type="radio" name="pred" value="B"> B) No, habr&aacute; variaci&oacute;n alrededor de una tendencia lineal</label>
+<label><input type="radio" name="pred" value="C"> C) No, porque la biolog&iacute;a nunca sigue patrones matem&aacute;ticos</label>
+<label><input type="radio" name="pred" value="D"> D) Solo si el f&aacute;rmaco es sint&eacute;tico</label>
+<button onclick="document.querySelector('.feedback-pred').style.display='block';document.querySelector('.feedback-pred').className+=' ok'">Mostrar resultado</button>
+<div class="feedback feedback-pred">Respuesta correcta: B. En biolog&iacute;a, las relaciones rara vez son perfectamente lineales. La regresi&oacute;n captura la tendencia central pero el error es inherente a los datos experimentales.</div>
+</div>
+</div>
+
+<div class="card">
+<div id="plot"></div>
+
+<div class="controls">
+<label>Pendiente (m): <span id="m-val" class="val">0.20</span></label>
+<input type="range" id="m-slider" min="-0.1" max="0.40" step="0.005" value="0.20">
+<label>Intercepto (b): <span id="b-val" class="val">5.0</span></label>
+<input type="range" id="b-slider" min="-2" max="12" step="0.5" value="5.0">
+</div>
+<div class="controls">
+<span style="font-weight:600">ECM: <span id="mse-val" class="val" style="color:#d62728">--</span></span>
+<button id="best-fit-btn">Calcular mejor recta</button>
+</div>
+<div class="prediccion-box">
+<input type="number" id="pred-input" placeholder="Concentraci&oacute;n (&#956;M)" min="0" max="120">
+<button id="predict-btn" class="rojo">Predecir</button>
+<span>Predicci&oacute;n: <span id="pred-result">--</span> mm</span>
+</div>
+</div>
+
+<div class="resumen">
+<strong>&#191;Qu&eacute; aprendimos?</strong> La regresi&oacute;n lineal encuentra la recta que minimiza el error cuadr&aacute;tico medio (ECM). Ajustando pendiente e intercepto manualmente, puedes sentir c&oacute;mo el ECM cambia. El bot&oacute;n <em>"Calcular mejor recta"</em> encuentra los par&aacute;metros &oacute;ptimos usando m&iacute;nimos cuadrados, el mismo principio que muchos modelos de aprendizaje supervisado. La predicci&oacute;n sobre nuevos valores de concentraci&oacute;n es un ejemplo de <strong>predicci&oacute;n continua</strong> (regresi&oacute;n).
+</div>
+
+<h3>Checkpoint: Eval&uacute;a tu comprensi&oacute;n</h3>
+
+<div class="mcq">
+<p>1. El error cuadr&aacute;tico medio (ECM o MSE) mide:</p>
+<label><input type="radio" name="q1" value="A"> A) La suma de las distancias entre puntos y recta</label>
+<label><input type="radio" name="q1" value="B"> B) El promedio de los errores al cuadrado entre valores reales y predichos</label>
+<label><input type="radio" name="q1" value="C"> C) La pendiente de la recta de regresi&oacute;n</label>
+<label><input type="radio" name="q1" value="D"> D) La cantidad de puntos fuera de la recta</label>
+<button onclick="mostrarFeedback('fb1','B')">Mostrar resultado</button>
+<div id="fb1" class="feedback">Respuesta correcta: B. El ECM eleva al cuadrado cada error (real - predicho), los suma y promedia. Esto penaliza errores grandes m&aacute;s que errores peque&ntilde;os.</div>
+</div>
+
+<div class="mcq">
+<p>2. En el contexto del demo, si tenemos una concentraci&oacute;n de 50 &#956;M y la recta predice 15 mm, &#191;qu&eacute; tipo de variable es la predicci&oacute;n?</p>
+<label><input type="radio" name="q2" value="A"> A) Variable categ&oacute;rica binaria</label>
+<label><input type="radio" name="q2" value="B"> B) Variable categ&oacute;rica multiclase</label>
+<label><input type="radio" name="q2" value="C"> C) Variable continua (regresi&oacute;n)</label>
+<label><input type="radio" name="q2" value="D"> D) Variable ordinal</label>
+<button onclick="mostrarFeedback('fb2','C')">Mostrar resultado</button>
+<div id="fb2" class="feedback">Respuesta correcta: C. Predecir un valor num&eacute;rico continuo (halo en mm) es un problema de regresi&oacute;n, no de clasificaci&oacute;n.</div>
+</div>
+
+<div class="mcq">
+<p>3. &#191;Por qu&eacute; la regresi&oacute;n lineal es considerada aprendizaje <strong>supervisado</strong>?</p>
+<label><input type="radio" name="q3" value="A"> A) Porque usa una recta supervisada por un humano</label>
+<label><input type="radio" name="q3" value="B"> B) Porque aprende de ejemplos etiquetados (X, Y conocidos)</label>
+<label><input type="radio" name="q3" value="C"> C) Porque supervisa la calidad de los datos autom&aacute;ticamente</label>
+<label><input type="radio" name="q3" value="D"> D) Porque no necesita datos para aprender</label>
+<button onclick="mostrarFeedback('fb3','B')">Mostrar resultado</button>
+<div id="fb3" class="feedback">Respuesta correcta: B. En aprendizaje supervisado, el modelo aprende de pares (entrada, salida esperada). Aqu&iacute;, la concentraci&oacute;n (X) y el halo medido (Y) son los ejemplos etiquetados.</div>
+</div>
+
+<script>
+const datos = [
+  {x:5,y:3.2},{x:10,y:4.8},{x:15,y:6.1},{x:20,y:7.5},{x:25,y:8.3},
+  {x:30,y:9.0},{x:35,y:9.8},{x:40,y:10.5},{x:45,y:11.2},{x:50,y:12.0},
+  {x:55,y:12.7},{x:60,y:13.5},{x:65,y:14.1},{x:70,y:14.8},{x:75,y:15.3},
+  {x:80,y:16.0},{x:85,y:16.5},{x:90,y:17.1},{x:95,y:17.6},{x:100,y:18.2}
+];
+
+let m = 0.20, b = 5.0;
+
+function calcMSE(m,b){
+  let sum=0;
+  for(let d of datos){
+    let pred=m*d.x+b;
+    sum+=(d.y-pred)**2;
+  }
+  return Math.sqrt(sum/datos.length);
+}
+
+function dibujar(){
+  m=parseFloat(document.getElementById('m-slider').value);
+  b=parseFloat(document.getElementById('b-slider').value);
+  document.getElementById('m-val').textContent=m.toFixed(3);
+  document.getElementById('b-val').textContent=b.toFixed(1);
+
+  const xRecta=[0,110];
+  const yRecta=xRecta.map(x=>m*x+b);
+  const mse=calcMSE(m,b);
+  document.getElementById('mse-val').textContent=mse.toFixed(3);
+
+  const scatterTrace={
+    x:datos.map(d=>d.x),y:datos.map(d=>d.y),
+    mode:'markers',type:'scatter',
+    marker:{color:'#1f77b4',size:10,line:{color:'#fff',width:1}},
+    name:'Datos experimentales'
+  };
+  const lineTrace={
+    x:xRecta,y:yRecta,
+    mode:'lines',type:'scatter',
+    line:{color:'#d62728',width:3},
+    name:`Recta: y = ${m.toFixed(3)}x + ${b.toFixed(1)}`
+  };
+  const residuals=datos.map(d=>({x:d.x,y:m*d.x+b,ym:d.y}));
+  const resTrace={
+    x:datos.map(d=>d.x),
+    y:datos.map(d=>m*d.x+b),
+    error_y:{type:'data',array:datos.map(d=>Math.abs(d.y-(m*d.x+b))),visible:true,color:'rgba(214,39,40,0.3)',thickness:1.5},
+    mode:'markers',type:'scatter',
+    marker:{color:'rgba(214,39,40,0.5)',size:0},
+    name:'Residuales',showlegend:true,
+    hoverinfo:'skip'
+  };
+
+  Plotly.newReact('plot',[resTrace,scatterTrace,lineTrace],{
+    title:{text:`Concentraci&oacute;n vs. Halo &mdash; ECM = ${mse.toFixed(3)}`,font:{size:14}},
+    xaxis:{title:'Concentraci&oacute;n (&micro;M)',range:[-5,115]},
+    yaxis:{title:'Halo de inhibici&oacute;n (mm)',range:[-2,25]},
+    margin:{l:60,r:20,t:50,b:50},
+    paper_bgcolor:'rgba(0,0,0,0)',
+    plot_bgcolor:'rgba(0,0,0,0)',
+    hovermode:'closest',
+    showlegend:true,
+    legend:{orientation:'h',y:-0.2}
+  },{responsive:true});
+}
+
+document.getElementById('m-slider').addEventListener('input',dibujar);
+document.getElementById('b-slider').addEventListener('input',dibujar);
+
+document.getElementById('best-fit-btn').addEventListener('click',function(){
+  const n=datos.length;
+  let sumX=0,sumY=0,sumXY=0,sumX2=0;
+  for(let d of datos){
+    sumX+=d.x;sumY+=d.y;sumXY+=d.x*d.y;sumX2+=d.x*d.x;
+  }
+  const mOpt=(n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+  const bOpt=(sumY-mOpt*sumX)/n;
+  document.getElementById('m-slider').value=mOpt;
+  document.getElementById('b-slider').value=bOpt;
+  dibujar();
+});
+
+document.getElementById('predict-btn').addEventListener('click',function(){
+  const inp=parseFloat(document.getElementById('pred-input').value);
+  if(isNaN(inp)||inp<0||inp>120){
+    document.getElementById('pred-result').textContent='v&aacute;lido?';
+    return;
+  }
+  const pred=m*inp+b;
+  document.getElementById('pred-result').textContent=pred.toFixed(2)+' mm';
+});
+
+dibujar();
+
+function mostrarFeedback(id,correcta){
+  const mcqDiv=document.getElementById(id).parentElement;
+  const seleccionado=mcqDiv.querySelector('input[type=radio]:checked');
+  const fb=document.getElementById(id);
+  if(!seleccionado){
+    fb.textContent='Selecciona una opci&oacute;n primero.';
+    fb.className='feedback err';
+    fb.style.display='block';
+    return;
+  }
+  if(seleccionado.value===correcta){
+    fb.className='feedback ok';
+  } else {
+    fb.className='feedback err';
+    const msgs={
+      '1B':'Incorrecto. El ECM promedia errores al cuadrado, no los suma sin promediar.',
+      '2C':'Incorrecto. Predecir un valor num&eacute;rico continuo es regresi&oacute;n.',
+      '3B':'Incorrecto. El aprendizaje supervisado requiere datos etiquetados (X,Y).'
+    };
+    fb.innerHTML=msgs[id+correcta]||'Incorrecto. Revisa el concepto e intenta de nuevo.';
+  }
+  fb.style.display='block';
+}
+</script>
+</body>
+</html>

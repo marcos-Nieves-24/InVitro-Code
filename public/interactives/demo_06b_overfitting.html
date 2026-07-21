@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 06b: Sobreajuste y Subajuste</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#222;line-height:1.6;padding:20px;max-width:1100px;margin:0 auto}
+h2{color:#1f3a5f;margin-bottom:8px}
+.sub{color:#555;font-size:.9rem;margin-bottom:16px}
+.controls{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:16px;margin:12px 0}
+.controls label{font-weight:600;display:block;margin-bottom:6px}
+.controls input[type=range]{width:100%;margin:6px 0}
+.range-labels{display:flex;justify-content:space-between;font-size:.8rem;color:#666}
+.plots{display:flex;flex-wrap:wrap;gap:12px}
+.plots > div{flex:1 1 48%;min-width:320px}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:600;margin:8px 0}
+.badge-edu{background:#e3f2fd;color:#1565c0}
+.badge-real{background:#fce4ec;color:#c62828}
+.pred-box{border:2px solid #1f77b4;border-radius:8px;padding:12px;margin:16px 0;background:#f0f7ff}
+.pred-box strong{color:#1f3a5f}
+.checkpoint{border:2px solid #d62728;border-radius:8px;padding:16px;margin:24px 0 8px;background:#fff5f5}
+.checkpoint strong{color:#a31515}
+.mcq{margin:10px 0;padding:10px 14px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;transition:.2s}
+.mcq:hover{border-color:#1f77b4;background:#f0f7ff}
+.mcq.selected{border-color:#1f77b4;background:#e3f2fd}
+.mcq.correct{background:#e8f5e9;border-color:#2e7d32}
+.mcq.incorrect{background:#ffebee;border-color:#c62828}
+.feedback{display:none;margin:8px 0 16px;padding:12px;border-radius:6px;background:#f5f5f5;font-size:.9rem}
+.feedback.show{display:block}
+.btn{background:#1f77b4;color:#fff;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:.9rem;font-weight:600}
+.btn:hover{background:#155a8a}
+.info-panel{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:12px;margin:8px 0;display:flex;gap:16px;flex-wrap:wrap}
+.info-item{flex:1;min-width:140px;text-align:center}
+.info-item .val{font-size:1.4rem;font-weight:700}
+.info-item .lbl{font-size:.75rem;color:#666}
+.under{color:#d62728}
+.good{color:#2e7d32}
+.over{color:#e65100}
+</style>
+</head>
+<body>
+
+<h2>🧪 Sobreajuste y Subajuste: el equilibrio de la complejidad</h2>
+<p class="sub">Ajustá la complejidad del modelo con el slider y observá cómo cambian los errores de entrenamiento y prueba.</p>
+<span class="badge badge-edu">🔬 simulación educativa</span>
+
+<div class="pred-box">
+  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <p><em>Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?</em></p>
+</div>
+
+<div class="controls">
+  <label for="complexity">Complejidad del modelo (grado del polinomio): <span id="deg-label">1</span></label>
+  <input type="range" id="complexity" min="1" max="15" value="1" step="1">
+  <div class="range-labels">
+    <span>Subajuste<br>(muy simple)</span>
+    <span>Punto óptimo</span>
+    <span>Sobreajuste<br>(demasiado complejo)</span>
+  </div>
+</div>
+
+<div class="info-panel" id="metrics">
+  <div class="info-item">
+    <div class="val" id="train-err">0.00</div>
+    <div class="lbl">Error entrenamiento (ECM)</div>
+  </div>
+  <div class="info-item">
+    <div class="val" id="test-err">0.00</div>
+    <div class="lbl">Error prueba (ECM)</div>
+  </div>
+  <div class="info-item">
+    <div class="val" id="status-val">—</div>
+    <div class="lbl">Diagnóstico</div>
+  </div>
+</div>
+
+<div class="plots">
+  <div id="plot-fit" style="height:400px"></div>
+  <div id="plot-errors" style="height:400px"></div>
+</div>
+
+<div class="checkpoint">
+  <strong>📝 Checkpoint de conceptos</strong>
+
+  <p><strong>1. Cuando el grado del polinomio es 1 (línea recta), ambos errores (train y test) son altos. ¿Cómo se llama esta situación?</strong></p>
+  <div class="mcq" data-q="1" data-a="b">
+    <span>A. Sobreajuste (overfitting)</span>
+  </div>
+  <div class="mcq" data-q="1" data-a="b">
+    <span>B. Subajuste (underfitting)</span>
+  </div>
+  <div class="mcq" data-q="1" data-a="b">
+    <span>C. Punto óptimo</span>
+  </div>
+  <div class="mcq" data-q="1" data-a="b">
+    <span>D. Generalización perfecta</span>
+  </div>
+  <div id="fb1" class="feedback"></div>
+
+  <p><strong>2. ¿Qué observás cuando el grado del polinomio es muy alto (ej. 13-15)?</strong></p>
+  <div class="mcq" data-q="2" data-a="c">
+    <span>A. Ambos errores son bajos</span>
+  </div>
+  <div class="mcq" data-q="2" data-a="c">
+    <span>B. Ambos errores son altos</span>
+  </div>
+  <div class="mcq" data-q="2" data-a="c">
+    <span>C. Error de entrenamiento muy bajo pero error de prueba alto</span>
+  </div>
+  <div class="mcq" data-q="2" data-a="c">
+    <span>D. Error de entrenamiento alto pero error de prueba bajo</span>
+  </div>
+  <div id="fb2" class="feedback"></div>
+
+  <p><strong>3. ¿Dónde está el punto óptimo de complejidad?</strong></p>
+  <div class="mcq" data-q="3" data-a="a">
+    <span>A. Donde el error de prueba es mínimo (ambos errores bajos)</span>
+  </div>
+  <div class="mcq" data-q="3" data-a="a">
+    <span>B. Donde el error de entrenamiento es cero</span>
+  </div>
+  <div class="mcq" data-q="3" data-a="a">
+    <span>C. Siempre en grado 1</span>
+  </div>
+  <div class="mcq" data-q="3" data-a="a">
+    <span>D. Siempre en el grado máximo</span>
+  </div>
+  <div id="fb3" class="feedback"></div>
+
+  <button class="btn" onclick="showFeedback()">Mostrar resultado</button>
+</div>
+
+<script>
+// ====================== DATA GENERATION ======================
+const SEED = 42;
+function seededRandom(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 4294967296;
+  };
+}
+
+const rng = seededRandom(SEED);
+
+// True function: cubic with some curvature
+function trueFunc(x) {
+  return 0.5 + 0.8*x - 0.3*x*x + 0.05*x*x*x;
+}
+
+// Generate training data (20 points with noise)
+const nTrain = 20;
+const trainX = [];
+const trainY = [];
+for (let i = 0; i < nTrain; i++) {
+  const x = (i / (nTrain - 1)) * 2 - 0.2; // range -0.2 to 1.8 (slightly extrapolated)
+  const noise = (rng() - 0.5) * 0.4;
+  trainX.push(x);
+  trainY.push(trueFunc(x) + noise);
+}
+
+// Generate test data (20 points, different positions, similar noise)
+const nTest = 20;
+const testX = [];
+const testY = [];
+for (let i = 0; i < nTest; i++) {
+  const x = (i / (nTest - 1)) * 2 - 0.1 + (rng() - 0.5) * 0.1;
+  const noise = (rng() - 0.5) * 0.4;
+  testX.push(x);
+  testY.push(trueFunc(x) + noise);
+}
+
+// Generate dense x for plotting curve
+const plotX = [];
+for (let i = 0; i <= 200; i++) plotX.push(i / 200 * 2 - 0.2);
+
+// ====================== POLYNOMIAL FIT (via normal equations) ======================
+function polyFit(x, y, degree) {
+  const n = x.length;
+  // Build Vandermonde matrix
+  const X = [];
+  for (let i = 0; i < n; i++) {
+    const row = [];
+    let xi = 1;
+    for (let j = 0; j <= degree; j++) {
+      row.push(xi);
+      xi *= x[i];
+    }
+    X.push(row);
+  }
+
+  // X^T * X
+  const XTX = [];
+  for (let i = 0; i <= degree; i++) {
+    XTX.push(new Array(degree + 1).fill(0));
+  }
+  for (let i = 0; i <= degree; i++) {
+    for (let j = 0; j <= degree; j++) {
+      let sum = 0;
+      for (let k = 0; k < n; k++) {
+        sum += X[k][i] * X[k][j];
+      }
+      XTX[i][j] = sum;
+    }
+  }
+
+  // X^T * y
+  const XTy = new Array(degree + 1).fill(0);
+  for (let i = 0; i <= degree; i++) {
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      sum += X[k][i] * y[k];
+    }
+    XTy[i] = sum;
+  }
+
+  // Solve using Gaussian elimination
+  const A = XTX.map(r => [...r]);
+  const b = [...XTy];
+  const m = degree + 1;
+  for (let col = 0; col < m; col++) {
+    // Find pivot
+    let maxRow = col;
+    for (let row = col + 1; row < m; row++) {
+      if (Math.abs(A[row][col]) > Math.abs(A[maxRow][col])) maxRow = row;
+    }
+    [A[col], A[maxRow]] = [A[maxRow], A[col]];
+    [b[col], b[maxRow]] = [b[maxRow], b[col]];
+
+    const pivot = A[col][col];
+    if (Math.abs(pivot) < 1e-12) continue;
+
+    for (let row = col + 1; row < m; row++) {
+      const factor = A[row][col] / pivot;
+      for (let j = col; j < m; j++) A[row][j] -= factor * A[col][j];
+      b[row] -= factor * b[col];
+    }
+  }
+
+  // Back substitution
+  const coeffs = new Array(m).fill(0);
+  for (let i = m - 1; i >= 0; i--) {
+    let sum = b[i];
+    for (let j = i + 1; j < m; j++) sum -= A[i][j] * coeffs[j];
+    coeffs[i] = sum / A[i][j];
+  }
+  return coeffs;
+}
+
+function polyEval(coeffs, x) {
+  let y = 0;
+  let xi = 1;
+  for (let i = 0; i < coeffs.length; i++) {
+    y += coeffs[i] * xi;
+    xi *= x;
+  }
+  return y;
+}
+
+function mse(actual, predicted) {
+  let sum = 0;
+  for (let i = 0; i < actual.length; i++) {
+    sum += (actual[i] - predicted[i]) ** 2;
+  }
+  return sum / actual.length;
+}
+
+// ====================== PLOTTING ======================
+const colorTrain = '#1f77b4';
+const colorTest = '#d62728';
+const colorFit = '#2ca02c';
+const colorTrue = '#888';
+
+function updatePlot(degree) {
+  const coeffs = polyFit(trainX, trainY, degree);
+
+  // Predicted curve
+  const predY = plotX.map(x => polyEval(coeffs, x));
+
+  // Predictions on data
+  const trainPred = trainX.map(x => polyEval(coeffs, x));
+  const testPred = testX.map(x => polyEval(coeffs, x));
+
+  const trainErr = mse(trainY, trainPred);
+  const testErr = mse(testY, testPred);
+
+  // Update metrics
+  document.getElementById('train-err').textContent = trainErr.toFixed(4);
+  document.getElementById('test-err').textContent = testErr.toFixed(4);
+
+  const diff = testErr - trainErr;
+  let status, color;
+  if (degree <= 2) {
+    status = 'Subajuste (underfitting) — ambos errores altos';
+    color = '#d62728';
+  } else if (degree <= 6) {
+    status = '✅ Punto óptimo — error de prueba bajo y cercano al de entrenamiento';
+    color = '#2e7d32';
+  } else {
+    status = '⚠️ Sobreajuste (overfitting) — error train bajo, error test alto';
+    color = '#e65100';
+  }
+  document.getElementById('status-val').textContent = status;
+  document.getElementById('status-val').style.color = color;
+
+  // --- Plot 1: Data + Fit ---
+  const trainTrace = {
+    x: trainX, y: trainY, mode: 'markers', type: 'scatter',
+    name: 'Entrenamiento', marker: {color: colorTrain, size: 7}
+  };
+  const testTrace = {
+    x: testX, y: testY, mode: 'markers', type: 'scatter',
+    name: 'Prueba', marker: {color: colorTest, size: 7, symbol: 'x'}
+  };
+  const fitTrace = {
+    x: plotX, y: predY, mode: 'lines', type: 'scatter',
+    name: `Polinomio grado ${degree}`, line: {color: colorFit, width: 2.5}
+  };
+  const trueTrace = {
+    x: plotX, y: plotX.map(trueFunc), mode: 'lines', type: 'scatter',
+    name: 'Función real (desconocida)', line: {color: colorTrue, width: 1.5, dash: 'dash'}
+  };
+
+  const layout1 = {
+    title: `Ajuste polinomial — grado ${degree}`,
+    xaxis: {title: 'Variable predictora', range: [-0.3, 1.9]},
+    yaxis: {title: 'Variable objetivo', range: [-0.2, 1.6]},
+    legend: {orientation: 'h', y: -0.2},
+    margin: {t: 35, r: 20, b: 60, l: 50},
+    hovermode: 'closest',
+    template: 'plotly_white'
+  };
+
+  Plotly.newReact('plot-fit', [trueTrace, fitTrace, trainTrace, testTrace], layout1, {responsive: true});
+
+  // --- Plot 2: Error bars ---
+  const errTrainBar = {
+    x: ['Entrenamiento'], y: [trainErr],
+    type: 'bar', name: 'Entrenamiento',
+    marker: {color: colorTrain},
+    text: [trainErr.toFixed(4)],
+    textposition: 'outside'
+  };
+  const errTestBar = {
+    x: ['Prueba'], y: [testErr],
+    type: 'bar', name: 'Prueba',
+    marker: {color: colorTest},
+    text: [testErr.toFixed(4)],
+    textposition: 'outside'
+  };
+
+  // Add vertical line at train error for comparison
+  const layout2 = {
+    title: 'Error Cuadrático Medio (ECM)',
+    yaxis: {title: 'ECM', range: [0, Math.max(trainErr, testErr, 0.05) * 1.5 + 0.02]},
+    barmode: 'group',
+    margin: {t: 35, r: 20, b: 40, l: 50},
+    template: 'plotly_white',
+    annotations: [
+      {
+        x: 0.5, y: Math.max(trainErr, testErr) * 1.35,
+        text: degree <= 2 ? '⬆️ Subajuste: ambos errores altos' :
+              degree <= 6 ? '✅ Punto óptimo' :
+              '⚠️ Sobreajuste: train ≠ test',
+        showarrow: false,
+        font: {size: 13, color: color}
+      }
+    ]
+  };
+
+  Plotly.newReact('plot-errors', [errTrainBar, errTestBar], layout2, {responsive: true});
+}
+
+// ====================== SLIDER ======================
+document.getElementById('complexity').addEventListener('input', function() {
+  const deg = parseInt(this.value);
+  document.getElementById('deg-label').textContent = deg;
+  updatePlot(deg);
+});
+
+// ====================== MCQ ======================
+document.querySelectorAll('.mcq').forEach(el => {
+  el.addEventListener('click', function() {
+    const q = this.dataset.q;
+    document.querySelectorAll(`.mcq[data-q="${q}"]`).forEach(m => m.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+const feedbackTexts = {
+  1: {
+    b: '✅ Correcto. Con grado 1 (línea recta), el modelo es demasiado simple para capturar la relación real. Ambos errores son altos — eso es subajuste (underfitting).'
+  },
+  2: {
+    c: '✅ Correcto. Con grado alto, el modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto) — eso es sobreajuste (overfitting).'
+  },
+  3: {
+    a: '✅ Correcto. El punto óptimo es donde el error de prueba es mínimo. El modelo es lo suficientemente complejo para capturar la tendencia pero no tanto como para memorizar el ruido.'
+  }
+};
+
+const wrongTexts = {
+  1: '❌ Incorrecto. Con grado 1, el modelo es demasiado simple. Repasá: cuando ambos errores son altos por falta de complejidad, se llama <strong>subajuste</strong> (underfitting).',
+  2: '❌ Incorrecto. Observá la brecha entre el error de entrenamiento (muy bajo) y el de prueba (alto). Esa brecha es la señal clásica de <strong>sobreajuste</strong>.',
+  3: '❌ El punto óptimo no está en los extremos. Buscá el grado donde el error de prueba es más bajo.'
+};
+
+function showFeedback() {
+  for (let q = 1; q <= 3; q++) {
+    const selected = document.querySelectorAll(`.mcq[data-q="${q}"].selected`);
+    const fb = document.getElementById(`fb${q}`);
+    if (selected.length === 1) {
+      const answer = selected[0].dataset.a;
+      if (feedbackTexts[q][answer]) {
+        fb.innerHTML = feedbackTexts[q][answer];
+        fb.className = 'feedback show';
+        selected.forEach(m => { m.classList.remove('selected'); m.classList.add('correct'); });
+      } else {
+        fb.innerHTML = wrongTexts[q];
+        fb.className = 'feedback show';
+        selected.forEach(m => { m.classList.remove('selected'); m.classList.add('incorrect'); });
+      }
+    } else {
+      fb.innerHTML = 'Seleccioná una opción primero.';
+      fb.className = 'feedback show';
+    }
+  }
+}
+
+// Initial render
+updatePlot(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 09: Rentosertib &mdash; IA en Descubrimiento de F&aacute;rmacos</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#222;line-height:1.6;padding:20px;max-width:1000px;margin:0 auto}
+h1{color:#1f77b4;font-size:1.6rem;margin-bottom:4px}
+h2{color:#444;font-size:1.1rem;font-weight:400;margin-bottom:16px}
+h3{color:#1f77b4;font-size:1.1rem;margin:16px 0 8px}
+.etiqueta{display:inline-block;background:#e8f0fe;color:#1f77b4;padding:4px 12px;border-radius:12px;font-size:.8rem;font-weight:600;margin-bottom:16px}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.1);padding:20px;margin-bottom:20px}
+.timeline{position:relative;margin:20px 0;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:3px;background:#1f77b4;border-radius:3px}
+.tl-item{position:relative;margin-bottom:20px;padding:12px 16px;background:#f0f4f8;border-radius:8px;cursor:pointer;transition:all .2s;border-left:3px solid transparent}
+.tl-item:hover{background:#e2e8f0;border-left-color:#1f77b4}
+.tl-item.activo{background:#dbeafe;border-left-color:#d62728}
+.tl-ano{color:#1f77b4;font-weight:700;font-size:1.1rem}
+.tl-titulo{font-weight:600;font-size:.95rem}
+.tl-desc{font-size:.85rem;color:#555;margin-top:4px;display:none}
+.tl-item.activo .tl-desc{display:block}
+.tl-dot{position:absolute;left:-26px;top:16px;width:16px;height:16px;background:#1f77b4;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #1f77b4}
+.barra-comp{display:flex;align-items:center;gap:16px;margin:16px 0;flex-wrap:wrap}
+.barra-comp .label{font-weight:600;font-size:.85rem;min-width:100px}
+.barra-comp .barra-wrap{flex:1;min-width:150px;height:24px;background:#eee;border-radius:12px;overflow:hidden;position:relative}
+.barra-comp .barra-fill{height:100%;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;transition:width 1s}
+.barra-blue{background:#1f77b4}
+.barra-red{background:#d62728}
+#plot-barras{width:100%;height:350px}
+.mcq{background:#f0f4f8;border-radius:8px;padding:16px;margin:10px 0}
+.mcq p{font-weight:600;margin-bottom:8px}
+.mcq label{display:block;padding:6px 10px;margin:4px 0;border-radius:6px;cursor:pointer;transition:background .2s}
+.mcq label:hover{background:#e2e8f0}
+.mcq input[type=radio]{margin-right:8px}
+.mcq button{background:#1f77b4;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;margin-top:8px;font-size:.85rem}
+.mcq button:hover{background:#155a8a}
+.feedback{margin-top:8px;padding:8px 12px;border-radius:6px;display:none;font-size:.9rem}
+.feedback.ok{background:#d4edda;color:#155724;display:block}
+.feedback.err{background:#f8d7da;color:#721c24;display:block}
+</style>
+</head>
+<body>
+
+<h1>Rentosertib: IA en Descubrimiento de F&aacute;rmacos</h1>
+<h2>Caso real: Insilico Medicine &mdash; de la idea al ensayo cl&iacute;nico en 5 a&ntilde;os</h2>
+<div class="etiqueta">modelo sobre datos reales &mdash; Nature Medicine 2025</div>
+
+<div class="card">
+<p style="margin-bottom:12px"><strong>Contexto:</strong> Rentosertib (INS018_055) es el primer f&aacute;rmaco descubierto y dise&ntilde;ado completamente con IA generativa en llegar a ensayos cl&iacute;nicos. Desarrollado por Insilico Medicine, est&aacute; dirigido a la fibrosis pulmonar idiop&aacute;tica (FPI), una enfermedad pulmonar progresiva y letal. Este hito demuestra que la IA puede acelerar dr&aacute;sticamente el descubrimiento de f&aacute;rmacos.</p>
+
+<h3>&#191;Antes de interactuar, qu&eacute; crees que pasar&aacute;?</h3>
+<div class="mcq">
+<p>Un f&aacute;rmaco t&iacute;pico tarda 10-15 a&ntilde;os en desarrollarse. &#191;Cu&aacute;nto crees que la IA puede acortar solo la fase de descubrimiento (hasta el candidato precl&iacute;nico)?</p>
+<label><input type="radio" name="pred" value="A"> A) No la acorta en absoluto</label>
+<label><input type="radio" name="pred" value="B"> B) De 4-5 a&ntilde;os a 2-3 a&ntilde;os</label>
+<label><input type="radio" name="pred" value="C"> C) De 2.5-4 a&ntilde;os a 18 meses</label>
+<label><input type="radio" name="pred" value="D"> D) De 10 a&ntilde;os a 1 semana</label>
+<button onclick="(function(){var fb=document.querySelector('.feedback-pred');fb.style.display='block';fb.className='feedback ok';})()">Mostrar resultado</button>
+<div class="feedback feedback-pred">Respuesta correcta: C. El descubrimiento tradicional toma 2.5-4 a&ntilde;os para llegar a un candidato precl&iacute;nico (PCC). Con IA, Insilico lo logr&oacute; en 18 meses &mdash; menos de la mitad del tiempo.</div>
+</div>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">L&iacute;nea de tiempo: Desarrollo de Rentosertib</h3>
+<p style="font-size:.9rem;margin-bottom:8px">Haz clic en cada etapa para expandir la informaci&oacute;n.</p>
+<div class="timeline" id="timeline">
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2014</div>
+<div class="tl-titulo">Fundaci&oacute;n de Insilico Medicine</div>
+<div class="tl-desc">Alex Zhavoronkov funda Insilico Medicine en Baltimore, EE.UU. La empresa se enfoca en aplicar inteligencia artificial generativa (GANs, autoencoders) al descubrimiento de f&aacute;rmacos y al envejecimiento.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2016</div>
+<div class="tl-titulo">Selecci&oacute;n del target: TNIK</div>
+<div class="tl-desc">Insilico utiliza su plataforma de IA <strong>PandaOmics</strong> para identificar TNIK (TRAF2 and NCK Interacting Kinase) como una nueva diana terap&eacute;utica para la fibrosis pulmonar idiop&aacute;tica. La IA analiza miles de datasets &oacute;micos y literatura cient&iacute;fica para identificar prote&iacute;nas clave en la patolog&iacute;a.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2018</div>
+<div class="tl-titulo">Descubrimiento de la mol&eacute;cula l&iacute;der (PCC) &mdash; 18 meses</div>
+<div class="tl-desc">Usando <strong>Chemistry42</strong>, su plataforma generativa de dise&ntilde;o molecular, Insilico dise&ntilde;a y optimiza una mol&eacute;cula candidata en solo 18 meses. El proceso tradicional toma 2.5-4 a&ntilde;os. La IA genera millones de mol&eacute;culas virtuales, las eval&uacute;a por propiedades f&aacute;rmaco-cin&eacute;ticas y toxicidad, y selecciona las mejores.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2019</div>
+<div class="tl-titulo">Estudios precl&iacute;nicos exitosos</div>
+<div class="tl-desc">El candidato INS018_055 (Rentosertib) supera estudios precl&iacute;nicos en modelos animales de fibrosis pulmonar. Se demuestra eficacia en reducci&oacute;n de fibrosis, buen perfil de seguridad y propiedades farmacocin&eacute;ticas favorables.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2021</div>
+<div class="tl-titulo">Fase cl&iacute;nica I &mdash; seguridad en humanos</div>
+<div class="tl-desc">Rentosertib completa exitosamente el ensayo de Fase I en voluntarios sanos, demostrando un perfil de seguridad favorable. Es el primer f&aacute;rmaco descubierto y dise&ntilde;ado por IA generativa en alcanzar ensayos cl&iacute;nicos en humanos.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2023</div>
+<div class="tl-titulo">Fase cl&iacute;nica II &mdash; eficacia en pacientes</div>
+<div class="tl-desc">Se inicia ensayo de Fase II en pacientes con fibrosis pulmonar idiop&aacute;tica en China y EE.UU. Los resultados preliminares muestran eficacia en la mejora de la capacidad pulmonar y reducci&oacute;n del progreso de la fibrosis.</div>
+</div>
+<div class="tl-item" onclick="toggleItem(this)">
+<div class="tl-dot"></div>
+<div class="tl-ano">2025</div>
+<div class="tl-titulo">Publicaci&oacute;n en Nature Medicine</div>
+<div class="tl-desc">Insilico publica los resultados completos del descubrimiento y desarrollo de Rentosertib en <strong>Nature Medicine</strong>, confirmando su estatus como hito hist&oacute;rico en el descubrimiento de f&aacute;rmacos impulsado por IA.</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Comparaci&oacute;n: Tradicional vs. IA en fase de descubrimiento</h3>
+<div class="barra-comp">
+<div class="label">Enfoque tradicional</div>
+<div class="barra-wrap"><div class="barra-fill barra-blue" style="width:65%">2.5&ndash;4 a&ntilde;os</div></div>
+</div>
+<div class="barra-comp">
+<div class="label">Con IA generativa</div>
+<div class="barra-wrap"><div class="barra-fill barra-red" style="width:30%">18 meses</div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Costo y tiempo: Pipeline completo de desarrollo de f&aacute;rmacos</h3>
+<div id="plot-barras"></div>
+</div>
+
+<div style="background:#e8f4f8;border-radius:8px;padding:16px;font-size:.9rem;border-left:4px solid #1f77b4;margin-bottom:20px">
+<strong>&#191;Qu&eacute; aprendimos?</strong> Rentosertib demuestra que la IA puede reducir el tiempo de descubrimiento de f&aacute;rmacos de 3-4 a&ntilde;os a 18 meses. La IA generativa (Chemistry42) dise&ntilde;a mol&eacute;culas con propiedades deseadas, mientras la IA anal&iacute;tica (PandaOmics) identifica dianas terap&eacute;uticas. Este enfoque promete acelerar el desarrollo de tratamientos para enfermedades con necesidades no cubiertas.
+</div>
+
+<h3>Checkpoint: Eval&uacute;a tu comprensi&oacute;n</h3>
+
+<div class="mcq">
+<p>1. &#191;Qu&eacute; hace &uacute;nico a Rentosertib (INS018_055) en la historia del descubrimiento de f&aacute;rmacos?</p>
+<label><input type="radio" name="q1" value="A"> A) Es el f&aacute;rmaco m&aacute;s caro jam&aacute;s desarrollado</label>
+<label><input type="radio" name="q1" value="B"> B) Es el primer f&aacute;rmaco descubierto y dise&ntilde;ado completamente con IA generativa en llegar a ensayos cl&iacute;nicos</label>
+<label><input type="radio" name="q1" value="C"> C) Fue descubierto por casualidad</label>
+<label><input type="radio" name="q1" value="D"> D) Es el primer f&aacute;rmaco contra la fibrosis pulmonar</label>
+<button onclick="mostrarFB('fb1','B')">Mostrar resultado</button>
+<div id="fb1" class="feedback">Respuesta correcta: B. Rentosertib es el primer f&aacute;rmaco donde tanto el descubrimiento de la diana (con PandaOmics) como el dise&ntilde;o molecular (con Chemistry42) fueron realizados &iacute;ntegramente por IA generativa.</div>
+</div>
+
+<div class="mcq">
+<p>2. &#191;C&oacute;mo contribuye la IA generativa al descubrimiento de f&aacute;rmacos en este caso?</p>
+<label><input type="radio" name="q2" value="A"> A) Solo organiza datos de pacientes</label>
+<label><input type="radio" name="q2" value="B"> B) Genera y eval&uacute;a millones de mol&eacute;culas virtuales para seleccionar las m&aacute;s prometedoras</label>
+<label><input type="radio" name="q2" value="C"> C) Reemplaza completamente los ensayos cl&iacute;nicos</label>
+<label><input type="radio" name="q2" value="D"> D) Se usa solo para determinar el precio del f&aacute;rmaco</label>
+<button onclick="mostrarFB('fb2','B')">Mostrar resultado</button>
+<div id="fb2" class="feedback">Respuesta correcta: B. La IA generativa (Chemistry42) crea y eval&uacute;a millones de mol&eacute;culas candidatas virtualmente, prediciendo sus propiedades y optimiz&aacute;ndolas antes de la s&iacute;ntesis en laboratorio. Esto reduce dr&aacute;sticamente el tiempo de descubrimiento.</div>
+</div>
+
+<script>
+function toggleItem(el) {
+  const activos = document.querySelectorAll('.tl-item.activo');
+  activos.forEach(a => a.classList.remove('activo'));
+  el.classList.add('activo');
+}
+
+const fases = ['Descubrimiento','Precl&iacute;nico','Fase I','Fase II','Fase III','Aprobaci&oacute;n'];
+const trad = [3.5, 1.5, 1.5, 2.5, 3.0, 1.5];
+const ia = [1.5, 1.2, 1.2, 2.0, 2.5, 1.2];
+
+const barData = [
+  {type:'bar', name:'Tradicional', x:fases, y:trad,
+    marker:{color:'#1f77b4', line:{color:'#155a8a',width:1}},
+    hovertemplate:'%{x}: %{y} a&ntilde;os<extra>Tradicional</extra>'},
+  {type:'bar', name:'Con IA', x:fases, y:ia,
+    marker:{color:'#d62728', line:{color:'#a01f1f',width:1}},
+    hovertemplate:'%{x}: %{y} a&ntilde;os<extra>Con IA</extra>'}
+];
+
+const barLayout = {
+  title:{text:'Duraci&oacute;n por fase: Tradicional vs. con IA (estimaci&oacute;n)', font:{size:13}},
+  xaxis:{title:'Fase del desarrollo'},
+  yaxis:{title:'A&ntilde;os'},
+  barmode:'group',
+  margin:{l:50,r:20,t:50,b:60},
+  paper_bgcolor:'rgba(0,0,0,0)',
+  plot_bgcolor:'rgba(0,0,0,0)',
+  legend:{orientation:'h',y:-0.2},
+  annotations:[{
+    x:'Descubrimiento', y:4.5, text:'-57%', showarrow:true, arrowhead:2, ax:30, ay:-20,
+    font:{color:'#d62728',size:12}
+  }]
+};
+
+Plotly.newReact('plot-barras', barData, barLayout, {responsive:true});
+
+function mostrarFB(id, correcta) {
+  const mcqDiv = document.getElementById(id).parentElement;
+  const seleccionado = mcqDiv.querySelector('input[type=radio]:checked');
+  const fb = document.getElementById(id);
+  if (!seleccionado) {
+    fb.textContent = 'Selecciona una opci\u00f3n primero.';
+    fb.className = 'feedback err';
+    fb.style.display = 'block';
+    return;
+  }
+  if (seleccionado.value === correcta) {
+    fb.className = 'feedback ok';
+  } else {
+    fb.className = 'feedback err';
+    const msgs = {'fb1B':'Incorrecto. Rentosertib fue el primero dise\u00f1ado \u00edntegramente con IA generativa.',
+      'fb2B':'Incorrecto. La IA generativa dise\u00f1a y eval\u00faa mol\u00e9culas virtualmente antes de sintetizarlas.'};
+    fb.innerHTML = msgs[id+correcta] || 'Incorrecto. Revisa el concepto e intenta de nuevo.';
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>

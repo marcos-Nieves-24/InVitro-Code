@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 05: KNN - K-Nearest Neighbors</title>
+<script src="assets/plotly-3.0.0.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #222; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; color: #1f77b4; margin-bottom: 4px; }
+  .subtitle { font-size: 0.9rem; color: #555; margin-bottom: 16px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+  .badge-sim { background: #fff3cd; color: #856404; }
+  .predict-box { background: #e8f4f8; border-left: 4px solid #1f77b4; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .predict-box h3 { font-size: 0.95rem; margin-bottom: 8px; color: #1f77b4; }
+  .predict-box label { display: block; font-size: 0.85rem; margin: 4px 0; cursor: pointer; }
+  .predict-box input { margin-right: 6px; }
+  #plot { width: 100%; height: 500px; }
+  .controls-row { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; align-items: center; }
+  .controls-row label { font-size: 0.85rem; font-weight: 600; }
+  .controls-row input[type="range"] { width: 160px; }
+  .controls-row input[type="number"] { width: 60px; padding: 4px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem; }
+  .k-display { font-size: 1.2rem; font-weight: 700; color: #1f77b4; }
+  .pred-box { background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin: 8px 0; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .pred-box .item { text-align: center; }
+  .pred-box .item .value { font-size: 1.1rem; font-weight: 700; }
+  .pred-box .item .label { font-size: 0.75rem; color: #666; }
+  .pred-aspergillus { color: #1f77b4; }
+  .pred-penicillium { color: #d62728; }
+  .bar-container { display: flex; height: 20px; border-radius: 10px; overflow: hidden; margin: 4px 0; min-width: 120px; }
+  .bar-aspergillus { background: #1f77b4; transition: width 0.2s; }
+  .bar-penicillium { background: #d62728; transition: width 0.2s; }
+  .btn { padding: 6px 16px; border: none; border-radius: 6px; font-size: 0.85rem; cursor: pointer; background: #1f77b4; color: #fff; }
+  .btn:hover { opacity: 0.9; }
+  .btn-secondary { background: #6c757d; }
+  .checkpoint { background: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 20px; }
+  .checkpoint h3 { font-size: 1rem; margin-bottom: 10px; color: #d62728; }
+  .mcq { margin: 10px 0; padding: 10px; background: #fff; border-radius: 6px; }
+  .mcq p { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .mcq label { display: block; font-size: 0.85rem; margin: 3px 0; cursor: pointer; }
+  .mcq input { margin-right: 6px; }
+  .feedback { margin-top: 6px; padding: 8px; border-radius: 6px; font-size: 0.85rem; display: none; }
+  .correct { background: #d4edda; color: #155724; }
+  .incorrect { background: #f8d7da; color: #721c24; }
+  .click-hint { font-size: 0.8rem; color: #888; font-style: italic; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>KNN: K-Vecinos Más Cercanos</h1>
+  <div class="subtitle">Clasificador visual interactivo para conidias de Aspergillus y Penicillium</div>
+  <span class="badge badge-sim">simulación educativa</span>
+
+  <div class="predict-box">
+    <h3>Antes de interactuar, ¿qué crees que pasará?</h3>
+    <p style="font-size:0.85rem;margin-bottom:6px;">Si k=1, clasificamos según el vecino más cercano. ¿Qué crees que pasa si aumentamos k a 15?</p>
+    <label><input type="radio" name="pred_q1" value="a"> La clasificación será más estable porque considera más vecinos</label>
+    <label><input type="radio" name="pred_q1" value="b"> La clasificación será menos precisa porque incluye vecinos lejanos</label>
+    <label><input type="radio" name="pred_q1" value="c"> No cambia nada, siempre se clasifica igual</label>
+  </div>
+
+  <div class="controls-row">
+    <label>Valor de k:</label>
+    <input type="range" id="k-slider" min="1" max="15" step="1" value="3">
+    <span class="k-display" id="k-display">3</span>
+    <button class="btn btn-secondary" onclick="randomPoint()">Nuevo punto</button>
+  </div>
+
+  <div class="click-hint">Haz clic en cualquier parte del gráfico para mover el punto de prueba (?)</div>
+  <div id="plot"></div>
+
+  <div class="pred-box" id="pred-box">
+    <div class="item"><div class="value pred-aspergillus" id="pred-class">—</div><div class="label">Clase predicha</div></div>
+    <div class="item"><div class="value" id="k-used">3</div><div class="label">k utilizados</div></div>
+    <div class="item" style="flex:2;">
+      <div class="label">Vecinos por clase</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:4px;">
+        <span style="font-size:0.85rem;color:#1f77b4;" id="count-a">A: 0</span>
+        <div class="bar-container" style="flex:1;"><div class="bar-aspergillus" id="bar-a" style="width:0%"></div><div class="bar-penicillium" id="bar-p" style="width:0%"></div></div>
+        <span style="font-size:0.85rem;color:#d62728;" id="count-p">P: 0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <h3>Checkpoint: K-Nearest Neighbors</h3>
+    <div class="mcq">
+      <p>1. ¿Qué significa k en el algoritmo KNN?</p>
+      <label><input type="radio" name="cq1" value="a"> El número de clases a predecir</label>
+      <label><input type="radio" name="cq1" value="b"> El número de vecinos más cercanos que votan por la clase</label>
+      <label><input type="radio" name="cq1" value="c"> El número de características que usa el modelo</label>
+      <button class="btn" onclick="showFeedback('cq1')">Mostrar resultado</button>
+      <div id="fb-cq1" class="feedback"></div>
+    </div>
+    <div class="mcq">
+      <p>2. ¿Qué ocurre si elegimos un valor de k demasiado grande?</p>
+      <label><input type="radio" name="cq2" value="a"> El modelo se vuelve muy sensible al ruido</label>
+      <label><input type="radio" name="cq2" value="b"> El modelo puede perder especificidad local porque considera puntos muy lejanos</label>
+      <label><input type="radio" name="cq2" value="c"> El modelo siempre acierta</label>
+      <button class="btn" onclick="showFeedback('cq2')">Mostrar resultado</button>
+      <div id="fb-cq2" class="feedback"></div>
+    </div>
+    <div class="mcq">
+      <p>3. ¿Cómo se mide la distancia entre dos puntos en KNN?</p>
+      <label><input type="radio" name="cq3" value="a"> Distancia Euclidiana (raíz de suma de diferencias al cuadrado)</label>
+      <label><input type="radio" name="cq3" value="b"> Distancia temporal (tiempo entre observaciones)</label>
+      <label><input type="radio" name="cq3" value="c"> Distancia semántica (significado de las características)</label>
+      <button class="btn" onclick="showFeedback('cq3')">Mostrar resultado</button>
+      <div id="fb-cq3" class="feedback"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const trainData = [];
+function sr(s) { let x = Math.sin(s + 1) * 10000; return x - Math.floor(x); }
+
+for (let i = 0; i < 40; i++) {
+  const r1 = sr(100 + i * 3), r2 = sr(200 + i * 3), r3 = sr(300 + i * 3);
+  const area = 20 + r1 * 30;
+  const circ = 0.5 + r2 * 0.5;
+  const label = (area * 0.025 + circ * 1.5 + (r3 - 0.5) * 0.6) > 1.05 ? 1 : 0;
+  trainData.push({area, circ, label});
+}
+
+let testPt = {area: 35, circ: 0.75};
+
+function euclidean(a, b) {
+  return Math.sqrt((a.area - b.area) ** 2 + (a.circ - b.circ) ** 2);
+}
+
+function knnPredict(k, test) {
+  const dists = trainData.map((d, i) => ({dist: euclidean(test, d), label: d.label, idx: i}));
+  dists.sort((a, b) => a.dist - b.dist);
+  const neighbors = dists.slice(0, k);
+  let aCount = 0, pCount = 0;
+  let maxDist = 0;
+  neighbors.forEach(n => {
+    if (n.label === 1) aCount++; else pCount++;
+    if (n.dist > maxDist) maxDist = n.dist;
+  });
+  const pred = aCount > pCount ? 1 : (pCount > aCount ? 0 : (dists[0].label));
+  return {pred, aCount, pCount, neighbors, maxDist};
+}
+
+function updatePlot() {
+  const k = parseInt(document.getElementById('k-slider').value);
+  document.getElementById('k-display').textContent = k;
+  const result = knnPredict(k, testPt);
+
+  const classStr = result.pred === 1 ? 'Aspergillus' : 'Penicillium';
+  document.getElementById('pred-class').textContent = classStr;
+  document.getElementById('pred-class').className = 'value ' + (result.pred === 1 ? 'pred-aspergillus' : 'pred-penicillium');
+  document.getElementById('k-used').textContent = k;
+  document.getElementById('count-a').textContent = 'A: ' + result.aCount;
+  document.getElementById('count-p').textContent = 'P: ' + result.pCount;
+
+  const total = result.aCount + result.pCount;
+  const pctA = total > 0 ? (result.aCount / total * 100) : 0;
+  document.getElementById('bar-a').style.width = pctA + '%';
+  document.getElementById('bar-p').style.width = (100 - pctA) + '%';
+
+  const neighborIndices = result.neighbors.map(n => n.idx);
+  const colors = trainData.map((d, i) => {
+    if (neighborIndices.includes(i)) return d.label === 1 ? '#1f77b4' : '#d62728';
+    return d.label === 1 ? '#9ecae1' : '#ff9896';
+  });
+  const sizes = trainData.map((d, i) => neighborIndices.includes(i) ? 10 : 6);
+
+  const traceTrain = {
+    x: trainData.map(d => d.area),
+    y: trainData.map(d => d.circ),
+    mode: 'markers',
+    type: 'scatter',
+    marker: {size: sizes, color: colors, line: {color: '#333', width: 0.5}},
+    text: trainData.map((d, i) => `${d.label === 1 ? 'Aspergillus' : 'Penicillium'}<br>Área: ${d.area.toFixed(1)}<br>Circ: ${d.circ.toFixed(2)}${neighborIndices.includes(i) ? '<br><b>Vecino k</b>' : ''}`),
+    hoverinfo: 'text',
+    name: 'Entrenamiento'
+  };
+
+  const traceTest = {
+    x: [testPt.area],
+    y: [testPt.circ],
+    mode: 'markers',
+    type: 'scatter',
+    marker: {size: 14, color: '#ff7f0e', symbol: 'diamond', line: {color: '#333', width: 1.5}},
+    text: [`Punto de prueba (?)<br>Área: ${testPt.area.toFixed(1)}<br>Circ: ${testPt.circ.toFixed(2)}<br>KNN predice: ${classStr}`],
+    hoverinfo: 'text',
+    name: '¿?'
+  };
+
+  const theta = [];
+  for (let a = 0; a <= 2 * Math.PI; a += 0.02) theta.push(a);
+  const circleX = theta.map(t => testPt.area + result.maxDist * Math.cos(t));
+  const circleY = theta.map(t => testPt.circ + result.maxDist * Math.sin(t));
+
+  const traceCircle = {
+    x: circleX, y: circleY,
+    mode: 'lines',
+    type: 'scatter',
+    line: {color: '#ff7f0e', width: 1.5, dash: 'dot'},
+    hoverinfo: 'none',
+    name: 'Radio k'
+  };
+
+  const layout = {
+    title: `KNN — k=${k} · Punto ? → ${classStr}`,
+    xaxis: {title: 'Área (µm²)', range: [18, 52], gridcolor: '#eee'},
+    yaxis: {title: 'Circularidad', range: [0.45, 1.05], gridcolor: '#eee', scaleanchor: 'x', scaleratio: 0.04},
+    plot_bgcolor: '#fff', paper_bgcolor: 'rgba(0,0,0,0)',
+    margin: {l: 60, r: 40, t: 50, b: 60},
+    showlegend: false,
+    clickmode: 'event'
+  };
+
+  Plotly.newPlot('plot', [traceTrain, traceTest, traceCircle], layout, {responsive: true, displayModeBar: false});
+
+  const plotDiv = document.getElementById('plot');
+  plotDiv.on('plotly_click', function(data) {
+    if (data.points && data.points.length > 0) {
+      const pt = data.points[0];
+      const x = pt.xaxis.d2p(pt.x);
+      const y = pt.yaxis.d2p(pt.y);
+      if (pt.data.name === '¿?') return;
+      testPt.area = pt.x;
+      testPt.circ = pt.y;
+      updatePlot();
+    }
+  });
+}
+
+document.getElementById('k-slider').addEventListener('input', updatePlot);
+
+function randomPoint() {
+  const r1 = sr(Date.now()), r2 = sr(Date.now() + 1000);
+  testPt.area = 22 + r1 * 26;
+  testPt.circ = 0.52 + r2 * 0.46;
+  updatePlot();
+}
+
+updatePlot();
+
+function showFeedback(id) {
+  const radios = document.getElementsByName(id);
+  let selected = null;
+  for (const r of radios) { if (r.checked) { selected = r.value; break; } }
+  const fb = document.getElementById('fb-' + id);
+  if (!selected) { fb.className = 'feedback incorrect'; fb.textContent = 'Selecciona una opción primero.'; fb.style.display = 'block'; return; }
+  const answers = {
+    'cq1': {correct:'b', msg:'¡Correcto! k es el número de vecinos más cercanos que "votan" para determinar la clase del punto de prueba.'},
+    'cq2': {correct:'b', msg:'¡Correcto! Con k grande, se consideran puntos lejanos que pueden no ser representativos de la vecindad local, suavizando demasiado la frontera.'},
+    'cq3': {correct:'a', msg:'¡Correcto! La distancia Euclidiana es la medida estándar: √[(x₁-x₂)² + (y₁-y₂)²].'}
+  };
+  const ans = answers[id];
+  if (selected === ans.correct) { fb.className = 'feedback correct'; fb.textContent = ans.msg; }
+  else {
+    const extras = {'cq1':'k es el número de vecinos, no de clases ni características.', 'cq2':'Un k muy grande suaviza demasiado y pierde información local.', 'cq3':'KNN usa distancia geométrica como la Euclidiana.'};
+    fb.className = 'feedback incorrect'; fb.textContent = 'No es correcto. ' + extras[id];
+  }
+  fb.style.display = 'block';
+}
+</script>
+</body>
+</html>
