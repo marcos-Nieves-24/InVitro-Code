@@ -78,7 +78,7 @@ Solo `platform-mvp` mergea a main.
 
 - [x] 5.1 Validación client-side: PyodideRunner compara output con test cases esperados
 - [x] 5.2 Feedback visual: check verde o cruz roja en OutputPanel según validación
-- [x] 5.3 Botón "Estoy listo" en OutputPanel + stub de API route para certificación E2B (futuro)
+- [x] 5.3 Botón "⭐ Estoy listo" en OutputPanel (aparece tras validación exitosa) + POST /api/certify con stub E2B
 
 ---
 

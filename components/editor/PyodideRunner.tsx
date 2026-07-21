@@ -137,6 +137,7 @@ export default function PyodideRunner({
         validationResult={validationResult}
         isRunning={isRunning}
         onClear={clearOutput}
+        code={code}
         exercise={exercise}
       />
     </div>
