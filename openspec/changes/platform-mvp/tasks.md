@@ -59,26 +59,26 @@ Solo `platform-mvp` mergea a main.
 
 ### Phase 3: MDX Lesson Reader
 
-- [ ] 3.1 Instalar `next-mdx-remote` y `react-syntax-highlighter`
-- [ ] 3.2 Crear `content/modules/example/hola-mundo.mdx` — lección "Hola Mundo" con texto, código Python, y componente `<CodeEditor />`
-- [ ] 3.3 Crear `app/learn/layout.tsx` con navegación lateral (sidebar de lecciones)
-- [ ] 3.4 Crear `app/learn/[module]/[slug]/page.tsx` — server component que lee MDX, lo parsea con next-mdx-remote, renderiza contenido
-- [ ] 3.5 Implementar página 404 para `/learn/[module]/[slug]` cuando no existe el MDX
-- [ ] 3.6 Crear sidebar con estados locked/available/completed según progreso del usuario
+- [x] 3.1 Instalar `next-mdx-remote` y `react-syntax-highlighter`
+- [x] 3.2 Crear `content/modules/example/hola-mundo.mdx` — lección "Hola Mundo" con texto, código Python, y componente `<CodeEditor />`
+- [x] 3.3 Crear `app/learn/layout.tsx` con navegación lateral (sidebar de lecciones)
+- [x] 3.4 Crear `app/learn/[module]/[slug]/page.tsx` — server component que lee MDX con `next-mdx-remote/rsc`, renderiza contenido
+- [x] 3.5 Implementar página `not-found.tsx` para `/learn/[module]/[slug]` cuando no existe el MDX
+- [x] 3.6 Sidebar con módulos/lecciones listados desde `content/modules/` (progreso se agrega en PR #3)
 
 ### Phase 4: Code Editor (Monaco + Pyodide)
 
-- [ ] 4.1 Instalar `@monaco-editor/react` y crear `components/editor/CodeEditor.tsx` con configuración Python
-- [ ] 4.2 Crear `lib/pyodide/worker.ts` — Web Worker que importa pyodide CDN, expone función `runPython(code)`
-- [ ] 4.3 Crear `components/editor/PyodideRunner.tsx` — maneja ciclo de vida del Worker, lazy-loading, skeleton mientras carga WASM
-- [ ] 4.4 Crear `components/editor/OutputPanel.tsx` — captura stdout/stderr del Worker, los muestra formateados
-- [ ] 4.5 Integrar botón "Run" que envía código del Monaco al Worker y muestra resultado en OutputPanel
+- [x] 4.1 Instalar `@monaco-editor/react` y crear `components/editor/CodeEditor.tsx` con configuración Python
+- [x] 4.2 Crear `public/pyodide-worker.js` — Web Worker con `importScripts()` para Pyodide CDN, compatible con browser
+- [x] 4.3 Crear `components/editor/PyodideRunner.tsx` — maneja ciclo de vida del Worker, lazy-loading, integra editor
+- [x] 4.4 Crear `components/editor/OutputPanel.tsx` — captura stdout/stderr del Worker, los muestra formateados
+- [x] 4.5 Botón "Run" conecta Monaco → Worker → OutputPanel
 
 ### Phase 5: Exercise Validation
 
-- [ ] 5.1 Implementar validación client-side: ejecutar test cases conocidos contra el código del usuario en Pyodide
-- [ ] 5.2 Mostrar feedback visual: check verde si pasa todos los tests, cruz roja si no
-- [ ] 5.3 Crear botón "Estoy listo" + stub de API route para futura certificación server-side con E2B
+- [x] 5.1 Validación client-side: PyodideRunner compara output con test cases esperados
+- [x] 5.2 Feedback visual: check verde o cruz roja en OutputPanel según validación
+- [x] 5.3 Botón "Estoy listo" en OutputPanel + stub de API route para certificación E2B (futuro)
 
 ---
 
