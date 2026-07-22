@@ -1,78 +1,78 @@
 ---
 Module: 2
 Lesson Number: 5
-Lesson Title: Operators
-Estimated Duration: 45 minutes
-Prerequisites: L4 — Data Types
+Lesson Title: Operadores
+Estimated Duration: 45 minutos
+Prerequisites: L4 — Tipos de Datos
 Learning Objectives:
-  - Use arithmetic operators for numeric computation
-  - Use comparison operators to compare values
-  - Use logical operators to combine boolean expressions
-  - Use assignment operators to update variables
-  - Understand operator precedence
-Keywords: arithmetic, comparison, logical, assignment, operator precedence
+  - Usar operadores aritméticos para cómputos numéricos
+  - Usar operadores de comparación para comparar valores
+  - Usar operadores lógicos para combinar expresiones booleanas
+  - Usar operadores de asignación para actualizar variables
+  - Entender la precedencia de operadores
+Keywords: aritmética, comparación, lógica, asignación, precedencia de operadores
 Difficulty: Beginner
-Programming Concepts: Operators, expressions, operator precedence
+Programming Concepts: Operadores, expresiones, precedencia de operadores
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Operators
+# Operadores
 
-## Motivation
+## Motivación
 
-Operators are the tools that let you compute, compare, and combine values. Every program — from a simple calculator to a machine learning model — relies on operators. In biotechnology, you use operators to calculate drug concentrations, compare gene expression levels, and determine significance. In SaaS, you use them to compute revenue, compare user engagement metrics, and evaluate business rules.
+Los operadores son las herramientas que te permiten computar, comparar y combinar valores. Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores. En biotecnología usás operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia. En SaaS los usás para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned about the data types that values can have. Now you will learn how to perform operations on those values. Operators build on your understanding of types because different types support different operators. This prepares you for the next lessons on functions and control flow, where operators are used in conditions and computations.
+En la lección anterior aprendiste sobre los tipos de datos que pueden tener los valores. Ahora vas a aprender cómo realizar operaciones sobre esos valores. Los operadores se basan en tu comprensión de los tipos porque diferentes tipos soportan diferentes operadores. Esto te prepara para las próximas lecciones sobre funciones y flujo de control, donde los operadores se usan en condiciones y cómputos.
 
-## Theory
+## Teoría
 
-### Arithmetic Operators
+### Operadores Aritméticos
 
-Arithmetic operators perform mathematical operations on numeric types (int, float).
+Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
-| Operator | Name | Example | Result |
-|----------|------|---------|--------|
-| `+` | Addition | `5 + 3` | `8` |
-| `-` | Subtraction | `5 - 3` | `2` |
-| `*` | Multiplication | `5 * 3` | `15` |
-| `/` | Float division | `5 / 3` | `1.666...` |
-| `//` | Integer division | `5 // 3` | `1` |
-| `%` | Modulus (remainder) | `5 % 3` | `2` |
-| `**` | Exponentiation | `5 ** 3` | `125` |
+| Operador | Nombre | Ejemplo | Resultado |
+|----------|--------|---------|----------|
+| `+` | Suma | `5 + 3` | `8` |
+| `-` | Resta | `5 - 3` | `2` |
+| `*` | Multiplicación | `5 * 3` | `15` |
+| `/` | División float | `5 / 3` | `1.666...` |
+| `//` | División entera | `5 // 3` | `1` |
+| `%` | Módulo (resto) | `5 % 3` | `2` |
+| `**` | Exponenciación | `5 ** 3` | `125` |
 
-### Comparison Operators
+### Operadores de Comparación
 
-Comparison operators compare two values and return a boolean.
+Los operadores de comparación comparan dos valores y devuelven un booleano.
 
-| Operator | Meaning | Example | Result |
-|----------|---------|---------|--------|
-| `==` | Equal to | `5 == 3` | `False` |
-| `!=` | Not equal to | `5 != 3` | `True` |
-| `<` | Less than | `5 < 3` | `False` |
-| `>` | Greater than | `5 > 3` | `True` |
-| `<=` | Less than or equal | `5 <= 5` | `True` |
-| `>=` | Greater than or equal | `5 >= 3` | `True` |
+| Operador | Significado | Ejemplo | Resultado |
+|----------|------------|---------|----------|
+| `==` | Igual a | `5 == 3` | `False` |
+| `!=` | Distinto de | `5 != 3` | `True` |
+| `<` | Menor que | `5 < 3` | `False` |
+| `>` | Mayor que | `5 > 3` | `True` |
+| `<=` | Menor o igual | `5 <= 5` | `True` |
+| `>=` | Mayor o igual | `5 >= 3` | `True` |
 
-### Logical Operators
+### Operadores Lógicos
 
-Logical operators combine boolean expressions.
+Los operadores lógicos combinan expresiones booleanas.
 
-| Operator | Description | Example | Result |
-|----------|-------------|---------|--------|
-| `and` | True if both are True | `True and False` | `False` |
-| `or` | True if at least one is True | `True or False` | `True` |
-| `not` | Inverts the boolean | `not True` | `False` |
+| Operador | Descripción | Ejemplo | Resultado |
+|----------|-------------|---------|----------|
+| `and` | True si ambos son True | `True and False` | `False` |
+| `or` | True si al menos uno es True | `True or False` | `True` |
+| `not` | Invierte el booleano | `not True` | `False` |
 
-### Assignment Operators
+### Operadores de Asignación
 
-Assignment operators update variables with a computation.
+Los operadores de asignación actualizan variables con un cómputo.
 
-| Operator | Example | Equivalent to |
+| Operador | Ejemplo | Equivalente a |
 |----------|---------|---------------|
 | `=` | `x = 5` | `x = 5` |
 | `+=` | `x += 3` | `x = x + 3` |
@@ -83,50 +83,50 @@ Assignment operators update variables with a computation.
 | `%=` | `x %= 3` | `x = x % 3` |
 | `**=` | `x **= 3` | `x = x ** 3` |
 
-### Operator Precedence
+### Precedencia de Operadores
 
-Python follows standard mathematical precedence (PEMDAS):
+Python sigue la precedencia matemática estándar (PEMDAS):
 
-1. Parentheses `()`
-2. Exponentiation `**`
-3. Unary `+`, `-`
-4. Multiplication `*`, Division `/`, Integer division `//`, Modulus `%`
-5. Addition `+`, Subtraction `-`
-6. Comparison `<`, `<=`, `>`, `>=`, `==`, `!=`
+1. Paréntesis `()`
+2. Exponenciación `**`
+3. `+`, `-` unarios
+4. Multiplicación `*`, División `/`, División entera `//`, Módulo `%`
+5. Suma `+`, Resta `-`
+6. Comparación `<`, `<=`, `>`, `>=`, `==`, `!=`
 7. `not`
 8. `and`
 9. `or`
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-Operator Precedence (highest to lowest)
+Precedencia de Operadores (de mayor a menor)
 
   ()   →   **   →   *,/,//,%   →   +,-   →   ==,!=,<,>   →   not   →   and   →   or
 
-Example:   5 + 3 * 2 ** 2
-           = 5 + 3 * 4       (exponentiation first)
-           = 5 + 12           (multiplication next)
-           = 17               (addition last)
+Ejemplo:   5 + 3 * 2 ** 2
+           = 5 + 3 * 4       (exponenciación primero)
+           = 5 + 12           (multiplicación después)
+           = 17               (suma al final)
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
-# Arithmetic operators
+# Operadores aritméticos
 a, b = 10, 3
 print(f"a = {a}, b = {b}")
-print(f"Addition: {a} + {b} = {a + b}")
-print(f"Subtraction: {a} - {b} = {a - b}")
-print(f"Multiplication: {a} * {b} = {a * b}")
-print(f"Float division: {a} / {b} = {a / b}")
-print(f"Integer division: {a} // {b} = {a // b}")
-print(f"Modulus: {a} % {b} = {a % b}")
-print(f"Exponentiation: {a} ** {b} = {a ** b}")
+print(f"Suma: {a} + {b} = {a + b}")
+print(f"Resta: {a} - {b} = {a - b}")
+print(f"Multiplicación: {a} * {b} = {a * b}")
+print(f"División float: {a} / {b} = {a / b}")
+print(f"División entera: {a} // {b} = {a // b}")
+print(f"Módulo: {a} % {b} = {a % b}")
+print(f"Exponenciación: {a} ** {b} = {a ** b}")
 ```
 
 ```python
-# Comparison operators
+# Operadores de comparación
 x, y = 5, 8
 print(f"{x} == {y}: {x == y}")
 print(f"{x} != {y}: {x != y}")
@@ -137,7 +137,7 @@ print(f"{x} >= {y}: {x >= y}")
 ```
 
 ```python
-# Logical operators
+# Operadores lógicos
 has_glucose = True
 has_insulin = False
 
@@ -147,7 +147,7 @@ print(not has_glucose)              # False
 ```
 
 ```python
-# Assignment operators
+# Operadores de asignación
 count = 0
 count += 5   # count = 5
 count *= 2   # count = 10
@@ -156,112 +156,112 @@ count //= 2  # count = 3
 print(f"Final count: {count}")
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Analyzing drug dose-response data.
+**Escenario**: Analizando datos de dosis-respuesta de fármacos.
 
 ```python
-# Drug dose-response calculation
+# Cálculo de dosis-respuesta de fármaco
 dose_mg = 50
 weight_kg = 70
 half_life_hours = 6
 time_hours = 24
 
-# Calculate concentration after n half-lives
+# Calcular concentración después de n vidas medias
 concentration = dose_mg / weight_kg * (0.5) ** (time_hours / half_life_hours)
 
-# Check if concentration is in therapeutic range
+# Verificar si la concentración está en rango terapéutico
 therapeutic_min = 0.1
 therapeutic_max = 1.0
 in_range = therapeutic_min <= concentration <= therapeutic_max
 
-print(f"Dose: {dose_mg} mg")
-print(f"Patient weight: {weight_kg} kg")
-print(f"Concentration after {time_hours}h: {concentration:.3f} mg/kg")
-print(f"In therapeutic range: {in_range}")
+print(f"Dosis: {dose_mg} mg")
+print(f"Peso del paciente: {weight_kg} kg")
+print(f"Concentración después de {time_hours}h: {concentration:.3f} mg/kg")
+print(f"En rango terapéutico: {in_range}")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Evaluating customer churn risk.
+**Escenario**: Evaluando riesgo de churn de clientes.
 
 ```python
-# Customer churn risk assessment
+# Evaluación de riesgo de churn
 days_since_login = 45
 support_tickets = 3
 subscription_tier = "basic"  # basic, premium, enterprise
 monthly_spend = 29.99
 
-# Churn risk factors
+# Factores de riesgo de churn
 low_engagement = days_since_login > 30
 multiple_issues = support_tickets >= 3
 is_basic_tier = subscription_tier == "basic"
 high_churn_risk = (low_engagement or multiple_issues) and is_basic_tier
 
-print(f"Low engagement: {low_engagement}")
-print(f"Multiple issues: {multiple_issues}")
-print(f"Basic tier: {is_basic_tier}")
-print(f"High churn risk: {high_churn_risk}")
+print(f"Bajo engagement: {low_engagement}")
+print(f"Múltiples problemas: {multiple_issues}")
+print(f"Plan basic: {is_basic_tier}")
+print(f"Alto riesgo de churn: {high_churn_risk}")
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Using `=` instead of `==` for comparison**: `if x = 5:` is assignment, not comparison
-2. **Integer division when float needed**: `5/2 = 2.5` (Python 3), but `5//2 = 2`
-3. **Chaining comparisons incorrectly**: Python allows `a < b < c`, which is `a < b and b < c`
-4. **Operator precedence confusion**: `3 + 4 * 2 = 11`, not `14`
-5. **Modulus with negative numbers**: `-5 % 3 = 1` (not -2)
+1. **Usar `=` en lugar de `==` para comparar**: `if x = 5:` es asignación, no comparación
+2. **División entera cuando se necesita float**: `5/2 = 2.5` (Python 3), pero `5//2 = 2`
+3. **Encadenar comparaciones incorrectamente**: Python permite `a < b < c`, que es `a < b and b < c`
+4. **Confundir precedencia de operadores**: `3 + 4 * 2 = 11`, no `14`
+5. **Módulo con números negativos**: `-5 % 3 = 1` (no -2)
 
-## Best Practices
+## Buenas Prácticas
 
-- Use parentheses to make precedence explicit
-- Use `+=` and similar operators for cleaner code
-- Use `==` with caution for float comparison; use `abs(a-b) < epsilon`
-- Leverage Python's chained comparisons: `0 <= x <= 100`
-- Use `not` sparingly — rewrite conditions for readability
+- Usá paréntesis para hacer explícita la precedencia
+- Usá `+=` y operadores similares para código más limpio
+- Usá `==` con cuidado para comparar floats; usá `abs(a-b) < epsilon`
+- Aprovechá las comparaciones encadenadas de Python: `0 <= x <= 100`
+- Usá `not` con moderación — reformulá las condiciones para que sean legibles
 
-## Summary
+## Resumen
 
-- Arithmetic: `+`, `-`, `*`, `/`, `//`, `%`, `**`
-- Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=` (return bool)
-- Logical: `and`, `or`, `not`
-- Assignment: `=`, `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `**=`
-- Precedence: `()` → `**` → `*,/` → `+,-` → comparisons → `not` → `and` → `or`
-- Use parentheses for clarity
+- Aritméticos: `+`, `-`, `*`, `/`, `//`, `%`, `**`
+- Comparación: `==`, `!=`, `<`, `>`, `<=`, `>=` (devuelven bool)
+- Lógicos: `and`, `or`, `not`
+- Asignación: `=`, `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `**=`
+- Precedencia: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`
+- Usá paréntesis para mayor claridad
 
-## Key Terms
+## Términos Clave
 
-- **Operator**: Symbol that performs an operation on operands
-- **Operand**: Value on which an operator acts
-- **Expression**: Combination of operators and operands that evaluates to a value
-- **Precedence**: Rules determining the order of evaluation
-- **Modulus**: Remainder after division
-- **Short-circuit evaluation**: `and`/`or` stop evaluating when the result is determined
+- **Operador**: Símbolo que realiza una operación sobre operandos
+- **Operando**: Valor sobre el que actúa un operador
+- **Expresión**: Combinación de operadores y operandos que se evalúa a un valor
+- **Precedencia**: Reglas que determinan el orden de evaluación
+- **Módulo**: Resto después de una división
+- **Evaluación de cortocircuito**: `and`/`or` dejan de evaluar cuando el resultado está determinado
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the result of `15 // 4` and `15 % 4`?
-2. What is the value of `3 + 4 * 2 ** 3`?
-3. What does `not (True and False)` evaluate to?
+1. ¿Cuál es el resultado de `15 // 4` y `15 % 4`?
+2. ¿Cuál es el valor de `3 + 4 * 2 ** 3`?
+3. ¿A qué evalúa `not (True and False)`?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Write code that checks if a number is even (use `%`) and prints "even" or "odd".
-5. Write a BMI calculator: weight (kg) / height² (m). Categorize as underweight (< 18.5), normal (18.5-24.9), overweight (25-29.9), obese (≥ 30).
+4. Escribí código que verifique si un número es par (usá `%`) e imprima "par" o "impar".
+5. Escribí una calculadora de IMC: peso (kg) / altura² (m). Clasificá como bajo peso (< 18.5), normal (18.5-24.9), sobrepeso (25-29.9), obeso (≥ 30).
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. Why does `0.1 + 0.2 == 0.3` return False? How would you compare floating-point results safely?
-7. Short-circuit evaluation: What does `False and print("hello")` output? Why?
+6. ¿Por qué `0.1 + 0.2 == 0.3` devuelve False? ¿Cómo compararías resultados de coma flotante de forma segura?
+7. Evaluación de cortocircuito: ¿Qué imprime `False and print("hola")`? ¿Por qué?
 
-## Coding Challenge
+## Desafío de Código
 
-Write a program that:
-1. Asks for the number of DNA samples, the cost per sample, and the available budget
-2. Calculates the total cost and whether it's within budget
-3. Applies a 15% discount if the number of samples > 100
-4. Calculates the remaining budget after the purchase
-5. Uses at least one operator from each category (arithmetic, comparison, logical, assignment)
-6. Prints a formatted summary of all calculations
+Escribí un programa que:
+1. Pregunte la cantidad de muestras de ADN, el costo por muestra y el presupuesto disponible
+2. Calcule el costo total y si está dentro del presupuesto
+3. Aplique un descuento del 15% si la cantidad de muestras > 100
+4. Calcule el presupuesto restante después de la compra
+5. Use al menos un operador de cada categoría (aritmético, comparación, lógico, asignación)
+6. Imprima un resumen formateado de todos los cálculos

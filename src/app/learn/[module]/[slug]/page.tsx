@@ -1,18 +1,11 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import dynamic from "next/dynamic";
 import fs from "fs";
 import path from "path";
-
-const LessonCodeEditor = dynamic(
-  () => import("@/components/editor/PyodideRunner"),
-  { ssr: false },
-);
-
-const CompleteLessonButton = dynamic(
-  () => import("@/components/CompleteLessonButton"),
-  { ssr: false },
-);
+import {
+  LessonCodeEditor,
+  LessonCompleteButton,
+} from "@/components/LessonComponents";
 
 const components = {
   CodeEditor: LessonCodeEditor,
@@ -46,7 +39,7 @@ export default async function LessonPage({ params }: Props) {
       </article>
 
       <div className="mt-6 max-w-4xl mx-auto px-4">
-        <CompleteLessonButton module={module} lesson={slug} />
+        <LessonCompleteButton module={module} lesson={slug} />
       </div>
     </div>
   );

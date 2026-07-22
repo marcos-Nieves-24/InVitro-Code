@@ -1,293 +1,293 @@
 ---
 Module: 5
 Lesson Number: 6
-Lesson Title: Regulation and Governance of AI
-Estimated Duration: 60 minutes
-Prerequisites: L1 (Introduction to AI Ethics)
+Lesson Title: Regulación y Gobernanza de la IA
+Estimated Duration: 60 minutos
+Prerequisites: L1 (Introducción a la Ética en IA)
 Learning Objectives:
-  - Describe the global AI regulatory landscape (EU AI Act, US frameworks, China)
-  - Explain the EU AI Act's risk-based classification system
-  - Evaluate the role of corporate AI ethics boards and internal governance
-  - Describe the algorithmic auditing process
-  - Analyze the challenges of regulating rapidly evolving AI technology
-Keywords: regulation, governance, EU AI Act, auditing, ethics board, compliance, risk classification
+  - Describir el panorama regulatorio global de la IA (Ley de IA de la UE, marcos de EE.UU., China)
+  - Explicar el sistema de clasificación basado en riesgo de la Ley de IA de la UE
+  - Evaluar el rol de los comités corporativos de ética en IA y la gobernanza interna
+  - Describir el proceso de auditoría algorítmica
+  - Analizar los desafíos de regular tecnología de IA en rápida evolución
+Keywords: regulación, gobernanza, Ley de IA de la UE, auditoría, comité de ética, cumplimiento normativo, clasificación de riesgo
 Difficulty: Introductory
-Programming Concepts: None
-Mathematical Concepts: None
-Machine Learning Concepts: Model evaluation, validation
-Datasets Used: None
+Programming Concepts: Ninguno
+Mathematical Concepts: Ninguno
+Machine Learning Concepts: Evaluación de modelos, validación
+Datasets Used: Ninguno
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Regulation and Governance of AI
+# Regulación y Gobernanza de la IA
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Describe** the major AI regulatory frameworks globally (EU, US, China)
-2. **Explain** the EU AI Act's risk-based classification system
-3. **Evaluate** the role and effectiveness of corporate AI ethics boards
-4. **Describe** the algorithmic auditing process
-5. **Analyze** the challenges of regulating AI given its rapid evolution
+1. **Describir** los principales marcos regulatorios de IA a nivel global (UE, EE.UU., China)
+2. **Explicar** el sistema de clasificación basado en riesgo de la Ley de IA de la UE
+3. **Evaluar** el rol y la efectividad de los comités corporativos de ética en IA
+4. **Describir** el proceso de auditoría algorítmica
+5. **Analizar** los desafíos de regular la IA dada su rápida evolución
 
-## Motivation
+## Motivación
 
-In 2024, the European Union passed the AI Act — the world's first comprehensive legal framework for artificial intelligence. It bans certain AI practices outright (social scoring, real-time biometric surveillance in public spaces), imposes strict requirements on "high-risk" AI systems (hiring, credit scoring, medical devices), and creates a new European AI Office to oversee enforcement.
+En 2024, la Unión Europea aprobó la Ley de IA — el primer marco legal integral del mundo para la inteligencia artificial. Prohíbe ciertas prácticas de IA directamente (puntuación social, vigilancia biométrica en tiempo real en espacios públicos), impone requisitos estrictos a los sistemas de IA de "alto riesgo" (contratación, puntuación crediticia, dispositivos médicos) y crea una nueva Oficina Europea de IA para supervisar su cumplimiento.
 
-Meanwhile, the US has taken a different approach. The White House issued an Executive Order on AI in 2023 requiring safety testing, watermarking, and civil rights protections, but comprehensive federal legislation has not yet passed. China has enacted its own AI regulations focusing on algorithmic recommendation transparency, deepfake disclosure, and generative AI content controls.
+Mientras tanto, EE.UU. ha adoptado un enfoque diferente. La Casa Blanca emitió una Orden Ejecutiva sobre IA en 2023 que exige pruebas de seguridad, marcas de agua y protecciones de derechos civiles, pero no se ha aprobado aún una legislación federal integral. China ha promulgado sus propias regulaciones de IA centradas en la transparencia de recomendaciones algorítmicas, divulgación de deepfakes y controles de contenido de IA generativa.
 
-AI regulation is not a theoretical future possibility. It is happening now. If you build or deploy AI systems, you will need to understand the regulatory environment. Non-compliance can mean fines of up to 7% of global revenue (EU AI Act), criminal liability, and reputational damage.
+La regulación de la IA no es una posibilidad futura teórica. Está sucediendo ahora. Si construís o desplegás sistemas de IA, vas a necesitar entender el entorno regulatorio. El incumplimiento puede significar multas de hasta el 7% de los ingresos globales (Ley de IA de la UE), responsabilidad penal y daño reputacional.
 
-## Big Picture
+## Panorama General
 
-| Previous Lesson | Current Lesson | Next Lesson |
+| Lección Anterior | Lección Actual | Próxima Lección |
 |---|---|---|
-| L5: Social Impact (society-level effects) | L6: Regulation and Governance (policy responses) | L7: Case Studies (applying all concepts) |
+| L5: Impacto Social (efectos a nivel societal) | L6: Regulación y Gobernanza (respuestas de política) | L7: Casos de Estudio (aplicando todos los conceptos) |
 
-## Theory
+## Teoría
 
-### The Regulatory Landscape
+### El Panorama Regulatorio
 
-#### EU AI Act
+#### Ley de IA de la UE
 
-The EU AI Act (2024) is the first comprehensive AI regulation. Key features:
+La Ley de IA de la UE (2024) es la primera regulación integral de IA. Características clave:
 
-**Risk-based classification:**
+**Clasificación basada en riesgo:**
 
-| Risk Level | Description | Examples | Requirements |
-|------------|-------------|----------|--------------|
-| Unacceptable | Prohibited | Social scoring, real-time biometric surveillance (limited exceptions) | Banned |
-| High-risk | Significant risk to health, safety, or fundamental rights | Medical devices, hiring, credit scoring, critical infrastructure | Conformity assessment, risk management, human oversight, transparency, documentation |
-| Limited risk | Some transparency concerns | Chatbots, deepfakes, emotion recognition | Transparency obligations |
-| Minimal risk | No significant risk | AI-enabled video games, spam filters | No obligations |
+| Nivel de Riesgo | Descripción | Ejemplos | Requisitos |
+|-----------------|-------------|----------|------------|
+| Inaceptable | Prohibido | Puntuación social, vigilancia biométrica en tiempo real (excepciones limitadas) | Prohibido |
+| Alto riesgo | Riesgo significativo para la salud, seguridad o derechos fundamentales | Dispositivos médicos, contratación, puntuación crediticia, infraestructura crítica | Evaluación de conformidad, gestión de riesgos, supervisión humana, transparencia, documentación |
+| Riesgo limitado | Algunas preocupaciones de transparencia | Chatbots, deepfakes, reconocimiento de emociones | Obligaciones de transparencia |
+| Riesgo mínimo | Sin riesgo significativo | Videojuegos con IA, filtros de spam | Sin obligaciones |
 
-**General-purpose AI (GPAI):** Foundation models and large language models have additional requirements:
-- Transparency (documentation, training data summary)
-- Copyright compliance
-- Systemic risk assessment for models trained with >10^25 FLOPS
+**IA de propósito general (GPAI):** Los modelos fundacionales y modelos de lenguaje grandes tienen requisitos adicionales:
+- Transparencia (documentación, resumen de datos de entrenamiento)
+- Cumplimiento de derechos de autor
+- Evaluación de riesgo sistémico para modelos entrenados con >10^25 FLOPS
 
-**Enforcement:**
-- Fines up to 35 million EUR or 7% of global annual revenue
-- European AI Office established for oversight
-- National authorities in each member state
+**Cumplimiento:**
+- Multas de hasta 35 millones de EUR o 7% de los ingresos anuales globales
+- Oficina Europea de IA establecida para supervisión
+- Autoridades nacionales en cada estado miembro
 
-#### US Approach
+#### Enfoque de EE.UU.
 
-The US has not passed comprehensive federal AI legislation. Key developments:
+EE.UU. no ha aprobado una legislación federal integral de IA. Desarrollos clave:
 
-- **Executive Order on AI (Oct 2023):** Requires safety testing for foundation models, watermarking of AI-generated content, privacy guidance, and civil rights protections.
-- **AI Bill of Rights (2022):** Non-binding blueprint for AI design and deployment, focusing on safe, equitable systems.
-- **State-level legislation:** California, Colorado, and others are passing their own AI laws.
-- **Sectoral regulation:** FDA regulates AI in medical devices; FTC enforces against deceptive AI practices.
+- **Orden Ejecutiva sobre IA (Oct 2023):** Exige pruebas de seguridad para modelos fundacionales, marcas de agua en contenido generado por IA, guías de privacidad y protecciones de derechos civiles.
+- **Declaración de Derechos de IA (2022):** Borrador no vinculante para el diseño y despliegue de IA, centrado en sistemas seguros y equitativos.
+- **Legislación a nivel estatal:** California, Colorado y otros están aprobando sus propias leyes de IA.
+- **Regulación sectorial:** La FDA regula la IA en dispositivos médicos; la FTC aplica medidas contra prácticas engañosas de IA.
 
-#### China's AI Regulation
+#### Regulación de IA en China
 
-China has taken an active approach:
+China ha adoptado un enfoque activo:
 
-- **Algorithmic Recommendation Regulation (2022):** Requires transparency, user profiling opt-out, and content management.
-- **Deep Synthesis Regulation (2023):** Requires labeling of AI-generated content, banning deepfakes without consent.
-- **Generative AI Regulation (2023):** Requires content review, training data compliance, and user protection. Generative AI must reflect "core socialist values."
+- **Regulación de Recomendaciones Algorítmicas (2022):** Exige transparencia, opción de exclusión de perfiles de usuario y gestión de contenido.
+- **Regulación de Síntesis Profunda (2023):** Exige etiquetado de contenido generado por IA, prohibiendo deepfakes sin consentimiento.
+- **Regulación de IA Generativa (2023):** Exige revisión de contenido, cumplimiento de datos de entrenamiento y protección del usuario. La IA generativa debe reflejar "valores socialistas fundamentales".
 
-#### Other Jurisdictions
+#### Otras Jurisdicciones
 
-- **UK:** Pro-innovation approach, avoiding broad legislation in favor of sector-specific guidance.
-- **Canada:** Proposed AI and Data Act (AIDA) with similar risk-based approach to EU.
-- **Brazil:** Proposed AI regulation inspired by EU AI Act.
-- **Japan:** Soft law approach with guidelines rather than binding regulation.
+- **Reino Unido:** Enfoque pro-innovación, evitando legislación amplia en favor de guías sectoriales específicas.
+- **Canadá:** Propuesta de Ley de IA y Datos (AIDA) con enfoque similar al de la UE basado en riesgo.
+- **Brasil:** Propuesta de regulación de IA inspirada en la Ley de IA de la UE.
+- **Japón:** Enfoque de derecho blando con guías en lugar de regulación vinculante.
 
-### Corporate AI Governance
+### Gobernanza Corporativa de IA
 
-Beyond government regulation, companies are establishing internal AI governance structures.
+Más allá de la regulación gubernamental, las empresas están estableciendo estructuras internas de gobernanza de IA.
 
-#### AI Ethics Boards
+#### Comités de Ética de IA
 
-Many large tech companies have established AI ethics boards or committees. Common functions:
+Muchas grandes empresas tecnológicas han establecido comités o consejos de ética de IA. Funciones comunes:
 
-1. **Review** new AI products and features for ethical risks
-2. **Develop** internal AI principles and guidelines
-3. **Oversee** fairness audits and bias testing
-4. **Advise** leadership on ethical AI strategy
-5. **Handle** escalation of ethical concerns
+1. **Revisar** nuevos productos y características de IA para identificar riesgos éticos
+2. **Desarrollar** principios y guías internas de IA
+3. **Supervisar** auditorías de equidad y pruebas de sesgo
+4. **Asesorar** a la dirección sobre estrategia ética de IA
+5. **Gestionar** la escalación de preocupaciones éticas
 
-**Criticisms:**
-- Boards often lack enforcement power
-- May function as "ethics washing" — appearing to address concerns without real change
-- Often composed of employees without independence
-- Can be dissolved when their recommendations conflict with business interests (e.g., Google's AI Ethics Board dissolved in 2019)
+**Críticas:**
+- Los comités a menudo carecen de poder de ejecución
+- Pueden funcionar como "lavado de ética" — aparentar abordar preocupaciones sin cambios reales
+- A menudo compuestos por empleados sin independencia
+- Pueden disolverse cuando sus recomendaciones entran en conflicto con intereses comerciales (ej., el Comité de Ética de IA de Google disuelto en 2019)
 
-#### Internal AI Governance Frameworks
+#### Marcos Internos de Gobernanza de IA
 
-Elements of a robust internal governance framework:
+Elementos de un marco interno robusto de gobernanza:
 
-| Component | Description |
-|-----------|-------------|
-| AI principles | Organization's ethical commitments (e.g., Google's AI Principles, Microsoft's Responsible AI) |
-| Governance body | Cross-functional committee with authority to approve/block AI products |
-| Risk assessment process | Mandatory review for new AI products |
-| Technical standards | Internal standards for fairness, transparency, privacy |
-| Training | Mandatory ethics training for AI practitioners |
-| Audit | Regular internal and external audits of AI systems |
-| Incident response | Process for addressing AI failures |
+| Componente | Descripción |
+|------------|-------------|
+| Principios de IA | Compromisos éticos de la organización (ej., Principios de IA de Google, IA Responsable de Microsoft) |
+| Órgano de gobernanza | Comité multifuncional con autoridad para aprobar/bloquear productos de IA |
+| Proceso de evaluación de riesgos | Revisión obligatoria para nuevos productos de IA |
+| Estándares técnicos | Estándares internos de equidad, transparencia, privacidad |
+| Capacitación | Formación obligatoria en ética para profesionales de IA |
+| Auditoría | Auditorías internas y externas regulares de sistemas de IA |
+| Respuesta a incidentes | Proceso para abordar fallas de IA |
 
-### Algorithmic Auditing
+### Auditoría Algorítmica
 
-An **algorithmic audit** is a systematic evaluation of an AI system to assess its compliance with legal, ethical, and technical standards.
+Una **auditoría algorítmica** es una evaluación sistemática de un sistema de IA para evaluar su cumplimiento con estándares legales, éticos y técnicos.
 
-#### Types of Audits
+#### Tipos de Auditorías
 
-1. **Pre-deployment audit:** Evaluate the system before it affects users.
-2. **Ongoing monitoring:** Continuous evaluation of deployed systems.
-3. **Independent external audit:** Third-party review for credibility.
-4. **Regulatory audit:** Required by law (e.g., EU AI Act conformity assessment).
+1. **Auditoría previa al despliegue:** Evaluar el sistema antes de que afecte a los usuarios.
+2. **Monitoreo continuo:** Evaluación continua de sistemas desplegados.
+3. **Auditoría externa independiente:** Revisión por terceros para credibilidad.
+4. **Auditoría regulatoria:** Requerida por ley (ej., evaluación de conformidad de la Ley de IA de la UE).
 
-#### Audit Process
+#### Proceso de Auditoría
 
-1. **Scoping:** Define the system boundaries, objectives, and standards.
-2. **Data audit:** Examine training data for bias, representativeness, and quality.
-3. **Model audit:** Evaluate performance across demographic groups, test for robustness.
-4. **Transparency audit:** Review documentation, explainability, and user-facing information.
-5. **Process audit:** Review development practices and governance.
-6. **Reporting:** Document findings, risks, and recommendations.
-7. **Remediation:** Implement fixes and re-audit.
+1. **Alcance:** Definir los límites del sistema, objetivos y estándares.
+2. **Auditoría de datos:** Examinar datos de entrenamiento por sesgo, representatividad y calidad.
+3. **Auditoría de modelo:** Evaluar rendimiento entre grupos demográficos, probar robustez.
+4. **Auditoría de transparencia:** Revisar documentación, explicabilidad e información para el usuario.
+5. **Auditoría de proceso:** Revisar prácticas de desarrollo y gobernanza.
+6. **Informe:** Documentar hallazgos, riesgos y recomendaciones.
+7. **Remediación:** Implementar correcciones y re-auditar.
 
-#### Challenges
+#### Desafíos
 
-- **Black box problem:** Some models are difficult to audit internally.
-- **Evolving systems:** AI systems that update post-deployment require ongoing auditing.
-- **Resource intensity:** Thorough audits require significant expertise and time.
-- **Lack of standards:** Auditing methodologies are not yet standardized.
-- **Adversarial dynamics:** Companies may resist findings that threaten product launches.
+- **Problema de la caja negra:** Algunos modelos son difíciles de auditar internamente.
+- **Sistemas en evolución:** Los sistemas de IA que se actualizan post-despliegue requieren auditoría continua.
+- **Intensidad de recursos:** Las auditorías exhaustivas requieren experiencia y tiempo significativos.
+- **Falta de estándares:** Las metodologías de auditoría aún no están estandarizadas.
+- **Dinámicas adversariales:** Las empresas pueden resistir hallazgos que amenacen lanzamientos de productos.
 
-### Challenges of AI Regulation
+### Desafíos de la Regulación de IA
 
-1. **Pacing problem:** Technology evolves faster than law. By the time a regulation is passed, the technology has moved on.
+1. **Problema de ritmo:** La tecnología evoluciona más rápido que la ley. Para cuando se aprueba una regulación, la tecnología ya avanzó.
 
-2. **Definitional challenges:** Defining "AI" in law is difficult. The EU AI Act's definition has been criticized as both over- and under-inclusive.
+2. **Desafíos de definición:** Definir "IA" en la ley es difícil. La definición de la Ley de IA de la UE ha sido criticada como tanto sobreincluyente como subincluyente.
 
-3. **Jurisdictional complexity:** AI systems operate globally. A model trained in one country and deployed in another may be subject to multiple regulatory regimes.
+3. **Complejidad jurisdiccional:** Los sistemas de IA operan globalmente. Un modelo entrenado en un país y desplegado en otro puede estar sujeto a múltiples regímenes regulatorios.
 
-4. **Enforcement capacity:** Regulators lack the technical expertise and resources to audit complex AI systems.
+4. **Capacidad de ejecución:** Los reguladores carecen de la experiencia técnica y los recursos para auditar sistemas de IA complejos.
 
-5. **International coordination:** Different regulatory philosophies (rights-based EU, market-based US, state-controlled China) complicate harmonization.
+5. **Coordinación internacional:** Diferentes filosofías regulatorias (basada en derechos en la UE, basada en el mercado en EE.UU., controlada por el estado en China) complican la armonización.
 
-6. **Innovation vs. protection trade-off:** Over-regulation may stifle innovation; under-regulation may cause harm. Finding the balance is difficult.
+6. **Compensación entre innovación y protección:** El exceso de regulación puede sofocar la innovación; la falta de regulación puede causar daño. Encontrar el equilibrio es difícil.
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Applying the EU AI Act to a Hypothetical System
+### Aplicar la Ley de IA de la UE a un Sistema Hipotético
 
-**System:** An AI-powered hiring platform that screens resumes and ranks candidates.
+**Sistema:** Una plataforma de contratación impulsada por IA que filtra currículums y clasifica candidatos.
 
-**EU AI Act classification:** High-risk (employment-related AI).
+**Clasificación según la Ley de IA de la UE:** Alto riesgo (IA relacionada con el empleo).
 
-**Requirements:**
-1. Conformity assessment (self-assessment or third-party)
-2. Risk management system throughout the lifecycle
-3. High-quality training, validation, and testing data
-4. Technical documentation and logging
-5. Transparency and provision of information to users
-6. Human oversight measures
-7. Accuracy, robustness, and cybersecurity requirements
+**Requisitos:**
+1. Evaluación de conformidad (autoevaluación o tercero)
+2. Sistema de gestión de riesgos durante todo el ciclo de vida
+3. Datos de entrenamiento, validación y prueba de alta calidad
+4. Documentación técnica y registro
+5. Transparencia y provisión de información a los usuarios
+6. Medidas de supervisión humana
+7. Requisitos de precisión, robustez y ciberseguridad
 
-**Practical implications for the developer:**
-- Document the training data composition and demographic representation
-- Implement fairness monitoring across gender, ethnicity, and age
-- Provide an explanation for each candidate ranking
-- Allow human recruiters to override AI recommendations
-- Register the system in an EU database
-- Appoint an authorized representative in the EU
+**Implicaciones prácticas para el desarrollador:**
+- Documentar la composición de los datos de entrenamiento y la representación demográfica
+- Implementar monitoreo de equidad por género, etnia y edad
+- Proporcionar una explicación para cada clasificación de candidato
+- Permitir que los reclutadores humanos anulen las recomendaciones de IA
+- Registrar el sistema en una base de datos de la UE
+- Designar un representante autorizado en la UE
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### Regulatory Compliance for AI-Based Medical Devices
+### Cumplimiento Normativo para Dispositivos Médicos Basados en IA
 
-An AI system that analyzes medical images to detect tumors is classified as a high-risk AI system under the EU AI Act and also requires FDA clearance in the US (as a medical device).
+Un sistema de IA que analiza imágenes médicas para detectar tumores se clasifica como un sistema de IA de alto riesgo según la Ley de IA de la UE y también requiere autorización de la FDA en EE.UU. (como dispositivo médico).
 
-**Compliance requirements:**
-- CE marking under EU Medical Device Regulation + AI Act conformity assessment
-- FDA 510(k) clearance or premarket approval
-- Clinical validation data
-- Quality management system (ISO 13485)
-- Post-market surveillance
-- Cybersecurity and data privacy (GDPR compliance)
+**Requisitos de cumplimiento:**
+- Marcado CE según el Reglamento de Dispositivos Médicos de la UE + evaluación de conformidad de la Ley de IA
+- Autorización 510(k) o aprobación precomercialización de la FDA
+- Datos de validación clínica
+- Sistema de gestión de calidad (ISO 13485)
+- Vigilancia post-comercialización
+- Ciberseguridad y privacidad de datos (cumplimiento GDPR)
 
-## SaaS Example
+## Ejemplo SaaS
 
-### Compliance for a SaaS Analytics Platform
+### Cumplimiento para una Plataforma SaaS de Analítica
 
-A SaaS platform offering AI-powered analytics must navigate:
+Una plataforma SaaS que ofrece analítica impulsada por IA debe navegar:
 
-- **EU AI Act:** Is the system high-risk? Most analytics platforms would be limited or minimal risk unless used in regulated domains (e.g., credit scoring).
-- **GDPR:** Customer data processing requires DPA, consent mechanism, data localization.
-- **CCPA/CPRA:** California residents have rights over their data.
-- **Sectoral regulation:** Financial analytics may fall under financial regulations.
-- **Customer contracts:** SaaS providers must offer AI compliance guarantees to enterprise customers.
+- **Ley de IA de la UE:** ¿Es el sistema de alto riesgo? La mayoría de las plataformas de analítica serían de riesgo limitado o mínimo a menos que se usen en dominios regulados (ej., puntuación crediticia).
+- **GDPR:** El procesamiento de datos de clientes requiere DPA, mecanismo de consentimiento, localización de datos.
+- **CCPA/CPRA:** Los residentes de California tienen derechos sobre sus datos.
+- **Regulación sectorial:** La analítica financiera puede caer bajo regulaciones financieras.
+- **Contratos con clientes:** Los proveedores de SaaS deben ofrecer garantías de cumplimiento de IA a clientes empresariales.
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Assuming regulation does not apply to you.** The EU AI Act has extraterritorial scope — if your system affects EU residents, it applies.
-2. **Treating compliance as a one-time activity.** AI regulation requires ongoing monitoring and updating.
-3. **Ignoring non-binding frameworks.** The US AI Bill of Rights is not law, but it signals regulatory direction and can be used in litigation.
-4. **Ethics washing.** Creating an ethics board without real authority is worse than having none — it creates a false sense of security.
-5. **Assuming self-regulation is sufficient.** Industry self-regulation has historically failed to prevent harm.
+1. **Asumir que la regulación no aplica a vos.** La Ley de IA de la UE tiene alcance extraterritorial — si tu sistema afecta a residentes de la UE, aplica.
+2. **Tratar el cumplimiento como una actividad única.** La regulación de IA requiere monitoreo y actualización continuos.
+3. **Ignorar los marcos no vinculantes.** La Declaración de Derechos de IA de EE.UU. no es ley, pero señala la dirección regulatoria y puede usarse en litigios.
+4. **Lavado de ética.** Crear un comité de ética sin autoridad real es peor que no tener ninguno — crea una falsa sensación de seguridad.
+5. **Asumir que la autorregulación es suficiente.** La autorregulación de la industria históricamente ha fallado en prevenir daños.
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Stay informed.** AI regulation is evolving rapidly. Monitor developments in jurisdictions where you operate.
-2. **Build compliance into the development process.** Do not treat it as an afterthought.
-3. **Document everything.** Regulatory compliance requires evidence of your process.
-4. **Engage with regulators.** Participate in consultations, contribute to standards development.
-5. **Invest in auditing capacity.** Either build internal capability or engage external auditors.
-6. **Be transparent.** Public-facing AI documentation builds trust and prepares you for regulatory requirements.
+1. **Mantenerse informado.** La regulación de IA está evolucionando rápidamente. Monitoreá los desarrollos en las jurisdicciones donde operás.
+2. **Incorporar el cumplimiento en el proceso de desarrollo.** No lo trates como una ocurrencia tardía.
+3. **Documentar todo.** El cumplimiento normativo requiere evidencia de tu proceso.
+4. **Involucrarse con los reguladores.** Participá en consultas, contribuí al desarrollo de estándares.
+5. **Invertir en capacidad de auditoría.** Ya sea desarrollando capacidad interna o contratando auditores externos.
+6. **Ser transparente.** La documentación pública de IA genera confianza y te prepara para requisitos regulatorios.
 
-## Summary
+## Resumen
 
-- Global AI regulation is diverse: EU (risk-based comprehensive), US (sectoral + executive action), China (content-focused).
-- The EU AI Act classifies AI systems into four risk levels with graduated requirements.
-- Corporate AI governance requires more than principles — it needs structure, authority, and accountability.
-- Algorithmic auditing is a systematic process for evaluating AI systems.
-- Regulating AI faces fundamental challenges: pacing, definition, jurisdiction, enforcement, and coordination.
+- La regulación global de IA es diversa: UE (integral basada en riesgo), EE.UU. (sectorial + acción ejecutiva), China (centrada en contenido).
+- La Ley de IA de la UE clasifica los sistemas de IA en cuatro niveles de riesgo con requisitos graduales.
+- La gobernanza corporativa de IA requiere más que principios — necesita estructura, autoridad y responsabilidad.
+- La auditoría algorítmica es un proceso sistemático para evaluar sistemas de IA.
+- Regular la IA enfrenta desafíos fundamentales: ritmo, definición, jurisdicción, ejecución y coordinación.
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| EU AI Act | First comprehensive AI regulation, with risk-based classification |
-| High-risk AI | AI systems posing significant risk to health, safety, or fundamental rights |
-| General-purpose AI (GPAI) | Foundation models and large language models |
-| Conformity assessment | Process of demonstrating compliance with regulatory requirements |
-| AI ethics board | Internal corporate body for AI ethical oversight |
-| Algorithmic audit | Systematic evaluation of an AI system for compliance and ethical standards |
-| Pacing problem | The challenge of regulating technology that evolves faster than law |
-| Ethics washing | Using ethics processes to create appearance of responsibility without substantive change |
-| Extraterritorial scope | Regulation applies to entities outside the jurisdiction if they affect residents |
+| Término | Definición |
+|---------|------------|
+| Ley de IA de la UE | Primera regulación integral de IA, con clasificación basada en riesgo |
+| IA de alto riesgo | Sistemas de IA que plantean un riesgo significativo para la salud, seguridad o derechos fundamentales |
+| IA de propósito general (GPAI) | Modelos fundacionales y modelos de lenguaje grandes |
+| Evaluación de conformidad | Proceso de demostrar cumplimiento con requisitos regulatorios |
+| Comité de ética de IA | Órgano corporativo interno para supervisión ética de IA |
+| Auditoría algorítmica | Evaluación sistemática de un sistema de IA para verificar cumplimiento y estándares éticos |
+| Problema de ritmo | El desafío de regular tecnología que evoluciona más rápido que la ley |
+| Lavado de ética | Usar procesos éticos para crear apariencia de responsabilidad sin cambios sustanciales |
+| Alcance extraterritorial | La regulación aplica a entidades fuera de la jurisdicción si afectan a residentes |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. List the four risk levels of the EU AI Act. Give an example of an AI system at each level.
-2. What is the "pacing problem" in AI regulation? Why is it particularly challenging for AI compared to other technologies?
+1. Enumerá los cuatro niveles de riesgo de la Ley de IA de la UE. Dá un ejemplo de un sistema de IA en cada nivel.
+2. ¿Qué es el "problema de ritmo" en la regulación de IA? ¿Por qué es particularmente desafiante para la IA en comparación con otras tecnologías?
 
-### Level 2: Analysis
+### Nivel 2: Análisis
 
-3. A US-based SaaS company offers a resume screening AI to EU customers. Which regulations apply? What steps must the company take for compliance?
-4. Compare the EU and US approaches to AI regulation. What are the advantages and disadvantages of each?
+3. Una empresa SaaS con sede en EE.UU. ofrece una IA de filtrado de currículums a clientes de la UE. ¿Qué regulaciones aplican? ¿Qué pasos debe tomar la empresa para cumplir?
+4. Compará los enfoques de la UE y EE.UU. hacia la regulación de IA. ¿Cuáles son las ventajas y desventajas de cada uno?
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. Some argue that the EU AI Act is too strict and will stifle innovation. Others argue it is too weak and does not adequately protect fundamental rights. Take a position and defend it with evidence.
-6. Design an ideal AI regulatory framework for a country that has not yet passed AI laws. What elements would you include? What would you prioritize? How would you address the pacing problem?
-7. Is "ethics washing" inevitable in corporate AI governance? What structural changes could make corporate ethics boards more effective?
+5. Algunos argumentan que la Ley de IA de la UE es demasiado estricta y sofocará la innovación. Otros argumentan que es demasiado débil y no protege adecuadamente los derechos fundamentales. Tomá una posición y defendela con evidencia.
+6. Diseñá un marco regulatorio de IA ideal para un país que aún no ha aprobado leyes de IA. ¿Qué elementos incluirías? ¿Qué priorizarías? ¿Cómo abordarías el problema de ritmo?
+7. ¿Es inevitable el "lavado de ética" en la gobernanza corporativa de IA? ¿Qué cambios estructurales podrían hacer que los comités de ética corporativos sean más efectivos?
 
-## Coding Challenge
+## Desafío de Programación
 
-No coding challenge for this lesson. Instead, write a 400-word regulatory compliance memo for a hypothetical AI-powered medical diagnosis system. Address which regulations apply (EU AI Act, FDA, GDPR, HIPAA), what risk classification it falls under, and what specific requirements must be met.
+No hay desafío de programación para esta lección. En su lugar, escribí un memorando de cumplimiento normativo de 400 palabras para un sistema hipotético de diagnóstico médico impulsado por IA. Abordá qué regulaciones aplican (Ley de IA de la UE, FDA, GDPR, HIPAA), en qué clasificación de riesgo cae y qué requisitos específicos deben cumplirse.
 
-## References
+## Referencias
 
 European Commission. (2024). The EU Artificial Intelligence Act. https://artificialintelligenceact.eu/
 

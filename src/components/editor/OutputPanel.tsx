@@ -83,7 +83,7 @@ export default function OutputPanel({
               >
                 {certifyState === "loading"
                   ? "Certificando..."
-                  : "⭐ Estoy listo"}
+                  : "Estoy listo"}
               </button>
             )}
 
@@ -110,10 +110,10 @@ export default function OutputPanel({
             }`}
           >
             {certifyState === "loading"
-              ? "⏳ Ejecutando certificación server-side..."
+              ? "Ejecutando certificacion server-side..."
               : certifyState === "passed"
-                ? `✅ ${certifyMessage}`
-                : `ℹ️ ${certifyMessage}`}
+                ? `${certifyMessage}`
+                : `${certifyMessage}`}
           </div>
         )}
 
@@ -121,7 +121,7 @@ export default function OutputPanel({
           <div className="mt-2 text-sm text-gray-600">
             {exercise.testCases.length} test
             {exercise.testCases.length !== 1 ? "s" : ""}
-            {" | "}Status:{" "}
+            {" | "}Estado:{" "}
             <span
               className={`font-medium ${
                 validationResult === "valid"
@@ -132,10 +132,10 @@ export default function OutputPanel({
               }`}
             >
               {validationResult === "valid"
-                ? "✓ Validación superada"
+                ? "Validacion superada"
                 : validationResult === "invalid"
-                  ? "✗ No superado"
-                  : "⏳ En espera"}
+                  ? "No superado"
+                  : "En espera"}
             </span>
           </div>
         )}
@@ -144,7 +144,7 @@ export default function OutputPanel({
         {exercise && validationResult === "invalid" && (
           <div className="mt-2 text-sm bg-orange-50 border border-orange-200 rounded p-2">
             <p className="font-medium text-orange-800 mb-1">
-              💡 Pistas
+              Pistas
             </p>
             {exercise.testCases.map((tc, i) => (
               <p key={i} className="text-orange-700 text-xs ml-2">
@@ -184,7 +184,7 @@ export default function OutputPanel({
             if (isLast && validationResult === "valid") {
               return (
                 <div key={i} className="flex items-center gap-2 my-2">
-                  <span className="text-green-400 text-lg">✓</span>
+                  <span className="text-green-400 text-lg font-bold">OK</span>
                   <span className="text-green-300 font-semibold bg-green-900/30 px-3 py-1 rounded-full">
                     Correcto — todos los tests pasaron
                   </span>
@@ -195,7 +195,7 @@ export default function OutputPanel({
             if (isLast && validationResult === "invalid") {
               return (
                 <div key={i} className="flex items-center gap-2 my-2">
-                  <span className="text-red-400 text-lg">✗</span>
+                  <span className="text-red-400 text-lg font-bold">X</span>
                   <span className="text-red-300 font-semibold bg-red-900/30 px-3 py-1 rounded-full">
                     No coincide con el test — intentá de nuevo
                   </span>

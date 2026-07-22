@@ -1,108 +1,108 @@
 ---
 Module: 4
 Lesson Number: 9
-Lesson Title: Model Interpretation
-Estimated Duration: 75 minutes
-Prerequisites: L2-L5 (Linear Regression, Classification, Decision Trees, Random Forest)
+Lesson Title: Interpretación de Modelos
+Estimated Duration: 75 minutos
+Prerequisites: L2-L5 (Regresión Lineal, Clasificación, Árboles de Decisión, Bosque Aleatorio)
 Learning Objectives:
-  - Explain why model interpretability matters in biotechnology and SaaS
-  - Compute and interpret permutation feature importance
-  - Generate and interpret partial dependence plots
-  - Explain the intuition behind SHAP and LIME
-  - Compare global and local interpretability methods
-Keywords: interpretability, feature importance, permutation importance, partial dependence, SHAP, LIME
-Difficulty: Advanced
+  - Explicar por qué la interpretabilidad de los modelos es importante en biotecnología y SaaS
+  - Calcular e interpretar la importancia de características por permutación
+  - Generar e interpretar gráficos de dependencia parcial
+  - Explicar la intuición detrás de SHAP y LIME
+  - Comparar métodos de interpretabilidad global y local
+Keywords: interpretabilidad, importancia de características, importancia por permutación, dependencia parcial, SHAP, LIME
+Difficulty: Avanzado
 Programming Concepts: sklearn.inspection.permutation_importance, sklearn.inspection.PartialDependenceDisplay
-Mathematical Concepts: marginal effect, feature perturbation
-Machine Learning Concepts: global interpretation, local interpretation, model-agnostic methods
+Mathematical Concepts: efecto marginal, perturbación de características
+Machine Learning Concepts: interpretación global, interpretación local, métodos agnósticos al modelo
 Datasets Used: breast cancer, california housing
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Model Interpretation
+# Interpretación de Modelos
 
-## Motivation
+## Motivación
 
-A black-box ML model predicts that a patient has cancer — but why? Which biomarkers drove this decision? In regulated industries (healthcare, finance), you can't deploy a model unless you can explain its predictions. Model interpretation answers "why?" — it builds trust, enables debugging, and provides scientific insight. In biotech, it identifies which genes drive disease. In SaaS, it reveals which features drive customer churn.
+Un modelo de ML de caja negra predice que un paciente tiene cáncer — pero ¿por qué? ¿Qué biomarcadores impulsaron esa decisión? En industrias reguladas (salud, finanzas), no podés implementar un modelo a menos que puedas explicar sus predicciones. La interpretación de modelos responde "¿por qué?" — genera confianza, permite la depuración y brinda conocimiento científico. En biotecnología, identifica qué genes impulsan una enfermedad. En SaaS, revela qué características impulsan el abandono de clientes.
 
-## Big Picture
+## Panorama general
 
-**Previous:** You've learned many models (LR, RF, GB). **This lesson:** How to understand what these models learned. **Next:** Applications — putting everything together.
+**Anterior:** Aprendiste muchos modelos (RL, RF, GB). **Esta lección:** Cómo entender lo que estos modelos aprendieron. **Siguiente:** Aplicaciones — juntando todo.
 
-## Theory
+## Teoría
 
-### Why Interpretability Matters
+### Por qué importa la interpretabilidad
 
-1. **Trust:** Stakeholders need to trust the model
-2. **Debugging:** Find data leaks, spurious correlations
-3. **Discovery:** Learn about the domain (e.g., which genes matter)
-4. **Regulation:** GDPR requires explanation for automated decisions
+1. **Confianza:** Los interesados necesitan confiar en el modelo
+2. **Depuración:** Encontrar fugas de datos, correlaciones espurias
+3. **Descubrimiento:** Aprender sobre el dominio (ej., qué genes importan)
+4. **Regulación:** El GDPR exige explicación para decisiones automatizadas
 
-### Types of Interpretability
+### Tipos de interpretabilidad
 
-**Global:** Understand the entire model behavior
-- Feature importance (which features matter overall)
-- Partial dependence plots (how features affect predictions)
+**Global:** Entender el comportamiento completo del modelo
+- Importancia de características (qué características importan en general)
+- Gráficos de dependencia parcial (cómo las características afectan las predicciones)
 
-**Local:** Understand a single prediction
-- LIME (Local Interpretable Model-agnostic Explanations)
-- SHAP (SHapley Additive exPlanations)
+**Local:** Entender una predicción individual
+- LIME (Explicaciones Locales Agnósticas al Modelo Interpretables)
+- SHAP (Explicaciones Aditivas de Shapley)
 
-### Model-Specific vs. Model-Agnostic
+### Específico del modelo vs. Agnóstico al modelo
 
-- **Model-specific:** Decision tree rules, linear regression coefficients
-- **Model-agnostic:** Can be applied to any model (permutation importance, SHAP)
+- **Específico del modelo:** Reglas de árboles de decisión, coeficientes de regresión lineal
+- **Agnóstico al modelo:** Puede aplicarse a cualquier modelo (importancia por permutación, SHAP)
 
-## Permutation Feature Importance
+## Importancia de características por permutación
 
-**Idea:** Shuffle a feature's values and measure the drop in performance. If shuffling drops performance significantly, the feature is important.
+**Idea:** Mezclar los valores de una característica y medir la caída en el rendimiento. Si mezclar reduce el rendimiento significativamente, la característica es importante.
 
-**Algorithm:**
-1. Evaluate baseline performance (score on validation set)
-2. For each feature:
-   - Randomly shuffle feature values
-   - Re-evaluate performance
-   - Importance = baseline - shuffled score
-3. Repeat multiple times for stability
+**Algoritmo:**
+1. Evaluar el rendimiento base (puntaje en conjunto de validación)
+2. Para cada característica:
+   - Mezclar aleatoriamente los valores de la característica
+   - Re-evaluar el rendimiento
+   - Importancia = rendimiento base - puntaje mezclado
+3. Repetir múltiples veces para estabilidad
 
-## Partial Dependence Plots (PDP)
+## Gráficos de Dependencia Parcial (PDP)
 
-**Idea:** Show how a feature affects predictions while averaging out other features.
+**Idea:** Mostrar cómo una característica afecta las predicciones mientras se promedian las demás características.
 
-**Algorithm:**
-1. Choose a feature $x_s$
-2. For each unique value of $x_s$:
-   - Set all samples to that value
-   - Average predictions across all samples
-3. Plot average prediction vs. $x_s$
+**Algoritmo:**
+1. Elegir una característica $x_s$
+2. Para cada valor único de $x_s$:
+   - Configurar todas las muestras a ese valor
+   - Promediar las predicciones de todas las muestras
+3. Graficar la predicción promedio vs. $x_s$
 
-**Interpretation:** Slope shows marginal effect. Flat line = no effect.
+**Interpretación:** La pendiente muestra el efecto marginal. Línea plana = sin efecto.
 
-## SHAP (SHapley Additive exPlanations)
+## SHAP (Explicaciones Aditivas de Shapley)
 
-**Game theory approach:** Each feature is a "player" contributing to the prediction. SHAP values distribute the prediction among features fairly.
+**Enfoque de teoría de juegos:** Cada característica es un "jugador" que contribuye a la predicción. Los valores SHAP distribuyen la predicción entre las características de forma justa.
 
-**Properties:**
-- Sum of SHAP values = prediction - average prediction
-- Positive SHAP = feature pushes prediction up
-- Negative SHAP = feature pushes prediction down
+**Propiedades:**
+- La suma de los valores SHAP = predicción - predicción promedio
+- SHAP positivo = la característica empuja la predicción hacia arriba
+- SHAP negativo = la característica empuja la predicción hacia abajo
 
-**SHAP summary plot:** Shows feature importance and direction of effect.
+**Gráfico resumen SHAP:** Muestra la importancia de las características y la dirección del efecto.
 
-## LIME (Local Interpretable Model-agnostic Explanations)
+## LIME (Explicaciones Locales Agnósticas al Modelo Interpretables)
 
-**Idea:** Approximate the complex model with a simple interpretable model (linear model) locally around a prediction.
+**Idea:** Aproximar el modelo complejo con un modelo simple e interpretable (modelo lineal) localmente alrededor de una predicción.
 
-**Algorithm:**
-1. Generate perturbed samples around the instance
-2. Get predictions from the complex model
-3. Weight samples by proximity to the instance
-4. Fit an interpretable model (linear regression) on weighted samples
-5. Coefficients = local explanation
+**Algoritmo:**
+1. Generar muestras perturbadas alrededor de la instancia
+2. Obtener predicciones del modelo complejo
+3. Ponderar muestras por proximidad a la instancia
+4. Ajustar un modelo interpretable (regresión lineal) sobre las muestras ponderadas
+5. Coeficientes = explicación local
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -144,7 +144,7 @@ plt.savefig('figures/partial_dependence.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import pandas as pd
@@ -194,23 +194,23 @@ plt.savefig('figures/pdp_breast_cancer.png', dpi=150)
 plt.show()
 ```
 
-## Walkthrough Example: Understanding a Cancer Classifier
+## Ejemplo guiado: Entendiendo un clasificador de cáncer
 
-**Model:** Random Forest predicting malignant vs. benign.
+**Modelo:** Bosque Aleatorio prediciendo maligno vs. benigno.
 
-**Top features (permutation):**
-1. `worst concave points` — most important
+**Principales características (permutación):**
+1. `worst concave points` — la más importante
 2. `worst radius`
 3. `worst perimeter`
 
-**Partial dependence for `worst radius`:**
-- Below 15: probability of malignant is near 0
-- Between 15-25: probability increases rapidly
-- Above 25: probability near 1
+**Dependencia parcial para `worst radius`:**
+- Debajo de 15: probabilidad de malignidad cerca de 0
+- Entre 15-25: la probabilidad aumenta rápidamente
+- Arriba de 25: probabilidad cerca de 1
 
-**This makes clinical sense:** Larger tumors are more likely to be malignant.
+**Esto tiene sentido clínico:** Los tumores más grandes tienen más probabilidad de ser malignos.
 
-## Biotechnology Example: Biomarker Discovery
+## Ejemplo en biotecnología: Descubrimiento de biomarcadores
 
 ```python
 np.random.seed(42)
@@ -230,53 +230,53 @@ for g in top_genes:
     print(f"  Gene {g}: importance = {perm.importances_mean[g]:.4f}")
 ```
 
-**Interpretation:** Permutation importance correctly identifies genes 0, 15, and 42 as the actual predictive features — even among 100 genes.
+**Interpretación:** La importancia por permutación identifica correctamente los genes 0, 15 y 42 como las características predictivas reales — incluso entre 100 genes.
 
-## Common Mistakes
+## Errores comunes
 
-1. **Confusing correlation with causation** — a feature can be "important" without causing the outcome
-2. **Impurity bias** — impurity-based importance favors high-cardinality features
-3. **Using only one importance method** — always compare permutation + impurity
-4. **Ignoring feature correlations** — correlated features share importance
-5. **Over-interpreting small effects** — permutation importance can be noisy
+1. **Confundir correlación con causalidad** — una característica puede ser "importante" sin causar el resultado
+2. **Sesgo de impureza** — la importancia basada en impureza favorece características de alta cardinalidad
+3. **Usar solo un método de importancia** — compará siempre permutación + impureza
+4. **Ignorar correlaciones entre características** — las características correlacionadas comparten importancia
+5. **Sobre-interpretar efectos pequeños** — la importancia por permutación puede ser ruidosa
 
-## Best Practices
+## Buenas prácticas
 
-- Always use permutation importance (not just impurity)
-- Compare built-in importance with permutation importance
-- Use PDP for features with high importance
-- Check for interactions using 2D PDP
-- For local explanations, consider SHAP (if installable) or LIME
-- Domain expertise is essential for correct interpretation
+- Usá siempre importancia por permutación (no solo impureza)
+- Compará la importancia incorporada con la importancia por permutación
+- Usá PDP para características con alta importancia
+- Revisá interacciones usando PDP 2D
+- Para explicaciones locales, considerá SHAP (si es instalable) o LIME
+- El conocimiento del dominio es esencial para una interpretación correcta
 
-## Summary
+## Resumen
 
-- Permutation importance measures feature importance by shuffling
-- Partial dependence plots show marginal effects
-- SHAP and LIME provide local explanations for individual predictions
-- Global methods explain the whole model; local methods explain one prediction
-- Always combine ML interpretation with domain knowledge
-- Interpretability is essential for trust, debugging, and discovery
+- La importancia por permutación mide la importancia de las características mediante mezclado
+- Los gráficos de dependencia parcial muestran efectos marginales
+- SHAP y LIME proveen explicaciones locales para predicciones individuales
+- Los métodos globales explican todo el modelo; los métodos locales explican una predicción
+- Combiná siempre la interpretación de ML con conocimiento del dominio
+- La interpretabilidad es esencial para la confianza, la depuración y el descubrimiento
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Permutation importance | Drop in score when a feature is shuffled |
-| Partial dependence | Average prediction as a function of one feature |
-| Global interpretation | Understanding the overall model |
-| Local interpretation | Understanding a single prediction |
-| SHAP | Game-theoretic feature attribution |
-| LIME | Local surrogate model approximation |
+| Término | Definición |
+|---------|------------|
+| Importancia por permutación | Caída en el puntaje cuando se mezcla una característica |
+| Dependencia parcial | Predicción promedio en función de una característica |
+| Interpretación global | Entender el modelo en su totalidad |
+| Interpretación local | Entender una predicción individual |
+| SHAP | Atribución de características basada en teoría de juegos |
+| LIME | Aproximación local con modelo sustituto |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** Why is permutation importance considered more reliable than impurity-based importance?
+**Nivel 1 — Básico:** ¿Por qué se considera la importancia por permutación más confiable que la importancia basada en impureza?
 
-**Level 2 — Implementation:** Train a `RandomForestRegressor` on California Housing. Compute permutation importance and plot the top 5 features.
+**Nivel 2 — Implementación:** Entrená un `RandomForestRegressor` en California Housing. Calculá la importancia por permutación y graficá las 5 características principales.
 
-**Level 3 — Critical Thinking:** Features A and B are highly correlated (r = 0.95). Permutation importance gives both low scores. If you remove feature A, importance of B becomes high. What is happening?
+**Nivel 3 — Pensamiento crítico:** Las características A y B están altamente correlacionadas (r = 0.95). La importancia por permutación da puntajes bajos a ambas. Si eliminás la característica A, la importancia de B se vuelve alta. ¿Qué está pasando?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `compare_importances(model, X_val, y_val, feature_names)` that returns a DataFrame comparing impurity-based and permutation-based feature importances, sorted by permutation importance.
+Escribí una función `compare_importances(model, X_val, y_val, feature_names)` que devuelva un DataFrame comparando las importancias basadas en impureza y por permutación, ordenadas por importancia por permutación.

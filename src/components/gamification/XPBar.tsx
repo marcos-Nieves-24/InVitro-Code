@@ -66,7 +66,7 @@ export function XPBar({ userId, totalXp }: XPBarProps) {
       </div>
       {showCelebration && (
         <div className="mt-2 animate-bounce rounded-full bg-yellow-100 px-3 py-1 text-center text-sm font-semibold text-yellow-800">
-          🎉 ¡Subiste de nivel!
+          Subiste de nivel!
         </div>
       )}
     </div>

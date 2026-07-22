@@ -1,142 +1,142 @@
 ---
 Module: 5
 Lesson Number: 3
-Lesson Title: Transparency and Explainability
-Estimated Duration: 60 minutes
-Prerequisites: L1 (Introduction to AI Ethics), Module 4 (ML)
+Lesson Title: Transparencia y Explicabilidad
+Estimated Duration: 60 minutos
+Prerequisites: L1 (Introducción a la Ética en IA), Módulo 4 (ML)
 Learning Objectives:
-  - Differentiate between interpretability and explainability
-  - Explain the black box problem in ML
-  - Describe SHAP and LIME as methods for model explanation
-  - Implement LIME to explain a classifier prediction
-  - Evaluate the limitations of post-hoc explanation methods
-Keywords: transparency, explainability, interpretability, XAI, SHAP, LIME, black box
+  - Diferenciar entre interpretabilidad y explicabilidad
+  - Explicar el problema de la caja negra en ML
+  - Describir SHAP y LIME como métodos de explicación de modelos
+  - Implementar LIME para explicar la predicción de un clasificador
+  - Evaluar las limitaciones de los métodos de explicación post-hoc
+Keywords: transparencia, explicabilidad, interpretabilidad, XAI, SHAP, LIME, caja negra
 Difficulty: Intermediate
-Programming Concepts: Function calls, library usage, visualization
-Mathematical Concepts: Feature importance, local approximations
-Machine Learning Concepts: Model prediction, classification, feature importance
-Datasets Used: Iris or synthetic dataset
+Programming Concepts: Llamadas a funciones, uso de librerías, visualización
+Mathematical Concepts: Importancia de características, aproximaciones locales
+Machine Learning Concepts: Predicción de modelos, clasificación, importancia de características
+Datasets Used: Iris o conjunto sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Transparency and Explainability
+# Transparencia y Explicabilidad
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Differentiate** between interpretability and explainability in the context of ML
-2. **Explain** the black box problem and why it matters for high-stakes decisions
-3. **Describe** how SHAP and LIME generate explanations for individual predictions
-4. **Implement** LIME to explain a Random Forest classifier prediction
-5. **Evaluate** the limitations and risks of post-hoc explanation methods
+1. **Diferenciar** entre interpretabilidad y explicabilidad en el contexto de ML
+2. **Explicar** el problema de la caja negra y por qué importa para decisiones de alto impacto
+3. **Describir** cómo SHAP y LIME generan explicaciones para predicciones individuales
+4. **Implementar** LIME para explicar la predicción de un clasificador Random Forest
+5. **Evaluar** las limitaciones y riesgos de los métodos de explicación post-hoc
 
-## Motivation
+## Motivación
 
-Imagine you are a doctor using an AI system that recommends whether to start a patient on chemotherapy. The model is a gradient boosting machine with 500 trees. It says: "High risk of mortality within 5 years. Recommend chemotherapy."
+Imaginá que sos un médico usando un sistema de IA que recomienda si iniciar o no quimioterapia a un paciente. El modelo es una máquina de gradient boosting con 500 árboles. Dice: "Alto riesgo de mortalidad en 5 años. Recomendar quimioterapia."
 
-The patient asks: "Why?"
+El paciente pregunta: "¿Por qué?"
 
-What do you say? "Because the model said so" is not acceptable. The patient deserves to know which factors drove the prediction, whether those factors are relevant to their specific case, and whether the model might be wrong.
+¿Qué decís? "Porque el modelo lo dijo" no es aceptable. El paciente merece saber qué factores impulsaron la predicción, si esos factores son relevantes para su caso específico y si el modelo podría estar equivocado.
 
-This is the **black box problem**. Many of our most powerful models — deep neural networks, gradient boosting, random forests — are highly accurate but opaque. They do not naturally explain their reasoning.
+Este es el **problema de la caja negra**. Muchos de nuestros modelos más potentes — redes neuronales profundas, gradient boosting, random forests — son muy precisos pero opacos. No explican naturalmente su razonamiento.
 
-**Explainable AI (XAI)** is the field that develops methods to open the black box. It is not just a nice-to-have. Under the EU AI Act, individuals have a right to an explanation for decisions made by AI systems. In healthcare, finance, criminal justice, and hiring, explainability is a legal and ethical requirement.
+**IA Explicable (XAI)** es el campo que desarrolla métodos para abrir la caja negra. No es solo algo lindo de tener. Según la Ley de IA de la UE, las personas tienen derecho a una explicación de las decisiones tomadas por sistemas de IA. En salud, finanzas, justicia penal y contratación, la explicabilidad es un requisito legal y ético.
 
-## Big Picture
+## Panorama General
 
-| Previous Lesson | Current Lesson | Next Lesson |
+| Lección Anterior | Lección Actual | Próxima Lección |
 |---|---|---|
-| L2: Bias and Fairness (detecting disparities) | L3: Transparency and Explainability (explaining decisions) | L4: Privacy and Data Protection (protecting data) |
+| L2: Sesgo y Equidad (detección de disparidades) | L3: Transparencia y Explicabilidad (explicar decisiones) | L4: Privacidad y Protección de Datos (proteger datos) |
 
-## Theory
+## Teoría
 
-### The Black Box Problem
+### El Problema de la Caja Negra
 
-A **black box model** is a model whose internal decision process is not directly understandable by humans. Deep neural networks with millions of parameters, ensembles of hundreds of trees, and complex kernel SVMs are all black boxes.
+Un **modelo de caja negra** es un modelo cuyo proceso interno de decisión no es directamente comprensible para los humanos. Las redes neuronales profundas con millones de parámetros, los ensambles de cientos de árboles y las SVM de kernel complejo son todas cajas negras.
 
-The black box problem has three dimensions:
+El problema de la caja negra tiene tres dimensiones:
 
-1. **Epistemic:** We cannot know for certain how the model reaches decisions.
-2. **Trust:** Users cannot trust what they do not understand.
-3. **Accountability:** If we cannot explain a decision, who is responsible for harm?
+1. **Epistémica:** No podemos saber con certeza cómo el modelo llega a sus decisiones.
+2. **Confianza:** Los usuarios no pueden confiar en lo que no entienden.
+3. **Responsabilidad:** Si no podemos explicar una decisión, ¿quién es responsable por el daño?
 
-### Interpretability vs. Explainability
+### Interpretabilidad vs. Explicabilidad
 
-These terms are often used interchangeably but have distinct meanings:
+Estos términos a menudo se usan indistintamente pero tienen significados distintos:
 
-| Concept | Definition | Example |
-|---------|------------|---------|
-| **Interpretability** | The degree to which a human can understand the model's inner workings | A linear regression's coefficients directly tell you how each feature affects the output |
-| **Explainability** | The degree to which a human can understand why a specific prediction was made | LIME telling you that for this particular loan denial, the most important factor was credit score |
+| Concepto | Definición | Ejemplo |
+|----------|------------|---------|
+| **Interpretabilidad** | El grado en que un humano puede entender el funcionamiento interno del modelo | Los coeficientes de una regresión lineal te dicen directamente cómo cada característica afecta la salida |
+| **Explicabilidad** | El grado en que un humano puede entender por qué se hizo una predicción específica | LIME te dice que para esta denegación de préstamo en particular, el factor más importante fue el puntaje crediticio |
 
-An interpretable model (e.g., linear regression, small decision tree) is inherently transparent. An explainable model may be a black box that requires post-hoc explanation methods to make individual predictions understandable.
+Un modelo interpretable (ej., regresión lineal, árbol de decisión pequeño) es inherentemente transparente. Un modelo explicable puede ser una caja negra que requiere métodos de explicación post-hoc para hacer comprensibles las predicciones individuales.
 
-### Types of Explainability
+### Tipos de Explicabilidad
 
-#### Global Explanations
-Explain the entire model behavior. Example: feature importance ranking for a Random Forest.
+#### Explicaciones Globales
+Explican el comportamiento completo del modelo. Ejemplo: ranking de importancia de características para un Random Forest.
 
-#### Local Explanations
-Explain a single prediction. Example: why was this particular patient classified as high risk?
+#### Explicaciones Locales
+Explican una predicción individual. Ejemplo: ¿por qué este paciente en particular fue clasificado como de alto riesgo?
 
-#### Model-Specific vs. Model-Agnostic
-- **Model-specific:** Only works for certain model types (e.g., decision tree visualization)
-- **Model-agnostic:** Works for any model (e.g., LIME, SHAP)
+#### Específicas del Modelo vs. Agnósticas del Modelo
+- **Específicas del modelo:** Solo funcionan para ciertos tipos de modelo (ej., visualización de árboles de decisión)
+- **Agnósticas del modelo:** Funcionan para cualquier modelo (ej., LIME, SHAP)
 
-### LIME (Local Interpretable Model-Agnostic Explanations)
+### LIME (Explicaciones Locales Agnósticas del Modelo Interpretables)
 
-LIME (Ribeiro et al., 2016) explains individual predictions by fitting a simple, interpretable model locally around the prediction.
+LIME (Ribeiro et al., 2016) explica predicciones individuales ajustando un modelo simple e interpretable localmente alrededor de la predicción.
 
-**Intuition:** Even if a complex model has a complicated global decision boundary, locally (near a specific point), the boundary can be approximated by a simple linear model.
+**Intuición:** Incluso si un modelo complejo tiene un límite de decisión global complicado, localmente (cerca de un punto específico), el límite puede aproximarse con un modelo lineal simple.
 
-**How it works:**
-1. Take the instance to explain
-2. Perturb the instance (create similar instances with random changes)
-3. Get predictions from the black box model for the perturbed instances
-4. Fit a weighted linear model (or other interpretable model) to the perturbed data
-5. The coefficients of the linear model explain which features were most important for this prediction
+**Cómo funciona:**
+1. Tomar la instancia a explicar
+2. Perturbar la instancia (crear instancias similares con cambios aleatorios)
+3. Obtener predicciones del modelo caja negra para las instancias perturbadas
+4. Ajustar un modelo lineal ponderado (u otro modelo interpretable) a los datos perturbados
+5. Los coeficientes del modelo lineal explican qué características fueron más importantes para esta predicción
 
-**Formula:**
+**Fórmula:**
 $$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
 
-where:
-- $f$ is the black box model
-- $g$ is the interpretable model (e.g., linear model)
-- $\pi_x$ is the proximity measure around instance $x$
-- $\mathcal{L}$ measures how well $g$ approximates $f$ locally
-- $\Omega(g)$ measures the complexity of $g$
+donde:
+- $f$ es el modelo caja negra
+- $g$ es el modelo interpretable (ej., modelo lineal)
+- $\pi_x$ es la medida de proximidad alrededor de la instancia $x$
+- $\mathcal{L}$ mide qué tan bien $g$ aproxima $f$ localmente
+- $\Omega(g)$ mide la complejidad de $g$
 
-### SHAP (SHapley Additive exPlanations)
+### SHAP (Explicaciones Aditivas de Shapley)
 
-SHAP (Lundberg & Lee, 2017) explains predictions using Shapley values from cooperative game theory.
+SHAP (Lundberg & Lee, 2017) explica predicciones usando valores Shapley de la teoría de juegos cooperativos.
 
-**Intuition:** Imagine the features are "players" in a game, and the prediction is the "payout." SHAP calculates each feature's contribution to the prediction by averaging over all possible subsets of features.
+**Intuición:** Imaginá que las características son "jugadores" en un juego, y la predicción es el "pago". SHAP calcula la contribución de cada característica a la predicción promediando sobre todos los subconjuntos posibles de características.
 
-**Key properties:**
-- **Efficiency:** The sum of Shapley values equals the prediction minus the average prediction
-- **Symmetry:** Two features with identical contributions receive the same value
-- **Dummy:** Features with no contribution receive zero
-- **Additivity:** Shapley values can be added across features
+**Propiedades clave:**
+- **Eficiencia:** La suma de los valores Shapley equivale a la predicción menos la predicción promedio
+- **Simetría:** Dos características con contribuciones idénticas reciben el mismo valor
+- **Dummy:** Las características sin contribución reciben cero
+- **Aditividad:** Los valores Shapley pueden sumarse entre características
 
-SHAP values unify several existing explanation methods and provide consistent, locally accurate explanations.
+Los valores SHAP unifican varios métodos de explicación existentes y proporcionan explicaciones consistentes y localmente precisas.
 
-### Trade-offs in Explainability
+### Compensaciones en Explicabilidad
 
-| Method | Strengths | Limitations |
-|--------|-----------|-------------|
-| Feature importance (global) | Simple, fast | Global only, no local explanations |
-| LIME | Local, model-agnostic | Unstable (different explanations for similar instances), sensitive to perturbation parameters |
-| SHAP | Theoretically grounded, consistent | Computationally expensive for large models |
-| Decision trees are inherently interpretable | No explanation needed | Limited predictive power for complex problems |
+| Método | Fortalezas | Limitaciones |
+|--------|------------|--------------|
+| Importancia de características (global) | Simple, rápida | Solo global, sin explicaciones locales |
+| LIME | Local, agnóstico del modelo | Inestable (diferentes explicaciones para instancias similares), sensible a parámetros de perturbación |
+| SHAP | Fundamento teórico, consistente | Costoso computacionalmente para modelos grandes |
+| Árboles de decisión son inherentemente interpretables | No necesita explicación | Poder predictivo limitado para problemas complejos |
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Explaining a Loan Denial with LIME
+### Explicar una Denegación de Préstamo con LIME
 
-We train a Random Forest on loan data and use LIME to explain why a specific applicant was denied.
+Entrenamos un Random Forest con datos de préstamos y usamos LIME para explicar por qué se denegó a un solicitante específico.
 
 ```python
 import numpy as np
@@ -188,92 +188,92 @@ exp.show_in_notebook(show_table=True)
 print("Explanation as list:", exp.as_list())
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### Explaining a Protein Structure Prediction
+### Explicar una Predicción de Estructura de Proteínas
 
-A deep learning model predicts protein folding structure. The model is a black box. Using SHAP, researchers can identify which amino acid positions are most influential in the prediction. This provides biological insight into which residues drive structural stability.
+Un modelo de deep learning predice el plegamiento de proteínas. El modelo es una caja negra. Usando SHAP, los investigadores pueden identificar qué posiciones de aminoácidos son más influyentes en la predicción. Esto proporciona información biológica sobre qué residuos impulsan la estabilidad estructural.
 
-**Why explainability matters in bioinformatics:**
-- Validate that the model is using biologically meaningful features
-- Generate hypotheses for experimental testing
-- Build trust in computational predictions
-- Comply with regulatory requirements for diagnostic models
+**Por qué la explicabilidad importa en bioinformática:**
+- Validar que el modelo está usando características biológicamente significativas
+- Generar hipótesis para pruebas experimentales
+- Generar confianza en predicciones computacionales
+- Cumplir con requisitos regulatorios para modelos de diagnóstico
 
-## SaaS Example
+## Ejemplo SaaS
 
-### Explainable Credit Scoring
+### Puntuación Crediticia Explicable
 
-A SaaS fintech platform uses Gradient Boosting to score loan applicants. Regulators require explainability. The platform integrates SHAP to provide:
+Una plataforma SaaS fintech usa Gradient Boosting para puntuar solicitantes de préstamos. Los reguladores exigen explicabilidad. La plataforma integra SHAP para proporcionar:
 
-- **Customer-facing explanation:** "Your application was declined primarily due to your debt-to-income ratio and recent late payments."
-- **Model auditor explanation:** Feature importance rank, partial dependence plots, SHAP summary plot.
-- **Compliance documentation:** Global explanation report for regulatory review.
+- **Explicación orientada al cliente:** "Su solicitud fue rechazada principalmente debido a su relación deuda-ingreso y pagos atrasados recientes."
+- **Explicación para el auditor del modelo:** Ranking de importancia de características, gráficos de dependencia parcial, gráfico resumen SHAP.
+- **Documentación de cumplimiento:** Informe de explicación global para revisión regulatoria.
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Equating interpretability with simplicity.** A decision tree with 200 nodes is not truly interpretable.
-2. **Trusting LIME/SHAP explanations as ground truth.** Post-hoc explanations approximate the model; they can be wrong.
-3. **Ignoring explanation instability.** Different LIME runs on the same instance may produce different explanations.
-4. **Over-relying on global feature importance.** Global importance masks local behavior.
-5. **Assuming explanations solve all trust problems.** An explanation can be correct but still mask harmful model behavior.
+1. **Equiparar interpretabilidad con simplicidad.** Un árbol de decisión con 200 nodos no es realmente interpretable.
+2. **Confiar en las explicaciones de LIME/SHAP como verdad absoluta.** Las explicaciones post-hoc aproximan el modelo; pueden estar equivocadas.
+3. **Ignorar la inestabilidad de las explicaciones.** Diferentes ejecuciones de LIME sobre la misma instancia pueden producir explicaciones diferentes.
+4. **Confiar excesivamente en la importancia global de características.** La importancia global enmascara el comportamiento local.
+5. **Asumir que las explicaciones resuelven todos los problemas de confianza.** Una explicación puede ser correcta pero aún así ocultar un comportamiento dañino del modelo.
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Prefer inherently interpretable models** when accuracy is comparable.
-2. **Use multiple explanation methods** and check for consistency.
-3. **Validate explanations with domain experts.** An explanation that surprises a doctor may indicate a model error.
-4. **Document explanation limitations.** Users should know when an explanation might be unreliable.
-5. **Design explanations for the audience.** A patient, a doctor, and a regulator each need different levels of detail.
+1. **Preferir modelos inherentemente interpretables** cuando la precisión es comparable.
+2. **Usar múltiples métodos de explicación** y verificar consistencia.
+3. **Validar explicaciones con expertos del dominio.** Una explicación que sorprende a un médico puede indicar un error del modelo.
+4. **Documentar las limitaciones de las explicaciones.** Los usuarios deberían saber cuándo una explicación podría no ser confiable.
+5. **Diseñar explicaciones para la audiencia.** Un paciente, un médico y un regulador necesitan diferentes niveles de detalle.
 
-## Summary
+## Resumen
 
-- Black box models achieve high accuracy but are opaque.
-- Interpretability is about understanding the model; explainability is about explaining individual predictions.
-- LIME explains predictions by fitting local linear models.
-- SHAP explains predictions using game-theoretic Shapley values.
-- Post-hoc explanations are approximations with known limitations.
-- In high-stakes domains (healthcare, finance), explainability is an ethical and legal requirement.
+- Los modelos de caja negra logran alta precisión pero son opacos.
+- La interpretabilidad se trata de entender el modelo; la explicabilidad se trata de explicar predicciones individuales.
+- LIME explica predicciones ajustando modelos lineales locales.
+- SHAP explica predicciones usando valores Shapley de teoría de juegos.
+- Las explicaciones post-hoc son aproximaciones con limitaciones conocidas.
+- En dominios de alto impacto (salud, finanzas), la explicabilidad es un requisito ético y legal.
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Black box model | A model whose internal decision process is not directly understandable by humans |
-| Interpretability | The degree to which humans can understand a model's inner workings |
-| Explainability | The degree to which humans can understand why a specific prediction was made |
-| Post-hoc explanation | An explanation generated after a prediction, without modifying the model |
-| LIME | Local Interpretable Model-Agnostic Explanations |
-| SHAP | SHapley Additive exPlanations |
-| Model-agnostic | An explanation method that works with any ML model |
-| Global explanation | An explanation of overall model behavior |
-| Local explanation | An explanation of a single prediction |
+| Término | Definición |
+|---------|------------|
+| Modelo de caja negra | Un modelo cuyo proceso interno de decisión no es directamente comprensible para los humanos |
+| Interpretabilidad | El grado en que los humanos pueden entender el funcionamiento interno de un modelo |
+| Explicabilidad | El grado en que los humanos pueden entender por qué se hizo una predicción específica |
+| Explicación post-hoc | Una explicación generada después de una predicción, sin modificar el modelo |
+| LIME | Explicaciones Locales Agnósticas del Modelo Interpretables |
+| SHAP | Explicaciones Aditivas de Shapley |
+| Agnóstico del modelo | Un método de explicación que funciona con cualquier modelo de ML |
+| Explicación global | Una explicación del comportamiento general del modelo |
+| Explicación local | Una explicación de una predicción individual |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. What is the black box problem? Give three domains where it is particularly concerning.
-2. Explain the difference between interpretability and explainability. Give an example of each.
+1. ¿Qué es el problema de la caja negra? Dá tres dominios donde es particularmente preocupante.
+2. Explicá la diferencia entre interpretabilidad y explicabilidad. Dá un ejemplo de cada una.
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-3. Using the loan dataset from the walkthrough, use LIME to explain a denied application. Compare the explanation with an approved application. What features differ?
-4. Train a linear regression model on the same data and compare the LIME explanation for the same instance. Is LIME still useful for an inherently interpretable model?
+3. Usando el conjunto de datos de préstamos del ejemplo guiado, usá LIME para explicar una solicitud denegada. Compará la explicación con una solicitud aprobada. ¿Qué características difieren?
+4. Entrená un modelo de regresión lineal con los mismos datos y compará la explicación de LIME para la misma instancia. ¿Sigue siendo útil LIME para un modelo inherentemente interpretable?
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. A researcher uses SHAP to explain a diagnostic model. The explanation shows that the model relies heavily on a feature that the researcher knows is biologically irrelevant. However, the model is 97% accurate. What might be happening? What should the researcher do?
-6. Some critics argue that post-hoc explanations can be misleading because they approximate the model rather than revealing its true logic. Do you agree? Under what circumstances might an explanation be worse than no explanation?
+5. Un investigador usa SHAP para explicar un modelo de diagnóstico. La explicación muestra que el modelo depende en gran medida de una característica que el investigador sabe que es biológicamente irrelevante. Sin embargo, el modelo tiene 97% de precisión. ¿Qué podría estar pasando? ¿Qué debería hacer el investigador?
+6. Algunos críticos argumentan que las explicaciones post-hoc pueden ser engañosas porque aproximan el modelo en lugar de revelar su lógica verdadera. ¿Estás de acuerdo? ¿Bajo qué circunstancias podría una explicación ser peor que ninguna explicación?
 
-## Coding Challenge
+## Desafío de Programación
 
-Use LIME or SHAP to explain a gradient boosting model trained on a dataset of your choice. Create a summary plot showing the top features. Write a brief interpretation of what the model learned, and identify at least one potential concern about the model's behavior based on the explanations.
+Usá LIME o SHAP para explicar un modelo de gradient boosting entrenado con un conjunto de datos de tu elección. Creá un gráfico resumen que muestre las principales características. Escribí una breve interpretación de lo que aprendió el modelo, e identificá al menos una preocupación potencial sobre el comportamiento del modelo basada en las explicaciones.
 
-## References
+## Referencias
 
 Lundberg, S. M., & Lee, S.-I. (2017). A unified approach to interpreting model predictions. *Advances in Neural Information Processing Systems*, 30, 4765–4774.
 
 Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?": Explaining the predictions of any classifier. *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*, 1135–1144. https://doi.org/10.1145/2939672.2939778
 
-Russell, S., & Norvig, P. (2020). *Artificial intelligence: A modern approach* (4th ed.). Pearson. (Chapter on Explainability)
+Russell, S., & Norvig, P. (2020). *Artificial intelligence: A modern approach* (4th ed.). Pearson. (Capítulo sobre Explicabilidad)

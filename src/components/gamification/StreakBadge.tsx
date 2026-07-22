@@ -75,7 +75,7 @@ export function StreakBadge({ userId }: StreakBadgeProps) {
         {streak.current_streak} día{streak.current_streak !== 1 ? "s" : ""}
       </span>
       {streak.current_streak >= 7 && (
-        <span className="text-xs text-orange-600">🔥 Racha de oro</span>
+        <span className="text-xs text-orange-600">Racha de oro</span>
       )}
     </div>
   );

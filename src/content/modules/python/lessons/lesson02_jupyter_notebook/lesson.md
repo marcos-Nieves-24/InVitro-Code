@@ -2,17 +2,17 @@
 Module: 2
 Lesson Number: 2
 Lesson Title: Jupyter Notebook
-Estimated Duration: 45 minutes
-Prerequisites: L1 — Installing Python
+Estimated Duration: 45 minutos
+Prerequisites: L1 — Instalando Python
 Learning Objectives:
-  - Launch Jupyter Notebook from the command line
-  - Create and edit code cells and markdown cells
-  - Execute Python code interactively in a notebook
-  - Use keyboard shortcuts to navigate efficiently
-  - Export a notebook to HTML or PDF
-Keywords: Jupyter, notebook, cell, kernel, markdown, REPL
+  - Iniciar Jupyter Notebook desde la línea de comandos
+  - Crear y editar celdas de código y celdas markdown
+  - Ejecutar código Python interactivamente en un notebook
+  - Usar atajos de teclado para navegar eficientemente
+  - Exportar un notebook a HTML o PDF
+Keywords: Jupyter, notebook, celda, kernel, markdown, REPL
 Difficulty: Beginner
-Programming Concepts: Notebook interface, markdown, code execution, kernel
+Programming Concepts: Interfaz de notebook, markdown, ejecución de código, kernel
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
@@ -21,43 +21,43 @@ Quiz: quiz.md
 
 # Jupyter Notebook
 
-## Motivation
+## Motivación
 
-Writing Python code in a terminal is functional but not ideal for data analysis. Jupyter Notebook provides an interactive, web-based environment where you can combine code, visualizations, and explanatory text in a single document. This is the standard tool for data scientists worldwide. In biotechnology, Jupyter notebooks are used to document and share research analyses. In SaaS, they are used for exploratory data analysis and reporting.
+Escribir código Python en una terminal es funcional pero no es ideal para análisis de datos. Jupyter Notebook proporciona un entorno interactivo basado en la web donde podés combinar código, visualizaciones y texto explicativo en un solo documento. Es la herramienta estándar para científicos de datos en todo el mundo. En biotecnología, los notebooks de Jupyter se usan para documentar y compartir análisis de investigación. En SaaS, se usan para análisis exploratorio de datos y generación de reportes.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you installed Python and verified it works. Now you will learn to use Jupyter Notebook — the environment where you will write most of your Python code in this course. The next lessons on variables, data types, and operators will all be practiced inside Jupyter.
+En la lección anterior instalaste Python y verificaste que funciona. Ahora vas a aprender a usar Jupyter Notebook, el entorno donde vas a escribir la mayor parte de tu código Python en este curso. Las próximas lecciones sobre variables, tipos de datos y operadores se van a practicar todas dentro de Jupyter.
 
-## Theory
+## Teoría
 
-### What is Jupyter Notebook?
+### ¿Qué es Jupyter Notebook?
 
-Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text.
+Jupyter Notebook es una aplicación web de código abierto que te permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo.
 
-**Key components:**
-- **Notebook** (`.ipynb`): A document containing cells
-- **Cell**: A unit of content (code or markdown)
-- **Kernel**: The computational engine that executes code
-- **Dashboard**: The file browser interface
+**Componentes clave:**
+- **Notebook** (`.ipynb`): Un documento que contiene celdas
+- **Celda**: Una unidad de contenido (código o markdown)
+- **Kernel**: El motor computacional que ejecuta el código
+- **Dashboard**: La interfaz del explorador de archivos
 
-### Cell Types
+### Tipos de Celdas
 
-1. **Code cells**: Contain Python code that can be executed. Output appears below the cell.
-2. **Markdown cells**: Contain formatted text using Markdown syntax (headings, lists, links, images, LaTeX equations).
+1. **Celdas de código**: Contienen código Python que se puede ejecutar. La salida aparece debajo de la celda.
+2. **Celdas Markdown**: Contienen texto formateado usando sintaxis Markdown (títulos, listas, enlaces, imágenes, ecuaciones LaTeX).
 
-### Modes
+### Modos
 
-Jupyter has two keyboard modes:
+Jupyter tiene dos modos de teclado:
 
-- **Command mode** (blue border): Keyboard shortcuts act on the notebook level
-- **Edit mode** (green border): Typing inserts text into the current cell
+- **Modo comando** (borde azul): Los atajos de teclado actúan a nivel del notebook
+- **Modo edición** (borde verde): Escribir inserta texto en la celda actual
 
-### Execution Model
+### Modelo de Ejecución
 
-When you run a code cell, the kernel executes the code. Variables and functions defined in one cell are available in subsequent cells. The kernel maintains state until it is restarted.
+Cuando ejecutás una celda de código, el kernel ejecuta el código. Las variables y funciones definidas en una celda están disponibles en las celdas siguientes. El kernel mantiene el estado hasta que se reinicia.
 
-## Visual Explanation
+## Explicación Visual
 
 ```
 ┌────────────────────────────────────────────────────┐
@@ -66,175 +66,175 @@ When you run a code cell, the kernel executes the code. Variables and functions 
 │  ┌────────────────────────────────────────────────┐│
 │  │ [File] [Edit] [View] [Insert] [Cell] [Kernel]  ││
 │  ├────────────────────────────────────────────────┤│
-│  │ [-] Markdown Cell (Title)                      ││
-│  │    # My Analysis                               ││
+│  │ [-] Celda Markdown (Título)                    ││
+│  │    # Mi Análisis                               ││
 │  ├────────────────────────────────────────────────┤│
-│  │ [ ] Code Cell                                  ││
+│  │ [ ] Celda de Código                            ││
 │  │    import pandas as pd                         ││
-│  │    df = pd.read_csv('data.csv')               ││
+│  │    df = pd.read_csv('datos.csv')               ││
 │  │    df.head()                                   ││
 │  │                                                ││
-│  │ Out[1]: [table output]                         ││
+│  │ Out[1]: [salida en tabla]                      ││
 │  ├────────────────────────────────────────────────┤│
-│  │ [-] Markdown Cell (Explanation)                ││
-│  │    ## Results                                  ││
-│  │    The data shows...                           ││
+│  │ [-] Celda Markdown (Explicación)               ││
+│  │    ## Resultados                               ││
+│  │    Los datos muestran...                       ││
 │  └────────────────────────────────────────────────┘│
 └────────────────────────────────────────────────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
-### Launching Jupyter
+### Iniciando Jupyter
 
 ```bash
-# Install if not already installed
+# Instalar si no está instalado
 pip install jupyter
 
-# Launch
+# Iniciar
 jupyter notebook
 ```
 
-This opens the Jupyter dashboard in your browser at `http://localhost:8888`.
+Esto abre el dashboard de Jupyter en tu navegador en `http://localhost:8888`.
 
-### Creating a New Notebook
+### Creando un Nuevo Notebook
 
-1. Click "New" → "Python 3"
-2. A new notebook opens with an empty code cell
+1. Hacé clic en "New" → "Python 3"
+2. Se abre un nuevo notebook con una celda de código vacía
 
-### Working with Cells
+### Trabajando con Celdas
 
 ```python
-# This is a code cell — press Shift+Enter to run it
-print("Hello, Jupyter!")
+# Esta es una celda de código — presioná Shift+Enter para ejecutarla
+print("¡Hola, Jupyter!")
 ```
 
-### Markdown Formatting
+### Formato Markdown
 
-In a markdown cell, you can write:
+En una celda markdown podés escribir:
 ```markdown
-# Heading 1
-## Heading 2
-### Heading 3
+# Encabezado 1
+## Encabezado 2
+### Encabezado 3
 
-**Bold text**, *italic text*, `inline code`
+**Texto en negrita**, *texto en cursiva*, `código en línea`
 
-- List item 1
-- List item 2
+- Elemento de lista 1
+- Elemento de lista 2
 
-[Link text](https://example.com)
+[Texto del enlace](https://ejemplo.com)
 
 $$ E = mc^2 $$
 ```
 
-### Keyboard Shortcuts
+### Atajos de Teclado
 
-| Shortcut | Action |
+| Atajo | Acción |
 |----------|--------|
-| Shift+Enter | Run cell and select next |
-| Ctrl+Enter | Run cell and stay |
-| Alt+Enter | Run cell and insert below |
-| A | Insert cell above (command mode) |
-| B | Insert cell below (command mode) |
-| DD | Delete cell (command mode) |
-| M | Change to markdown cell (command mode) |
-| Y | Change to code cell (command mode) |
-| Ctrl+S | Save notebook |
-| Z | Undo cell deletion |
+| Shift+Enter | Ejecutar celda y seleccionar siguiente |
+| Ctrl+Enter | Ejecutar celda y quedarse |
+| Alt+Enter | Ejecutar celda e insertar debajo |
+| A | Insertar celda arriba (modo comando) |
+| B | Insertar celda abajo (modo comando) |
+| DD | Eliminar celda (modo comando) |
+| M | Cambiar a celda markdown (modo comando) |
+| Y | Cambiar a celda de código (modo comando) |
+| Ctrl+S | Guardar notebook |
+| Z | Deshacer eliminación de celda |
 
-### Saving and Exporting
+### Guardar y Exportar
 
-- **Save**: File → Save and Checkpoint (or Ctrl+S)
-- **Export**: File → Download as → HTML, PDF, Python script, etc.
+- **Guardar**: File → Save and Checkpoint (o Ctrl+S)
+- **Exportar**: File → Download as → HTML, PDF, Python script, etc.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: A researcher is analyzing gene expression data and wants to document the analysis steps.
+**Escenario**: Un investigador está analizando datos de expresión génica y quiere documentar los pasos del análisis.
 
-The notebook structure would be:
-- **Cell 1 (Markdown)**: Title and research question
-- **Cell 2 (Code)**: Load expression data with Pandas
-- **Cell 3 (Markdown)**: Data cleaning methodology
-- **Cell 4 (Code)**: Filter and normalize data
-- **Cell 5 (Markdown)**: Results interpretation
-- **Cell 6 (Code)**: Generate heatmap with Seaborn
+La estructura del notebook sería:
+- **Celda 1 (Markdown)**: Título y pregunta de investigación
+- **Celda 2 (Código)**: Cargar datos de expresión con Pandas
+- **Celda 3 (Markdown)**: Metodología de limpieza de datos
+- **Celda 4 (Código)**: Filtrar y normalizar datos
+- **Celda 5 (Markdown)**: Interpretación de resultados
+- **Celda 6 (Código)**: Generar heatmap con Seaborn
 
-This notebook can be shared with collaborators who can reproduce the analysis.
+Este notebook se puede compartir con colaboradores que pueden reproducir el análisis.
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: A data analyst at a SaaS company needs to explore customer churn data and share findings.
+**Escenario**: Un analista de datos en una empresa SaaS necesita explorar datos de churn de clientes y compartir hallazgos.
 
-The notebook structure:
-- **Cell 1 (Markdown)**: Churn analysis for Q1 report
-- **Cell 2 (Code)**: Load customer data
-- **Cell 3 (Code)**: Calculate churn rate by cohort
-- **Cell 4 (Markdown)**: Key findings
-- **Cell 5 (Code)**: Visualization of churn trends
-- **Cell 6 (Markdown)**: Recommendations
+La estructura del notebook:
+- **Celda 1 (Markdown)**: Análisis de churn para el informe del Q1
+- **Celda 2 (Código)**: Cargar datos de clientes
+- **Celda 3 (Código)**: Calcular tasa de churn por cohorte
+- **Celda 4 (Markdown)**: Hallazgos clave
+- **Celda 5 (Código)**: Visualización de tendencias de churn
+- **Celda 6 (Markdown)**: Recomendaciones
 
-The notebook can be exported to HTML and shared with the product team.
+El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Running cells out of order**: Variables defined later may not be available. Use "Run All" (Cell → Run All) to execute sequentially.
-2. **Not restarting the kernel**: When code behaves unexpectedly, restart the kernel (Kernel → Restart & Run All).
-3. **Forgetting to save**: Jupyter autosaves, but manually save before closing.
-4. **Using print() excessively**: The last expression in a cell is automatically displayed.
-5. **Closing the terminal**: The Jupyter server runs in the terminal. Closing it stops the server.
+1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usá "Run All" (Cell → Run All) para ejecutar secuencialmente.
+2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reiniciá el kernel (Kernel → Restart & Run All).
+3. **Olvidarse de guardar**: Jupyter guarda automáticamente, pero guardá manualmente antes de cerrar.
+4. **Usar print() excesivamente**: La última expresión de una celda se muestra automáticamente.
+5. **Cerrar la terminal**: El servidor de Jupyter corre en la terminal. Cerrarla detiene el servidor.
 
-## Best Practices
+## Buenas Prácticas
 
-- Use markdown cells to document your analysis
-- Keep cells focused on a single task
-- Run cells in order from top to bottom
-- Restart and run all before sharing a notebook
-- Use meaningful filenames (e.g., `gene_expression_analysis.ipynb`)
-- Clear output before committing notebooks to version control
+- Usá celdas markdown para documentar tu análisis
+- Mantené las celdas enfocadas en una sola tarea
+- Ejecutá las celdas en orden de arriba hacia abajo
+- Reiniciá y ejecutá todo antes de compartir un notebook
+- Usá nombres de archivo significativos (ej: `analisis_expresion_genica.ipynb`)
+- Limpiá las salidas antes de subir notebooks al control de versiones
 
-## Summary
+## Resumen
 
-- Jupyter Notebook is a web-based interactive environment for data analysis
-- Notebooks contain code and markdown cells
-- Code cells execute Python code; markdown cells display formatted text and images
-- The kernel maintains state between cell executions
-- Keyboard shortcuts speed up workflow
-- Export notebooks to share results
+- Jupyter Notebook es un entorno interactivo basado en web para análisis de datos
+- Los notebooks contienen celdas de código y markdown
+- Las celdas de código ejecutan Python; las celdas markdown muestran texto e imágenes formateados
+- El kernel mantiene el estado entre ejecuciones de celdas
+- Los atajos de teclado agilizan el flujo de trabajo
+- Exportá notebooks para compartir resultados
 
-## Key Terms
+## Términos Clave
 
-- **Notebook** (`.ipynb`): JSON document containing code, text, and outputs
-- **Cell**: Individual unit of content (code or markdown)
-- **Kernel**: Python engine executing code cells
-- **Command mode**: Blue-bordered mode for notebook-level actions
-- **Edit mode**: Green-bordered mode for editing cell content
-- **Dashboard**: Jupyter file browser interface
-- **Shift+Enter**: Run current cell and move to the next
+- **Notebook** (`.ipynb`): Documento JSON que contiene código, texto y salidas
+- **Celda**: Unidad individual de contenido (código o markdown)
+- **Kernel**: Motor de Python que ejecuta las celdas de código
+- **Modo comando**: Modo de borde azul para acciones a nivel del notebook
+- **Modo edición**: Modo de borde verde para editar el contenido de la celda
+- **Dashboard**: Interfaz del explorador de archivos de Jupyter
+- **Shift+Enter**: Ejecutar celda actual y pasar a la siguiente
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the difference between a code cell and a markdown cell?
-2. What does `Shift+Enter` do in Jupyter?
-3. How do you create a new cell below the current one?
+1. ¿Cuál es la diferencia entre una celda de código y una celda markdown?
+2. ¿Qué hace `Shift+Enter` en Jupyter?
+3. ¿Cómo creás una nueva celda debajo de la actual?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Create a notebook with at least one markdown cell (with a heading and bullet list) and one code cell that prints "Jupyter is working!"
-5. Export your notebook as HTML.
+4. Creá un notebook con al menos una celda markdown (con un título y una lista con viñetas) y una celda de código que imprima "¡Jupyter está funcionando!"
+5. Exportá tu notebook como HTML.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. Why is it important to run cells in order from top to bottom? What problems can occur when cells are run out of order?
-7. In a collaborative research setting, what advantages does a Jupyter notebook offer over a traditional Python script?
+6. ¿Por qué es importante ejecutar las celdas en orden de arriba hacia abajo? ¿Qué problemas pueden ocurrir si se ejecutan fuera de orden?
+7. En un entorno de investigación colaborativa, ¿qué ventajas ofrece un notebook de Jupyter sobre un script de Python tradicional?
 
-## Coding Challenge
+## Desafío de Código
 
-Create a Jupyter notebook called `my_first_notebook.ipynb` that:
-1. Has a title cell (Markdown H1): "My First Notebook"
-2. A markdown cell explaining what the notebook does
-3. A code cell that creates a list of your 5 favorite things
-4. A code cell that prints each item with a number
-5. A markdown cell with a conclusion
-Export the notebook as HTML.
+Creá un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
+1. Tenga una celda de título (Markdown H1): "Mi Primer Notebook"
+2. Una celda markdown explicando de qué trata el notebook
+3. Una celda de código que cree una lista de tus 5 cosas favoritas
+4. Una celda de código que imprima cada elemento con un número
+5. Una celda markdown con una conclusión
+Exportá el notebook como HTML.

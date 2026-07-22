@@ -1,87 +1,87 @@
 ---
 Module: 3
 Lesson Number: 2
-Lesson Title: Data Distribution
-Estimated Duration: 60 minutes
-Prerequisites: Lesson 1 (Descriptive Statistics)
+Lesson Title: Distribución de Datos
+Estimated Duration: 60 minutos
+Prerequisites: Lección 1 (Estadística Descriptiva)
 Learning Objectives:
-  - Construct histograms and density plots using matplotlib and seaborn
-  - Interpret skewness and kurtosis values
-  - Distinguish between symmetric, left-skewed, and right-skewed distributions
-  - Choose appropriate bin width for histograms
-  - Explain how distribution shape affects choice of summary statistics
-Keywords: histogram, density plot, skewness, kurtosis, KDE, distribution shape
-Difficulty: Beginner
+  - Construir histogramas y gráficos de densidad usando matplotlib y seaborn
+  - Interpretar valores de asimetría y curtosis
+  - Distinguir entre distribuciones simétricas, con asimetría izquierda y con asimetría derecha
+  - Elegir el ancho de bin adecuado para histogramas
+  - Explicar cómo la forma de la distribución afecta la elección de estadísticos de resumen
+Keywords: histograma, gráfico de densidad, asimetría, curtosis, KDE, forma de distribución
+Difficulty: Principiante
 Programming Concepts: matplotlib, seaborn, numpy, pandas
-Mathematical Concepts: skewness, kurtosis, probability density function
-Machine Learning Concepts: data distribution understanding
-Datasets Used: Synthetic data, penguins dataset
+Mathematical Concepts: asimetría, curtosis, función de densidad de probabilidad
+Machine Learning Concepts: comprensión de la distribución de datos
+Datasets Used: Datos sintéticos, dataset de pingüinos
 Notebook: 02_data_distribution.ipynb
 Assignment: data_distribution_assignment.md
 Quiz: data_distribution_quiz.md
 ---
 
-# Lesson 2: Data Distribution
+# Lección 2: Distribución de Datos
 
-## Motivation
+## Motivación
 
-In Lesson 1, you learned to summarize data with a handful of numbers. But two very different datasets can have identical means and standard deviations. Visualizing the distribution reveals patterns that summary statistics miss: multimodality, gaps, clusters, and extreme values. Understanding data distribution is critical before applying any machine learning model, as many algorithms assume normally distributed features.
+En la Lección 1, aprendiste a resumir datos con un puñado de números. Pero dos conjuntos de datos muy diferentes pueden tener medias y desviaciones estándar idénticas. Visualizar la distribución revela patrones que los estadísticos de resumen no muestran: multimodalidad, huecos, agrupaciones y valores extremos. Entender la distribución de los datos es crítico antes de aplicar cualquier modelo de machine learning, ya que muchos algoritmos asumen que las features siguen una distribución normal.
 
-In biotechnology, distribution shapes reveal whether gene expression follows a normal or log-normal pattern. In SaaS, user activity data often follows a power-law distribution, affecting how we compute averages and detect anomalies.
+En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log-normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo que afecta cómo calculamos promedios y detectamos anomalías.
 
-## Big Picture
+## Panorama General
 
-Lesson 1 taught numerical summaries; this lesson teaches visual summaries. You will learn to see the shape of your data. This prepares you for Lesson 3 (Probability), where distributions become formal mathematical objects, and for Lesson 4 (Statistical Distributions), where you will encounter named distributions like the normal and binomial.
+La Lección 1 enseñó resúmenes numéricos; esta lección enseña resúmenes visuales. Aprenderás a ver la forma de tus datos. Esto te prepara para la Lección 3 (Probabilidad), donde las distribuciones se convierten en objetos matemáticos formales, y para la Lección 4 (Distribuciones Estadísticas), donde encontrarás distribuciones con nombre como la normal y la binomial.
 
-## Theory
+## Teoría
 
-### Histograms
+### Histogramas
 
-A histogram partitions data into bins and counts how many observations fall into each bin.
+Un histograma particiona los datos en intervalos (bins) y cuenta cuántas observaciones caen en cada uno.
 
-**Intuition**: The histogram approximates the underlying probability distribution of the data. The area of each bar represents the proportion of data in that bin.
+**Intuición**: El histograma aproxima la distribución de probabilidad subyacente de los datos. El área de cada barra representa la proporción de datos en ese intervalo.
 
-**Choosing Bin Width**: The number of bins dramatically affects interpretation. Too few bins hide detail; too many create noise.
+**Elección del Ancho de Bin**: La cantidad de bins afecta drásticamente la interpretación. Muy pocos bins ocultan detalles; demasiados crean ruido.
 
-- Sturges' rule: \(k = \lceil \log_2 n + 1 \rceil\)
-- Square-root rule: \(k = \lceil \sqrt{n} \rceil\)
-- Freedman-Diaconis rule: \(h = 2 \times \text{IQR} \times n^{-1/3}\)
+- Regla de Sturges: \(k = \lceil \log_2 n + 1 \rceil\)
+- Regla de la raíz cuadrada: \(k = \lceil \sqrt{n} \rceil\)
+- Regla de Freedman-Diaconis: \(h = 2 \times \text{IQR} \times n^{-1/3}\)
 
-### Density Plots (KDE)
+### Gráficos de Densidad (KDE)
 
-A kernel density estimate (KDE) plots a smooth version of the histogram.
+Una estimación de densidad por kernel (KDE) traza una versión suavizada del histograma.
 
 $$\hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right)$$
 
-Intuition: Place a small "bump" (kernel) at each data point, then sum all bumps to create a smooth curve. The bandwidth \(h\) controls smoothness.
+Intuición: Colocá un pequeño "bache" (kernel) en cada punto de datos, luego sumá todos los baches para crear una curva suave. El ancho de banda \(h\) controla la suavidad.
 
-### Skewness
+### Asimetría (Skewness)
 
-Skewness measures asymmetry of the distribution.
+La asimetría mide la falta de simetría de la distribución.
 
-$$\text{Skewness} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$$
+$$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$$
 
-- **Skewness = 0**: Symmetric (e.g., normal distribution)
-- **Skewness > 0**: Right-skewed (long tail on the right)
-- **Skewness < 0**: Left-skewed (long tail on the left)
+- **Asimetría = 0**: Simétrica (ej., distribución normal)
+- **Asimetría > 0**: Asimétrica a la derecha (cola larga a la derecha)
+- **Asimetría < 0**: Asimétrica a la izquierda (cola larga a la izquierda)
 
-Intuition: In a right-skewed distribution, the mean is greater than the median because extreme high values pull the mean to the right.
+Intuición: En una distribución con asimetría a la derecha, la media es mayor que la mediana porque los valores extremos altos jalan la media hacia la derecha.
 
-### Kurtosis
+### Curtosis
 
-Kurtosis measures the "tailedness" of the distribution.
+La curtosis mide el "peso de las colas" de la distribución.
 
-$$\text{Kurtosis} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$$
+$$\text{Curtosis} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$$
 
-(The "-3" makes the normal distribution have kurtosis = 0, called excess kurtosis.)
+(El "-3" hace que la distribución normal tenga curtosis = 0, llamada curtosis en exceso.)
 
-- **Kurtosis = 0**: Mesokurtic (normal-like)
-- **Kurtosis > 0**: Leptokurtic (heavy tails, more outliers)
-- **Kurtosis < 0**: Platykurtic (light tails, fewer outliers)
+- **Curtosis = 0**: Mesocúrtica (similar a la normal)
+- **Curtosis > 0**: Leptocúrtica (colas pesadas, más valores atípicos)
+- **Curtosis < 0**: Platicúrtica (colas livianas, menos valores atípicos)
 
-Intuition: High kurtosis means extreme values are more likely than in a normal distribution. This matters for risk assessment in finance and outlier detection in genomics.
+Intuición: Una curtosis alta significa que los valores extremos son más probables que en una distribución normal. Esto importa para la evaluación de riesgos en finanzas y la detección de valores atípicos en genómica.
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
@@ -89,73 +89,73 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Generate data with different distributions
+# Generar datos con diferentes distribuciones
 np.random.seed(42)
 symmetric = np.random.normal(loc=50, scale=10, size=1000)
 right_skewed = np.random.exponential(scale=10, size=1000)
 left_skewed = -np.random.exponential(scale=10, size=1000) + 100
 
-# Histograms
+# Histogramas
 fig, axes = plt.subplots(1, 3, figsize=(15, 4))
 
 axes[0].hist(symmetric, bins=20, edgecolor='black', color='steelblue')
-axes[0].set_title('Symmetric (Normal)')
+axes[0].set_title('Simétrica (Normal)')
 
 axes[1].hist(right_skewed, bins=20, edgecolor='black', color='coral')
-axes[1].set_title('Right-Skewed')
+axes[1].set_title('Asimétrica a la Derecha')
 
 axes[2].hist(left_skewed, bins=20, edgecolor='black', color='seagreen')
-axes[2].set_title('Left-Skewed')
+axes[2].set_title('Asimétrica a la Izquierda')
 
 plt.tight_layout()
 plt.show()
 
-# Density plots with seaborn
+# Gráficos de densidad con seaborn
 plt.figure(figsize=(10, 5))
-sns.kdeplot(symmetric, label='Symmetric', fill=True)
-sns.kdeplot(right_skewed, label='Right-Skewed', fill=True)
-sns.kdeplot(left_skewed, label='Left-Skewed', fill=True)
-plt.title('Density Plots Comparison')
+sns.kdeplot(symmetric, label='Simétrica', fill=True)
+sns.kdeplot(right_skewed, label='Asimétrica a la Derecha', fill=True)
+sns.kdeplot(left_skewed, label='Asimétrica a la Izquierda', fill=True)
+plt.title('Comparación de Gráficos de Densidad')
 plt.legend()
 plt.show()
 
-# Compute skewness and kurtosis
+# Calcular asimetría y curtosis
 from scipy.stats import skew, kurtosis
 
-print(f"Symmetric - Skewness: {skew(symmetric):.3f}, Kurtosis: {kurtosis(symmetric):.3f}")
-print(f"Right-Skewed - Skewness: {skew(right_skewed):.3f}, Kurtosis: {kurtosis(right_skewed):.3f}")
-print(f"Left-Skewed - Skewness: {skew(left_skewed):.3f}, Kurtosis: {kurtosis(left_skewed):.3f}")
+print(f"Simétrica - Asimetría: {skew(symmetric):.3f}, Curtosis: {kurtosis(symmetric):.3f}")
+print(f"Asimétrica a la Derecha - Asimetría: {skew(right_skewed):.3f}, Curtosis: {kurtosis(right_skewed):.3f}")
+print(f"Asimétrica a la Izquierda - Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_skewed):.3f}")
 ```
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-Analyze the distribution of body mass in penguins.
+Analizar la distribución de la masa corporal en pingüinos.
 
 ```python
 import seaborn as sns
 penguins = sns.load_dataset('penguins')
 penguins = penguins.dropna()
 
-# Histogram with KDE
+# Histograma con KDE
 plt.figure(figsize=(10, 5))
 sns.histplot(penguins['body_mass_g'], bins=25, kde=True, edgecolor='black')
-plt.title('Distribution of Penguin Body Mass')
-plt.xlabel('Body Mass (g)')
+plt.title('Distribución de la Masa Corporal de Pingüinos')
+plt.xlabel('Masa Corporal (g)')
 plt.tight_layout()
 plt.show()
 
-# Compute shape statistics
-print(f"Skewness: {skew(penguins['body_mass_g']):.3f}")
-print(f"Kurtosis: {kurtosis(penguins['body_mass_g']):.3f}")
-print(f"Mean: {penguins['body_mass_g'].mean():.0f} g")
-print(f"Median: {penguins['body_mass_g'].median():.0f} g")
+# Calcular estadísticos de forma
+print(f"Asimetría: {skew(penguins['body_mass_g']):.3f}")
+print(f"Curtosis: {kurtosis(penguins['body_mass_g']):.3f}")
+print(f"Media: {penguins['body_mass_g'].mean():.0f} g")
+print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
 ```
 
-Interpretation: The distribution of body mass is roughly symmetric (skewness near 0). The mean and median are close. There may be multiple peaks reflecting different penguin species.
+Interpretación: La distribución de la masa corporal es aproximadamente simétrica (asimetría cercana a 0). La media y la mediana están próximas. Puede haber múltiples picos reflejando diferentes especies de pingüinos.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-Gene expression data often follows a log-normal distribution. Taking the log makes it approximately normal.
+Los datos de expresión génica suelen seguir una distribución log-normal. Aplicar el logaritmo los vuelve aproximadamente normales.
 
 ```python
 np.random.seed(42)
@@ -164,95 +164,95 @@ gene_expression = np.random.lognormal(mean=2.0, sigma=0.8, size=1000)
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 axes[0].hist(gene_expression, bins=30, edgecolor='black', color='steelblue')
-axes[0].set_title('Raw Gene Expression (Log-Normal)')
-axes[0].set_xlabel('Expression Level')
+axes[0].set_title('Expresión Génica Original (Log-Normal)')
+axes[0].set_xlabel('Nivel de Expresión')
 
 log_transformed = np.log1p(gene_expression)
 axes[1].hist(log_transformed, bins=30, edgecolor='black', color='coral')
-axes[1].set_title('Log-Transformed (Approx. Normal)')
-axes[1].set_xlabel('Log(Expression)')
+axes[1].set_title('Transformación Logarítmica (Aprox. Normal)')
+axes[1].set_xlabel('Log(Expresión)')
 
 plt.tight_layout()
 plt.show()
 
-print(f"Raw skewness: {skew(gene_expression):.3f}")
-print(f"Log-transformed skewness: {skew(log_transformed):.3f}")
+print(f"Asimetría original: {skew(gene_expression):.3f}")
+print(f"Asimetría con log: {skew(log_transformed):.3f}")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-User session durations in a SaaS product.
+Duración de sesiones de usuarios en un producto SaaS.
 
 ```python
 np.random.seed(42)
-session_duration = np.random.exponential(scale=300, size=2000)  # in seconds
+session_duration = np.random.exponential(scale=300, size=2000)  # en segundos
 
 plt.figure(figsize=(10, 4))
 sns.histplot(session_duration, bins=40, kde=True, edgecolor='black')
-plt.title('Distribution of Session Durations')
-plt.xlabel('Duration (seconds)')
-plt.axvline(np.mean(session_duration), color='red', linestyle='--', label=f'Mean: {np.mean(session_duration):.0f}s')
-plt.axvline(np.median(session_duration), color='blue', linestyle='-', label=f'Median: {np.median(session_duration):.0f}s')
+plt.title('Distribución de Duraciones de Sesión')
+plt.xlabel('Duración (segundos)')
+plt.axvline(np.mean(session_duration), color='red', linestyle='--', label=f'Media: {np.mean(session_duration):.0f}s')
+plt.axvline(np.median(session_duration), color='blue', linestyle='-', label=f'Mediana: {np.median(session_duration):.0f}s')
 plt.legend()
 plt.show()
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Using too few bins**: Hides the shape of the distribution.
-2. **Ignoring multimodality**: Multiple peaks suggest subgroups (e.g., different species, user types).
-3. **Assuming normality**: Many real-world datasets are skewed.
-4. **Confusing skewness direction**: Right-skewed = tail on the right, mean > median.
+1. **Usar muy pocos bins**: Oculta la forma de la distribución.
+2. **Ignorar la multimodalidad**: Múltiples picos sugieren subgrupos (ej., diferentes especies, tipos de usuarios).
+3. **Asumir normalidad**: Muchos conjuntos de datos del mundo real son asimétricos.
+4. **Confundir la dirección de la asimetría**: Asimetría a la derecha = cola a la derecha, media > mediana.
 
-## Best Practices
+## Mejores Prácticas
 
-- Always visualize your data before computing statistics
-- Try multiple bin widths to see different levels of detail
-- Use KDE plots alongside histograms
-- Report skewness and kurtosis alongside mean and std for non-normal data
-- Log-transform right-skewed data when needed for ML models
+- Visualizá siempre tus datos antes de calcular estadísticos
+- Probá múltiples anchos de bin para ver diferentes niveles de detalle
+- Usá gráficos KDE junto con histogramas
+- Reportá asimetría y curtosis junto con media y desviación estándar para datos no normales
+- Aplicá transformación logarítmica a datos con asimetría derecha cuando sea necesario para modelos de ML
 
-## Summary
+## Resumen
 
-- Histograms show the frequency distribution of data
-- Density plots provide a smooth estimate of the distribution
-- Skewness measures asymmetry (0 = symmetric)
-- Kurtosis measures tail heaviness (0 = normal-like)
-- Distribution shape guides choice of summary statistics and preprocessing
+- Los histogramas muestran la distribución de frecuencias de los datos
+- Los gráficos de densidad proveen una estimación suave de la distribución
+- La asimetría mide la falta de simetría (0 = simétrico)
+- La curtosis mide el peso de las colas (0 = similar a la normal)
+- La forma de la distribución guía la elección de estadísticos de resumen y preprocesamiento
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Histogram | Bar chart of binned data frequencies |
-| Kernel Density Estimate | Smooth estimate of probability density |
-| Skewness | Measure of distribution asymmetry |
-| Kurtosis | Measure of tail heaviness |
-| Leptokurtic | Heavy-tailed distribution |
-| Platykurtic | Light-tailed distribution |
-| Multimodal | Distribution with multiple peaks |
+| Término | Definición |
+|---------|------------|
+| Histograma | Gráfico de barras de frecuencias de datos agrupados en bins |
+| Estimación de Densidad por Kernel | Estimación suave de la densidad de probabilidad |
+| Asimetría | Medida de la falta de simetría de la distribución |
+| Curtosis | Medida del peso de las colas |
+| Leptocúrtica | Distribución de colas pesadas |
+| Platicúrtica | Distribución de colas livianas |
+| Multimodal | Distribución con múltiples picos |
 
-## Exercises
+## Ejercicios
 
-**Level 1: Basic Understanding**
+**Nivel 1: Comprensión Básica**
 
-1. A histogram of house prices shows a long tail on the right. Is this distribution symmetric, left-skewed, or right-skewed? What does this imply about the mean vs median?
-2. What kurtosis value would you expect for a normal distribution?
+1. Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?
+2. ¿Qué valor de curtosis esperarías para una distribución normal?
 
-**Level 2: Implementation**
+**Nivel 2: Implementación**
 
-3. Generate 500 samples from a normal distribution with mean=0 and std=1. Plot a histogram with KDE overlay and compute skewness and kurtosis.
-4. Load the `tips` dataset from seaborn. Plot histograms of `total_bill` for each day and compare their shapes.
+3. Generá 500 muestras de una distribución normal con media=0 y desviación estándar=1. Trazá un histograma con superposición KDE y calculá asimetría y curtosis.
+4. Cargá el dataset `tips` de seaborn. Trazá histogramas de `total_bill` para cada día y compará sus formas.
 
-**Level 3: Critical Thinking**
+**Nivel 3: Pensamiento Crítico**
 
-5. A researcher finds that gene expression data has high kurtosis. What does this imply about the biology? How might this affect downstream analysis?
-6. Why might a SaaS company prefer median over mean when reporting customer lifetime value (LTV)?
+5. Un investigador encuentra que los datos de expresión génica tienen curtosis alta. ¿Qué implica esto sobre la biología? ¿Cómo podría afectar al análisis posterior?
+6. ¿Por qué una empresa SaaS podría preferir la mediana sobre la media al reportar el valor de vida del cliente (LTV)?
 
-## Coding Challenge
+## Desafío de Programación
 
-Write a script that:
-1. Generates data from four distributions: normal, exponential, uniform, and binomial (n=10, p=0.5)
-2. Creates a 2x2 grid of histograms with KDE overlays
-3. Prints skewness and kurtosis for each
-4. Includes a brief interpretation of each shape
+Escribí un script que:
+1. Genere datos de cuatro distribuciones: normal, exponencial, uniforme y binomial (n=10, p=0.5)
+2. Cree una cuadrícula de 2x2 de histogramas con superposición KDE
+3. Imprima asimetría y curtosis para cada una
+4. Incluya una breve interpretación de cada forma

@@ -1,156 +1,162 @@
 ---
 Module: 3
 Lesson Number: 1
-Lesson Title: Descriptive Statistics
-Estimated Duration: 75 minutes
-Prerequisites: Module 2 (Python Programming Fundamentals)
+Lesson Title: Estadística Descriptiva
+Estimated Duration: 75 minutos
+Prerequisites: Módulo 2 (Fundamentos de Programación en Python)
 Learning Objectives:
-  - Explain the difference between measures of central tendency and measures of dispersion
-  - Calculate mean, median, mode, variance, standard deviation, range, and IQR using Python
-  - Interpret descriptive statistics to summarize a dataset
-  - Choose the appropriate measure of central tendency based on data distribution
-  - Identify outliers using the IQR method
-Keywords: mean, median, mode, variance, standard deviation, range, IQR, boxplot, descriptive statistics
-Difficulty: Beginner
+  - Explicar la diferencia entre medidas de tendencia central y medidas de dispersión
+  - Calcular media, mediana, moda, varianza, desviación estándar, rango e IQR usando Python
+  - Interpretar estadísticas descriptivas para resumir un conjunto de datos
+  - Elegir la medida de tendencia central adecuada según la distribución de los datos
+  - Identificar valores atípicos usando el método del IQR
+Keywords: media, mediana, moda, varianza, desviación estándar, rango, IQR, diagrama de caja, estadística descriptiva
+Difficulty: Principiante
 Programming Concepts: numpy, pandas, matplotlib
-Mathematical Concepts: mean, variance, standard deviation, quartiles, percentiles
-Machine Learning Concepts: data summarization, feature understanding
-Datasets Used: Synthetic student exam scores, diabetes dataset
+Mathematical Concepts: media, varianza, desviación estándar, cuartiles, percentiles
+Machine Learning Concepts: resumen de datos, comprensión de features
+Datasets Used: Puntajes de examen sintéticos de estudiantes, dataset de diabetes
 Notebook: 01_descriptive_statistics.ipynb
 Assignment: descriptive_statistics_assignment.md
 Quiz: descriptive_statistics_quiz.md
 ---
 
-# Lesson 1: Descriptive Statistics
+# Lección 1: Estadística Descriptiva
 
-## Motivation
+## Motivación
 
-Imagine you have just sequenced 10,000 genes from a patient sample. You need to communicate which genes are consistently expressed and which vary wildly between patients. Without descriptive statistics, you would have to read 10,000 numbers one by one. Descriptive statistics condense entire datasets into a handful of meaningful numbers, enabling scientists and data analysts to understand data at a glance.
+Imaginá que acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías que leer 10.000 números uno por uno. La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
 
-In biotechnology, descriptive statistics help answer questions like: What is the average expression level of a gene across a population? How variable is the response to a drug? In SaaS, descriptive statistics summarize user engagement metrics like daily active users or session duration.
+En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, la estadística descriptiva resume métricas de engagement de usuarios como usuarios activos diarios o duración de sesiones.
 
-## Big Picture
+## Panorama General
 
-In the previous module, you learned to manipulate data using Python, NumPy, and Pandas. Now you will learn to describe data numerically. This lesson builds the foundation for all subsequent statistics lessons. In Lesson 2, you will visualize these same descriptive concepts using histograms and density plots.
+En el módulo anterior, aprendiste a manipular datos usando Python, NumPy y Pandas. Ahora aprenderás a describir datos numéricamente. Esta lección sienta las bases para todas las lecciones de estadística subsiguientes. En la Lección 2, visualizarás estos mismos conceptos descriptivos usando histogramas y gráficos de densidad.
 
-## Theory
+## Teoría
 
-### Measures of Central Tendency
+### Medidas de Tendencia Central
 
-Central tendency measures tell us where the "center" of a dataset lies.
+Las medidas de tendencia central indican dónde se encuentra el "centro" de un conjunto de datos.
 
-**Mean (Average)**
+**Media (Promedio)**
 
-The arithmetic mean is the sum of all values divided by the number of values.
+La media aritmética es la suma de todos los valores dividida por la cantidad de valores.
 
 $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
-Intuition: The mean is the balance point of the data. If you placed each data point on a number line with equal weights, the mean is where the fulcrum would balance.
+Intuición: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es donde se equilibraría el fulcro.
 
-**Median**
+**Mediana**
 
-The median is the middle value when data is sorted in ascending order.
+La mediana es el valor del medio cuando los datos están ordenados de forma ascendente.
 
-$$\text{median} = \begin{cases} x_{(n+1)/2} & \text{if } n \text{ is odd} \\ \frac{x_{n/2} + x_{(n/2)+1}}{2} & \text{if } n \text{ is even} \end{cases}$$
+$$\text{mediana} = \begin{cases} x_{(n+1)/2} & \text{si } n \text{ es impar} \\ \frac{x_{n/2} + x_{(n/2)+1}}{2} & \text{si } n \text{ es par} \end{cases}$$
 
-Intuition: The median splits the dataset into two equal halves. Unlike the mean, it is not affected by extreme values.
+Intuición: La mediana divide el conjunto de datos en dos mitades iguales. A diferencia de la media, no se ve afectada por valores extremos.
 
-**Mode**
+**Moda**
 
-The mode is the most frequent value in the dataset. A dataset can have one mode (unimodal), two modes (bimodal), or more.
+La moda es el valor más frecuente en un conjunto de datos. Un conjunto puede tener una moda (unimodal), dos modas (bimodal) o más.
 
-Intuition: The mode tells you the most common category or value.
+Intuición: La moda indica la categoría o el valor más común.
 
-### Measures of Dispersion
+### Medidas de Dispersión
 
-Dispersion measures tell us how spread out the data is.
+Las medidas de dispersión indican qué tan dispersos están los datos.
 
-**Range**
+**Rango**
 
-$$\text{Range} = \max(x) - \min(x)$$
+$$\text{Rango} = \max(x) - \min(x)$$
 
-Intuition: The range gives the total span of the data. It is very sensitive to outliers.
+Intuición: El rango da el recorrido total de los datos. Es muy sensible a valores atípicos.
 
-**Variance**
+**Varianza**
 
 $$\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$$
 
-Intuition: Variance measures the average squared distance from the mean. Larger variance means data points are more spread out.
+Intuición: La varianza mide la distancia cuadrática promedio desde la media. Una varianza más grande significa que los puntos están más dispersos.
 
-**Standard Deviation**
+**Desviación Estándar**
 
 $$\sigma = \sqrt{\sigma^2}$$
 
-Intuition: The standard deviation is the typical distance of a data point from the mean. Because it is in the same units as the original data, it is more interpretable than variance.
+Intuición: La desviación estándar es la distancia típica de un punto de datos respecto a la media. Como está en las mismas unidades que los datos originales, es más interpretable que la varianza.
 
-**Interquartile Range (IQR)**
+**Rango Intercuartílico (IQR)**
 
 $$\text{IQR} = Q_3 - Q_1$$
 
-Where \(Q_1\) is the 25th percentile and \(Q_3\) is the 75th percentile.
+Donde \(Q_1\) es el percentil 25 y \(Q_3\) es el percentil 75.
 
-Intuition: The IQR contains the middle 50% of the data. It is robust to outliers.
+Intuición: El IQR contiene el 50% central de los datos. Es robusto frente a valores atípicos.
 
-### Outlier Detection Using IQR
+### Detección de Valores Atípicos Usando IQR
 
-A common rule: any point below \(Q_1 - 1.5 \times \text{IQR}\) or above \(Q_3 + 1.5 \times \text{IQR}\) is considered an outlier.
+Una regla común: cualquier punto por debajo de \(Q_1 - 1.5 \times \text{IQR}\) o por encima de \(Q_3 + 1.5 \times \text{IQR}\) se considera un valor atípico.
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Sample data: exam scores for 30 students
+# Datos de ejemplo: puntajes de examen para 30 estudiantes
+# Datos de ejemplo: puntajes de examen para 30 estudiantes
 scores = [78, 85, 92, 67, 88, 95, 73, 81, 90, 76,
           84, 91, 69, 87, 93, 75, 82, 89, 96, 71,
           79, 86, 94, 68, 83, 97, 77, 80, 99, 100]
 
-# Convert to numpy array
+# Convertir a array de numpy
+# Convertir a array de numpy
 scores = np.array(scores)
 
-# Central tendency
+# Tendencia central
+# Tendencia central
 mean = np.mean(scores)
 median = np.median(scores)
 mode = pd.Series(scores).mode().values
 
-print(f"Mean: {mean:.2f}")
-print(f"Median: {median:.2f}")
-print(f"Mode: {mode}")
+print(f"Media: {mean:.2f}")
+print(f"Mediana: {median:.2f}")
+print(f"Moda: {mode}")
 
-# Dispersion
-variance = np.var(scores, ddof=0)  # population variance
+# Dispersión
+# Dispersión
+variance = np.var(scores, ddof=0)  # varianza poblacional
 std_dev = np.std(scores, ddof=0)
-data_range = np.ptp(scores)  # peak to peak (range)
+data_range = np.ptp(scores)  # rango (pico a pico)
 q1 = np.percentile(scores, 25)
 q3 = np.percentile(scores, 75)
 iqr = q3 - q1
 
-print(f"\nVariance: {variance:.2f}")
-print(f"Standard Deviation: {std_dev:.2f}")
-print(f"Range: {data_range}")
+print(f"\nVarianza: {variance:.2f}")
+print(f"Desviación Estándar: {std_dev:.2f}")
+print(f"Rango: {data_range}")
 print(f"Q1: {q1:.2f}, Q3: {q3:.2f}, IQR: {iqr:.2f}")
 
-# Outlier detection
+# Detección de valores atípicos
+# Detección de valores atípicos
 lower_bound = q1 - 1.5 * iqr
 upper_bound = q3 + 1.5 * iqr
 outliers = scores[(scores < lower_bound) | (scores > upper_bound)]
-print(f"\nOutlier bounds: [{lower_bound:.2f}, {upper_bound:.2f}]")
-print(f"Outliers: {outliers}")
+print(f"\nLímites de valores atípicos: [{lower_bound:.2f}, {upper_bound:.2f}]")
+print(f"Valores atípicos: {outliers}")
 
-# Boxplot visualization
+# Visualización con diagrama de caja
+# Visualización con diagrama de caja
 plt.figure(figsize=(8, 4))
 plt.boxplot(scores, vert=False, patch_artist=True)
-plt.title('Distribution of Exam Scores')
-plt.xlabel('Score')
+plt.title('Distribución de Puntajes de Examen')
+plt.xlabel('Puntaje')
 plt.tight_layout()
 plt.show()
 ```
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-**Problem**: A biotech company is testing a new drug. They measured the reduction in tumor size (mm) for 20 patients.
+**Problema**: Una empresa biotecnológica está probando un nuevo fármaco. Midieron la reducción del tamaño del tumor (mm) en 20 pacientes.
 
 ```python
 tumor_reduction = [12, 15, 8, 14, 16, 11, 13, 9, 17, 10,
@@ -158,25 +164,26 @@ tumor_reduction = [12, 15, 8, 14, 16, 11, 13, 9, 17, 10,
 
 reduction = np.array(tumor_reduction)
 
-print("Tumor Reduction Descriptive Statistics")
-print(f"Mean: {np.mean(reduction):.2f} mm")
-print(f"Median: {np.median(reduction):.2f} mm")
-print(f"Std Dev: {np.std(reduction, ddof=0):.2f} mm")
+print("Estadística Descriptiva de Reducción Tumoral")
+print(f"Media: {np.mean(reduction):.2f} mm")
+print(f"Mediana: {np.median(reduction):.2f} mm")
+print(f"Desvío Estándar: {np.std(reduction, ddof=0):.2f} mm")
 print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} mm")
 
-# The value 45 is likely an outlier — perhaps measurement error or exceptional case
+# El valor 45 es probablemente un valor atípico — quizás error de medición o caso excepcional
+# El valor 45 es probablemente un valor atípico — quizás error de medición o caso excepcional
 q1 = np.percentile(reduction, 25)
 q3 = np.percentile(reduction, 75)
 iqr = q3 - q1
 outliers = reduction[(reduction < q1 - 1.5*iqr) | (reduction > q3 + 1.5*iqr)]
-print(f"Potential outliers: {outliers}")
+print(f"Valores atípicos potenciales: {outliers}")
 ```
 
-**Interpretation**: The median (13 mm) is more representative than the mean (14.5 mm) because the outlier 45 inflates the mean. The IQR (4 mm) tells us the middle 50% of patients experienced 11--15 mm of tumor reduction.
+**Interpretación**: La mediana (13 mm) es más representativa que la media (14.5 mm) porque el valor atípico 45 infla la media. El IQR (4 mm) nos dice que el 50% central de los pacientes experimentó una reducción tumoral de 11 a 15 mm.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-Analyze gene expression data for 50 patient samples. Each sample measures the expression level of the TP53 tumor suppressor gene.
+Analizar datos de expresión génica de 50 muestras de pacientes. Cada muestra mide el nivel de expresión del gen supresor de tumores TP53.
 
 ```python
 np.random.seed(42)
@@ -186,93 +193,94 @@ df = pd.DataFrame({'TP53_expression': tp53_expression})
 summary = df.describe()
 print(summary)
 
-# Checking for abnormally low expression (potential gene deletion)
+# Verificando expresión anormalmente baja (posible deleción génica)
+# Verificando expresión anormalmente baja (posible deleción génica)
 q1 = df['TP53_expression'].quantile(0.25)
 q3 = df['TP53_expression'].quantile(0.75)
 iqr = q3 - q1
 lower = q1 - 1.5 * iqr
-print(f"\nSamples with unusually low TP53 expression:")
+print(f"\nMuestras con expresión de TP53 inusualmente baja:")
 print(df[df['TP53_expression'] < lower])
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-Analyze daily active users (DAU) for a SaaS product over 90 days.
+Analizar usuarios activos diarios (DAU) de un producto SaaS durante 90 días.
 
 ```python
 np.random.seed(42)
 dau = np.random.poisson(lam=1500, size=90) + np.random.randint(-50, 50, 90)
 
-print("Daily Active Users - Descriptive Statistics")
-print(f"Mean: {np.mean(dau):.0f}")
-print(f"Median: {np.median(dau):.0f}")
-print(f"Std Dev: {np.std(dau, ddof=0):.0f}")
+print("Usuarios Activos Diarios - Estadística Descriptiva")
+print(f"Media: {np.mean(dau):.0f}")
+print(f"Mediana: {np.median(dau):.0f}")
+print(f"Desvío Estándar: {np.std(dau, ddof=0):.0f}")
 print(f"Min: {np.min(dau)}, Max: {np.max(dau)}")
 
 pd.Series(dau).plot(kind='hist', bins=15, edgecolor='black')
-plt.title('Distribution of Daily Active Users')
-plt.xlabel('Users')
+plt.title('Distribución de Usuarios Activos Diarios')
+plt.xlabel('Usuarios')
 plt.tight_layout()
 plt.show()
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Using the mean for skewed data**: The mean is sensitive to outliers. Use median for income, gene expression with outliers, or any skewed distribution.
-2. **Confusing sample and population variance**: `np.var(x)` computes population variance (ddof=0). For sample variance, use `np.var(x, ddof=1)`.
-3. **Interpreting standard deviation without context**: A standard deviation of 10 might be large or small depending on the scale of the data.
-4. **Assuming mode is unique**: In continuous data, every value may appear once. Use binning or rounding to find meaningful modes.
+1. **Usar la media para datos sesgados**: La media es sensible a valores atípicos. Usá la mediana para ingresos, expresión génica con valores atípicos, o cualquier distribución sesgada.
+2. **Confundir varianza muestral y poblacional**: `np.var(x)` calcula la varianza poblacional (ddof=0). Para varianza muestral, usá `np.var(x, ddof=1)`.
+3. **Interpretar la desviación estándar sin contexto**: Una desviación estándar de 10 puede ser grande o chica dependiendo de la escala de los datos.
+4. **Asumir que la moda es única**: En datos continuos, cada valor puede aparecer una sola vez. Usá agrupamiento o redondeo para encontrar modas significativas.
 
-## Best Practices
+## Mejores Prácticas
 
-- Always compute both central tendency and dispersion measures together
-- Report median and IQR for skewed distributions
-- Report mean and standard deviation for symmetric distributions
-- Visualize data with a boxplot alongside numerical summaries
-- Use `df.describe()` for a quick overview in pandas
+- Calculá siempre juntas las medidas de tendencia central y dispersión
+- Reportá mediana e IQR para distribuciones sesgadas
+- Reportá media y desviación estándar para distribuciones simétricas
+- Visualizá los datos con un diagrama de caja junto con los resúmenes numéricos
+- Usá `df.describe()` para una visión rápida en pandas
 
-## Summary
+## Resumen
 
-- Descriptive statistics summarize data with a few key numbers
-- Central tendency: mean (balance point), median (middle value), mode (most common)
-- Dispersion: range (total spread), variance (average squared deviation), standard deviation (typical deviation), IQR (middle 50% spread)
-- IQR rule identifies outliers as points beyond 1.5×IQR from the quartiles
-- Choose mean + std for symmetric data, median + IQR for skewed data
+- La estadística descriptiva resume datos con unos pocos números clave
+- Tendencia central: media (punto de equilibrio), mediana (valor del medio), moda (más frecuente)
+- Dispersión: rango (recorrido total), varianza (desviación cuadrática promedio), desviación estándar (desviación típica), IQR (dispersión del 50% central)
+- La regla del IQR identifica valores atípicos como puntos más allá de 1.5×IQR desde los cuartiles
+- Elegí media + desviación estándar para datos simétricos, mediana + IQR para datos sesgados
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Mean | Sum of values divided by count; the arithmetic average |
-| Median | The middle value when data is sorted |
-| Mode | The most frequent value |
-| Variance | Average squared distance from the mean |
-| Standard Deviation | Square root of variance; typical distance from mean |
-| Range | Difference between max and min |
-| Interquartile Range | Difference between 75th and 25th percentiles |
-| Outlier | Data point that differs significantly from the rest |
+| Término | Definición |
+|---------|------------|
+| Media | Suma de valores dividida por la cantidad; el promedio aritmético |
+| Mediana | El valor del medio cuando los datos están ordenados |
+| Moda | El valor más frecuente |
+| Varianza | Distancia cuadrática promedio desde la media |
+| Desviación Estándar | Raíz cuadrada de la varianza; distancia típica desde la media |
+| Rango | Diferencia entre el máximo y el mínimo |
+| Rango Intercuartílico | Diferencia entre los percentiles 75 y 25 |
+| Valor Atípico | Punto de datos que difiere significativamente del resto |
 
-## Exercises
+## Ejercicios
 
-**Level 1: Basic Understanding**
+**Nivel 1: Comprensión Básica**
 
-1. A dataset has values [5, 7, 8, 8, 10, 100]. Calculate mean, median, and mode. Which measure best represents the center?
-2. What is the difference between variance and standard deviation? Why is standard deviation more commonly reported?
+1. Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. Calculá media, mediana y moda. ¿Qué medida representa mejor el centro?
+2. ¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué la desviación estándar se reporta con más frecuencia?
 
-**Level 2: Implementation**
+**Nivel 2: Implementación**
 
-3. Using pandas, load any CSV file and compute the mean, median, std, min, max, and IQR for all numeric columns.
-4. Write a function `outlier_count(data)` that returns the number of outliers using the IQR method.
+3. Usando pandas, cargá cualquier archivo CSV y calculá la media, mediana, desviación estándar, mínimo, máximo e IQR de todas las columnas numéricas.
+4. Escribí una función `outlier_count(data)` que devuelva la cantidad de valores atípicos usando el método del IQR.
 
-**Level 3: Critical Thinking**
+**Nivel 3: Pensamiento Crítico**
 
-5. A pharmaceutical company reports the mean effectiveness of a drug as 85%. However, 40% of patients showed no response. Explain how this contradiction is possible and suggest better summary statistics.
-6. Why might a SaaS company track median session duration instead of mean session duration?
+5. Una empresa farmacéutica reporta la efectividad media de un fármaco como 85%. Sin embargo, el 40% de los pacientes no mostró respuesta. Explicá cómo es posible esta contradicción y sugerí mejores estadísticos de resumen.
+6. ¿Por qué una empresa SaaS podría rastrear la duración mediana de sesión en vez de la duración promedio de sesión?
 
-## Coding Challenge
+## Desafío de Programación
 
-Write a Python script that:
-1. Generates a synthetic dataset of 200 values from a normal distribution with mean=50 and std=15
-2. Computes all descriptive statistics covered in this lesson
-3. Identifies and removes outliers using the IQR method
-4. Prints a summary comparing the original and cleaned datasets
+Escribí un script en Python que:
+1. Genere un conjunto de datos sintético de 200 valores a partir de una distribución normal con media=50 y desviación estándar=15
+2. Calcule todas las estadísticas descriptivas cubiertas en esta lección
+3. Identifique y elimine valores atípicos usando el método del IQR
+4. Imprima un resumen comparando los conjuntos de datos original y limpio

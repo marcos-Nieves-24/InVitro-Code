@@ -1,146 +1,146 @@
 ---
 Module: 5
 Lesson Number: 4
-Lesson Title: Privacy and Data Protection
-Estimated Duration: 60 minutes
-Prerequisites: L1 (Introduction to AI Ethics)
+Lesson Title: Privacidad y Protección de Datos
+Estimated Duration: 60 minutos
+Prerequisites: L1 (Introducción a la Ética en IA)
 Learning Objectives:
-  - Explain data privacy principles in the context of ML
-  - Describe key provisions of GDPR and HIPAA relevant to AI
-  - Compare anonymization, pseudonymization, and differential privacy
-  - Implement a simple differential privacy mechanism
-  - Evaluate privacy risks in ML systems (membership inference, model inversion)
-Keywords: privacy, GDPR, HIPAA, differential privacy, anonymization, consent, data protection
+  - Explicar los principios de privacidad de datos en el contexto de ML
+  - Describir disposiciones clave del GDPR y HIPAA relevantes para IA
+  - Comparar anonimización, seudonimización y privacidad diferencial
+  - Implementar un mecanismo simple de privacidad diferencial
+  - Evaluar riesgos de privacidad en sistemas de ML (inferencia de pertenencia, inversión de modelos)
+Keywords: privacidad, GDPR, HIPAA, privacidad diferencial, anonimización, consentimiento, protección de datos
 Difficulty: Intermediate
-Programming Concepts: numpy, random noise addition
-Mathematical Concepts: Laplace mechanism, epsilon parameter
-Machine Learning Concepts: Training data, model parameters
-Datasets Used: Synthetic
+Programming Concepts: numpy, adición de ruido aleatorio
+Mathematical Concepts: Mecanismo de Laplace, parámetro épsilon
+Machine Learning Concepts: Datos de entrenamiento, parámetros del modelo
+Datasets Used: Sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Privacy and Data Protection
+# Privacidad y Protección de Datos
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Explain** the core principles of data privacy as they apply to ML systems
-2. **Describe** key GDPR and HIPAA requirements that affect AI development
-3. **Compare** anonymization, pseudonymization, and differential privacy
-4. **Implement** the Laplace mechanism for differential privacy
-5. **Evaluate** privacy risks including membership inference and model inversion
+1. **Explicar** los principios centrales de privacidad de datos aplicados a sistemas de ML
+2. **Describir** los requisitos clave del GDPR y HIPAA que afectan el desarrollo de IA
+3. **Comparar** anonimización, seudonimización y privacidad diferencial
+4. **Implementar** el mecanismo de Laplace para privacidad diferencial
+5. **Evaluar** riesgos de privacidad incluyendo inferencia de pertenencia e inversión de modelos
 
-## Motivation
+## Motivación
 
-In 2018, a study demonstrated that it was possible to extract individual training examples from a generative language model trained on private text data (Carlini et al., 2018). The model had been trained on confidential emails. By querying the model, researchers could reconstruct verbatim passages from the training data.
+En 2018, un estudio demostró que era posible extraer ejemplos individuales de entrenamiento de un modelo de lenguaje generativo entrenado con datos de texto privados (Carlini et al., 2018). El modelo había sido entrenado con correos electrónicos confidenciales. Al consultar el modelo, los investigadores pudieron reconstruir pasajes textuales exactos de los datos de entrenamiento.
 
-The model was not supposed to "remember" individual records. It was supposed to learn general patterns. But deep neural networks can memorize training data — including personally identifiable information, medical records, and private communications.
+Se suponía que el modelo no debía "recordar" registros individuales. Se suponía que debía aprender patrones generales. Pero las redes neuronales profundas pueden memorizar datos de entrenamiento — incluyendo información personal identificable, historias clínicas y comunicaciones privadas.
 
-This is not a theoretical risk. Hospitals train diagnostic models on patient data. SaaS companies train recommendation models on user behavior. Financial institutions train fraud detection on transaction history. In all cases, the training data contains sensitive information that must be protected.
+Esto no es un riesgo teórico. Los hospitales entrenan modelos de diagnóstico con datos de pacientes. Las empresas SaaS entrenan modelos de recomendación con datos de comportamiento de usuarios. Las instituciones financieras entrenan detección de fraude con historiales de transacciones. En todos los casos, los datos de entrenamiento contienen información sensible que debe protegerse.
 
-Privacy is not just about keeping data secure during collection. It is about ensuring that the ML models trained on that data do not leak private information, even after deployment.
+La privacidad no se trata solo de mantener los datos seguros durante la recolección. Se trata de garantizar que los modelos de ML entrenados con esos datos no filtren información privada, incluso después del despliegue.
 
-## Big Picture
+## Panorama General
 
-| Previous Lesson | Current Lesson | Next Lesson |
+| Lección Anterior | Lección Actual | Próxima Lección |
 |---|---|---|
-| L3: Transparency (explaining models) | L4: Privacy and Data Protection (protecting data) | L5: Social Impact of AI (broader societal effects) |
+| L3: Transparencia (explicar modelos) | L4: Privacidad y Protección de Datos (proteger datos) | L5: Impacto Social de la IA (efectos sociales más amplios) |
 
-## Theory
+## Teoría
 
-### Data Privacy Principles
+### Principios de Privacidad de Datos
 
-The core principles of data privacy, as reflected in regulations worldwide:
+Los principios centrales de privacidad de datos, según lo reflejado en regulaciones mundiales:
 
-1. **Lawfulness, fairness, and transparency:** Data must be collected and processed lawfully, fairly, and transparently.
-2. **Purpose limitation:** Data should only be collected for specified, explicit, and legitimate purposes.
-3. **Data minimization:** Only collect data that is necessary for the purpose.
-4. **Accuracy:** Data should be accurate and kept up to date.
-5. **Storage limitation:** Data should not be kept longer than necessary.
-6. **Integrity and confidentiality:** Data should be processed securely.
-7. **Accountability:** The data controller is responsible for compliance.
+1. **Licitud, equidad y transparencia:** Los datos deben recolectarse y procesarse de manera lícita, equitativa y transparente.
+2. **Limitación de la finalidad:** Los datos solo deben recolectarse para fines específicos, explícitos y legítimos.
+3. **Minimización de datos:** Solo recolectar los datos necesarios para la finalidad.
+4. **Precisión:** Los datos deben ser precisos y mantenerse actualizados.
+5. **Limitación del almacenamiento:** Los datos no deben conservarse más tiempo del necesario.
+6. **Integridad y confidencialidad:** Los datos deben procesarse de forma segura.
+7. **Responsabilidad:** El responsable del tratamiento de datos es responsable del cumplimiento.
 
-These principles have direct implications for ML:
+Estos principios tienen implicaciones directas para el ML:
 
-- **Purpose limitation:** A model trained for diagnostic purposes should not be repurposed for insurance risk assessment without new consent.
-- **Data minimization:** Collecting every possible feature "just in case" violates data minimization.
-- **Storage limitation:** Training data should be deleted when no longer needed.
+- **Limitación de la finalidad:** Un modelo entrenado para fines de diagnóstico no debería reutilizarse para evaluación de riesgos de seguros sin nuevo consentimiento.
+- **Minimización de datos:** Recolectar cada característica posible "por si acaso" viola la minimización de datos.
+- **Limitación del almacenamiento:** Los datos de entrenamiento deberían eliminarse cuando ya no sean necesarios.
 
-### GDPR (General Data Protection Regulation)
+### GDPR (Reglamento General de Protección de Datos)
 
-The GDPR, effective 2018 in the EU, is the most influential data protection regulation globally. Key provisions for AI:
+El GDPR, vigente desde 2018 en la UE, es la regulación de protección de datos más influyente a nivel global. Disposiciones clave para IA:
 
-| Article | Requirement | ML Implication |
-|---------|-------------|----------------|
-| Art. 5 | Lawfulness, fairness, transparency | Document data processing for ML |
-| Art. 6 | Legal basis for processing | Obtain consent or legitimate interest basis |
-| Art. 9 | Special categories (health, race, etc.) | Prohibited unless explicit consent or substantial public interest |
-| Art. 15 | Right of access | Individuals can request their data |
-| Art. 17 | Right to erasure ("right to be forgotten") | May require model retraining without a person's data |
-| Art. 22 | Automated individual decision-making | Right not to be subject to solely automated decisions with legal effects |
+| Artículo | Requisito | Implicación para ML |
+|----------|-----------|---------------------|
+| Art. 5 | Licitud, equidad, transparencia | Documentar el procesamiento de datos para ML |
+| Art. 6 | Base legal para el procesamiento | Obtener consentimiento o base de interés legítimo |
+| Art. 9 | Categorías especiales (salud, raza, etc.) | Prohibido salvo consentimiento explícito o interés público sustancial |
+| Art. 15 | Derecho de acceso | Las personas pueden solicitar sus datos |
+| Art. 17 | Derecho al olvido | Puede requerir reentrenar el modelo sin los datos de una persona |
+| Art. 22 | Decisiones individuales automatizadas | Derecho a no estar sujeto a decisiones totalmente automatizadas con efectos legales |
 
-### HIPAA (Health Insurance Portability and Accountability Act)
+### HIPAA (Ley de Portabilidad y Responsabilidad de Seguros de Salud)
 
-HIPAA governs protected health information (PHI) in the US. Key implications for ML:
+HIPAA regula la información médica protegida (PHI) en EE.UU. Implicaciones clave para ML:
 
-- **De-identification:** PHI must be de-identified before use in research or ML.
-- **Safe harbor method:** Remove 18 specific identifiers (names, SSN, dates, etc.).
-- **Expert determination:** An expert certifies that re-identification risk is very small.
-- **Business associate agreements:** Cloud ML platforms must sign BAAs.
+- **Desidentificación:** La PHI debe desidentificarse antes de su uso en investigación o ML.
+- **Método de puerto seguro:** Eliminar 18 identificadores específicos (nombres, SSN, fechas, etc.).
+- **Determinación de experto:** Un experto certifica que el riesgo de reidentificación es muy pequeño.
+- **Acuerdos de asociados comerciales:** Las plataformas de ML en la nube deben firmar BAAs.
 
-### Anonymization vs. Pseudonymization
+### Anonimización vs. Seudonimización
 
-| Technique | Definition | Re-identification Risk |
-|-----------|------------|----------------------|
-| **Anonymization** | Irreversibly removing identifying information | Low (if done correctly) |
-| **Pseudonymization** | Replacing identifiers with pseudonyms | Higher (can be reversed with additional data) |
-| **Aggregation** | Reporting group statistics instead of individual data | Low (but can leak information with small groups) |
+| Técnica | Definición | Riesgo de Reidentificación |
+|---------|------------|---------------------------|
+| **Anonimización** | Eliminar irreversiblemente la información identificatoria | Bajo (si se hace correctamente) |
+| **Seudonimización** | Reemplazar identificadores con seudónimos | Más alto (puede revertirse con datos adicionales) |
+| **Agregación** | Reportar estadísticas grupales en lugar de datos individuales | Bajo (pero puede filtrar información con grupos pequeños) |
 
-**Critical point:** True anonymization is extremely difficult with high-dimensional data. A dataset with 15 demographic attributes can uniquely identify 99.96% of US residents (Sweeney, 2000). Simply removing names and SSNs is insufficient.
+**Punto crítico:** La anonimización verdadera es extremadamente difícil con datos de alta dimensionalidad. Un conjunto de datos con 15 atributos demográficos puede identificar de manera única al 99.96% de los residentes de EE.UU. (Sweeney, 2000). Simplemente eliminar nombres y SSNs es insuficiente.
 
-### Differential Privacy
+### Privacidad Diferencial
 
-Differential privacy provides a mathematical guarantee that the output of a computation does not reveal whether any individual's data was included in the dataset.
+La privacidad diferencial proporciona una garantía matemática de que la salida de un cómputo no revela si los datos de un individuo en particular estaban incluidos en el conjunto de datos.
 
-**Intuition:** If a model's predictions change very little when we add or remove any single person's data, then we cannot infer much about that person from the model.
+**Intuición:** Si las predicciones de un modelo cambian muy poco cuando agregamos o eliminamos los datos de una persona, entonces no podemos inferir mucho sobre esa persona a partir del modelo.
 
-**Formal definition:**
+**Definición formal:**
 
-A randomized mechanism $\mathcal{M}$ satisfies $\epsilon$-differential privacy if for any two datasets $D$ and $D'$ that differ by one record, and for any set of outcomes $S$:
+Un mecanismo aleatorizado $\mathcal{M}$ satisface $\epsilon$-privacidad diferencial si para cualquier par de conjuntos de datos $D$ y $D'$ que difieren en un registro, y para cualquier conjunto de resultados $S$:
 
 $$P(\mathcal{M}(D) \in S) \leq e^\epsilon \cdot P(\mathcal{M}(D') \in S)$$
 
-where $\epsilon$ (epsilon) is the privacy budget. Smaller $\epsilon$ means stronger privacy.
+donde $\epsilon$ (épsilon) es el presupuesto de privacidad. Un $\epsilon$ más pequeño significa mayor privacidad.
 
-#### The Laplace Mechanism
+#### El Mecanismo de Laplace
 
-The simplest mechanism for achieving differential privacy: add noise drawn from a Laplace distribution to the output.
+El mecanismo más simple para lograr privacidad diferencial: agregar ruido extraído de una distribución de Laplace a la salida.
 
 $$\mathcal{M}(x) = f(x) + \text{Lap}\left(\frac{\Delta f}{\epsilon}\right)$$
 
-where $\Delta f$ is the sensitivity of function $f$ (the maximum change in $f$ when one record is modified).
+donde $\Delta f$ es la sensibilidad de la función $f$ (el cambio máximo en $f$ cuando se modifica un registro).
 
-#### Privacy Budget
+#### Presupuesto de Privacidad
 
-- $\epsilon = 0.01$: Very strong privacy (high noise)
-- $\epsilon = 1$: Moderate privacy
-- $\epsilon = 10$: Weak privacy (low noise)
-- Multiple queries consume the budget cumulatively
+- $\epsilon = 0.01$: Privacidad muy fuerte (ruido alto)
+- $\epsilon = 1$: Privacidad moderada
+- $\epsilon = 10$: Privacidad débil (ruido bajo)
+- Múltiples consultas consumen el presupuesto de forma acumulativa
 
-### Privacy Attacks on ML Models
+### Ataques de Privacidad a Modelos de ML
 
-| Attack | Goal | Method |
-|--------|------|--------|
-| **Membership inference** | Determine if a specific record was in training data | Compare model confidence on known vs. held-out data |
-| **Model inversion** | Reconstruct training data features from the model | Optimize input to maximize class confidence |
-| **Attribute inference** | Infer sensitive attributes from model predictions | Use model outputs to predict unknown attributes |
+| Ataque | Objetivo | Método |
+|--------|----------|--------|
+| **Inferencia de pertenencia** | Determinar si un registro específico estaba en los datos de entrenamiento | Comparar la confianza del modelo en datos conocidos vs. no vistos |
+| **Inversión de modelo** | Reconstruir características de datos de entrenamiento a partir del modelo | Optimizar entrada para maximizar la confianza de clase |
+| **Inferencia de atributos** | Inferir atributos sensibles a partir de predicciones del modelo | Usar salidas del modelo para predecir atributos desconocidos |
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Implementing Differential Privacy with the Laplace Mechanism
+### Implementar Privacidad Diferencial con el Mecanismo de Laplace
 
 ```python
 import numpy as np
@@ -164,102 +164,102 @@ for eps in epsilon_values:
     print(f"epsilon={eps:.2f}: private mean = {private_mean:.2f} (error={abs(private_mean-real_mean):.2f})")
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### Privacy in Genomic Data
+### Privacidad en Datos Genómicos
 
-Genomic data is the ultimate personal identifier — it cannot be changed, and it identifies not just the individual but their relatives. Sharing genomic data for ML research requires extreme privacy protection.
+Los datos genómicos son el identificador personal definitivo — no pueden cambiarse, e identifican no solo al individuo sino también a sus familiares. Compartir datos genómicos para investigación en ML requiere una protección de privacidad extrema.
 
-**Differential privacy for GWAS:** Genome-wide association studies (GWAS) can leak information about individual participants. Applying differential privacy to summary statistics (e.g., allele frequencies) prevents attackers from determining whether a specific person was in the study.
+**Privacidad diferencial para GWAS:** Los estudios de asociación del genoma completo (GWAS) pueden filtrar información sobre participantes individuales. Aplicar privacidad diferencial a las estadísticas resumidas (ej., frecuencias alélicas) evita que atacantes determinen si una persona específica estaba en el estudio.
 
-**Challenge:** Differential privacy adds noise. For genomic signals, the noise can obscure real biological associations. Researchers must carefully balance privacy and utility.
+**Desafío:** La privacidad diferencial agrega ruido. Para señales genómicas, el ruido puede oscurecer asociaciones biológicas reales. Los investigadores deben equilibrar cuidadosamente privacidad y utilidad.
 
-## SaaS Example
+## Ejemplo SaaS
 
-### Privacy-Preserving Analytics
+### Analítica con Preservación de Privacidad
 
-A SaaS analytics platform collects user behavior data to provide product insights. To protect user privacy while maintaining utility:
+Una plataforma SaaS de analítica recolecta datos de comportamiento de usuarios para proporcionar información sobre productos. Para proteger la privacidad del usuario manteniendo la utilidad:
 
-1. **Aggregation:** Report metrics at cohort level, not individual.
-2. **k-anonymity:** Ensure each reported group has at least k users.
-3. **Differential privacy:** Add calibrated noise to dashboard metrics.
-4. **Data retention:** Automatically delete raw events after 90 days.
+1. **Agregación:** Reportar métricas a nivel de cohorte, no individual.
+2. **k-anonimato:** Asegurar que cada grupo reportado tenga al menos k usuarios.
+3. **Privacidad diferencial:** Agregar ruido calibrado a las métricas del panel.
+4. **Retención de datos:** Eliminar automáticamente los eventos sin procesar después de 90 días.
 
-GDPR requires that EU user data be processed lawfully. The platform must provide:
-- Clear privacy notice
-- Opt-out mechanism
-- Data export and deletion capabilities
-- Data Processing Agreement (DPA) with customers
+El GDPR exige que los datos de usuarios de la UE se procesen de manera lícita. La plataforma debe proporcionar:
+- Aviso de privacidad claro
+- Mecanismo de exclusión voluntaria
+- Capacidades de exportación y eliminación de datos
+- Acuerdo de Procesamiento de Datos (DPA) con los clientes
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Anonymization is not just removing names.** High-dimensional data can be re-identified with auxiliary information.
-2. **Differential privacy is not a silver bullet.** It does not prevent all privacy attacks; it bounds the information leakage.
-3. **Consent is not a one-time event.** GDPR requires granular, withdrawable consent for each processing purpose.
-4. **Privacy is not security.** Encryption protects data during transit/storage but does not prevent the model from leaking information.
-5. **Ignoring privacy during model deployment.** Privacy risks exist after deployment (membership inference attacks on APIs).
+1. **Anonimizar no es solo eliminar nombres.** Los datos de alta dimensionalidad pueden reidentificarse con información auxiliar.
+2. **La privacidad diferencial no es una bala de plata.** No previene todos los ataques de privacidad; acota la fuga de información.
+3. **El consentimiento no es un evento único.** El GDPR requiere consentimiento granular y revocable para cada finalidad de procesamiento.
+4. **La privacidad no es seguridad.** El cifrado protege los datos durante el transporte/almacenamiento pero no evita que el modelo filtre información.
+5. **Ignorar la privacidad durante el despliegue del modelo.** Los riesgos de privacidad existen después del despliegue (ataques de inferencia de pertenencia en APIs).
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Minimize data collection.** Only collect features you need.
-2. **Use differential privacy** for releasing model parameters or summary statistics.
-3. **Implement access controls** and audit logging for training data.
-4. **Conduct privacy impact assessments** before training models on sensitive data.
-5. **Plan for data deletion.** If a user requests erasure, can you retrain without their data?
+1. **Minimizar la recolección de datos.** Solo recolectar las características que necesitás.
+2. **Usar privacidad diferencial** para publicar parámetros de modelos o estadísticas resumidas.
+3. **Implementar controles de acceso** y registro de auditoría para los datos de entrenamiento.
+4. **Realizar evaluaciones de impacto de privacidad** antes de entrenar modelos con datos sensibles.
+5. **Planificar la eliminación de datos.** Si un usuario solicita el borrado, ¿podés reentrenar sin sus datos?
 
-## Summary
+## Resumen
 
-- Data privacy is governed by principles of lawfulness, minimization, and accountability.
-- GDPR provides a comprehensive framework with specific implications for ML.
-- HIPAA governs health data; de-identification is required before ML use.
-- Anonymization is difficult; differential privacy provides formal guarantees.
-- Privacy attacks (membership inference, model inversion) target trained models.
-- Privacy must be considered throughout the ML lifecycle.
+- La privacidad de datos se rige por principios de licitud, minimización y responsabilidad.
+- El GDPR proporciona un marco integral con implicaciones específicas para ML.
+- HIPAA regula los datos de salud; se requiere desidentificación antes de usar en ML.
+- La anonimización es difícil; la privacidad diferencial proporciona garantías formales.
+- Los ataques de privacidad (inferencia de pertenencia, inversión de modelo) apuntan a modelos entrenados.
+- La privacidad debe considerarse a lo largo de todo el ciclo de vida del ML.
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| GDPR | General Data Protection Regulation (EU) — comprehensive data protection law |
-| HIPAA | Health Insurance Portability and Accountability Act (US) — health data protection |
-| Anonymization | Irreversible removal of identifying information from data |
-| Pseudonymization | Replacement of identifiers with pseudonyms |
-| Differential privacy | Mathematical framework guaranteeing that algorithm outputs do not reveal individual data |
-| Epsilon (privacy budget) | Parameter controlling the strength of differential privacy |
-| Laplace mechanism | Method for achieving differential privacy by adding Laplace noise |
-| Membership inference | Attack to determine if a specific record was in the training data |
-| Model inversion | Attack to reconstruct training data from model parameters |
-| k-anonymity | Property that each record is indistinguishable from at least k-1 others |
+| Término | Definición |
+|---------|------------|
+| GDPR | Reglamento General de Protección de Datos (UE) — ley integral de protección de datos |
+| HIPAA | Ley de Portabilidad y Responsabilidad de Seguros de Salud (EE.UU.) — protección de datos de salud |
+| Anonimización | Eliminación irreversible de información identificatoria de los datos |
+| Seudonimización | Reemplazo de identificadores con seudónimos |
+| Privacidad diferencial | Marco matemático que garantiza que las salidas del algoritmo no revelen datos individuales |
+| Épsilon (presupuesto de privacidad) | Parámetro que controla la fortaleza de la privacidad diferencial |
+| Mecanismo de Laplace | Método para lograr privacidad diferencial agregando ruido Laplace |
+| Inferencia de pertenencia | Ataque para determinar si un registro específico estaba en los datos de entrenamiento |
+| Inversión de modelo | Ataque para reconstruir datos de entrenamiento a partir de parámetros del modelo |
+| k-anonimato | Propiedad por la cual cada registro es indistinguible de al menos k-1 otros |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. List the seven data privacy principles. Which three are most relevant to ML? Why?
-2. What is the difference between anonymization and pseudonymization? Give an example of each.
+1. Enumerá los siete principios de privacidad de datos. ¿Cuáles tres son más relevantes para ML? ¿Por qué?
+2. ¿Cuál es la diferencia entre anonimización y seudonimización? Dá un ejemplo de cada una.
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-3. Implement the Laplace mechanism for releasing the median of a dataset. Compare the noise needed for the median vs. the mean (median has lower sensitivity).
-4. Simulate a membership inference attack: train two models (one with and one without a specific record), compute the model's confidence on that record, and show the difference.
+3. Implementá el mecanismo de Laplace para publicar la mediana de un conjunto de datos. Compará el ruido necesario para la mediana vs. la media (la mediana tiene menor sensibilidad).
+4. Simulá un ataque de inferencia de pertenencia: entrená dos modelos (uno con y otro sin un registro específico), calculá la confianza del modelo en ese registro y mostrá la diferencia.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. A hospital wants to share patient data for ML research. They remove names, SSNs, and dates. Is this sufficient? What other re-identification risks exist?
-6. The "right to erasure" (GDPR Art. 17) conflicts with ML models that have already learned from a person's data. Is it sufficient to delete the raw data? If not, what should happen to the model? Discuss the practical challenges.
+5. Un hospital quiere compartir datos de pacientes para investigación en ML. Eliminan nombres, SSNs y fechas. ¿Es esto suficiente? ¿Qué otros riesgos de reidentificación existen?
+6. El "derecho al olvido" (GDPR Art. 17) entra en conflicto con modelos de ML que ya han aprendido de los datos de una persona. ¿Es suficiente eliminar los datos sin procesar? Si no, ¿qué debería pasar con el modelo? Discutí los desafíos prácticos.
 
-## Coding Challenge
+## Desafío de Programación
 
-Implement a differentially private mean release function. Write a script that:
-1. Generates a synthetic dataset of salaries
-2. Computes the true mean
-3. Applies the Laplace mechanism with epsilon = [0.1, 0.5, 1, 5]
-4. Runs 1000 trials for each epsilon
-5. Plots the distribution of private means vs. the true mean
-6. Reports the mean absolute error for each epsilon
-7. Also plots the privacy-utility trade-off curve
+Implementá una función de publicación de media con privacidad diferencial. Escribí un script que:
+1. Genere un conjunto de datos sintético de salarios
+2. Calcule la media verdadera
+3. Aplique el mecanismo de Laplace con epsilon = [0.1, 0.5, 1, 5]
+4. Ejecute 1000 pruebas por cada epsilon
+5. Grafique la distribución de medias privadas vs. la media verdadera
+6. Reporte el error absoluto medio para cada epsilon
+7. También grafique la curva de compensación privacidad-utilidad
 
-## References
+## Referencias
 
 Dwork, C., & Roth, A. (2014). The algorithmic foundations of differential privacy. *Foundations and Trends in Theoretical Computer Science*, 9(3–4), 211–407. https://doi.org/10.1561/0400000042
 

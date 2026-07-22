@@ -1,83 +1,83 @@
 ---
 Module: 4
 Lesson Number: 5
-Lesson Title: Random Forest
-Estimated Duration: 75 minutes
-Prerequisites: L4 (Decision Trees)
+Lesson Title: Bosque Aleatorio
+Estimated Duration: 75 minutos
+Prerequisites: L4 (Árboles de Decisión)
 Learning Objectives:
-  - Explain how bagging reduces variance in ensemble models
-  - Train and evaluate Random Forest classifiers with scikit-learn
-  - Compute and interpret feature importance from Random Forests
-  - Compare Random Forest performance to single decision trees
-  - Tune Random Forest hyperparameters
-Keywords: random forest, ensemble, bagging, bootstrap, feature importance, out-of-bag
-Difficulty: Intermediate
+  - Explicar cómo el bagging reduce la varianza en modelos ensemble
+  - Entrenar y evaluar clasificadores de Bosque Aleatorio con scikit-learn
+  - Calcular e interpretar la importancia de características de Bosques Aleatorios
+  - Comparar el rendimiento del Bosque Aleatorio con árboles de decisión individuales
+  - Ajustar hiperparámetros del Bosque Aleatorio
+Keywords: bosque aleatorio, ensemble, bagging, bootstrap, importancia de características, out-of-bag
+Difficulty: Intermedio
 Programming Concepts: sklearn.ensemble.RandomForestClassifier, n_estimators, oob_score
-Mathematical Concepts: bagging, bootstrap sampling, majority voting
-Machine Learning Concepts: ensemble learning, variance reduction, feature importance
+Mathematical Concepts: bagging, muestreo bootstrap, votación mayoritaria
+Machine Learning Concepts: aprendizaje ensemble, reducción de varianza, importancia de características
 Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Random Forest
+# Bosque Aleatorio
 
-## Motivation
+## Motivación
 
-A single decision tree overfits easily and is unstable — small data changes produce very different trees. But if you ask 100 doctors to diagnose a patient and take a vote, the collective diagnosis is more reliable than any single doctor. This is the core idea of Random Forest: build many trees and average their predictions. Random Forest is one of the most widely used algorithms in both biotech (genomics, drug discovery) and SaaS (fraud detection, churn prediction).
+Un solo árbol de decisión se sobreajusta fácilmente y es inestable — pequeños cambios en los datos producen árboles muy diferentes. Pero si le pedís a 100 médicos que diagnostiquen un paciente y tomás una votación, el diagnóstico colectivo es más confiable que el de cualquier médico individual. Esta es la idea central del Bosque Aleatorio: construir muchos árboles y promediar sus predicciones. El Bosque Aleatorio es uno de los algoritmos más utilizados tanto en biotecnología (genómica, descubrimiento de fármacos) como en SaaS (detección de fraude, predicción de abandono).
 
-## Big Picture
+## Panorama general
 
-**Previous:** Decision Trees were interpretable but unstable. **This lesson:** Random Forests solve instability by averaging many trees. **Next:** K-Means Clustering — moving from supervised to unsupervised learning.
+**Anterior:** Los árboles de decisión eran interpretables pero inestables. **Esta lección:** Los Bosques Aleatorios solucionan la inestabilidad promediando muchos árboles. **Siguiente:** Clustering K-Means — pasando de aprendizaje supervisado a no supervisado.
 
-## Theory
+## Teoría
 
-### Ensemble Learning
+### Aprendizaje Ensemble
 
-Ensemble methods combine multiple models to produce better predictions. The key insight: diverse models make different errors, and averaging reduces those errors.
+Los métodos ensemble combinan múltiples modelos para producir mejores predicciones. La idea clave: modelos diversos cometen errores diferentes, y promediarlos reduce esos errores.
 
 ### Bagging (Bootstrap Aggregating)
 
-1. Create $B$ bootstrap samples (samples with replacement) from training data
-2. Train a decision tree on each bootstrap sample
-3. Average predictions (regression) or majority vote (classification)
+1. Creá $B$ muestras bootstrap (muestreo con reemplazo) a partir de los datos de entrenamiento
+2. Entrená un árbol de decisión en cada muestra bootstrap
+3. Promediá las predicciones (regresión) o votación mayoritaria (clasificación)
 
-**Why it works:** Each tree has high variance but low bias. Averaging $B$ trees reduces variance by approximately $1/B$ without increasing bias.
+**Por qué funciona:** Cada árbol tiene varianza alta pero sesgo bajo. Promediar $B$ árboles reduce la varianza aproximadamente en $1/B$ sin aumentar el sesgo.
 
-### Random Forest = Bagging + Feature Randomness
+### Bosque Aleatorio = Bagging + Aleatoriedad de Características
 
-Random Forest adds an extra source of diversity: at each split, only a random subset of features is considered. This decorrelates the trees further.
+El Bosque Aleatorio agrega una fuente extra de diversidad: en cada división, solo se considera un subconjunto aleatorio de características. Esto descorrelaciona aún más los árboles.
 
-- For classification: typically $\sqrt{p}$ features
-- For regression: typically $p/3$ features
+- Para clasificación: típicamente $\sqrt{p}$ características
+- Para regresión: típicamente $p/3$ características
 
-### Out-of-Bag (OOB) Evaluation
+### Evaluación Out-of-Bag (OOB)
 
-Each bootstrap sample excludes ~37% of samples. These out-of-bag samples can be used as a built-in validation set without needing a separate train/validation split.
+Cada muestra bootstrap excluye ~37% de las muestras. Estas muestras out-of-bag se pueden usar como un conjunto de validación incorporado sin necesidad de una división train/validation separada.
 
-### Feature Importance
+### Importancia de características
 
-Random Forest provides two types:
+El Bosque Aleatorio provee dos tipos:
 
-1. **Impurity-based importance:** sum of impurity reduction across all splits for each feature
-2. **Permutation importance:** decrease in model performance when a feature's values are shuffled
+1. **Importancia basada en impureza:** suma de la reducción de impureza en todas las divisiones para cada característica
+2. **Importancia por permutación:** disminución en el rendimiento del modelo cuando los valores de una característica se mezclan aleatoriamente
 
-## Mathematical Foundation
+## Fundamento matemático
 
-### Bootstrap Variance Reduction
+### Reducción de varianza con bootstrap
 
-Let $\hat{f}_b(x)$ be the prediction from tree $b$. The ensemble prediction:
+Sea $\hat{f}_b(x)$ la predicción del árbol $b$. La predicción del ensemble:
 
 $$\hat{f}_{\text{rf}}(x) = \frac{1}{B}\sum_{b=1}^{B} \hat{f}_b(x)$$
 
-If each tree has variance $\sigma^2$ and pairwise correlation $\rho$:
+Si cada árbol tiene varianza $\sigma^2$ y correlación pairwise $\rho$:
 
 $$\text{Var}(\hat{f}_{\text{rf}}) = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2$$
 
-As $B \to \infty$, variance approaches $\rho\sigma^2$. Feature randomness reduces $\rho$, making the ensemble more effective.
+A medida que $B \to \infty$, la varianza se acerca a $\rho\sigma^2$. La aleatoriedad de características reduce $\rho$, haciendo el ensemble más efectivo.
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -109,7 +109,7 @@ plt.savefig('figures/tree_vs_forest_boundary.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import pandas as pd
@@ -145,17 +145,17 @@ print("\nTop 5 features:")
 print(importance.head(5).to_string(index=False))
 ```
 
-## Walkthrough Example: Breast Cancer with Random Forest
+## Ejemplo guiado: Cáncer de mama con Bosque Aleatorio
 
-**Comparing tree vs. forest:**
-- Single tree (depth 5): Test ~93%
-- Random Forest (100 trees, depth 5): Test ~97%
+**Comparando árbol vs. bosque:**
+- Árbol individual (profundidad 5): Prueba ~93%
+- Bosque Aleatorio (100 árboles, profundidad 5): Prueba ~97%
 
-**Why?** The forest averages many trees, reducing variance. Some trees might overfit specific patterns, but the majority vote corrects individual errors.
+**¿Por qué?** El bosque promedia muchos árboles, reduciendo la varianza. Algunos árboles podrían sobreajustar patrones específicos, pero la votación mayoritaria corrige errores individuales.
 
-**OOB score:** ~95% — close to test score, confirming OOB is a reliable validation proxy.
+**Puntaje OOB:** ~95% — cercano al puntaje de prueba, confirmando que OOB es un proxy de validación confiable.
 
-## Biotechnology Example: Gene Expression Classification
+## Ejemplo en biotecnología: Clasificación de expresión génica
 
 ```python
 np.random.seed(42)
@@ -179,9 +179,9 @@ gene_importance = pd.DataFrame({
 print(gene_importance.to_string(index=False))
 ```
 
-**Interpretation:** The model identifies gene 0, 50, and 200 as most predictive — matching the synthetic data generation.
+**Interpretación:** El modelo identifica los genes 0, 50 y 200 como los más predictivos — coincidiendo con la generación de datos sintéticos.
 
-## SaaS Example: Fraud Detection
+## Ejemplo en SaaS: Detección de fraude
 
 ```python
 np.random.seed(42)
@@ -214,49 +214,49 @@ print(f"Recall: {recall_score(y_f, rf.predict(X_f)):.3f}")
 print(f"Precision: {precision_score(y_f, rf.predict(X_f)):.3f}")
 ```
 
-## Common Mistakes
+## Errores comunes
 
-1. **Too few trees** — start with 100, increase until OOB error stabilizes.
-2. **No depth limit** — even in forests, very deep trees can overfit on small datasets.
-3. **Ignoring class_weight** — for imbalanced data, set `class_weight='balanced'`.
-4. **Using impurity importance blindly** — for high-cardinality features, permutation importance is more reliable.
+1. **Muy pocos árboles** — empezá con 100, aumentá hasta que el error OOB se estabilice.
+2. **Sin límite de profundidad** — incluso en bosques, árboles muy profundos pueden sobreajustar en conjuntos pequeños.
+3. **Ignorar class_weight** — para datos desbalanceados, configurá `class_weight='balanced'`.
+4. **Usar importancia por impureza a ciegas** — para características de alta cardinalidad, la importancia por permutación es más confiable.
 
-## Best Practices
+## Buenas prácticas
 
-- Use OOB score as a free validation metric
-- Start with `n_estimators=100` and increase until OOB error plateaus
-- Limit `max_depth` or set `min_samples_leaf` to control tree complexity
-- Compare with a single tree to measure ensemble benefit
-- Use permutation importance for final feature selection
+- Usá el puntaje OOB como métrica de validación gratuita
+- Empezá con `n_estimators=100` y aumentá hasta que el error OOB se estabilice
+- Limitá `max_depth` o configurá `min_samples_leaf` para controlar la complejidad del árbol
+- Compará con un árbol individual para medir el beneficio del ensemble
+- Usá importancia por permutación para la selección final de características
 
-## Summary
+## Resumen
 
-- Random Forest averages many trees to reduce variance
-- Bagging creates diverse trees via bootstrap sampling
-- Feature randomness decorrelates trees further
-- OOB evaluation provides free validation
-- Feature importance identifies key predictors
-- RF is robust, accurate, and widely applicable
+- El Bosque Aleatorio promedia muchos árboles para reducir la varianza
+- El bagging crea árboles diversos mediante muestreo bootstrap
+- La aleatoriedad de características descorrelaciona aún más los árboles
+- La evaluación OOB provee validación gratuita
+- La importancia de características identifica predictores clave
+- RF es robusto, preciso y ampliamente aplicable
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Ensemble | Combining multiple models |
-| Bagging | Bootstrap + Aggregation |
-| Bootstrap | Sampling with replacement |
-| OOB | Out-of-bag samples for validation |
-| Feature importance | Measure of each feature's contribution |
-| n_estimators | Number of trees in the forest |
+| Término | Definición |
+|---------|------------|
+| Ensemble | Combinación de múltiples modelos |
+| Bagging | Bootstrap + Agregación |
+| Bootstrap | Muestreo con reemplazo |
+| OOB | Muestras out-of-bag para validación |
+| Importancia de características | Medida de la contribución de cada característica |
+| n_estimators | Cantidad de árboles en el bosque |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** Explain why bagging reduces variance compared to a single tree.
+**Nivel 1 — Básico:** Explicá por qué el bagging reduce la varianza comparado con un árbol individual.
 
-**Level 2 — Implementation:** Train a Random Forest on the breast cancer dataset with `n_estimators=[10, 50, 100, 200]`. Plot OOB score vs. n_estimators. At what point do returns diminish?
+**Nivel 2 — Implementación:** Entrená un Bosque Aleatorio en el dataset breast cancer con `n_estimators=[10, 50, 100, 200]`. Graficá el puntaje OOB vs. n_estimators. ¿En qué punto disminuyen los retornos?
 
-**Level 3 — Critical Thinking:** Your Random Forest achieves 99.5% training accuracy but 88% test accuracy. The single tree achieves 94% training and 90% test. What is happening and how would you fix the forest?
+**Nivel 3 — Pensamiento crítico:** Tu Bosque Aleatorio alcanza 99.5% de precisión en entrenamiento pero 88% en prueba. El árbol individual alcanza 94% en entrenamiento y 90% en prueba. ¿Qué está pasando y cómo arreglarías el bosque?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `tune_random_forest(X_train, y_train, X_val, y_val)` that performs a grid search over `n_estimators` (50, 100, 200) and `max_depth` (3, 5, 10, None) and returns the best model and its validation accuracy.
+Escribí una función `tune_random_forest(X_train, y_train, X_val, y_val)` que realice una búsqueda en grilla sobre `n_estimators` (50, 100, 200) y `max_depth` (3, 5, 10, None) y devuelva el mejor modelo y su precisión en validación.

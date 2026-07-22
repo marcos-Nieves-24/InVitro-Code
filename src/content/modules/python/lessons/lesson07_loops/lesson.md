@@ -1,48 +1,48 @@
 ---
 Module: 2
 Lesson Number: 7
-Lesson Title: Loops
-Estimated Duration: 60 minutes
-Prerequisites: L6 — Functions
+Lesson Title: Bucles
+Estimated Duration: 60 minutos
+Prerequisites: L6 — Funciones
 Learning Objectives:
-  - Use for loops to iterate over sequences
-  - Use while loops for conditional iteration
-  - Use range() to generate numeric sequences
-  - Control loop flow with break and continue
-  - Write nested loops for multi-dimensional data
-Keywords: for, while, range, break, continue, nested loop, iteration
+  - Usar bucles for para iterar sobre secuencias
+  - Usar bucles while para iteración condicional
+  - Usar range() para generar secuencias numéricas
+  - Controlar el flujo de bucles con break y continue
+  - Escribir bucles anidados para datos multidimensionales
+Keywords: for, while, range, break, continue, bucle anidado, iteración
 Difficulty: Beginner
-Programming Concepts: Iteration, loop control, nested loops
+Programming Concepts: Iteración, control de bucles, bucles anidados
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Loops
+# Bucles
 
-## Motivation
+## Motivación
 
-Loops allow you to repeat operations efficiently. Instead of writing the same code for each item in a dataset, you write a loop that processes all items automatically. In biotechnology, loops process thousands of genes, DNA sequences, or patient records. In SaaS, they iterate over user transactions, log entries, and feature calculations. Without loops, data analysis at scale would be impossible.
+Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escribir el mismo código para cada elemento de un dataset, escribís un bucle que procesa todos los elementos automáticamente. En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes. En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características. Sin bucles, el análisis de datos a escala sería imposible.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned functions — reusable code blocks. Loops add repetition to your toolkit. Combined with conditionals (next lesson), loops enable you to build complex data processing pipelines. After this lesson, you will understand lists (Lesson 9) better because loops are the primary way to process list elements.
+En la lección anterior aprendiste funciones — bloques de código reutilizables. Los bucles agregan repetición a tu kit de herramientas. Combinados con condicionales (próxima lección), los bucles te permiten construir pipelines complejos de procesamiento de datos. Después de esta lección, vas a entender mejor las listas (Lección 9) porque los bucles son la forma principal de procesar elementos de una lista.
 
-## Theory
+## Teoría
 
-### The for Loop
+### El Bucle for
 
-The `for` loop iterates over a sequence (string, list, tuple, etc.):
+El bucle `for` itera sobre una secuencia (string, lista, tupla, etc.):
 
 ```python
 for variable in sequence:
-    pass  # code to repeat
+    pass  # código a repetir
 ```
 
-### The range() Function
+### La Función range()
 
-`range()` generates sequences of numbers:
+`range()` genera secuencias de números:
 
 ```python
 range(stop)       # 0, 1, 2, ..., stop-1
@@ -50,23 +50,23 @@ range(start, stop)  # start, start+1, ..., stop-1
 range(start, stop, step)  # start, start+step, ...
 ```
 
-### The while Loop
+### El Bucle while
 
-The `while` loop repeats as long as a condition is True:
+El bucle `while` se repite mientras una condición sea True:
 
 ```python
 while condition:
-    pass  # code to repeat
+    pass  # código a repetir
 ```
 
-### Break and Continue
+### Break y Continue
 
-- **break**: Exits the loop immediately
-- **continue**: Skips the rest of the current iteration, goes to the next
+- **break**: Sale del bucle inmediatamente
+- **continue**: Salta el resto de la iteración actual, pasa a la siguiente
 
-### Nested Loops
+### Bucles Anidados
 
-Loops inside loops — used for multi-dimensional data:
+Bucles dentro de bucles — se usan para datos multidimensionales:
 
 ```python
 for i in range(3):
@@ -74,69 +74,69 @@ for i in range(3):
         print(i, j)
 ```
 
-### The else Clause in Loops
+### La Cláusula else en Bucles
 
-Python loops can have an `else` clause that executes when the loop completes normally (no `break`):
+Los bucles de Python pueden tener una cláusula `else` que se ejecuta cuando el bucle termina normalmente (sin `break`):
 
 ```python
 for x in range(5):
     print(x)
 else:
-    print("Loop completed without break")
+    print("Bucle completado sin break")
 ```
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-For Loop Flow:
+Flujo del Bucle For:
 ┌─────────┐     ┌──────────────┐     ┌─────────┐
-│ Start   │ ──→ │ More items?  │ ──→ │ Execute │
-│         │     │ in sequence  │     │ Block   │
+│ Inicio  │ ──→ │ ¿Más items?  │ ──→ │ Ejecutar│
+│         │     │ en secuencia │     │ Bloque  │
 └─────────┘     └──────┬───────┘     └────┬────┘
-                       │ No               │ Yes
+                       │ No               │ Sí
                        ↓                  ↓
-                    ┌─────────┐          Next item
-                    │  Done   │
+                    ┌─────────┐          Siguiente
+                    │  Fin    │            item
                     └─────────┘
 
-While Loop Flow:
+Flujo del Bucle While:
 ┌─────────┐     ┌──────────┐     ┌─────────┐
-│ Start   │ ──→ │Condition?│ ──→ │ Execute │
-│         │     │          │     │ Block   │
+│ Inicio  │ ──→ │¿Condición?│ ──→ │ Ejecutar│
+│         │     │          │     │ Bloque  │
 └─────────┘     └────┬─────┘     └────┬────┘
                      │ False          │ True
                      ↓                ↓
-                  ┌─────────┐      Update
-                  │  Done   │    condition
+                  ┌─────────┐      Actualizar
+                  │  Fin    │    condición
                   └─────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
-# For loop with a list
+# For loop con una lista
 genes = ["BRCA1", "TP53", "EGFR", "MYC"]
 for gene in genes:
-    print(f"Analyzing {gene}...")
+    print(f"Analizando {gene}...")
 ```
 
 ```python
-# Range examples
+# Ejemplos de range
 for i in range(5):
     print(i, end=" ")
-# Output: 0 1 2 3 4
+# Salida: 0 1 2 3 4
 
 for i in range(2, 8):
     print(i, end=" ")
-# Output: 2 3 4 5 6 7
+# Salida: 2 3 4 5 6 7
 
 for i in range(0, 10, 2):
     print(i, end=" ")
-# Output: 0 2 4 6 8
+# Salida: 0 2 4 6 8
 ```
 
 ```python
-# While loop
+# Bucle while
 count = 0
 while count < 5:
     print(f"Count: {count}")
@@ -144,27 +144,27 @@ while count < 5:
 ```
 
 ```python
-# Break and continue
+# Break y continue
 for i in range(10):
     if i == 3:
-        continue  # skip 3
+        continue  # saltear el 3
     if i == 7:
-        break     # stop at 7
+        break     # parar en el 7
     print(i, end=" ")
-# Output: 0 1 2 4 5 6
+# Salida: 0 1 2 4 5 6
 ```
 
 ```python
-# Nested loops — multiplication table
+# Bucles anidados — tabla de multiplicar
 for i in range(1, 4):
     for j in range(1, 4):
         print(f"{i} × {j} = {i * j:2d}", end="  ")
     print()
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Processing a list of DNA sequences to find those with high GC content.
+**Escenario**: Procesando una lista de secuencias de ADN para encontrar aquellas con alto contenido GC.
 
 ```python
 sequences = [
@@ -180,33 +180,33 @@ for seq in sequences:
     gc = (seq.count("G") + seq.count("C")) / len(seq) * 100
     if gc > 50:
         high_gc.append(seq)
-        print(f"High GC: {seq} ({gc:.1f}%)")
+        print(f"Alto GC: {seq} ({gc:.1f}%)")
 
-print(f"\nFound {len(high_gc)} high-GC sequences")
+print(f"\nEncontradas {len(high_gc)} secuencias con alto GC")
 ```
 
 ```python
-# Using break to find a target sequence
+# Usando break para encontrar una secuencia objetivo
 target = "CGCGCGCGCGCG"
 for i, seq in enumerate(sequences):
     if seq == target:
-        print(f"Found target {target} at index {i}")
+        print(f"Objetivo {target} encontrado en índice {i}")
         break
 else:
-    print(f"Target {target} not found")
+    print(f"Objetivo {target} no encontrado")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Processing monthly transaction data for churn analysis.
+**Escenario**: Procesando datos mensuales de transacciones para análisis de churn.
 
 ```python
-# Simulated monthly user activity
+# Actividad de usuarios simulada mensualmente
 monthly_activity = [
-    {"month": "Jan", "active_users": 1200, "churned": 45},
+    {"month": "Ene", "active_users": 1200, "churned": 45},
     {"month": "Feb", "active_users": 1250, "churned": 38},
     {"month": "Mar", "active_users": 1300, "churned": 52},
-    {"month": "Apr", "active_users": 1280, "churned": 41},
+    {"month": "Abr", "active_users": 1280, "churned": 41},
     {"month": "May", "active_users": 1350, "churned": 35},
 ]
 
@@ -217,27 +217,27 @@ for month in monthly_activity:
     total_churned += month["churned"]
 
 print(f"\nTotal churned: {total_churned}")
-print(f"Avg monthly churn: {total_churned / len(monthly_activity):.0f}")
+print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Infinite while loops**: Forgetting to update the condition variable
-2. **Modifying a list while iterating**: Can cause skipped items or errors. Iterate over a copy instead
-3. **Off-by-one errors**: `range(n)` gives 0 to n-1, not 1 to n
-4. **Using `range(len(list))` instead of iterating directly**: Pythonic style prefers direct iteration
-5. **Forgetting colon and indentation**: Required syntax for loop blocks
+1. **Bucles while infinitos**: Olvidarse de actualizar la variable de condición
+2. **Modificar una lista mientras se itera**: Puede saltear elementos o causar errores. Iterá sobre una copia
+3. **Errores de off-by-one**: `range(n)` da de 0 a n-1, no de 1 a n
+4. **Usar `range(len(lista))` en lugar de iterar directamente**: El estilo pitónico prefiere la iteración directa
+5. **Olvidar los dos puntos y la indentación**: Sintaxis requerida para los bloques de bucle
 
-## Best Practices
+## Buenas Prácticas
 
-- Prefer `for` loops over `while` when iterating over sequences
-- Use `enumerate()` when you need both index and value
-- Use `zip()` to iterate over multiple sequences in parallel
-- Keep loop bodies short — extract complex logic into functions
-- Use descriptive loop variable names (not just `i`, `j` for complex cases)
+- Preferí bucles `for` sobre `while` cuando iteres sobre secuencias
+- Usá `enumerate()` cuando necesites tanto el índice como el valor
+- Usá `zip()` para iterar sobre múltiples secuencias en paralelo
+- Mantené los cuerpos de los bucles cortos — extraé lógica compleja a funciones
+- Usá nombres de variables de bucle descriptivos (no solo `i`, `j` para casos complejos)
 
 ```python
-# Pythonic patterns
+# Patrones pitónicos
 for i, gene in enumerate(genes):
     print(f"{i}: {gene}")
 
@@ -245,47 +245,47 @@ for gene, expression in zip(genes, expressions):
     print(f"{gene}: {expression}")
 ```
 
-## Summary
+## Resumen
 
-- `for` loops iterate over sequences (lists, strings, ranges)
-- `while` loops repeat while a condition is True
-- `range(start, stop, step)` generates number sequences
-- `break` exits the loop; `continue` skips to the next iteration
-- Nested loops handle multi-dimensional data
-- Loops can have `else` clauses that execute on normal completion
+- Los bucles `for` iteran sobre secuencias (listas, strings, ranges)
+- Los bucles `while` se repiten mientras una condición sea True
+- `range(start, stop, step)` genera secuencias numéricas
+- `break` sale del bucle; `continue` salta a la siguiente iteración
+- Los bucles anidados manejan datos multidimensionales
+- Los bucles pueden tener cláusulas `else` que se ejecutan al completarse normalmente
 
-## Key Terms
+## Términos Clave
 
-- **Iteration**: One execution of the loop body
-- **Iterable**: Object that can be looped over (list, str, range, etc.)
-- **Loop variable**: Variable that takes each value in the sequence
-- **Infinite loop**: Loop that never terminates
-- **Nested loop**: Loop inside another loop
-- **enumerate()**: Built-in that yields (index, value) pairs
+- **Iteración**: Una ejecución del cuerpo del bucle
+- **Iterable**: Objeto sobre el que se puede iterar (lista, str, range, etc.)
+- **Variable de bucle**: Variable que toma cada valor de la secuencia
+- **Bucle infinito**: Bucle que nunca termina
+- **Bucle anidado**: Bucle dentro de otro bucle
+- **enumerate()**: Función incorporada que produce pares (índice, valor)
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the output of `for i in range(3): print(i)`?
-2. What is the difference between `break` and `continue`?
-3. What happens if the condition in a `while` loop never becomes False?
+1. ¿Cuál es la salida de `for i in range(3): print(i)`?
+2. ¿Cuál es la diferencia entre `break` y `continue`?
+3. ¿Qué pasa si la condición en un bucle `while` nunca se vuelve False?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Write a for loop that calculates the sum of numbers from 1 to 100.
-5. Write a while loop that prints the Fibonacci sequence up to 100 (each number is the sum of the previous two: 0, 1, 1, 2, 3, 5, 8...).
+4. Escribí un bucle for que calcule la suma de los números del 1 al 100.
+5. Escribí un bucle while que imprima la secuencia de Fibonacci hasta 100 (cada número es la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8...).
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. Compare `for` loops and `while` loops. When would you choose one over the other?
-7. Why is modifying a list while iterating over it problematic? Show an example and the correct approach.
+6. Compará los bucles `for` y `while`. ¿Cuándo elegirías uno sobre el otro?
+7. ¿Por qué modificar una lista mientras se itera sobre ella es problemático? Mostrá un ejemplo y el enfoque correcto.
 
-## Coding Challenge
+## Desafío de Código
 
-Write a program that implements the **Sieve of Eratosthenes** to find all prime numbers up to a given limit `n`:
-1. Create a list of booleans from 0 to n, initially all True
-2. For each number from 2 to sqrt(n), mark multiples as False
-3. The remaining True indices are prime numbers
-4. Use nested loops and `break`/`continue` appropriately
-5. Print all primes found
+Escribí un programa que implemente la **Criba de Eratóstenes** para encontrar todos los números primos hasta un límite `n`:
+1. Creá una lista de booleanos de 0 a n, inicialmente todos True
+2. Para cada número del 2 a sqrt(n), marcá los múltiplos como False
+3. Los índices que quedan True son números primos
+4. Usá bucles anidados y `break`/`continue` apropiadamente
+5. Imprimí todos los primos encontrados

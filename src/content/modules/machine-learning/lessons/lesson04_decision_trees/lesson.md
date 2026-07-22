@@ -1,96 +1,96 @@
 ---
 Module: 4
 Lesson Number: 4
-Lesson Title: Decision Trees
-Estimated Duration: 75 minutes
-Prerequisites: L1 (ML Fundamentals)
+Lesson Title: Árboles de Decisión
+Estimated Duration: 75 minutos
+Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  - Explain how decision trees make predictions by recursive partitioning
-  - Describe Gini impurity and entropy as splitting criteria
-  - Train and visualize decision trees with scikit-learn
-  - Diagnose overfitting in decision trees and apply pruning
-  - Compare decision trees with linear models
-Keywords: decision tree, Gini impurity, entropy, information gain, pruning, overfitting
-Difficulty: Intermediate
+  - Explicar cómo los árboles de decisión hacen predicciones mediante particionamiento recursivo
+  - Describir la impureza de Gini y la entropía como criterios de división
+  - Entrenar y visualizar árboles de decisión con scikit-learn
+  - Diagnosticar sobreajuste en árboles de decisión y aplicar poda
+  - Comparar árboles de decisión con modelos lineales
+Keywords: árbol de decisión, impureza de Gini, entropía, ganancia de información, poda, sobreajuste
+Difficulty: Intermedio
 Programming Concepts: sklearn.tree.DecisionTreeClassifier, sklearn.tree.plot_tree
-Mathematical Concepts: Gini impurity, entropy, information gain
-Machine Learning Concepts: recursive partitioning, tree depth, pruning
+Mathematical Concepts: impureza de Gini, entropía, ganancia de información
+Machine Learning Concepts: particionamiento recursivo, profundidad del árbol, poda
 Datasets Used: iris, breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Decision Trees
+# Árboles de Decisión
 
-## Motivation
+## Motivación
 
-A doctor diagnoses patients by asking a series of questions: "Is the tumor larger than 2 cm?" → "Are lymph nodes involved?" → "Is the patient over 50?" This is exactly how decision trees work. They are intuitive — you can explain them to a non-technical stakeholder — and they handle non-linear relationships naturally. In biotech, they are used for patient stratification. In SaaS, for lead scoring.
+Un médico diagnostica pacientes haciendo una serie de preguntas: "¿El tumor mide más de 2 cm?" → "¿Los ganglios linfáticos están involucrados?" → "¿El paciente tiene más de 50 años?" Así exactamente funcionan los árboles de decisión. Son intuitivos — podés explicárselos a un interesado no técnico — y manejan relaciones no lineales de forma natural. En biotecnología se usan para estratificación de pacientes. En SaaS, para puntuación de leads.
 
-## Big Picture
+## Panorama general
 
-**Previous:** Logistic Regression gave us linear decision boundaries. **This lesson:** Decision Trees capture non-linear patterns without feature engineering. **Next:** Random Forests combine many trees for even better performance.
+**Anterior:** La regresión logística nos dio fronteras de decisión lineales. **Esta lección:** Los árboles de decisión capturan patrones no lineales sin ingeniería de características. **Siguiente:** Los bosques aleatorios combinan muchos árboles para un rendimiento aún mejor.
 
-## Theory
+## Teoría
 
-### Tree Structure
+### Estructura del árbol
 
-A decision tree consists of:
-- **Root node:** first split on the most informative feature
-- **Internal nodes:** decisions based on feature values
-- **Leaf nodes:** predictions (class label or value)
-- **Branches:** outcomes of decisions
+Un árbol de decisión consta de:
+- **Nodo raíz:** primera división en la característica más informativa
+- **Nodos internos:** decisiones basadas en valores de características
+- **Nodos hoja:** predicciones (etiqueta de clase o valor)
+- **Ramas:** resultados de las decisiones
 
-### How Predictions Flow
+### Cómo fluyen las predicciones
 
-A sample starts at the root and traverses down based on feature comparisons until it reaches a leaf. The leaf's majority class (classification) or mean value (regression) is the prediction.
+Una muestra comienza en la raíz y atraviesa el árbol hacia abajo según comparaciones de características hasta llegar a una hoja. La clase mayoritaria de la hoja (clasificación) o el valor medio (regresión) es la predicción.
 
-### Splitting Criteria
+### Criterios de división
 
-**Gini Impurity:** Measures how often a randomly chosen element would be incorrectly classified.
+**Impureza de Gini:** Mide qué tan seguido un elemento elegido al azar sería clasificado incorrectamente.
 
 $$\text{Gini}(t) = 1 - \sum_{i=1}^{c} p_i^2$$
 
-Where $p_i$ is the proportion of class $i$ in node $t$.
+Donde $p_i$ es la proporción de la clase $i$ en el nodo $t$.
 
-- Gini = 0: node is pure (all same class)
-- Maximum Gini: $1 - 1/c$
+- Gini = 0: nodo puro (todos de la misma clase)
+- Gini máximo: $1 - 1/c$
 
-**Entropy:**
+**Entropía:**
 
-$$\text{Entropy}(t) = -\sum_{i=1}^{c} p_i \log_2(p_i)$$
+$$\text{Entropía}(t) = -\sum_{i=1}^{c} p_i \log_2(p_i)$$
 
-- Entropy = 0: pure node
-- Higher entropy → more disorder
+- Entropía = 0: nodo puro
+- Entropía más alta → más desorden
 
-**Information Gain:** Reduction in impurity after a split.
+**Ganancia de información:** Reducción en la impureza después de una división.
 
-$$\text{IG} = \text{Impurity}_{\text{parent}} - \sum_{j} \frac{n_j}{n} \text{Impurity}_{\text{child}_j}$$
+$$\text{IG} = \text{Impureza}_{\text{padre}} - \sum_{j} \frac{n_j}{n} \text{Impureza}_{\text{hijo}_j}$$
 
-The algorithm selects the split that maximizes information gain.
+El algoritmo selecciona la división que maximiza la ganancia de información.
 
-### Pruning
+### Poda
 
-Decision trees tend to overfit — they can grow until every leaf is pure. **Pruning** removes unnecessary branches:
+Los árboles de decisión tienden al sobreajuste — pueden crecer hasta que cada hoja sea pura. La **poda** elimina ramas innecesarias:
 
-- **Pre-pruning:** Stop growing when no significant information gain (max_depth, min_samples_split)
-- **Post-pruning:** Grow full tree, then remove branches
+- **Pre-poda:** Dejar de crecer cuando no hay ganancia significativa de información (max_depth, min_samples_split)
+- **Post-poda:** Crecer el árbol completo, luego eliminar ramas
 
-## Mathematical Foundation
+## Fundamento matemático
 
-### Finding the Best Split
+### Encontrar la mejor división
 
-For a numerical feature, the algorithm:
-1. Sorts all values
-2. Considers midpoints between consecutive values as candidate thresholds
-3. Computes weighted impurity for each split
-4. Selects the threshold with highest information gain
+Para una característica numérica, el algoritmo:
+1. Ordena todos los valores
+2. Considera los puntos medios entre valores consecutivos como umbrales candidatos
+3. Calcula la impureza ponderada para cada división
+4. Selecciona el umbral con mayor ganancia de información
 
-### Tree Depth and Overfitting
+### Profundidad del árbol y sobreajuste
 
-A tree with depth 1 (stump) is high-bias. A tree with depth 20 is extremely high-variance. The optimal depth is found via cross-validation.
+Un árbol con profundidad 1 (stump) tiene sesgo alto. Un árbol con profundidad 20 tiene varianza extremadamente alta. La profundidad óptima se encuentra mediante validación cruzada.
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -111,7 +111,7 @@ plt.savefig('figures/decision_tree_iris.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import pandas as pd
@@ -149,22 +149,22 @@ plt.show()
 print(classification_report(y_test, best_tree.predict(X_test)))
 ```
 
-## Walkthrough Example: Iris Classification
+## Ejemplo guiado: Clasificación de Iris
 
-**Problem:** Classify iris flowers into 3 species.
+**Problema:** Clasificar flores Iris en 3 especies.
 
-**Dataset:** 150 samples, 4 features (sepal length/width, petal length/width).
+**Conjunto de datos:** 150 muestras, 4 características (largo/ancho de sépalo, largo/ancho de pétalo).
 
-**Tree structure:**
-- Root: petal length ≤ 2.45 → Setosa (pure leaf)
-- Right branch: petal length > 2.45 → further splits on petal width
-- Depth 2: petal width ≤ 1.75 → Versicolor vs. Virginica
+**Estructura del árbol:**
+- Raíz: largo de pétalo ≤ 2.45 → Setosa (hoja pura)
+- Rama derecha: largo de pétalo > 2.45 → más divisiones en ancho de pétalo
+- Profundidad 2: ancho de pétalo ≤ 1.75 → Versicolor vs. Virginica
 
-**Interpretation:** The tree automatically identified petal measurements as most discriminative.
+**Interpretación:** El árbol identificó automáticamente las medidas de los pétalos como las más discriminativas.
 
-## Biotechnology Example: Patient Stratification
+## Ejemplo en biotecnología: Estratificación de pacientes
 
-A hospital wants to identify high-risk patients for a clinical trial based on biomarkers.
+Un hospital quiere identificar pacientes de alto riesgo para un ensayo clínico basándose en biomarcadores.
 
 ```python
 np.random.seed(42)
@@ -195,9 +195,9 @@ tree.fit(X_bio, y_bio)
 print(f"Feature importances: {dict(zip(X_bio.columns, tree.feature_importances_))}")
 ```
 
-**Interpretation:** The tree reveals that gene_mutation_count is the most important risk factor.
+**Interpretación:** El árbol revela que gene_mutation_count es el factor de riesgo más importante.
 
-## SaaS Example: Lead Scoring
+## Ejemplo en SaaS: Puntuación de leads
 
 ```python
 np.random.seed(42)
@@ -228,52 +228,52 @@ tree.fit(X_lead, y_lead)
 print(f"Importance: {dict(zip(X_lead.columns, tree.feature_importances_))}")
 ```
 
-**Interpretation:** Demo requests are the strongest signal of conversion intent.
+**Interpretación:** Las solicitudes de demo son la señal más fuerte de intención de conversión.
 
-## Common Mistakes
+## Errores comunes
 
-1. **No depth limit** — trees grow until pure, causing severe overfitting.
-2. **Ignoring feature importance** — trees provide built-in importance scores.
-3. **Unbalanced trees** — one branch much deeper than others.
-4. **Not checking for instability** — small data changes can produce very different trees.
+1. **Sin límite de profundidad** — los árboles crecen hasta ser puros, causando sobreajuste severo.
+2. **Ignorar la importancia de características** — los árboles proveen puntajes de importancia incorporados.
+3. **Árboles desbalanceados** — una rama mucho más profunda que las otras.
+4. **No verificar la inestabilidad** — pequeños cambios en los datos pueden producir árboles muy diferentes.
 
-## Best Practices
+## Buenas prácticas
 
-- Always limit tree depth (max_depth, min_samples_leaf)
-- Use cross-validation to find optimal depth
-- Compare tree with baseline model
-- Visualize the tree for communication
-- Use feature importance to identify key drivers
+- Limitá siempre la profundidad del árbol (max_depth, min_samples_leaf)
+- Usá validación cruzada para encontrar la profundidad óptima
+- Compará el árbol con un modelo de línea base
+- Visualizá el árbol para comunicación
+- Usá la importancia de características para identificar factores clave
 
-## Summary
+## Resumen
 
-- Decision trees split data recursively based on feature values
-- Gini impurity and entropy measure node purity
-- Information gain guides split selection
-- Deeper trees overfit; pruning prevents this
-- Trees are interpretable but unstable
-- Feature importance is a key output
+- Los árboles de decisión dividen los datos recursivamente según valores de características
+- La impureza de Gini y la entropía miden la pureza de los nodos
+- La ganancia de información guía la selección de divisiones
+- Los árboles más profundos se sobreajustan; la poda lo previene
+- Los árboles son interpretables pero inestables
+- La importancia de características es un resultado clave
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Gini impurity | Probability of incorrect classification in a node |
-| Entropy | Measure of disorder in a node |
-| Information gain | Reduction in impurity after split |
-| Root node | First split in the tree |
-| Leaf node | Terminal node with prediction |
-| Pruning | Reducing tree depth to prevent overfitting |
-| Decision boundary | Axis-aligned splits in feature space |
+| Término | Definición |
+|---------|------------|
+| Impureza de Gini | Probabilidad de clasificación incorrecta en un nodo |
+| Entropía | Medida de desorden en un nodo |
+| Ganancia de información | Reducción en impureza después de una división |
+| Nodo raíz | Primera división en el árbol |
+| Nodo hoja | Nodo terminal con predicción |
+| Poda | Reducir la profundidad del árbol para evitar sobreajuste |
+| Frontera de decisión | Divisiones alineadas a los ejes en el espacio de características |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** What is the difference between Gini impurity and entropy? When would they give different splits?
+**Nivel 1 — Básico:** ¿Cuál es la diferencia entre impureza de Gini y entropía? ¿Cuándo darían divisiones diferentes?
 
-**Level 2 — Implementation:** Train decision trees with max_depth = 2, 4, 6, 8, 10 on the breast cancer dataset. Plot the resulting train and test accuracies. What is the optimal depth?
+**Nivel 2 — Implementación:** Entrená árboles de decisión con max_depth = 2, 4, 6, 8, 10 en el dataset breast cancer. Graficá las precisiones de entrenamiento y prueba resultantes. ¿Cuál es la profundidad óptima?
 
-**Level 3 — Critical Thinking:** A decision tree with max_depth = None achieves 100% accuracy on training data but 60% on test data. What three strategies would you use to improve test performance?
+**Nivel 3 — Pensamiento crítico:** Un árbol de decisión con max_depth = None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué tres estrategias usarías para mejorar el rendimiento en prueba?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `tree_depth_tuner(X_train, X_val, y_train, y_val, max_depths)` that trains decision trees for each depth in max_depths, evaluates validation accuracy, and returns the optimal depth and the trained tree.
+Escribí una función `tree_depth_tuner(X_train, X_val, y_train, y_val, max_depths)` que entrene árboles de decisión para cada profundidad en max_depths, evalúe la precisión en validación, y devuelva la profundidad óptima y el árbol entrenado.

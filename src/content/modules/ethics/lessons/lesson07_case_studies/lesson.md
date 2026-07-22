@@ -1,154 +1,154 @@
 ---
 Module: 5
 Lesson Number: 7
-Lesson Title: Case Studies in Health and SaaS
-Estimated Duration: 75 minutes
+Lesson Title: Casos de Estudio en Salud y SaaS
+Estimated Duration: 75 minutos
 Prerequisites: L1–L6
 Learning Objectives:
-  - Analyze real-world bias in healthcare algorithms using ethical principles
-  - Evaluate fairness in credit scoring and lending algorithms
-  - Design responsible SaaS analytics with privacy and transparency
-  - Apply bias detection and mitigation techniques to real datasets
-  - Synthesize all Module 5 concepts in a comprehensive case analysis
-Keywords: case studies, healthcare bias, credit scoring, responsible AI, algorithmic fairness, ethical deployment
+  - Analizar sesgo real en algoritmos de salud usando principios éticos
+  - Evaluar equidad en algoritmos de puntuación crediticia y préstamos
+  - Diseñar analítica SaaS responsable con privacidad y transparencia
+  - Aplicar técnicas de detección y mitigación de sesgo a conjuntos de datos reales
+  - Sintetizar todos los conceptos del Módulo 5 en un análisis de caso integral
+Keywords: casos de estudio, sesgo en salud, puntuación crediticia, IA responsable, equidad algorítmica, despliegue ético
 Difficulty: Advanced
-Programming Concepts: pandas, sklearn, data analysis
-Mathematical Concepts: Fairness metrics, statistical disparities
-Machine Learning Concepts: Classification, model evaluation
-Datasets Used: Synthetic healthcare and credit datasets
+Programming Concepts: pandas, sklearn, análisis de datos
+Mathematical Concepts: Métricas de equidad, disparidades estadísticas
+Machine Learning Concepts: Clasificación, evaluación de modelos
+Datasets Used: Conjuntos sintéticos de salud y crédito
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Case Studies in Health and SaaS
+# Casos de Estudio en Salud y SaaS
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Analyze** the Obermeyer et al. (2019) study on racial bias in a healthcare algorithm
-2. **Evaluate** fairness in credit scoring using multiple fairness definitions
-3. **Design** a responsible SaaS analytics system incorporating privacy, fairness, and transparency
-4. **Apply** bias detection techniques to synthetic healthcare and credit datasets
-5. **Synthesize** all Module 5 concepts in comprehensive case analysis
+1. **Analizar** el estudio de Obermeyer et al. (2019) sobre sesgo racial en un algoritmo de salud
+2. **Evaluar** la equidad en puntuación crediticia usando múltiples definiciones de equidad
+3. **Diseñar** un sistema SaaS de analítica responsable que incorpore privacidad, equidad y transparencia
+4. **Aplicar** técnicas de detección de sesgo a conjuntos de datos sintéticos de salud y crédito
+5. **Sintetizar** todos los conceptos del Módulo 5 en un análisis de caso integral
 
-## Motivation
+## Motivación
 
-This lesson brings together everything you have learned in Module 5. We will examine two real-world domains where AI ethics failures have caused documented harm: healthcare and financial services. These are not academic exercises. In 2019, Obermeyer et al. published a study showing that a healthcare algorithm used by hospitals serving 100+ million patients was systematically biased against Black patients. The algorithm did not use race explicitly. It used health costs as a proxy for health needs — and because Black patients had less access to healthcare (and therefore lower costs), the algorithm labeled them as healthier than equally sick white patients. The harm was not malicious. It was structural. And it was entirely preventable with the right ethical analysis.
+Esta lección reúne todo lo que aprendiste en el Módulo 5. Vamos a examinar dos dominios del mundo real donde las fallas éticas de IA han causado daño documentado: salud y servicios financieros. Estos no son ejercicios académicos. En 2019, Obermeyer et al. publicaron un estudio que mostraba que un algoritmo de salud usado por hospitales que atienden a más de 100 millones de pacientes estaba sistemáticamente sesgado contra pacientes negros. El algoritmo no usaba la raza explícitamente. Usaba costos de salud como proxy de necesidades de salud — y como los pacientes negros tenían menos acceso a atención médica (y por lo tanto costos más bajos), el algoritmo los etiquetaba como más saludables que pacientes blancos igualmente enfermos. El daño no fue malicioso. Fue estructural. Y fue totalmente prevenible con el análisis ético adecuado.
 
-In the SaaS domain, AI-powered credit scoring and lending platforms make automated decisions that affect millions of people's access to credit, housing, and financial opportunity. These systems must balance predictive accuracy with fairness, transparency, and regulatory compliance.
+En el dominio SaaS, las plataformas de puntuación crediticia y préstamos impulsadas por IA toman decisiones automatizadas que afectan el acceso de millones de personas al crédito, la vivienda y las oportunidades financieras. Estos sistemas deben equilibrar la precisión predictiva con la equidad, la transparencia y el cumplimiento normativo.
 
-By the end of this lesson, you should be able to conduct a comprehensive ethical analysis of any ML system you encounter — identifying risks, proposing mitigations, and evaluating trade-offs between competing values.
+Al finalizar esta lección, deberías poder realizar un análisis ético integral de cualquier sistema de ML que encuentres — identificando riesgos, proponiendo mitigaciones y evaluando compensaciones entre valores en competencia.
 
-## Big Picture
+## Panorama General
 
-| Previous Lessons | Current Lesson | Next |
-|---|---|---|
-| L1–L6 (Principles, Bias, Explainability, Privacy, Social Impact, Regulation) | L7: Case Studies (synthesis and application) | End of Module 5 |
+| Lecciones Anteriores | Lección Actual | Siguiente |
+|----------------------|----------------|-----------|
+| L1–L6 (Principios, Sesgo, Explicabilidad, Privacidad, Impacto Social, Regulación) | L7: Casos de Estudio (síntesis y aplicación) | Fin del Módulo 5 |
 
-## Theory
+## Teoría
 
-### Case Study 1: Racial Bias in Healthcare Algorithms
+### Caso de Estudio 1: Sesgo Racial en Algoritmos de Salud
 
-#### Background
+#### Antecedentes
 
-Obermeyer et al. (2019) studied a commercial algorithm used by US hospitals to identify high-risk patients who would benefit from "high-risk care management" programs. These programs provide additional resources (nurse follow-up, care coordination) to patients with complex health needs.
+Obermeyer et al. (2019) estudiaron un algoritmo comercial usado por hospitales de EE.UU. para identificar pacientes de alto riesgo que se beneficiarían de programas de "gestión de cuidados de alto riesgo". Estos programas proporcionan recursos adicionales (seguimiento de enfermería, coordinación de cuidados) a pacientes con necesidades de salud complejas.
 
-The algorithm predicted which patients would generate high healthcare costs. The underlying assumption: patients who will generate high costs are those with high health needs, so targeting cost is equivalent to targeting need.
+El algoritmo predecía qué pacientes generarían altos costos de salud. El supuesto subyacente: los pacientes que generarán altos costos son aquellos con altas necesidades de salud, por lo que apuntar al costo equivale a apuntar a la necesidad.
 
-#### The Finding
+#### El Hallazgo
 
-The algorithm systematically underestimated the health needs of Black patients. At any given risk score, Black patients were sicker than white patients. The algorithm falsely labeled Black patients as healthier than equally sick white patients.
+El algoritmo subestimaba sistemáticamente las necesidades de salud de los pacientes negros. Para cualquier puntaje de riesgo dado, los pacientes negros estaban más enfermos que los pacientes blancos. El algoritmo etiquetaba falsamente a los pacientes negros como más saludables que pacientes blancos igualmente enfermos.
 
-**The mechanism:** The algorithm used health costs as a proxy for health needs. Due to systemic barriers (access to care, insurance coverage, trust in the healthcare system), Black patients with the same level of health need generate lower healthcare costs than white patients. The algorithm learned that "low cost = healthy," which was incorrect for Black patients.
+**El mecanismo:** El algoritmo usaba costos de salud como proxy de necesidades de salud. Debido a barreras sistémicas (acceso a la atención, cobertura de seguro, confianza en el sistema de salud), los pacientes negros con el mismo nivel de necesidad de salud generan costos de salud más bajos que los pacientes blancos. El algoritmo aprendió que "costo bajo = saludable", lo cual era incorrecto para pacientes negros.
 
-#### Magnitude
+#### Magnitud
 
-The bias reduced the number of Black patients identified for extra care by more than half. If the algorithm were unbiased, the number of Black patients referred for extra care would have roughly doubled.
+El sesgo redujo en más de la mitad la cantidad de pacientes negros identificados para cuidados adicionales. Si el algoritmo no estuviera sesgado, la cantidad de pacientes negros derivados para cuidados adicionales se habría aproximadamente duplicado.
 
-#### Root Causes
+#### Causas Raíz
 
-1. **Proxy problem:** Cost is a biased proxy for need when access to care varies by race.
-2. **Label bias:** The training label (cost) does not measure what we actually care about (need).
-3. **Historical/systemic bias:** The data reflects structural racism in healthcare access.
-4. **Missing fairness audit:** The algorithm was deployed without testing for demographic disparities.
+1. **Problema del proxy:** El costo es un proxy sesgado de la necesidad cuando el acceso a la atención varía según la raza.
+2. **Sesgo de etiqueta:** La etiqueta de entrenamiento (costo) no mide lo que realmente nos importa (necesidad).
+3. **Sesgo histórico/sistémico:** Los datos reflejan el racismo estructural en el acceso a la salud.
+4. **Falta de auditoría de equidad:** El algoritmo se desplegó sin probar disparidades demográficas.
 
-#### Fix
+#### Solución
 
-Obermeyer et al. showed that retraining the algorithm to predict "number of chronic conditions" (a more direct measure of health need) instead of cost eliminated 84% of the bias.
+Obermeyer et al. mostraron que reentrenar el algoritmo para predecir "cantidad de enfermedades crónicas" (una medida más directa de la necesidad de salud) en lugar del costo eliminó el 84% del sesgo.
 
-#### Ethical Analysis
+#### Análisis Ético
 
-| Principle | Application |
-|-----------|-------------|
-| Beneficence | Algorithm intended to improve health outcomes, but failed for Black patients |
-| Non-maleficence | Caused harm by denying resources to those who needed them most |
-| Justice | Distributed healthcare resources inequitably by race |
-| Autonomy | Patients unaware algorithm was used to allocate care |
-| Explicability | The proxy problem was not transparent to users |
+| Principio | Aplicación |
+|-----------|------------|
+| Beneficencia | El algoritmo buscaba mejorar resultados de salud, pero falló para pacientes negros |
+| No maleficencia | Causó daño al negar recursos a quienes más los necesitaban |
+| Justicia | Distribuyó recursos de salud de manera inequitativa por raza |
+| Autonomía | Los pacientes no sabían que se usaba un algoritmo para asignar cuidados |
+| Explicabilidad | El problema del proxy no era transparente para los usuarios |
 
-### Case Study 2: Fairness in Credit Scoring
+### Caso de Estudio 2: Equidad en Puntuación Crediticia
 
-#### Background
+#### Antecedentes
 
-Credit scoring algorithms predict the likelihood that a borrower will default on a loan. These scores determine access to credit, mortgages, and sometimes employment and housing. The most widely used scoring system is FICO, but many fintech companies use ML models for more granular risk assessment.
+Los algoritmos de puntuación crediticia predicen la probabilidad de que un prestatario incumpla un préstamo. Estos puntajes determinan el acceso al crédito, hipotecas y, a veces, el empleo y la vivienda. El sistema de puntuación más usado es FICO, pero muchas empresas fintech usan modelos de ML para una evaluación de riesgo más granular.
 
-#### The Challenge
+#### El Desafío
 
-Credit scoring faces fundamental fairness challenges:
+La puntuación crediticia enfrenta desafíos fundamentales de equidad:
 
-1. **Historical discrimination:** Training data from past lending reflects historical discrimination (redlining, steering). The model learns to replicate these patterns.
-2. **Proxy features:** Features like zip code, education level, and even transaction history can proxy for race and socioeconomic status.
-3. **Base rate differences:** Different groups have different historical default rates due to systemic economic inequality. Equalizing outcomes (demographic parity) may conflict with predictive accuracy.
-4. **Regulatory requirements:** The Equal Credit Opportunity Act (ECOA) prohibits discrimination on the basis of race, color, religion, national origin, sex, marital status, age, or public assistance income.
+1. **Discriminación histórica:** Los datos de entrenamiento de préstamos pasados reflejan discriminación histórica (redlining, direccionamiento). El modelo aprende a replicar estos patrones.
+2. **Características proxy:** Características como código postal, nivel educativo e incluso historial de transacciones pueden ser proxy de raza y estatus socioeconómico.
+3. **Diferencias en tasas base:** Diferentes grupos tienen diferentes tasas históricas de incumplimiento debido a la desigualdad económica sistémica. Igualar resultados (paridad demográfica) puede entrar en conflicto con la precisión predictiva.
+4. **Requisitos regulatorios:** La Ley de Igualdad de Oportunidades Crediticias (ECOA) prohíbe la discriminación por raza, color, religión, origen nacional, sexo, estado civil, edad o ingresos por asistencia pública.
 
-#### Fairness Analysis
+#### Análisis de Equidad
 
-| Fairness Definition | Application to Credit Scoring |
-|-------------------|-------------------------------|
-| Demographic parity | Equal approval rates across groups. May conflict with base rate differences. |
-| Equal opportunity | Equal TPR: qualified applicants equally likely to be approved regardless of group. |
-| Equalized odds | Equal TPR and FPR: errors affect all groups equally. |
-| Disparate impact | Approval rate ratio between groups should exceed 0.8 (EEOC 4/5ths rule). |
+| Definición de Equidad | Aplicación a Puntuación Crediticia |
+|-----------------------|-----------------------------------|
+| Paridad demográfica | Tasas de aprobación iguales entre grupos. Puede entrar en conflicto con diferencias en tasas base. |
+| Igualdad de oportunidades | TPR igual: solicitantes calificados igualmente propensos a ser aprobados independientemente del grupo. |
+| Probabilidades igualadas | TPR y FPR iguales: los errores afectan a todos los grupos por igual. |
+| Impacto dispar | La razón de tasas de aprobación entre grupos debe superar 0.8 (regla de 4/5 de la EEOC). |
 
-#### Responsible Credit Scoring Design
+#### Diseño de Puntuación Crediticia Responsable
 
-1. **Feature selection:** Avoid proxies for protected attributes.
-2. **Adverse action notice:** Provide specific reasons for denial (ECOA requirement).
-3. **Regular fairness monitoring:** Audit approval rates, TPR, FPR by demographic group.
-4. **Alternative data caution:** Using alternative data (social media, utility payments) may introduce new bias sources.
-5. **Human review:** Allow manual override for borderline cases.
+1. **Selección de características:** Evitar proxies de atributos protegidos.
+2. **Notificación de acción adversa:** Proporcionar razones específicas para la denegación (requisito ECOA).
+3. **Monitoreo regular de equidad:** Auditar tasas de aprobación, TPR, FPR por grupo demográfico.
+4. **Precaución con datos alternativos:** Usar datos alternativos (redes sociales, pagos de servicios) puede introducir nuevas fuentes de sesgo.
+5. **Revisión humana:** Permitir anulación manual para casos límite.
 
-### Case Study 3: Ethical SaaS Analytics
+### Caso de Estudio 3: Analítica SaaS Ética
 
-#### Background
+#### Antecedentes
 
-Software-as-a-Service (SaaS) platforms collect vast amounts of user behavior data: clicks, time spent, feature usage, purchases, support interactions. AI-powered analytics extract insights to help businesses improve products, reduce churn, and increase revenue.
+Las plataformas SaaS recolectan grandes cantidades de datos de comportamiento de usuarios: clics, tiempo de uso, uso de funciones, compras, interacciones de soporte. La analítica impulsada por IA extrae información para ayudar a las empresas a mejorar productos, reducir la pérdida de clientes y aumentar ingresos.
 
-#### Ethical Challenges
+#### Desafíos Éticos
 
-1. **Privacy:** Users may not know their behavior is being analyzed at this granularity.
-2. **Consent:** Is implicit consent (using the product) sufficient for predictive analytics?
-3. **Transparency:** Should users be told that a model predicts their likelihood of churning?
-4. **Manipulation:** Personalized recommendations can cross the line into manipulation.
-5. **Fairness:** If a SaaS platform optimizes for high-revenue customers, smaller customers may receive worse service.
-6. **Data retention:** How long should behavioral data be kept?
+1. **Privacidad:** Los usuarios pueden no saber que su comportamiento se analiza a este nivel de detalle.
+2. **Consentimiento:** ¿Es suficiente el consentimiento implícito (usar el producto) para analítica predictiva?
+3. **Transparencia:** ¿Debería informarse a los usuarios que un modelo predice su probabilidad de cancelación?
+4. **Manipulación:** Las recomendaciones personalizadas pueden cruzar la línea hacia la manipulación.
+5. **Equidad:** Si una plataforma SaaS optimiza para clientes de altos ingresos, los clientes más pequeños pueden recibir peor servicio.
+6. **Retención de datos:** ¿Por cuánto tiempo deberían conservarse los datos de comportamiento?
 
-#### Design Principles for Responsible SaaS Analytics
+#### Principios de Diseño para Analítica SaaS Responsable
 
-1. **Privacy by design:** Aggregate data where possible; anonymize or pseudonymize.
-2. **Transparency:** Publish a clear description of what data is collected and how it is used.
-3. **User control:** Allow users to opt out of behavioral analytics (without losing core functionality).
-4. **Fairness auditing:** Monitor whether the analytics system treats all customer segments equitably.
-5. **Bias mitigation:** Check for algorithmic bias in predictive models (churn prediction, upselling).
-6. **Data minimization:** Only collect data needed for the stated purpose.
+1. **Privacidad desde el diseño:** Agregar datos cuando sea posible; anonimizar o seudonimizar.
+2. **Transparencia:** Publicar una descripción clara de qué datos se recolectan y cómo se usan.
+3. **Control del usuario:** Permitir que los usuarios opten por no participar en analítica de comportamiento (sin perder funcionalidad central).
+4. **Auditoría de equidad:** Monitorear si el sistema de analítica trata a todos los segmentos de clientes de manera equitativa.
+5. **Mitigación de sesgo:** Verificar sesgo algorítmico en modelos predictivos (predicción de cancelación, venta adicional).
+6. **Minimización de datos:** Solo recolectar datos necesarios para el propósito declarado.
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Analyzing Bias in a Synthetic Credit Dataset
+### Analizar Sesgo en un Conjunto Sintético de Crédito
 
-We generate a synthetic credit dataset with demographic information and analyze fairness.
+Generamos un conjunto de datos sintético de crédito con información demográfica y analizamos equidad.
 
 ```python
 import numpy as np
@@ -189,117 +189,117 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### Synthetic Diagnostic Algorithm Audit
+### Auditoría de Algoritmo de Diagnóstico Sintético
 
-A diagnostic algorithm predicts disease risk from biomarkers. The training data is 75% from Population A and 25% from Population B. The algorithm achieves 92% accuracy on Population A but 78% on Population B.
+Un algoritmo de diagnóstico predice riesgo de enfermedad a partir de biomarcadores. Los datos de entrenamiento son 75% de la Población A y 25% de la Población B. El algoritmo alcanza 92% de precisión en la Población A pero 78% en la Población B.
 
-**Bias detection:**
-- Representation bias: Population B underrepresented
-- Model performance gap: 14 percentage point accuracy difference
-- Fairness metrics: compute TPR, FPR, PPV, NPV by population
+**Detección de sesgo:**
+- Sesgo de representación: Población B subrepresentada
+- Brecha de rendimiento del modelo: 14 puntos porcentuales de diferencia en precisión
+- Métricas de equidad: calcular TPR, FPR, PPV, NPV por población
 
-**Mitigation:**
-1. Collect more data from Population B
-2. Stratified sampling during training
-3. Group-specific thresholds to equalize TPR or FPR
-4. Regular monitoring post-deployment
+**Mitigación:**
+1. Recolectar más datos de la Población B
+2. Muestreo estratificado durante el entrenamiento
+3. Umbrales específicos por grupo para igualar TPR o FPR
+4. Monitoreo regular post-despliegue
 
-**Ethical principles:**
-- Justice: unequal performance violates distributive justice
-- Non-maleficence: misdiagnosis in Population B causes harm
-- Explicability: must document performance disparities
+**Principios éticos:**
+- Justicia: el rendimiento desigual viola la justicia distributiva
+- No maleficencia: el diagnóstico erróneo en la Población B causa daño
+- Explicabilidad: deben documentarse las disparidades de rendimiento
 
-## SaaS Example
+## Ejemplo SaaS
 
-### Ethical Churn Prediction
+### Predicción Ética de Cancelación
 
-A SaaS company builds a churn prediction model to identify customers likely to cancel. The model identifies two segments:
+Una empresa SaaS construye un modelo de predicción de cancelación para identificar clientes con probabilidad de darse de baja. El modelo identifica dos segmentos:
 
-- **Small businesses** (lower revenue): Higher predicted churn because they have fewer users and less engagement
-- **Enterprise customers** (higher revenue): Lower predicted churn
+- **Pequeñas empresas** (menores ingresos): Mayor probabilidad de cancelación porque tienen menos usuarios y menor participación
+- **Clientes empresariales** (mayores ingresos): Menor probabilidad de cancelación
 
-The company plans to offer retention discounts only to the high-churn segment. But this disproportionately rewards small businesses (which need the discount) while enterprise customers (with more negotiating power) receive no offer.
+La empresa planea ofrecer descuentos de retención solo al segmento de alta cancelación. Pero esto recompensa desproporcionadamente a las pequeñas empresas (que necesitan el descuento) mientras que los clientes empresariales (con más poder de negociación) no reciben ninguna oferta.
 
-**Ethical analysis:**
-- Should retention resources be distributed based on customer value or customer need?
-- Is it fair to optimize retention spend for maximum ROI if this deprioritizes smaller customers?
-- What transparency obligations does the company have to customers whose data is used?
+**Análisis ético:**
+- ¿Deberían distribuirse los recursos de retención según el valor del cliente o la necesidad del cliente?
+- ¿Es justo optimizar el gasto en retención para el máximo ROI si esto desprioriza a clientes más pequeños?
+- ¿Qué obligaciones de transparencia tiene la empresa con los clientes cuyos datos se utilizan?
 
-**Responsible approach:**
-1. Segment-neutral retention: allocate resources proportional to churn risk, not customer value
-2. Transparency: disclose data collection and model usage in the terms of service
-3. Opt-out: allow customers to exclude their data from churn modeling
-4. Auditing: monitor whether the model disadvantage any customer segment
+**Enfoque responsable:**
+1. Retención neutral por segmento: asignar recursos proporcionales al riesgo de cancelación, no al valor del cliente
+2. Transparencia: divulgar la recolección de datos y el uso del modelo en los términos de servicio
+3. Exclusión voluntaria: permitir que los clientes excluyan sus datos del modelo de cancelación
+4. Auditoría: monitorear si el modelo perjudica a algún segmento de clientes
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Assuming a well-intentioned model causes no harm.** The Obermeyer algorithm was not malicious; it caused harm through a design flaw.
-2. **Ignoring the proxy problem.** Features that correlate with the target may still be biased.
-3. **Testing fairness only on overall metrics.** Need to test across all demographic subgroups.
-4. **Assuming one fairness definition fits all contexts.** Credit scoring and healthcare need different fairness criteria.
-5. **Forgetting that fairness is not the only ethical concern.** Privacy, transparency, and accountability also matter.
+1. **Asumir que un modelo bien intencionado no causa daño.** El algoritmo de Obermeyer no era malicioso; causó daño a través de un defecto de diseño.
+2. **Ignorar el problema del proxy.** Las características que se correlacionan con el objetivo pueden seguir estando sesgadas.
+3. **Probar equidad solo en métricas generales.** Hay que probar en todos los subgrupos demográficos.
+4. **Asumir que una definición de equidad sirve para todos los contextos.** La puntuación crediticia y la salud necesitan diferentes criterios de equidad.
+5. **Olvidar que la equidad no es la única preocupación ética.** La privacidad, la transparencia y la responsabilidad también importan.
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Always test models across demographic subgroups before deployment.**
-2. **Choose fairness metrics that match the domain context.**
-3. **Document feature selection decisions and their ethical rationale.**
-4. **Plan for ongoing monitoring — fairness is not a one-time check.**
-5. **Involve domain experts and affected communities in system design.**
-6. **Build in transparency from the start.**
+1. **Siempre probar los modelos en subgrupos demográficos antes del despliegue.**
+2. **Elegir métricas de equidad que coincidan con el contexto del dominio.**
+3. **Documentar las decisiones de selección de características y su fundamento ético.**
+4. **Planificar un monitoreo continuo — la equidad no es una verificación única.**
+5. **Involucrar a expertos del dominio y comunidades afectadas en el diseño del sistema.**
+6. **Incorporar transparencia desde el principio.**
 
-## Summary
+## Resumen
 
-- Obermeyer et al. (2019): healthcare algorithm used cost as a proxy for need, causing racial bias.
-- Credit scoring requires careful feature selection, fairness monitoring, and regulatory compliance.
-- Responsible SaaS analytics balances business value with user privacy and fairness.
-- Bias can be detected through subgroup performance analysis and fairness metrics.
-- Mitigation requires changes to data, model, or deployment strategy.
-- There is no single correct solution — each case requires context-specific ethical reasoning.
+- Obermeyer et al. (2019): algoritmo de salud usó costo como proxy de necesidad, causando sesgo racial.
+- La puntuación crediticia requiere selección cuidadosa de características, monitoreo de equidad y cumplimiento normativo.
+- La analítica SaaS responsable equilibra el valor comercial con la privacidad del usuario y la equidad.
+- El sesgo puede detectarse mediante análisis de rendimiento por subgrupo y métricas de equidad.
+- La mitigación requiere cambios en los datos, el modelo o la estrategia de despliegue.
+- No existe una única solución correcta — cada caso requiere razonamiento ético específico del contexto.
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Proxy problem | Using a variable that correlates with the target but is biased across groups |
-| Label bias | Bias in the target variable used for training |
-| High-risk care management | Healthcare program providing extra resources to high-need patients |
-| Adverse action notice | Legal requirement to explain credit denial reasons |
-| ECOA | Equal Credit Opportunity Act — prohibits credit discrimination |
-| Churn prediction | Model predicting which customers will cancel a service |
-| Privacy by design | Embedding privacy protections into system architecture from the start |
+| Término | Definición |
+|---------|------------|
+| Problema del proxy | Usar una variable que se correlaciona con el objetivo pero está sesgada entre grupos |
+| Sesgo de etiqueta | Sesgo en la variable objetivo utilizada para el entrenamiento |
+| Gestión de cuidados de alto riesgo | Programa de salud que proporciona recursos adicionales a pacientes de alta necesidad |
+| Notificación de acción adversa | Requisito legal de explicar las razones de denegación de crédito |
+| ECOA | Ley de Igualdad de Oportunidades Crediticias — prohíbe la discriminación crediticia |
+| Predicción de cancelación | Modelo que predice qué clientes cancelarán un servicio |
+| Privacidad desde el diseño | Incorporar protecciones de privacidad en la arquitectura del sistema desde el principio |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. In the Obermeyer healthcare algorithm, what was the proxy variable? Why was it biased?
-2. List three ethical principles from Lesson 1 and explain how they apply to credit scoring.
+1. En el algoritmo de salud de Obermeyer, ¿cuál era la variable proxy? ¿Por qué estaba sesgada?
+2. Enumerá tres principios éticos de la Lección 1 y explicá cómo se aplican a la puntuación crediticia.
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-3. Using the synthetic credit dataset from the walkthrough, compute the demographic parity difference and equal opportunity difference. Does the model exhibit bias?
-4. Retrain the model without the problematic features. Do fairness metrics improve? At what cost to accuracy?
+3. Usando el conjunto de datos sintético de crédito del ejemplo guiado, calculá la diferencia de paridad demográfica y la diferencia de igualdad de oportunidades. ¿El modelo presenta sesgo?
+4. Reentrená el modelo sin las características problemáticas. ¿Mejoran las métricas de equidad? ¿A qué costo en precisión?
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. A SaaS company uses AI to predict customer churn and offers retention discounts to the highest-risk customers. This leads to enterprise customers receiving fewer discounts than small businesses. Is this ethical? Defend your position.
-6. Design a responsible AI review process for a company that builds AI credit scoring systems. What stages should the review have? Who should be on the review board? What criteria should they use to approve or reject a model?
-7. The Obermeyer algorithm could be fixed by changing the target variable from cost to number of chronic conditions. Are there cases where no target variable is unbiased? What should developers do in that case?
+5. Una empresa SaaS usa IA para predecir cancelación de clientes y ofrece descuentos de retención a los clientes de mayor riesgo. Esto lleva a que los clientes empresariales reciban menos descuentos que las pequeñas empresas. ¿Es esto ético? Defendé tu posición.
+6. Diseñá un proceso de revisión de IA responsable para una empresa que construye sistemas de puntuación crediticia con IA. ¿Qué etapas debería tener la revisión? ¿Quién debería estar en el comité de revisión? ¿Qué criterios deberían usar para aprobar o rechazar un modelo?
+7. El algoritmo de Obermeyer podía corregirse cambiando la variable objetivo de costo a cantidad de enfermedades crónicas. ¿Existen casos donde ninguna variable objetivo sea imparcial? ¿Qué deberían hacer los desarrolladores en ese caso?
 
-## Coding Challenge
+## Desafío de Programación
 
-Using the synthetic healthcare dataset from the notebook:
-1. Train a model to predict healthcare need
-2. Use cost as a proxy for need (as in the real case)
-3. Measure the bias across two demographic groups
-4. Retrain the model using a different target variable
-5. Compare fairness metrics before and after
-6. Visualize the improvement
+Usando el conjunto de datos sintético de salud del notebook:
+1. Entrená un modelo para predecir necesidad de salud
+2. Usá el costo como proxy de necesidad (como en el caso real)
+3. Medí el sesgo entre dos grupos demográficos
+4. Reentrená el modelo usando una variable objetivo diferente
+5. Compará las métricas de equidad antes y después
+6. Visualizá la mejora
 
-## References
+## Referencias
 
 Obermeyer, Z., Powers, B., Vogeli, C., & Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. *Science*, 366(6464), 447–453. https://doi.org/10.1126/science.aax2342
 

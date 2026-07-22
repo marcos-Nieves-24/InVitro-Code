@@ -113,10 +113,10 @@ export default function PyodideRunner({
         <span className="font-medium text-gray-700">Python</span>
         <span className="text-xs text-gray-500">
           {isLoading
-            ? "⏳ Cargando Pyodide..."
+            ? "Cargando Pyodide..."
             : isWorkerReady
-              ? "✓ Listo"
-              : "⚠ Error al cargar"}
+              ? "Listo"
+              : "Error al cargar"}
         </span>
       </div>
 

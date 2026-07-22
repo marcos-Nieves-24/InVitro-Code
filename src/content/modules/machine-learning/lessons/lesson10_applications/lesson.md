@@ -1,43 +1,43 @@
 ---
 Module: 4
 Lesson Number: 10
-Lesson Title: Applications
-Estimated Duration: 90 minutes
-Prerequisites: L1-L9 (all previous lessons)
+Lesson Title: Aplicaciones
+Estimated Duration: 90 minutos
+Prerequisites: L1-L9 (todas las lecciones anteriores)
 Learning Objectives:
-  - Build an end-to-end ML pipeline from raw data to evaluation
-  - Apply regression to a biotech product quality prediction problem
-  - Apply clustering + classification to a SaaS customer analytics problem
-  - Select appropriate models and metrics for different business contexts
-  - Communicate ML results to non-technical stakeholders
-Keywords: pipeline, end-to-end, biotechnology, SaaS, product quality, customer segmentation, deployment
-Difficulty: Advanced
+  - Construir un pipeline de ML de extremo a extremo desde datos crudos hasta evaluación
+  - Aplicar regresión a un problema de predicción de calidad de productos biotecnológicos
+  - Aplicar clustering + clasificación a un problema de análisis de clientes SaaS
+  - Seleccionar modelos y métricas apropiados para diferentes contextos de negocio
+  - Comunicar resultados de ML a interesados no técnicos
+Keywords: pipeline, extremo a extremo, biotecnología, SaaS, calidad de producto, segmentación de clientes, despliegue
+Difficulty: Avanzado
 Programming Concepts: Pipeline, ColumnTransformer, GridSearchCV
-Mathematical Concepts: integration of multiple ML concepts
-Machine Learning Concepts: full ML workflow, model deployment considerations
-Datasets Used: synthetic biotech quality, synthetic SaaS customer data
+Mathematical Concepts: integración de múltiples conceptos de ML
+Machine Learning Concepts: flujo de trabajo completo de ML, consideraciones de despliegue de modelos
+Datasets Used: calidad biotecnológica sintética, datos SaaS de clientes sintéticos
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Applications
+# Aplicaciones
 
-## Motivation
+## Motivación
 
-You've learned 9 different algorithms. Now it's time to apply them to real problems: predicting the quality of a biotech product and segmenting SaaS customers. This lesson integrates everything — from data preprocessing through model selection to business communication.
+Aprendiste 9 algoritmos diferentes. Ahora es momento de aplicarlos a problemas reales: predecir la calidad de un producto biotecnológico y segmentar clientes SaaS. Esta lección integra todo — desde el preprocesamiento de datos hasta la selección de modelos y la comunicación empresarial.
 
-## Big Picture
+## Panorama general
 
-**Previous:** 9 lessons of theory and practice. **This lesson:** Two complete end-to-end case studies. **Next:** You are ready for the final project.
+**Anterior:** 9 lecciones de teoría y práctica. **Esta lección:** Dos casos de estudio completos de extremo a extremo. **Siguiente:** Estás listo para el proyecto final.
 
-## Case Study 1: Biotech Product Quality Prediction
+## Caso de Estudio 1: Predicción de calidad de producto biotecnológico
 
-### Problem
+### Problema
 
-A biomanufacturing company produces therapeutic proteins. They want to predict the final product **quality score** (0-100) based on process parameters measured during production.
+Una empresa de biomanufactura produce proteínas terapéuticas. Quiere predecir el **puntaje de calidad** del producto final (0-100) basándose en parámetros del proceso medidos durante la producción.
 
-### Dataset
+### Conjunto de datos
 
 ```python
 import numpy as np
@@ -106,25 +106,25 @@ results_df = pd.DataFrame(results).sort_values('R²', ascending=False)
 print(results_df.to_string(index=False))
 ```
 
-### Interpretation
+### Interpretación
 
-Gradient Boosting explains ~85% of quality variance. Key insight: pH and temperature deviations from optimal are the most important factors.
+Gradient Boosting explica ~85% de la varianza de calidad. Hallazgo clave: las desviaciones de pH y temperatura del óptimo son los factores más importantes.
 
-### Business Action
+### Acción empresarial
 
-- Tighten temperature and pH control in bioreactors
-- Monitor dissolved oxygen more carefully
-- Predicted quality score can be used for early release testing
+- Ajustar el control de temperatura y pH en los biorreactores
+- Monitorear el oxígeno disuelto más cuidadosamente
+- El puntaje de calidad predicho puede usarse para liberación anticipada de lotes
 
-## Case Study 2: SaaS Customer Segmentation and Churn
+## Caso de Estudio 2: Segmentación de clientes SaaS y abandono
 
-### Problem
+### Problema
 
-A SaaS company wants to:
-1. Segment customers based on usage patterns
-2. Build a churn prediction model for each segment
+Una empresa SaaS quiere:
+1. Segmentar clientes según patrones de uso
+2. Construir un modelo de predicción de abandono para cada segmento
 
-### Dataset
+### Conjunto de datos
 
 ```python
 np.random.seed(42)
@@ -150,7 +150,7 @@ churn_log_odds = (
 saas['churned'] = (1 / (1 + np.exp(-churn_log_odds)) > 0.3).astype(int)
 ```
 
-### Step 1: Segmentation
+### Paso 1: Segmentación
 
 ```python
 from sklearn.cluster import KMeans
@@ -166,7 +166,7 @@ print("Segment Profiles:")
 print(segment_profiles.round(1))
 ```
 
-### Step 2: Churn Prediction per Segment
+### Paso 2: Predicción de abandono por segmento
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -189,13 +189,13 @@ for seg in sorted(saas['segment'].unique()):
     print(f"Segment {seg} (n={len(seg_data)}): AUC = {auc:.3f}")
 ```
 
-### Business Action
+### Acción empresarial
 
-- Segment-specific retention campaigns
-- High-risk customers identified weeks before churn
-- Personalized pricing changes
+- Campañas de retención específicas por segmento
+- Clientes de alto riesgo identificados semanas antes del abandono
+- Cambios de precio personalizados
 
-## Walkthrough Example: End-to-End Pipeline
+## Ejemplo guiado: Pipeline de extremo a extremo
 
 ```python
 from sklearn.pipeline import Pipeline
@@ -237,49 +237,49 @@ print(f"Best params: {grid.best_params_}")
 print(f"Best CV R²: {grid.best_score_:.3f}")
 ```
 
-## Common Mistakes
+## Errores comunes
 
-1. **Skipping EDA** — always understand data before modeling
-2. **Leaking future information** — time-based data needs chronological splits
-3. **Tuning on test data** — use validation or cross-validation
-4. **Ignoring business constraints** — interpretability, speed, cost matter
-5. **Not communicating results** — a great model with no buy-in is useless
+1. **Saltarse el EDA** — entendé siempre los datos antes de modelar
+2. **Filtrar información futura** — los datos basados en tiempo necesitan divisiones cronológicas
+3. **Ajustar sobre datos de prueba** — usá validación o validación cruzada
+4. **Ignorar restricciones de negocio** — la interpretabilidad, velocidad y costo importan
+5. **No comunicar los resultados** — un modelo excelente sin aceptación es inútil
 
-## Best Practices
+## Buenas prácticas
 
-- Always start with a simple baseline
-- Build pipelines for reproducibility
-- Use cross-validation for reliable estimates
-- Document everything (data sources, assumptions, decisions)
-- Communicate in business language, not ML jargon
-- Monitor model performance after deployment
+- Empezá siempre con una línea base simple
+- Construí pipelines para reproducibilidad
+- Usá validación cruzada para estimaciones confiables
+- Documentá todo (fuentes de datos, supuestos, decisiones)
+- Comunicá en lenguaje de negocio, no en jerga de ML
+- Monitoreá el rendimiento del modelo después del despliegue
 
-## Summary
+## Resumen
 
-- End-to-end ML pipeline: data → preprocessing → model → evaluation → business action
-- Biotech: quality prediction enables process optimization
-- SaaS: segmentation + churn prediction enables targeted retention
-- Always consider the business context when choosing models and metrics
-- Communication is as important as technical accuracy
+- Pipeline de ML de extremo a extremo: datos → preprocesamiento → modelo → evaluación → acción empresarial
+- Biotecnología: la predicción de calidad permite la optimización de procesos
+- SaaS: la segmentación + predicción de abandono permite retención dirigida
+- Considerá siempre el contexto de negocio al elegir modelos y métricas
+- La comunicación es tan importante como la precisión técnica
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Pipeline | Chained sequence of data transforms and model |
-| End-to-end | Complete workflow from raw data to business decision |
-| ColumnTransformer | Applies different preprocessing to different columns |
-| GridSearchCV | Systematic hyperparameter search with cross-validation |
-| Business metric | KPI that matters to stakeholders (not just ML metrics) |
+| Término | Definición |
+|---------|------------|
+| Pipeline | Secuencia encadenada de transformaciones de datos y modelo |
+| Extremo a extremo | Flujo de trabajo completo desde datos crudos hasta decisión empresarial |
+| ColumnTransformer | Aplica diferentes preprocesamientos a diferentes columnas |
+| GridSearchCV | Búsqueda sistemática de hiperparámetros con validación cruzada |
+| Métrica de negocio | KPI que importa a los interesados (no solo métricas de ML) |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** What are the 5 key stages of an end-to-end ML pipeline?
+**Nivel 1 — Básico:** ¿Cuáles son las 5 etapas clave de un pipeline de ML de extremo a extremo?
 
-**Level 2 — Implementation:** Build a complete pipeline for the biotech quality dataset that includes scaling, a Random Forest, and GridSearchCV for n_estimators and max_depth.
+**Nivel 2 — Implementación:** Construí un pipeline completo para el dataset de calidad biotecnológica que incluya escalado, un Bosque Aleatorio y GridSearchCV para n_estimators y max_depth.
 
-**Level 3 — Critical Thinking:** A model achieves R² = 0.92 on the test set, but the manufacturing team doesn't trust it. What would you do to build trust and enable adoption?
+**Nivel 3 — Pensamiento crítico:** Un modelo alcanza R² = 0.92 en el conjunto de prueba, pero el equipo de manufactura no confía en él. ¿Qué harías para generar confianza y permitir la adopción?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `build_ml_pipeline(X, y, model, param_grid)` that creates a pipeline with StandardScaler and the given model, performs GridSearchCV with 5-fold CV, and returns the best pipeline and the cross-validation results DataFrame.
+Escribí una función `build_ml_pipeline(X, y, model, param_grid)` que cree un pipeline con StandardScaler y el modelo dado, realice GridSearchCV con validación cruzada de 5 folds, y devuelva el mejor pipeline y el DataFrame de resultados de validación cruzada.

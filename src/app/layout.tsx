@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "InVitro-Code",
   description:
-    "Aprende IA y Machine Learning con Python — interactive learning for biotech students",
+    "Aprende IA y Machine Learning con Python — aprendizaje interactivo para estudiantes de biotecnología",
 };
 
 export default function RootLayout({

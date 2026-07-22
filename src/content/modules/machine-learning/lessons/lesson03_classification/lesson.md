@@ -1,102 +1,102 @@
 ---
 Module: 4
 Lesson Number: 3
-Lesson Title: Classification
-Estimated Duration: 90 minutes
-Prerequisites: L1 (ML Fundamentals)
+Lesson Title: Clasificación
+Estimated Duration: 90 minutos
+Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  - Explain binary classification and the logistic function
-  - Train and evaluate logistic regression models with scikit-learn
-  - Interpret a confusion matrix and derive precision, recall, F1
-  - Plot and interpret ROC curves and AUC scores
-  - Compare classification metrics for different business contexts
-Keywords: binary classification, logistic regression, confusion matrix, precision, recall, F1, ROC, AUC, decision boundary
-Difficulty: Beginner
+  - Explicar la clasificación binaria y la función logística
+  - Entrenar y evaluar modelos de regresión logística con scikit-learn
+  - Interpretar una matriz de confusión y derivar precisión, recall, F1
+  - Graficar e interpretar curvas ROC y puntajes AUC
+  - Comparar métricas de clasificación para diferentes contextos de negocio
+Keywords: clasificación binaria, regresión logística, matriz de confusión, precisión, recall, F1, ROC, AUC, frontera de decisión
+Difficulty: Principiante
 Programming Concepts: sklearn.linear_model.LogisticRegression, sklearn.metrics
-Mathematical Concepts: sigmoid function, log-odds, cross-entropy loss
-Machine Learning Concepts: decision boundary, threshold, ROC curve, AUC
+Mathematical Concepts: función sigmoide, log-odds, pérdida de entropía cruzada
+Machine Learning Concepts: frontera de decisión, umbral, curva ROC, AUC
 Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Classification
+# Clasificación
 
-## Motivation
+## Motivación
 
-Is this email spam or not? Does this patient have cancer? Will this customer churn? These are *classification* problems — predicting a discrete category. Classification is the most common type of ML application in both biotechnology (disease diagnosis, drug response) and SaaS (churn prediction, lead scoring).
+¿Este correo es spam o no? ¿Este paciente tiene cáncer? ¿Este cliente se va a dar de baja? Estos son problemas de *clasificación* — predecir una categoría discreta. La clasificación es el tipo de aplicación de ML más común tanto en biotecnología (diagnóstico de enfermedades, respuesta a fármacos) como en SaaS (predicción de abandono, puntuación de leads).
 
-## Big Picture
+## Panorama general
 
-**Previous:** Linear Regression predicted continuous numbers. **This lesson:** Logistic Regression predicts categories. **Next:** Decision Trees — a non-linear approach to classification.
+**Anterior:** La regresión lineal predecía números continuos. **Esta lección:** La regresión logística predice categorías. **Siguiente:** Árboles de decisión — un enfoque no lineal para la clasificación.
 
-## Theory
+## Teoría
 
-### Binary Classification
+### Clasificación Binaria
 
-The target $y$ takes two values: 0 (negative class) or 1 (positive class).
+El objetivo $y$ toma dos valores: 0 (clase negativa) o 1 (clase positiva).
 
-### Logistic Regression
+### Regresión Logística
 
-Despite the name, logistic regression is a *classification* algorithm. Instead of predicting a continuous value, it predicts the *probability* that a sample belongs to the positive class.
+A pesar del nombre, la regresión logística es un algoritmo de *clasificación*. En lugar de predecir un valor continuo, predice la *probabilidad* de que una muestra pertenezca a la clase positiva.
 
-**Linear part:** $z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
+**Parte lineal:** $z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
 
-**Logistic (sigmoid) function:** $\sigma(z) = \frac{1}{1 + e^{-z}}$
+**Función logística (sigmoide):** $\sigma(z) = \frac{1}{1 + e^{-z}}$
 
-The sigmoid squashes any real number into [0, 1], giving a valid probability:
+La sigmoide comprime cualquier número real a [0, 1], dando una probabilidad válida:
 
 $$\hat{p} = P(y=1 | \mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p)}}$$
 
-**Decision rule:** Predict $y=1$ if $\hat{p} \geq 0.5$, else $y=0$.
+**Regla de decisión:** Predecir $y=1$ si $\hat{p} \geq 0.5$, sino $y=0$.
 
-### Decision Boundary
+### Frontera de decisión
 
-The line (or hyperplane) where $\hat{p} = 0.5$, i.e., $z = 0$.
+La línea (o hiperplano) donde $\hat{p} = 0.5$, es decir, $z = 0$.
 
-### Loss Function: Log Loss (Cross-Entropy)
+### Función de pérdida: Log Loss (Entropía Cruzada)
 
 $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$$
 
-Unlike MSE for linear regression, log loss heavily penalizes confident wrong predictions.
+A diferencia del MSE en regresión lineal, la log loss penaliza fuertemente las predicciones incorrectas con alta confianza.
 
-## Mathematical Foundation
+## Fundamento matemático
 
 ### Log-Odds
 
-The log-odds (logit) transformation:
+La transformación log-odds (logit):
 
 $$\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$$
 
-This shows logistic regression is linear in *log-odds* space.
+Esto muestra que la regresión logística es lineal en el espacio de *log-odds*.
 
-### Confusion Matrix
+### Matriz de confusión
 
-| | Predicted Positive | Predicted Negative |
+| | Predicho Positivo | Predicho Negativo |
 |-|-------------------|-------------------|
-| **Actual Positive** | True Positive (TP) | False Negative (FN) |
-| **Actual Negative** | False Positive (FP) | True Negative (TN) |
+| **Real Positivo** | Verdadero Positivo (VP) | Falso Negativo (FN) |
+| **Real Negativo** | Falso Positivo (FP) | Verdadero Negativo (VN) |
 
-### Derived Metrics
+### Métricas derivadas
 
-**Accuracy:** $\frac{TP + TN}{TP + TN + FP + FN}$
+**Exactitud:** $\frac{VP + VN}{VP + VN + FP + FN}$
 
-**Precision:** $\frac{TP}{TP + FP}$ — "When we predict positive, how often are we right?"
+**Precisión:** $\frac{VP}{VP + FP}$ — "Cuando predecimos positivo, ¿qué tan seguido acertamos?"
 
-**Recall (Sensitivity):** $\frac{TP}{TP + FN}$ — "What fraction of actual positives did we catch?"
+**Recall (Sensibilidad):** $\frac{VP}{VP + FN}$ — "¿Qué fracción de positivos reales capturamos?"
 
-**F1 Score:** $2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$ — Harmonic mean of precision and recall.
+**Puntaje F1:** $2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}}$ — Media armónica de precisión y recall.
 
-**Specificity:** $\frac{TN}{TN + FP}$ — "What fraction of actual negatives did we correctly reject?"
+**Especificidad:** $\frac{VN}{VN + FP}$ — "¿Qué fracción de negativos reales rechazamos correctamente?"
 
-### ROC Curve and AUC
+### Curva ROC y AUC
 
-ROC (Receiver Operating Characteristic) plots TPR (recall) vs. FPR (1 - specificity) as the threshold varies.
+La curva ROC (Receiver Operating Characteristic) grafica TPR (recall) vs. FPR (1 - especificidad) a medida que varía el umbral.
 
-**AUC (Area Under the Curve):** Probability that a randomly chosen positive is ranked higher than a randomly chosen negative. AUC = 1 is perfect, AUC = 0.5 is random.
+**AUC (Área Bajo la Curva):** Probabilidad de que un positivo elegido al azar tenga un rango más alto que un negativo elegido al azar. AUC = 1 es perfecto, AUC = 0.5 es aleatorio.
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -127,7 +127,7 @@ plt.savefig('figures/decision_boundary.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
@@ -174,21 +174,21 @@ plt.savefig('figures/roc_curve.png', dpi=150)
 plt.show()
 ```
 
-## Walkthrough Example: Breast Cancer Detection
+## Ejemplo guiado: Detección de cáncer de mama
 
-**Problem:** Classify breast tumors as malignant (1) or benign (0).
+**Problema:** Clasificar tumores de mama como malignos (1) o benignos (0).
 
-**Dataset:** Wisconsin Breast Cancer dataset (569 samples, 30 features).
+**Conjunto de datos:** Wisconsin Breast Cancer (569 muestras, 30 características).
 
-**Results:**
-- Accuracy: ~97%
-- Precision: ~0.98 (when we predict malignant, we are 98% correct)
-- Recall: ~0.96 (we catch 96% of actual malignancies)
-- AUC: ~0.99 (excellent discrimination)
+**Resultados:**
+- Exactitud: ~97%
+- Precisión: ~0.98 (cuando predecimos maligno, acertamos el 98% de las veces)
+- Recall: ~0.96 (capturamos el 96% de las malignidades reales)
+- AUC: ~0.99 (discriminación excelente)
 
-## Biotechnology Example: Predicting Drug Response
+## Ejemplo en biotecnología: Predicción de respuesta a fármacos
 
-A pharmaceutical company tests whether a drug is effective (responder = 1) based on patient biomarkers.
+Una empresa farmacéutica evalúa si un fármaco es efectivo (respondedor = 1) basándose en biomarcadores del paciente.
 
 ```python
 np.random.seed(42)
@@ -219,9 +219,9 @@ model_c.fit(X_train_c, y_train_c)
 print(classification_report(y_test_c, model_c.predict(X_test_c)))
 ```
 
-**Interpretation:** Gene X expression is the strongest predictor of drug response.
+**Interpretación:** La expresión del gen X es el predictor más fuerte de respuesta al fármaco.
 
-## SaaS Example: Churn Prediction
+## Ejemplo en SaaS: Predicción de abandono
 
 ```python
 np.random.seed(42)
@@ -254,51 +254,51 @@ for col, coef in zip(X_s.columns, model_s.coef_[0]):
 print(f"\nAUC: {roc_auc_score(y_s, model_s.predict_proba(X_s)[:, 1]):.3f}")
 ```
 
-## Common Mistakes
+## Errores comunes
 
-1. **Using accuracy on imbalanced data** — if 95% of samples are negative, a model predicting "negative" always gets 95% accuracy but is useless.
-2. **Setting threshold at 0.5 by default** — adjust based on business needs (higher threshold if false positives are costly).
-3. **Confusing precision and recall** — precision = accuracy of positive predictions; recall = fraction of positives found.
-4. **Interpreting coefficients directly** — coefficients are in log-odds units, not probability units.
+1. **Usar exactitud con datos desbalanceados** — si el 95% de las muestras son negativas, un modelo que predice "negativo" siempre obtiene 95% de exactitud pero es inútil.
+2. **Fijar el umbral en 0.5 por defecto** — ajustalo según las necesidades del negocio (umbral más alto si los falsos positivos son costosos).
+3. **Confundir precisión y recall** — precisión = exactitud de las predicciones positivas; recall = fracción de positivos encontrados.
+4. **Interpretar coeficientes directamente** — los coeficientes están en unidades de log-odds, no en unidades de probabilidad.
 
-## Best Practices
+## Buenas prácticas
 
-- Always check class balance before choosing metrics
-- Use AUC for model comparison, precision/recall for business decisions
-- Consider cost matrices: false positives and false negatives have different costs
-- Scale features for logistic regression (it uses gradient descent)
-- Use stratified train/test split to preserve class proportions
+- Revisá siempre el balance de clases antes de elegir métricas
+- Usá AUC para comparar modelos, precisión/recall para decisiones de negocio
+- Considerá matrices de costo: los falsos positivos y falsos negativos tienen costos diferentes
+- Escalá las características para la regresión logística (usa descenso por gradiente)
+- Usá división train/test estratificada para preservar las proporciones de clases
 
-## Summary
+## Resumen
 
-- Logistic regression predicts class probabilities via the sigmoid function
-- Decision boundary separates classes in feature space
-- Confusion matrix summarizes prediction outcomes
-- Precision, recall, F1 provide nuanced evaluation
-- ROC AUC measures ranking quality across thresholds
-- Threshold selection depends on business context
+- La regresión logística predice probabilidades de clase mediante la función sigmoide
+- La frontera de decisión separa las clases en el espacio de características
+- La matriz de confusión resume los resultados de predicción
+- Precisión, recall, F1 proveen una evaluación matizada
+- El AUC de la curva ROC mide la calidad del ranking a través de umbrales
+- La selección del umbral depende del contexto de negocio
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Sigmoid | S-shaped function squashing values to [0, 1] |
-| Decision boundary | Threshold where probability = 0.5 |
-| Confusion matrix | Table of TP, FP, TN, FN |
-| Precision | TP / (TP + FP) |
-| Recall (Sensitivity) | TP / (TP + FN) |
-| F1 Score | Harmonic mean of precision and recall |
-| ROC Curve | TPR vs. FPR at various thresholds |
-| AUC | Area under ROC, measures ranking quality |
+| Término | Definición |
+|---------|------------|
+| Sigmoide | Función en forma de S que comprime valores a [0, 1] |
+| Frontera de decisión | Umbral donde la probabilidad = 0.5 |
+| Matriz de confusión | Tabla de VP, FP, VN, FN |
+| Precisión | VP / (VP + FP) |
+| Recall (Sensibilidad) | VP / (VP + FN) |
+| Puntaje F1 | Media armónica de precisión y recall |
+| Curva ROC | TPR vs. FPR a varios umbrales |
+| AUC | Área bajo la curva ROC, mide calidad del ranking |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** If a spam filter has precision = 0.95 and recall = 0.60, what does each number mean? Which is more important for a spam filter?
+**Nivel 1 — Básico:** Si un filtro de spam tiene precisión = 0.95 y recall = 0.60, ¿qué significa cada número? ¿Cuál es más importante para un filtro de spam?
 
-**Level 2 — Implementation:** Load the `breast_cancer` dataset, train a logistic regression model, and plot the ROC curve with AUC displayed on the plot.
+**Nivel 2 — Implementación:** Cargá el dataset `breast_cancer`, entrená un modelo de regresión logística y graficá la curva ROC con el AUC mostrado en el gráfico.
 
-**Level 3 — Critical Thinking:** A medical test for a rare disease (1% prevalence) achieves 99% accuracy. Is this a good test? Explain why accuracy is misleading here.
+**Nivel 3 — Pensamiento crítico:** Una prueba médica para una enfermedad rara (1% de prevalencia) alcanza un 99% de exactitud. ¿Es una buena prueba? Explicá por qué la exactitud es engañosa aquí.
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `find_optimal_threshold(model, X_val, y_val)` that finds the decision threshold (0.0 to 1.0) that maximizes F1 score on validation data. Use 100 evenly spaced thresholds.
+Escribí una función `find_optimal_threshold(model, X_val, y_val)` que encuentre el umbral de decisión (0.0 a 1.0) que maximice el puntaje F1 en datos de validación. Usá 100 umbrales espaciados uniformemente.

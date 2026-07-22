@@ -1,161 +1,161 @@
 ---
 Module: 5
 Lesson Number: 2
-Lesson Title: Bias and Fairness
-Estimated Duration: 75 minutes
-Prerequisites: L1 (Introduction to AI Ethics)
+Lesson Title: Sesgo y Equidad
+Estimated Duration: 75 minutos
+Prerequisites: L1 (Introducción a la Ética en IA)
 Learning Objectives:
-  - Differentiate between data bias, algorithmic bias, and societal bias
-  - Implement fairness metrics using Python and sklearn
-  - Detect bias in a dataset using statistical analysis
-  - Analyze the COMPAS recidivism case and facial recognition bias case
-  - Apply bias mitigation strategies to a real dataset
-Keywords: bias, fairness, disparate impact, equal opportunity, demographic parity, COMPAS, fairness metrics
+  - Diferenciar entre sesgo de datos, sesgo algorítmico y sesgo social
+  - Implementar métricas de equidad usando Python y sklearn
+  - Detectar sesgo en un conjunto de datos usando análisis estadístico
+  - Analizar el caso COMPAS de reincidencia y el caso de sesgo en reconocimiento facial
+  - Aplicar estrategias de mitigación de sesgo a un conjunto de datos real
+Keywords: sesgo, equidad, impacto dispar, igualdad de oportunidades, paridad demográfica, COMPAS, métricas de equidad
 Difficulty: Intermediate
-Programming Concepts: pandas, numpy, python functions
-Mathematical Concepts: Conditional probability, confusion matrix, statistical disparity
-Machine Learning Concepts: Classification, model evaluation, threshold selection
-Datasets Used: Synthetic loan dataset, COMPAS (ProPublica) sample
+Programming Concepts: pandas, numpy, funciones de Python
+Mathematical Concepts: Probabilidad condicional, matriz de confusión, disparidad estadística
+Machine Learning Concepts: Clasificación, evaluación de modelos, selección de umbrales
+Datasets Used: Conjunto sintético de préstamos, muestra COMPAS (ProPublica)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Bias and Fairness
+# Sesgo y Equidad
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Differentiate** three types of bias: data, algorithmic, and societal
-2. **Define** formal fairness criteria: demographic parity, equal opportunity, equalized odds
-3. **Implement** fairness metrics in Python using sklearn
-4. **Analyze** the COMPAS recidivism case and identify sources of bias
-5. **Apply** at least one pre-processing bias mitigation strategy
+1. **Diferenciar** tres tipos de sesgo: de datos, algorítmico y social
+2. **Definir** criterios formales de equidad: paridad demográfica, igualdad de oportunidades, probabilidades igualadas
+3. **Implementar** métricas de equidad en Python usando sklearn
+4. **Analizar** el caso COMPAS de reincidencia e identificar fuentes de sesgo
+5. **Aplicar** al menos una estrategia de mitigación de sesgo de preprocesamiento
 
-## Motivation
+## Motivación
 
-In 2016, ProPublica published an investigation of COMPAS, a commercial algorithm used by US courts to predict recidivism risk. The algorithm assigned risk scores to defendants. ProPublica found that:
+En 2016, ProPublica publicó una investigación sobre COMPAS, un algoritmo comercial usado por tribunales de EE.UU. para predecir riesgo de reincidencia. El algoritmo asignaba puntajes de riesgo a los acusados. ProPublica encontró que:
 
-- Black defendants were almost twice as likely as white defendants to be labeled high risk but not actually re-offend (false positive rate: 45% vs. 23%)
-- White defendants were more likely to be labeled low risk but later re-offend (false negative rate: 48% vs. 28%)
+- Los acusados negros tenían casi el doble de probabilidades que los acusados blancos de ser etiquetados como de alto riesgo sin haber reincidido (tasa de falsos positivos: 45% vs. 23%)
+- Los acusados blancos eran más propensos a ser etiquetados como de bajo riesgo pero luego reincidían (tasa de falsos negativos: 48% vs. 28%)
 
-The algorithm was systematically biased. It was used to influence bail, sentencing, and parole decisions affecting millions of people.
+El algoritmo estaba sistemáticamente sesgado. Se usaba para influir en decisiones de fianza, sentencia y libertad condicional que afectaban a millones de personas.
 
-The company that built COMPAS, Northpointe (now Equivant), defended the algorithm. They argued that it was fair because the *probability of recidivism* for any given score was the same across groups. Both sides had a mathematical argument. Who was right?
+La empresa que construyó COMPAS, Northpointe (hoy Equivant), defendió el algoritmo. Argumentaron que era justo porque la *probabilidad de reincidencia* para cualquier puntaje dado era la misma entre grupos. Ambas partes tenían un argumento matemático. ¿Quién tenía razón?
 
-The answer depends on which definition of fairness you use. And that is the central challenge of algorithmic fairness: **fairness is not a single mathematical concept.** It is a contested social value translated into competing mathematical definitions.
+La respuesta depende de qué definición de equidad uses. Y ese es el desafío central de la equidad algorítmica: **la equidad no es un concepto matemático único.** Es un valor social en disputa traducido a definiciones matemáticas en competencia.
 
-Understanding these definitions — and their limitations — is essential for anyone building or deploying ML systems that affect people's lives.
+Entender estas definiciones — y sus limitaciones — es esencial para cualquiera que construya o despliegue sistemas de ML que afectan la vida de las personas.
 
-## Big Picture
+## Panorama General
 
-| Previous Lesson | Current Lesson | Next Lesson |
+| Lección Anterior | Lección Actual | Próxima Lección |
 |---|---|---|
-| L1: Intro to Ethics (principles) | L2: Bias and Fairness (types, metrics, case studies) | L3: Transparency and Explainability (XAI, SHAP, LIME) |
+| L1: Introducción a la Ética (principios) | L2: Sesgo y Equidad (tipos, métricas, casos de estudio) | L3: Transparencia y Explicabilidad (XAI, SHAP, LIME) |
 
-## Theory
+## Teoría
 
-### The Three Types of Bias
+### Los Tres Tipos de Sesgo
 
-#### 1. Data Bias
+#### 1. Sesgo de Datos
 
-Data bias exists when the training data does not accurately represent the population the model will be applied to.
+El sesgo de datos existe cuando los datos de entrenamiento no representan con precisión a la población a la que se aplicará el modelo.
 
-Common sources:
+Fuentes comunes:
 
-- **Historical bias:** The data reflects existing societal prejudices. Example: historical hiring data shows fewer women hired for tech roles because of past discrimination.
-- **Representation bias:** Certain groups are underrepresented in the data. Example: medical datasets that primarily contain data from white men.
-- **Measurement bias:** The features or labels are measured differently across groups. Example: using self-reported health status when different groups have different access to healthcare.
-- **Label bias:** The target variable itself is biased. Example: using arrest records as labels for "criminality" when policing is biased.
+- **Sesgo histórico:** Los datos reflejan prejuicios sociales existentes. Ejemplo: los datos históricos de contratación muestran menos mujeres contratadas para roles tecnológicos debido a discriminación pasada.
+- **Sesgo de representación:** Ciertos grupos están subrepresentados en los datos. Ejemplo: conjuntos de datos médicos que contienen principalmente datos de hombres blancos.
+- **Sesgo de medición:** Las características o etiquetas se miden de manera diferente entre grupos. Ejemplo: usar estado de salud autoinformado cuando diferentes grupos tienen diferente acceso a la atención médica.
+- **Sesgo de etiqueta:** La variable objetivo en sí misma está sesgada. Ejemplo: usar registros de arrestos como etiquetas para "criminalidad" cuando la vigilancia policial está sesgada.
 
-#### 2. Algorithmic Bias
+#### 2. Sesgo Algorítmico
 
-Algorithmic bias arises from the design choices in the model or the optimization process.
+El sesgo algorítmico surge de las decisiones de diseño en el modelo o el proceso de optimización.
 
-Common sources:
+Fuentes comunes:
 
-- **Feature choice:** Including protected attributes (race, gender) or proxies (zip code, name).
-- **Objective function:** Optimizing for overall accuracy can sacrifice performance on minority groups.
-- **Model architecture:** Some models may amplify certain patterns in the data.
-- **Evaluation:** Using inappropriate metrics that hide group-level disparities.
+- **Selección de características:** Incluir atributos protegidos (raza, género) o proxies (código postal, nombre).
+- **Función objetivo:** Optimizar para la precisión general puede sacrificar el rendimiento en grupos minoritarios.
+- **Arquitectura del modelo:** Algunos modelos pueden amplificar ciertos patrones en los datos.
+- **Evaluación:** Usar métricas inapropiadas que ocultan disparidades a nivel de grupo.
 
-#### 3. Societal Bias
+#### 3. Sesgo Social
 
-Societal bias is bias that exists in the broader society and is reflected or amplified by AI systems.
+El sesgo social es el sesgo que existe en la sociedad en general y es reflejado o amplificado por los sistemas de IA.
 
-- **Feedback loops:** A biased model makes decisions that reinforce the bias in future data.
-- **Amplification:** An AI system trained on biased data does not just replicate the bias — it can amplify it.
-- **Legitimization:** People trust algorithmic decisions as objective, giving biased systems an aura of authority.
+- **Bucles de retroalimentación:** Un modelo sesgado toma decisiones que refuerzan el sesgo en datos futuros.
+- **Amplificación:** Un sistema de IA entrenado con datos sesgados no solo replica el sesgo — puede amplificarlo.
+- **Legitimación:** La gente confía en las decisiones algorítmicas como objetivas, otorgando a los sistemas sesgados un aura de autoridad.
 
-### Fairness Definitions
+### Definiciones de Equidad
 
-There are many competing definitions of fairness. The three most commonly used are:
+Existen muchas definiciones de equidad en competencia. Las tres más usadas son:
 
-#### Demographic Parity (Statistical Parity)
+#### Paridad Demográfica (Paridad Estadística)
 
-A prediction is fair if the outcome is independent of the protected attribute:
+Una predicción es justa si el resultado es independiente del atributo protegido:
 
 $$P(\hat{Y} = 1 | A = 0) = P(\hat{Y} = 1 | A = 1)$$
 
-where $\hat{Y}$ is the predicted outcome and $A$ is the protected attribute.
+donde $\hat{Y}$ es el resultado predicho y $A$ es el atributo protegido.
 
-**Intuition:** Each group should receive positive outcomes at the same rate.
+**Intuición:** Cada grupo debería recibir resultados positivos a la misma tasa.
 
-**Limitation:** If base rates differ between groups (e.g., different recidivism rates), demographic parity may require sacrificing accuracy.
+**Limitación:** Si las tasas base difieren entre grupos (ej., diferentes tasas de reincidencia), la paridad demográfica puede requerir sacrificar precisión.
 
-#### Equal Opportunity
+#### Igualdad de Oportunidades
 
-A prediction satisfies equal opportunity if the true positive rate is equal across groups:
+Una predicción satisface igualdad de oportunidades si la tasa de verdaderos positivos es igual entre grupos:
 
 $$P(\hat{Y} = 1 | Y = 1, A = 0) = P(\hat{Y} = 1 | Y = 1, A = 1)$$
 
-**Intuution:** Each group should have the same chance of being correctly identified as positive.
+**Intuición:** Cada grupo debería tener la misma probabilidad de ser correctamente identificado como positivo.
 
-**Limitation:** Does not address false positive disparities.
+**Limitación:** No aborda las disparidades en falsos positivos.
 
-#### Equalized Odds
+#### Probabilidades Igualadas
 
-A prediction satisfies equalized odds if both the true positive rate and false positive rate are equal across groups:
+Una predicción satisface probabilidades igualadas si tanto la tasa de verdaderos positivos como la tasa de falsos positivos son iguales entre grupos:
 
-$$P(\hat{Y} = 1 | Y = y, A = 0) = P(\hat{Y} = 1 | Y = y, A = 1) \quad \text{for } y \in \{0, 1\}$$
+$$P(\hat{Y} = 1 | Y = y, A = 0) = P(\hat{Y} = 1 | Y = y, A = 1) \quad \text{para } y \in \{0, 1\}$$
 
-**Intuition:** The model's errors affect all groups equally.
+**Intuición:** Los errores del modelo afectan a todos los grupos por igual.
 
-**Limitation:** Harder to achieve in practice. May conflict with other fairness definitions.
+**Limitación:** Más difícil de lograr en la práctica. Puede entrar en conflicto con otras definiciones de equidad.
 
-#### The Impossibility Theorem
+#### El Teorema de Imposibilidad
 
-Chouldechova (2017) and Kleinberg et al. (2016) showed that it is impossible to simultaneously satisfy all three fairness criteria unless either the base rates are equal across groups or the classifier is perfect. This means **fairness requires trade-offs.**
+Chouldechova (2017) y Kleinberg et al. (2016) demostraron que es imposible satisfacer simultáneamente los tres criterios de equidad a menos que las tasas base sean iguales entre grupos o el clasificador sea perfecto. Esto significa que **la equidad requiere compensaciones.**
 
-### Bias Detection Workflow
+### Flujo de Trabajo para Detección de Sesgo
 
-1. **Dataset audit:** Examine demographic composition, missing data patterns, label distribution across groups.
-2. **Model audit:** Train model, compute fairness metrics, compare performance across groups.
-3. **Error analysis:** Analyze false positive and false negative rates by group.
-4. **Mitigation:** Apply pre-processing, in-processing, or post-processing interventions.
+1. **Auditoría del conjunto de datos:** Examinar composición demográfica, patrones de datos faltantes, distribución de etiquetas entre grupos.
+2. **Auditoría del modelo:** Entrenar modelo, calcular métricas de equidad, comparar rendimiento entre grupos.
+3. **Análisis de errores:** Analizar tasas de falsos positivos y falsos negativos por grupo.
+4. **Mitigación:** Aplicar intervenciones de preprocesamiento, durante el procesamiento o postprocesamiento.
 
-## Mathematical Foundation
+## Base Matemática
 
-### Fairness Metrics
+### Métricas de Equidad
 
-Given:
-- $A$: protected attribute (e.g., race, gender)
-- $Y$: true label (1 = positive, 0 = negative)
-- $\hat{Y}$: predicted label
+Dado:
+- $A$: atributo protegido (ej., raza, género)
+- $Y$: etiqueta verdadera (1 = positivo, 0 = negativo)
+- $\hat{Y}$: etiqueta predicha
 
-| Metric | Formula | What It Measures |
-|--------|---------|-----------------|
-| Demographic parity difference | $P(\hat{Y}=1\|A=0) - P(\hat{Y}=1\|A=1)$ | Rate of positive predictions |
-| Equal opportunity difference | $TPR_{A=0} - TPR_{A=1}$ | True positive rate gap |
-| Equalized odds difference | $\max(\|TPR_0 - TPR_1\|, \|FPR_0 - FPR_1\|)$ | Maximum of TPR and FPR gaps |
-| Disparate impact | $\frac{P(\hat{Y}=1\|A=1)}{P(\hat{Y}=1\|A=0)}$ | Ratio of positive prediction rates |
+| Métrica | Fórmula | Qué Mide |
+|---------|---------|----------|
+| Diferencia de paridad demográfica | $P(\hat{Y}=1\|A=0) - P(\hat{Y}=1\|A=1)$ | Tasa de predicciones positivas |
+| Diferencia de igualdad de oportunidades | $TPR_{A=0} - TPR_{A=1}$ | Brecha en tasa de verdaderos positivos |
+| Diferencia de probabilidades igualadas | $\max(\|TPR_0 - TPR_1\|, \|FPR_0 - FPR_1\|)$ | Máximo de brechas de TPR y FPR |
+| Impacto dispar | $\frac{P(\hat{Y}=1\|A=1)}{P(\hat{Y}=1\|A=0)}$ | Razón de tasas de predicción positiva |
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Bias Detection in a Synthetic Loan Dataset
+### Detección de Sesgo en un Conjunto Sintético de Préstamos
 
-We will generate a synthetic dataset representing loan applications with a protected attribute (race) and analyze bias.
+Vamos a generar un conjunto de datos sintético que representa solicitudes de préstamo con un atributo protegido (raza) y analizar sesgo.
 
 ```python
 import numpy as np
@@ -207,98 +207,98 @@ for group in ['white', 'non_white']:
     print(f"{group}: TPR={tpr:.3f}, FPR={fpr:.3f}, Approval Rate={approval_rate:.3f}")
 ```
 
-**Interpretation:** The non-white group likely has higher FPR and lower approval rate, indicating bias.
+**Interpretación:** El grupo no blanco probablemente tiene una FPR más alta y una tasa de aprobación más baja, lo que indica sesgo.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### Bias in a Diagnostic Model
+### Sesgo en un Modelo de Diagnóstico
 
-A diagnostic model for skin cancer is trained on a dataset where 90% of images are of light skin. When evaluated on dark skin images, accuracy drops from 95% to 70%.
+Un modelo de diagnóstico para cáncer de piel se entrena con un conjunto de datos donde el 90% de las imágenes son de piel clara. Cuando se evalúa en imágenes de piel oscura, la precisión cae del 95% al 70%.
 
-**Bias types involved:**
-- Representation bias (dark skin underrepresented)
-- Measurement bias (image capture conditions may differ)
-- Historical bias (medical research has historically focused on light skin)
+**Tipos de sesgo involucrados:**
+- Sesgo de representación (piel oscura subrepresentada)
+- Sesgo de medición (las condiciones de captura de imagen pueden diferir)
+- Sesgo histórico (la investigación médica se ha centrado históricamente en piel clara)
 
-**Fairness analysis:**
-- Demographic parity: For a "requires biopsy" positive class, rate should be consistent
-- Equal opportunity: Sensitivity should be equal across skin types
-- Equalized odds: Both sensitivity and specificity should be equal across skin types
+**Análisis de equidad:**
+- Paridad demográfica: para una clase positiva de "requiere biopsia", la tasa debería ser consistente
+- Igualdad de oportunidades: la sensibilidad debería ser igual entre tipos de piel
+- Probabilidades igualadas: tanto la sensibilidad como la especificidad deberían ser iguales entre tipos de piel
 
-## SaaS Example
+## Ejemplo SaaS
 
-### Algorithmic Hiring
+### Contratación Algorítmica
 
-A SaaS recruiting platform offers an AI screening tool. The model is trained on successful hires from the past 5 years at client companies. The model learns to penalize candidates with gaps in their resume, which disproportionately affects women who took parental leave.
+Una plataforma SaaS de reclutamiento ofrece una herramienta de selección con IA. El modelo se entrena con contrataciones exitosas de los últimos 5 años en empresas cliente. El modelo aprende a penalizar a candidatos con espacios en su currículum, lo que afecta desproporcionadamente a mujeres que tomaron licencia parental.
 
-**Fairness mitigation:**
-1. Remove or transform features that are proxies for protected attributes
-2. Require equal opportunity: the top-k candidates should have equal TPR across gender
-3. Regular auditing of deployed model performance by demographic group
-4. Transparency reports for clients on model demographics
+**Mitigación de equidad:**
+1. Eliminar o transformar características que son proxies de atributos protegidos
+2. Exigir igualdad de oportunidades: los k mejores candidatos deberían tener TPR igual entre géneros
+3. Auditoría regular del rendimiento del modelo desplegado por grupo demográfico
+4. Informes de transparencia para clientes sobre la demografía del modelo
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Assuming fairness through unawareness.** Simply removing the protected attribute from the model does not eliminate bias because other features (zip code, education) can act as proxies.
-2. **Ignoring intersectionality.** Bias may be concentrated at the intersection of multiple attributes (e.g., women of color) rather than single dimensions.
-3. **Optimizing for one fairness metric while ignoring others.** There is no single universally correct fairness definition.
-4. **Confusing group fairness with individual fairness.** Two individuals who are similar should receive similar predictions (individual fairness), which differs from group-level parity.
-5. **Assuming fairness is a one-time fix.** Bias can emerge or change over time as data distributions shift.
+1. **Asumir equidad por desconocimiento.** Simplemente eliminar el atributo protegido del modelo no elimina el sesgo porque otras características (código postal, educación) pueden actuar como proxies.
+2. **Ignorar la interseccionalidad.** El sesgo puede concentrarse en la intersección de múltiples atributos (ej., mujeres de color) en lugar de dimensiones únicas.
+3. **Optimizar para una métrica de equidad ignorando otras.** No existe una única definición de equidad universalmente correcta.
+4. **Confundir equidad grupal con equidad individual.** Dos individuos similares deberían recibir predicciones similares (equidad individual), lo cual difiere de la paridad a nivel grupal.
+5. **Asumir que la equidad es una solución única.** El sesgo puede aparecer o cambiar con el tiempo a medida que las distribuciones de datos se modifican.
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Audit your data before training.** Examine demographic composition, label balance, and feature distributions across groups.
-2. **Test multiple fairness metrics.** No single metric captures everything.
-3. **Document fairness decisions.** Explain which definition(s) you chose and why.
-4. **Involve domain experts.** Understanding why bias exists requires domain knowledge.
-5. **Plan for ongoing monitoring.** Fairness is not a one-time check.
+1. **Auditá tus datos antes de entrenar.** Examiná la composición demográfica, el balance de etiquetas y las distribuciones de características entre grupos.
+2. **Probá múltiples métricas de equidad.** Ninguna métrica única captura todo.
+3. **Documentá las decisiones de equidad.** Explicá qué definición(es) elegiste y por qué.
+4. **Involucrá a expertos del dominio.** Entender por qué existe el sesgo requiere conocimiento del dominio.
+5. **Planificá un monitoreo continuo.** La equidad no es una verificación única.
 
-## Summary
+## Resumen
 
-- Three types of bias: data, algorithmic, societal
-- Key fairness definitions: demographic parity, equal opportunity, equalized odds
-- Fairness metrics are competing and sometimes incompatible (impossibility theorem)
-- Bias detection requires auditing data, model, and errors by group
-- Mitigation strategies exist at each stage of the ML pipeline
-- Removing protected attributes is insufficient (proxy problem)
+- Tres tipos de sesgo: de datos, algorítmico, social
+- Definiciones clave de equidad: paridad demográfica, igualdad de oportunidades, probabilidades igualadas
+- Las métricas de equidad compiten y a veces son incompatibles (teorema de imposibilidad)
+- La detección de sesgo requiere auditar datos, modelo y errores por grupo
+- Existen estrategias de mitigación en cada etapa del pipeline de ML
+- Eliminar atributos protegidos es insuficiente (problema del proxy)
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Data bias | Bias originating from the training data (representation, measurement, historical) |
-| Algorithmic bias | Bias introduced by model design choices (features, objective, evaluation) |
-| Societal bias | Bias that exists in society and is reflected/amplified by AI |
-| Demographic parity | Equal rate of positive predictions across groups |
-| Equal opportunity | Equal true positive rate across groups |
-| Equalized odds | Equal TPR and FPR across groups |
-| Disparate impact | When a policy or practice disproportionately affects a protected group |
-| Impossibility theorem | Proof that multiple fairness definitions cannot simultaneously be satisfied |
-| Proxy | A non-protected feature that correlates with a protected attribute |
-| Intersectionality | The compounding effect of multiple protected attributes |
+| Término | Definición |
+|---------|------------|
+| Sesgo de datos | Sesgo originado en los datos de entrenamiento (representación, medición, histórico) |
+| Sesgo algorítmico | Sesgo introducido por decisiones de diseño del modelo (características, objetivo, evaluación) |
+| Sesgo social | Sesgo que existe en la sociedad y es reflejado/amplificado por la IA |
+| Paridad demográfica | Tasa igual de predicciones positivas entre grupos |
+| Igualdad de oportunidades | Tasa igual de verdaderos positivos entre grupos |
+| Probabilidades igualadas | TPR y FPR iguales entre grupos |
+| Impacto dispar | Cuando una política o práctica afecta desproporcionadamente a un grupo protegido |
+| Teorema de imposibilidad | Prueba de que múltiples definiciones de equidad no pueden satisfacerse simultáneamente |
+| Proxy | Una característica no protegida que se correlaciona con un atributo protegido |
+| Interseccionalidad | El efecto compuesto de múltiples atributos protegidos |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. Define the three types of bias in AI. Give a concrete example of each.
-2. What is the difference between demographic parity and equal opportunity? Which one would you use for a credit approval model? Why?
+1. Definí los tres tipos de sesgo en IA. Dá un ejemplo concreto de cada uno.
+2. ¿Cuál es la diferencia entre paridad demográfica e igualdad de oportunidades? ¿Cuál usarías para un modelo de aprobación de crédito? ¿Por qué?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-3. Using the synthetic loan dataset from the walkthrough, compute the disparate impact ratio for the model's predictions. Disparate impact is defined as the ratio of positive prediction rates between the protected group and the reference group.
-4. Train a Random Forest classifier on the same data and compare the fairness metrics. Does the model class affect fairness?
+3. Usando el conjunto de datos sintético de préstamos del ejemplo guiado, calculá la razón de impacto dispar para las predicciones del modelo. El impacto dispar se define como la razón de tasas de predicción positiva entre el grupo protegido y el grupo de referencia.
+4. Entrená un clasificador Random Forest con los mismos datos y compará las métricas de equidad. ¿La clase del modelo afecta la equidad?
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. Imagine you are building a model to predict which patients need follow-up care. The base rate of the condition is 2x higher in one demographic group. Discuss whether demographic parity is an appropriate fairness criterion for this scenario. What would you recommend instead?
-6. Read ProPublica's COMPAS analysis and Northpointe's response. Both used rigorous statistics but reached opposite conclusions. Explain how they could both be "correct" by using different fairness definitions.
+5. Imaginá que estás construyendo un modelo para predecir qué pacientes necesitan atención de seguimiento. La tasa base de la condición es 2 veces mayor en un grupo demográfico. Discutí si la paridad demográfica es un criterio de equidad apropiado para este escenario. ¿Qué recomendarías en su lugar?
+6. Leé el análisis de COMPAS de ProPublica y la respuesta de Northpointe. Ambos usaron estadísticas rigurosas pero llegaron a conclusiones opuestas. Explicá cómo ambos podrían estar "correctos" usando diferentes definiciones de equidad.
 
-## Coding Challenge
+## Desafío de Programación
 
-Generate a synthetic dataset with two demographic groups where one group has a higher base rate of the positive class. Train a classifier. Compute demographic parity, equal opportunity, and equalized odds. Implement a simple reweighing pre-processing technique (assign higher sample weights to underrepresented groups) and compare the fairness metrics before and after.
+Generá un conjunto de datos sintético con dos grupos demográficos donde un grupo tenga una tasa base más alta de la clase positiva. Entrená un clasificador. Calculá paridad demográfica, igualdad de oportunidades y probabilidades igualadas. Implementá una técnica simple de reponderación de preprocesamiento (asignar pesos de muestra más altos a grupos subrepresentados) y compará las métricas de equidad antes y después.
 
-## References
+## Referencias
 
 Angwin, J., Larson, J., Mattu, S., & Kirchner, L. (2016). Machine bias. *ProPublica*. https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing
 

@@ -1,16 +1,8 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-const protectedRoutes = createRouteMatcher(["/learn(.*)", "/dashboard(.*)"]);
-
-export default clerkMiddleware(async (auth, req) => {
-  if (protectedRoutes(req)) {
-    await auth.protect();
-  }
-});
+// Auth desactivado durante desarrollo/pulido
+export default clerkMiddleware();
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and static files
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: [],
 };

@@ -1,111 +1,111 @@
 ---
 Module: 4
 Lesson Number: 1
-Lesson Title: ML Fundamentals
-Estimated Duration: 75 minutes
-Prerequisites: Module 3 (Statistics for Machine Learning)
+Lesson Title: Fundamentos de ML
+Estimated Duration: 75 minutos
+Prerequisites: Módulo 3 (Estadística para Aprendizaje Automático)
 Learning Objectives:
-  - Explain what Machine Learning is and how it differs from traditional programming
-  - Define features, labels, training, and prediction
-  - Distinguish between supervised and unsupervised learning
-  - Diagnose overfitting and underfitting from learning curves
-  - Explain the bias-variance tradeoff with examples
-Keywords: supervised learning, unsupervised learning, features, labels, overfitting, underfitting, bias-variance tradeoff, generalization
-Difficulty: Beginner
+  - Explicar qué es el Aprendizaje Automático y cómo difiere de la programación tradicional
+  - Definir características, etiquetas, entrenamiento y predicción
+  - Distinguir entre aprendizaje supervisado y no supervisado
+  - Diagnosticar sobreajuste y subajuste a partir de curvas de aprendizaje
+  - Explicar la compensación sesgo-varianza con ejemplos
+Keywords: aprendizaje supervisado, aprendizaje no supervisado, características, etiquetas, sobreajuste, subajuste, compensación sesgo-varianza, generalización
+Difficulty: Principiante
 Programming Concepts: train_test_split, model.fit, model.predict
-Mathematical Concepts: variance, bias, mean squared error
-Machine Learning Concepts: training set, test set, generalization, overfitting, underfitting
-Datasets Used: scikit-learn diabetes, synthetic sinusoidal
+Mathematical Concepts: varianza, sesgo, error cuadrático medio
+Machine Learning Concepts: conjunto de entrenamiento, conjunto de prueba, generalización, sobreajuste, subajuste
+Datasets Used: scikit-learn diabetes, sinusoidal sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# ML Fundamentals
+# Fundamentos de ML
 
-## Motivation
+## Motivación
 
-Every day you use Machine Learning: Netflix recommends shows, Gmail filters spam, your phone recognizes faces. But how does it work? In traditional programming, you write rules. In ML, the computer learns rules from data. This shift — from programmed rules to learned rules — is the most important idea in modern software. In biotechnology, ML predicts which drug compounds are effective. In SaaS, ML predicts which customers will churn. This lesson builds the mental model you need for every algorithm in the course.
+Todos los días usás Aprendizaje Automático: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero ¿cómo funciona? En la programación tradicional, escribís reglas. En ML, la computadora aprende reglas a partir de datos. Este cambio —de reglas programadas a reglas aprendidas— es la idea más importante del software moderno. En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, el ML predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitás para cada algoritmo del curso.
 
-## Big Picture
+## Panorama general
 
-**Previous:** Module 3 taught you how to describe and visualize data. **This lesson:** You learn how algorithms *learn from data*. **Next:** Linear Regression — your first real ML algorithm.
+**Anterior:** El Módulo 3 te enseñó a describir y visualizar datos. **Esta lección:** Aprendés cómo los algoritmos *aprenden de los datos*. **Siguiente:** Regresión lineal — tu primer algoritmo de ML real.
 
-## Theory
+## Teoría
 
-### What is Machine Learning?
+### ¿Qué es el Aprendizaje Automático?
 
-Machine Learning is a field of artificial intelligence where computers learn patterns from data without being explicitly programmed for every scenario.
+El Aprendizaje Automático es un campo de la inteligencia artificial donde las computadoras aprenden patrones a partir de datos sin ser programadas explícitamente para cada escenario.
 
-**Traditional programming:**
+**Programación tradicional:**
 ```
-Rules + Data → Answers
-```
-
-**Machine Learning:**
-```
-Data + Answers → Rules
+Reglas + Datos → Respuestas
 ```
 
-We give the computer examples, and it figures out the underlying pattern.
+**Aprendizaje Automático:**
+```
+Datos + Respuestas → Reglas
+```
 
-### Key Vocabulary
+Le damos ejemplos a la computadora, y ella descubre el patrón subyacente.
 
-**Feature (X):** An input variable used to make predictions.
-- Example: number of bedrooms in a house, gene expression level, days since last login.
+### Vocabulario clave
 
-**Label (y):** The output variable we want to predict.
-- Example: house price, disease status, churn probability.
+**Característica (X):** Una variable de entrada usada para hacer predicciones.
+- Ejemplo: cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión.
 
-**Training:** The process where the model learns patterns from data.
+**Etiqueta (y):** La variable de salida que queremos predecir.
+- Ejemplo: precio de una casa, estado de enfermedad, probabilidad de abandono.
 
-**Prediction:** Using the trained model on new data.
+**Entrenamiento:** El proceso donde el modelo aprende patrones a partir de los datos.
 
-### Supervised vs. Unsupervised Learning
+**Predicción:** Usar el modelo entrenado con datos nuevos.
 
-| Aspect | Supervised | Unsupervised |
-|--------|-----------|--------------|
-| Data | Has labels | No labels |
-| Goal | Predict labels | Find structure |
-| Examples | Regression, Classification | Clustering, PCA |
+### Aprendizaje Supervisado vs. No Supervisado
 
-### Generalization
+| Aspecto | Supervisado | No Supervisado |
+|---------|-------------|----------------|
+| Datos | Tiene etiquetas | Sin etiquetas |
+| Objetivo | Predecir etiquetas | Encontrar estructura |
+| Ejemplos | Regresión, Clasificación | Clustering, PCA |
 
-A model's ability to perform well on *unseen* data. This is the true goal of ML — not memorizing training data, but learning patterns that generalize.
+### Generalización
 
-### Overfitting
+La capacidad de un modelo de funcionar bien con datos *no vistos*. Este es el verdadero objetivo del ML —no memorizar datos de entrenamiento, sino aprender patrones que generalicen.
 
-The model learns the training data *too well*, including noise. It performs great on training data but poorly on new data.
+### Sobreajuste
 
-**Symptoms:**
-- Training accuracy near 100%, test accuracy much lower
-- Very complex model with many parameters
+El modelo aprende los datos de entrenamiento *demasiado bien*, incluyendo el ruido. Funciona excelente en los datos de entrenamiento pero mal con datos nuevos.
 
-### Underfitting
+**Síntomas:**
+- Precisión en entrenamiento cercana al 100%, precisión en prueba mucho más baja
+- Modelo muy complejo con muchos parámetros
 
-The model is too simple to capture the underlying pattern. It performs poorly on both training and test data.
+### Subajuste
 
-**Symptoms:**
-- Both training and test accuracy are low
-- Model is too simple
+El modelo es demasiado simple para capturar el patrón subyacente. Funciona mal tanto en datos de entrenamiento como de prueba.
 
-## Mathematical Foundation: Bias-Variance Tradeoff
+**Síntomas:**
+- Tanto la precisión en entrenamiento como en prueba son bajas
+- El modelo es demasiado simple
 
-The expected test error of a model can be decomposed into three parts:
+## Fundamento matemático: Compensación sesgo-varianza
 
-$$\text{Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}$$
+El error esperado de prueba de un modelo se puede descomponer en tres partes:
 
-**Bias:** Error from wrong assumptions. High bias → underfitting.
-**Variance:** Error from sensitivity to small fluctuations in training data. High variance → overfitting.
-**Irreducible Error:** Noise inherent in the problem.
+$$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 
-**Intuition:** Think of archery.
-- High bias: shots are far from bullseye (systematic error).
-- High variance: shots are scattered (inconsistent).
+**Sesgo:** Error proveniente de suposiciones incorrectas. Sesgo alto → subajuste.
+**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos de entrenamiento. Varianza alta → sobreajuste.
+**Error irreducible:** Ruido inherente al problema.
 
-**The tradeoff:** As model complexity increases, bias decreases but variance increases. The optimal model balances both.
+**Intuición:** Pensá en tiro con arco.
+- Sesgo alto: los disparos están lejos del centro (error sistemático).
+- Varianza alta: los disparos están dispersos (inconsistencia).
 
-## Visual Explanation
+**La compensación:** A medida que la complejidad del modelo aumenta, el sesgo disminuye pero la varianza aumenta. El modelo óptimo equilibra ambos.
+
+## Explicación visual
 
 ```python
 import numpy as np
@@ -154,14 +154,14 @@ plt.savefig('figures/bias_variance_demo.png', dpi=150)
 plt.show()
 ```
 
-**Interpretation:**
-- Degree 1 (underfitting): Simple line, high bias, both errors high.
-- Degree 4 (good fit): Captures pattern, both errors low.
-- Degree 15 (overfitting): Wiggly, perfect on training but fails on test.
+**Interpretación:**
+- Grado 1 (subajuste): Línea simple, sesgo alto, ambos errores altos.
+- Grado 4 (buen ajuste): Captura el patrón, ambos errores bajos.
+- Grado 15 (sobreajuste): Ondulado, perfecto en entrenamiento pero falla en prueba.
 
-## Python Implementation
+## Implementación en Python
 
-### Train/Test Split
+### División Train/Test
 
 ```python
 import numpy as np
@@ -189,11 +189,11 @@ print(f"Test R²: {model.score(X_test, y_test):.3f}")
 print(f"Test MSE: {mean_squared_error(y_test, y_pred):.1f}")
 ```
 
-## Walkthrough Example: Predicting Disease Progression
+## Ejemplo guiado: Predicción de progresión de enfermedad
 
-**Problem:** Predict diabetes progression after one year.
+**Problema:** Predecir la progresión de diabetes después de un año.
 
-**Dataset:** scikit-learn diabetes dataset (442 patients, 10 features).
+**Conjunto de datos:** scikit-learn diabetes (442 pacientes, 10 características).
 
 ```python
 from sklearn.datasets import load_diabetes
@@ -204,81 +204,81 @@ print(f"Samples: {data.data.shape[0]}")
 print(f"Features per sample: {data.data.shape[1]}")
 ```
 
-**Analysis:** We split data, train a linear model, and evaluate.
+**Análisis:** Dividimos los datos, entrenamos un modelo lineal y evaluamos.
 
-**Interpretation:** The model explains ~45% of variance in disease progression (R² ≈ 0.45).
+**Interpretación:** El modelo explica ~45% de la varianza en la progresión de la enfermedad (R² ≈ 0.45).
 
-## Biotechnology Example: Gene Expression → Drug Response
+## Ejemplo en biotecnología: Expresión génica → Respuesta a fármacos
 
-Imagine you have gene expression data from 500 cancer patients and want to predict which patients respond to a specific drug.
+Imaginá que tenés datos de expresión génica de 500 pacientes con cáncer y querés predecir qué pacientes responden a un fármaco específico.
 
-- **Features (X):** Expression levels of 1000 genes
-- **Label (y):** Responder (1) or non-responder (0)
+- **Características (X):** Niveles de expresión de 1000 genes
+- **Etiqueta (y):** Respondedor (1) o no respondedor (0)
 
-A model trained on this data can identify expression signatures predictive of drug response.
+Un modelo entrenado con estos datos puede identificar firmas de expresión predictivas de la respuesta al fármaco.
 
-## SaaS Example: Predicting User Churn
+## Ejemplo en SaaS: Predicción de abandono de usuarios
 
-A SaaS company wants to predict which users will cancel their subscription.
+Una empresa SaaS quiere predecir qué usuarios cancelarán su suscripción.
 
-- **Features:** login frequency, support tickets, days since last login, plan type
-- **Label:** churned (1) or not (0)
+- **Características:** frecuencia de inicio de sesión, tickets de soporte, días desde el último inicio de sesión, tipo de plan
+- **Etiqueta:** abandonó (1) o no (0)
 
-The model learns patterns: users who don't log in for 30+ days and have filed support tickets are high-risk.
+El modelo aprende patrones: los usuarios que no inician sesión por más de 30 días y han abierto tickets de soporte son de alto riesgo.
 
-## Common Mistakes
+## Errores comunes
 
-1. **Training on all data before splitting** — causes data leakage, overestimates performance.
-2. **Using test set for hyperparameter tuning** — treats test set like training data.
-3. **Assuming high training accuracy means a good model** — could be overfitting.
-4. **Confusing correlation with causation** — ML finds patterns, not causes.
+1. **Entrenar con todos los datos antes de dividir** — causa fuga de datos, sobreestima el rendimiento.
+2. **Usar el conjunto de prueba para ajustar hiperparámetros** — trata al conjunto de prueba como si fuera de entrenamiento.
+3. **Asumir que una alta precisión en entrenamiento significa un buen modelo** — podría ser sobreajuste.
+4. **Confundir correlación con causalidad** — el ML encuentra patrones, no causas.
 
-## Best Practices
+## Buenas prácticas
 
-- Always split data *before* any preprocessing
-- Keep a test set completely hidden until final evaluation
-- Use cross-validation for reliable performance estimates
-- Start with simple models before trying complex ones
-- Plot learning curves to diagnose bias/variance
+- Siempre dividí los datos *antes* de cualquier preprocesamiento
+- Mantené un conjunto de prueba completamente oculto hasta la evaluación final
+- Usá validación cruzada para estimaciones de rendimiento confiables
+- Empezá con modelos simples antes de probar complejos
+- Graficá curvas de aprendizaje para diagnosticar sesgo/varianza
 
-## Summary
+## Resumen
 
-- ML learns patterns from data instead of following explicit rules
-- Features (X) are inputs; labels (y) are outputs
-- Training fits the model; prediction applies it to new data
-- Generalization is the ability to perform well on unseen data
-- Overfitting: model too complex, memorizes noise
-- Underfitting: model too simple, misses patterns
-- Bias-variance tradeoff: optimal model balances systematic error and sensitivity
-- Train/test split is essential for honest evaluation
+- El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas
+- Las características (X) son entradas; las etiquetas (y) son salidas
+- El entrenamiento ajusta el modelo; la predicción lo aplica a datos nuevos
+- La generalización es la capacidad de funcionar bien con datos no vistos
+- Sobreajuste: modelo demasiado complejo, memoriza ruido
+- Subajuste: modelo demasiado simple, pierde patrones
+- Compensación sesgo-varianza: el modelo óptimo equilibra error sistemático y sensibilidad
+- La división train/test es esencial para una evaluación honesta
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Feature | Input variable used for prediction |
-| Label | Output variable to predict |
-| Training | Process of fitting a model to data |
-| Prediction | Model output on new data |
-| Generalization | Performance on unseen data |
-| Overfitting | Model memorizes training noise |
-| Underfitting | Model too simple for the pattern |
-| Bias | Error from simplifying assumptions |
-| Variance | Error from sensitivity to data fluctuations |
+| Término | Definición |
+|---------|------------|
+| Característica | Variable de entrada usada para la predicción |
+| Etiqueta | Variable de salida a predecir |
+| Entrenamiento | Proceso de ajustar un modelo a los datos |
+| Predicción | Salida del modelo con datos nuevos |
+| Generalización | Rendimiento en datos no vistos |
+| Sobreajuste | El modelo memoriza ruido del entrenamiento |
+| Subajuste | Modelo demasiado simple para el patrón |
+| Sesgo | Error por suposiciones simplificadoras |
+| Varianza | Error por sensibilidad a fluctuaciones en los datos |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** Explain in your own words the difference between traditional programming and Machine Learning.
+**Nivel 1 — Básico:** Explicá con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático.
 
-**Level 2 — Implementation:** Load the load_diabetes dataset, create a train/test split, train a LinearRegression, and compute both train and test R². Increase model complexity using PolynomialFeatures and observe the bias-variance tradeoff.
+**Nivel 2 — Implementación:** Cargá el dataset load_diabetes, creá una división train/test, entrená un LinearRegression, y calculá tanto el R² de entrenamiento como el de prueba. Aumentá la complejidad del modelo usando PolynomialFeatures y observá la compensación sesgo-varianza.
 
-**Level 3 — Critical Thinking:** You train a model and get train accuracy = 99% and test accuracy = 65%. What is likely happening? What three things would you try to fix it?
+**Nivel 3 — Pensamiento crítico:** Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `diagnose_fit(model, X_train, X_test, y_train, y_test)` that:
-1. Computes train and test scores
-2. Prints whether the model is overfitting, underfitting, or well-balanced
-3. Returns a string with the diagnosis
+Escribí una función `diagnose_fit(model, X_train, X_test, y_train, y_test)` que:
+1. Calcule los puntajes de entrenamiento y prueba
+2. Imprima si el modelo está sobreajustado, subajustado o bien equilibrado
+3. Devuelva un string con el diagnóstico
 
-Use a threshold: if train_score - test_score > 0.15, flag overfitting.
+Usá un umbral: si train_score - test_score > 0.15, marcá como sobreajuste.

@@ -9,14 +9,15 @@ interface Props {
 }
 
 export default function CompleteLessonButton({ module, lesson }: Props) {
-  const { userId } = useAuth();
+  const { userId: clerkUserId } = useAuth();
+  const userId = clerkUserId ?? "dev-user";
   const [status, setStatus] = useState<
     "idle" | "loading" | "done" | "error"
   >("idle");
   const [message, setMessage] = useState("");
 
   const handleComplete = async () => {
-    if (status !== "idle" || !userId) return;
+    if (status !== "idle") return;
 
     setStatus("loading");
 
@@ -36,7 +37,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
       if (data.success) {
         setStatus("done");
         setMessage(
-          `✅ Lección completada! +${data.xpEarned} XP | Racha: ${data.streak.current_streak} días`,
+           `Leccion completada! +${data.xpEarned} XP | Racha: ${data.streak.current_streak} dias`,
         );
       } else {
         setStatus("error");
@@ -69,7 +70,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
       >
         {status === "loading"
           ? "Guardando progreso..."
-          : "✔ Marcar como Completado"}
+          : "Marcar como Completado"}
       </button>
 
       {status === "error" && (

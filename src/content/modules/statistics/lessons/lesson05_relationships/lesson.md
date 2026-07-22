@@ -1,84 +1,84 @@
 ---
 Module: 3
 Lesson Number: 5
-Lesson Title: Relationships Between Variables
-Estimated Duration: 60 minutes
-Prerequisites: Lesson 1 (Descriptive Statistics)
+Lesson Title: Relaciones Entre Variables
+Estimated Duration: 60 minutos
+Prerequisites: Lección 1 (Estadística Descriptiva)
 Learning Objectives:
-  - Compute and interpret covariance between two variables
-  - Distinguish between Pearson and Spearman correlation
-  - Create and interpret a correlation matrix heatmap
-  - Choose the appropriate correlation coefficient based on data characteristics
-  - Identify spurious correlations
-Keywords: covariance, Pearson correlation, Spearman correlation, correlation matrix, heatmap, monotonic relationship
-Difficulty: Beginner
+  - Calcular e interpretar la covarianza entre dos variables
+  - Distinguir entre correlación de Pearson y de Spearman
+  - Crear e interpretar un mapa de calor de matriz de correlación
+  - Elegir el coeficiente de correlación adecuado según las características de los datos
+  - Identificar correlaciones espurias
+Keywords: covarianza, correlación de Pearson, correlación de Spearman, matriz de correlación, mapa de calor, relación monótona
+Difficulty: Principiante
 Programming Concepts: numpy, pandas, matplotlib, seaborn
-Mathematical Concepts: covariance, correlation coefficient, rank correlation
-Machine Learning Concepts: feature relationships, multicollinearity, feature selection
-Datasets Used: iris dataset, synthetic data, penguins dataset
+Mathematical Concepts: covarianza, coeficiente de correlación, correlación por rangos
+Machine Learning Concepts: relaciones entre features, multicolinealidad, selección de features
+Datasets Used: dataset iris, datos sintéticos, dataset de pingüinos
 Notebook: 05_relationships.ipynb
 Assignment: relationships_assignment.md
 Quiz: relationships_quiz.md
 ---
 
-# Lesson 5: Relationships Between Variables
+# Lección 5: Relaciones Entre Variables
 
-## Motivation
+## Motivación
 
-In machine learning, we rarely work with isolated variables. The relationship between features — and between features and the target — determines which algorithms will work well. Two genes may be co-expressed (correlated expression levels). Customer age and subscription duration may be correlated. Understanding these relationships helps you select features, detect multicollinearity, and gain insight into the underlying system.
+En machine learning, raramente trabajamos con variables aisladas. La relación entre las features — y entre las features y el objetivo — determina qué algoritmos funcionarán bien. Dos genes pueden estar co-expresados (niveles de expresión correlacionados). La edad del cliente y la duración de la suscripción pueden estar correlacionados. Entender estas relaciones te ayuda a seleccionar features, detectar multicolinealidad y obtener conocimiento del sistema subyacente.
 
-## Big Picture
+## Panorama General
 
-You already know how to describe single variables (Lessons 1-2). Now you will learn to quantify relationships between pairs of variables. This is essential preparation for:
-- Lesson 6 (EDA): relationships are a key part of exploration
-- Lesson 7 (PCA): PCA is built on the covariance matrix
-- All of Module 4: correlation informs feature selection and model choice
+Ya sabés cómo describir variables individuales (Lecciones 1-2). Ahora aprenderás a cuantificar relaciones entre pares de variables. Esto es esencial para:
+- Lección 6 (EDA): las relaciones son una parte clave de la exploración
+- Lección 7 (PCA): PCA está construida sobre la matriz de covarianza
+- Todo el Módulo 4: la correlación informa la selección de features y la elección del modelo
 
-## Theory
+## Teoría
 
-### Covariance
+### Covarianza
 
-Covariance measures how two variables vary together.
+La covarianza mide cómo dos variables varían juntas.
 
 $$\text{Cov}(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$$
 
-Intuition: When X is above its mean, is Y also above its mean? If yes, covariance is positive. If opposite, negative. If no pattern, near zero.
+Intuición: Cuando X está por encima de su media, ¿Y también está por encima de su media? Si sí, la covarianza es positiva. Si es al revés, negativa. Si no hay patrón, cercana a cero.
 
-**Limitation**: Covariance depends on the scale of variables. Two variables measured in different units cannot be compared by covariance alone.
+**Limitación**: La covarianza depende de la escala de las variables. Dos variables medidas en distintas unidades no se pueden comparar solo por su covarianza.
 
-### Pearson Correlation Coefficient
+### Coeficiente de Correlación de Pearson
 
 $$\rho_{X,Y} = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}$$
 
-This normalizes covariance to a [-1, 1] scale.
+Esto normaliza la covarianza a una escala de [-1, 1].
 
-- +1: perfect positive linear relationship
-- 0: no linear relationship
-- -1: perfect negative linear relationship
+- +1: relación lineal positiva perfecta
+- 0: no hay relación lineal
+- -1: relación lineal negativa perfecta
 
-Intuition: Pearson correlation measures the strength and direction of a linear relationship. It assumes variables are approximately normally distributed and the relationship is linear.
+Intuición: La correlación de Pearson mide la fuerza y dirección de una relación lineal. Asume que las variables tienen distribución aproximadamente normal y que la relación es lineal.
 
-**Assumptions**: Linearity, normality (for inference), homoscedasticity, no outliers.
+**Supuestos**: Linealidad, normalidad (para inferencia), homocedasticidad, sin valores atípicos.
 
-### Spearman Rank Correlation
+### Correlación por Rangos de Spearman
 
-Spearman correlation uses ranks instead of raw values.
+La correlación de Spearman usa rangos en lugar de valores originales.
 
 $$\rho_s = \frac{\text{Cov}(R(X), R(Y))}{\sigma_{R(X)} \sigma_{R(Y)}}$$
 
-Where \(R(X)\) are the ranks of \(X\).
+Donde \(R(X)\) son los rangos de \(X\).
 
-Intuition: Spearman measures monotonic relationships (not just linear). If Y consistently increases as X increases, Spearman is high, even if the relationship is curved.
+Intuición: Spearman mide relaciones monótonas (no solo lineales). Si Y aumenta consistentemente a medida que X aumenta, Spearman es alto, incluso si la relación es curvada.
 
-**Advantages**: No normality assumption, robust to outliers, captures any monotonic trend.
+**Ventajas**: No requiere supuesto de normalidad, es robusta a valores atípicos, captura cualquier tendencia monótona.
 
-### Correlation Matrix
+### Matriz de Correlación
 
-A square matrix showing pairwise correlations between all variables.
+Una matriz cuadrada que muestra las correlaciones por pares entre todas las variables.
 
 $$R = \begin{bmatrix} 1 & \rho_{12} & \cdots & \rho_{1p} \\ \rho_{21} & 1 & \cdots & \rho_{2p} \\ \vdots & \vdots & \ddots & \vdots \\ \rho_{p1} & \rho_{p2} & \cdots & 1 \end{bmatrix}$$
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
@@ -86,80 +86,80 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Generate data with different relationships
+# Generar datos con diferentes relaciones
 np.random.seed(42)
 n = 200
 x = np.random.normal(0, 1, n)
 
-# Linear positive
+# Lineal positiva
 y_linear = 2 * x + np.random.normal(0, 0.5, n)
 
-# Nonlinear monotonic
+# No lineal monótona
 y_nonlinear = x**3 + np.random.normal(0, 1, n)
 
-# No relationship
+# Sin relación
 y_none = np.random.normal(0, 1, n)
 
 # Pearson vs Spearman
 from scipy.stats import pearsonr, spearmanr
 
-print("Linear relationship:")
+print("Relación lineal:")
 print(f"  Pearson: {pearsonr(x, y_linear)[0]:.3f}, Spearman: {spearmanr(x, y_linear)[0]:.3f}")
 
-print("\nNonlinear monotonic:")
+print("\nNo lineal monótona:")
 print(f"  Pearson: {pearsonr(x, y_nonlinear)[0]:.3f}, Spearman: {spearmanr(x, y_nonlinear)[0]:.3f}")
 
-print("\nNo relationship:")
+print("\nSin relación:")
 print(f"  Pearson: {pearsonr(x, y_none)[0]:.3f}, Spearman: {spearmanr(x, y_none)[0]:.3f}")
 
-# Visualize
+# Visualizar
 fig, axes = plt.subplots(1, 3, figsize=(15, 4))
 axes[0].scatter(x, y_linear, alpha=0.6)
-axes[0].set_title(f'Linear (Pearson={pearsonr(x, y_linear)[0]:.2f})')
+axes[0].set_title(f'Lineal (Pearson={pearsonr(x, y_linear)[0]:.2f})')
 axes[1].scatter(x, y_nonlinear, alpha=0.6)
-axes[1].set_title(f'Nonlinear (Spearman={spearmanr(x, y_nonlinear)[0]:.2f})')
+axes[1].set_title(f'No lineal (Spearman={spearmanr(x, y_nonlinear)[0]:.2f})')
 axes[2].scatter(x, y_none, alpha=0.6)
-axes[2].set_title('No Relationship')
+axes[2].set_title('Sin Relación')
 plt.tight_layout()
 plt.show()
 ```
 
-### Correlation Matrix with Heatmap
+### Matriz de Correlación con Mapa de Calor
 
 ```python
-# Load iris dataset
+# Cargar dataset iris
 iris = sns.load_dataset('iris')
 numeric_cols = iris.select_dtypes(include=[np.number])
 
-# Compute correlation matrix
+# Calcular matriz de correlación
 corr_matrix = numeric_cols.corr()
 
-# Visualize with heatmap
+# Visualizar con mapa de calor
 plt.figure(figsize=(8, 6))
 sns.heatmap(corr_matrix, annot=True, cmap='RdBu_r', center=0,
             square=True, linewidths=1, fmt='.2f')
-plt.title('Iris Dataset - Correlation Matrix')
+plt.title('Dataset Iris - Matriz de Correlación')
 plt.tight_layout()
 plt.show()
 ```
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-Analyze relationships in the penguins dataset.
+Analizar relaciones en el dataset de pingüinos.
 
 ```python
 penguins = sns.load_dataset('penguins').dropna()
 
-# Compute pairwise correlations
+# Calcular correlaciones por pares
 numeric_cols = penguins.select_dtypes(include=[np.number])
 corr = numeric_cols.corr()
-print("Correlation Matrix:")
+print("Matriz de Correlación:")
 print(corr)
 
-# Heatmap
+# Mapa de calor
 plt.figure(figsize=(8, 6))
 sns.heatmap(corr, annot=True, cmap='coolwarm', center=0, square=True, fmt='.2f')
-plt.title('Penguin Measurements - Correlation Matrix')
+plt.title('Medidas de Pingüinos - Matriz de Correlación')
 plt.tight_layout()
 plt.show()
 
@@ -168,39 +168,39 @@ sns.pairplot(penguins, hue='species')
 plt.show()
 ```
 
-Interpretation: Flipper length and body mass are highly correlated (r ≈ 0.87). Bill length and bill depth have moderate negative correlation in some species.
+Interpretación: La longitud de la aleta y la masa corporal están altamente correlacionadas (r ≈ 0.87). La longitud del pico y la profundidad del pico tienen correlación negativa moderada en algunas especies.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-Gene co-expression analysis.
+Análisis de co-expresión génica.
 
 ```python
 np.random.seed(42)
 n_genes = 1000
 n_samples = 50
 
-# Simulate gene expression matrix
+# Simular matriz de expresión génica
 expression = np.random.randn(n_samples, n_genes)
 gene_names = [f'GENE_{i}' for i in range(n_genes)]
 df_expr = pd.DataFrame(expression, columns=gene_names)
 
-# Make some genes co-expressed
+# Hacer que algunos genes estén co-expresados
 df_expr['GENE_0'] = df_expr['GENE_1'] * 0.9 + np.random.randn(n_samples) * 0.1
 df_expr['GENE_2'] = -df_expr['GENE_3'] * 0.8 + np.random.randn(n_samples) * 0.2
 
-# Find highly correlated gene pairs
+# Encontrar pares de genes altamente correlacionados
 corr_matrix = df_expr.corr()
 high_corr = np.where(np.abs(corr_matrix) > 0.8)
 high_corr_pairs = [(gene_names[i], gene_names[j], corr_matrix.iloc[i, j])
                    for i, j in zip(*high_corr) if i < j]
-print(f"Highly correlated pairs (|r| > 0.8):")
+print(f"Pares altamente correlacionados (|r| > 0.8):")
 for g1, g2, r in high_corr_pairs[:5]:
     print(f"  {g1} - {g2}: r = {r:.3f}")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-User engagement metrics correlation.
+Correlación de métricas de engagement de usuarios.
 
 ```python
 np.random.seed(42)
@@ -216,67 +216,67 @@ saas_data = pd.DataFrame({
 plt.figure(figsize=(8, 6))
 sns.heatmap(saas_data.corr(), annot=True, cmap='RdBu_r', center=0,
             square=True, fmt='.2f')
-plt.title('SaaS User Metrics - Correlation Matrix')
+plt.title('Métricas de Usuarios SaaS - Matriz de Correlación')
 plt.tight_layout()
 plt.show()
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Correlation ≠ causation**: High correlation does not imply one variable causes the other. Ice cream sales and drowning are correlated (both increase in summer) but not causally related.
-2. **Only checking linear correlation**: Two variables can have a perfect nonlinear relationship (e.g., circle) with zero Pearson correlation.
-3. **Ignoring outliers**: A single outlier can dramatically inflate or deflate Pearson correlation.
-4. **Over-interpreting small correlations**: With large samples, even r = 0.05 can be statistically significant but practically meaningless.
+1. **Correlación ≠ causalidad**: Una correlación alta no implica que una variable cause la otra. Las ventas de helado y los ahogamientos están correlacionados (ambos aumentan en verano) pero no tienen relación causal.
+2. **Solo verificar correlación lineal**: Dos variables pueden tener una relación no lineal perfecta (ej., un círculo) con correlación de Pearson cero.
+3. **Ignorar valores atípicos**: Un solo valor atípico puede inflar o desinflar drásticamente la correlación de Pearson.
+4. **Sobre-interpretar correlaciones pequeñas**: Con muestras grandes, incluso r = 0.05 puede ser estadísticamente significativo pero prácticamente irrelevante.
 
-## Best Practices
+## Mejores Prácticas
 
-- Always visualize relationships with scatter plots alongside correlation coefficients
-- Use Spearman for non-linear monotonic relationships
-- Check for outliers before interpreting Pearson correlation
-- Report both r and p-value when discussing statistical significance
-- Use correlation matrices before building ML models to detect multicollinearity
+- Visualizá siempre las relaciones con gráficos de dispersión junto con los coeficientes de correlación
+- Usá Spearman para relaciones monótonas no lineales
+- Verificá la presencia de valores atípicos antes de interpretar la correlación de Pearson
+- Reportá tanto r como el valor p al discutir significancia estadística
+- Usá matrices de correlación antes de construir modelos de ML para detectar multicolinealidad
 
-## Summary
+## Resumen
 
-- Covariance measures joint variability but depends on scale
-- Pearson correlation: linear relationship, [-1, 1], assumes normality
-- Spearman correlation: monotonic relationship, based on ranks
-- Correlation matrix summarizes all pairwise relationships
-- Correlation ≠ causation
-- Visualize relationships with scatter plots and heatmaps
+- La covarianza mide la variabilidad conjunta pero depende de la escala
+- Correlación de Pearson: relación lineal, [-1, 1], asume normalidad
+- Correlación de Spearman: relación monótona, basada en rangos
+- La matriz de correlación resume todas las relaciones por pares
+- Correlación ≠ causalidad
+- Visualizá las relaciones con gráficos de dispersión y mapas de calor
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Covariance | Measure of joint variability |
-| Pearson Correlation | Linear correlation coefficient (r) |
-| Spearman Correlation | Rank-based monotonic correlation |
-| Correlation Matrix | Table of pairwise correlations |
-| Heatmap | Visual representation of a matrix |
-| Monotonic | Consistently increasing or decreasing |
+| Término | Definición |
+|---------|------------|
+| Covarianza | Medida de variabilidad conjunta |
+| Correlación de Pearson | Coeficiente de correlación lineal (r) |
+| Correlación de Spearman | Correlación monótona basada en rangos |
+| Matriz de Correlación | Tabla de correlaciones por pares |
+| Mapa de Calor | Representación visual de una matriz |
+| Monótona | Consistentemente creciente o decreciente |
 
-## Exercises
+## Ejercicios
 
-**Level 1: Basic Understanding**
+**Nivel 1: Comprensión Básica**
 
-1. What is the difference between Pearson and Spearman correlation? When would you use each?
-2. If two variables have a Pearson correlation of -0.9, what does this mean?
+1. ¿Cuál es la diferencia entre la correlación de Pearson y la de Spearman? ¿Cuándo usarías cada una?
+2. Si dos variables tienen una correlación de Pearson de -0.9, ¿qué significa esto?
 
-**Level 2: Implementation**
+**Nivel 2: Implementación**
 
-3. Load the `mpg` dataset from seaborn. Compute the Pearson and Spearman correlation between `mpg` and `horsepower`. Interpret the difference.
-4. Generate a dataset where X and Y have a perfect quadratic relationship (Y = X²). Compute Pearson and Spearman correlations. Explain the results.
+3. Cargá el dataset `mpg` de seaborn. Calculá la correlación de Pearson y Spearman entre `mpg` y `horsepower`. Interpretá la diferencia.
+4. Generá un dataset donde X e Y tengan una relación cuadrática perfecta (Y = X²). Calculá las correlaciones de Pearson y Spearman. Explicá los resultados.
 
-**Level 3: Critical Thinking**
+**Nivel 3: Pensamiento Crítico**
 
-5. In a gene expression study, you find two genes with a Pearson correlation of 0.95. What are three possible explanations? Which one is most plausible biologically?
-6. A SaaS company finds that the number of support tickets and customer churn are correlated (r = 0.6). Should they conclude that support tickets cause churn? What alternative explanations exist?
+5. En un estudio de expresión génica, encontrás dos genes con una correlación de Pearson de 0.95. ¿Cuáles son tres explicaciones posibles? ¿Cuál es la más plausible biológicamente?
+6. Una empresa SaaS encuentra que la cantidad de tickets de soporte y la deserción de clientes están correlacionados (r = 0.6). ¿Deberían concluir que los tickets de soporte causan la deserción? ¿Qué explicaciones alternativas existen?
 
-## Coding Challenge
+## Desafío de Programación
 
-Write a Python script that:
-1. Generates 5 different synthetic datasets: linear positive, linear negative, quadratic (U-shaped), exponential, and a circle
-2. For each, computes and prints Pearson and Spearman correlations
-3. Creates a 2×3 grid of scatter plots with the correlation coefficients in the titles
-4. Writes a brief interpretation of why Pearson and Spearman differ (or agree) for each relationship
+Escribí un script en Python que:
+1. Genere 5 datasets sintéticos diferentes: lineal positivo, lineal negativo, cuadrático (forma de U), exponencial y un círculo
+2. Para cada uno, calcule e imprima las correlaciones de Pearson y Spearman
+3. Cree una cuadrícula de 2×3 de gráficos de dispersión con los coeficientes de correlación en los títulos
+4. Escriba una breve interpretación de por qué Pearson y Spearman difieren (o coinciden) para cada relación

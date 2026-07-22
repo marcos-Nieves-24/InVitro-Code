@@ -1,113 +1,113 @@
 ---
 Module: 4
 Lesson Number: 2
-Lesson Title: Linear Regression
-Estimated Duration: 90 minutes
-Prerequisites: L1 (ML Fundamentals), Module 3 statistics (variance, covariance, correlation)
+Lesson Title: Regresión Lineal
+Estimated Duration: 90 minutos
+Prerequisites: L1 (Fundamentos de ML), Módulo 3 estadística (varianza, covarianza, correlación)
 Learning Objectives:
-  - Explain the mathematical formulation of simple and multiple linear regression
-  - Implement linear regression with scikit-learn
-  - Interpret regression coefficients in context
-  - Evaluate regression models using R², MSE, and RMSE
-  - Describe how gradient descent optimizes model parameters
-Keywords: linear regression, OLS, gradient descent, R-squared, MSE, coefficient, intercept
-Difficulty: Beginner
-Programming Concepts: sklearn.linear_model.LinearRegression, numpy linear algebra
-Mathematical Concepts: Ordinary Least Squares, gradient descent, R², MSE, RMSE
-Machine Learning Concepts: regression, feature weighting, residuals
-Datasets Used: scikit-learn diabetes, California Housing, synthetic
+  - Explicar la formulación matemática de la regresión lineal simple y múltiple
+  - Implementar regresión lineal con scikit-learn
+  - Interpretar coeficientes de regresión en contexto
+  - Evaluar modelos de regresión usando R², MSE y RMSE
+  - Describir cómo el descenso por gradiente optimiza los parámetros del modelo
+Keywords: regresión lineal, OLS, descenso por gradiente, R-cuadrado, MSE, coeficiente, intersección
+Difficulty: Principiante
+Programming Concepts: sklearn.linear_model.LinearRegression, álgebra lineal con numpy
+Mathematical Concepts: Mínimos Cuadrados Ordinarios, descenso por gradiente, R², MSE, RMSE
+Machine Learning Concepts: regresión, ponderación de características, residuales
+Datasets Used: scikit-learn diabetes, California Housing, sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Linear Regression
+# Regresión Lineal
 
-## Motivation
+## Motivación
 
-A biotech company wants to predict drug solubility from molecular properties. A SaaS company wants to forecast monthly recurring revenue. Both are *regression* problems — predicting a continuous number. Linear regression is the simplest and most interpretable regression algorithm. Understanding it thoroughly is essential because many advanced models (regularized regression, neural networks) build on its ideas.
+Una empresa de biotecnología quiere predecir la solubilidad de fármacos a partir de propiedades moleculares. Una empresa SaaS quiere pronosticar los ingresos recurrentes mensuales. Ambos son problemas de *regresión* — predecir un número continuo. La regresión lineal es el algoritmo de regresión más simple e interpretable. Entenderlo a fondo es esencial porque muchos modelos avanzados (regresión regularizada, redes neuronales) se basan en sus ideas.
 
-## Big Picture
+## Panorama general
 
-**Previous:** ML Fundamentals gave you the mental model. **This lesson:** Your first real algorithm — Linear Regression. **Next:** Classification — predicting categories instead of numbers.
+**Anterior:** Fundamentos de ML te dio el modelo mental. **Esta lección:** Tu primer algoritmo real — Regresión Lineal. **Siguiente:** Clasificación — predecir categorías en lugar de números.
 
-## Theory
+## Teoría
 
-### Simple Linear Regression
+### Regresión Lineal Simple
 
-The relationship between one feature $x$ and the target $y$:
+La relación entre una característica $x$ y el objetivo $y$:
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
 
-- $\beta_0$: intercept (value of y when x = 0)
-- $\beta_1$: slope (change in y per unit change in x)
-- $\varepsilon$: residual (error term)
+- $\beta_0$: intersección (valor de y cuando x = 0)
+- $\beta_1$: pendiente (cambio en y por cambio unitario en x)
+- $\varepsilon$: residual (término de error)
 
-### Multiple Linear Regression
+### Regresión Lineal Múltiple
 
-With $p$ features:
+Con $p$ características:
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon$$
 
-In matrix form: $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$
+En forma matricial: $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$
 
-### Ordinary Least Squares (OLS)
+### Mínimos Cuadrados Ordinarios (OLS)
 
-We choose $\boldsymbol{\beta}$ to minimize the sum of squared residuals:
+Elegimos $\boldsymbol{\beta}$ para minimizar la suma de residuales al cuadrado:
 
 $$\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$$
 
-The closed-form solution:
+La solución de forma cerrada:
 
 $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
 
-### Gradient Descent Intuition
+### Intuición del descenso por gradiente
 
-When $p$ is large, the closed-form solution is slow. Gradient descent iteratively adjusts $\boldsymbol{\beta}$:
+Cuando $p$ es grande, la solución de forma cerrada es lenta. El descenso por gradiente ajusta $\boldsymbol{\beta}$ iterativamente:
 
-1. Start with random $\boldsymbol{\beta}$
-2. Compute gradient of MSE w.r.t. $\boldsymbol{\beta}$
-3. Update: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
-4. Repeat until convergence
+1. Iniciá con $\boldsymbol{\beta}$ aleatorio
+2. Calculá el gradiente del MSE con respecto a $\boldsymbol{\beta}$
+3. Actualizá: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
+4. Repetí hasta converger
 
-$\alpha$ is the **learning rate** — how big each step is.
+$\alpha$ es la **tasa de aprendizaje** — qué tan grande es cada paso.
 
-### Evaluation Metrics
+### Métricas de evaluación
 
-**MSE (Mean Squared Error):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
-- Sensitive to outliers (squares large errors)
+**MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
+- Sensible a valores atípicos (eleva al cuadrado errores grandes)
 
-**RMSE (Root Mean Squared Error):** $\sqrt{\text{MSE}}$
-- Same units as target variable
+**RMSE (Raíz del Error Cuadrático Medio):** $\sqrt{\text{MSE}}$
+- Mismas unidades que la variable objetivo
 
-**R² (Coefficient of Determination):** $1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
-- Proportion of variance explained by the model
-- Ranges from $-\infty$ to 1
-- R² = 1: perfect fit
-- R² = 0: model predicts mean always
+**R² (Coeficiente de Determinación):** $1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
+- Proporción de varianza explicada por el modelo
+- Varía de $-\infty$ a 1
+- R² = 1: ajuste perfecto
+- R² = 0: el modelo siempre predice la media
 
-## Mathematical Foundation
+## Fundamento matemático
 
-### Deriving OLS
+### Derivación de OLS
 
-We minimize $L(\boldsymbol{\beta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})$
+Minimizamos $L(\boldsymbol{\beta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})$
 
-Set gradient to zero:
+Igualamos el gradiente a cero:
 $$\frac{\partial L}{\partial \boldsymbol{\beta}} = -2\mathbf{X}^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0$$
 
 $$\mathbf{X}^\top\mathbf{X}\boldsymbol{\beta} = \mathbf{X}^\top\mathbf{y}$$
 
 $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
 
-### Assumptions of Linear Regression
+### Supuestos de la regresión lineal
 
-1. **Linearity:** Relationship between X and y is linear
-2. **Independence:** Observations are independent
-3. **Homoscedasticity:** Constant variance of residuals
-4. **Normality:** Residuals are normally distributed (for inference)
-5. **No multicollinearity:** Features are not highly correlated
+1. **Linealidad:** La relación entre X e y es lineal
+2. **Independencia:** Las observaciones son independientes
+3. **Homocedasticidad:** Varianza constante de los residuales
+4. **Normalidad:** Los residuales se distribuyen normalmente (para inferencia)
+5. **Sin multicolinealidad:** Las características no están altamente correlacionadas
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -135,7 +135,7 @@ plt.savefig('figures/simple_linear_regression.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
@@ -165,7 +165,7 @@ print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.1f}")
 print(f"R²:   {r2_score(y_test, y_pred):.3f}")
 ```
 
-## Walkthrough Example: California Housing
+## Ejemplo guiado: California Housing
 
 ```python
 from sklearn.datasets import fetch_california_housing
@@ -189,11 +189,11 @@ coef_df = pd.DataFrame({
 print(coef_df)
 ```
 
-**Interpretation:** MedInc (median income) has the largest positive coefficient — higher income predicts higher house prices.
+**Interpretación:** MedInc (ingreso mediano) tiene el coeficiente positivo más grande — mayor ingreso predice precios de vivienda más altos.
 
-## Biotechnology Example: Predicting Protein Solubility
+## Ejemplo en biotecnología: Predicción de solubilidad de proteínas
 
-A pharmaceutical company wants to predict whether a protein will be soluble in water based on molecular descriptors.
+Una empresa farmacéutica quiere predecir si una proteína será soluble en agua basándose en descriptores moleculares.
 
 ```python
 np.random.seed(42)
@@ -226,11 +226,11 @@ for col, coef in zip(X_s.columns, model_s.coef_):
 print(f"R²: {model_s.score(X_s, y_s):.3f}")
 ```
 
-**Interpretation:** Hydrophobicity has the largest negative effect — more hydrophobic proteins tend to be less soluble.
+**Interpretación:** La hidrofobicidad tiene el efecto negativo más grande — las proteínas más hidrofóbicas tienden a ser menos solubles.
 
-## SaaS Example: Forecasting Monthly Revenue
+## Ejemplo en SaaS: Pronóstico de ingresos mensuales
 
-A SaaS startup wants to forecast next month's MRR (Monthly Recurring Revenue).
+Una startup SaaS quiere pronosticar el MRR (Ingreso Recurrente Mensual) del próximo mes.
 
 ```python
 np.random.seed(42)
@@ -264,51 +264,51 @@ for col, coef in zip(X_r.columns, model_r.coef_):
     print(f"{col}: {coef:.2f}")
 ```
 
-## Common Mistakes
+## Errores comunes
 
-1. **Interpreting coefficients causally** — correlation ≠ causation
-2. **Ignoring multicollinearity** — correlated features inflate coefficient variance
-3. **Not checking residual patterns** — curved residuals suggest non-linearity
-4. **Using R² alone** — always check residual plots and MSE too
-5. **Forgetting to scale features** — coefficients are not comparable when features have different units
+1. **Interpretar coeficientes de forma causal** — correlación ≠ causalidad
+2. **Ignorar la multicolinealidad** — características correlacionadas inflan la varianza de los coeficientes
+3. **No revisar los patrones de residuales** — residuales curvos sugieren no linealidad
+4. **Usar R² solamente** — revisá siempre también los gráficos de residuales y el MSE
+5. **Olvidar escalar las características** — los coeficientes no son comparables cuando las características tienen diferentes unidades
 
-## Best Practices
+## Buenas prácticas
 
-- Always visualize the data first
-- Check residual plots (residuals vs. fitted, Q-Q plot)
-- Use RMSE instead of MSE for interpretability
-- Compare model performance to a baseline (mean predictor)
-- Consider regularization (Ridge, Lasso) when many features
+- Visualizá siempre los datos primero
+- Revisá los gráficos de residuales (residuales vs. ajustados, Q-Q plot)
+- Usá RMSE en lugar de MSE para interpretabilidad
+- Compará el rendimiento del modelo contra una línea base (predictor medio)
+- Considerá regularización (Ridge, Lasso) cuando haya muchas características
 
-## Summary
+## Resumen
 
-- Linear regression models the target as a weighted sum of features
-- OLS finds coefficients that minimize MSE
-- R² measures the proportion of variance explained
-- Gradient descent is an iterative alternative to OLS for large datasets
-- Always check assumptions and residual plots
+- La regresión lineal modela el objetivo como una suma ponderada de características
+- OLS encuentra coeficientes que minimizan el MSE
+- R² mide la proporción de varianza explicada
+- El descenso por gradiente es una alternativa iterativa a OLS para conjuntos grandes
+- Revisá siempre los supuestos y los gráficos de residuales
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Ordinary Least Squares | Method minimizing squared residuals |
-| Coefficient | Weight assigned to a feature |
-| Intercept | Prediction when all features are 0 |
-| Residual | Difference between actual and predicted |
-| R² | Proportion of variance explained |
-| MSE | Average squared prediction error |
-| RMSE | Square root of MSE, in original units |
-| Gradient Descent | Iterative optimization algorithm |
+| Término | Definición |
+|---------|------------|
+| Mínimos Cuadrados Ordinarios | Método que minimiza los residuales al cuadrado |
+| Coeficiente | Peso asignado a una característica |
+| Intersección | Predicción cuando todas las características son 0 |
+| Residual | Diferencia entre el valor real y el predicho |
+| R² | Proporción de varianza explicada |
+| MSE | Error de predicción cuadrático promedio |
+| RMSE | Raíz cuadrada del MSE, en unidades originales |
+| Descenso por gradiente | Algoritmo de optimización iterativo |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** What do R² = 1, R² = 0, and R² = -0.5 mean in practice?
+**Nivel 1 — Básico:** ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?
 
-**Level 2 — Implementation:** Use `fetch_california_housing()`, train a linear regression on all 8 features, and create a bar plot of the coefficients (absolute value).
+**Nivel 2 — Implementación:** Usá `fetch_california_housing()`, entrená una regresión lineal con las 8 características y creá un gráfico de barras de los coeficientes (en valor absoluto).
 
-**Level 3 — Critical Thinking:** You have a dataset with 5 features. After training, 3 features have very large coefficients and 2 have tiny coefficients. Does this mean the 2 features are unimportant? Why or why not?
+**Nivel 3 — Pensamiento crítico:** Tenés un conjunto de datos con 5 características. Después de entrenar, 3 características tienen coeficientes muy grandes y 2 tienen coeficientes muy pequeños. ¿Significa eso que las 2 características no son importantes? ¿Por qué o por qué no?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `linear_regression_from_scratch(X, y)` that implements OLS using the closed-form solution. Compare your coefficients to `sklearn.linear_model.LinearRegression`. Return the coefficients, intercept, and R².
+Escribí una función `linear_regression_from_scratch(X, y)` que implemente OLS usando la solución de forma cerrada. Compará tus coeficientes con `sklearn.linear_model.LinearRegression`. Devolvé los coeficientes, la intersección y R².

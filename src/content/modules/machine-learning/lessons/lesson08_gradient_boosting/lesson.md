@@ -2,19 +2,19 @@
 Module: 4
 Lesson Number: 8
 Lesson Title: Gradient Boosting
-Estimated Duration: 90 minutes
-Prerequisites: L4 (Decision Trees), L5 (Random Forest)
+Estimated Duration: 90 minutos
+Prerequisites: L4 (Árboles de Decisión), L5 (Bosque Aleatorio)
 Learning Objectives:
-  - Explain the boosting paradigm and how it differs from bagging
-  - Describe the Gradient Boosting algorithm
-  - Train Gradient Boosting models with scikit-learn
-  - Tune hyperparameters: learning rate, n_estimators, max_depth
-  - Describe how XGBoost and LightGBM improve upon basic gradient boosting
-Keywords: boosting, gradient boosting, XGBoost, LightGBM, learning rate, additive model, residual
-Difficulty: Advanced
+  - Explicar el paradigma de boosting y cómo difiere del bagging
+  - Describir el algoritmo de Gradient Boosting
+  - Entrenar modelos de Gradient Boosting con scikit-learn
+  - Ajustar hiperparámetros: learning_rate, n_estimators, max_depth
+  - Describir cómo XGBoost y LightGBM mejoran el gradient boosting básico
+Keywords: boosting, gradient boosting, XGBoost, LightGBM, tasa de aprendizaje, modelo aditivo, residual
+Difficulty: Avanzado
 Programming Concepts: sklearn.ensemble.GradientBoostingClassifier, learning_rate, early_stopping
-Mathematical Concepts: gradient descent in function space, additive modeling
-Machine Learning Concepts: boosting, weak learners, sequential ensemble
+Mathematical Concepts: descenso por gradiente en el espacio de funciones, modelado aditivo
+Machine Learning Concepts: boosting, aprendices débiles, ensemble secuencial
 Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
@@ -23,55 +23,55 @@ Quiz: quiz.md
 
 # Gradient Boosting
 
-## Motivation
+## Motivación
 
-Random Forest builds many trees independently and averages them. Gradient Boosting builds trees *sequentially*, where each new tree focuses on the mistakes of the previous ones. Like a student who learns from errors, boosting creates a powerful ensemble from simple trees. Gradient Boosting and its optimized variants (XGBoost, LightGBM) dominate ML competitions and are widely used in biotech (drug discovery, genomics) and SaaS (click-through rate prediction, ranking).
+El Bosque Aleatorio construye muchos árboles de forma independiente y los promedia. Gradient Boosting construye árboles *secuencialmente*, donde cada nuevo árbol se enfoca en los errores de los anteriores. Como un estudiante que aprende de sus errores, boosting crea un ensemble poderoso a partir de árboles simples. Gradient Boosting y sus variantes optimizadas (XGBoost, LightGBM) dominan las competencias de ML y son ampliamente utilizados en biotecnología (descubrimiento de fármacos, genómica) y SaaS (predicción de tasa de clics, ranking).
 
-## Big Picture
+## Panorama general
 
-**Previous:** Random Forest (parallel ensemble — bagging). **This lesson:** Gradient Boosting (sequential ensemble — boosting). **Next:** Model Interpretation — understanding what your model learned.
+**Anterior:** Bosque Aleatorio (ensemble paralelo — bagging). **Esta lección:** Gradient Boosting (ensemble secuencial — boosting). **Siguiente:** Interpretación de Modelos — entender lo que tu modelo aprendió.
 
-## Theory
+## Teoría
 
-### Boosting Intuition
+### Intuición de Boosting
 
-Instead of training trees independently, boosting trains them sequentially. Each new tree tries to correct the errors of the previous ensemble.
+En lugar de entrenar árboles de forma independiente, boosting los entrena secuencialmente. Cada nuevo árbol intenta corregir los errores del ensemble anterior.
 
-**Analogy:** If you ask 100 people to guess the weight of an object independently (bagging), you get 100 independent estimates. If you ask person 1, then show their error to person 2, then show the combined error to person 3 (boosting), each subsequent person focuses on harder cases.
+**Analogía:** Si le pedís a 100 personas que adivinen el peso de un objeto de forma independiente (bagging), obtenés 100 estimaciones independientes. Si le preguntás a la persona 1, luego le mostrás su error a la persona 2, luego le mostrás el error combinado a la persona 3 (boosting), cada persona subsiguiente se enfoca en los casos más difíciles.
 
-### Gradient Boosting Algorithm
+### Algoritmo de Gradient Boosting
 
-1. Start with a simple model (e.g., predict the mean)
-2. Compute residuals (errors) of the current model
-3. Train a shallow tree to predict the residuals
-4. Add the tree's predictions (scaled by learning rate) to the ensemble
-5. Repeat steps 2-4 for M iterations
+1. Empezá con un modelo simple (ej., predecir la media)
+2. Calculá los residuales (errores) del modelo actual
+3. Entrená un árbol superficial para predecir los residuales
+4. Agregá las predicciones del árbol (escaladas por la tasa de aprendizaje) al ensemble
+5. Repetí los pasos 2-4 durante M iteraciones
 
-**Key insight:** Training on residuals is equivalent to gradient descent in function space.
+**Idea clave:** Entrenar sobre residuales es equivalente al descenso por gradiente en el espacio de funciones.
 
-### Mathematical Foundation
+### Fundamento matemático
 
-The model is an additive ensemble:
+El modelo es un ensemble aditivo:
 
 $$F_M(x) = \sum_{m=1}^{M} \gamma_m h_m(x)$$
 
-At step $m$, we fit $h_m$ to the negative gradient of the loss function with respect to the current prediction:
+En el paso $m$, ajustamos $h_m$ al gradiente negativo de la función de pérdida con respecto a la predicción actual:
 
 $$h_m \approx \arg\min_h \sum_{i=1}^{n} \left[ -\frac{\partial L(y_i, F_{m-1}(x_i))}{\partial F_{m-1}(x_i)} - h(x_i) \right]^2$$
 
-For MSE loss, the negative gradient is simply the residual: $y_i - F_{m-1}(x_i)$.
+Para la pérdida MSE, el gradiente negativo es simplemente el residual: $y_i - F_{m-1}(x_i)$.
 
-### Key Hyperparameters
+### Hiperparámetros clave
 
-**learning_rate (η):** Shrinks each tree's contribution (typical: 0.01-0.3). Lower η requires more trees but generalizes better.
+**learning_rate (η):** Reduce la contribución de cada árbol (típico: 0.01-0.3). Un η más bajo requiere más árboles pero generaliza mejor.
 
-**n_estimators:** Number of trees. More trees + low learning rate = better performance (with diminishing returns).
+**n_estimators:** Cantidad de árboles. Más árboles + tasa de aprendizaje baja = mejor rendimiento (con rendimientos decrecientes).
 
-**max_depth:** Trees in boosting are typically shallow (2-5). Each tree is a "weak learner."
+**max_depth:** Los árboles en boosting son típicamente superficiales (2-5). Cada árbol es un "aprendiz débil".
 
-**subsample:** Fraction of data used per iteration (stochastic gradient boosting).
+**subsample:** Fracción de datos usada por iteración (stochastic gradient boosting).
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -105,7 +105,7 @@ plt.savefig('figures/boosting_sequential.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import pandas as pd
@@ -142,30 +142,30 @@ print(classification_report(y_test, y_pred))
 print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")
 ```
 
-## Walkthrough Example: Breast Cancer with Gradient Boosting
+## Ejemplo guiado: Cáncer de mama con Gradient Boosting
 
-**Results:**
-- learning_rate=0.1: Test ~97%
-- learning_rate=0.5: Test ~96% (slightly worse — overfitting)
-- learning_rate=0.01: Test ~96% (needed more trees)
+**Resultados:**
+- learning_rate=0.1: Prueba ~97%
+- learning_rate=0.5: Prueba ~96% (ligeramente peor — sobreajuste)
+- learning_rate=0.01: Prueba ~96% (necesitaba más árboles)
 
-**Key finding:** Lower learning rate + more trees consistently beats higher learning rate with fewer trees.
+**Hallazgo clave:** Tasa de aprendizaje más baja + más árboles supera consistentemente a una tasa más alta con menos árboles.
 
-## XGBoost and LightGBM
+## XGBoost y LightGBM
 
-Both are optimized implementations of gradient boosting widely used in practice.
+Ambas son implementaciones optimizadas de gradient boosting ampliamente usadas en la práctica.
 
 **XGBoost (eXtreme Gradient Boosting):**
-- Regularized boosting to prevent overfitting
-- Efficient handling of missing values
-- Built-in cross-validation
-- Parallel processing (at tree level)
+- Boosting regularizado para prevenir sobreajuste
+- Manejo eficiente de valores faltantes
+- Validación cruzada incorporada
+- Procesamiento paralelo (a nivel de árbol)
 
 **LightGBM:**
-- Faster training (histogram-based algorithm)
-- Leaf-wise tree growth (vs. depth-wise)
-- Lower memory usage
-- Native categorical feature handling
+- Entrenamiento más rápido (algoritmo basado en histogramas)
+- Crecimiento de árbol por hojas (vs. por profundidad)
+- Menor uso de memoria
+- Manejo nativo de características categóricas
 
 ```python
 # Conceptual example (requires xgboost/lightgbm installation)
@@ -174,7 +174,7 @@ Both are optimized implementations of gradient boosting widely used in practice.
 # model.fit(X_train, y_train)
 ```
 
-## Biotechnology Example: Drug-Target Interaction
+## Ejemplo en biotecnología: Interacción fármaco-objetivo
 
 ```python
 np.random.seed(42)
@@ -194,7 +194,7 @@ interaction = (
     + 0.2 * drug_data['h_bond_acceptors']
     + np.random.normal(0, 0.2, n)
 )
-drug_data['binds'] = (interaction > intervention.median()).astype(int)
+drug_data['binds'] = (interaction > interaction.median()).astype(int)
 
 X_d = drug_data.drop('binds', axis=1)
 y_d = drug_data['binds']
@@ -207,7 +207,7 @@ for name, imp in zip(X_d.columns, gb.feature_importances_):
     print(f"  {name}: {imp:.3f}")
 ```
 
-## SaaS Example: Click-Through Rate Prediction
+## Ejemplo en SaaS: Predicción de tasa de clics
 
 ```python
 np.random.seed(42)
@@ -234,49 +234,49 @@ gb_ctr.fit(ctr_data.drop('clicked', axis=1), ctr_data['clicked'])
 print(f"Test AUC: {roc_auc_score(ctr_data['clicked'], gb_ctr.predict_proba(ctr_data.drop('clicked', axis=1))[:, 1]):.3f}")
 ```
 
-## Common Mistakes
+## Errores comunes
 
-1. **Too many trees without enough learning rate** — overfitting
-2. **Deep trees in boosting** — boosting is designed for shallow trees (depth 2-5)
-3. **Ignoring early stopping** — use validation set to stop when performance plateaus
-4. **Using boosting on very small datasets** — prone to overfitting with <100 samples
+1. **Demasiados árboles sin suficiente tasa de aprendizaje** — sobreajuste
+2. **Árboles profundos en boosting** — boosting está diseñado para árboles superficiales (profundidad 2-5)
+3. **Ignorar la parada temprana** — usá un conjunto de validación para detenerte cuando el rendimiento se estabilice
+4. **Usar boosting en conjuntos de datos muy pequeños** — propenso a sobreajuste con menos de 100 muestras
 
-## Best Practices
+## Buenas prácticas
 
-- Always use a validation set for early stopping
-- Start with learning_rate=0.1, n_estimators=100, max_depth=3
-- Lower learning rate → more trees → better generalization
-- Use subsample < 1.0 for stochastic boosting (reduces overfitting)
-- Compare with Random Forest to decide which ensemble works better
-- For large data, use XGBoost or LightGBM
+- Usá siempre un conjunto de validación para parada temprana
+- Empezá con learning_rate=0.1, n_estimators=100, max_depth=3
+- Tasa de aprendizaje más baja → más árboles → mejor generalización
+- Usá subsample < 1.0 para boosting estocástico (reduce sobreajuste)
+- Compará con Bosque Aleatorio para decidir qué ensemble funciona mejor
+- Para datos grandes, usá XGBoost o LightGBM
 
-## Summary
+## Resumen
 
-- Boosting builds trees sequentially, each correcting previous errors
-- Each tree fits the residuals (negative gradient) of the current ensemble
-- Key hyperparameters: learning_rate, n_estimators, max_depth
-- Lower learning rate + more trees = better generalization
-- XGBoost and LightGBM are optimized, production-ready implementations
+- Boosting construye árboles secuencialmente, cada uno corrigiendo errores anteriores
+- Cada árbol ajusta los residuales (gradiente negativo) del ensemble actual
+- Hiperparámetros clave: learning_rate, n_estimators, max_depth
+- Tasa de aprendizaje más baja + más árboles = mejor generalización
+- XGBoost y LightGBM son implementaciones optimizadas listas para producción
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Boosting | Sequential ensemble correcting previous errors |
-| Residual | Difference between actual and predicted |
-| Learning rate | Scaling factor for each tree's contribution |
-| Weak learner | Shallow tree that barely outperforms random |
-| Additive model | Ensemble formed by adding models sequentially |
-| Early stopping | Stopping training when validation performance stops improving |
+| Término | Definición |
+|---------|------------|
+| Boosting | Ensemble secuencial que corrige errores anteriores |
+| Residual | Diferencia entre el valor real y el predicho |
+| Tasa de aprendizaje | Factor de escala para la contribución de cada árbol |
+| Aprendiz débil | Árbol superficial que apenas supera al azar |
+| Modelo aditivo | Ensemble formado agregando modelos secuencialmente |
+| Parada temprana | Detener el entrenamiento cuando el rendimiento en validación deja de mejorar |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** Explain the key difference between bagging (Random Forest) and boosting (Gradient Boosting).
+**Nivel 1 — Básico:** Explicá la diferencia clave entre bagging (Bosque Aleatorio) y boosting (Gradient Boosting).
 
-**Level 2 — Implementation:** Train GradientBoostingClassifier on breast cancer with learning_rates [0.01, 0.05, 0.1, 0.5] and n_estimators=100. Plot test accuracy vs. learning_rate.
+**Nivel 2 — Implementación:** Entrená GradientBoostingClassifier en breast cancer con learning_rates [0.01, 0.05, 0.1, 0.5] y n_estimators=100. Graficá la precisión en prueba vs. learning_rate.
 
-**Level 3 — Critical Thinking:** You have 50 samples with 200 features. Why might Gradient Boosting be a bad choice? What would you use instead?
+**Nivel 3 — Pensamiento crítico:** Tenés 50 muestras con 200 características. ¿Por qué Gradient Boosting podría ser una mala elección? ¿Qué usarías en su lugar?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `tune_gradient_boosting(X_train, y_train, X_val, y_val)` that performs a grid search over learning_rate (0.01, 0.05, 0.1) and max_depth (2, 3, 5) and returns the best model and its validation accuracy.
+Escribí una función `tune_gradient_boosting(X_train, y_train, X_val, y_val)` que realice una búsqueda en grilla sobre learning_rate (0.01, 0.05, 0.1) y max_depth (2, 3, 5) y devuelva el mejor modelo y su precisión en validación.

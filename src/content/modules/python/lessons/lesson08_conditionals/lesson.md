@@ -1,133 +1,133 @@
 ---
 Module: 2
 Lesson Number: 8
-Lesson Title: Conditionals
-Estimated Duration: 45 minutes
-Prerequisites: L6 — Functions
+Lesson Title: Condicionales
+Estimated Duration: 45 minutos
+Prerequisites: L6 — Funciones
 Learning Objectives:
-  - Write if/elif/else conditional statements
-  - Evaluate boolean expressions with comparison and logical operators
-  - Use truthy and falsy values in conditions
-  - Write nested conditional statements
-  - Use conditional expressions (ternary operator)
-Keywords: if, elif, else, boolean, truthy, falsy, conditional, ternary
+  - Escribir sentencias condicionales if/elif/else
+  - Evaluar expresiones booleanas con operadores de comparación y lógicos
+  - Usar valores truthy y falsy en condiciones
+  - Escribir sentencias condicionales anidadas
+  - Usar expresiones condicionales (operador ternario)
+Keywords: if, elif, else, booleano, truthy, falsy, condicional, ternario
 Difficulty: Beginner
-Programming Concepts: Control flow, boolean logic, conditional expressions
+Programming Concepts: Flujo de control, lógica booleana, expresiones condicionales
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Conditionals
+# Condicionales
 
-## Motivation
+## Motivación
 
-Conditionals allow programs to make decisions. Without them, code would execute the same way every time. With conditionals, your program can react differently based on data values, user input, or computed results. In biotechnology, conditionals determine diagnoses based on lab results, classify genetic mutations, and trigger alerts for abnormal values. In SaaS, they control access levels, calculate discounts, and segment customers.
+Los condicionales permiten que los programas tomen decisiones. Sin ellos, el código se ejecutaría de la misma manera siempre. Con condicionales, tu programa puede reaccionar de forma diferente según los valores de los datos, la entrada del usuario o los resultados calculados. En biotecnología, los condicionales determinan diagnósticos basados en resultados de laboratorio, clasifican mutaciones genéticas y disparan alertas por valores anormales. En SaaS, controlan niveles de acceso, calculan descuentos y segmentan clientes.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned loops (repetition). Now you learn conditionals (decision-making). These two control structures — loops and conditionals — form the backbone of all non-trivial programs. Together with functions and operators, you now have everything needed to write sophisticated data processing logic.
+En la lección anterior aprendiste bucles (repetición). Ahora aprendés condicionales (toma de decisiones). Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales. Junto con funciones y operadores, ahora tenés todo lo necesario para escribir lógica de procesamiento de datos sofisticada.
 
-## Theory
+## Teoría
 
-### The if Statement
+### La Sentencia if
 
-The simplest conditional executes code only when a condition is True:
+El condicional más simple ejecuta código solo cuando una condición es True:
 
 ```python
 if condition:
-    pass  # code to execute if condition is True
+    pass  # código a ejecutar si la condición es True
 ```
 
 ### if/else
 
 ```python
 if condition:
-    pass  # code if True
+    pass  # código si True
 else:
-    pass  # code if False
+    pass  # código si False
 ```
 
 ### if/elif/else
 
-Chain multiple conditions:
+Encadená múltiples condiciones:
 
 ```python
 if condition1:
-    pass  # condition1 is True
+    pass  # condition1 es True
 elif condition2:
-    pass  # condition1 is False, condition2 is True
+    pass  # condition1 es False, condition2 es True
 elif condition3:
-    pass  # condition1 and condition2 are False, condition3 is True
+    pass  # condition1 y condition2 son False, condition3 es True
 else:
-    pass  # all conditions are False
+    pass  # todas las condiciones son False
 ```
 
-### Truthy and Falsy
+### Truthy y Falsy
 
-In Python, values can be "truthy" or "falsy" when used in a condition:
+En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condición:
 
-**Falsy values** (evaluate to False):
+**Valores falsy** (evalúan a False):
 - `None`
 - `False`
 - `0`, `0.0`, `0j`
-- Empty sequences: `""`, `[]`, `()`, `{}`, `set()`
-- Custom objects that return `False` from `__bool__`
+- Secuencias vacías: `""`, `[]`, `()`, `{}`, `set()`
+- Objetos personalizados que devuelven `False` de `__bool__`
 
-**Everything else is truthy.**
+**Todo lo demás es truthy.**
 
-### Nested Conditionals
+### Condicionales Anidados
 
-Conditionals inside conditionals:
+Condicionales dentro de condicionales:
 
 ```python
 if condition1:
     if condition2:
-        pass  # both True
+        pass  # ambas True
     else:
         pass  # condition1 True, condition2 False
 else:
     pass  # condition1 False
 ```
 
-### Ternary (Conditional Expression)
+### Ternario (Expresión Condicional)
 
-One-line conditional:
+Condicional en una línea:
 
 ```python
 value = true_value if condition else false_value
 ```
 
-### Match Statement (Python 3.10+)
+### Sentencia Match (Python 3.10+)
 
-Structural pattern matching (similar to switch/case):
+Pattern matching estructural (similar a switch/case):
 
 ```python
 match value:
     case 1:
-        pass  # handle case 1
+        pass  # manejar caso 1
     case 2:
-        pass  # handle case 2
+        pass  # manejar caso 2
     case _:
-        pass  # default
+        pass  # caso por defecto
 ```
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-if/elif/else Flow:
+Flujo if/elif/else:
 
          ┌───────────┐
-         │ Start     │
+         │ Inicio    │
          └─────┬─────┘
                │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition1 ├───────→│ code block 1     │
+         │ condition1 ├───────→│ bloque código 1  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition2 ├───────→│ code block 2     │
+         │ condition2 ├───────→│ bloque código 2  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐               │
@@ -138,81 +138,81 @@ if/elif/else Flow:
                └──────┬───────────────┘
                       │
                 ┌─────▼─────┐
-                │   End     │
+                │   Fin     │
                 └───────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
-# Basic if
+# if básico
 temperature = 38.5
 if temperature > 37.5:
-    print("Patient has a fever")
+    print("El paciente tiene fiebre")
 
 # if/else
 if temperature > 37.5:
-    print("Has fever")
+    print("Tiene fiebre")
 else:
-    print("Normal temperature")
+    print("Temperatura normal")
 ```
 
 ```python
 # if/elif/else
 bmi = 26.3
 if bmi < 18.5:
-    category = "Underweight"
+    category = "Bajo peso"
 elif bmi < 25:
     category = "Normal"
 elif bmi < 30:
-    category = "Overweight"
+    category = "Sobrepeso"
 else:
-    category = "Obese"
-print(f"BMI: {bmi:.1f} - {category}")
+    category = "Obeso"
+print(f"IMC: {bmi:.1f} - {category}")
 ```
 
 ```python
 # Truthy/falsy
 name = ""
 if name:
-    print(f"Hello, {name}")
+    print(f"Hola, {name}")
 else:
-    print("Name is empty")
+    print("El nombre está vacío")
 
-# None check
+# Verificación de None
 result = None
 if result is None:
-    print("No result available")
+    print("No hay resultado disponible")
 ```
 
 ```python
-# Ternary (conditional expression)
+# Ternario (expresión condicional)
 age = 20
-status = "Adult" if age >= 18 else "Minor"
+status = "Adulto" if age >= 18 else "Menor"
 print(status)
 ```
 
 ```python
-# Match statement (Python 3.10+)
+# Sentencia match (Python 3.10+)
 def describe_mutation(mutation_type):
     match mutation_type:
         case "missense":
-            return "Single amino acid change"
+            return "Cambio de un solo aminoácido"
         case "nonsense":
-            return "Premature stop codon"
+            return "Codón de parada prematuro"
         case "frameshift":
-            return "Reading frame shift"
+            return "Corrimiento del marco de lectura"
         case "silent":
-            return "No amino acid change"
+            return "Sin cambio de aminoácido"
         case _:
-            return "Unknown mutation type"
+            return "Tipo de mutación desconocido"
 
 print(describe_mutation("missense"))
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Clinical decision support for patient diagnosis.
+**Escenario**: Sistema de apoyo a decisiones clínicas para diagnóstico de pacientes.
 
 ```python
 def assess_patient(systolic_bp, diastolic_bp, heart_rate, glucose):
@@ -221,60 +221,60 @@ def assess_patient(systolic_bp, diastolic_bp, heart_rate, glucose):
     
     Returns a tuple of (status, recommendations).
     """
-    # Blood pressure classification
+    # Clasificación de presión arterial
     if systolic_bp < 120 and diastolic_bp < 80:
         bp_status = "Normal"
     elif systolic_bp < 130 and diastolic_bp < 80:
-        bp_status = "Elevated"
+        bp_status = "Elevada"
     elif systolic_bp < 140 or diastolic_bp < 90:
-        bp_status = "Stage 1 Hypertension"
+        bp_status = "Hipertensión Estadio 1"
     else:
-        bp_status = "Stage 2 Hypertension"
+        bp_status = "Hipertensión Estadio 2"
     
-    # Heart rate assessment
+    # Evaluación de frecuencia cardíaca
     if heart_rate < 60:
-        hr_status = "Bradycardia"
+        hr_status = "Bradicardia"
     elif heart_rate <= 100:
         hr_status = "Normal"
     else:
-        hr_status = "Tachycardia"
+        hr_status = "Taquicardia"
     
-    # Glucose assessment
+    # Evaluación de glucosa
     if glucose < 70:
-        glucose_status = "Hypoglycemia"
+        glucose_status = "Hipoglucemia"
     elif glucose <= 126:
         glucose_status = "Normal"
     else:
-        glucose_status = "Hyperglycemia"
+        glucose_status = "Hiperglucemia"
     
-    # Overall alert
+    # Alerta general
     is_emergency = (
-        bp_status == "Stage 2 Hypertension"
-        or hr_status in ("Bradycardia", "Tachycardia")
-        or glucose_status in ("Hypoglycemia", "Hyperglycemia")
+        bp_status == "Hipertensión Estadio 2"
+        or hr_status in ("Bradicardia", "Taquicardia")
+        or glucose_status in ("Hipoglucemia", "Hiperglucemia")
     )
     
     return bp_status, hr_status, glucose_status, is_emergency
 
-# Test
+# Prueba
 result = assess_patient(145, 95, 110, 140)
 bp, hr, glu, emergency = result
-print(f"BP: {bp}")
-print(f"HR: {hr}")
-print(f"Glucose: {glu}")
-print(f"Emergency: {emergency}")
+print(f"PA: {bp}")
+print(f"FC: {hr}")
+print(f"Glucosa: {glu}")
+print(f"Emergencia: {emergency}")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Customer tier assignment and discount calculation.
+**Escenario**: Asignación de nivel de cliente y cálculo de descuento.
 
 ```python
 def calculate_discount(customer_tier, annual_spend, years_active):
     """
     Calculate discount percentage based on customer profile.
     """
-    # Determine discount from tier
+    # Determinar descuento según el nivel
     if customer_tier == "enterprise":
         base_discount = 0.20
     elif customer_tier == "professional":
@@ -284,7 +284,7 @@ def calculate_discount(customer_tier, annual_spend, years_active):
     else:
         base_discount = 0.00
     
-    # Loyalty bonus
+    # Bono por lealtad
     if years_active >= 3:
         loyalty_bonus = 0.05
     elif years_active >= 1:
@@ -292,7 +292,7 @@ def calculate_discount(customer_tier, annual_spend, years_active):
     else:
         loyalty_bonus = 0.00
     
-    # Volume bonus
+    # Bono por volumen
     if annual_spend > 50000:
         volume_bonus = 0.10
     elif annual_spend > 10000:
@@ -303,73 +303,73 @@ def calculate_discount(customer_tier, annual_spend, years_active):
     total_discount = min(base_discount + loyalty_bonus + volume_bonus, 0.30)
     return total_discount
 
-# Usage
+# Uso
 discount = calculate_discount("professional", 25000, 4)
-print(f"Discount: {discount:.0%}")
+print(f"Descuento: {discount:.0%}")
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Using `=` instead of `==`**: `if x = 5:` assigns 5 to x and is always True
-2. **Forgetting colon**: `if x > 5` without `:` raises SyntaxError
-3. **Indentation errors**: Inconsistent indentation breaks conditionals
-4. **Comparing None with `==`**: Use `is None` instead of `== None`
-5. **Checking boolean with `== True`**: Redundant — just use `if condition:`
-6. **Deep nesting**: More than 3 levels of nesting suggests refactoring
+1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
+2. **Olvidar los dos puntos**: `if x > 5` sin `:` lanza SyntaxError
+3. **Errores de indentación**: Indentación inconsistente rompe los condicionales
+4. **Comparar None con `==`**: Usá `is None` en lugar de `== None`
+5. **Verificar booleanos con `== True`**: Es redundante — usá `if condition:`
+6. **Anidamiento profundo**: Más de 3 niveles de anidamiento sugiere refactorización
 
-## Best Practices
+## Buenas Prácticas
 
-- Use `elif` instead of nested `if` for mutually exclusive conditions
-- Keep conditions simple — extract complex logic into boolean variables
-- Use truthy/falsy checks naturally: `if items:` rather than `if len(items) > 0:`
-- Avoid deep nesting (max 3 levels)
-- Use guard clauses (early returns) to reduce nesting
-- Use `in` for multiple comparisons: `if x in (1, 2, 3):`
+- Usá `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
+- Mantené las condiciones simples — extraé lógica compleja a variables booleanas
+- Usá verificaciones truthy/falsy de forma natural: `if items:` en lugar de `if len(items) > 0:`
+- Evitá anidamiento profundo (máx. 3 niveles)
+- Usá cláusulas de guarda (returns tempranos) para reducir el anidamiento
+- Usá `in` para comparaciones múltiples: `if x in (1, 2, 3):`
 
-## Summary
+## Resumen
 
-- `if` executes code when a condition is True
-- `elif` checks additional conditions
-- `else` handles the default case
-- Values are truthy (True) or falsy (False, None, 0, empty sequences)
-- Ternary: `x if condition else y`
-- Match statement (3.10+) for pattern matching
-- Avoid deep nesting; use guard clauses
+- `if` ejecuta código cuando una condición es True
+- `elif` verifica condiciones adicionales
+- `else` maneja el caso por defecto
+- Los valores son truthy (True) o falsy (False, None, 0, secuencias vacías)
+- Ternario: `x if condition else y`
+- Sentencia match (3.10+) para pattern matching
+- Evitá anidamiento profundo; usá cláusulas de guarda
 
-## Key Terms
+## Términos Clave
 
-- **Conditional**: Statement that executes code based on a condition
-- **Boolean expression**: Expression that evaluates to True or False
-- **Truthy**: Value that evaluates to True in a boolean context
-- **Falsy**: Value that evaluates to False in a boolean context
-- **Ternary operator**: Conditional expression for inline if/else
-- **Guard clause**: Early return to avoid nesting
-- **Match statement**: Python 3.10+ structural pattern matching
+- **Condicional**: Sentencia que ejecuta código basada en una condición
+- **Expresión booleana**: Expresión que evalúa a True o False
+- **Truthy**: Valor que evalúa a True en un contexto booleano
+- **Falsy**: Valor que evalúa a False en un contexto booleano
+- **Operador ternario**: Expresión condicional para if/else en línea
+- **Cláusula de guarda**: Return temprano para evitar anidamiento
+- **Sentencia match**: Pattern matching estructural de Python 3.10+
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the output of `if 0: print("yes") else: print("no")`?
-2. What is the difference between `=` and `==`?
-3. What values are considered falsy in Python?
+1. ¿Cuál es la salida de `if 0: print("sí") else: print("no")`?
+2. ¿Cuál es la diferencia entre `=` y `==`?
+3. ¿Qué valores se consideran falsy en Python?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Write a function that takes a temperature in Celsius and returns "Cold" (< 15), "Mild" (15-25), "Hot" (> 25).
-5. Write a function that takes a year and returns whether it is a leap year (divisible by 400, or divisible by 4 but not by 100).
+4. Escribí una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
+5. Escribí una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. Why is `if x == True:` considered bad style? What is the Pythonic alternative?
-7. Compare and contrast if/elif/else chains with match statements. When would you use each?
+6. ¿Por qué `if x == True:` se considera mal estilo? ¿Cuál es la alternativa pitónica?
+7. Compará y contrastá las cadenas if/elif/else con las sentencias match. ¿Cuándo usarías cada una?
 
-## Coding Challenge
+## Desafío de Código
 
-Write a **credit scoring** system that:
-1. Takes income, credit history length (years), outstanding debt, and missed payments count
-2. Calculates a credit score (0-100) using a weighted formula
-3. Assigns a rating: Excellent (≥ 80), Good (60-79), Fair (40-59), Poor (< 40)
-4. Applies modifiers: if debt > income → -20 points; if missed payments > 3 → -15 points; if credit history > 10 years → +10 points
-5. Uses `match` for the rating assignment
-6. Prints the final score, rating, and approval status (Excellent/Good → Approved, otherwise → Review Required)
+Escribí un sistema de **puntaje crediticio** que:
+1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados
+2. Calcule un puntaje crediticio (0-100) usando una fórmula ponderada
+3. Asigne una calificación: Excelente (≥ 80), Buena (60-79), Regular (40-59), Mala (< 40)
+4. Aplique modificadores: si deuda > ingresos → -20 puntos; si pagos atrasados > 3 → -15 puntos; si antigüedad crediticia > 10 años → +10 puntos
+5. Use `match` para la asignación de calificación
+6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena → Aprobado, sino → Revisión Requerida)

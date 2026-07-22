@@ -1,263 +1,263 @@
 ---
 Module: 5
 Lesson Number: 1
-Lesson Title: Introduction to AI Ethics
-Estimated Duration: 60 minutes
-Prerequisites: Module 4 (Machine Learning)
+Lesson Title: Introducción a la Ética en IA
+Estimated Duration: 60 minutos
+Prerequisites: Módulo 4 (Machine Learning)
 Learning Objectives:
-  - Define ethics in the context of artificial intelligence
-  - Explain why AI ethics matters for biotechnology and SaaS applications
-  - Identify the five key ethical principles for AI: beneficence, non-maleficence, autonomy, justice, explicability
-  - Analyze real-world cases where ethical failures in AI caused harm
-  - Evaluate trade-offs between competing ethical principles in system design
-Keywords: ethics, beneficence, non-maleficence, autonomy, justice, explicability, fairness, accountability
+  - Definir la ética en el contexto de la inteligencia artificial
+  - Explicar por qué la ética en IA es importante para biotecnología y aplicaciones SaaS
+  - Identificar los cinco principios éticos clave para IA: beneficencia, no maleficencia, autonomía, justicia, explicabilidad
+  - Analizar casos reales donde fallas éticas en IA causaron daño
+  - Evaluar las compensaciones entre principios éticos en conflicto en el diseño de sistemas
+Keywords: ética, beneficencia, no maleficencia, autonomía, justicia, explicabilidad, equidad, rendición de cuentas
 Difficulty: Introductory
-Programming Concepts: None
-Mathematical Concepts: None
-Machine Learning Concepts: Model evaluation, classification, regression (review)
-Datasets Used: None
+Programming Concepts: Ninguno
+Mathematical Concepts: Ninguno
+Machine Learning Concepts: Evaluación de modelos, clasificación, regresión (repaso)
+Datasets Used: Ninguno
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Introduction to AI Ethics
+# Introducción a la Ética en IA
 
-## Learning Objectives
+## Objetivos de Aprendizaje
 
-By the end of this lesson, students will be able to:
+Al finalizar esta lección, los estudiantes podrán:
 
-1. **Define** AI ethics and its scope within the ML lifecycle
-2. **Explain** why ethical considerations are critical when deploying AI in healthcare and SaaS
-3. **Identify** the five foundational principles of AI ethics
-4. **Analyze** a real-world case of algorithmic harm using ethical principles
-5. **Evaluate** ethical trade-offs in a concrete system design scenario
+1. **Definir** la ética en IA y su alcance dentro del ciclo de vida del ML
+2. **Explicar** por qué las consideraciones éticas son críticas al desplegar IA en salud y SaaS
+3. **Identificar** los cinco principios fundamentales de la ética en IA
+4. **Analizar** un caso real de daño algorítmico usando principios éticos
+5. **Evaluar** compensaciones éticas en un escenario concreto de diseño de sistemas
 
-## Motivation
+## Motivación
 
-Imagine you build a machine learning model that predicts which patients will develop diabetes. Your model achieves 94% accuracy on your test set. You deploy it in a hospital. Months later, you discover the model systematically underdiagnoses diabetes in women of color — precisely the population that needs early detection the most.
+Imaginá que construís un modelo de machine learning que predice qué pacientes desarrollarán diabetes. Tu modelo alcanza un 94% de precisión en el conjunto de prueba. Lo desplegás en un hospital. Meses después, descubrís que el modelo subdiagnostica sistemáticamente la diabetes en mujeres de color — justamente la población que más necesita detección temprana.
 
-Your model is accurate on average. But it causes real harm.
+Tu modelo es preciso en promedio. Pero causa daño real.
 
-This is not a hypothetical scenario. It happened. In 2019, researchers discovered that a widely-used healthcare algorithm in US hospitals was systematically biased against Black patients, falsely labeling them as healthier than equally sick white patients (Obermeyer et al., 2019). The algorithm was deployed in hospitals serving millions of patients. The harm was real, measurable, and entirely preventable.
+Esto no es un escenario hipotético. Sucedió. En 2019, investigadores descubrieron que un algoritmo de salud ampliamente usado en hospitales de Estados Unidos estaba sistemáticamente sesgado contra pacientes negros, clasificándolos falsamente como más saludables que pacientes blancos igualmente enfermos (Obermeyer et al., 2019). El algoritmo estaba desplegado en hospitales que atienden a millones de pacientes. El daño fue real, medible y totalmente prevenible.
 
-AI ethics is not an abstract philosophical exercise. It is an engineering discipline that asks: *What should we build? How should we build it? Who might be harmed? What responsibilities do we have toward the people affected by our systems?*
+La ética en IA no es un ejercicio filosófico abstracto. Es una disciplina de ingeniería que pregunta: *¿Qué deberíamos construir? ¿Cómo deberíamos construirlo? ¿Quién podría resultar dañado? ¿Qué responsabilidades tenemos hacia las personas afectadas por nuestros sistemas?*
 
-If you work in biotechnology, healthcare, or SaaS, you will almost certainly deploy models that affect real people. Understanding ethics is as essential as understanding gradient descent.
+Si trabajás en biotecnología, salud o SaaS, casi con certeza vas a desplegar modelos que afectan a personas reales. Entender la ética es tan esencial como entender el gradiente descendente.
 
-## Big Picture
+## Panorama General
 
-| Previous Module | Current Lesson | Next Lesson |
+| Módulo Anterior | Lección Actual | Próxima Lección |
 |---|---|---|
-| Module 4: Introduction to ML (training models, evaluation) | L1: Introduction to AI Ethics (principles, why ethics matters) | L2: Bias and Fairness (types of bias, fairness metrics) |
+| Módulo 4: Introducción al ML (entrenamiento de modelos, evaluación) | L1: Introducción a la Ética en IA (principios, por qué importa la ética) | L2: Sesgo y Equidad (tipos de sesgo, métricas de equidad) |
 
-This lesson lays the philosophical and practical foundation. Every subsequent lesson — bias, transparency, privacy, social impact, regulation, case studies — builds on these five principles.
+Esta lección sienta la base filosófica y práctica. Cada lección subsiguiente — sesgo, transparencia, privacidad, impacto social, regulación, casos de estudio — se construye sobre estos cinco principios.
 
-## Theory
+## Teoría
 
-### What is Ethics in AI?
+### ¿Qué es la Ética en IA?
 
-Ethics is the branch of philosophy concerned with moral principles — what is right and wrong, good and bad. AI ethics applies these principles to the design, development, deployment, and governance of artificial intelligence systems.
+La ética es la rama de la filosofía que se ocupa de los principios morales — lo que está bien y mal, lo bueno y lo malo. La ética en IA aplica estos principios al diseño, desarrollo, despliegue y gobernanza de sistemas de inteligencia artificial.
 
-AI ethics asks questions like:
+La ética en IA plantea preguntas como:
 
-- Who is responsible when an autonomous vehicle kills a pedestrian?
-- Should an ML model deny a loan application based on zip code?
-- Is it acceptable to train a diagnostic model without patient consent?
-- How transparent should an AI system be about its decision process?
+- ¿Quién es responsable cuando un vehículo autónomo atropella a un peatón?
+- ¿Debería un modelo de ML denegar una solicitud de préstamo basándose en el código postal?
+- ¿Es aceptable entrenar un modelo de diagnóstico sin el consentimiento del paciente?
+- ¿Qué tan transparente debería ser un sistema de IA sobre su proceso de decisión?
 
-These are not questions we can answer with a loss function. They require values, deliberation, and trade-offs.
+Estas no son preguntas que podamos responder con una función de pérdida. Requieren valores, deliberación y compensaciones.
 
-### Why It Matters
+### Por Qué Importa
 
-There are four compelling reasons to care about AI ethics:
+Hay cuatro razones convincentes para ocuparse de la ética en IA:
 
-1. **Harm prevention.** ML systems can and do cause harm — biased predictions, privacy violations, job displacement. Understanding ethics helps us minimize harm.
+1. **Prevención de daños.** Los sistemas de ML pueden y causan daño — predicciones sesgadas, violaciones de privacidad, desplazamiento laboral. Entender la ética nos ayuda a minimizar el daño.
 
-2. **Trust.** Users, patients, and regulators demand trustworthy systems. A single ethical failure can destroy credibility.
+2. **Confianza.** Los usuarios, pacientes y reguladores exigen sistemas confiables. Una sola falla ética puede destruir la credibilidad.
 
-3. **Legal compliance.** Regulation is accelerating. The EU AI Act, GDPR, and HIPAA impose legal requirements on AI systems. Ignorance is not a defense.
+3. **Cumplimiento legal.** La regulación se está acelerando. La Ley de IA de la UE, el GDPR y la HIPAA imponen requisitos legales a los sistemas de IA. La ignorancia no es una defensa.
 
-4. **Better science.** Ethical reflection improves scientific rigor. Considering who is included in your dataset, how your features are constructed, and what your model optimizes for leads to better, more robust models.
+4. **Mejor ciencia.** La reflexión ética mejora el rigor científico. Considerar quién está incluido en tu conjunto de datos, cómo se construyen tus características y para qué optimiza tu modelo conduce a modelos más robustos y mejores.
 
-### The Five Key Principles
+### Los Cinco Principios Clave
 
-Floridi and Cowls (2019) synthesized over 50 AI ethics guidelines worldwide into five core principles:
+Floridi y Cowls (2019) sintetizaron más de 50 guías de ética en IA a nivel mundial en cinco principios centrales:
 
-#### 1. Beneficence
+#### 1. Beneficencia
 
-*Do good. Promote well-being.*
+*Hacer el bien. Promover el bienestar.*
 
-AI systems should be designed to benefit humanity. This means:
+Los sistemas de IA deberían diseñarse para beneficiar a la humanidad. Esto significa:
 
-- Maximizing positive outcomes (better diagnoses, higher productivity, improved access)
-- Considering who benefits and who is excluded
-- Building systems that serve the public good, not just corporate profit
+- Maximizar resultados positivos (mejores diagnósticos, mayor productividad, mejor acceso)
+- Considerar quién se beneficia y quién queda excluido
+- Construir sistemas que sirvan al bien público, no solo a las ganancias corporativas
 
-**Example:** A diagnostic AI should be evaluated not just on accuracy but on whether it improves patient outcomes in practice.
+**Ejemplo:** Una IA de diagnóstico debería evaluarse no solo por su precisión sino por si mejora los resultados de los pacientes en la práctica.
 
-#### 2. Non-maleficence
+#### 2. No Maleficencia
 
-*Do no harm. Prevent harm.*
+*No hacer daño. Prevenir el daño.*
 
-AI systems must not cause foreseeable harm. This includes:
+Los sistemas de IA no deben causar daño previsible. Esto incluye:
 
-- Direct harm (misdiagnosis, accidents)
-- Indirect harm (bias, discrimination, privacy violations)
-- Long-term harm (environmental damage, social inequality)
+- Daño directo (diagnóstico erróneo, accidentes)
+- Daño indirecto (sesgo, discriminación, violaciones de privacidad)
+- Daño a largo plazo (daño ambiental, desigualdad social)
 
-**Example:** Before deploying an automated hiring system, test whether it disproportionately rejects candidates from certain demographic groups.
+**Ejemplo:** Antes de desplegar un sistema de contratación automatizado, evaluá si rechaza desproporcionadamente a candidatos de ciertos grupos demográficos.
 
-#### 3. Autonomy
+#### 3. Autonomía
 
-*Respect human agency. Keep humans in control.*
+*Respetar la agencia humana. Mantener a los humanos en control.*
 
-Humans should retain meaningful control over AI systems. This means:
+Los humanos deben retener un control significativo sobre los sistemas de IA. Esto significa:
 
-- Informed consent when using people's data
-- The right to opt out of automated decisions
-- Meaningful human oversight for high-stakes decisions
+- Consentimiento informado al usar los datos de las personas
+- El derecho a optar por no participar en decisiones automatizadas
+- Supervisión humana significativa para decisiones de alto impacto
 
-**Example:** A patient should be told when a diagnostic recommendation comes from an AI, and a clinician should have the final say.
+**Ejemplo:** Se le debe informar a un paciente cuando una recomendación de diagnóstico proviene de una IA, y el clínico debe tener la última palabra.
 
-#### 4. Justice
+#### 4. Justicia
 
-*Be fair. Distribute benefits and burdens equitably.*
+*Ser equitativo. Distribuir beneficios y cargas de manera justa.*
 
-AI systems should not reinforce existing inequalities. This means:
+Los sistemas de IA no deben reforzar las desigualdades existentes. Esto significa:
 
-- Fair distribution of AI's benefits across populations
-- Protection of vulnerable groups
-- Access to redress when systems cause harm
+- Distribución equitativa de los beneficios de la IA entre las poblaciones
+- Protección de grupos vulnerables
+- Acceso a reparación cuando los sistemas causan daño
 
-**Example:** If an AI system predicts disease risk, ensure it performs equally well across all demographic groups, not just the majority.
+**Ejemplo:** Si un sistema de IA predice riesgo de enfermedad, asegurate de que funcione igual de bien en todos los grupos demográficos, no solo en la mayoría.
 
-#### 5. Explicability
+#### 5. Explicabilidad
 
-*Be transparent and accountable.*
+*Ser transparente y responsable.*
 
-AI systems should be understandable and accountable to those they affect. This includes:
+Los sistemas de IA deberían ser comprensibles y responsables ante quienes afectan. Esto incluye:
 
-- Transparency: explaining how decisions are made
-- Interpretability: making model behavior understandable
-- Accountability: clearly assigning responsibility for outcomes
+- Transparencia: explicar cómo se toman las decisiones
+- Interpretabilidad: hacer comprensible el comportamiento del modelo
+- Rendición de cuentas: asignar claramente la responsabilidad por los resultados
 
-**Example:** A credit-scoring model should be able to explain why a loan was denied in terms the applicant can understand.
+**Ejemplo:** Un modelo de puntuación crediticia debería poder explicar por qué se denegó un préstamo en términos que el solicitante pueda entender.
 
-### Ethical Trade-offs
+### Compensaciones Éticas
 
-Principles often conflict. Consider a trade-off between:
+Los principios a menudo entran en conflicto. Considerá una compensación entre:
 
-- **Autonomy vs. Beneficence:** A medical AI that always recommends the best treatment (beneficence) might override a patient's preferences (autonomy).
-- **Privacy vs. Transparency:** Making an AI fully transparent might require sharing private training data (privacy violation).
-- **Justice vs. Efficiency:** Achieving perfect fairness across groups might reduce overall accuracy (efficiency loss).
+- **Autonomía vs. Beneficencia:** Una IA médica que siempre recomienda el mejor tratamiento (beneficencia) podría anular las preferencias del paciente (autonomía).
+- **Privacidad vs. Transparencia:** Hacer que una IA sea completamente transparente podría requerir compartir datos de entrenamiento privados (violación de privacidad).
+- **Justicia vs. Eficiencia:** Lograr equidad perfecta entre grupos podría reducir la precisión general (pérdida de eficiencia).
 
-There is no universal formula for resolving these conflicts. Ethical AI design requires thoughtful deliberation, stakeholder input, and domain expertise.
+No existe una fórmula universal para resolver estos conflictos. El diseño ético de IA requiere deliberación cuidadosa, aporte de las partes interesadas y experiencia en el dominio.
 
-## Walkthrough Example
+## Ejemplo Guiado
 
-### Case: Predictive Policing
+### Caso: Policía Predictiva
 
-Consider a predictive policing system that uses historical crime data to forecast where crimes are likely to occur. Police departments use these predictions to allocate patrols.
+Considerá un sistema de policía predictiva que usa datos históricos de delitos para pronosticar dónde es probable que ocurran crímenes. Los departamentos de policía usan estas predicciones para asignar patrullajes.
 
-**Ethical analysis using our five principles:**
+**Análisis ético usando nuestros cinco principios:**
 
-| Principle | Question | Analysis |
+| Principio | Pregunta | Análisis |
 |-----------|----------|----------|
-| Beneficence | Does it produce good outcomes? | Could reduce crime rates and improve public safety |
-| Non-maleficence | Does it cause harm? | Historical data reflects biased policing; predictions may perpetuate over-policing of minority neighborhoods |
-| Autonomy | Does it respect human agency? | Officers may defer to the algorithm rather than using judgment |
-| Justice | Is it fair? | If historical data is biased, the system unfairly targets already over-policed communities |
-| Explicability | Is it transparent? | Citizens may not know they are being policed based on an algorithm |
+| Beneficencia | ¿Produce buenos resultados? | Podría reducir las tasas de criminalidad y mejorar la seguridad pública |
+| No maleficencia | ¿Causa daño? | Los datos históricos reflejan vigilancia sesgada; las predicciones pueden perpetuar el sobrepatrullaje de barrios minoritarios |
+| Autonomía | ¿Respeta la agencia humana? | Los oficiales pueden delegar en el algoritmo en lugar de usar su criterio |
+| Justicia | ¿Es equitativo? | Si los datos históricos están sesgados, el sistema apunta injustamente a comunidades ya sobrevigiladas |
+| Explicabilidad | ¿Es transparente? | Los ciudadanos pueden no saber que están siendo vigilados según un algoritmo |
 
-**Conclusion:** The system could produce good outcomes only if the data, deployment, and oversight are carefully designed to prevent harm and ensure fairness.
+**Conclusión:** El sistema podría producir buenos resultados solo si los datos, el despliegue y la supervisión se diseñan cuidadosamente para prevenir daños y garantizar equidad.
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-### AI in Drug Discovery
+### IA en Descubrimiento de Fármacos
 
-An ML model is trained to predict which chemical compounds will bind to a target protein for a new cancer drug. The training data comes from public databases that primarily contain compounds tested on European-derived cell lines.
+Se entrena un modelo de ML para predecir qué compuestos químicos se unirán a una proteína objetivo para un nuevo medicamento contra el cáncer. Los datos de entrenamiento provienen de bases de datos públicas que contienen principalmente compuestos probados en líneas celulares de origen europeo.
 
-**Ethical concerns:**
+**Preocupaciones éticas:**
 
-- **Justice:** The resulting drug may be less effective for non-European populations because the model never learned their biological variability.
-- **Beneficence:** The drug could save lives, but only for a subset of patients.
-- **Autonomy:** Were the patients whose cell lines were used in training informed? Did they consent?
+- **Justicia:** El medicamento resultante podría ser menos efectivo para poblaciones no europeas porque el modelo nunca aprendió su variabilidad biológica.
+- **Beneficencia:** El medicamento podría salvar vidas, pero solo para un subconjunto de pacientes.
+- **Autonomía:** ¿Los pacientes cuyas líneas celulares se usaron en el entrenamiento fueron informados? ¿Dieron su consentimiento?
 
-**Lesson:** Dataset composition is an ethical decision, not just a technical one.
+**Lección:** La composición del conjunto de datos es una decisión ética, no solo técnica.
 
-## SaaS Example
+## Ejemplo SaaS
 
-### AI-Powered Loan Underwriting
+### Suscripción de Préstamos con IA
 
-A SaaS lending platform uses ML to approve or deny small business loans. The model uses features including credit history, revenue, and zip code.
+Una plataforma SaaS de préstamos usa ML para aprobar o denegar préstamos a pequeñas empresas. El modelo usa características que incluyen historial crediticio, ingresos y código postal.
 
-**Ethical concerns:**
+**Preocupaciones éticas:**
 
-- **Justice:** Zip code correlates with race due to historical redlining. The model may perpetuate housing discrimination.
-- **Explicability:** Applicants denied a loan deserve an explanation. "The model said no" is insufficient.
-- **Non-maleficence:** Denying loans to minority-owned businesses deepens wealth inequality.
+- **Justicia:** El código postal se correlaciona con la raza debido a la discriminación histórica en vivienda. El modelo puede perpetuar la discriminación habitacional.
+- **Explicabilidad:** Los solicitantes a quienes se les deniega un préstamo merecen una explicación. "El modelo dijo que no" es insuficiente.
+- **No maleficencia:** Denegar préstamos a negocios de minorías profundiza la desigualdad económica.
 
-**Lesson:** Features that are predictive are not always ethically acceptable.
+**Lección:** Las características que son predictivas no siempre son éticamente aceptables.
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Equating accuracy with ethical success.** A model can be accurate on average but systematically wrong for specific groups.
-2. **Ignoring data provenance.** The ethical properties of a dataset matter as much as its statistical properties.
-3. **Treating ethics as optional.** Ethics is not a checkbox to complete after the model is built. It must be integrated throughout the ML lifecycle.
-4. **Assuming neutrality.** ML systems are not value-neutral. Every design choice reflects values.
-5. **Forgetting the human.** Behind every data point is a person who may be affected by the system.
+1. **Equiparar precisión con éxito ético.** Un modelo puede ser preciso en promedio pero sistemáticamente incorrecto para grupos específicos.
+2. **Ignorar la procedencia de los datos.** Las propiedades éticas de un conjunto de datos importan tanto como sus propiedades estadísticas.
+3. **Tratar la ética como opcional.** La ética no es una casilla para marcar después de construir el modelo. Debe integrarse a lo largo de todo el ciclo de vida del ML.
+4. **Asumir neutralidad.** Los sistemas de ML no son neutrales en cuanto a valores. Cada decisión de diseño refleja valores.
+5. **Olvidar a la persona.** Detrás de cada punto de datos hay una persona que puede verse afectada por el sistema.
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Start early.** Consider ethical implications during problem formulation, not after deployment.
-2. **Diverse teams.** Teams with diverse backgrounds identify more ethical risks.
-3. **Stakeholder engagement.** Talk to the people who will be affected by your system.
-4. **Document decisions.** Write down why you chose certain features, datasets, and thresholds.
-5. **Assume responsibility.** If your system causes harm, own it and fix it.
+1. **Empezar temprano.** Considerá las implicaciones éticas durante la formulación del problema, no después del despliegue.
+2. **Equipos diversos.** Los equipos con antecedentes diversos identifican más riesgos éticos.
+3. **Participación de las partes interesadas.** Hablá con las personas que se verán afectadas por tu sistema.
+4. **Documentar decisiones.** Anotá por qué elegiste ciertas características, conjuntos de datos y umbrales.
+5. **Asumir responsabilidad.** Si tu sistema causa daño, reconocelo y corregilo.
 
-## Summary
+## Resumen
 
-- AI ethics applies moral principles to the design, development, and deployment of AI systems.
-- There are five key principles: beneficence, non-maleficence, autonomy, justice, and explicability.
-- These principles often conflict; there is no universal resolution.
-- Dataset composition, feature selection, and model design are all ethical decisions.
-- Ethics is not optional — it is a core engineering responsibility.
+- La ética en IA aplica principios morales al diseño, desarrollo y despliegue de sistemas de IA.
+- Hay cinco principios clave: beneficencia, no maleficencia, autonomía, justicia y explicabilidad.
+- Estos principios a menudo entran en conflicto; no existe una resolución universal.
+- La composición del conjunto de datos, la selección de características y el diseño del modelo son decisiones éticas.
+- La ética no es opcional — es una responsabilidad central de la ingeniería.
 
-## Key Terms
+## Términos Clave
 
-| Term | Definition |
-|------|------------|
-| Beneficence | The principle of designing AI to promote well-being and produce good outcomes |
-| Non-maleficence | The principle of preventing harm caused by AI systems |
-| Autonomy | The principle of respecting human agency and keeping humans in control |
-| Justice | The principle of distributing AI's benefits and burdens fairly |
-| Explicability | The principle of making AI transparent, interpretable, and accountable |
-| AI ethics | The field concerned with moral principles in AI design and deployment |
-| Ethical trade-off | A situation where satisfying one ethical principle conflicts with another |
+| Término | Definición |
+|---------|------------|
+| Beneficencia | El principio de diseñar IA para promover el bienestar y producir buenos resultados |
+| No maleficencia | El principio de prevenir el daño causado por sistemas de IA |
+| Autonomía | El principio de respetar la agencia humana y mantener a los humanos en control |
+| Justicia | El principio de distribuir los beneficios y cargas de la IA de manera equitativa |
+| Explicabilidad | El principio de hacer que la IA sea transparente, interpretable y responsable |
+| Ética en IA | El campo que se ocupa de los principios morales en el diseño y despliegue de IA |
+| Compensación ética | Una situación donde satisfacer un principio ético entra en conflicto con otro |
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic Understanding
+### Nivel 1: Comprensión Básica
 
-1. List the five ethical principles of AI according to Floridi and Cowls (2019). Provide a one-sentence definition for each.
-2. Explain why a model with 95% accuracy can still be ethically problematic.
+1. Enumerá los cinco principios éticos de la IA según Floridi y Cowls (2019). Proporcioná una definición de una oración para cada uno.
+2. Explicá por qué un modelo con 95% de precisión puede seguir siendo éticamente problemático.
 
-### Level 2: Analysis
+### Nivel 2: Análisis
 
-3. Choose a real or hypothetical AI system. Analyze it using the five ethical principles. Identify at least one potential ethical violation.
-4. Give an example of an ethical trade-off between autonomy and non-maleficence in a healthcare AI context.
+3. Elegí un sistema de IA real o hipotético. Analizalo usando los cinco principios éticos. Identificá al menos una posible violación ética.
+4. Dá un ejemplo de una compensación ética entre autonomía y no maleficencia en un contexto de IA en salud.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-5. An AI system predicts student performance to allocate educational resources. Write a short ethical analysis (200 words) covering all five principles. What trade-offs exist? How would you resolve them?
-6. Why might it be insufficient to rely solely on "fairness through unawareness" (excluding protected attributes from the model)? What ethical principle does this violate?
+5. Un sistema de IA predice el rendimiento estudiantil para asignar recursos educativos. Escribí un breve análisis ético (200 palabras) que cubra los cinco principios. ¿Qué compensaciones existen? ¿Cómo las resolverías?
+6. ¿Por qué podría ser insuficiente confiar únicamente en la "equidad por desconocimiento" (excluir atributos protegidos del modelo)? ¿Qué principio ético se viola?
 
-## Coding Challenge
+## Desafío de Programación
 
-No coding challenge for this introductory lesson. Implementation exercises begin in Lesson 2.
+No hay desafío de programación para esta lección introductoria. Los ejercicios de implementación comienzan en la Lección 2.
 
-## References
+## Referencias
 
 Floridi, L., & Cowls, J. (2019). A unified framework of five principles for AI in society. *Harvard Data Science Review*, 1(1). https://doi.org/10.1162/99608f92.8cd550d1
 

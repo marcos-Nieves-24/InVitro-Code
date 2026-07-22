@@ -2,18 +2,18 @@
 Module: 2
 Lesson Number: 15
 Lesson Title: Matplotlib
-Estimated Duration: 75 minutes
+Estimated Duration: 75 minutos
 Prerequisites: L14 — Pandas
 Learning Objectives:
-  - Create basic plots using pyplot: line, scatter, bar, histogram
-  - Customize plots with titles, labels, legends, and colors
-  - Use the figure/axes interface for multi-panel plots
-  - Save figures to files in various formats
-  - Apply different plot styles and color maps
-Keywords: Matplotlib, pyplot, figure, axes, plot, scatter, histogram, bar chart
+  - Crear gráficos básicos usando pyplot: líneas, dispersión, barras, histogramas
+  - Personalizar gráficos con títulos, etiquetas, leyendas y colores
+  - Usar la interfaz figure/axes para gráficos multi-panel
+  - Guardar figuras a archivos en varios formatos
+  - Aplicar diferentes estilos de gráfico y mapas de colores
+Keywords: Matplotlib, pyplot, figure, axes, plot, scatter, histograma, gráfico de barras
 Difficulty: Beginner-Intermediate
-Programming Concepts: Data visualization, plotting, customization
-Datasets Used: None (synthetic data)
+Programming Concepts: Visualización de datos, graficación, personalización
+Datasets Used: None (datos sintéticos)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
@@ -21,59 +21,59 @@ Quiz: quiz.md
 
 # Matplotlib
 
-## Motivation
+## Motivación
 
-Visualization is essential for understanding data. A well-chosen plot reveals patterns, outliers, and relationships that are invisible in raw numbers. Matplotlib is the foundational visualization library in Python, and most other visualization tools (Seaborn, Plotly) are built on top of it. In biotechnology, visualizations show gene expression distributions, patient survival curves, and protein structure analyses. In SaaS, they display revenue trends, user growth, and A/B test results.
+La visualización es esencial para entender los datos. Un gráfico bien elegido revela patrones, outliers y relaciones que son invisibles en números crudos. Matplotlib es la librería de visualización fundamental en Python, y la mayoría de las otras herramientas de visualización (Seaborn, Plotly) están construidas sobre ella. En biotecnología, las visualizaciones muestran distribuciones de expresión génica, curvas de supervivencia de pacientes y análisis de estructuras de proteínas. En SaaS, muestran tendencias de ingresos, crecimiento de usuarios y resultados de tests A/B.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned Pandas for data manipulation. Now you'll learn to visualize that data with Matplotlib. The next lesson on Seaborn builds on Matplotlib to create statistically-focused visualizations with less code. Throughout the ML modules, you'll use Matplotlib daily to understand models, evaluate performance, and present results.
+En la lección anterior aprendiste Pandas para manipulación de datos. Ahora vas a aprender a visualizar esos datos con Matplotlib. La próxima lección sobre Seaborn se basa en Matplotlib para crear visualizaciones estadísticas con menos código. A lo largo de los módulos de ML, vas a usar Matplotlib a diario para entender modelos, evaluar rendimiento y presentar resultados.
 
-## Theory
+## Teoría
 
-### Matplotlib Architecture
+### Arquitectura de Matplotlib
 
-Matplotlib has three layers:
-1. **Backend**: Renders to screen/file (e.g., Agg, PDF, SVG)
-2. **Artist**: Everything you see on the plot (lines, text, axes)
-3. **pyplot**: Convenience interface (what you'll use most)
+Matplotlib tiene tres capas:
+1. **Backend**: Renderiza a pantalla/archivo (ej. Agg, PDF, SVG)
+2. **Artist**: Todo lo que ves en el gráfico (líneas, texto, ejes)
+3. **pyplot**: Interfaz de conveniencia (lo que más vas a usar)
 
-### Two Interfaces
+### Dos Interfaces
 
-**pyplot (functional) interface:**
+**Interfaz pyplot (funcional):**
 ```python
 import matplotlib.pyplot as plt
 plt.plot(x, y)
 plt.show()
 ```
 
-**Object-oriented (OO) interface:**
+**Interfaz orientada a objetos (OO):**
 ```python
 fig, ax = plt.subplots()
 ax.plot(x, y)
 plt.show()
 ```
 
-The OO interface is preferred for complex plots.
+La interfaz OO es preferida para gráficos complejos.
 
-### Basic Plot Types
+### Tipos de Gráficos Básicos
 
 ```python
-plt.plot(x, y)              # Line plot
-plt.scatter(x, y)           # Scatter plot
-plt.bar(x, height)          # Bar chart
-plt.hist(data, bins=10)     # Histogram
-plt.boxplot(data)           # Box plot
-plt.pie(sizes)              # Pie chart
-plt.imshow(image)           # Image display
+plt.plot(x, y)              # Gráfico de líneas
+plt.scatter(x, y)           # Gráfico de dispersión
+plt.bar(x, height)          # Gráfico de barras
+plt.hist(data, bins=10)     # Histograma
+plt.boxplot(data)           # Diagrama de caja
+plt.pie(sizes)              # Gráfico circular
+plt.imshow(image)           # Visualización de imagen
 ```
 
-### Customization
+### Personalización
 
 ```python
-plt.title("Title")
-plt.xlabel("X Label")
-plt.ylabel("Y Label")
+plt.title("Título")
+plt.xlabel("Etiqueta X")
+plt.ylabel("Etiqueta Y")
 plt.legend()
 plt.grid(True)
 plt.xlim(0, 10)
@@ -81,7 +81,7 @@ plt.ylim(0, 100)
 plt.colorbar()
 ```
 
-### Figure and Axes
+### Figure y Axes
 
 ```python
 fig, axes = plt.subplots(2, 3, figsize=(12, 8))
@@ -89,51 +89,51 @@ axes[0, 0].plot(x, y)
 axes[0, 1].scatter(x, y)
 ```
 
-### Saving Figures
+### Guardando Figuras
 
 ```python
-plt.savefig("plot.png", dpi=300, bbox_inches="tight")
-plt.savefig("plot.pdf")
-plt.savefig("plot.svg")
+plt.savefig("grafico.png", dpi=300, bbox_inches="tight")
+plt.savefig("grafico.pdf")
+plt.savefig("grafico.svg")
 ```
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-Matplotlib Figure Structure
+Estructura de una Figura de Matplotlib
 
 ┌─────────────────────────────────────────────────┐
-│ Figure (the whole window)                        │
+│ Figure (la ventana completa)                     │
 │  ┌─────────────────────────────────────────────┐│
-│  │ Axes (the actual plot area)                  ││
+│  │ Axes (el área de gráfico real)               ││
 │  │  ┌───────────────────────────────────────┐   ││
-│  │  │ Title                                 │   ││
+│  │  │ Título                               │   ││
 │  │  │ ──────────────────────────────────── │   ││
 │  │  │ │                                    │   ││
-│  │  │ │        Plot Area                   │   ││
+│  │  │ │        Área del Gráfico            │   ││
 │  │  │ │                                    │   ││
 │  │  │ ──────────────────────────────────── │   ││
-│  │  │ X Label                              │   ││
+│  │  │ Etiqueta X                           │   ││
 │  │  └───────────────────────────────────────┘   ││
 │  └─────────────────────────────────────────────┘│
-│  Legend                                          │
+│  Leyenda                                         │
 └─────────────────────────────────────────────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Line plot
+# Gráfico de líneas
 x = np.linspace(0, 10, 100)
 y = np.sin(x)
 
 plt.figure(figsize=(10, 6))
-plt.plot(x, y, label="sin(x)", color="blue", linewidth=2)
+plt.plot(x, y, label="sen(x)", color="blue", linewidth=2)
 plt.plot(x, np.cos(x), label="cos(x)", color="red", linestyle="--")
-plt.title("Sine and Cosine Functions")
+plt.title("Funciones Seno y Coseno")
 plt.xlabel("x")
 plt.ylabel("y")
 plt.legend()
@@ -142,86 +142,86 @@ plt.show()
 ```
 
 ```python
-# Scatter plot
+# Gráfico de dispersión
 np.random.seed(42)
 x = np.random.randn(100)
 y = 2 * x + np.random.randn(100) * 0.5
 
 plt.figure(figsize=(8, 6))
 plt.scatter(x, y, alpha=0.6, c="steelblue", edgecolors="white", linewidth=0.5)
-plt.title("Scatter Plot with Linear Relationship")
-plt.xlabel("Feature X")
-plt.ylabel("Target Y")
+plt.title("Gráfico de Dispersión con Relación Lineal")
+plt.xlabel("Característica X")
+plt.ylabel("Objetivo Y")
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
 ```python
-# Bar chart
+# Gráfico de barras
 categories = ["BRCA1", "TP53", "EGFR", "MYC", "KRAS"]
 values = [2.5, -1.2, 3.8, 0.9, -2.1]
 colors = ["green" if v > 0 else "red" for v in values]
 
 plt.figure(figsize=(8, 6))
 plt.bar(categories, values, color=colors, alpha=0.7)
-plt.title("Gene Expression Fold Changes")
-plt.xlabel("Gene")
+plt.title("Cambios Relativos de Expresión Génica")
+plt.xlabel("Gen")
 plt.ylabel("Fold Change")
 plt.axhline(y=0, color="black", linewidth=0.5)
 plt.show()
 ```
 
 ```python
-# Histogram
+# Histograma
 data = np.random.randn(1000)
 
 plt.figure(figsize=(10, 6))
 plt.hist(data, bins=30, edgecolor="white", alpha=0.7, density=True)
-plt.title("Distribution of Values (Histogram)")
-plt.xlabel("Value")
-plt.ylabel("Density")
+plt.title("Distribución de Valores (Histograma)")
+plt.xlabel("Valor")
+plt.ylabel("Densidad")
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
 ```python
-# Multiple subplots
+# Múltiples subplots
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
 x = np.linspace(0, 10, 100)
 data = np.random.randn(500)
 
 axes[0, 0].plot(x, np.sin(x))
-axes[0, 0].set_title("Sine")
+axes[0, 0].set_title("Seno")
 
 axes[0, 1].plot(x, np.cos(x), color="red")
-axes[0, 1].set_title("Cosine")
+axes[0, 1].set_title("Coseno")
 
 axes[1, 0].scatter(np.random.randn(50), np.random.randn(50), alpha=0.6)
-axes[1, 0].set_title("Scatter")
+axes[1, 0].set_title("Dispersión")
 
 axes[1, 1].hist(data, bins=20, edgecolor="white")
-axes[1, 1].set_title("Histogram")
+axes[1, 1].set_title("Histograma")
 
 plt.tight_layout()
 plt.show()
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Visualizing gene expression data across conditions.
+**Escenario**: Visualizando datos de expresión génica en diferentes condiciones.
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Simulate gene expression data (4 genes, 3 conditions)
+# Simular datos de expresión génica (4 genes, 3 condiciones)
 np.random.seed(42)
 conditions = ["Control", "Treatment_A", "Treatment_B"]
 genes = ["BRCA1", "TP53", "EGFR", "MYC"]
 expression = np.random.randn(4, 3) * 1.5 + 2
 
-# Grouped bar chart
+# Gráfico de barras agrupadas
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.arange(len(genes))
 width = 0.25
@@ -231,9 +231,9 @@ for i, (cond, color) in enumerate(zip(conditions, colors)):
     offset = (i - 1) * width
     ax.bar(x + offset, expression[:, i], width, label=cond, color=color, alpha=0.8)
 
-ax.set_xlabel("Gene")
-ax.set_ylabel("Expression Level")
-ax.set_title("Gene Expression by Condition")
+ax.set_xlabel("Gen")
+ax.set_ylabel("Nivel de Expresión")
+ax.set_title("Expresión Génica por Condición")
 ax.set_xticks(x)
 ax.set_xticklabels(genes)
 ax.legend()
@@ -242,110 +242,110 @@ plt.tight_layout()
 plt.show()
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Visualizing SaaS metrics dashboard.
+**Escenario**: Visualizando un dashboard de métricas SaaS.
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Monthly metrics
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+# Métricas mensuales
+months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
 revenue = np.array([50, 55, 62, 68, 75, 82])
 users = np.array([1000, 1100, 1250, 1400, 1550, 1700])
 churn = np.array([5.2, 4.8, 4.5, 4.2, 3.9, 3.5])
 
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-# Revenue trend
+# Tendencia de ingresos
 axes[0].plot(months, revenue, marker="o", linewidth=2, color="steelblue")
-axes[0].set_title("Monthly Revenue ($K)")
-axes[0].set_xlabel("Month")
+axes[0].set_title("Ingresos Mensuales ($K)")
+axes[0].set_xlabel("Mes")
 axes[0].grid(True, alpha=0.3)
 
-# User growth
+# Crecimiento de usuarios
 axes[1].bar(months, users, color="seagreen", alpha=0.7)
-axes[1].set_title("Active Users")
-axes[1].set_xlabel("Month")
+axes[1].set_title("Usuarios Activos")
+axes[1].set_xlabel("Mes")
 axes[1].grid(True, alpha=0.3)
 
-# Churn rate
+# Tasa de churn
 axes[2].plot(months, churn, marker="s", linewidth=2, color="coral")
-axes[2].set_title("Churn Rate (%)")
-axes[2].set_xlabel("Month")
+axes[2].set_title("Tasa de Churn (%)")
+axes[2].set_xlabel("Mes")
 axes[2].grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Plotting lists without conversion**: Matplotlib can plot lists, but NumPy arrays are faster
-2. **Not calling `plt.show()`**: In scripts, plots won't appear without it
-3. **Too many plot elements**: Cluttered plots confuse rather than inform
-4. **Incompatible shapes**: x and y must have the same length
-5. **Forgetting `tight_layout()`**: Labels can be cut off
-6. **Using default colors/styles**: Customize for professional-looking plots
+1. **Graficar listas sin conversión**: Matplotlib puede graficar listas, pero los arrays NumPy son más rápidos
+2. **No llamar `plt.show()`**: En scripts, los gráficos no aparecen sin esto
+3. **Demasiados elementos en el gráfico**: Gráficos recargados confunden en lugar de informar
+4. **Formas incompatibles**: x e y deben tener el mismo largo
+5. **Olvidar `tight_layout()`**: Las etiquetas pueden cortarse
+6. **Usar colores/estilos por defecto**: Personalizá para gráficos con aspecto profesional
 
-## Best Practices
+## Buenas Prácticas
 
-- Use the OO interface (`fig, ax = plt.subplots()`) for complex plots
-- Always label axes and include units
-- Use colorblind-friendly color schemes
-- Set appropriate figure sizes with `figsize`
-- Use `alpha` for overlapping elements
-- Save as SVG for publications (vector format)
-- Add grid lines with low alpha for readability
-- Use `tight_layout()` to prevent label clipping
+- Usá la interfaz OO (`fig, ax = plt.subplots()`) para gráficos complejos
+- Siempre etiquetá los ejes e incluí unidades
+- Usá esquemas de colores aptos para daltonismo
+- Establecé tamaños de figura apropiados con `figsize`
+- Usá `alpha` para elementos superpuestos
+- Guardá como SVG para publicaciones (formato vectorial)
+- Agregá líneas de cuadrícula con alpha bajo para legibilidad
+- Usá `tight_layout()` para evitar que se corten las etiquetas
 
-## Summary
+## Resumen
 
-- Matplotlib's pyplot provides MATLAB-like plotting
-- Two interfaces: pyplot (simple) and OO (flexible)
-- Basic plots: line, scatter, bar, histogram
-- Customize with titles, labels, legends, colors
-- Subplots enable multi-panel figures
-- Save in PNG, PDF, SVG formats
-- Always label axes and include legends
+- El pyplot de Matplotlib proporciona gráficos estilo MATLAB
+- Dos interfaces: pyplot (simple) y OO (flexible)
+- Gráficos básicos: líneas, dispersión, barras, histograma
+- Personalizá con títulos, etiquetas, leyendas, colores
+- Subplots permiten figuras multi-panel
+- Guardá en formatos PNG, PDF, SVG
+- Siempre etiquetá los ejes e incluí leyendas
 
-## Key Terms
+## Términos Clave
 
-- **Figure**: The top-level container (entire window)
-- **Axes**: The actual plotting area (one figure can have many)
-- **pyplot**: MATLAB-like interface for quick plotting
-- **Subplot**: Multiple plots in a single figure
-- **Legend**: Labels identifying plot elements
-- **Tight layout**: Automatic spacing adjustment
-- **Vector format**: SVG/PDF — scalable without quality loss
-- **Raster format**: PNG — pixel-based, quality depends on DPI
+- **Figure**: El contenedor de nivel superior (ventana completa)
+- **Axes**: El área de graficación real (una figura puede tener varios)
+- **pyplot**: Interfaz tipo MATLAB para graficación rápida
+- **Subplot**: Múltiples gráficos en una sola figura
+- **Leyenda**: Etiquetas que identifican elementos del gráfico
+- **Tight layout**: Ajuste automático de espaciado
+- **Formato vectorial**: SVG/PDF — escalable sin pérdida de calidad
+- **Formato raster**: PNG — basado en píxeles, calidad depende del DPI
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the difference between `plt.plot()` and `plt.scatter()`?
-2. How do you save a figure as a PNG file?
-3. What does `fig, ax = plt.subplots(2, 3)` create?
+1. ¿Cuál es la diferencia entre `plt.plot()` y `plt.scatter()`?
+2. ¿Cómo guardás una figura como archivo PNG?
+3. ¿Qué crea `fig, ax = plt.subplots(2, 3)`?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Plot the function f(x) = x² from -10 to 10 with labeled axes and a title.
-5. Create a bar chart showing the top 5 most frequent words in a given text.
+4. Graficá la función f(x) = x² de -10 a 10 con ejes etiquetados y un título.
+5. Creá un gráfico de barras mostrando las 5 palabras más frecuentes en un texto dado.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. When would you choose a line plot over a scatter plot, and vice versa?
-7. Why is it important to save figures in vector format (SVG/PDF) for publications?
+6. ¿Cuándo elegirías un gráfico de líneas sobre uno de dispersión, y viceversa?
+7. ¿Por qué es importante guardar figuras en formato vectorial (SVG/PDF) para publicaciones?
 
-## Coding Challenge
+## Desafío de Código
 
-Create a **comprehensive data report** with the following plots:
+Creá un **reporte de datos integral** con los siguientes gráficos:
 
-1. **Line plot**: Plot 4 different mathematical functions (sin, cos, sin², cos²) on the same axes with different styles and a legend
-2. **Scatter plot**: Generate 200 random (x, y) points with a clear linear trend, add a regression line
-3. **Bar chart**: Show the distribution of letters in a DNA sequence (count of A, C, G, T)
-4. **Histogram**: Plot the distribution of 10,000 random values and overlay a normal distribution curve
-5. **Multi-panel figure**: Create a 2×2 subplot combining the above into one figure
-6. Style: Use a professional style (`plt.style.use("seaborn-v0_8")` or similar), include grid lines, and save as PDF
+1. **Gráfico de líneas**: Graficá 4 funciones matemáticas diferentes (sen, cos, sen², cos²) en los mismos ejes con diferentes estilos y una leyenda
+2. **Gráfico de dispersión**: Generá 200 puntos (x, y) aleatorios con una tendencia lineal clara, agregá una línea de regresión
+3. **Gráfico de barras**: Mostrá la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
+4. **Histograma**: Graficá la distribución de 10.000 valores aleatorios y superponé una curva de distribución normal
+5. **Figura multi-panel**: Creá un subplot 2×2 combinando lo anterior en una sola figura
+6. Estilo: Usá un estilo profesional (`plt.style.use("seaborn-v0_8")` o similar), incluí líneas de cuadrícula y guardá como PDF

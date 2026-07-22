@@ -56,7 +56,7 @@ export default function CodeEditor({
               : "bg-green-600 text-white hover:bg-green-700"
           }`}
         >
-          {isRunning ? "Ejecutando..." : "▶ Ejecutar"}
+          {isRunning ? "Ejecutando..." : "Ejecutar"}
         </button>
       </div>
 

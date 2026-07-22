@@ -2,18 +2,18 @@
 Module: 2
 Lesson Number: 16
 Lesson Title: Seaborn
-Estimated Duration: 60 minutes
+Estimated Duration: 60 minutos
 Prerequisites: L15 — Matplotlib
 Learning Objectives:
-  - Create statistical visualizations using Seaborn
-  - Use pairplot and heatmap for multi-variable exploration
-  - Create box plots and violin plots for distribution comparison
-  - Apply Seaborn themes and color palettes
-  - Customize Seaborn plots with Matplotlib integration
-Keywords: Seaborn, pairplot, heatmap, boxplot, violinplot, palette, theme
+  - Crear visualizaciones estadísticas usando Seaborn
+  - Usar pairplot y heatmap para exploración multivariable
+  - Crear box plots y violin plots para comparación de distribuciones
+  - Aplicar temas y paletas de colores de Seaborn
+  - Personalizar gráficos de Seaborn con integración de Matplotlib
+Keywords: Seaborn, pairplot, heatmap, boxplot, violinplot, paleta, tema
 Difficulty: Beginner-Intermediate
-Programming Concepts: Statistical visualization, data exploration
-Datasets Used: None (synthetic data)
+Programming Concepts: Visualización estadística, exploración de datos
+Datasets Used: None (datos sintéticos)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
@@ -21,26 +21,26 @@ Quiz: quiz.md
 
 # Seaborn
 
-## Motivation
+## Motivación
 
-Seaborn is a statistical visualization library built on Matplotlib that makes it easy to create informative, attractive plots with minimal code. It is designed specifically for exploring and understanding data. While Matplotlib gives you complete control, Seaborn gives you smart defaults and statistical plot types. In biotechnology, Seaborn creates publication-ready heatmaps of gene expression, box plots comparing treatment groups, and pair plots for biomarker discovery. In SaaS, it visualizes customer segments, correlation analyses, and A/B test results.
+Seaborn es una librería de visualización estadística construida sobre Matplotlib que facilita crear gráficos informativos y atractivos con código mínimo. Está diseñada específicamente para explorar y entender datos. Mientras Matplotlib te da control total, Seaborn te da valores predeterminados inteligentes y tipos de gráficos estadísticos. En biotecnología, Seaborn crea heatmaps de expresión génica listos para publicación, box plots que comparan grupos de tratamiento y pair plots para descubrimiento de biomarcadores. En SaaS, visualiza segmentos de clientes, análisis de correlación y resultados de tests A/B.
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned Matplotlib — the foundation for Python visualization. Seaborn builds on Matplotlib to provide higher-level, statistically-focused plots. Combined with Pandas for data manipulation, these three libraries (Pandas, Matplotlib, Seaborn) form the core data science toolkit. Throughout the ML modules, you'll use Seaborn for EDA and result visualization.
+En la lección anterior aprendiste Matplotlib — la base para la visualización en Python. Seaborn se basa en Matplotlib para proporcionar gráficos de más alto nivel enfocados en estadística. Combinado con Pandas para manipulación de datos, estas tres librerías (Pandas, Matplotlib, Seaborn) forman el kit de herramientas esencial de ciencia de datos. A lo largo de los módulos de ML, vas a usar Seaborn para EDA y visualización de resultados.
 
-## Theory
+## Teoría
 
-### What is Seaborn?
+### ¿Qué es Seaborn?
 
-Seaborn provides:
-- **Statistical plot types**: box, violin, swarm, pair, heatmap
-- **Automatic aggregation**: computes statistics for you
-- **Smart color mapping**: categorical and continuous palettes
-- **Themes**: Professional default styles
-- **Pandas integration**: Works directly with DataFrames
+Seaborn provee:
+- **Tipos de gráficos estadísticos**: box, violin, swarm, pair, heatmap
+- **Agregación automática**: calcula estadísticas por vos
+- **Mapeo de colores inteligente**: paletas categóricas y continuas
+- **Temas**: Estilos profesionales predeterminados
+- **Integración con Pandas**: Funciona directamente con DataFrames
 
-### Installation and Import
+### Instalación e Importación
 
 ```bash
 pip install seaborn
@@ -52,15 +52,15 @@ import seaborn as sns
 
 ### Seaborn vs Matplotlib
 
-| Feature | Matplotlib | Seaborn |
-|---------|------------|---------|
-| Level | Low-level | High-level |
-| Default style | Basic | Professional |
-| Pandas support | Manual | Native |
-| Statistical plots | Manual | Built-in |
-| Customization | Complete | Good, with Matplotlib access |
+| Característica | Matplotlib | Seaborn |
+|------------|------------|---------|
+| Nivel | Bajo nivel | Alto nivel |
+| Estilo por defecto | Básico | Profesional |
+| Soporte Pandas | Manual | Nativo |
+| Gráficos estadísticos | Manual | Incorporados |
+| Personalización | Completa | Buena, con acceso a Matplotlib |
 
-### Key Plot Types
+### Tipos de Gráficos Clave
 
 ```python
 sns.scatterplot(data=df, x="col1", y="col2", hue="category")
@@ -75,21 +75,21 @@ sns.heatmap(data=correlation_matrix, annot=True)
 sns.clustermap(data)
 ```
 
-### Themes and Palettes
+### Temas y Paletas
 
 ```python
-sns.set_theme()  # Default Seaborn theme
-sns.set_style("whitegrid")  # Styles: darkgrid, whitegrid, dark, white, ticks
-sns.set_palette("viridis")  # Palettes: deep, muted, pastel, bright, dark, colorblind
-sns.color_palette("husl", 8)  # Custom palette
+sns.set_theme()  # Tema predeterminado de Seaborn
+sns.set_style("whitegrid")  # Estilos: darkgrid, whitegrid, dark, white, ticks
+sns.set_palette("viridis")  # Paletas: deep, muted, pastel, bright, dark, colorblind
+sns.color_palette("husl", 8)  # Paleta personalizada
 ```
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-Seaborn Plot Types for Different Data
+Tipos de Gráficos de Seaborn para Diferentes Datos
 
-Relationship:              Distribution:
+Relación:                 Distribución:
 ┌──────────────────┐     ┌──────────────────┐
 │ Scatterplot      │     │ Histplot         │
 │ ·  ·    ·        │     │ ▓▓▓▓░░░░         │
@@ -97,7 +97,7 @@ Relationship:              Distribution:
 │     ·  ·   ·     │     │ ▓▓▓▓▓▓░░         │
 └──────────────────┘     └──────────────────┘
 
-Comparison:                Multi-variable:
+Comparación:               Multivariable:
 ┌──────────────────┐     ┌──────────────────┐
 │ Boxplot          │     │ Pairplot         │
 │ ┌──┐  ┌──┐       │     │ ╔══╤══╤══╗       │
@@ -105,7 +105,7 @@ Comparison:                Multi-variable:
 │ └──┘  └──┘       │     │ ╟──┼──┼──╢       │
 └──────────────────┘     │ ║· │· │ │║       │
                          │ ╚══╧══╧══╝       │
-Correlation:              └──────────────────┘
+Correlación:              └──────────────────┘
 ┌──────────────────┐
 │ Heatmap          │
 │ ████░░ ░░████    │
@@ -114,7 +114,7 @@ Correlation:              └─────────────────
 └──────────────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import seaborn as sns
@@ -122,29 +122,29 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Load a built-in dataset
+# Cargar un dataset incorporado
 tips = sns.load_dataset("tips")
 print(tips.head())
 ```
 
 ```python
-# Scatter plot with hue
+# Scatter plot con hue
 sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time", size="size")
-plt.title("Tips by Total Bill")
+plt.title("Propinas por Cuenta Total")
 plt.show()
 ```
 
 ```python
 # Box plot
 sns.boxplot(data=tips, x="day", y="total_bill", hue="sex")
-plt.title("Bill Distribution by Day and Sex")
+plt.title("Distribución de Cuentas por Día y Sexo")
 plt.show()
 ```
 
 ```python
 # Violin plot
 sns.violinplot(data=tips, x="day", y="total_bill", hue="sex", split=True)
-plt.title("Violin Plot of Bills")
+plt.title("Violin Plot de Cuentas")
 plt.show()
 ```
 
@@ -159,26 +159,26 @@ plt.show()
 numeric_cols = tips.select_dtypes(include=[np.number])
 corr = numeric_cols.corr()
 sns.heatmap(corr, annot=True, cmap="coolwarm", center=0)
-plt.title("Correlation Heatmap")
+plt.title("Mapa de Calor de Correlaciones")
 plt.show()
 ```
 
 ```python
-# Distribution plot
+# Gráfico de distribución
 sns.histplot(data=tips, x="total_bill", hue="time", kde=True)
 plt.show()
 ```
 
 ```python
-# Count plot
+# Gráfico de conteo
 sns.countplot(data=tips, x="day", hue="sex")
-plt.title("Number of Parties by Day")
+plt.title("Cantidad de Comensales por Día")
 plt.show()
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Visualizing gene expression data from an experiment.
+**Escenario**: Visualizando datos de expresión génica de un experimento.
 
 ```python
 import seaborn as sns
@@ -186,13 +186,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Simulate gene expression data
+# Simular datos de expresión génica
 np.random.seed(42)
 genes = ["BRCA1", "TP53", "EGFR", "MYC", "KRAS"] * 20
 conditions = np.random.choice(["Control", "Drug_A", "Drug_B"], 100)
 expression = np.random.randn(100) * 2 + 5
 
-# Add some group effects
+# Agregar algunos efectos de grupo
 for i in range(len(expression)):
     if conditions[i] == "Drug_A":
         expression[i] += 1.5 if genes[i] in ["EGFR", "MYC"] else -1.0
@@ -208,20 +208,20 @@ df = pd.DataFrame({
 # Box plot
 plt.figure(figsize=(12, 6))
 sns.boxplot(data=df, x="Gene", y="Expression", hue="Condition")
-plt.title("Gene Expression by Condition")
+plt.title("Expresión Génica por Condición")
 plt.show()
 
-# Heatmap (pivot table)
+# Heatmap (tabla dinámica)
 pivot = df.pivot_table(index="Gene", columns="Condition", values="Expression", aggfunc="mean")
 plt.figure(figsize=(8, 6))
 sns.heatmap(pivot, annot=True, cmap="viridis", fmt=".1f")
-plt.title("Mean Expression Levels")
+plt.title("Niveles de Expresión Promedio")
 plt.show()
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Analyzing customer engagement metrics.
+**Escenario**: Analizando métricas de engagement de clientes.
 
 ```python
 import seaborn as sns
@@ -229,7 +229,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Simulate customer data
+# Simular datos de clientes
 np.random.seed(42)
 n_customers = 200
 
@@ -242,95 +242,95 @@ df = pd.DataFrame({
     "Churned": np.random.choice([0, 1], n_customers, p=[0.7, 0.3])
 })
 
-# Pairplot colored by churn
+# Pairplot coloreado por churn
 sns.pairplot(data=df, hue="Churned", vars=["Tenure", "Monthly_Spend", "Satisfaction"])
 plt.show()
 
-# Box plot of spend by plan and churn
+# Box plot de gasto por plan y churn
 plt.figure(figsize=(10, 6))
 sns.boxplot(data=df, x="Plan", y="Monthly_Spend", hue="Churned")
-plt.title("Monthly Spend by Plan and Churn Status")
+plt.title("Gasto Mensual por Plan y Estado de Churn")
 plt.show()
 
-# Correlation heatmap
+# Mapa de calor de correlaciones
 plt.figure(figsize=(8, 6))
 numeric = df.select_dtypes(include=[np.number])
 sns.heatmap(numeric.corr(), annot=True, cmap="coolwarm", center=0)
-plt.title("Customer Metrics Correlation")
+plt.title("Correlación de Métricas de Clientes")
 plt.show()
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Forgetting to import matplotlib**: Seaborn needs `plt.show()` to display plots
-2. **Overriding Seaborn's styles**: Setting Matplotlib styles after seaborn imports can conflict
-3. **Using Seaborn for everything**: Some plots (like line charts with many lines) are better with pure Matplotlib
-4. **Ignoring `hue` and `style` parameters**: These make Seaborn powerful — use them!
-5. **Not using Pandas DataFrames**: Seaborn works best with DataFrames; using raw arrays loses functionality
+1. **Olvidar importar matplotlib**: Seaborn necesita `plt.show()` para mostrar gráficos
+2. **Sobrescribir los estilos de Seaborn**: Configurar estilos de Matplotlib después de importar seaborn puede causar conflictos
+3. **Usar Seaborn para todo**: Algunos gráficos (como líneas con muchas series) son mejores con Matplotlib puro
+4. **Ignorar los parámetros `hue` y `style`**: Estos hacen poderoso a Seaborn — ¡usalos!
+5. **No usar DataFrames de Pandas**: Seaborn funciona mejor con DataFrames; usar arrays crudos pierde funcionalidad
 
-## Best Practices
+## Buenas Prácticas
 
-- Use `sns.set_theme()` at the start for consistent styling
-- Use `hue` for categorical coloring and `size` for continuous values
-- Use `col` and `row` parameters for faceted plots
-- Use `sns.color_palette()` to create custom color schemes
-- Combine Seaborn plots with Matplotlib's `plt.subplots()` for complex layouts
-- Use `sns.heatmap()` with `annot=True` for correlation matrices
+- Usá `sns.set_theme()` al inicio para estilo consistente
+- Usá `hue` para coloración categórica y `size` para valores continuos
+- Usá los parámetros `col` y `row` para gráficos facetados
+- Usá `sns.color_palette()` para crear esquemas de colores personalizados
+- Combiná gráficos de Seaborn con `plt.subplots()` de Matplotlib para diseños complejos
+- Usá `sns.heatmap()` con `annot=True` para matrices de correlación
 
-## Summary
+## Resumen
 
-- Seaborn provides high-level statistical visualizations
-- Key plots: scatterplot, boxplot, violinplot, pairplot, heatmap
-- Native Pandas integration — works directly with DataFrames
-- Professional default themes and color palettes
-- Built-in statistical aggregation (confidence intervals, etc.)
-- Easily customized with Matplotlib functions
+- Seaborn provee visualizaciones estadísticas de alto nivel
+- Gráficos clave: scatterplot, boxplot, violinplot, pairplot, heatmap
+- Integración nativa con Pandas — funciona directamente con DataFrames
+- Temas profesionales y paletas de colores predeterminados
+- Agregación estadística incorporada (intervalos de confianza, etc.)
+- Fácilmente personalizable con funciones de Matplotlib
 
-## Key Terms
+## Términos Clave
 
-- **Seaborn**: Statistical data visualization library
-- **Hue**: Color-coded categorical variable
-- **Pairplot**: Matrix of scatter plots for all variable pairs
-- **Heatmap**: Color-coded matrix of values
-- **Box plot**: Statistical distribution summary (quartiles, outliers)
-- **Violin plot**: Box plot + kernel density estimation
-- **Facet**: Subplot based on variable values
-- **Palette**: Color scheme for categorical or continuous data
+- **Seaborn**: Librería de visualización estadística de datos
+- **Hue**: Variable categórica codificada por color
+- **Pairplot**: Matriz de gráficos de dispersión para todos los pares de variables
+- **Heatmap**: Matriz de valores codificada por color
+- **Box plot**: Resumen estadístico de distribución (cuartiles, outliers)
+- **Violin plot**: Box plot + estimación de densidad kernel
+- **Facet**: Subgráfico basado en valores de variables
+- **Paleta**: Esquema de colores para datos categóricos o continuos
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. What is the main advantage of Seaborn over Matplotlib?
-2. How do you add color coding for a categorical variable in a Seaborn plot?
-3. What does `sns.pairplot()` show?
+1. ¿Cuál es la principal ventaja de Seaborn sobre Matplotlib?
+2. ¿Cómo agregás codificación de color para una variable categórica en un gráfico de Seaborn?
+3. ¿Qué muestra `sns.pairplot()`?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Using the tips dataset, create a box plot of total_bill grouped by day and sex.
-5. Create a heatmap of the correlation matrix of numeric columns in any dataset.
+4. Usando el dataset tips, creá un box plot de total_bill agrupado por día y sexo.
+5. Creá un heatmap de la matriz de correlación de las columnas numéricas de cualquier dataset.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. When would you choose a violin plot over a box plot? What additional information does the violin plot provide?
-7. How would you customize a Seaborn plot (e.g., change title, axis labels, figure size) that doesn't have those parameters directly?
+6. ¿Cuándo elegirías un violin plot sobre un box plot? ¿Qué información adicional proporciona el violin plot?
+7. ¿Cómo personalizarías un gráfico de Seaborn (ej. cambiar título, etiquetas de ejes, tamaño de figura) que no tiene esos parámetros directamente?
 
-## Coding Challenge
+## Desafío de Código
 
-Create a **comprehensive EDA report** of a synthetic customer dataset using Seaborn:
+Creá un **reporte EDA integral** de un dataset sintético de clientes usando Seaborn:
 
-1. Generate a dataset with 300 customers and features: `age`, `income`, `spending_score` (1-100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regions), `segment` (Low/Medium/High)
+1. Generá un dataset con 300 clientes y características: `age`, `income`, `spending_score` (1-100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regiones), `segment` (Low/Medium/High)
 
-2. Create the following visualizations:
-   - Pairplot of numerical variables colored by segment
-   - Heatmap of correlations between all numerical variables
-   - Box plots of spending_score across regions
-   - Violin plot of income by segment
-   - Count plot of segments by region
-   - Histogram of age with KDE overlay, colored by segment
+2. Creá las siguientes visualizaciones:
+   - Pairplot de variables numéricas coloreado por segment
+   - Heatmap de correlaciones entre todas las variables numéricas
+   - Box plots de spending_score por región
+   - Violin plot de income por segment
+   - Count plot de segments por región
+   - Histograma de age con superposición KDE, coloreado por segment
 
-3. Apply a professional Seaborn theme and custom color palette
+3. Aplicá un tema profesional de Seaborn y una paleta de colores personalizada
 
-4. Arrange multiple plots in a single figure using `plt.subplots()` with Seaborn axes
+4. Organizá múltiples gráficos en una sola figura usando `plt.subplots()` con ejes de Seaborn
 
-5. Save the final figure as `eda_report.png`
+5. Guardá la figura final como `eda_report.png`

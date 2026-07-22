@@ -1,139 +1,139 @@
 ---
 Module: 2
 Lesson Number: 10
-Lesson Title: Tuples
-Estimated Duration: 30 minutes
-Prerequisites: L9 — Lists
+Lesson Title: Tuplas
+Estimated Duration: 30 minutos
+Prerequisites: L9 — Listas
 Learning Objectives:
-  - Create tuples and explain their immutability
-  - Use tuple unpacking for multiple assignment
-  - Compare tuples with lists and choose appropriately
-  - Use tuples as dictionary keys
-  - Return multiple values from functions using tuples
-Keywords: tuple, immutable, unpacking, hashable, sequence
+  - Crear tuplas y explicar su inmutabilidad
+  - Usar desempaquetado de tuplas para asignación múltiple
+  - Comparar tuplas con listas y elegir apropiadamente
+  - Usar tuplas como claves de diccionarios
+  - Devolver múltiples valores desde funciones usando tuplas
+Keywords: tupla, inmutable, desempaquetado, hashable, secuencia
 Difficulty: Beginner
-Programming Concepts: Immutable sequences, packing/unpacking, hashable types
+Programming Concepts: Secuencias inmutables, empaquetado/desempaquetado, tipos hashables
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Tuples
+# Tuplas
 
-## Motivation
+## Motivación
 
-Tuples are often called "immutable lists" — they store ordered collections like lists but cannot be changed after creation. This immutability makes them useful for fixed data that shouldn't be modified, like database records, coordinates, and function return values. In biotechnology, tuples represent (gene, expression) pairs, (patient_id, diagnosis) records, and DNA codon triplets. In SaaS, they store (user_id, timestamp, event) log entries.
+Las tuplas suelen llamarse "listas inmutables" — almacenan colecciones ordenadas como las listas pero no se pueden modificar después de creadas. Esta inmutabilidad las hace útiles para datos fijos que no deberían modificarse, como registros de base de datos, coordenadas y valores de retorno de funciones. En biotecnología, las tuplas representan pares (gen, expresión), registros (id_paciente, diagnóstico) y tripletes de codones de ADN. En SaaS, almacenan entradas de log (id_usuario, timestamp, evento).
 
-## Big Picture
+## Panorama General
 
-In the previous lesson, you learned lists — ordered, mutable collections. Tuples are ordered but immutable. Understanding the difference between mutable and immutable data structures is crucial for writing correct and efficient code. This lesson prepares you for dictionaries (next lesson), where tuples are used as keys (lists cannot be dictionary keys).
+En la lección anterior aprendiste listas — colecciones ordenadas y mutables. Las tuplas son ordenadas pero inmutables. Entender la diferencia entre estructuras de datos mutables e inmutables es crucial para escribir código correcto y eficiente. Esta lección te prepara para los diccionarios (próxima lección), donde las tuplas se usan como claves (las listas no pueden ser claves de diccionarios).
 
-## Theory
+## Teoría
 
-### Creating Tuples
+### Creando Tuplas
 
-Tuples are created with parentheses `()`:
+Las tuplas se crean con paréntesis `()`:
 
 ```python
 empty = ()
-single = (42,)        # Note: comma required for single-element tuple
+single = (42,)        # Nota: la coma es obligatoria para tuplas de un elemento
 pair = (1, 2)
-triple = 1, 2, 3      # Parentheses optional
+triple = 1, 2, 3      # Los paréntesis son opcionales
 mixed = (1, "hello", 3.14)
 nested = ((1, 2), (3, 4))
 ```
 
-### Immutability
+### Inmutabilidad
 
-Once created, a tuple cannot be modified:
+Una vez creada, una tupla no se puede modificar:
 
 ```python
 point = (3, 4)
 point[0] = 5  # TypeError: 'tuple' object does not support item assignment
 ```
 
-### Tuple Unpacking
+### Desempaquetado de Tuplas
 
-Assign tuple elements to multiple variables:
+Asigná elementos de una tupla a múltiples variables:
 
 ```python
 point = (3, 4)
 x, y = point          # x=3, y=4
 
-# Swapping with unpacking
+# Swapping con desempaquetado
 a, b = 10, 20
 a, b = b, a          # a=20, b=10
 
-# Extended unpacking (Python 3)
+# Desempaquetado extendido (Python 3)
 first, *rest = (1, 2, 3, 4, 5)  # first=1, rest=[2, 3, 4, 5]
 ```
 
-### Tuple Methods
+### Métodos de Tuplas
 
-Tuples have only two methods:
+Las tuplas tienen solo dos métodos:
 
 ```python
 t = (1, 2, 3, 1, 2, 1)
 t.count(1)    # 3
-t.index(2)    # 1 (first occurrence)
+t.index(2)    # 1 (primera ocurrencia)
 ```
 
-### When to Use Tuples
+### Cuándo Usar Tuplas
 
-- **Fixed data**: Coordinates, RGB values, database records
-- **Multiple return values**: Functions return tuples by default
-- **Dictionary keys**: Tuples are hashable, lists are not
-- **Immutable requirements**: Data that should not change
-- **Performance**: Tuples are slightly faster than lists
+- **Datos fijos**: Coordenadas, valores RGB, registros de base de datos
+- **Múltiples valores de retorno**: Las funciones devuelven tuplas por defecto
+- **Claves de diccionarios**: Las tuplas son hashables, las listas no
+- **Requisitos de inmutabilidad**: Datos que no deberían cambiar
+- **Rendimiento**: Las tuplas son ligeramente más rápidas que las listas
 
-### Tuple vs List Comparison
+### Comparación Tupla vs Lista
 
-| Feature | Tuple | List |
-|---------|-------|------|
-| Syntax | `()` | `[]` |
-| Mutable | No | Yes |
-| Hashable | Yes (if elements hashable) | No |
-| Use case | Fixed data | Variable data |
-| Methods | count(), index() | Many methods |
-| Memory | Slightly less | Slightly more |
-| Speed | Slightly faster | Slightly slower |
+| Característica | Tupla | Lista |
+|------------|-------|-------|
+| Sintaxis | `()` | `[]` |
+| Mutable | No | Sí |
+| Hashable | Sí (si los elementos son hashables) | No |
+| Caso de uso | Datos fijos | Datos variables |
+| Métodos | count(), index() | Muchos métodos |
+| Memoria | Ligeramente menos | Ligeramente más |
+| Velocidad | Ligeramente más rápida | Ligeramente más lenta |
 
-## Visual Explanation
+## Explicación Visual
 
 ```
-Tuple vs List Memory
+Memoria: Tupla vs Lista
 
-Tuple (immutable):          List (mutable):
+Tupla (inmutable):          Lista (mutable):
 ┌───────────────────┐      ┌───────────────────┐
 │ "BRCA1"           │      │ "BRCA1"           │
 │ 2.5               │      │ 2.5               │
 │ 0.001             │      │ 0.001             │
-│                   │      │ ← Can add/remove  │
-│ Fixed size        │      │ Variable size     │
+│                   │      │ ← Puede agregar/eliminar │
+│ Tamaño fijo       │      │ Tamaño variable    │
 └───────────────────┘      └───────────────────┘
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
-# Creating tuples
+# Creando tuplas
 gene_data = ("BRCA1", 2.5, 0.001)
 coordinates = (47.6, -122.3)
 rgb = (255, 128, 0)
 
-# Accessing elements
-print(f"Gene: {gene_data[0]}")
-print(f"Expression: {gene_data[1]}")
+# Accediendo a elementos
+print(f"Gen: {gene_data[0]}")
+print(f"Expresión: {gene_data[1]}")
 ```
 
 ```python
-# Tuple unpacking
+# Desempaquetado de tuplas
 patient = ("P-0042", "John Doe", 45, "Hypertension")
 pid, name, age, diagnosis = patient
-print(f"{pid}: {name}, {age} yrs, {diagnosis}")
+print(f"{pid}: {name}, {age} años, {diagnosis}")
 
-# Return tuple from function
+# Devolver tupla desde una función
 def min_max(numbers):
     return min(numbers), max(numbers)
 
@@ -143,7 +143,7 @@ print(f"Min: {mn}, Max: {mx}")
 ```
 
 ```python
-# Tuples as dictionary keys
+# Tuplas como claves de diccionarios
 location_data = {
     (47.6, -122.3): "Seattle",
     (40.7, -74.0): "New York",
@@ -153,33 +153,33 @@ print(location_data[(47.6, -122.3)])
 ```
 
 ```python
-# Nested tuples
+# Tuplas anidadas
 matrix = ((1, 2, 3), (4, 5, 6), (7, 8, 9))
-print(f"Row 1, Col 2: {matrix[0][1]}")
+print(f"Fila 1, Col 2: {matrix[0][1]}")
 ```
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario**: Representing genetic data as immutable records.
+**Escenario**: Representando datos genéticos como registros inmutables.
 
 ```python
-# Each variant is a tuple: (chromosome, position, ref_base, alt_base, quality)
+# Cada variante es una tupla: (cromosoma, posición, base_ref, base_alt, calidad)
 variants = [
     ("chr1", 123456, "A", "G", 99),
     ("chr1", 789012, "C", "T", 85),
     ("chrX", 345678, "G", "A", 92),
 ]
 
-# Unpack and analyze
+# Desempaquetar y analizar
 for chrom, pos, ref, alt, qual in variants:
     if qual > 90:
-        print(f"High-quality variant: {chrom}:{pos} {ref}→{alt} (Q{qual})")
+        print(f"Variante de alta calidad: {chrom}:{pos} {ref}→{alt} (Q{qual})")
 
-# Tuples ensure variant data cannot be accidentally modified
+# Las tuplas aseguran que los datos de variantes no se modifiquen accidentalmente
 ```
 
 ```python
-# Codon table as tuple-based lookups
+# Tabla de codones como búsquedas basadas en tuplas
 codons = [
     ("ATG", "M", "Start"),
     ("TAA", "*", "Stop"),
@@ -187,7 +187,7 @@ codons = [
     ("TGA", "*", "Stop"),
 ]
 
-# Find codon function
+# Función de búsqueda de codones
 def lookup_codon(codon):
     for c, aa, note in codons:
         if c == codon:
@@ -198,12 +198,12 @@ aa, note = lookup_codon("ATG")
 print(f"ATG → {aa} ({note})")
 ```
 
-## SaaS Example
+## Ejemplo SaaS
 
-**Scenario**: Storing event log entries as immutable records.
+**Escenario**: Almacenando registros de eventos como datos inmutables.
 
 ```python
-# Each event: (timestamp, user_id, event_type, metadata_tuple)
+# Cada evento: (timestamp, user_id, tipo_evento, metadatos_tupla)
 events = [
     (1700000000, "user_001", "login", ("127.0.0.1", "Chrome")),
     (1700000050, "user_042", "purchase", ("premium", 49.99)),
@@ -213,66 +213,66 @@ events = [
 for ts, uid, event_type, meta in events:
     if event_type == "purchase":
         product, amount = meta
-        print(f"Purchase: {uid} bought {product} for ${amount:.2f}")
+        print(f"Compra: {uid} compró {product} por ${amount:.2f}")
 ```
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Forgetting comma for single-element tuple**: `(5)` is an int, `(5,)` is a tuple
-2. **Trying to modify a tuple**: Creates TypeError
-3. **Using tuple when list is needed**: If you need to modify data, use a list
-4. **Unpacking mismatch**: Number of variables must match tuple length
-5. **Using mutable elements in tuple**: Tuple with a list inside is not immutable overall
+1. **Olvidar la coma en tuplas de un elemento**: `(5)` es un int, `(5,)` es una tupla
+2. **Intentar modificar una tupla**: Lanza TypeError
+3. **Usar tupla cuando se necesita lista**: Si necesitás modificar datos, usá una lista
+4. **Desajuste en desempaquetado**: La cantidad de variables debe coincidir con el largo de la tupla
+5. **Usar elementos mutables en una tupla**: Una tupla con una lista adentro no es realmente inmutable
 
-## Best Practices
+## Buenas Prácticas
 
-- Use tuples for fixed, structured data (like database records)
-- Use tuples for multiple return values from functions
-- Use tuple unpacking for cleaner code
-- Use tuples as dictionary keys when you need compound keys
-- Prefer tuples over lists for data that shouldn't change
+- Usá tuplas para datos fijos y estructurados (como registros de base de datos)
+- Usá tuplas para múltiples valores de retorno de funciones
+- Usá desempaquetado de tuplas para código más limpio
+- Usá tuplas como claves de diccionarios cuando necesites claves compuestas
+- Preferí tuplas sobre listas para datos que no deberían cambiar
 
-## Summary
+## Resumen
 
-- Tuples are ordered, immutable sequences created with `()`
-- Single-element tuples require a trailing comma: `(42,)`
-- Tuple unpacking assigns elements to multiple variables
-- Tuples are hashable and can be used as dictionary keys
-- Tuples protect data from accidental modification
-- Use tuples for fixed records and multiple return values
+- Las tuplas son secuencias ordenadas e inmutables creadas con `()`
+- Las tuplas de un solo elemento requieren una coma al final: `(42,)`
+- El desempaquetado asigna elementos a múltiples variables
+- Las tuplas son hashables y se pueden usar como claves de diccionarios
+- Las tuplas protegen los datos de modificaciones accidentales
+- Usá tuplas para registros fijos y múltiples valores de retorno
 
-## Key Terms
+## Términos Clave
 
-- **Tuple**: Immutable ordered sequence
-- **Immutable**: Cannot be changed after creation
-- **Unpacking**: Assigning tuple elements to multiple variables
-- **Hashable**: Can be used as a dictionary key (tuple yes, list no)
-- **Packing**: Creating a tuple from multiple values
+- **Tupla**: Secuencia ordenada inmutable
+- **Inmutable**: No se puede cambiar después de creada
+- **Desempaquetado**: Asignar elementos de una tupla a múltiples variables
+- **Hashable**: Se puede usar como clave de diccionario (tupla sí, lista no)
+- **Empaquetado**: Crear una tupla a partir de múltiples valores
 
-## Exercises
+## Ejercicios
 
-### Level 1: Basic
+### Nivel 1: Básico
 
-1. How do you create a tuple with a single element?
-2. What happens if you try to change a tuple element?
-3. What is the output of `a, b, *rest = (1, 2, 3, 4, 5)`?
+1. ¿Cómo creás una tupla con un solo elemento?
+2. ¿Qué pasa si intentás cambiar un elemento de una tupla?
+3. ¿Cuál es la salida de `a, b, *rest = (1, 2, 3, 4, 5)`?
 
-### Level 2: Implementation
+### Nivel 2: Implementación
 
-4. Write a function `divide_and_remainder(a, b)` that returns a tuple (quotient, remainder) and use unpacking to print both values.
-5. Create a list of tuples representing (name, score) pairs for 5 students. Find the student with the highest score.
+4. Escribí una función `divide_y_resto(a, b)` que devuelva una tupla (cociente, resto) y usá desempaquetado para imprimir ambos valores.
+5. Creá una lista de tuplas que representen pares (nombre, puntaje) para 5 estudiantes. Encontrá al estudiante con el puntaje más alto.
 
-### Level 3: Critical Thinking
+### Nivel 3: Pensamiento Crítico
 
-6. Why can tuples be used as dictionary keys but lists cannot? What property of tuples enables this?
-7. Under what circumstances would the immutability of tuples be a liability rather than an asset?
+6. ¿Por qué las tuplas se pueden usar como claves de diccionarios pero las listas no? ¿Qué propiedad de las tuplas lo permite?
+7. ¿En qué circunstancias la inmutabilidad de las tuplas sería una desventaja en lugar de una ventaja?
 
-## Coding Challenge
+## Desafío de Código
 
-Write a program that manages **inventory items** as tuples:
-1. Each item is a tuple: `(item_id, name, quantity, price)`
-2. Create a list of at least 5 inventory items
-3. Write a function `total_value(inventory)` that returns the total value (sum of quantity * price for all items)
-4. Write a function `find_item(inventory, item_id)` that searches by item_id
-5. Write a function `sort_by_value(inventory)` that returns items sorted by total value (quantity * price), using tuples
-6. Demonstrate all functions with your inventory
+Escribí un programa que administre **ítems de inventario** como tuplas:
+1. Cada ítem es una tupla: `(item_id, nombre, cantidad, precio)`
+2. Creá una lista de al menos 5 ítems de inventario
+3. Escribí una función `total_value(inventario)` que devuelva el valor total (suma de cantidad * precio de todos los ítems)
+4. Escribí una función `find_item(inventario, item_id)` que busque por item_id
+5. Escribí una función `sort_by_value(inventario)` que devuelva los ítems ordenados por valor total (cantidad * precio), usando tuplas
+6. Demostrá todas las funciones con tu inventario

@@ -35,3 +35,4 @@ plan-estudio.docx
 *.swo
 *~
 .DS_Store
+.vercel

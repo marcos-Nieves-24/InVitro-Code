@@ -2,7 +2,9 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-const supabaseAdmin = createAdminClient();
+function getAdmin() {
+  return createAdminClient();
+}
 
 type ClerkEvent = {
   data: {
@@ -42,7 +44,8 @@ export async function POST(req: Request) {
     const { id, email_addresses, first_name } = evt.data;
     const email = email_addresses[0]?.email_address ?? "";
 
-    await supabaseAdmin.from("profiles").upsert({
+    const admin = getAdmin();
+    await admin.from("profiles").upsert({
       id,
       email,
       username: first_name ?? email.split("@")[0],

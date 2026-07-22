@@ -1,112 +1,112 @@
 ---
 Module: 2
 Lesson Number: 6
-Lesson Title: Functions
-Estimated Duration: 60 minutes
-Prerequisites: L5 — Operators
+Lesson Title: Funciones
+Estimated Duration: 60 minutos
+Prerequisites: L5 — Operadores
 Learning Objectives:
-  - Define functions using the def keyword
-  - Pass arguments and return values from functions
-  - Distinguish between local and global scope
-  - Create lambda (anonymous) functions
-  - Write docstrings following PEP 257
-Keywords: function, parameter, argument, return, scope, lambda, docstring
+  - Definir funciones usando la palabra clave def
+  - Pasar argumentos y devolver valores desde funciones
+  - Distinguir entre ámbito local y global
+  - Crear funciones lambda (anónimas)
+  - Escribir docstrings siguiendo PEP 257
+Keywords: función, parámetro, argumento, retorno, ámbito, lambda, docstring
 Difficulty: Beginner
-Programming Concepts: Function definition, parameter passing, scope, lambda expressions, documentation
+Programming Concepts: Definición de funciones, paso de parámetros, ámbito, expresiones lambda, documentación
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Functions
+# Funciones
 
-## Motivation
+## Motivación
 
-Functions are reusable blocks of code that solve a specific task. Instead of writing the same code multiple times, you define it once in a function and call it whenever needed. This is the foundation of modular, maintainable programming. In biotechnology, functions encapsulate DNA sequence analysis, statistical tests, and data preprocessing steps. In SaaS, functions calculate metrics, filter data, and generate reports.
+Las funciones son bloques de código reutilizables que resuelven una tarea específica. En lugar de escribir el mismo código varias veces, lo definís una vez en una función y la llamás cuando sea necesario. Esta es la base de la programación modular y mantenible. En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos. En SaaS, las funciones calculan métricas, filtran datos y generan reportes.
 
-## Big Picture
+## Panorama General
 
-In previous lessons, you learned variables, data types, and operators. Functions combine these elements into reusable units. The next lessons on loops and conditionals will be used inside functions to create powerful, reusable logic.
+En lecciones anteriores aprendiste variables, tipos de datos y operadores. Las funciones combinan estos elementos en unidades reutilizables. Las próximas lecciones sobre bucles y condicionales se van a usar dentro de funciones para crear lógica reutilizable poderosa.
 
-## Theory
+## Teoría
 
-### What is a Function?
+### ¿Qué es una Función?
 
-A function is a named block of code that takes inputs (parameters), performs a computation, and returns an output. Functions promote the DRY (Don't Repeat Yourself) principle.
+Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).
 
-### Defining and Calling Functions
+### Definiendo y Llamando Funciones
 
 ```python
 def function_name(parameter1, parameter2):
-    """Docstring explaining the function."""
+    """Docstring explicando la función."""
     result = parameter1 + parameter2
     return result
 ```
 
-### Function Components
+### Componentes de una Función
 
-1. **def keyword**: Starts the function definition
-2. **Function name**: Follows naming conventions (snake_case)
-3. **Parameters**: Variables that receive input values
-4. **Colon**: Ends the function header
-5. **Body**: Indented block of code
-6. **return**: Sends output back to the caller
-7. **Docstring**: Documentation string (optional but recommended)
+1. **Palabra clave def**: Inicia la definición de la función
+2. **Nombre de la función**: Sigue las convenciones de nomenclatura (snake_case)
+3. **Parámetros**: Variables que reciben los valores de entrada
+4. **Dos puntos**: Finalizan el encabezado de la función
+5. **Cuerpo**: Bloque de código indentado
+6. **return**: Envía la salida de vuelta a quien llamó
+7. **Docstring**: String de documentación (opcional pero recomendado)
 
-### Parameters vs Arguments
+### Parámetros vs Argumentos
 
-- **Parameter**: Variable listed in the function definition
-- **Argument**: Value passed to the function when called
+- **Parámetro**: Variable listada en la definición de la función
+- **Argumento**: Valor que se pasa a la función al llamarla
 
-### Types of Arguments
+### Tipos de Argumentos
 
 ```python
-# Positional arguments (required, in order)
+# Argumentos posicionales (requeridos, en orden)
 def add(x, y):
     return x + y
 add(3, 5)  # x=3, y=5
 
-# Keyword arguments (order doesn't matter)
+# Argumentos de palabra clave (el orden no importa)
 add(y=5, x=3)  # x=3, y=5
 
-# Default parameters
+# Parámetros con valor por defecto
 def greet(name, greeting="Hello"):
     return f"{greeting}, {name}!"
 greet("Alice")        # "Hello, Alice!"
 greet("Bob", "Hi")    # "Hi, Bob!"
 
-# Variable-length arguments
+# Argumentos de longitud variable
 def sum_all(*args):
     return sum(args)
 sum_all(1, 2, 3, 4)  # 10
 ```
 
-### Return Values
+### Valores de Retorno
 
-Functions can return:
-- A single value: `return x`
-- Multiple values: `return x, y` (returns a tuple)
-- Nothing: `return None` (or no return statement)
+Las funciones pueden devolver:
+- Un solo valor: `return x`
+- Múltiples valores: `return x, y` (devuelve una tupla)
+- Nada: `return None` (o ninguna declaración return)
 
-### Scope
+### Ámbito (Scope)
 
-- **Local scope**: Variables defined inside a function are only accessible there
-- **Global scope**: Variables defined outside any function are accessible everywhere
+- **Ámbito local**: Las variables definidas dentro de una función solo son accesibles allí
+- **Ámbito global**: Las variables definidas fuera de cualquier función son accesibles en todas partes
 
-### Lambda Functions
+### Funciones Lambda
 
-Lambda functions are anonymous, single-expression functions:
+Las funciones lambda son funciones anónimas de una sola expresión:
 
 ```python
-# Regular function
+# Función regular
 def square(x):
     return x ** 2
 
-# Lambda equivalent
+# Equivalente lambda
 square = lambda x: x ** 2
 
-# Often used inline
+# A menudo se usan en línea
 numbers = [1, 2, 3, 4]
 squared = list(map(lambda x: x ** 2, numbers))
 ```
@@ -260,9 +260,9 @@ print(f"After modification: {x}")`}
   }}
 />
 
-## Biotechnology Example
+## Ejemplo de Biotecnología
 
-**Scenario:** A bioinformatics pipeline for DNA sequence analysis.
+**Escenario:** Un pipeline de bioinformática para análisis de secuencias de ADN.
 
 <CodeEditor
   defaultValue={`def reverse_complement(sequence):
@@ -291,44 +291,44 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
   }}
 />
 
-## Common Mistakes
+## Errores Comunes
 
-1. **Forgetting parentheses when calling**: `result = my_func` (references the function) vs `result = my_func()` (calls it)
-2. **Modifying global variables inside functions**: Use `global` keyword if needed, but prefer passing parameters
-3. **Mutable default arguments**: `def f(x=[])` — the list is shared across calls. Use `def f(x=None)` instead.
-4. **Not returning a value**: Functions without `return` return `None`
-5. **Shadowing built-in functions**: Don't name variables `list`, `str`, `print`
+1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
+2. **Modificar variables globales dentro de funciones**: Usá la palabra clave `global` si es necesario, pero preferí pasar parámetros
+3. **Argumentos mutables por defecto**: `def f(x=[])` — la lista se comparte entre llamadas. Usá `def f(x=None)` en su lugar.
+4. **No devolver un valor**: Las funciones sin `return` devuelven `None`
+5. **Sombrear funciones incorporadas**: No nombres variables `list`, `str`, `print`
 
-## Best Practices
+## Buenas Prácticas
 
-- Functions should do one thing well (Single Responsibility Principle)
-- Use descriptive names that indicate what the function does
-- Write docstrings for all public functions
-- Keep functions short (typically < 20-30 lines)
-- Use type hints for better readability (Python 3.5+)
-- Prefer returning values over printing inside functions
+- Las funciones deberían hacer una sola cosa bien (Principio de Responsabilidad Única)
+- Usá nombres descriptivos que indiquen lo que hace la función
+- Escribí docstrings para todas las funciones públicas
+- Mantené las funciones cortas (típicamente < 20-30 líneas)
+- Usá type hints para mejor legibilidad (Python 3.5+)
+- Preferí devolver valores en lugar de imprimir dentro de las funciones
 
-## Summary
+## Resumen
 
-- Functions are reusable code blocks defined with `def`
-- Parameters receive inputs; `return` sends outputs
-- Python supports positional, keyword, default, and variable-length arguments
-- Variables inside functions are local; variables outside are global
-- Lambda functions are anonymous, single-expression functions
-- Docstrings document function purpose and usage
+- Las funciones son bloques de código reutilizables definidos con `def`
+- Los parámetros reciben entradas; `return` envía salidas
+- Python soporta argumentos posicionales, de palabra clave, con valor por defecto y de longitud variable
+- Las variables dentro de funciones son locales; las variables fuera son globales
+- Las funciones lambda son funciones anónimas de una sola expresión
+- Los docstrings documentan el propósito y uso de la función
 
-## Key Terms
+## Términos Clave
 
-- **Function**: Named reusable block of code
-- **Parameter**: Variable in the function definition
-- **Argument**: Value passed when calling a function
-- **Return value**: Output sent back to the caller
-- **Scope**: Region where a variable is accessible
-- **Lambda**: Anonymous inline function
-- **Docstring**: Documentation string for functions
-- **DRY**: Don't Repeat Yourself principle
+- **Función**: Bloque de código reutilizable con nombre
+- **Parámetro**: Variable en la definición de la función
+- **Argumento**: Valor pasado al llamar una función
+- **Valor de retorno**: Salida enviada de vuelta a quien llamó
+- **Ámbito**: Región donde una variable es accesible
+- **Lambda**: Función anónima en línea
+- **Docstring**: String de documentación para funciones
+- **DRY**: Principio Don't Repeat Yourself
 
-## Coding Challenge
+## Desafío de Código
 
 Escribí una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluí un docstring y probala con diferentes secuencias.
 

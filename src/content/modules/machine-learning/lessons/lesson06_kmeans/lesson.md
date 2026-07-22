@@ -1,87 +1,87 @@
 ---
 Module: 4
 Lesson Number: 6
-Lesson Title: K-Means Clustering
-Estimated Duration: 75 minutes
-Prerequisites: L1 (ML Fundamentals)
+Lesson Title: Clustering K-Means
+Estimated Duration: 75 minutos
+Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  - Explain the K-Means algorithm and its steps
-  - Determine the optimal number of clusters using elbow method and silhouette score
-  - Implement K-Means clustering with scikit-learn
-  - Interpret cluster centers and assignments
-  - Distinguish between supervised and unsupervised learning
-Keywords: K-Means, clustering, elbow method, silhouette score, inertia, unsupervised learning
-Difficulty: Intermediate
+  - Explicar el algoritmo K-Means y sus pasos
+  - Determinar el número óptimo de clústeres usando el método del codo y el puntaje de silueta
+  - Implementar clustering K-Means con scikit-learn
+  - Interpretar centros de clúster y asignaciones
+  - Distinguir entre aprendizaje supervisado y no supervisado
+Keywords: K-Means, clustering, método del codo, puntaje de silueta, inercia, aprendizaje no supervisado
+Difficulty: Intermedio
 Programming Concepts: sklearn.cluster.KMeans, sklearn.metrics.silhouette_score
-Mathematical Concepts: Euclidean distance, inertia, within-cluster sum of squares
-Machine Learning Concepts: unsupervised learning, clustering, centroid
-Datasets Used: make_blobs, iris (unsupervised), customer segmentation synthetic
+Mathematical Concepts: distancia euclidiana, inercia, suma de cuadrados intra-clúster
+Machine Learning Concepts: aprendizaje no supervisado, clustering, centroide
+Datasets Used: make_blobs, iris (no supervisado), segmentación de clientes sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# K-Means Clustering
+# Clustering K-Means
 
-## Motivation
+## Motivación
 
-A biotech company has thousands of patient gene expression profiles and wants to discover new disease subtypes — without any labeled data. A SaaS company wants to group customers into segments for targeted marketing — without predefined categories. These are *clustering* problems, and K-Means is the most popular algorithm for solving them. Unlike previous lessons, there are no labels to predict; we discover hidden structure in the data.
+Una empresa de biotecnología tiene miles de perfiles de expresión génica de pacientes y quiere descubrir nuevos subtipos de enfermedades — sin datos etiquetados. Una empresa SaaS quiere agrupar clientes en segmentos para marketing dirigido — sin categorías predefinidas. Estos son problemas de *clustering*, y K-Means es el algoritmo más popular para resolverlos. A diferencia de las lecciones anteriores, no hay etiquetas que predecir; descubrimos estructura oculta en los datos.
 
-## Big Picture
+## Panorama general
 
-**Previous:** Random Forest (supervised — predicting labels). **This lesson:** K-Means (unsupervised — discovering groups). **Next:** PCA (unsupervised — reducing dimensions).
+**Anterior:** Bosque Aleatorio (supervisado — predicción de etiquetas). **Esta lección:** K-Means (no supervisado — descubrimiento de grupos). **Siguiente:** PCA (no supervisado — reducción de dimensiones).
 
-## Theory
+## Teoría
 
-### What is Clustering?
+### ¿Qué es el Clustering?
 
-Clustering groups similar samples together. It answers: "What natural groups exist in the data?"
+El clustering agrupa muestras similares entre sí. Responde: "¿Qué grupos naturales existen en los datos?"
 
-### K-Means Algorithm
+### Algoritmo K-Means
 
-1. Choose K (number of clusters)
-2. Initialize K centroids randomly
-3. **Assignment step:** assign each point to the nearest centroid
-4. **Update step:** recompute centroids as mean of assigned points
-5. Repeat steps 3-4 until convergence (centroids stop changing)
+1. Elegí K (cantidad de clústeres)
+2. Inicializá K centroides aleatoriamente
+3. **Paso de asignación:** asigná cada punto al centroide más cercano
+4. **Paso de actualización:** recalculá los centroides como la media de los puntos asignados
+5. Repetí los pasos 3-4 hasta converger (los centroides dejan de cambiar)
 
-### Distance Metric
+### Métrica de distancia
 
-K-Means uses Euclidean distance:
+K-Means usa distancia euclidiana:
 
 $$d(\mathbf{x}, \boldsymbol{\mu}_k) = \sqrt{\sum_{j=1}^{p}(x_j - \mu_{kj})^2}$$
 
-### Inertia (Within-Cluster Sum of Squares)
+### Inercia (Suma de Cuadrados Intra-Clúster)
 
-$$\text{Inertia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
+$$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
 
-Inertia measures how compact clusters are. Lower inertia → tighter clusters.
+La inercia mide qué tan compactos son los clústeres. Menor inercia → clústeres más ajustados.
 
-### Choosing K
+### Cómo elegir K
 
-**Elbow Method:** Plot inertia vs. K. Look for the "elbow" where inertia stops decreasing sharply.
+**Método del codo:** Graficá inercia vs. K. Buscá el "codo" donde la inercia deja de disminuir bruscamente.
 
-**Silhouette Score:** Measures how similar a point is to its own cluster vs. other clusters. Ranges from -1 to 1. Higher is better.
+**Puntaje de silueta:** Mide qué tan similar es un punto a su propio clúster vs. otros clústeres. Varía de -1 a 1. Cuanto más alto, mejor.
 
 $$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
 
-Where $a(i)$ is the mean distance to other points in the same cluster, and $b(i)$ is the mean distance to points in the nearest different cluster.
+Donde $a(i)$ es la distancia media a otros puntos en el mismo clúster, y $b(i)$ es la distancia media a puntos en el clúster diferente más cercano.
 
-## Mathematical Foundation
+## Fundamento matemático
 
-### K-Means as Optimization
+### K-Means como optimización
 
-K-Means minimizes the inertia objective:
+K-Means minimiza el objetivo de inercia:
 
 $$\min_{\{\boldsymbol{\mu}_k\}} \sum_{k=1}^{K} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
 
-This is an NP-hard problem (exponential in K and n). The iterative algorithm finds a local minimum.
+Este es un problema NP-difícil (exponencial en K y n). El algoritmo iterativo encuentra un mínimo local.
 
-### Initialization
+### Inicialización
 
-Random initialization can lead to different results. **K-Means++** (scikit-learn default) initializes centroids far apart to improve convergence.
+La inicialización aleatoria puede llevar a resultados diferentes. **K-Means++** (valor por defecto en scikit-learn) inicializa los centroides separados para mejorar la convergencia.
 
-## Visual Explanation
+## Explicación visual
 
 ```python
 import numpy as np
@@ -110,7 +110,7 @@ plt.savefig('figures/kmeans_different_k.png', dpi=150)
 plt.show()
 ```
 
-## Python Implementation
+## Implementación en Python
 
 ```python
 import numpy as np
@@ -161,9 +161,9 @@ print(f"Inertia: {best_kmeans.inertia_:.2f}")
 print(f"Silhouette: {silhouette_score(X, best_kmeans.labels_):.3f}")
 ```
 
-## Walkthrough Example: Iris Clustering
+## Ejemplo guiado: Clustering de Iris
 
-**Problem:** Can K-Means discover the 3 Iris species without labels?
+**Problema:** ¿Puede K-Means descubrir las 3 especies de Iris sin etiquetas?
 
 ```python
 from sklearn.datasets import load_iris
@@ -180,9 +180,9 @@ labels = kmeans.fit_predict(X_scaled)
 print(pd.crosstab(iris.target, labels, rownames=['True'], colnames=['Cluster']))
 ```
 
-**Result:** K-Means recovers species reasonably well (some confusion between versicolor and virginica).
+**Resultado:** K-Means recupera las especies razonablemente bien (cierta confusión entre versicolor y virginica).
 
-## Biotechnology Example: Gene Expression Subtypes
+## Ejemplo en biotecnología: Subtipos de expresión génica
 
 ```python
 np.random.seed(42)
@@ -202,9 +202,9 @@ true_subtypes = np.array([0]*70 + [1]*60 + [2]*70)
 print(pd.crosstab(true_subtypes, clusters, rownames=['True'], colnames=['Cluster']))
 ```
 
-**Interpretation:** K-Means discovers the three subtypes, potentially revealing novel disease subgroups.
+**Interpretación:** K-Means descubre los tres subtipos, potencialmente revelando subgrupos de enfermedades novedosos.
 
-## SaaS Example: Customer Segmentation
+## Ejemplo en SaaS: Segmentación de clientes
 
 ```python
 np.random.seed(42)
@@ -228,52 +228,52 @@ segments = customers.groupby('segment').mean()
 print(segments.round(1))
 ```
 
-**Interpretation:** Segment 0 = high spenders with high frequency, Segment 1 = new customers, etc.
+**Interpretación:** Segmento 0 = gastadores altos con alta frecuencia, Segmento 1 = clientes nuevos, etc.
 
-## Common Mistakes
+## Errores comunes
 
-1. **Not scaling features** — features with larger units dominate distance calculations.
-2. **Assuming K is known** — always use elbow + silhouette to determine K.
-3. **Interpreting clusters causally** — clusters are geometric, not necessarily biological.
-4. **Using K-Means on high dimensions** — Euclidean distance loses meaning in >50 dimensions.
-5. **Expecting equal-sized clusters** — K-Means tends to produce balanced clusters.
+1. **No escalar las características** — las características con unidades más grandes dominan los cálculos de distancia.
+2. **Asumir que K es conocido** — usá siempre el codo + silueta para determinar K.
+3. **Interpretar clústeres de forma causal** — los clústeres son geométricos, no necesariamente biológicos.
+4. **Usar K-Means en altas dimensiones** — la distancia euclidiana pierde sentido en más de 50 dimensiones.
+5. **Esperar clústeres del mismo tamaño** — K-Means tiende a producir clústeres balanceados.
 
-## Best Practices
+## Buenas prácticas
 
-- Always scale features (StandardScaler) before clustering
-- Use K-Means++ initialization (default in sklearn)
-- Run multiple initializations (n_init=10)
-- Use elbow + silhouette together to choose K
-- Try t-SNE or PCA for visualization of high-dimensional clusters
+- Escalá siempre las características (StandardScaler) antes de clusterizar
+- Usá inicialización K-Means++ (valor por defecto en sklearn)
+- Ejecutá múltiples inicializaciones (n_init=10)
+- Usá el codo + silueta juntos para elegir K
+- Probá t-SNE o PCA para visualizar clústeres de alta dimensionalidad
 
-## Summary
+## Resumen
 
-- K-Means groups data into K clusters by minimizing inertia
-- Algorithm: assign → update → repeat
-- Elbow method + silhouette score choose K
-- Features must be scaled
-- Clustering discovers hidden structure without labels
-- Useful for patient stratification, customer segmentation
+- K-Means agrupa datos en K clústeres minimizando la inercia
+- Algoritmo: asignar → actualizar → repetir
+- El método del codo + puntaje de silueta eligen K
+- Las características deben escalarse
+- El clustering descubre estructura oculta sin etiquetas
+- Útil para estratificación de pacientes, segmentación de clientes
 
-## Key Terms
+## Términos clave
 
-| Term | Definition |
-|------|-----------|
-| Centroid | Center of a cluster (mean of its points) |
-| Inertia | Sum of squared distances from points to centroids |
-| Elbow method | Choosing K where inertia improvement slows |
-| Silhouette score | Measure of cluster cohesion vs. separation |
-| K-Means++ | Smart centroid initialization |
-| WCSS | Within-cluster sum of squares (inertia) |
+| Término | Definición |
+|---------|------------|
+| Centroide | Centro de un clúster (media de sus puntos) |
+| Inercia | Suma de distancias al cuadrado desde los puntos a los centroides |
+| Método del codo | Elegir K donde la mejora de inercia se desacelera |
+| Puntaje de silueta | Medida de cohesión del clúster vs. separación |
+| K-Means++ | Inicialización inteligente de centroides |
+| WCSS | Suma de cuadrados intra-clúster (inercia) |
 
-## Exercises
+## Ejercicios
 
-**Level 1 — Basic:** What is the main difference between supervised and unsupervised learning? Give an example of each.
+**Nivel 1 — Básico:** ¿Cuál es la diferencia principal entre aprendizaje supervisado y no supervisado? Dá un ejemplo de cada uno.
 
-**Level 2 — Implementation:** Generate synthetic data with `make_blobs(n_samples=500, centers=5)`. Apply K-Means with K=2..10, plot elbow and silhouette curves, and determine the optimal K.
+**Nivel 2 — Implementación:** Generá datos sintéticos con `make_blobs(n_samples=500, centers=5)`. Aplicá K-Means con K=2..10, graficá las curvas de codo y silueta, y determiná el K óptimo.
 
-**Level 3 — Critical Thinking:** Your K-Means analysis on patient data produces 3 clusters. A doctor says cluster 2 is biologically meaningful. How would you validate whether the clusters represent real biology or just statistical artifacts?
+**Nivel 3 — Pensamiento crítico:** Tu análisis de K-Means en datos de pacientes produce 3 clústeres. Un médico dice que el clúster 2 es biológicamente significativo. ¿Cómo validarías si los clústeres representan biología real o solo artefactos estadísticos?
 
-## Coding Challenge
+## Desafío de programación
 
-Write a function `optimal_k(X, max_k=10)` that computes inertia and silhouette scores for K=2..max_k and returns the optimal K according to both methods (if they agree) or reports a conflict.
+Escribí una función `optimal_k(X, max_k=10)` que calcule la inercia y el puntaje de silueta para K=2..max_k y devuelva el K óptimo según ambos métodos (si coinciden) o reporte un conflicto.

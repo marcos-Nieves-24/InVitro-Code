@@ -108,7 +108,7 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
       </div>
       {completedLessons === totalLessons && totalLessons > 0 && (
         <div className="text-sm text-green-600 font-medium">
-          🎉 ¡Módulo completo!
+           Modulo completo!
         </div>
       )}
     </div>
