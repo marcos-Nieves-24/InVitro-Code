@@ -12,6 +12,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "autoprefixer": "latest",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^1.25.0",
     "next": "latest",
     "next-mdx-remote": "^6.0.0",

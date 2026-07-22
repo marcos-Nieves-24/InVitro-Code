@@ -23,14 +23,25 @@ function getModules(): ModuleEntry[] {
       .filter((e) => e.isDirectory())
       .map((e) => ({
         slug: e.name,
-        name: formatModuleName(e.name),
+        name: getModuleDisplayName(e.name),
       }));
   } catch {
     return [];
   }
 }
 
-function formatModuleName(slug: string): string {
+function getModuleDisplayName(slug: string): string {
+  const metaPath = path.join(
+    process.cwd(),
+    "src/content/modules",
+    slug,
+    "module.json",
+  );
+  try {
+    const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    if (meta.name) return meta.name;
+  } catch { /* fallback below */ }
+
   return slug
     .split(/[-_]/)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))

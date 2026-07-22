@@ -1,14 +1,50 @@
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
 
-const modules = [
-  { slug: "ai", title: "Introducción a la IA", lessons: 10 },
-  { slug: "python", title: "Python para Biotech", lessons: 10 },
-  { slug: "statistics", title: "Estadística y Probabilidad", lessons: 12 },
-  { slug: "machine-learning", title: "Machine Learning", lessons: 8 },
-  { slug: "ethics", title: "Ética en IA Biomédica", lessons: 7 },
-];
+interface ModuleMeta {
+  slug: string;
+  title: string;
+  firstLesson: string;
+}
+
+function getModules(): ModuleMeta[] {
+  const modulesDir = path.join(process.cwd(), "src/content/modules");
+  try {
+    if (!fs.existsSync(modulesDir)) return [];
+
+    return fs.readdirSync(modulesDir, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((entry) => {
+        const slug = entry.name;
+        const lessonsDir = path.join(modulesDir, slug, "lessons");
+        let firstLesson = "";
+        try {
+          const lessons = fs.readdirSync(lessonsDir, { withFileTypes: true })
+            .filter((e) => e.isDirectory())
+            .map((e) => e.name)
+            .sort();
+          firstLesson = lessons[0] || "";
+        } catch { /* no lessons dir */ }
+
+        const metaPath = path.join(modulesDir, slug, "module.json");
+        let title = slug;
+        try {
+          const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+          title = meta.name || slug;
+        } catch { /* no module.json */ }
+
+        return { slug, title, firstLesson };
+      });
+  } catch {
+    return [];
+  }
+}
 
 export default function Home() {
+  const modules = getModules();
+  const pythonMod = modules.find((m) => m.slug === "python");
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <header className="flex items-center justify-between border-b bg-white px-6 py-4 shadow-sm">
@@ -17,7 +53,7 @@ export default function Home() {
         </h1>
         <nav className="flex gap-4">
           <Link
-            href="/learn/python/lesson01_introduction"
+            href={pythonMod ? `/learn/${pythonMod.slug}/${pythonMod.firstLesson}` : "/learn"}
             className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
           >
             Comenzar a aprender
@@ -38,7 +74,7 @@ export default function Home() {
             Sin registro, sin vueltas — aprendé haciendo.
           </p>
           <Link
-            href="/learn/python/lesson01_introduction"
+            href={pythonMod ? `/learn/${pythonMod.slug}/${pythonMod.firstLesson}` : "/learn"}
             className="inline-block rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-blue-700 transition-colors"
           >
             Empezar ahora
@@ -51,23 +87,35 @@ export default function Home() {
             Contenido del curso
           </h3>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {modules.map((mod) => (
-              <Link
-                key={mod.slug}
-                href={`/learn/${mod.slug}/lesson01_introduction`}
-                className="rounded-xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <h4 className="mb-2 text-lg font-semibold text-gray-900">
-                  {mod.title}
-                </h4>
-                <p className="text-sm text-gray-500">
-                  {mod.lessons} lecciones
-                </p>
-              </Link>
-            ))}
+            {modules.map((mod) => {
+              const lessonCount = getLessonCount(mod.slug);
+              return (
+                <Link
+                  key={mod.slug}
+                  href={mod.firstLesson ? `/learn/${mod.slug}/${mod.firstLesson}` : `/learn/${mod.slug}`}
+                  className="rounded-xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h4 className="mb-2 text-lg font-semibold text-gray-900">
+                    {mod.title}
+                  </h4>
+                  <p className="text-sm text-gray-500">
+                    {lessonCount} lecciones
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </section>
       </main>
     </div>
   );
+}
+
+function getLessonCount(slug: string): number {
+  const lessonsDir = path.join(process.cwd(), "src/content/modules", slug, "lessons");
+  try {
+    return fs.readdirSync(lessonsDir, { withFileTypes: true }).filter((e) => e.isDirectory()).length;
+  } catch {
+    return 0;
+  }
 }
