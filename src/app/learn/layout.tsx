@@ -54,7 +54,7 @@ export default function LearnLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md shrink-0 overflow-y-auto">
         <div className="p-4">
