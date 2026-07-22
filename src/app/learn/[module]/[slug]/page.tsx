@@ -93,11 +93,7 @@ export default async function LessonPage({ params }: Props) {
         <MDXRemote
           source={bodyContent}
           components={components}
-          options={{
-            mdxOptions: {
-              format: "md",
-            },
-          }}
+          options={{}}
         />
       </div>
     </LessonLayout>
