@@ -49,13 +49,13 @@ Para 2020, solo habíamos determinado experimentalmente ~170,000 estructuras. Se
 ### La línea de tiempo
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Antes de AlphaFold (2020), ¿cuánto tiempo tomaba determinar experimentalmente la estructura de una proteína mediana?</em></p>
 </div>
 
 <iframe src="/interactives/demo_08_alphafold.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🧬 modelo sobre datos reales — Nature 2021, Nobel 2024</small>
+<small>modelo sobre datos reales — Nature 2021, Nobel 2024</small>
 
 **La historia en hitos:**
 
@@ -95,13 +95,13 @@ Insilico Medicine, una empresa fundada en 2014, usó IA generativa para acelerar
 ### Demo interactiva 9: Timeline de Rentosertib
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Un fármaco típico tarda 10-15 años en desarrollarse. ¿Cuánto creés que la IA puede acortar solo la fase de descubrimiento (hasta candidato preclínico)?</em></p>
 </div>
 
 <iframe src="/interactives/demo_09_rentosertib.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>💊 modelo sobre datos reales — Nature Medicine 2025</small>
+<small>modelo sobre datos reales — Nature Medicine 2025</small>
 
 **Cronología real de Rentosertib:**
 
