@@ -29,7 +29,14 @@ export default async function LessonPage({ params }: Props) {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       <article className="bg-white rounded-lg shadow-md p-8 prose prose-lg max-w-none">
-        <pre className="text-xs">{JSON.stringify({ module, slug, contentLength: content.length }, null, 2)}</pre>
+        <MDXRemote
+          source={content}
+          options={{
+            mdxOptions: {
+              format: "md",
+            },
+          }}
+        />
       </article>
     </div>
   );
