@@ -60,7 +60,7 @@
   </div>
 
   <div id="plot"></div>
-  <p class="info-text">Cada punto representa una conidia. Pase el mouse sobre un punto para ver sus valores. El color indica la textura (más oscuro = textura más rugosa).</p>
+  <p class="info-text">Cada punto representa una conidia. <span style="color:#1f77b4;font-weight:600;">Azul = Aspergillus</span>, <span style="color:#d62728;font-weight:600;">rojo = Penicillium</span>. Pasá el mouse sobre un punto para ver sus valores.</p>
 
   <div class="checkpoint">
     <h3>Checkpoint: Características en ML</h3>
@@ -115,30 +115,33 @@ const labels = {
 
 function buildPlot(sel) {
   const l = labels[sel];
-  const trace = {
-    x: data.map(d => d[l.xKey]),
-    y: data.map(d => d[l.yKey]),
-    mode: 'markers',
-    type: 'scatter',
-    marker: {
-      size: 10,
-      color: data.map(d => d.textura),
-      colorscale: [[0, '#d62728'], [1, '#1f77b4']],
-      showscale: true,
-      colorbar: {title: 'Textura', thickness: 15}
-    },
-    text: data.map(d => `Especie: ${d.especie}<br>Área: ${d.area} µm²<br>Circularidad: ${d.circularidad}<br>Textura: ${d.textura}`),
-    hoverinfo: 'text'
-  };
+  const asp = data.filter(d => d.especie === 'Aspergillus');
+  const pen = data.filter(d => d.especie === 'Penicillium');
+
+  function makeTrace(pts, color, name) {
+    return {
+      x: pts.map(d => d[l.xKey]),
+      y: pts.map(d => d[l.yKey]),
+      mode: 'markers',
+      type: 'scatter',
+      name,
+      marker: { size: 10, color },
+      text: pts.map(d => `Área: ${d.area} µm²<br>Circularidad: ${d.circularidad}<br>Textura: ${d.textura}`),
+      hoverinfo: 'text'
+    };
+  }
+
   const layout = {
     title: `${l.x} vs ${l.y}`,
     xaxis: {title: l.x, gridcolor: '#eee'},
     yaxis: {title: l.y, gridcolor: '#eee'},
     plot_bgcolor: '#fff',
     paper_bgcolor: 'rgba(0,0,0,0)',
-    margin: {l: 60, r: 40, t: 50, b: 60}
+    margin: {l: 60, r: 40, t: 50, b: 60},
+    showlegend: true,
+    legend: { x: 1.02, y: 1, bgcolor: 'rgba(0,0,0,0)' }
   };
-  Plotly.newPlot('plot', [trace], layout, {responsive: true});
+  Plotly.newPlot('plot', [makeTrace(asp, '#1f77b4', 'Aspergillus'), makeTrace(pen, '#d62728', 'Penicillium')], layout, {responsive: true});
 }
 
 document.getElementById('feature-select').addEventListener('change', function() {
