@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -93,7 +95,12 @@ export default async function LessonPage({ params }: Props) {
         <MDXRemote
           source={bodyContent}
           components={components}
-          options={{}}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkMath],
+              rehypePlugins: [rehypeKatex],
+            },
+          }}
         />
       </div>
     </LessonLayout>
