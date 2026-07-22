@@ -96,6 +96,7 @@ export default async function LessonPage({ params }: Props) {
           source={bodyContent}
           components={components}
           options={{
+            blockJS: false,
             mdxOptions: {
               remarkPlugins: [remarkMath],
               rehypePlugins: [rehypeKatex],
