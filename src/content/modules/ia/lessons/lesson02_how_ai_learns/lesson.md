@@ -17,9 +17,7 @@ Machine Learning Concepts: Clasificación binaria, regresión, KNN, perceptrón,
 Datasets Used: module01_ai_cell_features.csv
 ---
 
-# Lección 2: ¿Cómo aprende la IA?
-
-## Motivación
+<Section number={1} title="Motivación" eyebrow="INICIO">
 
 En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.
 
@@ -27,7 +25,9 @@ Acá entra el **aprendizaje automático** (machine learning). En lugar de que un
 
 Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
 
-## Panorama General
+</Section>
+
+<Section number={2} title="Panorama General" eyebrow="ESTRUCTURA" description="De entender features y reglas fijas a ver cómo aprenden las máquinas: frontera de decisión, KNN, regresión, y el problema del sobreajuste.">
 
 ```
 Lección 1 (Features + reglas fijas) → Lección 2 (¡Acá aprenden las máquinas!)
@@ -37,7 +37,9 @@ Entender frontera de decisión → KNN → Regresión → Overfitting
 Lección 3 (Aplicaciones biotecnológicas)
 ```
 
-## Teoría
+</Section>
+
+<Section number={3} title="Teoría" eyebrow="CONTENIDO">
 
 ### Aprendizaje supervisado: aprender con ejemplos
 
@@ -67,14 +69,12 @@ Pensalo así:
 
 Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza una línea recta para separar dos clases.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>¿Crees que una línea recta puede separar dos tipos de conidias si solo usamos dos características (área y circularidad)?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_04_boundary.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_04_boundary.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
 
 **¿Qué está pasando?**
 - Cada punto es una conidia (azul = *Aspergillus*, rojo = *Penicillium*)
@@ -93,14 +93,12 @@ Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza
 
 Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, KNN clasifica según los vecinos más cercanos.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Si k=1 clasificamos según el vecino más cercano. ¿Qué crees que pasa si aumentamos k a 15?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_05_knn.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_05_knn.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
 
 **¿Cómo funciona KNN?**
 1. Tenemos puntos de entrenamiento ya clasificados
@@ -125,14 +123,12 @@ Eso es **regresión**. En lugar de predecir una etiqueta (Aspergillus/Penicilliu
 
 ### Demo interactiva 6: Regresión lineal
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Si duplicamos la concentración de un fármaco, ¿esperás que el efecto inhibitorio se duplique exactamente?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_06_regression.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>modelo sobre datos reales simulados (basado en curvas dosis-respuesta de antifúngicos)</small>
+<InteractiveFrame src="/interactives/demo_06_regression.html" height="700px" caption="modelo sobre datos reales simulados (basado en curvas dosis-respuesta de antifúngicos)" />
 
 **¿Qué muestra?**
 - Cada punto es un experimento: concentración de fármaco vs. halo de inhibición
@@ -154,14 +150,12 @@ Eso es **regresión**. En lugar de predecir una etiqueta (Aspergillus/Penicilliu
 
 Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_06b_overfitting.html" width="100%" height="800px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_06b_overfitting.html" height="800px" caption="simulación educativa sobre datos sintéticos" />
 
 **¿Qué muestra este demo?**
 - El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
@@ -180,14 +174,16 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 **Sobreajuste (overfitting)** ocurre cuando el modelo es **demasiado complejo** y memoriza el ruido en lugar de la señal. Se reconoce porque hay una **brecha grande entre el error de entrenamiento (muy bajo) y el de prueba (alto)**.
 
->  **Idea clave**: El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
+> **Idea clave**: El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
 
 **La solución**: 
 - **Train/test split**: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.
 - **Validación cruzada**: probar el modelo en múltiples particiones de los datos
 - **Modelos más simples**: a veces menos es más (navaja de Occam)
 
-## Resumen
+</Section>
+
+<Section number={4} title="Resumen" eyebrow="CIERRE">
 
 | Algoritmo | Tipo | ¿Qué hace? | Ejemplo en biotech |
 |---|---|---|---|
@@ -197,7 +193,9 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 | Overfitting | Problema | El modelo memoriza en lugar de generalizar | Modelo que solo funciona en el laboratorio de entrenamiento |
 | Underfitting | Problema | El modelo es demasiado simple para capturar la estructura | Regresión lineal en datos no lineales |
 
-## Checkpoint de conceptos
+</Section>
+
+<Section number={5} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué es una frontera de decisión?**
    - a) El límite ético de lo que la IA puede decidir
@@ -229,15 +227,18 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
    - c) Porque usa demasiada memoria RAM
    - d) Porque solo funciona con redes neuronales
 
-<details>
-<summary>Ver respuestas</summary>
+<AnswerReveal summary="Ver respuestas">
 <p><strong>1.</strong> b) La frontera separa clases. En 2D es una línea; en 3D es un plano; en más dimensiones es un hiperplano.</p>
 <p><strong>2.</strong> b) k grande suaviza la frontera pero puede perder detalle local. Es un balance.</p>
 <p><strong>3.</strong> b) Clasificación → categorías (Aspergillus/Penicillium). Regresión → números continuos (concentración, peso, temperatura).</p>
 <p><strong>4.</strong> a) Subajuste: el modelo es demasiado simple (ambos errores altos). Sobreajuste: el modelo es demasiado complejo (train bajo, test alto). Son los dos extremos del espectro de complejidad.</p>
 <p><strong>5.</strong> b) El modelo memoriza los datos de entrenamiento y no generaliza. Es el problema más común en ML.</p>
-</details>
+</AnswerReveal>
 
-## Para la próxima lección
+</Section>
+
+<Section number={6} title="Para la próxima lección" eyebrow="CIERRE">
 
 Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+
+</Section>

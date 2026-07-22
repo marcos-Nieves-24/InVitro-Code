@@ -17,9 +17,7 @@ Machine Learning Concepts: Pipeline de ML, clustering, clasificación, validaci�
 Datasets Used: module01_ai_cell_features.csv, PDB structures (1MBN, 5K2P, 2X8R, 4HHB, 4INS)
 ---
 
-# Lección 3: IA en la Biotecnología
-
-## Motivación
+<Section number={1} title="Motivación" eyebrow="INICIO">
 
 Hasta ahora clasificamos conidias con algoritmos sencillos. Pero la IA en biotecnología va muchísimo más allá.
 
@@ -29,7 +27,9 @@ En esta lección vamos a ver dos aplicaciones concretas:
 1. **Visualización 3D de proteínas** — cómo se representan las estructuras moleculares y qué datos usa la IA para predecirlas
 2. **Pipeline completo de ML** — cómo se organiza un proyecto real de machine learning, desde los datos hasta la evaluación
 
-## Panorama General
+</Section>
+
+<Section number={2} title="Panorama General" eyebrow="ESTRUCTURA" description="De los algoritmos básicos a aplicaciones reales: visualización 3D de proteínas y pipeline completo de ML.">
 
 ```
 Lección 2 (Algoritmos básicos) → Lección 3 (Aplicaciones biotecnológicas)
@@ -40,7 +40,9 @@ Lección 2 (Algoritmos básicos) → Lección 3 (Aplicaciones biotecnológicas)
                           Lección 4 (Casos reales: AlphaFold, Rentosertib)
 ```
 
-## Teoría
+</Section>
+
+<Section number={3} title="Teoría" eyebrow="CONTENIDO">
 
 ### Proteínas en 3D: ¿qué estamos viendo realmente?
 
@@ -60,14 +62,12 @@ Cada punto en el visualizador 3D representa un aminoácido. La línea que conect
 
 Vamos a explorar 5 proteínas reales, todas verificadas del RCSB PDB.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **🧪 Antes de interactuar, respondé:**
   <p><em>¿Cuántos átomos de carbono alfa (Cα) creés que tiene una proteína de tamaño medio como una lisozima?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_07_protein_3d.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>🧬 estructuras reales de PDB (RCSB.org) — extracción de carbonos alfa</small>
+<InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="700px" caption="🧬 estructuras reales de PDB (RCSB.org) — extracción de carbonos alfa" />
 
 **Las proteínas que podés explorar:**
 
@@ -101,14 +101,12 @@ Sin IA, determinar la estructura requiere cristalografía de rayos X (meses, cos
 
 Ahora que vimos aplicaciones, volvamos a nuestro problema de clasificación de conidias y veamos cómo se organiza un proyecto real de ML de principio a fin.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>En un proyecto real de ML, ¿qué paso creés que consume más tiempo: entrenar el modelo o preparar los datos?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_10_pipeline.html" width="100%" height="750px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_10_pipeline.html" height="750px" caption="simulación educativa sobre datos sintéticos" />
 
 **Los 4 pasos del pipeline:**
 
@@ -126,7 +124,9 @@ Ahora que vimos aplicaciones, volvamos a nuestro problema de clasificación de c
 
 > 💡 **Idea clave**: Preparar los datos consume ~80% del tiempo en proyectos reales de ML. El modelo es la parte más pequeña (y a menudo la más fácil) del pipeline.
 
-## Conclusión: el pipeline completo
+</Section>
+
+<Section number={4} title="Conclusión: el pipeline completo" eyebrow="APLICACIÓN">
 
 Cada concepto de las Lecciones 1 y 2 aparece en este pipeline:
 - **Features** → paso 1 (Datos)
@@ -136,7 +136,9 @@ Cada concepto de las Lecciones 1 y 2 aparece en este pipeline:
 
 En la Lección 4 vamos a ver dos casos reales donde la IA transformó la biotecnología: AlphaFold (premio Nobel 2024) y Rentosertib de Insilico Medicine (Nature Medicine 2025).
 
-## Checkpoint de conceptos
+</Section>
+
+<Section number={5} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué representa cada punto en el visualizador 3D de proteínas?**
    - a) Un átomo de hidrógeno
@@ -162,14 +164,17 @@ En la Lección 4 vamos a ver dos casos reales donde la IA transformó la biotecn
    - c) Los parámetros internos del modelo
    - d) El tiempo que tardó el entrenamiento
 
-<details>
-<summary>Ver respuestas</summary>
+<AnswerReveal summary="Ver respuestas">
 <p><strong>1.</strong> b) Cada Cα representa un aminoácido. La nube de puntos forma el esqueleto de la proteína.</p>
 <p><strong>2.</strong> b) La velocidad y accesibilidad. AlphaFold predice en horas lo que antes tomaba meses o años. No reemplaza los métodos experimentales, los complementa.</p>
 <p><strong>3.</strong> b) Preparar datos (limpiar, etiquetar, manejar valores faltantes) es ~80% del trabajo. Entrenar el modelo suele ser menos del 5%.</p>
 <p><strong>4.</strong> b) La matriz de confusión muestra TP, FP, FN, TN — mucho más informativo que solo el accuracy.</p>
-</details>
+</AnswerReveal>
 
-## Para la próxima lección
+</Section>
+
+<Section number={6} title="Para la próxima lección" eyebrow="CIERRE">
 
 En la Lección 4 vamos a cerrar el módulo con dos casos reales que cambiaron la biotecnología: la historia completa de AlphaFold (de CASP a Nobel) y el caso de Rentosertib, el primer fármaco descubierto con IA en llegar a fases clínicas. También vamos a mencionar Evo, el modelo genómico que está abriendo nuevas fronteras en biología sintética.
+
+</Section>

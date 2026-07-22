@@ -17,23 +17,23 @@ Machine Learning Concepts: Features, clasificación, reconocimiento de patrones
 Datasets Used: module01_ai_cell_features.csv
 ---
 
-# Lección 1: ¿Qué es la Inteligencia Artificial?
-
-## Motivación
+<Section number={1} title="Motivación" eyebrow="INICIO">
 
 Imaginá que sos microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitás identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por vos, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
 
-## Panorama General
+</Section>
 
-Esta lección es la primera del Módulo 1. Vamos a construir desde cero qué significa que una máquina "aprenda". No asumimos ningún conocimiento previo de programación, estadística ni matemática. Solo curiosidad y ganas de entender.
+<Section number={2} title="Panorama General" eyebrow="ESTRUCTURA" description="Esta lección es la primera del Módulo 1. Vamos a construir desde cero qué significa que una máquina 'aprenda'. No asumimos ningún conocimiento previo de programación, estadística ni matemática. Solo curiosidad y ganas de entender.">
 
 ```
 Lección 1 (¿Qué es IA?) → Lección 2 (¿Cómo aprende?) → Lección 3 (IA en Biotecnología) → Lección 4 (Casos Reales)
 ```
 
-## Teoría
+</Section>
+
+<Section number={3} title="Teoría" eyebrow="CONTENIDO">
 
 ### ¿Qué es la Inteligencia Artificial?
 
@@ -77,14 +77,12 @@ Cada conidia se convierte en un **vector de números**. Eso es lo que la IA pued
 
 Vamos a ver nuestras primeras conidias como datos.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_01_features.html" width="100%" height="650px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_01_features.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 
 Cada punto en el gráfico es una conidia. Podés cambiar qué características comparar con el menú desplegable. Notá cómo algunas features separan mejor las especies que otras.
 
@@ -97,14 +95,12 @@ Cada punto en el gráfico es una conidia. Podés cambiar qué características c
 
 Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_02_patterns.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_02_patterns.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
 
 Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu tarea es clasificar cada una como *Aspergillus* o *Penicillium* basándote en el patrón visual.
 
@@ -117,14 +113,12 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_03_rules.html" width="100%" height="650px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>simulación educativa sobre datos sintéticos</small>
+<InteractiveFrame src="/interactives/demo_03_rules.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 
 Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 
@@ -134,7 +128,9 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 - Para capturar la complejidad, necesitaríamos cientos de reglas → imposible de mantener
 - **Acá entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
 
-## Resumen
+</Section>
+
+<Section number={4} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -144,11 +140,13 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 | Reglas fijas | Funcionan para problemas simples, fallan en la complejidad del mundo real |
 | Aprendizaje automático | La máquina encuentra patrones por sí misma a partir de ejemplos |
 
-## Checkpoint de conceptos
+</Section>
 
-<div style="border: 2px solid #d62728; border-radius: 8px; padding: 12px; margin: 16px 0; background: #fff5f5;">
-  <strong>Respondé estas preguntas antes de seguir:</strong>
-</div>
+<Section number={5} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<CalloutCheck>
+  **Respondé estas preguntas antes de seguir:**
+</CalloutCheck>
 
 1. **¿Qué es una "feature" en el contexto de IA?**
    - a) Una característica del hardware de la computadora
@@ -168,13 +166,16 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
    - c) Que puede tener conversaciones como un humano
    - d) Que reemplaza completamente al científico
 
-<details>
-<summary>Ver respuestas</summary>
+<AnswerReveal summary="Ver respuestas">
 <p><strong>1.</strong> b) Una propiedad medible de los datos. Las features son los números que la IA usa para aprender.</p>
 <p><strong>2.</strong> b) La variabilidad natural hace que las reglas fijas siempre tengan excepciones. El ML se adapta a esa variabilidad.</p>
 <p><strong>3.</strong> b) La IA no "entiende" como nosotros. Encuentra correlaciones estadísticas en los datos. Es poderoso... pero limitado.</p>
-</details>
+</AnswerReveal>
 
-## Para la próxima lección
+</Section>
+
+<Section number={6} title="Para la próxima lección" eyebrow="CIERRE">
 
 Viste que las reglas fijas no alcanzan. En la Lección 2 vamos a ver *cómo* las máquinas realmente aprenden: desde la frontera de decisión más simple (el perceptrón) hasta algoritmos como KNN que clasifican por cercanía. También vamos a entender qué es el "sobreajuste" (overfitting) y por qué un modelo demasiado complejo puede ser peor que uno simple.
+
+</Section>

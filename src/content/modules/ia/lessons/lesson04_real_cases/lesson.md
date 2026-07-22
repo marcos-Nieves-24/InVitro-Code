@@ -17,15 +17,15 @@ Machine Learning Concepts: Predicción de estructura, drug discovery, modelos ge
 Datasets Used: PDB structures (1MBN, 5K2P, 2X8R, 4HHB, 4INS)
 ---
 
-# Lección 4: Casos Reales en la Investigación Biotecnológica
-
-## Motivación
+<Section number={1} title="Motivación" eyebrow="INICIO">
 
 Todo lo que vimos hasta acá —features, clasificación, regresión, fronteras de decisión— no es teoría abstracta. Es el fundamento de avances que están transformando la biotecnología hoy.
 
 En esta lección vamos a ver dos casos concretos donde la IA tuvo un impacto real y medible. No son promesas de futuro: son hitos que ya ocurrieron.
 
-## Panorama General
+</Section>
+
+<Section number={2} title="Panorama General" eyebrow="ESTRUCTURA" description="De los fundamentos a los casos reales: AlphaFold (Nobel 2024), Rentosertib (Nature Medicine 2025) y la frontera actual de la IA en biotecnología.">
 
 ```
 Lección 3 (Aplicaciones: visualización 3D, pipeline ML) → Lección 4 (Casos reales)
@@ -33,7 +33,9 @@ Lección 3 (Aplicaciones: visualización 3D, pipeline ML) → Lección 4 (Casos 
                     AlphaFold (Nobel 2024) → Rentosertib (Nature Medicine 2025) → Frontera
 ```
 
-## Caso 1: AlphaFold — el Nobel de Química 2024
+</Section>
+
+<Section number={3} title="Caso 1: AlphaFold — el Nobel de Química 2024" eyebrow="APLICACIÓN">
 
 ### ¿Cuál era el problema?
 
@@ -48,14 +50,12 @@ Para 2020, solo habíamos determinado experimentalmente ~170,000 estructuras. Se
 
 ### La línea de tiempo
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Antes de AlphaFold (2020), ¿cuánto tiempo tomaba determinar experimentalmente la estructura de una proteína mediana?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_08_alphafold.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>modelo sobre datos reales — Nature 2021, Nobel 2024</small>
+<InteractiveFrame src="/interactives/demo_08_alphafold.html" height="700px" caption="modelo sobre datos reales — Nature 2021, Nobel 2024" />
 
 **La historia en hitos:**
 
@@ -84,7 +84,9 @@ AlphaFold no "conoce" física de proteínas. Aprendió a predecir distancias ent
 
 No necesita saber física. Necesita **suficientes ejemplos** para encontrar patrones estadísticos.
 
-## Caso 2: Rentosertib — el primer fármaco descubierto con IA
+</Section>
+
+<Section number={4} title="Caso 2: Rentosertib — el primer fármaco descubierto con IA" eyebrow="APLICACIÓN">
 
 ### ¿Cuál era el problema?
 
@@ -94,14 +96,12 @@ Insilico Medicine, una empresa fundada en 2014, usó IA generativa para acelerar
 
 ### Demo interactiva 9: Timeline de Rentosertib
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
+<CalloutInfo>
+  **Antes de interactuar, respondé:**
   <p><em>Un fármaco típico tarda 10-15 años en desarrollarse. ¿Cuánto creés que la IA puede acortar solo la fase de descubrimiento (hasta candidato preclínico)?</em></p>
-</div>
+</CalloutInfo>
 
-<iframe src="/interactives/demo_09_rentosertib.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
-
-<small>modelo sobre datos reales — Nature Medicine 2025</small>
+<InteractiveFrame src="/interactives/demo_09_rentosertib.html" height="700px" caption="modelo sobre datos reales — Nature Medicine 2025" />
 
 **Cronología real de Rentosertib:**
 
@@ -129,7 +129,9 @@ Insilico aplicó tres tipos de IA en paralelo:
 
 > 💡 **Dato clave**: No fue un solo algoritmo, sino un **sistema de IA integrado** que aceleró todas las etapas del descubrimiento. La molécula de Rentosertib fue diseñada por IA, no encontrada en una biblioteca química.
 
-## ¿Qué sigue? La frontera actual
+</Section>
+
+<Section number={5} title="¿Qué sigue? La frontera actual" eyebrow="APLICACIÓN">
 
 ### Evo: IA para el diseño genómico
 
@@ -151,7 +153,9 @@ Evo representa una nueva frontera: pasar de predecir estructuras a **diseñar si
 | "Caja negra" | Difícil explicar por qué la IA hace ciertas predicciones |
 | Validación experimental necesaria | Toda predicción de IA debe confirmarse en laboratorio |
 
-## Resumen final del módulo
+</Section>
+
+<Section number={6} title="Resumen final del módulo" eyebrow="CIERRE">
 
 Lo que construimos en estas 4 lecciones:
 
@@ -164,7 +168,9 @@ Lo que construimos en estas 4 lecciones:
 
 **El mensaje central**: La IA no es magia. Es matemática aplicada a datos. En biotecnología, su impacto es real, medible y está acelerando descubrimientos que salvan vidas. Pero siempre requiere supervisión humana y validación experimental.
 
-## Checkpoint de conceptos
+</Section>
+
+<Section number={7} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué puntaje obtuvo AlphaFold 2 en CASP14?**
    - a) 40
@@ -190,18 +196,21 @@ Lo que construimos en estas 4 lecciones:
    - c) Un fármaco aprobado por la FDA
    - d) Un método experimental para determinar estructuras
 
-<details>
-<summary>Ver respuestas</summary>
+<AnswerReveal summary="Ver respuestas">
 <p><strong>1.</strong> c) 92.4 — un salto enorme respecto al score 40 de AlphaFold 1 en 2018.</p>
 <p><strong>2.</strong> b) 18 meses hasta PCC, comparado con 2.5-4 años del método tradicional. Fuente: Nature Biotechnology 2024, citado en Nature Medicine 2025.</p>
 <p><strong>3.</strong> c) Predecir estructuras con precisión atómica NO es una limitación — ¡es justamente lo que AlphaFold logra! (aunque siempre requiere confirmación experimental).</p>
 <p><strong>4.</strong> b) Evo es un modelo fundacional genómico. Evo 1 (Science 2024) demostró diseño funcional de CRISPR-Cas. Evo 2 (2025) escala a genomas de todos los dominios de la vida.</p>
-</details>
+</AnswerReveal>
 
-## Referencias
+</Section>
+
+<Section number={8} title="Referencias" eyebrow="REFERENCIAS">
 
 - Jumper, J. et al. "Highly accurate protein structure prediction with AlphaFold." *Nature* 596, 583–589 (2021). [DOI: 10.1038/s41586-021-03819-2](https://doi.org/10.1038/s41586-021-03819-2)
 - Ren, F. et al. "A small-molecule TNIK inhibitor for idiopathic pulmonary fibrosis." *Nature Medicine* (2025). [DOI: 10.1038/s41591-025-03743-y](https://doi.org/10.1038/s41591-025-03743-y)
 - Nguyen, E. et al. "Sequence modeling and design from to million nucleotides." *Science* 386, eado9336 (2024). [DOI: 10.1126/science.ado9336](https://doi.org/10.1126/science.ado9336)
 - Muskat, L. C. et al. Trabajos relacionados en PLoS One sobre clasificación de conidias con deep learning.
 - Todas las estructuras PDB verificadas de [RCSB.org](https://www.rcsb.org/): 1MBN, 5K2P, 2X8R, 4HHB, 4INS.
+
+</Section>
