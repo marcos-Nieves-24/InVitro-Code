@@ -71,20 +71,20 @@ Para nuestras conidias, las features podrían ser:
 
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.
 
-> 💡 **Idea clave**: La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
+> **Idea clave**: La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
 
-### Demo interactiva 1: Visualizando características
+### interactiva 1: Visualizando características
 
 Vamos a ver nuestras primeras conidias como datos.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</em></p>
 </div>
 
 <iframe src="/interactives/demo_01_features.html" width="100%" height="650px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 Cada punto en el gráfico es una conidia. Podés cambiar qué características comparar con el menú desplegable. Notá cómo algunas features separan mejor las especies que otras.
 
@@ -93,18 +93,18 @@ Cada punto en el gráfico es una conidia. Podés cambiar qué características c
 - Con dos o más características, la separación mejora
 - El "espacio de características" (feature space) es donde la IA trabaja
 
-### Demo interactiva 2: Reconocimiento de patrones
+### interactiva 2: Reconocimiento de patrones
 
 Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?</em></p>
 </div>
 
 <iframe src="/interactives/demo_02_patterns.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu tarea es clasificar cada una como *Aspergillus* o *Penicillium* basándote en el patrón visual.
 
@@ -113,18 +113,18 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 - Pero no podemos explicar fácilmente *cómo* lo hacemos
 - La IA necesita convertir esos patrones en números para aprender
 
-### Demo interactiva 3: Reglas fijas vs. aprendizaje automático
+### interactiva 3: Reglas fijas vs. aprendizaje automático
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?</em></p>
 </div>
 
 <iframe src="/interactives/demo_03_rules.html" width="100%" height="650px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 
@@ -147,7 +147,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 ## Checkpoint de conceptos
 
 <div style="border: 2px solid #d62728; border-radius: 8px; padding: 12px; margin: 16px 0; background: #fff5f5;">
-  <strong>📝 Respondé estas preguntas antes de seguir:</strong>
+  <strong>Respondé estas preguntas antes de seguir:</strong>
 </div>
 
 1. **¿Qué es una "feature" en el contexto de IA?**

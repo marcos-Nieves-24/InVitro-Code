@@ -63,18 +63,18 @@ Pensalo así:
 - El **modelo** es el conocimiento que el estudiante adquirió
 - Las **predicciones** son los ejercicios nuevos que el estudiante resuelve usando ese conocimiento
 
-### Demo interactiva 4: Frontera de decisión lineal
+### interactiva 4: Frontera de decisión lineal
 
 Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza una línea recta para separar dos clases.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>¿Crees que una línea recta puede separar dos tipos de conidias si solo usamos dos características (área y circularidad)?</em></p>
 </div>
 
 <iframe src="/interactives/demo_04_boundary.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 **¿Qué está pasando?**
 - Cada punto es una conidia (azul = *Aspergillus*, rojo = *Penicillium*)
@@ -89,18 +89,18 @@ Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza
 
 **Concepto clave**: El aprendizaje consiste en *ajustar parámetros* (en este caso, pendiente e intercepto) para minimizar errores. Cada slider es un parámetro que el algoritmo optimiza.
 
-### Demo interactiva 5: KNN — clasificar por cercanía
+### interactiva 5: KNN — clasificar por cercanía
 
 Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, KNN clasifica según los vecinos más cercanos.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Si k=1 clasificamos según el vecino más cercano. ¿Qué crees que pasa si aumentamos k a 15?</em></p>
 </div>
 
 <iframe src="/interactives/demo_05_knn.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 **¿Cómo funciona KNN?**
 1. Tenemos puntos de entrenamiento ya clasificados
@@ -126,13 +126,13 @@ Eso es **regresión**. En lugar de predecir una etiqueta (Aspergillus/Penicilliu
 ### Demo interactiva 6: Regresión lineal
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Si duplicamos la concentración de un fármaco, ¿esperás que el efecto inhibitorio se duplique exactamente?</em></p>
 </div>
 
 <iframe src="/interactives/demo_06_regression.html" width="100%" height="700px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>💊 modelo sobre datos reales simulados (basado en curvas dosis-respuesta de antifúngicos)</small>
+<small>modelo sobre datos reales simulados (basado en curvas dosis-respuesta de antifúngicos)</small>
 
 **¿Qué muestra?**
 - Cada punto es un experimento: concentración de fármaco vs. halo de inhibición
@@ -155,13 +155,13 @@ Eso es **regresión**. En lugar de predecir una etiqueta (Aspergillus/Penicilliu
 Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?</em></p>
 </div>
 
 <iframe src="/interactives/demo_06b_overfitting.html" width="100%" height="800px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 **¿Qué muestra este demo?**
 - El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
@@ -180,7 +180,7 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 **Sobreajuste (overfitting)** ocurre cuando el modelo es **demasiado complejo** y memoriza el ruido en lugar de la señal. Se reconoce porque hay una **brecha grande entre el error de entrenamiento (muy bajo) y el de prueba (alto)**.
 
-> 💡 **Idea clave**: El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
+>  **Idea clave**: El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
 
 **La solución**: 
 - **Train/test split**: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.

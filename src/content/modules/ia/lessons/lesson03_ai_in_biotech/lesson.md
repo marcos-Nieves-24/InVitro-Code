@@ -85,7 +85,7 @@ Vamos a explorar 5 proteínas reales, todas verificadas del RCSB PDB.
 - La **hemoglobina** (4HHB) tiene dos tipos de cadena (alfa y beta) en colores diferentes — es una proteína multimérica
 - La **insulina** (4INS) es pequeña (solo 51 aminoácidos) y también tiene dos cadenas
 
-> 💡 **Idea clave**: Cada punto en el espacio 3D es un aminoácido. La estructura tridimensional determina la función de la proteína. La IA (como AlphaFold) aprende a predecir estas coordenadas a partir de la secuencia de aminoácidos.
+> **Idea clave**: Cada punto en el espacio 3D es un aminoácido. La estructura tridimensional determina la función de la proteína. La IA (como AlphaFold) aprende a predecir estas coordenadas a partir de la secuencia de aminoácidos.
 
 ### ¿Por qué la estructura 3D importa?
 
@@ -102,13 +102,13 @@ Sin IA, determinar la estructura requiere cristalografía de rayos X (meses, cos
 Ahora que vimos aplicaciones, volvamos a nuestro problema de clasificación de conidias y veamos cómo se organiza un proyecto real de ML de principio a fin.
 
 <div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>🧪 Antes de interactuar, respondé:</strong>
+  <strong>Antes de interactuar, respondé:</strong>
   <p><em>En un proyecto real de ML, ¿qué paso creés que consume más tiempo: entrenar el modelo o preparar los datos?</em></p>
 </div>
 
 <iframe src="/interactives/demo_10_pipeline.html" width="100%" height="750px" style="border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;"></iframe>
 
-<small>🔬 simulación educativa sobre datos sintéticos</small>
+<small>simulación educativa sobre datos sintéticos</small>
 
 **Los 4 pasos del pipeline:**
 
