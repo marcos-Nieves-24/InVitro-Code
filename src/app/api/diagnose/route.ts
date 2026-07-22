@@ -1,42 +1,54 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const module = searchParams.get("module") || "ia";
   const slug = searchParams.get("slug") || "lesson01_what_is_ai";
 
-  const lessonsDir = path.join(process.cwd(), "src/content/modules", module, "lessons", slug);
-  const filePath = path.join(lessonsDir, "lesson.md");
+  const filePath = path.join(process.cwd(), "src/content/modules", module, "lessons", slug, "lesson.md");
 
   const result: Record<string, unknown> = {
-    cwd: process.cwd(),
     module,
     slug,
-    lessonsDir,
     filePath,
-    lessonsDirExists: fs.existsSync(lessonsDir),
     fileExists: fs.existsSync(filePath),
+    cwd: process.cwd(),
   };
 
   if (fs.existsSync(filePath)) {
-    const stat = fs.statSync(filePath);
-    result.fileSize = stat.size;
-    result.fileMode = stat.mode;
     try {
-      const content = fs.readFileSync(filePath, "utf8");
-      result.contentLength = content.length;
-      result.firstChars = content.substring(0, 50);
-    } catch (e) {
-      result.readError = String(e);
+      const source = fs.readFileSync(filePath, "utf8");
+
+      // Test gray-matter
+      try {
+        const { content, data } = matter(source);
+        result.grayMatterOk = true;
+        result.contentLength = content.length;
+        result.frontmatterKeys = Object.keys(data);
+      } catch (e: unknown) {
+        result.grayMatterOk = false;
+        result.grayMatterError = e instanceof Error ? e.message : String(e);
+      }
+    } catch (e: unknown) {
+      result.readError = e instanceof Error ? e.message : String(e);
     }
   }
 
-  // List all module dirs
-  const modulesDir = path.join(process.cwd(), "src/content/modules");
-  if (fs.existsSync(modulesDir)) {
-    result.modules = fs.readdirSync(modulesDir);
+  // Test if gray-matter and mdx modules are accessible
+  try {
+    require.resolve("gray-matter");
+    result.grayMatterResolved = true;
+  } catch {
+    result.grayMatterResolved = false;
+  }
+  try {
+    require.resolve("next-mdx-remote");
+    result.mdxResolved = true;
+  } catch {
+    result.mdxResolved = false;
   }
 
   return NextResponse.json(result);
