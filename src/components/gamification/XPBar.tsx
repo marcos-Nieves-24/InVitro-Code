@@ -24,7 +24,7 @@ export function XPBar({ userId, totalXp }: XPBarProps) {
           event: "INSERT",
           schema: "public",
           table: "progress",
-          filter: `user_id=eq.${userId}`, // Filter by user_id
+          filter: `user_id=eq.${userId}`,
         },
         (payload) => {
           if (payload.new.xp_earned > 0) {
@@ -32,8 +32,30 @@ export function XPBar({ userId, totalXp }: XPBarProps) {
             setUserXp(newXp);
             const newLevelInfo = calcLevel(newXp);
             setLevelInfo(newLevelInfo);
-            
+
             // Check if level up
+            if (Math.floor(newXp / 100) > Math.floor(totalXp / 100)) {
+              setShowCelebration(true);
+              setTimeout(() => setShowCelebration(false), 3000);
+            }
+          }
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "reflection_completions",
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload) => {
+          if (payload.new.xp_earned > 0) {
+            const newXp = userXp + payload.new.xp_earned;
+            setUserXp(newXp);
+            const newLevelInfo = calcLevel(newXp);
+            setLevelInfo(newLevelInfo);
+
             if (Math.floor(newXp / 100) > Math.floor(totalXp / 100)) {
               setShowCelebration(true);
               setTimeout(() => setShowCelebration(false), 3000);

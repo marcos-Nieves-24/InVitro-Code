@@ -17,7 +17,11 @@ Machine Learning Concepts: Features, clasificación, reconocimiento de patrones
 Datasets Used: module01_ai_cell_features.csv
 ---
 
-<Section number={1} title="Motivación" eyebrow="INICIO">
+<Section number={1} title="El microscopio y la conidia" eyebrow="INICIO">
+
+<MascotMessage>
+Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
+</MascotMessage>
 
 Imaginá que sos microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitás identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 
@@ -25,7 +29,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 
 </Section>
 
-<Section number={2} title="Panorama General" eyebrow="ESTRUCTURA" description="Esta lección es la primera del Módulo 1. Vamos a construir desde cero qué significa que una máquina 'aprenda'. No asumimos ningún conocimiento previo de programación, estadística ni matemática. Solo curiosidad y ganas de entender.">
+<Section number={2} title="Viaje de 4 lecciones" eyebrow="ESTRUCTURA" description="Esta lección es la primera del Módulo 1. Vamos a construir desde cero qué significa que una máquina 'aprenda'. No asumimos ningún conocimiento previo de programación, estadística ni matemática. Solo curiosidad y ganas de entender.">
 
 ```
 Lección 1 (¿Qué es IA?) → Lección 2 (¿Cómo aprende?) → Lección 3 (IA en Biotecnología) → Lección 4 (Casos Reales)
@@ -33,17 +37,25 @@ Lección 1 (¿Qué es IA?) → Lección 2 (¿Cómo aprende?) → Lección 3 (IA 
 
 </Section>
 
-<Section number={3} title="Teoría" eyebrow="CONTENIDO">
+<Section number={3} title="¿Qué es la Inteligencia Artificial?" eyebrow="CONCEPTO">
 
-### ¿Qué es la Inteligencia Artificial?
-
+<ConceptCard variant="definition">
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
+</ConceptCard>
 
 **Intuición**: Cuando ves una foto y reconocés que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 
-**Pero ojo**: La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
+</Section>
 
-### El problema: clasificar conidias de *Aspergillus* y *Penicillium*
+<Section number={4} title="IA no piensa" eyebrow="CONCEPTO">
+
+<ConceptCard variant="key-idea">
+La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
+</ConceptCard>
+
+</Section>
+
+<Section number={5} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
 
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
@@ -58,9 +70,9 @@ Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
 
-### Características (Features)
-
+<ConceptCard variant="definition">
 En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
+</ConceptCard>
 
 Para nuestras conidias, las features podrían ser:
 
@@ -71,66 +83,106 @@ Para nuestras conidias, las features podrían ser:
 
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.
 
-> **Idea clave**: La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
+<ConceptCard variant="key-idea">
+La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
+</ConceptCard>
 
-### interactiva 1: Visualizando características
+</Section>
+
+<Section number={6} title="Visualizando características" eyebrow="INTERACTIVA">
 
 Vamos a ver nuestras primeras conidias como datos.
 
-<CalloutInfo>
-  **Antes de interactuar, respondé:**
-  <p><em>Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</em></p>
-</CalloutInfo>
+<ReflectionCheck
+  blockId="reflection-l01-features"
+  prompt="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
+  answer="No. Con una sola característica hay superposición entre especies. Una conidia pequeña de Aspergillus puede tener el mismo tamaño que una conidia grande de Penicillium. Necesitamos múltiples características para clasificar correctamente."
+/>
 
 <InteractiveFrame src="/interactives/demo_01_features.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 
 Cada punto en el gráfico es una conidia. Podés cambiar qué características comparar con el menú desplegable. Notá cómo algunas features separan mejor las especies que otras.
 
-**¿Qué observamos?**
+</Section>
+
+<Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
+
+**¿Qué observamos en la simulación?**
+
 - Si usamos solo una característica, hay superposición entre especies
 - Con dos o más características, la separación mejora
 - El "espacio de características" (feature space) es donde la IA trabaja
 
-### interactiva 2: Reconocimiento de patrones
+<ConceptCard variant="key-idea">
+Cada característica que agregamos es una nueva dimensión que ayuda a separar las clases. Pero tampoco sirve agregar cien features al azar — el arte está en elegir las correctas.
+</ConceptCard>
+
+</Section>
+
+<Section number={8} title="Vos como clasificador" eyebrow="INTERACTIVA">
 
 Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
 
-<CalloutInfo>
-  **Antes de interactuar, respondé:**
-  <p><em>¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?</em></p>
-</CalloutInfo>
+<ReflectionCheck
+  blockId="reflection-l01-patrones"
+  prompt="¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?"
+  answer="Depende del problema. En patrones visuales claros, un humano entrenado puede ser muy preciso. Pero los humanos nos cansamos, somos inconsistentes y no podemos procesar miles de conidias por segundo. La IA es consistente, scalable y no se cansa."
+/>
 
 <InteractiveFrame src="/interactives/demo_02_patterns.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
 
 Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu tarea es clasificar cada una como *Aspergillus* o *Penicillium* basándote en el patrón visual.
 
-**¿Qué aprendemos?**
+</Section>
+
+<Section number={9} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+
+**¿Qué aprendemos de la simulación?**
+
 - Los humanos reconocemos patrones visuales intuitivamente
 - Pero no podemos explicar fácilmente *cómo* lo hacemos
 - La IA necesita convertir esos patrones en números para aprender
 
-### interactiva 3: Reglas fijas vs. aprendizaje automático
+<ConceptCard variant="key-idea">
+Los humanos clasificamos por intuición visual. La IA clasifica con matemática. La intuición es poderosa pero difícil de programar. La matemática es fría pero se puede escalar a millones de datos.
+</ConceptCard>
+
+</Section>
+
+<Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
-<CalloutInfo>
-  **Antes de interactuar, respondé:**
-  <p><em>Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?</em></p>
-</CalloutInfo>
+<ReflectionCheck
+  blockId="reflection-l01-reglas"
+  prompt="Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?"
+  answer="No. Por más que ajustemos los umbrales, siempre hay conidias que quedan mal clasificadas. La naturaleza tiene variabilidad que las reglas fijas no pueden capturar. Algunas conidias de Aspergillus son más alargadas de lo normal, y algunas de Penicillium son más redondeadas."
+/>
 
 <InteractiveFrame src="/interactives/demo_03_rules.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 
 Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 
-**¿Por qué fallan las reglas fijas?**
-- La naturaleza es difusa, no binaria
-- Hay superposición natural entre especies
-- Para capturar la complejidad, necesitaríamos cientos de reglas → imposible de mantener
+</Section>
+
+<Section number={11} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+
+<ConceptCard variant="warning">
+**La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
+</ConceptCard>
+
+- Hay **superposición natural** entre especies: algunas conidias de *Aspergillus* se parecen a *Penicillium*
+- Para capturar la complejidad, necesitaríamos **cientos de reglas** → imposible de mantener
+- Cada regla nueva puede contradecir a las anteriores
 - **Acá entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
+
+<ConceptCard variant="key-idea">
+El machine learning no reemplaza al científico. Le da una herramienta para analizar datos que serían imposibles de procesar manualmente.
+</ConceptCard>
 
 </Section>
 
-<Section number={4} title="Resumen" eyebrow="CIERRE">
+<Section number={12} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -142,11 +194,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={5} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
-
-<CalloutCheck>
-  **Respondé estas preguntas antes de seguir:**
-</CalloutCheck>
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué es una "feature" en el contexto de IA?**
    - a) Una característica del hardware de la computadora
@@ -174,7 +222,11 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={6} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
+
+<MascotMessage mood="celebrating">
+Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
+</MascotMessage>
 
 Viste que las reglas fijas no alcanzan. En la Lección 2 vamos a ver *cómo* las máquinas realmente aprenden: desde la frontera de decisión más simple (el perceptrón) hasta algoritmos como KNN que clasifican por cercanía. También vamos a entender qué es el "sobreajuste" (overfitting) y por qué un modelo demasiado complejo puede ser peor que uno simple.
 

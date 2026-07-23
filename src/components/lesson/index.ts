@@ -6,3 +6,6 @@ export { InteractiveFrame } from "./interactive-frame";
 export { AnswerReveal } from "./answer-reveal";
 export { Badge } from "./badge";
 export { LessonCarousel } from "./lesson-carousel";
+export { ReflectionCheck } from "./reflection-check";
+export { ConceptCard } from "./concept-card";
+export { MascotMessage } from "./mascot-message";

@@ -1,4 +1,5 @@
 {
   "name": "Estadística y Probabilidad",
-  "description": "Conceptos estadísticos fundamentales para el análisis de datos biológicos"
+  "description": "Fundamentos estadísticos para el análisis de datos en investigación biomédica",
+  "order": 3
 }

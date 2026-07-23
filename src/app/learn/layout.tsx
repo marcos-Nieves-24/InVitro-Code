@@ -1,6 +1,7 @@
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
 interface Lesson {
   slug: string;
@@ -10,6 +11,20 @@ interface Lesson {
 interface ModuleEntry {
   slug: string;
   name: string;
+}
+
+function getModuleOrder(slug: string): number {
+  const metaPath = path.join(
+    process.cwd(),
+    "src/content/modules",
+    slug,
+    "module.json",
+  );
+  try {
+    const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    if (typeof meta.order === "number") return meta.order;
+  } catch { /* fallback below */ }
+  return Infinity;
 }
 
 function getModules(): ModuleEntry[] {
@@ -24,7 +39,13 @@ function getModules(): ModuleEntry[] {
       .map((e) => ({
         slug: e.name,
         name: getModuleDisplayName(e.name),
-      }));
+      }))
+      .sort((a, b) => {
+        const oa = getModuleOrder(a.slug);
+        const ob = getModuleOrder(b.slug);
+        if (oa !== ob) return oa - ob;
+        return a.name.localeCompare(b.name);
+      });
   } catch {
     return [];
   }
@@ -108,6 +129,24 @@ export default function LearnLayout({
   );
 }
 
+function getLessonTitle(moduleSlug: string, lessonSlug: string): string | null {
+  const lessonPath = path.join(
+    process.cwd(),
+    "src/content/modules",
+    moduleSlug,
+    "lessons",
+    lessonSlug,
+    "lesson.md",
+  );
+  try {
+    const source = fs.readFileSync(lessonPath, "utf8");
+    const { data } = matter(source);
+    const title = data["Lesson Title"] ?? data["title"];
+    if (typeof title === "string" && title.length > 0) return title;
+  } catch { /* fallback below */ }
+  return null;
+}
+
 function getLessons(moduleSlug: string): Lesson[] {
   const lessonDir = path.join(
     process.cwd(),
@@ -124,7 +163,7 @@ function getLessons(moduleSlug: string): Lesson[] {
       .filter((e) => e.isDirectory())
       .map((e) => ({
         slug: e.name,
-        title: formatLessonName(e.name),
+        title: getLessonTitle(moduleSlug, e.name) ?? formatLessonName(e.name),
       }));
   } catch {
     return [];

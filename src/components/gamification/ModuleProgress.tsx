@@ -5,21 +5,26 @@ import { createClient } from "@/lib/supabase/client";
 
 interface ModuleProgressProps {
   moduleSlug: string;
+  moduleName: string;
   userId: string;
+  totalLessons: number;
 }
 
-export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
+export function ModuleProgress({
+  moduleSlug,
+  moduleName,
+  userId,
+  totalLessons,
+}: ModuleProgressProps) {
   const [supabase] = useState(() => createClient());
   const [completedLessons, setCompletedLessons] = useState(0);
-  const [totalLessons, setTotalLessons] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchModuleProgress = async () => {
       try {
         setLoading(true);
-        
-        // Fetch completed lessons for this user/module
+
         const { data: progressData, error: progressError } = await supabase
           .from("progress")
           .select("lesson_slug")
@@ -32,18 +37,7 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
           return;
         }
 
-        // Get module lessons from the filesystem via API route
-        const response = await fetch(`/api/modules/${moduleSlug}/lessons`);
-        let lessons = [];
-        if (response.ok) {
-          const data = await response.json();
-          lessons = data.lessons || [];
-        }
-
-        const completedCount = progressData?.length || 0;
-        
-        setCompletedLessons(completedCount);
-        setTotalLessons(lessons.length);
+        setCompletedLessons(progressData?.length || 0);
       } catch (error) {
         console.error("Error fetching module progress:", error);
       } finally {
@@ -61,10 +55,10 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
           event: "INSERT",
           schema: "public",
           table: "progress",
-          filter: `user_id=eq.${userId}`, // Filter by user_id
+          filter: `user_id=eq.${userId}`,
         },
         () => {
-          fetchModuleProgress(); // Refetch on new progress
+          fetchModuleProgress();
         },
       )
       .subscribe();
@@ -76,9 +70,7 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
 
   if (loading) {
     return (
-      <div className="text-sm text-gray-500">
-        Cargando progreso...
-      </div>
+      <div className="text-sm text-gray-500">Cargando progreso...</div>
     );
   }
 
@@ -95,9 +87,9 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Progreso del módulo</span>
+        <span className="text-sm font-medium">{moduleName}</span>
         <span className="text-sm text-gray-600">
-          {completedLessons}/{totalLessons} lecciones completadas
+          {completedLessons}/{totalLessons} lecciones
         </span>
       </div>
       <div className="relative h-3 w-full overflow-hidden rounded-full bg-gray-200">
@@ -107,8 +99,8 @@ export function ModuleProgress({ moduleSlug, userId }: ModuleProgressProps) {
         />
       </div>
       {completedLessons === totalLessons && totalLessons > 0 && (
-        <div className="text-sm text-green-600 font-medium">
-           Modulo completo!
+        <div className="text-sm font-medium text-green-600">
+          Módulo completo
         </div>
       )}
     </div>

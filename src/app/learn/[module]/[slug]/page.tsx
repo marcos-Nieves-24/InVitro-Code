@@ -14,6 +14,9 @@ import {
   CalloutCheck,
   InteractiveFrame,
   AnswerReveal,
+  ReflectionCheck,
+  ConceptCard,
+  MascotMessage,
 } from "@/components/lesson";
 
 const components = {
@@ -22,6 +25,9 @@ const components = {
   CalloutCheck,
   InteractiveFrame,
   AnswerReveal,
+  ReflectionCheck,
+  ConceptCard,
+  MascotMessage,
 };
 
 const mdxConfig = {
@@ -162,6 +168,7 @@ export default async function LessonPage({ params }: Props) {
           <LessonCarousel
             slides={slides.map((s) => s.content)}
             nextLessonHref={nextLessonHref}
+            lessonTitle={data["Lesson Title"] as string}
           />
         </div>
       ) : (

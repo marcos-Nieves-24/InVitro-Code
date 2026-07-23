@@ -10,6 +10,16 @@
   --spacing-section-y: 3.5rem; /* 56px */
   --spacing-card-padding: 1.5rem; /* 24px */
   --width-layout-max: 920px;
+
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
 }
 
 /* ─── Font Utilities ────────────────────────────────── */
@@ -37,4 +47,27 @@
 .bg-dot-grid {
   background-image: radial-gradient(circle, #d4d4d4 0.5px, transparent 0.5px);
   background-size: 20px 20px;
+}
+
+/* ─── Confetti Animation ────────────────────────────── */
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall 3s ease-in-out infinite;
 }

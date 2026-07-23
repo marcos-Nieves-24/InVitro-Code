@@ -2,22 +2,20 @@ export function calcXpForLesson(moduleSlug: string, lessonSlug: string): number 
   // Base XP per lesson
   const baseXp = 25;
 
-  // Module modifiers (can be expanded later)
+  // Module difficulty multipliers (1.0 = standard)
   const moduleMultipliers: Record<string, number> = {
-    "hola-mundo": 1.0,
-    "variables": 1.0,
-    "bucles": 1.5,
-    "condicionales": 1.0,
-    "funciones": 1.5,
-  }
+    "ia": 1.0,
+    "python": 1.0,
+    "estadistica": 1.0,
+    "machine-learning": 1.2,
+    "etica": 1.0,
+  };
   const multiplier = moduleMultipliers[moduleSlug] || 1.0;
 
   // Dynamic factors based on lesson complexity
   let complexityFactor = 1.0;
-  if (lessonSlug.includes("avanzado") || lessonSlug.includes("complicado")) {
+  if (lessonSlug.includes("avanzado") || lessonSlug.includes("avanzada")) {
     complexityFactor = 1.5;
-  } else if (lessonSlug.includes("basico") || lessonSlug.includes("simple")) {
-    complexityFactor = 0.8;
   }
 
   return Math.round(baseXp * multiplier * complexityFactor);

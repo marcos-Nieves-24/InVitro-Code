@@ -23,7 +23,21 @@ export function LevelBadge({ userId, totalXp }: LevelBadgeProps) {
           event: "INSERT",
           schema: "public",
           table: "progress",
-          filter: `user_id=eq.${userId}`, // Filter by user_id
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload) => {
+          if (payload.new.xp_earned > 0) {
+            setXp((prev) => prev + payload.new.xp_earned);
+          }
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "reflection_completions",
+          filter: `user_id=eq.${userId}`,
         },
         (payload) => {
           if (payload.new.xp_earned > 0) {

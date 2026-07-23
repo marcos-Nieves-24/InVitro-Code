@@ -1,4 +1,5 @@
 {
-  "name": "Python para Biotech",
-  "description": "Programación en Python desde cero para estudiantes de biotecnología"
+  "name": "Python para Biotecnología",
+  "description": "Programación en Python aplicada al análisis de datos biológicos",
+  "order": 2
 }

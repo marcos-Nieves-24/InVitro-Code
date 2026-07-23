@@ -1,4 +1,5 @@
 {
-  "name": "Ética en IA Biomédica",
-  "description": "Consideraciones éticas en el uso de inteligencia artificial en biomedicina"
+  "name": "Ética en IA",
+  "description": "Consideraciones éticas en el uso de inteligencia artificial en biomedicina",
+  "order": 5
 }
