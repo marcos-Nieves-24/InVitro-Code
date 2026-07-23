@@ -211,19 +211,7 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 </Section>
 
-<Section number={4} title="Resumen" eyebrow="CIERRE">
-
-| Algoritmo | Tipo | ¿Qué hace? | Ejemplo en biotech |
-|---|---|---|---|
-| Perceptrón | Clasificación | Traza una línea para separar dos clases | Clasificar conidias por especie |
-| KNN | Clasificación | Clasifica según los k vecinos más cercanos | Identificar cepas por similitud de perfil |
-| Regresión lineal | Regresión | Predice valores numéricos | Estimar concentración inhibitoria |
-| Overfitting | Problema | El modelo memoriza en lugar de generalizar | Modelo que solo funciona en el laboratorio de entrenamiento |
-| Underfitting | Problema | El modelo es demasiado simple para capturar la estructura | Regresión lineal en datos no lineales |
-
-</Section>
-
-<Section number={5} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={4} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué es una frontera de decisión?**
    - a) El límite ético de lo que la IA puede decidir
@@ -265,7 +253,7 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 </Section>
 
-<Section number={6} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={5} title="Para la próxima lección" eyebrow="CIERRE">
 
 Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
 

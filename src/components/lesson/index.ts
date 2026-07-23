@@ -5,3 +5,4 @@ export { CalloutCheck } from "./callout-check";
 export { InteractiveFrame } from "./interactive-frame";
 export { AnswerReveal } from "./answer-reveal";
 export { Badge } from "./badge";
+export { LessonCarousel } from "./lesson-carousel";
