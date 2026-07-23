@@ -131,7 +131,7 @@ function calcMSE(m,b){
     let pred=m*d.x+b;
     sum+=(d.y-pred)**2;
   }
-  return Math.sqrt(sum/datos.length);
+  return sum/datos.length;
 }
 
 function dibujar(){
@@ -168,7 +168,7 @@ function dibujar(){
     hoverinfo:'skip'
   };
 
-  Plotly.newReact('plot',[resTrace,scatterTrace,lineTrace],{
+  Plotly.newPlot('plot',[resTrace,scatterTrace,lineTrace],{
     title:{text:`Concentraci&oacute;n vs. Halo &mdash; ECM = ${mse.toFixed(3)}`,font:{size:14}},
     xaxis:{title:'Concentraci&oacute;n (&micro;M)',range:[-5,115]},
     yaxis:{title:'Halo de inhibici&oacute;n (mm)',range:[-2,25]},

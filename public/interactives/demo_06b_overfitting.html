@@ -334,7 +334,7 @@ function updatePlot(degree) {
     template: 'plotly_white'
   };
 
-  Plotly.newReact('plot-fit', [trueTrace, fitTrace, trainTrace, testTrace], layout1, {responsive: true});
+  Plotly.newPlot('plot-fit', [trueTrace, fitTrace, trainTrace, testTrace], layout1, {responsive: true});
 
   // --- Plot 2: Error bars ---
   const errTrainBar = {
@@ -371,7 +371,7 @@ function updatePlot(degree) {
     ]
   };
 
-  Plotly.newReact('plot-errors', [errTrainBar, errTestBar], layout2, {responsive: true});
+  Plotly.newPlot('plot-errors', [errTrainBar, errTestBar], layout2, {responsive: true});
 }
 
 // ====================== SLIDER ======================
