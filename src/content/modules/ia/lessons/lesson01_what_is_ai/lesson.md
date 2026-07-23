@@ -93,10 +93,9 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 Vamos a ver nuestras primeras conidias como datos.
 
-<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
-  <strong>Antes de interactuar, respondé:</strong>
-  <p><em>Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</em></p>
-</div>
+<InteractivePrompt>
+Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?
+</InteractivePrompt>
 
 <InteractiveFrame src="/interactives/demo_01_features.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 

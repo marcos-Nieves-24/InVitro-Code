@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import dynamic from "next/dynamic";
 import fs from "fs";
 import path from "path";
@@ -16,6 +17,7 @@ const CompleteLessonButton = dynamic(
 
 const components = {
   CodeEditor: LessonCodeEditor,
+  InteractivePrompt: InteractivePrompt,
 };
 
 interface Props {
