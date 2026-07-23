@@ -89,6 +89,12 @@ Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza
 
 **Concepto clave**: El aprendizaje consiste en *ajustar parámetros* (en este caso, pendiente e intercepto) para minimizar errores. Cada slider es un parámetro que el algoritmo optimiza.
 
+<CalloutInfo>
+**Reflexión rápida:**
+- *¿Qué pasa si las clases no son separables linealmente? ¿Cómo cambiaría la frontera?*
+- *¿Por qué el accuracy no llega al 100% aunque ajustemos bien la línea?*
+</CalloutInfo>
+
 ### interactiva 5: KNN — clasificar por cercanía
 
 Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, KNN clasifica según los vecinos más cercanos.
@@ -114,6 +120,12 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, 
 - Con k grande, la frontera se vuelve más suave, pero puede perder detalles finos
 
 **Concepto clave**: La elección de **k** es un **hiperparámetro**. No lo aprende el modelo; lo elegimos nosotros. Encontrar el valor óptimo es parte del arte del machine learning.
+
+<CalloutInfo>
+**Reflexión rápida:**
+- *En un laboratorio de microbiología, clasificar un patógeno por su similitud con aislamientos previos documentados — ¿es clasificación o regresión?*
+- *Si k=1 clasificamos según el único vecino más cercano, ¿qué riesgo hay con datos ruidosos (ej. una medición mal tomada)? ¿Y si k=20?*
+</CalloutInfo>
 
 ### Regresión: predecir números, no categorías
 
@@ -146,6 +158,12 @@ Eso es **regresión**. En lugar de predecir una etiqueta (Aspergillus/Penicilliu
 - La "mejor recta" minimiza el ECM — esto se llama **mínimos cuadrados**
 - No toda relación es lineal; en biología muchas son curvas sigmoideas (dosis-respuesta)
 
+<CalloutInfo>
+**Reflexión rápida:**
+- *¿Por qué elevamos al cuadrado los errores (ECM) en lugar de sumar las diferencias directamente?*
+- *Si la relación dosis-respuesta es sigmoidea (no lineal), ¿la regresión lineal sigue siendo útil para aproximarla en algún rango?*
+</CalloutInfo>
+
 ### Demo interactiva 6b: Sobreajuste y subajuste
 
 Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
@@ -176,10 +194,20 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 > **Idea clave**: El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
 
+<CalloutInfo>
+**Analogía biotecnológica:** Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu termociclador, con tus reactivos, en tu mesada del laboratorio — pero falla cuando otro laboratorio lo replica. Memorizaste las condiciones específicas de tu entorno (temperatura exacta del termociclador, marca de la polimerasa, humedad ambiental) en lugar de aprender el principio biológico general. El modelo, como el protocolo, necesita generalizar, no memorizar.
+</CalloutInfo>
+
 **La solución**: 
 - **Train/test split**: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.
 - **Validación cruzada**: probar el modelo en múltiples particiones de los datos
 - **Modelos más simples**: a veces menos es más (navaja de Occam)
+
+<CalloutInfo>
+**Reflexión rápida:**
+- *Un modelo con 99% de accuracy en entrenamiento pero 60% en datos nuevos — ¿es subajuste o sobreajuste? ¿Qué harías para mejorarlo?*
+- *Entre un modelo simple con 80% de accuracy que funciona consistentemente y uno complejo con 99% en train pero 70% en test, ¿cuál preferirías para diagnosticar una infección?*
+</CalloutInfo>
 
 </Section>
 
