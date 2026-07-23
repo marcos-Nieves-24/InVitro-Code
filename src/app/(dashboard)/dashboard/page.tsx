@@ -91,18 +91,30 @@ export default async function DashboardPage() {
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes] = await Promise.all([
+  const [progressRes, reflectionRes, moduleProgressRes] = await Promise.all([
     supabase.from("progress").select("xp_earned").eq("user_id", userId),
     supabase
       .from("reflection_completions")
       .select("xp_earned")
       .eq("user_id", userId),
+    supabase
+      .from("progress")
+      .select("module_slug, lesson_slug")
+      .eq("user_id", userId)
+      .eq("completed", true),
   ]);
 
   const totalXp = [
     ...(progressRes.data ?? []),
     ...(reflectionRes.data ?? []),
   ].reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
+
+  // Build a map of module_slug -> completed lesson count
+  const completedByModule: Record<string, number> = {};
+  for (const row of moduleProgressRes.data ?? []) {
+    const slug = row.module_slug;
+    completedByModule[slug] = (completedByModule[slug] ?? 0) + 1;
+  }
 
   const modules = getModules();
 
@@ -171,6 +183,7 @@ export default async function DashboardPage() {
                     moduleName={mod.name}
                     userId={userId}
                     totalLessons={mod.totalLessons}
+                    initialCompletedLessons={completedByModule[mod.slug] ?? 0}
                   />
                 ))}
               </div>

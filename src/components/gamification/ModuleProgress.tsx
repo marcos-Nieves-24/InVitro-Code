@@ -8,6 +8,7 @@ interface ModuleProgressProps {
   moduleName: string;
   userId: string;
   totalLessons: number;
+  initialCompletedLessons: number;
 }
 
 export function ModuleProgress({
@@ -15,38 +16,13 @@ export function ModuleProgress({
   moduleName,
   userId,
   totalLessons,
+  initialCompletedLessons,
 }: ModuleProgressProps) {
   const [supabase] = useState(() => createClient());
-  const [completedLessons, setCompletedLessons] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [completedLessons, setCompletedLessons] = useState(initialCompletedLessons);
 
   useEffect(() => {
-    const fetchModuleProgress = async () => {
-      try {
-        setLoading(true);
-
-        const { data: progressData, error: progressError } = await supabase
-          .from("progress")
-          .select("lesson_slug")
-          .eq("user_id", userId)
-          .eq("module_slug", moduleSlug)
-          .eq("completed", true);
-
-        if (progressError) {
-          console.error("Error fetching progress:", progressError);
-          return;
-        }
-
-        setCompletedLessons(progressData?.length || 0);
-      } catch (error) {
-        console.error("Error fetching module progress:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchModuleProgress();
-
+    // Listen for realtime updates — initial data comes from server
     const channel = supabase
       .channel("progress-updates")
       .on(
@@ -57,8 +33,10 @@ export function ModuleProgress({
           table: "progress",
           filter: `user_id=eq.${userId}`,
         },
-        () => {
-          fetchModuleProgress();
+        (payload) => {
+          if (payload.new.module_slug === moduleSlug) {
+            setCompletedLessons((prev) => prev + 1);
+          }
         },
       )
       .subscribe();
@@ -67,12 +45,6 @@ export function ModuleProgress({
       supabase.removeChannel(channel);
     };
   }, [supabase, userId, moduleSlug]);
-
-  if (loading) {
-    return (
-      <div className="text-sm text-gray-500">Cargando progreso...</div>
-    );
-  }
 
   if (totalLessons === 0) {
     return (
