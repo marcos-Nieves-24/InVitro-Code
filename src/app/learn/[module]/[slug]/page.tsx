@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import dynamic from "next/dynamic";
 import fs from "fs";
 import path from "path";
+import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 
 const LessonCodeEditor = dynamic(
   () => import("@/components/editor/PyodideRunner"),
