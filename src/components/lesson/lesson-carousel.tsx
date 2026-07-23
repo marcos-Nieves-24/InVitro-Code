@@ -4,24 +4,20 @@ import { useState } from "react";
 import Link from "next/link";
 
 interface LessonCarouselProps {
-  header: React.ReactNode;
   slides: React.ReactNode[];
   nextLessonHref?: string;
 }
 
 export function LessonCarousel({
-  header,
   slides,
   nextLessonHref,
 }: LessonCarouselProps) {
-  const total = slides.length + 1; // header + sections
+  const total = slides.length;
   const [current, setCurrent] = useState(0);
-  const isHeader = current === 0;
   const isLast = current === total - 1;
-  const sectionIndex = current - 1; // slides index when not header
 
   return (
-    <div className="flex min-h-[70vh] flex-col">
+    <div className="flex min-h-[60vh] flex-col">
       {/* ── Progress bar ──────────────────────────────── */}
       <div className="mb-8 flex gap-1.5">
         {Array.from({ length: total }, (_, i) => (
@@ -35,9 +31,7 @@ export function LessonCarousel({
       </div>
 
       {/* ── Content ───────────────────────────────────── */}
-      <div className="flex-1">
-        {isHeader ? header : slides[sectionIndex]}
-      </div>
+      <div className="flex-1">{slides[current]}</div>
 
       {/* ── Navigation ────────────────────────────────── */}
       <div className="mt-8 flex items-center justify-between border-t border-gray-200 pt-6">

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import fs from "fs";
@@ -154,13 +154,21 @@ export default async function LessonPage({ params }: Props) {
 
   return (
     <LessonLayout>
-      <div className={proseClass}>
-        <LessonCarousel
-          header={renderHeader(data)}
-          slides={slides.map((s) => s.content)}
-          nextLessonHref={nextLessonHref}
-        />
-      </div>
+      {/* ── Header: always visible, outside carousel ── */}
+      <div className="mb-8">{renderHeader(data)}</div>
+
+      {slides.length > 0 ? (
+        <div className={proseClass}>
+          <LessonCarousel
+            slides={slides.map((s) => s.content)}
+            nextLessonHref={nextLessonHref}
+          />
+        </div>
+      ) : (
+        <div className={proseClass}>
+          <MDXRemote source={bodyContent} components={components} options={mdxConfig} />
+        </div>
+      )}
     </LessonLayout>
   );
 }
