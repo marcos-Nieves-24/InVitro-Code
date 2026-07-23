@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import dynamic from "next/dynamic";
 import fs from "fs";
 import path from "path";
+import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 
 const LessonCodeEditor = dynamic(
   () => import("@/components/editor/PyodideRunner"),
@@ -14,10 +15,6 @@ const CompleteLessonButton = dynamic(
   { ssr: false },
 );
 
-const InteractivePrompt = dynamic(
-  () => import("@/components/mdx/InteractivePrompt"),
-  { ssr: false },
-);
 
 const components = {
   CodeEditor: LessonCodeEditor,
