@@ -93,11 +93,10 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 Vamos a ver nuestras primeras conidias como datos.
 
-<ReflectionCheck
-  blockId="reflection-l01-features"
-  prompt="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
-  answer="No. Con una sola característica hay superposición entre especies. Una conidia pequeña de Aspergillus puede tener el mismo tamaño que una conidia grande de Penicillium. Necesitamos múltiples características para clasificar correctamente."
-/>
+<div style="border: 2px solid #1f77b4; border-radius: 8px; padding: 12px; margin: 16px 0; background: #f0f7ff;">
+  <strong>Antes de interactuar, respondé:</strong>
+  <p><em>Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?</em></p>
+</div>
 
 <InteractiveFrame src="/interactives/demo_01_features.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
 
@@ -176,13 +175,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 - Cada regla nueva puede contradecir a las anteriores
 - **Acá entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
 
-<ConceptCard variant="key-idea">
-El machine learning no reemplaza al científico. Le da una herramienta para analizar datos que serían imposibles de procesar manualmente.
-</ConceptCard>
-
-</Section>
-
-<Section number={12} title="Resumen" eyebrow="CIERRE">
+## Resumen
 
 | Concepto | Idea clave |
 |---|---|
@@ -192,7 +185,7 @@ El machine learning no reemplaza al científico. Le da una herramienta para anal
 | Reglas fijas | Funcionan para problemas simples, fallan en la complejidad del mundo real |
 | Aprendizaje automático | La máquina encuentra patrones por sí misma a partir de ejemplos |
 
-</Section>
+## Checkpoint de conceptos
 
 <Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
