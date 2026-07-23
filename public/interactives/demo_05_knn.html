@@ -59,6 +59,8 @@
     <label><input type="radio" name="pred_q1" value="a"> La clasificación será más estable porque considera más vecinos</label>
     <label><input type="radio" name="pred_q1" value="b"> La clasificación será menos precisa porque incluye vecinos lejanos</label>
     <label><input type="radio" name="pred_q1" value="c"> No cambia nada, siempre se clasifica igual</label>
+    <button class="btn" onclick="showPredFeedback()" style="margin-top:8px;">Verificar predicción</button>
+    <div id="fb-pred" class="feedback"></div>
   </div>
 
   <div class="controls-row">
@@ -241,6 +243,24 @@ function randomPoint() {
 }
 
 updatePlot();
+
+function showPredFeedback() {
+  const radios = document.getElementsByName('pred_q1');
+  let selected = null;
+  for (const r of radios) { if (r.checked) { selected = r.value; break; } }
+  const fb = document.getElementById('fb-pred');
+  if (!selected) { fb.className = 'feedback incorrect'; fb.textContent = 'Seleccioná una opción primero.'; fb.style.display = 'block'; return; }
+  if (selected === 'a') {
+    fb.className = 'feedback correct';
+    fb.textContent = '¡Correcto! Con k más grande, el promedio de más vecinos suaviza la frontera y reduce el impacto de puntos aislados o ruido.';
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.textContent = selected === 'b'
+      ? 'No es exactamente "menos preciso". k grande suaviza la frontera, lo que reduce ruido pero puede perder detalles locales importantes. Mové el slider para verlo.'
+      : 'Sí cambia. Aumentar k suaviza la frontera de decisión. Probá moviendo el slider de k para observar el efecto.';
+  }
+  fb.style.display = 'block';
+}
 
 function showFeedback(id) {
   const radios = document.getElementsByName(id);

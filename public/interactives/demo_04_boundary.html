@@ -55,6 +55,8 @@
     <label><input type="radio" name="pred_q1" value="a"> Sí, siempre se puede separar con una línea recta</label>
     <label><input type="radio" name="pred_q1" value="b"> Depende de cómo se distribuyan los datos en el espacio 2D</label>
     <label><input type="radio" name="pred_q1" value="c"> No, se necesita una curva para cualquier clasificación</label>
+    <button class="btn" onclick="showPredFeedback()" style="margin-top:8px;">Verificar predicción</button>
+    <div id="fb-pred" class="feedback"></div>
   </div>
 
   <div id="plot"></div>
@@ -161,21 +163,28 @@ function updatePlot() {
   const y1 = slope * x1 + intercept;
   const y2 = slope * x2 + intercept;
 
-  const colors = points.map(p => {
-    const pred = classifyLine(slope, intercept, p);
-    if (pred === p.label) return p.label === 1 ? '#1f77b4' : '#d62728';
-    return p.label === 1 ? '#9ecae1' : '#ff9896';
-  });
+  function makeTrace(pts, color, name, symbol) {
+    return {
+      x: pts.map(p => p.area), y: pts.map(p => p.circ),
+      mode: 'markers', type: 'scatter', name,
+      marker: { size: 8, color, symbol: symbol || 'circle', line: {color:'#333', width:0.5} },
+      text: pts.map(p => `${p.especie}<br>Área: ${p.area.toFixed(1)}<br>Circ: ${p.circ.toFixed(2)}`),
+      hoverinfo: 'text'
+    };
+  }
 
-  const traceData = {
-    x: points.map(p => p.area),
-    y: points.map(p => p.circ),
-    mode: 'markers',
-    type: 'scatter',
-    marker: { size: 8, color: colors, line: {color:'#333', width:0.5} },
-    text: points.map(p => `${p.especie}<br>Área: ${p.area.toFixed(1)}<br>Circ: ${p.circ.toFixed(2)}`),
-    hoverinfo: 'text'
-  };
+  const aspOK = [], aspBAD = [], penOK = [], penBAD = [];
+  points.forEach(p => {
+    const pred = classifyLine(slope, intercept, p);
+    if (p.label === 1) (pred === 1 ? aspOK : aspBAD).push(p);
+    else (pred === 0 ? penOK : penBAD).push(p);
+  });
+  const traces = [
+    makeTrace(aspOK, '#1f77b4', 'Aspergillus ✓'),
+    makeTrace(aspBAD, '#9ecae1', 'Aspergillus ✗', 'diamond'),
+    makeTrace(penOK, '#d62728', 'Penicillium ✓'),
+    makeTrace(penBAD, '#ff9896', 'Penicillium ✗', 'diamond'),
+  ];
 
   const traceLine = {
     x: [x1, x2], y: [y1, y2],
@@ -192,10 +201,11 @@ function updatePlot() {
     yaxis: {title: 'Circularidad', range: [0.45, 1.05], gridcolor: '#eee'},
     plot_bgcolor: '#fff', paper_bgcolor: 'rgba(0,0,0,0)',
     margin: {l: 60, r: 40, t: 40, b: 60},
-    showlegend: false
+    showlegend: true,
+    legend: { x: 1.02, y: 1, bgcolor: 'rgba(0,0,0,0)', font: {size: 11} }
   };
 
-  Plotly.newPlot('plot', [traceData, traceLine], layout, {responsive: true});
+  Plotly.newPlot('plot', [...traces, traceLine], layout, {responsive: true});
 }
 
 document.getElementById('slope-slider').addEventListener('input', updatePlot);
@@ -219,6 +229,24 @@ function autoTrain() {
 }
 
 updatePlot();
+
+function showPredFeedback() {
+  const radios = document.getElementsByName('pred_q1');
+  let selected = null;
+  for (const r of radios) { if (r.checked) { selected = r.value; break; } }
+  const fb = document.getElementById('fb-pred');
+  if (!selected) { fb.className = 'feedback incorrect'; fb.textContent = 'Seleccioná una opción primero.'; fb.style.display = 'block'; return; }
+  if (selected === 'b') {
+    fb.className = 'feedback correct';
+    fb.textContent = '¡Correcto! La separabilidad depende de la distribución de los datos. Algunos datasets (como este) tienen solapamiento que una línea recta no puede resolver perfectamente.';
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.textContent = selected === 'a'
+      ? 'No siempre. Depende de cómo se distribuyan los puntos en el espacio de características. Mové los sliders para explorar.'
+      : 'No es correcto. Una línea recta puede separar algunas distribuciones, pero no todas. Explorá los datos con los sliders.';
+  }
+  fb.style.display = 'block';
+}
 
 function showFeedback(id) {
   const radios = document.getElementsByName(id);
