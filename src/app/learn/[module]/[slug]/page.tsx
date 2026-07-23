@@ -129,10 +129,10 @@ export default async function LessonPage({ params }: Props) {
   // Strip the H1 from content
   const bodyContent = content.replace(/^# .+\n?/, "");
 
-  // Split by <Section, filter out Resumen, renumber
+  // Split by <Section, keep only blocks that start with <Section, filter out Resumen, renumber
   const sectionBlocks = bodyContent
     .split(/(?=<Section )/)
-    .filter(Boolean)
+    .filter((b) => b.trim().startsWith("<Section"))
     .filter((b) => !b.includes('title="Resumen"'));
 
   const renumbered = sectionBlocks.map((b, i) =>
