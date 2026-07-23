@@ -1,4 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const publicRoutes = [
   "/",
@@ -8,7 +9,7 @@ const publicRoutes = [
   "/api/diagnose",
 ];
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
 
   // Check if the path starts with any public route
@@ -17,7 +18,19 @@ export default clerkMiddleware((auth, req) => {
   );
 
   if (!isPublic) {
-    auth.protect();
+    const session = await auth();
+    if (!session.userId) {
+      // API routes → 401, pages → redirect to sign-in
+      if (pathname.startsWith("/api/")) {
+        return NextResponse.json(
+          { error: "Authentication required" },
+          { status: 401 },
+        );
+      }
+      const signInUrl = new URL("/sign-in", req.url);
+      signInUrl.searchParams.set("redirect_url", pathname);
+      return NextResponse.redirect(signInUrl);
+    }
   }
 });
 
