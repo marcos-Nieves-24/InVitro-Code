@@ -127,10 +127,39 @@ body {
   animation-fill-mode: none;
 }
 
+/** Slide-down reveal for the "Respuesta" output panel */
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.25s ease-out both;
+  overflow: hidden;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 1;
+    max-height: 500px;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-terminal-enter,
   .animate-code-line,
-  .animate-cursor-blink {
+  .animate-cursor-blink,
+  .animate-slide-down {
     animation: none;
   }
   .animate-terminal-enter {
@@ -143,5 +172,9 @@ body {
   }
   .animate-cursor-blink {
     opacity: 0.6;
+  }
+  .animate-slide-down {
+    opacity: 1;
+    max-height: none;
   }
 }
