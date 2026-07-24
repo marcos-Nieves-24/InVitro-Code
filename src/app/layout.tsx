@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
-const inter = Inter({
+const plus_Jakarta_Sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
 });
 
-const fraunces = Fraunces({
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["600"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetBrains_Mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   weight: ["400", "600"],
@@ -33,9 +33,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="es"
-        className={`${fraunces.variable} ${ibmPlexMono.variable}`}
+        className={`${plus_Jakarta_Sans.variable} ${sora.className} ${jetBrains_Mono.variable}`}
       >
-        <body className={`${inter.className} antialiased`}>{children}</body>
+        <body className="antialiased">{children}</body>
       </html>
     </ClerkProvider>
   );
