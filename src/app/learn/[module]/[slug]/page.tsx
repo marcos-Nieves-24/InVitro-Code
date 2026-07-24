@@ -18,6 +18,7 @@ import {
   ConceptCard,
   MascotMessage,
   ComparisonTable,
+  CodeBlock,
   DiagnosticTrainer,
   ConidiaSortGame,
   ThresholdLab,
@@ -38,6 +39,7 @@ const components = {
   DiagnosticTrainer,
   ConidiaSortGame,
   ThresholdLab,
+  pre: CodeBlock,
 };
 
 const mdxConfig = {
