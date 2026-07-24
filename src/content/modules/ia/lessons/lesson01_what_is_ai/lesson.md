@@ -174,7 +174,9 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 - Cada regla nueva puede contradecir a las anteriores
 - **Acá entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
 
-## Resumen
+</Section>
+
+<Section number={12} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -184,7 +186,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 | Reglas fijas | Funcionan para problemas simples, fallan en la complejidad del mundo real |
 | Aprendizaje automático | La máquina encuentra patrones por sí misma a partir de ejemplos |
 
-## Checkpoint de conceptos
+</Section>
 
 <Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
