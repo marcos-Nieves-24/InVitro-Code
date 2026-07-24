@@ -27,11 +27,10 @@ export async function GET(request: Request) {
         result.contentLength = content.length;
         result.frontmatterKeys = Object.keys(data);
 
-        // Test MDX import
+        // Test MDX import (use dynamic import for ESM compatibility)
         try {
-          // Just verify mdx modules resolve
-          require.resolve("next-mdx-remote");
-          require.resolve("next-mdx-remote/rsc");
+          await import("next-mdx-remote");
+          await import("next-mdx-remote/rsc");
           result.mdxModulesResolve = true;
         } catch (e: unknown) {
           result.mdxModulesResolve = false;
