@@ -6,16 +6,16 @@ interface ReflectionCheckProps {
   prompt: string;
   answer: string;
   blockId: string;
-  moduleSlug?: string;
-  lessonSlug?: string;
+  moduleSlug: string;
+  lessonSlug: string;
 }
 
 export function ReflectionCheck({
   prompt,
   answer,
   blockId,
-  moduleSlug = "ia",
-  lessonSlug = "lesson02_how_ai_learns",
+  moduleSlug,
+  lessonSlug,
 }: ReflectionCheckProps) {
   const [userAnswer, setUserAnswer] = useState("");
   const [revealed, setRevealed] = useState(false);

@@ -18,6 +18,9 @@ import {
   ConceptCard,
   MascotMessage,
   ComparisonTable,
+  DiagnosticTrainer,
+  ConidiaSortGame,
+  ThresholdLab,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 
@@ -32,6 +35,9 @@ const components = {
   MascotMessage,
   ComparisonTable,
   InteractivePrompt,
+  DiagnosticTrainer,
+  ConidiaSortGame,
+  ThresholdLab,
 };
 
 const mdxConfig = {

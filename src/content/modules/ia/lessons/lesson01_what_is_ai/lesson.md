@@ -82,17 +82,21 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={6} title="Visualizando características" eyebrow="INTERACTIVA">
+<Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
-Vamos a ver nuestras primeras conidias como datos.
+Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las conidias, pero con datos médicos reales. El dataset Breast Cancer Wisconsin contiene 569 casos reales de biopsias — cada uno con 30 features numéricas extraídas de imágenes de núcleos celulares.
 
-<InteractivePrompt>
-Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?
-</InteractivePrompt>
+<ReflectionCheck
+  blockId="reflection-l01-features"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  prompt="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
+  answer="No, porque los rangos de área se superponen entre especies. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes. Necesitamos múltiples características para clasificar correctamente."
+/>
 
-<InteractiveFrame src="/interactives/demo_01_features.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
+<DiagnosticTrainer />
 
-Cada punto en el gráfico es una conidia. Podés cambiar qué características comparar con el menú desplegable. Notá cómo algunas features separan mejor las especies que otras.
+Cada punto en el gráfico es un caso real de biopsia. Cambiá las features con el menú desplegable. Notá cómo algunas combinaciones separan mejor tumores benignos de malignos que otras.
 
 </Section>
 
@@ -116,11 +120,13 @@ Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
 
 <ReflectionCheck
   blockId="reflection-l01-patrones"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
   prompt="¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?"
   answer="Depende del problema. En patrones visuales claros, un humano entrenado puede ser muy preciso. Pero los humanos nos cansamos, somos inconsistentes y no podemos procesar miles de conidias por segundo. La IA es consistente, scalable y no se cansa."
 />
 
-<InteractiveFrame src="/interactives/demo_02_patterns.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
+<ConidiaSortGame />
 
 Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu tarea es clasificar cada una como *Aspergillus* o *Penicillium* basándote en el patrón visual.
 
@@ -146,11 +152,13 @@ Antes de que existiera el machine learning, se usaban **sistemas basados en regl
 
 <ReflectionCheck
   blockId="reflection-l01-reglas"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
   prompt="Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?"
   answer="No. Por más que ajustemos los umbrales, siempre hay conidias que quedan mal clasificadas. La naturaleza tiene variabilidad que las reglas fijas no pueden capturar. Algunas conidias de Aspergillus son más alargadas de lo normal, y algunas de Penicillium son más redondeadas."
 />
 
-<InteractiveFrame src="/interactives/demo_03_rules.html" height="650px" caption="simulación educativa sobre datos sintéticos" />
+<ThresholdLab />
 
 Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 

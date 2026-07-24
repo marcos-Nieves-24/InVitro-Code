@@ -70,6 +70,8 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 
 <ReflectionCheck
   blockId="reflection-l02-perceptron"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="¿Crees que una línea recta puede separar dos tipos de conidias si solo usamos dos características (área y circularidad)?"
   answer="Depende de los datos. Si las clases son linealmente separables, sí. Si hay solapamiento natural entre las poblaciones de conidias, una línea recta no alcanza y necesitamos fronteras no lineales."
 />
@@ -96,6 +98,8 @@ El aprendizaje consiste en *ajustar parámetros* (pendiente e intercepto) para m
 
 <ReflectionCheck
   blockId="reflection-l02-frontera"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="¿Qué pasa si las clases no son separables linealmente? ¿Cómo cambiaría la frontera? ¿Por qué el accuracy no llega al 100% aunque ajustemos bien la línea?"
   answer="La frontera no sería una línea recta sino una curva (o superficie más compleja). El accuracy no llega al 100% porque siempre hay solapamiento natural entre clases — conidias atípicas, ruido de medición, variabilidad biológica. Ninguna línea recta puede separar perfectamente poblaciones que se mezclan."
 />
@@ -120,6 +124,8 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, 
 
 <ReflectionCheck
   blockId="reflection-l02-knn"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="Si k=1 clasificamos según el vecino más cercano. ¿Qué crees que pasa si aumentamos k a 15?"
   answer="La frontera se vuelve más suave y menos sensible al ruido, pero puede perder detalles finos en zonas donde las clases cambian rápidamente. k grande reduce varianza pero aumenta sesgo: el modelo se vuelve más estable pero puede subestimar patrones locales."
 />
@@ -149,6 +155,8 @@ La elección de **k** es un **hiperparámetro**. No lo aprende el modelo; lo ele
 
 <ReflectionCheck
   blockId="reflection-l02-clasif-reg"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="En un laboratorio de microbiología, clasificar un patógeno por su similitud con aislamientos previos documentados — ¿es clasificación o regresión? Si k=1 clasificamos según el único vecino más cercano, ¿qué riesgo hay con datos ruidosos? ¿Y si k=20?"
   answer="Es clasificación porque predecimos una categoría discreta (especie A o B), no un valor continuo. Con k=1, una medición mal tomada (dato ruidoso) clasifica incorrectamente el punto porque el vecino más cercano es espurio. Con k=20, el ruido se promedia entre varios vecinos y el efecto se diluye."
 />
@@ -165,6 +173,8 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 <ReflectionCheck
   blockId="reflection-l02-regresion"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="Si duplicamos la concentración de un fármaco, ¿esperás que el efecto inhibitorio se duplique exactamente?"
   answer="No necesariamente. La relación dosis-respuesta en biología suele ser sigmoidea: a bajas concentraciones el efecto es pequeño, luego crece rápidamente en un rango, y finalmente se satura (meseta). La regresión lineal solo aproxima bien en el rango casi lineal de la curva."
 />
@@ -188,6 +198,8 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 <ReflectionCheck
   blockId="reflection-l02-ecm"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="¿Por qué elevamos al cuadrado los errores (ECM) en lugar de sumar las diferencias directamente? Si la relación dosis-respuesta es sigmoidea (no lineal), ¿la regresión lineal sigue siendo útil para aproximarla en algún rango?"
   answer="Elevar al cuadrado penaliza más los errores grandes y evita que errores positivos y negativos se cancelen entre sí. La regresión lineal puede aproximar una sigmoidea en su rango casi lineal (la zona media de la curva), pero no en los extremos donde se aplana."
 />
@@ -206,6 +218,8 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 <ReflectionCheck
   blockId="reflection-l02-overfitting-predict"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?"
   answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
 />
@@ -250,6 +264,8 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 <ReflectionCheck
   blockId="reflection-l02-overfitting"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
   prompt="Un modelo con 99% de accuracy en entrenamiento pero 60% en datos nuevos — ¿es subajuste o sobreajuste? ¿Qué harías para mejorarlo? Entre un modelo simple con 80% de accuracy que funciona consistentemente y uno complejo con 99% en train pero 70% en test, ¿cuál preferirías para diagnosticar una infección?"
   answer="Es sobreajuste. Soluciones: simplificar el modelo (reducir complejidad), aumentar datos de entrenamiento, aplicar regularización. Para diagnosticar una infección prefiero el modelo simple y consistente (80%) — es más confiable porque generaliza mejor; un falso negativo por sobreajuste podría tener consecuencias graves."
 />
