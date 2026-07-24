@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react";
-import { usePyodideWorker } from "@/hooks/usePyodideWorker";
 import { AlertCircle, CheckCircle2, Target, TrendingUp } from "lucide-react";
 
 interface Metrics {
@@ -13,14 +12,13 @@ interface Metrics {
   total: number;
 }
 
-interface DatasetInfo {
+interface DatasetJson {
   min_radius: number;
   max_radius: number;
   n_samples: number;
   feature_name: string;
-}
-
-interface BestAccuracy {
+  radius_values: number[];
+  labels: number[];
   best_accuracy: number;
   best_threshold: number;
 }
@@ -31,156 +29,90 @@ interface ThresholdLabProps {
   blockId: string;
 }
 
+const DATA_URL = "/data/threshold-lab.json";
+
+function computeMetrics(threshold: number, radiusValues: number[], labels: number[]): Metrics {
+  let tp = 0, tn = 0, fp = 0, fn = 0;
+  for (let i = 0; i < radiusValues.length; i++) {
+    const pred = radiusValues[i] > threshold ? 1 : 0;
+    const actual = labels[i];
+    if (pred === 1 && actual === 1) tp++;
+    else if (pred === 0 && actual === 0) tn++;
+    else if (pred === 1 && actual === 0) fp++;
+    else fn++;
+  }
+  const total = tp + tn + fp + fn;
+  return {
+    accuracy: (tp + tn) / total,
+    true_positives: tp,
+    true_negatives: tn,
+    false_positives: fp,
+    false_negatives: fn,
+    total,
+  };
+}
+
 export function ThresholdLab({
   moduleSlug,
   lessonSlug,
   blockId,
 }: ThresholdLabProps) {
-  const { status, run, error } = usePyodideWorker();
-  const [datasetInfo, setDatasetInfo] = useState<DatasetInfo | null>(null);
+  const [dataset, setDataset] = useState<DatasetJson | null>(null);
+  const [fetchLoading, setFetchLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
   const [metrics, setMetrics] = useState<Metrics | null>(null);
-  const [bestAccuracy, setBestAccuracy] = useState<number>(0);
-  const [bestAccuracyThreshold, setBestAccuracyThreshold] = useState<number>(0);
   const [threshold, setThreshold] = useState<number>(0);
-  const [isCalculatingBest, setIsCalculatingBest] = useState<boolean>(false);
   const [hasCompleted, setHasCompleted] = useState<boolean>(false);
+  const [prevBestAccuracy, setPrevBestAccuracy] = useState<number>(0);
 
-  const bestAccuracyFetchedRef = useRef(false);
-  const loadingSetupRef = useRef(false);
-  const loadingBestRef = useRef(false);
-  const requestIdRef = useRef<number>(0);
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const previousRequestIdRef = useRef<number>(0);
-  const sliderChangeCountRef = useRef<number>(0);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Initial setup - load dataset
+  // Fetch pre-computed dataset on mount
   useEffect(() => {
-    if (!loadingSetupRef.current && status === "ready") {
-      loadingSetupRef.current = true;
+    setFetchLoading(true);
+    fetch(DATA_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<DatasetJson>;
+      })
+      .then((data) => {
+        setDataset(data);
+        setThreshold(data.min_radius);
+        // Compute initial metrics at min_radius
+        const initial = computeMetrics(data.min_radius, data.radius_values, data.labels);
+        setMetrics(initial);
+        setPrevBestAccuracy(data.best_accuracy);
+        setFetchLoading(false);
+      })
+      .catch((err) => {
+        setFetchError(err.message);
+        setFetchLoading(false);
+      });
+  }, []);
 
-      const setupCode = `from sklearn.datasets import load_breast_cancer
-import numpy as np, json
-
-data = load_breast_cancer()
-X = data.data[:, 0]  # mean radius feature
-y = data.target       # 0=malignant, 1=benign
-
-# Guardar en globales del worker para reuso
-globals()['__X_radius'] = X
-globals()['__y_true'] = y
-
-json.dumps({
-  "min_radius": float(X.min()),
-  "max_radius": float(X.max()),
-  "n_samples": len(y),
-  "feature_name": "mean radius"
-})`;
-
-      run(setupCode)
-        .then((result) => {
-          const info = JSON.parse(result as string) as DatasetInfo;
-          setDatasetInfo(info);
-          setThreshold(info.min_radius);
-        })
-        .catch((err) => {
-          console.error("Error setting up dataset:", err);
-        });
-    }
-  }, [status, run]);
-
-  // Load best accuracy (only once)
-  useEffect(() => {
-    if (!loadingBestRef.current && status === "ready" && datasetInfo && !bestAccuracyFetchedRef.current) {
-      loadingBestRef.current = true;
-      bestAccuracyFetchedRef.current = true;
-
-      const bestAccuracyCode = `import numpy as np, json
-X = __X_radius
-y = __y_true
-
-best_acc = 0
-best_th = 0
-thresholds = np.linspace(float(X.min()), float(X.max()), 200)
-for t in thresholds:
-    acc = ((X > t).astype(int) == y).mean()
-    if acc > best_acc:
-        best_acc = acc
-        best_th = t
-json.dumps({"best_accuracy": round(float(best_acc), 4), "best_threshold": round(float(best_th), 2)})`;
-
-      run(bestAccuracyCode)
-        .then((result) => {
-          const best = JSON.parse(result as string) as BestAccuracy;
-          setBestAccuracy(best.best_accuracy);
-          setBestAccuracyThreshold(best.best_threshold);
-        })
-        .catch((err) => {
-          console.error("Error calculating best accuracy:", err);
-        });
-    }
-  }, [status, run, datasetInfo]);
-
-  // Handle slider changes with debouncing and requestId tracking
+  // Handle slider changes with debouncing
   const handleThresholdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newThreshold = Number(event.target.value);
+    setThreshold(newThreshold);
 
-    // Cleanup previous timeout
     if (debounceTimeoutRef.current) {
       clearTimeout(debounceTimeoutRef.current);
     }
 
-    // Increment requestId for this slider change
-    requestIdRef.current += 1;
-    const currentRequestId = requestIdRef.current;
-
-    // Increment change count for each slider change (even if debounced)
-    sliderChangeCountRef.current += 1;
-
-    // Set new timeout for debounced execution
     debounceTimeoutRef.current = setTimeout(() => {
-      const pythonCode = `import numpy as np, json
+      if (!dataset) return;
 
-X = __X_radius
-y = __y_true
-threshold = ${newThreshold}
+      const newMetrics = computeMetrics(newThreshold, dataset.radius_values, dataset.labels);
+      setMetrics(newMetrics);
 
-preds = (X > threshold).astype(int)
-acc = (preds == y).mean()
-tp = ((preds == 1) & (y == 1)).sum()
-tn = ((preds == 0) & (y == 0)).sum()
-fp = ((preds == 1) & (y == 0)).sum()
-fn = ((preds == 0) & (y == 1)).sum()
-
-json.dumps({
-  "accuracy": round(float(acc), 4),
-  "true_positives": int(tp),
-  "true_negatives": int(tn),
-  "false_positives": int(fp),
-  "false_negatives": int(fn),
-  "total": int(len(y))
-})`;
-
-      run(pythonCode, { threshold: newThreshold })
-        .then((result) => {
-          const latestId = requestIdRef.current;
-          if (currentRequestId !== latestId) {
-            console.log(`[threshold-lab] DISCARD response ${currentRequestId} — latest is ${latestId}`);
-            return;
-          }
-          previousRequestIdRef.current = currentRequestId;
-
-          const newMetrics = JSON.parse(result as string) as Metrics;
-          setMetrics(newMetrics);
-
-          // Update best accuracy if this is better
-          if (newMetrics.accuracy > bestAccuracy) {
-            setBestAccuracy(newMetrics.accuracy);
-          }
-        })
-        .catch((err) => {
-          console.error("Error calculating metrics:", err);
-        });
-    }, 200);
+      // Update live best (might discover a better threshold than pre-computed
+      // if we're using a non-pre-computed value, though with step=0.1 the
+      // pre-computed best should be the true optimum)
+      if (newMetrics.accuracy > prevBestAccuracy) {
+        setPrevBestAccuracy(newMetrics.accuracy);
+      }
+    }, 80); // 80ms debounce — instant computation, just avoid too many renders
   };
 
   // Cleanup timeouts on unmount
@@ -223,24 +155,29 @@ json.dumps({
     return (accuracy * 100).toFixed(1) + "%";
   };
 
-  if (status === "loading") {
+  const bestAccuracy = dataset?.best_accuracy ?? 0;
+  const bestAccuracyThreshold = dataset?.best_threshold ?? 0;
+
+  // --- Loading state ---
+
+  if (fetchLoading) {
     return (
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando datos de乳腺肿瘤...</p>
+          <p className="text-gray-600">Cargando datos del laboratorio...</p>
         </div>
       </div>
     );
   }
 
-  if (status === "error") {
+  if (fetchError) {
     return (
       <div className="flex items-center justify-center min-h-96">
         <div className="text-center max-w-md">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Error al cargar el laboratorio</h3>
-          <p className="text-gray-600 mb-4">{error || "Ocurrió un error inesperado"}</p>
+          <p className="text-gray-600 mb-4">{fetchError}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -258,8 +195,12 @@ json.dumps({
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold text-gray-900">Experimento de umbral de clasificación</h1>
         <p className="text-gray-600">
-          Ajusta el umbral para clasificar muestras de {datasetInfo?.feature_name || "feature"} como benignas (1) o malignas (0)
+          Ajusta el umbral para clasificar muestras de {dataset?.feature_name || "feature"} como benignas (1) o malignas (0)
         </p>
+        <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+          <span className="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+          <span>Datos pre-computados · scikit-learn (seed=42)</span>
+        </div>
       </div>
 
       {/* Main lab content */}
@@ -281,25 +222,24 @@ json.dumps({
               <input
                 id="threshold-slider"
                 type="range"
-                min={datasetInfo?.min_radius ?? 0}
-                max={datasetInfo?.max_radius ?? 1}
+                min={dataset?.min_radius ?? 0}
+                max={dataset?.max_radius ?? 1}
                 step={0.1}
                 value={threshold}
                 onChange={handleThresholdChange}
                 className="w-full accent-blue-600"
-                disabled={!datasetInfo}
               />
 
               <div className="flex justify-between text-xs text-gray-500">
-                <span>{datasetInfo?.min_radius.toFixed(1)}</span>
-                <span>{datasetInfo?.max_radius.toFixed(1)}</span>
+                <span>{dataset?.min_radius.toFixed(1)}</span>
+                <span>{dataset?.max_radius.toFixed(1)}</span>
               </div>
 
               <div className="pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Target className="h-4 w-4" />
                   <span>
-                    Total de muestras: {datasetInfo?.n_samples || "--"} (0=maligno, 1=benigno)
+                    Total de muestras: {dataset?.n_samples || "--"} (0=maligno, 1=benigno)
                   </span>
                 </div>
               </div>
@@ -335,7 +275,7 @@ json.dumps({
                   </div>
                 </div>
 
-                {metrics.accuracy > bestAccuracy && (
+                {metrics.accuracy > prevBestAccuracy && (
                   <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg animate-fade-in">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-5 w-5 text-green-600" />
@@ -410,7 +350,13 @@ json.dumps({
                 </div>
 
                 <button
-                  onClick={() => setThreshold(bestAccuracyThreshold)}
+                  onClick={() => {
+                    setThreshold(bestAccuracyThreshold);
+                    if (dataset) {
+                      const m = computeMetrics(bestAccuracyThreshold, dataset.radius_values, dataset.labels);
+                      setMetrics(m);
+                    }
+                  }}
                   className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
                 >
                   Ir al mejor umbral
@@ -418,8 +364,7 @@ json.dumps({
               </div>
             ) : (
               <div className="text-center py-8 text-gray-500">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-                <div className="text-sm">Calculando mejor accuracy...</div>
+                <div className="text-sm">Pre-computado desde scikit-learn</div>
               </div>
             )}
           </div>
@@ -444,14 +389,19 @@ json.dumps({
                 </div>
               ) : (
                 <div className="text-center py-4 text-gray-500">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-400 mx-auto mb-2"></div>
-                  <div className="text-xs">Evaluando 200 umbrales...</div>
+                  <div className="text-sm">Pre-computado desde scikit-learn</div>
                 </div>
               )}
             </div>
 
             <button
-              onClick={() => setThreshold(bestAccuracyThreshold)}
+              onClick={() => {
+                setThreshold(bestAccuracyThreshold);
+                if (dataset) {
+                  const m = computeMetrics(bestAccuracyThreshold, dataset.radius_values, dataset.labels);
+                  setMetrics(m);
+                }
+              }}
               className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
             >
               Ir al mejor umbral
