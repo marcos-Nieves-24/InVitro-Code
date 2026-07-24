@@ -27,7 +27,7 @@ export function LessonCarousel({
 
   return (
     <>
-      <div className="flex min-h-0 flex-1 flex-col">
+      <div className="flex min-h-0 flex-1 flex-col gap-3">
         {/* ── Lab Progress ─────────────────────────────── */}
         <LabProgress total={total} current={current} />
 
@@ -35,7 +35,7 @@ export function LessonCarousel({
         <div className="min-h-0 flex-1 overflow-y-auto">{slides[current]}</div>
 
         {/* ── Navigation ───────────────────────────────── */}
-        <div className="mt-4 flex items-center justify-between border-t border-gray-200 pt-4">
+        <div className="flex items-center justify-between border-t border-gray-200 pt-3">
           <button
             onClick={() => setCurrent((c) => c - 1)}
             disabled={current === 0}

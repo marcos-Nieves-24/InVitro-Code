@@ -2,7 +2,6 @@
 Module: 1
 Lesson Number: 3
 Lesson Title: IA en Biotecnología
-Estimated Duration: 60 minutos
 Prerequisites: Lección 2 — ¿Cómo aprende la IA?
 Learning Objectives:
   - Reconocer las etapas de un pipeline de machine learning en biotecnología
@@ -31,18 +30,6 @@ Vamos a explorar tres aplicaciones concretas:
 1. **Visualización 3D de moléculas** — cómo representar y analizar proteínas en el espacio
 2. **AlphaFold** — el modelo que revolucionó la biología estructural
 3. **Pipeline completo de ML** — desde los datos biológicos hasta la predicción
-
-</Section>
-
-<Section number={2} title="Mapa de la lección" eyebrow="ESTRUCTURA" description="De entender algoritmos a aplicarlos: visualización molecular 3D, AlphaFold, y el pipeline completo de ML en biotecnología.">
-
-```
-Lección 2 (Algoritmos y fundamentos) → Lección 3 (¡Aplicaciones reales!)
-↓
-Visualización 3D de moléculas → AlphaFold → Pipeline ML
-↓
-Lección 4 (Casos reales y futuro)
-```
 
 </Section>
 

@@ -2,7 +2,6 @@
 Module: 1
 Lesson Number: 2
 Lesson Title: ¿Cómo aprende la IA?
-Estimated Duration: 70 minutos
 Prerequisites: Lección 1 — ¿Qué es la IA?
 Learning Objectives:
   - Comprender el concepto de frontera de decisión en clasificación binaria
@@ -28,18 +27,6 @@ En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar c
 Acá entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
 
 Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
-
-</Section>
-
-<Section number={2} title="Mapa de la lección" eyebrow="ESTRUCTURA" description="De entender features y reglas fijas a ver cómo aprenden las máquinas: frontera de decisión, KNN, regresión, y el problema del sobreajuste.">
-
-```
-Lección 1 (Features + reglas fijas) → Lección 2 (¡Acá aprenden las máquinas!)
-↓
-Entender frontera de decisión → KNN → Regresión → Overfitting
-↓
-Lección 3 (Aplicaciones biotecnológicas)
-```
 
 </Section>
 

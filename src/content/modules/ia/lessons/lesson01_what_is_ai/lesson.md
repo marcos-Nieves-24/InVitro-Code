@@ -2,7 +2,6 @@
 Module: 1
 Lesson Number: 1
 Lesson Title: ¿Qué es la Inteligencia Artificial?
-Estimated Duration: 60 minutos
 Prerequisites: Ninguno
 Learning Objectives:
   - Definir inteligencia artificial y distinguirla de la inteligencia natural
@@ -26,14 +25,6 @@ Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artifici
 Imaginá que sos microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitás identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por vos, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
-
-</Section>
-
-<Section number={2} title="Viaje de 4 lecciones" eyebrow="ESTRUCTURA" description="Esta lección es la primera del Módulo 1. Vamos a construir desde cero qué significa que una máquina 'aprenda'. No asumimos ningún conocimiento previo de programación, estadística ni matemática. Solo curiosidad y ganas de entender.">
-
-```
-Lección 1 (¿Qué es IA?) → Lección 2 (¿Cómo aprende?) → Lección 3 (IA en Biotecnología) → Lección 4 (Casos Reales)
-```
 
 </Section>
 
@@ -61,12 +52,14 @@ Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
-| Característica | *Aspergillus* | *Penicillium* |
-|---|---|---|
-| Forma | Más redondeada | Más alargada |
-| Textura superficial | Rugosa (verrugosa) | Más lisa |
-| Color | Verde-azulado | Verde |
-| Tamaño | ~3-6 µm | ~2.5-5 µm |
+<ComparisonTable
+  rows={[
+    { feature: "Forma", left: "Más redondeada", right: "Más alargada" },
+    { feature: "Textura superficial", left: "Rugosa (verrugosa)", right: "Más lisa" },
+    { feature: "Color", left: "Verde-azulado", right: "Verde" },
+    { feature: "Tamaño", left: "~3-6 µm", right: "~2.5-5 µm" },
+  ]}
+/>
 
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
 

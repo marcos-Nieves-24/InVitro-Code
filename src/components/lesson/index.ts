@@ -9,3 +9,4 @@ export { LessonCarousel } from "./lesson-carousel";
 export { ReflectionCheck } from "./reflection-check";
 export { ConceptCard } from "./concept-card";
 export { MascotMessage } from "./mascot-message";
+export { ComparisonTable } from "./comparison-table";

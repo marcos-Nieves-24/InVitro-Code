@@ -2,7 +2,6 @@
 Module: 1
 Lesson Number: 4
 Lesson Title: Casos Reales y Futuro
-Estimated Duration: 60 minutos
 Prerequisites: Lección 3 — IA en Biotecnología
 Learning Objectives:
   - Analizar cómo se aplicó ML en el desarrollo de la vacuna mRNA del COVID-19
@@ -30,18 +29,6 @@ En tres lecciones recorrimos un camino enorme:
 3. **Aplicaciones biotecnológicas**: visualización 3D de proteínas, AlphaFold, pipelines de ML
 
 La Lección 4 cierra el módulo con casos reales donde todo esto confluye: el desarrollo de la vacuna mRNA del COVID-19, el reposicionamiento de fármacos existentes, el diseño de nanopartículas, y una mirada crítica a lo que la IA puede — y no puede — hacer en biotecnología.
-
-</Section>
-
-<Section number={2} title="Mapa de la lección" eyebrow="ESTRUCTURA" description="Aplicaciones reales que integran todo lo aprendido: vacunas mRNA, reposicionamiento de fármacos, AlphaFold en la práctica, y el futuro de la IA en el laboratorio.">
-
-```
-Lección 3 (Fundamentos biotecnológicos) → Lección 4 (¡Casos reales!)
-↓
-Vacunas mRNA → Reposicionamiento → AlphaFold en acción → IA en el laboratorio → Límites
-↓
-Fin del Módulo 1
-```
 
 </Section>
 

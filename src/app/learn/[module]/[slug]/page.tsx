@@ -17,6 +17,7 @@ import {
   ReflectionCheck,
   ConceptCard,
   MascotMessage,
+  ComparisonTable,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 
@@ -29,6 +30,7 @@ const components = {
   ReflectionCheck,
   ConceptCard,
   MascotMessage,
+  ComparisonTable,
   InteractivePrompt,
 };
 
