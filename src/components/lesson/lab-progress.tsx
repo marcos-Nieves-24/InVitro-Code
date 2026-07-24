@@ -5,7 +5,7 @@ interface LabProgressProps {
 
 export function LabProgress({ total, current }: LabProgressProps) {
   return (
-    <div className="mb-8 flex items-center justify-center gap-0">
+    <div className="mb-4 flex items-center justify-center gap-0">
       {Array.from({ length: total }, (_, i) => (
         <div key={i} className="flex items-center">
           {/* well (circle) */}

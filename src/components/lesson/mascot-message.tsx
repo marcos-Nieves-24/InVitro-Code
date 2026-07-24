@@ -48,7 +48,7 @@ export function MascotMessage({
 
   return (
     <div
-      className={`my-6 flex items-start gap-3 ${
+      className={`my-3 flex items-start gap-3 ${
         side === "right" ? "flex-row-reverse" : ""
       }`}
     >

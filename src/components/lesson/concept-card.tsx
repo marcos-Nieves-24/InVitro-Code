@@ -23,7 +23,7 @@ export function ConceptCard({
 }: ConceptCardProps) {
   return (
     <div
-      className={`my-6 rounded-[12px] border-l-4 p-4 ${variantStyles[variant]}`}
+      className={`my-3 rounded-[12px] border-l-4 p-3 md:p-4 ${variantStyles[variant]}`}
     >
       <p className="mb-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
         {variantLabels[variant]}

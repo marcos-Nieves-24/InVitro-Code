@@ -27,15 +27,15 @@ export function LessonCarousel({
 
   return (
     <>
-      <div className="flex min-h-[60vh] flex-col">
+      <div className="flex min-h-0 flex-1 flex-col">
         {/* ── Lab Progress ─────────────────────────────── */}
         <LabProgress total={total} current={current} />
 
-        {/* ── Content ──────────────────────────────────── */}
-        <div className="flex-1">{slides[current]}</div>
+        {/* ── Content (scrollable si excede el viewport) ── */}
+        <div className="min-h-0 flex-1 overflow-y-auto">{slides[current]}</div>
 
         {/* ── Navigation ───────────────────────────────── */}
-        <div className="mt-8 flex items-center justify-between border-t border-gray-200 pt-6">
+        <div className="mt-4 flex items-center justify-between border-t border-gray-200 pt-4">
           <button
             onClick={() => setCurrent((c) => c - 1)}
             disabled={current === 0}

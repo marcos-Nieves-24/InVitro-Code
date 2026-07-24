@@ -56,7 +56,7 @@ export function ReflectionCheck({
   };
 
   return (
-    <div className="my-6 rounded-[12px] border border-blue-600 bg-blue-50 p-6">
+    <div className="my-3 rounded-[12px] border border-blue-600 bg-blue-50 p-4">
       <p className="mb-3 text-sm font-semibold leading-relaxed text-gray-900">
         {prompt}
       </p>

@@ -10,7 +10,7 @@ export function InteractiveFrame({
   caption,
 }: InteractiveFrameProps) {
   return (
-    <div className="my-6">
+    <div className="my-3">
       <div className="overflow-hidden rounded-[12px] border border-gray-200">
         <iframe
           src={src}

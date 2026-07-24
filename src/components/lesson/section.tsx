@@ -14,7 +14,7 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section className="border-b border-gray-200 py-[56px] last:border-b-0">
+    <section className="border-b border-gray-200 py-4 last:border-b-0 md:py-6">
       {/* Eyebrow */}
       <div className="eyebrow mb-2 flex items-center gap-2">
         <span>{String(number).padStart(2, "0")}</span>

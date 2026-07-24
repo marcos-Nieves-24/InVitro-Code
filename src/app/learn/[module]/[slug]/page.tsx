@@ -41,7 +41,7 @@ const mdxConfig = {
 };
 
 const proseClass =
-  "prose prose-sm max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-h2:mt-0 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-4 prose-h3:text-xl prose-p:text-gray-700 prose-lead:text-gray-500 prose-strong:text-gray-900 prose-code:font-mono prose-code:text-[13px] prose-pre:rounded-[12px] prose-pre:border prose-pre:border-gray-200 prose-pre:bg-gray-50 prose-pre:shadow-none prose-table:text-sm prose-th:font-mono prose-th:text-[11px] prose-th:uppercase prose-th:tracking-[0.08em] prose-th:text-gray-500 prose-td:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-a:no-underline";
+  "prose prose-base max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-h2:mt-0 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-4 prose-h3:text-xl prose-p:text-gray-700 prose-lead:text-gray-500 prose-strong:text-gray-900 prose-code:font-mono prose-code:text-[13px] prose-pre:rounded-[12px] prose-pre:border prose-pre:border-gray-200 prose-pre:bg-gray-50 prose-pre:shadow-none prose-table:text-sm prose-th:font-mono prose-th:text-[11px] prose-th:uppercase prose-th:tracking-[0.08em] prose-th:text-gray-500 prose-td:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-a:no-underline";
 
 function getNextLessonHref(
   moduleSlug: string,
