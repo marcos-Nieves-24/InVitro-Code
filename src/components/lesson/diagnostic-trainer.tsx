@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { usePyodideWorker } from "@/hooks/usePyodideWorker";
 import dynamic from "next/dynamic";
 
 // Plotly MUST be loaded only on the client — it accesses browser globals (self) at import time
@@ -20,12 +19,19 @@ interface TestCase {
   total_test: number;
 }
 
+interface DatasetJson {
+  test_count: number;
+  feature_names: string[];
+  training_points: number[][];
+  training_labels: number[];
+  test_cases: TestCase[];
+}
+
 interface DiagnosticTrainerProps {
   moduleSlug?: string;
   lessonSlug?: string;
 }
 
-// 4 features used for training (dataset indices 0,1,3,4)
 const FEATURE_KEYS = ["mean_radius", "mean_texture", "mean_area", "mean_smoothness"];
 
 const FEATURE_DISPLAY_NAMES: Record<string, string> = {
@@ -35,22 +41,21 @@ const FEATURE_DISPLAY_NAMES: Record<string, string> = {
   "mean_smoothness": "mean smoothness",
 };
 
+const DATA_URL = "/data/diagnostic-trainer.json";
+
 export function DiagnosticTrainer({
   moduleSlug = "ia",
   lessonSlug = "lesson01_what_is_ai",
 }: DiagnosticTrainerProps) {
-  const { status, run, error } = usePyodideWorker();
-  const [isSetupComplete, setIsSetupComplete] = useState(false);
+  const [dataset, setDataset] = useState<DatasetJson | null>(null);
+  const [fetchLoading, setFetchLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
   const [currentTest, setCurrentTest] = useState<TestCase | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [streak, setStreak] = useState(0);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
-  const [testCount, setTestCount] = useState(0);
-
-  // Training data from Python for the Plotly scatter
-  const [trainingPoints, setTrainingPoints] = useState<number[][]>([]);
-  const [trainingLabels, setTrainingLabels] = useState<number[]>([]);
 
   // Feature selection for the plot axes
   const [selectedXFeature, setSelectedXFeature] = useState(0);
@@ -60,121 +65,67 @@ export function DiagnosticTrainer({
   const testPointerRef = useRef(0);
   const isResettingRef = useRef(false);
 
-  const setupPythonEnvironment = useCallback(async () => {
-    setIsLoading(true);
-    console.time("sklearn-init");
-    try {
-      const setupScript = `
-import json
-import numpy as np
-from sklearn.datasets import load_breast_cancer
-from sklearn.neighbors import KNeighborsClassifier
+  // Abort controller ref for fetch cancellation on unmount
+  const abortRef = useRef<AbortController | null>(null);
 
-# Load dataset
-bcc = load_breast_cancer()
-X = bcc.data
-y = bcc.target
+  // Fetch pre-computed dataset on mount
+  useEffect(() => {
+    abortRef.current = new AbortController();
+    const signal = abortRef.current.signal;
 
-np.random.seed(42)
-indices = np.arange(len(X))
-np.random.shuffle(indices)
-test_indices = indices[:56]
-tr_indices = indices[56:]
+    setFetchLoading(true);
+    setFetchError(null);
 
-X_train = X[tr_indices]
-y_train = y[tr_indices]
-X_test = X[test_indices]
-y_test = y[test_indices]
+    fetch(DATA_URL, { signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<DatasetJson>;
+      })
+      .then((data) => {
+        setDataset(data);
+        setFetchLoading(false);
+        // Load first test case
+        if (data.test_cases.length > 0) {
+          const first = data.test_cases[0];
+          setCurrentTest(first);
+          testPointerRef.current = first.round;
+        }
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        setFetchError(err.message);
+        setFetchLoading(false);
+      });
 
-model = KNeighborsClassifier(n_neighbors=5)
-model.fit(X_train, y_train)
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
 
-# Persist in global scope for round queries
-model = model
-X_test = X_test
-y_test = y_test
-indices = test_indices
-test_pointer = 0
-
-# The 4 features we use (dataset indices 0,1,3,4)
-feature_cols = [0, 1, 3, 4]
-X_train_4f = X_train[:, feature_cols]
-X_test_4f = X_test[:, feature_cols]
-globals()['X_test_4f'] = X_test_4f
-
-print(json.dumps({
-    "test_count": len(y_test),
-    "feature_names": ["mean radius", "mean texture", "mean area", "mean smoothness"],
-    "training_points": [[float(v) for v in row] for row in X_train_4f.tolist()],
-    "training_labels": [int(l) for l in y_train.tolist()]
-}))
-`;
-
-      const result: any = await run(setupScript);
-      console.timeEnd("sklearn-init");
-      setTestCount(result.test_count);
-      setTrainingPoints(result.training_points);
-      setTrainingLabels(result.training_labels);
-      setIsSetupComplete(true);
-      await loadNextTestCase();
-    } catch (err) {
-      console.timeEnd("sklearn-init");
-      console.error("Error setting up Python environment:", err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [run]);
-
-  const loadNextTestCase = useCallback(async () => {
-    if (testPointerRef.current >= 56) {
+  const loadNextTestCase = useCallback(() => {
+    if (!dataset) return;
+    if (testPointerRef.current >= 56 || testPointerRef.current >= dataset.test_cases.length) {
       return;
     }
 
-    setIsLoading(true);
     setIsCorrect(null);
     setShowDiagnosis(false);
+    setIsLoading(true);
 
-    try {
-      const roundScript = `
-import json
-
-try:
-  idx = test_indices[test_pointer]
-  features_4 = [float(X_test[idx, 0]), float(X_test[idx, 1]), float(X_test[idx, 3]), float(X_test[idx, 4])]
-  pred = int(model.predict([X_test[idx]])[0])
-  actual = int(y_test[idx])
-  test_pointer += 1
-
-  result = {
-    "features": features_4,
-    "prediction": pred,
-    "actual": actual,
-    "round": test_pointer,
-    "total_test": len(y_test)
-  }
-  json.dumps(result)
-except Exception as e:
-  json.dumps({"error": str(e)})
-`;
-
-      const roundResult: any = await run(roundScript);
-
-      if (roundResult.error) {
-        console.error("Error loading test case:", roundResult.error);
-        return;
+    // Use a microtask to let the loading state flush
+    setTimeout(() => {
+      const idx = testPointerRef.current; // 0-based index in array
+      if (idx < dataset.test_cases.length) {
+        const next = dataset.test_cases[idx];
+        setCurrentTest(next);
+        testPointerRef.current = next.round; // round is 1-based
       }
-
-      setCurrentTest(roundResult as TestCase);
-      testPointerRef.current = roundResult.round;
-    } catch (err) {
-      console.error("Error loading next test case:", err);
-    } finally {
       setIsLoading(false);
-    }
-  }, [run]);
+    }, 0);
+  }, [dataset]);
 
   const handleAnswer = useCallback(
-    async (userChoice: number) => {
+    (userChoice: number) => {
       if (!currentTest || isResettingRef.current) return;
 
       const correct = userChoice === currentTest.actual;
@@ -182,7 +133,7 @@ except Exception as e:
       setShowDiagnosis(true);
 
       if (correct) {
-        setStreak(prev => prev + 1);
+        setStreak((prev) => prev + 1);
       } else {
         setStreak(0);
       }
@@ -191,15 +142,16 @@ except Exception as e:
 
       autoAdvanceRef.current = setTimeout(() => {
         autoAdvanceRef.current = null;
-        if (testPointerRef.current < 56) {
+        if (testPointerRef.current < (dataset?.test_cases.length ?? 56)) {
           loadNextTestCase();
         }
       }, 1500);
     },
-    [currentTest, loadNextTestCase]
+    [currentTest, dataset, loadNextTestCase]
   );
 
-  const resetGame = useCallback(async () => {
+  const resetGame = useCallback(() => {
+    if (!dataset) return;
     isResettingRef.current = true;
 
     if (autoAdvanceRef.current) {
@@ -207,22 +159,18 @@ except Exception as e:
       autoAdvanceRef.current = null;
     }
 
-    setIsSetupComplete(false);
     setCurrentTest(null);
     setStreak(0);
     setIsCorrect(null);
     setShowDiagnosis(false);
     testPointerRef.current = 0;
 
-    try {
-      await run(`test_pointer = 0`);
-    } catch (err) {
-      console.error("Error resetting Python state:", err);
-    } finally {
-      isResettingRef.current = false;
-      await setupPythonEnvironment();
-    }
-  }, [run, setupPythonEnvironment]);
+    // Load first test case
+    const first = dataset.test_cases[0];
+    setCurrentTest(first);
+    testPointerRef.current = first.round;
+    isResettingRef.current = false;
+  }, [dataset]);
 
   const handleContinueProgress = async () => {
     try {
@@ -243,12 +191,6 @@ except Exception as e:
       console.error("Error al registrar progreso en reflexión:", err);
     }
   };
-
-  useEffect(() => {
-    if (status === "ready" && !isSetupComplete) {
-      setupPythonEnvironment();
-    }
-  }, [status, isSetupComplete, setupPythonEnvironment]);
 
   useEffect(() => {
     return () => {
@@ -281,7 +223,10 @@ except Exception as e:
   // --- Plotly scatter data ---
 
   const renderScatterPlot = () => {
-    if (trainingPoints.length === 0) {
+    const points = dataset?.training_points ?? [];
+    const labels = dataset?.training_labels ?? [];
+
+    if (points.length === 0) {
       return (
         <div className="h-72 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center">
           <p className="text-sm text-gray-500">Cargando datos de entrenamiento...</p>
@@ -292,11 +237,20 @@ except Exception as e:
     // Split points by class for colored traces
     const benignPoints: number[][] = [];
     const malignantPoints: number[][] = [];
-    for (let i = 0; i < trainingPoints.length; i++) {
-      if (trainingLabels[i] === 1) {
-        benignPoints.push(trainingPoints[i]);
+    for (let i = 0; i < points.length; i++) {
+      if (labels[i] === 1) {
+        benignPoints.push(points[i]);
       } else {
-        malignantPoints.push(trainingPoints[i]);
+        malignantPoints.push(points[i]);
+      }
+    }
+
+    // Log accuracy for debugging
+    if (process.env.NODE_ENV === "development") {
+      const total = points.length;
+      const count = malignantPoints.length + benignPoints.length;
+      if (total > 0 && count !== total) {
+        console.warn(`[DiagnosticTrainer] Point count mismatch: ${count} vs ${total}`);
       }
     }
 
@@ -421,6 +375,39 @@ except Exception as e:
     </div>
   );
 
+  // --- Loading state ---
+
+  if (fetchLoading) {
+    return (
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+          <div className="inline-flex items-center gap-3">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-teal-600"></div>
+            <span className="text-sm text-gray-600">Cargando datos del modelo de diagnóstico...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (fetchError) {
+    return (
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <p className="text-sm text-red-800 mb-2">Error al cargar datos: {fetchError}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const testCount = dataset?.test_count ?? 56;
+
   return (
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
@@ -435,32 +422,22 @@ except Exception as e:
                 </div>
               )}
               <div className="text-sm text-gray-600">
-                Caso {currentTest?.round || 0}/{currentTest?.total_test || 56}
+                Caso {currentTest?.round || 0}/{testCount}
               </div>
             </div>
           </div>
 
-          {status === "loading" && !isSetupComplete && (
-            <div className="text-center py-8">
-              <div className="inline-flex items-center gap-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-teal-600"></div>
-                <span className="text-sm text-gray-600">Preparando entorno de Python (scikit-learn)...</span>
-              </div>
-            </div>
-          )}
-
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <p className="text-sm text-red-800">Error: {error}</p>
-            </div>
-          )}
+          <div className="flex items-center gap-2 text-xs text-gray-500 border-t border-gray-100 pt-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-teal-500"></span>
+            <span>Modelo KNN pre-entrenado (seed=42) · scikit-learn</span>
+          </div>
         </div>
 
         {/* Main content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left column - Features and controls */}
           <div className="space-y-6">
-            {isSetupComplete && currentTest && !isLoading && (
+            {currentTest && !isLoading && (
               <div className="bg-white rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Características del Caso</h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -478,7 +455,7 @@ except Exception as e:
               </div>
             )}
 
-            {isSetupComplete && currentTest && !isLoading && (
+            {currentTest && !isLoading && (
               <div className="bg-white rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Tu Respuesta</h3>
                 <div className="flex gap-4">
@@ -547,7 +524,7 @@ except Exception as e:
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-900">Visualización de Datos de Entrenamiento</h3>
                 <div className="text-xs text-gray-500">
-                  {trainingPoints.length} muestras
+                  {dataset?.training_points.length ?? 0} muestras
                 </div>
               </div>
               {renderFeatureSelectors()}
@@ -562,7 +539,7 @@ except Exception as e:
           </div>
         </div>
 
-        {/* Loading overlay */}
+        {/* Loading overlay (brief round transitions only) */}
         {isLoading && (
           <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 shadow-lg">
