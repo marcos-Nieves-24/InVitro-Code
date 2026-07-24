@@ -24,6 +24,11 @@ import {
   ThresholdLab,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
+import {
+  LessonCodeEditor,
+  LessonCompleteButton,
+} from "@/components/LessonComponents";
+import { lessonProseClass } from "@/lib/ui/prose";
 
 const components = {
   Section,
@@ -39,6 +44,8 @@ const components = {
   DiagnosticTrainer,
   ConidiaSortGame,
   ThresholdLab,
+  CodeEditor: LessonCodeEditor,
+  CompleteLessonButton: LessonCompleteButton,
   pre: CodeBlock,
 };
 
@@ -49,10 +56,6 @@ const mdxConfig = {
     rehypePlugins: [rehypeKatex],
   },
 };
-
-const proseClass =
-  "prose prose-base max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-h2:mt-0 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-4 prose-h3:text-xl prose-p:text-gray-700 prose-lead:text-gray-500 prose-strong:text-gray-900 prose-code:font-mono prose-code:text-[13px] prose-pre:my-0 prose-pre:bg-transparent prose-pre:p-0 prose-pre:shadow-none prose-pre:border-0 prose-table:text-sm prose-th:font-mono prose-th:text-[11px] prose-th:uppercase prose-th:tracking-[0.08em] prose-th:text-gray-500 prose-td:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-a:no-underline";
-
 function getNextLessonHref(
   moduleSlug: string,
   currentSlug: string,
@@ -103,7 +106,7 @@ function renderHeader(data: Record<string, unknown>) {
           <ul className="space-y-0.5">
             {objectives.map((obj: string, i: number) => (
               <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-600" />
+                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
                 {obj}
               </li>
             ))}
@@ -176,7 +179,7 @@ export default async function LessonPage({ params }: Props) {
       <div className="shrink-0">{renderHeader(data)}</div>
 
       {slides.length > 0 ? (
-        <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${proseClass}`}>
+        <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${lessonProseClass}`}>
           <LessonCarousel
             slides={slides.map((s) => s.content)}
             nextLessonHref={nextLessonHref}
@@ -184,10 +187,9 @@ export default async function LessonPage({ params }: Props) {
           />
         </div>
       ) : (
-        <div className={`flex-1 overflow-y-auto ${proseClass}`}>
+        <div className={`flex-1 overflow-y-auto ${lessonProseClass}`}>
           <MDXRemote source={bodyContent} components={components} options={mdxConfig} />
         </div>
-      )}
-    </LessonLayout>
+      )}    </LessonLayout>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui";
 
 interface ReflectionCheckProps {
   prompt: string;
@@ -56,7 +57,7 @@ export function ReflectionCheck({
   };
 
   return (
-    <div className="my-3 rounded-[12px] border border-blue-600 bg-blue-50 p-4">
+    <div className="my-3 rounded-card border border-brand bg-brand-soft p-4">
       <p className="mb-3 text-sm font-semibold leading-relaxed text-gray-900">
         {prompt}
       </p>
@@ -66,33 +67,29 @@ export function ReflectionCheck({
         onChange={(e) => setUserAnswer(e.target.value)}
         disabled={revealed}
         rows={3}
-        className="block w-full resize-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
+        className="block w-full resize-none rounded-btn border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
         placeholder="Escribí tu respuesta acá..."
       />
 
       <div className="mt-3 flex items-center gap-3">
-        <button
+        <Button
+          size="sm"
           onClick={handleReveal}
           disabled={revealed || submitting}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
         >
           {submitting
             ? "Guardando..."
             : revealed
               ? "✓ Respuesta revelada"
               : "Revelar respuesta modelo"}
-        </button>
+        </Button>
 
-        {error && (
-          <span className="text-sm text-red-600">{error}</span>
-        )}
+        {error && <span className="text-sm text-red-600">{error}</span>}
       </div>
 
       {revealed && (
-        <div className="mt-4 rounded-lg border border-blue-200 bg-blue-100 px-4 py-3 text-sm leading-relaxed text-gray-800">
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
-            Respuesta modelo
-          </p>
+        <div className="mt-4 rounded-btn border border-brand/20 bg-white px-4 py-3 text-sm leading-relaxed text-gray-800">
+          <p className="eyebrow mb-1 text-[10px] text-brand">Respuesta modelo</p>
           {answer}
         </div>
       )}

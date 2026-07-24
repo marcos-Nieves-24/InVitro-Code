@@ -1,89 +1,11 @@
-import Link from "next/link";
-import fs from "fs";
-import path from "path";
 import { auth } from "@clerk/nextjs/server";
 import { XPBar } from "@/components/gamification/XPBar";
 import { StreakBadge } from "@/components/gamification/StreakBadge";
 import { LevelBadge } from "@/components/gamification/LevelBadge";
 import { ModuleProgress } from "@/components/gamification/ModuleProgress";
 import { createAdminClient } from "@/lib/supabase/admin";
-
-interface ModuleInfo {
-  slug: string;
-  name: string;
-  totalLessons: number;
-}
-
-function getModuleDisplayName(slug: string): string {
-  const metaPath = path.join(
-    process.cwd(),
-    "src/content/modules",
-    slug,
-    "module.json",
-  );
-  try {
-    const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
-    if (meta.name) return meta.name;
-  } catch { /* fallback */ }
-  return slug
-    .split(/[-_]/)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
-function getModuleOrder(slug: string): number {
-  const metaPath = path.join(
-    process.cwd(),
-    "src/content/modules",
-    slug,
-    "module.json",
-  );
-  try {
-    const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
-    if (typeof meta.order === "number") return meta.order;
-  } catch { /* fallback */ }
-  return Infinity;
-}
-
-function getLessonCount(slug: string): number {
-  const lessonDir = path.join(
-    process.cwd(),
-    "src/content/modules",
-    slug,
-    "lessons",
-  );
-  try {
-    if (!fs.existsSync(lessonDir)) return 0;
-    return fs
-      .readdirSync(lessonDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory()).length;
-  } catch {
-    return 0;
-  }
-}
-
-function getModules(): ModuleInfo[] {
-  const modulesDir = path.join(process.cwd(), "src/content/modules");
-  try {
-    if (!fs.existsSync(modulesDir)) return [];
-    return fs
-      .readdirSync(modulesDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory())
-      .map((e) => ({
-        slug: e.name,
-        name: getModuleDisplayName(e.name),
-        totalLessons: getLessonCount(e.name),
-      }))
-      .sort((a, b) => {
-        const oa = getModuleOrder(a.slug);
-        const ob = getModuleOrder(b.slug);
-        if (oa !== ob) return oa - ob;
-        return a.name.localeCompare(b.name);
-      });
-  } catch {
-    return [];
-  }
-}
+import { getModulesInfo } from "@/lib/content/modules";
+import { Card, PageShell, SiteHeader } from "@/components/ui";
 
 export default async function DashboardPage() {
   const session = await auth().catch(() => ({ userId: null }));
@@ -109,88 +31,87 @@ export default async function DashboardPage() {
     ...(reflectionRes.data ?? []),
   ].reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
 
-  // Build a map of module_slug -> completed lesson count
   const completedByModule: Record<string, number> = {};
   for (const row of moduleProgressRes.data ?? []) {
     const slug = row.module_slug;
     completedByModule[slug] = (completedByModule[slug] ?? 0) + 1;
   }
 
-  const modules = getModules();
+  const modules = getModulesInfo();
+  const python = modules.find((m) => m.slug === "python");
+  const startHref = python
+    ? `/learn/${python.slug}`
+    : modules[0]
+      ? `/learn/${modules[0].slug}`
+      : "/";
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between border-b px-6 py-4">
-        <Link href="/" className="text-xl font-bold text-blue-900">
-          InVitro-Code
-        </Link>
-      </header>
+    <PageShell width="marketing">
+      <SiteHeader startHref={startHref} showDashboard={false} />
 
-      <main className="flex-1 p-6">
-        <h2 className="mb-2 text-2xl font-semibold">
-          Bienvenido, Estudiante
-        </h2>
-        <p className="mb-8 text-gray-600">
-          Continúa tu aprendizaje y desbloquea nuevas lecciones.
-        </p>
+      <main className="mt-8 space-y-6 pb-12">
+        <Card>
+          <p className="eyebrow mb-2">Dashboard</p>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-gray-900">
+            Bienvenido, Estudiante
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Continuá tu aprendizaje y desbloqueá nuevas lecciones.
+          </p>
+        </Card>
 
-        <div className="grid gap-8">
-          <div className="rounded-lg border bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-lg font-semibold">
-              Estadísticas de Progreso
-            </h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg bg-gray-50 p-4">
-                <h4 className="font-medium text-gray-600">Nivel Actual</h4>
-                <div className="mt-1">
-                  <LevelBadge userId={userId} totalXp={totalXp} />
-                </div>
+        <Card>
+          <h2 className="mb-4 font-display text-lg font-semibold tracking-tight text-gray-900">
+            Estadísticas de progreso
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
+              <h3 className="eyebrow text-[10px]">Nivel actual</h3>
+              <div className="mt-2">
+                <LevelBadge userId={userId} totalXp={totalXp} />
               </div>
-
-              <div className="rounded-lg bg-gray-50 p-4">
-                <h4 className="font-medium text-gray-600">Puntos Totales</h4>
-                <p className="mt-1 text-2xl font-bold">{totalXp} XP</p>
+            </div>
+            <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
+              <h3 className="eyebrow text-[10px]">Puntos totales</h3>
+              <p className="mt-2 font-display text-2xl font-semibold text-gray-900">
+                {totalXp} XP
+              </p>
+            </div>
+            <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
+              <h3 className="eyebrow text-[10px]">Racha actual</h3>
+              <div className="mt-2">
+                <StreakBadge userId={userId} />
               </div>
-
-              <div className="rounded-lg bg-gray-50 p-4">
-                <h4 className="font-medium text-gray-600">Racha Actual</h4>
-                <div className="mt-1">
-                  <StreakBadge userId={userId} />
-                </div>
-              </div>
-
-              <div className="rounded-lg bg-gray-50 p-4">
-                <h4 className="font-medium text-gray-600">
-                  Progreso Hacia el Nivel Siguiente
-                </h4>
-                <div className="mt-1">
-                  <XPBar userId={userId} totalXp={totalXp} />
-                </div>
+            </div>
+            <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
+              <h3 className="eyebrow text-[10px]">Siguiente nivel</h3>
+              <div className="mt-2">
+                <XPBar userId={userId} totalXp={totalXp} />
               </div>
             </div>
           </div>
+        </Card>
 
-          {modules.length > 0 && (
-            <div className="rounded-lg border bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-lg font-semibold">
-                Progreso de Módulos
-              </h3>
-              <div className="space-y-6">
-                {modules.map((mod) => (
-                  <ModuleProgress
-                    key={mod.slug}
-                    moduleSlug={mod.slug}
-                    moduleName={mod.name}
-                    userId={userId}
-                    totalLessons={mod.totalLessons}
-                    initialCompletedLessons={completedByModule[mod.slug] ?? 0}
-                  />
-                ))}
-              </div>
+        {modules.length > 0 && (
+          <Card>
+            <h2 className="mb-4 font-display text-lg font-semibold tracking-tight text-gray-900">
+              Progreso de módulos
+            </h2>
+            <div className="space-y-6">
+              {modules.map((mod) => (
+                <ModuleProgress
+                  key={mod.slug}
+                  moduleSlug={mod.slug}
+                  moduleName={mod.name}
+                  userId={userId}
+                  totalLessons={mod.totalLessons}
+                  initialCompletedLessons={completedByModule[mod.slug] ?? 0}
+                />
+              ))}
             </div>
-          )}
-        </div>
+          </Card>
+        )}
       </main>
-    </div>
+    </PageShell>
   );
 }

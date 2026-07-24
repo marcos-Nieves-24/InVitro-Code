@@ -20,16 +20,15 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
 
   return (
     <>
-      {/* ── Toggle button (mobile) ─────────────── */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-md ring-1 ring-gray-200 transition-colors hover:bg-gray-50 lg:hidden"
+        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-btn border border-gray-200 bg-white shadow-sm transition-colors hover:bg-gray-50 lg:hidden"
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
+        type="button"
       >
         {open ? <X size={20} /> : <Menu size={20} />}
       </button>
 
-      {/* ── Backdrop (mobile) ──────────────────── */}
       {open && (
         <div
           className="fixed inset-0 z-30 bg-black/30 lg:hidden"
@@ -37,10 +36,9 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
         />
       )}
 
-      {/* ── Sidebar ────────────────────────────── */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-40 w-64 shrink-0 overflow-y-auto bg-white shadow-md
+          fixed inset-y-0 left-0 z-40 w-64 shrink-0 overflow-y-auto border-r border-gray-200 bg-white
           transition-transform duration-300 ease-in-out
           lg:static lg:translate-x-0
           ${open ? "translate-x-0" : "-translate-x-full"}
@@ -49,14 +47,20 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
         <div className="p-4 pt-16 lg:pt-4">
           <div className="mb-6">
             <Link
+              href="/"
+              className="font-display text-base font-semibold tracking-tight text-gray-900 hover:text-brand"
+            >
+              InVitro-Code
+            </Link>
+            <Link
               href="/dashboard"
-              className="text-sm text-blue-600 hover:underline"
+              className="mt-2 block text-sm text-brand hover:underline"
             >
               ← Dashboard
             </Link>
           </div>
 
-          <h2 className="mb-4 text-xl font-bold text-gray-800">Módulos</h2>
+          <h2 className="eyebrow mb-4">Módulos</h2>
 
           <nav>
             {modules.length === 0 && (
@@ -67,16 +71,16 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
 
             {modules.map((mod) => (
               <div key={mod.slug} className="mb-4">
-                <h3 className="mb-2 text-sm font-semibold text-gray-700">
+                <h3 className="mb-2 font-display text-sm font-semibold tracking-tight text-gray-800">
                   {mod.name}
                 </h3>
-                <ul className="ml-2 space-y-1">
+                <ul className="ml-1 space-y-0.5">
                   {mod.lessons.map((lesson) => (
                     <li key={lesson.slug}>
                       <Link
                         href={`/learn/${mod.slug}/${lesson.slug}`}
                         onClick={() => setOpen(false)}
-                        className="block rounded px-2 py-1 text-sm text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
+                        className="block rounded-btn px-2 py-1.5 text-sm text-gray-600 transition-colors hover:bg-brand-soft hover:text-brand"
                       >
                         {lesson.title}
                       </Link>

@@ -11,6 +11,11 @@
   --spacing-card-padding: 1rem; /* 16px */
   --width-layout-max: 920px;
 
+  /* Brand (primary CTA — deep lab blue) */
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-brand-soft: #eff6ff;
+
   --color-teal-50: #f0fdfa;
   --color-teal-100: #ccfbf1;
   --color-teal-500: #14b8a6;

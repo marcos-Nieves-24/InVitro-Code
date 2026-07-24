@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { LabProgress } from "./lab-progress";
 import { CelebrationOverlay } from "./celebration-overlay";
+import { Button } from "@/components/ui";
 
 interface LessonCarouselProps {
   slides: React.ReactNode[];
@@ -28,45 +28,40 @@ export function LessonCarousel({
   return (
     <>
       <div className="flex min-h-0 flex-1 flex-col gap-3">
-        {/* ── Lab Progress ─────────────────────────────── */}
         <LabProgress total={total} current={current} />
 
-        {/* ── Content (scrollable si excede el viewport) ── */}
         <div className="min-h-0 flex-1 overflow-y-auto">{slides[current]}</div>
 
-        {/* ── Navigation ───────────────────────────────── */}
         <div className="flex items-center justify-between border-t border-gray-200 pt-3">
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => setCurrent((c) => c - 1)}
             disabled={current === 0}
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 disabled:cursor-not-allowed disabled:opacity-30"
           >
             ← Anterior
-          </button>
+          </Button>
 
           <span className="font-mono text-xs text-gray-400">
             {current + 1} / {total}
           </span>
 
           {isLast ? (
-            <button
+            <Button
+              size="sm"
+              className="bg-teal-600 hover:bg-teal-700 shadow-teal-600/20"
               onClick={handleFinish}
-              className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-teal-700"
             >
               Finalizar
-            </button>
+            </Button>
           ) : (
-            <button
-              onClick={() => setCurrent((c) => c + 1)}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
-            >
+            <Button size="sm" onClick={() => setCurrent((c) => c + 1)}>
               Siguiente →
-            </button>
+            </Button>
           )}
         </div>
       </div>
 
-      {/* ── Celebration Overlay ────────────────────────── */}
       {showCelebration && (
         <CelebrationOverlay
           lessonTitle={lessonTitle}
