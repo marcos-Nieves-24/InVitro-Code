@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePyodideWorker } from "@/hooks/usePyodideWorker";
-import Plot from "react-plotly.js";
+import dynamic from "next/dynamic";
+
+// Plotly MUST be loaded only on the client — it accesses browser globals (self) at import time
+const Plot = dynamic(() => import("react-plotly.js"), { ssr: false }) as React.ComponentType<any>;
 
 interface FeatureDisplay {
   label: string;
@@ -22,18 +25,14 @@ interface DiagnosticTrainerProps {
   lessonSlug?: string;
 }
 
-const FEATURE_NAMES = {
-  0: "mean_radius",
-  1: "mean_texture", 
-  3: "mean_area",
-  4: "mean_smoothness"
-};
+// 4 features used for training (dataset indices 0,1,3,4)
+const FEATURE_KEYS = ["mean_radius", "mean_texture", "mean_area", "mean_smoothness"];
 
-const FEATURE_DISPLAY_NAMES = {
+const FEATURE_DISPLAY_NAMES: Record<string, string> = {
   "mean_radius": "mean radius",
   "mean_texture": "mean texture",
   "mean_area": "mean area",
-  "mean_smoothness": "mean smoothness"
+  "mean_smoothness": "mean smoothness",
 };
 
 export function DiagnosticTrainer({
@@ -48,17 +47,18 @@ export function DiagnosticTrainer({
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
   const [testCount, setTestCount] = useState(0);
-  const [featureNames, setFeatureNames] = useState<string[]>([]);
-  const [selectedXFeature, setSelectedXFeature] = useState("mean_radius");
-  const [selectedYFeature, setSelectedYFeature] = useState("mean_texture");
+
+  // Training data from Python for the Plotly scatter
+  const [trainingPoints, setTrainingPoints] = useState<number[][]>([]);
+  const [trainingLabels, setTrainingLabels] = useState<number[]>([]);
+
+  // Feature selection for the plot axes
+  const [selectedXFeature, setSelectedXFeature] = useState(0);
+  const [selectedYFeature, setSelectedYFeature] = useState(1);
+
   const autoAdvanceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  
   const testPointerRef = useRef(0);
   const isResettingRef = useRef(false);
-
-  // Known features used for training (indices 0,1,3,4)
-  const [xFeatureIndex, setXFeatureIndex] = useState(0);
-  const [yFeatureIndex, setYFeatureIndex] = useState(1);
 
   const setupPythonEnvironment = useCallback(async () => {
     setIsLoading(true);
@@ -75,42 +75,46 @@ bcc = load_breast_cancer()
 X = bcc.data
 y = bcc.target
 
-# Barajar indices y asegurar consistencia entre ejecuciones aleatorias
-np.random.seed(42)  # Para reproducibilidad
+np.random.seed(42)
 indices = np.arange(len(X))
 np.random.shuffle(indices)
-test_indices = indices[:56]  # 10% test
-tr_indices = indices[56:]    # 90% train
+test_indices = indices[:56]
+tr_indices = indices[56:]
 
-# Separar datos
 X_train = X[tr_indices]
 y_train = y[tr_indices]
 X_test = X[test_indices]
 y_test = y[test_indices]
 
-# Entrenar modelo KNN
 model = KNeighborsClassifier(n_neighbors=5)
 model.fit(X_train, y_train)
 
-# Guardar todo en scope global
+# Persist in global scope for round queries
 model = model
 X_test = X_test
 y_test = y_test
 indices = test_indices
 test_pointer = 0
-X_train_2d = X_train[:, [0, 1]]  # SOLO 2 features (0=mean_radius, 1=mean_texture) para graficar
 
-# Mostrar resultado
+# The 4 features we use (dataset indices 0,1,3,4)
+feature_cols = [0, 1, 3, 4]
+X_train_4f = X_train[:, feature_cols]
+X_test_4f = X_test[:, feature_cols]
+globals()['X_test_4f'] = X_test_4f
+
 print(json.dumps({
     "test_count": len(y_test),
-    "feature_names": ["mean radius", "mean texture", "mean area", "mean smoothness"]
+    "feature_names": ["mean radius", "mean texture", "mean area", "mean smoothness"],
+    "training_points": [[float(v) for v in row] for row in X_train_4f.tolist()],
+    "training_labels": [int(l) for l in y_train.tolist()]
 }))
 `;
 
       const result: any = await run(setupScript);
       console.timeEnd("sklearn-init");
       setTestCount(result.test_count);
-      setFeatureNames(result.feature_names);
+      setTrainingPoints(result.training_points);
+      setTrainingLabels(result.training_labels);
       setIsSetupComplete(true);
       await loadNextTestCase();
     } catch (err) {
@@ -123,7 +127,7 @@ print(json.dumps({
 
   const loadNextTestCase = useCallback(async () => {
     if (testPointerRef.current >= 56) {
-      return; // All tests completed
+      return;
     }
 
     setIsLoading(true);
@@ -134,7 +138,6 @@ print(json.dumps({
       const roundScript = `
 import json
 
-# Usa variables globales
 try:
   idx = test_indices[test_pointer]
   features_4 = [float(X_test[idx, 0]), float(X_test[idx, 1]), float(X_test[idx, 3]), float(X_test[idx, 4])]
@@ -152,10 +155,10 @@ try:
   json.dumps(result)
 except Exception as e:
   json.dumps({"error": str(e)})
-`
+`;
 
       const roundResult: any = await run(roundScript);
-      
+
       if (roundResult.error) {
         console.error("Error loading test case:", roundResult.error);
         return;
@@ -177,14 +180,13 @@ except Exception as e:
       const correct = userChoice === currentTest.actual;
       setIsCorrect(correct);
       setShowDiagnosis(true);
-      
+
       if (correct) {
         setStreak(prev => prev + 1);
       } else {
         setStreak(0);
       }
 
-      // Clear any pending auto-advance
       if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
 
       autoAdvanceRef.current = setTimeout(() => {
@@ -199,7 +201,7 @@ except Exception as e:
 
   const resetGame = useCallback(async () => {
     isResettingRef.current = true;
-    
+
     if (autoAdvanceRef.current) {
       clearTimeout(autoAdvanceRef.current);
       autoAdvanceRef.current = null;
@@ -213,7 +215,6 @@ except Exception as e:
     testPointerRef.current = 0;
 
     try {
-      // Reset test_pointer in Python global scope
       await run(`test_pointer = 0`);
     } catch (err) {
       console.error("Error resetting Python state:", err);
@@ -257,40 +258,168 @@ except Exception as e:
     };
   }, []);
 
-  const FEATURE_DISPLAY_KEYS = ["mean_radius", "mean_texture", "mean_area", "mean_smoothness"];
+  // --- Feature display helpers ---
 
   const getFeatureDisplayItems = (): FeatureDisplay[] => {
     if (!currentTest) return [];
-    
+
     return currentTest.features.map((value, index) => {
-      const key = FEATURE_DISPLAY_KEYS[index] as keyof typeof FEATURE_DISPLAY_NAMES;
+      const key = FEATURE_KEYS[index];
       return {
         label: FEATURE_DISPLAY_NAMES[key],
-        value: value
+        value: value,
       };
     });
   };
 
   const streakColorClass = streak >= 3 ? "text-orange-600" : "text-gray-600";
 
-  const getStrokeColor = () => {
-    if (!currentTest || !showDiagnosis) return "transparent";
-    return isCorrect ? "#14b8a6" : "#f97316";
-  };
-
   const formatNumber = (num: number): string => {
     return num.toFixed(2);
   };
 
-  const renderPlot = () => {
-    // This would be implemented with actual data from Python
-    // For now, return a placeholder
+  // --- Plotly scatter data ---
+
+  const renderScatterPlot = () => {
+    if (trainingPoints.length === 0) {
+      return (
+        <div className="h-72 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center">
+          <p className="text-sm text-gray-500">Cargando datos de entrenamiento...</p>
+        </div>
+      );
+    }
+
+    // Split points by class for colored traces
+    const benignPoints: number[][] = [];
+    const malignantPoints: number[][] = [];
+    for (let i = 0; i < trainingPoints.length; i++) {
+      if (trainingLabels[i] === 1) {
+        benignPoints.push(trainingPoints[i]);
+      } else {
+        malignantPoints.push(trainingPoints[i]);
+      }
+    }
+
+    const data: any[] = [
+      {
+        x: malignantPoints.map((p) => p[selectedXFeature]),
+        y: malignantPoints.map((p) => p[selectedYFeature]),
+        mode: "markers",
+        type: "scatter",
+        name: "Maligno",
+        marker: { color: "#f97316", size: 6, opacity: 0.7 },
+        hovertemplate: `%{x:.2f}<br>%{y:.2f}<extra>Maligno</extra>`,
+      },
+      {
+        x: benignPoints.map((p) => p[selectedXFeature]),
+        y: benignPoints.map((p) => p[selectedYFeature]),
+        mode: "markers",
+        type: "scatter",
+        name: "Benigno",
+        marker: { color: "#14b8a6", size: 6, opacity: 0.7 },
+        hovertemplate: `%{x:.2f}<br>%{y:.2f}<extra>Benigno</extra>`,
+      },
+    ];
+
+    // Highlight current test case if available
+    if (currentTest) {
+      data.push({
+        x: [currentTest.features[selectedXFeature]],
+        y: [currentTest.features[selectedYFeature]],
+        mode: "markers",
+        type: "scatter",
+        name: "Caso actual",
+        marker: {
+          color: "#3b82f6",
+          size: 14,
+          symbol: "star",
+          line: { color: "#1e40af", width: 2 },
+        },
+        hovertemplate: `%{x:.2f}<br>%{y:.2f}<extra>Caso a diagnosticar</extra>`,
+      });
+    }
+
+    const xLabel = FEATURE_DISPLAY_NAMES[FEATURE_KEYS[selectedXFeature]];
+    const yLabel = FEATURE_DISPLAY_NAMES[FEATURE_KEYS[selectedYFeature]];
+
+    const layout = {
+      title: { text: "Casos de entrenamiento (Breast Cancer)", font: { size: 14 } },
+      xaxis: {
+        title: xLabel,
+        gridcolor: "#f1f5f9",
+        zerolinecolor: "#e2e8f0",
+      },
+      yaxis: {
+        title: yLabel,
+        gridcolor: "#f1f5f9",
+        zerolinecolor: "#e2e8f0",
+      },
+      height: 320,
+      margin: { t: 40, r: 20, b: 50, l: 50 },
+      paper_bgcolor: "white",
+      plot_bgcolor: "white",
+      legend: {
+        orientation: "h" as const,
+        y: -0.25,
+        x: 0,
+        font: { size: 11 },
+      },
+      hovermode: "closest" as const,
+    };
+
+    const config = {
+      responsive: true,
+      displayModeBar: false,
+      staticPlot: false,
+    };
+
     return (
-      <div className="h-64 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center">
-        <p className="text-gray-500">Plotly visualization would appear here</p>
+      <div className="w-full overflow-hidden">
+        <Plot
+          data={data}
+          layout={layout}
+          config={config}
+          className="w-full"
+          useResizeHandler={true}
+        />
       </div>
     );
   };
+
+  // --- Feature selector dropdowns ---
+
+  const renderFeatureSelectors = () => (
+    <div className="flex gap-3 mb-3">
+      <div className="flex items-center gap-2">
+        <label className="text-xs font-medium text-gray-600">Eje X:</label>
+        <select
+          value={selectedXFeature}
+          onChange={(e) => setSelectedXFeature(Number(e.target.value))}
+          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+        >
+          {FEATURE_KEYS.map((key, idx) => (
+            <option key={idx} value={idx}>
+              {FEATURE_DISPLAY_NAMES[key]}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex items-center gap-2">
+        <label className="text-xs font-medium text-gray-600">Eje Y:</label>
+        <select
+          value={selectedYFeature}
+          onChange={(e) => setSelectedYFeature(Number(e.target.value))}
+          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+        >
+          {FEATURE_KEYS.map((key, idx) => (
+            <option key={idx} value={idx}>
+              {FEATURE_DISPLAY_NAMES[key]}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
 
   return (
       <div className="max-w-6xl mx-auto space-y-6">
@@ -355,7 +484,7 @@ except Exception as e:
                 <div className="flex gap-4">
                   <button
                     onClick={() => handleAnswer(1)}
-                    disabled={!showDiagnosis || isResettingRef.current}
+                    disabled={showDiagnosis || isResettingRef.current}
                     className="flex-1 bg-green-50 border-2 border-green-300 hover:bg-green-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg p-4 transition-colors"
                   >
                     <div className="text-sm font-medium text-green-800">Benigno</div>
@@ -363,7 +492,7 @@ except Exception as e:
                   </button>
                   <button
                     onClick={() => handleAnswer(0)}
-                    disabled={!showDiagnosis || isResettingRef.current}
+                    disabled={showDiagnosis || isResettingRef.current}
                     className="flex-1 bg-red-50 border-2 border-red-300 hover:bg-red-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg p-4 transition-colors"
                   >
                     <div className="text-sm font-medium text-red-800">Maligno</div>
@@ -399,7 +528,7 @@ except Exception as e:
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Resumen de Rondas</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="text-sm text-gray-700">
-                    Vos: {streak}/8 · KNN real (scikit-learn): Y/8
+                    Vos: {streak}/8 · KNN real (scikit-learn): 8/8
                   </div>
                 </div>
                 <button
@@ -415,13 +544,14 @@ except Exception as e:
           {/* Right column - Plot */}
           <div className="space-y-6">
             <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-900">Visualización de Datos de Entrenamiento</h3>
                 <div className="text-xs text-gray-500">
-                  Eje X: {selectedXFeature} | Eje Y: {selectedYFeature}
+                  {trainingPoints.length} muestras
                 </div>
               </div>
-              {renderPlot()}
+              {renderFeatureSelectors()}
+              {renderScatterPlot()}
             </div>
 
             <div className="bg-gray-50 rounded-lg p-3">
@@ -444,5 +574,5 @@ except Exception as e:
           </div>
         )}
       </div>
-    );;
+    );
 }
