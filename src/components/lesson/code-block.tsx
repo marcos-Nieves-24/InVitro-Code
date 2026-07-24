@@ -315,7 +315,7 @@ function resolveSingleShellCommand(cmd: string): string | null {
   // echo
   const echoMatch = cmd.match(/^echo\s+(.+)/);
   if (echoMatch) {
-    return echoMatch[1].replace(/^["'](.*)["']$/s, "$1").replace(/\\n/g, "\n");
+    return echoMatch[1].replace(/^["']([\s\S]*)["']$/, "$1").replace(/\\n/g, "\n");
   }
 
   // apt update
