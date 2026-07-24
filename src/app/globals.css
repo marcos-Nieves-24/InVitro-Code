@@ -94,27 +94,50 @@ body {
 }
 
 /** Consecutive terminals get staggered delays */
-.animate-terminal-enter:nth-child(2) { animation-delay: 0.06s; }
-.animate-terminal-enter:nth-child(3) { animation-delay: 0.12s; }
-.animate-terminal-enter:nth-child(4) { animation-delay: 0.18s; }
-.animate-terminal-enter:nth-child(5) { animation-delay: 0.24s; }
+.animate-terminal-enter + .animate-terminal-enter { animation-delay: 0.12s; }
 
-/** Blinking terminal cursor */
+/** Line-by-line typing — each line fades in + slides up */
+@keyframes code-line-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-code-line {
+  animation: code-line-enter 0.2s ease-out both;
+  animation-delay: calc(var(--line-index, 0) * 50ms);
+}
+
+/** Terminal cursor — hidden until its delay elapses, then blinks */
 @keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .animate-cursor-blink {
+  opacity: 0; /* hidden during animation-delay */
   animation: cursor-blink 1.2s step-end infinite;
+  animation-delay: var(--cursor-delay, 500ms);
+  animation-fill-mode: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-terminal-enter,
+  .animate-code-line,
   .animate-cursor-blink {
     animation: none;
   }
   .animate-terminal-enter {
+    opacity: 1;
+    transform: none;
+  }
+  .animate-code-line {
     opacity: 1;
     transform: none;
   }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Check, Copy } from "lucide-react";
 
 interface CodeBlockProps {
@@ -9,39 +9,47 @@ interface CodeBlockProps {
 }
 
 /**
- * Wraps fenced code blocks (```) with an animated Linux terminal look:
+ * Wraps fenced code blocks (```) with an animated Linux terminal look.
+ * Code text appears line-by-line with a typing animation.
  *
- *  ┌─[○ ● ○]─[bash]─[📋]─┐
- *  │ $ command ―            │  ← blinking cursor
- *  │ >>> print("hi") ―      │
- *  └────────────────────────┘
+ *  ┌─[○ ● ○]─[Python — >>>]─[📋 Copiar]─┐
+ *  │ $ git init                            │  ← line enters
+ *  │ >>> print("hi")                       │  ← line enters
+ *  │ █                                    │  ← blinks after all lines
+ *  └───────────────────────────────────────┘
  *
- * Features:
- * - macOS-style traffic light dots (close/minimize/maximize)
- * - Terminal prompt symbol ($ for bash, >>> for Python)
- * - Blinking cursor at end of code
- * - Terminal "power-on" expansion animation
- * - Copy-to-clipboard button
- *
- * Plain <pre> elements (ASCII art) fall through unchanged.
+ * Non-code <pre> (ASCII art) falls through unchanged.
  */
 export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
-  // Detect if this is a fenced code block: <pre><code className="language-...">
+  // Detect fenced code block: <pre><code className="language-...">
   const childArray = Array.isArray(children) ? children : [children];
   const codeEl = childArray.find(
     (child: any) => child?.type === "code" || child?.props?.className?.startsWith("language-"),
   ) as React.ReactElement<{ className?: string; children?: React.ReactNode }> | undefined;
 
   if (!codeEl) {
-    // Not a code block — render as plain <pre> (e.g. ASCII diagrams)
     return <pre className={className} {...rest}>{children}</pre>;
   }
 
   const language = extractLanguage(codeEl.props?.className ?? "");
   const codeText = extractCodeText(codeEl);
   const prompt = language === "python" ? ">>>" : "$";
+
+  // Split code into lines for typing animation
+  const lines = useMemo(() => {
+    const parts = codeText.split("\n");
+    // Drop trailing empty line (from final newline in markdown)
+    if (parts.length > 1 && parts[parts.length - 1] === "") {
+      parts.pop();
+    }
+    return parts;
+  }, [codeText]);
+
+  const totalLines = lines.length;
+  // Each line types for 50ms; cursor starts blinking after all lines appear
+  const typingDuration = totalLines * 50 + 300;
 
   const handleCopy = useCallback(async () => {
     try {
@@ -65,14 +73,14 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
   return (
     <div className="group relative my-6 animate-terminal-enter perspective-[600px]">
       {/* ── Terminal window ── */}
-      <div className="overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] shadow-2xl shadow-black/40 backdrop-blur-sm">
+      <div className="overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] shadow-2xl shadow-black/40">
         {/* ── Title bar ── */}
         <div className="flex items-center justify-between border-b border-[#21262d] bg-[#161b22] px-4 py-2.5">
           {/* macOS traffic-light dots */}
           <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f56] transition-colors hover:brightness-110" />
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e] transition-colors hover:brightness-110" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f] transition-colors hover:brightness-110" />
+            <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+            <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+            <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
             <span className="ml-3 font-mono text-[12px] font-medium tracking-tight text-[#8b949e]">
               {language || "terminal"} — {prompt}
             </span>
@@ -98,15 +106,27 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
           </button>
         </div>
 
-        {/* ── Code body ── */}
+        {/* ── Code body with line-by-line typing ── */}
         <div className="relative">
           <pre
             {...rest}
             className="overflow-x-auto p-4 pb-6 text-sm leading-[1.7] text-[#e6edf3] [font-family:var(--font-mono),monospace] [font-variant-ligatures:none] [tab-size:4]"
           >
-            {codeEl}
-            {/* Terminal cursor — blinks forever */}
-            <span className="relative inline-block h-[1.1em] w-[0.55em] translate-y-[2px] align-text-bottom bg-[#3fb950] animate-cursor-blink" />
+            {lines.map((line, i) => (
+              <div
+                key={i}
+                className="animate-code-line"
+                style={{ "--line-index": i } as React.CSSProperties}
+              >
+                {i === 0 ? <TypingPrompt text={prompt} /> : null}
+                {line || "\u00A0"}
+              </div>
+            ))}
+            {/* Blinking cursor — waits for all lines to appear */}
+            <span
+              className="relative inline-block h-[1.1em] w-[0.55em] translate-y-[2px] align-text-bottom bg-[#3fb950] animate-cursor-blink"
+              style={{ "--cursor-delay": `${typingDuration}ms` } as React.CSSProperties}
+            />
           </pre>
 
           {/* Subtle scan-line overlay */}
@@ -120,7 +140,7 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
         </div>
       </div>
 
-      {/* ── Glow effect ── */}
+      {/* ── Glow effect on hover ── */}
       <div
         className="pointer-events-none absolute -inset-[1px] -z-10 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
@@ -133,7 +153,16 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
   );
 }
 
-/** Extract language from "language-python" → "Python" */
+// ─── TypingPrompt: renders the prompt symbol ($ or >>>) on the first line ──
+
+function TypingPrompt({ text }: { text: string }) {
+  return (
+    <span className="mr-2 select-none text-[#3fb950]">{text}</span>
+  );
+}
+
+// ─── Helpers ────────────────────────────────────────────────────────
+
 function extractLanguage(className: string): string {
   if (!className) return "";
   const match = className.match(/language-(\w+)/);
@@ -155,7 +184,6 @@ function extractLanguage(className: string): string {
   return displayNames[lang] ?? lang;
 }
 
-/** Recursively extract plain text from a React element tree */
 function extractCodeText(el: React.ReactNode): string {
   if (typeof el === "string") return el;
   if (typeof el === "number") return String(el);
