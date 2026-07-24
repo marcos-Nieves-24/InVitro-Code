@@ -9,13 +9,21 @@ interface CodeBlockProps {
 }
 
 /**
- * Wraps fenced code blocks (```) with:
- * - A card-style container with dark background
- * - A language badge extracted from className="language-xxx"
- * - A copy-to-clipboard button with brief "Copied!" feedback
- * - A fade-in + slide-up animation on mount
+ * Wraps fenced code blocks (```) with an animated Linux terminal look:
  *
- * Plain <pre> elements (without a <code> child) fall through unchanged.
+ *  ┌─[○ ● ○]─[bash]─[📋]─┐
+ *  │ $ command ―            │  ← blinking cursor
+ *  │ >>> print("hi") ―      │
+ *  └────────────────────────┘
+ *
+ * Features:
+ * - macOS-style traffic light dots (close/minimize/maximize)
+ * - Terminal prompt symbol ($ for bash, >>> for Python)
+ * - Blinking cursor at end of code
+ * - Terminal "power-on" expansion animation
+ * - Copy-to-clipboard button
+ *
+ * Plain <pre> elements (ASCII art) fall through unchanged.
  */
 export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
@@ -33,6 +41,7 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
 
   const language = extractLanguage(codeEl.props?.className ?? "");
   const codeText = extractCodeText(codeEl);
+  const prompt = language === "python" ? ">>>" : "$";
 
   const handleCopy = useCallback(async () => {
     try {
@@ -40,7 +49,6 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for older browsers
       const textarea = document.createElement("textarea");
       textarea.value = codeText;
       textarea.style.position = "fixed";
@@ -55,43 +63,77 @@ export function CodeBlock({ children, className, ...rest }: CodeBlockProps) {
   }, [codeText]);
 
   return (
-    <div className="group relative my-5 animate-code-fade-in">
-      {/* Header bar */}
-      <div className="flex items-center justify-between rounded-t-xl border border-b-0 border-gray-700 bg-gray-800 px-4 py-2">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-gray-400">
-          {language || "code"}
-        </span>
-        <button
-          onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-medium text-gray-400 transition-all hover:bg-gray-700 hover:text-gray-200 active:scale-95"
-          aria-label={copied ? "Copiado" : "Copiar código"}
-        >
-          {copied ? (
-            <>
-              <Check className="h-3.5 w-3.5 text-teal-400" />
-              <span className="text-teal-400">Copiado</span>
-            </>
-          ) : (
-            <>
-              <Copy className="h-3.5 w-3.5" />
-              <span>Copiar</span>
-            </>
-          )}
-        </button>
+    <div className="group relative my-6 animate-terminal-enter perspective-[600px]">
+      {/* ── Terminal window ── */}
+      <div className="overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] shadow-2xl shadow-black/40 backdrop-blur-sm">
+        {/* ── Title bar ── */}
+        <div className="flex items-center justify-between border-b border-[#21262d] bg-[#161b22] px-4 py-2.5">
+          {/* macOS traffic-light dots */}
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-[#ff5f56] transition-colors hover:brightness-110" />
+            <span className="h-3 w-3 rounded-full bg-[#ffbd2e] transition-colors hover:brightness-110" />
+            <span className="h-3 w-3 rounded-full bg-[#27c93f] transition-colors hover:brightness-110" />
+            <span className="ml-3 font-mono text-[12px] font-medium tracking-tight text-[#8b949e]">
+              {language || "terminal"} — {prompt}
+            </span>
+          </div>
+
+          {/* Copy button */}
+          <button
+            onClick={handleCopy}
+            className="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-medium text-[#8b949e] transition-all hover:bg-[#21262d] hover:text-[#e6edf3] active:scale-90"
+            aria-label={copied ? "Copiado" : "Copiar código"}
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5 text-[#3fb950]" />
+                <span className="text-[#3fb950]">Copiado</span>
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" />
+                <span>Copiar</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* ── Code body ── */}
+        <div className="relative">
+          <pre
+            {...rest}
+            className="overflow-x-auto p-4 pb-6 text-sm leading-[1.7] text-[#e6edf3] [font-family:var(--font-mono),monospace] [font-variant-ligatures:none] [tab-size:4]"
+          >
+            {codeEl}
+            {/* Terminal cursor — blinks forever */}
+            <span className="relative inline-block h-[1.1em] w-[0.55em] translate-y-[2px] align-text-bottom bg-[#3fb950] animate-cursor-blink" />
+          </pre>
+
+          {/* Subtle scan-line overlay */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.15) 1px, rgba(255,255,255,0.15) 2px)",
+            }}
+          />
+        </div>
       </div>
 
-      {/* Code content */}
-      <pre
-        {...rest}
-        className="overflow-x-auto rounded-b-xl border border-gray-700 bg-gray-900 p-4 text-sm leading-relaxed shadow-inner"
-      >
-        {codeEl}
-      </pre>
+      {/* ── Glow effect ── */}
+      <div
+        className="pointer-events-none absolute -inset-[1px] -z-10 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(63,185,80,0.08), transparent 40%, transparent 60%, rgba(63,185,80,0.04))",
+          filter: "blur(12px)",
+        }}
+      />
     </div>
   );
 }
 
-/** Extract language from "language-python" → "python" */
+/** Extract language from "language-python" → "Python" */
 function extractLanguage(className: string): string {
   if (!className) return "";
   const match = className.match(/language-(\w+)/);
