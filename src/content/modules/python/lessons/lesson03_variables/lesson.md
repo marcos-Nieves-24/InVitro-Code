@@ -19,7 +19,7 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Variables
+<Section number={1} title="Variables" eyebrow="INICIO">
 
 ## Motivación
 
@@ -28,6 +28,10 @@ Las variables son los bloques fundamentales de cualquier programa. Te permiten a
 ## Panorama General
 
 En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook. Ahora vas a aprender cómo almacenar y gestionar datos usando variables. Esto te prepara directamente para la próxima lección sobre tipos de datos, donde vas a aprender sobre los distintos tipos de datos que pueden contener las variables.
+
+</Section>
+
+<Section number={2} title="¿Qué es una Variable?" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -145,6 +149,10 @@ name = input("Enter your name: ")
 
 > ⚠️ **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
 
+</Section>
+
+<Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+
 ## Implementación en Python
 
 **Ejercicio 1:** Asigná una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
@@ -189,6 +197,10 @@ print(data, type(data))`}
   }}
 />
 
+</Section>
+
+<Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario:** Calculando el contenido GC de una secuencia de ADN.
@@ -207,6 +219,10 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
   }}
 />
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Usar variables no definidas**: `print(x)` antes de `x = 5` lanza `NameError`
@@ -223,6 +239,10 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - Inicializá las variables antes de usarlas
 - Usá constantes para valores fijos (UPPER_SNAKE_CASE)
 - Una variable por propósito lógico
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -242,6 +262,10 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - **snake_case**: Convención de nomenclatura que usa guiones bajos
 - **Inferencia de tipos**: Python deduce el tipo a partir del valor
 - **NameError**: Excepción que se lanza al usar una variable no definida
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
 ## Desafío de Código
 
@@ -269,3 +293,5 @@ dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
 />
 
 > **Pista:** Usá `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
+
+</Section>

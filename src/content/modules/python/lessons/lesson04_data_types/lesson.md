@@ -19,7 +19,7 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Tipos de Datos
+<Section number={1} title="Tipos de Datos" eyebrow="INICIO">
 
 ## Motivación
 
@@ -28,6 +28,10 @@ Cada pieza de datos en Python tiene un tipo que determina qué operaciones son p
 ## Panorama General
 
 En la lección anterior aprendiste a almacenar valores en variables. Ahora vas a entender los distintos tipos de valores que las variables pueden contener. Esto te prepara para la próxima lección sobre operadores, donde cada tipo de dato soporta diferentes operaciones.
+
+</Section>
+
+<Section number={2} title="Los Cuatro Tipos de Datos Básicos" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -135,6 +139,10 @@ not_a_number = float('nan')
 └─────────────────────────────────────────────────────┘
 ```
 
+</Section>
+
+<Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+
 ## Implementación en Python
 
 ```python
@@ -182,6 +190,10 @@ result = "The answer is " + 42     # TypeError: can only concatenate str
 result = "The answer is " + str(42)  # Correcto
 ```
 
+</Section>
+
+<Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario**: Procesando datos de expresión génica de un experimento de microarreglos.
@@ -224,6 +236,10 @@ print(f"Annual revenue: ${annual_revenue:,.2f}")
 print(f"After discount: ${discounted_revenue:,.2f}")
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Concatenar strings con no-strings**: `"count: " + 5` lanza TypeError
@@ -239,6 +255,10 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 - Usá `//` para división entera, `/` para división float
 - Usá guiones bajos en números grandes: `1_000_000` en lugar de `1000000`
 - Tené en cuenta las limitaciones de precisión de coma flotante
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -259,6 +279,10 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 - **Inmutable**: No se puede modificar después de su creación
 - **None**: Valor nulo de Python
 - **TypeError**: Excepción que se lanza al operar con tipos incompatibles
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -287,3 +311,5 @@ Escribí un programa que:
 4. Imprima un resumen: "[Nombre] tiene [edad] años, gana $[salario], estudiante: [True/False]"
 5. Calcule e imprima: "Salario después de aumento del 10%: $[monto]"
 6. Maneje los errores de conversión de tipos con elegancia
+
+</Section>

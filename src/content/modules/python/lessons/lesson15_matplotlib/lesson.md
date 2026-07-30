@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Matplotlib
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 La visualización es esencial para entender los datos. Un gráfico bien elegido revela patrones, outliers y relaciones que son invisibles en números crudos. Matplotlib es la librería de visualización fundamental en Python, y la mayoría de las otras herramientas de visualización (Seaborn, Plotly) están construidas sobre ella. En biotecnología, las visualizaciones muestran distribuciones de expresión génica, curvas de supervivencia de pacientes y análisis de estructuras de proteínas. En SaaS, muestran tendencias de ingresos, crecimiento de usuarios y resultados de tests A/B.
@@ -28,6 +30,10 @@ La visualización es esencial para entender los datos. Un gráfico bien elegido 
 ## Panorama General
 
 En la lección anterior aprendiste Pandas para manipulación de datos. Ahora vas a aprender a visualizar esos datos con Matplotlib. La próxima lección sobre Seaborn se basa en Matplotlib para crear visualizaciones estadísticas con menos código. A lo largo de los módulos de ML, vas a usar Matplotlib a diario para entender modelos, evaluar rendimiento y presentar resultados.
+
+</Section>
+
+<Section number={2} title="Arquitectura y Tipos de Gráficos" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -120,6 +126,10 @@ Estructura de una Figura de Matplotlib
 └─────────────────────────────────────────────────┘
 ```
 
+</Section>
+
+<Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+
 ## Implementación en Python
 
 ```python
@@ -207,6 +217,10 @@ plt.tight_layout()
 plt.show()
 ```
 
+</Section>
+
+<Section number={4} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario**: Visualizando datos de expresión génica en diferentes condiciones.
@@ -280,6 +294,10 @@ plt.tight_layout()
 plt.show()
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Graficar listas sin conversión**: Matplotlib puede graficar listas, pero los arrays NumPy son más rápidos
@@ -299,6 +317,10 @@ plt.show()
 - Guardá como SVG para publicaciones (formato vectorial)
 - Agregá líneas de cuadrícula con alpha bajo para legibilidad
 - Usá `tight_layout()` para evitar que se corten las etiquetas
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -320,6 +342,10 @@ plt.show()
 - **Tight layout**: Ajuste automático de espaciado
 - **Formato vectorial**: SVG/PDF — escalable sin pérdida de calidad
 - **Formato raster**: PNG — basado en píxeles, calidad depende del DPI
+
+</Section>
+
+<Section number={7} title="Evaluación" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -349,3 +375,5 @@ Creá un **reporte de datos integral** con los siguientes gráficos:
 4. **Histograma**: Graficá la distribución de 10.000 valores aleatorios y superponé una curva de distribución normal
 5. **Figura multi-panel**: Creá un subplot 2×2 combinando lo anterior en una sola figura
 6. Estilo: Usá un estilo profesional (`plt.style.use("seaborn-v0_8")` o similar), incluí líneas de cuadrícula y guardá como PDF
+
+</Section>

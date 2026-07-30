@@ -19,7 +19,7 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Jupyter Notebook
+<Section number={1} title="Jupyter Notebook" eyebrow="INICIO">
 
 ## Motivación
 
@@ -28,6 +28,10 @@ Escribir código Python en una terminal es funcional pero no es ideal para anál
 ## Panorama General
 
 En la lección anterior instalaste Python y verificaste que funciona. Ahora vas a aprender a usar Jupyter Notebook, el entorno donde vas a escribir la mayor parte de tu código Python en este curso. Las próximas lecciones sobre variables, tipos de datos y operadores se van a practicar todas dentro de Jupyter.
+
+</Section>
+
+<Section number={2} title="¿Qué es Jupyter Notebook?" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -83,6 +87,10 @@ Cuando ejecutás una celda de código, el kernel ejecuta el código. Las variabl
 └────────────────────────────────────────────────────┘
 ```
 
+</Section>
+
+<Section number={3} title="Usando Jupyter Notebook" eyebrow="IMPLEMENTACIÓN">
+
 ## Implementación en Python
 
 ### Iniciando Jupyter
@@ -129,23 +137,31 @@ $$ E = mc^2 $$
 
 ### Atajos de Teclado
 
-| Atajo | Acción |
-|----------|--------|
-| Shift+Enter | Ejecutar celda y seleccionar siguiente |
-| Ctrl+Enter | Ejecutar celda y quedarse |
-| Alt+Enter | Ejecutar celda e insertar debajo |
-| A | Insertar celda arriba (modo comando) |
-| B | Insertar celda abajo (modo comando) |
-| DD | Eliminar celda (modo comando) |
-| M | Cambiar a celda markdown (modo comando) |
-| Y | Cambiar a celda de código (modo comando) |
-| Ctrl+S | Guardar notebook |
-| Z | Deshacer eliminación de celda |
+<InteractiveTable
+  headers={["Atajo", "Acción"]}
+  rows={[
+    ["Shift+Enter", "Ejecutar celda y seleccionar siguiente"],
+    ["Ctrl+Enter", "Ejecutar celda y quedarse"],
+    ["Alt+Enter", "Ejecutar celda e insertar debajo"],
+    ["A", "Insertar celda arriba (modo comando)"],
+    ["B", "Insertar celda abajo (modo comando)"],
+    ["DD", "Eliminar celda (modo comando)"],
+    ["M", "Cambiar a celda markdown (modo comando)"],
+    ["Y", "Cambiar a celda de código (modo comando)"],
+    ["Ctrl+S", "Guardar notebook"],
+    ["Z", "Deshacer eliminación de celda"],
+  ]}
+  searchable
+/>
 
 ### Guardar y Exportar
 
 - **Guardar**: File → Save and Checkpoint (o Ctrl+S)
 - **Exportar**: File → Download as → HTML, PDF, Python script, etc.
+
+</Section>
+
+<Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
 
 ## Ejemplo de Biotecnología
 
@@ -175,6 +191,10 @@ La estructura del notebook:
 
 El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usá "Run All" (Cell → Run All) para ejecutar secuencialmente.
@@ -191,6 +211,10 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - Reiniciá y ejecutá todo antes de compartir un notebook
 - Usá nombres de archivo significativos (ej: `analisis_expresion_genica.ipynb`)
 - Limpiá las salidas antes de subir notebooks al control de versiones
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -210,6 +234,10 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - **Modo edición**: Modo de borde verde para editar el contenido de la celda
 - **Dashboard**: Interfaz del explorador de archivos de Jupyter
 - **Shift+Enter**: Ejecutar celda actual y pasar a la siguiente
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -238,3 +266,5 @@ Creá un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
 4. Una celda de código que imprima cada elemento con un número
 5. Una celda markdown con una conclusión
 Exportá el notebook como HTML.
+
+</Section>

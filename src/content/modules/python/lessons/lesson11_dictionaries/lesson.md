@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Diccionarios
 
+<Section number={1} title="¿Por qué Diccionarios?" eyebrow="INICIO">
+
 ## Motivación
 
 Los diccionarios almacenan datos como pares clave-valor, permitiéndote buscar valores por una clave significativa en lugar de por un índice numérico. Son la estructura de datos incorporada más importante de Python para ciencia de datos. En biotecnología, los diccionarios mapean nombres de genes a valores de expresión, IDs de pacientes a datos clínicos, y codones a aminoácidos. En SaaS, mapean IDs de usuarios a perfiles, nombres de productos a precios, y nombres de métricas a valores.
@@ -28,6 +30,10 @@ Los diccionarios almacenan datos como pares clave-valor, permitiéndote buscar v
 ## Panorama General
 
 Después de aprender sobre listas (ordenadas, indexadas por posición) y tuplas (inmutables), los diccionarios introducen una nueva forma de organizar datos: por clave en lugar de por posición. Esto se acerca más a cómo funcionan los datos del mundo real — buscás un paciente por ID, no por índice numérico. La próxima lección sobre conjuntos usa tecnología similar basada en hash. Más adelante, vas a usar diccionarios extensivamente con Pandas DataFrames.
+
+</Section>
+
+<Section number={2} title="Pares Clave-Valor" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -81,6 +87,10 @@ d.get("a")    # 1 (acceso seguro)
 d.setdefault("d", 4)  # Establecer si la clave no existe
 ```
 
+</Section>
+
+<Section number={3} title="Dictionary Comprehensions y Operaciones" eyebrow="CONCEPTO">
+
 ### Dictionary Comprehension
 
 ```python
@@ -107,7 +117,7 @@ d1 | d2           # Fusión (Python 3.9+)
 d1 |= d2          # Actualización in-place (Python 3.9+)
 ```
 
-## Explicación Visual
+### Explicación Visual
 
 ```
 Estructura del Diccionario (Tabla Hash)
@@ -123,6 +133,10 @@ Clave      Función Hash    Bucket
 
 La búsqueda por clave es O(1) — ¡muy rápida!
 ```
+
+</Section>
+
+<Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 
 ## Implementación en Python
 
@@ -242,6 +256,10 @@ for user, events in sorted(user_events.items()):
     print(f"  {user}: {total} eventos - {events}")
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Acceder a una clave inexistente directamente**: `d["missing"]` lanza KeyError. Usá `d.get("missing")`
@@ -258,6 +276,10 @@ for user, events in sorted(user_events.items()):
 - Usá `items()` cuando iteres sobre claves y valores
 - Usá `setdefault()` para inserción condicional
 - Preferí `collections.Counter` para tareas de conteo
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -278,6 +300,10 @@ for user, events in sorted(user_events.items()):
 - **KeyError**: Excepción al acceder a una clave inexistente
 - **defaultdict**: Diccionario que provee valores por defecto para claves faltantes
 - **Counter**: Subclase de diccionario para contar objetos hashables
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -306,3 +332,5 @@ Escribí un programa que implemente un **almacén clave-valor en memoria** (como
 4. Implementá `search(campo, valor)` que devuelva todas las entradas donde `entrada[campo] == valor`
 5. Demostrá con al menos 10 registros y 3 búsquedas
 6. Usá un `defaultdict` para indexar datos por campos para búsqueda más rápida
+
+</Section>

@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Tuplas
 
+<Section number={1} title="¿Por qué Tuplas?" eyebrow="INICIO">
+
 ## Motivación
 
 Las tuplas suelen llamarse "listas inmutables" — almacenan colecciones ordenadas como las listas pero no se pueden modificar después de creadas. Esta inmutabilidad las hace útiles para datos fijos que no deberían modificarse, como registros de base de datos, coordenadas y valores de retorno de funciones. En biotecnología, las tuplas representan pares (gen, expresión), registros (id_paciente, diagnóstico) y tripletes de codones de ADN. En SaaS, almacenan entradas de log (id_usuario, timestamp, evento).
@@ -28,6 +30,10 @@ Las tuplas suelen llamarse "listas inmutables" — almacenan colecciones ordenad
 ## Panorama General
 
 En la lección anterior aprendiste listas — colecciones ordenadas y mutables. Las tuplas son ordenadas pero inmutables. Entender la diferencia entre estructuras de datos mutables e inmutables es crucial para escribir código correcto y eficiente. Esta lección te prepara para los diccionarios (próxima lección), donde las tuplas se usan como claves (las listas no pueden ser claves de diccionarios).
+
+</Section>
+
+<Section number={2} title="Creación, Inmutabilidad y Desempaquetado" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -89,17 +95,19 @@ t.index(2)    # 1 (primera ocurrencia)
 
 ### Comparación Tupla vs Lista
 
-| Característica | Tupla | Lista |
-|------------|-------|-------|
-| Sintaxis | `()` | `[]` |
-| Mutable | No | Sí |
-| Hashable | Sí (si los elementos son hashables) | No |
-| Caso de uso | Datos fijos | Datos variables |
-| Métodos | count(), index() | Muchos métodos |
-| Memoria | Ligeramente menos | Ligeramente más |
-| Velocidad | Ligeramente más rápida | Ligeramente más lenta |
+<InteractiveTable
+  headers={["Característica", "Tupla", "Lista"]}
+  rows={[
+    ["Sintaxis", "`()`", "`[]`"],
+    ["Mutable", "No", "Sí"],
+    ["Hashable", "Sí (si los elementos son hashables)", "No"],
+    ["Caso de uso", "Datos fijos", "Datos variables"],
+    ["Métodos", "count(), index()", "Muchos métodos"],
+  ]}
+  searchable
+/>
 
-## Explicación Visual
+### Explicación Visual
 
 ```
 Memoria: Tupla vs Lista
@@ -113,6 +121,10 @@ Tupla (inmutable):          Lista (mutable):
 │ Tamaño fijo       │      │ Tamaño variable    │
 └───────────────────┘      └───────────────────┘
 ```
+
+</Section>
+
+<Section number={3} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 
 ## Implementación en Python
 
@@ -216,6 +228,10 @@ for ts, uid, event_type, meta in events:
         print(f"Compra: {uid} compró {product} por ${amount:.2f}")
 ```
 
+</Section>
+
+<Section number={4} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Olvidar la coma en tuplas de un elemento**: `(5)` es un int, `(5,)` es una tupla
@@ -231,6 +247,10 @@ for ts, uid, event_type, meta in events:
 - Usá desempaquetado de tuplas para código más limpio
 - Usá tuplas como claves de diccionarios cuando necesites claves compuestas
 - Preferí tuplas sobre listas para datos que no deberían cambiar
+
+</Section>
+
+<Section number={5} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -248,6 +268,10 @@ for ts, uid, event_type, meta in events:
 - **Desempaquetado**: Asignar elementos de una tupla a múltiples variables
 - **Hashable**: Se puede usar como clave de diccionario (tupla sí, lista no)
 - **Empaquetado**: Crear una tupla a partir de múltiples valores
+
+</Section>
+
+<Section number={6} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -276,3 +300,5 @@ Escribí un programa que administre **ítems de inventario** como tuplas:
 4. Escribí una función `find_item(inventario, item_id)` que busque por item_id
 5. Escribí una función `sort_by_value(inventario)` que devuelva los ítems ordenados por valor total (cantidad * precio), usando tuplas
 6. Demostrá todas las funciones con tu inventario
+
+</Section>

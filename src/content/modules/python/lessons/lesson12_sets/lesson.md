@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Conjuntos
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Los conjuntos son colecciones sin orden de elementos únicos. Se destacan en dos tareas: eliminar duplicados y prueba de pertenencia rápida. En biotecnología, los conjuntos ayudan a encontrar genes únicos entre experimentos, identificar variantes comunes entre pacientes y eliminar secuencias duplicadas. En SaaS, los conjuntos rastrean usuarios únicos, encuentran características comunes entre planes y filtran duplicados en logs de eventos.
@@ -28,6 +30,10 @@ Los conjuntos son colecciones sin orden de elementos únicos. Se destacan en dos
 ## Panorama General
 
 En lecciones anteriores aprendiste listas (ordenadas, mutables), tuplas (ordenadas, inmutables) y diccionarios (clave-valor). Los conjuntos son otro tipo fundamental de colección, optimizados para unicidad y operaciones matemáticas de conjuntos. Comparten la implementación basada en hash con los diccionarios pero almacenan solo claves. Entender los conjuntos completa tu conocimiento de las estructuras de datos principales de Python.
+
+</Section>
+
+<Section number={2} title="Teoría de Conjuntos" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -126,6 +132,10 @@ Operaciones de Conjuntos (Diagrama de Venn)
   └────────┘           └────────────────┘
 ```
 
+</Section>
+
+<Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+
 ## Implementación en Python
 
 ```python
@@ -180,6 +190,10 @@ print(f"Pertenencia en conjunto: {set_time:.4f}s")
 print(f"El conjunto es {list_time/set_time:.0f}x más rápido!")
 ```
 
+</Section>
+
+<Section number={4} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario**: Comparando conjuntos de genes entre diferentes experimentos.
@@ -233,6 +247,10 @@ print(f"Faltan en basic: {missing_from_basic}")
 print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}")
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Usar `{}` para conjunto vacío**: Crea un dict vacío, no un conjunto. Usá `set()`
@@ -248,6 +266,10 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 - Usá operaciones de conjuntos (unión, intersección, diferencia) para análisis
 - Usá `frozenset` cuando necesites un conjunto inmutable y hashable (ej. como clave de dict)
 - Preferí `discard` sobre `remove` cuando no estés seguro de que el elemento exista
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -268,6 +290,10 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 - **Diferencia simétrica**: Elementos en exactamente uno de los conjuntos
 - **Hashable**: Se puede usar como elemento de un conjunto (tipos inmutables)
 - **Prueba de pertenencia**: Verificar si un elemento está en un conjunto (O(1))
+
+</Section>
+
+<Section number={7} title="Evaluación" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -295,3 +321,5 @@ Escribí un programa que implemente un calculador de **similitud de Jaccard**:
 3. Dada una lista de conjuntos de genes (cada uno un conjunto de nombres de genes), encontrá el par con la mayor similitud de Jaccard
 4. También encontrá el par con la menor similitud de Jaccard
 5. Probá con al menos 5 conjuntos de genes de diferentes tamaños
+
+</Section>

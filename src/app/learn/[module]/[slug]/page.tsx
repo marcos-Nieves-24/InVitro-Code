@@ -22,6 +22,7 @@ import {
   DiagnosticTrainer,
   ConidiaSortGame,
   ThresholdLab,
+  InteractiveTable,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
@@ -44,6 +45,7 @@ const components = {
   DiagnosticTrainer,
   ConidiaSortGame,
   ThresholdLab,
+  InteractiveTable,
   CodeEditor: LessonCodeEditor,
   CompleteLessonButton: LessonCompleteButton,
   pre: CodeBlock,

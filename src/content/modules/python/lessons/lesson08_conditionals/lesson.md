@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Condicionales
 
+<Section number={1} title="¿Por qué Condicionales?" eyebrow="INICIO">
+
 ## Motivación
 
 Los condicionales permiten que los programas tomen decisiones. Sin ellos, el código se ejecutaría de la misma manera siempre. Con condicionales, tu programa puede reaccionar de forma diferente según los valores de los datos, la entrada del usuario o los resultados calculados. En biotecnología, los condicionales determinan diagnósticos basados en resultados de laboratorio, clasifican mutaciones genéticas y disparan alertas por valores anormales. En SaaS, controlan niveles de acceso, calculan descuentos y segmentan clientes.
@@ -28,6 +30,10 @@ Los condicionales permiten que los programas tomen decisiones. Sin ellos, el có
 ## Panorama General
 
 En la lección anterior aprendiste bucles (repetición). Ahora aprendés condicionales (toma de decisiones). Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales. Junto con funciones y operadores, ahora tenés todo lo necesario para escribir lógica de procesamiento de datos sofisticada.
+
+</Section>
+
+<Section number={2} title="Sentencias if, elif y else" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -63,6 +69,39 @@ elif condition3:
 else:
     pass  # todas las condiciones son False
 ```
+
+### Explicación Visual
+
+```
+Flujo if/elif/else:
+
+         ┌───────────┐
+         │ Inicio    │
+         └─────┬─────┘
+               │
+         ┌─────▼──────┐  True  ┌──────────────────┐
+         │ condition1 ├───────→│ bloque código 1  │
+         └─────┬──────┘       └────────┬─────────┘
+               │ False                 │
+         ┌─────▼──────┐  True  ┌──────────────────┐
+         │ condition2 ├───────→│ bloque código 2  │
+         └─────┬──────┘       └────────┬─────────┘
+               │ False                 │
+         ┌─────▼──────┐               │
+         │ else       │               │
+         │ (default)  │               │
+         └─────┬──────┘               │
+               │                      │
+               └──────┬───────────────┘
+                      │
+                ┌─────▼─────┐
+                │   Fin     │
+                └───────────┘
+```
+
+</Section>
+
+<Section number={3} title="Truthy, Falsy y Condiciones Avanzadas" eyebrow="CONCEPTO">
 
 ### Truthy y Falsy
 
@@ -113,34 +152,9 @@ match value:
         pass  # caso por defecto
 ```
 
-## Explicación Visual
+</Section>
 
-```
-Flujo if/elif/else:
-
-         ┌───────────┐
-         │ Inicio    │
-         └─────┬─────┘
-               │
-         ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition1 ├───────→│ bloque código 1  │
-         └─────┬──────┘       └────────┬─────────┘
-               │ False                 │
-         ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition2 ├───────→│ bloque código 2  │
-         └─────┬──────┘       └────────┬─────────┘
-               │ False                 │
-         ┌─────▼──────┐               │
-         │ else       │               │
-         │ (default)  │               │
-         └─────┬──────┘               │
-               │                      │
-               └──────┬───────────────┘
-                      │
-                ┌─────▼─────┐
-                │   Fin     │
-                └───────────┘
-```
+<Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 
 ## Implementación en Python
 
@@ -308,6 +322,10 @@ discount = calculate_discount("professional", 25000, 4)
 print(f"Descuento: {discount:.0%}")
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
@@ -325,6 +343,10 @@ print(f"Descuento: {discount:.0%}")
 - Evitá anidamiento profundo (máx. 3 niveles)
 - Usá cláusulas de guarda (returns tempranos) para reducir el anidamiento
 - Usá `in` para comparaciones múltiples: `if x in (1, 2, 3):`
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -345,6 +367,10 @@ print(f"Descuento: {discount:.0%}")
 - **Operador ternario**: Expresión condicional para if/else en línea
 - **Cláusula de guarda**: Return temprano para evitar anidamiento
 - **Sentencia match**: Pattern matching estructural de Python 3.10+
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -373,3 +399,5 @@ Escribí un sistema de **puntaje crediticio** que:
 4. Aplique modificadores: si deuda > ingresos → -20 puntos; si pagos atrasados > 3 → -15 puntos; si antigüedad crediticia > 10 años → +10 puntos
 5. Use `match` para la asignación de calificación
 6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena → Aprobado, sino → Revisión Requerida)
+
+</Section>

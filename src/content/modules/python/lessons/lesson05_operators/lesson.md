@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Operadores
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Los operadores son las herramientas que te permiten computar, comparar y combinar valores. Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores. En biotecnología usás operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia. En SaaS los usás para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.
@@ -29,59 +31,35 @@ Los operadores son las herramientas que te permiten computar, comparar y combina
 
 En la lección anterior aprendiste sobre los tipos de datos que pueden tener los valores. Ahora vas a aprender cómo realizar operaciones sobre esos valores. Los operadores se basan en tu comprensión de los tipos porque diferentes tipos soportan diferentes operadores. Esto te prepara para las próximas lecciones sobre funciones y flujo de control, donde los operadores se usan en condiciones y cómputos.
 
+</Section>
+
+<Section number={2} title="Operadores en Python" eyebrow="CONCEPTO">
+
 ## Teoría
 
 ### Operadores Aritméticos
 
 Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
-| Operador | Nombre | Ejemplo | Resultado |
-|----------|--------|---------|----------|
-| `+` | Suma | `5 + 3` | `8` |
-| `-` | Resta | `5 - 3` | `2` |
-| `*` | Multiplicación | `5 * 3` | `15` |
-| `/` | División float | `5 / 3` | `1.666...` |
-| `//` | División entera | `5 // 3` | `1` |
-| `%` | Módulo (resto) | `5 % 3` | `2` |
-| `**` | Exponenciación | `5 ** 3` | `125` |
+<InteractiveTable headers={["Operador", "Nombre", "Ejemplo", "Resultado"]} rows={[["`+`", "Suma", "`5 + 3`", "`8`"], ["`-`", "Resta", "`5 - 3`", "`2`"], ["`*`", "Multiplicación", "`5 * 3`", "`15`"], ["`/`", "División float", "`5 / 3`", "`1.666...`"], ["`//`", "División entera", "`5 // 3`", "`1`"], ["`%`", "Módulo (resto)", "`5 % 3`", "`2`"], ["`**`", "Exponenciación", "`5 ** 3`", "`125`"]]} searchable />
 
 ### Operadores de Comparación
 
 Los operadores de comparación comparan dos valores y devuelven un booleano.
 
-| Operador | Significado | Ejemplo | Resultado |
-|----------|------------|---------|----------|
-| `==` | Igual a | `5 == 3` | `False` |
-| `!=` | Distinto de | `5 != 3` | `True` |
-| `<` | Menor que | `5 < 3` | `False` |
-| `>` | Mayor que | `5 > 3` | `True` |
-| `<=` | Menor o igual | `5 <= 5` | `True` |
-| `>=` | Mayor o igual | `5 >= 3` | `True` |
+<InteractiveTable headers={["Operador", "Significado", "Ejemplo", "Resultado"]} rows={[["`==`", "Igual a", "`5 == 3`", "`False`"], ["`!=`", "Distinto de", "`5 != 3`", "`True`"], ["`<`", "Menor que", "`5 < 3`", "`False`"], ["`>`", "Mayor que", "`5 > 3`", "`True`"], ["`<=`", "Menor o igual", "`5 <= 5`", "`True`"], ["`>=`", "Mayor o igual", "`5 >= 3`", "`True`"]]} searchable />
 
 ### Operadores Lógicos
 
 Los operadores lógicos combinan expresiones booleanas.
 
-| Operador | Descripción | Ejemplo | Resultado |
-|----------|-------------|---------|----------|
-| `and` | True si ambos son True | `True and False` | `False` |
-| `or` | True si al menos uno es True | `True or False` | `True` |
-| `not` | Invierte el booleano | `not True` | `False` |
+<InteractiveTable headers={["Operador", "Descripción", "Ejemplo", "Resultado"]} rows={[["`and`", "True si ambos son True", "`True and False`", "`False`"], ["`or`", "True si al menos uno es True", "`True or False`", "`True`"], ["`not`", "Invierte el booleano", "`not True`", "`False`"]]} searchable />
 
 ### Operadores de Asignación
 
 Los operadores de asignación actualizan variables con un cómputo.
 
-| Operador | Ejemplo | Equivalente a |
-|----------|---------|---------------|
-| `=` | `x = 5` | `x = 5` |
-| `+=` | `x += 3` | `x = x + 3` |
-| `-=` | `x -= 3` | `x = x - 3` |
-| `*=` | `x *= 3` | `x = x * 3` |
-| `/=` | `x /= 3` | `x = x / 3` |
-| `//=` | `x //= 3` | `x = x // 3` |
-| `%=` | `x %= 3` | `x = x % 3` |
-| `**=` | `x **= 3` | `x = x ** 3` |
+<InteractiveTable headers={["Operador", "Ejemplo", "Equivalente a"]} rows={[["`=`", "`x = 5`", "`x = 5`"], ["`+=`", "`x += 3`", "`x = x + 3`"], ["`-=`", "`x -= 3`", "`x = x - 3`"], ["`*=`", "`x *= 3`", "`x = x * 3`"], ["`/=`", "`x /= 3`", "`x = x / 3`"], ["`//=`", "`x //= 3`", "`x = x // 3`"], ["`%=`", "`x %= 3`", "`x = x % 3`"], ["`**=`", "`x **= 3`", "`x = x ** 3`"]]} searchable />
 
 ### Precedencia de Operadores
 
@@ -97,6 +75,10 @@ Python sigue la precedencia matemática estándar (PEMDAS):
 8. `and`
 9. `or`
 
+</Section>
+
+<Section number={3} title="Visualización de Precedencia" eyebrow="CONCEPTO">
+
 ## Explicación Visual
 
 ```
@@ -109,6 +91,10 @@ Ejemplo:   5 + 3 * 2 ** 2
            = 5 + 12           (multiplicación después)
            = 17               (suma al final)
 ```
+
+</Section>
+
+<Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 
 ## Implementación en Python
 
@@ -156,6 +142,10 @@ count //= 2  # count = 3
 print(f"Final count: {count}")
 ```
 
+</Section>
+
+<Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario**: Analizando datos de dosis-respuesta de fármacos.
@@ -181,6 +171,10 @@ print(f"Concentración después de {time_hours}h: {concentration:.3f} mg/kg")
 print(f"En rango terapéutico: {in_range}")
 ```
 
+</Section>
+
+<Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
+
 ## Ejemplo SaaS
 
 **Escenario**: Evaluando riesgo de churn de clientes.
@@ -204,6 +198,10 @@ print(f"Plan basic: {is_basic_tier}")
 print(f"Alto riesgo de churn: {high_churn_risk}")
 ```
 
+</Section>
+
+<Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Usar `=` en lugar de `==` para comparar**: `if x = 5:` es asignación, no comparación
@@ -219,6 +217,10 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - Usá `==` con cuidado para comparar floats; usá `abs(a-b) < epsilon`
 - Aprovechá las comparaciones encadenadas de Python: `0 <= x <= 100`
 - Usá `not` con moderación — reformulá las condiciones para que sean legibles
+
+</Section>
+
+<Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -237,6 +239,10 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - **Precedencia**: Reglas que determinan el orden de evaluación
 - **Módulo**: Resto después de una división
 - **Evaluación de cortocircuito**: `and`/`or` dejan de evaluar cuando el resultado está determinado
+
+</Section>
+
+<Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -265,3 +271,5 @@ Escribí un programa que:
 4. Calcule el presupuesto restante después de la compra
 5. Use al menos un operador de cada categoría (aritmético, comparación, lógico, asignación)
 6. Imprima un resumen formateado de todos los cálculos
+
+</Section>

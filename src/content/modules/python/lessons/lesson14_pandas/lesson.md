@@ -22,6 +22,8 @@ Quiz: quiz.md
 
 # Pandas
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Pandas es la librería de Python más utilizada para manipulación y análisis de datos. Proporciona el DataFrame — una estructura de datos tabular con filas y columnas etiquetadas que hace intuitiva la limpieza, transformación y análisis de datos. En biotecnología, Pandas maneja datos de ensayos clínicos, tablas de expresión génica y registros de pacientes. En SaaS, procesa bases de datos de clientes, logs de transacciones y resultados de tests A/B. La mayor parte de tu tiempo como científico de datos la vas a pasar manipulando DataFrames.
@@ -29,6 +31,10 @@ Pandas es la librería de Python más utilizada para manipulación y análisis d
 ## Panorama General
 
 En la lección anterior aprendiste NumPy para cómputo numérico. Pandas está construido sobre NumPy y agrega ejes etiquetados, manejo de datos faltantes y operaciones de datos poderosas. Esta lección te prepara directamente para las lecciones de visualización (Matplotlib, Seaborn) y para todo Machine Learning (scikit-learn espera arrays de NumPy que vienen de DataFrames de Pandas).
+
+</Section>
+
+<Section number={2} title="Estructuras de Datos en Pandas" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -70,6 +76,26 @@ df = pd.read_excel("data.xlsx")
 df = pd.read_json("data.json")
 ```
 
+## Explicación Visual
+
+```
+Estructura del DataFrame
+
+       Columnas →
+       Name    Age  Salary
+Fila 0  Alice   25   50000
+  ↓ 1  Bob     30   60000
+    2  Charlie 35   70000
+
+     Cada columna es una Series
+     Cada fila es un registro
+     Ejes etiquetados para acceso intuitivo
+```
+
+</Section>
+
+<Section number={3} title="Selección y Manipulación de Datos" eyebrow="CONCEPTO">
+
 ### Operaciones Básicas
 
 ```python
@@ -107,6 +133,10 @@ df["NewColumn"] = values
 df.drop("OldColumn", axis=1, inplace=True)
 ```
 
+</Section>
+
+<Section number={4} title="GroupBy, Merge y Apply" eyebrow="CONCEPTO">
+
 ### Operaciones GroupBy
 
 ```python
@@ -129,21 +159,9 @@ df["Column"].apply(lambda x: x ** 2)
 df["Column"].map({"old": "new"})
 ```
 
-## Explicación Visual
+</Section>
 
-```
-Estructura del DataFrame
-
-       Columnas →
-       Name    Age  Salary
-Fila 0  Alice   25   50000
-  ↓ 1  Bob     30   60000
-    2  Charlie 35   70000
-
-     Cada columna es una Series
-     Cada fila es un registro
-     Ejes etiquetados para acceso intuitivo
-```
+<Section number={5} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 
 ## Implementación en Python
 
@@ -212,6 +230,10 @@ print(merged)
 df["Expression_Rounded"] = df["Expression"].apply(lambda x: round(x, 1))
 print(df)
 ```
+
+</Section>
+
+<Section number={6} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
 
 ## Ejemplo de Biotecnología
 
@@ -293,6 +315,10 @@ high_risk = customers[(customers["Support_Tickets"] > 3) &
 print(f"\nClientes de alto riesgo: {len(high_risk)}")
 ```
 
+</Section>
+
+<Section number={7} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usá `df.loc[0, "A"]`
@@ -309,6 +335,10 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 - Usá `pd.cut()` y `pd.qcut()` para discretización
 - Usá `to_datetime()` para columnas de fecha
 - Perfilá el rendimiento: las operaciones vectorizadas son más rápidas que `apply()`
+
+</Section>
+
+<Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -329,6 +359,10 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 - **Tabla dinámica**: Agregación multidimensional
 - **Indexación booleana**: Filtrado con condiciones True/False
 - **Encadenamiento de métodos**: Aplicar múltiples operaciones secuencialmente
+
+</Section>
+
+<Section number={9} title="Evaluación" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -361,3 +395,5 @@ Creá un **análisis de segmentación de clientes** usando Pandas:
 4. Analizá cada segmento: calculá ingreso promedio, gasto y frecuencia de compra
 5. Encontrá el top 10% de clientes por un puntaje compuesto (20% income + 50% spending_score + 30% purchase_frequency, normalizado)
 6. Generá un reporte resumen con todos los hallazgos
+
+</Section>

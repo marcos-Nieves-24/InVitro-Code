@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Bucles
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escribir el mismo código para cada elemento de un dataset, escribís un bucle que procesa todos los elementos automáticamente. En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes. En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características. Sin bucles, el análisis de datos a escala sería imposible.
@@ -28,6 +30,10 @@ Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escri
 ## Panorama General
 
 En la lección anterior aprendiste funciones — bloques de código reutilizables. Los bucles agregan repetición a tu kit de herramientas. Combinados con condicionales (próxima lección), los bucles te permiten construir pipelines complejos de procesamiento de datos. Después de esta lección, vas a entender mejor las listas (Lección 9) porque los bucles son la forma principal de procesar elementos de una lista.
+
+</Section>
+
+<Section number={2} title="Tipos de Bucles" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -85,6 +91,10 @@ else:
     print("Bucle completado sin break")
 ```
 
+</Section>
+
+<Section number={3} title="Visualización de Bucles" eyebrow="CONCEPTO">
+
 ## Explicación Visual
 
 ```
@@ -110,6 +120,10 @@ Flujo del Bucle While:
                   │  Fin    │    condición
                   └─────────┘
 ```
+
+</Section>
+
+<Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 
 ## Implementación en Python
 
@@ -162,6 +176,10 @@ for i in range(1, 4):
     print()
 ```
 
+</Section>
+
+<Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario**: Procesando una lista de secuencias de ADN para encontrar aquellas con alto contenido GC.
@@ -196,6 +214,10 @@ else:
     print(f"Objetivo {target} no encontrado")
 ```
 
+</Section>
+
+<Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
+
 ## Ejemplo SaaS
 
 **Escenario**: Procesando datos mensuales de transacciones para análisis de churn.
@@ -219,6 +241,10 @@ for month in monthly_activity:
 print(f"\nTotal churned: {total_churned}")
 print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 ```
+
+</Section>
+
+<Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
 
 ## Errores Comunes
 
@@ -245,6 +271,10 @@ for gene, expression in zip(genes, expressions):
     print(f"{gene}: {expression}")
 ```
 
+</Section>
+
+<Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 ## Resumen
 
 - Los bucles `for` iteran sobre secuencias (listas, strings, ranges)
@@ -262,6 +292,10 @@ for gene, expression in zip(genes, expressions):
 - **Bucle infinito**: Bucle que nunca termina
 - **Bucle anidado**: Bucle dentro de otro bucle
 - **enumerate()**: Función incorporada que produce pares (índice, valor)
+
+</Section>
+
+<Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -289,3 +323,5 @@ Escribí un programa que implemente la **Criba de Eratóstenes** para encontrar 
 3. Los índices que quedan True son números primos
 4. Usá bucles anidados y `break`/`continue` apropiadamente
 5. Imprimí todos los primos encontrados
+
+</Section>

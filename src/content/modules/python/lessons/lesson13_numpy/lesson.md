@@ -22,6 +22,8 @@ Quiz: quiz.md
 
 # NumPy
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 NumPy (Numerical Python) es la base del cómputo científico en Python. Proporciona un objeto array multidimensional de alto rendimiento y herramientas para trabajar con estos arrays. La mayoría de las librerías de ciencia de datos (Pandas, scikit-learn, TensorFlow) están construidas sobre NumPy. En biotecnología, los arrays de NumPy representan matrices de expresión génica, codificaciones de secuencias de ADN y datos de imágenes médicas. En SaaS, almacenan matrices de características, series temporales y vectores de embeddings de usuarios.
@@ -29,6 +31,10 @@ NumPy (Numerical Python) es la base del cómputo científico en Python. Proporci
 ## Panorama General
 
 En lecciones anteriores aprendiste las estructuras de datos incorporadas de Python (listas, tuplas, diccionarios, conjuntos). Las listas pueden almacenar datos multidimensionales pero son lentas para operaciones numéricas. Los arrays de NumPy resuelven esto con operaciones vectorizadas que se ejecutan a velocidad C. Esta lección conecta los fundamentos de Python con las librerías de ciencia de datos que vas a usar después: Pandas (construido sobre NumPy), Matplotlib (grafica arrays de NumPy), scikit-learn (entrena sobre arrays de NumPy).
+
+</Section>
+
+<Section number={2} title="Creación y Atributos de Arrays" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -71,6 +77,10 @@ arr.dtype      # dtype('int64') — tipo de elemento
 arr.itemsize   # 8 — bytes por elemento
 ```
 
+</Section>
+
+<Section number={3} title="Indexación, Slicing y Funciones Universales" eyebrow="CONCEPTO">
+
 ### Indexación y Slicing
 
 ```python
@@ -99,6 +109,10 @@ arr + 10        # [11, 12, 13, 14, 15]
 arr * 2         # [2, 4, 6, 8, 10]
 arr ** 2        # [1, 4, 9, 16, 25]
 ```
+
+</Section>
+
+<Section number={4} title="Broadcasting y Álgebra Lineal" eyebrow="CONCEPTO">
 
 ### Broadcasting
 
@@ -138,6 +152,10 @@ Lista de Python:           Array NumPy:
 Cada elemento es un         Tipo homogéneo
 objeto Python → lento       → cómputo rápido
 ```
+
+</Section>
+
+<Section number={5} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 
 ## Implementación en Python
 
@@ -206,6 +224,10 @@ print(f"A @ B:\n{a @ b}")
 print(f"A invertida:\n{np.linalg.inv(a)}")
 print(f"Determinante: {np.linalg.det(a):.1f}")
 ```
+
+</Section>
+
+<Section number={6} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
 
 ## Ejemplo de Biotecnología
 
@@ -280,6 +302,10 @@ corr = np.corrcoef(dau.T)
 print(f"\nMatriz de correlación:\n{corr}")
 ```
 
+</Section>
+
+<Section number={7} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Confundir np.array() con listas de Python**: Los arrays soportan operaciones elemento a elemento; las listas no
@@ -297,6 +323,10 @@ print(f"\nMatriz de correlación:\n{corr}")
 - Usá `np.isclose()` para comparaciones de coma flotante
 - Usá el parámetro `axis=` para operaciones por fila/columna
 - Perfilá el código: NumPy vectorizado es 10-100x más rápido que bucles de Python
+
+</Section>
+
+<Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -319,6 +349,10 @@ print(f"\nMatriz de correlación:\n{corr}")
 - **Dtype**: Tipo de dato de los elementos del array
 - **Vista**: Acceso alternativo a los mismos datos (sin copia)
 - **Fancy indexing**: Indexación con arrays booleanos o listas de enteros
+
+</Section>
+
+<Section number={9} title="Evaluación" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -349,3 +383,5 @@ Escribí un programa que implemente **Análisis de Componentes Principales (PCA)
 6. Proyectá los datos sobre las primeras 2 componentes principales
 7. Verificá tu resultado comparando con el error de reconstrucción (reconstruí el original desde los datos reducidos)
 8. Usá solo NumPy — nada de scikit-learn
+
+</Section>

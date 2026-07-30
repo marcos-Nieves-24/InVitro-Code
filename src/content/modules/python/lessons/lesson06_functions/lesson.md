@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Funciones
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Las funciones son bloques de código reutilizables que resuelven una tarea específica. En lugar de escribir el mismo código varias veces, lo definís una vez en una función y la llamás cuando sea necesario. Esta es la base de la programación modular y mantenible. En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos. En SaaS, las funciones calculan métricas, filtran datos y generan reportes.
@@ -28,6 +30,10 @@ Las funciones son bloques de código reutilizables que resuelven una tarea espec
 ## Panorama General
 
 En lecciones anteriores aprendiste variables, tipos de datos y operadores. Las funciones combinan estos elementos en unidades reutilizables. Las próximas lecciones sobre bucles y condicionales se van a usar dentro de funciones para crear lógica reutilizable poderosa.
+
+</Section>
+
+<Section number={2} title="Fundamentos de Funciones" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -132,6 +138,10 @@ def calculate_bmi(weight, height):
     """
     return weight / (height ** 2)
 ```
+
+</Section>
+
+<Section number={3} title="Ejercicios Interactivos" eyebrow="APLICACIÓN">
 
 ## Ejercicios interactivos
 
@@ -260,6 +270,10 @@ print(f"After modification: {x}")`}
   }}
 />
 
+</Section>
+
+<Section number={4} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
+
 ## Ejemplo de Biotecnología
 
 **Escenario:** Un pipeline de bioinformática para análisis de secuencias de ADN.
@@ -291,6 +305,10 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
   }}
 />
 
+</Section>
+
+<Section number={5} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
@@ -307,6 +325,10 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - Mantené las funciones cortas (típicamente < 20-30 líneas)
 - Usá type hints para mejor legibilidad (Python 3.5+)
 - Preferí devolver valores en lugar de imprimir dentro de las funciones
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -327,6 +349,10 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - **Lambda**: Función anónima en línea
 - **Docstring**: String de documentación para funciones
 - **DRY**: Principio Don't Repeat Yourself
+
+</Section>
+
+<Section number={7} title="Desafío de Código" eyebrow="EVALUACIÓN">
 
 ## Desafío de Código
 
@@ -353,3 +379,5 @@ print(f"GC: {gc_content('AAAAATTT'):.1f}%")`}
     ]
   }}
 />
+
+</Section>

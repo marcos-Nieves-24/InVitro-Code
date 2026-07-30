@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Listas
 
+<Section number={1} title="¿Por qué Listas?" eyebrow="INICIO">
+
 ## Motivación
 
 Las listas son la estructura de datos más versátil de Python. Almacenan colecciones de elementos en un orden específico y se pueden modificar después de creadas. En ciencia de datos, las listas están en todas partes: vectores de características, nombres de muestras, salidas de predicciones y cómputos intermedios. En biotecnología, las listas contienen nombres de genes, valores de expresión, IDs de pacientes y fragmentos de secuencias. En SaaS, almacenan IDs de usuarios, registros de transacciones y valores de métricas.
@@ -28,6 +30,10 @@ Las listas son la estructura de datos más versátil de Python. Almacenan colecc
 ## Panorama General
 
 En lecciones anteriores aprendiste variables (valores individuales), operadores, funciones, bucles y condicionales. Las listas introducen el concepto de **colecciones** — almacenar múltiples valores en una sola estructura. Este es tu primer paso para trabajar con datasets. Las próximas lecciones sobre tuplas, diccionarios y conjuntos se basan en los mismos conceptos con diferentes características.
+
+</Section>
+
+<Section number={2} title="Creación, Indexación y Slicing" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -65,6 +71,27 @@ numbers[7:]      # [7, 8, 9]
 numbers[::2]     # [0, 2, 4, 6, 8]
 numbers[::-1]    # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 ```
+
+### Explicación Visual
+
+```
+Indexación de Listas (desde 0):
+
+Índice:   0      1      2      3      4
+      ┌──────┬──────┬──────┬──────┬──────┐
+      │ "a"  │ "b"  │ "c"  │ "d"  │ "e"  │
+      └──────┴──────┴──────┴──────┴──────┘
+Índice:  -5     -4     -3     -2     -1
+
+Slicing [inicio:fin]:
+  [1:4] → "b", "c", "d"  (fin es exclusivo)
+  [:3]  → "a", "b", "c"
+  [2:]  → "c", "d", "e"
+```
+
+</Section>
+
+<Section number={3} title="Métodos y List Comprehensions" eyebrow="CONCEPTO">
 
 ### Métodos de Listas
 
@@ -116,22 +143,9 @@ max(list)        # Máximo
 sum(list)        # Suma (listas numéricas)
 ```
 
-## Explicación Visual
+</Section>
 
-```
-Indexación de Listas (desde 0):
-
-Índice:   0      1      2      3      4
-      ┌──────┬──────┬──────┬──────┬──────┐
-      │ "a"  │ "b"  │ "c"  │ "d"  │ "e"  │
-      └──────┴──────┴──────┴──────┴──────┘
-Índice:  -5     -4     -3     -2     -1
-
-Slicing [inicio:fin]:
-  [1:4] → "b", "c", "d"  (fin es exclusivo)
-  [:3]  → "a", "b", "c"
-  [2:]  → "c", "d", "e"
-```
+<Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 
 ## Implementación en Python
 
@@ -253,6 +267,10 @@ print(f"Transacciones de alto valor (> prom.): {high_value}")
 print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Índice fuera de rango**: Acceder a un índice ≥ len(lista) lanza IndexError
@@ -269,6 +287,10 @@ print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 - Preferí `in` para pruebas de pertenencia sobre bucles manuales
 - Usá `copy()` o `[:]` para crear copias independientes
 - Evitá modificar listas mientras iterás
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -288,6 +310,10 @@ print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 - **List comprehension**: Sintaxis concisa para crear listas
 - **Lista anidada**: Lista que contiene listas (multidimensional)
 - **Copia superficial**: Nueva referencia al mismo objeto
+
+</Section>
+
+<Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -316,3 +342,5 @@ Escribí un programa que implemente un calculador de **promedio móvil con venta
 4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)` → `[2.0, 3.0, 4.0]`
 5. Usá list comprehension y slicing
 6. Manejá casos borde: lista vacía, k > len(lista), k = 1
+
+</Section>

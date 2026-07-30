@@ -21,6 +21,8 @@ Quiz: quiz.md
 
 # Seaborn
 
+<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+
 ## Motivación
 
 Seaborn es una librería de visualización estadística construida sobre Matplotlib que facilita crear gráficos informativos y atractivos con código mínimo. Está diseñada específicamente para explorar y entender datos. Mientras Matplotlib te da control total, Seaborn te da valores predeterminados inteligentes y tipos de gráficos estadísticos. En biotecnología, Seaborn crea heatmaps de expresión génica listos para publicación, box plots que comparan grupos de tratamiento y pair plots para descubrimiento de biomarcadores. En SaaS, visualiza segmentos de clientes, análisis de correlación y resultados de tests A/B.
@@ -28,6 +30,10 @@ Seaborn es una librería de visualización estadística construida sobre Matplot
 ## Panorama General
 
 En la lección anterior aprendiste Matplotlib — la base para la visualización en Python. Seaborn se basa en Matplotlib para proporcionar gráficos de más alto nivel enfocados en estadística. Combinado con Pandas para manipulación de datos, estas tres librerías (Pandas, Matplotlib, Seaborn) forman el kit de herramientas esencial de ciencia de datos. A lo largo de los módulos de ML, vas a usar Seaborn para EDA y visualización de resultados.
+
+</Section>
+
+<Section number={2} title="Conceptos Básicos de Seaborn" eyebrow="CONCEPTO">
 
 ## Teoría
 
@@ -52,13 +58,17 @@ import seaborn as sns
 
 ### Seaborn vs Matplotlib
 
-| Característica | Matplotlib | Seaborn |
-|------------|------------|---------|
-| Nivel | Bajo nivel | Alto nivel |
-| Estilo por defecto | Básico | Profesional |
-| Soporte Pandas | Manual | Nativo |
-| Gráficos estadísticos | Manual | Incorporados |
-| Personalización | Completa | Buena, con acceso a Matplotlib |
+<InteractiveTable
+  headers={["Característica", "Matplotlib", "Seaborn"]}
+  rows={[
+    ["Nivel", "Bajo nivel", "Alto nivel"],
+    ["Estilo por defecto", "Básico", "Profesional"],
+    ["Soporte Pandas", "Manual", "Nativo"],
+    ["Gráficos estadísticos", "Manual", "Incorporados"],
+    ["Personalización", "Completa", "Buena, con acceso a Matplotlib"],
+  ]}
+  searchable
+/>
 
 ### Tipos de Gráficos Clave
 
@@ -113,6 +123,10 @@ Correlación:              └────────────────�
 │ ████░░ ░░████    │
 └──────────────────┘
 ```
+
+</Section>
+
+<Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 
 ## Implementación en Python
 
@@ -175,6 +189,10 @@ sns.countplot(data=tips, x="day", hue="sex")
 plt.title("Cantidad de Comensales por Día")
 plt.show()
 ```
+
+</Section>
+
+<Section number={4} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
 
 ## Ejemplo de Biotecnología
 
@@ -260,6 +278,10 @@ plt.title("Correlación de Métricas de Clientes")
 plt.show()
 ```
 
+</Section>
+
+<Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+
 ## Errores Comunes
 
 1. **Olvidar importar matplotlib**: Seaborn necesita `plt.show()` para mostrar gráficos
@@ -276,6 +298,10 @@ plt.show()
 - Usá `sns.color_palette()` para crear esquemas de colores personalizados
 - Combiná gráficos de Seaborn con `plt.subplots()` de Matplotlib para diseños complejos
 - Usá `sns.heatmap()` con `annot=True` para matrices de correlación
+
+</Section>
+
+<Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
 ## Resumen
 
@@ -296,6 +322,10 @@ plt.show()
 - **Violin plot**: Box plot + estimación de densidad kernel
 - **Facet**: Subgráfico basado en valores de variables
 - **Paleta**: Esquema de colores para datos categóricos o continuos
+
+</Section>
+
+<Section number={7} title="Evaluación" eyebrow="EVALUACIÓN">
 
 ## Ejercicios
 
@@ -334,3 +364,5 @@ Creá un **reporte EDA integral** de un dataset sintético de clientes usando Se
 4. Organizá múltiples gráficos en una sola figura usando `plt.subplots()` con ejes de Seaborn
 
 5. Guardá la figura final como `eda_report.png`
+
+</Section>
