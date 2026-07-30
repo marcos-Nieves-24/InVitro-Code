@@ -5,7 +5,7 @@ Lesson Title: Tipos de Datos
 Estimated Duration: 60 minutos
 Prerequisites: L3 — Variables
 Learning Objectives:
-  - Identificar los cuatro tipos de datos básicos: int, float, str, bool
+  - "Identificar los cuatro tipos de datos básicos: int, float, str, bool"
   - Usar type() para inspeccionar tipos de variables
   - Convertir entre tipos de datos usando int(), float(), str(), bool()
   - Explicar la diferencia entre tipos mutables e inmutables

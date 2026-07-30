@@ -7,7 +7,7 @@ Prerequisites: L9 — Listas
 Learning Objectives:
   - Crear diccionarios con pares clave-valor
   - Acceder, agregar, actualizar y eliminar entradas de diccionarios
-  - Usar métodos de diccionarios: keys(), values(), items(), get()
+  - "Usar métodos de diccionarios: keys(), values(), items(), get()"
   - Escribir dictionary comprehensions
   - Usar diccionarios para agregación y conteo de datos
 Keywords: diccionario, clave, valor, mapeo, tabla hash, comprehension

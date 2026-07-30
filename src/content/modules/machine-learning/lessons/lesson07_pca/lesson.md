@@ -5,7 +5,7 @@ Lesson Title: Análisis de Componentes Principales (PCA)
 Estimated Duration: 75 minutos
 Prerequisites: L1 (Fundamentos de ML), Módulo 3 (covarianza, valores propios)
 Learning Objectives:
-  - Explicar la intuición de PCA: encontrar direcciones de máxima varianza
+  - "Explicar la intuición de PCA: encontrar direcciones de máxima varianza"
   - Aplicar PCA para reducción de dimensionalidad con scikit-learn
   - Interpretar la proporción de varianza explicada y el gráfico de varianza acumulada
   - Usar PCA para visualización 2D de datos de alta dimensionalidad

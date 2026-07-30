@@ -7,7 +7,7 @@ Prerequisites: Módulo 4 (Machine Learning)
 Learning Objectives:
   - Definir la ética en el contexto de la inteligencia artificial
   - Explicar por qué la ética en IA es importante para biotecnología y aplicaciones SaaS
-  - Identificar los cinco principios éticos clave para IA: beneficencia, no maleficencia, autonomía, justicia, explicabilidad
+  - "Identificar los cinco principios éticos clave para IA: beneficencia, no maleficencia, autonomía, justicia, explicabilidad"
   - Analizar casos reales donde fallas éticas en IA causaron daño
   - Evaluar las compensaciones entre principios éticos en conflicto en el diseño de sistemas
 Keywords: ética, beneficencia, no maleficencia, autonomía, justicia, explicabilidad, equidad, rendición de cuentas

@@ -8,7 +8,7 @@ Learning Objectives:
   - Explicar el paradigma de boosting y cómo difiere del bagging
   - Describir el algoritmo de Gradient Boosting
   - Entrenar modelos de Gradient Boosting con scikit-learn
-  - Ajustar hiperparámetros: learning_rate, n_estimators, max_depth
+  - "Ajustar hiperparámetros: learning_rate, n_estimators, max_depth"
   - Describir cómo XGBoost y LightGBM mejoran el gradient boosting básico
 Keywords: boosting, gradient boosting, XGBoost, LightGBM, tasa de aprendizaje, modelo aditivo, residual
 Difficulty: Avanzado

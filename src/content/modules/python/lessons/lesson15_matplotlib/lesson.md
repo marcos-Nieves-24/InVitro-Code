@@ -5,7 +5,7 @@ Lesson Title: Matplotlib
 Estimated Duration: 75 minutos
 Prerequisites: L14 — Pandas
 Learning Objectives:
-  - Crear gráficos básicos usando pyplot: líneas, dispersión, barras, histogramas
+  - "Crear gráficos básicos usando pyplot: líneas, dispersión, barras, histogramas"
   - Personalizar gráficos con títulos, etiquetas, leyendas y colores
   - Usar la interfaz figure/axes para gráficos multi-panel
   - Guardar figuras a archivos en varios formatos

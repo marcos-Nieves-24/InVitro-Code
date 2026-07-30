@@ -6,7 +6,7 @@ Estimated Duration: 30 minutos
 Prerequisites: L9 — Listas
 Learning Objectives:
   - Crear conjuntos y explicar sus propiedades (sin orden, únicos, hashables)
-  - Realizar operaciones de conjuntos: unión, intersección, diferencia, diferencia simétrica
+  - "Realizar operaciones de conjuntos: unión, intersección, diferencia, diferencia simétrica"
   - Usar conjuntos para eliminar duplicados y prueba de pertenencia
   - Distinguir entre conjuntos y frozensets
   - Elegir entre conjuntos, listas y tuplas según el caso de uso
