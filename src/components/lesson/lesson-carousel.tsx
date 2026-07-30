@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LabProgress } from "./lab-progress";
 import { CelebrationOverlay } from "./celebration-overlay";
 import { Button } from "@/components/ui";
@@ -20,6 +20,12 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const isLast = current === total - 1;
+  const slideRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top whenever the slide changes
+  useEffect(() => {
+    slideRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [current]);
 
   const handleFinish = () => {
     setShowCelebration(true);
@@ -30,7 +36,12 @@ export function LessonCarousel({
       <div className="flex min-h-0 flex-1 flex-col gap-3">
         <LabProgress total={total} current={current} />
 
-        <div className="min-h-0 flex-1 overflow-y-auto">{slides[current]}</div>
+        <div
+          ref={slideRef}
+          className="min-h-0 flex-1 overflow-y-auto"
+        >
+          {slides[current]}
+        </div>
 
         <div className="flex items-center justify-between border-t border-gray-200 pt-3">
           <Button
