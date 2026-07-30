@@ -22,9 +22,9 @@ export function LessonCarousel({
   const isLast = current === total - 1;
   const slideRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to top whenever the slide changes
+  // Scroll the page so the current slide is at the top of the viewport
   useEffect(() => {
-    slideRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    slideRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [current]);
 
   const handleFinish = () => {
