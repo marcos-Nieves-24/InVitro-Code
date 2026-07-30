@@ -39,3 +39,4 @@ src/**/*.js
 *~
 .DS_Store
 .vercel
+.env*
