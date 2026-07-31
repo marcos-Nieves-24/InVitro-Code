@@ -21,82 +21,90 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Clasificación
+<Section number={1} title="Predecir categorías, no números" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="excited">
+¿Spam o no spam? ¿Cáncer o benigno? ¿Se va a dar de baja o se queda? La clasificación es el tipo de ML más usado en el mundo real. Hoy aprendés a separar el sí del no con matemática.
+</MascotMessage>
 
-¿Este correo es spam o no? ¿Este paciente tiene cáncer? ¿Este cliente se va a dar de baja? Estos son problemas de *clasificación* — predecir una categoría discreta. La clasificación es el tipo de aplicación de ML más común tanto en biotecnología (diagnóstico de enfermedades, respuesta a fármacos) como en SaaS (predicción de abandono, puntuación de leads).
+La regresión lineal predice números. Pero muchos problemas del mundo real requieren predecir **categorías**. La clasificación binaria — dos clases posibles — es el punto de partida. Biotecnología: diagnóstico de enfermedades. SaaS: predicción de abandono. Finanzas: detección de fraude. Todo es clasificación.
 
-## Panorama general
+<ConceptCard variant="key-idea">
+La regresión logística toma una combinación lineal de features, la pasa por una función sigmoide, y produce una probabilidad entre 0 y 1. Con un umbral (típicamente 0.5), decidís la clase.
+</ConceptCard>
 
-**Anterior:** La regresión lineal predecía números continuos. **Esta lección:** La regresión logística predice categorías. **Siguiente:** Árboles de decisión — un enfoque no lineal para la clasificación.
+</Section>
 
-## Teoría
+<Section number={2} title="La sigmoide: de números a probabilidades" eyebrow="CONCEPTO">
 
-### Clasificación Binaria
+La regresión logística calcula primero una combinación lineal:
 
-El objetivo $y$ toma dos valores: 0 (clase negativa) o 1 (clase positiva).
+$$z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$$
 
-### Regresión Logística
+Luego aplica la **función sigmoide** para convertir $z$ en una probabilidad:
 
-A pesar del nombre, la regresión logística es un algoritmo de *clasificación*. En lugar de predecir un valor continuo, predice la *probabilidad* de que una muestra pertenezca a la clase positiva.
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
-**Parte lineal:** $z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
+<CalloutInfo>
+La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$ → probabilidad cercana a 1. Valores muy negativos → probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
+</CalloutInfo>
 
-**Función logística (sigmoide):** $\sigma(z) = \frac{1}{1 + e^{-z}}$
+**Regla de decisión:** si $\hat{p} \geq 0.5$, predecís clase 1. Si $\hat{p} < 0.5$, clase 0. La **frontera de decisión** es el hiperplano donde $\hat{p} = 0.5$, es decir, $z = 0$.
 
-La sigmoide comprime cualquier número real a [0, 1], dando una probabilidad válida:
-
-$$\hat{p} = P(y=1 | \mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p)}}$$
-
-**Regla de decisión:** Predecir $y=1$ si $\hat{p} \geq 0.5$, sino $y=0$.
-
-### Frontera de decisión
-
-La línea (o hiperplano) donde $\hat{p} = 0.5$, es decir, $z = 0$.
-
-### Función de pérdida: Log Loss (Entropía Cruzada)
+<ConceptCard variant="definition">
+**Log Loss (Entropía Cruzada):** La función de pérdida que optimiza la regresión logística. Penaliza fuertemente las predicciones incorrectas con alta confianza — si el modelo dice "99% seguro que es clase 1" y resulta ser clase 0, el castigo es enorme.
 
 $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$$
+</ConceptCard>
 
-A diferencia del MSE en regresión lineal, la log loss penaliza fuertemente las predicciones incorrectas con alta confianza.
+</Section>
 
-## Fundamento matemático
+<Section number={3} title="La matriz de confusión: tu mejor amiga" eyebrow="CONCEPTO">
 
-### Log-Odds
+<ComparisonTable
+  rows={[
+    { feature: "", left: "Predicho Positivo", right: "Predicho Negativo" },
+    { feature: "Real Positivo", left: "✅ VP (Verdadero Positivo)", right: "❌ FN (Falso Negativo)" },
+    { feature: "Real Negativo", left: "❌ FP (Falso Positivo)", right: "✅ VN (Verdadero Negativo)" },
+  ]}
+/>
 
-La transformación log-odds (logit):
+De la matriz salen todas las métricas:
 
-$$\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$$
+<ConceptCard variant="definition">
+**Exactitud (Accuracy):** $\frac{VP + VN}{\text{Total}}$ — ¿qué porcentaje acerté? 🚨 No uses accuracy solo si las clases están desbalanceadas.
 
-Esto muestra que la regresión logística es lineal en el espacio de *log-odds*.
+**Precisión (Precision):** $\frac{VP}{VP + FP}$ — de todo lo que dije que era positivo, ¿cuánto era realmente positivo?
 
-### Matriz de confusión
+**Recall (Sensibilidad):** $\frac{VP}{VP + FN}$ — de todos los positivos reales, ¿cuántos detecté?
 
-| | Predicho Positivo | Predicho Negativo |
-|-|-------------------|-------------------|
-| **Real Positivo** | Verdadero Positivo (VP) | Falso Negativo (FN) |
-| **Real Negativo** | Falso Positivo (FP) | Verdadero Negativo (VN) |
+**F1:** $2 \times \frac{P \times R}{P + R}$ — media armónica de precisión y recall. El equilibrio cuando ambas importan.
+</ConceptCard>
 
-### Métricas derivadas
+<ComparisonTable
+  rows={[
+    { feature: "Priorizás Precisión cuando", left: "El costo de un falso positivo es alto. Ej: enviar una notificación push molesta a un usuario que no iba a abandonar." },
+    { feature: "Priorizás Recall cuando", left: "El costo de un falso negativo es alto. Ej: no detectar un tumor maligno porque pensaste que era benigno." },
+  ]}
+/>
 
-**Exactitud:** $\frac{VP + VN}{VP + VN + FP + FN}$
+</Section>
 
-**Precisión:** $\frac{VP}{VP + FP}$ — "Cuando predecimos positivo, ¿qué tan seguido acertamos?"
+<Section number={4} title="Curva ROC: más allá de un solo número" eyebrow="CONCEPTO">
 
-**Recall (Sensibilidad):** $\frac{VP}{VP + FN}$ — "¿Qué fracción de positivos reales capturamos?"
+<ConceptCard variant="definition">
+La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras variás el umbral de decisión de 0 a 1. Cada punto de la curva es un umbral diferente.
 
-**Puntaje F1:** $2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}}$ — Media armónica de precisión y recall.
+**AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0 → clasificador perfecto. AUC = 0.5 → no mejor que tirar una moneda. AUC < 0.5 → estás haciendo todo al revés.
+</ConceptCard>
 
-**Especificidad:** $\frac{VN}{VN + FP}$ — "¿Qué fracción de negativos reales rechazamos correctamente?"
+<CalloutCheck>
+La curva ROC es independiente del umbral — te dice qué tan bien separa el modelo las clases sin importar dónde pongas la línea. Es la métrica preferida para comparar modelos de clasificación.
+</CalloutCheck>
 
-### Curva ROC y AUC
+</Section>
 
-La curva ROC (Receiver Operating Characteristic) grafica TPR (recall) vs. FPR (1 - especificidad) a medida que varía el umbral.
-
-**AUC (Área Bajo la Curva):** Probabilidad de que un positivo elegido al azar tenga un rango más alto que un negativo elegido al azar. AUC = 1 es perfecto, AUC = 0.5 es aleatorio.
-
-## Explicación visual
+<Section number={5} title="Visualizá la frontera de decisión" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -110,7 +118,6 @@ y = (X[:, 0] + X[:, 1] > 0).astype(int)
 model = LogisticRegression()
 model.fit(X, y)
 
-# Decision boundary
 xx, yy = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-3, 3, 100))
 Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
 Z = Z.reshape(xx.shape)
@@ -121,13 +128,18 @@ plt.contour(xx, yy, Z, levels=[0.5], colors='k', linewidths=2)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap='RdBu', edgecolors='k', alpha=0.7)
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
-plt.title('Logistic Regression Decision Boundary')
-plt.colorbar(label='Probability')
-plt.savefig('figures/decision_boundary.png', dpi=150)
+plt.title('Frontera de Decisión — Regresión Logística')
+plt.colorbar(label='Probabilidad')
 plt.show()
 ```
 
-## Implementación en Python
+<CalloutInfo>
+La línea negra es la frontera de decisión ($\hat{p} = 0.5$). A la izquierda, el modelo predice clase 0 (azul). A la derecha, clase 1 (rojo). Los colores degradados muestran la confianza: cuanto más intenso, más seguro está el modelo.
+</CalloutInfo>
+
+</Section>
+
+<Section number={6} title="Clasificación con datos reales: cáncer de mama" eyebrow="CÓDIGO">
 
 ```python
 import numpy as np
@@ -144,8 +156,7 @@ X = pd.DataFrame(data.data, columns=data.feature_names)
 y = data.target
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+    X, y, test_size=0.2, random_state=42)
 
 model = LogisticRegression(max_iter=5000)
 model.fit(X_train, y_train)
@@ -153,11 +164,10 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 y_proba = model.predict_proba(X_test)[:, 1]
 
-print("Confusion Matrix:")
+print("Matriz de Confusión:")
 print(confusion_matrix(y_test, y_pred))
-print("\nClassification Report:")
+print("\nReporte de Clasificación:")
 print(classification_report(y_test, y_pred))
-print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")
 
 # ROC Curve
 fpr, tpr, _ = roc_curve(y_test, y_proba)
@@ -165,140 +175,119 @@ roc_auc = auc(fpr, tpr)
 
 plt.figure(figsize=(6, 5))
 plt.plot(fpr, tpr, label=f'ROC (AUC = {roc_auc:.3f})')
-plt.plot([0, 1], [0, 1], 'k--', label='Random')
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate (Recall)')
-plt.title('ROC Curve')
+plt.plot([0, 1], [0, 1], 'k--', label='Aleatorio')
+plt.xlabel('Tasa de Falsos Positivos')
+plt.ylabel('Tasa de Verdaderos Positivos (Recall)')
+plt.title('Curva ROC — Cáncer de Mama')
 plt.legend()
-plt.savefig('figures/roc_curve.png', dpi=150)
 plt.show()
 ```
 
-## Ejemplo guiado: Detección de cáncer de mama
+<ReflectionCheck
+  blockId="reflection-l03-metrics-tradeoff"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson03_classification"
+  prompt="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
+  answer="Alto recall. En diagnóstico médico, un falso negativo (decir que no hay cáncer cuando sí lo hay) puede ser fatal. Prefiero detectar todos los casos posibles aunque algunos resulten ser falsas alarmas (falsos positivos) que se pueden descartar con más estudios. En cambio, en un sistema de recomendación de contenido, preferirías alta precisión para no recomendar cosas irrelevantes."
+/>
 
-**Problema:** Clasificar tumores de mama como malignos (1) o benignos (0).
+</Section>
 
-**Conjunto de datos:** Wisconsin Breast Cancer (569 muestras, 30 características).
+<Section number={7} title="Biotecnología: respuesta a fármacos" eyebrow="APLICACIÓN">
 
-**Resultados:**
-- Exactitud: ~97%
-- Precisión: ~0.98 (cuando predecimos maligno, acertamos el 98% de las veces)
-- Recall: ~0.96 (capturamos el 96% de las malignidades reales)
-- AUC: ~0.99 (discriminación excelente)
+Una farmacéutica entrena un clasificador para predecir si un paciente responderá a una inmunoterapia basándose en 50 biomarcadores sanguíneos:
 
-## Ejemplo en biotecnología: Predicción de respuesta a fármacos
+- **Features:** niveles de 50 proteínas en sangre
+- **Etiqueta:** respondedor (1) o no respondedor (0)
+- **Prioridad:** Alto recall — no querés dejar a ningún paciente que podría beneficiarse sin tratamiento
 
-Una empresa farmacéutica evalúa si un fármaco es efectivo (respondedor = 1) basándose en biomarcadores del paciente.
+<CalloutInfo>
+En medicina personalizada, la clasificación permite evitar tratamientos costosos e invasivos en pacientes que no se beneficiarían. Un modelo con AUC > 0.85 se considera clínicamente útil.
+</CalloutInfo>
 
-```python
-np.random.seed(42)
-n_patients = 500
+</Section>
 
-clinic_data = pd.DataFrame({
-    'age': np.random.normal(55, 15, n_patients),
-    'biomarker_A': np.random.normal(0, 1, n_patients),
-    'biomarker_B': np.random.normal(0, 1, n_patients),
-    'gene_X_expression': np.random.exponential(1, n_patients),
-})
+<Section number={8} title="SaaS: predicción de abandono" eyebrow="APLICACIÓN">
 
-log_odds = (
-    -2
-    + 0.5 * clinic_data['biomarker_A']
-    - 0.3 * clinic_data['biomarker_B']
-    + 1.5 * clinic_data['gene_X_expression']
-)
-clinic_data['responder'] = (1 / (1 + np.exp(-log_odds)) > 0.5).astype(int)
+Un clasificador predice qué usuarios cancelarán su suscripción:
 
-X_c = clinic_data.drop('responder', axis=1)
-y_c = clinic_data['responder']
-X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(X_c, y_c, test_size=0.3)
+- **Features:** días desde último login, tickets de soporte, uso de features premium, tipo de plan
+- **Etiqueta:** abandonó (1) o se quedó (0)
+- **Prioridad:** Alta precisión — no querés molestar con descuentos a usuarios que no iban a abandonar
 
-model_c = LogisticRegression()
-model_c.fit(X_train_c, y_train_c)
+<ConceptCard variant="key-idea">
+El mismo algoritmo, métricas distintas según el contexto. En salud priorizás recall (no dejar escapar ningún caso). En negocio priorizás precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta — la estrategia cambia según el problema.
+</ConceptCard>
 
-print(classification_report(y_test_c, model_c.predict(X_test_c)))
-```
+</Section>
 
-**Interpretación:** La expresión del gen X es el predictor más fuerte de respuesta al fármaco.
+<Section number={9} title="Errores comunes" eyebrow="PELIGROS">
 
-## Ejemplo en SaaS: Predicción de abandono
+<CalloutInfo>
+1. **Usar accuracy con clases desbalanceadas.** Si el 95% de tus muestras son negativas, un modelo que siempre predice "negativo" tiene 95% de accuracy. Es un mal modelo, pero la métrica no te lo dice.
 
-```python
-np.random.seed(42)
-n_users = 1000
+2. **Elegir el umbral 0.5 sin pensar.** El umbral óptimo depende del costo relativo de FP vs FN. En detección de fraude quizás querés umbral 0.3 para ser más sensible.
 
-saas_data = pd.DataFrame({
-    'days_since_login': np.random.exponential(20, n_users),
-    'support_tickets': np.random.poisson(2, n_users),
-    'feature_usage_pct': np.random.uniform(0, 100, n_users),
-    'account_age_months': np.random.exponential(12, n_users),
-})
+3. **Interpretar coeficientes como en regresión lineal.** En regresión logística, un coeficiente $\beta$ significa que por cada unidad de aumento en $x$, los *log-odds* aumentan en $\beta$. No es un efecto directo sobre la probabilidad.
 
-log_odds = (
-    -1
-    + 0.08 * saas_data['days_since_login']
-    + 0.5 * saas_data['support_tickets']
-    - 0.03 * saas_data['feature_usage_pct']
-)
-saas_data['churned'] = (1 / (1 + np.exp(-log_odds)) > 0.5).astype(int)
+4. **Confiar en AUC sin ver la curva.** Dos curvas ROC pueden tener el mismo AUC pero comportarse muy distinto en diferentes regiones.
+</CalloutInfo>
 
-X_s = saas_data.drop('churned', axis=1)
-y_s = saas_data['churned']
+</Section>
 
-model_s = LogisticRegression(max_iter=1000)
-model_s.fit(X_s, y_s)
+<Section number={10} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
 
-for col, coef in zip(X_s.columns, model_s.coef_[0]):
-    print(f"{col}: {coef:.4f}")
+<CalloutCheck>
+Siempre mirá la matriz de confusión, no solo un número. Accuracy = 0.92 suena bien hasta que ves que todos los falsos negativos son casos de cáncer.
 
-print(f"\nAUC: {roc_auc_score(y_s, model_s.predict_proba(X_s)[:, 1]):.3f}")
-```
+Elegí tu métrica principal según el problema de negocio. No existe "la mejor métrica" — existe la métrica correcta para tu contexto.
 
-## Errores comunes
+Graficá la curva ROC y reportá AUC. Es independiente del umbral y del balance de clases.
 
-1. **Usar exactitud con datos desbalanceados** — si el 95% de las muestras son negativas, un modelo que predice "negativo" siempre obtiene 95% de exactitud pero es inútil.
-2. **Fijar el umbral en 0.5 por defecto** — ajustalo según las necesidades del negocio (umbral más alto si los falsos positivos son costosos).
-3. **Confundir precisión y recall** — precisión = exactitud de las predicciones positivas; recall = fracción de positivos encontrados.
-4. **Interpretar coeficientes directamente** — los coeficientes están en unidades de log-odds, no en unidades de probabilidad.
+Ajustá el umbral de decisión según el costo de cada tipo de error. No tiene por qué ser 0.5.
 
-## Buenas prácticas
+Con clases desbalanceadas, usá `class_weight='balanced'` en scikit-learn para que el modelo preste atención a la clase minoritaria.
+</CalloutCheck>
 
-- Revisá siempre el balance de clases antes de elegir métricas
-- Usá AUC para comparar modelos, precisión/recall para decisiones de negocio
-- Considerá matrices de costo: los falsos positivos y falsos negativos tienen costos diferentes
-- Escalá las características para la regresión logística (usa descenso por gradiente)
-- Usá división train/test estratificada para preservar las proporciones de clases
+</Section>
 
-## Resumen
+<Section number={11} title="Resumen y glosario" eyebrow="RESUMEN">
 
-- La regresión logística predice probabilidades de clase mediante la función sigmoide
-- La frontera de decisión separa las clases en el espacio de características
-- La matriz de confusión resume los resultados de predicción
-- Precisión, recall, F1 proveen una evaluación matizada
-- El AUC de la curva ROC mide la calidad del ranking a través de umbrales
-- La selección del umbral depende del contexto de negocio
+<ConceptCard variant="key-idea">
+La regresión logística convierte una combinación lineal en una probabilidad mediante la sigmoide. La matriz de confusión es la base de precisión, recall y F1. La curva ROC con AUC es la métrica estándar para comparar clasificadores. Elegí tu métrica según el costo de equivocarte en cada dirección.
+</ConceptCard>
 
-## Términos clave
+<InteractiveTable
+  columns={[
+    { key: "term", label: "Término" },
+    { key: "def", label: "Definición" },
+  ]}
+  rows={[
+    { term: "Sigmoide", def: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)" },
+    { term: "VP (TP)", def: "Positivo real clasificado como positivo" },
+    { term: "FP", def: "Negativo real clasificado como positivo — falsa alarma" },
+    { term: "FN", def: "Positivo real clasificado como negativo — omisión" },
+    { term: "Precisión", def: "VP/(VP+FP) — pureza de las predicciones positivas" },
+    { term: "Recall", def: "VP/(VP+FN) — cobertura de los positivos reales" },
+    { term: "F1", def: "Media armónica de precisión y recall: 2PR/(P+R)" },
+    { term: "AUC", def: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio" },
+  ]}
+/>
 
-| Término | Definición |
-|---------|------------|
-| Sigmoide | Función en forma de S que comprime valores a [0, 1] |
-| Frontera de decisión | Umbral donde la probabilidad = 0.5 |
-| Matriz de confusión | Tabla de VP, FP, VN, FN |
-| Precisión | VP / (VP + FP) |
-| Recall (Sensibilidad) | VP / (VP + FN) |
-| Puntaje F1 | Media armónica de precisión y recall |
-| Curva ROC | TPR vs. FPR a varios umbrales |
-| AUC | Área bajo la curva ROC, mide calidad del ranking |
+</Section>
 
-## Ejercicios
+<Section number={12} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-**Nivel 1 — Básico:** Si un filtro de spam tiene precisión = 0.95 y recall = 0.60, ¿qué significa cada número? ¿Cuál es más importante para un filtro de spam?
+<ReflectionCheck
+  blockId="reflection-l03-accuracy-trap"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson03_classification"
+  prompt="Nivel 1 — Tenés 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
+  answer="No. Tiene 95% de accuracy pero 0% de recall para spam — no detecta ningún spam. En datasets desbalanceados, accuracy es engañosa. Necesitás mirar precisión y recall por clase. Este modelo es inútil: es equivalente a no tener filtro de spam."
+/>
 
-**Nivel 2 — Implementación:** Cargá el dataset `breast_cancer`, entrená un modelo de regresión logística y graficá la curva ROC con el AUC mostrado en el gráfico.
+<ConceptCard variant="key-idea">
+**Desafío:** Escribí `logistic_regression_from_scratch(X, y, lr=0.01, epochs=1000)` que implemente regresión logística con descenso por gradiente. Usá la sigmoide y la log loss. Compará tus predicciones con `sklearn.linear_model.LogisticRegression`.
+</ConceptCard>
 
-**Nivel 3 — Pensamiento crítico:** Una prueba médica para una enfermedad rara (1% de prevalencia) alcanza un 99% de exactitud. ¿Es una buena prueba? Explicá por qué la exactitud es engañosa aquí.
-
-## Desafío de programación
-
-Escribí una función `find_optimal_threshold(model, X_val, y_val)` que encuentre el umbral de decisión (0.0 a 1.0) que maximice el puntaje F1 en datos de validación. Usá 100 umbrales espaciados uniformemente.
+</Section>
