@@ -1,270 +1,159 @@
 ---
 Module: 4
 Lesson Number: 7
-Lesson Title: Análisis de Componentes Principales (PCA)
+Lesson Title: PCA
 Estimated Duration: 75 minutos
-Prerequisites: L1 (Fundamentos de ML), Módulo 3 (covarianza, valores propios)
+Prerequisites: L1 (Fundamentos de ML), álgebra lineal básica
 Learning Objectives:
-  - "Explicar la intuición de PCA: encontrar direcciones de máxima varianza"
-  - Aplicar PCA para reducción de dimensionalidad con scikit-learn
-  - Interpretar la proporción de varianza explicada y el gráfico de varianza acumulada
-  - Usar PCA para visualización 2D de datos de alta dimensionalidad
-  - Describir la relación entre vectores propios y componentes principales
-Keywords: PCA, reducción de dimensionalidad, valores propios, vectores propios, varianza explicada, extracción de características
+  - Explicar cómo PCA reduce la dimensionalidad preservando la varianza
+  - Calcular e interpretar componentes principales y varianza explicada
+  - Aplicar PCA con scikit-learn para visualización 2D y preprocesamiento
+  - Determinar el número óptimo de componentes usando la varianza explicada acumulada
+Keywords: PCA, componentes principales, reducción de dimensionalidad, valores propios, varianza explicada, visualización
 Difficulty: Intermedio
-Programming Concepts: sklearn.decomposition.PCA, fit_transform, explained_variance_ratio_
-Mathematical Concepts: matriz de covarianza, descomposición en valores propios, proyección ortogonal
-Machine Learning Concepts: reducción de dimensionalidad, extracción de características, visualización de datos
-Datasets Used: iris, breast cancer, make_blobs
+Programming Concepts: sklearn.decomposition.PCA
+Mathematical Concepts: valores propios, vectores propios, matriz de covarianza, descomposición espectral
+Machine Learning Concepts: reducción de dimensionalidad, compresión de features
+Datasets Used: iris, breast cancer, California Housing
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Análisis de Componentes Principales (PCA)
+<Section number={1} title="Cuando tenés demasiadas dimensiones" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+¿Mil features pero solo podés graficar en 2D? PCA comprime la información en pocas dimensiones preservando lo más importante. Es la navaja suiza del preprocesamiento.
+</MascotMessage>
 
-Un citómetro de flujo mide 50+ marcadores por célula. Un microarray mide 20,000+ niveles de expresión génica. Los datos de alta dimensionalidad están en todas partes en biotecnología, pero los humanos solo podemos visualizar 2-3 dimensiones. PCA reduce cientos de dimensiones a unas pocas mientras preserva los patrones más importantes. En SaaS, PCA ayuda a visualizar segmentos de clientes e identificar factores ocultos que impulsan el comportamiento del usuario.
+En genómica tenés 20,000 genes pero solo 100 pacientes. En SaaS tenés cientos de métricas de comportamiento. Visualizar, modelar y entender datos de alta dimensionalidad es difícil. **PCA (Principal Component Analysis)** resuelve esto: encuentra las direcciones de máxima varianza en tus datos y proyecta todo a un espacio más chico.
 
-## Panorama general
+<ConceptCard variant="key-idea">
+PCA no selecciona features — crea **nuevas features** (componentes principales) que son combinaciones lineales de las originales. El primer componente captura la dirección de mayor varianza, el segundo la siguiente (ortogonal al primero), y así.
+</ConceptCard>
 
-**Anterior:** K-Means (no supervisado — agrupamiento). **Esta lección:** PCA (no supervisado — reducción de dimensionalidad). **Siguiente:** Gradient Boosting (de vuelta a supervisado, pero con un nuevo paradigma).
+</Section>
 
-## Teoría
+<Section number={2} title="¿Cómo funciona?" eyebrow="CONCEPTO">
 
-### La Maldición de la Dimensionalidad
+1. **Estandarizá los datos** (media 0, varianza 1 por feature)
+2. **Calculá la matriz de covarianza** entre features
+3. **Encontrá valores y vectores propios** de la matriz de covarianza
+4. **Ordená los vectores propios** por valor propio (mayor → más varianza explicada)
+5. **Proyectá** los datos al subespacio de los primeros K vectores propios
 
-A medida que las dimensiones aumentan:
-- Los datos se vuelven dispersos
-- Las distancias pierden sentido
-- La visualización se vuelve imposible
-- Los modelos se sobreajustan más fácilmente
+<CalloutInfo>
+Los **valores propios** miden cuánta varianza captura cada componente. La suma de todos los valores propios es la varianza total. Dividir cada valor propio por la suma total te da el porcentaje de varianza explicada por ese componente.
+</CalloutInfo>
 
-PCA resuelve esto encontrando una representación de menor dimensión que captura la mayor parte de la varianza.
+<ConceptCard variant="definition">
+**Varianza explicada acumulada:** Qué porcentaje de la información original retenés con K componentes. Si los primeros 3 componentes explican el 95% de la varianza, podés reducir tus datos de 100 dimensiones a 3 perdiendo solo el 5% de la información.
+</ConceptCard>
 
-### Intuición de PCA
+</Section>
 
-PCA encuentra nuevos ejes (componentes principales) que:
-1. Son direcciones de máxima varianza en los datos
-2. Son ortogonales entre sí (no correlacionados)
-3. Capturan cantidades decrecientes de varianza
-
-**Pensalo como:** rotar los datos para alinearlos con sus ejes naturales de variación.
-
-### Fundamento matemático
-
-1. **Centrar los datos:** restar la media de cada característica
-2. **Calcular la matriz de covarianza:** $\mathbf{\Sigma} = \frac{1}{n-1}\mathbf{X}^\top\mathbf{X}$
-3. **Descomposición en valores propios:** $\mathbf{\Sigma}\mathbf{v} = \lambda\mathbf{v}$
-4. **Seleccionar los K vectores propios principales:** estos son los componentes principales
-5. **Proyectar los datos:** $\mathbf{X}_{\text{PCA}} = \mathbf{X}\mathbf{W}$ donde $\mathbf{W}$ contiene los K vectores propios principales
-
-**Valores propios ($\lambda$):** cantidad de varianza explicada por cada componente
-**Vectores propios ($\mathbf{v}$):** dirección de cada componente (cargas de características)
-
-### Proporción de varianza explicada
-
-$$\text{Proporción de varianza explicada}_k = \frac{\lambda_k}{\sum_{j=1}^{p}\lambda_j}$$
-
-Esto nos dice qué fracción de la varianza total captura cada componente.
-
-## Explicación visual
+<Section number={3} title="PCA en acción: de 4D a 2D" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
 
 iris = load_iris()
 X = iris.data
+y = iris.target
 
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X)
+# Siempre estandarizar antes de PCA
+X_scaled = StandardScaler().fit_transform(X)
 
-plt.figure(figsize=(8, 6))
-scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=iris.target, cmap='viridis', alpha=0.7)
-plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%} variance)')
-plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%} variance)')
-plt.title('PCA of Iris Dataset (2 Components)')
-plt.colorbar(scatter, label='Species')
-plt.savefig('figures/pca_iris.png', dpi=150)
-plt.show()
-
-print(f"Explained variance ratio: {pca.explained_variance_ratio_}")
-print(f"Cumulative: {np.cumsum(pca.explained_variance_ratio_)}")
-```
-
-## Implementación en Python
-
-```python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import load_breast_cancer
-
-data = load_breast_cancer()
-X = StandardScaler().fit_transform(data.data)
-
-# Full PCA
 pca = PCA()
-X_pca = pca.fit_transform(X)
+X_pca = pca.fit_transform(X_scaled)
 
-# Explained variance
-cumulative = np.cumsum(pca.explained_variance_ratio_)
+# Varianza explicada
+print("Varianza explicada por componente:")
+for i, ratio in enumerate(pca.explained_variance_ratio_):
+    print(f"  PC{i+1}: {ratio:.3f} ({ratio*100:.1f}%)")
+print(f"Total 2 PCs: {pca.explained_variance_ratio_[:2].sum():.3f}")
 
-plt.figure(figsize=(8, 5))
-plt.bar(range(1, len(cumulative) + 1), pca.explained_variance_ratio_, alpha=0.7, label='Individual')
-plt.step(range(1, len(cumulative) + 1), cumulative, where='mid', label='Cumulative')
-plt.axhline(y=0.9, color='r', linestyle='--', label='90% threshold')
-plt.xlabel('Principal Component')
-plt.ylabel('Explained Variance Ratio')
-plt.title('PCA: Explained Variance')
-plt.legend()
-plt.grid(True)
-plt.savefig('figures/pca_variance.png', dpi=150)
-plt.show()
-
-# Number of components for 90% variance
-n_90 = np.argmax(cumulative >= 0.9) + 1
-print(f"Components needed for 90% variance: {n_90}")
-
-# PCA with 2 components for visualization
-pca2 = PCA(n_components=2)
-X_pca2 = pca2.fit_transform(X)
-
+# Visualización 2D
 plt.figure(figsize=(8, 6))
-plt.scatter(X_pca2[:, 0], X_pca2[:, 1], c=data.target, cmap='RdBu', alpha=0.6)
-plt.xlabel('PC1')
-plt.ylabel('PC2')
-plt.title(f'Breast Cancer: 2D PCA ({pca2.explained_variance_ratio_.sum():.1%} variance)')
-plt.colorbar(label='Malignant')
-plt.savefig('figures/pca_breast_cancer.png', dpi=150)
-plt.show()
-```
-
-## Ejemplo guiado: PCA de Iris
-
-**Problema:** Visualizar datos de Iris 4D en 2D.
-
-**Resultados:**
-- PC1 captura ~92% de la varianza (principalmente medidas de pétalos)
-- PC2 captura ~5% (principalmente medidas de sépalos)
-- Juntos: ~97% de la varianza en 2 dimensiones
-
-**Interpretación:** Setosa está claramente separada. Versicolor y Virginica se superponen ligeramente pero son distinguibles.
-
-## Ejemplo en biotecnología: Visualización de expresión génica
-
-```python
-np.random.seed(42)
-n_samples, n_genes = 200, 1000
-
-X_expr = np.random.randn(n_samples, n_genes)
-X_expr[:70, :50] += 0.5
-X_expr[70:130, 50:100] += 0.5
-X_expr[130:, 100:150] += 0.5
-y_true = np.array([0]*70 + [1]*60 + [2]*70)
-
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X_expr)
-
-plt.figure(figsize=(8, 6))
-plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y_true, cmap='viridis', alpha=0.7)
+scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='viridis', s=50)
 plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
 plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
-plt.title('Gene Expression: PCA Visualization')
-plt.colorbar(label='Subtype')
+plt.title('Iris dataset proyectado en 2D con PCA')
+plt.colorbar(scatter, label='Especie')
 plt.show()
-
-print(f"2 components capture {pca.explained_variance_ratio_.sum():.1%} of variance")
 ```
 
-**Interpretación:** PCA revela tres subgrupos distintos de pacientes correspondientes a los subtipos simulados.
+<CalloutCheck>
+Con solo 2 componentes capturás >95% de la varianza del Iris dataset. Pasaste de 4 dimensiones (sépalos y pétalos) a 2 que podés graficar, y las especies siguen siendo separables. Eso es PCA en una frase: **comprimir sin perder lo esencial**.
+</CalloutCheck>
 
-## Ejemplo en SaaS: Factores de comportamiento de usuarios
+</Section>
+
+<Section number={4} title="¿Cuántos componentes necesitás?" eyebrow="CÓDIGO">
 
 ```python
-np.random.seed(42)
-n_users = 500
+# Varianza explicada acumulada
+cumsum = np.cumsum(pca.explained_variance_ratio_)
 
-user_data = pd.DataFrame({
-    'pages_per_session': np.random.poisson(4, n_users),
-    'session_duration': np.random.exponential(10, n_users),
-    'features_used': np.random.poisson(8, n_users),
-    'support_tickets': np.random.poisson(1, n_users),
-    'days_active_per_month': np.random.randint(1, 30, n_users),
-    'referrals': np.random.poisson(2, n_users),
-})
-
-X_user = StandardScaler().fit_transform(user_data)
-pca = PCA(n_components=3)
-X_pca = pca.fit_transform(X_user)
-
-loadings = pd.DataFrame(
-    pca.components_.T,
-    columns=['PC1', 'PC2', 'PC3'],
-    index=user_data.columns
-)
-print("Component Loadings:")
-print(loadings.round(3))
-print(f"\nExplained variance: {pca.explained_variance_ratio_.cumsum()}")
+plt.figure(figsize=(8, 5))
+plt.bar(range(1, len(cumsum)+1), pca.explained_variance_ratio_, alpha=0.7, label='Individual')
+plt.step(range(1, len(cumsum)+1), cumsum, where='mid', color='red', linewidth=2, label='Acumulada')
+plt.axhline(y=0.95, color='gray', linestyle='--', label='95% umbral')
+plt.xlabel('Componentes principales')
+plt.ylabel('Varianza explicada')
+plt.legend()
+plt.title('¿Cuántos componentes necesito?')
+plt.show()
 ```
 
-**Interpretación:** PC1 podría representar "compromiso" (páginas, duración, características), PC2 "necesidades de soporte" (tickets), PC3 "crecimiento" (referidos, días activo).
+<ReflectionCheck
+  blockId="reflection-l07-pca-components"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson07_pca"
+  prompt="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo hacés?"
+  answer="PCA es sensible a la escala. Si una feature va de 0 a 1000 y otra de 0 a 1, la primera domina la matriz de covarianza y el primer componente principal será básicamente esa feature. Estandarizar (restar media, dividir por desvío) pone todas las features en igualdad de condiciones y deja que PCA descubra las verdaderas direcciones de varianza."
+/>
 
-## Errores comunes
+</Section>
 
-1. **No escalar los datos** — las características con mayor varianza dominan el primer PC
-2. **Interpretar las direcciones de PCA como causales** — los componentes son matemáticos, no biológicos
-3. **Usar PCA para selección de características** — PCA crea nuevas características, no selecciona las originales
-4. **Asumir que PCA siempre ayuda** — si la señal está en direcciones de baja varianza, PCA podría descartarla
-5. **Ignorar las cargas** — revisá siempre qué características originales contribuyen a cada componente
+<Section number={5} title="Aplicaciones" eyebrow="APLICACIÓN">
 
-## Buenas prácticas
+<ConceptCard variant="key-idea">
+**Biotecnología — Genómica:** Reducís 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
 
-- Escalá siempre los datos antes de PCA (StandardScaler)
-- Usá el gráfico de varianza explicada acumulada para elegir la cantidad de componentes
-- Buscá el "codo" en el gráfico de scree (varianza vs. número de componente)
-- Para visualización, 2-3 componentes suelen ser suficientes
-- Examiná las cargas de los componentes para interpretar qué representa cada PC
-- Considerá t-SNE o UMAP para visualización no lineal si PCA falla
+**SaaS — Visualización de usuarios:** Proyectás cientos de métricas de comportamiento a 2D y ves clústeres naturales de usuarios: "power users", "en riesgo", "casuales". Sin PCA, estas estructuras serían invisibles.
 
-## Resumen
+**Preprocesamiento:** Antes de aplicar K-Means o cualquier modelo, PCA elimina ruido y features redundantes, acelerando el entrenamiento y mejorando la generalización.
+</ConceptCard>
 
-- PCA encuentra direcciones ortogonales de máxima varianza
-- Vectores propios = componentes principales; valores propios = varianza explicada
-- PCA reduce dimensiones mientras preserva estructura
-- Escalá siempre los datos antes de PCA
-- Usá la proporción de varianza explicada para elegir la cantidad de componentes
-- PCA es esencial para visualizar datos de alta dimensionalidad
+</Section>
 
-## Términos clave
+<Section number={6} title="Resumen y glosario" eyebrow="RESUMEN">
 
-| Término | Definición |
-|---------|------------|
-| Componente Principal | Nuevo eje alineado con la máxima varianza |
-| Valor propio | Cantidad de varianza capturada por un componente |
-| Vector propio | Dirección de un componente principal |
-| Proporción de varianza explicada | Fracción de la varianza total por componente |
-| Cargas | Contribución de las características originales a cada PC |
-| Reducción de dimensionalidad | Reducir la cantidad de características preservando información |
+<ConceptCard variant="key-idea">
+PCA reduce dimensionalidad creando nuevas features (componentes principales) que son combinaciones lineales de las originales, ordenadas por varianza explicada. Estandarizar es obligatorio. La varianza explicada acumulada te dice cuántos componentes retener. Esencial para visualización, compresión y preprocesamiento.
+</ConceptCard>
 
-## Ejercicios
+<InteractiveTable
+  columns={[{ key: "term", label: "Término" }, { key: "def", label: "Definición" }]}
+  rows={[
+    { term: "Componente principal", def: "Nueva feature = combinación lineal de las originales, ortogonal a las demás" },
+    { term: "Valor propio", def: "Cantidad de varianza capturada por un componente" },
+    { term: "Varianza explicada", def: "Porcentaje de la varianza total que captura un componente" },
+    { term: "Varianza acumulada", def: "Suma de varianzas explicadas por los primeros K componentes" },
+  ]}
+/>
 
-**Nivel 1 — Básico:** Si el 95% de la varianza es capturada por 3 componentes de 30 características originales, ¿qué significa esto?
+</Section>
 
-**Nivel 2 — Implementación:** Aplicá PCA al dataset breast cancer (30 características). Graficá la varianza explicada acumulada y determiná cuántos componentes capturan el 95% de la varianza.
+<Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
 
-**Nivel 3 — Pensamiento crítico:** Aplicás PCA a datos de expresión génica y PC1 separa a los pacientes por edad en lugar de por estado de enfermedad. ¿Qué pasó? ¿Cómo lo arreglarías?
+<ConceptCard variant="key-idea">
+**Desafío:** Cargá breast cancer (30 features), aplicá PCA, y encontrá el número mínimo de componentes necesario para retener el 95% de la varianza. Luego entrená un Random Forest con las features originales vs. las componentes de PCA y compará accuracy y tiempo de entrenamiento.
+</ConceptCard>
 
-## Desafío de programación
-
-Escribí una función `pca_analysis(X, n_components)` que:
-1. Escale los datos
-2. Ajuste PCA
-3. Devuelva los datos transformados, las proporciones de varianza explicada y las cargas
-4. Imprima cuántos componentes se necesitan para el 90% de la varianza
+</Section>
