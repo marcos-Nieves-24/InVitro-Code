@@ -66,7 +66,7 @@ export function LessonCarousel({
               Finalizar
             </Button>
           ) : (
-            <Button size="sm" onClick={() => setCurrent((c) => c + 1)}>
+            <Button variant="secondary" size="sm" onClick={() => setCurrent((c) => c + 1)}>
               Siguiente →
             </Button>
           )}

@@ -27,11 +27,11 @@ Quiz: descriptive_statistics_quiz.md
 Bienvenido al Laboratorio de Datos. Hoy vamos a aprender cómo resumir miles de números en un puñado de medidas significativas. Es la primera herramienta de todo científico de datos.
 </MascotMessage>
 
-Imaginá que acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías que leer 10.000 números uno por uno.
+Imaginá qué acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías qué leer 10.000 números uno por uno.
 
 La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
 
-En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, resume métricas de engagement como usuarios activos diarios o duración de sesiones.
+En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, resume métricas de engagement cómo usuarios activos diarios o duración de sesiones.
 
 </Section>
 
@@ -40,7 +40,7 @@ En biotecnología, la estadística descriptiva ayuda a responder preguntas como:
 En el módulo anterior aprendiste a manipular datos usando Python, NumPy y Pandas. Ahora aprenderás a **describir** datos numéricamente.
 
 <ConceptCard variant="key-idea">
-La estadística descriptiva es el primer paso de cualquier análisis de datos. Antes de modelar, antes de predecir, antes de sacar conclusiones: hay que describir.
+La estadística descriptiva es el primer paso de cualquier análisis de datos. Antes de modelar, antes de predecir, antes de sacar conclusiones: hay qué describir.
 </ConceptCard>
 
 Esta lección sienta las bases para todo el módulo:
@@ -64,12 +64,12 @@ La media aritmética es la suma de todos los valores dividida por la cantidad de
 
 $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
-**Intuición**: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es donde se equilibraría el fulcro.
+**Intuición**: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es dónde se equilibraría el fulcro.
 
 ### Mediana
 
 <ConceptCard variant="definition">
-La mediana es el valor del medio cuando los datos están ordenados de forma ascendente.
+La mediana es el valor del medio cuándo los datos están ordenados de forma ascendente.
 </ConceptCard>
 
 $$\text{mediana} = \begin{cases} x_{(n+1)/2} & \text{si } n \text{ es impar} \\ \frac{x_{n/2} + x_{(n/2)+1}}{2} & \text{si } n \text{ es par} \end{cases}$$
@@ -95,7 +95,7 @@ La mediana divide el conjunto en dos mitades iguales. A diferencia de la media, 
     { feature: "Definición", left: "Punto de equilibrio (suma / n)", right: "Valor central (mitad arriba, mitad abajo)" },
     { feature: "Robustez a outliers", left: "Muy sensible — un valor extremo la desplaza", right: "Robusta — los outliers no la afectan" },
     { feature: "Cuándo usarla", left: "Datos simétricos (ej. altura, peso, temperatura corporal)", right: "Datos sesgados (ej. ingresos, precios, expresión génica con outliers)" },
-    { feature: "Ejemplo", left: "Notas de un examen bien diseñado", right: "Ingresos de una población (donde algunos ganan 100× más)" },
+    { feature: "Ejemplo", left: "Notas de un examen bien diseñado", right: "Ingresos de una población (dónde algunos ganan 100× más)" },
   ]}
 />
 
@@ -128,7 +128,7 @@ print(f"Moda: {mode}")
 ```
 
 <CalloutInfo>
-Ejecutá este código en tu notebook. ¿Están cerca la media y la mediana? Cuando son similares, es una buena señal de que los datos son simétricos. Si difieren mucho, hay sesgo.
+Ejecutá este código en tu notebook. ¿Están cerca la media y la mediana? Cuándo son similares, es una buena señal de qué los datos son simétricos. Si difieren mucho, hay sesgo.
 </CalloutInfo>
 
 <ReflectionCheck
@@ -136,7 +136,7 @@ Ejecutá este código en tu notebook. ¿Están cerca la media y la mediana? Cuan
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
   prompt="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
-  answer="Que la distribución es aproximadamente simétrica — no hay valores extremos que desplacen la media. En una distribución simétrica, media ≈ mediana. Si fueran muy diferentes, sabríamos que hay sesgo o outliers."
+  answer="Que la distribución es aproximadamente simétrica — no hay valores extremos qué desplacen la media. En una distribución simétrica, media ≈ mediana. Si fueran muy diferentes, sabríamos qué hay sesgo o outliers."
 />
 
 </Section>
@@ -150,7 +150,7 @@ Las medidas de dispersión indican qué tan dispersos están los datos. No basta
 
 $$\text{Rango} = \max(x) - \min(x)$$
 
-Es muy sensible a valores atípicos: un solo valor extremo duplica el rango.
+Es muy sensible a valores atípicos: un sólo valor extremo duplica el rango.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -166,7 +166,7 @@ Mide dispersión, pero en unidades al cuadrado (difícil de interpretar).
 
 $$\sigma = \sqrt{\sigma^2}$$
 
-Está en las mismas unidades que los datos originales — es la medida de dispersión más reportada.
+Está en las mismas unidades qué los datos originales — es la medida de dispersión más reportada.
 </ConceptCard>
 
 </Section>
@@ -182,14 +182,14 @@ Donde $Q_1$ es el percentil 25 y $Q_3$ es el percentil 75.
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-El IQR contiene el 50% central de los datos. Es **robusto frente a valores atípicos** porque ignora los extremos. Junto con la mediana, forma la pareja ideal para datos sesgados.
+El IQR contiene el 50% central de los datos. Es **robusto frente a valores atípicos** por qué ignora los extremos. Junto con la mediana, forma la pareja ideal para datos sesgados.
 </ConceptCard>
 
 <ComparisonTable
   rows={[
     { feature: "Mide", left: "Recorrido total (max − min)", right: "Dispersión del 50% central (Q3 − Q1)" },
     { feature: "Robustez", left: "Muy sensible a outliers", right: "Robusto — ignora extremos" },
-    { feature: "Unidad", left: "Misma que los datos", right: "Misma que los datos" },
+    { feature: "Unidad", left: "Misma qué los datos", right: "Misma qué los datos" },
     { feature: "Se usa con", left: "Media y desviación estándar", right: "Mediana" },
     { feature: "Cuándo", left: "Datos simétricos, sin outliers", right: "Datos sesgados o con outliers" },
   ]}
@@ -214,19 +214,19 @@ print(f"Desvío Estándar: {np.std(reduction, ddof=0):.2f} mm")
 print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} mm")
 ```
 
-**¿Qué observamos?** El paciente 20 tuvo una reducción de 45 mm — mucho mayor que el resto.
+**¿Qué observamos?** El paciente 20 tuvo una reducción de 45 mm — mucho mayor qué el resto.
 
 <ReflectionCheck
   blockId="reflection-l01-tumor-outlier"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
   prompt="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
-  answer="Reportaría la mediana (13 mm). El valor 45 mm es un outlier que infla la media artificialmente. La mediana de 13 mm representa mejor la experiencia típica del paciente. Podría complementar con el IQR (4 mm) para indicar que el 50% central de pacientes tuvo reducciones entre 11 y 15 mm."
+  answer="Reportaría la mediana (13 mm). El valor 45 mm es un outlier qué infla la media artificialmente. La mediana de 13 mm representa mejor la experiencia típica del paciente. Podría complementar con el IQR (4 mm) para indicar qué el 50% central de pacientes tuvo reducciones entre 11 y 15 mm."
 />
 
 </Section>
 
-<Section number={9} title="El IQR como detector de outliers" eyebrow="CONCEPTO">
+<Section number={9} title="El IQR cómo detector de outliers" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
 Un valor es **atípico (outlier)** si está por debajo de $Q_1 - 1.5 \times \text{IQR}$ o por encima de $Q_3 + 1.5 \times \text{IQR}$.
@@ -273,14 +273,14 @@ print(df[df['TP53_expression'] < lower])
 ```
 
 <CalloutInfo>
-TP53 es conocido como "el guardián del genoma". Una expresión anormalmente baja puede indicar una deleción del gen — un evento común en células cancerosas. La estadística descriptiva nos ayuda a identificar estas muestras para análisis más profundos.
+TP53 es conocido cómo "el guardián del genoma". Una expresión anormalmente baja puede indicar una deleción del gen — un evento común en células cancerosas. La estadística descriptiva nos ayuda a identificar estas muestras para análisis más profundos.
 </CalloutInfo>
 
 </Section>
 
 <Section number={11} title="Ejemplo SaaS: usuarios activos diarios" eyebrow="INTERACTIVA">
 
-La estadística descriptiva no es solo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
+La estadística descriptiva no es sólo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
 
 ```python
 np.random.seed(42)
@@ -304,7 +304,7 @@ plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
   prompt="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
-  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un solo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un sólo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
 />
 
 </Section>
@@ -312,12 +312,12 @@ plt.show()
 <Section number={12} title="Errores comunes y mejores prácticas" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
-**Cuatro errores que todo principiante comete:**
+**Cuatro errores qué todo principiante comete:**
 
 1. **Usar la media para datos sesgados** — la media se va con los outliers. Usá la mediana para ingresos, precios, o cualquier distribución con cola larga.
 2. **Confundir varianza muestral y poblacional** — `np.var(x)` usa ddof=0 (poblacional). Para una muestra, usá `np.var(x, ddof=1)`.
 3. **Interpretar la desviación estándar sin contexto** — una std de 10 puede ser enorme o insignificante según la escala.
-4. **Asumir que la moda es única** — en datos continuos, agrupá o redondeá para encontrar modas significativas.
+4. **Asumir qué la moda es única** — en datos continuos, agrupá o redondeá para encontrar modas significativas.
 </ConceptCard>
 
 <CalloutInfo>
@@ -333,7 +333,7 @@ plt.show()
 
 <Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-Poné a prueba lo que aprendiste:
+Poné a prueba lo qué aprendiste:
 
 1. **Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. ¿Qué medida representa mejor el centro?**
 2. **¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué se reporta más la segunda?**
@@ -344,7 +344,7 @@ Poné a prueba lo que aprendiste:
 
 <p><strong>2.</strong> La varianza mide dispersión en unidades al cuadrado (difícil de interpretar: "la varianza es 25 puntos²"). La desviación estándar es la raíz cuadrada, devolviéndonos a las unidades originales ("la desviación estándar es 5 puntos"). Por eso se reporta más: es directamente interpretable.</p>
 
-<p><strong>3.</strong> La media puede ser engañosa cuando hay variabilidad extrema. Si el 60% de pacientes tuvo 100% de efectividad y el 40% tuvo 0%, la media es 60%... no 85%. Para llegar a 85% con 40% en cero, el 60% restante tendría que tener ~142% de efectividad (imposible). Algo no cierra — probablemente están reportando la media de los respondedores nada más, excluyendo a los no respondedores. Mejores estadísticos: reportar la mediana y el porcentaje de respondedores por separado.</p>
+<p><strong>3.</strong> La media puede ser engañosa cuándo hay variabilidad extrema. Si el 60% de pacientes tuvo 100% de efectividad y el 40% tuvo 0%, la media es 60%... no 85%. Para llegar a 85% con 40% en cero, el 60% restante tendría qué tener ~142% de efectividad (imposible). Algo no cierra — probablemente están reportando la media de los respondedores nada más, excluyendo a los no respondedores. Mejores estadísticos: reportar la mediana y el porcentaje de respondedores por separado.</p>
 </AnswerReveal>
 
 </Section>
@@ -355,13 +355,13 @@ Poné a prueba lo que aprendiste:
   headers={["Término", "Definición"]}
   rows={[
     ["Media", "Suma de valores dividida por la cantidad; el promedio aritmético"],
-    ["Mediana", "El valor del medio cuando los datos están ordenados"],
+    ["Mediana", "El valor del medio cuándo los datos están ordenados"],
     ["Moda", "El valor más frecuente en el conjunto de datos"],
     ["Varianza", "Distancia cuadrática promedio desde la media (σ²)"],
     ["Desviación Estándar", "Raíz cuadrada de la varianza; distancia típica desde la media (σ)"],
     ["Rango", "Diferencia entre el valor máximo y el mínimo"],
     ["Rango Intercuartílico", "Diferencia entre Q3 (percentil 75) y Q1 (percentil 25)"],
-    ["Valor Atípico (Outlier)", "Punto que difiere significativamente del resto; detectado con la regla 1.5×IQR"],
+    ["Valor Atípico (Outlier)", "Punto qué difiere significativamente del resto; detectado con la regla 1.5×IQR"],
   ]}
   searchable={true}
   caption="Términos clave de estadística descriptiva — usá la búsqueda para encontrar definiciones rápido"

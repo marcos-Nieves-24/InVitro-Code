@@ -24,10 +24,10 @@ Quiz: model_evaluation_quiz.md
 <Section number={1} title="Crear modelos es fácil. Evaluarlos, no." eyebrow="INICIO">
 
 <MascotMessage mood="curious">
-Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o solo memorizó los datos de entrenamiento. La evaluación de modelos es donde separamos la magia de la ilusión.
+Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o sólo memorizó los datos de entrenamiento. La evaluación de modelos es dónde separamos la magia de la ilusión.
 </MascotMessage>
 
-En las lecciones anteriores construiste intuición estadística. Ahora la vas a aplicar para responder la pregunta más importante en ML: **¿este modelo es bueno?** No en training — en datos que nunca vio. Eso se llama **generalización**.
+En las lecciones anteriores construiste intuición estadística. Ahora la vas a aplicar para responder la pregunta más importante en ML: **¿este modelo es bueno?** No en training — en datos qué nunca vio. Eso se llama **generalización**.
 
 </Section>
 
@@ -43,7 +43,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-Evaluar en training es como corregirte tu propio examen con las respuestas adelante. El accuracy en training siempre es alto. Lo que importa es el accuracy en test: los datos que el modelo nunca vio.
+Evaluar en training es cómo corregirte tu propio examen con las respuestas adelante. El accuracy en training siempre es alto. Lo qué importa es el accuracy en test: los datos qué el modelo nunca vio.
 </ConceptCard>
 
 </Section>
@@ -73,9 +73,9 @@ La validación cruzada te da un intervalo de confianza sobre la performance real
 
 **MSE** (Mean Squared Error): $\frac{1}{n}\sum (y_i - \hat{y}_i)^2$ — penaliza errores grandes más fuerte.
 
-**RMSE** (Root MSE): $\sqrt{\text{MSE}}$ — como MSE pero en unidades originales, interpretable.
+**RMSE** (Root MSE): $\sqrt{\text{MSE}}$ — cómo MSE pero en unidades originales, interpretable.
 
-**R²** (Coeficiente de determinación): proporción de varianza explicada. 1.0 = perfecto, 0 = siempre predice la media, negativo = peor que la media.
+**R²** (Coeficiente de determinación): proporción de varianza explicada. 1.0 = perfecto, 0 = siempre predice la media, negativo = peor qué la media.
 </ConceptCard>
 
 <ComparisonTable
@@ -147,7 +147,7 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
   moduleSlug="estadistica"
   lessonSlug="lesson09_model_evaluation"
   prompt="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
-  answer="Significa que el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganás plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² solo no te dice nada sin contexto."
+  answer="Significa qué el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganás plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² sólo no te dice nada sin contexto."
 />
 
 </Section>
@@ -155,7 +155,7 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 <Section number={7} title="Checkpoint" eyebrow="EVALUACIÓN">
 
 <AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué no evaluamos en el training set?</strong> Porque el modelo ya "vio" esos datos — los puede memorizar. Accuracy en training mide memoria, no aprendizaje. Solo el test set (datos no vistos) mide generalización, que es lo que realmente nos importa en producción.</p>
+<p><strong>¿Por qué no evaluamos en el training set?</strong> Porque el modelo ya "vio" esos datos — los puede memorizar. Accuracy en training mide memoria, no aprendizaje. Sólo el test set (datos no vistos) mide generalización, qué es lo qué realmente nos importa en producción.</p>
 <p><strong>¿MAE o RMSE? ¿Cuándo elegir cuál?</strong> MAE si todos los errores son igualmente costosos (ej. predecir temperatura). RMSE si los errores grandes son particularmente graves y querés penalizarlos más (ej. predecir dosis de medicamento — un error de 10× puede matar).</p>
 </AnswerReveal>
 
@@ -173,7 +173,7 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
     ["RMSE", "Raíz del MSE — en unidades originales, interpretable"],
     ["R²", "Proporción de varianza explicada (1 = perfecto)"],
     ["Overfitting", "El modelo memoriza training, falla en test"],
-    ["Generalización", "Performance en datos no vistos — lo que importa"],
+    ["Generalización", "Performance en datos no vistos — lo qué importa"],
   ]}
   searchable={true}
   caption="Términos clave de evaluación de modelos"
@@ -184,9 +184,9 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 <Section number={9} title="Para la última lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Sabés evaluar modelos! Train/test split, validación cruzada, MAE, RMSE, R² — tenés el toolkit completo para separar modelos buenos de malos. Esto es lo que hace un científico de datos senior.
+¡Sabés evaluar modelos! Train/test split, validación cruzada, MAE, RMSE, R² — tenés el toolkit completo para separar modelos buenos de malos. Esto es lo qué hace un científico de datos senior.
 </MascotMessage>
 
-**En la Lección 10** cerramos el módulo con **Narración de Datos**: cómo comunicar tus hallazgos. Porque de nada sirve el mejor análisis si no podés explicarlo. Vas a aprender a contar historias con datos que convenzan a cualquier audiencia.
+**En la Lección 10** cerramos el módulo con **Narración de Datos**: cómo comunicar tus hallazgos. Porque de nada sirve el mejor análisis si no podés explicarlo. Vas a aprender a contar historias con datos qué convenzan a cualquier audiencia.
 
 </Section>

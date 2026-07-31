@@ -53,6 +53,8 @@ Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
 <ComparisonTable
+  leftLabel="Aspergillus"
+  rightLabel="Penicillium"
   rows={[
     { feature: "Forma", left: "Más redondeada", right: "Más alargada" },
     { feature: "Textura superficial", left: "Rugosa (verrugosa)", right: "Más lisa" },
