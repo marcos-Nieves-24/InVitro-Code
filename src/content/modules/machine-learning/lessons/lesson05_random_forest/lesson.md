@@ -21,242 +21,182 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Bosque Aleatorio
+<Section number={1} title="100 médicos piensan mejor que uno" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="excited">
+El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La razón? Funciona bien casi siempre, sin requerir mucho ajuste. Es el "caballo de batalla" del ML supervisado.
+</MascotMessage>
 
-Un solo árbol de decisión se sobreajusta fácilmente y es inestable — pequeños cambios en los datos producen árboles muy diferentes. Pero si le pedís a 100 médicos que diagnostiquen un paciente y tomás una votación, el diagnóstico colectivo es más confiable que el de cualquier médico individual. Esta es la idea central del Bosque Aleatorio: construir muchos árboles y promediar sus predicciones. El Bosque Aleatorio es uno de los algoritmos más utilizados tanto en biotecnología (genómica, descubrimiento de fármacos) como en SaaS (detección de fraude, predicción de abandono).
+Un árbol de decisión solo es inestable y sobreajusta. Pero si entrenás 100 árboles con variaciones aleatorias de los datos y los ponés a votar, el resultado es sorprendentemente robusto. Esto es un **ensemble**: combinar modelos débiles para crear uno fuerte.
 
-## Panorama general
+<ConceptCard variant="key-idea">
+**Bagging (Bootstrap Aggregating):** Tomás muchas muestras bootstrap de tus datos, entrenás un árbol en cada una, y promediás (regresión) o hacés votación mayoritaria (clasificación). La magia: cada árbol tiene varianza alta, pero el promedio de B árboles reduce la varianza ~B veces sin aumentar el sesgo.
+</ConceptCard>
 
-**Anterior:** Los árboles de decisión eran interpretables pero inestables. **Esta lección:** Los Bosques Aleatorios solucionan la inestabilidad promediando muchos árboles. **Siguiente:** Clustering K-Means — pasando de aprendizaje supervisado a no supervisado.
+</Section>
 
-## Teoría
+<Section number={2} title="Dos fuentes de aleatoriedad" eyebrow="CONCEPTO">
 
-### Aprendizaje Ensemble
+<ComparisonTable
+  rows={[
+    { feature: "Aleatoriedad 1", left: "Cada árbol se entrena con una muestra bootstrap diferente (~63% de los datos, con reemplazo)" },
+    { feature: "Aleatoriedad 2", left: "En cada división del árbol, solo se considera un subconjunto aleatorio de features (√p para clasificación, p/3 para regresión)" },
+    { feature: "¿Por qué dos?", left: "Si solo usáramos bootstrap, los árboles todavía estarían correlacionados (las features más fuertes dominarían). La segunda aleatoriedad fuerza diversidad real." },
+    { feature: "Resultado", left: "Árboles descorrelacionados que cometen errores en distintas direcciones → el promedio es mucho mejor que cualquiera individual." },
+  ]}
+/>
 
-Los métodos ensemble combinan múltiples modelos para producir mejores predicciones. La idea clave: modelos diversos cometen errores diferentes, y promediarlos reduce esos errores.
+<ConceptCard variant="definition">
+**OOB (Out-of-Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out-of-bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtenés una estimación de rendimiento sin necesidad de dividir train/test.
+</ConceptCard>
 
-### Bagging (Bootstrap Aggregating)
+</Section>
 
-1. Creá $B$ muestras bootstrap (muestreo con reemplazo) a partir de los datos de entrenamiento
-2. Entrená un árbol de decisión en cada muestra bootstrap
-3. Promediá las predicciones (regresión) o votación mayoritaria (clasificación)
+<Section number={3} title="Importancia de características: el superpoder del RF" eyebrow="CONCEPTO">
 
-**Por qué funciona:** Cada árbol tiene varianza alta pero sesgo bajo. Promediar $B$ árboles reduce la varianza aproximadamente en $1/B$ sin aumentar el sesgo.
+El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclás aleatoriamente cada feature:
 
-### Bosque Aleatorio = Bagging + Aleatoriedad de Características
+<CalloutCheck>
+La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top-3 en 100 árboles distintos, podés confiar en que realmente importa.
+</CalloutCheck>
 
-El Bosque Aleatorio agrega una fuente extra de diversidad: en cada división, solo se considera un subconjunto aleatorio de características. Esto descorrelaciona aún más los árboles.
+<ReflectionCheck
+  blockId="reflection-l05-feature-importance"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson05_random_forest"
+  prompt="Dos features tienen importancia similar según el RF. ¿Significa que son igualmente importantes para tu problema?"
+  answer="No necesariamente. Si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Para saberlo, eliminá una y reentrená: si la otra captura toda la importancia, son redundantes. Además, la importancia mide utilidad predictiva, no causalidad."
+/>
 
-- Para clasificación: típicamente $\sqrt{p}$ características
-- Para regresión: típicamente $p/3$ características
+</Section>
 
-### Evaluación Out-of-Bag (OOB)
-
-Cada muestra bootstrap excluye ~37% de las muestras. Estas muestras out-of-bag se pueden usar como un conjunto de validación incorporado sin necesidad de una división train/validation separada.
-
-### Importancia de características
-
-El Bosque Aleatorio provee dos tipos:
-
-1. **Importancia basada en impureza:** suma de la reducción de impureza en todas las divisiones para cada característica
-2. **Importancia por permutación:** disminución en el rendimiento del modelo cuando los valores de una característica se mezclan aleatoriamente
-
-## Fundamento matemático
-
-### Reducción de varianza con bootstrap
-
-Sea $\hat{f}_b(x)$ la predicción del árbol $b$. La predicción del ensemble:
-
-$$\hat{f}_{\text{rf}}(x) = \frac{1}{B}\sum_{b=1}^{B} \hat{f}_b(x)$$
-
-Si cada árbol tiene varianza $\sigma^2$ y correlación pairwise $\rho$:
-
-$$\text{Var}(\hat{f}_{\text{rf}}) = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2$$
-
-A medida que $B \to \infty$, la varianza se acerca a $\rho\sigma^2$. La aleatoriedad de características reduce $\rho$, haciendo el ensemble más efectivo.
-
-## Explicación visual
+<Section number={4} title="Tu primer Bosque Aleatorio" eyebrow="CÓDIGO">
 
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import make_classification
-
-X, y = make_classification(n_samples=300, n_features=2, n_redundant=0,
-                            n_clusters_per_class=1, class_sep=0.8, random_state=42)
-
-tree = DecisionTreeClassifier(random_state=42)
-forest = RandomForestClassifier(n_estimators=100, random_state=42)
-
-tree.fit(X, y)
-forest.fit(X, y)
-
-xx, yy = np.meshgrid(np.linspace(X[:,0].min()-0.5, X[:,0].max()+0.5, 100),
-                     np.linspace(X[:,1].min()-0.5, X[:,1].max()+0.5, 100))
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-for ax, model, title in zip(axes, [tree, forest], ['Single Tree', 'Random Forest (100 trees)']):
-    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
-    ax.contourf(xx, yy, Z, alpha=0.3, cmap='RdBu')
-    ax.scatter(X[:, 0], X[:, 1], c=y, cmap='RdBu', edgecolors='k', alpha=0.7)
-    ax.set_title(title)
-plt.tight_layout()
-plt.savefig('figures/tree_vs_forest_boundary.png', dpi=150)
-plt.show()
-```
-
-## Implementación en Python
-
-```python
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.datasets import load_breast_cancer
+import pandas as pd
+import numpy as np
 
 data = load_breast_cancer()
 X, y = data.data, data.target
-
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+    X, y, test_size=0.2, random_state=42)
 
-# Compare tree vs. forest
-tree = DecisionTreeClassifier(max_depth=5, random_state=42)
-forest = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
+rf = RandomForestClassifier(n_estimators=100, oob_score=True, random_state=42)
+rf.fit(X_train, y_train)
 
-for name, model in [('Single Tree', tree), ('Random Forest', forest)]:
-    model.fit(X_train, y_train)
-    print(f"{name}:")
-    print(f"  Train: {accuracy_score(y_train, model.predict(X_train)):.3f}")
-    print(f"  Test:  {accuracy_score(y_test, model.predict(X_test)):.3f}")
+print(f"OOB Score: {rf.oob_score_:.3f}")
+print(f"Test Accuracy: {rf.score(X_test, y_test):.3f}")
 
-# Feature importance
 importance = pd.DataFrame({
     'feature': data.feature_names,
-    'importance': forest.feature_importances_
-}).sort_values('importance', ascending=False)
-
-print("\nTop 5 features:")
-print(importance.head(5).to_string(index=False))
-```
-
-## Ejemplo guiado: Cáncer de mama con Bosque Aleatorio
-
-**Comparando árbol vs. bosque:**
-- Árbol individual (profundidad 5): Prueba ~93%
-- Bosque Aleatorio (100 árboles, profundidad 5): Prueba ~97%
-
-**¿Por qué?** El bosque promedia muchos árboles, reduciendo la varianza. Algunos árboles podrían sobreajustar patrones específicos, pero la votación mayoritaria corrige errores individuales.
-
-**Puntaje OOB:** ~95% — cercano al puntaje de prueba, confirmando que OOB es un proxy de validación confiable.
-
-## Ejemplo en biotecnología: Clasificación de expresión génica
-
-```python
-np.random.seed(42)
-n_samples, n_genes = 300, 1000
-
-X_expr = np.random.randn(n_samples, n_genes)
-y_type = (X_expr[:, 0] * 0.5 + X_expr[:, 50] * 0.3 - X_expr[:, 200] * 0.4 > 0).astype(int)
-
-X_tr, X_te, y_tr, y_te = train_test_split(X_expr, y_type, test_size=0.3)
-
-rf = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)
-rf.fit(X_tr, y_tr)
-
-print(f"Test accuracy: {accuracy_score(y_te, rf.predict(X_te)):.3f}")
-
-# Top predictive genes
-gene_importance = pd.DataFrame({
-    'gene': [f'GENE_{i}' for i in range(n_genes)],
     'importance': rf.feature_importances_
 }).sort_values('importance', ascending=False).head(10)
-print(gene_importance.to_string(index=False))
+print(importance)
 ```
 
-**Interpretación:** El modelo identifica los genes 0, 50 y 200 como los más predictivos — coincidiendo con la generación de datos sintéticos.
+<CalloutInfo>
+Ni siquiera necesitás un conjunto de validación separado: el OOB score te da una estimación honesta del rendimiento. Si OOB ≈ test accuracy, sabés que no hay fuga de datos y el modelo generaliza bien.
+</CalloutInfo>
 
-## Ejemplo en SaaS: Detección de fraude
+</Section>
+
+<Section number={5} title="RF vs Árbol individual" eyebrow="INTERACTIVA">
 
 ```python
-np.random.seed(42)
-n = 2000
+from sklearn.tree import DecisionTreeClassifier
 
-fraud_data = pd.DataFrame({
-    'transaction_amount': np.random.exponential(100, n),
-    'distance_from_home': np.random.exponential(50, n),
-    'hour_of_day': np.random.randint(0, 24, n),
-    'num_previous_transactions': np.random.poisson(20, n),
-    'is_new_device': np.random.binomial(1, 0.1, n),
-})
+# Single tree
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
 
-fraud_prob = (
-    0.001 * fraud_data['transaction_amount']
-    + 0.002 * fraud_data['distance_from_home']
-    + 0.02 * (fraud_data['hour_of_day'] < 6)
-    + 0.1 * fraud_data['is_new_device']
-    + np.random.normal(0, 0.05, n)
-)
-fraud_data['is_fraud'] = (fraud_prob > 0.15).astype(int)
+# Random Forest
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
 
-X_f = fraud_data.drop('is_fraud', axis=1)
-y_f = fraud_data['is_fraud']
+print(f"Árbol individual — Test: {tree.score(X_test, y_test):.3f}")
+print(f"Bosque Aleatorio — Test: {rf.score(X_test, y_test):.3f}")
 
-rf = RandomForestClassifier(n_estimators=100, class_weight='balanced', random_state=42)
-rf.fit(X_f, y_f)
-
-print(f"Recall: {recall_score(y_f, rf.predict(X_f)):.3f}")
-print(f"Precision: {precision_score(y_f, rf.predict(X_f)):.3f}")
+# Compare top features
+tree_imp = pd.DataFrame({
+    'feature': data.feature_names,
+    'tree': tree.feature_importances_,
+    'forest': rf.feature_importances_
+}).set_index('feature')
+print(tree_imp.sort_values('forest', ascending=False).head(10))
 ```
 
-## Errores comunes
+<ConceptCard variant="key-idea">
+El RF casi siempre supera al árbol individual. La diferencia es más notable cuando hay mucho ruido en los datos. Si el RF no mejora significativamente al árbol, probablemente tus datos son muy simples o tenés pocas features.
+</ConceptCard>
 
-1. **Muy pocos árboles** — empezá con 100, aumentá hasta que el error OOB se estabilice.
-2. **Sin límite de profundidad** — incluso en bosques, árboles muy profundos pueden sobreajustar en conjuntos pequeños.
-3. **Ignorar class_weight** — para datos desbalanceados, configurá `class_weight='balanced'`.
-4. **Usar importancia por impureza a ciegas** — para características de alta cardinalidad, la importancia por permutación es más confiable.
+</Section>
 
-## Buenas prácticas
+<Section number={6} title="Biotecnología: genómica y biomarcadores" eyebrow="APLICACIÓN">
 
-- Usá el puntaje OOB como métrica de validación gratuita
-- Empezá con `n_estimators=100` y aumentá hasta que el error OOB se estabilice
-- Limitá `max_depth` o configurá `min_samples_leaf` para controlar la complejidad del árbol
-- Compará con un árbol individual para medir el beneficio del ensemble
-- Usá importancia por permutación para la selección final de características
+En descubrimiento de fármacos, tenés datos de expresión de miles de genes pero solo cientos de pacientes. El RF brilla en este escenario:
 
-## Resumen
+- **Maneja p >> n** (más features que muestras) mejor que la regresión
+- **Selecciona features automáticamente** — identificás qué genes predicen respuesta al tratamiento
+- **Robusto a features irrelevantes** — la aleatoriedad en cada split ignora features ruidosas
 
-- El Bosque Aleatorio promedia muchos árboles para reducir la varianza
-- El bagging crea árboles diversos mediante muestreo bootstrap
-- La aleatoriedad de características descorrelaciona aún más los árboles
-- La evaluación OOB provee validación gratuita
-- La importancia de características identifica predictores clave
-- RF es robusto, preciso y ampliamente aplicable
+<CalloutInfo>
+En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para identificar variantes genéticas asociadas a enfermedades sin asumir linealidad. Un modelo lineal te dice "el gen A aumenta el riesgo en 20%". Un RF te dice "el gen A importa, pero su efecto depende de los genes B y C".
+</CalloutInfo>
 
-## Términos clave
+</Section>
 
-| Término | Definición |
-|---------|------------|
-| Ensemble | Combinación de múltiples modelos |
-| Bagging | Bootstrap + Agregación |
-| Bootstrap | Muestreo con reemplazo |
-| OOB | Muestras out-of-bag para validación |
-| Importancia de características | Medida de la contribución de cada característica |
-| n_estimators | Cantidad de árboles en el bosque |
+<Section number={7} title="Errores comunes" eyebrow="PELIGROS">
 
-## Ejercicios
+<CalloutInfo>
+1. **Pocos árboles.** Con n_estimators=10 dejás mucha varianza sin reducir. Empezá con 100 y subí si tenés recursos. Después de ~500 árboles, la mejora marginal es mínima.
 
-**Nivel 1 — Básico:** Explicá por qué el bagging reduce la varianza comparado con un árbol individual.
+2. **No usar OOB.** Estás desperdiciando validación gratis. Siempre `oob_score=True`.
 
-**Nivel 2 — Implementación:** Entrená un Bosque Aleatorio en el dataset breast cancer con `n_estimators=[10, 50, 100, 200]`. Graficá el puntaje OOB vs. n_estimators. ¿En qué punto disminuyen los retornos?
+3. **max_depth=None en RF.** Aunque el RF es más robusto al sobreajuste que un árbol solo, árboles sin podar dentro del bosque igual pueden sobreajustar sus muestras bootstrap.
 
-**Nivel 3 — Pensamiento crítico:** Tu Bosque Aleatorio alcanza 99.5% de precisión en entrenamiento pero 88% en prueba. El árbol individual alcanza 94% en entrenamiento y 90% en prueba. ¿Qué está pasando y cómo arreglarías el bosque?
+4. **Ignorar max_features.** El default (sqrt(p)) suele funcionar, pero en datasets con muchas features ruidosas, reducirlo fuerza más diversidad.
+</CalloutInfo>
 
-## Desafío de programación
+</Section>
 
-Escribí una función `tune_random_forest(X_train, y_train, X_val, y_val)` que realice una búsqueda en grilla sobre `n_estimators` (50, 100, 200) y `max_depth` (3, 5, 10, None) y devuelva el mejor modelo y su precisión en validación.
+<Section number={8} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<ConceptCard variant="key-idea">
+El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria de features. Reduce la varianza drásticamente sin aumentar el sesgo. El OOB da validación gratis. La feature importance es confiable. Es el algoritmo "default" para problemas tabulares supervisados.
+</ConceptCard>
+
+<InteractiveTable
+  columns={[
+    { key: "term", label: "Término" },
+    { key: "def", label: "Definición" },
+  ]}
+  rows={[
+    { term: "Ensemble", def: "Combinar múltiples modelos para superar a cualquiera individual" },
+    { term: "Bagging", def: "Bootstrap + agregación: entrenar en muestras bootstrap y promediar" },
+    { term: "OOB", def: "Estimación de rendimiento con datos no usados en el bootstrap" },
+    { term: "n_estimators", def: "Cantidad de árboles. Más = mejor (hasta cierto punto)" },
+    { term: "max_features", def: "Cuántas features considerar por split. Clave para diversidad" },
+  ]}
+/>
+
+</Section>
+
+<Section number={9} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<ReflectionCheck
+  blockId="reflection-l05-bagging-vs-single"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson05_random_forest"
+  prompt="¿Por qué un Bosque Aleatorio con 500 árboles de profundidad 3 puede tener mejor rendimiento que un solo árbol de profundidad 15?"
+  answer="Porque el RF reduce la varianza promediando. Un árbol profundo (15) tiene varianza altísima — memoriza ruido. En cambio, 500 árboles shallow (profundidad 3), cada uno con sesgo alto pero poca varianza, al promediarse producen predicciones estables que capturan la señal real sin perseguir el ruido. Es mejor tener 500 estudiantes mediocres que votan que un solo genio inestable."
+/>
+
+<ConceptCard variant="key-idea">
+**Desafío:** Entrená un RF en breast cancer con n_estimators=[10, 50, 100, 200, 500] y graficá OOB score vs n_estimators. ¿En qué punto la mejora marginal se vuelve insignificante? ¿Vale la pena el costo computacional extra?
+</ConceptCard>
+
+</Section>
