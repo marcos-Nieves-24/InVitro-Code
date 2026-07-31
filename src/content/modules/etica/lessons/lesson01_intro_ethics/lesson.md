@@ -7,7 +7,7 @@ Prerequisites: Módulo 4 (Machine Learning)
 Learning Objectives:
   - Definir la ética en el contexto de la inteligencia artificial
   - Explicar por qué la ética en IA es importante para biotecnología y aplicaciones SaaS
-  - "Identificar los cinco principios éticos clave para IA: beneficencia, no maleficencia, autonomía, justicia, explicabilidad"
+  - Identificar los cinco principios éticos clave para IA: beneficencia, no maleficencia, autonomía, justicia, explicabilidad
   - Analizar casos reales donde fallas éticas en IA causaron daño
   - Evaluar las compensaciones entre principios éticos en conflicto en el diseño de sistemas
 Keywords: ética, beneficencia, no maleficencia, autonomía, justicia, explicabilidad, equidad, rendición de cuentas
@@ -21,250 +21,122 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Introducción a la Ética en IA
+<Section number={1} title="Cuando la precisión no alcanza" eyebrow="INICIO">
 
-## Objetivos de Aprendizaje
+<MascotMessage mood="serious">
+La ética en IA no es filosofía abstracta. Es ingeniería aplicada. Un modelo con 94% de accuracy puede estar matando gente si ese 6% de error se concentra en una población vulnerable. Hoy aprendés a ver lo que las métricas no muestran.
+</MascotMessage>
 
-Al finalizar esta lección, los estudiantes podrán:
+Imaginá que construís un modelo que predice diabetes con 94% de precisión. Lo desplegás en un hospital. Meses después descubrís que subdiagnostica sistemáticamente a mujeres de color — justamente la población que más necesita detección temprana.
 
-1. **Definir** la ética en IA y su alcance dentro del ciclo de vida del ML
-2. **Explicar** por qué las consideraciones éticas son críticas al desplegar IA en salud y SaaS
-3. **Identificar** los cinco principios fundamentales de la ética en IA
-4. **Analizar** un caso real de daño algorítmico usando principios éticos
-5. **Evaluar** compensaciones éticas en un escenario concreto de diseño de sistemas
+Esto no es hipotético. En 2019, investigadores descubrieron que un algoritmo de salud usado en hospitales de EE.UU. estaba sesgado contra pacientes negros, clasificándolos como más saludables que pacientes blancos igualmente enfermos (Obermeyer et al., 2019). El algoritmo estaba desplegado en hospitales que atienden a millones.
 
-## Motivación
+<ConceptCard variant="key-idea">
+La ética en IA pregunta: ¿Qué deberíamos construir? ¿Cómo deberíamos construirlo? ¿Quién podría resultar dañado? ¿Qué responsabilidades tenemos hacia las personas afectadas por nuestros sistemas? Si trabajás en biotecnología, salud o SaaS, entender esto es tan esencial como entender el gradiente descendente.
+</ConceptCard>
 
-Imaginá que construís un modelo de machine learning que predice qué pacientes desarrollarán diabetes. Tu modelo alcanza un 94% de precisión en el conjunto de prueba. Lo desplegás en un hospital. Meses después, descubrís que el modelo subdiagnostica sistemáticamente la diabetes en mujeres de color — justamente la población que más necesita detección temprana.
+</Section>
 
-Tu modelo es preciso en promedio. Pero causa daño real.
+<Section number={2} title="Por qué importa (y no es opcional)" eyebrow="CONTEXTO">
 
-Esto no es un escenario hipotético. Sucedió. En 2019, investigadores descubrieron que un algoritmo de salud ampliamente usado en hospitales de Estados Unidos estaba sistemáticamente sesgado contra pacientes negros, clasificándolos falsamente como más saludables que pacientes blancos igualmente enfermos (Obermeyer et al., 2019). El algoritmo estaba desplegado en hospitales que atienden a millones de pacientes. El daño fue real, medible y totalmente prevenible.
+<CalloutInfo>
+1. **Prevención de daños.** Los sistemas de ML causan daño real — predicciones sesgadas, violaciones de privacidad, desplazamiento laboral. La ética minimiza el daño previsible.
 
-La ética en IA no es un ejercicio filosófico abstracto. Es una disciplina de ingeniería que pregunta: *¿Qué deberíamos construir? ¿Cómo deberíamos construirlo? ¿Quién podría resultar dañado? ¿Qué responsabilidades tenemos hacia las personas afectadas por nuestros sistemas?*
+2. **Confianza.** Una sola falla ética destruye la credibilidad. Pacientes, usuarios y reguladores exigen sistemas confiables.
 
-Si trabajás en biotecnología, salud o SaaS, casi con certeza vas a desplegar modelos que afectan a personas reales. Entender la ética es tan esencial como entender el gradiente descendente.
+3. **Cumplimiento legal.** La EU AI Act, GDPR, HIPAA imponen requisitos legales. La ignorancia no es defensa.
 
-## Panorama General
+4. **Mejor ciencia.** Considerar quién está en tus datos, cómo construís features, y para qué optimizás conduce a modelos más robustos.
+</CalloutInfo>
 
-| Módulo Anterior | Lección Actual | Próxima Lección |
-|---|---|---|
-| Módulo 4: Introducción al ML (entrenamiento de modelos, evaluación) | L1: Introducción a la Ética en IA (principios, por qué importa la ética) | L2: Sesgo y Equidad (tipos de sesgo, métricas de equidad) |
+</Section>
 
-Esta lección sienta la base filosófica y práctica. Cada lección subsiguiente — sesgo, transparencia, privacidad, impacto social, regulación, casos de estudio — se construye sobre estos cinco principios.
+<Section number={3} title="Los cinco principios" eyebrow="CONCEPTO">
 
-## Teoría
+Floridi y Cowls (2019) sintetizaron más de 50 guías de ética en IA en cinco principios:
 
-### ¿Qué es la Ética en IA?
+<ConceptCard variant="definition">
+**1. Beneficencia — Hacer el bien.** Los sistemas de IA deben diseñarse para beneficiar a la humanidad. Evaluá no solo la precisión, sino si el sistema realmente mejora resultados. Una IA de diagnóstico debe medirse por si los pacientes mejoran, no solo por su accuracy.
+</ConceptCard>
 
-La ética es la rama de la filosofía que se ocupa de los principios morales — lo que está bien y mal, lo bueno y lo malo. La ética en IA aplica estos principios al diseño, desarrollo, despliegue y gobernanza de sistemas de inteligencia artificial.
+<ConceptCard variant="definition">
+**2. No maleficencia — No hacer daño.** Prevenir daño directo (diagnóstico erróneo), indirecto (sesgo, discriminación) y a largo plazo (desigualdad social). Antes de desplegar un sistema de contratación, evaluá si rechaza desproporcionadamente a ciertos grupos.
+</ConceptCard>
 
-La ética en IA plantea preguntas como:
+<ConceptCard variant="definition">
+**3. Autonomía — Humanos al mando.** Consentimiento informado, derecho a rechazar decisiones automatizadas, supervisión humana significativa. Un paciente debe saber cuándo un diagnóstico viene de una IA, y el médico debe tener la última palabra.
+</ConceptCard>
 
-- ¿Quién es responsable cuando un vehículo autónomo atropella a un peatón?
-- ¿Debería un modelo de ML denegar una solicitud de préstamo basándose en el código postal?
-- ¿Es aceptable entrenar un modelo de diagnóstico sin el consentimiento del paciente?
-- ¿Qué tan transparente debería ser un sistema de IA sobre su proceso de decisión?
+<ConceptCard variant="definition">
+**4. Justicia — Ser equitativo.** Los beneficios de la IA deben distribuirse entre todas las poblaciones. Proteger grupos vulnerables. Si tu modelo predice riesgo de enfermedad, debe funcionar igual de bien en todos los grupos demográficos.
+</ConceptCard>
 
-Estas no son preguntas que podamos responder con una función de pérdida. Requieren valores, deliberación y compensaciones.
+<ConceptCard variant="definition">
+**5. Explicabilidad — Poder explicar.** Las decisiones de IA deben ser comprensibles. Los afectados tienen derecho a saber por qué se tomó una decisión. Un modelo de crédito que dice "rechazado" sin explicación no es aceptable.
+</ConceptCard>
 
-### Por Qué Importa
+</Section>
 
-Hay cuatro razones convincentes para ocuparse de la ética en IA:
+<Section number={4} title="Compensaciones: cuando los principios chocan" eyebrow="CONCEPTO">
 
-1. **Prevención de daños.** Los sistemas de ML pueden y causan daño — predicciones sesgadas, violaciones de privacidad, desplazamiento laboral. Entender la ética nos ayuda a minimizar el daño.
+<ComparisonTable
+  rows={[
+    { feature: "Precisión vs Justicia", left: "Un modelo más complejo puede ser más preciso pero introducir sesgo difícil de detectar" },
+    { feature: "Privacidad vs Beneficencia", left: "Más datos de pacientes mejoran el diagnóstico pero comprometen la privacidad" },
+    { feature: "Explicabilidad vs Rendimiento", left: "Los modelos más interpretables (regresión) suelen ser menos precisos que cajas negras (deep learning)" },
+    { feature: "Autonomía vs Eficiencia", left: "La supervisión humana ralentiza las decisiones pero protege contra errores automáticos" },
+  ]}
+/>
 
-2. **Confianza.** Los usuarios, pacientes y reguladores exigen sistemas confiables. Una sola falla ética puede destruir la credibilidad.
+<ReflectionCheck
+  blockId="reflection-e01-tradeoffs"
+  moduleSlug="etica"
+  lessonSlug="lesson01_intro_ethics"
+  prompt="Estás diseñando un sistema de diagnóstico de cáncer. ¿Qué principio priorizás si tenés que elegir entre maximizar la precisión (más vidas salvadas en general) y garantizar justicia (igual precisión en todos los grupos demográficos)?"
+  answer="No hay respuesta universal — es una decisión de diseño con implicaciones éticas. Podés argumentar justicia: si el modelo falla más en ciertos grupos, estás creando un sistema de dos niveles donde algunos reciben peor atención médica. O podés argumentar beneficencia: más vidas totales salvadas es mejor, aunque la distribución no sea perfecta. La clave es hacer la decisión explícita y documentarla, no pretender que la métrica la tomó por vos."
+/>
 
-3. **Cumplimiento legal.** La regulación se está acelerando. La Ley de IA de la UE, el GDPR y la HIPAA imponen requisitos legales a los sistemas de IA. La ignorancia no es una defensa.
+</Section>
 
-4. **Mejor ciencia.** La reflexión ética mejora el rigor científico. Considerar quién está incluido en tu conjunto de datos, cómo se construyen tus características y para qué optimiza tu modelo conduce a modelos más robustos y mejores.
+<Section number={5} title="El caso real que lo cambió todo" eyebrow="INTERACTIVA">
 
-### Los Cinco Principios Clave
+En 2016, ProPublica investigó COMPAS, un algoritmo usado en cortes de EE.UU. para predecir reincidencia criminal:
 
-Floridi y Cowls (2019) sintetizaron más de 50 guías de ética en IA a nivel mundial en cinco principios centrales:
+- **Accuracy general:** ~65% (modesta pero "aceptable" para el contexto)
+- **Falsos positivos en personas negras:** 45% (el algoritmo dijo "reincidirá" y no lo hizo)
+- **Falsos positivos en personas blancas:** 23%
+- **Falsos negativos en personas blancas:** 48% (el algoritmo dijo "no reincidirá" y sí lo hizo)
 
-#### 1. Beneficencia
+<ConceptCard variant="key-idea">
+El algoritmo no usaba la raza como variable. El sesgo emergió de los datos históricos: un sistema de justicia que ya era desigual produjo datos desiguales, y el modelo aprendió y amplificó esa desigualdad. Esto se llama **sesgo histórico**.
+</ConceptCard>
 
-*Hacer el bien. Promover el bienestar.*
+<CalloutCheck>
+La lección de COMPAS: que tu modelo no use una variable protegida (raza, género) no garantiza que sea justo. Otras variables (código postal, nivel educativo, historial laboral) pueden actuar como proxies y producir exactamente el mismo sesgo.
+</CalloutCheck>
 
-Los sistemas de IA deberían diseñarse para beneficiar a la humanidad. Esto significa:
+</Section>
 
-- Maximizar resultados positivos (mejores diagnósticos, mayor productividad, mejor acceso)
-- Considerar quién se beneficia y quién queda excluido
-- Construir sistemas que sirvan al bien público, no solo a las ganancias corporativas
+<Section number={6} title="Marco para análisis ético" eyebrow="HERRAMIENTA">
 
-**Ejemplo:** Una IA de diagnóstico debería evaluarse no solo por su precisión sino por si mejora los resultados de los pacientes en la práctica.
+Cuando evalúes un sistema de IA, hacete estas preguntas:
 
-#### 2. No Maleficencia
+1. **¿A quién afecta?** ¿Quiénes son los stakeholders? ¿Hay grupos vulnerables?
+2. **¿Qué podría salir mal?** ¿Cuáles son los peores escenarios?
+3. **¿Qué datos estoy usando?** ¿Representan a todas las poblaciones? ¿Hay sesgo histórico?
+4. **¿Quién es responsable?** Si algo sale mal, ¿quién rinde cuentas?
+5. **¿Puedo explicarlo?** ¿Entiendo por qué el modelo toma cada decisión?
 
-*No hacer daño. Prevenir el daño.*
+<CalloutInfo>
+Este marco no reemplaza el juicio ético — lo estructura. La ética no se automatiza. Pero hacer estas preguntas sistemáticamente es mejor que no hacerlas.
+</CalloutInfo>
 
-Los sistemas de IA no deben causar daño previsible. Esto incluye:
+</Section>
 
-- Daño directo (diagnóstico erróneo, accidentes)
-- Daño indirecto (sesgo, discriminación, violaciones de privacidad)
-- Daño a largo plazo (daño ambiental, desigualdad social)
+<Section number={7} title="Resumen" eyebrow="RESUMEN">
 
-**Ejemplo:** Antes de desplegar un sistema de contratación automatizado, evaluá si rechaza desproporcionadamente a candidatos de ciertos grupos demográficos.
+<ConceptCard variant="key-idea">
+La ética en IA es una disciplina de ingeniería, no filosofía abstracta. Los cinco principios — beneficencia, no maleficencia, autonomía, justicia, explicabilidad — son tu checklist. Los principios chocan en la práctica y tenés que elegir. La precisión no es suficiente: un modelo puede ser preciso en promedio y causar daño real. Los datos heredan los sesgos del mundo que los produjo.
+</ConceptCard>
 
-#### 3. Autonomía
-
-*Respetar la agencia humana. Mantener a los humanos en control.*
-
-Los humanos deben retener un control significativo sobre los sistemas de IA. Esto significa:
-
-- Consentimiento informado al usar los datos de las personas
-- El derecho a optar por no participar en decisiones automatizadas
-- Supervisión humana significativa para decisiones de alto impacto
-
-**Ejemplo:** Se le debe informar a un paciente cuando una recomendación de diagnóstico proviene de una IA, y el clínico debe tener la última palabra.
-
-#### 4. Justicia
-
-*Ser equitativo. Distribuir beneficios y cargas de manera justa.*
-
-Los sistemas de IA no deben reforzar las desigualdades existentes. Esto significa:
-
-- Distribución equitativa de los beneficios de la IA entre las poblaciones
-- Protección de grupos vulnerables
-- Acceso a reparación cuando los sistemas causan daño
-
-**Ejemplo:** Si un sistema de IA predice riesgo de enfermedad, asegurate de que funcione igual de bien en todos los grupos demográficos, no solo en la mayoría.
-
-#### 5. Explicabilidad
-
-*Ser transparente y responsable.*
-
-Los sistemas de IA deberían ser comprensibles y responsables ante quienes afectan. Esto incluye:
-
-- Transparencia: explicar cómo se toman las decisiones
-- Interpretabilidad: hacer comprensible el comportamiento del modelo
-- Rendición de cuentas: asignar claramente la responsabilidad por los resultados
-
-**Ejemplo:** Un modelo de puntuación crediticia debería poder explicar por qué se denegó un préstamo en términos que el solicitante pueda entender.
-
-### Compensaciones Éticas
-
-Los principios a menudo entran en conflicto. Considerá una compensación entre:
-
-- **Autonomía vs. Beneficencia:** Una IA médica que siempre recomienda el mejor tratamiento (beneficencia) podría anular las preferencias del paciente (autonomía).
-- **Privacidad vs. Transparencia:** Hacer que una IA sea completamente transparente podría requerir compartir datos de entrenamiento privados (violación de privacidad).
-- **Justicia vs. Eficiencia:** Lograr equidad perfecta entre grupos podría reducir la precisión general (pérdida de eficiencia).
-
-No existe una fórmula universal para resolver estos conflictos. El diseño ético de IA requiere deliberación cuidadosa, aporte de las partes interesadas y experiencia en el dominio.
-
-## Ejemplo Guiado
-
-### Caso: Policía Predictiva
-
-Considerá un sistema de policía predictiva que usa datos históricos de delitos para pronosticar dónde es probable que ocurran crímenes. Los departamentos de policía usan estas predicciones para asignar patrullajes.
-
-**Análisis ético usando nuestros cinco principios:**
-
-| Principio | Pregunta | Análisis |
-|-----------|----------|----------|
-| Beneficencia | ¿Produce buenos resultados? | Podría reducir las tasas de criminalidad y mejorar la seguridad pública |
-| No maleficencia | ¿Causa daño? | Los datos históricos reflejan vigilancia sesgada; las predicciones pueden perpetuar el sobrepatrullaje de barrios minoritarios |
-| Autonomía | ¿Respeta la agencia humana? | Los oficiales pueden delegar en el algoritmo en lugar de usar su criterio |
-| Justicia | ¿Es equitativo? | Si los datos históricos están sesgados, el sistema apunta injustamente a comunidades ya sobrevigiladas |
-| Explicabilidad | ¿Es transparente? | Los ciudadanos pueden no saber que están siendo vigilados según un algoritmo |
-
-**Conclusión:** El sistema podría producir buenos resultados solo si los datos, el despliegue y la supervisión se diseñan cuidadosamente para prevenir daños y garantizar equidad.
-
-## Ejemplo de Biotecnología
-
-### IA en Descubrimiento de Fármacos
-
-Se entrena un modelo de ML para predecir qué compuestos químicos se unirán a una proteína objetivo para un nuevo medicamento contra el cáncer. Los datos de entrenamiento provienen de bases de datos públicas que contienen principalmente compuestos probados en líneas celulares de origen europeo.
-
-**Preocupaciones éticas:**
-
-- **Justicia:** El medicamento resultante podría ser menos efectivo para poblaciones no europeas porque el modelo nunca aprendió su variabilidad biológica.
-- **Beneficencia:** El medicamento podría salvar vidas, pero solo para un subconjunto de pacientes.
-- **Autonomía:** ¿Los pacientes cuyas líneas celulares se usaron en el entrenamiento fueron informados? ¿Dieron su consentimiento?
-
-**Lección:** La composición del conjunto de datos es una decisión ética, no solo técnica.
-
-## Ejemplo SaaS
-
-### Suscripción de Préstamos con IA
-
-Una plataforma SaaS de préstamos usa ML para aprobar o denegar préstamos a pequeñas empresas. El modelo usa características que incluyen historial crediticio, ingresos y código postal.
-
-**Preocupaciones éticas:**
-
-- **Justicia:** El código postal se correlaciona con la raza debido a la discriminación histórica en vivienda. El modelo puede perpetuar la discriminación habitacional.
-- **Explicabilidad:** Los solicitantes a quienes se les deniega un préstamo merecen una explicación. "El modelo dijo que no" es insuficiente.
-- **No maleficencia:** Denegar préstamos a negocios de minorías profundiza la desigualdad económica.
-
-**Lección:** Las características que son predictivas no siempre son éticamente aceptables.
-
-## Errores Comunes
-
-1. **Equiparar precisión con éxito ético.** Un modelo puede ser preciso en promedio pero sistemáticamente incorrecto para grupos específicos.
-2. **Ignorar la procedencia de los datos.** Las propiedades éticas de un conjunto de datos importan tanto como sus propiedades estadísticas.
-3. **Tratar la ética como opcional.** La ética no es una casilla para marcar después de construir el modelo. Debe integrarse a lo largo de todo el ciclo de vida del ML.
-4. **Asumir neutralidad.** Los sistemas de ML no son neutrales en cuanto a valores. Cada decisión de diseño refleja valores.
-5. **Olvidar a la persona.** Detrás de cada punto de datos hay una persona que puede verse afectada por el sistema.
-
-## Mejores Prácticas
-
-1. **Empezar temprano.** Considerá las implicaciones éticas durante la formulación del problema, no después del despliegue.
-2. **Equipos diversos.** Los equipos con antecedentes diversos identifican más riesgos éticos.
-3. **Participación de las partes interesadas.** Hablá con las personas que se verán afectadas por tu sistema.
-4. **Documentar decisiones.** Anotá por qué elegiste ciertas características, conjuntos de datos y umbrales.
-5. **Asumir responsabilidad.** Si tu sistema causa daño, reconocelo y corregilo.
-
-## Resumen
-
-- La ética en IA aplica principios morales al diseño, desarrollo y despliegue de sistemas de IA.
-- Hay cinco principios clave: beneficencia, no maleficencia, autonomía, justicia y explicabilidad.
-- Estos principios a menudo entran en conflicto; no existe una resolución universal.
-- La composición del conjunto de datos, la selección de características y el diseño del modelo son decisiones éticas.
-- La ética no es opcional — es una responsabilidad central de la ingeniería.
-
-## Términos Clave
-
-| Término | Definición |
-|---------|------------|
-| Beneficencia | El principio de diseñar IA para promover el bienestar y producir buenos resultados |
-| No maleficencia | El principio de prevenir el daño causado por sistemas de IA |
-| Autonomía | El principio de respetar la agencia humana y mantener a los humanos en control |
-| Justicia | El principio de distribuir los beneficios y cargas de la IA de manera equitativa |
-| Explicabilidad | El principio de hacer que la IA sea transparente, interpretable y responsable |
-| Ética en IA | El campo que se ocupa de los principios morales en el diseño y despliegue de IA |
-| Compensación ética | Una situación donde satisfacer un principio ético entra en conflicto con otro |
-
-## Ejercicios
-
-### Nivel 1: Comprensión Básica
-
-1. Enumerá los cinco principios éticos de la IA según Floridi y Cowls (2019). Proporcioná una definición de una oración para cada uno.
-2. Explicá por qué un modelo con 95% de precisión puede seguir siendo éticamente problemático.
-
-### Nivel 2: Análisis
-
-3. Elegí un sistema de IA real o hipotético. Analizalo usando los cinco principios éticos. Identificá al menos una posible violación ética.
-4. Dá un ejemplo de una compensación ética entre autonomía y no maleficencia en un contexto de IA en salud.
-
-### Nivel 3: Pensamiento Crítico
-
-5. Un sistema de IA predice el rendimiento estudiantil para asignar recursos educativos. Escribí un breve análisis ético (200 palabras) que cubra los cinco principios. ¿Qué compensaciones existen? ¿Cómo las resolverías?
-6. ¿Por qué podría ser insuficiente confiar únicamente en la "equidad por desconocimiento" (excluir atributos protegidos del modelo)? ¿Qué principio ético se viola?
-
-## Desafío de Programación
-
-No hay desafío de programación para esta lección introductoria. Los ejercicios de implementación comienzan en la Lección 2.
-
-## Referencias
-
-Floridi, L., & Cowls, J. (2019). A unified framework of five principles for AI in society. *Harvard Data Science Review*, 1(1). https://doi.org/10.1162/99608f92.8cd550d1
-
-Jobin, A., Ienca, M., & Vayena, E. (2019). The global landscape of AI ethics guidelines. *Nature Machine Intelligence*, 1, 389–399. https://doi.org/10.1038/s42256-019-0088-2
-
-Obermeyer, Z., Powers, B., Vogeli, C., & Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. *Science*, 366(6464), 447–453. https://doi.org/10.1126/science.aax2342
-
-O'Neil, C. (2016). *Weapons of math destruction: How big data increases inequality and threatens democracy*. Crown Publishing Group.
-
-Russell, S., & Norvig, P. (2020). *Artificial intelligence: A modern approach* (4th ed.). Pearson.
+</Section>
