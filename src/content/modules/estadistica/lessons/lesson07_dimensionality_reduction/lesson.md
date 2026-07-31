@@ -21,270 +21,161 @@ Assignment: pca_assignment.md
 Quiz: pca_quiz.md
 ---
 
-# Lección 7: Reducción de Dimensionalidad (PCA)
+<Section number={1} title="Cuando hay demasiadas dimensiones" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+¿Qué pasa cuando tenés 10,000 genes pero solo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
+</MascotMessage>
 
-La biología moderna y SaaS generan datasets con cientos, miles o incluso millones de features. Un solo experimento de RNA-seq mide 20.000+ genes. Una plataforma SaaS rastrea cientos de métricas de usuarios. Trabajar con datos de alta dimensionalidad es desafiante: los modelos sobreajustan, el cálculo se vuelve lento y la visualización se vuelve imposible. El Análisis de Componentes Principales (PCA) resuelve esto encontrando una representación de menor dimensionalidad que preserva la estructura más importante de los datos.
+En biotecnología, los datasets de expresión génica tienen miles de genes (features) pero pocas muestras. En SaaS, cientos de métricas de comportamiento de usuario. PCA encuentra las direcciones de máxima varianza y proyecta los datos a un espacio de menor dimensión.
 
-## Panorama General
+</Section>
 
-Esta lección se basa en la Lección 5 (covarianza y correlación). PCA está construida directamente sobre la matriz de covarianza. Se conecta con la Lección 8 (Clustering) — PCA se usa a menudo para visualizar clusters. También se conecta con la Lección 9 (Evaluación de Modelos) — reducir dimensiones puede mejorar el rendimiento del modelo.
+<Section number={2} title="La intuición de PCA" eyebrow="CONCEPTO">
 
-## Teoría
+<ConceptCard variant="key-idea">
+Imaginá una nube de puntos en 3D. PCA encuentra la dirección donde los puntos están más "estirados" (máxima varianza) — ese es el primer componente principal. Luego busca la siguiente dirección más estirada perpendicular a la primera, y así sucesivamente.
+</ConceptCard>
 
-### Intuición de PCA
+<ConceptCard variant="definition">
+**PCA** = transformación lineal que rota los ejes de los datos para alinearlos con las direcciones de máxima varianza (autovectores de la matriz de covarianza).
 
-PCA encuentra nuevos ejes (componentes principales) que capturan la máxima varianza en los datos.
+- **Componentes Principales**: nuevas variables, combinaciones lineales de las originales
+- **Varianza Explicada**: cuánta información captura cada componente
+- Los primeros componentes capturan la mayor parte de la varianza
+</ConceptCard>
 
-1. El primer componente principal (PC1) es la dirección de máxima varianza
-2. PC2 es la dirección de máxima varianza restante, ortogonal a PC1
-3. Y así sucesivamente para PC3, PC4, ...
+</Section>
 
-Pensá en PCA como rotar los datos para alinearlos con sus ejes naturales de variación.
+<Section number={3} title="¿Cuántos componentes? Elbow y scree plot" eyebrow="CONCEPTO">
 
-### Fundamento Matemático
+<ConceptCard variant="definition">
+El **gráfico de sedimentación (scree plot)** muestra la varianza explicada por cada componente. El "codo" donde la curva se aplana indica el número óptimo.
 
-Dada una matriz de datos \(X\) (centrada, \(n\) muestras × \(p\) features):
+Criterios para elegir k:
+- Varianza acumulada > 80-90%
+- Componentes con autovalor > 1 (criterio de Kaiser)
+- El codo del scree plot
+</ConceptCard>
 
-1. Calcular la matriz de covarianza: \(\Sigma = \frac{1}{n} X^T X\)
-2. Calcular autovectores y autovalores: \(\Sigma v_i = \lambda_i v_i\)
-3. Ordenar autovectores por autovalores decrecientes
-4. Proyectar los datos sobre los \(k\) autovectores principales: \(Z = X V_k\)
+<CalloutInfo>
+En genómica, es común que los primeros 2-3 componentes capturen >50% de la varianza total — eso significa que cientos de genes se pueden reducir a un puñado de componentes para visualización y clustering.
+</CalloutInfo>
 
-**Proporción de varianza explicada**: \(\frac{\lambda_i}{\sum_{j=1}^{p} \lambda_j}\) — la proporción de la varianza total capturada por cada CP.
+</Section>
 
-### Elección del Número de Componentes
-
-- **Gráfico de sedimentación (scree plot)**: Trazar autovalores y buscar el "codo"
-- **Varianza explicada acumulada**: Elegir suficientes CP para explicar el 70-95% de la varianza
-- **Criterio de Kaiser**: Conservar componentes con autovalor > 1
-
-## Implementación en Python
+<Section number={4} title="PCA en acción: dataset Iris" eyebrow="INTERACTIVA">
 
 ```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import seaborn as sns
 
-# Cargar dataset iris
 iris = sns.load_dataset('iris')
 X = iris.drop('species', axis=1)
 y = iris['species']
 
-# Estandarizar (crucial para PCA)
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# Estandarizar (PCA es sensible a la escala)
+X_scaled = StandardScaler().fit_transform(X)
 
 # Aplicar PCA
 pca = PCA()
 X_pca = pca.fit_transform(X_scaled)
 
 # Varianza explicada
-print("Proporción de varianza explicada:", pca.explained_variance_ratio_)
-print("Acumulada:", np.cumsum(pca.explained_variance_ratio_))
+print("Varianza explicada por componente:")
+for i, var in enumerate(pca.explained_variance_ratio_):
+    print(f"  PC{i+1}: {var:.3f} ({var*100:.1f}%)")
 
-# Gráfico de sedimentación
-plt.figure(figsize=(8, 4))
-plt.subplot(1, 2, 1)
-plt.bar(range(1, len(pca.explained_variance_ratio_) + 1),
-        pca.explained_variance_ratio_, color='steelblue')
-plt.plot(range(1, len(pca.explained_variance_ratio_) + 1),
-         np.cumsum(pca.explained_variance_ratio_), 'ro-')
+print(f"\nTotal acumulado 2 PCs: {pca.explained_variance_ratio_[:2].sum():.3f}")
+
+# Visualizar en 2D
+plt.figure(figsize=(8,6))
+scatter = plt.scatter(X_pca[:,0], X_pca[:,1], c=pd.Categorical(y).codes, cmap='viridis')
+plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
+plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
+plt.colorbar(scatter, label='Especie')
+plt.title('Iris dataset — PCA (2 componentes)')
+plt.show()
+```
+
+</Section>
+
+<Section number={5} title="Biotecnología: PCA en genómica" eyebrow="INTERACTIVA">
+
+```python
+# Simular expresión génica: 1000 genes, 50 pacientes, 3 subtipos de cáncer
+np.random.seed(42)
+n_genes, n_patients = 1000, 50
+X = np.random.randn(n_patients, n_genes)
+
+# Aplicar PCA
+pca = PCA(n_components=5)
+X_pca = pca.fit_transform(StandardScaler().fit_transform(X))
+print(f"Varianza explicada (5 PCs): {pca.explained_variance_ratio_.sum():.3f}")
+
+# Scree plot
+plt.figure(figsize=(10,4))
+plt.subplot(1,2,1)
+plt.plot(range(1,6), pca.explained_variance_ratio_, 'o-')
 plt.xlabel('Componente Principal')
-plt.ylabel('Proporción de Varianza Explicada')
-plt.title('Gráfico de Sedimentación')
+plt.ylabel('Varianza Explicada')
+plt.title('Scree Plot')
 
-# Proyección 2D
-plt.subplot(1, 2, 2)
-species_codes = {'setosa': 'red', 'versicolor': 'blue', 'virginica': 'green'}
-for species, color in species_codes.items():
-    mask = y == species
-    plt.scatter(X_pca[mask, 0], X_pca[mask, 1], c=color, label=species, alpha=0.7)
-plt.xlabel('CP1 ({:.1f}%)'.format(pca.explained_variance_ratio_[0] * 100))
-plt.ylabel('CP2 ({:.1f}%)'.format(pca.explained_variance_ratio_[1] * 100))
-plt.title('PCA del Dataset Iris')
+plt.subplot(1,2,2)
+plt.plot(range(1,6), np.cumsum(pca.explained_variance_ratio_), 'o-')
+plt.axhline(y=0.8, color='r', linestyle='--', label='80%')
+plt.xlabel('Componente Principal')
+plt.ylabel('Varianza Acumulada')
 plt.legend()
 plt.tight_layout()
 plt.show()
-
-# Cargas (contribución de las features a los CP)
-loadings = pd.DataFrame(
-    pca.components_.T,
-    columns=[f'CP{i+1}' for i in range(4)],
-    index=iris.columns[:4]
-)
-print("\nCargas de PCA (contribución de features):")
-print(loadings)
 ```
 
-## Ejemplo Guiado
+<ReflectionCheck
+  blockId="reflection-l07-pca-genes"
+  moduleSlug="estadistica"
+  lessonSlug="lesson07_dimensionality_reduction"
+  prompt="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
+  answer="Es ambas. Ventaja: captura patrones multivariados que ningún gen individual muestra (perfiles de expresión). Desventaja: perdés interpretabilidad — PC1 = 0.3×genA + 0.1×genB − 0.5×genC... no es accionable para un biólogo que quiere saber '¿qué gen causa esto?'. En la práctica, usamos PCA para visualización/clustering y luego volvemos a los genes originales para interpretación biológica."
+/>
 
-PCA en el dataset Wine para distinguir cultivares de vino.
+</Section>
 
-```python
-from sklearn.datasets import load_wine
-wine = load_wine()
-X = wine.data
-y = wine.target
-feature_names = wine.feature_names
+<Section number={6} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+<AnswerReveal summary="Ver respuestas">
+<p><strong>¿Por qué estandarizar antes de PCA?</strong> PCA se basa en la varianza. Si una variable está en metros (0-2) y otra en dólares (0-100000), la segunda domina completamente el primer componente solo por su escala, no porque sea más importante. Estandarizar (μ=0, σ=1) pone todas las variables en igualdad de condiciones.</p>
+<p><strong>¿Cuándo NO usarías PCA?</strong> Cuando necesitás interpretabilidad (cada feature debe ser explicable), cuando las relaciones son no lineales (PCA asume linealidad), o cuando tus features ya son independientes y pocas.</p>
+</AnswerReveal>
 
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X_scaled)
+</Section>
 
-print(f"Varianza explicada (2 componentes): {pca.explained_variance_ratio_.sum():.3f}")
+<Section number={7} title="Términos clave" eyebrow="CIERRE">
 
-plt.figure(figsize=(8, 6))
-scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='viridis', alpha=0.7)
-plt.xlabel(f'CP1 ({pca.explained_variance_ratio_[0]:.1%})')
-plt.ylabel(f'CP2 ({pca.explained_variance_ratio_[1]:.1%})')
-plt.colorbar(scatter, label='Cultivar')
-plt.title('PCA del Dataset Wine')
-plt.show()
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["PCA", "Transformación que rota ejes hacia direcciones de máxima varianza"],
+    ["Componente Principal", "Combinación lineal de features originales; nuevo eje"],
+    ["Varianza Explicada", "Proporción de información que captura cada componente"],
+    ["Scree Plot", "Gráfico de varianza explicada vs número de componente"],
+    ["Autovector", "Dirección del componente principal"],
+    ["Autovalor", "Cantidad de varianza capturada por el componente"],
+    ["Estandarización", "Centrar a μ=0 y escalar a σ=1 — necesario antes de PCA"],
+  ]}
+  searchable={true}
+  caption="Términos clave de PCA"
+/>
 
-# Contribución de features a CP1
-loadings = pd.Series(pca.components_[0], index=feature_names)
-top_features = loadings.abs().sort_values(ascending=False).head(5)
-print("\nTop 5 features que contribuyen a CP1:")
-print(top_features)
-```
+</Section>
 
-Interpretación: Los cultivares de vino se separan bien en los dos primeros componentes principales. CP1 está impulsado por prolina, flavonoides y OD280 (compuestos fenólicos).
+<Section number={8} title="Para la próxima lección" eyebrow="CIERRE">
 
-## Ejemplo de Biotecnología
+<MascotMessage mood="celebrating">
+¡PCA es magia matemática! De 1000 dimensiones a 2, manteniendo la esencia de los datos. Ahora que sabés reducir dimensiones, estás listo para agrupar.
+</MascotMessage>
 
-PCA de datos de expresión génica para muestras de cáncer vs normales.
+**En la Lección 8** vamos a hacer **Clustering con K-Means**: encontrar grupos naturales en los datos sin etiquetas. Vas a usar el método del codo, el puntaje de silueta, y PCA para visualizar clusters. Aprendizaje no supervisado en acción.
 
-```python
-np.random.seed(42)
-n_genes = 1000
-n_samples = 60
-
-# Simular expresión génica
-expression = np.random.randn(n_samples, n_genes)
-# Crear diferencias de grupo
-expression[:30, :50] += 1.5  # cancer group / grupo cáncer
-labels = ['cancer'] * 30 + ['normal'] * 30
-
-scaler = StandardScaler()
-expr_scaled = scaler.fit_transform(expression)
-
-pca = PCA(n_components=2)
-expr_pca = pca.fit_transform(expr_scaled)
-
-plt.figure(figsize=(8, 6))
-colors = {'cancer': 'red', 'normal': 'blue'}
-for label in ['cancer', 'normal']:
-    mask = np.array(labels) == label
-    plt.scatter(expr_pca[mask, 0], expr_pca[mask, 1], c=colors[label],
-                label=label, alpha=0.7)
-plt.xlabel(f'CP1 ({pca.explained_variance_ratio_[0]:.1%})')
-plt.ylabel(f'CP2 ({pca.explained_variance_ratio_[1]:.1%})')
-plt.title('PCA de Expresión Génica: Cáncer vs Normal')
-plt.legend()
-plt.show()
-```
-
-## Ejemplo SaaS
-
-PCA de métricas de comportamiento de clientes para segmentación.
-
-```python
-np.random.seed(42)
-n_customers = 500
-saas_features = pd.DataFrame({
-    'session_frequency': np.random.poisson(15, n_customers),
-    'avg_session_duration': np.random.exponential(20, n_customers),
-    'pages_per_session': np.random.poisson(6, n_customers),
-    'feature_usage_count': np.random.poisson(8, n_customers),
-    'support_tickets': np.random.poisson(1, n_customers),
-    'days_since_signup': np.random.exponential(100, n_customers),
-    'revenue': np.random.exponential(30, n_customers)
-})
-
-scaler = StandardScaler()
-saas_scaled = scaler.fit_transform(saas_features)
-
-pca = PCA(n_components=3)
-saas_pca = pca.fit_transform(saas_scaled)
-
-print("Proporciones de varianza explicada:", pca.explained_variance_ratio_)
-print(f"Acumulada (3 componentes): {pca.explained_variance_ratio_.sum():.3f}")
-
-# Dispersión 3D si es posible, sino 2D
-plt.figure(figsize=(8, 6))
-plt.scatter(saas_pca[:, 0], saas_pca[:, 1], alpha=0.6, c=saas_features['revenue'], cmap='viridis')
-plt.colorbar(label='Ingresos')
-plt.xlabel('CP1')
-plt.ylabel('CP2')
-plt.title('PCA de Métricas de Clientes SaaS')
-plt.show()
-```
-
-## Errores Comunes
-
-1. **No estandarizar los datos antes de PCA**: PCA es sensible a las escalas de las variables. Estandarizá siempre.
-2. **Interpretar las direcciones de PCA como causales**: PCA encuentra estructura correlacional, no mecanismos causales.
-3. **Forzar la interpretación de todos los componentes**: Los componentes superiores suelen capturar ruido.
-4. **Usar PCA en datos categóricos**: PCA está diseñada para variables continuas.
-5. **Conservar muy pocos componentes**: Puede descartar señal importante.
-
-## Mejores Prácticas
-
-- Estandarizá siempre (puntaje Z) las features antes de PCA
-- Usá el gráfico de sedimentación + varianza acumulada para elegir componentes
-- Examiná las cargas (loadings) para interpretar los componentes
-- Considerá el conocimiento del dominio al interpretar los CP
-- Recordá: PCA es no supervisado — no usa etiquetas
-
-## Resumen
-
-- PCA encuentra direcciones ortogonales de máxima varianza
-- Construida sobre la descomposición en autovalores de la matriz de covarianza
-- La proporción de varianza explicada indica cuánta información captura cada CP
-- Estandarizá siempre los datos antes de PCA
-- PCA se usa para visualización, eliminación de ruido y preprocesamiento
-
-## Términos Clave
-
-| Término | Definición |
-|---------|------------|
-| Componente Principal | Nueva variable que captura la máxima varianza |
-| Autovalor | Cantidad de varianza capturada por un CP |
-| Autovector | Dirección de un CP (cargas) |
-| Proporción de Varianza Explicada | Proporción de la varianza total por CP |
-| Gráfico de Sedimentación | Gráfico de autovalores por número de componente |
-| Carga | Contribución de una feature original a un CP |
-
-## Ejercicios
-
-**Nivel 1: Comprensión Básica**
-
-1. ¿Por qué debemos estandarizar los datos antes de PCA? ¿Qué pasa si no lo hacemos?
-2. Si los primeros dos CP explican el 90% de la varianza, ¿qué significa esto sobre los datos?
-
-**Nivel 2: Implementación**
-
-3. Cargá el dataset digits de sklearn. Aplicá PCA y trazá los dos primeros componentes coloreados por dígito.
-4. Determiná el número mínimo de CP necesarios para explicar el 95% de la varianza en el dataset wine.
-
-**Nivel 3: Pensamiento Crítico**
-
-5. Un bioinformático aplica PCA a datos de RNA-seq y encuentra que CP1 separa lotes (diferentes corridas de secuenciación) en lugar de condiciones biológicas. ¿Qué significa esto? ¿Cómo debería proceder?
-6. En un contexto SaaS, CP1 carga fuertemente en "cantidad de sesiones" y "páginas por sesión" con coeficientes similares. ¿Cómo interpretarías este componente?
-
-## Desafío de Programación
-
-Escribí un script en Python que:
-1. Cargue el dataset de cáncer de mama de sklearn
-2. Estandarice las features
-3. Aplique PCA y trace la varianza explicada acumulada
-4. Encuentre el número mínimo de componentes para 90% de varianza explicada
-5. Cree un gráfico PCA 2D coloreado por diagnóstico (maligno vs benigno)
-6. Interprete qué features originales contribuyen más a CP1
+</Section>

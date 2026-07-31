@@ -21,165 +21,142 @@ Assignment: probability_assignment.md
 Quiz: probability_quiz.md
 ---
 
-# Lección 3: Fundamentos de Probabilidad
+<Section number={1} title="La ciencia de la incertidumbre" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza. La probabilidad es el lenguaje matemático para expresar esa incertidumbre. Sin ella, no podés interpretar la confianza de un modelo ni evaluar métodos bayesianos.
+</MascotMessage>
 
-Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza a qué clase pertenece un ejemplo. Un modelo de regresión nunca predice el valor exacto sin error. La probabilidad provee el lenguaje matemático para expresar y cuantificar esta incertidumbre. Sin probabilidad, no podés entender la confianza del modelo, interpretar valores p, ni evaluar métodos bayesianos.
+En biotecnología, la probabilidad cuantifica la precisión de tests diagnósticos: "Si un paciente da positivo, ¿cuál es la probabilidad de que realmente tenga la enfermedad?" En SaaS, modelos de probabilidad predicen la deserción: "¿Cuál es la probabilidad de que este usuario cancele en 30 días?"
 
-En biotecnología, la probabilidad cuantifica la precisión de tests diagnósticos: "Si un paciente da positivo para una enfermedad, ¿cuál es la probabilidad de que realmente la tenga?" En SaaS, los modelos de probabilidad predicen la deserción de clientes: "¿Cuál es la probabilidad de que este usuario cancele su suscripción en los próximos 30 días?"
+<ConceptCard variant="key-idea">
+La probabilidad no elimina la incertidumbre — la mide. Y medirla es el primer paso para tomar decisiones informadas.
+</ConceptCard>
 
-## Panorama General
+</Section>
 
-Ya entendés estadística descriptiva (Lección 1) y distribuciones de datos (Lección 2). Ahora aprenderás la base matemática de la aleatoriedad y la incertidumbre. Esto te prepara directamente para la Lección 4 (Distribuciones Estadísticas), donde las variables aleatorias siguen leyes de probabilidad específicas, y para todas las lecciones de ML subsiguientes que se apoyan en el razonamiento probabilístico.
+<Section number={2} title="Los tres axiomas de Kolmogorov" eyebrow="CONCEPTO">
 
-## Teoría
+Andrey Kolmogorov formalizó la probabilidad con tres axiomas que son la base de TODO:
 
-### Axiomas de Kolmogorov
+<ConceptCard variant="definition">
+**Axioma 1 (No negatividad)**: Para cualquier evento $A$, $P(A) \geq 0$.
 
-Andrey Kolmogorov formalizó la probabilidad con tres axiomas.
+**Axioma 2 (Normalización)**: $P(S) = 1$ donde $S$ es el espacio muestral completo.
 
-**Axioma 1 (No negatividad)**: Para cualquier evento \(A\), \(P(A) \geq 0\).
-
-**Axioma 2 (Normalización)**: La probabilidad del espacio muestral \(S\) es 1: \(P(S) = 1\).
-
-**Axioma 3 (Aditividad)**: Para eventos mutuamente excluyentes \(A_1, A_2, \ldots\),
+**Axioma 3 (Aditividad)**: Para eventos mutuamente excluyentes:
 
 $$P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)$$
+</ConceptCard>
 
-Intuición: Las probabilidades siempre están entre 0 y 1. Algo debe ocurrir (probabilidad total = 1). Si dos eventos no pueden ocurrir simultáneamente, la probabilidad de que ocurra uno u otro es la suma de sus probabilidades individuales.
+<ConceptCard variant="key-idea">
+Las probabilidades siempre están entre 0 y 1. Algo debe ocurrir (total = 1). Si dos eventos no pueden ocurrir juntos, la probabilidad de uno u otro es la suma.
+</ConceptCard>
 
-### Probabilidad Condicional
+</Section>
+
+<Section number={3} title="Probabilidad Condicional" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+La probabilidad condicional responde: "Sabiendo que B ocurrió, ¿cuál es la probabilidad de A?"
 
 $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
+</ConceptCard>
 
-Intuición: Si sabemos que el evento B ocurrió, restringimos nuestra atención a la porción de A que se superpone con B, renormalizada por la probabilidad de B.
+Intuición: Si sabemos que B ocurrió, restringimos nuestra atención al "mundo" donde B es cierto. La probabilidad de A en ese mundo es la porción de A que se superpone con B, renormalizada.
+
+<ConceptCard variant="warning">
+**Error clásico**: confundir $P(A|B)$ con $P(B|A)$. La probabilidad de tener cáncer dado un test positivo NO es igual a la probabilidad de un test positivo dado que tenés cáncer. Esto se llama la "falacia del fiscal".
+</ConceptCard>
+
+</Section>
+
+<Section number={4} title="Teorema de Bayes: la regla que cambia todo" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+El Teorema de Bayes actualiza nuestras creencias cuando observamos evidencia:
+
+$$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)} = \frac{P(B \mid A) \cdot P(A)}{\sum_{i} P(B \mid A_i) \cdot P(A_i)}$$
+</ConceptCard>
+
+<ConceptCard variant="key-idea">
+$P(A)$ es la **probabilidad a priori** (lo que creíamos antes). $P(A|B)$ es la **probabilidad a posteriori** (lo que creemos después de ver la evidencia B). Bayes nos dice exactamente cuánto actualizar nuestras creencias.
+</ConceptCard>
 
 ### Ley de Probabilidad Total
 
-Si los eventos \(B_1, B_2, \ldots, B_k\) particionan el espacio muestral:
-
 $$P(A) = \sum_{i=1}^{k} P(A \mid B_i) \cdot P(B_i)$$
 
-Intuición: Para encontrar la probabilidad total de A, considerá todas las formas en que A puede ocurrir, ponderadas por qué tan probable es cada escenario.
+Para encontrar la probabilidad total de A, considerás todas las formas en que A puede ocurrir, ponderadas por la probabilidad de cada escenario.
 
-### Teorema de Bayes
+</Section>
 
-$$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
+<Section number={5} title="Variables Aleatorias" eyebrow="CONCEPTO">
 
-O usando la ley de probabilidad total:
+<ConceptCard variant="definition">
+Una variable aleatoria es una función que asigna un número real a cada resultado del espacio muestral.
+</ConceptCard>
 
-$$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{\sum_{i} P(B \mid A_i) \cdot P(A_i)}$$
+<ComparisonTable
+  rows={[
+    { feature: "Valores", left: "Contables (0, 1, 2, ...)", right: "Cualquier valor en un intervalo" },
+    { feature: "Probabilidad", left: "PMF: $p(x) = P(X = x)$", right: "PDF: $P(a \\leq X \\leq b) = \\int_a^b f(x)dx$" },
+    { feature: "Esperanza", left: "$E[X] = \\sum x \\cdot P(X=x)$", right: "$E[X] = \\int x f(x)dx$" },
+    { feature: "Ejemplo", left: "Cantidad de usuarios que cancelan", right: "Nivel de expresión génica" },
+    { feature: "Varianza", left: "$\\text{Var}(X) = E[X^2] - E[X]^2$", right: "Misma fórmula" },
+  ]}
+/>
 
-Intuición: El teorema de Bayes actualiza nuestra creencia sobre A después de observar B. \(P(A)\) es la probabilidad a priori (lo que creíamos antes), y \(P(A \mid B)\) es la probabilidad a posteriori (lo que creemos después de ver la evidencia).
+<CalloutInfo>
+**CDF** (Función de Distribución Acumulada): $F(x) = P(X \leq x)$. La CDF responde "¿cuál es la probabilidad de que X sea menor o igual a x?" y funciona tanto para discretas como continuas.
+</CalloutInfo>
 
-### Variables Aleatorias
+</Section>
 
-Una variable aleatoria es una función que asigna un número real a cada resultado en el espacio muestral.
+<Section number={6} title="Bayes en acción: test de diagnóstico" eyebrow="INTERACTIVA">
 
-- **Discreta**: Toma valores contables (ej., cantidad de clientes que se dan de baja)
-- **Continua**: Toma valores en un intervalo (ej., nivel de expresión génica)
-
-**Función de Probabilidad (PMF)**: Para variables aleatorias discretas, \(p(x) = P(X = x)\)
-
-**Función de Densidad (PDF)**: Para variables aleatorias continuas, \(P(a \leq X \leq b) = \int_a^b f(x) dx\)
-
-**Función de Distribución Acumulada (CDF)**: \(F(x) = P(X \leq x)\)
-
-**Valor Esperado**: \(E[X] = \sum_x x \cdot P(X=x)\) (discreto) o \(E[X] = \int x f(x) dx\) (continuo)
-
-**Varianza**: \(\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - E[X]^2\)
-
-## Implementación en Python
+Apliquemos Bayes a un caso médico real. Una enfermedad rara y un test imperfecto:
 
 ```python
 import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
 
-# Simulando probabilidad condicional: test de enfermedad
-# Prevalencia de la enfermedad: 1% de la población
-# Sensibilidad del test (tasa de verdaderos positivos): 95%
-# Especificidad del test (tasa de verdaderos negativos): 90%
+# Prevalencia: 1% de la población
+# Sensibilidad: 95% (detecta 95% de los casos reales)
+# Especificidad: 90% (identifica 90% de los sanos)
 
-# Probabilidad a priori
 p_disease = 0.01
-p_no_disease = 0.99
-
-# Verosimilitud
 p_pos_given_disease = 0.95
-p_neg_given_no_disease = 0.90
-p_pos_given_no_disease = 1 - p_neg_given_no_disease  # 0.10 (falso positivo)
+p_pos_given_no_disease = 0.10  # 10% falsos positivos
 
-# Usando el teorema de Bayes: P(enfermedad | positivo)
+# Bayes: P(enfermedad | positivo)
 p_disease_given_pos = (p_pos_given_disease * p_disease) / (
-    p_pos_given_disease * p_disease + p_pos_given_no_disease * p_no_disease
+    p_pos_given_disease * p_disease + p_pos_given_no_disease * (1 - p_disease)
 )
 
-print(f"Probabilidad de tener la enfermedad dado un test positivo: {p_disease_given_pos:.3f}")
-print(f"¡Solo {p_disease_given_pos*100:.1f}% — porque la enfermedad es rara!")
-
-# Simular con muchos pacientes
-np.random.seed(42)
-n_patients = 100000
-has_disease = np.random.random(n_patients) < p_disease
-test_positive = np.where(
-    has_disease,
-    np.random.random(n_patients) < 0.95,  # verdadero positivo
-    np.random.random(n_patients) < 0.10   # falso positivo
-)
-
-# Bayes empírico
-actual_disease_given_pos = has_disease[test_positive].mean()
-print(f"P empírica(enfermedad | positivo): {actual_disease_given_pos:.3f}")
-
-# Variable aleatoria: valor esperado
-# Considerá: el 20% de los usuarios se van cada mes. ¿Cantidad esperada de usuarios que se van de 100?
-n_users = 100
-p_churn = 0.20
-expected_churn = n_users * p_churn
-variance_churn = n_users * p_churn * (1 - p_churn)
-print(f"\nUsuarios que se van esperados: {expected_churn}")
-print(f"Varianza: {variance_churn:.2f}")
-print(f"Desvío estándar: {np.sqrt(variance_churn):.2f}")
+print(f"P(enfermedad | positivo) = {p_disease_given_pos:.3f}")
+print(f"¡Solo {p_disease_given_pos*100:.1f}%!")
 ```
 
-## Ejemplo Guiado
+<ReflectionCheck
+  blockId="reflection-l03-bayes-rare"
+  moduleSlug="estadistica"
+  lessonSlug="lesson03_probability"
+  prompt="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
+  answer="No, el test no es malo — ¡la enfermedad es rara! Con prevalencia del 1%, de 1000 personas solo 10 tienen la enfermedad. El test detecta ~9.5 de esas 10 (95% sensibilidad), pero también marca falsamente ~99 de las 990 sanas (10% falsos positivos). De ~108 tests positivos, solo ~9.5 son reales → ~8.8%. Esto se llama la paradoja de la tasa base: cuando la condición es rara, la mayoría de los positivos son falsos positivos."
+/>
 
-**Test de Diagnóstico Médico**
+</Section>
 
-Una empresa biotecnológica desarrolla un test para un trastorno genético poco común.
+<Section number={7} title="Caso biotecnológico: variantes génicas" eyebrow="INTERACTIVA">
 
-- Prevalencia: 0.5% de la población
-- Sensibilidad: 99% (detecta el 99% de los casos reales)
-- Especificidad: 98% (identifica correctamente al 98% de las personas sanas)
-
-**Pregunta**: Si un paciente da positivo, ¿cuál es la probabilidad de que realmente tenga el trastorno?
-
-```python
-prevalence = 0.005
-sensitivity = 0.99
-specificity = 0.98
-
-p_pos_given_disease = sensitivity
-p_pos_given_healthy = 1 - specificity
-
-p_dis_given_pos = (p_pos_given_disease * prevalence) / (
-    p_pos_given_disease * prevalence + p_pos_given_healthy * (1 - prevalence)
-)
-
-print(f"P(enfermedad | positivo) = {p_dis_given_pos:.3f} ({p_dis_given_pos*100:.1f}%)")
-```
-
-**Interpretación**: A pesar de tener 99% de sensibilidad y 98% de especificidad, un test positivo todavía significa solo un 20% de probabilidad de tener la enfermedad. Este resultado contraintuitivo surge porque la enfermedad es rara — la mayoría de los tests positivos son falsos positivos.
-
-## Ejemplo de Biotecnología
-
-Clasificación de variantes génicas. Supongamos que se encuentra una mutación en una secuencia de ADN. La mutación podría ser benigna (99.9% de las variantes) o patogénica (0.1%). Una herramienta bioinformática clasifica correctamente el 95% de las variantes patogénicas e incorrectamente marca el 2% de las variantes benignas como patogénicas.
+Clasificación de mutaciones en ADN. Una herramienta bioinformática analiza variantes:
 
 ```python
+# Solo 0.1% de variantes son patogénicas
 p_pathogenic = 0.001
 p_benign = 0.999
+
+# Herramienta: 95% sensibilidad, 2% falsos positivos
 p_detect_given_pathogenic = 0.95
 p_detect_given_benign = 0.02
 
@@ -189,82 +166,109 @@ p_pathogenic_given_detect = (p_detect_given_pathogenic * p_pathogenic) / (
 print(f"P(patogénica | detectada) = {p_pathogenic_given_detect:.3f}")
 ```
 
-## Ejemplo SaaS
+<CalloutInfo>
+Incluso con 95% de precisión, una variante marcada como patogénica tiene solo ~4.5% de probabilidad de serlo realmente. Esto explica por qué los genetistas siempre validan con estudios funcionales antes de diagnosticar.
+</CalloutInfo>
 
-Predicción de deserción de clientes. Una empresa SaaS tiene datos que muestran:
-- El 10% de los clientes se dan de baja cada mes (probabilidad a priori)
-- El modelo predice la deserción con 80% de precisión para los clientes que se dan de baja
-- El modelo predice falsamente la deserción para el 15% de los clientes que se quedan
+</Section>
+
+<Section number={8} title="Predicción de deserción en SaaS" eyebrow="INTERACTIVA">
 
 ```python
+# 10% de clientes cancelan cada mes
+# Modelo: 80% precisión para los que cancelan
+#         15% falsas alarmas para los que se quedan
+
 p_churn = 0.10
-p_stay = 0.90
 p_pred_churn_given_churn = 0.80
 p_pred_churn_given_stay = 0.15
 
 p_churn_given_pred = (p_pred_churn_given_churn * p_churn) / (
-    p_pred_churn_given_churn * p_churn + p_pred_churn_given_stay * p_stay
+    p_pred_churn_given_churn * p_churn + p_pred_churn_given_stay * (1 - p_churn)
 )
-print(f"P(deserción | predicho deserción) = {p_churn_given_pred:.3f}")
+print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 ```
 
-## Errores Comunes
+<ReflectionCheck
+  blockId="reflection-l03-churn-bayes"
+  moduleSlug="estadistica"
+  lessonSlug="lesson03_probability"
+  prompt="De los clientes marcados como 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
+  answer="Depende del costo de contactar vs el costo de perder un cliente. Si contactar es barato (email automático), conviene contactar a todos — rescatás al 80% de los que iban a cancelar. Si contactar es caro (llamada de un account manager), quizás querés un modelo más preciso. Es un trade-off clásico entre recall (detectar todos los que cancelan) y precision (no molestar a los que no van a cancelar)."
+/>
 
-1. **Confundir P(A|B) con P(B|A)**: La probabilidad de tener una enfermedad dado un test positivo no es lo mismo que la probabilidad de un test positivo dado que se tiene la enfermedad. Esto se llama la "falacia del fiscal."
-2. **Ignorar la tasa base**: El teorema de Bayes muestra que los eventos raros siguen siendo raros incluso después de evidencia positiva (la falacia de la tasa base).
-3. **Asumir independencia**: Los eventos raramente son independientes en datos reales. Siempre verificá antes de multiplicar probabilidades.
-4. **Malinterpretar los valores p**: Un valor p NO es la probabilidad de que la hipótesis nula sea verdadera.
+</Section>
 
-## Mejores Prácticas
+<Section number={9} title="Errores comunes" eyebrow="CONCEPTO">
 
+<ConceptCard variant="warning">
+**Cuatro trampas probabilísticas:**
+
+1. **Confundir $P(A|B)$ con $P(B|A)$** — la falacia del fiscal. Son cosas completamente diferentes.
+2. **Ignorar la tasa base** — Bayes muestra que eventos raros siguen siendo raros incluso con evidencia positiva.
+3. **Asumir independencia sin verificar** — multiplicar probabilidades solo funciona si los eventos son independientes.
+4. **Malinterpretar el valor p** — un valor p NO es la probabilidad de que la hipótesis nula sea verdadera.
+</ConceptCard>
+
+<CalloutInfo>
+**Mejores prácticas:**
 - Escribí siempre la probabilidad a priori antes de actualizar con evidencia
-- Usá simulación para verificar cálculos de probabilidad
-- Visualizá distribuciones de probabilidad cuando sea posible
-- Recordá que la probabilidad cuantifica la incertidumbre; no la elimina
+- Usá simulación para verificar cálculos de probabilidad (es más fácil que el álgebra)
+- Visualizá distribuciones cuando sea posible — una imagen vale más que mil fórmulas
+- La probabilidad cuantifica incertidumbre, no la elimina — no busques certezas donde no las hay
+</CalloutInfo>
 
-## Resumen
+</Section>
 
-- Axiomas de Kolmogorov: no negatividad, normalización, aditividad
-- Probabilidad condicional: P(A|B) = P(A∩B) / P(B)
-- Ley de probabilidad total: P(A) = Σ P(A|B_i) · P(B_i)
-- Teorema de Bayes: actualiza creencias a priori con evidencia
-- Variables aleatorias: funciones del espacio muestral a los números reales
-- Valor esperado: promedio a largo plazo de una variable aleatoria
+<Section number={10} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-## Términos Clave
+<ReflectionCheck
+  blockId="reflection-l03-axioms"
+  moduleSlug="estadistica"
+  lessonSlug="lesson03_probability"
+  prompt="¿Por qué el Axioma 2 de Kolmogorov (P(S) = 1) es necesario? ¿Qué pasaría si la probabilidad total no fuera 1?"
+  answer="Si la probabilidad total no fuera 1, las probabilidades no serían interpretables como frecuencias o grados de creencia. El axioma garantiza que 'algo tiene que ocurrir'. Sin él, podríamos tener escenarios donde ningún resultado posible ocurre, lo cual es lógicamente inconsistente. Es el equivalente probabilístico de 'el todo es la suma de las partes'."
+/>
 
-| Término | Definición |
-|---------|------------|
-| Espacio Muestral | Conjunto de todos los resultados posibles |
-| Evento | Subconjunto del espacio muestral |
-| Probabilidad Condicional | Probabilidad de A dado que B ocurrió |
-| Teorema de Bayes | Fórmula para actualizar probabilidades dada evidencia |
-| Probabilidad a Priori | Probabilidad inicial antes de nueva evidencia |
-| Probabilidad a Posteriori | Probabilidad actualizada después de la evidencia |
-| Variable Aleatoria | Variable cuyo valor está determinado por un proceso aleatorio |
-| Valor Esperado | Promedio a largo plazo de una variable aleatoria |
+<AnswerReveal summary="Ver respuestas adicionales">
+<p><strong>Se lanza un dado justo. ¿P(sacar 3)? ¿P(número par)?</strong> P(3) = 1/6 (un resultado de seis igualmente probables). P(par) = 3/6 = 1/2 (tres resultados pares: 2, 4, 6).</p>
+<p><strong>¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?</strong> Porque un clasificador que dice "95% confianza" está dando P(clase | features), no P(features | clase). Sin entender la diferencia, podés sobreestimar peligrosamente la precisión del modelo, especialmente con clases desbalanceadas.</p>
+</AnswerReveal>
 
-## Ejercicios
+</Section>
 
-**Nivel 1: Comprensión Básica**
+<Section number={11} title="Términos clave" eyebrow="CIERRE">
 
-1. Se lanza un dado justo. ¿Cuál es la probabilidad de sacar un 3? ¿Cuál es la probabilidad de sacar un número par?
-2. Enunciá y explicá cada uno de los tres axiomas de Kolmogorov con tus propias palabras.
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["Espacio Muestral", "Conjunto de todos los resultados posibles de un experimento"],
+    ["Evento", "Subconjunto del espacio muestral"],
+    ["Probabilidad Condicional", "P(A|B): probabilidad de A sabiendo que B ocurrió"],
+    ["Teorema de Bayes", "Fórmula para actualizar probabilidades con nueva evidencia"],
+    ["Probabilidad a Priori", "Creencia inicial antes de observar evidencia"],
+    ["Probabilidad a Posteriori", "Creencia actualizada después de la evidencia"],
+    ["Variable Aleatoria", "Función que asigna un número a cada resultado"],
+    ["Valor Esperado", "Promedio a largo plazo de una variable aleatoria"],
+  ]}
+  searchable={true}
+  caption="Términos clave de probabilidad"
+/>
 
-**Nivel 2: Implementación**
+</Section>
 
-3. Escribí una simulación en Python que lance dos dados 10.000 veces y calcule la probabilidad empírica de que la suma sea 7. Compará con la probabilidad teórica.
-4. Un filtro de spam tiene una tasa de falsos positivos del 2% y una tasa de falsos negativos del 1%. El 40% de todos los correos son spam. Usá el teorema de Bayes para encontrar la probabilidad de que un correo sea spam dado que el filtro lo marcó.
+<Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
 
-**Nivel 3: Pensamiento Crítico**
+<MascotMessage mood="celebrating">
+¡Bayes es poderoso! Acabás de aprender la herramienta matemática más importante para razonar bajo incertidumbre. Todo el machine learning moderno — desde clasificadores naive Bayes hasta redes neuronales bayesianas — se construye sobre estas ideas.
+</MascotMessage>
 
-5. En estudios de asociación genómica (GWAS), se realizan millones de tests estadísticos simultáneamente. Explicá cómo la ley de probabilidad total y el teorema de Bayes se relacionan con métodos de corrección por tests múltiples como la corrección de Bonferroni.
-6. ¿Por qué es esencial entender la probabilidad condicional para interpretar las salidas de modelos de machine learning como puntajes de confianza o probabilidades predichas?
+**¿Qué aprendiste hoy?**
+- Los tres axiomas de Kolmogorov son los cimientos de la probabilidad
+- $P(A|B) \neq P(B|A)$ — la falacia del fiscal se cobra víctimas todos los días
+- Bayes actualiza creencias: a priori → evidencia → a posteriori
+- Las variables aleatorias discretas y continuas se manejan con PMF y PDF
 
-## Desafío de Programación
+**En la Lección 4** vamos a conocer las distribuciones con nombre y apellido: Bernoulli, Binomial, Poisson y la famosísima distribución Normal. Porque hasta ahora hablamos de probabilidad en abstracto — es hora de ponerle nombres a las curvas.
 
-Escribí un script en Python que:
-1. Simule un test de diagnóstico para una enfermedad con prevalencia, sensibilidad y especificidad configurables
-2. Para cada una de 10 tasas de prevalencia diferentes (de 0.001 a 0.5), calcule la probabilidad a posteriori P(enfermedad|positivo)
-3. Trace una curva de prevalencia vs probabilidad a posteriori
-4. Incluya una línea horizontal en y=0.5 para mostrar dónde el test se vuelve informativo (P(enfermedad|positivo) > 0.5)
+</Section>

@@ -20,278 +20,199 @@ Assignment: statistical_distributions_assignment.md
 Quiz: statistical_distributions_quiz.md
 ---
 
-# Lección 4: Distribuciones Estadísticas
+<Section number={1} title="Las distribuciones con nombre y apellido" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log-normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
+</MascotMessage>
 
-Todo proceso generador de datos en la naturaleza y los negocios sigue alguna distribución de probabilidad. La expresión génica sigue una distribución log-normal. Las llegadas de clientes siguen una distribución de Poisson. Los resultados binarios como enfermedad/no-enfermedad siguen una distribución de Bernoulli. Entender estas distribuciones con nombre te permite modelar datos de forma realista, hacer predicciones probabilísticas y elegir tests estadísticos adecuados.
+En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a conocer las distribuciones específicas que aparecen con más frecuencia en machine learning: **Bernoulli, Binomial, Poisson y Normal**. Cada una modela un tipo distinto de fenómeno.
 
-En la Lección 3, aprendiste el lenguaje general de la probabilidad. Ahora conocerás las distribuciones específicas que aparecen con más frecuencia en machine learning y ciencia de datos.
+</Section>
 
-## Panorama General
+<Section number={2} title="Bernoulli: éxito o fracaso" eyebrow="CONCEPTO">
 
-Esta lección puentea la teoría de probabilidad (Lección 3) con el análisis práctico de datos. Aprenderás a trabajar con cuatro distribuciones esenciales usando scipy.stats. Estas distribuciones aparecen a lo largo del resto del curso — en EDA (Lección 6), evaluación de modelos (Lección 9), y todo el Módulo 4 (Machine Learning).
+<ConceptCard variant="definition">
+**Distribución Bernoulli**: Modela un único resultado binario (éxito/fracaso, 1/0).
+- Parámetro: $p$ (probabilidad de éxito)
+- PMF: $P(X = 1) = p$, $P(X = 0) = 1 - p$
+- Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
+</ConceptCard>
 
-## Teoría
+Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
 
-### Distribución Bernoulli
+</Section>
 
-Modela un único resultado binario (éxito/fracaso, 1/0).
+<Section number={3} title="Binomial: contar éxitos" eyebrow="CONCEPTO">
 
-- Parámetro: \(p\) (probabilidad de éxito)
-- PMF: \(P(X = 1) = p\), \(P(X = 0) = 1 - p\)
-- Media: \(E[X] = p\)
-- Varianza: \(\text{Var}(X) = p(1-p)\)
+<ConceptCard variant="definition">
+**Distribución Binomial**: Cantidad de éxitos en $n$ ensayos Bernoulli independientes.
+- Parámetros: $n$ (ensayos), $p$ (probabilidad de éxito)
+- PMF: $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
+- Media: $E[X] = np$, Varianza: $\text{Var}(X) = np(1-p)$
+</ConceptCard>
 
-Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento o no.
+Intuición: Lanzar una moneda 10 veces y contar caras. De 100 pacientes tratados, ¿cuántos responden? La Binomial es una suma de $n$ Bernoullis independientes.
 
-### Distribución Binomial
+</Section>
 
-Modela la cantidad de éxitos en \(n\) ensayos Bernoulli independientes.
+<Section number={4} title="Poisson: eventos en el tiempo" eyebrow="CONCEPTO">
 
-- Parámetros: \(n\) (ensayos), \(p\) (probabilidad de éxito)
-- PMF: \(P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\)
-- Media: \(E[X] = np\)
-- Varianza: \(\text{Var}(X) = np(1-p)\)
+<ConceptCard variant="definition">
+**Distribución Poisson**: Cantidad de eventos que ocurren en un intervalo fijo de tiempo o espacio.
+- Parámetro: $\lambda$ (tasa promedio)
+- PMF: $P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}$
+- Media: $E[X] = \lambda$, Varianza: $\text{Var}(X) = \lambda$
+</ConceptCard>
 
-Intuición: Lanzar una moneda \(n\) veces y contar las caras. Cantidad de pacientes que responden al tratamiento de 100.
+<ConceptCard variant="key-idea">
+Lo fascinante de Poisson es que la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor que la media, hay sobredispersión — necesitás un modelo más complejo.
+</ConceptCard>
 
-### Distribución Poisson
+Ejemplos: mutaciones en una secuencia de ADN, llegadas de clientes por hora, llamadas a un call center por minuto.
 
-Modela la cantidad de eventos que ocurren en un intervalo fijo de tiempo o espacio.
+</Section>
 
-- Parámetro: \(\lambda\) (tasa promedio)
-- PMF: \(P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}\)
-- Media: \(E[X] = \lambda\)
-- Varianza: \(\text{Var}(X) = \lambda\)
+<Section number={5} title="Normal: la reina de las distribuciones" eyebrow="CONCEPTO">
 
-Intuición: Llegadas de clientes por hora. Cantidad de mutaciones en una secuencia de ADN de longitud fija.
+<ConceptCard variant="definition">
+**Distribución Normal (Gaussiana)**: La distribución más importante en estadística.
+- Parámetros: $\mu$ (media), $\sigma^2$ (varianza)
+- PDF: $f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$
+</ConceptCard>
 
-### Distribución Normal (Gaussiana)
+**Regla 68-95-99.7**: ~68% de los datos dentro de 1σ, ~95% dentro de 2σ, ~99.7% dentro de 3σ.
 
-La distribución más importante en estadística. Modela muchos fenómenos naturales.
+**Estandarización** (puntaje Z): $Z = \frac{X - \mu}{\sigma}$ transforma cualquier normal a $N(0, 1)$.
 
-- Parámetros: \(\mu\) (media), \(\sigma^2\) (varianza)
-- PDF: \(f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\)
-- Media: \(\mu\)
-- Varianza: \(\sigma^2\)
+<ConceptCard variant="key-idea">
+El **Teorema Central del Límite** explica por qué la normal es ubicua: la suma de muchas variables independientes converge a una normal, sin importar la distribución original. Incluso si tus datos no son normales, los promedios de muestras grandes sí lo son.
+</ConceptCard>
 
-**Distribución Normal Estándar**: \(Z = \frac{X - \mu}{\sigma}\) transforma cualquier normal a \(N(0, 1)\).
+</Section>
 
-**Regla 68-95-99.7**: Aproximadamente el 68% de los datos dentro de 1σ, 95% dentro de 2σ, 99.7% dentro de 3σ.
+<Section number={6} title="Comparación visual de las cuatro" eyebrow="INTERACTIVA">
 
-Intuición: Alturas, errores de medición, puntajes de examen. Muchos algoritmos de machine learning asumen que las features están distribuidas normalmente.
+<ComparisonTable
+  rows={[
+    { feature: "Tipo", left: "Discreta (0 o 1)", right: "Discreta (0 a n)" },
+    { feature: "Parámetros", left: "p", right: "n, p" },
+    { feature: "Media", left: "p", right: "np" },
+    { feature: "Varianza", left: "p(1-p)", right: "np(1-p)" },
+    { feature: "Ejemplo", left: "¿Responde al tratamiento?", right: "¿Cuántos de 50 responden?" },
+    { feature: "scipy.stats", left: "bernoulli(p)", right: "binom(n, p)" },
+  ]}
+/>
 
-### Teorema Central del Límite
+<ComparisonTable
+  rows={[
+    { feature: "Tipo", left: "Discreta (0 a ∞)", right: "Continua (−∞ a ∞)" },
+    { feature: "Parámetros", left: "λ", right: "μ, σ²" },
+    { feature: "Media", left: "λ", right: "μ" },
+    { feature: "Varianza", left: "λ", right: "σ²" },
+    { feature: "Ejemplo", left: "Mutaciones por gen", right: "Altura de personas" },
+    { feature: "scipy.stats", left: "poisson(lam)", right: "norm(mu, sigma)" },
+  ]}
+/>
 
-La suma (o promedio) de \(n\) variables aleatorias independientes converge a una distribución normal a medida que \(n\) aumenta, sin importar la distribución original.
+</Section>
 
-Intuición: Incluso si los puntos de datos individuales no son normales, el promedio de muchas muestras será aproximadamente normal. Por eso la distribución normal es tan ubicua.
-
-## Implementación en Python
+<Section number={7} title="Manos a la obra con scipy.stats" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy import stats
 
-# Bernoulli
-p = 0.3
-bernoulli = stats.bernoulli(p)
-print(f"Bernoulli - P(X=1): {bernoulli.pmf(1):.2f}, P(X=0): {bernoulli.pmf(0):.2f}")
+# Bernoulli: paciente responde (p=0.3)
+ber = stats.bernoulli(0.3)
+print(f"P(responde) = {ber.pmf(1):.2f}")
 
-# Binomial
-n, p = 10, 0.3
-binomial = stats.binom(n, p)
-k = np.arange(0, n+1)
-print(f"Binomial - P(X=3): {binomial.pmf(3):.3f}")
-print(f"Media (np): {binomial.mean():.2f}, Varianza (np(1-p)): {binomial.var():.2f}")
+# Binomial: de 10 pacientes, ¿cuántos responden?
+bin = stats.binom(n=10, p=0.3)
+print(f"P(exactamente 3) = {bin.pmf(3):.3f}")
+print(f"P(al menos 5) = {1 - bin.cdf(4):.3f}")
 
-# Poisson
-lam = 3.0
-poisson = stats.poisson(lam)
-k = np.arange(0, 10)
-print(f"Poisson - P(X=2): {poisson.pmf(2):.3f}")
-print(f"Media: {poisson.mean():.2f}, Varianza: {poisson.var():.2f}")
+# Poisson: mutaciones por gen (λ=3)
+poi = stats.poisson(3)
+print(f"P(2 mutaciones) = {poi.pmf(2):.3f}")
 
-# Normal
-mu, sigma = 50, 10
-normal = stats.norm(mu, sigma)
-print(f"Normal - P(X < 60) (CDF): {normal.cdf(60):.3f}")
-print(f"P(40 < X < 60): {normal.cdf(60) - normal.cdf(40):.3f}")
+# Normal: expresión génica (μ=50, σ=10)
+norm = stats.norm(50, 10)
+print(f"P(X < 60) = {norm.cdf(60):.3f}")
+print(f"P(40 < X < 60) = {norm.cdf(60) - norm.cdf(40):.3f}")
 ```
 
-### Visualización
+<CalloutInfo>
+**PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$ — siempre usá CDF para rangos.
+</CalloutInfo>
+
+</Section>
+
+<Section number={8} title="Biotecnología: modelando eventos raros" eyebrow="INTERACTIVA">
+
+Las mutaciones en secuencias de ADN siguen Poisson. Si la tasa promedio es 2.5 mutaciones por gen:
 
 ```python
-fig, axes = plt.subplots(2, 2, figsize=(12, 8))
-
-# Bernoulli
-x = [0, 1]
-axes[0, 0].bar(x, stats.bernoulli(0.3).pmf(x), width=0.4, color='steelblue')
-axes[0, 0].set_title('Bernoulli (p=0.3)')
-axes[0, 0].set_xticks([0, 1])
-
-# Binomial
-n, p = 10, 0.3
-k = np.arange(0, n+1)
-axes[0, 1].bar(k, stats.binom(n, p).pmf(k), width=0.8, color='coral')
-axes[0, 1].set_title(f'Binomial (n={n}, p={p})')
-
-# Poisson
-lam = 3
-k = np.arange(0, 12)
-axes[1, 0].bar(k, stats.poisson(lam).pmf(k), width=0.8, color='seagreen')
-axes[1, 0].set_title(f'Poisson ($\lambda$={lam})')
-
-# Normal
-x = np.linspace(mu-4*sigma, mu+4*sigma, 200)
-axes[1, 1].plot(x, stats.norm(mu, sigma).pdf(x), color='purple', linewidth=2)
-axes[1, 1].set_title(f'Normal ($\mu$={mu}, $\sigma$={sigma})')
-
-plt.tight_layout()
-plt.show()
-
-# Demostración de estandarización
-data = np.random.normal(loc=100, scale=15, size=1000)
-z_scores = (data - np.mean(data)) / np.std(data, ddof=0)
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-axes[0].hist(data, bins=30, edgecolor='black')
-axes[0].set_title('Datos Originales')
-axes[1].hist(z_scores, bins=30, edgecolor='black')
-axes[1].set_title('Estandarizados (Puntajes Z)')
-plt.tight_layout()
-plt.show()
+lam = 2.5
+poi = stats.poisson(lam)
+print(f"P(0 mutaciones) = {poi.pmf(0):.3f}")  # gen intacto
+print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 ```
 
-## Ejemplo Guiado
+<ReflectionCheck
+  blockId="reflection-l04-poisson-genes"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  prompt="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
+  answer="Poisson asume que los eventos ocurren independientemente a una tasa constante λ. En genética, cada posición del ADN puede mutar independientemente, y la tasa es aproximadamente constante por región. Pero ojo: en regiones genómicas inestables (hotspots), la tasa no es constante y Poisson subestima la varianza — ahí necesitamos modelos más complejos como binomial negativa."
+/>
 
-Una empresa biotecnológica mide la cantidad de colonias bacterianas en 100 placas de Petri. El promedio es de 15 colonias por placa.
+</Section>
 
-```python
-lam = 15
-k = np.arange(0, 30)
-probs = stats.poisson(lam).pmf(k)
+<Section number={9} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-plt.figure(figsize=(10, 4))
-plt.bar(k, probs, width=0.8, color='steelblue')
-plt.axvline(lam, color='red', linestyle='--', label=f'Media = {lam}')
-plt.title('Distribución Poisson: Colonias Bacterianas por Placa')
-plt.xlabel('Cantidad de Colonias')
-plt.ylabel('Probabilidad')
-plt.legend()
-plt.show()
+<ReflectionCheck
+  blockId="reflection-l04-choose-dist"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  prompt="Tenés datos de cantidad de clientes que entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
+  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verificá: si la varianza empírica es mucho mayor que 5 (sobredispersión), considerá binomial negativa. Si hay patrones temporales (hora pico), necesitás un Poisson no homogéneo con λ(t) variable."
+/>
 
-# Probabilidad de observar exactamente 12 colonias
-print(f"P(X=12): {stats.poisson(lam).pmf(12):.3f}")
-# Probabilidad de observar 20 o más colonias
-print(f"P(X >= 20): {1 - stats.poisson(lam).cdf(19):.3f}")
-```
+<AnswerReveal summary="Ver respuestas">
+<p><strong>¿Cuándo usarías Bernoulli vs Binomial?</strong> Bernoulli para UN evento (¿este paciente responde?). Binomial para contar éxitos en n eventos (de 50 pacientes, ¿cuántos responden?). La Binomial es la suma de n Bernoullis.</p>
+<p><strong>¿Qué hace el puntaje Z?</strong> $Z = (X - \mu) / \sigma$ transforma cualquier normal a N(0,1). Un Z=2 significa "a 2 desviaciones estándar de la media". Permite comparar valores de distintas distribuciones.</p>
+</AnswerReveal>
 
-Interpretación: El modelo Poisson ayuda a predecir cuántas colonias esperamos ver y si una placa con 25 colonias es inusualmente alta.
+</Section>
 
-## Ejemplo de Biotecnología
+<Section number={10} title="Términos clave" eyebrow="CIERRE">
 
-Los cambios de expresión génica (fold changes) suelen ser aproximadamente log-normales. Después de una transformación logarítmica, siguen una distribución normal.
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["Bernoulli", "Un ensayo binario con probabilidad p de éxito"],
+    ["Binomial", "Cantidad de éxitos en n ensayos Bernoulli independientes"],
+    ["Poisson", "Cantidad de eventos en un intervalo fijo, tasa constante λ"],
+    ["Normal (Gaussiana)", "Distribución campana simétrica N(μ, σ²)"],
+    ["Puntaje Z", "Estandarización: $Z = (X - \\mu)/\\sigma \\sim N(0,1)$"],
+    ["PMF", "Probability Mass Function — para variables discretas"],
+    ["PDF", "Probability Density Function — para variables continuas"],
+    ["CDF", "Cumulative Distribution Function — $F(x) = P(X \\leq x)$"],
+    ["TCL", "Teorema Central del Límite: promedios convergen a normal"],
+  ]}
+  searchable={true}
+  caption="Distribuciones estadísticas — referencia rápida"
+/>
 
-```python
-# Simular cambios de expresión
-np.random.seed(42)
-fold_changes = np.random.lognormal(mean=0, sigma=0.5, size=1000)
+</Section>
 
-log_fc = np.log2(fold_changes)
-z_scores = (log_fc - np.mean(log_fc)) / np.std(log_fc, ddof=0)
+<Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
 
-# ¿Qué genes se expresan diferencialmente (|Z| > 2)?
-de_genes = np.abs(z_scores) > 2
-print(f"Cantidad de genes expresados diferencialmente: {de_genes.sum()}")
-print(f"Porcentaje: {de_genes.mean() * 100:.1f}%")
-```
+<MascotMessage mood="celebrating">
+¡Cuatro distribuciones fundamentales dominadas! Bernoulli, Binomial, Poisson, Normal — con estas cuatro ya podés modelar una enorme variedad de fenómenos reales.
+</MascotMessage>
 
-## Ejemplo SaaS
+**En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento — todo está conectado.
 
-Los registros diarios de usuarios siguen un proceso de Poisson.
-
-```python
-lam_signups = 25  # 25 registros por día en promedio
-daily_signups = stats.poisson(lam_signups).rvs(365, random_state=42)
-
-plt.figure(figsize=(10, 4))
-plt.hist(daily_signups, bins=20, edgecolor='black', color='coral')
-plt.axvline(lam_signups, color='red', linestyle='--', label=f'Media = {lam_signups}')
-plt.title('Registros Diarios (Distribución Poisson)')
-plt.xlabel('Registros')
-plt.ylabel('Frecuencia')
-plt.legend()
-plt.show()
-
-# Cantidad esperada de días con más de 30 registros
-p_more_than_30 = 1 - stats.poisson(lam_signups).cdf(30)
-expected_days = p_more_than_30 * 365
-print(f"Días esperados con >30 registros: {expected_days:.1f}")
-```
-
-## Errores Comunes
-
-1. **Usar Binomial cuando los ensayos no son independientes**: La Binomial asume independencia. En realidad, pacientes del mismo hospital pueden tener resultados correlacionados.
-2. **Usar Poisson cuando la varianza ≠ media**: La Poisson asume que varianza = media. Si la varianza es mucho mayor (sobredispersión), usá Binomial Negativa en su lugar.
-3. **Asumir que los datos son normales sin verificar**: Visualizá y testéá la normalidad siempre antes de usar métodos que la asumen.
-4. **Interpretar el TCL demasiado ampliamente**: El TCL aplica a la media muestral, no a observaciones individuales.
-
-## Mejores Prácticas
-
-- Visualizá tus datos antes de elegir una distribución
-- Usá gráficos Q-Q para verificar normalidad
-- Estandarizá las features (puntajes Z) cuando uses algoritmos de ML basados en distancia
-- Recordá la regla 68-95-99.7 para aproximaciones normales rápidas
-- Usá scipy.stats para todos los cálculos de distribuciones
-
-## Resumen
-
-- **Bernoulli**: Único resultado binario (p)
-- **Binomial**: Conteo de éxitos en n ensayos (n, p)
-- **Poisson**: Conteo de eventos en tiempo/espacio (λ)
-- **Normal**: Distribución continua con forma de campana (μ, σ)
-- **Estandarización**: Z = (X - μ) / σ crea la normal estándar
-- Teorema Central del Límite: las medias muestrales se aproximan a la normal a medida que el tamaño de muestra crece
-
-## Términos Clave
-
-| Término | Definición |
-|---------|------------|
-| Distribución Bernoulli | Modela un único resultado binario |
-| Distribución Binomial | Modela la cantidad de éxitos en n ensayos |
-| Distribución Poisson | Modela conteos de eventos en tiempo/espacio |
-| Distribución Normal | Distribución simétrica con forma de campana |
-| Puntaje Z | Valor estandarizado: (X - μ) / σ |
-| Estandarización | Transformar a media 0, desviación estándar 1 |
-| Teorema Central del Límite | Las medias muestrales se aproximan a la normal con n grande |
-| PMF | Función de probabilidad (discreta) |
-| PDF | Función de densidad de probabilidad (continua) |
-| CDF | Función de distribución acumulada |
-
-## Ejercicios
-
-**Nivel 1: Comprensión Básica**
-
-1. ¿Cuáles son la media y la varianza de una distribución Bernoulli con p = 0.5?
-2. La cantidad de tickets de soporte recibidos por hora promedia 12. ¿Qué distribución modela esto? ¿Cuál es la probabilidad de recibir exactamente 10 tickets en una hora?
-
-**Nivel 2: Implementación**
-
-3. Usando scipy.stats, generá y trazá la PMF de una distribución Binomial con n=20, p=0.7. ¿Cuál es la probabilidad de obtener al menos 15 éxitos?
-4. Generá 1000 muestras de N(100, 20), estandarizalas y verificá que los puntajes Z resultantes tengan media ≈ 0 y desviación estándar ≈ 1.
-
-**Nivel 3: Pensamiento Crítico**
-
-5. En datos de RNA-seq, los conteos de genes suelen modelarse con una Binomial Negativa en lugar de Poisson. ¿Por qué? ¿Qué propiedad de los datos de RNA-seq viola el supuesto de Poisson?
-6. Los ingresos diarios de una empresa SaaS tienen asimetría a la derecha. ¿Por qué el Teorema Central del Límite podría aún permitirles usar intervalos de confianza basados en la normal para el ingreso mensual promedio?
-
-## Desafío de Programación
-
-Escribí un script en Python que:
-1. Genere datos de 4 distribuciones diferentes (Bernoulli, Binomial, Poisson, Normal)
-2. Para cada distribución, calcule e imprima la media y la varianza
-3. Cree un subplot de 2×2 con la PMF o PDF de cada distribución
-4. Para la distribución normal, superponga líneas verticales en ±1σ, ±2σ, ±3σ desde la media con anotaciones que muestren el porcentaje de datos dentro de cada rango
+</Section>
