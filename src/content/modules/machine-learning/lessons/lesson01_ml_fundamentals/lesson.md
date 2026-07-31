@@ -21,91 +21,150 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Fundamentos de ML
+<Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="excited">
+¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: acá dejás de decirle a la computadora qué hacer y empezás a enseñarle a descubrir patrones por sí misma.
+</MascotMessage>
 
-Todos los días usás Aprendizaje Automático: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero ¿cómo funciona? En la programación tradicional, escribís reglas. En ML, la computadora aprende reglas a partir de datos. Este cambio —de reglas programadas a reglas aprendidas— es la idea más importante del software moderno. En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, el ML predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitás para cada algoritmo del curso.
+Todos los días usás Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:
 
-## Panorama general
+<ConceptCard variant="key-idea">
+En la programación tradicional escribís **reglas explícitas**. En ML, la computadora **aprende las reglas** a partir de ejemplos. Es la diferencia entre darle una receta a alguien y mostrarle 1000 fotos de gatos hasta que pueda identificarlos solo.
+</ConceptCard>
 
-**Anterior:** El Módulo 3 te enseñó a describir y visualizar datos. **Esta lección:** Aprendés cómo los algoritmos *aprenden de los datos*. **Siguiente:** Regresión lineal — tu primer algoritmo de ML real.
+En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitás para cada algoritmo del curso.
 
-## Teoría
+</Section>
 
-### ¿Qué es el Aprendizaje Automático?
+<Section number={2} title="¿Dónde estamos parados?" eyebrow="CONTEXTO">
+
+**Anterior:** El Módulo 3 te enseñó a describir y visualizar datos con estadística.
+
+**Esta lección:** Aprendés cómo los algoritmos *aprenden de los datos* y qué puede salir mal en el proceso.
+
+**Siguiente:** Regresión lineal — tu primer algoritmo de ML real, donde todo esto cobra vida.
+
+<ConceptCard variant="key-idea">
+Antes de lanzarte a implementar algoritmos, necesitás entender los fundamentos: ¿qué significa que un modelo "aprenda"? ¿Cómo sabés si aprendió bien? ¿Por qué un modelo perfecto en entrenamiento puede fallar estrepitosamente en producción?
+</ConceptCard>
+
+</Section>
+
+<Section number={3} title="¿Qué es el Aprendizaje Automático?" eyebrow="CONCEPTO">
 
 El Aprendizaje Automático es un campo de la inteligencia artificial donde las computadoras aprenden patrones a partir de datos sin ser programadas explícitamente para cada escenario.
 
-**Programación tradicional:**
-```
-Reglas + Datos → Respuestas
-```
+<ComparisonTable
+  rows={[
+    { feature: "Enfoque", left: "Programación Tradicional", right: "Aprendizaje Automático" },
+    { feature: "Entrada", left: "Reglas + Datos", right: "Datos + Respuestas" },
+    { feature: "Salida", left: "Respuestas", right: "Reglas" },
+    { feature: "Ejemplo", left: "if spam_words > 3: marcar_spam()", right: "Mostrar 10.000 emails etiquetados → el modelo descubre qué patrones indican spam" },
+    { feature: "Cuándo usarlo", left: "Problemas con reglas claras y estables", right: "Problemas donde las reglas son difíciles de expresar o cambian con el tiempo" },
+  ]}
+/>
 
-**Aprendizaje Automático:**
-```
-Datos + Respuestas → Reglas
-```
+Le damos ejemplos a la computadora, y ella descubre el patrón subyacente. Simple en teoría, pero el diablo está en los detalles.
 
-Le damos ejemplos a la computadora, y ella descubre el patrón subyacente.
+</Section>
 
-### Vocabulario clave
+<Section number={4} title="Vocabulario que vas a usar todo el curso" eyebrow="CONCEPTO">
 
-**Característica (X):** Una variable de entrada usada para hacer predicciones.
-- Ejemplo: cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión.
+<ConceptCard variant="definition">
+**Característica (X):** Una variable de entrada usada para hacer predicciones. Cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión. Todo lo que *medís* para predecir algo.
+</ConceptCard>
 
-**Etiqueta (y):** La variable de salida que queremos predecir.
-- Ejemplo: precio de una casa, estado de enfermedad, probabilidad de abandono.
+<ConceptCard variant="definition">
+**Etiqueta (y):** La variable de salida que queremos predecir. Precio de una casa, estado de enfermedad, probabilidad de abandono. Es lo que querés *saber*.
+</ConceptCard>
 
-**Entrenamiento:** El proceso donde el modelo aprende patrones a partir de los datos.
+<ConceptCard variant="definition">
+**Entrenamiento:** El proceso donde el modelo aprende patrones a partir de los datos ajustando sus parámetros internos. Es como estudiar para un examen.
+</ConceptCard>
 
-**Predicción:** Usar el modelo entrenado con datos nuevos.
+<ConceptCard variant="definition">
+**Predicción:** Usar el modelo entrenado con datos nuevos que nunca vio. Es como rendir el examen.
+</ConceptCard>
 
-### Aprendizaje Supervisado vs. No Supervisado
+<CalloutInfo>
+Regla de oro: el modelo solo puede aprender de los datos que ve durante el entrenamiento. Si tus datos de entrenamiento tienen sesgos, tu modelo también los tendrá. Garbage in, garbage out.
+</CalloutInfo>
 
-| Aspecto | Supervisado | No Supervisado |
-|---------|-------------|----------------|
-| Datos | Tiene etiquetas | Sin etiquetas |
-| Objetivo | Predecir etiquetas | Encontrar estructura |
-| Ejemplos | Regresión, Clasificación | Clustering, PCA |
+</Section>
 
-### Generalización
+<Section number={5} title="Supervisado vs No Supervisado" eyebrow="CONCEPTO">
 
-La capacidad de un modelo de funcionar bien con datos *no vistos*. Este es el verdadero objetivo del ML —no memorizar datos de entrenamiento, sino aprender patrones que generalicen.
+<ComparisonTable
+  rows={[
+    { feature: "Datos de entrenamiento", left: "Tienen etiquetas (sabemos la respuesta correcta)", right: "Sin etiquetas (solo tenemos las características)" },
+    { feature: "Objetivo", left: "Predecir etiquetas para datos nuevos", right: "Encontrar estructura oculta en los datos" },
+    { feature: "Ejemplos", left: "Regresión (predecir un número), Clasificación (predecir una categoría)", right: "Clustering (agrupar similares), PCA (reducir dimensiones)" },
+    { feature: "Analogía", left: "Un profesor que corrige tus ejercicios", right: "Explorar una biblioteca sin catálogo y descubrir secciones por tu cuenta" },
+    { feature: "En este módulo", left: "Lecciones 1-5 y 8", right: "Lecciones 6 y 7" },
+  ]}
+/>
 
-### Sobreajuste
+</Section>
 
-El modelo aprende los datos de entrenamiento *demasiado bien*, incluyendo el ruido. Funciona excelente en los datos de entrenamiento pero mal con datos nuevos.
+<Section number={6} title="Generalización: el verdadero objetivo" eyebrow="CONCEPTO">
 
-**Síntomas:**
-- Precisión en entrenamiento cercana al 100%, precisión en prueba mucho más baja
-- Modelo muy complejo con muchos parámetros
+<ConceptCard variant="key-idea">
+La **generalización** es la capacidad del modelo de funcionar bien con datos *que nunca vio*. Este es el verdadero objetivo del ML — no memorizar los datos de entrenamiento, sino aprender patrones que se transfieran a situaciones nuevas.
+</ConceptCard>
 
-### Subajuste
+Si un modelo solo funciona con los datos que usaste para entrenarlo, no sirve. Es como un estudiante que se memoriza las respuestas del examen de práctica pero no entiende los conceptos.
 
-El modelo es demasiado simple para capturar el patrón subyacente. Funciona mal tanto en datos de entrenamiento como de prueba.
+<CalloutInfo>
+La división train/test es la herramienta más básica para medir generalización: entrenás con una parte de los datos y evaluás con otra que el modelo nunca vio.
+</CalloutInfo>
 
-**Síntomas:**
-- Tanto la precisión en entrenamiento como en prueba son bajas
-- El modelo es demasiado simple
+</Section>
 
-## Fundamento matemático: Compensación sesgo-varianza
+<Section number={7} title="Los dos enemigos: sobreajuste y subajuste" eyebrow="CONCEPTO">
 
-El error esperado de prueba de un modelo se puede descomponer en tres partes:
+<ComparisonTable
+  rows={[
+    { feature: "Qué es", left: "El modelo aprende los datos de entrenamiento **demasiado bien**, incluyendo el ruido", right: "El modelo es **demasiado simple** para capturar el patrón subyacente" },
+    { feature: "Síntoma clave", left: "Precisión en entrenamiento ≈ 100%, precisión en prueba mucho más baja", right: "Tanto la precisión en entrenamiento como en prueba son bajas" },
+    { feature: "Causa típica", left: "Modelo muy complejo con demasiados parámetros", right: "Modelo muy simple o falta de features relevantes" },
+    { feature: "Analogía", left: "Un estudiante que se memoriza cada palabra del libro pero no puede aplicar los conceptos", right: "Un estudiante que solo leyó el título del capítulo y cree que ya sabe todo" },
+  ]}
+/>
+
+<ReflectionCheck
+  blockId="reflection-l01-overfit-underfit"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  prompt="Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
+  answer="Es un caso claro de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Tres cosas que probaría: (1) simplificar el modelo (reducir complejidad), (2) agregar más datos de entrenamiento si es posible, (3) aplicar regularización para penalizar la complejidad excesiva."
+/>
+
+</Section>
+
+<Section number={8} title="La compensación sesgo-varianza" eyebrow="MATEMÁTICA">
+
+El error esperado de un modelo se puede descomponer en tres partes:
 
 $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 
-**Sesgo:** Error proveniente de suposiciones incorrectas. Sesgo alto → subajuste.
-**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos de entrenamiento. Varianza alta → sobreajuste.
-**Error irreducible:** Ruido inherente al problema.
+<ConceptCard variant="definition">
+**Sesgo:** Error por suposiciones demasiado simplificadoras. Sesgo alto → subajuste. Es como disparar consistentemente lejos del blanco.
 
-**Intuición:** Pensá en tiro con arco.
-- Sesgo alto: los disparos están lejos del centro (error sistemático).
-- Varianza alta: los disparos están dispersos (inconsistencia).
+**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos. Varianza alta → sobreajuste. Es como disparar por todos lados sin consistencia.
 
-**La compensación:** A medida que la complejidad del modelo aumenta, el sesgo disminuye pero la varianza aumenta. El modelo óptimo equilibra ambos.
+**Error irreducible:** Ruido inherente al problema que ningún modelo puede eliminar.
+</ConceptCard>
 
-## Explicación visual
+<ConceptCard variant="key-idea">
+**La compensación:** A medida que aumentás la complejidad del modelo, el sesgo baja (capturás más patrones) pero la varianza sube (empezás a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo — existe el modelo adecuado para tu problema.
+</ConceptCard>
+
+</Section>
+
+<Section number={9} title="Visualizá el sesgo y la varianza" eyebrow="INTERACTIVA">
+
+Veamos la compensación sesgo-varianza en acción con un ejemplo que podés ejecutar:
 
 ```python
 import numpy as np
@@ -141,27 +200,32 @@ for i, deg in enumerate(degrees):
     axes[i].scatter(X_train, y_train, label='Train', alpha=0.6)
     axes[i].scatter(X_test, y_test, label='Test', alpha=0.6)
     axes[i].plot(X_plot, y_plot, 'r-', label='Model', linewidth=2)
-    axes[i].set_title(f'Degree {deg}')
+    axes[i].set_title(f'Grado {deg}')
     axes[i].legend()
     axes[i].set_ylim(-1.5, 1.5)
 
     train_mse = mean_squared_error(y_train, y_train_pred)
     test_mse = mean_squared_error(y_test, y_test_pred)
-    print(f"Degree {deg}: Train MSE = {train_mse:.4f}, Test MSE = {test_mse:.4f}")
+    print(f"Grado {deg}: Train MSE = {train_mse:.4f}, Test MSE = {test_mse:.4f}")
 
 plt.tight_layout()
-plt.savefig('figures/bias_variance_demo.png', dpi=150)
 plt.show()
 ```
 
-**Interpretación:**
-- Grado 1 (subajuste): Línea simple, sesgo alto, ambos errores altos.
-- Grado 4 (buen ajuste): Captura el patrón, ambos errores bajos.
-- Grado 15 (sobreajuste): Ondulado, perfecto en entrenamiento pero falla en prueba.
+<CalloutInfo>
+Ejecutá este código en tu notebook. Vas a ver tres paneles:
+- **Grado 1 (subajuste):** Una línea recta que ni siquiera pasa cerca de los puntos. Sesgo altísimo.
+- **Grado 4 (buen ajuste):** La curva sigue la tendencia de los datos sin perseguir cada punto. Equilibrio justo.
+- **Grado 15 (sobreajuste):** La curva zigzaguea para tocar cada punto de entrenamiento. En datos nuevos sería un desastre.
+</CalloutInfo>
 
-## Implementación en Python
+</Section>
 
-### División Train/Test
+<Section number={10} title="Tu primer pipeline de ML" eyebrow="CÓDIGO">
+
+<ConceptCard variant="key-idea">
+El pipeline mínimo de ML tiene tres pasos: dividir los datos, entrenar el modelo, y evaluar con datos que el modelo nunca vio. Esto se repite en absolutamente todos los algoritmos del curso.
+</ConceptCard>
 
 ```python
 import numpy as np
@@ -175,110 +239,141 @@ data = load_diabetes()
 X = pd.DataFrame(data.data, columns=data.feature_names)
 y = data.target
 
+# Paso 1: Dividir (NUNCA entrenes con todos los datos)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
+# Paso 2: Entrenar
 model = LinearRegression()
 model.fit(X_train, y_train)
 
+# Paso 3: Evaluar con datos NO VISTOS
 y_pred = model.predict(X_test)
 
 print(f"Train R²: {model.score(X_train, y_train):.3f}")
-print(f"Test R²: {model.score(X_test, y_test):.3f}")
+print(f"Test R²:  {model.score(X_test, y_test):.3f}")
 print(f"Test MSE: {mean_squared_error(y_test, y_pred):.1f}")
+
+# El modelo explica ~45% de la varianza en la progresión de la enfermedad
 ```
 
-## Ejemplo guiado: Predicción de progresión de enfermedad
+<CalloutCheck>
+Si el R² de entrenamiento es mucho mayor que el de prueba, tu modelo está sobreajustando. Si ambos son bajos, está subajustando. El gap entre train y test es tu primer indicador de salud del modelo.
+</CalloutCheck>
 
-**Problema:** Predecir la progresión de diabetes después de un año.
+</Section>
 
-**Conjunto de datos:** scikit-learn diabetes (442 pacientes, 10 características).
+<Section number={11} title="ML en biotecnología: expresión génica" eyebrow="APLICACIÓN">
 
-```python
-from sklearn.datasets import load_diabetes
+<ConceptCard variant="key-idea">
+En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es el puente entre el laboratorio húmedo y la medicina personalizada.
+</ConceptCard>
 
-data = load_diabetes()
-print(f"Features: {data.feature_names}")
-print(f"Samples: {data.data.shape[0]}")
-print(f"Features per sample: {data.data.shape[1]}")
-```
-
-**Análisis:** Dividimos los datos, entrenamos un modelo lineal y evaluamos.
-
-**Interpretación:** El modelo explica ~45% de la varianza en la progresión de la enfermedad (R² ≈ 0.45).
-
-## Ejemplo en biotecnología: Expresión génica → Respuesta a fármacos
-
-Imaginá que tenés datos de expresión génica de 500 pacientes con cáncer y querés predecir qué pacientes responden a un fármaco específico.
+Imaginá que tenés datos de expresión génica de 500 pacientes con cáncer y querés predecir qué pacientes responderán a un fármaco específico:
 
 - **Características (X):** Niveles de expresión de 1000 genes
 - **Etiqueta (y):** Respondedor (1) o no respondedor (0)
 
-Un modelo entrenado con estos datos puede identificar firmas de expresión predictivas de la respuesta al fármaco.
+El modelo aprende qué combinaciones de genes predicen la respuesta al tratamiento. Esto permite evitar quimioterapia innecesaria en pacientes que no se beneficiarían.
 
-## Ejemplo en SaaS: Predicción de abandono de usuarios
+</Section>
 
-Una empresa SaaS quiere predecir qué usuarios cancelarán su suscripción.
+<Section number={12} title="ML en SaaS: predicción de abandono" eyebrow="APLICACIÓN">
 
-- **Características:** frecuencia de inicio de sesión, tickets de soporte, días desde el último inicio de sesión, tipo de plan
+Una empresa SaaS quiere predecir qué usuarios cancelarán su suscripción el próximo mes:
+
+- **Características:** frecuencia de inicio de sesión, tickets de soporte abiertos, días desde último login, tipo de plan, cantidad de features usadas
 - **Etiqueta:** abandonó (1) o no (0)
 
-El modelo aprende patrones: los usuarios que no inician sesión por más de 30 días y han abierto tickets de soporte son de alto riesgo.
+El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días Y abrieron >3 tickets de soporte = 85% probabilidad de abandono"*. Con esta información, el equipo de customer success interviene **antes** de que cancelen.
 
-## Errores comunes
+<ReflectionCheck
+  blockId="reflection-l01-saas-churn"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  prompt="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
+  answer="Porque predecir antes permite actuar: podés enviar un descuento, una sesión de onboarding personalizada, o contactar al usuario para resolver sus problemas. Si solo registrás quién abandonó, ya es tarde — ese cliente se fue. La predicción temprana convierte un problema reactivo en uno proactivo."
+/>
 
-1. **Entrenar con todos los datos antes de dividir** — causa fuga de datos, sobreestima el rendimiento.
-2. **Usar el conjunto de prueba para ajustar hiperparámetros** — trata al conjunto de prueba como si fuera de entrenamiento.
-3. **Asumir que una alta precisión en entrenamiento significa un buen modelo** — podría ser sobreajuste.
-4. **Confundir correlación con causalidad** — el ML encuentra patrones, no causas.
+</Section>
 
-## Buenas prácticas
+<Section number={13} title="Los 4 errores que todo principiante comete" eyebrow="PELIGROS">
 
-- Siempre dividí los datos *antes* de cualquier preprocesamiento
-- Mantené un conjunto de prueba completamente oculto hasta la evaluación final
-- Usá validación cruzada para estimaciones de rendimiento confiables
-- Empezá con modelos simples antes de probar complejos
-- Graficá curvas de aprendizaje para diagnosticar sesgo/varianza
+<CalloutInfo>
+1. **Entrenar con todos los datos y después dividir.** Hacés trampa sin darte cuenta: el modelo ya "vio" los datos de prueba durante el preprocesamiento. Siempre dividí primero.
 
-## Resumen
+2. **Usar el conjunto de prueba para ajustar hiperparámetros.** El conjunto de prueba es sagrado — solo se toca una vez al final. Para ajustar parámetros usá validación cruzada sobre el conjunto de entrenamiento.
 
-- El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas
-- Las características (X) son entradas; las etiquetas (y) son salidas
-- El entrenamiento ajusta el modelo; la predicción lo aplica a datos nuevos
-- La generalización es la capacidad de funcionar bien con datos no vistos
-- Sobreajuste: modelo demasiado complejo, memoriza ruido
-- Subajuste: modelo demasiado simple, pierde patrones
-- Compensación sesgo-varianza: el modelo óptimo equilibra error sistemático y sensibilidad
-- La división train/test es esencial para una evaluación honesta
+3. **Asumir que precisión de entrenamiento alta = buen modelo.** Si tu modelo tiene 99% en train y 65% en test, no es bueno — está sobreajustado. La métrica que importa es la de test.
 
-## Términos clave
+4. **Confundir correlación con causalidad.** Que las ventas de helado y los ahogamientos aumenten juntos no significa que el helado cause ahogamientos. El ML encuentra patrones, no causas. La interpretación causal requiere expertise de dominio.
+</CalloutInfo>
 
-| Término | Definición |
-|---------|------------|
-| Característica | Variable de entrada usada para la predicción |
-| Etiqueta | Variable de salida a predecir |
-| Entrenamiento | Proceso de ajustar un modelo a los datos |
-| Predicción | Salida del modelo con datos nuevos |
-| Generalización | Rendimiento en datos no vistos |
-| Sobreajuste | El modelo memoriza ruido del entrenamiento |
-| Subajuste | Modelo demasiado simple para el patrón |
-| Sesgo | Error por suposiciones simplificadoras |
-| Varianza | Error por sensibilidad a fluctuaciones en los datos |
+</Section>
 
-## Ejercicios
+<Section number={14} title="Buenas prácticas desde el día 1" eyebrow="BUENAS PRÁCTICAS">
 
-**Nivel 1 — Básico:** Explicá con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático.
+<CalloutCheck>
+Siempre dividí los datos **antes** de cualquier preprocesamiento. Es la regla #1.
 
-**Nivel 2 — Implementación:** Cargá el dataset load_diabetes, creá una división train/test, entrená un LinearRegression, y calculá tanto el R² de entrenamiento como el de prueba. Aumentá la complejidad del modelo usando PolynomialFeatures y observá la compensación sesgo-varianza.
+Mantené un conjunto de prueba completamente oculto hasta la evaluación final. No lo mires, no lo toques, no lo uses para decidir nada.
 
-**Nivel 3 — Pensamiento crítico:** Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?
+Usá validación cruzada para estimaciones de rendimiento confiables. Un solo split train/test puede engañarte.
 
-## Desafío de programación
+Empezá con modelos simples antes de probar arquitecturas complejas. Si una regresión lineal resuelve el problema, no necesitás una red neuronal.
 
-Escribí una función `diagnose_fit(model, X_train, X_test, y_train, y_test)` que:
-1. Calcule los puntajes de entrenamiento y prueba
-2. Imprima si el modelo está sobreajustado, subajustado o bien equilibrado
-3. Devuelva un string con el diagnóstico
+Graficá curvas de aprendizaje para diagnosticar si necesitás más datos o un modelo más complejo. Los números sin visualización mienten.
+</CalloutCheck>
 
-Usá un umbral: si train_score - test_score > 0.15, marcá como sobreajuste.
+</Section>
+
+<Section number={15} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<ConceptCard variant="key-idea">
+El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. Las características (X) son entradas; las etiquetas (y) son salidas. El objetivo no es memorizar — es **generalizar** a datos nunca vistos. El sobreajuste y el subajuste son los dos enemigos, y la compensación sesgo-varianza explica por qué no existe un modelo perfecto universal.
+</ConceptCard>
+
+<InteractiveTable
+  columns={[
+    { key: "term", label: "Término" },
+    { key: "def", label: "Definición" },
+  ]}
+  rows={[
+    { term: "Característica", def: "Variable de entrada usada para la predicción" },
+    { term: "Etiqueta", def: "Variable de salida a predecir" },
+    { term: "Entrenamiento", def: "Proceso de ajustar un modelo a los datos" },
+    { term: "Predicción", def: "Salida del modelo con datos nuevos" },
+    { term: "Generalización", def: "Rendimiento en datos no vistos" },
+    { term: "Sobreajuste", def: "El modelo memoriza ruido del entrenamiento" },
+    { term: "Subajuste", def: "Modelo demasiado simple para el patrón" },
+    { term: "Sesgo", def: "Error por suposiciones simplificadoras" },
+    { term: "Varianza", def: "Error por sensibilidad a fluctuaciones en los datos" },
+  ]}
+/>
+
+</Section>
+
+<Section number={16} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
+
+<ReflectionCheck
+  blockId="reflection-l01-trad-vs-ml"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  prompt="Nivel 1 — Explicá con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
+  answer="En programación tradicional escribo reglas explícitas (if temperatura > 38: alerta_fiebre()). En ML le doy ejemplos etiquetados al algoritmo y él descubre las reglas. Usaría programación tradicional para problemas con reglas claras y estables (cálculo de impuestos, validación de formularios). Usaría ML cuando las reglas son difíciles de expresar (reconocimiento de imágenes, predicción de abandono de clientes, diagnóstico médico)."
+/>
+
+<ReflectionCheck
+  blockId="reflection-l01-overfit-diagnosis"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  prompt="Nivel 3 — Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
+  answer="Es sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Soluciones: (1) Simplificar el modelo — reducir complejidad, menos features, regularización. (2) Conseguir más datos de entrenamiento si es posible. (3) Usar validación cruzada para detectar el sobreajuste más temprano y parar el entrenamiento antes (early stopping)."
+/>
+
+<ConceptCard variant="key-idea">
+**Desafío de programación:** Escribí una función `diagnose_fit(model, X_train, X_test, y_train, y_test)` que calcule los puntajes de entrenamiento y prueba, e imprima si el modelo está sobreajustado, subajustado o bien equilibrado. Usá un umbral: si `train_score - test_score > 0.15`, marcá como sobreajuste.
+</ConceptCard>
+
+</Section>
