@@ -2,6 +2,7 @@
 Module: 1
 Lesson Number: 4
 Lesson Title: Casos Reales y Futuro
+Estimated Duration: 60 minutos
 Prerequisites: Lección 3 — IA en Biotecnología
 Learning Objectives:
   - Analizar cómo se aplicó ML en el desarrollo de la vacuna mRNA del COVID-19
@@ -32,7 +33,7 @@ La Lección 4 cierra el módulo con casos reales donde todo esto confluye: el de
 
 </Section>
 
-<Section number={3} title="El problema: COVID-19" eyebrow="CONTEXTO">
+<Section number={2} title="El problema: COVID-19" eyebrow="CONTEXTO">
 
 A principios de 2020, el mundo enfrentó una pandemia. En menos de un año se desarrollaron vacunas efectivas — un hito que normalmente toma 5-10 años. La IA jugó un papel clave.
 
@@ -44,7 +45,7 @@ Pero el mRNA es frágil y no entra fácilmente a las células. Acá es donde la 
 
 </Section>
 
-<Section number={4} title="IA en las nanopartículas lipídicas" eyebrow="CONCEPTO">
+<Section number={3} title="IA en las nanopartículas lipídicas" eyebrow="CONCEPTO">
 
 La vacuna mRNA necesita un **vehículo** para llevar el mensaje genético a las células: las nanopartículas lipídicas (LNPs). Son burbujas microscópicas de grasa que encapsulan el mRNA.
 
@@ -60,7 +61,7 @@ La IA no reemplazó los experimentos de laboratorio. Los hizo **más inteligente
 
 </Section>
 
-<Section number={5} title="Reposicionamiento de fármacos" eyebrow="CONCEPTO">
+<Section number={4} title="Reposicionamiento de fármacos" eyebrow="CONCEPTO">
 
 Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug repositioning): encontrar fármacos existentes que pudieran tratar el COVID-19.
 
@@ -80,7 +81,7 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
 
 </Section>
 
-<Section number={6} title="AlphaFold en la práctica" eyebrow="CONCEPTO">
+<Section number={5} title="AlphaFold en la práctica" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l04-alphafold-practica"
@@ -94,7 +95,7 @@ AlphaFold predice estructuras, pero las proteínas no son estáticas. Se mueven,
 
 </Section>
 
-<Section number={7} title="AlphaFold en la industria" eyebrow="CONCEPTO">
+<Section number={6} title="AlphaFold en la industria" eyebrow="CONCEPTO">
 
 DeepMind se asoció con Isomorphic Labs para llevar AlphaFold a la industria farmacéutica. El objetivo: usar predicciones de estructura para acelerar el diseño de fármacos.
 
@@ -111,7 +112,7 @@ DeepMind se asoció con Isomorphic Labs para llevar AlphaFold a la industria far
 
 </Section>
 
-<Section number={8} title="IA en el laboratorio del futuro" eyebrow="CONCEPTO">
+<Section number={7} title="IA en el laboratorio del futuro" eyebrow="CONCEPTO">
 
 ¿Cómo será un laboratorio de biotecnología con IA integrada en 5-10 años?
 
@@ -130,7 +131,7 @@ La IA no va a reemplazar a científicos. Va a **aumentar** su capacidad: experim
 
 </Section>
 
-<Section number={9} title="Limitaciones de la IA en biotecnología" eyebrow="CRÍTICO">
+<Section number={8} title="Limitaciones de la IA en biotecnología" eyebrow="CRÍTICO">
 
 <ReflectionCheck
   blockId="reflection-l04-limites"
@@ -149,7 +150,7 @@ La IA en biotecnología tiene limitaciones fundamentales:
 
 </Section>
 
-<Section number={10} title="Lo que aprendimos en el Módulo 1" eyebrow="CIERRE">
+<Section number={9} title="Lo que aprendimos en el Módulo 1" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorrido completo: features, algoritmos, pipelines, y aplicaciones reales.
@@ -173,7 +174,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 </Section>
 
-<Section number={11} title="Checkpoint final" eyebrow="EVALUACIÓN">
+<Section number={10} title="Checkpoint final" eyebrow="EVALUACIÓN">
 
 1. **¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?**
    - a) Diseñó la secuencia genética del virus
@@ -215,7 +216,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 </Section>
 
-<Section number={12} title="Fin del Módulo 1" eyebrow="COMPLETADO">
+<Section number={11} title="Fin del Módulo 1" eyebrow="COMPLETADO">
 
 <MascotMessage mood="celebrating">
 Completaste el Módulo 1. Features, algoritmos, pipelines, casos reales. Tenés las bases para entender cómo la IA está transformando la biotecnología.

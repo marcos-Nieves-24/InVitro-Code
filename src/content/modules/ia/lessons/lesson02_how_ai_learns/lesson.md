@@ -2,6 +2,7 @@
 Module: 1
 Lesson Number: 2
 Lesson Title: ¿Cómo aprende la IA?
+Estimated Duration: 60 minutos
 Prerequisites: Lección 1 — ¿Qué es la IA?
 Learning Objectives:
   - Comprender el concepto de frontera de decisión en clasificación binaria
@@ -30,7 +31,7 @@ Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo
 
 </Section>
 
-<Section number={3} title="Aprendizaje supervisado" eyebrow="CONCEPTO">
+<Section number={2} title="Aprendizaje supervisado" eyebrow="CONCEPTO">
 
 El tipo de aprendizaje que vamos a ver se llama **aprendizaje supervisado**. Funciona así:
 
@@ -56,7 +57,7 @@ Pensalo así:
 
 </Section>
 
-<Section number={4} title="Frontera de decisión lineal" eyebrow="CONCEPTO">
+<Section number={3} title="Frontera de decisión lineal" eyebrow="CONCEPTO">
 
 Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza una línea recta para separar dos clases.
 
@@ -66,7 +67,7 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 
 </Section>
 
-<Section number={5} title="Perceptrón: interactive" eyebrow="INTERACTIVA">
+<Section number={4} title="Perceptrón: interactive" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-perceptron"
@@ -94,7 +95,7 @@ El aprendizaje consiste en *ajustar parámetros* (pendiente e intercepto) para m
 
 </Section>
 
-<Section number={6} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
+<Section number={5} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l02-frontera"
@@ -110,7 +111,7 @@ No todos los problemas se pueden resolver con una línea recta. Cuando las clase
 
 </Section>
 
-<Section number={7} title="KNN: clasificar por cercanía" eyebrow="CONCEPTO">
+<Section number={6} title="KNN: clasificar por cercanía" eyebrow="CONCEPTO">
 
 Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, KNN clasifica según los vecinos más cercanos.
 
@@ -120,7 +121,7 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, 
 
 </Section>
 
-<Section number={8} title="KNN: interactive" eyebrow="INTERACTIVA">
+<Section number={7} title="KNN: interactive" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-knn"
@@ -151,7 +152,7 @@ La elección de **k** es un **hiperparámetro**. No lo aprende el modelo; lo ele
 
 </Section>
 
-<Section number={9} title="Clasificación vs regresión" eyebrow="CONCEPTO">
+<Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l02-clasif-reg"
@@ -169,7 +170,7 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 </Section>
 
-<Section number={10} title="Regresión lineal: interactive" eyebrow="INTERACTIVA">
+<Section number={9} title="Regresión lineal: interactive" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-regresion"
@@ -194,7 +195,7 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 </Section>
 
-<Section number={11} title="ECM y límites de la regresión" eyebrow="CONCEPTO">
+<Section number={10} title="ECM y límites de la regresión" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l02-ecm"
@@ -212,7 +213,7 @@ No toda relación es lineal; en biología muchas son curvas sigmoideas (dosis-re
 
 </Section>
 
-<Section number={12} title="Overfitting: interactive" eyebrow="INTERACTIVA">
+<Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
 
 Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
 
@@ -233,7 +234,7 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 </Section>
 
-<Section number={13} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
+<Section number={12} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
 
 | Grado | Diagnóstico | ¿Qué pasa? |
 |---|---|---|
@@ -247,7 +248,7 @@ El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en 
 
 </Section>
 
-<Section number={14} title="Analogía biotecnológica" eyebrow="CONCEPTO">
+<Section number={13} title="Analogía biotecnológica" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
 Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu termociclador, con tus reactivos, en tu mesada del laboratorio — pero falla cuando otro laboratorio lo replica. Memorizaste las condiciones específicas de tu entorno (temperatura exacta del termociclador, marca de la polimerasa, humedad ambiental) en lugar de aprender el principio biológico general. El modelo, como el protocolo, necesita generalizar, no memorizar.
@@ -260,7 +261,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 </Section>
 
-<Section number={15} title="Overfitting: reflexión final" eyebrow="CONCEPTO">
+<Section number={14} title="Overfitting: reflexión final" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l02-overfitting"
@@ -272,7 +273,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 </Section>
 
-<Section number={16} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué es una frontera de decisión?**
    - a) El límite ético de lo que la IA puede decidir
@@ -314,7 +315,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 </Section>
 
-<Section number={17} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entendés cómo aprenden las máquinas.

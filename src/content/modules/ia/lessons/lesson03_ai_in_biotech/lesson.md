@@ -2,6 +2,7 @@
 Module: 1
 Lesson Number: 3
 Lesson Title: IA en Biotecnología
+Estimated Duration: 60 minutos
 Prerequisites: Lección 2 — ¿Cómo aprende la IA?
 Learning Objectives:
   - Reconocer las etapas de un pipeline de machine learning en biotecnología
@@ -33,7 +34,7 @@ Vamos a explorar tres aplicaciones concretas:
 
 </Section>
 
-<Section number={3} title="Proteínas en 3D" eyebrow="CONCEPTO">
+<Section number={2} title="Proteínas en 3D" eyebrow="CONCEPTO">
 
 Las proteínas no son solo secuencias lineales de aminoácidos. Su **estructura tridimensional** determina su función.
 
@@ -53,7 +54,7 @@ Acá entra AlphaFold.
 
 </Section>
 
-<Section number={4} title="Visualizador 3D: interactive" eyebrow="INTERACTIVA">
+<Section number={3} title="Visualizador 3D: interactive" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l03-visualizador"
@@ -74,7 +75,7 @@ Cada átomo en esa visualización tiene coordenadas (x, y, z) determinadas exper
 
 </Section>
 
-<Section number={5} title="AlphaFold: el desafío" eyebrow="CONCEPTO">
+<Section number={4} title="AlphaFold: el desafío" eyebrow="CONCEPTO">
 
 **AlphaFold** (DeepMind, 2021) resolvió un problema que la biología estructural tenía hace 50 años: predecir la estructura 3D de una proteína solo a partir de su secuencia de aminoácidos.
 
@@ -90,7 +91,7 @@ El **RMSD (Root Mean Square Deviation)** mide la distancia promedio entre los á
 
 </Section>
 
-<Section number={6} title="AlphaFold: cómo funciona" eyebrow="CONCEPTO">
+<Section number={5} title="AlphaFold: cómo funciona" eyebrow="CONCEPTO">
 
 ¿Cómo lo logró AlphaFold? No es un solo modelo, sino un sistema que combina múltiples ideas de ML:
 
@@ -108,7 +109,7 @@ La gran innovación de AlphaFold fue modelar el **plegamiento como un problema d
 
 </Section>
 
-<Section number={7} title="AlphaFold: impacto y limitaciones" eyebrow="CONCEPTO">
+<Section number={6} title="AlphaFold: impacto y limitaciones" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l03-alphafold"
@@ -118,7 +119,7 @@ La gran innovación de AlphaFold fue modelar el **plegamiento como un problema d
 
 </Section>
 
-<Section number={8} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
+<Section number={7} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
 
 Un **pipeline de ML** es el flujo de trabajo completo, desde los datos brutos hasta el modelo en producción. En biotecnología tiene particularidades:
 
@@ -139,7 +140,7 @@ Cada etapa del pipeline tiene desafíos específicos:
 
 </Section>
 
-<Section number={9} title="Pipeline ML: interactive" eyebrow="INTERACTIVA">
+<Section number={8} title="Pipeline ML: interactive" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l03-pipeline"
@@ -161,7 +162,7 @@ Cada etapa del pipeline tiene desafíos específicos:
 
 </Section>
 
-<Section number={10} title="Pipeline real: conidias y Antifúngicos" eyebrow="CONCEPTO">
+<Section number={9} title="Pipeline real: conidias y Antifúngicos" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l03-pipeline-real"
@@ -175,7 +176,7 @@ El mayor error en ML biotecnológico es la **contaminación de datos**: cuando i
 
 </Section>
 
-<Section number={11} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={10} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué mide el RMSD en el contexto de AlphaFold?**
    - a) La cantidad de proteínas predichas por segundo
@@ -217,7 +218,7 @@ El mayor error en ML biotecnológico es la **contaminación de datos**: cuando i
 
 </Section>
 
-<Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 AlphaFold, PDB, pipelines de ML — ya ves cómo la IA está transformando la biotecnología, un experimento a la vez.
