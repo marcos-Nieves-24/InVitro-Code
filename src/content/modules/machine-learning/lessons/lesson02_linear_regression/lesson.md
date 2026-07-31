@@ -21,93 +21,90 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Regresión Lineal
+<Section number={1} title="Predecir números, no categorías" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Tu primer algoritmo de ML real. La regresión lineal es el más simple, el más interpretable, y la base sobre la que se construyen redes neuronales enteras. Dominarla es obligatorio.
+</MascotMessage>
 
-Una empresa de biotecnología quiere predecir la solubilidad de fármacos a partir de propiedades moleculares. Una empresa SaaS quiere pronosticar los ingresos recurrentes mensuales. Ambos son problemas de *regresión* — predecir un número continuo. La regresión lineal es el algoritmo de regresión más simple e interpretable. Entenderlo a fondo es esencial porque muchos modelos avanzados (regresión regularizada, redes neuronales) se basan en sus ideas.
+Una empresa biotecnológica quiere predecir la solubilidad de fármacos a partir de propiedades moleculares. Una SaaS quiere pronosticar ingresos del próximo mes. Ambos son problemas de **regresión** — predecir un número continuo.
 
-## Panorama general
+<ConceptCard variant="key-idea">
+La regresión lineal modela la relación entre características de entrada y un valor numérico de salida como una **suma ponderada**. Cada característica aporta según su peso (coeficiente), y el modelo aprende esos pesos a partir de los datos.
+</ConceptCard>
 
-**Anterior:** Fundamentos de ML te dio el modelo mental. **Esta lección:** Tu primer algoritmo real — Regresión Lineal. **Siguiente:** Clasificación — predecir categorías en lugar de números.
+</Section>
 
-## Teoría
+<Section number={2} title="La ecuación que lo explica todo" eyebrow="CONCEPTO">
 
-### Regresión Lineal Simple
-
-La relación entre una característica $x$ y el objetivo $y$:
+**Regresión Lineal Simple** (una característica):
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
 
-- $\beta_0$: intersección (valor de y cuando x = 0)
-- $\beta_1$: pendiente (cambio en y por cambio unitario en x)
-- $\varepsilon$: residual (término de error)
+- $\beta_0$: intersección — valor de $y$ cuando $x = 0$
+- $\beta_1$: pendiente — cuánto cambia $y$ por cada unidad de $x$
+- $\varepsilon$: residual — lo que el modelo no puede explicar
 
-### Regresión Lineal Múltiple
-
-Con $p$ características:
+**Regresión Lineal Múltiple** ($p$ características):
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon$$
 
 En forma matricial: $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$
 
-### Mínimos Cuadrados Ordinarios (OLS)
-
-Elegimos $\boldsymbol{\beta}$ para minimizar la suma de residuales al cuadrado:
-
-$$\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$$
-
-La solución de forma cerrada:
+<ConceptCard variant="definition">
+**Mínimos Cuadrados Ordinarios (OLS):** El método que encuentra los coeficientes $\boldsymbol{\beta}$ que minimizan la suma de errores al cuadrado. La solución tiene forma cerrada:
 
 $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
+</ConceptCard>
 
-### Intuición del descenso por gradiente
+</Section>
 
-Cuando $p$ es grande, la solución de forma cerrada es lenta. El descenso por gradiente ajusta $\boldsymbol{\beta}$ iterativamente:
+<Section number={3} title="Descenso por gradiente: la alternativa iterativa" eyebrow="MATEMÁTICA">
+
+Cuando tenés miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es carísimo. El descenso por gradiente ofrece un camino iterativo:
 
 1. Iniciá con $\boldsymbol{\beta}$ aleatorio
-2. Calculá el gradiente del MSE con respecto a $\boldsymbol{\beta}$
+2. Calculá el gradiente del error respecto a $\boldsymbol{\beta}$
 3. Actualizá: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
 4. Repetí hasta converger
 
-$\alpha$ es la **tasa de aprendizaje** — qué tan grande es cada paso.
+<CalloutInfo>
+$\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardás una eternidad. Si es muy grande, pasás de largo y nunca convergés. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
+</CalloutInfo>
 
-### Métricas de evaluación
+### Supuestos del modelo
 
-**MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
-- Sensible a valores atípicos (eleva al cuadrado errores grandes)
-
-**RMSE (Raíz del Error Cuadrático Medio):** $\sqrt{\text{MSE}}$
-- Mismas unidades que la variable objetivo
-
-**R² (Coeficiente de Determinación):** $1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
-- Proporción de varianza explicada por el modelo
-- Varía de $-\infty$ a 1
-- R² = 1: ajuste perfecto
-- R² = 0: el modelo siempre predice la media
-
-## Fundamento matemático
-
-### Derivación de OLS
-
-Minimizamos $L(\boldsymbol{\beta}) = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})$
-
-Igualamos el gradiente a cero:
-$$\frac{\partial L}{\partial \boldsymbol{\beta}} = -2\mathbf{X}^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0$$
-
-$$\mathbf{X}^\top\mathbf{X}\boldsymbol{\beta} = \mathbf{X}^\top\mathbf{y}$$
-
-$$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
-
-### Supuestos de la regresión lineal
-
-1. **Linealidad:** La relación entre X e y es lineal
-2. **Independencia:** Las observaciones son independientes
+1. **Linealidad:** $y$ es aproximadamente lineal en $X$
+2. **Independencia:** Las observaciones no dependen entre sí
 3. **Homocedasticidad:** Varianza constante de los residuales
-4. **Normalidad:** Los residuales se distribuyen normalmente (para inferencia)
-5. **Sin multicolinealidad:** Las características no están altamente correlacionadas
+4. **Normalidad:** Residuales con distribución normal (para tests estadísticos)
+5. **Sin multicolinealidad:** Features no altamente correlacionadas entre sí
 
-## Explicación visual
+</Section>
+
+<Section number={4} title="Las 3 métricas que necesitás saber" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+**MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
+
+Penaliza fuerte los errores grandes (los eleva al cuadrado). La métrica que el modelo optimiza internamente.
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**RMSE (Raíz del MSE):** $\sqrt{\text{MSE}}$
+
+La ventaja: está en las mismas unidades que $y$. Si predecís precios en dólares, el RMSE te dice "me equivoco en promedio por \$X".
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**R² (Coeficiente de Determinación):** $1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
+
+Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bueno como predecir siempre el promedio, R² < 0 es peor que el promedio.
+</ConceptCard>
+
+</Section>
+
+<Section number={5} title="Visualizá tu primera regresión" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -125,17 +122,23 @@ X_line = np.linspace(0, 10, 100).reshape(-1, 1)
 y_line = model.predict(X_line)
 
 plt.figure(figsize=(8, 5))
-plt.scatter(X, y, alpha=0.6, label='Data')
-plt.plot(X_line, y_line, 'r-', linewidth=2, label=f'y = {model.coef_[0]:.2f}x + {model.intercept_:.2f}')
+plt.scatter(X, y, alpha=0.6, label='Datos')
+plt.plot(X_line, y_line, 'r-', linewidth=2,
+         label=f'y = {model.coef_[0]:.2f}x + {model.intercept_:.2f}')
 plt.xlabel('Feature (x)')
 plt.ylabel('Target (y)')
 plt.legend()
-plt.title('Simple Linear Regression')
-plt.savefig('figures/simple_linear_regression.png', dpi=150)
+plt.title('Regresión Lineal Simple')
 plt.show()
 ```
 
-## Implementación en Python
+<CalloutInfo>
+La línea roja es lo que el modelo aprendió. Cada punto azul que se desvía de la línea es un residual — lo que el modelo no pudo explicar. El objetivo de OLS es hacer que esas desviaciones verticales sean lo más chicas posible, en promedio.
+</CalloutInfo>
+
+</Section>
+
+<Section number={6} title="Tu primer modelo con datos reales" eyebrow="CÓDIGO">
 
 ```python
 import numpy as np
@@ -149,7 +152,8 @@ data = load_diabetes()
 X = pd.DataFrame(data.data, columns=data.feature_names)
 y = data.target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
 
 model = LinearRegression()
 model.fit(X_train, y_train)
@@ -157,7 +161,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 print("Intercept:", model.intercept_)
-print("Coefficients:")
+print("Coeficientes:")
 for name, coef in zip(data.feature_names, model.coef_):
     print(f"  {name}: {coef:.4f}")
 print(f"\nMSE:  {mean_squared_error(y_test, y_pred):.1f}")
@@ -165,7 +169,17 @@ print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.1f}")
 print(f"R²:   {r2_score(y_test, y_pred):.3f}")
 ```
 
-## Ejemplo guiado: California Housing
+<ReflectionCheck
+  blockId="reflection-l02-coefficients"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  prompt="Mirá los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
+  answer="No necesariamente. Los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, sus coeficientes no son comparables directamente. Para comparar importancia real hay que estandarizar las features primero (restar media, dividir por desvío)."
+/>
+
+</Section>
+
+<Section number={7} title="Caso California Housing" eyebrow="INTERACTIVA">
 
 ```python
 from sklearn.datasets import fetch_california_housing
@@ -174,7 +188,8 @@ housing = fetch_california_housing()
 X_h = pd.DataFrame(housing.data, columns=housing.feature_names)
 y_h = housing.target
 
-X_train, X_test, y_train, y_test = train_test_split(X_h, y_h, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_h, y_h, test_size=0.2, random_state=42)
 
 model = LinearRegression()
 model.fit(X_train, y_train)
@@ -189,11 +204,13 @@ coef_df = pd.DataFrame({
 print(coef_df)
 ```
 
-**Interpretación:** MedInc (ingreso mediano) tiene el coeficiente positivo más grande — mayor ingreso predice precios de vivienda más altos.
+<CalloutCheck>
+**Interpretación:** MedInc (ingreso mediano) domina los coeficientes. A mayor ingreso en la zona, mayor el precio de las viviendas. Esto tiene sentido económico y valida que el modelo está capturando relaciones reales, no ruido.
+</CalloutCheck>
 
-## Ejemplo en biotecnología: Predicción de solubilidad de proteínas
+</Section>
 
-Una empresa farmacéutica quiere predecir si una proteína será soluble en agua basándose en descriptores moleculares.
+<Section number={8} title="Biotecnología: solubilidad de proteínas" eyebrow="APLICACIÓN">
 
 ```python
 np.random.seed(42)
@@ -206,7 +223,6 @@ solubility_data = pd.DataFrame({
     'helix_fraction': np.random.uniform(0, 1, n_proteins),
 })
 
-# Simulate solubility score
 solubility_data['solubility'] = (
     0.5
     - 0.3 * solubility_data['hydrophobicity']
@@ -226,11 +242,15 @@ for col, coef in zip(X_s.columns, model_s.coef_):
 print(f"R²: {model_s.score(X_s, y_s):.3f}")
 ```
 
-**Interpretación:** La hidrofobicidad tiene el efecto negativo más grande — las proteínas más hidrofóbicas tienden a ser menos solubles.
+<ConceptCard variant="key-idea">
+La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confiás más en el modelo.
+</ConceptCard>
 
-## Ejemplo en SaaS: Pronóstico de ingresos mensuales
+</Section>
 
-Una startup SaaS quiere pronosticar el MRR (Ingreso Recurrente Mensual) del próximo mes.
+<Section number={9} title="SaaS: forecasting de ingresos" eyebrow="APLICACIÓN">
+
+Una startup quiere pronosticar su MRR (Ingreso Recurrente Mensual) del próximo mes basándose en métricas del mes actual:
 
 ```python
 np.random.seed(42)
@@ -250,7 +270,6 @@ true_mrr = (
     + revenue_data['avg_revenue_per_user'] * revenue_data['active_users'] * 0.01
     + np.random.normal(0, 100, n_months)
 )
-
 revenue_data['mrr'] = true_mrr
 
 X_r = revenue_data.drop('mrr', axis=1)
@@ -264,51 +283,85 @@ for col, coef in zip(X_r.columns, model_r.coef_):
     print(f"{col}: {coef:.2f}")
 ```
 
-## Errores comunes
+</Section>
 
-1. **Interpretar coeficientes de forma causal** — correlación ≠ causalidad
-2. **Ignorar la multicolinealidad** — características correlacionadas inflan la varianza de los coeficientes
-3. **No revisar los patrones de residuales** — residuales curvos sugieren no linealidad
-4. **Usar R² solamente** — revisá siempre también los gráficos de residuales y el MSE
-5. **Olvidar escalar las características** — los coeficientes no son comparables cuando las características tienen diferentes unidades
+<Section number={10} title="Errores que te van a costar puntos" eyebrow="PELIGROS">
 
-## Buenas prácticas
+<CalloutInfo>
+1. **Interpretar coeficientes como causales.** Que el coeficiente de "gasto en marketing" sea positivo no significa que gastar más cause más ingresos. Podría ser al revés: empresas con más ingresos gastan más en marketing.
 
-- Visualizá siempre los datos primero
-- Revisá los gráficos de residuales (residuales vs. ajustados, Q-Q plot)
-- Usá RMSE en lugar de MSE para interpretabilidad
-- Compará el rendimiento del modelo contra una línea base (predictor medio)
-- Considerá regularización (Ridge, Lasso) cuando haya muchas características
+2. **Ignorar multicolinealidad.** Si dos features están muy correlacionadas (ej. "pies cuadrados" y "número de habitaciones"), los coeficientes se vuelven inestables y sus valores individuales pierden sentido.
 
-## Resumen
+3. **No mirar los residuales.** Si graficás residuales vs predicciones y ves un patrón curvo, tus datos no son lineales. Necesitás features polinómicas u otro modelo.
 
-- La regresión lineal modela el objetivo como una suma ponderada de características
-- OLS encuentra coeficientes que minimizan el MSE
-- R² mide la proporción de varianza explicada
-- El descenso por gradiente es una alternativa iterativa a OLS para conjuntos grandes
-- Revisá siempre los supuestos y los gráficos de residuales
+4. **Usar solo R².** Un R² alto no garantiza un buen modelo. Podrías estar sobreajustando o teniendo errores sistemáticos que R² no captura.
 
-## Términos clave
+5. **No escalar features al comparar coeficientes.** Si una feature va de 0 a 1 y otra de 0 a 100000, sus coeficientes no son comparables.
+</CalloutInfo>
 
-| Término | Definición |
-|---------|------------|
-| Mínimos Cuadrados Ordinarios | Método que minimiza los residuales al cuadrado |
-| Coeficiente | Peso asignado a una característica |
-| Intersección | Predicción cuando todas las características son 0 |
-| Residual | Diferencia entre el valor real y el predicho |
-| R² | Proporción de varianza explicada |
-| MSE | Error de predicción cuadrático promedio |
-| RMSE | Raíz cuadrada del MSE, en unidades originales |
-| Descenso por gradiente | Algoritmo de optimización iterativo |
+</Section>
 
-## Ejercicios
+<Section number={11} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
 
-**Nivel 1 — Básico:** ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?
+<CalloutCheck>
+Visualizá siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
 
-**Nivel 2 — Implementación:** Usá `fetch_california_housing()`, entrená una regresión lineal con las 8 características y creá un gráfico de barras de los coeficientes (en valor absoluto).
+Revisá los gráficos de residuales (residuales vs. ajustados, Q-Q plot). Son tu alerta temprana de violaciones de supuestos.
 
-**Nivel 3 — Pensamiento crítico:** Tenés un conjunto de datos con 5 características. Después de entrenar, 3 características tienen coeficientes muy grandes y 2 tienen coeficientes muy pequeños. ¿Significa eso que las 2 características no son importantes? ¿Por qué o por qué no?
+Usá RMSE en lugar de MSE para comunicar resultados. "El modelo se equivoca en promedio por \$3,200" es más claro que "MSE = 10,240,000".
 
-## Desafío de programación
+Compará contra una línea base simple (predecir siempre el promedio). Si tu modelo no le gana a la línea base, algo anda mal.
 
-Escribí una función `linear_regression_from_scratch(X, y)` que implemente OLS usando la solución de forma cerrada. Compará tus coeficientes con `sklearn.linear_model.LinearRegression`. Devolvé los coeficientes, la intersección y R².
+Considerá regularización (Ridge, Lasso) cuando tengas muchas features. La regresión lineal simple se descontrola con alta dimensionalidad.
+</CalloutCheck>
+
+</Section>
+
+<Section number={12} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<ConceptCard variant="key-idea">
+La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicás, RMSE mide cuánto te equivocás en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
+</ConceptCard>
+
+<InteractiveTable
+  columns={[
+    { key: "term", label: "Término" },
+    { key: "def", label: "Definición" },
+  ]}
+  rows={[
+    { term: "OLS", def: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE" },
+    { term: "Coeficiente", def: "Peso asignado a una feature. Cuánto cambia y por unidad de x" },
+    { term: "Intersección", def: "Predicción cuando todas las features son 0" },
+    { term: "Residual", def: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ" },
+    { term: "R²", def: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio" },
+    { term: "MSE", def: "Error cuadrático medio. Penaliza fuerte los errores grandes" },
+    { term: "RMSE", def: "Raíz del MSE. Mismas unidades que y — interpretable" },
+    { term: "Descenso por gradiente", def: "Optimización iterativa: ajusta β en dirección del gradiente negativo" },
+  ]}
+/>
+
+</Section>
+
+<Section number={13} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
+
+<ReflectionCheck
+  blockId="reflection-l02-r2-values"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  prompt="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
+  answer="R² = 1: el modelo explica el 100% de la varianza — predicciones perfectas (cuidado, puede ser sobreajuste). R² = 0: el modelo no es mejor que predecir siempre el promedio de y. R² = -0.5: el modelo es peor que el promedio — tus predicciones son contraproducentes. Posiblemente hay un error en el código o el modelo no es adecuado."
+/>
+
+<ReflectionCheck
+  blockId="reflection-l02-feature-importance"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  prompt="Nivel 3 — Tenés 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
+  answer="No necesariamente. Tres explicaciones posibles: (1) Las features no están escaladas — si una feature va de 0 a 0.001, necesita un coeficiente enorme para tener impacto. (2) Hay multicolinealidad — dos features correlacionadas se reparten el peso y ambas parecen chicas. (3) Efectivamente son irrelevantes. Para saberlo, estandarizá las features y usá regularización Lasso, que lleva coeficientes irrelevantes a cero."
+/>
+
+<ConceptCard variant="key-idea">
+**Desafío:** Escribí `linear_regression_from_scratch(X, y)` que implemente OLS usando la solución cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$. Compará tus coeficientes con `sklearn.linear_model.LinearRegression`.
+</ConceptCard>
+
+</Section>
