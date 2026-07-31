@@ -3,6 +3,7 @@
 let pyodide = null;
 let numpyReady = false;
 let sklearnReady = false;
+let statsReady = false;
 let initPromise = null;
 
 async function ensurePyodide() {
@@ -28,6 +29,13 @@ async function ensureSklearn() {
   await pyodide.loadPackage("matplotlib");
   await pyodide.loadPackage("pandas");
   sklearnReady = true;
+}
+
+async function ensureStats() {
+  if (statsReady) return;
+  await pyodide.loadPackage("scipy");
+  await pyodide.loadPackage("seaborn");
+  statsReady = true;
 }
 
 self.addEventListener("message", async (event) => {
@@ -95,6 +103,22 @@ self.addEventListener("message", async (event) => {
           code.includes("pandas"))
       ) {
         await ensureSklearn();
+      }
+
+      // Install scipy/seaborn if the code needs them
+      if (
+        statsReady === false &&
+        (code.includes("scipy") ||
+          code.includes("seaborn") ||
+          code.includes("sns.") ||
+          code.includes("pearsonr") ||
+          code.includes("spearmanr") ||
+          code.includes("skew") ||
+          code.includes("kurtosis") ||
+          code.includes("norm") ||
+          code.includes("ttest"))
+      ) {
+        await ensureStats();
       }
 
       // Capture stdout from Python print() calls
