@@ -5,8 +5,8 @@ Lesson Title: Sesgo y Equidad
 Estimated Duration: 75 minutos
 Prerequisites: L1 (Introducción a la Ética en IA)
 Learning Objectives:
-  - Diferenciar tres tipos de sesgo: de datos, algorítmico y social
-  - Definir criterios formales de equidad: paridad demográfica, igualdad de oportunidades, probabilidades igualadas
+  - "Diferenciar tres tipos de sesgo: de datos, algorítmico y social"
+  - "Definir criterios formales de equidad: paridad demográfica, igualdad de oportunidades, probabilidades igualadas"
   - Implementar métricas de equidad en Python usando sklearn
   - Analizar el caso COMPAS de reincidencia e identificar fuentes de sesgo
   - Aplicar al menos una estrategia de mitigación de sesgo
