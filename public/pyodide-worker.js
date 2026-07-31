@@ -97,25 +97,34 @@ self.addEventListener("message", async (event) => {
         await ensureSklearn();
       }
 
+      // Capture stdout from Python print() calls
+      let stdout = "";
+      pyodide.setStdout({
+        batched: (text) => {
+          stdout += text + "\n";
+        },
+      });
+
       const pyResult = await pyodide.runPythonAsync(code);
 
-      // Parse structured return: Python code should return json.dumps(data)
-      let output = null;
+      // Reset stdout to default
+      pyodide.setStdout();
+
+      // Build output: stdout first, then return value
+      let output = stdout.trimEnd();
       let error = null;
 
-      if (pyResult !== undefined) {
+      if (pyResult !== undefined && pyResult !== null) {
         const str = String(pyResult);
-        try {
-          output = JSON.parse(str);
-        } catch {
-          // Not JSON — return as raw string
-          output = str;
+        // Don't show "None" as output
+        if (str !== "None") {
+          output += (output ? "\n" : "") + str;
         }
       }
 
       self.postMessage({
         type: "result",
-        output,
+        output: output || null,
         error,
         sklearnReady,
         requestId,
