@@ -287,7 +287,41 @@ La regresión logística convierte una combinación lineal en una probabilidad m
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Escribí `logistic_regression_from_scratch(X, y, lr=0.01, epochs=1000)` que implemente regresión logística con descenso por gradiente. Usá la sigmoide y la log loss. Compará tus predicciones con `sklearn.linear_model.LogisticRegression`.
+**Desafío:** Implementá regresión logística con descenso por gradiente desde cero.
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def logistic_regression_from_scratch(X, y, lr=0.01, epochs=1000):
+    X_b = np.c_[np.ones((X.shape[0], 1)), X]
+    theta = np.zeros(X_b.shape[1])
+    
+    for _ in range(epochs):
+        z = X_b @ theta
+        h = sigmoid(z)
+        gradient = X_b.T @ (h - y) / len(y)
+        theta -= lr * gradient
+    
+    return theta[0], theta[1:]  # intercept, coefs
+
+# Probá con datos sintéticos
+np.random.seed(42)
+X = np.random.randn(200, 2)
+y = (X[:, 0] + X[:, 1] > 0).astype(int)
+
+intercept, coefs = logistic_regression_from_scratch(X, y, lr=0.1, epochs=500)
+print(f"Intercept: {intercept:.4f}")
+print(f"Coeficientes: {coefs}")
+
+# Accuracy
+X_b = np.c_[np.ones((X.shape[0], 1)), X]
+preds = (sigmoid(X_b @ np.r_[intercept, coefs]) >= 0.5).astype(int)
+print(f"Accuracy: {np.mean(preds == y):.3f}")`}
+  height="350px"
+/>
 
 </Section>

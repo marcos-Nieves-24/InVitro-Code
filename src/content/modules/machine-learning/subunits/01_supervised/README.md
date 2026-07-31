@@ -1,22 +1,35 @@
-# Subunit 1: Supervised Learning — Deep Dive
+# Subunidad 1: Aprendizaje Supervisado
 
-## Topics
+## Descripción
 
-- Linear Regression: assumptions, interpretation, regularization (Ridge, Lasso)
-- Logistic Regression: odds ratios, decision boundaries, multiclass extensions
-- Decision Trees: splitting criteria (Gini, entropy), pruning, tree visualization
-- Ensemble Methods: Bagging, Random Forest, Gradient Boosting, XGBoost
-- Support Vector Machines: kernels, margin, soft margin
-- Model Evaluation: cross-validation strategies, hyperparameter tuning (GridSearchCV, RandomizedSearchCV)
-- Feature Engineering: polynomial features, interaction terms, domain-specific features
+El aprendizaje supervisado es el tipo de ML más común: tenés features (X) y etiquetas (y), y el modelo aprende a mapear unas a otras. Esta subunidad cubre desde los fundamentos conceptuales hasta ensembles avanzados.
 
-## Key Skills
+## Lecciones
 
-- Select appropriate supervised algorithm for different problem types
-- Implement cross-validation and hyperparameter tuning
-- Interpret model coefficients and feature importance
-- Diagnose overfitting and underfitting
+| # | Lección | Tema principal |
+|---|---------|---------------|
+| L1 | Fundamentos de ML | Features, etiquetas, train/test, sobreajuste, sesgo-varianza |
+| L2 | Regresión Lineal | OLS, descenso por gradiente, R², MSE, RMSE |
+| L3 | Clasificación | Regresión logística, matriz de confusión, ROC AUC |
+| L4 | Árboles de Decisión | Gini, entropía, poda, visualización |
+| L5 | Bosque Aleatorio | Bagging, ensemble, OOB, feature importance |
 
-## Lessons
+## Temas complementarios
 
-Refer to lessons 1-8 in the main module 4 directory.
+- **Regularización:** Ridge (L2), Lasso (L1), Elastic Net
+- **SVM:** Kernels, margen, soft margin, one-class SVM
+- **Feature Engineering:** Polynomial features, interaction terms, domain-specific features
+- **Validación Cruzada:** K-fold, stratified, leave-one-out
+- **Hiperparámetros:** GridSearchCV, RandomizedSearchCV, Bayesian optimization
+
+## Habilidades clave
+
+- Elegir entre regresión y clasificación según el tipo de target
+- Diagnosticar sobreajuste y subajuste con curvas de aprendizaje
+- Seleccionar la métrica correcta según el contexto de negocio
+- Comparar modelos con validación cruzada
+
+## Aplicaciones
+
+- **Biotecnología:** Predicción de solubilidad de proteínas, diagnóstico de enfermedades
+- **SaaS:** Predicción de abandono, forecasting de ingresos, lead scoring

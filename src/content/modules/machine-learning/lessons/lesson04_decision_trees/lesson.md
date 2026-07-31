@@ -250,7 +250,38 @@ Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpret
 <Section number={11} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Escribí `tree_depth_tuner(X_train, X_val, y_train, y_val, max_depths)` que entrene árboles para cada profundidad, evalúe en validación, y devuelva la profundidad óptima y el árbol entrenado. Graficá accuracy vs profundidad para visualizar el punto de sobreajuste.
+**Desafío:** Encontrá la profundidad óptima para un árbol de decisión.
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+def tree_depth_tuner(X_train, X_val, y_train, y_val, max_depths):
+    best_depth, best_acc = None, 0
+    scores = []
+    for depth in max_depths:
+        tree = DecisionTreeClassifier(max_depth=depth, random_state=42)
+        tree.fit(X_train, y_train)
+        acc = accuracy_score(y_val, tree.predict(X_val))
+        scores.append(acc)
+        if acc > best_acc:
+            best_acc, best_depth = acc, depth
+        print(f"Depth {str(depth):>3s}: val_acc = {acc:.3f}")
+    return best_depth, scores
+
+# Probá con breast cancer
+data = load_breast_cancer()
+X, y = data.data, data.target
+X_tr, X_val, y_tr, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+best_depth, scores = tree_depth_tuner(X_tr, X_val, y_tr, y_val, [1,2,3,5,7,10,15])
+print()
+print(f"Mejor profundidad: {best_depth}")`}
+  height="350px"
+/>
 
 </Section>

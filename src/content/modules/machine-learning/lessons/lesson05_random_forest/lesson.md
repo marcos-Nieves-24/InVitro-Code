@@ -196,7 +196,41 @@ El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Entrená un RF en breast cancer con n_estimators=[10, 50, 100, 200, 500] y graficá OOB score vs n_estimators. ¿En qué punto la mejora marginal se vuelve insignificante? ¿Vale la pena el costo computacional extra?
+**Desafío:** Analizá cómo mejora el OOB score al aumentar árboles. ¿Dónde deja de valer la pena?
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_breast_cancer
+import matplotlib.pyplot as plt
+
+data = load_breast_cancer()
+X, y = data.data, data.target
+
+n_trees = [10, 50, 100, 200, 500]
+oob_scores = []
+
+for n in n_trees:
+    rf = RandomForestClassifier(n_estimators=n, oob_score=True, 
+                                 random_state=42, n_jobs=-1)
+    rf.fit(X, y)
+    oob_scores.append(rf.oob_score_)
+    print(f"n_estimators={n:3d}: OOB = {rf.oob_score_:.4f}")
+
+# Visualizá
+plt.figure(figsize=(8, 5))
+plt.plot(n_trees, oob_scores, 'bo-', linewidth=2)
+plt.xlabel('Número de árboles')
+plt.ylabel('OOB Score')
+plt.title('¿Cuántos árboles necesito?')
+plt.grid(True, alpha=0.3)
+plt.show()
+
+# ¿Dónde se aplana la mejora?
+for i in range(1, len(oob_scores)):
+    improvement = oob_scores[i] - oob_scores[i-1]
+    print(f"{n_trees[i-1]} → {n_trees[i]}: mejora = {improvement:.5f}")`}
+  height="380px"
+/>
 
 </Section>

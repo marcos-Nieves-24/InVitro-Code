@@ -361,7 +361,41 @@ La regresión lineal modela el objetivo como suma ponderada de features. OLS enc
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Escribí `linear_regression_from_scratch(X, y)` que implemente OLS usando la solución cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$. Compará tus coeficientes con `sklearn.linear_model.LinearRegression`.
+**Desafío:** Implementá OLS desde cero con la solución cerrada. Compará tus coeficientes con `sklearn`.
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+
+def linear_regression_from_scratch(X, y):
+    # Agregar columna de unos para el intercepto
+    X_b = np.c_[np.ones((X.shape[0], 1)), X]
+    
+    # Solución cerrada: β = (X^T X)^(-1) X^T y
+    beta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
+    
+    intercept = beta[0]
+    coefs = beta[1:]
+    
+    # R²
+    y_pred = X_b @ beta
+    ss_res = np.sum((y - y_pred) ** 2)
+    ss_tot = np.sum((y - np.mean(y)) ** 2)
+    r2 = 1 - ss_res / ss_tot
+    
+    return coefs, intercept, r2
+
+# Probá con datos sintéticos
+np.random.seed(42)
+X = np.random.rand(100, 3) * 10
+y = 2.5 + 1.3 * X[:, 0] - 0.7 * X[:, 1] + 0.5 * X[:, 2] + np.random.normal(0, 1, 100)
+
+coefs, intercept, r2 = linear_regression_from_scratch(X, y)
+print(f"Intercept: {intercept:.4f}")
+print(f"Coeficientes: {coefs}")
+print(f"R²: {r2:.4f}")
+`}
+  height="350px"
+/>
 
 </Section>
