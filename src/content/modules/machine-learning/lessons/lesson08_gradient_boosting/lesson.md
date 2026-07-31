@@ -135,3 +135,33 @@ Gradient Boosting entrena árboles secuencialmente, cada uno corrigiendo los err
 </ConceptCard>
 
 </Section>
+
+<Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<ConceptCard variant="key-idea">
+**Desafío:** Compará GB vs Random Forest y analizá el efecto del learning rate.
+</ConceptCard>
+
+<CodeEditor
+  defaultValue={`from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+
+data = load_breast_cancer()
+X, y = data.data, data.target
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Random Forest como baseline
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_tr, y_tr)
+print(f"Random Forest: {rf.score(X_te, y_te):.3f}")
+
+# Gradient Boosting con distintos learning rates
+for lr in [0.01, 0.05, 0.1, 0.5]:
+    gb = GradientBoostingClassifier(n_estimators=100, learning_rate=lr, max_depth=3, random_state=42)
+    gb.fit(X_tr, y_tr)
+    print(f"GB (lr={lr:.2f}): {gb.score(X_te, y_te):.3f}")`}
+  height="350px"
+/>
+
+</Section>

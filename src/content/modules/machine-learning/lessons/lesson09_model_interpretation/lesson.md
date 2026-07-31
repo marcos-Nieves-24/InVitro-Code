@@ -96,3 +96,49 @@ La importancia por permutación es más confiable que la de impureza. Los PDP mu
 </ConceptCard>
 
 </Section>
+
+<Section number={6} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<ConceptCard variant="key-idea">
+**Desafío:** Compará importancia por impureza vs permutación en un Random Forest.
+</ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.inspection import permutation_importance
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+
+data = load_breast_cancer()
+X, y = data.data, data.target
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_tr, y_tr)
+
+# Importancia por impureza (viene del modelo)
+imp_impurity = rf.feature_importances_
+
+# Importancia por permutación (más confiable)
+result = permutation_importance(rf, X_te, y_te, n_repeats=10, random_state=42)
+imp_permutation = result.importances_mean
+
+# Comparar top 5 de cada método
+features = [str(f) for f in data.feature_names]
+df = pd.DataFrame({
+    'feature': features,
+    'impurity': imp_impurity,
+    'permutation': imp_permutation
+})
+
+print("Top 5 — Impureza:")
+print(df.sort_values('impurity', ascending=False).head(5)[['feature','impurity']])
+print("\\nTop 5 — Permutación:")
+print(df.sort_values('permutation', ascending=False).head(5)[['feature','permutation']])
+`}
+  height="380px"
+/>
+
+</Section>
