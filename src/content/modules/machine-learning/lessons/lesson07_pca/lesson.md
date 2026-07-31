@@ -153,7 +153,38 @@ PCA reduce dimensionalidad creando nuevas features (componentes principales) que
 <Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Cargá breast cancer (30 features), aplicá PCA, y encontrá el número mínimo de componentes necesario para retener el 95% de la varianza. Luego entrená un Random Forest con las features originales vs. las componentes de PCA y compará accuracy y tiempo de entrenamiento.
+**Desafío:** Aplicá PCA a breast cancer y compará rendimiento con features originales.
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+import time
+
+data = load_breast_cancer()
+X, y = data.data, data.target
+X = StandardScaler().fit_transform(X)
+
+# ¿Cuántos componentes para 95% de varianza?
+pca = PCA().fit(X)
+cumsum = np.cumsum(pca.explained_variance_ratio_)
+n_components = np.argmax(cumsum >= 0.95) + 1
+print(f"Componentes para 95% varianza: {n_components} (de {X.shape[1]})")
+
+# Comparar: features originales vs PCA
+for name, X_data in [("Original", X), ("PCA", PCA(n_components=n_components).fit_transform(X))]:
+    X_tr, X_te, y_tr, y_te = train_test_split(X_data, y, test_size=0.2, random_state=42)
+    start = time.time()
+    rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf.fit(X_tr, y_tr)
+    elapsed = time.time() - start
+    print(f"{name}: accuracy={rf.score(X_te, y_te):.3f}, tiempo={elapsed:.3f}s")
+`}
+  height="380px"
+/>
 
 </Section>

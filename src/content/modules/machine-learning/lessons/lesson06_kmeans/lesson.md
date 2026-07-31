@@ -177,4 +177,38 @@ K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamen
   answer="Depende del contexto. Si el objetivo es exploratorio (descubrir estructura), elegiría K=5 porque la silueta más alta indica clústeres mejor definidos. Si el objetivo es comunicación (explicar los grupos a stakeholders), K=3 puede ser preferible por simplicidad aunque la calidad sea menor. En la práctica, inspeccioná ambos: a veces K=5 revela un grupo pequeño pero biológicamente relevante que K=3 esconde."
 />
 
+<ConceptCard variant="key-idea">
+**Desafío:** Encontrá el K óptimo para un dataset sintético usando inercia y silueta.
+</ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+from sklearn.metrics import silhouette_score
+import matplotlib.pyplot as plt
+
+X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=0)
+
+# Explorá K de 2 a 10
+K_range = range(2, 11)
+inertias = []
+silhouettes = []
+
+for k in K_range:
+    km = KMeans(n_clusters=k, n_init=10, random_state=42)
+    labels = km.fit_predict(X)
+    inertias.append(km.inertia_)
+    silhouettes.append(silhouette_score(X, labels))
+
+# Resultados
+for i, k in enumerate(K_range):
+    print(f"K={k}: inercia={inertias[i]:.1f}, silueta={silhouettes[i]:.3f}")
+
+best_k = K_range[silhouettes.index(max(silhouettes))]
+print(f"\\nMejor K según silueta: {best_k} (silueta={max(silhouettes):.3f})")
+`}
+  height="350px"
+/>
+
 </Section>

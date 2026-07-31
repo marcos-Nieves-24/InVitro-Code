@@ -99,3 +99,48 @@ Completaste el módulo de Machine Learning. Sabés predecir números (regresión
 </CalloutCheck>
 
 </Section>
+
+<Section number={6} title="Ejercicio final" eyebrow="EJERCICIOS">
+
+<ConceptCard variant="key-idea">
+**Desafío final:** Construí un pipeline completo: desde datos crudos hasta selección de modelo.
+</ConceptCard>
+
+<CodeEditor
+  defaultValue={`import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import classification_report
+
+# Cargar datos
+data = load_breast_cancer()
+X, y = data.data, data.target
+
+# Preprocesar
+X = StandardScaler().fit_transform(X)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Comparar 3 modelos con validación cruzada
+models = {
+    'LogisticRegression': LogisticRegression(max_iter=5000),
+    'RandomForest': RandomForestClassifier(n_estimators=100, random_state=42),
+    'GradientBoosting': GradientBoostingClassifier(n_estimators=100, random_state=42)
+}
+
+for name, model in models.items():
+    scores = cross_val_score(model, X_tr, y_tr, cv=5)
+    model.fit(X_tr, y_tr)
+    test_score = model.score(X_te, y_te)
+    print(f"{name}: CV={scores.mean():.3f} (±{scores.std():.3f}), Test={test_score:.3f}")
+
+# ¿Cuál elegirías y por qué?
+print("\\nEl mejor modelo balancea accuracy, interpretabilidad y velocidad.")
+`}
+  height="400px"
+/>
+
+</Section>
