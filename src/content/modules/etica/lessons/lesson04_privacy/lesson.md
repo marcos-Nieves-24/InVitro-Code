@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Tus datos no son tuyos (y eso es un problema)" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 En 1997, investigadores de Harvard re-identificaron al gobernador de Massachusetts en una base de datos "anónima" de registros médicos usando solo su fecha de nacimiento, género y código postal. Tres datos. La anonimización es un mito.
 </MascotMessage>
 

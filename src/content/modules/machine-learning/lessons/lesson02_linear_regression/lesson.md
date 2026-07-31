@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Predecir números, no categorías" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Tu primer algoritmo de ML real. La regresión lineal es el más simple, el más interpretable, y la base sobre la que se construyen redes neuronales enteras. Dominarla es obligatorio.
 </MascotMessage>
 

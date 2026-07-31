@@ -23,7 +23,7 @@ Quiz: data_distribution_quiz.md
 
 <Section number={1} title="Más allá de los números" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 En la Lección 1 aprendiste a resumir datos con números. Pero dos datasets con idéntica media y desviación estándar pueden ser completamente diferentes. Hoy vamos a ver la forma de los datos.
 </MascotMessage>
 

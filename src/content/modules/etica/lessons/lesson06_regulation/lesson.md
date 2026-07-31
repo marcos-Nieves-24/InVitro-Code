@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="La ley alcanzó a la IA" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 La era del "move fast and break things" en IA se terminó. La EU AI Act entró en vigor. Si construís sistemas de IA para salud, biotecnología o SaaS en Europa, cumplir no es opcional — es legalmente obligatorio.
 </MascotMessage>
 

@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Descubrir grupos sin etiquetas" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tenés etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
 </MascotMessage>
 

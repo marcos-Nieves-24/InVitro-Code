@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="No basta con predecir bien — hay que explicar por qué" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Un modelo que predice con 99% de accuracy pero no podés explicar por qué decidió algo es inútil en medicina, finanzas o justicia. La interpretabilidad no es un lujo — es un requisito ético y legal.
 </MascotMessage>
 

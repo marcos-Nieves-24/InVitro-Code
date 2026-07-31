@@ -23,7 +23,7 @@ Quiz: clustering_quiz.md
 
 <Section number={1} title="Agrupar sin etiquetas" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Hasta ahora trabajamos con datos etiquetados. Pero en el mundo real, la mayoría de los datos no tienen etiquetas. ¿Cómo encontrás grupos naturales? K-Means clustering: el algoritmo de aprendizaje no supervisado más popular.
 </MascotMessage>
 

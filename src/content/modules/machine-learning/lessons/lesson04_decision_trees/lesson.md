@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="El algoritmo que piensa como un médico" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Los árboles de decisión son el algoritmo más intuitivo del ML. Hacen exactamente lo que harías vos: una serie de preguntas de sí/no hasta llegar a una conclusión. Y lo mejor: podés dibujar el resultado y explicárselo a cualquiera.
 </MascotMessage>
 

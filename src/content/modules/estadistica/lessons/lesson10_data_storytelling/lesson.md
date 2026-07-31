@@ -23,7 +23,7 @@ Quiz: data_storytelling_quiz.md
 
 <Section number={1} title="El análisis qué nadie lee" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Hiciste el EDA, corriste PCA, evaluaste tu modelo con validacion cruzada... y ahora que? Si no podes comunicar tus resultados, es cómo si no hubieras hecho nada. La narracion de datos convierte análisis en accion.
 </MascotMessage>
 

@@ -23,7 +23,7 @@ Quiz: eda_quiz.md
 
 <Section number={1} title="La fase más importante del ML" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 El 80% del trabajo de un científico de datos es entender y limpiar los datos. Sólo el 20% es modelar. El Análisis Exploratorio de Datos (EDA) es dónde realmente conocés tus datos — y dónde se evitan los errores más costosos.
 </MascotMessage>
 

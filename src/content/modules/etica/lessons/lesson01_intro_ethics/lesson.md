@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Cuando la precisión no alcanza" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 La ética en IA no es filosofía abstracta. Es ingeniería aplicada. Un modelo con 94% de accuracy puede estar matando gente si ese 6% de error se concentra en una población vulnerable. Hoy aprendés a ver lo que las métricas no muestran.
 </MascotMessage>
 

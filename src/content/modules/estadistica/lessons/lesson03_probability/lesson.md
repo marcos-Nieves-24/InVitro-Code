@@ -23,7 +23,7 @@ Quiz: probability_quiz.md
 
 <Section number={1} title="La ciencia de la incertidumbre" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza. La probabilidad es el lenguaje matemático para expresar esa incertidumbre. Sin ella, no podés interpretar la confianza de un modelo ni evaluar métodos bayesianos.
 </MascotMessage>
 

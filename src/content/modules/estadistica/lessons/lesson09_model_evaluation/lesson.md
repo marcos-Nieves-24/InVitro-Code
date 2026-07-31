@@ -23,7 +23,7 @@ Quiz: model_evaluation_quiz.md
 
 <Section number={1} title="Crear modelos es fácil. Evaluarlos, no." eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o sólo memorizó los datos de entrenamiento. La evaluación de modelos es dónde separamos la magia de la ilusión.
 </MascotMessage>
 

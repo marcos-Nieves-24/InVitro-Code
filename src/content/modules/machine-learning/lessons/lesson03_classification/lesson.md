@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Predecir categorías, no números" eyebrow="INICIO">
 
-<MascotMessage mood="excited">
+<MascotMessage mood="celebrating">
 ¿Spam o no spam? ¿Cáncer o benigno? ¿Se va a dar de baja o se queda? La clasificación es el tipo de ML más usado en el mundo real. Hoy aprendés a separar el sí del no con matemática.
 </MascotMessage>
 

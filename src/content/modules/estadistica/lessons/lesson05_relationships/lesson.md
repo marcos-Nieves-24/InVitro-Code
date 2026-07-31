@@ -23,7 +23,7 @@ Quiz: relationships_quiz.md
 
 <Section number={1} title="Nada ocurre en aislamiento" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 En machine learning, raramente trabajamos con variables aisladas. Dos genes pueden estar co-expresados, la edad del cliente y la duración de suscripción correlacionan. Entender estas relaciones te ayuda a seleccionar features y detectar multicolinealidad.
 </MascotMessage>
 
