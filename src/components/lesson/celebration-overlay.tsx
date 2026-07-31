@@ -91,9 +91,9 @@ export function CelebrationOverlay({
           {nextLessonHref && (
             <Link
               href={nextLessonHref}
-              className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              className="rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-brand/20 transition-colors hover:bg-brand-hover"
             >
-              Siguiente leccion
+              Siguiente lección
             </Link>
           )}
           <Link

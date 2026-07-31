@@ -2,6 +2,7 @@
 Module: 1
 Lesson Number: 1
 Lesson Title: ¿Qué es la Inteligencia Artificial?
+Estimated Duration: 60 minutos
 Prerequisites: Ninguno
 Learning Objectives:
   - Definir inteligencia artificial y distinguirla de la inteligencia natural
@@ -28,7 +29,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 
 </Section>
 
-<Section number={3} title="¿Qué es la Inteligencia Artificial?" eyebrow="CONCEPTO">
+<Section number={2} title="¿Qué es la Inteligencia Artificial?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
@@ -38,7 +39,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 
 </Section>
 
-<Section number={4} title="IA no piensa" eyebrow="CONCEPTO">
+<Section number={3} title="IA no piensa" eyebrow="CONCEPTO">
 
 <ConceptCard variant="key-idea">
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
@@ -46,7 +47,7 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 </Section>
 
-<Section number={5} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
+<Section number={4} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
 
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
@@ -84,7 +85,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
+<Section number={5} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
 Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las conidias, pero con datos médicos reales. El dataset Breast Cancer Wisconsin contiene 569 casos reales de biopsias — cada uno con 30 features numéricas extraídas de imágenes de núcleos celulares.
 
@@ -102,7 +103,7 @@ Cada punto en el gráfico es un caso real de biopsia. Cambiá las features con e
 
 </Section>
 
-<Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
+<Section number={6} title="Dos features > una" eyebrow="CONCEPTO">
 
 **¿Qué observamos en la simulación?**
 
@@ -116,7 +117,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={8} title="Vos como clasificador" eyebrow="INTERACTIVA">
+<Section number={7} title="Vos como clasificador" eyebrow="INTERACTIVA">
 
 Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
 
@@ -134,7 +135,7 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 
 </Section>
 
-<Section number={9} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+<Section number={8} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
 
 **¿Qué aprendemos de la simulación?**
 
@@ -148,7 +149,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
+<Section number={9} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
@@ -166,7 +167,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={11} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+<Section number={10} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
 **La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
@@ -179,7 +180,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={12} title="Resumen" eyebrow="CIERRE">
+<Section number={11} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -191,7 +192,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={12} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué es una "feature" en el contexto de IA?**
    - a) Una característica del hardware de la computadora
@@ -219,7 +220,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 
 </Section>
 
-<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={13} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
