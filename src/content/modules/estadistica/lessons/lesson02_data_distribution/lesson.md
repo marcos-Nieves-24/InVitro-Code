@@ -27,9 +27,9 @@ Quiz: data_distribution_quiz.md
 En la Lección 1 aprendiste a resumir datos con números. Pero dos datasets con idéntica media y desviación estándar pueden ser completamente diferentes. Hoy vamos a ver la forma de los datos.
 </MascotMessage>
 
-Dos conjuntos de datos muy diferentes pueden tener medias y desviaciones estándar idénticas. Visualizar la distribución revela patrones que los estadísticos de resumen no muestran: multimodalidad, huecos, agrupaciones y valores extremos.
+Dos conjuntos de datos muy diferentes pueden tener medias y desviaciones estándar idénticas. Visualizar la distribución revela patrones qué los estadísticos de resumen no muestran: multimodalidad, huecos, agrupaciones y valores extremos.
 
-En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log-normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo que afecta cómo calculamos promedios y detectamos anomalías.
+En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log-normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo qué afecta cómo calculamos promedios y detectamos anomalías.
 
 </Section>
 
@@ -38,10 +38,10 @@ En biotecnología, las formas de las distribuciones revelan si la expresión gé
 La Lección 1 enseñó resúmenes numéricos; esta lección enseña resúmenes visuales. Aprenderás a **ver** la forma de tus datos.
 
 <ConceptCard variant="key-idea">
-Entender la distribución de los datos es crítico antes de aplicar cualquier modelo de machine learning, ya que muchos algoritmos asumen que las features siguen una distribución normal.
+Entender la distribución de los datos es crítico antes de aplicar cualquier modelo de machine learning, ya qué muchos algoritmos asumen qué las features siguen una distribución normal.
 </ConceptCard>
 
-Esto te prepara para la Lección 3 (Probabilidad) y la Lección 4 (Distribuciones Estadísticas con nombre como la normal y binomial).
+Esto te prepara para la Lección 3 (Probabilidad) y la Lección 4 (Distribuciones Estadísticas con nombre cómo la normal y binomial).
 
 </Section>
 
@@ -58,7 +58,7 @@ La cantidad de bins afecta drásticamente la interpretación:
 - Regla de Freedman-Diaconis: $h = 2 \times \text{IQR} \times n^{-1/3}$
 
 <ConceptCard variant="warning">
-Muy pocos bins ocultan detalles importantes. Demasiados bins crean ruido que parece estructura pero no lo es. Probar varios anchos es parte del análisis exploratorio.
+Muy pocos bins ocultan detalles importantes. Demasiados bins crean ruido qué parece estructura pero no lo es. Probar varios anchos es parte del análisis exploratorio.
 </ConceptCard>
 
 </Section>
@@ -93,7 +93,7 @@ $$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sig
 />
 
 <ConceptCard variant="key-idea">
-En una distribución con asimetría a la derecha, la media es mayor que la mediana porque los valores extremos altos jalan la media. ¡Siempre reportá la mediana en estos casos!
+En una distribución con asimetría a la derecha, la media es mayor qué la mediana por qué los valores extremos altos jalan la media. ¡Siempre reportá la mediana en estos casos!
 </ConceptCard>
 
 </Section>
@@ -115,7 +115,7 @@ $$\text{Curtosis} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma
 />
 
 <CalloutInfo>
-Una curtosis alta significa que los valores extremos son más probables que en una normal. Esto importa para evaluación de riesgos y detección de outliers en genómica.
+Una curtosis alta significa qué los valores extremos son más probables qué en una normal. Esto importa para evaluación de riesgos y detección de outliers en genómica.
 </CalloutInfo>
 
 </Section>
@@ -178,7 +178,7 @@ print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
   prompt="La masa corporal de los pingüinos muestra múltiples picos en el histograma. ¿Qué podría explicar esto biológicamente?"
-  answer="Probablemente hay múltiples especies de pingüinos en el dataset (Adelie, Gentoo, Chinstrap), cada una con un rango de masa corporal diferente. Esto se llama multimodalidad — la distribución general es una mezcla de distribuciones por especie. Es una señal de que necesitamos segmentar los datos por especie antes de analizar."
+  answer="Probablemente hay múltiples especies de pingüinos en el dataset (Adelie, Gentoo, Chinstrap), cada una con un rango de masa corporal diferente. Esto se llama multimodalidad — la distribución general es una mezcla de distribuciones por especie. Es una señal de qué necesitamos segmentar los datos por especie antes de analizar."
 />
 
 </Section>
@@ -267,11 +267,11 @@ plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
   prompt="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
-  answer="Es asimétrica a la derecha (cola a la derecha). En esta distribución, la media es mayor que la mediana porque las casas muy caras jalan la media hacia arriba. Para reportar un precio 'típico', usá la mediana. La media puede ser engañosa porque está distorsionada por un puñado de mansiones."
+  answer="Es asimétrica a la derecha (cola a la derecha). En esta distribución, la media es mayor qué la mediana por qué las casas muy caras jalan la media hacia arriba. Para reportar un precio 'típico', usá la mediana. La media puede ser engañosa por qué está distorsionada por un puñado de mansiones."
 />
 
 <AnswerReveal summary="Ver más respuestas">
-<p><strong>¿Qué valor de curtosis esperarías para una distribución normal?</strong> Curtosis = 0 (usando curtosis en exceso, que resta 3). La distribución normal es el punto de referencia: ni colas pesadas ni livianas.</p>
+<p><strong>¿Qué valor de curtosis esperarías para una distribución normal?</strong> Curtosis = 0 (usando curtosis en exceso, qué resta 3). La distribución normal es el punto de referencia: ni colas pesadas ni livianas.</p>
 <p><strong>¿Por qué una empresa SaaS preferiría la mediana sobre la media para reportar LTV?</strong> Porque el Lifetime Value suele tener cola derecha — unos pocos clientes enterprise con LTV enorme inflan la media. La mediana refleja mejor el valor de un cliente 'típico'.</p>
 </AnswerReveal>
 
@@ -304,7 +304,7 @@ plt.show()
 
 **¿Qué aprendiste hoy?**
 - Histogramas y KDE revelan la forma de la distribución
-- Asimetría ≠ 0 significa que los datos no son simétricos
+- Asimetría ≠ 0 significa qué los datos no son simétricos
 - Curtosis alta = riesgo de outliers extremos
 - La transformación logarítmica normaliza datos con cola derecha
 

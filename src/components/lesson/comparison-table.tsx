@@ -6,22 +6,30 @@ interface ComparisonRow {
 
 interface ComparisonTableProps {
   rows: ComparisonRow[];
+  leftLabel?: string;
+  rightLabel?: string;
+  featureLabel?: string;
 }
 
-export function ComparisonTable({ rows }: ComparisonTableProps) {
+export function ComparisonTable({
+  rows,
+  leftLabel = "",
+  rightLabel = "",
+  featureLabel = "Característica",
+}: ComparisonTableProps) {
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200">
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="border-b border-gray-200 bg-gray-50">
             <th className="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-              Característica
+              {featureLabel}
             </th>
             <th className="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-              <em>Aspergillus</em>
+              {leftLabel}
             </th>
             <th className="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-              <em>Penicillium</em>
+              {rightLabel}
             </th>
           </tr>
         </thead>

@@ -39,12 +39,12 @@ Clustering agrupa puntos similares sin conocer las categorías de antemano. En b
 1. Elegir k (cantidad de clusters)
 2. Inicializar k centroides aleatoriamente
 3. Asignar cada punto al centroide más cercano
-4. Recalcular centroides como la media de sus puntos asignados
+4. Recalcular centroides cómo la media de sus puntos asignados
 5. Repetir pasos 3-4 hasta convergencia
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a su centroide. Es como poner k "imanes" en los datos que atraen a los puntos más cercanos, y luego mover los imanes al centro de los puntos que atrajeron.
+K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a su centroide. Es cómo poner k "imanes" en los datos qué atraen a los puntos más cercanos, y luego mover los imanes al centro de los puntos qué atrajeron.
 </ConceptCard>
 
 </Section>
@@ -55,8 +55,8 @@ K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a 
   rows={[
     { feature: "Qué mide", left: "Inercia (distancia intra-cluster)", right: "Cohesión + separación de clusters" },
     { feature: "Rango", left: "Siempre decrece con k", right: "[-1, 1]; >0.5 = buen clustering" },
-    { feature: "Cómo elegir k", left: "Buscar el 'codo' donde la mejora se aplana", right: "Elegir k con mayor silhouette score" },
-    { feature: "Ventaja", left: "Simple, intuitivo", right: "Considera tanto cohesión como separación" },
+    { feature: "Cómo elegir k", left: "Buscar el 'codo' dónde la mejora se aplana", right: "Elegir k con mayor silhouette score" },
+    { feature: "Ventaja", left: "Simple, intuitivo", right: "Considera tanto cohesión cómo separación" },
     { feature: "Limitación", left: "No siempre hay un codo claro", right: "Costoso computacionalmente con muchos datos" },
   ]}
 />
@@ -129,7 +129,7 @@ plt.legend(); plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson08_clustering"
   prompt="¿Por qué visualizamos clusters en 2D con PCA en vez de usar 2 features originales? ¿Qué podríamos perder?"
-  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un solo gráfico. Pero perdemos información: clusters que se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
+  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un sólo gráfico. Pero perdemos información: clusters qué se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
 />
 
 </Section>
@@ -152,7 +152,7 @@ print(f"Silhouette score: {silhouette_score(X_cancer, labels):.3f}")
 ```
 
 <CalloutInfo>
-En la práctica, clustering de expresión génica ha llevado al descubrimiento de subtipos moleculares de cáncer (como los subtipos Luminal A/B, HER2, Basal en cáncer de mama) que hoy guían decisiones terapéuticas.
+En la práctica, clustering de expresión génica ha llevado al descubrimiento de subtipos moleculares de cáncer (cómo los subtipos Luminal A/B, HER2, Basal en cáncer de mama) qué hoy guían decisiones terapéuticas.
 </CalloutInfo>
 
 </Section>
@@ -179,12 +179,12 @@ Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí 
 <InteractiveTable
   headers={["Término", "Definición"]}
   rows={[
-    ["K-Means", "Algoritmo que agrupa puntos en k clusters alrededor de centroides"],
+    ["K-Means", "Algoritmo qué agrupa puntos en k clusters alrededor de centroides"],
     ["Centroide", "Punto central de un cluster (media de sus miembros)"],
     ["Inercia", "Suma de distancias² intra-cluster — K-Means la minimiza"],
     ["Método del Codo", "Técnica para elegir k: buscar aplanamiento de inercia"],
     ["Silhouette Score", "Métrica de calidad: cohesión + separación [-1,1]"],
-    ["K-Means++", "Inicialización inteligente que dispersa centroides iniciales"],
+    ["K-Means++", "Inicialización inteligente qué dispersa centroides iniciales"],
     ["No Supervisado", "Aprendizaje sin etiquetas — el algoritmo descubre la estructura"],
   ]}
   searchable={true}

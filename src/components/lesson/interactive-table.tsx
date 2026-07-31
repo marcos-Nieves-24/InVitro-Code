@@ -3,22 +3,59 @@
 import { useState, useMemo } from "react";
 import { ArrowUpDown, ArrowUp, ArrowDown, Search } from "lucide-react";
 
-interface InteractiveTableProps {
-  headers: string[];
-  rows: string[][];
-  caption?: string;
-  searchable?: boolean;
+// ---- Column-based API (used by ML lessons) ----
+interface ColumnDef {
+  key: string;
+  label: string;
 }
 
-export function InteractiveTable({
-  headers,
-  rows,
-  caption,
-  searchable = false,
-}: InteractiveTableProps) {
+interface ColumnBasedRows {
+  [key: string]: string;
+}
+
+// ---- Array-based API (used by estadística and original lessons) ----
+interface ArrayBasedHeaders extends Array<string> {}
+
+type InteractiveTableProps =
+  | {
+      // Column-based API
+      columns: ColumnDef[];
+      rows: ColumnBasedRows[];
+      caption?: string;
+      searchable?: boolean;
+      headers?: never;
+    }
+  | {
+      // Array-based API
+      headers: string[];
+      rows: string[][];
+      caption?: string;
+      searchable?: boolean;
+      columns?: never;
+    };
+
+export function InteractiveTable(props: InteractiveTableProps) {
+  const { caption, searchable = false } = props;
   const [sortColumn, setSortColumn] = useState<number | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState("");
+
+  // Normalize both APIs into headers: string[] and rows: string[][]
+  const { headers, rows } = useMemo(() => {
+    if ("columns" in props && props.columns) {
+      const cols = props.columns;
+      return {
+        headers: cols.map((c) => c.label),
+        rows: (props.rows as ColumnBasedRows[]).map((row) =>
+          cols.map((c) => row[c.key] ?? ""),
+        ),
+      };
+    }
+    return {
+      headers: (props as { headers: string[] }).headers ?? [],
+      rows: (props as { rows: string[][] }).rows ?? [],
+    };
+  }, [props]);
 
   const processedRows = useMemo(() => {
     let filtered = rows;

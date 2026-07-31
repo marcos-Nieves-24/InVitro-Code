@@ -26,7 +26,7 @@ Quiz: statistical_distributions_quiz.md
 Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log-normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
 </MascotMessage>
 
-En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a conocer las distribuciones específicas que aparecen con más frecuencia en machine learning: **Bernoulli, Binomial, Poisson y Normal**. Cada una modela un tipo distinto de fenómeno.
+En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a conocer las distribuciones específicas qué aparecen con más frecuencia en machine learning: **Bernoulli, Binomial, Poisson y Normal**. Cada una modela un tipo distinto de fenómeno.
 
 </Section>
 
@@ -39,7 +39,7 @@ En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a 
 - Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
 </ConceptCard>
 
-Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
+Intuición: Un sólo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
 
 </Section>
 
@@ -59,14 +59,14 @@ Intuición: Lanzar una moneda 10 veces y contar caras. De 100 pacientes tratados
 <Section number={4} title="Poisson: eventos en el tiempo" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
-**Distribución Poisson**: Cantidad de eventos que ocurren en un intervalo fijo de tiempo o espacio.
+**Distribución Poisson**: Cantidad de eventos qué ocurren en un intervalo fijo de tiempo o espacio.
 - Parámetro: $\lambda$ (tasa promedio)
 - PMF: $P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}$
 - Media: $E[X] = \lambda$, Varianza: $\text{Var}(X) = \lambda$
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-Lo fascinante de Poisson es que la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor que la media, hay sobredispersión — necesitás un modelo más complejo.
+Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitás un modelo más complejo.
 </ConceptCard>
 
 Ejemplos: mutaciones en una secuencia de ADN, llegadas de clientes por hora, llamadas a un call center por minuto.
@@ -164,7 +164,7 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
   prompt="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
-  answer="Poisson asume que los eventos ocurren independientemente a una tasa constante λ. En genética, cada posición del ADN puede mutar independientemente, y la tasa es aproximadamente constante por región. Pero ojo: en regiones genómicas inestables (hotspots), la tasa no es constante y Poisson subestima la varianza — ahí necesitamos modelos más complejos como binomial negativa."
+  answer="Poisson asume qué los eventos ocurren independientemente a una tasa constante λ. En genética, cada posición del ADN puede mutar independientemente, y la tasa es aproximadamente constante por región. Pero ojo: en regiones genómicas inestables (hotspots), la tasa no es constante y Poisson subestima la varianza — ahí necesitamos modelos más complejos cómo binomial negativa."
 />
 
 </Section>
@@ -175,8 +175,8 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   blockId="reflection-l04-choose-dist"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="Tenés datos de cantidad de clientes que entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
-  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verificá: si la varianza empírica es mucho mayor que 5 (sobredispersión), considerá binomial negativa. Si hay patrones temporales (hora pico), necesitás un Poisson no homogéneo con λ(t) variable."
+  prompt="Tenés datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
+  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verificá: si la varianza empírica es mucho mayor qué 5 (sobredispersión), considerá binomial negativa. Si hay patrones temporales (hora pico), necesitás un Poisson no homogéneo con λ(t) variable."
 />
 
 <AnswerReveal summary="Ver respuestas">
