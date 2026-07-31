@@ -1,21 +1,33 @@
-# Subunit 2: Unsupervised Learning — Deep Dive
+# Subunidad 2: Aprendizaje No Supervisado
 
-## Topics
+## Descripción
 
-- K-Means Clustering: initialization, convergence, limitations, K-Means++
-- Hierarchical Clustering: agglomerative, dendrograms, linkage criteria
-- DBSCAN: density-based clustering, noise points, parameter selection
-- Dimensionality Reduction: PCA (variance explained, biplots), t-SNE, UMAP
-- Anomaly Detection: Isolation Forest, LOF, one-class SVM
-- Cluster Validation: silhouette score, Davies-Bouldin index, elbow method
+Cuando no tenés etiquetas, necesitás que el modelo descubra estructura por sí mismo. Esta subunidad cubre los dos enfoques principales del aprendizaje no supervisado: clustering (agrupar) y reducción de dimensionalidad (comprimir).
 
-## Key Skills
+## Lecciones
 
-- Select appropriate clustering algorithm based on data characteristics
-- Determine optimal number of clusters
-- Interpret dimensionality reduction results
-- Identify anomalies in datasets
+| # | Lección | Tema principal |
+|---|---------|---------------|
+| L6 | Clustering K-Means | Agrupar datos sin etiquetas, método del codo, puntaje de silueta |
+| L7 | PCA | Reducir dimensiones preservando varianza, componentes principales |
 
-## Lessons
+## Temas complementarios
 
-Refer to lessons 6-7 in the main module 4 directory.
+- **K-Means++:** Inicialización inteligente de centroides para mejor convergencia
+- **Clustering Jerárquico:** Dendrogramas, criterios de enlace (Ward, complete, average)
+- **DBSCAN:** Clustering basado en densidad, detección de outliers
+- **t-SNE / UMAP:** Reducción de dimensionalidad no lineal para visualización
+- **Detección de anomalías:** Isolation Forest, LOF
+
+## Habilidades clave
+
+- Elegir el algoritmo de clustering según la forma de los datos
+- Determinar el número óptimo de grupos con validación
+- Interpretar resultados de reducción de dimensionalidad
+- Identificar anomalías en datasets sin etiquetas
+
+## Aplicaciones
+
+- **Biotecnología:** Descubrimiento de subtipos de cáncer por perfiles de expresión génica
+- **SaaS:** Segmentación de usuarios por comportamiento para marketing personalizado
+- **Genómica:** Agrupación de genes por patrones de co-expresión

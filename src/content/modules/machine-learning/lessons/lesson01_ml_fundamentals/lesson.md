@@ -373,7 +373,37 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
 />
 
 <ConceptCard variant="key-idea">
-**Desafío de programación:** Escribí una función `diagnose_fit(model, X_train, X_test, y_train, y_test)` que calcule los puntajes de entrenamiento y prueba, e imprima si el modelo está sobreajustado, subajustado o bien equilibrado. Usá un umbral: si `train_score - test_score > 0.15`, marcá como sobreajuste.
+**Desafío de programación:** Escribí una función `diagnose_fit` que detecte sobreajuste. Ejecutá tu código con Shift+Enter.
 </ConceptCard>
+
+<CodeEditor
+  defaultValue={`from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_diabetes
+import numpy as np
+
+def diagnose_fit(model, X_train, X_test, y_train, y_test):
+    train_score = model.score(X_train, y_train)
+    test_score = model.score(X_test, y_test)
+    gap = train_score - test_score
+    
+    if gap > 0.15:
+        return "SOBREAJUSTE"
+    elif train_score < 0.5 and test_score < 0.5:
+        return "SUBAJUSTE"
+    else:
+        return "BIEN EQUILIBRADO"
+
+# Probá tu función
+data = load_diabetes()
+X, y = data.data, data.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+print(diagnose_fit(model, X_train, X_test, y_train, y_test))
+`}
+  height="350px"
+/>
 
 </Section>
