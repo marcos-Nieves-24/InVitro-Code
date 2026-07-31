@@ -4,35 +4,36 @@ schema: spec-driven
 context: |
   Project: invitro-code
   Vision: Interactive learning platform (Duolingo-style) for biotech students to learn AI/ML fundamentals through coding challenges.
-  Stack: Undefined — to be decided during explore phase.
-  Architecture: Undefined — to be decided during explore phase.
-  Testing: No test runner configured yet — to be defined when stack is chosen.
-  Strict TDD: false (no test runner available; will be re-evaluated when stack is chosen).
-  Style: New project — no conventions established yet.
+  Stack: Next.js (App Router), TypeScript, Tailwind CSS, MDX (next-mdx-remote), Plotly.js, Monaco Editor, Supabase (auth/DB), Clerk auth
+  Architecture: Content-driven — modules (python, ia, estadistica, etica, machine-learning) with lesson.md files containing MDX components (<Section>, <ConceptCard>, etc.). Lesson page splits by <Section> blocks into a carousel.
+  Testing: Manual test file exists (src/__tests__/requestId-descarte.test.mjs) but no test runner configured in npm scripts.
+  Strict TDD: false (no test runner available)
+  Style: Next.js App Router patterns; MDX components in src/components/lesson/; content in src/content/modules/; Spanish-language educational content
 
 rules:
   proposal:
     - Include rollback plan for risky changes
-    - Document tradeoffs explicitly since this is a new project with no stack
+    - Document tradeoffs explicitly
   specs:
     - Use Given/When/Then for scenarios
     - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
     - Keep language accessible for a solo developer learning to program
   design:
-    - Include sequence diagrams for complex flows
+    - Follow existing component patterns in src/components/lesson/
     - Document architecture decisions with rationale
-    - Prioritize maintainability and low-cost infrastructure
   tasks:
-    - Group by phase, use hierarchical numbering
+    - Group by lesson, use hierarchical numbering
     - Keep tasks completable in one session
   apply:
     guidelines:
-      - Follow existing code patterns (none yet — first code sets the patterns)
+      - Follow existing MDX component patterns (Section, ConceptCard, InteractiveTable, etc.)
+      - Content must remain in Spanish
+      - Preserve LaTeX math (remark-math + rehype-katex)
     tdd: false
     test_command: ""
   verify:
     test_command: ""
-    build_command: ""
+    build_command: "npm run build"
     coverage_threshold: 0
   archive:
     - Warn before merging destructive deltas
@@ -51,10 +52,9 @@ testing:
     available: false
     command: null
   quality:
-    linter: { available: false, command: null }
-    type_checker: { available: false, command: null }
+    linter: { available: true, command: "npm run lint" }
+    type_checker: { available: true, command: "npm run type-check" }
     formatter: { available: false, command: null }
   note: >
-    No test runner, linter, or type checker detected. Project is greenfield.
-    Strict TDD is disabled until a stack is chosen and a test runner is configured.
-    Recommendation: enable strict_tdd when the first test runner is added.
+    Project has code patterns established. MDX lesson components exist and work.
+    No automated test runner; manual tests only. Strict TDD disabled.

@@ -21,98 +21,102 @@ Assignment: descriptive_statistics_assignment.md
 Quiz: descriptive_statistics_quiz.md
 ---
 
-# Lección 1: Estadística Descriptiva
+<Section number={1} title="El problema de los 10.000 genes" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Bienvenido al Laboratorio de Datos. Hoy vamos a aprender cómo resumir miles de números en un puñado de medidas significativas. Es la primera herramienta de todo científico de datos.
+</MascotMessage>
 
-Imaginá que acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías que leer 10.000 números uno por uno. La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
+Imaginá que acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías que leer 10.000 números uno por uno.
 
-En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, la estadística descriptiva resume métricas de engagement de usuarios como usuarios activos diarios o duración de sesiones.
+La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
 
-## Panorama General
+En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, resume métricas de engagement como usuarios activos diarios o duración de sesiones.
 
-En el módulo anterior, aprendiste a manipular datos usando Python, NumPy y Pandas. Ahora aprenderás a describir datos numéricamente. Esta lección sienta las bases para todas las lecciones de estadística subsiguientes. En la Lección 2, visualizarás estos mismos conceptos descriptivos usando histogramas y gráficos de densidad.
+</Section>
 
-## Teoría
+<Section number={2} title="¿Dónde estamos parados?" eyebrow="CONCEPTO">
 
-### Medidas de Tendencia Central
+En el módulo anterior aprendiste a manipular datos usando Python, NumPy y Pandas. Ahora aprenderás a **describir** datos numéricamente.
+
+<ConceptCard variant="key-idea">
+La estadística descriptiva es el primer paso de cualquier análisis de datos. Antes de modelar, antes de predecir, antes de sacar conclusiones: hay que describir.
+</ConceptCard>
+
+Esta lección sienta las bases para todo el módulo:
+
+- **Hoy**: Describir datos con números (tendencia central + dispersión)
+- **Lección 2**: Visualizar distribuciones con histogramas y densidades
+- **Lección 3**: Fundamentos de probabilidad
+- **Y más**: Distribuciones, correlaciones, clustering, y evaluación de modelos
+
+</Section>
+
+<Section number={3} title="Medidas de Tendencia Central" eyebrow="CONCEPTO">
 
 Las medidas de tendencia central indican dónde se encuentra el "centro" de un conjunto de datos.
 
-**Media (Promedio)**
+### Media (Promedio)
 
+<ConceptCard variant="definition">
 La media aritmética es la suma de todos los valores dividida por la cantidad de valores.
+</ConceptCard>
 
 $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
-Intuición: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es donde se equilibraría el fulcro.
+**Intuición**: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es donde se equilibraría el fulcro.
 
-**Mediana**
+### Mediana
 
+<ConceptCard variant="definition">
 La mediana es el valor del medio cuando los datos están ordenados de forma ascendente.
+</ConceptCard>
 
 $$\text{mediana} = \begin{cases} x_{(n+1)/2} & \text{si } n \text{ es impar} \\ \frac{x_{n/2} + x_{(n/2)+1}}{2} & \text{si } n \text{ es par} \end{cases}$$
 
-Intuición: La mediana divide el conjunto de datos en dos mitades iguales. A diferencia de la media, no se ve afectada por valores extremos.
+### Moda
 
-**Moda**
+<ConceptCard variant="definition">
+La moda es el valor más frecuente en un conjunto de datos.
+</ConceptCard>
 
-La moda es el valor más frecuente en un conjunto de datos. Un conjunto puede tener una moda (unimodal), dos modas (bimodal) o más.
+Un conjunto puede tener una moda (unimodal), dos modas (bimodal) o más. En datos continuos, cada valor puede aparecer una sola vez — se usa agrupamiento para encontrar modas significativas.
 
-Intuición: La moda indica la categoría o el valor más común.
+</Section>
 
-### Medidas de Dispersión
+<Section number={4} title="Media vs Mediana: ¿cuál usar?" eyebrow="CONCEPTO">
 
-Las medidas de dispersión indican qué tan dispersos están los datos.
+<ConceptCard variant="key-idea">
+La mediana divide el conjunto en dos mitades iguales. A diferencia de la media, **no se ve afectada por valores extremos**. Por eso es la medida preferida para datos sesgados.
+</ConceptCard>
 
-**Rango**
+<ComparisonTable
+  rows={[
+    { feature: "Definición", left: "Punto de equilibrio (suma / n)", right: "Valor central (mitad arriba, mitad abajo)" },
+    { feature: "Robustez a outliers", left: "Muy sensible — un valor extremo la desplaza", right: "Robusta — los outliers no la afectan" },
+    { feature: "Cuándo usarla", left: "Datos simétricos (ej. altura, peso, temperatura corporal)", right: "Datos sesgados (ej. ingresos, precios, expresión génica con outliers)" },
+    { feature: "Ejemplo", left: "Notas de un examen bien diseñado", right: "Ingresos de una población (donde algunos ganan 100× más)" },
+  ]}
+/>
 
-$$\text{Rango} = \max(x) - \min(x)$$
+</Section>
 
-Intuición: El rango da el recorrido total de los datos. Es muy sensible a valores atípicos.
+<Section number={5} title="Manos a la obra: análisis de puntajes" eyebrow="INTERACTIVA">
 
-**Varianza**
-
-$$\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$$
-
-Intuición: La varianza mide la distancia cuadrática promedio desde la media. Una varianza más grande significa que los puntos están más dispersos.
-
-**Desviación Estándar**
-
-$$\sigma = \sqrt{\sigma^2}$$
-
-Intuición: La desviación estándar es la distancia típica de un punto de datos respecto a la media. Como está en las mismas unidades que los datos originales, es más interpretable que la varianza.
-
-**Rango Intercuartílico (IQR)**
-
-$$\text{IQR} = Q_3 - Q_1$$
-
-Donde \(Q_1\) es el percentil 25 y \(Q_3\) es el percentil 75.
-
-Intuición: El IQR contiene el 50% central de los datos. Es robusto frente a valores atípicos.
-
-### Detección de Valores Atípicos Usando IQR
-
-Una regla común: cualquier punto por debajo de \(Q_1 - 1.5 \times \text{IQR}\) o por encima de \(Q_3 + 1.5 \times \text{IQR}\) se considera un valor atípico.
-
-## Implementación en Python
+Veamos cómo calcular estas medidas en Python con datos reales de 30 estudiantes:
 
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Datos de ejemplo: puntajes de examen para 30 estudiantes
-# Datos de ejemplo: puntajes de examen para 30 estudiantes
+# Puntajes de examen para 30 estudiantes
 scores = [78, 85, 92, 67, 88, 95, 73, 81, 90, 76,
           84, 91, 69, 87, 93, 75, 82, 89, 96, 71,
           79, 86, 94, 68, 83, 97, 77, 80, 99, 100]
 
-# Convertir a array de numpy
-# Convertir a array de numpy
 scores = np.array(scores)
 
-# Tendencia central
 # Tendencia central
 mean = np.mean(scores)
 median = np.median(scores)
@@ -121,42 +125,81 @@ mode = pd.Series(scores).mode().values
 print(f"Media: {mean:.2f}")
 print(f"Mediana: {median:.2f}")
 print(f"Moda: {mode}")
-
-# Dispersión
-# Dispersión
-variance = np.var(scores, ddof=0)  # varianza poblacional
-std_dev = np.std(scores, ddof=0)
-data_range = np.ptp(scores)  # rango (pico a pico)
-q1 = np.percentile(scores, 25)
-q3 = np.percentile(scores, 75)
-iqr = q3 - q1
-
-print(f"\nVarianza: {variance:.2f}")
-print(f"Desviación Estándar: {std_dev:.2f}")
-print(f"Rango: {data_range}")
-print(f"Q1: {q1:.2f}, Q3: {q3:.2f}, IQR: {iqr:.2f}")
-
-# Detección de valores atípicos
-# Detección de valores atípicos
-lower_bound = q1 - 1.5 * iqr
-upper_bound = q3 + 1.5 * iqr
-outliers = scores[(scores < lower_bound) | (scores > upper_bound)]
-print(f"\nLímites de valores atípicos: [{lower_bound:.2f}, {upper_bound:.2f}]")
-print(f"Valores atípicos: {outliers}")
-
-# Visualización con diagrama de caja
-# Visualización con diagrama de caja
-plt.figure(figsize=(8, 4))
-plt.boxplot(scores, vert=False, patch_artist=True)
-plt.title('Distribución de Puntajes de Examen')
-plt.xlabel('Puntaje')
-plt.tight_layout()
-plt.show()
 ```
 
-## Ejemplo Guiado
+<CalloutInfo>
+Ejecutá este código en tu notebook. ¿Están cerca la media y la mediana? Cuando son similares, es una buena señal de que los datos son simétricos. Si difieren mucho, hay sesgo.
+</CalloutInfo>
 
-**Problema**: Una empresa biotecnológica está probando un nuevo fármaco. Midieron la reducción del tamaño del tumor (mm) en 20 pacientes.
+<ReflectionCheck
+  blockId="reflection-l01-mean-median-scores"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  prompt="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
+  answer="Que la distribución es aproximadamente simétrica — no hay valores extremos que desplacen la media. En una distribución simétrica, media ≈ mediana. Si fueran muy diferentes, sabríamos que hay sesgo o outliers."
+/>
+
+</Section>
+
+<Section number={6} title="Medidas de Dispersión" eyebrow="CONCEPTO">
+
+Las medidas de dispersión indican qué tan dispersos están los datos. No basta con saber el centro — necesitamos saber cuánto varían.
+
+<ConceptCard variant="definition">
+**Rango**: Diferencia entre el máximo y el mínimo.
+
+$$\text{Rango} = \max(x) - \min(x)$$
+
+Es muy sensible a valores atípicos: un solo valor extremo duplica el rango.
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Varianza**: Distancia cuadrática promedio desde la media.
+
+$$\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$$
+
+Mide dispersión, pero en unidades al cuadrado (difícil de interpretar).
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Desviación Estándar**: Raíz cuadrada de la varianza.
+
+$$\sigma = \sqrt{\sigma^2}$$
+
+Está en las mismas unidades que los datos originales — es la medida de dispersión más reportada.
+</ConceptCard>
+
+</Section>
+
+<Section number={7} title="IQR: la medida robusta" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+**Rango Intercuartílico (IQR)**:
+
+$$\text{IQR} = Q_3 - Q_1$$
+
+Donde $Q_1$ es el percentil 25 y $Q_3$ es el percentil 75.
+</ConceptCard>
+
+<ConceptCard variant="key-idea">
+El IQR contiene el 50% central de los datos. Es **robusto frente a valores atípicos** porque ignora los extremos. Junto con la mediana, forma la pareja ideal para datos sesgados.
+</ConceptCard>
+
+<ComparisonTable
+  rows={[
+    { feature: "Mide", left: "Recorrido total (max − min)", right: "Dispersión del 50% central (Q3 − Q1)" },
+    { feature: "Robustez", left: "Muy sensible a outliers", right: "Robusto — ignora extremos" },
+    { feature: "Unidad", left: "Misma que los datos", right: "Misma que los datos" },
+    { feature: "Se usa con", left: "Media y desviación estándar", right: "Mediana" },
+    { feature: "Cuándo", left: "Datos simétricos, sin outliers", right: "Datos sesgados o con outliers" },
+  ]}
+/>
+
+</Section>
+
+<Section number={8} title="Caso real: reducción tumoral" eyebrow="INTERACTIVA">
+
+Una empresa biotecnológica prueba un nuevo fármaco. Midieron la reducción del tamaño del tumor (mm) en 20 pacientes:
 
 ```python
 tumor_reduction = [12, 15, 8, 14, 16, 11, 13, 9, 17, 10,
@@ -169,21 +212,48 @@ print(f"Media: {np.mean(reduction):.2f} mm")
 print(f"Mediana: {np.median(reduction):.2f} mm")
 print(f"Desvío Estándar: {np.std(reduction, ddof=0):.2f} mm")
 print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} mm")
+```
 
-# El valor 45 es probablemente un valor atípico — quizás error de medición o caso excepcional
-# El valor 45 es probablemente un valor atípico — quizás error de medición o caso excepcional
+**¿Qué observamos?** El paciente 20 tuvo una reducción de 45 mm — mucho mayor que el resto.
+
+<ReflectionCheck
+  blockId="reflection-l01-tumor-outlier"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  prompt="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
+  answer="Reportaría la mediana (13 mm). El valor 45 mm es un outlier que infla la media artificialmente. La mediana de 13 mm representa mejor la experiencia típica del paciente. Podría complementar con el IQR (4 mm) para indicar que el 50% central de pacientes tuvo reducciones entre 11 y 15 mm."
+/>
+
+</Section>
+
+<Section number={9} title="El IQR como detector de outliers" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+Un valor es **atípico (outlier)** si está por debajo de $Q_1 - 1.5 \times \text{IQR}$ o por encima de $Q_3 + 1.5 \times \text{IQR}$.
+</ConceptCard>
+
+```python
 q1 = np.percentile(reduction, 25)
 q3 = np.percentile(reduction, 75)
 iqr = q3 - q1
-outliers = reduction[(reduction < q1 - 1.5*iqr) | (reduction > q3 + 1.5*iqr)]
-print(f"Valores atípicos potenciales: {outliers}")
+lower_bound = q1 - 1.5 * iqr
+upper_bound = q3 + 1.5 * iqr
+outliers = reduction[(reduction < lower_bound) | (reduction > upper_bound)]
+
+print(f"Límites: [{lower_bound:.2f}, {upper_bound:.2f}]")
+print(f"Outliers detectados: {outliers}")
+# → Outliers detectados: [45]
 ```
 
-**Interpretación**: La mediana (13 mm) es más representativa que la media (14.5 mm) porque el valor atípico 45 infla la media. El IQR (4 mm) nos dice que el 50% central de los pacientes experimentó una reducción tumoral de 11 a 15 mm.
+<ConceptCard variant="warning">
+Un outlier NO siempre es un error. Puede ser un error de medición, un caso excepcional... ¡o el descubrimiento más importante de tu dataset! Nunca elimines outliers sin investigar su causa.
+</ConceptCard>
 
-## Ejemplo de Biotecnología
+</Section>
 
-Analizar datos de expresión génica de 50 muestras de pacientes. Cada muestra mide el nivel de expresión del gen supresor de tumores TP53.
+<Section number={10} title="Expresión génica de TP53" eyebrow="INTERACTIVA">
+
+Apliquemos todo lo aprendido a un caso real de biotecnología: análisis de expresión del gen supresor de tumores **TP53** en 50 muestras de pacientes.
 
 ```python
 np.random.seed(42)
@@ -194,7 +264,6 @@ summary = df.describe()
 print(summary)
 
 # Verificando expresión anormalmente baja (posible deleción génica)
-# Verificando expresión anormalmente baja (posible deleción génica)
 q1 = df['TP53_expression'].quantile(0.25)
 q3 = df['TP53_expression'].quantile(0.75)
 iqr = q3 - q1
@@ -203,9 +272,15 @@ print(f"\nMuestras con expresión de TP53 inusualmente baja:")
 print(df[df['TP53_expression'] < lower])
 ```
 
-## Ejemplo SaaS
+<CalloutInfo>
+TP53 es conocido como "el guardián del genoma". Una expresión anormalmente baja puede indicar una deleción del gen — un evento común en células cancerosas. La estadística descriptiva nos ayuda a identificar estas muestras para análisis más profundos.
+</CalloutInfo>
 
-Analizar usuarios activos diarios (DAU) de un producto SaaS durante 90 días.
+</Section>
+
+<Section number={11} title="Ejemplo SaaS: usuarios activos diarios" eyebrow="INTERACTIVA">
+
+La estadística descriptiva no es solo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
 
 ```python
 np.random.seed(42)
@@ -224,63 +299,88 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Errores Comunes
+<ReflectionCheck
+  blockId="reflection-l01-dau"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  prompt="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
+  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un solo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+/>
 
-1. **Usar la media para datos sesgados**: La media es sensible a valores atípicos. Usá la mediana para ingresos, expresión génica con valores atípicos, o cualquier distribución sesgada.
-2. **Confundir varianza muestral y poblacional**: `np.var(x)` calcula la varianza poblacional (ddof=0). Para varianza muestral, usá `np.var(x, ddof=1)`.
-3. **Interpretar la desviación estándar sin contexto**: Una desviación estándar de 10 puede ser grande o chica dependiendo de la escala de los datos.
-4. **Asumir que la moda es única**: En datos continuos, cada valor puede aparecer una sola vez. Usá agrupamiento o redondeo para encontrar modas significativas.
+</Section>
 
-## Mejores Prácticas
+<Section number={12} title="Errores comunes y mejores prácticas" eyebrow="CONCEPTO">
 
+<ConceptCard variant="warning">
+**Cuatro errores que todo principiante comete:**
+
+1. **Usar la media para datos sesgados** — la media se va con los outliers. Usá la mediana para ingresos, precios, o cualquier distribución con cola larga.
+2. **Confundir varianza muestral y poblacional** — `np.var(x)` usa ddof=0 (poblacional). Para una muestra, usá `np.var(x, ddof=1)`.
+3. **Interpretar la desviación estándar sin contexto** — una std de 10 puede ser enorme o insignificante según la escala.
+4. **Asumir que la moda es única** — en datos continuos, agrupá o redondeá para encontrar modas significativas.
+</ConceptCard>
+
+<CalloutInfo>
+**Mejores prácticas:**
 - Calculá siempre juntas las medidas de tendencia central y dispersión
-- Reportá mediana e IQR para distribuciones sesgadas
-- Reportá media y desviación estándar para distribuciones simétricas
+- Reportá **mediana + IQR** para distribuciones sesgadas
+- Reportá **media + desviación estándar** para distribuciones simétricas
 - Visualizá los datos con un diagrama de caja junto con los resúmenes numéricos
 - Usá `df.describe()` para una visión rápida en pandas
+</CalloutInfo>
 
-## Resumen
+</Section>
 
-- La estadística descriptiva resume datos con unos pocos números clave
-- Tendencia central: media (punto de equilibrio), mediana (valor del medio), moda (más frecuente)
-- Dispersión: rango (recorrido total), varianza (desviación cuadrática promedio), desviación estándar (desviación típica), IQR (dispersión del 50% central)
-- La regla del IQR identifica valores atípicos como puntos más allá de 1.5×IQR desde los cuartiles
-- Elegí media + desviación estándar para datos simétricos, mediana + IQR para datos sesgados
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-## Términos Clave
+Poné a prueba lo que aprendiste:
 
-| Término | Definición |
-|---------|------------|
-| Media | Suma de valores dividida por la cantidad; el promedio aritmético |
-| Mediana | El valor del medio cuando los datos están ordenados |
-| Moda | El valor más frecuente |
-| Varianza | Distancia cuadrática promedio desde la media |
-| Desviación Estándar | Raíz cuadrada de la varianza; distancia típica desde la media |
-| Rango | Diferencia entre el máximo y el mínimo |
-| Rango Intercuartílico | Diferencia entre los percentiles 75 y 25 |
-| Valor Atípico | Punto de datos que difiere significativamente del resto |
+1. **Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. ¿Qué medida representa mejor el centro?**
+2. **¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué se reporta más la segunda?**
+3. **Una farmacéutica reporta efectividad media del 85%, pero el 40% de pacientes no respondió. ¿Cómo es posible?**
 
-## Ejercicios
+<AnswerReveal summary="Ver respuestas">
+<p><strong>1.</strong> La mediana (8). La media es 23 — está totalmente distorsionada por el valor 100. La mediana ignora el outlier y refleja el valor típico. La moda es 8 (aparece dos veces).</p>
 
-**Nivel 1: Comprensión Básica**
+<p><strong>2.</strong> La varianza mide dispersión en unidades al cuadrado (difícil de interpretar: "la varianza es 25 puntos²"). La desviación estándar es la raíz cuadrada, devolviéndonos a las unidades originales ("la desviación estándar es 5 puntos"). Por eso se reporta más: es directamente interpretable.</p>
 
-1. Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. Calculá media, mediana y moda. ¿Qué medida representa mejor el centro?
-2. ¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué la desviación estándar se reporta con más frecuencia?
+<p><strong>3.</strong> La media puede ser engañosa cuando hay variabilidad extrema. Si el 60% de pacientes tuvo 100% de efectividad y el 40% tuvo 0%, la media es 60%... no 85%. Para llegar a 85% con 40% en cero, el 60% restante tendría que tener ~142% de efectividad (imposible). Algo no cierra — probablemente están reportando la media de los respondedores nada más, excluyendo a los no respondedores. Mejores estadísticos: reportar la mediana y el porcentaje de respondedores por separado.</p>
+</AnswerReveal>
 
-**Nivel 2: Implementación**
+</Section>
 
-3. Usando pandas, cargá cualquier archivo CSV y calculá la media, mediana, desviación estándar, mínimo, máximo e IQR de todas las columnas numéricas.
-4. Escribí una función `outlier_count(data)` que devuelva la cantidad de valores atípicos usando el método del IQR.
+<Section number={14} title="Términos clave" eyebrow="CIERRE">
 
-**Nivel 3: Pensamiento Crítico**
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["Media", "Suma de valores dividida por la cantidad; el promedio aritmético"],
+    ["Mediana", "El valor del medio cuando los datos están ordenados"],
+    ["Moda", "El valor más frecuente en el conjunto de datos"],
+    ["Varianza", "Distancia cuadrática promedio desde la media (σ²)"],
+    ["Desviación Estándar", "Raíz cuadrada de la varianza; distancia típica desde la media (σ)"],
+    ["Rango", "Diferencia entre el valor máximo y el mínimo"],
+    ["Rango Intercuartílico", "Diferencia entre Q3 (percentil 75) y Q1 (percentil 25)"],
+    ["Valor Atípico (Outlier)", "Punto que difiere significativamente del resto; detectado con la regla 1.5×IQR"],
+  ]}
+  searchable={true}
+  caption="Términos clave de estadística descriptiva — usá la búsqueda para encontrar definiciones rápido"
+/>
 
-5. Una empresa farmacéutica reporta la efectividad media de un fármaco como 85%. Sin embargo, el 40% de los pacientes no mostró respuesta. Explicá cómo es posible esta contradicción y sugerí mejores estadísticos de resumen.
-6. ¿Por qué una empresa SaaS podría rastrear la duración mediana de sesión en vez de la duración promedio de sesión?
+</Section>
 
-## Desafío de Programación
+<Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
 
-Escribí un script en Python que:
-1. Genere un conjunto de datos sintético de 200 valores a partir de una distribución normal con media=50 y desviación estándar=15
-2. Calcule todas las estadísticas descriptivas cubiertas en esta lección
-3. Identifique y elimine valores atípicos usando el método del IQR
-4. Imprima un resumen comparando los conjuntos de datos original y limpio
+<MascotMessage mood="celebrating">
+¡Excelente trabajo! Ya tenés las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, IQR, outliers — son el pan de cada día de un científico de datos.
+</MascotMessage>
+
+**¿Qué aprendiste hoy?**
+- La estadística descriptiva resume datasets enteros en un puñado de números
+- Media + desviación estándar para datos simétricos
+- Mediana + IQR para datos sesgados o con outliers
+- El IQR detecta outliers con la regla de 1.5×
+
+**En la Lección 2** vamos a complementar estos números con visualizaciones: histogramas, curvas de densidad, asimetría y curtosis. Porque un número te dice *qué*, pero un gráfico te muestra *por qué*.
+
+</Section>
