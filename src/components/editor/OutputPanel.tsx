@@ -166,7 +166,7 @@ export default function OutputPanel({
       <div
         ref={outputRef}
         className="flex-1 overflow-auto p-4 font-mono text-sm bg-gray-900 text-gray-100"
-        style={{ maxHeight: "400px" }}
+        style={{ minHeight: "200px", maxHeight: "600px" }}
       >
         {output.length === 0 ? (
           <div className="text-gray-500 text-center mt-8">

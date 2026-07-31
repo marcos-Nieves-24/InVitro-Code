@@ -107,10 +107,12 @@ export default function PyodideRunner({
   }, [output, exercise, isRunning]);
 
   return (
-    <div className="space-y-4 my-6">
+    <div className="my-6">
       {/* Status bar */}
-      <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-gray-700">Python</span>
+      <div className="mb-4 flex items-center justify-between rounded-t-lg border border-b-0 border-gray-200 bg-gray-50 px-4 py-2">
+        <span className="font-mono text-sm font-semibold text-gray-700">
+          Python
+        </span>
         <span className="text-xs text-gray-500">
           {isLoading
             ? "Cargando Pyodide..."
@@ -120,26 +122,33 @@ export default function PyodideRunner({
         </span>
       </div>
 
-      {/* Editor */}
-      <CodeEditor
-        value={code}
-        onChange={handleCodeChange}
-        height={height || "300px"}
-        language={language || "python"}
-        onRun={handleRun}
-        isRunning={isRunning}
-        isWorkerReady={isWorkerReady}
-      />
+      {/* Editor + Output side by side on desktop */}
+      <div className="flex flex-col gap-0 lg:flex-row lg:gap-4">
+        {/* Editor */}
+        <div className="flex-1 lg:w-1/2">
+          <CodeEditor
+            value={code}
+            onChange={handleCodeChange}
+            height={height || "400px"}
+            language={language || "python"}
+            onRun={handleRun}
+            isRunning={isRunning}
+            isWorkerReady={isWorkerReady}
+          />
+        </div>
 
-      {/* Output */}
-      <OutputPanel
-        output={output}
-        validationResult={validationResult}
-        isRunning={isRunning}
-        onClear={clearOutput}
-        code={code}
-        exercise={exercise}
-      />
+        {/* Output */}
+        <div className="flex-1 lg:w-1/2">
+          <OutputPanel
+            output={output}
+            validationResult={validationResult}
+            isRunning={isRunning}
+            onClear={clearOutput}
+            code={code}
+            exercise={exercise}
+          />
+        </div>
+      </div>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function CodeEditor({
   };
 
   return (
-    <div className="w-full">
+    <div className="flex h-full flex-col">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-sm font-medium text-gray-700">
           Editor ({language})
@@ -60,7 +60,7 @@ export default function CodeEditor({
         </button>
       </div>
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="flex-1 overflow-hidden rounded-lg border border-gray-200">
         <Editor
           height={height}
           language={language}
@@ -76,6 +76,8 @@ export default function CodeEditor({
             automaticLayout: true,
             tabSize: 2,
             insertSpaces: true,
+            scrollBeyondLastLine: false,
+            wordWrap: "on",
           }}
         />
       </div>
