@@ -1,6 +1,7 @@
 // Pyodide Web Worker — v2: lazy loading + scikit-learn + context injection + structured return
 
 let pyodide = null;
+let numpyReady = false;
 let sklearnReady = false;
 let initPromise = null;
 
@@ -13,6 +14,9 @@ async function ensurePyodide() {
     pyodide = await globalThis.loadPyodide({
       indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
     });
+    // Preload numpy — needed by virtually all ML/DS code
+    await pyodide.loadPackage("numpy");
+    numpyReady = true;
   })();
 
   return initPromise;
@@ -20,8 +24,9 @@ async function ensurePyodide() {
 
 async function ensureSklearn() {
   if (sklearnReady) return;
-  await pyodide.loadPackage("numpy");
   await pyodide.loadPackage("scikit-learn");
+  await pyodide.loadPackage("matplotlib");
+  await pyodide.loadPackage("pandas");
   sklearnReady = true;
 }
 
@@ -62,9 +67,32 @@ self.addEventListener("message", async (event) => {
       if (
         sklearnReady === false &&
         (code.includes("sklearn") ||
+          code.includes("LinearRegression") ||
+          code.includes("LogisticRegression") ||
+          code.includes("RandomForest") ||
+          code.includes("DecisionTree") ||
+          code.includes("KMeans") ||
+          code.includes("GradientBoosting") ||
+          code.includes("PCA") ||
+          code.includes("train_test_split") ||
           code.includes("load_breast_cancer") ||
+          code.includes("load_diabetes") ||
+          code.includes("load_iris") ||
+          code.includes("make_classification") ||
+          code.includes("make_regression") ||
+          code.includes("make_blobs") ||
+          code.includes("confusion_matrix") ||
+          code.includes("classification_report") ||
+          code.includes("mean_squared_error") ||
+          code.includes("r2_score") ||
+          code.includes("accuracy_score") ||
           code.includes("KNeighbors") ||
-          code.includes("train_test_split"))
+          code.includes("PolynomialFeatures") ||
+          code.includes("permutation_importance") ||
+          code.includes("PartialDependenceDisplay") ||
+          code.includes("StandardScaler") ||
+          code.includes("matplotlib") ||
+          code.includes("pandas"))
       ) {
         await ensureSklearn();
       }
