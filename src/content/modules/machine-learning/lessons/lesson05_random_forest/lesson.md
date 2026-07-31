@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="100 médicos piensan mejor que uno" eyebrow="INICIO">
 
-<MascotMessage mood="excited">
+<MascotMessage mood="celebrating">
 El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La razón? Funciona bien casi siempre, sin requerir mucho ajuste. Es el "caballo de batalla" del ML supervisado.
 </MascotMessage>
 

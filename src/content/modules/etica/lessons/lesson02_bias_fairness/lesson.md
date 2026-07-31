@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Cuando el algoritmo es racista sin saberlo" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 COMPAS, un algoritmo usado en cortes de EE.UU., etiquetaba a acusados negros como "alto riesgo" al doble de tasa que a blancos. La empresa dijo que era justo. Los investigadores dijeron que era sesgado. Ambos tenían razón matemática. Bienvenido a la equidad algorítmica.
 </MascotMessage>
 

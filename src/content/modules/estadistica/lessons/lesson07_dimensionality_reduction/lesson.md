@@ -23,7 +23,7 @@ Quiz: pca_quiz.md
 
 <Section number={1} title="Cuando hay demasiadas dimensiones" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 ¿Qué pasa cuándo tenés 10,000 genes pero sólo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
 </MascotMessage>
 

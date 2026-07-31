@@ -23,7 +23,7 @@ Quiz: descriptive_statistics_quiz.md
 
 <Section number={1} title="El problema de los 10.000 genes" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Bienvenido al Laboratorio de Datos. Hoy vamos a aprender cómo resumir miles de números en un puñado de medidas significativas. Es la primera herramienta de todo científico de datos.
 </MascotMessage>
 

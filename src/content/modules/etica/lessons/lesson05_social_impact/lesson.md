@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Más allá del modelo: el mundo que cambia" eyebrow="INICIO">
 
-<MascotMessage mood="thoughtful">
+<MascotMessage mood="thinking">
 Un modelo de ML no vive en un vacío. Cuando lo desplegás, cambia el comportamiento de las personas que interactúan con él. Y ese cambio genera nuevos datos. Y esos datos re-entrenan el modelo. Entender estos bucles es tan importante como entender el algoritmo.
 </MascotMessage>
 

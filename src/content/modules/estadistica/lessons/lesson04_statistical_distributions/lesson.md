@@ -22,7 +22,7 @@ Quiz: statistical_distributions_quiz.md
 
 <Section number={1} title="Las distribuciones con nombre y apellido" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log-normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
 </MascotMessage>
 

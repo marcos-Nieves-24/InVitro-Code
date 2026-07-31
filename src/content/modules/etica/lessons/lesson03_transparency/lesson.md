@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="No alcanza con decir 'confiá en mí'" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 Un modelo de crédito te rechaza. Preguntás por qué. "El algoritmo decidió." Eso no es una respuesta. La transparencia no es un lujo — es un derecho. Y en medicina, puede ser la diferencia entre confianza y abandono del tratamiento.
 </MascotMessage>
 

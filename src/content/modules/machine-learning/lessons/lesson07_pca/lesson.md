@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Cuando tenés demasiadas dimensiones" eyebrow="INICIO">
 
-<MascotMessage mood="curious">
+<MascotMessage mood="thinking">
 ¿Mil features pero solo podés graficar en 2D? PCA comprime la información en pocas dimensiones preservando lo más importante. Es la navaja suiza del preprocesamiento.
 </MascotMessage>
 

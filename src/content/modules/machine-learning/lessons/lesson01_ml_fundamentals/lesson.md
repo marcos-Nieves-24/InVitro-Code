@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
-<MascotMessage mood="excited">
+<MascotMessage mood="celebrating">
 ¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: acá dejás de decirle a la computadora qué hacer y empezás a enseñarle a descubrir patrones por sí misma.
 </MascotMessage>
 

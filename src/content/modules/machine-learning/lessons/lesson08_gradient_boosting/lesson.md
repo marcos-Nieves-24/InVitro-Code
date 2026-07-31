@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Aprender de los errores, uno por uno" eyebrow="INICIO">
 
-<MascotMessage mood="excited">
+<MascotMessage mood="celebrating">
 Gradient Boosting es el algoritmo que domina las competencias de ML. XGBoost y LightGBM (sus implementaciones optimizadas) ganan Kaggle una y otra vez. Entender cómo funciona es entrar a la liga mayor.
 </MascotMessage>
 

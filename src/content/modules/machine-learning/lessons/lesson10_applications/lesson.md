@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Todo junto: del dato a la decisión" eyebrow="INICIO">
 
-<MascotMessage mood="excited">
+<MascotMessage mood="celebrating">
 ¡Llegaste a la lección final! Nueve algoritmos después, es hora de integrar todo en pipelines reales. Esto es lo que hace un ML Engineer en producción: tomar datos crudos, preprocesarlos, seleccionar el modelo correcto, y comunicar resultados.
 </MascotMessage>
 

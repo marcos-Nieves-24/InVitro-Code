@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 <Section number={1} title="Cinco casos que todo ML engineer debería conocer" eyebrow="INICIO">
 
-<MascotMessage mood="serious">
+<MascotMessage mood="neutral">
 Estos no son ejercicios académicos. Son sistemas reales que afectaron a millones de personas. Cada uno falló de una manera distinta. Estudiarlos es la mejor vacuna contra repetir los mismos errores.
 </MascotMessage>
 
