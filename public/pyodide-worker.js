@@ -34,7 +34,10 @@ async function ensureSklearn() {
 async function ensureStats() {
   if (statsReady) return;
   await pyodide.loadPackage("scipy");
-  await pyodide.loadPackage("seaborn");
+  // seaborn is not a native Pyodide package — install via micropip from PyPI
+  await pyodide.loadPackage("micropip");
+  const micropip = pyodide.pyimport("micropip");
+  await micropip.install("seaborn");
   statsReady = true;
 }
 
