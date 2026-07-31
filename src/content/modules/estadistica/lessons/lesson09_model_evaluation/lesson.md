@@ -21,137 +21,107 @@ Assignment: model_evaluation_assignment.md
 Quiz: model_evaluation_quiz.md
 ---
 
-# Lección 9: Evaluación de Modelos
+<Section number={1} title="Crear modelos es fácil. Evaluarlos, no." eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o solo memorizó los datos de entrenamiento. La evaluación de modelos es donde separamos la magia de la ilusión.
+</MascotMessage>
 
-Construir un modelo es solo la mitad del trabajo. La pregunta crítica es: ¿qué tan bien funciona este modelo con datos nuevos no vistos? Un modelo que memoriza los datos de entrenamiento pero falla con datos nuevos es inútil — esto es sobreajuste. Las métricas de evaluación de modelos y la validación cruzada nos dan estimaciones confiables del rendimiento en el mundo real.
+En las lecciones anteriores construiste intuición estadística. Ahora la vas a aplicar para responder la pregunta más importante en ML: **¿este modelo es bueno?** No en training — en datos que nunca vio. Eso se llama **generalización**.
 
-En biotecnología, evaluar un modelo de predicción de respuesta a fármacos determina si puede guiar decisiones de tratamiento. En SaaS, evaluar un modelo de predicción de deserción determina si vale la pena implementarlo para retener clientes.
+</Section>
 
-## Panorama General
+<Section number={2} title="Train/Test Split: la regla de oro" eyebrow="CONCEPTO">
 
-Esta lección introduce los conceptos centrales de evaluación de modelos que sustentan todo el machine learning. Se conecta con la Lección 6 (EDA) — una buena evaluación comienza con datos limpios. Te prepara para el Módulo 4, donde entrenarás, evaluarás y compararás muchos tipos de modelos.
-
-## Teoría
-
-### División Entrenamiento/Prueba
-
-Dividir los datos en un conjunto de entrenamiento (usado para ajustar el modelo) y un conjunto de prueba (usado para evaluar el rendimiento).
-
-- División típica: 70-80% entrenamiento, 20-30% prueba
-- El conjunto de prueba nunca debe usarse durante el entrenamiento
-- Sin un conjunto de prueba, las estimaciones de rendimiento están sesgadas de forma optimista
-
-### Validación Cruzada
-
-La validación cruzada k-fold divide los datos en k pliegues, entrena en k-1 pliegues y prueba en el pliegue restante. Esto se repite k veces.
-
-**Ventajas**:
-- Estimación de rendimiento más estable que una única división
-- Todos los datos se usan tanto para entrenar como para probar
-- Reduce la varianza de la estimación de rendimiento
-
-### Métricas de Regresión
-
-**Error Absoluto Medio (MAE)**
-
-$$\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$$
-
-Intuición: Error de predicción absoluto promedio. Interpretable en las unidades originales.
-
-**Error Cuadrático Medio (MSE)**
-
-$$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
-
-Intuición: Error cuadrático promedio. Penaliza errores grandes más fuertemente.
-
-**Raíz del Error Cuadrático Medio (RMSE)**
-
-$$\text{RMSE} = \sqrt{\text{MSE}}$$
-
-Intuición: Error de predicción típico en las unidades originales (como la desviación estándar de los errores).
-
-**R² (Coeficiente de Determinación)**
-
-$$R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
-
-Intuición: Proporción de la varianza del objetivo explicada por el modelo. Va de (-∞, 1], donde 1 es predicción perfecta y 0 significa que el modelo no funciona mejor que predecir la media.
-
-## Implementación en Python
+<ConceptCard variant="definition">
+**Train/Test Split**: dividir los datos en dos conjuntos — uno para entrenar (train, ~70-80%) y otro para evaluar (test, ~20-30%). El modelo NUNCA ve el test set durante el entrenamiento.
 
 ```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_diabetes
-from sklearn.model_selection import train_test_split, cross_val_score, KFold
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+</ConceptCard>
 
-# Cargar datos
-diabetes = load_diabetes()
-X, y = diabetes.data, diabetes.target
+<ConceptCard variant="key-idea">
+Evaluar en training es como corregirte tu propio examen con las respuestas adelante. El accuracy en training siempre es alto. Lo que importa es el accuracy en test: los datos que el modelo nunca vio.
+</ConceptCard>
 
-# División entrenamiento/prueba
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+</Section>
 
-# Entrenar modelo
-model = LinearRegression()
-model.fit(X_train, y_train)
+<Section number={3} title="Validación Cruzada: más robusta" eyebrow="CONCEPTO">
 
-# Predecir
-y_pred = model.predict(X_test)
+<ConceptCard variant="definition">
+**K-Fold Cross-Validation**: dividir los datos en k partes (folds). Entrenar k veces, cada vez usando k-1 folds para training y 1 fold distinto para validación. El resultado es el promedio de las k métricas.
+</ConceptCard>
 
-# Métricas
-mae = mean_absolute_error(y_test, y_pred)
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_test, y_pred)
-
-print("Rendimiento en conjunto de prueba:")
-print(f"MAE:  {mae:.2f}")
-print(f"MSE:  {mse:.2f}")
-print(f"RMSE: {rmse:.2f}")
-print(f"R²:   {r2:.3f}")
-
-# Validación cruzada
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
-cv_scores = cross_val_score(LinearRegression(), X, y, cv=cv, scoring='r2')
-
-print(f"\nValidación Cruzada de 5 Pliegues R²:")
-print(f"Puntajes: {cv_scores}")
-print(f"Media:   {cv_scores.mean():.3f} (±{cv_scores.std():.3f})")
-
-# Visualizar predicciones
-plt.figure(figsize=(8, 6))
-plt.scatter(y_test, y_pred, alpha=0.6)
-plt.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
-plt.xlabel('Valores Reales')
-plt.ylabel('Predicciones')
-plt.title(f'Progresión de Diabetes: Predicciones vs Reales (R² = {r2:.3f})')
-plt.tight_layout()
-plt.show()
+```python
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X, y, cv=5, scoring='r2')
+print(f"R² CV: {scores.mean():.3f} ± {scores.std():.3f}")
 ```
 
-## Ejemplo Guiado
+<ConceptCard variant="key-idea">
+La validación cruzada te da un intervalo de confianza sobre la performance real de tu modelo. Si la desviación estándar es alta, tu modelo es inestable — pequeños cambios en los datos lo afectan mucho.
+</ConceptCard>
 
-California Housing: evaluar un modelo de regresión lineal de forma exhaustiva.
+</Section>
+
+<Section number={4} title="Métricas de regresión" eyebrow="CONCEPTO">
+
+<ConceptCard variant="definition">
+**MAE** (Mean Absolute Error): $\frac{1}{n}\sum |y_i - \hat{y}_i|$ — error promedio en unidades originales. Robusto a outliers.
+
+**MSE** (Mean Squared Error): $\frac{1}{n}\sum (y_i - \hat{y}_i)^2$ — penaliza errores grandes más fuerte.
+
+**RMSE** (Root MSE): $\sqrt{\text{MSE}}$ — como MSE pero en unidades originales, interpretable.
+
+**R²** (Coeficiente de determinación): proporción de varianza explicada. 1.0 = perfecto, 0 = siempre predice la media, negativo = peor que la media.
+</ConceptCard>
+
+<ComparisonTable
+  rows={[
+    { feature: "Unidad", left: "Original (ej. dólares)", right: "Original (ej. dólares)" },
+    { feature: "Outliers", left: "Robusto", right: "Muy sensible (penaliza fuerte)" },
+    { feature: "Interpretación", left: "Error típico promedio", right: "Error típico (penalizando grandes)" },
+    { feature: "Cuándo usar", left: "Errores uniformemente costosos", right: "Errores grandes son catastróficos" },
+  ]}
+/>
+
+</Section>
+
+<Section number={5} title="Overfitting: el enemigo #1" eyebrow="CONCEPTO">
+
+<ConceptCard variant="warning">
+**Overfitting (sobreajuste)**: El modelo memoriza el ruido del training set en vez de aprender patrones generalizables.
+
+Síntomas:
+- Accuracy training >> accuracy test
+- Alta varianza entre folds de CV
+- Modelo demasiado complejo para los datos disponibles
+</ConceptCard>
+
+<CalloutInfo>
+**Antídoto**: validación cruzada, regularización, más datos, menos features, modelos más simples. Si tu modelo es perfecto en training pero malo en test, felicitaciones — descubriste overfitting. Simplificá.
+</CalloutInfo>
+
+</Section>
+
+<Section number={6} title="Evaluación en código" eyebrow="INTERACTIVA">
 
 ```python
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+# Cargar datos
 from sklearn.datasets import fetch_california_housing
+X, y = fetch_california_housing(return_X_y=True)
 
-housing = fetch_california_housing(as_frame=True)
-X, y = housing.data, housing.target
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Dividir
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-# Entrenar
+# Modelo
 model = LinearRegression()
 model.fit(X_train, y_train)
 
@@ -159,181 +129,64 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # Métricas
-def regression_report(y_true, y_pred):
-    print("Reporte de Rendimiento de Regresión")
-    print("=" * 35)
-    print(f"MAE:  ${mean_absolute_error(y_true, y_pred):.3f}k")
-    print(f"MSE:  ${mean_squared_error(y_true, y_pred):.3f}k")
-    print(f"RMSE: ${np.sqrt(mean_squared_error(y_true, y_pred)):.3f}k")
-    print(f"R²:   {r2_score(y_true, y_pred):.4f}")
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+r2 = r2_score(y_test, y_pred)
 
-regression_report(y_test, y_pred)
+print(f"MAE:  {mae:.3f}")
+print(f"RMSE: {rmse:.3f}")
+print(f"R²:   {r2:.3f}")
 
 # Validación cruzada
-cv_scores = cross_val_score(
-    LinearRegression(), X, y, cv=10, scoring='r2'
-)
-print(f"\nVC 10-Pliegues R²: {cv_scores.mean():.4f} (±{cv_scores.std():.4f})")
-
-# Residuales
-residuals = y_test - y_pred
-plt.figure(figsize=(12, 4))
-plt.subplot(1, 2, 1)
-plt.scatter(y_pred, residuals, alpha=0.6)
-plt.axhline(0, color='red', linestyle='--')
-plt.xlabel('Predicho')
-plt.ylabel('Residuales')
-plt.title('Gráfico de Residuales')
-
-plt.subplot(1, 2, 2)
-plt.hist(residuals, bins=30, edgecolor='black')
-plt.xlabel('Residual')
-plt.title('Distribución de Residuales')
-plt.tight_layout()
-plt.show()
-
-print(f"Media residual: {np.mean(residuals):.4f}")
-print(f"Desviación estándar residual: {np.std(residuals):.4f}")
+cv_scores = cross_val_score(model, X, y, cv=5, scoring='r2')
+print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 ```
 
-## Ejemplo de Biotecnología
+<ReflectionCheck
+  blockId="reflection-l09-interpret-r2"
+  moduleSlug="estadistica"
+  lessonSlug="lesson09_model_evaluation"
+  prompt="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
+  answer="Significa que el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganás plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² solo no te dice nada sin contexto."
+/>
 
-Predecir respuesta a fármacos basada en features moleculares.
+</Section>
 
-```python
-np.random.seed(42)
-n_samples = 200
-n_features = 20
+<Section number={7} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-X_drug = np.random.randn(n_samples, n_features)
-true_coeffs = np.random.randn(n_features)
-y_drug = X_drug @ true_coeffs + np.random.randn(n_samples) * 2
+<AnswerReveal summary="Ver respuestas">
+<p><strong>¿Por qué no evaluamos en el training set?</strong> Porque el modelo ya "vio" esos datos — los puede memorizar. Accuracy en training mide memoria, no aprendizaje. Solo el test set (datos no vistos) mide generalización, que es lo que realmente nos importa en producción.</p>
+<p><strong>¿MAE o RMSE? ¿Cuándo elegir cuál?</strong> MAE si todos los errores son igualmente costosos (ej. predecir temperatura). RMSE si los errores grandes son particularmente graves y querés penalizarlos más (ej. predecir dosis de medicamento — un error de 10× puede matar).</p>
+</AnswerReveal>
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X_drug, y_drug, test_size=0.25, random_state=42
-)
+</Section>
 
-model = LinearRegression()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
+<Section number={8} title="Términos clave" eyebrow="CIERRE">
 
-print("Modelo de Predicción de Respuesta a Fármacos")
-print(f"R²: {r2_score(y_test, y_pred):.3f}")
-print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.3f}")
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["Train/Test Split", "Dividir datos: 70-80% train, 20-30% test"],
+    ["Validación Cruzada", "k-fold: entrenar k veces, promediar métricas"],
+    ["MAE", "Error absoluto medio — robusto a outliers"],
+    ["MSE", "Error cuadrático medio — penaliza errores grandes"],
+    ["RMSE", "Raíz del MSE — en unidades originales, interpretable"],
+    ["R²", "Proporción de varianza explicada (1 = perfecto)"],
+    ["Overfitting", "El modelo memoriza training, falla en test"],
+    ["Generalización", "Performance en datos no vistos — lo que importa"],
+  ]}
+  searchable={true}
+  caption="Términos clave de evaluación de modelos"
+/>
 
-# Features más predictivas
-feature_importance = pd.Series(
-    np.abs(model.coef_), index=[f'Feature_{i}' for i in range(n_features)]
-).sort_values(ascending=False)
-print("\nTop 5 features predictivas:")
-print(feature_importance.head(5))
-```
+</Section>
 
-## Ejemplo SaaS
+<Section number={9} title="Para la última lección" eyebrow="CIERRE">
 
-Predecir el valor de vida del cliente (LTV).
+<MascotMessage mood="celebrating">
+¡Sabés evaluar modelos! Train/test split, validación cruzada, MAE, RMSE, R² — tenés el toolkit completo para separar modelos buenos de malos. Esto es lo que hace un científico de datos senior.
+</MascotMessage>
 
-```python
-np.random.seed(42)
-n_customers = 1000
-ltv_data = pd.DataFrame({
-    'logins_per_week': np.random.poisson(3, n_customers),
-    'avg_session_min': np.random.exponential(15, n_customers),
-    'features_used': np.random.poisson(5, n_customers),
-    'support_tickets': np.random.poisson(0.5, n_customers),
-    'referrals': np.random.poisson(1, n_customers)
-})
+**En la Lección 10** cerramos el módulo con **Narración de Datos**: cómo comunicar tus hallazgos. Porque de nada sirve el mejor análisis si no podés explicarlo. Vas a aprender a contar historias con datos que convenzan a cualquier audiencia.
 
-# Simular LTV
-ltv_data['ltv'] = (
-    10 * ltv_data['logins_per_week']
-    + 2 * ltv_data['avg_session_min']
-    + 15 * ltv_data['features_used']
-    - 20 * ltv_data['support_tickets']
-    + 30 * ltv_data['referrals']
-    + np.random.randn(n_customers) * 20
-)
-
-X = ltv_data.drop('ltv', axis=1)
-y = ltv_data['ltv']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = LinearRegression()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-
-print("Predicción de LTV de Clientes")
-regression_report(y_test, y_pred)
-
-# Validación cruzada
-cv_scores = cross_val_score(LinearRegression(), X, y, cv=5, scoring='r2')
-print(f"\nVC R²: {cv_scores.mean():.3f} (±{cv_scores.std():.3f})")
-```
-
-## Errores Comunes
-
-1. **Evaluar en datos de entrenamiento**: Da una estimación excesivamente optimista. Usá siempre un conjunto de prueba reservado.
-2. **Data leakage**: Usar información del conjunto de prueba durante el entrenamiento (ej., escalar antes de dividir).
-3. **Reportar solo R²**: Reportá múltiples métricas (MAE, RMSE, R²) para tener una imagen completa.
-4. **Ignorar patrones en los residuales**: Los residuales deberían estar dispersos aleatoriamente alrededor de 0; los patrones indican mala especificación del modelo.
-5. **Usar una única división entrenamiento/prueba**: El rendimiento depende de la división aleatoria; usá validación cruzada para estimaciones más confiables.
-
-## Mejores Prácticas
-
-- Dividí siempre antes de cualquier preprocesamiento (evitá data leakage)
-- Usá validación cruzada para selección de modelos y ajuste de hiperparámetros
-- Reportá múltiples métricas (MAE es más interpretable, MSE penaliza más los valores atípicos)
-- Verificá los gráficos de residuales para los supuestos del modelo
-- Compará el rendimiento del modelo contra una línea de base simple
-
-## Resumen
-
-- La división entrenamiento/prueba simula el rendimiento del modelo en datos no vistos
-- La validación cruzada provee estimaciones de rendimiento más confiables
-- MAE: error absoluto promedio (interpretable)
-- MSE: error cuadrático promedio (penaliza errores grandes)
-- RMSE: error típico en unidades originales
-- R²: proporción de la varianza explicada
-- Nunca evaluar en datos de entrenamiento
-
-## Términos Clave
-
-| Término | Definición |
-|---------|------------|
-| Conjunto de Entrenamiento | Datos usados para ajustar el modelo |
-| Conjunto de Prueba | Datos usados para evaluar el modelo |
-| Validación Cruzada | Divisiones entrenamiento/prueba repetidas en diferentes pliegues |
-| MAE | Error Absoluto Medio |
-| MSE | Error Cuadrático Medio |
-| RMSE | Raíz del Error Cuadrático Medio |
-| R² | Coeficiente de Determinación |
-| Sobreajuste | El modelo memoriza los datos de entrenamiento, falla en datos nuevos |
-| Data Leakage | Usar información del conjunto de prueba durante el entrenamiento |
-
-## Ejercicios
-
-**Nivel 1: Comprensión Básica**
-
-1. ¿Cuál es la diferencia entre MAE y MSE? ¿Cuándo preferirías uno sobre el otro?
-2. ¿Por qué la validación cruzada es mejor que una única división entrenamiento/prueba?
-
-**Nivel 2: Implementación**
-
-3. Cargá el dataset de diabetes. Compará el R² de VC de 5 pliegues de LinearRegression con un modelo que siempre predice la media.
-4. Escribí una función `evaluate_model(model, X, y, cv_folds=5)` que devuelva MAE, RMSE y R² usando validación cruzada.
-
-**Nivel 3: Pensamiento Crítico**
-
-5. Un modelo logra R² = 0.95 en el conjunto de entrenamiento pero R² = 0.45 en el conjunto de prueba. ¿Qué está pasando? ¿Qué pasos deberían tomarse?
-6. En un problema de predicción de respuesta a fármacos en biotecnología, ¿qué métrica (MAE, MSE, RMSE o R²) es más significativa clínicamente? Justificá tu respuesta.
-
-## Desafío de Programación
-
-Escribí un script en Python que:
-1. Cargue el dataset California housing
-2. Divida en entrenamiento (80%) y prueba (20%)
-3. Entrene un modelo LinearRegression
-4. Calcule e imprima MAE, MSE, RMSE y R² en los conjuntos de entrenamiento y prueba
-5. Realice validación cruzada de 10 pliegues y reporte la media ± desviación estándar de R²
-6. Cree un gráfico lado a lado: predicciones vs reales (dispersión) y residuales (histograma)
-7. Determine qué feature tiene el coeficiente absoluto más grande e interprete su significado
+</Section>

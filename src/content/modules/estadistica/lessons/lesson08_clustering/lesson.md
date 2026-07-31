@@ -21,315 +21,184 @@ Assignment: clustering_assignment.md
 Quiz: clustering_quiz.md
 ---
 
-# Lección 8: Clustering (K-Means)
+<Section number={1} title="Agrupar sin etiquetas" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Hasta ahora trabajamos con datos etiquetados. Pero en el mundo real, la mayoría de los datos no tienen etiquetas. ¿Cómo encontrás grupos naturales? K-Means clustering: el algoritmo de aprendizaje no supervisado más popular.
+</MascotMessage>
 
-No todos los datos vienen con etiquetas. En muchos escenarios del mundo real — segmentación de clientes, análisis de expresión génica, compresión de imágenes — necesitamos descubrir grupos dentro de los datos sin conocimiento previo. Los algoritmos de clustering encuentran estos grupos automáticamente. K-Means es el algoritmo de clustering más usado debido a su simplicidad, velocidad e interpretabilidad.
+Clustering agrupa puntos similares sin conocer las categorías de antemano. En biotecnología, agrupa pacientes por perfiles de expresión génica. En SaaS, segmenta usuarios por comportamiento. En marketing, encuentra grupos de clientes con patrones de compra similares.
 
-En biotecnología, el clustering identifica subgrupos de pacientes con perfiles moleculares similares (medicina de precisión). En SaaS, el clustering segmenta usuarios para marketing dirigido y experiencias personalizadas.
+</Section>
 
-## Panorama General
+<Section number={2} title="Cómo funciona K-Means" eyebrow="CONCEPTO">
 
-Esta lección introduce el aprendizaje no supervisado, un paradigma central de ML. Se basa en la estadística descriptiva (Lección 1 — distancias) y relaciones (Lección 5 — similitud). Se conecta con la Lección 7 (PCA), que se usa a menudo para visualizar clusters. K-Means reaparecerá en el Módulo 4 como un algoritmo de aprendizaje no supervisado.
+<ConceptCard variant="definition">
+**Algoritmo K-Means**:
 
-## Teoría
+1. Elegir k (cantidad de clusters)
+2. Inicializar k centroides aleatoriamente
+3. Asignar cada punto al centroide más cercano
+4. Recalcular centroides como la media de sus puntos asignados
+5. Repetir pasos 3-4 hasta convergencia
+</ConceptCard>
 
-### Algoritmo K-Means
+<ConceptCard variant="key-idea">
+K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a su centroide. Es como poner k "imanes" en los datos que atraen a los puntos más cercanos, y luego mover los imanes al centro de los puntos que atrajeron.
+</ConceptCard>
 
-**Objetivo**: Particionar \(n\) observaciones en \(k\) clusters, donde cada observación pertenece al cluster con el centroide más cercano.
+</Section>
 
-**Algoritmo**:
-1. Inicializar \(k\) centroides (aleatoriamente o con k-means++)
-2. Asignar cada punto al centroide más cercano
-3. Recalcular centroides como la media de los puntos asignados
-4. Repetir pasos 2-3 hasta convergencia
+<Section number={3} title="¿Cuántos clusters? Elbow + Silhouette" eyebrow="CONCEPTO">
 
-**Objetivo (Inercia)**: Minimizar la suma de cuadrados intra-cluster:
+<ComparisonTable
+  rows={[
+    { feature: "Qué mide", left: "Inercia (distancia intra-cluster)", right: "Cohesión + separación de clusters" },
+    { feature: "Rango", left: "Siempre decrece con k", right: "[-1, 1]; >0.5 = buen clustering" },
+    { feature: "Cómo elegir k", left: "Buscar el 'codo' donde la mejora se aplana", right: "Elegir k con mayor silhouette score" },
+    { feature: "Ventaja", left: "Simple, intuitivo", right: "Considera tanto cohesión como separación" },
+    { feature: "Limitación", left: "No siempre hay un codo claro", right: "Costoso computacionalmente con muchos datos" },
+  ]}
+/>
 
-$$\text{Inercia} = \sum_{i=1}^{k} \sum_{x \in C_i} \| x - \mu_i \|^2$$
+<CalloutInfo>
+Siempre usá **ambos métodos juntos**. Si el codo y la silueta coinciden en k, tenés alta confianza. Si difieren, explorá visualmente los clusters con PCA para decidir.
+</CalloutInfo>
 
-Donde \(\mu_i\) es el centroide del cluster \(C_i\).
+</Section>
 
-Intuición: K-Means encuentra clusters circulares de tamaño similar. Los puntos dentro de un cluster están cerca entre sí y de su centroide.
-
-### Elección de k: Método del Codo
-
-Trazar la inercia vs k. El "codo" (donde la curva se aplana) sugiere el k óptimo.
-
-Intuición: Agregar más clusters siempre reduce la inercia, pero después del k óptimo, la mejora se vuelve marginal.
-
-### Elección de k: Puntaje de Silueta
-
-Para cada punto, el puntaje de silueta mide qué tan similar es a su propio cluster vs otros clusters:
-
-$$s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$$
-
-Donde \(a(i)\) es la distancia promedio a los puntos del mismo cluster, y \(b(i)\) es la distancia promedio a los puntos del cluster diferente más cercano.
-
-- La silueta va de [-1, 1]
-- > 0.5: Buen clustering
-- > 0.25: Estructura razonable
-- < 0: Los puntos podrían estar en el cluster equivocado
-
-### Inicialización K-Means++
-
-Inicialización inteligente de centroides que separa los centroides iniciales, mejorando la convergencia y los resultados. Es el valor predeterminado en sklearn.
-
-## Implementación en Python
+<Section number={4} title="K-Means en código" eyebrow="INTERACTIVA">
 
 ```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
-import seaborn as sns
 
-# Cargar datos
 iris = sns.load_dataset('iris')
-X = iris.drop('species', axis=1)
+X = StandardScaler().fit_transform(iris.drop('species', axis=1))
 
-# Estandarizar
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# Método del codo
+# Elbow method
 inertias = []
 silhouettes = []
-K_range = range(2, 11)
+K_range = range(2, 10)
 
 for k in K_range:
-    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
-    labels = kmeans.fit_predict(X_scaled)
-    inertias.append(kmeans.inertia_)
-    silhouettes.append(silhouette_score(X_scaled, labels))
-
-# Graficar
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-axes[0].plot(K_range, inertias, 'bo-')
-axes[0].set_xlabel('Número de Clusters (k)')
-axes[0].set_ylabel('Inercia')
-axes[0].set_title('Método del Codo')
-axes[0].axvline(3, color='red', linestyle='--', alpha=0.5)
-
-axes[1].plot(K_range, silhouettes, 'ro-')
-axes[1].set_xlabel('Número de Clusters (k)')
-axes[1].set_ylabel('Puntaje de Silueta')
-axes[1].set_title('Análisis de Silueta')
-axes[1].axvline(3, color='blue', linestyle='--', alpha=0.5)
-
-plt.tight_layout()
-plt.show()
-
-# Aplicar K-Means con k óptimo
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-iris['cluster'] = kmeans.fit_predict(X_scaled)
-
-# Comparar con etiquetas reales
-cross_tab = pd.crosstab(iris['species'], iris['cluster'])
-print("Tabla cruzada (Especie vs Cluster):")
-print(cross_tab)
-
-# Visualizar clusters usando PCA
-from sklearn.decomposition import PCA
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X_scaled)
-
-plt.figure(figsize=(8, 6))
-scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=iris['cluster'],
-                      cmap='viridis', alpha=0.7)
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-            c='red', marker='X', s=200, label='Centroides')
-plt.xlabel('CP1')
-plt.ylabel('CP2')
-plt.title('Clusters K-Means (Dataset Iris)')
-plt.legend()
-plt.show()
-```
-
-## Ejemplo Guiado
-
-Segmentación de clientes para un negocio minorista.
-
-```python
-from sklearn.datasets import make_blobs
-
-# Generar datos sintéticos de clientes
-X, y_true = make_blobs(n_samples=300, centers=4, cluster_std=1.5, random_state=42)
-customer_df = pd.DataFrame(X, columns=['annual_income', 'spending_score'])
-
-# Determinar k óptimo
-inertias = []
-for k in range(1, 11):
-    km = KMeans(n_clusters=k, random_state=42, n_init=10)
-    km.fit(X)
+    km = KMeans(n_clusters=k, n_init=10, random_state=42)
+    labels = km.fit_predict(X)
     inertias.append(km.inertia_)
+    silhouettes.append(silhouette_score(X, labels))
 
-plt.figure(figsize=(8, 4))
-plt.plot(range(1, 11), inertias, 'bo-')
-plt.axvline(4, color='red', linestyle='--')
-plt.xlabel('k')
-plt.ylabel('Inercia')
-plt.title('Método del Codo para Segmentación de Clientes')
-plt.show()
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12,4))
+ax1.plot(K_range, inertias, 'o-')
+ax1.set_xlabel('k'); ax1.set_ylabel('Inercia')
+ax1.set_title('Método del Codo')
+ax2.plot(K_range, silhouettes, 'o-')
+ax2.set_xlabel('k'); ax2.set_ylabel('Silhouette Score')
+ax2.set_title('Puntaje de Silueta')
+plt.tight_layout(); plt.show()
 
-# Aplicar K-Means
-kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
-customer_df['segment'] = kmeans.fit_predict(X)
-
-plt.figure(figsize=(8, 6))
-plt.scatter(X[:, 0], X[:, 1], c=customer_df['segment'], cmap='viridis', alpha=0.7)
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-            c='red', marker='X', s=200)
-plt.xlabel('Ingreso Anual')
-plt.ylabel('Puntaje de Gasto')
-plt.title('Segmentos de Clientes')
-plt.show()
-
-# Perfiles de segmentos
-print("\nPerfiles de Segmentos:")
-print(customer_df.groupby('segment').mean())
+# Mejor k
+best_k = K_range[np.argmax(silhouettes)]
+print(f"Mejor k según silueta: {best_k}")
 ```
 
-Interpretación: Surgen cuatro segmentos de clientes: ingresos altos-gasto alto, ingresos altos-gasto bajo, ingresos bajos-gasto alto e ingresos bajos-gasto bajo.
+</Section>
 
-## Ejemplo de Biotecnología
-
-Clustering de perfiles de expresión génica de pacientes.
+<Section number={5} title="Visualizando clusters con PCA" eyebrow="INTERACTIVA">
 
 ```python
-np.random.seed(42)
-n_patients = 100
-n_genes = 50
+from sklearn.decomposition import PCA
 
-expression = np.random.randn(n_patients, n_genes)
-# Crear 3 subtipos
-expression[:30, :20] += 2  # Subtype A / Subtipo A
-expression[30:65, 20:35] -= 1.5  # Subtype B / Subtipo B
-expression[65:, 35:] += 1  # Subtype C / Subtipo C
+kmeans = KMeans(n_clusters=3, n_init=10, random_state=42)
+labels = kmeans.fit_predict(X)
 
-true_subtypes = ['A'] * 30 + ['B'] * 35 + ['C'] * 35
+# Reducir a 2D para visualizar
+X_pca = PCA(n_components=2).fit_transform(X)
 
-# PCA + K-Means
-pca = PCA(n_components=10)
-expr_pca = pca.fit_transform(expression)
-
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-predicted_clusters = kmeans.fit_predict(expr_pca)
-
-# Visualize
-pca_2d = PCA(n_components=2)
-expr_2d = pca_2d.fit_transform(expression)
-
-plt.figure(figsize=(8, 6))
-plt.scatter(expr_2d[:, 0], expr_2d[:, 1], c=predicted_clusters, cmap='viridis', alpha=0.7)
-plt.title('Clusters de Pacientes Basados en Expresión Génica')
-plt.xlabel('CP1')
-plt.ylabel('CP2')
-plt.show()
-
-# Evaluar vs etiquetas reales
-from sklearn.metrics import adjusted_rand_score
-print(f"Índice de Rand Ajustado: {adjusted_rand_score(true_subtypes, predicted_clusters):.3f}")
+plt.figure(figsize=(8,6))
+scatter = plt.scatter(X_pca[:,0], X_pca[:,1], c=labels, cmap='viridis', s=50)
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], 
+            c='red', marker='X', s=200, label='Centroides')
+plt.xlabel('PC1'); plt.ylabel('PC2')
+plt.title('K-Means Clusters (PCA 2D)')
+plt.legend(); plt.show()
 ```
 
-## Ejemplo SaaS
+<ReflectionCheck
+  blockId="reflection-l08-kmeans-pca"
+  moduleSlug="estadistica"
+  lessonSlug="lesson08_clustering"
+  prompt="¿Por qué visualizamos clusters en 2D con PCA en vez de usar 2 features originales? ¿Qué podríamos perder?"
+  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un solo gráfico. Pero perdemos información: clusters que se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
+/>
 
-Segmentación de comportamiento de usuarios.
+</Section>
+
+<Section number={6} title="Biotecnología: subtipos de cáncer" eyebrow="INTERACTIVA">
+
+K-Means puede descubrir subtipos de cáncer a partir de perfiles de expresión génica sin conocerlos de antemano:
 
 ```python
+# Simular 3 subtipos de cáncer con 50 genes cada uno
 np.random.seed(42)
-n_users = 1000
-user_data = pd.DataFrame({
-    'avg_session_min': np.random.exponential(15, n_users),
-    'logins_per_week': np.random.poisson(4, n_users),
-    'features_used': np.random.poisson(6, n_users),
-    'support_tickets': np.random.poisson(0.5, n_users)
-})
+subtype_A = np.random.normal(loc=[5]*20+[2]*30, scale=1, size=(30,50))
+subtype_B = np.random.normal(loc=[2]*20+[5]*20+[2]*10, scale=1, size=(30,50))
+subtype_C = np.random.normal(loc=[2]*40+[5]*10, scale=1, size=(30,50))
+X_cancer = np.vstack([subtype_A, subtype_B, subtype_C])
 
-scaler = StandardScaler()
-user_scaled = scaler.fit_transform(user_data)
-
-# Encontrar k óptimo
-sil_scores = []
-for k in range(2, 9):
-    km = KMeans(n_clusters=k, random_state=42, n_init=10)
-    labels = km.fit_predict(user_scaled)
-    sil_scores.append(silhouette_score(user_scaled, labels))
-
-optimal_k = range(2, 9)[np.argmax(sil_scores)]
-print(f"k óptimo (silueta): {optimal_k}")
-
-kmeans = KMeans(n_clusters=optimal_k, random_state=42, n_init=10)
-user_data['segment'] = kmeans.fit_predict(user_scaled)
-
-print("\nPerfiles de Segmentos:")
-print(user_data.groupby('segment').describe().round(1))
+kmeans = KMeans(n_clusters=3, n_init=10, random_state=42)
+labels = kmeans.fit_predict(StandardScaler().fit_transform(X_cancer))
+print(f"Silhouette score: {silhouette_score(X_cancer, labels):.3f}")
 ```
 
-## Errores Comunes
+<CalloutInfo>
+En la práctica, clustering de expresión génica ha llevado al descubrimiento de subtipos moleculares de cáncer (como los subtipos Luminal A/B, HER2, Basal en cáncer de mama) que hoy guían decisiones terapéuticas.
+</CalloutInfo>
 
-1. **No estandarizar las features**: K-Means usa distancia euclídea; las features en escalas más grandes dominan.
-2. **Asumir que se conoce k**: Validá siempre k con el método del codo y el puntaje de silueta.
-3. **Usar K-Means para clusters no esféricos**: K-Means encuentra clusters circulares. Usá DBSCAN para formas arbitrarias.
-4. **Interpretar clusters sin validación del dominio**: Los clusters son construcciones matemáticas — verificá que tengan sentido.
-5. **Ejecutar K-Means una sola vez**: Los resultados dependen de la inicialización; usá `n_init=10` y establecé `random_state`.
+</Section>
 
-## Mejores Prácticas
+<Section number={7} title="Limitaciones de K-Means" eyebrow="CONCEPTO">
 
-- Estandarizá siempre las features antes de clusterizar
-- Usá inicialización k-means++ (predeterminada en sklearn)
-- Validá k con los métodos del codo y de silueta
-- Visualizá los clusters con PCA
-- Perfilá cada cluster para entender sus características
-- Ejecutá K-Means múltiples veces con diferentes semillas
+<ConceptCard variant="warning">
+**K-Means asume:**
+- Clusters **esféricos** (misma varianza en todas direcciones)
+- Clusters de **tamaño similar**
+- **Necesitás especificar k** (no lo descubre solo)
+- **Sensible a la inicialización** (K-Means++ mitiga esto)
+- **SIEMPRE estandarizar** antes (sensible a la escala)
+</ConceptCard>
 
-## Resumen
+<CalloutInfo>
+Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí necesitás DBSCAN o clustering jerárquico. Pero K-Means es rápido, simple, y sorprendentemente efectivo para la mayoría de casos.
+</CalloutInfo>
 
-- K-Means particiona datos en k grupos basados en la distancia euclídea a los centroides
-- El método del codo traza la inercia vs k para encontrar el k óptimo
-- El puntaje de silueta mide la calidad del cluster (-1 a 1)
-- Estandarizá siempre los datos antes de K-Means
-- K-Means funciona mejor para clusters esféricos y bien separados
+</Section>
 
-## Términos Clave
+<Section number={8} title="Términos clave" eyebrow="CIERRE">
 
-| Término | Definición |
-|---------|------------|
-| K-Means | Algoritmo de clustering basado en particiones |
-| Centroide | Centro de un cluster (media de los puntos asignados) |
-| Inercia | Suma de distancias al cuadrado de los puntos a su centroide |
-| Método del Codo | Técnica para encontrar k localizando el codo en la curva de inercia |
-| Puntaje de Silueta | Medida de cohesión y separación del cluster |
-| K-Means++ | Método de inicialización inteligente de centroides |
-| Aprendizaje No Supervisado | Aprendizaje sin datos etiquetados |
+<InteractiveTable
+  headers={["Término", "Definición"]}
+  rows={[
+    ["K-Means", "Algoritmo que agrupa puntos en k clusters alrededor de centroides"],
+    ["Centroide", "Punto central de un cluster (media de sus miembros)"],
+    ["Inercia", "Suma de distancias² intra-cluster — K-Means la minimiza"],
+    ["Método del Codo", "Técnica para elegir k: buscar aplanamiento de inercia"],
+    ["Silhouette Score", "Métrica de calidad: cohesión + separación [-1,1]"],
+    ["K-Means++", "Inicialización inteligente que dispersa centroides iniciales"],
+    ["No Supervisado", "Aprendizaje sin etiquetas — el algoritmo descubre la estructura"],
+  ]}
+  searchable={true}
+  caption="Términos clave de clustering"
+/>
 
-## Ejercicios
+</Section>
 
-**Nivel 1: Comprensión Básica**
+<Section number={9} title="Para la próxima lección" eyebrow="CIERRE">
 
-1. Explicá el algoritmo K-Means en 3 pasos.
-2. ¿Qué significa un puntaje de silueta de -0.1? ¿Y de 0.7?
+<MascotMessage mood="celebrating">
+¡Primer algoritmo de ML no supervisado dominado! K-Means es simple pero poderoso. Con PCA para visualizar y silhouette para validar, tenés un toolkit completo de clustering.
+</MascotMessage>
 
-**Nivel 2: Implementación**
+**En la Lección 9** cerramos el módulo con **Evaluación de Modelos**: train/test split, validación cruzada, y todas las métricas (MAE, MSE, RMSE, R²). Porque crear modelos es fácil — saber si son buenos es lo difícil.
 
-3. Cargá el dataset de pingüinos, estandarizá las features numéricas y aplicá K-Means con k=3. Compará las asignaciones de clusters con las especies reales usando una tabla cruzada.
-4. Para el dataset iris, calculá los puntajes de silueta para k=2 a k=8. ¿Qué k es óptimo?
-
-**Nivel 3: Pensamiento Crítico**
-
-5. Un bioinformático aplica K-Means a datos de RNA-seq de célula única y obtiene clusters que no coinciden con los tipos celulares conocidos. ¿Qué podría explicar esto? Sugerí tres verificaciones de diagnóstico.
-6. ¿Por qué K-Means falla en datos con clusters alargados o de forma irregular? ¿Qué algoritmo alternativo funcionaría mejor?
-
-## Desafío de Programación
-
-Escribí un script en Python que:
-1. Genere datos sintéticos con `make_blobs` (4 centros, diferentes desviaciones estándar)
-2. Pruebe k = 2 a k = 8 usando el método del codo y el puntaje de silueta
-3. Trace ambas métricas lado a lado
-4. Aplique K-Means con el k óptimo
-5. Visualice los clusters (use PCA si hay más de 2 features)
-6. Imprima las coordenadas de los centroides y los tamaños de los clusters
-7. Cree una tabla de perfiles que muestre los valores medios de las features por cluster
+</Section>
