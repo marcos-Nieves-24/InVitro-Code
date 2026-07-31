@@ -21,67 +21,61 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-# Clustering K-Means
+<Section number={1} title="Descubrir grupos sin etiquetas" eyebrow="INICIO">
 
-## Motivación
+<MascotMessage mood="curious">
+Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tenés etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
+</MascotMessage>
 
-Una empresa de biotecnología tiene miles de perfiles de expresión génica de pacientes y quiere descubrir nuevos subtipos de enfermedades — sin datos etiquetados. Una empresa SaaS quiere agrupar clientes en segmentos para marketing dirigido — sin categorías predefinidas. Estos son problemas de *clustering*, y K-Means es el algoritmo más popular para resolverlos. A diferencia de las lecciones anteriores, no hay etiquetas que predecir; descubrimos estructura oculta en los datos.
+Hasta acá todo fue **aprendizaje supervisado**: tenías features (X) y etiquetas (y), y el modelo aprendía a predecir. Ahora entramos al territorio del **no supervisado**: solo tenés X. No hay "respuesta correcta". El objetivo es descubrir patrones, grupos, estructura oculta.
 
-## Panorama general
+<ConceptCard variant="key-idea">
+K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, rápido, y sorprendentemente efectivo para segmentación de clientes, descubrimiento de subtipos de enfermedades, y compresión de imágenes.
+</ConceptCard>
 
-**Anterior:** Bosque Aleatorio (supervisado — predicción de etiquetas). **Esta lección:** K-Means (no supervisado — descubrimiento de grupos). **Siguiente:** PCA (no supervisado — reducción de dimensiones).
+</Section>
 
-## Teoría
+<Section number={2} title="El algoritmo en 4 pasos" eyebrow="CONCEPTO">
 
-### ¿Qué es el Clustering?
+1. **Elegí K:** ¿Cuántos grupos querés encontrar?
+2. **Inicializá:** Poné K centroides en posiciones aleatorias
+3. **Asigná:** Cada punto va al centroide más cercano (distancia euclidiana)
+4. **Actualizá:** Mové cada centroide al promedio de los puntos que le asignaste
+5. **Repetí 3-4** hasta que los centroides dejen de moverse
 
-El clustering agrupa muestras similares entre sí. Responde: "¿Qué grupos naturales existen en los datos?"
-
-### Algoritmo K-Means
-
-1. Elegí K (cantidad de clústeres)
-2. Inicializá K centroides aleatoriamente
-3. **Paso de asignación:** asigná cada punto al centroide más cercano
-4. **Paso de actualización:** recalculá los centroides como la media de los puntos asignados
-5. Repetí los pasos 3-4 hasta converger (los centroides dejan de cambiar)
-
-### Métrica de distancia
-
-K-Means usa distancia euclidiana:
+<CalloutInfo>
+K-Means garantiza convergencia (los centroides eventualmente se estabilizan), pero el resultado depende de dónde empezaron los centroides. Por eso sklearn corre el algoritmo varias veces con inicializaciones distintas (`n_init=10`) y se queda con la mejor.
+</CalloutInfo>
 
 $$d(\mathbf{x}, \boldsymbol{\mu}_k) = \sqrt{\sum_{j=1}^{p}(x_j - \mu_{kj})^2}$$
 
-### Inercia (Suma de Cuadrados Intra-Clúster)
+El algoritmo minimiza la **inercia** (suma de distancias al cuadrado dentro de cada clúster):
 
 $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
 
-La inercia mide qué tan compactos son los clústeres. Menor inercia → clústeres más ajustados.
+</Section>
 
-### Cómo elegir K
+<Section number={3} title="¿Cuántos clústeres? El problema de elegir K" eyebrow="CONCEPTO">
 
-**Método del codo:** Graficá inercia vs. K. Buscá el "codo" donde la inercia deja de disminuir bruscamente.
-
-**Puntaje de silueta:** Mide qué tan similar es un punto a su propio clúster vs. otros clústeres. Varía de -1 a 1. Cuanto más alto, mejor.
+<ComparisonTable
+  rows={[
+    { feature: "Método del codo", left: "Graficás inercia vs K. Donde la curva hace \"codo\" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro." },
+    { feature: "Puntaje de silueta", left: "Mide qué tan similar es cada punto a su propio clúster vs. el clúster más cercano. Varía de -1 a 1. Más alto = mejor separación. Más objetivo que el codo." },
+  ]}
+/>
 
 $$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
 
-Donde $a(i)$ es la distancia media a otros puntos en el mismo clúster, y $b(i)$ es la distancia media a puntos en el clúster diferente más cercano.
+- $a(i)$: distancia promedio a puntos del mismo clúster (querés que sea chica)
+- $b(i)$: distancia promedio al clúster vecino más cercano (querés que sea grande)
 
-## Fundamento matemático
+<CalloutCheck>
+Regla práctica: probá K desde 2 hasta ~10, calculá silueta para cada uno, y elegí el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen — tus datos no tienen estructura de grupos.
+</CalloutCheck>
 
-### K-Means como optimización
+</Section>
 
-K-Means minimiza el objetivo de inercia:
-
-$$\min_{\{\boldsymbol{\mu}_k\}} \sum_{k=1}^{K} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
-
-Este es un problema NP-difícil (exponencial en K y n). El algoritmo iterativo encuentra un mínimo local.
-
-### Inicialización
-
-La inicialización aleatoria puede llevar a resultados diferentes. **K-Means++** (valor por defecto en scikit-learn) inicializa los centroides separados para mejorar la convergencia.
-
-## Explicación visual
+<Section number={4} title="Visualizá K-Means en acción" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -89,191 +83,98 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
 
-X, y_true = make_blobs(n_samples=300, centers=4, cluster_std=0.8, random_state=42)
+X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=0)
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+for i, k in enumerate([2, 4, 6]):
+    km = KMeans(n_clusters=k, n_init=10, random_state=42)
+    y_pred = km.fit_predict(X)
+    axes[i].scatter(X[:, 0], X[:, 1], c=y_pred, cmap='viridis', s=20)
+    axes[i].scatter(km.cluster_centers_[:, 0], km.cluster_centers_[:, 1],
+                    c='red', marker='X', s=200, edgecolors='black')
+    axes[i].set_title(f'K = {k}')
 
-for i, K in enumerate([2, 3, 4, 5, 6, 8]):
-    kmeans = KMeans(n_clusters=K, random_state=42, n_init=10)
-    y_pred = kmeans.fit_predict(X)
-
-    ax = axes[i // 3, i % 3]
-    ax.scatter(X[:, 0], X[:, 1], c=y_pred, cmap='viridis', alpha=0.6)
-    ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-               c='red', marker='x', s=200, linewidths=3)
-    ax.set_title(f'K = {K}')
-    ax.set_xlabel('Feature 1')
-    ax.set_ylabel('Feature 2')
-
+plt.suptitle('K-Means con distintos valores de K')
 plt.tight_layout()
-plt.savefig('figures/kmeans_different_k.png', dpi=150)
 plt.show()
 ```
 
-## Implementación en Python
+<CalloutInfo>
+Las X rojas son los centroides. Con K=2, el algoritmo fuerza 2 grupos donde hay 4. Con K=6, divide grupos naturales innecesariamente. K=4 captura la estructura real. El arte está en elegir el K correcto.
+</CalloutInfo>
+
+</Section>
+
+<Section number={5} title="El método del codo en código" eyebrow="CÓDIGO">
 
 ```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_blobs
 
-# Generate data
-X, y = make_blobs(n_samples=300, centers=4, cluster_std=0.8, random_state=42)
-
-# Elbow method
 inertias = []
 silhouettes = []
 K_range = range(2, 11)
 
-for K in K_range:
-    kmeans = KMeans(n_clusters=K, random_state=42, n_init=10)
-    kmeans.fit(X)
-    inertias.append(kmeans.inertia_)
-    silhouettes.append(silhouette_score(X, kmeans.labels_))
+for k in K_range:
+    km = KMeans(n_clusters=k, n_init=10, random_state=42)
+    km.fit(X)
+    inertias.append(km.inertia_)
+    silhouettes.append(silhouette_score(X, km.labels_))
 
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+ax1.plot(K_range, inertias, 'bo-')
+ax1.set_xlabel('K'); ax1.set_ylabel('Inercia')
+ax1.set_title('Método del Codo')
 
-axes[0].plot(K_range, inertias, 'o-')
-axes[0].set_xlabel('K')
-axes[0].set_ylabel('Inertia')
-axes[0].set_title('Elbow Method')
-axes[0].grid(True)
-
-axes[1].plot(K_range, silhouettes, 'o-')
-axes[1].set_xlabel('K')
-axes[1].set_ylabel('Silhouette Score')
-axes[1].set_title('Silhouette Score')
-axes[1].grid(True)
-
-plt.tight_layout()
-plt.savefig('figures/elbow_silhouette.png', dpi=150)
-plt.show()
-
-# Best model
-best_kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
-best_kmeans.fit(X)
-print(f"Cluster centers:\n{best_kmeans.cluster_centers_}")
-print(f"Inertia: {best_kmeans.inertia_:.2f}")
-print(f"Silhouette: {silhouette_score(X, best_kmeans.labels_):.3f}")
+ax2.plot(K_range, silhouettes, 'ro-')
+ax2.set_xlabel('K'); ax2.set_ylabel('Silueta')
+ax2.set_title('Puntaje de Silueta')
+plt.tight_layout(); plt.show()
 ```
 
-## Ejemplo guiado: Clustering de Iris
+</Section>
 
-**Problema:** ¿Puede K-Means descubrir las 3 especies de Iris sin etiquetas?
+<Section number={6} title="Aplicaciones" eyebrow="APLICACIÓN">
 
-```python
-from sklearn.datasets import load_iris
-iris = load_iris()
-X = iris.data
+<ConceptCard variant="key-idea">
+**Biotecnología:** Agrupá pacientes por perfiles de expresión génica para descubrir subtipos de cáncer que responden distinto a tratamientos.
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+**SaaS:** Segmentá usuarios por comportamiento (frecuencia de uso, features usadas, gasto) para campañas de marketing personalizadas.
 
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-labels = kmeans.fit_predict(X_scaled)
+**Genómica:** Agrupá genes por patrones de co-expresión para inferir funciones biológicas compartidas.
+</ConceptCard>
 
-# Compare with true labels
-print(pd.crosstab(iris.target, labels, rownames=['True'], colnames=['Cluster']))
-```
+<CalloutCheck>
+La gran ventaja del no supervisado: no necesitás datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K-Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
+</CalloutCheck>
 
-**Resultado:** K-Means recupera las especies razonablemente bien (cierta confusión entre versicolor y virginica).
+</Section>
 
-## Ejemplo en biotecnología: Subtipos de expresión génica
+<Section number={7} title="Resumen y glosario" eyebrow="RESUMEN">
 
-```python
-np.random.seed(42)
-n_patients, n_genes = 200, 500
+<ConceptCard variant="key-idea">
+K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamente. El método del codo y la silueta ayudan a elegir K. Es el algoritmo de clustering más usado por su simplicidad y velocidad. No necesita etiquetas — descubre estructura por sí mismo.
+</ConceptCard>
 
-# Simulate 3 disease subtypes
-X_expr = np.random.randn(n_patients, n_genes)
-X_expr[:70, :50] += 0.5  # Subtype 1
-X_expr[70:130, 50:100] += 0.5  # Subtype 2
-X_expr[130:, 100:150] += 0.5  # Subtype 3
+<InteractiveTable
+  columns={[{ key: "term", label: "Término" }, { key: "def", label: "Definición" }]}
+  rows={[
+    { term: "Centroide", def: "Punto central de un clúster — promedio de todos sus miembros" },
+    { term: "Inercia", def: "Suma de distancias al cuadrado dentro de cada clúster. Menos = mejor" },
+    { term: "Silueta", def: "Puntaje de -1 a 1 que mide calidad de agrupamiento" },
+    { term: "No supervisado", def: "Aprendizaje sin etiquetas — solo características (X)" },
+  ]}
+/>
 
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-clusters = kmeans.fit_predict(X_expr)
+</Section>
 
-# Create subtype labels
-true_subtypes = np.array([0]*70 + [1]*60 + [2]*70)
-print(pd.crosstab(true_subtypes, clusters, rownames=['True'], colnames=['Cluster']))
-```
+<Section number={8} title="Ejercicios" eyebrow="EJERCICIOS">
 
-**Interpretación:** K-Means descubre los tres subtipos, potencialmente revelando subgrupos de enfermedades novedosos.
+<ReflectionCheck
+  blockId="reflection-l06-elbow-vs-silhouette"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson06_kmeans"
+  prompt="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál elegís y por qué?"
+  answer="Depende del contexto. Si el objetivo es exploratorio (descubrir estructura), elegiría K=5 porque la silueta más alta indica clústeres mejor definidos. Si el objetivo es comunicación (explicar los grupos a stakeholders), K=3 puede ser preferible por simplicidad aunque la calidad sea menor. En la práctica, inspeccioná ambos: a veces K=5 revela un grupo pequeño pero biológicamente relevante que K=3 esconde."
+/>
 
-## Ejemplo en SaaS: Segmentación de clientes
-
-```python
-np.random.seed(42)
-n_customers = 500
-
-customers = pd.DataFrame({
-    'annual_spend': np.random.exponential(1000, n_customers),
-    'purchase_frequency': np.random.poisson(12, n_customers),
-    'avg_order_value': np.random.normal(50, 20, n_customers),
-    'tenure_months': np.random.exponential(24, n_customers),
-})
-
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(customers)
-
-kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
-customers['segment'] = kmeans.fit_predict(X_scaled)
-
-# Analyze segments
-segments = customers.groupby('segment').mean()
-print(segments.round(1))
-```
-
-**Interpretación:** Segmento 0 = gastadores altos con alta frecuencia, Segmento 1 = clientes nuevos, etc.
-
-## Errores comunes
-
-1. **No escalar las características** — las características con unidades más grandes dominan los cálculos de distancia.
-2. **Asumir que K es conocido** — usá siempre el codo + silueta para determinar K.
-3. **Interpretar clústeres de forma causal** — los clústeres son geométricos, no necesariamente biológicos.
-4. **Usar K-Means en altas dimensiones** — la distancia euclidiana pierde sentido en más de 50 dimensiones.
-5. **Esperar clústeres del mismo tamaño** — K-Means tiende a producir clústeres balanceados.
-
-## Buenas prácticas
-
-- Escalá siempre las características (StandardScaler) antes de clusterizar
-- Usá inicialización K-Means++ (valor por defecto en sklearn)
-- Ejecutá múltiples inicializaciones (n_init=10)
-- Usá el codo + silueta juntos para elegir K
-- Probá t-SNE o PCA para visualizar clústeres de alta dimensionalidad
-
-## Resumen
-
-- K-Means agrupa datos en K clústeres minimizando la inercia
-- Algoritmo: asignar → actualizar → repetir
-- El método del codo + puntaje de silueta eligen K
-- Las características deben escalarse
-- El clustering descubre estructura oculta sin etiquetas
-- Útil para estratificación de pacientes, segmentación de clientes
-
-## Términos clave
-
-| Término | Definición |
-|---------|------------|
-| Centroide | Centro de un clúster (media de sus puntos) |
-| Inercia | Suma de distancias al cuadrado desde los puntos a los centroides |
-| Método del codo | Elegir K donde la mejora de inercia se desacelera |
-| Puntaje de silueta | Medida de cohesión del clúster vs. separación |
-| K-Means++ | Inicialización inteligente de centroides |
-| WCSS | Suma de cuadrados intra-clúster (inercia) |
-
-## Ejercicios
-
-**Nivel 1 — Básico:** ¿Cuál es la diferencia principal entre aprendizaje supervisado y no supervisado? Dá un ejemplo de cada uno.
-
-**Nivel 2 — Implementación:** Generá datos sintéticos con `make_blobs(n_samples=500, centers=5)`. Aplicá K-Means con K=2..10, graficá las curvas de codo y silueta, y determiná el K óptimo.
-
-**Nivel 3 — Pensamiento crítico:** Tu análisis de K-Means en datos de pacientes produce 3 clústeres. Un médico dice que el clúster 2 es biológicamente significativo. ¿Cómo validarías si los clústeres representan biología real o solo artefactos estadísticos?
-
-## Desafío de programación
-
-Escribí una función `optimal_k(X, max_k=10)` que calcule la inercia y el puntaje de silueta para K=2..max_k y devuelva el K óptimo según ambos métodos (si coinciden) o reporte un conflicto.
+</Section>
