@@ -54,7 +54,7 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
       {/* Desktop collapse toggle */}
       <button
         onClick={() => setDesktopCollapsed(!desktopCollapsed)}
-        className="fixed left-0 top-1/2 z-50 hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-r-md border border-l-0 border-gray-200 bg-white text-gray-400 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-600 lg:flex"
+        className="fixed top-1/2 z-[60] hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-r-md border border-l-0 border-gray-200 bg-white text-gray-400 shadow-sm transition-all hover:bg-gray-50 hover:text-gray-600 lg:flex"
         aria-label={desktopCollapsed ? "Expandir sidebar" : "Colapsar sidebar"}
         type="button"
         style={{ left: desktopCollapsed ? 0 : "16rem" }}
