@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 
 interface Props {
@@ -9,8 +8,6 @@ interface Props {
 }
 
 export default function CompleteLessonButton({ module, lesson }: Props) {
-  const { userId: clerkUserId } = useAuth();
-  const userId = clerkUserId ?? "dev-user";
   const [status, setStatus] = useState<
     "idle" | "loading" | "done" | "error"
   >("idle");
@@ -26,7 +23,6 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId,
           moduleSlug: module,
           lessonSlug: lesson,
         }),

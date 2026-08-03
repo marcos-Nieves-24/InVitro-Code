@@ -1,3 +1,4 @@
+import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NextRequest, NextResponse } from "next/server";
 import { calcXpForLesson } from "@/lib/gamification/utils";
@@ -19,11 +20,17 @@ function isSameDay(a: string, b: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId, moduleSlug, lessonSlug } = await request.json();
+    const { userId } = await auth();
 
-    if (!userId || !moduleSlug || !lessonSlug) {
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { moduleSlug, lessonSlug } = await request.json();
+
+    if (!moduleSlug || !lessonSlug) {
       return NextResponse.json(
-        { error: "Missing required fields: userId, moduleSlug, lessonSlug" },
+        { error: "Missing required fields: moduleSlug, lessonSlug" },
         { status: 400 },
       );
     }
