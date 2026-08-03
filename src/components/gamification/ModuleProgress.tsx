@@ -1,12 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-
 interface ModuleProgressProps {
   moduleSlug: string;
   moduleName: string;
-  userId: string;
   totalLessons: number;
   initialCompletedLessons: number;
 }
@@ -14,37 +8,10 @@ interface ModuleProgressProps {
 export function ModuleProgress({
   moduleSlug,
   moduleName,
-  userId,
   totalLessons,
   initialCompletedLessons,
 }: ModuleProgressProps) {
-  const [supabase] = useState(() => createClient());
-  const [completedLessons, setCompletedLessons] = useState(initialCompletedLessons);
-
-  useEffect(() => {
-    // Listen for realtime updates — initial data comes from server
-    const channel = supabase
-      .channel("progress-updates")
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "progress",
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          if (payload.new.module_slug === moduleSlug) {
-            setCompletedLessons((prev) => prev + 1);
-          }
-        },
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [supabase, userId, moduleSlug]);
+  const completedLessons = initialCompletedLessons;
 
   if (totalLessons === 0) {
     return (

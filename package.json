@@ -25,12 +25,11 @@
     "react-syntax-highlighter": "^16.1.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
+    "@supabase/supabase-js": "latest",
     "tailwindcss": "latest"
   },
   "devDependencies": {
     "@clerk/nextjs": "latest",
-    "@supabase/ssr": "latest",
-    "@supabase/supabase-js": "latest",
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",

@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes, moduleProgressRes] = await Promise.all([
+  const [progressRes, reflectionRes, moduleProgressRes, streakRes] = await Promise.all([
     supabase.from("progress").select("xp_earned").eq("user_id", userId),
     supabase
       .from("reflection_completions")
@@ -24,7 +24,14 @@ export default async function DashboardPage() {
       .select("module_slug, lesson_slug")
       .eq("user_id", userId)
       .eq("completed", true),
+    supabase
+      .from("streaks")
+      .select("current_streak, longest_streak")
+      .eq("user_id", userId)
+      .maybeSingle(),
   ]);
+
+  const streakData = streakRes.data ?? { current_streak: 0, longest_streak: 0 };
 
   const totalXp = [
     ...(progressRes.data ?? []),
@@ -68,7 +75,7 @@ export default async function DashboardPage() {
             <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
               <h3 className="eyebrow text-[10px]">Nivel actual</h3>
               <div className="mt-2">
-                <LevelBadge userId={userId} totalXp={totalXp} />
+                <LevelBadge totalXp={totalXp} />
               </div>
             </div>
             <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
@@ -80,13 +87,16 @@ export default async function DashboardPage() {
             <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
               <h3 className="eyebrow text-[10px]">Racha actual</h3>
               <div className="mt-2">
-                <StreakBadge userId={userId} />
+                <StreakBadge
+                  currentStreak={streakData.current_streak}
+                  longestStreak={streakData.longest_streak}
+                />
               </div>
             </div>
             <div className="rounded-card border border-gray-100 bg-gray-50 p-4">
               <h3 className="eyebrow text-[10px]">Siguiente nivel</h3>
               <div className="mt-2">
-                <XPBar userId={userId} totalXp={totalXp} />
+                <XPBar totalXp={totalXp} />
               </div>
             </div>
           </div>
@@ -103,7 +113,6 @@ export default async function DashboardPage() {
                   key={mod.slug}
                   moduleSlug={mod.slug}
                   moduleName={mod.name}
-                  userId={userId}
                   totalLessons={mod.totalLessons}
                   initialCompletedLessons={completedByModule[mod.slug] ?? 0}
                 />

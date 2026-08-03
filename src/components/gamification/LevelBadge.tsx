@@ -1,56 +1,11 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { calcLevel } from "@/lib/gamification/utils";
 
 interface LevelBadgeProps {
-  userId: string;
   totalXp: number;
 }
 
-export function LevelBadge({ userId, totalXp }: LevelBadgeProps) {
-  const [supabase] = useState(() => createClient());
-  const [xp, setXp] = useState(totalXp);
-  const levelInfo = calcLevel(xp);
-
-  useEffect(() => {
-    const channel = supabase
-      .channel("xp-updates")
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "progress",
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          if (payload.new.xp_earned > 0) {
-            setXp((prev) => prev + payload.new.xp_earned);
-          }
-        },
-      )
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "reflection_completions",
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          if (payload.new.xp_earned > 0) {
-            setXp((prev) => prev + payload.new.xp_earned);
-          }
-        },
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [supabase, userId]);
+export function LevelBadge({ totalXp }: LevelBadgeProps) {
+  const levelInfo = calcLevel(totalXp);
 
   const getLevelColor = (level: number) => {
     if (level < 5) return "bg-gray-500";
