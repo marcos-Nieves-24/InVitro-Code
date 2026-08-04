@@ -4,7 +4,7 @@ import { StreakBadge } from "@/components/gamification/StreakBadge";
 import { LevelBadge } from "@/components/gamification/LevelBadge";
 import { ModuleProgress } from "@/components/gamification/ModuleProgress";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getModulesInfo } from "@/lib/content/modules";
+import { getModulesInfo, getResumeHref } from "@/lib/content/modules";
 import { Card, PageShell, SiteHeader } from "@/components/ui";
 
 export default async function DashboardPage() {
@@ -45,12 +45,13 @@ export default async function DashboardPage() {
   }
 
   const modules = getModulesInfo();
-  const python = modules.find((m) => m.slug === "python");
-  const startHref = python
-    ? `/learn/${python.slug}`
-    : modules[0]
-      ? `/learn/${modules[0].slug}`
-      : "/";
+
+  const completedLessonKeys = new Set(
+    (moduleProgressRes.data ?? []).map(
+      (row) => `${row.module_slug}/${row.lesson_slug}`,
+    ),
+  );
+  const startHref = getResumeHref(completedLessonKeys);
 
   return (
     <PageShell width="marketing">

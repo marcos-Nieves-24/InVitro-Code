@@ -1,13 +1,32 @@
 import Link from "next/link";
-import { getModules } from "@/lib/content/modules";
+import { auth } from "@clerk/nextjs/server";
+import { getModules, getResumeHref } from "@/lib/content/modules";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { Button, Card, PageShell, SiteHeader } from "@/components/ui";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth().catch(() => ({ userId: null }));
+  const userId = session?.userId ?? null;
+
   const modules = getModules();
   const pythonMod = modules.find((m) => m.slug === "python");
-  const startHref = pythonMod?.firstLesson
+
+  let startHref = pythonMod?.firstLesson
     ? `/learn/${pythonMod.slug}/${pythonMod.firstLesson}`
     : "/dashboard";
+
+  if (userId) {
+    const supabase = createAdminClient();
+    const { data } = await supabase
+      .from("progress")
+      .select("module_slug, lesson_slug")
+      .eq("user_id", userId)
+      .eq("completed", true);
+    const completedLessonKeys = new Set(
+      (data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
+    );
+    startHref = getResumeHref(completedLessonKeys);
+  }
 
   return (
     <PageShell width="marketing">

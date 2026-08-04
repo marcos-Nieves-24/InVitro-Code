@@ -72,17 +72,34 @@ export function getLessonCount(slug: string): number {
 }
 
 export function getFirstLesson(slug: string): string {
-  const lessonsDir = path.join(modulesRoot(), slug, "lessons");
+  const lessons = getLessonSlugs(slug);
+  return lessons[0] || "";
+}
+
+/** Ordered lesson slugs for a module (deterministic sort, same as lesson pages). */
+export function getLessonSlugs(moduleSlug: string): string[] {
+  const lessonsDir = path.join(modulesRoot(), moduleSlug, "lessons");
   try {
-    const lessons = fs
+    return fs
       .readdirSync(lessonsDir, { withFileTypes: true })
       .filter((e) => e.isDirectory())
       .map((e) => e.name)
       .sort();
-    return lessons[0] || "";
   } catch {
-    return "";
+    return [];
   }
+}
+
+/** First lesson the user has NOT completed, across modules in order. */
+export function getResumeHref(completedLessonKeys: Set<string>): string {
+  for (const mod of getModules()) {
+    for (const lessonSlug of getLessonSlugs(mod.slug)) {
+      if (!completedLessonKeys.has(`${mod.slug}/${lessonSlug}`)) {
+        return `/learn/${mod.slug}/${lessonSlug}`;
+      }
+    }
+  }
+  return "/dashboard";
 }
 
 function formatLessonName(slug: string): string {
