@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
-import { NexusShell } from "@/components/layout/NexusShell";
-import { NexusTopBar } from "@/components/layout/NexusTopBar";
+import { InVitroShell } from "@/components/layout/InVitroShell";
+import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { LabMission } from "@/components/laboratorio/LabMission";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
@@ -34,8 +34,8 @@ export default async function LaboratoriosPage() {
   const levelInfo = calcLevel(totalXp);
 
   return (
-    <NexusShell userMeta={`Nivel ${levelInfo.level} · Laboratorios`}>
-      <NexusTopBar
+    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Laboratorios`}>
+      <InVitroTopBar
         totalXp={totalXp}
         currentStreak={currentStreak}
         trail="Niveles · Nivel 1 · Novato · Misión 2"
@@ -127,6 +127,6 @@ export default async function LaboratoriosPage() {
           </div>
         </aside>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }

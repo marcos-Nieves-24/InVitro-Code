@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
-import { NexusShell } from "@/components/layout/NexusShell";
-import { NexusTopBar } from "@/components/layout/NexusTopBar";
+import { InVitroShell } from "@/components/layout/InVitroShell";
+import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { AchievementCard } from "@/components/gamification/AchievementCard";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
@@ -67,8 +67,8 @@ const CATEGORIES = [
     badgeClass: "text-on-surface-variant",
     achievements: [
       {
-        title: "Nexus Pioneer",
-        description: "Publica un paper en el Nexus Journal.",
+        title: "InVitro-Code Pioneer",
+        description: "Publica un paper en InVitro-Code Journal.",
         icon: Shield,
         locked: true,
       },
@@ -112,8 +112,8 @@ export default async function LogrosPage() {
   const levelInfo = calcLevel(totalXp);
 
   return (
-    <NexusShell userMeta={`Nivel ${levelInfo.level} · Logros`}>
-      <NexusTopBar totalXp={totalXp} currentStreak={currentStreak} trail="Mis Logros" />
+    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Logros`}>
+      <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} trail="Mis Logros" />
 
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
         {/* Hero progress */}
@@ -124,8 +124,8 @@ export default async function LogrosPage() {
                 Mis Logros
               </h2>
               <p className="text-on-surface-variant">
-                Tu camino hacia la excelencia en Inteligencia Artificial y Nexus
-                Engineering.
+                Tu camino hacia la excelencia en Inteligencia Artificial y
+                InVitro-Code Engineering.
               </p>
             </div>
             <div className="text-left md:text-right">
@@ -257,6 +257,6 @@ export default async function LogrosPage() {
           </aside>
         </div>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }

@@ -4,7 +4,7 @@ import { XPBar } from "@/components/gamification/XPBar";
 import { StreakBadge } from "@/components/gamification/StreakBadge";
 import { LevelBadge } from "@/components/gamification/LevelBadge";
 import { ModuleProgress } from "@/components/gamification/ModuleProgress";
-import { NexusShell } from "@/components/layout/NexusShell";
+import { InVitroShell } from "@/components/layout/InVitroShell";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getModulesInfo, getResumeHref } from "@/lib/content/modules";
 import { calcLevel } from "@/lib/gamification/utils";
@@ -99,7 +99,7 @@ export default async function DashboardPage() {
     ringCircumference - (ringProgress / 100) * ringCircumference;
 
   return (
-    <NexusShell
+    <InVitroShell
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
     >
       {/* Top bar */}
@@ -142,7 +142,7 @@ export default async function DashboardPage() {
                     ¡Bienvenido de vuelta, Investigador! 👋
                   </h2>
                   <p className="mb-8 mt-4 max-w-lg text-on-surface-variant">
-                    Estás construyendo tu camino en el Nexus Institute.
+                    Estás construyendo tu camino en InVitro-Code.
                     Continúa tu investigación y descubrí nuevas formas de
                     aplicar la Inteligencia Artificial.
                   </p>
@@ -498,6 +498,6 @@ export default async function DashboardPage() {
           </aside>
         </div>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }

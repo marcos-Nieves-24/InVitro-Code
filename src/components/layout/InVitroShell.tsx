@@ -1,17 +1,17 @@
 import type { ReactNode } from "react";
 import { AppSidebar } from "./AppSidebar";
 
-interface NexusShellProps {
+interface InVitroShellProps {
   children: ReactNode;
   userName?: string;
   userMeta?: string;
 }
 
-export function NexusShell({
+export function InVitroShell({
   children,
   userName,
   userMeta,
-}: NexusShellProps) {
+}: InVitroShellProps) {
   return (
     <div className="min-h-screen bg-surface text-on-surface">
       <AppSidebar userName={userName} userMeta={userMeta} />

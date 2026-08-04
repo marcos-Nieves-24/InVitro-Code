@@ -1,12 +1,12 @@
 import { Gem, Flame, Bell } from "lucide-react";
 
-interface NexusTopBarProps {
+interface InVitroTopBarProps {
   totalXp: number;
   currentStreak: number;
   trail?: string;
 }
 
-export function NexusTopBar({ totalXp, currentStreak, trail }: NexusTopBarProps) {
+export function InVitroTopBar({ totalXp, currentStreak, trail }: InVitroTopBarProps) {
   return (
     <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-outline-variant bg-surface/80 px-8 pl-16 backdrop-blur-md md:pl-8">
       <div

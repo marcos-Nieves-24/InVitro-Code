@@ -11,7 +11,7 @@
   --spacing-card-padding: 1rem; /* 16px */
   --width-layout-max: 920px;
 
-  /* Brand (primary CTA — Nexus primary) */
+  /* Brand (primary CTA — InVitro-Code primary) */
   --color-brand: #3525cd;
   --color-brand-hover: #4f46e5;
   --color-brand-soft: #e2dfff;
@@ -26,7 +26,7 @@
   --color-amber-500: #f59e0b;
   --color-amber-600: #d97706;
 
-  /* Nexus / Material 3 surface tokens */
+  /* InVitro-Code / Material 3 surface tokens */
   --color-primary: #3525cd;
   --color-on-primary: #ffffff;
   --color-primary-container: #4f46e5;
@@ -99,7 +99,7 @@ body {
   background-size: 20px 20px;
 }
 
-/* ─── Nexus Glass Cards ──────────────────────────────── */
+/* ─── InVitro-Code Glass Cards ──────────────────────── */
 
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
@@ -121,7 +121,7 @@ body {
   color: #3525cd;
 }
 
-/* ─── Nexus Scroll / Timeline Helpers ─────────────────── */
+/* ─── InVitro-Code Scroll / Timeline Helpers ────────── */
 
 .scroll-hide::-webkit-scrollbar {
   display: none;

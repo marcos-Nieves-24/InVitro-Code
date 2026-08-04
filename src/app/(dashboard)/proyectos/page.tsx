@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { NexusShell } from "@/components/layout/NexusShell";
+import { InVitroShell } from "@/components/layout/InVitroShell";
 import { Countdown } from "@/components/proyectos/Countdown";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
@@ -64,7 +64,7 @@ export default async function ProyectosPage() {
   const levelInfo = calcLevel(totalXp);
 
   return (
-    <NexusShell userMeta={`Nivel ${levelInfo.level} · Proyectos`}>
+    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Proyectos`}>
       <div className="mx-auto max-w-[1440px] p-6 md:p-8">
         {/* Header */}
         <header className="mb-8 flex flex-wrap items-center justify-between gap-6">
@@ -215,7 +215,7 @@ export default async function ProyectosPage() {
                     <span className="h-3 w-3 rounded-full bg-green-500/80" />
                   </div>
                   <span className="ml-2 font-mono text-xs text-white/50">
-                    nexus_model_training.py
+                    invitro_model_training.py
                   </span>
                 </div>
                 <button
@@ -237,16 +237,16 @@ export default async function ProyectosPage() {
                   GradientBoostingRegressor
                 </p>
                 <p>
-                  <span className="text-purple-400">from</span> nexus_toolkit{" "}
+                  <span className="text-purple-400">from</span> invitro_toolkit{" "}
                   <span className="text-purple-400">import</span>{" "}
                   AdvancedPreprocessor
                 </p>
                 <br />
                 <p className="text-white/40">
-                  # Inicializando pipeline de entrenamiento Nexus
+                  # Inicializando pipeline de entrenamiento InVitro-Code
                 </p>
                 <p>data = pd.read_csv(<span className="text-green-400">&apos;wine_quality.csv&apos;</span>)</p>
-                <p>X_train, X_test, y_train, y_test = prepare_nexus_data(data)</p>
+                <p>X_train, X_test, y_train, y_test = prepare_invitro_data(data)</p>
                 <br />
                 <p>model = GradientBoostingRegressor(</p>
                 <p className="pl-4">
@@ -283,7 +283,7 @@ export default async function ProyectosPage() {
                     <span className="font-bold">+1,250</span>
                   </div>
                   <div className="flex justify-between text-sm text-white">
-                    <span className="opacity-70">Nexus Credits</span>
+                    <span className="opacity-70">InVitro-Code Credits</span>
                     <span className="font-bold">500</span>
                   </div>
                   <div className="h-px bg-white/20" />
@@ -376,11 +376,11 @@ export default async function ProyectosPage() {
               </div>
             </section>
 
-            {/* Nexus tips */}
+            {/* InVitro-Code tips */}
             <section className="rounded-[24px] glass-card p-6">
               <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-deep-navy">
                 <Lightbulb className="h-5 w-5 text-xp-blue" />
-                Nexus Tips
+                InVitro-Code Tips
               </h4>
               <div className="rounded-xl border border-xp-blue/20 bg-xp-blue/10 p-4">
                 <p className="mb-1 text-[11px] font-bold text-xp-blue">
@@ -396,6 +396,6 @@ export default async function ProyectosPage() {
           </div>
         </div>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }

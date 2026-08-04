@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
-import { NexusShell } from "@/components/layout/NexusShell";
-import { NexusTopBar } from "@/components/layout/NexusTopBar";
+import { InVitroShell } from "@/components/layout/InVitroShell";
+import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
 import {
@@ -94,8 +94,8 @@ export default async function ComunidadPage() {
   const levelInfo = calcLevel(totalXp);
 
   return (
-    <NexusShell userMeta={`Nivel ${levelInfo.level} · Comunidad`}>
-      <NexusTopBar totalXp={totalXp} currentStreak={currentStreak} trail="Centro de la Comunidad" />
+    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Comunidad`}>
+      <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} trail="Centro de la Comunidad" />
 
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
         {/* Featured projects + leaderboard */}
@@ -318,6 +318,6 @@ export default async function ComunidadPage() {
           </div>
         </section>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }

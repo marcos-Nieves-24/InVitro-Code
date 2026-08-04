@@ -41,7 +41,7 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({
-  userName = "Investigador Nexus",
+  userName = "Investigador InVitro-Code",
   userMeta = "Nivel 4 · Investigador",
 }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -92,10 +92,10 @@ export function AppSidebar({
           </div>
           <div>
             <h1 className="text-lg font-bold leading-none tracking-tight text-on-surface">
-              NEXUS
+              InVitro-Code
             </h1>
             <p className="text-xs font-medium text-on-surface-variant">
-              INSTITUTE
+              AI LEARNING
             </p>
           </div>
         </div>

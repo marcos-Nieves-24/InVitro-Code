@@ -245,7 +245,7 @@ export function LabMission() {
         </div>
       )}
 
-      {/* Nexus bot feedback */}
+      {/* InVitro-Code bot feedback */}
       {step >= 2 && (
         <div className="flex items-center gap-6 rounded-xl border border-primary/20 bg-primary/[0.03] p-6">
           <div className="relative">

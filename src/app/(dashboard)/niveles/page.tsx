@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
-import { NexusShell } from "@/components/layout/NexusShell";
-import { NexusTopBar } from "@/components/layout/NexusTopBar";
+import { InVitroShell } from "@/components/layout/InVitroShell";
+import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
 import {
@@ -125,10 +125,10 @@ export default async function NivelesPage() {
     ringCircumference - (rankProgress / 100) * ringCircumference;
 
   return (
-    <NexusShell
+    <InVitroShell
       userMeta={`Nivel ${levelInfo.level} · ${currentRank.name}`}
     >
-      <NexusTopBar totalXp={totalXp} currentStreak={currentStreak} />
+      <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} />
 
       <div className="mx-auto max-w-[1280px] px-6 py-10 md:px-10">
         {/* Header */}
@@ -138,7 +138,7 @@ export default async function NivelesPage() {
               Mapa de Niveles
             </h2>
             <p className="mt-1 text-on-surface-variant">
-              Tu trayectoria como investigador en el Nexus Institute
+              Tu trayectoria como investigador en InVitro-Code
             </p>
           </div>
         </header>
@@ -389,6 +389,6 @@ export default async function NivelesPage() {
           </div>
         </div>
       </div>
-    </NexusShell>
+    </InVitroShell>
   );
 }
