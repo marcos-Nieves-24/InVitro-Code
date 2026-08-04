@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Sora, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
-const plus_Jakarta_Sans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
 });
 
-const sora = Sora({
+const plus_Jakarta_Sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["600"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const jetBrains_Mono = JetBrains_Mono({
@@ -33,7 +33,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="es"
-        className={`${plus_Jakarta_Sans.variable} ${sora.className} ${jetBrains_Mono.variable}`}
+        className={`${inter.variable} ${plus_Jakarta_Sans.variable} ${jetBrains_Mono.variable}`}
       >
         <body className="antialiased">{children}</body>
       </html>

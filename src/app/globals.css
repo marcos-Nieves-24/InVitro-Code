@@ -11,10 +11,10 @@
   --spacing-card-padding: 1rem; /* 16px */
   --width-layout-max: 920px;
 
-  /* Brand (primary CTA — deep lab blue) */
-  --color-brand: #2563eb;
-  --color-brand-hover: #1d4ed8;
-  --color-brand-soft: #eff6ff;
+  /* Brand (primary CTA — Nexus primary) */
+  --color-brand: #3525cd;
+  --color-brand-hover: #4f46e5;
+  --color-brand-soft: #e2dfff;
 
   --color-teal-50: #f0fdfa;
   --color-teal-100: #ccfbf1;
@@ -25,6 +25,48 @@
   --color-amber-100: #fef3c7;
   --color-amber-500: #f59e0b;
   --color-amber-600: #d97706;
+
+  /* Nexus / Material 3 surface tokens */
+  --color-primary: #3525cd;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #4f46e5;
+  --color-primary-fixed: #e2dfff;
+  --color-primary-fixed-dim: #c3c0ff;
+  --color-on-primary-fixed-variant: #3323cc;
+
+  --color-secondary: #6b38d4;
+  --color-secondary-container: #8455ef;
+  --color-secondary-fixed: #e9ddff;
+  --color-secondary-fixed-dim: #d0bcff;
+
+  --color-tertiary: #005338;
+  --color-tertiary-container: #006e4b;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-tertiary-fixed-dim: #4edea3;
+
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #464555;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+
+  --color-outline: #777587;
+  --color-outline-variant: #c7c4d8;
+
+  --color-deep-navy: #0f172a;
+  --color-xp-blue: #3b82f6;
+  --color-error: #ba1a1a;
+  --color-success-green: #10b981;
+  --color-xp-gold: #f59e0b;
+  --color-streak-orange: #f97316;
+
+  --color-glass-fill: rgba(255, 255, 255, 0.7);
+  --color-glass-stroke: rgba(255, 255, 255, 0.4);
 }
 
 /* ─── Font Utilities ────────────────────────────────── */
@@ -55,6 +97,48 @@ body {
 .bg-dot-grid {
   background-image: radial-gradient(circle, #d4d4d4 0.5px, transparent 0.5px);
   background-size: 20px 20px;
+}
+
+/* ─── Nexus Glass Cards ──────────────────────────────── */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 24px -1px rgba(15, 23, 42, 0.05);
+}
+
+.xp-gradient {
+  background: linear-gradient(90deg, #3b82f6 0%, #3525cd 100%);
+}
+
+.progress-gradient {
+  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+}
+
+.sidebar-active {
+  background-color: #e2dfff;
+  color: #3525cd;
+}
+
+/* ─── Nexus Scroll / Timeline Helpers ─────────────────── */
+
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-hide {
+  scrollbar-width: none;
+}
+
+.timeline-connector {
+  background: repeating-linear-gradient(
+    90deg,
+    #c7c4d8 0,
+    #c7c4d8 4px,
+    transparent 4px,
+    transparent 8px
+  );
 }
 
 /* ─── Confetti Animation ────────────────────────────── */
