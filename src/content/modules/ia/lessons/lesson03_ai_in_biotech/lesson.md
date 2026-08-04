@@ -176,7 +176,52 @@ El mayor error en ML biotecnológico es la **contaminación de datos**: cuando i
 
 </Section>
 
-<Section number={10} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={10} title="Matriz de confusión" eyebrow="CONCEPTO">
+
+Cuando un clasificador predice, no solo importa cuántas acertó: importa **qué tipo de errores comete**. La matriz de confusión desagrega los aciertos y errores por clase.
+
+<ConceptCard variant="definition">
+En una clasificación binaria:
+- **Verdadero Positivo (TP)**: el modelo predijo positivo y realmente era positivo.
+- **Falso Positivo (FP)**: el modelo predijo positivo, pero era negativo.
+- **Falso Negativo (FN)**: el modelo predijo negativo, pero era positivo.
+- **Verdadero Negativo (TN)**: el modelo predijo negativo y realmente era negativo.
+</ConceptCard>
+
+Imaginá un clasificador de conidias que etiqueta como positiva a *Aspergillus*. De 100 conidias analizadas, obtuvimos estos resultados:
+
+<InteractiveTable
+  headers={["", "Predicho Aspergillus", "Predicho Penicillium"]}
+  rows={[
+    ["Real Aspergillus", "35 (TP)", "10 (FN)"],
+    ["Real Penicillium", "5 (FP)", "50 (TN)"],
+  ]}
+  caption="Resultados de un clasificador de conidias (n=100)"
+/>
+
+<ConceptCard variant="definition">
+La **precisión** mide qué tan confiables son las predicciones positivas: precision = TP / (TP + FP).
+</ConceptCard>
+
+<ConceptCard variant="definition">
+El **recall** (o sensibilidad) mide qué proporción de los positivos reales detectamos: recall = TP / (TP + FN).
+</ConceptCard>
+
+<ConceptCard variant="definition">
+El **F1-score** es la media armónica entre precisión y recall: F1 = 2 * (precision * recall) / (precision + recall).
+</ConceptCard>
+
+En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0.824.
+
+<ReflectionCheck
+  blockId="reflection-l03-confusion"
+  prompt="¿Por qué la matriz de confusión es más útil que solo reportar el porcentaje de aciertos totales?"
+  answer="Porque desagrega los errores. En biotecnología, un falso negativo (dejar pasar un patógeno) puede tener un costo muy distinto a un falso positivo (rechazar una muestra sana). El accuracy solo no muestra eso."
+/>
+
+</Section>
+
+<Section number={11} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 1. **¿Qué mide el RMSD en el contexto de AlphaFold?**
    - a) La cantidad de proteínas predichas por segundo
@@ -218,7 +263,7 @@ El mayor error en ML biotecnológico es la **contaminación de datos**: cuando i
 
 </Section>
 
-<Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 AlphaFold, PDB, pipelines de ML — ya ves cómo la IA está transformando la biotecnología, un experimento a la vez.
