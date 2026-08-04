@@ -51,6 +51,8 @@ La vacuna mRNA necesita un **vehículo** para llevar el mensaje genético a las 
 
 <ReflectionCheck
   blockId="reflection-l04-lnp"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
   prompt="Diseñar la combinación óptima de lípidos para una LNP implica probar miles de formulaciones. Cada una varía en estabilidad, captura celular, inmunogenicidad. ¿Cómo puede la IA acelerar este proceso en lugar de probar cada una en el laboratorio?"
   answer="Un modelo de ML se entrena con datos de formulaciones previas (composición lipídica → eficiencia de transfección, estabilidad, toxicidad). Aprende la relación entre composición química y rendimiento. Luego predice qué formulaciones nuevas serían más efectivas, guiando los experimentos hacia las candidatas más prometedoras y evitando probar miles de combinaciones al azar."
 />
@@ -67,6 +69,8 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
 
 <ReflectionCheck
   blockId="reflection-l04-reposicionamiento"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
   prompt="Si tenés datos de interacciones molecular-detector (qué fármacos se unen a qué proteínas virales), ¿cómo models el problema: clasificación o regresión? ¿Qué métrica usarías para evaluar si un modelo así es confiable en un contexto clínico donde un falso negativo puede costar vidas?"
   answer="Es clasificación binaria (se une / no se une). La métrica clave es sensibilidad (recall): minimizar falsos negativos (fármacos que sí funcionan pero el modelo descartó). En un contexto clínico, también importa la especificidad para evitar falsos positivos que lleven a ensayos clínicos costosos e inútiles. Se necesita un balance cuidadoso."
 />
@@ -79,15 +83,33 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
 - Baricitinib (artritis reumatoide) fue identificado por IA como candidato para COVID-19, y pasó a ensayos clínicos
 - Remdesivir (originalmente para Ébola) también fue acelerado por predicciones computacionales
 
+<CalloutInfo>
+<strong>Rentosertib (INS018_055):</strong> Insilico Medicine descubrió este candidato usando modelos generativos de IA en solo <strong>18 meses</strong> desde la identificación del objetivo hasta el candidato preclínico (PCC). El proceso tradicional suele llevar de 4 a 6 años, lo que muestra cuánto puede acelerar la IA el descubrimiento de fármacos.
+</CalloutInfo>
+
+<ReflectionCheck
+  blockId="reflection-l04-rentosertib-transition"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  prompt="¿Por qué un fármaco descubierto en 18 meses es revolucionario para la industria biotecnológica? ¿Qué tipo de validaciones experimentales siguen siendo necesarias antes de usarlo en humanos?"
+  answer="Acortar el tiempo de descubrimiento reduce costos y acelera el acceso a terapias potenciales. Sin embargo, la IA no reemplaza los ensayos de seguridad, eficacia, toxicología y las fases clínicas: solo validan en laboratorio y en pacientes si el compuesto es realmente seguro y efectivo."
+/>
+
 </Section>
 
 <Section number={5} title="AlphaFold en la práctica" eyebrow="CONCEPTO">
 
 <ReflectionCheck
   blockId="reflection-l04-alphafold-practica"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
   prompt="AlphaFold predice estructuras. ¿Cómo ayuda esto a diseñar un fármaco que se una a una proteína viral específica? ¿Qué limitaciones viste antes que podrían afectar un diseño de fármaco basado ENTERAMENTE en estructuras predichas?"
   answer="Con la estructura predicha de la proteína viral, se puede simular (docking) qué moléculas podrían unirse a ella — un paso clave en diseño de fármacos. Limitaciones: AlphaFold predice la estructura más estable, pero las proteínas son dinámicas y cambian de forma al unirse a otras moléculas. La predicción puede no reflejar el estado activo real de la proteína, llevando a falsos positivos en los screenings virtuales."
 />
+
+<ConceptCard variant="key-idea">
+<strong>CASP14 y el score de 92.4 GDT:</strong> En 2020, AlphaFold 2 alcanzó una puntuación mediana de <strong>92.4 sobre 100</strong> en la competencia CASP14, muy por encima del segundo equipo (~80). Este fue un punto de inflexión para la biología computacional: por primera vez una IA predijo estructuras de proteínas con una precisión comparable a los métodos experimentales en muchos casos.
+</ConceptCard>
 
 <ConceptCard variant="warning">
 AlphaFold predice estructuras, pero las proteínas no son estáticas. Se mueven, vibran, cambian de forma al interactuar. Una estructura predicha es una aproximación útil, no la verdad absoluta. Los experimentos de laboratorio siguen siendo necesarios para validar.
@@ -106,6 +128,8 @@ DeepMind se asoció con Isomorphic Labs para llevar AlphaFold a la industria far
 
 <ReflectionCheck
   blockId="reflection-l04-industria"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
   prompt="AlphaFold democratizó el acceso a estructuras de proteínas: ahora cualquier laboratorio del mundo puede obtener una predicción sin necesidad de costosos equipos de rayos X o criomicroscopía. ¿Qué oportunidades crea esto para países con menos recursos? ¿Qué riesgos hay si un laboratorio confía ciegamente en una estructura predicha sin validación experimental?"
   answer="Oportunidad: laboratorios de recursos limitados pueden hacer investigación estructural y diseño de fármacos que antes eran inviables. Riesgo: tomar decisiones críticas (como seleccionar una diana farmacológica) basadas en una predicción incorrecta, desperdiciando años de investigación. La validación experimental sigue siendo necesaria, pero ahora se puede priorizar mejor."
 />
@@ -131,10 +155,57 @@ La IA no va a reemplazar a científicos. Va a **aumentar** su capacidad: experim
 
 </Section>
 
-<Section number={8} title="Limitaciones de la IA en biotecnología" eyebrow="CRÍTICO">
+<Section number={8} title="Evo: modelos fundacionales para la genómica" eyebrow="CONCEPTO">
+
+Hasta ahora vimos modelos que predicen estructuras a partir de secuencias. Pero la IA también puede aprender directamente del lenguaje del ADN.
+
+<ConceptCard variant="definition">
+<strong>Evo</strong> es un modelo fundacional para genómica desarrollado por el Arc Institute (publicado en <em>Science</em> en 2024). Se entrenó con <strong>300 mil millones de bases de ADN</strong> del Tree of Life y puede predecir el efecto de variantes genéticas, diseñar proteínas funcionales y generar secuencias de ADN novedosas.
+</ConceptCard>
+
+Esto lo hace distinto de AlphaFold:
+
+- **AlphaFold** predice la estructura 3D de una proteína a partir de su secuencia de aminoácidos.
+- **Evo** genera y comprende secuencias genómicas completas, incluyendo regiones no codificantes.
+
+<InteractiveTable
+  columns={[
+    { key: "modelo", label: "Modelo" },
+    { key: "entrada", label: "Entrada" },
+    { key: "salida", label: "Salida principal" },
+    { key: "generativo", label: "¿Genera secuencias?" }
+  ]}
+  rows={[
+    { modelo: "AlphaFold", entrada: "Secuencia de aminoácidos", salida: "Estructura 3D", generativo: "No" },
+    { modelo: "Evo", entrada: "Secuencia de ADN", salida: "Predicciones + secuencias", generativo: "Sí" },
+    { modelo: "Métodos tradicionales", entrada: "Datos experimentales", salida: "Estructura o función validada", generativo: "No" }
+  ]}
+  caption="Comparación de capacidades: AlphaFold predice estructuras, Evo entiende y genera ADN."
+/>
+
+<ComparisonTable
+  leftLabel="AlphaFold"
+  rightLabel="Evo"
+  rows={[
+    { feature: "Tipo de dato", left: "Proteínas (secuencias de aminoácidos)", right: "Genomas completos (ADN)" },
+    { feature: "Tarea principal", left: "Predicción estructural", right: "Modelado y diseño de secuencias" },
+    { feature: "Salida", left: "Coordenadas 3D de la proteína", right: "Secuencias, variantes y proteínas diseñadas" },
+    { feature: "Relación con métodos tradicionales", left: "Reduce la necesidad de cristalografía de rayos X", right: "Amplía la ingeniería genética más allá de lo experimental" }
+  ]}
+/>
+
+<ConceptCard variant="key-idea">
+Ambos modelos son herramientas poderosas, pero complementarias: AlphaFold resuelve el problema de <em>qué forma</em> tiene una proteína, mientras que Evo explora <em>qué secuencias</em> pueden producir funciones biológicas útiles.
+</ConceptCard>
+
+</Section>
+
+<Section number={9} title="Limitaciones de la IA en biotecnología" eyebrow="CRÍTICO">
 
 <ReflectionCheck
   blockId="reflection-l04-limites"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
   prompt="Si un modelo de IA predice con 95% de confianza que un fármaco funciona contra un virus, ¿lo usarías directamente en pacientes? ¿Qué podría estar ocultando ese 5% de incertidumbre?"
   answer="No. Un 95% de confianza en el modelo no es un 95% de probabilidad de que funcione en humanos. El modelo puede tener sesgos: datos de entrenamiento limitados, condiciones de laboratorio que no reflejan la fisiología real, efectos secundarios imprevistos. La incertidumbre real incluye cosas que el modelo no modeló (interacciones metabólicas, variabilidad genética, efectos a largo plazo) — y eso no está en el 5%. La validación clínica en fases sigue siendo obligatoria."
 />
@@ -150,7 +221,7 @@ La IA en biotecnología tiene limitaciones fundamentales:
 
 </Section>
 
-<Section number={9} title="Lo que aprendimos en el Módulo 1" eyebrow="CIERRE">
+<Section number={10} title="Lo que aprendimos en el Módulo 1" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorrido completo: features, algoritmos, pipelines, y aplicaciones reales.
@@ -174,7 +245,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 </Section>
 
-<Section number={10} title="Checkpoint final" eyebrow="EVALUACIÓN">
+<Section number={11} title="Checkpoint final" eyebrow="EVALUACIÓN">
 
 1. **¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?**
    - a) Diseñó la secuencia genética del virus
@@ -216,7 +287,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 </Section>
 
-<Section number={11} title="Fin del Módulo 1" eyebrow="COMPLETADO">
+<Section number={12} title="Fin del Módulo 1" eyebrow="COMPLETADO">
 
 <MascotMessage mood="celebrating">
 Completaste el Módulo 1. Features, algoritmos, pipelines, casos reales. Tenés las bases para entender cómo la IA está transformando la biotecnología.
