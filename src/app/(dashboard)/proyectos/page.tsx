@@ -1,59 +1,73 @@
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
-import { Countdown } from "@/components/proyectos/Countdown";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { calcLevel } from "@/lib/gamification/utils";
+import { calcLevel, rankTitle } from "@/lib/gamification/utils";
+import { getDisplayName } from "@/lib/gamification/user";
+import { getNextLesson, getModuleDisplayName } from "@/lib/content/modules";
+import { EMPTY_STATES } from "@/lib/ui/empty-states";
 import {
   Trophy,
-  ArrowLeft,
-  Bell,
-  Settings,
-  UploadCloud,
-  Crown,
   Lightbulb,
-  Medal,
-  Play,
   Wine,
+  Gem,
+  Flame,
+  BookOpen,
+  ArrowRight,
+  FlaskConical,
+  BarChart3,
 } from "lucide-react";
 
+// 11 variables físico-químicas reales del dataset de vino (UCI Wine Quality).
 const FEATURES = [
-  "Acidez fija y volátil",
-  "Ácido cítrico y azúcares residuales",
-  "Cloruros y densidad de sulfatos",
-  "pH, sulfatos y alcohol",
-];
-
-const METRICS = [
-  { label: "Precisión (R²)", value: "0.782", color: "text-xp-blue", barColor: "bg-xp-blue", border: "border-l-xp-blue", percent: 78 },
-  { label: "MAE", value: "0.42", color: "text-secondary", barColor: "bg-secondary", border: "border-l-secondary", percent: 42 },
-  { label: "Validación", value: "94.5%", color: "text-tertiary", barColor: "bg-tertiary", border: "border-l-tertiary", percent: 94 },
-  { label: "Epochs", value: "120/500", color: "text-error", barColor: "bg-error", border: "border-l-error", percent: 24 },
-];
-
-const LEADERBOARD = [
-  { name: "Elena_AI_Dev", metric: "R²: 0.924", xp: "+40XP", highlight: true },
-  { name: "Data_Scientist_X", metric: "R²: 0.911", highlight: false },
-  { name: "BioCoder_99", metric: "R²: 0.898", highlight: false },
+  "Acidez fija",
+  "Acidez volátil",
+  "Ácido cítrico",
+  "Azúcar residual",
+  "Cloruros",
+  "Dióxido de azufre libre",
+  "Dióxido de azufre total",
+  "Densidad",
+  "pH",
+  "Sulfatos",
+  "Alcohol",
 ];
 
 export default async function ProyectosPage() {
-  const session = await auth().catch(() => ({ userId: null }));
-  const userId = session?.userId ?? "dev-user";
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes, streakRes] = await Promise.all([
-    supabase.from("progress").select("xp_earned").eq("user_id", userId),
-    supabase
-      .from("reflection_completions")
-      .select("xp_earned")
-      .eq("user_id", userId),
-    supabase
-      .from("streaks")
-      .select("current_streak")
-      .eq("user_id", userId)
-      .maybeSingle(),
-  ]);
+  const [progressRes, reflectionRes, streakRes, profileRes] = await Promise.all(
+    [
+      supabase
+        .from("progress")
+        .select("module_slug, lesson_slug, xp_earned")
+        .eq("user_id", userId)
+        .eq("completed", true)
+        .not("completed_at", "is", null),
+      supabase
+        .from("reflection_completions")
+        .select("xp_earned")
+        .eq("user_id", userId)
+        .not("completed_at", "is", null),
+      supabase
+        .from("streaks")
+        .select("current_streak")
+        .eq("user_id", userId)
+        .maybeSingle(),
+      supabase
+        .from("profiles")
+        .select("username, email")
+        .eq("id", userId)
+        .maybeSingle(),
+    ],
+  );
 
   const totalXp = [
     ...(progressRes.data ?? []),
@@ -62,20 +76,26 @@ export default async function ProyectosPage() {
 
   const currentStreak = streakRes.data?.current_streak ?? 0;
   const levelInfo = calcLevel(totalXp);
+  const userName = getDisplayName(profileRes.data ?? {});
+
+  const completedLessonKeys = new Set(
+    (progressRes.data ?? []).map(
+      (row) => `${row.module_slug}/${row.lesson_slug}`,
+    ),
+  );
+  const lessonsCompleted = completedLessonKeys.size;
+  const nextLesson = getNextLesson(completedLessonKeys);
+  const missionXp = nextLesson?.xp ?? 0;
 
   return (
-    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Proyectos`}>
+    <InVitroShell
+      userName={userName}
+      userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
+    >
       <div className="mx-auto max-w-[1440px] p-6 md:p-8">
         {/* Header */}
         <header className="mb-8 flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition-colors hover:bg-outline-variant"
-              aria-label="Volver"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </button>
             <div>
               <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
                 <Trophy className="h-4 w-4" />
@@ -84,27 +104,6 @@ export default async function ProyectosPage() {
               <h2 className="font-display text-2xl font-bold text-deep-navy">
                 Predicción de Calidad de Vino
               </h2>
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center gap-6">
-            <Countdown days={2} hours={14} minutes={32} />
-            <div className="h-8 w-px bg-outline-variant" />
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-high"
-                aria-label="Notificaciones"
-              >
-                <Bell className="h-5 w-5 text-on-surface-variant" />
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-error" />
-              </button>
-              <button
-                type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-high"
-                aria-label="Configuración"
-              >
-                <Settings className="h-5 w-5 text-on-surface-variant" />
-              </button>
             </div>
           </div>
         </header>
@@ -150,7 +149,7 @@ export default async function ProyectosPage() {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="space-y-4 text-sm leading-relaxed text-on-surface-variant">
                   <p>
                     Este conjunto de datos contiene información sobre variantes
@@ -158,7 +157,7 @@ export default async function ProyectosPage() {
                     portugués. Están disponibles variables físico-químicas
                     (entradas) y sensoriales (salida).
                   </p>
-                  <ul className="space-y-2">
+                  <ul className="grid grid-cols-1 gap-2">
                     {FEATURES.map((feature) => (
                       <li key={feature} className="flex items-center gap-2">
                         <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
@@ -167,213 +166,135 @@ export default async function ProyectosPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="group flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-low p-6 transition-colors hover:border-primary">
-                  <UploadCloud className="mb-3 h-10 w-10 text-primary transition-transform group-hover:scale-110" />
+                <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-low p-6 text-center">
+                  <BarChart3 className="mb-3 h-10 w-10 text-primary" />
                   <p className="mb-1 text-sm font-bold text-deep-navy">
-                    Carga tu Dataset
+                    Tus métricas son reales
                   </p>
-                  <p className="px-4 text-center text-xs text-on-surface-variant">
-                    Arrastrá archivos .csv o .parquet para iniciar el
-                    pre-procesamiento
+                  <p className="px-4 text-xs text-on-surface-variant">
+                    Este desafío se resuelve en las lecciones del módulo de
+                    Machine Learning: ahí entrenás tu modelo y ves tu R² real.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* Metrics HUD */}
+            {/* Real progress HUD (real data, no invented metrics) */}
             <section className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-              {METRICS.map((metric) => (
-                <div
-                  key={metric.label}
-                  className={`rounded-2xl border-l-4 glass-card p-6 ${metric.border}`}
-                >
-                  <p
-                    className={`mb-1 text-[10px] font-bold uppercase tracking-widest ${metric.color}`}
-                  >
-                    {metric.label}
-                  </p>
-                  <h5 className="text-2xl font-bold text-deep-navy">
-                    {metric.value}
-                  </h5>
-                  <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-surface-container">
-                    <div
-                      className={`h-full ${metric.barColor}`}
-                      style={{ width: `${metric.percent}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+              <div className="rounded-2xl border-l-4 border-l-xp-blue glass-card p-6">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-xp-blue">
+                  XP Total
+                </p>
+                <h5 className="text-2xl font-bold text-deep-navy">
+                  {totalXp.toLocaleString("es-AR")}
+                </h5>
+              </div>
+              <div className="rounded-2xl border-l-4 border-l-primary glass-card p-6">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                  Nivel
+                </p>
+                <h5 className="text-2xl font-bold text-deep-navy">
+                  {levelInfo.level} · {rankTitle(levelInfo.level)}
+                </h5>
+              </div>
+              <div className="rounded-2xl border-l-4 border-l-error glass-card p-6">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-error">
+                  Racha
+                </p>
+                <h5 className="flex items-center gap-2 text-2xl font-bold text-deep-navy">
+                  <Flame className="h-5 w-5 text-error" />
+                  {currentStreak}
+                </h5>
+              </div>
+              <div className="rounded-2xl border-l-4 border-l-tertiary glass-card p-6">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-tertiary">
+                  Lecciones completadas
+                </p>
+                <h5 className="flex items-center gap-2 text-2xl font-bold text-deep-navy">
+                  <BookOpen className="h-5 w-5 text-tertiary" />
+                  {lessonsCompleted}
+                </h5>
+              </div>
             </section>
 
-            {/* Code / process area */}
-            <section className="relative overflow-hidden rounded-[24px] bg-deep-navy shadow-2xl">
-              <div className="flex items-center justify-between border-b border-white/10 bg-deep-navy px-6 py-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-1.5">
-                    <span className="h-3 w-3 rounded-full bg-red-500/80" />
-                    <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                    <span className="h-3 w-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <span className="ml-2 font-mono text-xs text-white/50">
-                    invitro_model_training.py
-                  </span>
+            {/* Model area — honest, no fake training (D1) */}
+            <section className="rounded-[24px] bg-deep-navy p-6 shadow-2xl">
+              <div className="mb-4 flex items-center gap-3 border-b border-white/10 pb-4">
+                <div className="flex gap-1.5">
+                  <span className="h-3 w-3 rounded-full bg-red-500/80" />
+                  <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
+                  <span className="h-3 w-3 rounded-full bg-green-500/80" />
                 </div>
-                <button
-                  type="button"
-                  className="group flex items-center gap-2 rounded-lg bg-tertiary px-6 py-2 text-xs font-bold text-white transition-all hover:bg-tertiary-container"
-                >
-                  <Play className="h-4 w-4 text-tertiary-fixed transition-transform group-hover:rotate-12" fill="currentColor" />
-                  ENTRENAR MODELO
-                </button>
+                <span className="ml-2 font-mono text-xs text-white/50">
+                  Laboratorio de Machine Learning
+                </span>
               </div>
-              <div className="min-h-[240px] space-y-1 p-8 font-mono text-[13px] leading-relaxed text-blue-300">
-                <p>
-                  <span className="text-purple-400">import</span> pandas{" "}
-                  <span className="text-purple-400">as</span> pd
-                </p>
-                <p>
-                  <span className="text-purple-400">from</span> sklearn.ensemble{" "}
-                  <span className="text-purple-400">import</span>{" "}
-                  GradientBoostingRegressor
-                </p>
-                <p>
-                  <span className="text-purple-400">from</span> invitro_toolkit{" "}
-                  <span className="text-purple-400">import</span>{" "}
-                  AdvancedPreprocessor
-                </p>
-                <br />
-                <p className="text-white/40">
-                  # Inicializando pipeline de entrenamiento InVitro-Code
-                </p>
-                <p>data = pd.read_csv(<span className="text-green-400">&apos;wine_quality.csv&apos;</span>)</p>
-                <p>X_train, X_test, y_train, y_test = prepare_invitro_data(data)</p>
-                <br />
-                <p>model = GradientBoostingRegressor(</p>
-                <p className="pl-4">
-                  learning_rate=<span className="text-orange-400">0.1</span>,
-                </p>
-                <p className="pl-4">
-                  n_estimators=<span className="text-orange-400">100</span>,
-                </p>
-                <p className="pl-4">
-                  max_depth=<span className="text-orange-400">3</span>
-                </p>
-                <p>)</p>
-              </div>
+              <EmptyState
+                icon={FlaskConical}
+                {...EMPTY_STATES.challengeLab}
+                actionLabel="Ir a las lecciones"
+                href="/learn"
+              />
             </section>
           </div>
 
           {/* Right column */}
           <div className="col-span-12 space-y-8 xl:col-span-4">
-            {/* Master reward */}
+            {/* Real mission reward */}
             <section className="overflow-hidden rounded-[32px] bg-gradient-to-br from-primary to-secondary p-1 shadow-xl shadow-primary/20">
-              <div className="flex h-full w-full flex-col items-center rounded-[30px] bg-white/10 p-8 text-center backdrop-blur-xl">
+              <div className="flex h-full w-full flex-col rounded-[30px] bg-white/10 p-8 text-center backdrop-blur-xl">
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg">
-                  <Crown className="h-10 w-10 text-xp-gold" />
+                  <Gem className="h-10 w-10 text-xp-gold" />
                 </div>
                 <h4 className="mb-2 text-xl font-bold tracking-tight text-white">
-                  Recompensa Maestra
+                  Recompensa de tu próxima misión
                 </h4>
                 <p className="mb-6 text-xs font-bold uppercase tracking-[0.15em] text-white/70">
-                  Insignia de Viticultor Digital
+                  {nextLesson
+                    ? getModuleDisplayName(nextLesson.moduleSlug)
+                    : "Expedición completa"}
                 </p>
                 <div className="mb-6 w-full space-y-3">
                   <div className="flex justify-between text-sm text-white">
-                    <span className="opacity-70">XP de Misión</span>
-                    <span className="font-bold">+1,250</span>
+                    <span className="opacity-70">XP reales</span>
+                    <span className="font-bold">
+                      +{missionXp.toLocaleString("es-AR")}
+                    </span>
                   </div>
-                  <div className="flex justify-between text-sm text-white">
-                    <span className="opacity-70">InVitro-Code Credits</span>
-                    <span className="font-bold">500</span>
-                  </div>
-                  <div className="h-px bg-white/20" />
                   <div className="flex justify-between text-white">
-                    <span className="font-bold">Nivel Posterior</span>
+                    <span className="font-bold">Nivel actual</span>
                     <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
-                      NIVEL 5
+                      NIVEL {levelInfo.level}
                     </span>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="w-full rounded-2xl bg-white py-4 font-bold text-primary shadow-xl transition-transform hover:scale-[1.02]"
+                <a
+                  href="/laboratorios"
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white py-4 font-bold text-primary shadow-xl transition-transform hover:scale-[1.02]"
                 >
-                  CANJEAR PREMIOS
-                </button>
+                  Ir al laboratorio
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
             </section>
 
-            {/* Leaderboard */}
+            {/* Real leaderboard link */}
             <section className="rounded-[24px] glass-card p-6">
-              <div className="mb-6 flex items-center justify-between">
-                <h4 className="flex items-center gap-2 text-sm font-bold text-deep-navy">
-                  <Medal className="h-5 w-5 text-secondary" />
-                  Leaderboard Global
-                </h4>
-                <button
-                  type="button"
-                  className="text-[10px] font-bold text-primary hover:underline"
-                >
-                  VER TODOS
-                </button>
-              </div>
-              <div className="space-y-4">
-                {LEADERBOARD.map((row, i) => (
-                  <div
-                    key={row.name}
-                    className={`flex items-center gap-3 rounded-xl p-3 ${
-                      row.highlight
-                        ? "border border-outline-variant bg-surface-container/50"
-                        : "transition-colors hover:bg-surface-container"
-                    }`}
-                  >
-                    <span
-                      className={`w-6 text-center text-sm font-bold italic ${
-                        i === 0 ? "text-primary" : "text-on-surface-variant"
-                      }`}
-                    >
-                      #{i + 1}
-                    </span>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-outline-variant text-[10px] font-bold">
-                      {row.name.charAt(0)}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs font-bold text-deep-navy">
-                        {row.name}
-                      </p>
-                      <p className="text-[10px] text-on-surface-variant">
-                        {row.metric}
-                      </p>
-                    </div>
-                    {row.xp && (
-                      <span className="text-[10px] font-bold text-tertiary">
-                        {row.xp}
-                      </span>
-                    )}
-                  </div>
-                ))}
-                <div className="mt-4 border-t border-outline-variant pt-4">
-                  <div className="flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 p-3">
-                    <span className="w-6 text-center text-sm font-bold italic text-primary">
-                      #42
-                    </span>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full border border-primary bg-primary-container text-[10px] font-bold text-primary">
-                      TÚ
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs font-bold text-deep-navy">
-                        Tú (Investigador)
-                      </p>
-                      <p className="text-[10px] text-on-surface-variant">
-                        R²: 0.782
-                      </p>
-                    </div>
-                    <span className="text-[10px] font-bold text-primary">
-                      SIGUE ASÍ
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-deep-navy">
+                <Trophy className="h-5 w-5 text-secondary" />
+                Ranking global
+              </h4>
+              <p className="mb-4 text-xs leading-relaxed text-on-surface-variant">
+                El ranking se calcula con el XP real de cada investigador.
+                Miralo en el Centro de la Comunidad.
+              </p>
+              <a
+                href="/comunidad"
+                className="flex items-center justify-center gap-2 rounded-xl bg-surface-container px-4 py-3 text-sm font-bold text-on-surface transition-colors hover:bg-surface-container-high"
+              >
+                Ir al ranking
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </section>
 
             {/* InVitro-Code tips */}

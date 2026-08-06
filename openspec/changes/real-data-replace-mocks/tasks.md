@@ -53,23 +53,23 @@ Chain strategy: pending
 
 - [x] T4.1 `dashboard/page.tsx`: redirect sin sesión; Proyecto Actual = módulo en progreso %=real o EmptyState; Misión Actual = `getNextLesson`+`calcXpForLesson`; Logros Recientes reales; quitar 68%, +40 XP, campana, logros fake (REQ-UP-01/02, REQ-ACH-08)
 - [x] T4.2 `logros/page.tsx`: pintar desde API + `getWeeklyXp`; % real; quitar 38%/24 de 64/CATEGORIES/WEEKLY_XP/"Ver perfil"/"Explorar Desafíos"; vacío motivador si 0 (REQ-ACH-06/07)
-- [ ] T4.3 `comunidad/page.tsx`: ranking real + `currentUser`; activos `streaks.current_streak>0`; quitar proyectos fake/1,248/feed/"Sincronizar"/foros/DIREC ⇒ vacíos honestos (REQ-LB-04/05)
-- [ ] T4.4 `proyectos/page.tsx`: conservar descripción educativa de vino; quitar Countdown, METRICS, leaderboard fake, "#42", Recompensa inventada, "Carga"/"ENTRENAR"/"CANJEAR", código fake → editor real o EmptyState; HUD = XP/nivel real (REQ-NFR-03, OQ-1)
-- [ ] T4.5 `laboratorios/page.tsx`: breadcrumb real; `LabMission` con props reales; "+40 XP"→`calcXpForLesson` (REQ-UP-03)
+- [x] T4.3 `comunidad/page.tsx`: ranking real + `currentUser`; activos `streaks.current_streak>0`; quitar proyectos fake/1,248/feed/"Sincronizar"/foros/DIREC ⇒ vacíos honestos (REQ-LB-04/05)
+- [x] T4.4 `proyectos/page.tsx`: conservar descripción educativa de vino; quitar Countdown, METRICS, leaderboard fake, "#42", Recompensa inventada, "Carga"/"ENTRENAR"/"CANJEAR", código fake → editor real o EmptyState; HUD = XP/nivel real (REQ-NFR-03, OQ-1)
+- [x] T4.5 `laboratorios/page.tsx`: breadcrumb real; `LabMission` con props reales; "+40 XP"→`calcXpForLesson` (REQ-UP-03)
 - [x] T4.6 `niveles/page.tsx`: `?? "dev-user"`→`redirect("/sign-in")`; userName real (REQ-UI-02)
 
 ## T5. Componentes
 
 - [x] T5.1 `AppSidebar.tsx`: default `userName="Investigador"`; las 6 páginas pasan `getDisplayName(profile)` (REQ-UI-01)
-- [ ] T5.2 `lesson/page.tsx` lee `FEATURE_FLAG_CERTIFY` y propaga por components map → `LessonCodeEditor`→`PyodideRunner`→`OutputPanel` (prop `certifyEnabled`); botón solo si `valid && certifyEnabled` (REQ-CER-02/04)
-- [ ] T5.3 `LabMission.tsx`: props nivel/misión/progreso; quitar 35%/"Nivel 1"/"Misión 2"/R²0.72/MAE0.48/160; mostrar run real Pyodide o "Ejecutá el código..." (REQ-UP-03/04, OQ-2)
+- [x] T5.2 `lesson/page.tsx` lee `FEATURE_FLAG_CERTIFY` y propaga por components map → `LessonCodeEditor`→`PyodideRunner`→`OutputPanel` (prop `certifyEnabled`); botón solo si `valid && certifyEnabled` (REQ-CER-02/04)
+- [x] T5.3 `LabMission.tsx`: props nivel/misión/progreso; quitar 35%/"Nivel 1"/"Misión 2"/R²0.72/MAE0.48/160; mostrar run real Pyodide o "Ejecutá el código..." (REQ-UP-03/04, OQ-2)
 - [x] T5.4 `InVitroTopBar.tsx`: quitar campana (REQ-UI-03)
 
 ## T6. Limpieza global
 
-- [ ] T6.1 `rg 'dev-user' src/` → 0 (REQ-UI-02)
-- [ ] T6.2 `rg '68%|+40 XP|1,248|0\\.782|0\\.42|38%|24 de 64|35%|de 14h 32m'` en páginas → 0 (REQ-NFR-03)
-- [ ] T6.3 `rg` no-ops (campana/"Ver perfil"/"Explorar Desafíos"/"Sincronizar"/"CANJEAR"/"ENTRENAR"/"Carga tu Dataset") → 0 (REQ-UI-03)
+- [x] T6.1 `rg 'dev-user' src/` → 0 (REQ-UI-02)
+- [x] T6.2 `rg '68%|+40 XP|1,248|0\\.782|0\\.42|38%|24 de 64|35%|de 14h 32m'` en páginas → 0 (REQ-NFR-03)
+- [x] T6.3 `rg` no-ops (campana/"Ver perfil"/"Explorar Desafíos"/"Sincronizar"/"CANJEAR"/"ENTRENAR"/"Carga tu Dataset") → 0 (REQ-UI-03)
 - [ ] T6.4 `npm run build` pasa (REQ-NFR-01)
 
 ## T7. Env

@@ -33,6 +33,11 @@ export const EMPTY_STATES: Record<string, EmptyStateCopy> = {
   },
   labProgress: {
     title: "Sin progreso en este laboratorio",
-    description: "Ejecutá el código de la misión para comenzar a progresar.",
+    description: "Ejecutá el código para ver tu progreso real.",
+  },
+  challengeLab: {
+    title: "Ejecutá el modelo en el laboratorio",
+    description:
+      "Este desafío de calidad de vino se resuelve en las lecciones del módulo de Machine Learning: ahí vas a entrenar tu modelo y ver tus métricas reales.",
   },
 };
