@@ -67,30 +67,32 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 
 </Section>
 
-<Section number={4} title="Perceptrón: interactive" eyebrow="INTERACTIVA">
+<Section number={4} title="Perceptrón en acción" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-perceptron"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="¿Crees que una línea recta puede separar dos tipos de conidias si solo usamos dos características (área y circularidad)?"
-  answer="Depende de los datos. Si las clases son linealmente separables, sí. Si hay solapamiento natural entre las poblaciones de conidias, una línea recta no alcanza y necesitamos fronteras no lineales."
+  prompt="Antes de empezar: ¿qué parámetros ajusta un algoritmo para trazar una línea que separe dos clases?"
+  answer="Ajusta dos pesos (w₁, w₂) y un sesgo (b). La recta se define como w₁·x₁ + w₂·x₂ + b = 0. De un lado predice una clase, del otro la otra. El perceptrón solo corrige los pesos cuando se equivoca."
 />
 
-<InteractiveFrame src="/interactives/demo_04_boundary.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
+<PerceptronTrainer />
 
 **¿Qué está pasando?**
-- Cada punto es una conidia (azul = *Aspergillus*, rojo = *Penicillium*)
-- La línea es la **frontera de decisión** que el modelo aprende
-- El accuracy muestra qué porcentaje de conidias están bien clasificadas
+- Cada punto es una biopsia real de mama (círculo = benigno, triángulo = maligno)
+- El perceptrón traza una **frontera de decisión** lineal para separar las clases
+- La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos
 
 **Probá vos:**
-1. Mové los sliders para ajustar la línea manualmente
-2. Fijate cómo cambia el accuracy
-3. Después presioná "Entrenar automáticamente" y observá cómo el algoritmo encuentra la mejor línea por sí solo
+1. Ajustá la tasa de aprendizaje con el slider
+2. Presioná "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
+3. Usá "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
+4. Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética
+5. Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
 
 <ConceptCard variant="key-idea">
-El aprendizaje consiste en *ajustar parámetros* (pendiente e intercepto) para minimizar errores. Cada slider es un parámetro que el algoritmo optimiza.
+El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cuando su predicción es incorrecta, moviendo la frontera de decisión en la dirección correcta.
 </ConceptCard>
 
 </Section>
