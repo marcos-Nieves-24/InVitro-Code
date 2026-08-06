@@ -11,14 +11,13 @@ Introducir la Inteligencia Artificial desde cero, usando como hilo narrativo la 
 3. **IA en la Biotecnología** — Visualización 3D de proteínas, pipeline completo de ML
 4. **Casos Reales en la Investigación** — AlphaFold (Nobel 2024), Rentosertib (Nature Medicine 2025), Evo
 
-## Demos interactivos (10)
+## Demos interactivos (9)
 
 | # | Demo | Tema |
 |---|---|---|
 | 1 | features | Visualización de características de conidias (scatter biplot) |
 | 2 | patterns | Reconocimiento visual de patrones (heatmaps 5×5) |
 | 3 | rules | Reglas fijas vs IA (clasificador por umbrales) |
-| 5 | knn | KNN interactivo (k ajustable + vecinos) |
 | 6 | regression | Regresión lineal (concentración vs efecto) |
 | 6b | **overfitting** | Subajuste y sobreajuste (curvas train/test con slider de complejidad) |
 | 7 | protein_3d | Visualizador 3D de proteínas (5 PDBs reales) |

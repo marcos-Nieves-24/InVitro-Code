@@ -16,3 +16,4 @@ export { ConidiaSortGame } from "./conidia-sort-game";
 export { ThresholdLab } from "./threshold-lab";
 export { InteractiveTable } from "./interactive-table";
 export { PerceptronTrainer } from "./perceptron-trainer";
+export { KnnTrainer } from "./knn-trainer";

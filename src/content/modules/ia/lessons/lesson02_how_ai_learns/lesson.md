@@ -115,7 +115,7 @@ No todos los problemas se pueden resolver con una línea recta. Cuando las clase
 
 <Section number={6} title="KNN: clasificar por cercanía" eyebrow="CONCEPTO">
 
-Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, KNN clasifica según los vecinos más cercanos.
+Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea como el perceptrón, KNN clasifica según los vecinos más cercanos. No aprende parámetros: simplemente recuerda los datos y consulta a los vecinos cuando llega un caso nuevo.
 
 <ConceptCard variant="definition">
 **KNN (K-Nearest Neighbors)**: el algoritmo mira los k puntos más cercanos al punto nuevo, cuenta cuántos son de cada clase, y asigna la clase mayoritaria.
@@ -123,7 +123,7 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, 
 
 </Section>
 
-<Section number={7} title="KNN: interactive" eyebrow="INTERACTIVA">
+<Section number={7} title="KNN en acción" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-knn"
@@ -133,23 +133,23 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea, 
   answer="La frontera se vuelve más suave y menos sensible al ruido, pero puede perder detalles finos en zonas donde las clases cambian rápidamente. k grande reduce varianza pero aumenta sesgo: el modelo se vuelve más estable pero puede subestimar patrones locales."
 />
 
-<InteractiveFrame src="/interactives/demo_05_knn.html" height="700px" caption="simulación educativa sobre datos sintéticos" />
+<KnnTrainer />
 
 **¿Cómo funciona KNN?**
-1. Tenemos puntos de entrenamiento ya clasificados
-2. Llega un punto nuevo (marcado con "?")
-3. El algoritmo mira los k puntos más cercanos
-4. Cuenta cuántos son de cada clase
-5. Asigna la clase mayoritaria
+1. El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)
+2. Elegí un valor de k con el slider — es la cantidad de vecinos que votan
+3. Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
+4. Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo
+5. La zona sombreada muestra la **frontera de decisión**: de un lado KNN predice benigno, del otro maligno
 
 **Experimentá:**
-- Mové el slider de k (1 a 15) y observá cómo cambia la clasificación
-- Arrastrá el punto de prueba a diferentes zonas
-- Con k pequeño, la frontera es más irregular y sensible al ruido
-- Con k grande, la frontera se vuelve más suave, pero puede perder detalles finos
+1. Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
+2. Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
+3. Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
+4. Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
 
 <ConceptCard variant="key-idea">
-La elección de **k** es un **hiperparámetro**. No lo aprende el modelo; lo elegimos nosotros. Encontrar el valor óptimo es parte del arte del machine learning.
+KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perceptrón. Simplemente **recuerda** todos los datos y, para cada predicción nueva, consulta a los k vecinos más cercanos. La elección de k es un **hiperparámetro**: no lo aprende el algoritmo, lo elegimos nosotros.
 </ConceptCard>
 
 </Section>

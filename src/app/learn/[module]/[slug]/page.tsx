@@ -24,6 +24,7 @@ import {
   ConidiaSortGame,
   ThresholdLab,
   InteractiveTable,
+  KnnTrainer,
   PerceptronTrainer,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
@@ -148,6 +149,7 @@ export default async function LessonPage({ params }: Props) {
     ConidiaSortGame,
     ThresholdLab,
     InteractiveTable,
+    KnnTrainer,
     PerceptronTrainer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
