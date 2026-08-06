@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { calcXpForLesson } from "@/lib/gamification/utils";
 
 export interface ModuleMeta {
   slug: string;
@@ -206,4 +207,32 @@ export function getModulesInfo(): ModuleInfo[] {
     name: m.title,
     totalLessons: m.lessonCount,
   }));
+}
+
+export interface NextLesson {
+  moduleSlug: string;
+  lessonSlug: string;
+  title: string;
+  xp: number;
+}
+
+/**
+ * Next incomplete lesson across modules in order (REQ-UP-02).
+ * Returns `null` when every lesson is completed so the caller can show a
+ * completion state instead of inventing a mission.
+ */
+export function getNextLesson(completedKeys: Set<string>): NextLesson | null {
+  for (const mod of getModules()) {
+    for (const lessonSlug of getLessonSlugs(mod.slug)) {
+      if (!completedKeys.has(`${mod.slug}/${lessonSlug}`)) {
+        return {
+          moduleSlug: mod.slug,
+          lessonSlug,
+          title: getLessonTitle(mod.slug, lessonSlug) ?? formatLessonName(lessonSlug),
+          xp: calcXpForLesson(mod.slug, lessonSlug),
+        };
+      }
+    }
+  }
+  return null;
 }

@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NextRequest, NextResponse } from "next/server";
 import { calcXpForLesson } from "@/lib/gamification/utils";
+import { evaluateAchievements } from "@/lib/gamification/achievements";
 
 /** Number of consecutive days with activity to count as a streak day. */
 function isNextDay(a: string, b: string): boolean {
@@ -122,6 +123,14 @@ export async function POST(request: NextRequest) {
         { error: `Failed to update streak: ${streakWriteError.message}` },
         { status: 500 },
       );
+    }
+
+    // ── Achievement evaluation (non-fatal, REQ-ACH-04) ──
+    // A failure here must never break the lesson completion flow.
+    try {
+      await evaluateAchievements(userId, supabase);
+    } catch (error) {
+      console.error("Achievement evaluation error:", error);
     }
 
     return NextResponse.json({

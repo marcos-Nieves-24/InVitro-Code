@@ -29,3 +29,13 @@ export function calcLevel(totalXp: number): { level: number; nextLevelXp: number
 
   return { level, nextLevelXp, progressToNext };
 }
+
+/** Rank name for a level (D10: shared between dashboard and labs). */
+export function rankTitle(level: number): string {
+  if (level < 2) return "Novato";
+  if (level < 5) return "Analista";
+  if (level < 8) return "Investigador Jr.";
+  if (level < 12) return "Investigador";
+  if (level < 20) return "Especialista";
+  return "ML Engineer";
+}
