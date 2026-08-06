@@ -6,14 +6,11 @@ import {
   PlayCircle,
   ArrowLeft,
   ArrowRight,
-  HelpCircle,
   Brain,
   Database,
   MemoryStick,
   TrendingUp,
   CheckCircle2,
-  Lightbulb,
-  Gem,
 } from "lucide-react";
 
 const STEPS = ["Concepto", "Visualización", "Laboratorio", "Desafío"];
@@ -45,7 +42,32 @@ print(f"R2: {r2_score(y, pred):.2f}")
 print(f"MAE: {mean_absolute_error(y, pred):.2f}")
 print(f"Pendiente: {model.coef_[0]:.3f}")`;
 
-export function LabMission() {
+export interface LabMissionProps {
+  /** Real level derived from total XP (REQ-UP-03). */
+  level: number;
+  /** Real rank name for the level (D10, shared rankTitle). */
+  rankName: string;
+  /** Real current mission label (next incomplete lesson). */
+  missionLabel: string;
+  /**
+   * Real persisted progress percent, or `null` when no real run exists
+   * (honest empty state, REQ-UP-04 / D1).
+   */
+  progressPercent: number | null;
+  /** Total lessons in the mission's module (real module metadata). */
+  lessonTotal: number;
+  /** Completed lessons in the mission's module (real progress rows). */
+  completedLessonCount: number;
+}
+
+export function LabMission({
+  level,
+  rankName,
+  missionLabel,
+  progressPercent,
+  lessonTotal,
+  completedLessonCount,
+}: LabMissionProps) {
   const [step, setStep] = useState(2);
 
   return (
@@ -54,10 +76,10 @@ export function LabMission() {
       <div className="flex flex-wrap items-start justify-between gap-6">
         <div className="max-w-2xl space-y-2">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">
-            Nivel 1 - Novato
+            Nivel {level} - {rankName}
           </p>
           <h2 className="flex items-center gap-3 font-display text-3xl font-extrabold text-deep-navy md:text-4xl">
-            Misión 2. Tu primer modelo
+            {missionLabel}
             <PlayCircle className="h-8 w-8 text-primary" />
           </h2>
           <p className="text-lg text-outline">
@@ -66,16 +88,29 @@ export function LabMission() {
             vino.
           </p>
         </div>
-        <div className="rounded-xl border border-surface-container bg-white p-2 shadow-sm">
-          <p className="text-center text-[10px] font-bold text-outline">
-            Progreso
-          </p>
-          <p className="text-center text-sm font-black text-primary">35%</p>
-        </div>
+        {progressPercent !== null ? (
+          <div className="rounded-xl border border-surface-container bg-white p-2 shadow-sm">
+            <p className="text-center text-[10px] font-bold text-outline">
+              Progreso
+            </p>
+            <p className="text-center text-sm font-black text-primary">
+              {progressPercent}%
+            </p>
+          </div>
+        ) : (
+          <div className="max-w-[200px] rounded-xl border border-dashed border-outline-variant bg-surface-container-low p-3 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+              Sin progreso registrado
+            </p>
+            <p className="mt-1 text-[10px] leading-relaxed text-on-surface-variant">
+              Ejecutá el código para ver tu progreso real.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Steps nav */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-surface-container pb-1">
+      <div className="flex flex-wrap items-center gap-4 border-b border-surface-container pb-1">
         <div className="flex flex-wrap gap-2">
           {STEPS.map((label, i) => {
             const active = i === step;
@@ -107,13 +142,11 @@ export function LabMission() {
             );
           })}
         </div>
-        <button
-          type="button"
-          className="flex items-center gap-2 text-outline transition-colors hover:text-deep-navy"
-        >
-          <HelpCircle className="h-4 w-4" />
-          <span className="text-xs font-bold">Hint</span>
-        </button>
+        {completedLessonCount > 0 && (
+          <span className="ml-auto rounded-full bg-surface-container px-3 py-1 text-[10px] font-bold text-on-surface-variant">
+            {completedLessonCount} de {lessonTotal} lecciones del módulo
+          </span>
+        )}
       </div>
 
       {/* Step content */}
@@ -159,16 +192,8 @@ export function LabMission() {
 
       {step === 1 && (
         <div className="glass-card flex h-[500px] flex-col rounded-xl p-6">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6">
             <h3 className="text-sm font-bold">Visualización del modelo</h3>
-            <div className="flex gap-1 rounded-lg bg-surface-container p-1">
-              <span className="rounded-md px-3 py-1 text-[10px] font-bold text-outline">
-                Datos
-              </span>
-              <span className="rounded-md bg-white px-3 py-1 text-[10px] font-bold text-primary shadow-sm">
-                Predicción
-              </span>
-            </div>
           </div>
           <div className="relative mb-4 flex-1">
             <div className="absolute inset-0 flex flex-col justify-between">
@@ -176,7 +201,7 @@ export function LabMission() {
                 <div className="absolute bottom-1/4 left-0 h-[2px] w-full origin-bottom-left -rotate-[22deg] bg-success-green" />
                 <div className="absolute left-[15%] top-[20%] h-2 w-2 rounded-full bg-xp-blue/40" />
                 <div className="absolute left-[25%] top-[40%] h-2 w-2 rounded-full bg-xp-blue/60" />
-                <div className="absolute left-[45%] top-[35%] h-2 w-2 rounded-full bg-primary/80" />
+                <div className="absolute left-[45%] top-[45%] h-2 w-2 rounded-full bg-primary/80" />
                 <div className="absolute left-[65%] top-[60%] h-2 w-2 rounded-full bg-xp-blue/50" />
                 <div className="absolute left-[80%] top-[10%] h-2 w-2 rounded-full bg-xp-blue/30" />
                 <div className="absolute left-[20%] top-[55%] h-2 w-2 rounded-full bg-primary/70" />
@@ -184,26 +209,10 @@ export function LabMission() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="rounded-lg border border-surface-container bg-surface-container-low p-3 text-center">
-              <p className="mb-1 text-[10px] font-bold uppercase text-outline">
-                R² Score
-              </p>
-              <p className="text-xl font-black text-success-green">0.72</p>
-            </div>
-            <div className="rounded-lg border border-surface-container bg-surface-container-low p-3 text-center">
-              <p className="mb-1 text-[10px] font-bold uppercase text-outline">
-                Error MAE
-              </p>
-              <p className="text-xl font-black text-xp-blue">0.48</p>
-            </div>
-            <div className="rounded-lg border border-surface-container bg-surface-container-low p-3 text-center">
-              <p className="mb-1 text-[10px] font-bold uppercase text-outline">
-                Muestras
-              </p>
-              <p className="text-xl font-black text-deep-navy">160</p>
-            </div>
-          </div>
+          <p className="text-xs text-outline">
+            Ejecutá el código del laboratorio para ver las métricas reales de
+            tu modelo.
+          </p>
         </div>
       )}
 
@@ -245,7 +254,7 @@ export function LabMission() {
         </div>
       )}
 
-      {/* InVitro-Code bot feedback */}
+      {/* InVitro-Code bot feedback — honest, no fabricated success (D1) */}
       {step >= 2 && (
         <div className="flex items-center gap-6 rounded-xl border border-primary/20 bg-primary/[0.03] p-6">
           <div className="relative">
@@ -255,12 +264,10 @@ export function LabMission() {
             <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white bg-success-green" />
           </div>
           <div>
-            <p className="mb-1 font-bold text-primary">¡Excelente! 🎉</p>
+            <p className="mb-1 font-bold text-primary">Consejo del laboratorio</p>
             <p className="text-sm leading-relaxed text-on-surface-variant">
-              Tu modelo está capturando una relación positiva entre el alcohol
-              y la calidad del vino. En la mayoría de vinos, a mayor contenido
-              de alcohol, mayor calidad percibida. ¡Estás listo para el desafío
-              final!
+              Ejecutá el código y observá tus propios resultados: el R² y el
+              MAE que aparezcan en la consola son los reales de tu modelo.
             </p>
           </div>
         </div>

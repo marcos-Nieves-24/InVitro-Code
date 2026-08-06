@@ -5,6 +5,7 @@ import rehypeKatex from "rehype-katex";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { ComponentProps } from "react";
 import {
   LessonLayout,
   LessonCarousel,
@@ -30,26 +31,6 @@ import {
   LessonCompleteButton,
 } from "@/components/LessonComponents";
 import { lessonProseClass } from "@/lib/ui/prose";
-
-const components = {
-  Section,
-  CalloutInfo,
-  CalloutCheck,
-  InteractiveFrame,
-  AnswerReveal,
-  ReflectionCheck,
-  ConceptCard,
-  MascotMessage,
-  ComparisonTable,
-  InteractivePrompt,
-  DiagnosticTrainer,
-  ConidiaSortGame,
-  ThresholdLab,
-  InteractiveTable,
-  CodeEditor: LessonCodeEditor,
-  CompleteLessonButton: LessonCompleteButton,
-  pre: CodeBlock,
-};
 
 const mdxConfig = {
   blockJS: false,
@@ -145,6 +126,33 @@ export default async function LessonPage({ params }: Props) {
   if (!fs.existsSync(filePath)) {
     notFound();
   }
+
+  // Server-side feature flag (REQ-CER-01): certification is off unless
+  // FEATURE_FLAG_CERTIFY === "true". Drilled through the components map so
+  // the client never reads process.env (REQ-CER-04).
+  const certifyEnabled = process.env.FEATURE_FLAG_CERTIFY === "true";
+
+  const components = {
+    Section,
+    CalloutInfo,
+    CalloutCheck,
+    InteractiveFrame,
+    AnswerReveal,
+    ReflectionCheck,
+    ConceptCard,
+    MascotMessage,
+    ComparisonTable,
+    InteractivePrompt,
+    DiagnosticTrainer,
+    ConidiaSortGame,
+    ThresholdLab,
+    InteractiveTable,
+    CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
+      <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
+    ),
+    CompleteLessonButton: LessonCompleteButton,
+    pre: CodeBlock,
+  };
 
   const source = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(source);

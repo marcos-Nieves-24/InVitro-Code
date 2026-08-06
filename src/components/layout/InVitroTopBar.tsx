@@ -1,4 +1,4 @@
-import { Gem, Flame, Bell } from "lucide-react";
+import { Gem, Flame } from "lucide-react";
 
 interface InVitroTopBarProps {
   totalXp: number;
@@ -33,14 +33,6 @@ export function InVitroTopBar({ totalXp, currentStreak, trail }: InVitroTopBarPr
             {currentStreak} día{currentStreak !== 1 ? "s" : ""}
           </span>
         </div>
-        <button
-          className="relative rounded-full p-2 text-on-surface-variant transition-colors hover:bg-surface-container"
-          aria-label="Notificaciones"
-          type="button"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full border-2 border-surface bg-error" />
-        </button>
       </div>
     </header>
   );

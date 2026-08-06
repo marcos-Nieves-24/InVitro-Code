@@ -1,61 +1,20 @@
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { calcLevel } from "@/lib/gamification/utils";
+import { calcLevel, rankTitle } from "@/lib/gamification/utils";
+import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
+import { EMPTY_STATES } from "@/lib/ui/empty-states";
 import {
-  Network,
-  Cpu,
-  FlaskConical,
   Medal,
+  Trophy,
+  Users,
+  Flame,
   ArrowRight,
-  Zap,
-  MessageSquare,
-  Sparkles,
+  FlaskConical,
 } from "lucide-react";
-
-const FEATURED_PROJECTS = [
-  {
-    title: "NeuralSync Engine",
-    icon: Network,
-    tag: "AI Engineering",
-    description:
-      "Plataforma de orquestación de modelos distribuidos para inferencia en tiempo real a escala global.",
-    progress: 78,
-  },
-  {
-    title: "FPGA-Accelerated Vision",
-    icon: Cpu,
-    tag: "Hardware Tech",
-    description:
-      "Optimización de redes neuronales convolucionales para procesamiento de video en latencia sub-milisegundo.",
-    investigators: 42,
-  },
-  {
-    title: "Bio-Data Challenge",
-    icon: FlaskConical,
-    tag: "Ciencia de Datos",
-    description:
-      "Análisis de 11 variables físico-químicas para predecir la calidad sensorial del vino.",
-    progress: 65,
-  },
-];
-
-const ACTIVE_RESEARCHERS = [
-  { name: "Dra. Sofía Meyer", specialty: "Quantum ML Expert", level: 42 },
-  { name: "Alex Rivera", specialty: "CV Architect", level: 38 },
-  { name: "Li Wei", specialty: "RL Specialist", level: 35 },
-  { name: "Elena Vega", specialty: "MLOps Engineer", level: 31 },
-  { name: "Dr. Marco Pérez", specialty: "Estadística Avanzada", level: 28 },
-];
-
-const LEADERBOARD = [
-  { name: "Marcus.K", xp: "24.1k XP", rank: 1 },
-  { name: "Elena.V", xp: "22.8k XP", rank: 2 },
-  { name: "Sato.ML", xp: "21.4k XP", rank: 3 },
-  { name: "Dr. Sarah Chen", xp: "12.4k XP", rank: 4 },
-  { name: "Project Phoenix", xp: "11.9k XP", rank: 5 },
-];
 
 function initials(name: string) {
   return name
@@ -67,253 +26,242 @@ function initials(name: string) {
 }
 
 export default async function ComunidadPage() {
-  const session = await auth().catch(() => ({ userId: null }));
-  const userId = session?.userId ?? "dev-user";
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes, streakRes] = await Promise.all([
-    supabase.from("progress").select("xp_earned").eq("user_id", userId),
-    supabase
-      .from("reflection_completions")
-      .select("xp_earned")
-      .eq("user_id", userId),
-    supabase
-      .from("streaks")
-      .select("current_streak")
-      .eq("user_id", userId)
-      .maybeSingle(),
-  ]);
+  const [leaderboardRes, rankRes, streaksRes, profileRes, myStreakRes] =
+    await Promise.all([
+      supabase.rpc("get_leaderboard", { limit_n: 50 }),
+      supabase.rpc("get_leaderboard_rank", { target_user_id: userId }),
+      supabase
+        .from("streaks")
+        .select("user_id, current_streak")
+        .gt("current_streak", 0)
+        .limit(20),
+      supabase
+        .from("profiles")
+        .select("username, email")
+        .eq("id", userId)
+        .maybeSingle(),
+      supabase
+        .from("streaks")
+        .select("current_streak")
+        .eq("user_id", userId)
+        .maybeSingle(),
+    ]);
 
-  const totalXp = [
-    ...(progressRes.data ?? []),
-    ...(reflectionRes.data ?? []),
-  ].reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
+  const entries = (leaderboardRes.data ?? []) as Array<{
+    userId: string;
+    username: string | null;
+    totalXp: number;
+  }>;
+  const myRank = rankRes.data as { position: number } | null;
+  const myProfile = profileRes.data ?? {};
 
-  const currentStreak = streakRes.data?.current_streak ?? 0;
+  // Real XP per leaderboard user, to derive honest level/rank chips.
+  const xpByUser = new Map(
+    entries.map((entry) => [entry.userId, entry.totalXp ?? 0]),
+  );
+
+  // Active researchers: real profiles with an active streak (current_streak > 0).
+  const streakRows = (streaksRes.data ?? []).filter(
+    (row) => (row.current_streak ?? 0) > 0,
+  );
+  const streakUserIds = streakRows.map((row) => row.user_id);
+  const researchersRes =
+    streakUserIds.length > 0
+      ? await supabase
+          .from("profiles")
+          .select("id, username, email")
+          .in("id", streakUserIds)
+      : { data: [] };
+
+  const streakByUser = new Map(
+    streakRows.map((row) => [row.user_id, row.current_streak ?? 0]),
+  );
+  const researchers = (researchersRes.data ?? [])
+    .map((profile) => ({
+      id: profile.id,
+      name: getDisplayName(profile),
+      streak: streakByUser.get(profile.id) ?? 0,
+      xp: xpByUser.get(profile.id) ?? null,
+    }))
+    .sort((a, b) => b.streak - a.streak);
+
+  const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);
+  const userName = getDisplayName(myProfile);
+  const myEntry = entries.find((entry) => entry.userId === userId);
 
   return (
-    <InVitroShell userMeta={`Nivel ${levelInfo.level} · Comunidad`}>
-      <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} trail="Centro de la Comunidad" />
+    <InVitroShell
+      userName={userName}
+      userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
+    >
+      <InVitroTopBar
+        totalXp={totalXp}
+        currentStreak={myStreakRes.data?.current_streak ?? 0}
+        trail="Centro de la Comunidad"
+      />
 
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
-        {/* Featured projects + leaderboard */}
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Left column: real challenge + active researchers */}
           <div className="space-y-6 lg:col-span-8">
-            <div className="flex items-center justify-between">
-              <h2 className="font-display text-2xl font-bold text-on-surface">
-                Proyectos Destacados
-              </h2>
-              <button
-                type="button"
-                className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+            {/* Desafío real de la expedición (D1: static, no fake numbers) */}
+            <div className="glass-card flex flex-col gap-4 rounded-2xl p-6 md:flex-row md:items-center">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-fixed text-primary">
+                <FlaskConical className="h-6 w-6" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h2 className="font-display text-2xl font-bold text-on-surface">
+                  Desafío Bio-Data 2026
+                </h2>
+                <p className="mt-1 text-sm text-on-surface-variant">
+                  Análisis de 11 variables físico-químicas para predecir la
+                  calidad sensorial del vino. Resolvelo en las lecciones del
+                  módulo de Machine Learning.
+                </p>
+              </div>
+              <a
+                href="/proyectos"
+                className="flex shrink-0 items-center gap-1 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-primary/90"
               >
-                Ver todos <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {FEATURED_PROJECTS.map((project) => (
-                <div
-                  key={project.title}
-                  className="glass-card flex h-full cursor-pointer flex-col rounded-2xl p-6 transition-all duration-300 hover:border-primary/50"
-                >
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-fixed text-primary">
-                      <project.icon className="h-6 w-6" />
-                    </div>
-                    <span className="rounded border border-primary/20 bg-primary-container px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
-                      {project.tag}
-                    </span>
-                  </div>
-                  <h3 className="font-display text-lg font-semibold text-on-surface">
-                    {project.title}
-                  </h3>
-                  <p className="mt-1 flex-1 text-sm text-on-surface-variant">
-                    {project.description}
-                  </p>
-                  {project.progress !== undefined ? (
-                    <div className="mt-6 space-y-3">
-                      <div className="flex items-center justify-between text-[11px] font-bold">
-                        <span className="uppercase tracking-tight text-on-surface-variant">
-                          Progreso de Investigación
-                        </span>
-                        <span className="text-tertiary">
-                          {project.progress}%
-                        </span>
-                      </div>
-                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-container-high">
-                        <div
-                          className="h-full bg-primary"
-                          style={{ width: `${project.progress}%` }}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mt-6 flex items-center justify-between text-[11px] font-bold">
-                      <span className="uppercase tracking-tight text-on-surface-variant">
-                        Investigadores Activos
-                      </span>
-                      <span className="text-on-surface">
-                        {project.investigators}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ))}
+                Explorar
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
 
-            {/* Active researchers */}
+            {/* Active researchers (real) */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-on-surface">
                 Investigadores Activos
               </h2>
-              <div className="glass-card divide-y divide-outline-variant/30 rounded-2xl">
-                {ACTIVE_RESEARCHERS.map((researcher) => (
-                  <div
-                    key={researcher.name}
-                    className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-container-low"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/20 bg-secondary-container text-xs font-bold text-on-secondary">
-                      {initials(researcher.name)}
+              {researchers.length > 0 ? (
+                <div className="glass-card divide-y divide-outline-variant/30 rounded-2xl">
+                  {researchers.map((researcher) => (
+                    <div
+                      key={researcher.id}
+                      className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-container-low"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/20 bg-secondary-container text-xs font-bold text-on-secondary">
+                        {initials(researcher.name)}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-bold text-on-surface">
+                          {researcher.name}
+                        </p>
+                        <p className="flex items-center gap-1 truncate text-xs text-on-surface-variant">
+                          <Flame className="h-3.5 w-3.5 text-error" />
+                          Racha de {researcher.streak}{" "}
+                          {researcher.streak !== 1 ? "días" : "día"}
+                        </p>
+                      </div>
+                      {researcher.xp !== null ? (
+                        <span className="rounded-full bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-primary">
+                          {rankTitle(calcLevel(researcher.xp).level)}
+                        </span>
+                      ) : null}
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-bold text-on-surface">
-                        {researcher.name}
-                      </p>
-                      <p className="truncate text-xs text-on-surface-variant">
-                        {researcher.specialty}
-                      </p>
-                    </div>
-                    <span className="rounded-full bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-primary">
-                      Nivel {researcher.level}
-                    </span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <EmptyState icon={Users} {...EMPTY_STATES.activeUsers} />
+              )}
             </div>
           </div>
 
-          {/* Leaderboard */}
+          {/* Right column: real global leaderboard */}
           <div className="space-y-6 lg:col-span-4">
             <h2 className="font-display text-2xl font-bold text-on-surface">
               Global Leaderboard
             </h2>
-            <div className="glass-card space-y-6 rounded-2xl p-6">
-              <div className="mb-4 flex items-end justify-center gap-4 border-b border-outline-variant/50 pb-6">
-                {[
-                  { rank: 2, name: "@Elena.V", height: "h-20", color: "text-on-surface-variant" },
-                  { rank: 1, name: "@Marcus.K", height: "h-28", color: "text-primary", gold: true },
-                  { rank: 3, name: "@Sato.ML", height: "h-16", color: "text-streak-orange" },
-                ].map((entry) => (
-                  <div key={entry.rank} className="flex flex-col items-center gap-2">
-                    {entry.gold && (
-                      <Medal className="mb-[-8px] h-6 w-6 text-xp-gold" fill="currentColor" />
-                    )}
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container font-bold">
-                      {entry.name.charAt(2)}
-                    </div>
-                    <div
-                      className={`flex w-12 flex-col items-center justify-end rounded-t-lg pb-2 ${entry.height} ${
-                        entry.gold ? "border-t-2 border-primary bg-primary/10" : "bg-surface-container-high"
-                      }`}
-                    >
-                      <span className={`text-xl font-bold ${entry.color}`}>
-                        {entry.rank}
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-bold text-on-surface-variant">
-                      {entry.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="space-y-4">
-                {LEADERBOARD.map((row) => (
-                  <div
-                    key={row.name}
-                    className="flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-container-low"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="w-4 text-sm font-bold text-on-surface-variant">
-                        {row.rank}
-                      </span>
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-highest text-[10px] font-bold">
-                        {initials(row.name)}
+            {entries.length > 0 ? (
+              <div className="glass-card space-y-4 rounded-2xl p-6">
+                <div className="space-y-4">
+                  {entries.slice(0, 10).map((row, index) => {
+                    const isMe = row.userId === userId;
+                    return (
+                      <div
+                        key={row.userId}
+                        className={`flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-container-low ${
+                          isMe
+                            ? "border border-primary/30 bg-primary-fixed/40"
+                            : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-container-highest text-xs font-black text-on-surface-variant">
+                            {index < 3 ? (
+                              <Medal
+                                className={`h-4 w-4 ${
+                                  index === 0
+                                    ? "text-xp-gold"
+                                    : index === 1
+                                      ? "text-streak-orange"
+                                      : "text-outline"
+                                }`}
+                                fill="currentColor"
+                              />
+                            ) : (
+                              index + 1
+                            )}
+                          </span>
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-highest text-[10px] font-bold">
+                            {initials(row.username ?? "Investigador")}
+                          </div>
+                          <span
+                            className={`text-sm font-bold ${
+                              isMe ? "text-primary" : "text-on-surface"
+                            }`}
+                          >
+                            {row.username ?? "Investigador"}
+                            {isMe ? " (vos)" : ""}
+                          </span>
+                        </div>
+                        <span className="text-xs font-bold text-primary">
+                          {(row.totalXp ?? 0).toLocaleString("es-AR")} XP
+                        </span>
                       </div>
-                      <span className="text-sm font-bold text-on-surface">
-                        {row.name}
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-primary">
-                      {row.xp}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Network pulse */}
-            <div className="relative overflow-hidden rounded-2xl border-t-4 border-t-tertiary glass-card space-y-6 p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-3 w-3">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-tertiary opacity-75" />
-                    <span className="relative inline-flex h-3 w-3 rounded-full bg-tertiary" />
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-on-surface">
-                    En Línea
-                  </span>
+                    );
+                  })}
                 </div>
-                <span className="text-2xl font-bold text-tertiary">1,248</span>
               </div>
-              <div>
-                <p className="mb-3 border-b border-outline-variant/50 pb-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-                  Nuevos Labs
+            ) : (
+              <EmptyState icon={Trophy} {...EMPTY_STATES.leaderboard} />
+            )}
+
+            {/* Tu posición — real rank from get_leaderboard_rank */}
+            <div className="rounded-2xl border-t-4 border-t-tertiary glass-card space-y-4 p-6">
+              <div className="flex items-center gap-2">
+                <Trophy className="h-5 w-5 text-tertiary" />
+                <span className="text-sm font-black uppercase tracking-widest text-on-surface">
+                  Tu posición
+                </span>
+              </div>
+              {myRank && entries.length > 0 ? (
+                <>
+                  <p className="text-3xl font-black text-tertiary">
+                    #{myRank.position}
+                  </p>
+                  <p className="text-xs text-on-surface-variant">
+                    {myEntry
+                      ? `${(myEntry.totalXp ?? 0).toLocaleString("es-AR")} XP reales`
+                      : "Ranking calculado sobre XP real."}
+                  </p>
+                </>
+              ) : (
+                <p className="text-sm text-on-surface-variant">
+                  {totalXp > 0
+                    ? `Todavía no entrás en el top 50 — tenés ${totalXp.toLocaleString("es-AR")} XP.`
+                    : "Completá tu primera lección para aparecer en el ranking."}
                 </p>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 rounded-lg bg-primary-container/30 p-2 text-primary">
-                      <FlaskConical className="h-4 w-4" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-on-surface">
-                        Transformers 2.0
-                      </span>
-                      <span className="text-[10px] font-medium text-on-surface-variant">
-                        Hace 2 horas • 12 vacantes
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 rounded-lg bg-streak-orange/10 p-2 text-streak-orange">
-                      <Zap className="h-4 w-4" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-on-surface">
-                        Neural Architecture
-                      </span>
-                      <span className="text-[10px] font-medium text-on-surface-variant">
-                        Hace 5 horas • 5 vacantes
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="w-full rounded-xl border border-outline-variant bg-surface-container-low py-2 text-xs font-bold text-on-surface transition-all hover:bg-surface-container-high"
-              >
-                Sincronizar Feed
-              </button>
-            </div>
-
-            <div className="flex items-center gap-3 rounded-2xl bg-primary p-5 text-white shadow-lg shadow-primary/20">
-              <MessageSquare className="h-6 w-6 shrink-0" />
-              <p className="text-sm font-semibold">
-                Foros de Discusión — participá y aprendé con la comunidad.
-              </p>
-              <Sparkles className="ml-auto h-5 w-5 shrink-0 opacity-60" />
+              )}
             </div>
           </div>
         </section>

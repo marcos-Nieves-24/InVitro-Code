@@ -1,16 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 
 /**
  * POST /api/certify
  *
- * Server-side certification stub for E2B sandbox execution.
+ * Server-side certification for E2B sandbox execution.
  *
- * Current behaviour (MVP stub):
- * - Always returns certified=true for demonstration
- * - Future: runs code in E2B sandbox with 3 random test seeds
+ * Order of checks (REQ-CER-03/05):
+ * 1. Clerk session required -> 401
+ * 2. Feature flag `FEATURE_FLAG_CERTIFY !== "true"` -> 503, never `certified: true`
+ * 3. Only with the flag ON does the E2B block run (MVP stub today)
  */
 export async function POST(request: NextRequest) {
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (process.env.FEATURE_FLAG_CERTIFY !== "true") {
+      return NextResponse.json(
+        { certified: false, message: "La certificación no está disponible todavía." },
+        { status: 503 },
+      );
+    }
+
     const body = await request.json();
     const { code } = body;
 
@@ -32,7 +47,7 @@ export async function POST(request: NextRequest) {
     //     message: result.message,
     //   })
     //
-    // For MVP, always pass:
+    // For MVP, always pass (only reachable with FEATURE_FLAG_CERTIFY=true):
     return NextResponse.json({
       certified: true,
       testsPassed: 3,

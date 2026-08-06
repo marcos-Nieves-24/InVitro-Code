@@ -20,6 +20,8 @@ interface PyodideRunnerProps {
   exercise?: Exercise;
   height?: string;
   language?: string;
+  /** Server-side flag (FEATURE_FLAG_CERTIFY), forwarded to OutputPanel (REQ-CER-04). */
+  certifyEnabled?: boolean;
 }
 
 export default function PyodideRunner({
@@ -27,6 +29,7 @@ export default function PyodideRunner({
   exercise,
   height,
   language,
+  certifyEnabled,
 }: PyodideRunnerProps) {
   const [worker, setWorker] = useState<Worker | null>(null);
   const [isWorkerReady, setIsWorkerReady] = useState(false);
@@ -146,6 +149,7 @@ export default function PyodideRunner({
             onClear={clearOutput}
             code={code}
             exercise={exercise}
+            certifyEnabled={certifyEnabled}
           />
         </div>
       </div>

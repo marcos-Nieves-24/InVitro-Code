@@ -11,6 +11,8 @@ interface OutputPanelProps {
   exercise?: {
     testCases: Array<{ expectedOutput: string; note: string }>;
   };
+  /** Server-side flag (FEATURE_FLAG_CERTIFY), default off (REQ-CER-02/04). */
+  certifyEnabled?: boolean;
 }
 
 type CertifyState = "idle" | "loading" | "passed" | "failed" | "unavailable";
@@ -22,6 +24,7 @@ export default function OutputPanel({
   onClear,
   code,
   exercise,
+  certifyEnabled = false,
 }: OutputPanelProps) {
   const outputRef = useRef<HTMLDivElement>(null);
   const [certifyState, setCertifyState] = useState<CertifyState>("idle");
@@ -70,8 +73,8 @@ export default function OutputPanel({
             Consola de Salida
           </h3>
           <div className="flex items-center gap-2">
-            {/* Estoy listo — only when client-side validation passed */}
-            {validationResult === "valid" && (
+            {/* Estoy listo — only when client-side validation passed AND flag on */}
+            {validationResult === "valid" && certifyEnabled && (
               <button
                 onClick={handleCertify}
                 disabled={certifyState === "loading"}
