@@ -1,35 +1,41 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { XPBar } from "@/components/gamification/XPBar";
 import { StreakBadge } from "@/components/gamification/StreakBadge";
 import { LevelBadge } from "@/components/gamification/LevelBadge";
 import { ModuleProgress } from "@/components/gamification/ModuleProgress";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getModulesInfo, getResumeHref } from "@/lib/content/modules";
-import { calcLevel } from "@/lib/gamification/utils";
 import {
-  Gem,
-  Flame,
-  Bell,
-  Play,
-  Map,
+  getModulesInfo,
+  getNextLesson,
+  getResumeHref,
+  getLessonSlugs,
+  getModuleDisplayName,
+} from "@/lib/content/modules";
+import { calcLevel, rankTitle } from "@/lib/gamification/utils";
+import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
+import { evaluateAchievements } from "@/lib/gamification/achievements";
+import { achievementIcon } from "@/lib/gamification/icons";
+import { EMPTY_STATES } from "@/lib/ui/empty-states";
+import {
   ArrowRight,
-  Wine,
+  BarChart3,
+  Brain,
+  CheckCircle2,
+  Cpu,
+  Flame,
   FlaskConical,
-  Database,
-  Terminal,
+  Gem,
+  Map,
+  Play,
   Shield,
+  Terminal,
+  Trophy,
+  type LucideIcon,
 } from "lucide-react";
-
-function rankTitle(level: number): string {
-  if (level < 2) return "Novato";
-  if (level < 5) return "Analista";
-  if (level < 8) return "Investigador Jr.";
-  if (level < 12) return "Investigador";
-  if (level < 20) return "Especialista";
-  return "ML Engineer";
-}
 
 const LEVEL_STEPS = [
   "Novato",
@@ -40,55 +46,106 @@ const LEVEL_STEPS = [
   "Machine Learning Eng.",
 ];
 
+const MODULE_ICONS: Record<string, LucideIcon> = {
+  python: Terminal,
+  ia: Brain,
+  estadistica: BarChart3,
+  "machine-learning": Cpu,
+  etica: Shield,
+};
+
+function moduleIcon(slug: string): LucideIcon {
+  return MODULE_ICONS[slug] ?? FlaskConical;
+}
+
 export default async function DashboardPage() {
-  const session = await auth().catch(() => ({ userId: null }));
-  const userId = session?.userId ?? "dev-user";
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes, moduleProgressRes, streakRes] =
-    await Promise.all([
-      supabase.from("progress").select("xp_earned").eq("user_id", userId),
-      supabase
-        .from("reflection_completions")
-        .select("xp_earned")
-        .eq("user_id", userId),
-      supabase
-        .from("progress")
-        .select("module_slug, lesson_slug")
-        .eq("user_id", userId)
-        .eq("completed", true),
-      supabase
-        .from("streaks")
-        .select("current_streak, longest_streak")
-        .eq("user_id", userId)
-        .maybeSingle(),
-    ]);
+  const [profileRes, progressRes, streakRes] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("username, email")
+      .eq("id", userId)
+      .maybeSingle(),
+    supabase
+      .from("progress")
+      .select("module_slug, lesson_slug")
+      .eq("user_id", userId)
+      .eq("completed", true)
+      .not("completed_at", "is", null),
+    supabase
+      .from("streaks")
+      .select("current_streak, longest_streak")
+      .eq("user_id", userId)
+      .maybeSingle(),
+  ]);
 
+  const userName = getDisplayName(profileRes.data ?? {});
   const streakData = streakRes.data ?? { current_streak: 0, longest_streak: 0 };
 
-  const totalXp = [
-    ...(progressRes.data ?? []),
-    ...(reflectionRes.data ?? []),
-  ].reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
+  const totalXp = await getTotalXp(userId, supabase);
+  const levelInfo = calcLevel(totalXp);
+
+  const completedRows = progressRes.data ?? [];
+  const completedLessonKeys = new Set(
+    completedRows.map((row) => `${row.module_slug}/${row.lesson_slug}`),
+  );
 
   const completedByModule: Record<string, number> = {};
-  for (const row of moduleProgressRes.data ?? []) {
+  for (const row of completedRows) {
     const slug = row.module_slug;
     completedByModule[slug] = (completedByModule[slug] ?? 0) + 1;
   }
 
   const modules = getModulesInfo();
 
-  const completedLessonKeys = new Set(
-    (moduleProgressRes.data ?? []).map(
-      (row) => `${row.module_slug}/${row.lesson_slug}`,
-    ),
-  );
+  // "Proyecto Actual" (REQ-UP-01): first module in order with real progress (<100%).
+  const projectModule = modules.find((mod) => {
+    const completed = completedByModule[mod.slug] ?? 0;
+    return completed > 0 && completed < mod.totalLessons;
+  });
+
+  const projectCompleted = projectModule
+    ? completedByModule[projectModule.slug] ?? 0
+    : 0;
+  const projectPercent = projectModule
+    ? Math.round((projectCompleted / projectModule.totalLessons) * 100)
+    : 0;
+
+  let projectHref = "/learn";
+  if (projectModule) {
+    const nextInModule = getLessonSlugs(projectModule.slug).find(
+      (lessonSlug) => !completedLessonKeys.has(`${projectModule.slug}/${lessonSlug}`),
+    );
+    if (nextInModule) {
+      projectHref = `/learn/${projectModule.slug}/${nextInModule}`;
+    }
+  }
+
+  // "Misión Actual" (REQ-UP-02): next incomplete lesson with real XP.
+  const nextLesson = getNextLesson(completedLessonKeys);
+  const missionHref = nextLesson
+    ? `/learn/${nextLesson.moduleSlug}/${nextLesson.lessonSlug}`
+    : null;
+
+  // "Logros Recientes" (REQ-ACH-08): real unlocks, most recent first.
+  const { achievements } = await evaluateAchievements(userId, supabase);
+  const recentAchievements = achievements
+    .filter((achievement) => achievement.unlocked)
+    .sort((a, b) => (b.unlockedAt ?? "").localeCompare(a.unlockedAt ?? ""))
+    .slice(0, 3);
+
   const startHref = getResumeHref(completedLessonKeys);
 
-  const levelInfo = calcLevel(totalXp);
-  const rankLevel = Math.min(levelInfo.level, LEVEL_STEPS.length - 1);
+  const ProjectIcon = projectModule ? moduleIcon(projectModule.slug) : null;
+  const MissionIcon = nextLesson ? moduleIcon(nextLesson.moduleSlug) : null;
+
   const ringRadius = 56;
   const ringCircumference = 2 * Math.PI * ringRadius;
   const ringProgress = Math.min(
@@ -97,12 +154,14 @@ export default async function DashboardPage() {
   );
   const ringOffset =
     ringCircumference - (ringProgress / 100) * ringCircumference;
+  const rankLevel = Math.min(levelInfo.level, LEVEL_STEPS.length - 1);
 
   return (
     <InVitroShell
+      userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
     >
-      {/* Top bar */}
+      {/* Top bar (REQ-UI-03: no notification bell) */}
       <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-outline-variant bg-surface/80 px-8 pl-16 backdrop-blur-md md:pl-8">
         <div className="hidden text-sm font-semibold text-on-surface md:block">
           Dashboard de Expedición
@@ -119,14 +178,6 @@ export default async function DashboardPage() {
               {streakData.current_streak !== 1 ? "s" : ""}
             </span>
           </div>
-          <button
-            className="relative rounded-full p-2 text-on-surface-variant transition-colors hover:bg-surface-container"
-            aria-label="Notificaciones"
-            type="button"
-          >
-            <Bell className="h-5 w-5" />
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full border-2 border-surface bg-error" />
-          </button>
         </div>
       </header>
 
@@ -139,7 +190,7 @@ export default async function DashboardPage() {
               <div className="flex items-center gap-8 p-10">
                 <div className="flex-1">
                   <h2 className="font-display text-3xl font-extrabold tracking-tight text-on-surface md:text-4xl">
-                    ¡Bienvenido de vuelta, Investigador! 👋
+                    ¡Bienvenido de vuelta, {userName}! 👋
                   </h2>
                   <p className="mb-8 mt-4 max-w-lg text-on-surface-variant">
                     Estás construyendo tu camino en InVitro-Code.
@@ -218,84 +269,98 @@ export default async function DashboardPage() {
 
             {/* Current work */}
             <section className="grid gap-6 md:grid-cols-2">
+              {/* Proyecto Actual (REQ-UP-01) */}
               <div className="glass-card flex flex-col rounded-xl p-6">
                 <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                   Proyecto Actual
                 </h3>
-                <div className="mb-6 flex gap-4">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary-fixed-dim text-primary">
-                    <Wine className="h-8 w-8" />
-                  </div>
-                  <div>
-                    <h4 className="font-display text-lg font-semibold">
-                      Wine Quality
-                    </h4>
-                    <p className="text-sm text-on-surface-variant">
-                      Estás analizando las características químicas del vino
-                      para predecir su calidad.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-auto">
-                  <div className="mb-2 flex items-end justify-between">
-                    <span className="text-xs font-bold text-on-surface-variant">
-                      Progreso
-                    </span>
-                    <span className="text-sm font-bold text-primary">68%</span>
-                  </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-surface-container">
-                    <div className="xp-gradient h-full rounded-full" style={{ width: "68%" }} />
-                  </div>
-                </div>
-                <Link
-                  href="/proyectos"
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container py-3 text-sm font-bold text-primary transition-colors hover:bg-outline-variant"
-                >
-                  Ver proyecto <ArrowRight className="h-4 w-4" />
-                </Link>
+                {projectModule ? (
+                  <>
+                    <div className="mb-6 flex gap-4">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary-fixed-dim text-primary">
+                        {ProjectIcon ? <ProjectIcon className="h-8 w-8" /> : null}
+                      </div>
+                      <div>
+                        <h4 className="font-display text-lg font-semibold">
+                          {projectModule.name}
+                        </h4>
+                        <p className="text-sm text-on-surface-variant">
+                          {projectCompleted} de {projectModule.totalLessons}{" "}
+                          lecciones completadas
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-auto">
+                      <div className="mb-2 flex items-end justify-between">
+                        <span className="text-xs font-bold text-on-surface-variant">
+                          Progreso
+                        </span>
+                        <span className="text-sm font-bold text-primary">
+                          {projectPercent}%
+                        </span>
+                      </div>
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-surface-container">
+                        <div
+                          className="xp-gradient h-full rounded-full"
+                          style={{ width: `${projectPercent}%` }}
+                        />
+                      </div>
+                    </div>
+                    <Link
+                      href={projectHref}
+                      className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container py-3 text-sm font-bold text-primary transition-colors hover:bg-outline-variant"
+                    >
+                      Continuar módulo <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </>
+                ) : (
+                  <EmptyState
+                    icon={FlaskConical}
+                    {...EMPTY_STATES.currentProject}
+                  />
+                )}
               </div>
 
+              {/* Misión Actual (REQ-UP-02) */}
               <div className="glass-card flex flex-col rounded-xl p-6">
                 <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                   Misión Actual
                 </h3>
-                <div className="mb-6 flex gap-4">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-tertiary-fixed-dim text-tertiary">
-                    <FlaskConical className="h-8 w-8" />
-                  </div>
-                  <div>
-                    <h4 className="font-display text-lg font-semibold">
-                      Correlación entre variables
-                    </h4>
-                    <p className="text-sm text-on-surface-variant">
-                      Descubrí cómo las variables químicas del vino se relacionan
-                      entre sí.
-                    </p>
-                  </div>
-                </div>
-                <div className="mb-2 flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-primary">
-                    <Gem className="h-4 w-4" fill="currentColor" />
-                    <span className="text-sm font-bold">+40 XP</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="mr-1 text-xs font-medium text-on-surface-variant">
-                      Dificultad
-                    </span>
-                    <div className="flex gap-1">
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <div className="h-2 w-2 rounded-full bg-surface-container-highest" />
+                {nextLesson ? (
+                  <>
+                    <div className="mb-6 flex gap-4">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-tertiary-fixed-dim text-tertiary">
+                        {MissionIcon ? <MissionIcon className="h-8 w-8" /> : null}
+                      </div>
+                      <div>
+                        <h4 className="font-display text-lg font-semibold">
+                          {nextLesson.title}
+                        </h4>
+                        <p className="text-sm text-on-surface-variant">
+                          {getModuleDisplayName(nextLesson.moduleSlug)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <Link
-                  href={startHref}
-                  className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-on-primary transition-all hover:opacity-90"
-                >
-                  Continuar misión <ArrowRight className="h-4 w-4" />
-                </Link>
+                    <div className="mb-2 flex items-center gap-1 text-primary">
+                      <Gem className="h-4 w-4" fill="currentColor" />
+                      <span className="text-sm font-bold">
+                        +{nextLesson.xp} XP
+                      </span>
+                    </div>
+                    <Link
+                      href={missionHref ?? "/learn"}
+                      className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-on-primary transition-all hover:opacity-90"
+                    >
+                      Continuar misión <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </>
+                ) : (
+                  <EmptyState
+                    icon={CheckCircle2}
+                    title="¡Completaste todas las lecciones!"
+                    description="No quedan misiones pendientes en ninguna expedición."
+                  />
+                )}
               </div>
             </section>
 
@@ -432,6 +497,7 @@ export default async function DashboardPage() {
               </div>
             </div>
 
+            {/* Logros Recientes (REQ-ACH-08) */}
             <div className="glass-card rounded-2xl p-6">
               <div className="mb-6 flex items-center justify-between">
                 <h3 className="font-display text-lg font-bold">
@@ -444,56 +510,35 @@ export default async function DashboardPage() {
                   Ver todos
                 </Link>
               </div>
-              <div className="space-y-4">
-                <div className="flex gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-tertiary-fixed-dim text-tertiary">
-                    <Database className="h-5 w-5" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between">
-                      <h5 className="text-xs font-bold">Explorador de Datos</h5>
-                      <span className="text-[10px] font-bold text-tertiary">
-                        +20 XP
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-on-surface-variant">
-                      Completaste tu primer análisis exploratorio.
-                    </p>
-                  </div>
+              {recentAchievements.length > 0 ? (
+                <div className="space-y-4">
+                  {recentAchievements.map((achievement) => {
+                    const Icon = achievementIcon(achievement.icon);
+                    return (
+                      <div key={achievement.id} className="flex gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-tertiary-fixed-dim text-tertiary">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div className="flex-grow">
+                          <div className="flex justify-between">
+                            <h5 className="text-xs font-bold">
+                              {achievement.title}
+                            </h5>
+                            <span className="text-[10px] font-bold text-tertiary">
+                              +{achievement.xpReward} XP
+                            </span>
+                          </div>
+                          <p className="text-[10px] text-on-surface-variant">
+                            {achievement.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="flex gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-fixed-dim text-primary">
-                    <Terminal className="h-5 w-5" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between">
-                      <h5 className="text-xs font-bold">Maestro de Python</h5>
-                      <span className="text-[10px] font-bold text-primary">
-                        +30 XP
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-on-surface-variant">
-                      Completaste 20 ejercicios de Python.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary-fixed-dim text-secondary">
-                    <Shield className="h-5 w-5" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between">
-                      <h5 className="text-xs font-bold">Detective de Outliers</h5>
-                      <span className="text-[10px] font-bold text-secondary">
-                        +25 XP
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-on-surface-variant">
-                      Identificaste valores atípicos en tus datos.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ) : (
+                <EmptyState icon={Trophy} {...EMPTY_STATES.achievements} />
+              )}
             </div>
           </aside>
         </div>

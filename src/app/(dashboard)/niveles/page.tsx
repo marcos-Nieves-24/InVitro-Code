@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel } from "@/lib/gamification/utils";
+import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import {
   Sprout,
   Search,
@@ -77,17 +79,20 @@ const RANKS: Rank[] = [
 ];
 
 export default async function NivelesPage() {
-  const session = await auth().catch(() => ({ userId: null }));
-  const userId = session?.userId ?? "dev-user";
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const supabase = createAdminClient();
 
-  const [progressRes, reflectionRes, streakRes] = await Promise.all([
-    supabase.from("progress").select("xp_earned").eq("user_id", userId),
+  const [profileRes, streakRes] = await Promise.all([
     supabase
-      .from("reflection_completions")
-      .select("xp_earned")
-      .eq("user_id", userId),
+      .from("profiles")
+      .select("username, email")
+      .eq("id", userId)
+      .maybeSingle(),
     supabase
       .from("streaks")
       .select("current_streak")
@@ -95,12 +100,10 @@ export default async function NivelesPage() {
       .maybeSingle(),
   ]);
 
-  const totalXp = [
-    ...(progressRes.data ?? []),
-    ...(reflectionRes.data ?? []),
-  ].reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
-
+  const userName = getDisplayName(profileRes.data ?? {});
   const currentStreak = streakRes.data?.current_streak ?? 0;
+
+  const totalXp = await getTotalXp(userId, supabase);
 
   const levelInfo = calcLevel(totalXp);
 
@@ -126,6 +129,7 @@ export default async function NivelesPage() {
 
   return (
     <InVitroShell
+      userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${currentRank.name}`}
     >
       <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} />

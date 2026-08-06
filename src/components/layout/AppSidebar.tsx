@@ -14,7 +14,6 @@ import {
   Users,
   Menu,
   X,
-  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -41,8 +40,8 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({
-  userName = "Investigador InVitro-Code",
-  userMeta = "Nivel 4 · Investigador",
+  userName = "Investigador",
+  userMeta = "Investigador",
 }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
@@ -135,12 +134,6 @@ export function AppSidebar({
               </span>
             </div>
           </div>
-          <Link
-            href="/dashboard"
-            className="flex items-center justify-center gap-2 rounded-lg border border-primary py-2 text-xs font-bold text-primary transition-all hover:bg-primary hover:text-on-primary"
-          >
-            Ver perfil <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
         </div>
       </aside>
     </>
