@@ -109,6 +109,6 @@ The change MUST pass `npm run type-check` and `npm run build`.
 ## Out of Scope
 
 - ia lesson01's table inside `<Section title="Resumen">` — filtered by design
-- Tables in `lab.md`, `assignment.md`, `quiz.md`, `README.md` — no consumer
+- Tables in `quiz.md` — parsed structurally by `quiz-parser.ts` (REQ-QUIZ-01), not MDX-rendered; `README.md` — no consumer
 - Content changes or transcription to `ComparisonTable`/`InteractiveTable` props
 - Sort/search — handled by `InteractiveTable`

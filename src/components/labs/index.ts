@@ -4,3 +4,5 @@ export { LabRunner } from "./LabRunner";
 export { AssignmentViewer } from "./AssignmentViewer";
 export { NotebookDownloadButton } from "./NotebookDownloadButton";
 export { LabTabs } from "./LabTabs";
+export { LabHub } from "./LabHub";
+export { LabCard } from "./LabCard";
