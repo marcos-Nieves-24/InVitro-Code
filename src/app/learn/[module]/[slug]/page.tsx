@@ -25,6 +25,7 @@ import {
   ThresholdLab,
   InteractiveTable,
   KnnTrainer,
+  MarkdownTable,
   PerceptronTrainer,
   RegressionTrainer,
   OverfittingTrainer,
@@ -160,6 +161,7 @@ export default async function LessonPage({ params }: Props) {
     ),
     CompleteLessonButton: LessonCompleteButton,
     pre: CodeBlock,
+    table: MarkdownTable,
   };
 
   const source = fs.readFileSync(filePath, "utf8");
