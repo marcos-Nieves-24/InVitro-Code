@@ -172,28 +172,29 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 </Section>
 
-<Section number={9} title="Regresión lineal: interactive" eyebrow="INTERACTIVA">
+<Section number={9} title="Regresión lineal en acción" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-regresion"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="Si duplicamos la concentración de un fármaco, ¿esperás que el efecto inhibitorio se duplique exactamente?"
-  answer="No necesariamente. La relación dosis-respuesta en biología suele ser sigmoidea: a bajas concentraciones el efecto es pequeño, luego crece rápidamente en un rango, y finalmente se satura (meseta). La regresión lineal solo aproxima bien en el rango casi lineal de la curva."
+  prompt="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media del tejido?"
+  answer="No con gran precisión. El radio medio y la textura media tienen una relación débil (R² ≈ 0.10) — son datos reales ruidosos. La regresión lineal nos da la mejor recta posible, pero la predicción tiene mucho error porque la textura depende de muchos más factores que solo el tamaño del núcleo."
 />
 
-<InteractiveFrame src="/interactives/demo_06_regression.html" height="700px" caption="modelo sobre datos reales simulados (basado en curvas dosis-respuesta de antifúngicos)" />
+<RegressionTrainer />
 
 **¿Qué muestra?**
-- Cada punto es un experimento: concentración de fármaco vs. halo de inhibición
-- La recta es el **modelo de regresión lineal**: la mejor línea que pasa entre los puntos
-- El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta
+- Cada punto es una biopsia real del dataset BCW: radio medio del núcleo vs. textura media del tejido
+- La recta es el **modelo de regresión lineal**: la mejor línea que pasa entre los 569 puntos
+- El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta — con datos reales, siempre hay dispersión
+- Las líneas verticales (residuales) muestran la distancia de cada punto a la recta
 
 **Probá:**
-1. Ajustá pendiente e intercepto manualmente
-2. Fijate cómo el ECM se reduce al acercarte a la mejor recta
-3. Presioná "Calcular mejor recta" para ver la solución óptima
-4. Usá "Predecir" para estimar el halo para una concentración nueva
+1. Mové los sliders de pendiente e intercepto para ajustar la recta manualmente
+2. Fijate cómo el ECM y R² cambian en vivo al mover la recta
+3. Presioná "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
+4. Usá "Predecir" para estimar la textura a partir de un valor de radio
 
 </Section>
 
@@ -203,15 +204,15 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
   blockId="reflection-l02-ecm"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="¿Por qué elevamos al cuadrado los errores (ECM) en lugar de sumar las diferencias directamente? Si la relación dosis-respuesta es sigmoidea (no lineal), ¿la regresión lineal sigue siendo útil para aproximarla en algún rango?"
-  answer="Elevar al cuadrado penaliza más los errores grandes y evita que errores positivos y negativos se cancelen entre sí. La regresión lineal puede aproximar una sigmoidea en su rango casi lineal (la zona media de la curva), pero no en los extremos donde se aplana."
+  prompt="¿Por qué elevamos al cuadrado los errores (ECM) en lugar de sumar las diferencias directamente? ¿Por qué el R² de nuestra regresión radio→textura es tan bajo (≈0.10)?"
+  answer="Elevar al cuadrado penaliza más los errores grandes y evita que errores positivos y negativos se cancelen entre sí. El R² es bajo porque la textura de un tumor depende de muchos factores (no solo el tamaño del núcleo) — son datos reales, ruidosos. La regresión nos da la mejor aproximación lineal posible, pero no puede capturar toda la complejidad."
 />
 
 <ConceptCard variant="key-idea">
-La regresión lineal encuentra la relación lineal entre una variable independiente (concentración) y una dependiente (efecto). La "mejor recta" minimiza el ECM — esto se llama **mínimos cuadrados**.
+La regresión lineal encuentra la relación lineal entre una variable independiente (radio medio) y una dependiente (textura media). La "mejor recta" minimiza el ECM — esto se llama **mínimos cuadrados**. Con datos reales, el R² rara vez es perfecto, y eso está bien: nos dice cuánta información aporta nuestra variable.
 </ConceptCard>
 
-No toda relación es lineal; en biología muchas son curvas sigmoideas (dosis-respuesta).
+No toda relación es lineal; en biología muchas variables tienen relaciones complejas que una sola recta no puede capturar. Un R² bajo no significa que el modelo esté mal — significa que el problema es difícil, como casi siempre en datos reales.
 
 </Section>
 
