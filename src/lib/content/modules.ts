@@ -259,6 +259,44 @@ export function hasNotebook(modSlug: string, lessonSlug: string): boolean {
   return fs.existsSync(nbPath);
 }
 
+// ── Hub helpers ──
+
+export interface LessonFrontmatter {
+  title: string;
+  difficulty?: string;
+  duration?: string;
+  prerequisites?: string;
+}
+
+/** Per-lesson frontmatter for hub cards (D13). Slug-derived title fallback. */
+export function getLessonFrontmatter(
+  moduleSlug: string,
+  lessonSlug: string,
+): LessonFrontmatter | null {
+  const lessonPath = path.join(
+    modulesRoot(),
+    moduleSlug,
+    "lessons",
+    lessonSlug,
+    "lesson.md",
+  );
+  try {
+    const source = fs.readFileSync(lessonPath, "utf8");
+    const { data } = matter(source);
+    return {
+      title:
+        (typeof data["Lesson Title"] === "string" && data["Lesson Title"]) ||
+        (typeof data["title"] === "string" && data["title"]) ||
+        formatLessonName(lessonSlug),
+      difficulty: typeof data["Difficulty"] === "string" ? data["Difficulty"] : undefined,
+      duration: typeof data["Estimated Duration"] === "string" ? data["Estimated Duration"] : undefined,
+      prerequisites: typeof data["Prerequisites"] === "string" ? data["Prerequisites"] : undefined,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function getNextLesson(completedKeys: Set<string>): NextLesson | null {
   for (const mod of getModules()) {
     for (const lessonSlug of getLessonSlugs(mod.slug)) {
