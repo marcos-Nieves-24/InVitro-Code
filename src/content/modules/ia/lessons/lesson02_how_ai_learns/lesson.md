@@ -216,9 +216,7 @@ No toda relación es lineal; en biología muchas variables tienen relaciones com
 
 </Section>
 
-<Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
-
-Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
+<Section number={11} title="Overfitting en acción" eyebrow="INTERACTIVA">
 
 <ReflectionCheck
   blockId="reflection-l02-overfitting-predict"
@@ -228,12 +226,12 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
   answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
 />
 
-<InteractiveFrame src="/interactives/demo_06b_overfitting.html" height="800px" caption="simulación educativa sobre datos sintéticos" />
+<OverfittingTrainer />
 
 **¿Qué muestra este demo?**
-- El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
-- El panel derecho muestra el **Error Cuadrático Medio (ECM)** para cada conjunto
-- La línea punteada gris es la **función real subyacente** — que el modelo nunca ve, igual que en la vida real
+- El panel izquierdo muestra **50 biopsias de entrenamiento** (submuestra fija) y las **172 de prueba** (conjunto completo), con una curva polinomial ajustada sobre el radio medio del núcleo para predecir si la biopsia es benigna o maligna
+- El panel derecho muestra el **Error Cuadrático Medio (ECM)** en escala logarítmica — a grados bajos el modelo es demasiado rígido (**subajuste**), a grados altos la curva memoriza cada punto y el error de prueba explota por varios órdenes de magnitud (**sobreajuste**)
+- Con datos reales el error de entrenamiento NUNCA llega a cero — el piso (~0.10) es la superposición natural entre clases: un polinomio del radio medio, por más complejo que sea, no puede separar perfectamente biopsias benignas de malignas
 
 </Section>
 
@@ -243,7 +241,9 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 |---|---|---|
 | **1–2** (muy simple) | **Subajuste** (underfitting) | El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo. |
 | **3–6** (balanceado) | **Punto óptimo** | El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí. |
-| **8–15** (demasiado complejo) | **Sobreajuste** (overfitting) | El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto). |
+| **8–15** (demasiado complejo) | **Sobreajuste** (overfitting) | El modelo memoriza cada punto de entrenamiento (error train en su piso (~0.10)), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto). |
+
+El grado 7 es transicional — su ECM de prueba sigue siendo óptimo (~0.098), pero es el último grado antes del colapso.
 
 <ConceptCard variant="key-idea">
 El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
