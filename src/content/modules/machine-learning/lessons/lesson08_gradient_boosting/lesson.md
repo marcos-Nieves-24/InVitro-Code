@@ -87,7 +87,7 @@ El Gradient Boosting de sklearn es la versión académica. En producción se usa
 />
 
 <CalloutInfo>
-Para datasets <10,000 filas, sklearn GradientBoosting es suficiente. Para datasets más grandes o competitivos, XGBoost o LightGBM. La diferencia en accuracy suele ser pequeña (1-3%), pero en tiempo de entrenamiento puede ser 10x.
+Para datasets \<10,000 filas, sklearn GradientBoosting es suficiente. Para datasets más grandes o competitivos, XGBoost o LightGBM. La diferencia en accuracy suele ser pequeña (1-3%), pero en tiempo de entrenamiento puede ser 10x.
 </CalloutInfo>
 
 </Section>
