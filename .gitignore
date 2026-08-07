@@ -40,3 +40,10 @@ src/**/*.js
 .DS_Store
 .vercel
 .env*
+# Local AI runtime state
+.atl/
+.codegraph/
+.stitch-screens/
+
+# Local editor config (contains API keys — never commit)
+opencode.json

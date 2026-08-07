@@ -52,7 +52,7 @@ testing:
     available: false
     command: null
   quality:
-    linter: { available: true, command: "npm run lint" }
+    linter: { available: false, command: "npm run lint", note: "Broken by design: Next 16 removed the next lint CLI and the repo has no eslint config; do not add one unless asked." }
     type_checker: { available: true, command: "npm run type-check" }
     formatter: { available: false, command: null }
   note: >
