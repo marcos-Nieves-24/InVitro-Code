@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import fs from "fs";
 import path from "path";
@@ -40,7 +41,7 @@ import { lessonProseClass } from "@/lib/ui/prose";
 const mdxConfig = {
   blockJS: false,
   mdxOptions: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkGfm],
     rehypePlugins: [rehypeKatex],
   },
 };
@@ -168,7 +169,7 @@ export default async function LessonPage({ params }: Props) {
   const { content, data } = matter(source);
 
   // Strip the H1 from content
-  const bodyContent = content.replace(/^# .+\n?/, "");
+  const bodyContent = content.replace(/^\s*# .+\n?/, "");
 
   // Split by <Section, keep only blocks that start with <Section, filter out Resumen, renumber
   const sectionBlocks = bodyContent
