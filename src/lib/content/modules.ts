@@ -221,6 +221,44 @@ export interface NextLesson {
  * Returns `null` when every lesson is completed so the caller can show a
  * completion state instead of inventing a mission.
  */
+// ── Lab helpers (used by subject pages and hub) ──
+
+/** True when lab.md exists for the lesson (D8). */
+export function hasLab(modSlug: string, lessonSlug: string): boolean {
+  const labPath = path.join(
+    modulesRoot(),
+    modSlug,
+    "lessons",
+    lessonSlug,
+    "lab.md",
+  );
+  return fs.existsSync(labPath);
+}
+
+/** True when quiz.md exists for the lesson (D8). */
+export function hasQuiz(modSlug: string, lessonSlug: string): boolean {
+  const quizPath = path.join(
+    modulesRoot(),
+    modSlug,
+    "lessons",
+    lessonSlug,
+    "quiz.md",
+  );
+  return fs.existsSync(quizPath);
+}
+
+/** True when notebook.ipynb exists for the lesson (D12). */
+export function hasNotebook(modSlug: string, lessonSlug: string): boolean {
+  const nbPath = path.join(
+    modulesRoot(),
+    modSlug,
+    "lessons",
+    lessonSlug,
+    "notebook.ipynb",
+  );
+  return fs.existsSync(nbPath);
+}
+
 export function getNextLesson(completedKeys: Set<string>): NextLesson | null {
   for (const mod of getModules()) {
     for (const lessonSlug of getLessonSlugs(mod.slug)) {
