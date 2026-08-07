@@ -27,6 +27,7 @@ import {
   KnnTrainer,
   PerceptronTrainer,
   RegressionTrainer,
+  OverfittingTrainer,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
@@ -153,6 +154,7 @@ export default async function LessonPage({ params }: Props) {
     KnnTrainer,
     PerceptronTrainer,
     RegressionTrainer,
+    OverfittingTrainer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),
