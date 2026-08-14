@@ -13,7 +13,7 @@ Creá un script de Python `lab_calculator.py` que implemente una calculadora de 
 
 1. **Cálculo de dilución de soluciones**: Pedí la concentración del stock (M), la concentración deseada (M) y el volumen deseado (mL). Calculá: `volume_stock = (desired_conc * desired_volume) / stock_conc`, y luego volume_water = desired_volume - volume_stock.
 
-2. **Cálculo de pH**: Dada la concentración de iones de hidrógeno [H⁺], calculá pH = -log10([H⁺]). Usá `**` para log10: `pH = -math.log10(h_concentration)` (import math).
+2. **Cálculo de pH**: Dada la concentración de iones de hidrógeno [H⁺], calculá pH = -log10([H⁺]). Usá `math.log10` para el logaritmo: `pH = -math.log10(h_concentration)` (import math).
 
 3. **Clasificación**: Según el valor del pH: ácido (< 7), neutro (== 7), base (> 7).
 
