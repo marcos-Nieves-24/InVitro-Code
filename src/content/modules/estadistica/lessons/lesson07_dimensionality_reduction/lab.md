@@ -1,52 +1,52 @@
-# Lab: Dimensionality Reduction with PCA
+# Lab: Reducción de dimensionalidad con PCA
 
-## Objective
+## Objetivo
 
-Apply PCA to real and synthetic high-dimensional data and interpret the results.
+Aplicá PCA a datos de alta dimensionalidad reales y sintéticos e interpretá los resultados.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
 ## Dataset
 
-Wine dataset from sklearn.
+Dataset Wine de sklearn.
 
-## Instructions
+## Instrucciones
 
-### Part 1: PCA on Wine Dataset (20 min)
-1. Load wine dataset
-2. Standardize features
-3. Apply PCA (keep all components)
-4. Plot the scree plot with cumulative explained variance
-5. How many components explain 90% of variance?
+### Parte 1: PCA sobre el dataset Wine (20 min)
+1. Cargá el dataset wine
+2. Estandarizá los features
+3. Aplicá PCA (conservá todos los componentes)
+4. Graficá el scree plot con la varianza explicada acumulada
+5. ¿Cuántos componentes explican el 90% de la varianza?
 
-### Part 2: 2D Visualization (15 min)
-1. Project data onto first 2 PCs
-2. Create a scatter plot colored by cultivar
-3. Interpret: are the cultivars separable?
+### Parte 2: Visualización 2D (15 min)
+1. Proyectá los datos sobre los primeros 2 PCs
+2. Creá un scatter plot coloreado por cultivar
+3. Interpretá: ¿los cultivares son separables?
 
-### Part 3: Loadings Analysis (15 min)
-1. Extract loadings for PC1 and PC2
-2. Identify top 3 features contributing to each
-3. Create a heatmap of loadings
-4. Interpret PC1 and PC2 in terms of original features
+### Parte 3: Análisis de cargas (15 min)
+1. Extraé las cargas de PC1 y PC2
+2. Identificá los 3 features principales que contribuyen a cada uno
+3. Creá un heatmap de las cargas
+4. Interpretá PC1 y PC2 en términos de los features originales
 
-### Part 4: Dimensionality Reduction Impact (10 min)
-1. Reconstruct data using only first 3 PCs
-2. Compute reconstruction error (MSE between original and reconstructed)
-3. Discuss: how much information is lost?
+### Parte 4: Impacto de la reducción de dimensionalidad (10 min)
+1. Reconstruí los datos usando solo los primeros 3 PCs
+2. Calculá el error de reconstrucción (MSE entre el original y el reconstruido)
+3. Discutí: ¿cuánta información se pierde?
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with all analyses and interpretations
+- Notebook de Jupyter con todos los análisis e interpretaciones
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| PCA application and scree plot | 3 |
-| 2D visualization with interpretation | 2 |
-| Loadings analysis | 3 |
-| Reconstruction analysis | 2 |
-Total: 10 points
+| Aplicación de PCA y scree plot | 3 |
+| Visualización 2D con interpretación | 2 |
+| Análisis de cargas | 3 |
+| Análisis de reconstrucción | 2 |
+Total: 10 puntos

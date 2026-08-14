@@ -1,60 +1,60 @@
-# Assignment: Customer Segmentation with K-Means
+# Assignment: Segmentación de clientes con K-Means
 
-## Objectives
+## Objetivos
 
-- Segment customers using K-Means clustering
-- Determine optimal number of segments
-- Interpret and profile each segment
-- Provide business recommendations
+- Segmentar clientes usando clustering K-Means
+- Determinar la cantidad óptima de segmentos
+- Interpretar y perfilar cada segmento
+- Proporcionar recomendaciones de negocio
 
-## Instructions
+## Instrucciones
 
-1. Generate or load customer data. Use the `make_blobs` function to create synthetic customer data with 5 segments based on:
-   - Annual income
-   - Spending score
-   - Number of purchases
-   - Average purchase value
+1. Generá o cargá datos de clientes. Usá la función `make_blobs` para crear datos sintéticos de clientes con 5 segmentos basados en:
+   - Ingreso anual
+   - Puntaje de gasto
+   - Cantidad de compras
+   - Valor promedio de compra
 
-2. **Preprocessing**:
-   - Standardize all features
-   - Explain why standardization is necessary
+2. **Preprocesamiento**:
+   - Estandarizá todos los features
+   - Explicá por qué la estandarización es necesaria
 
-3. **Finding Optimal k**:
-   - Test k from 2 to 10
-   - Plot elbow curve and silhouette scores
-   - Determine optimal k and justify your choice
+3. **Búsqueda del k óptimo**:
+   - Probá k de 2 a 10
+   - Graficá la curva del codo y los silhouette scores
+   - Determiná el k óptimo y justificá tu elección
 
 4. **Clustering**:
-   - Apply K-Means with optimal k
-   - Create a PCA visualization colored by cluster
-   - Plot centroids
+   - Aplicá K-Means con el k óptimo
+   - Creá una visualización con PCA coloreada por cluster
+   - Graficá los centroides
 
-5. **Segment Profiling**:
-   - Compute mean feature values per cluster
-   - Create a profile table
-   - Name each segment (e.g., "High-Value Customers", "Bargain Shoppers")
-   - Write a 1-paragraph description of each segment
+5. **Perfilado de segmentos**:
+   - Calculá los valores medios de los features por cluster
+   - Creá una tabla de perfil
+   - Nombra cada segmento (por ejemplo, "High-Value Customers", "Bargain Shoppers")
+   - Escribí una descripción de un párrafo para cada segmento
 
-6. **Business Recommendations**:
-   - Based on segment profiles, suggest 3 marketing strategies
-   - Explain how each strategy targets specific segments
+6. **Recomendaciones de negocio**:
+   - Basándote en los perfiles de los segmentos, sugerí 3 estrategias de marketing
+   - Explicá cómo cada estrategia apunta a segmentos específicos
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, visualizations, segment profiles, and recommendations
+- Notebook de Jupyter con código, visualizaciones, perfiles de segmentos y recomendaciones
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Data generation + preprocessing | Realistic + justified | Adequate | Simple | Missing |
-| Optimal k selection | Both methods, well justified | One method | Weak justification | Missing |
-| K-Means + visualization | Clean, informative | Good | Basic | Missing |
-| Segment profiling | Detailed, named segments | Good profiles | Basic | Missing |
-| Business recommendations | Specific, actionable | General | Vague | Missing |
+| Generación de datos + preprocesamiento | Realista y justificado | Adecuado | Simple | Faltante |
+| Selección del k óptimo | Ambos métodos, bien justificados | Un método | Justificación débil | Faltante |
+| K-Means + visualización | Limpio e informativo | Bueno | Básico | Faltante |
+| Perfilado de segmentos | Detallado, con nombres | Buenos perfiles | Básico | Faltante |
+| Recomendaciones de negocio | Específicas y accionables | Generales | Vagas | Faltante |
 
-**Total: 20 points**
+**Total: 20 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-2.5 hours
+2.5 horas

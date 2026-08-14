@@ -1,68 +1,68 @@
 # Quiz: Clustering (K-Means)
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. K-Means is an example of:**
+**1. K-Means es un ejemplo de:**
 
-a) Supervised learning
-b) Unsupervised learning
-c) Reinforcement learning
-d) Semi-supervised learning
+a) Aprendizaje supervisado
+b) Aprendizaje no supervisado
+c) Aprendizaje por refuerzo
+d) Aprendizaje semi-supervisado
 
-**2. The inertia of a K-Means solution measures:**
+**2. La inercia de una solución de K-Means mide:**
 
-a) The distance between cluster centroids
-b) The sum of squared distances from points to their centroid
-c) The silhouette score
-d) The number of iterations
+a) La distancia entre los centroides de los clusters
+b) La suma de las distancias al cuadrado desde los puntos hasta su centroide
+c) El silhouette score
+d) La cantidad de iteraciones
 
-**3. A silhouette score close to 1 indicates:**
+**3. Un silhouette score cercano a 1 indica:**
 
-a) Points may be in the wrong cluster
-b) Points are well-matched to their own cluster and poorly matched to neighboring clusters
-c) The clustering algorithm failed
-d) The data has no natural clusters
+a) Que los puntos pueden estar en el cluster equivocado
+b) Que los puntos están bien emparejados con su propio cluster y mal emparejados con los clusters vecinos
+c) Que el algoritmo de clustering falló
+d) Que los datos no tienen clusters naturales
 
-**4. Which of the following is NOT a method to determine the optimal k?**
+**4. ¿Cuál de los siguientes NO es un método para determinar el k óptimo?**
 
-a) Elbow method
-b) Silhouette analysis
-c) P-value of the clustering
-d) Gap statistic
+a) Método del codo
+b) Análisis de silhouette
+c) El p-valor del clustering
+d) Estadístico de brecha (gap statistic)
 
-**5. K-Means works best for clusters that are:**
+**5. K-Means funciona mejor para clusters que son:**
 
-a) Spherical and similarly sized
-b) Irregularly shaped
-c) Hierarchical
-d) Overlapping
+a) Esféricos y de tamaño similar
+b) De forma irregular
+c) Jerárquicos
+d) Superpuestos
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Why is it important to standardize features before applying K-Means?
+**6.** ¿Por qué es importante estandarizar los features antes de aplicar K-Means?
 
-**7.** A bioinformatician applies K-Means to single-cell RNA-seq data and finds clusters that don't match known cell types. List three possible explanations.
+**7.** Un bioinformático aplica K-Means a datos de single-cell RNA-seq y encuentra clusters que no coinciden con los tipos celulares conocidos. Mencioná tres explicaciones posibles.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code using sklearn that:
-- Generates synthetic data with `make_blobs` (300 samples, 3 centers)
-- Applies K-Means with k=3
-- Computes and prints the silhouette score
+**8.** Escribí código en Python usando sklearn que:
+- Genere datos sintéticos con `make_blobs` (300 muestras, 3 centros)
+- Aplique K-Means con k=3
+- Calcule e imprima el silhouette score
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. b) Unsupervised learning
-2. b) The sum of squared distances from points to their centroid
-3. b) Points are well-matched to their own cluster and poorly matched to neighboring clusters
-4. c) P-value of the clustering
-5. a) Spherical and similarly sized
+1. b) Aprendizaje no supervisado
+2. b) La suma de las distancias al cuadrado desde los puntos hasta su centroide
+3. b) Que los puntos están bien emparejados con su propio cluster y mal emparejados con los clusters vecinos
+4. c) El p-valor del clustering
+5. a) Esféricos y de tamaño similar
 
-6. K-Means uses Euclidean distance. Features on larger scales will dominate the distance calculation. Standardization ensures all features contribute equally.
+6. K-Means usa la distancia euclidiana. Los features con escalas más grandes dominarán el cálculo de la distancia. La estandarización asegura que todos los features contribuyan por igual.
 
-7. (1) The true biological subtypes are not spherical (K-Means assumes spherical clusters). (2) Technical noise or batch effects may dominate the clustering. (3) The data may need normalization or transformation first.
+7. (1) Los subtipos biológicos reales no son esféricos (K-Means asume clusters esféricos). (2) El ruido técnico o los efectos de lote pueden dominar el clustering. (3) Los datos pueden necesitar primero una normalización o transformación.
 
 8. 
 ```python

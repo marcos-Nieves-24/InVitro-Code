@@ -1,69 +1,69 @@
-# Quiz: Dimensionality Reduction (PCA)
+# Quiz: Reducción de dimensionalidad (PCA)
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. PCA finds directions that maximize:**
+**1. PCA encuentra direcciones que maximizan:**
 
-a) The correlation between variables
-b) The variance in the data
-c) The accuracy of a classifier
-d) The number of features
+a) La correlación entre las variables
+b) La varianza en los datos
+c) La precisión de un clasificador
+d) La cantidad de features
 
-**2. The explained variance ratio of a principal component tells us:**
+**2. La proporción de varianza explicada de un componente principal nos dice:**
 
-a) How many features it uses
-b) The proportion of total variance it captures
-c) How correlated it is with the target
-d) The number of iterations needed
+a) Cuántos features usa
+b) La proporción de la varianza total que captura
+c) Cuán correlacionado está con el target
+d) La cantidad de iteraciones necesarias
 
-**3. Why must we standardize data before PCA?**
+**3. ¿Por qué debemos estandarizar los datos antes de aplicar PCA?**
 
-a) To reduce computation time
-b) PCA is scale-sensitive; variables with larger scales would dominate
-c) To make the data categorical
-d) To increase the number of components
+a) Para reducir el tiempo de cómputo
+b) PCA es sensible a la escala; las variables con escalas más grandes dominarían
+c) Para volver los datos categóricos
+d) Para aumentar la cantidad de componentes
 
-**4. The elbow in a scree plot suggests:**
+**4. El codo en un scree plot sugiere:**
 
-a) The optimal number of features to remove
-b) The optimal number of principal components to retain
-c) The learning rate
-d) The correlation threshold
+a) La cantidad óptima de features a eliminar
+b) La cantidad óptima de componentes principales a retener
+c) La tasa de aprendizaje
+d) El umbral de correlación
 
-**5. PCA loadings represent:**
+**5. Las cargas de PCA representan:**
 
-a) The predicted values of the model
-b) The contribution of each original feature to a PC
-c) The eigenvalues of the covariance matrix
-d) The residuals after transformation
+a) Los valores predichos del modelo
+b) La contribución de cada feature original a un PC
+c) Los autovalores de la matriz de covarianza
+d) Los residuos después de la transformación
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Explain why PCA is considered an unsupervised technique.
+**6.** Explicá por qué PCA se considera una técnica no supervisada.
 
-**7.** A dataset with 100 features is reduced to 3 PCs that explain 85% of the variance. Interpret this result and discuss the trade-off.
+**7.** Un dataset con 100 features se reduce a 3 PCs que explican el 85% de la varianza. Interpretá este resultado y discutí el trade-off.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code using sklearn that:
-- Loads the iris dataset
-- Standardizes the features
-- Applies PCA and keeps 2 components
-- Prints the explained variance ratios and the cumulative variance
+**8.** Escribí código en Python usando sklearn que:
+- Cargue el dataset iris
+- Estandarice los features
+- Aplique PCA y conserve 2 componentes
+- Imprima las proporciones de varianza explicada y la varianza acumulada
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. b) The variance in the data
-2. b) The proportion of total variance it captures
-3. b) PCA is scale-sensitive; variables with larger scales would dominate
-4. b) The optimal number of principal components to retain
-5. b) The contribution of each original feature to a PC
+1. b) La varianza en los datos
+2. b) La proporción de la varianza total que captura
+3. b) PCA es sensible a la escala; las variables con escalas más grandes dominarían
+4. b) La cantidad óptima de componentes principales a retener
+5. b) La contribución de cada feature original a un PC
 
-6. PCA does not use any label information. It finds patterns (directions of maximum variance) purely from the feature matrix X, without reference to a target variable y. This makes it an unsupervised learning method.
+6. PCA no usa ninguna información de etiquetas. Encuentra patrones (direcciones de máxima varianza) únicamente a partir de la matriz de features X, sin referencia a una variable target y. Esto lo convierte en un método de aprendizaje no supervisado.
 
-7. 3 PCs capture 85% of the variability in 100 features — the data has a low-dimensional structure. Trade-off: we lose 15% of information but gain a much simpler representation, faster computation, and reduced overfitting risk.
+7. 3 PCs capturan el 85% de la variabilidad en 100 features: los datos tienen una estructura de baja dimensionalidad. Trade-off: perdemos el 15% de la información pero ganamos una representación mucho más simple, un cómputo más rápido y un menor riesgo de overfitting.
 
 8. 
 ```python

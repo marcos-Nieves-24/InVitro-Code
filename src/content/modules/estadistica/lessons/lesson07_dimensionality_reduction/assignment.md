@@ -1,60 +1,60 @@
-# Assignment: PCA Analysis
+# Assignment: Análisis de PCA
 
-## Objectives
+## Objetivos
 
-- Apply PCA to analyze high-dimensional data
-- Determine optimal number of components
-- Interpret principal components in terms of original features
+- Aplicar PCA para analizar datos de alta dimensionalidad
+- Determinar la cantidad óptima de componentes
+- Interpretar los componentes principales en términos de los features originales
 
-## Instructions
+## Instrucciones
 
-1. Load the breast cancer dataset from sklearn:
+1. Cargá el dataset de cáncer de mama de sklearn:
 ```python
 from sklearn.datasets import load_breast_cancer
 cancer = load_breast_cancer()
 ```
 
-2. **Standardization**: Standardize all 30 features
+2. **Estandarización**: Estandarizá los 30 features
 
-3. **PCA Application**:
-   - Apply PCA keeping all components
-   - Create a scree plot with cumulative explained variance
-   - Determine the number of components needed for 80%, 90%, and 95% explained variance
+3. **Aplicación de PCA**:
+   - Aplicá PCA conservando todos los componentes
+   - Creá un scree plot con la varianza explicada acumulada
+   - Determiná la cantidad de componentes necesarios para el 80%, 90% y 95% de la varianza explicada
 
-4. **2D Visualization**:
-   - Project data onto PC1 and PC2
-   - Create a scatter plot colored by diagnosis (malignant vs benign)
-   - Interpret the separation
+4. **Visualización 2D**:
+   - Proyectá los datos sobre PC1 y PC2
+   - Creá un scatter plot coloreado por diagnóstico (maligno vs benigno)
+   - Interpretá la separación
 
-5. **Loadings Analysis**:
-   - Extract the top 5 features contributing to PC1
-   - Extract the top 5 features contributing to PC2
-   - Interpret PC1 and PC2 biologically (what types of features dominate?)
+5. **Análisis de cargas**:
+   - Extraé los 5 features principales que contribuyen a PC1
+   - Extraé los 5 features principales que contribuyen a PC2
+   - Interpretá PC1 y PC2 biológicamente (¿qué tipos de features dominan?)
 
-6. **Reconstruction**:
-   - Keep only the first N components (where N explains 90% variance)
-   - Reconstruct the data and compute reconstruction MSE
-   - Discuss the information loss
+6. **Reconstrucción**:
+   - Conservá solo los primeros N componentes (donde N explica el 90% de la varianza)
+   - Reconstruí los datos y calculá el MSE de reconstrucción
+   - Discutí la pérdida de información
 
-7. **Report**: Write a summary interpreting what PCA reveals about the breast cancer dataset
+7. **Informe**: Escribí un resumen que interprete qué revela PCA sobre el dataset de cáncer de mama
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, plots, and written interpretations
+- Notebook de Jupyter con código, gráficos e interpretaciones escritas
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| PCA application | Correct with all steps | Minor issues | Partial | Missing |
-| Scree + components selection | Clear and justified | Basic | Confusing | Missing |
-| 2D visualization | Informative with interpretation | Good plot | Basic | Missing |
-| Loadings analysis | Insightful interpretation | Good | Superficial | Missing |
-| Reconstruction | Correct with discussion | Correct only | Incomplete | Missing |
-| Written summary | Excellent synthesis | Good | Basic | Missing |
+| Aplicación de PCA | Correcta con todos los pasos | Problemas menores | Parcial | Faltante |
+| Scree + selección de componentes | Clara y justificada | Básica | Confusa | Faltante |
+| Visualización 2D | Informativa con interpretación | Buen gráfico | Básica | Faltante |
+| Análisis de cargas | Interpretación con insight | Buena | Superficial | Faltante |
+| Reconstrucción | Correcta con discusión | Correcta solamente | Incompleta | Faltante |
+| Resumen escrito | Síntesis excelente | Bueno | Básico | Faltante |
 
-**Total: 24 points**
+**Total: 24 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-3 hours
+3 horas

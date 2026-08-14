@@ -1,47 +1,47 @@
-# Assignment: Correlation Analysis
+# Assignment: Análisis de correlación
 
-## Objectives
+## Objetivos
 
-- Compute and interpret Pearson and Spearman correlations
-- Create correlation matrix visualizations
-- Detect multicollinearity and spurious correlations
+- Calcular e interpretar las correlaciones de Pearson y Spearman
+- Crear visualizaciones de la matriz de correlación
+- Detectar multicolinealidad y correlaciones espurias
 
-## Instructions
+## Instrucciones
 
-1. **Correlation Comparison**: Load the `mpg` dataset.
-   - Compute Pearson and Spearman correlations between all numeric pairs
-   - Find pairs where |Pearson - Spearman| > 0.1 and explain why
-   - Create scatter plots for the 3 most correlated pairs
+1. **Comparación de correlaciones**: Cargá el dataset `mpg`.
+   - Calculá las correlaciones de Pearson y Spearman entre todos los pares numéricos
+   - Encontrá los pares donde |Pearson - Spearman| > 0.1 y explicá por qué
+   - Creá scatter plots para los 3 pares más correlacionados
 
-2. **Correlation Matrix**: Create a styled correlation matrix heatmap with:
-   - All numeric variables
-   - Annotations showing correlation values
-   - Red-blue diverging colormap centered at 0
-   - Highlight correlations > 0.8 (potential multicollinearity)
+2. **Matriz de correlación**: Creá un heatmap de la matriz de correlación con estilo que incluya:
+   - Todas las variables numéricas
+   - Anotaciones que muestren los valores de correlación
+   - Colormap divergente rojo-azul centrado en 0
+   - Resaltar las correlaciones > 0.8 (posible multicolinealidad)
 
-3. **Anscombe's Quartet Analysis**: 
-   - Load `anscombe` dataset
-   - For each of the 4 groups, compute Pearson correlation, mean of x, mean of y, and regression line
-   - Show that summary statistics are identical but visualizations reveal very different patterns
-   - Create a 2×2 scatter plot with regression lines
+3. **Análisis del cuarteto de Anscombe**:
+   - Cargá el dataset `anscombe`
+   - Para cada uno de los 4 grupos, calculá la correlación de Pearson, la media de x, la media de y y la línea de regresión
+   - Mostrá que los estadísticos resumidos son idénticos pero las visualizaciones revelan patrones muy diferentes
+   - Creá un scatter plot de 2×2 con líneas de regresión
 
-4. **Spurious Correlations**: Find an example of two variables from the datasets that are correlated but have no plausible causal relationship. Explain why the correlation exists despite no causation.
+4. **Correlaciones espurias**: Encontrá un ejemplo de dos variables de los datasets que estén correlacionadas pero no tengan una relación causal plausible. Explicá por qué existe la correlación a pesar de no haber causalidad.
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, visualizations, and written interpretations
+- Notebook de Jupyter con código, visualizaciones e interpretaciones escritas
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Pearson vs Spearman | Correct comparison | Minor issues | Partial | Missing |
-| Correlation matrix | Clear, informative | Good but basic | Missing elements | Poor quality |
-| Anscombe analysis | Complete with insight | Good analysis | Basic | Missing |
-| Spurious correlations | Plausible, well-explained | Acceptable | Weak | Missing |
+| Pearson vs Spearman | Comparación correcta | Problemas menores | Parcial | Faltante |
+| Matriz de correlación | Clara e informativa | Buena pero básica | Faltan elementos | Mala calidad |
+| Análisis de Anscombe | Completo con insight | Buen análisis | Básico | Faltante |
+| Correlaciones espurias | Plausible y bien explicada | Aceptable | Débil | Faltante |
 
-**Total: 16 points**
+**Total: 16 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-2 hours
+2 horas

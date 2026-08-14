@@ -1,68 +1,68 @@
-# Quiz: Exploratory Data Analysis
+# Quiz: Análisis exploratorio de datos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. What does MCAR stand for in missing data analysis?**
+**1. ¿Qué significa MCAR en el análisis de datos faltantes?**
 
 a) Missing Completely At Random
 b) Missing Correlated And Random
 c) Measured Correctly At Random
 d) Mostly Categorical And Rare
 
-**2. Which method is NOT typically used for outlier detection?**
+**2. ¿Qué método NO se usa típicamente para la detección de valores atípicos?**
 
-a) IQR method
-b) Z-score method
-c) Mean imputation
+a) Método IQR
+b) Método del puntaje Z
+c) Imputación por la media
 d) Isolation Forest
 
-**3. According to the IQR rule, a point is an outlier if it is:**
+**3. Según la regla del IQR, un punto es un valor atípico si:**
 
-a) Below Q1 or above Q3
-b) Below Q1 - 1.5×IQR or above Q3 + 1.5×IQR
-c) More than 2 standard deviations from the mean
-d) Below the 10th percentile
+a) Está por debajo del Q1 o por encima del Q3
+b) Está por debajo de Q1 - 1.5×IQR o por encima de Q3 + 1.5×IQR
+c) Está a más de 2 desviaciones estándar de la media
+d) Está por debajo del percentil 10
 
-**4. What is the first step in the EDA workflow?**
+**4. ¿Cuál es el primer paso en el flujo de trabajo del EDA?**
 
-a) Outlier detection
-b) Data overview (shape, columns, types)
-c) Correlation analysis
-d) Model building
+a) Detección de valores atípicos
+b) Vista general de los datos (forma, columnas, tipos)
+c) Análisis de correlación
+d) Construcción del modelo
 
-**5. Which type of missing data is most problematic?**
+**5. ¿Qué tipo de datos faltantes es más problemático?**
 
 a) MCAR
 b) MAR
 c) MNAR
-d) All are equally problematic
+d) Todos son igualmente problemáticos
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Explain the difference between MAR and MNAR missing data. Give an example of each from a clinical trial.
+**6.** Explicá la diferencia entre los datos faltantes MAR y MNAR. Da un ejemplo de cada uno en un ensayo clínico.
 
-**7.** Why should you keep the original data untouched during EDA and work on copies?
+**7.** ¿Por qué deberías mantener los datos originales intactos durante el EDA y trabajar sobre copias?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code that loads the `titanic` dataset from seaborn and:
-- Prints the percentage of missing values per column
-- Creates a heatmap of missing values
-- Imputes missing `age` values with the median
+**8.** Escribí código en Python que cargue el dataset `titanic` de seaborn y:
+- Imprima el porcentaje de valores faltantes por columna
+- Cree un heatmap de los valores faltantes
+- Impute los valores faltantes de `age` con la mediana
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
 1. a) Missing Completely At Random
-2. c) Mean imputation
-3. b) Below Q1 - 1.5×IQR or above Q3 + 1.5×IQR
-4. b) Data overview (shape, columns, types)
+2. c) Imputación por la media
+3. b) Por debajo de Q1 - 1.5×IQR o por encima de Q3 + 1.5×IQR
+4. b) Vista general de los datos (forma, columnas, tipos)
 5. c) MNAR
 
-6. MAR: missing depends on observed data (e.g., older patients more likely to skip a blood test). MNAR: missing depends on unobserved data (e.g., patients with very high pain levels don't report their pain score). MNAR is more problematic because the missingness mechanism cannot be verified from the observed data.
+6. MAR: los datos faltantes dependen de datos observados (por ejemplo, los pacientes mayores tienen más probabilidades de saltarse un análisis de sangre). MNAR: los datos faltantes dependen de datos no observados (por ejemplo, los pacientes con niveles de dolor muy altos no informan su puntaje de dolor). MNAR es más problemático porque el mecanismo de falta no puede verificarse a partir de los datos observados.
 
-7. EDA often involves trial and error. Keeping the original data allows you to revert changes, compare results, and ensures reproducibility. Data cleaning decisions should be documented and applied systematically, not in-place.
+7. El EDA a menudo implica prueba y error. Mantener los datos originales te permite revertir cambios, comparar resultados y garantiza la reproducibilidad. Las decisiones de limpieza de datos deben documentarse y aplicarse de forma sistemática, y no directamente sobre los datos originales.
 
 8. 
 ```python

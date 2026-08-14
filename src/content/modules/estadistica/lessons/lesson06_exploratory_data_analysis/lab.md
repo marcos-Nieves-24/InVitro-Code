@@ -1,64 +1,64 @@
-# Lab: Exploratory Data Analysis
+# Lab: Análisis exploratorio de datos
 
-## Objective
+## Objetivo
 
-Perform a complete EDA on the MPG dataset, documenting findings and cleaning decisions.
+Realizá un EDA completo sobre el dataset MPG, documentando los hallazgos y las decisiones de limpieza.
 
-## Duration
+## Duración
 
-90 minutes
+90 minutos
 
 ## Dataset
 
-Seaborn's `mpg` dataset.
+El dataset `mpg` de seaborn.
 
-## Instructions
+## Instrucciones
 
-### Part 1: Data Loading and Overview (10 min)
-1. Load `mpg` from seaborn
-2. Print shape, column names, dtypes
-3. Generate `df.describe()` and `df.info()`
+### Parte 1: Carga de datos y vista general (10 min)
+1. Cargá `mpg` de seaborn
+2. Imprimí la forma, los nombres de las columnas y los dtypes
+3. Generá `df.describe()` y `df.info()`
 
-### Part 2: Missing Values (15 min)
-1. Identify columns with missing values
-2. Calculate percentage of missing values
-3. Visualize missing data patterns
-4. Decide on handling strategy for each column with missing values
+### Parte 2: Valores faltantes (15 min)
+1. Identificá las columnas con valores faltantes
+2. Calculá el porcentaje de valores faltantes
+3. Visualizá los patrones de datos faltantes
+4. Decidí la estrategia de manejo para cada columna con valores faltantes
 
-### Part 3: Univariate Analysis (20 min)
-1. Create histograms for `mpg`, `horsepower`, `weight`, `acceleration`
-2. Compute skewness and kurtosis for each
-3. Identify which features need transformation
+### Parte 3: Análisis univariado (20 min)
+1. Creá histogramas para `mpg`, `horsepower`, `weight`, `acceleration`
+2. Calculá la asimetría (skewness) y la curtosis para cada uno
+3. Identificá qué features necesitan transformación
 
-### Part 4: Bivariate and Multivariate Analysis (20 min)
-1. Create a correlation matrix heatmap
-2. Create scatter plots: mpg vs horsepower, mpg vs weight
-3. Create boxplots: mpg by origin and by cylinders
-4. Identify the strongest relationships
+### Parte 4: Análisis bivariado y multivariado (20 min)
+1. Creá un heatmap de la matriz de correlación
+2. Creá scatter plots: mpg vs horsepower, mpg vs weight
+3. Creá boxplots: mpg por origin y por cylinders
+4. Identificá las relaciones más fuertes
 
-### Part 5: Outlier Detection (15 min)
-1. Use IQR method on `mpg`, `horsepower`, `weight`
-2. Report number of outliers per column
-3. Create boxplots highlighting outliers
+### Parte 5: Detección de valores atípicos (15 min)
+1. Usá el método IQR en `mpg`, `horsepower`, `weight`
+2. Informá la cantidad de valores atípicos por columna
+3. Creá boxplots que resalten los valores atípicos
 
-### Part 6: Summary Report (10 min)
-Write a markdown summary with:
-- Key findings about the data
-- Data quality issues
-- Recommended preprocessing steps
-- 3 interesting patterns discovered
+### Parte 6: Informe resumido (10 min)
+Escribí un resumen en markdown con:
+- Hallazgos clave sobre los datos
+- Problemas de calidad de datos
+- Pasos de preprocesamiento recomendados
+- 3 patrones interesantes descubiertos
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, visualizations, and markdown summary
+- Notebook de Jupyter con código, visualizaciones y resumen en markdown
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Missing value analysis | 2 |
-| Univariate analysis (histograms + shape stats) | 2 |
-| Bivariate analysis (correlation + scatter) | 2 |
-| Outlier detection | 2 |
-| Summary report | 2 |
-Total: 10 points
+| Análisis de valores faltantes | 2 |
+| Análisis univariado (histogramas + estadísticos de forma) | 2 |
+| Análisis bivariado (correlación + scatter) | 2 |
+| Detección de valores atípicos | 2 |
+| Informe resumido | 2 |
+Total: 10 puntos
