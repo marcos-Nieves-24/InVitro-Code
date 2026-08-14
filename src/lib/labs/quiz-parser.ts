@@ -210,9 +210,12 @@ function extractMcqOptions(body: string): {
   }
 
   // Clean question: remove the bold **Q1:**/**1.** prefix from the first line,
-  // then join
+  // and a trailing ** left by the `**N. question**` format, then join
   let questionText = questionLines.join("\n");
-  questionText = questionText.replace(Q_PREFIX_RE, "").trim();
+  questionText = questionText
+    .replace(Q_PREFIX_RE, "")
+    .replace(/\*\*\s*$/, "")
+    .trim();
 
   return { question: questionText, options };
 }
@@ -234,6 +237,7 @@ function extractPlainQuestion(body: string): string {
     .slice(start)
     .join("\n")
     .replace(Q_PREFIX_RE, "") // in case it's on the first kept line
+    .replace(/\*\*\s*$/, "") // trailing ** from `**N. question**` format
     .trim();
 }
 
