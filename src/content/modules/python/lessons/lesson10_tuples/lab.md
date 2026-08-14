@@ -1,20 +1,20 @@
-# Lab: Working with Tuples
+# Lab: Trabajando con tuplas
 
-## Objective
+## Objetivo
 
-Practice creating tuples, unpacking, and understanding immutability.
+Practicar la creación de tuplas, el desempaquetado y la comprensión de la inmutabilidad.
 
-## Duration
+## Duración
 
-30 minutes
+30 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 9: Lists
+Lección 9: Listas
 
-## Instructions
+## Instrucciones
 
-### Part 1: Creating and Accessing Tuples
+### Parte 1: Creación y acceso a tuplas
 
 ```python
 # Create various tuples
@@ -31,7 +31,7 @@ print(f"Triple: {triple}")
 print(f"Nested: {nested}")
 ```
 
-### Part 2: Tuple Unpacking
+### Parte 2: Desempaquetado de tuplas
 
 ```python
 # Basic unpacking
@@ -49,7 +49,7 @@ first, *middle, last = (1, 2, 3, 4, 5)
 print(f"first={first}, middle={middle}, last={last}")
 ```
 
-### Part 3: Immutability Demonstration
+### Parte 3: Demostración de la inmutabilidad
 
 ```python
 t = (1, 2, 3)
@@ -63,7 +63,7 @@ t2 = (99,) + t[1:]
 print(f"New tuple: {t2}")
 ```
 
-### Part 4: Tuples as Dictionary Keys
+### Parte 4: Tuplas como claves de diccionarios
 
 ```python
 # Using tuples as keys for location data
@@ -82,7 +82,7 @@ for coords, city in locations.items():
     print(f"{city}: {coords}")
 ```
 
-### Part 5: Multiple Return Values
+### Parte 5: Múltiples valores de retorno
 
 ```python
 def analyze(numbers):
@@ -100,6 +100,6 @@ print(f"Data: {data}")
 print(f"Min: {minimum}, Max: {maximum}, Mean: {mean:.2f}, Count: {count}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `tuples_lab.ipynb` with all exercises.
+Notebook de Jupyter `tuples_lab.ipynb` con todos los ejercicios.

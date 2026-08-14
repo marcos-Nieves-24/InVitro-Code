@@ -1,27 +1,27 @@
-# Assignment: Data Records with Tuples
+# Assignment: Registros de datos con tuplas
 
-## Objectives
+## Objetivos
 
-- Use tuples to represent structured records
-- Practice tuple unpacking
-- Understand when immutability is beneficial
-- Use function return tuples effectively
+- Usar tuplas para representar registros estructurados
+- Practicar el desempaquetado de tuplas
+- Entender cuándo la inmutabilidad es beneficiosa
+- Usar tuplas como valores de retorno de funciones de forma eficaz
 
-## Instructions
+## Instrucciones
 
-Create a Python script `student_records.py` that:
+Creá un script de Python `student_records.py` que:
 
-1. **Define records**: Create a list of student records, each as a tuple: `(student_id, name, [grades])` where grades is a list of exam scores.
+1. **Definición de registros**: Creá una lista de registros de estudiantes, cada uno como tupla: `(student_id, name, [grades])` donde grades es una lista de notas de exámenes.
 
-2. **Functions using tuples**:
-   - `average_grade(student)` — returns `(student_id, name, avg_score)`
-   - `top_student(students)` — returns the tuple of the student with highest average
-   - `passed_students(students, threshold=60)` — returns list of tuples of students who passed
-   - `grade_summary(students)` — returns a tuple containing (class_average, highest_avg, lowest_avg, num_passed, num_failed)
+2. **Funciones con tuplas**:
+   - `average_grade(student)` — devuelve `(student_id, name, avg_score)`
+   - `top_student(students)` — devuelve la tupla del estudiante con el promedio más alto
+   - `passed_students(students, threshold=60)` — devuelve una lista de tuplas de estudiantes aprobados
+   - `grade_summary(students)` — devuelve una tupla con (class_average, highest_avg, lowest_avg, num_passed, num_failed)
 
-3. **Analysis**: Use the functions to analyze the data and print a formatted summary.
+3. **Análisis**: Usá las funciones para analizar los datos e imprimí un resumen formateado.
 
-## Starter Data
+## Datos iniciales
 
 ```python
 students = [
@@ -33,21 +33,21 @@ students = [
 ]
 ```
 
-## Deliverables
+## Entregables
 
 - `student_records.py`
-- Output showing the analysis
+- Salida mostrando el análisis
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Tuple Usage | Appropriate use throughout | Mostly appropriate | Poor use |
-| Unpacking | Used effectively in all functions | Used occasionally | Not used |
-| Functions | Well-designed, clear I/O | Mostly clear | Poor design |
-| Analysis | Complete summary output | Partial output | Missing |
-| Code Quality | Clean, commented | Acceptable | Poor |
+| Uso de tuplas | Uso apropiado en todo el código | Mayormente apropiado | Uso deficiente |
+| Desempaquetado | Usado eficazmente en todas las funciones | Usado ocasionalmente | No usado |
+| Funciones | Bien diseñadas, I/O clara | Mayormente claras | Mal diseño |
+| Análisis | Resumen de salida completo | Salida parcial | Falta |
+| Calidad del código | Limpio, comentado | Aceptable | Mala |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-45 minutes
+45 minutos

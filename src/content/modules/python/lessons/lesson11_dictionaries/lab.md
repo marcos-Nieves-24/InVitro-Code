@@ -1,20 +1,20 @@
-# Lab: Dictionaries in Practice
+# Lab: Diccionarios en la práctica
 
-## Objective
+## Objetivo
 
-Practice creating, accessing, and manipulating dictionaries.
+Practicar la creación, el acceso y la manipulación de diccionarios.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 9: Lists
+Lección 9: Listas
 
-## Instructions
+## Instrucciones
 
-### Part 1: Creating and Accessing Dictionaries
+### Parte 1: Creación y acceso a diccionarios
 
 ```python
 # Contact book
@@ -28,7 +28,7 @@ print(f"Alice's email: {contacts['Alice']['email']}")
 print(f"Bob's phone: {contacts['Bob'].get('phone', 'N/A')}")
 ```
 
-### Part 2: Adding and Updating
+### Parte 2: Agregar y actualizar
 
 ```python
 contacts["Diana"] = {"phone": "555-0104", "email": "diana@example.com"}
@@ -39,7 +39,7 @@ for name, info in contacts.items():
     print(f"  {name}: {info['phone']}, {info['email']}")
 ```
 
-### Part 3: Dictionary Comprehension
+### Parte 3: Dictionary comprehension
 
 ```python
 # Create dictionary from lists
@@ -53,7 +53,7 @@ high_scorers = {name: score for name, score in gradebook.items() if score >= 90}
 print(f"High scorers: {high_scorers}")
 ```
 
-### Part 4: Counting with Dictionaries
+### Parte 4: Contar con diccionarios
 
 ```python
 text = "the quick brown fox jumps over the lazy dog"
@@ -70,7 +70,7 @@ for word in text.split():
 print(f"DefaultDict: {dict(counts)}")
 ```
 
-### Part 5: Nested Dictionaries
+### Parte 5: Diccionarios anidados
 
 ```python
 # Sales data
@@ -89,6 +89,6 @@ for quarter, products in sales.items():
 print(f"Product totals: {dict(product_totals)}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `dicts_lab.ipynb` with all exercises.
+Notebook de Jupyter `dicts_lab.ipynb` con todos los ejercicios.

@@ -1,52 +1,52 @@
-# Quiz: Dictionaries
+# Quiz: Diccionarios
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What happens if you access `d["missing"]` when the key doesn't exist?
-- A) Returns None
-- B) Raises KeyError
-- C) Creates the key
-- D) Returns False
+**Q1:** ¿Qué pasa si accedés a `d["missing"]` cuando la clave no existe?
+- A) Devuelve None
+- B) Lanza un KeyError
+- C) Crea la clave
+- D) Devuelve False
 
-**Q2:** Which of the following can be a dictionary key?
-- A) List
-- B) Dictionary
-- C) Tuple
-- D) Set
+**Q2:** ¿Cuál de los siguientes puede ser una clave de diccionario?
+- A) Lista
+- B) Diccionario
+- C) Tupla
+- D) Conjunto
 
-**Q3:** What does `d.get("key", "default")` return if "key" is not in the dictionary?
+**Q3:** ¿Qué devuelve `d.get("key", "default")` si "key" no está en el diccionario?
 - A) None
 - B) "default"
 - C) KeyError
 - D) False
 
-**Q4:** How do you iterate over both keys and values in a dictionary d?
+**Q4:** ¿Cómo iterás sobre claves y valores a la vez en un diccionario d?
 - A) `for k in d:`
 - B) `for k, v in d:`
 - C) `for k, v in d.items():`
 - D) `for v in d.values():`
 
-**Q5:** What is the time complexity of dictionary key lookup?
+**Q5:** ¿Cuál es la complejidad temporal de la búsqueda de claves en un diccionario?
 - A) O(1)
 - B) O(n)
 - C) O(log n)
 - D) O(n²)
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain why lists cannot be used as dictionary keys but tuples can.
+**Q6:** Explicá por qué las listas no pueden usarse como claves de diccionario pero las tuplas sí.
 
-**Q7:** What is the difference between `d.get(key)` and `d[key]`?
+**Q7:** ¿Cuál es la diferencia entre `d.get(key)` y `d[key]`?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a function `count_characters(s)` that returns a dictionary counting character frequencies in a string. For example, `count_characters("hello")` should return `{"h": 1, "e": 1, "l": 2, "o": 1}`.
+**Q8:** Escribí una función `count_characters(s)` que devuelva un diccionario con las frecuencias de cada carácter de una cadena. Por ejemplo, `count_characters("hello")` debería devolver `{"h": 1, "e": 1, "l": 2, "o": 1}`.
 
-## Answer Key
+## Clave de respuestas
 
-**Q1:** B) Raises KeyError
+**Q1:** B) Lanza un KeyError
 
-**Q2:** C) Tuple
+**Q2:** C) Tupla
 
 **Q3:** B) "default"
 
@@ -54,9 +54,9 @@
 
 **Q5:** A) O(1)
 
-**Q6:** Dictionary keys must be hashable — they need a stable hash value that doesn't change. Lists are mutable (can be modified), so their hash would change if modified, breaking the dictionary. Tuples are immutable, so their hash is stable and they can be used as keys.
+**Q6:** Las claves de los diccionarios deben ser hashables — necesitan un valor de hash estable que no cambie. Las listas son mutables (se pueden modificar), así que su hash cambiaría si se modificaran, rompiendo el diccionario. Las tuplas son inmutables, por lo que su hash es estable y se pueden usar como claves.
 
-**Q7:** `d[key]` raises a KeyError if the key doesn't exist. `d.get(key)` returns None if the key doesn't exist (or a default value if provided). `get()` is safer and preferred when you're unsure if the key exists.
+**Q7:** `d[key]` lanza un KeyError si la clave no existe. `d.get(key)` devuelve None si la clave no existe (o un valor por defecto si se lo proporcionás). `get()` es más seguro y se prefiere cuando no estás seguro de que la clave exista.
 
 **Q8:**
 ```python

@@ -1,20 +1,20 @@
-# Lab: Sets and Set Operations
+# Lab: Conjuntos y operaciones de conjuntos
 
-## Objective
+## Objetivo
 
-Practice creating sets, performing set operations, and using sets for data analysis.
+Practicar la creación de conjuntos, la realización de operaciones de conjuntos y el uso de conjuntos para el análisis de datos.
 
-## Duration
+## Duración
 
-30 minutes
+30 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 9: Lists
+Lección 9: Listas
 
-## Instructions
+## Instrucciones
 
-### Part 1: Creating Sets
+### Parte 1: Creación de conjuntos
 
 ```python
 # Various ways to create sets
@@ -29,7 +29,7 @@ print(f"From string: {from_string}")
 print(f"Literal: {literal}")
 ```
 
-### Part 2: Set Operations
+### Parte 2: Operaciones de conjuntos
 
 ```python
 a = {1, 2, 3, 4, 5}
@@ -44,7 +44,7 @@ print(f"Difference (B-A): {b - a}")
 print(f"Symmetric diff: {a ^ b}")
 ```
 
-### Part 3: Duplicate Removal
+### Parte 3: Eliminación de duplicados
 
 ```python
 # Practical use: remove duplicates
@@ -58,7 +58,7 @@ unique_list = list(unique_users)
 print(f"Unique (sorted): {sorted(unique_list)}")
 ```
 
-### Part 4: Membership Testing
+### Parte 4: Prueba de pertenencia
 
 ```python
 valid_codes = {"A01", "B02", "C03", "D04", "E05"}
@@ -71,7 +71,7 @@ for code in test_codes:
         print(f"{code}: INVALID")
 ```
 
-### Part 5: Set Relationships
+### Parte 5: Relaciones entre conjuntos
 
 ```python
 a = {1, 2, 3, 4}
@@ -83,6 +83,6 @@ print(f"A is superset of B: {a.issuperset(b)}")
 print(f"A and C are disjoint: {a.isdisjoint(c)}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `sets_lab.ipynb` with all exercises.
+Notebook de Jupyter `sets_lab.ipynb` con todos los ejercicios.

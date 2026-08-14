@@ -1,27 +1,27 @@
-# Assignment: Data Processing with Lists
+# Assignment: Procesamiento de datos con listas
 
-## Objectives
+## Objetivos
 
-- Create and manipulate lists effectively
-- Use list comprehensions for concise code
-- Work with nested lists (matrices)
-- Process data using lists and loops
+- Crear y manipular listas de forma eficaz
+- Usar list comprehensions para código conciso
+- Trabajar con listas anidadas (matrices)
+- Procesar datos usando listas y bucles
 
-## Instructions
+## Instrucciones
 
-Create a Python script `list_processor.py` that performs the following tasks:
+Creá un script de Python `list_processor.py` que realice las siguientes tareas:
 
-1. **Temperature analysis**: Given a list of daily temperatures, compute min, max, mean, and identify days above the mean.
+1. **Análisis de temperaturas**: Dada una lista de temperaturas diarias, calculá el mínimo, el máximo y el promedio, e identificá los días por encima del promedio.
 
-2. **Matrix transpose**: Given a matrix (list of lists), compute its transpose and matrix multiplication (dot product) with another matrix.
+2. **Transposición de matrices**: Dada una matriz (lista de listas), calculá su transpuesta y la multiplicación de matrices (producto punto) con otra matriz.
 
-3. **Sequence analysis**: Given a DNA sequence as a string, create a list of all codons (3-base chunks), count occurrences of each codon, and find the most frequent codon.
+3. **Análisis de secuencias**: Dada una secuencia de ADN como cadena, creá una lista de todos los codones (bloques de 3 bases), contá las ocurrencias de cada codón y encontrá el codón más frecuente.
 
-4. **Moving average**: Implement a `moving_average(data, window_size)` function using list comprehension.
+4. **Promedio móvil**: Implementá una función `moving_average(data, window_size)` usando list comprehension.
 
-5. **Outlier detection**: Given a list of numbers, identify outliers using the IQR method (Q1 - 1.5*IQR, Q3 + 1.5*IQR).
+5. **Detección de valores atípicos**: Dada una lista de números, identificá los valores atípicos usando el método IQR (Q1 - 1.5*IQR, Q3 + 1.5*IQR).
 
-## Starter Data
+## Datos iniciales
 
 ```python
 temperatures = [36.1, 37.2, 38.5, 36.8, 37.0, 39.1, 36.5, 37.8, 38.0, 36.9]
@@ -31,21 +31,21 @@ dna = "ATGCGATCGAATTCGATCGATCGAATTCGATCGA"
 data_points = [10, 12, 11, 13, 45, 12, 11, 10, 13, 12, 48, 11, 10, 13]
 ```
 
-## Deliverables
+## Entregables
 
-- `list_processor.py` with all 5 tasks
-- Output for each task
+- `list_processor.py` con las 5 tareas
+- Salida de cada tarea
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| List Operations | All operations correct and efficient | Most correct | Errors present |
-| List Comprehensions | Used appropriately throughout | Used occasionally | Not used |
-| Matrix Operations | Correct transpose and multiplication | One correct | Neither correct |
-| Functions | Well-defined, reusable | Defined but basic | Missing |
-| Code Quality | PEP 8, commented, clean | Acceptable | Poor |
+| Operaciones con listas | Todas las operaciones correctas y eficientes | La mayoría correctas | Hay errores |
+| List comprehensions | Usadas apropiadamente en todo el código | Usadas ocasionalmente | No usadas |
+| Operaciones con matrices | Transpuesta y multiplicación correctas | Una correcta | Ninguna correcta |
+| Funciones | Bien definidas, reutilizables | Definidas pero básicas | Faltan |
+| Calidad del código | PEP 8, comentado, limpio | Aceptable | Mala |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

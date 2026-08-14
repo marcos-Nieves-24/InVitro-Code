@@ -1,28 +1,28 @@
-# Assignment: Data Aggregation with Dictionaries
+# Assignment: Agregación de datos con diccionarios
 
-## Objectives
+## Objetivos
 
-- Use dictionaries for data organization and lookup
-- Implement dictionary comprehensions
-- Use defaultdict and Counter for specialized tasks
-- Nest dictionaries for structured data
+- Usar diccionarios para la organización de datos y la búsqueda
+- Implementar dictionary comprehensions
+- Usar defaultdict y Counter para tareas especializadas
+- Anidar diccionarios para datos estructurados
 
-## Instructions
+## Instrucciones
 
-Create a Python script `sales_analyzer.py` that:
+Creá un script de Python `sales_analyzer.py` que:
 
-1. **Sales data**: Create a dictionary with product names as keys and a list of monthly sales as values.
+1. **Datos de ventas**: Creá un diccionario con los nombres de los productos como claves y una lista de ventas mensuales como valores.
 
-2. **Analysis functions**:
-   - `total_sales(sales_data)` — returns dict of product → total sales
-   - `average_sales(sales_data)` — returns dict of product → average monthly sales
-   - `top_product(sales_data)` — returns the product name with highest total sales
-   - `monthly_totals(sales_data)` — returns list of total sales per month
-   - `products_above_threshold(sales_data, threshold)` — returns list of products above threshold
+2. **Funciones de análisis**:
+   - `total_sales(sales_data)` — devuelve un dict de producto → ventas totales
+   - `average_sales(sales_data)` — devuelve un dict de producto → promedio de ventas mensuales
+   - `top_product(sales_data)` — devuelve el nombre del producto con mayores ventas totales
+   - `monthly_totals(sales_data)` — devuelve una lista de ventas totales por mes
+   - `products_above_threshold(sales_data, threshold)` — devuelve una lista de productos por encima del umbral
 
-3. **Report**: Generate a formatted report with all statistics.
+3. **Informe**: Generá un informe formateado con todas las estadísticas.
 
-## Starter Data
+## Datos iniciales
 
 ```python
 sales_data = {
@@ -33,21 +33,21 @@ sales_data = {
 }
 ```
 
-## Deliverables
+## Entregables
 
 - `sales_analyzer.py`
-- Formatted output of all analysis results
+- Salida formateada de todos los resultados del análisis
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Dictionary Usage | Effective, appropriate usage | Mostly appropriate | Poor usage |
-| Functions | All functions correct, reusable | Most correct | Missing functions |
-| Comprehensions | Used where appropriate | Used but unnecessary | Not used |
-| Output | Clear, formatted report | Adequate | Hard to read |
-| Code Quality | PEP 8, commented, clean | Acceptable | Poor |
+| Uso de diccionarios | Uso eficaz y apropiado | Mayormente apropiado | Uso deficiente |
+| Funciones | Todas las funciones correctas, reutilizables | La mayoría correctas | Faltan funciones |
+| Comprehensions | Usadas donde corresponde | Usadas pero innecesarias | No usadas |
+| Salida | Informe claro y formateado | Adecuada | Difícil de leer |
+| Calidad del código | PEP 8, comentado, limpio | Aceptable | Mala |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-60 minutes
+60 minutos

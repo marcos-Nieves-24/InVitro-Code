@@ -1,20 +1,20 @@
-# Lab: Working with Lists
+# Lab: Trabajando con listas
 
-## Objective
+## Objetivo
 
-Practice creating, accessing, modifying, and comprehending lists.
+Practicar la creación, el acceso, la modificación y la comprensión de listas.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lessons 7 (Loops), 8 (Conditionals)
+Lecciones 7 (Bucles), 8 (Condicionales)
 
-## Instructions
+## Instrucciones
 
-### Part 1: Basic List Operations
+### Parte 1: Operaciones básicas con listas
 
 ```python
 # Create a list of 10 numbers
@@ -29,7 +29,7 @@ numbers.sort()
 print(f"Sorted: {numbers}")
 ```
 
-### Part 2: List Methods
+### Parte 2: Métodos de listas
 
 ```python
 tasks = []
@@ -46,7 +46,7 @@ print(f"Remaining: {tasks}")
 print(f"Index of 'Learn Python': {tasks.index('Learn Python')}")
 ```
 
-### Part 3: List Comprehension
+### Parte 3: List comprehension
 
 ```python
 # Create lists with comprehension
@@ -63,7 +63,7 @@ print(f"Positive: {positive}")
 print(f"Negative: {negative}")
 ```
 
-### Part 4: Matrix Operations
+### Parte 4: Operaciones con matrices
 
 ```python
 # Create a 3x3 matrix
@@ -77,7 +77,7 @@ cols = [sum(matrix[i][j] for i in range(3)) for j in range(3)]
 print(f"Column sums: {cols}")
 ```
 
-### Part 5: Zip and Enumerate
+### Parte 5: Zip y enumerate
 
 ```python
 genes = ["BRCA1", "TP53", "EGFR"]
@@ -89,6 +89,6 @@ for i, (gene, expr, p) in enumerate(zip(genes, expressions, p_values)):
     print(f"{i}. {gene}: expr={expr}, p={p} ({status})")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `lists_lab.ipynb` with all cells executed.
+Notebook de Jupyter `lists_lab.ipynb` con todas las celdas ejecutadas.

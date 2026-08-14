@@ -1,48 +1,48 @@
-# Quiz: Sets
+# Quiz: Conjuntos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** How do you create an empty set in Python?
+**Q1:** ¿Cómo creás un conjunto vacío en Python?
 - A) `{}`
 - B) `set()`
 - C) `[]`
 - D) `empty_set()`
 
-**Q2:** What is the output of `set([1, 2, 2, 3, 1, 3])`?
+**Q2:** ¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?
 - A) {1, 2, 3}
 - B) {1, 2, 2, 3, 1, 3}
 - C) [1, 2, 3]
 - D) (1, 2, 3)
 
-**Q3:** What does `{1, 2, 3} & {3, 4, 5}` return?
+**Q3:** ¿Qué devuelve `{1, 2, 3} & {3, 4, 5}`?
 - A) {3}
 - B) {1, 2, 3, 4, 5}
 - C) {1, 2}
 - D) {4, 5}
 
-**Q4:** Which data type can be added to a set?
-- A) List
-- B) Dictionary
-- C) Tuple
-- D) Set
+**Q4:** ¿Qué tipo de dato se puede agregar a un conjunto?
+- A) Lista
+- B) Diccionario
+- C) Tupla
+- D) Conjunto
 
-**Q5:** What is the time complexity of `element in my_set`?
+**Q5:** ¿Cuál es la complejidad temporal de `element in my_set`?
 - A) O(1)
 - B) O(n)
 - C) O(log n)
 - D) O(n²)
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between `remove()` and `discard()` for sets.
+**Q6:** Explicá la diferencia entre `remove()` y `discard()` para conjuntos.
 
-**Q7:** What is a frozenset and when would you use it?
+**Q7:** ¿Qué es un frozenset y cuándo lo usarías?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a function `common_elements(list1, list2)` that returns a set of elements that appear in both lists.
+**Q8:** Escribí una función `common_elements(list1, list2)` que devuelva un conjunto con los elementos que aparecen en ambas listas.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) `set()`
 
@@ -50,13 +50,13 @@
 
 **Q3:** A) {3}
 
-**Q4:** C) Tuple
+**Q4:** C) Tupla
 
 **Q5:** A) O(1)
 
-**Q6:** `remove(x)` removes x from the set but raises a KeyError if x is not present. `discard(x)` also removes x but does nothing if x is not present (no error). Use `discard` when you're not sure if the element exists.
+**Q6:** `remove(x)` elimina x del conjunto pero lanza un KeyError si x no está presente. `discard(x)` también elimina x pero no hace nada si x no está presente (sin error). Usá `discard` cuando no estés seguro de que el elemento exista.
 
-**Q7:** A frozenset is an immutable version of a set. It cannot be modified after creation (no add, remove, etc.). Use frozenset when you need a hashable set-like object, such as using a set as a dictionary key or as an element of another set.
+**Q7:** Un frozenset es una versión inmutable de un conjunto. No se puede modificar después de su creación (sin add, remove, etc.). Usá frozenset cuando necesites un objeto con características de conjunto y hashable, como usar un conjunto como clave de diccionario o como elemento de otro conjunto.
 
 **Q8:**
 ```python
