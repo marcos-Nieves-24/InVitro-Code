@@ -1,51 +1,51 @@
 # Quiz: Variables
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** Which of the following is a valid Python variable name?
+**Q1:** ¿Cuál de los siguientes es un nombre de variable válido en Python?
 - A) `2nd_place`
 - B) `my-variable`
 - C) `_count`
 - D) `class`
 
-**Q2:** What is the type of `x` after `x = "42"`?
+**Q2:** ¿Cuál es el tipo de `x` después de `x = "42"`?
 - A) int
 - B) float
 - C) str
 - D) bool
 
-**Q3:** What does `input()` always return?
+**Q3:** ¿Qué devuelve siempre `input()`?
 - A) int
 - B) float
 - C) str
-- D) The type of the input value
+- D) El tipo del valor ingresado
 
-**Q4:** What is the value of `a` and `b` after `a, b = b, a` if initially `a=3` and `b=7`?
+**Q4:** ¿Cuál es el valor de `a` y `b` después de `a, b = b, a` si inicialmente `a=3` y `b=7`?
 - A) a=3, b=7
 - B) a=7, b=3
 - C) a=3, b=3
 - D) Error
 
-**Q5:** Which naming convention does PEP 8 recommend for variables?
+**Q5:** ¿Qué convención de nombres recomienda PEP 8 para las variables?
 - A) camelCase
 - B) PascalCase
 - C) snake_case
 - D) kebab-case
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain what dynamic typing means in Python and give an example.
+**Q6:** Explicá qué significa el tipado dinámico en Python y da un ejemplo.
 
-**Q7:** Why can't you use `if` or `for` as variable names?
+**Q7:** ¿Por qué no podés usar `if` o `for` como nombres de variables?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write code that:
-1. Asks the user for their name, age, and favorite color
-2. Stores them in variables
-3. Prints "Hello [name], you are [age] years old and your favorite color is [color]."
+**Q8:** Escribí código que:
+1. Le pregunte al usuario su nombre, edad y color favorito
+2. Los almacene en variables
+3. Imprima "Hello [name], you are [age] years old and your favorite color is [color]."
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** C) `_count`
 
@@ -57,14 +57,14 @@
 
 **Q5:** C) snake_case
 
-**Q6:** Dynamic typing means a variable can change its type during execution. For example:
+**Q6:** El tipado dinámico significa que una variable puede cambiar de tipo durante la ejecución. Por ejemplo:
 ```python
 x = 10      # x is int
 x = "hello" # x is now str
 ```
-The type is determined by the value assigned, not declared upfront.
+El tipo lo determina el valor asignado, no se declara de antemano.
 
-**Q7:** `if` and `for` are reserved keywords in Python. They are part of the language syntax. Using them as variable names would create ambiguity between the keyword and the variable, so Python raises a `SyntaxError`.
+**Q7:** `if` y `for` son palabras reservadas en Python. Son parte de la sintaxis del lenguaje. Usarlas como nombres de variables crearía ambigüedad entre la palabra clave y la variable, por lo que Python lanza un `SyntaxError`.
 
 **Q8:**
 ```python

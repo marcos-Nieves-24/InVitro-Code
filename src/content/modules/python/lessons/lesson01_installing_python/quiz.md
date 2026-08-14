@@ -1,56 +1,56 @@
-# Quiz: Installing Python
+# Quiz: Instalar Python
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What command verifies that Python is installed correctly?
+**Q1:** ¿Qué comando verifica que Python esté instalado correctamente?
 - A) `python check`
 - B) `python --version`
 - C) `python install`
 - D) `python verify`
 
-**Q2:** What is the purpose of a virtual environment?
-- A) To run Python faster
-- B) To isolate project dependencies
-- C) To create a backup of Python
-- D) To install multiple Python versions
+**Q2:** ¿Cuál es el propósito de un virtual environment?
+- A) Hacer que Python corra más rápido
+- B) Aislar las dependencias del proyecto
+- C) Crear un backup de Python
+- D) Instalar múltiples versiones de Python
 
-**Q3:** Which command installs a package with pip?
+**Q3:** ¿Qué comando instala un paquete con pip?
 - A) `pip get package_name`
 - B) `pip add package_name`
 - C) `pip install package_name`
 - D) `pip download package_name`
 
-**Q4:** On Windows, what critical option must be checked during installation?
+**Q4:** En Windows, ¿qué opción crítica se debe marcar durante la instalación?
 - A) "Install for all users"
 - B) "Add Python to PATH"
 - C) "Create desktop shortcut"
 - D) "Enable debug mode"
 
-**Q5:** What file lists all project dependencies with their versions?
+**Q5:** ¿Qué archivo lista todas las dependencias del proyecto con sus versiones?
 - A) `dependencies.txt`
 - B) `packages.txt`
 - C) `requirements.txt`
 - D) `config.txt`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain why you should use virtual environments instead of installing packages globally.
+**Q6:** Explicá por qué deberías usar virtual environments en lugar de instalar paquetes de forma global.
 
-**Q7:** What is the difference between pip and pip3?
+**Q7:** ¿Cuál es la diferencia entre pip y pip3?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write the sequence of terminal commands to:
-1. Create a virtual environment named `ml_env`
-2. Activate it (on macOS/Linux)
-3. Install the package `scikit-learn`
-4. Save the list of installed packages to a file
+**Q8:** Escribí la secuencia de comandos de terminal para:
+1. Crear un virtual environment llamado `ml_env`
+2. Activarlo (en macOS/Linux)
+3. Instalar el paquete `scikit-learn`
+4. Guardar la lista de paquetes instalados en un archivo
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) `python --version`
 
-**Q2:** B) To isolate project dependencies
+**Q2:** B) Aislar las dependencias del proyecto
 
 **Q3:** C) `pip install package_name`
 
@@ -58,9 +58,9 @@
 
 **Q5:** C) `requirements.txt`
 
-**Q6:** Virtual environments isolate dependencies per project, preventing version conflicts between projects. Global installations can break system tools and make it impossible to use different versions of the same library for different projects.
+**Q6:** Los virtual environments aíslan las dependencias de cada proyecto, previniendo conflictos de versiones entre proyectos. Las instalaciones globales pueden romper herramientas del sistema y hacer imposible usar diferentes versiones de la misma librería para distintos proyectos.
 
-**Q7:** On some systems, `pip` may point to Python 2, while `pip3` explicitly points to Python 3. On modern Python installations, `pip` and `pip3` are often the same, but using `pip3` ensures you're installing for Python 3.
+**Q7:** En algunos sistemas, `pip` puede apuntar a Python 2, mientras que `pip3` apunta explícitamente a Python 3. En instalaciones modernas de Python, `pip` y `pip3` suelen ser lo mismo, pero usar `pip3` asegura que estés instalando para Python 3.
 
 **Q8:**
 ```bash

@@ -1,62 +1,62 @@
-# Lab: Getting Started with Jupyter Notebook
+# Lab: Primeros pasos con Jupyter Notebook
 
-## Objective
+## Objetivo
 
-Launch Jupyter, create a notebook with code and markdown cells, and practice keyboard shortcuts.
+Lanzar Jupyter, crear un notebook con celdas de código y de markdown, y practicar los atajos de teclado.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Python installed (Lesson 1)
+Python instalado (Lección 1)
 
-## Instructions
+## Instrucciones
 
-### Part 1: Launch Jupyter
+### Parte 1: Lanzar Jupyter
 
 ```bash
 pip install jupyter
 jupyter notebook
 ```
 
-### Part 2: Create a Notebook
+### Parte 2: Crear un notebook
 
-1. Click "New" → "Python 3"
-2. Save as `lab_notebook.ipynb`
+1. Hacé clic en "New" → "Python 3"
+2. Guardalo como `lab_notebook.ipynb`
 
-### Part 3: Add Markdown Cells
+### Parte 3: Agregar celdas de markdown
 
-Create a markdown cell with:
-- A heading: "# My Jupyter Lab"
-- Your name as a subheading
-- A brief description of what you hope to learn
+Creá una celda de markdown con:
+- Un encabezado: "# My Jupyter Lab"
+- Tu nombre como subtítulo
+- Una breve descripción de lo que esperás aprender
 
-### Part 4: Add Code Cells
+### Parte 4: Agregar celdas de código
 
-Create code cells that:
-1. Print "Hello from Jupyter!"
-2. Calculate 15 * 37
-3. Display a list of numbers from 1 to 10
+Creá celdas de código que:
+1. Impriman "Hello from Jupyter!"
+2. Calculen 15 * 37
+3. Muestren una lista de números del 1 al 10
 
-### Part 5: Practice Keyboard Shortcuts
+### Parte 5: Practicar los atajos de teclado
 
-Practice these shortcuts:
-- `Shift+Enter` — run cell
-- `A` — insert cell above
-- `B` — insert cell below
-- `DD` — delete cell
-- `M` — change to markdown
-- `Y` — change to code
-- `Ctrl+S` — save
+Practicá estos atajos:
+- `Shift+Enter` — ejecutar celda
+- `A` — insertar celda arriba
+- `B` — insertar celda abajo
+- `DD` — eliminar celda
+- `M` — cambiar a markdown
+- `Y` — cambiar a código
+- `Ctrl+S` — guardar
 
-### Part 6: Export
+### Parte 6: Exportar
 
-Export your notebook as HTML: File → Download as → HTML
+Exportá tu notebook como HTML: File → Download as → HTML
 
-## Deliverables
+## Entregables
 
-- Screenshot of your notebook in the browser
-- The exported HTML file
-- List of 5 keyboard shortcuts you practiced
+- Captura de pantalla de tu notebook en el navegador
+- El archivo HTML exportado
+- Lista de 5 atajos de teclado que practicaste

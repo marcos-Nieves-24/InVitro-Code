@@ -1,22 +1,22 @@
-# Lab: Data Types in Practice
+# Lab: Tipos de datos en la práctica
 
-## Objective
+## Objetivo
 
-Practice identifying, converting, and working with Python's primitive data types.
+Practicar la identificación, conversión y el trabajo con los tipos de datos primitivos de Python.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 3: Variables
+Lección 3: Variables
 
-## Instructions
+## Instrucciones
 
-### Part 1: Type Identification
+### Parte 1: Identificación de tipos
 
-Create a code cell that creates variables of each type and prints their types:
+Creá una celda de código que cree variables de cada tipo e imprima sus tipos:
 
 ```python
 a = 42
@@ -29,7 +29,7 @@ for var in [a, b, c, d, e]:
     print(f"{var!r:>10} -> {type(var).__name__}")
 ```
 
-### Part 2: Type Conversion
+### Parte 2: Conversión de tipos
 
 ```python
 # String to number
@@ -45,7 +45,7 @@ report = "Samples processed: " + str(count)
 print(report)
 ```
 
-### Part 3: The input() Type Trap
+### Parte 3: La trampa del tipo de `input()`
 
 ```python
 # Wrong:
@@ -58,7 +58,7 @@ next_year = age + 1
 print(f"Next year you will be {next_year}")
 ```
 
-### Part 4: Boolean Logic
+### Parte 4: Lógica booleana
 
 ```python
 temperature = 38.5  # Celsius
@@ -72,7 +72,7 @@ should_rest = has_fever or is_coughing or is_tired
 print(f"Should rest: {should_rest}")
 ```
 
-### Part 5: Float Precision
+### Parte 5: Precisión de los flotantes
 
 ```python
 # The famous 0.1 + 0.2 problem
@@ -81,6 +81,6 @@ print(0.1 + 0.2 == 0.3)       # False
 print(abs((0.1 + 0.2) - 0.3) < 1e-10)  # True (safe comparison)
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `data_types_lab.ipynb` with all executed cells.
+Notebook de Jupyter `data_types_lab.ipynb` con todas las celdas ejecutadas.

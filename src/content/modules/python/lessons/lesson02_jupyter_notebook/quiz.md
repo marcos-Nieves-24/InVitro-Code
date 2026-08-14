@@ -1,65 +1,65 @@
 # Quiz: Jupyter Notebook
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What file extension do Jupyter notebooks use?
+**Q1:** ¿Qué extensión de archivo usan los notebooks de Jupyter?
 - A) `.py`
 - B) `.json`
 - C) `.ipynb`
 - D) `.nb`
 
-**Q2:** What does the kernel in Jupyter do?
-- A) Manages file storage
-- B) Executes Python code
-- C) Renders markdown
-- D) Connects to the internet
+**Q2:** ¿Qué hace el kernel en Jupyter?
+- A) Maneja el almacenamiento de archivos
+- B) Ejecuta código de Python
+- C) Renderiza markdown
+- D) Se conecta a internet
 
-**Q3:** Which keyboard shortcut runs a cell and selects the next cell?
+**Q3:** ¿Qué atajo de teclado ejecuta una celda y selecciona la siguiente?
 - A) Ctrl+Enter
 - B) Alt+Enter
 - C) Shift+Enter
 - D) Tab+Enter
 
-**Q4:** How do you change a cell to markdown type in command mode?
-- A) Press M
-- B) Press Y
-- C) Press D
-- D) Press A
+**Q4:** ¿Cómo cambiás una celda al tipo markdown en modo comando?
+- A) Presioná M
+- B) Presioná Y
+- C) Presioná D
+- D) Presioná A
 
-**Q5:** What command launches Jupyter Notebook from the terminal?
+**Q5:** ¿Qué comando lanza Jupyter Notebook desde la terminal?
 - A) `jupyter start`
 - B) `jupyter notebook`
 - C) `jupyter launch`
 - D) `python jupyter`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between command mode and edit mode in Jupyter.
+**Q6:** Explicá la diferencia entre el modo comando y el modo edición en Jupyter.
 
-**Q7:** Why should you restart the kernel and run all cells before sharing a notebook?
+**Q7:** ¿Por qué deberías reiniciar el kernel y ejecutar todas las celdas antes de compartir un notebook?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a markdown cell that displays:
-- A level-2 heading reading "Results"
-- A bullet list with three items
-- The text "p-value < 0.05" formatted as inline code
+**Q8:** Escribí una celda de markdown que muestre:
+- Un encabezado de nivel 2 que diga "Results"
+- Una lista con viñetas con tres elementos
+- El texto "p-value < 0.05" formateado como código inline
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** C) `.ipynb`
 
-**Q2:** B) Executes Python code
+**Q2:** B) Ejecuta código de Python
 
 **Q3:** C) Shift+Enter
 
-**Q4:** A) Press M
+**Q4:** A) Presioná M
 
 **Q5:** B) `jupyter notebook`
 
-**Q6:** Command mode (blue border) allows notebook-level actions like adding/deleting cells and changing cell types. Edit mode (green border) allows typing and editing the content of the current cell.
+**Q6:** El modo comando (borde azul) permite acciones a nivel del notebook como agregar/eliminar celdas y cambiar el tipo de celda. El modo edición (borde verde) permite escribir y editar el contenido de la celda actual.
 
-**Q7:** Restarting and running all ensures the notebook executes in the correct order from a clean state, revealing any hidden errors caused by running cells out of order or using stale variables.
+**Q7:** Reiniciar y ejecutar todo asegura que el notebook se ejecute en el orden correcto desde un estado limpio, revelando cualquier error oculto causado por ejecutar celdas fuera de orden o usar variables obsoletas.
 
 **Q8:**
 ```markdown

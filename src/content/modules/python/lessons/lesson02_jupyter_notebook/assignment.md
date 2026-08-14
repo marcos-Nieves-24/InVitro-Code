@@ -1,42 +1,42 @@
-# Assignment: Jupyter Notebook Portfolio
+# Assignment: Portafolio de Jupyter Notebook
 
-## Objectives
+## Objetivos
 
-- Demonstrate proficiency with Jupyter Notebook
-- Create well-structured notebooks with markdown and code
-- Practice keyboard shortcuts and efficient workflow
+- Demostrar dominio de Jupyter Notebook
+- Crear notebooks bien estructurados con markdown y código
+- Practicar atajos de teclado y un flujo de trabajo eficiente
 
-## Instructions
+## Instrucciones
 
-Create a Jupyter notebook called `portfolio.ipynb` that includes:
+Creá un notebook de Jupyter llamado `portfolio.ipynb` que incluya:
 
-1. **Title section** (markdown): "# My Python Portfolio" with your name
-2. **About section** (markdown): A paragraph about your background
-3. **Code section 1**: A code cell defining three variables and printing them
-4. **Code section 2**: A code cell that calculates the area of a circle (radius = 5)
-5. **Analysis section** (markdown): Explain what the code does
-6. **List section** (markdown): A numbered list of 3 topics you want to learn
-7. **Code section 3**: Code that creates a list of 5 numbers and prints the sum
-8. **Conclusion** (markdown): Summary of what the notebook demonstrates
+1. **Sección de título** (markdown): "# My Python Portfolio" con tu nombre
+2. **Sección de "Acerca de"** (markdown): Un párrafo sobre tu trayectoria
+3. **Sección de código 1**: Una celda de código que defina tres variables y las imprima
+4. **Sección de código 2**: Una celda de código que calcule el área de un círculo (radio = 5)
+5. **Sección de análisis** (markdown): Explicá qué hace el código
+6. **Sección de lista** (markdown): Una lista numerada de 3 temas que querés aprender
+7. **Sección de código 3**: Código que cree una lista de 5 números e imprima la suma
+8. **Conclusión** (markdown): Resumen de lo que demuestra el notebook
 
-Export the notebook as both HTML and Python script (`.py`).
+Exportá el notebook como HTML y como script de Python (`.py`).
 
-## Deliverables
+## Entregables
 
 - `portfolio.ipynb`
 - `portfolio.html`
 - `portfolio.py`
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Markdown Cells | Well-structured with headings, lists, formatting | Adequate structure | Poor or missing |
-| Code Cells | All execute correctly, well-commented | Most execute | Errors present |
-| Export | Both HTML and .py exported correctly | One export missing | No exports |
-| Organization | Logical flow, clean presentation | Acceptable flow | Disorganized |
-| Keyboard Shortcuts | Demonstrates efficient use (A, B, DD, M, Y) | Basic shortcut use | No evidence of shortcuts |
+| Celdas de markdown | Bien estructuradas con encabezados, listas y formato | Estructura adecuada | Pobres o faltantes |
+| Celdas de código | Todas se ejecutan correctamente, bien comentadas | La mayoría se ejecuta | Presentan errores |
+| Exportación | HTML y .py exportados correctamente | Falta una exportación | Sin exportaciones |
+| Organización | Flujo lógico, presentación limpia | Flujo aceptable | Desorganizado |
+| Atajos de teclado | Demuestra uso eficiente (A, B, DD, M, Y) | Uso básico de atajos | Sin evidencia de atajos |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-60 minutes
+60 minutos

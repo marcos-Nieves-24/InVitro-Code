@@ -1,39 +1,39 @@
-# Assignment: Type-Error Proofing
+# Assignment: A prueba de errores de tipo
 
-## Objectives
+## Objetivos
 
-- Demonstrate understanding of Python data types
-- Handle type conversion correctly
-- Debug common type errors
-- Write type-safe code
+- Demostrar comprensión de los tipos de datos de Python
+- Manejar la conversión de tipos correctamente
+- Depurar errores de tipo comunes
+- Escribir código seguro respecto a los tipos
 
-## Instructions
+## Instrucciones
 
-Create a Python script called `grade_calculator.py` that:
+Creá un script de Python llamado `grade_calculator.py` que:
 
-1. **Collect input**: Ask for student name (str), assignment scores (3 numbers entered separately), and total possible points
-2. **Calculate**: Compute the average score and percentage grade
-3. **Convert types appropriately**: All input comes as strings
-4. **Grade assignment**: Use boolean logic to determine pass/fail (≥ 60% passes)
-5. **Output**: Print a formatted grade report
+1. **Recolecte la entrada**: Preguntá por el nombre del estudiante (str), las notas de las tareas (3 números ingresados por separado) y el total de puntos posibles
+2. **Calcule**: Calculá el promedio de notas y el porcentaje de calificación
+3. **Convierta los tipos apropiadamente**: Toda la entrada llega como strings
+4. **Asigne la calificación**: Usá lógica booleana para determinar aprobado/desaprobado (≥ 60% aprueba)
+5. **Salida**: Imprimí un informe de calificación con formato
 
-Also include a function `safe_divide(a, b)` that safely handles division by returning `None` if `b` is zero.
+También incluí una función `safe_divide(a, b)` que maneje la división de forma segura devolviendo `None` si `b` es cero.
 
-## Deliverables
+## Entregables
 
 - `grade_calculator.py`
-- Example output showing at least two student grade calculations
+- Ejemplo de salida mostrando al menos dos cálculos de calificaciones de estudiantes
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Type Conversion | All input correctly converted | Most conversions correct | Missing conversions |
-| Calculations | Accurate and correct | Minor errors | Major errors |
-| Boolean Logic | Correct pass/fail with edge cases | Basic logic | Logic errors |
-| Error Handling | Handles division by zero and invalid input | Basic handling | No error handling |
-| Code Quality | Well-commented, PEP 8, organized | Acceptable | Poor quality |
+| Conversión de tipos | Toda la entrada convertida correctamente | La mayoría de las conversiones correctas | Conversiones faltantes |
+| Cálculos | Precisos y correctos | Errores menores | Errores mayores |
+| Lógica booleana | Aprobado/desaprobado correcto con casos límite | Lógica básica | Errores de lógica |
+| Manejo de errores | Maneja la división por cero y la entrada inválida | Manejo básico | Sin manejo de errores |
+| Calidad del código | Bien comentado, PEP 8, organizado | Aceptable | Mala calidad |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-45 minutes
+45 minutos
