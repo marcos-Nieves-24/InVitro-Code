@@ -59,12 +59,41 @@ function extractCodeText(children: React.ReactNode): string {
 }
 
 /**
+ * Extracts the language id from the MDX `<code>` element tree.
+ * MDX wraps fenced content in `<pre><code class="language-xxx">…</code></pre>`
+ * and the `language-*` class lives on the `<code>` child, not on `<pre>`.
+ */
+function extractLanguageId(children: React.ReactNode): string {
+  if (!children || typeof children !== "object") return "";
+  const node = children as { props?: { className?: unknown; children?: React.ReactNode } };
+  const cls = node.props?.className;
+  if (typeof cls === "string") {
+    const m = cls.match(/language-(\w+)/);
+    if (m) return m[1].toLowerCase();
+  }
+
+  const childNodes = node.props?.children;
+  if (!childNodes || typeof childNodes === "string") return "";
+  if (Array.isArray(childNodes)) {
+    for (const c of childNodes) {
+      const id = extractLanguageId(c);
+      if (id) return id;
+    }
+    return "";
+  }
+  return extractLanguageId(childNodes);
+}
+
+/**
  * REQ-LABRUN-02/06: Inspects the MDX-emitted `className` on the `<code>`
  * element. If it's `language-python`, renders a real PyodideRunner.
- * Everything else (bash, shell, text, etc.) renders statically.
+ * Everything else (bash, shell, text, etc.) renders with the animated
+ * terminal CodeBlock.
  */
 export function LabCodeBlock({ children, className }: LabCodeBlockProps) {
-  const langId = (className ?? "").replace("language-", "").toLowerCase();
+  const langId =
+    extractLanguageId(children) ||
+    (className ?? "").replace("language-", "").toLowerCase();
 
   // REQ-LABRUN-02: Python fences become executable PyodideRunner instances
   if (langId === "python") {
