@@ -1,47 +1,47 @@
 # Lab 8: Gradient Boosting
 
-## Objectives
+## Objetivos
 
-- Train gradient boosting models and understand the effect of learning rate
-- Use staged predictions to monitor training
-- Compare boosting with Random Forest
-- Tune hyperparameters
+- Entrená modelos de gradient boosting y entendé el efecto de la tasa de aprendizaje
+- Usá predicciones por etapas para monitorear el entrenamiento
+- Compará boosting con el bosque aleatorio
+- Ajustá los hiperparámetros
 
-## Part 1: Learning Rate Experiment
+## Parte 1: Experimento de tasa de aprendizaje
 
-On the breast cancer dataset, train `GradientBoostingClassifier` with learning_rates = [0.01, 0.05, 0.1, 0.5, 1.0] and n_estimators=100. Plot test accuracy vs. learning rate.
+En el dataset de breast cancer, entrená `GradientBoostingClassifier` con learning_rates = [0.01, 0.05, 0.1, 0.5, 1.0] y n_estimators=100. Graficá la exactitud de prueba vs. la tasa de aprendizaje.
 
-**Question:** What is the optimal learning rate?
+**Pregunta:** ¿Cuál es la tasa de aprendizaje óptima?
 
-## Part 2: Staged Predictions
+## Parte 2: Predicciones por etapas
 
-Train a GB model with n_estimators=200, learning_rate=0.1. Use `staged_score()` to get train and test scores at each stage. Plot both curves.
+Entrená un modelo GB con n_estimators=200, learning_rate=0.1. Usá `staged_score()` para obtener los scores de entrenamiento y de prueba en cada etapa. Graficá ambas curvas.
 
-**Question:** At what n_estimators does test accuracy plateau?
+**Pregunta:** ¿En qué n_estimators se estabiliza la exactitud de prueba?
 
-## Part 3: Boosting vs. Random Forest
+## Parte 3: Boosting vs. bosque aleatorio
 
-Compare GradientBoostingClassifier (lr=0.1, n=100, depth=3) with RandomForestClassifier (n=100, depth=3) on breast cancer.
+Compará GradientBoostingClassifier (lr=0.1, n=100, depth=3) con RandomForestClassifier (n=100, depth=3) en breast cancer.
 
-**Question:** Which performs better on this dataset?
+**Pregunta:** ¿Cuál rinde mejor en este dataset?
 
-## Part 4: Effect of max_depth
+## Parte 4: Efecto de max_depth
 
-Train GB models with max_depth = [2, 3, 5, 10] (learning_rate=0.1, n_estimators=100). Compare test accuracy.
+Entrená modelos GB con max_depth = [2, 3, 5, 10] (learning_rate=0.1, n_estimators=100). Compará la exactitud de prueba.
 
-**Question:** Why does depth 10 perform worse than depth 3?
+**Pregunta:** ¿Por qué la profundidad 10 rinde peor que la 3?
 
-## Part 5: Subsample (Stochastic Boosting)
+## Parte 5: Subsample (boosting estocástico)
 
-Train GB with subsample = [0.5, 0.8, 1.0] (learning_rate=0.1, n_estimators=100, max_depth=3). Compare test accuracy.
+Entrená GB con subsample = [0.5, 0.8, 1.0] (learning_rate=0.1, n_estimators=100, max_depth=3). Compará la exactitud de prueba.
 
-**Question:** Does stochasticity help generalization?
+**Pregunta:** ¿Ayuda la estocasticidad a la generalización?
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Learning rate plot (Part 1)
-- Learning curves (Part 2)
-- Model comparison table (Part 3)
+- Notebook con las 5 partes
+- Gráfico de tasa de aprendizaje (Parte 1)
+- Curvas de aprendizaje (Parte 2)
+- Tabla de comparación de modelos (Parte 3)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

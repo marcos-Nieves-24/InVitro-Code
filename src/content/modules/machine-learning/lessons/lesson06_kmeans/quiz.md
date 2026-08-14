@@ -1,67 +1,67 @@
-# Quiz: K-Means Clustering
+# Quiz: Agrupamiento K-Means
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Which of the following best describes unsupervised learning?
+**Q1.** ¿Cuál de las siguientes describe mejor el aprendizaje no supervisado?
 
-a) The model learns from labeled data to predict outcomes
-b) The model discovers patterns in data without labels
-c) The model receives feedback on each prediction
-d) The model requires a validation set for tuning
+a) El modelo aprende de datos etiquetados para predecir resultados
+b) El modelo descubre patrones en los datos sin etiquetas
+c) El modelo recibe feedback sobre cada predicción
+d) El modelo requiere un set de validación para el ajuste
 
-<details><summary>Answer</summary>b) The model discovers patterns in data without labels</details>
+<details><summary>Respuesta</summary>b) El modelo descubre patrones en los datos sin etiquetas</details>
 
-**Q2.** In K-Means, the "assignment step" consists of:
+**Q2.** En K-Means, el "paso de asignación" consiste en:
 
-a) Randomly initializing centroids
-b) Assigning each point to the nearest centroid
-c) Computing the mean of all points in the dataset
-d) Updating the number of clusters
+a) Inicializar centroides al azar
+b) Asignar cada punto al centroide más cercano
+c) Calcular la media de todos los puntos del dataset
+d) Actualizar el número de clusters
 
-<details><summary>Answer</summary>b) Assigning each point to the nearest centroid</details>
+<details><summary>Respuesta</summary>b) Asignar cada punto al centroide más cercano</details>
 
-**Q3.** The elbow method for choosing K involves:
+**Q3.** El método del codo para elegir K implica:
 
-a) Selecting K where accuracy is highest
-b) Selecting K where adding more clusters gives diminishing returns in inertia reduction
-c) Selecting K that maximizes the number of clusters
-d) Selecting K randomly and testing iteratively
+a) Seleccionar la K donde la exactitud es mayor
+b) Seleccionar la K donde agregar más clusters da rendimientos decrecientes en la reducción de la inercia
+c) Seleccionar la K que maximiza el número de clusters
+d) Seleccionar K al azar y probar de forma iterativa
 
-<details><summary>Answer</summary>b) Selecting K where adding more clusters gives diminishing returns in inertia reduction</details>
+<details><summary>Respuesta</summary>b) Seleccionar la K donde agregar más clusters da rendimientos decrecientes en la reducción de la inercia</details>
 
-**Q4.** A silhouette score of -0.2 for a point indicates:
+**Q4.** Un silhouette score de -0.2 para un punto indica:
 
-a) The point is well-clustered
-b) The point is likely assigned to the wrong cluster
-c) The data has too many dimensions
-d) K is too small
+a) El punto está bien agrupado
+b) El punto probablemente está asignado al cluster incorrecto
+c) Los datos tienen demasiadas dimensiones
+d) K es demasiado pequeña
 
-<details><summary>Answer</summary>b) The point is likely assigned to the wrong cluster (silhouette ranges from -1 to 1; negative means the point is closer to another cluster)</details>
+<details><summary>Respuesta</summary>b) El punto probablemente está asignado al cluster incorrecto (la silueta va de -1 a 1; un valor negativo significa que el punto está más cerca de otro cluster)</details>
 
-**Q5.** Why is feature scaling important in K-Means?
+**Q5.** ¿Por qué es importante el escalado de features en K-Means?
 
-a) It speeds up the algorithm
-b) Features with larger units would dominate the distance calculation
-c) It guarantees finding global optimum
-d) It is not important — K-Means handles scale automatically
+a) Acelera el algoritmo
+b) Las features con unidades más grandes dominarían el cálculo de distancia
+c) Garantiza encontrar el óptimo global
+d) No es importante — K-Means maneja la escala automáticamente
 
-<details><summary>Answer</summary>b) Features with larger units would dominate the Euclidean distance calculation, making the algorithm effectively ignore smaller-scale features</details>
+<details><summary>Respuesta</summary>b) Las features con unidades más grandes dominarían el cálculo de la distancia euclidiana, haciendo que el algoritmo ignore efectivamente las features de menor escala</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the difference between inertia and silhouette score. When would each be misleading?
+**Q6.** Explicá la diferencia entre la inercia y el silhouette score. ¿Cuándo podría ser engañoso cada uno?
 
-<details><summary>Answer</summary>Inertia measures how compact clusters are (sum of squared distances to centroids). It always decreases as K increases (eventually to 0 when K=n). It can be misleading because it favors many small clusters. Silhouette measures both cohesion (within-cluster) and separation (between-cluster). A point with a negative silhouette is likely in the wrong cluster. Silhouette can be misleading on very small or irregularly shaped clusters.</details>
+<details><summary>Respuesta</summary>La inercia mide qué tan compactos son los clusters (suma de distancias al cuadrado a los centroides). Siempre decrece a medida que K aumenta (eventualmente a 0 cuando K=n). Puede ser engañosa porque favorece muchos clusters pequeños. La silueta mide tanto la cohesión (dentro del cluster) como la separación (entre clusters). Un punto con silueta negativa probablemente está en el cluster incorrecto. La silueta puede ser engañosa en clusters muy pequeños o de forma irregular.</details>
 
-**Q7.** Why does K-Means sometimes produce different results when run multiple times on the same data?
+**Q7.** ¿Por qué K-Means a veces produce resultados diferentes cuando se corre varias veces sobre los mismos datos?
 
-<details><summary>Answer</summary>K-Means depends on random centroid initialization. Different initial positions lead to different local minima of the inertia objective (the problem is NP-hard). K-Means++ initialization (default in sklearn) helps but doesn't guarantee global optimum. Using n_init=10 runs the algorithm 10 times and returns the best one.</details>
+<details><summary>Respuesta</summary>K-Means depende de la inicialización aleatoria de los centroides. Diferentes posiciones iniciales llevan a diferentes mínimos locales del objetivo de inercia (el problema es NP-hard). La inicialización K-Means++ (la de sklearn por defecto) ayuda pero no garantiza el óptimo global. Usar n_init=10 corre el algoritmo 10 veces y devuelve el mejor resultado.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `kmeans_with_metrics(X, K_range)` that performs K-Means for each K in K_range, computes inertia and silhouette scores, and returns a DataFrame with columns ['K', 'inertia', 'silhouette'].
+**Q8.** Escribí una función en Python `kmeans_with_metrics(X, K_range)` que realice K-Means para cada K en K_range, calcule la inercia y los silhouette scores, y devuelva un DataFrame con las columnas ['K', 'inertia', 'silhouette'].
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

@@ -1,71 +1,71 @@
 # Quiz: PCA
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** What is the primary goal of PCA?
+**Q1.** ¿Cuál es el objetivo principal de PCA?
 
-a) Predict a target variable
-b) Find directions of maximum variance in the data
-c) Group similar data points together
-d) Select the most important original features
+a) Predecir una variable objetivo
+b) Encontrar las direcciones de máxima varianza en los datos
+c) Agrupar puntos de datos similares
+d) Seleccionar las features originales más importantes
 
-<details><summary>Answer</summary>b) Find directions of maximum variance in the data</details>
+<details><summary>Respuesta</summary>b) Encontrar las direcciones de máxima varianza en los datos</details>
 
-**Q2.** In PCA, eigenvectors represent:
+**Q2.** En PCA, los eigenvectors representan:
 
-a) The amount of variance in each component
-b) The direction of each principal component
-c) The cluster assignments
-d) The predicted values
+a) La cantidad de varianza en cada componente
+b) La dirección de cada componente principal
+c) Las asignaciones de cluster
+d) Los valores predichos
 
-<details><summary>Answer</summary>b) The direction of each principal component (the loadings/weights of original features)</details>
+<details><summary>Respuesta</summary>b) La dirección de cada componente principal (las cargas/pesos de las features originales)</details>
 
-**Q3.** If the cumulative explained variance for the first 3 components is 0.92, this means:
+**Q3.** Si la varianza explicada acumulada de los primeros 3 componentes es 0.92, esto significa:
 
-a) 92% of the original features are retained
-b) 92% of the total variance is captured by 3 components
-c) The model accuracy is 92%
-d) 8% of data is noise
+a) Se retiene el 92% de las features originales
+b) El 92% de la varianza total es capturado por 3 componentes
+c) La exactitud del modelo es 92%
+d) El 8% de los datos es ruido
 
-<details><summary>Answer</summary>b) 92% of the total variance in the data is captured by the first 3 principal components</details>
+<details><summary>Respuesta</summary>b) El 92% de la varianza total de los datos es capturado por los primeros 3 componentes principales</details>
 
-**Q4.** Why is scaling important before PCA?
+**Q4.** ¿Por qué es importante el escalado antes de PCA?
 
-a) It speeds up eigendecomposition
-b) Features with larger variance would dominate the first PC
-c) PCA only works on standardized data
-d) It reduces the number of components needed
+a) Acelera la eigendecomposition
+b) Las features con mayor varianza dominarían el primer PC
+c) PCA solo funciona con datos estandarizados
+d) Reduce el número de componentes necesarios
 
-<details><summary>Answer</summary>b) Features with larger variance would dominate the first PC, potentially hiding important structure in other features</details>
+<details><summary>Respuesta</summary>b) Las features con mayor varianza dominarían el primer PC, ocultando potencialmente estructura importante en otras features</details>
 
-**Q5.** Which of the following is TRUE about principal components?
+**Q5.** ¿Cuál de las siguientes afirmaciones es VERDADERA sobre los componentes principales?
 
-a) They are correlated with each other
-b) They are orthogonal (uncorrelated)
-c) They are the same as the original features
-d) The first component always separates classes
+a) Están correlacionados entre sí
+b) Son ortogonales (no correlacionados)
+c) Son los mismos que las features originales
+d) El primer componente siempre separa las clases
 
-<details><summary>Answer</summary>b) They are orthogonal (uncorrelated). PCA rotates the data so components have zero correlation.</details>
+<details><summary>Respuesta</summary>b) Son ortogonales (no correlacionados). PCA rota los datos para que los componentes tengan correlación cero.</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the relationship between eigenvalues and explained variance in PCA.
+**Q6.** Explicá la relación entre los eigenvalues y la varianza explicada en PCA.
 
-<details><summary>Answer</summary>Each eigenvalue (λₖ) represents the variance captured by its corresponding principal component. The explained variance ratio for component k is λₖ / Σλⱼ. Components with larger eigenvalues capture more variance. The first component has the largest eigenvalue, the second the next largest, and so on. The sum of all eigenvalues equals the total variance in the dataset.</details>
+<details><summary>Respuesta</summary>Cada eigenvalue (λₖ) representa la varianza capturada por su componente principal correspondiente. El ratio de varianza explicada del componente k es λₖ / Σλⱼ. Los componentes con eigenvalues más grandes capturan más varianza. El primer componente tiene el eigenvalue más grande, el segundo el siguiente más grande, y así sucesivamente. La suma de todos los eigenvalues equivale a la varianza total del dataset.</details>
 
-**Q7.** A colleague runs PCA on a dataset and all 20 components have roughly equal explained variance (~5% each). What does this suggest?
+**Q7.** Un colega corre PCA sobre un dataset y los 20 componentes tienen una varianza explicada aproximadamente igual (~5% cada uno). ¿Qué sugiere esto?
 
-<details><summary>Answer</summary>This suggests there is no dominant low-dimensional structure in the data — variance is spread evenly across all dimensions. This could mean the data is approximately spherical (isotropic) with no strong correlations between features. PCA may not be helpful for dimensionality reduction in this case. Possible causes: poorly chosen features, data already uncorrelated, or random noise dominating.</details>
+<details><summary>Respuesta</summary>Esto sugiere que no hay estructura dominante de baja dimensionalidad en los datos — la varianza está distribuida uniformemente en todas las dimensiones. Esto podría significar que los datos son aproximadamente esféricos (isotrópicos) sin correlaciones fuertes entre las features. En este caso, PCA puede no ser útil para la reducción de dimensionalidad. Posibles causas: features mal elegidas, datos ya no correlacionados o ruido aleatorio dominando.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `pca_scree_plot(X, n_components=10)` that:
-1. Scales the data
-2. Fits PCA with n_components
-3. Creates a scree plot (bar plot of explained variance ratios)
-4. Returns the PCA object
+**Q8.** Escribí una función en Python `pca_scree_plot(X, n_components=10)` que:
+1. Escale los datos
+2. Ajuste PCA con n_components
+3. Cree un scree plot (gráfico de barras de los ratios de varianza explicada)
+4. Devuelva el objeto PCA
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

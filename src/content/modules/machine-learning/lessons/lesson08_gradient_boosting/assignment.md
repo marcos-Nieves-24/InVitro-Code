@@ -1,55 +1,55 @@
 # Assignment 8: Gradient Boosting
 
-## Objectives
+## Objetivos
 
-- Apply gradient boosting to a regression problem
-- Tune hyperparameters systematically
-- Compare multiple ensemble methods
-- Write a model selection recommendation
+- Aplicá gradient boosting a un problema de regresión
+- Ajustá los hiperparámetros de forma sistemática
+- Compará múltiples métodos de conjunto
+- Escribí una recomendación de selección de modelo
 
 ## Dataset
 
-Use the **California Housing** dataset.
+Usá el dataset de **California Housing**.
 
 ```python
 from sklearn.datasets import fetch_california_housing
 data = fetch_california_housing()
 ```
 
-## Scenario
+## Escenario
 
-A real estate analytics company needs a model to predict house prices. You must compare multiple ensemble methods and recommend the best one.
+Una empresa de análisis inmobiliario necesita un modelo para predecir precios de casas. Tenés que comparar múltiples métodos de conjunto y recomendar el mejor.
 
-## Instructions
+## Instrucciones
 
-1. **Split** into train (70%), validation (15%), test (15%)
-2. **Train the following models** (use validation set for tuning):
-   - DecisionTreeRegressor (tune max_depth)
-   - RandomForestRegressor (tune n_estimators, max_depth)
-   - GradientBoostingRegressor (tune learning_rate, n_estimators, max_depth)
-3. **Compare models** on validation set using R² and RMSE
-4. **Select the best model** and evaluate on test set
-5. **Create a learning curve** for the best model (R² vs. n_estimators)
+1. **Dividí** en entrenamiento (70%), validación (15%) y prueba (15%)
+2. **Entrená los siguientes modelos** (usá el set de validación para el ajuste):
+   - DecisionTreeRegressor (ajustá max_depth)
+   - RandomForestRegressor (ajustá n_estimators, max_depth)
+   - GradientBoostingRegressor (ajustá learning_rate, n_estimators, max_depth)
+3. **Compará los modelos** en el set de validación usando R² y RMSE
+4. **Seleccioná el mejor modelo** y evaluálo en el set de prueba
+5. **Creá una curva de aprendizaje** para el mejor modelo (R² vs. n_estimators)
 
-## Deliverables
+## Entregables
 
-- Notebook with all steps
-- Table comparing all models (R², RMSE on train/val)
-- Learning curve for the best model
-- Report (max 300 words):
-  - Which model performed best and why?
-  - What were the optimal hyperparameters?
-  - How does boosting compare to bagging for this problem?
-  - Would you use this model in production? Why or why not?
+- Notebook con todos los pasos
+- Tabla que compare todos los modelos (R², RMSE en entrenamiento/validación)
+- Curva de aprendizaje del mejor modelo
+- Informe (máx. 300 palabras):
+  - ¿Qué modelo rindió mejor y por qué?
+  - ¿Cuáles fueron los hiperparámetros óptimos?
+  - ¿Cómo se compara boosting con bagging para este problema?
+  - ¿Usarías este modelo en producción? ¿Por qué sí o por qué no?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Model comparison | 3+ models with tuning | 2 models | 1 model | Missing |
-| Hyperparameter tuning | Systematic search | Partial | Minimal | Missing |
-| Evaluation | R² + RMSE with interpretation | Both metrics | One metric | Missing |
-| Learning curve | Clear, annotated | Present | Unclear | Missing |
-| Recommendation | Insightful, production-aware | Clear | Basic | Missing |
+| Comparación de modelos | 3+ modelos con ajuste | 2 modelos | 1 modelo | Faltante |
+| Ajuste de hiperparámetros | Búsqueda sistemática | Parcial | Mínimo | Faltante |
+| Evaluación | R² + RMSE con interpretación | Ambas métricas | Una métrica | Faltante |
+| Curva de aprendizaje | Clara, anotada | Presente | Poco clara | Faltante |
+| Recomendación | Con insights, consciente de producción | Clara | Básica | Faltante |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas

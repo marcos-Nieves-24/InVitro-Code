@@ -1,19 +1,19 @@
-# Assignment 5: Random Forest
+# Assignment 5: Bosque Aleatorio
 
-## Objectives
+## Objetivos
 
-- Apply Random Forest to a high-dimensional biological dataset
-- Use feature importance for biomarker discovery
-- Tune the model for optimal performance
-- Interpret results in biological context
+- Aplicá el bosque aleatorio a un dataset biológico de alta dimensionalidad
+- Usá la importancia de características para descubrir biomarcadores
+- Ajustá el modelo para un rendimiento óptimo
+- Interpretá los resultados en contexto biológico
 
 ## Dataset
 
-Use `make_classification` to simulate a **gene expression dataset** with:
+Usá `make_classification` para simular un **dataset de expresión génica** con:
 - 500 samples
 - 5000 features (genes)
-- 10 informative features
-- Binary outcome (responder / non-responder)
+- 10 features informativas
+- Resultado binario (responder / non-responder)
 
 ```python
 from sklearn.datasets import make_classification
@@ -21,39 +21,39 @@ X, y = make_classification(n_samples=500, n_features=5000, n_informative=10,
                             n_redundant=0, random_state=42)
 ```
 
-## Scenario
+## Escenario
 
-You are a bioinformatician analyzing gene expression data from a clinical trial. Your goal is to identify which genes predict drug response and build a classifier.
+Sos un bioinformático analizando datos de expresión génica de un ensayo clínico. Tu objetivo es identificar qué genes predicen la respuesta al fármaco y construir un clasificador.
 
-## Instructions
+## Instrucciones
 
-1. **Split** into train (60%), validation (20%), test (20%)
-2. **Train baseline:** single decision tree (tune depth)
-3. **Train Random Forest** with default parameters
-4. **Tune hyperparameters:** n_estimators, max_depth, min_samples_leaf
-5. **Identify top 10 genes** from the best Random Forest
-6. **Re-train** using only the top 10, 50, and 100 genes — does performance change?
-7. **Final evaluation** on test set
+1. **Dividí** en entrenamiento (60%), validación (20%) y prueba (20%)
+2. **Entrená el baseline:** un árbol de decisión individual (ajustá la profundidad)
+3. **Entrená un bosque aleatorio** con parámetros por defecto
+4. **Ajustá los hiperparámetros:** n_estimators, max_depth, min_samples_leaf
+5. **Identificá los 10 genes principales** del mejor bosque aleatorio
+6. **Reentrená** usando solo los 10, 50 y 100 genes principales — ¿cambia el rendimiento?
+7. **Evaluación final** en el set de prueba
 
-## Deliverables
+## Entregables
 
-- Notebook with all code
-- Table comparing all models (train/val/test accuracy)
-- Bar plot of top 10 gene importances
-- Plot of validation accuracy vs. number of genes used
-- Short report (max 300 words):
-  - How many genes are truly needed for good prediction?
-  - Would you trust impurity-based importance for biological discovery? Why or why not?
-  - How would you validate these biomarkers in the lab?
+- Notebook con todo el código
+- Tabla que compare todos los modelos (exactitud de entrenamiento/validación/prueba)
+- Gráfico de barras de las importancias de los 10 genes principales
+- Gráfico de la exactitud de validación vs. el número de genes usados
+- Informe corto (máx. 300 palabras):
+  - ¿Cuántos genes se necesitan realmente para una buena predicción?
+  - ¿Confiarías en la importancia basada en impureza para el descubrimiento biológico? ¿Por qué sí o por qué no?
+  - ¿Cómo validarías estos biomarcadores en el laboratorio?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Pipeline | Complete with all steps | Minor missing | Several steps missing | Incomplete |
-| Hyperparameter tuning | Systematic grid search | Partial | Minimal | Missing |
-| Gene selection analysis | 10/50/100 comparison | One comparison | Raw importance only | Missing |
-| Biological interpretation | Insightful discussion | Clear | Basic | Missing |
-| Code quality | Clean, reproducible | Readable | Messy | Does not run |
+| Pipeline | Completo con todos los pasos | Faltan detalles menores | Faltan varios pasos | Incompleto |
+| Ajuste de hiperparámetros | Búsqueda sistemática en grid | Parcial | Mínimo | Faltante |
+| Análisis de selección de genes | Comparación 10/50/100 | Una comparación | Solo importancia cruda | Faltante |
+| Interpretación biológica | Discusión con insights | Clara | Básica | Faltante |
+| Calidad del código | Limpio, reproducible | Legible | Desordenado | No corre |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas

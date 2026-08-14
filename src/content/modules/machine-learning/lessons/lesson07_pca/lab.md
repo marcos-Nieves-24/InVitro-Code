@@ -1,56 +1,56 @@
 # Lab 7: PCA
 
-## Objectives
+## Objetivos
 
-- Apply PCA for dimensionality reduction
-- Interpret explained variance and component loadings
-- Visualize high-dimensional data in 2D
-- Understand the effect of scaling
+- Aplicá PCA para la reducción de dimensionalidad
+- Interpretá la varianza explicada y las cargas de los componentes
+- Visualizá datos de alta dimensionalidad en 2D
+- Entendé el efecto del escalado
 
-## Part 1: PCA on Iris
+## Parte 1: PCA en Iris
 
-Load iris, apply PCA with 2 components, and create a scatter plot colored by species.
+Cargá iris, aplicá PCA con 2 componentes y creá un scatter plot coloreado por especie.
 
-**Questions:**
-- What % of variance is captured by 2 components?
-- Which species is most clearly separated?
+**Preguntas:**
+- ¿Qué % de la varianza capturan 2 componentes?
+- ¿Qué especie queda más claramente separada?
 
-## Part 2: Scree Plot
+## Parte 2: Scree plot
 
-On the breast cancer dataset, run PCA on scaled data and plot:
-- Bar plot of individual explained variance
-- Cumulative variance line
-- 90% and 95% threshold lines
+En el dataset de breast cancer, corré PCA sobre los datos escalados y graficá:
+- Gráfico de barras de la varianza explicada individual
+- Línea de varianza acumulada
+- Líneas de umbral de 90% y 95%
 
-**Question:** How many components for 90%? For 95%?
+**Pregunta:** ¿Cuántos componentes para 90%? ¿Y para 95%?
 
-## Part 3: Loadings Analysis
+## Parte 3: Análisis de cargas
 
-For PCA on breast cancer with 2 components:
-1. Examine loadings: which original features contribute most to PC1? To PC2?
-2. Create a bar plot of the top 5 absolute loadings for each component.
+Para PCA en breast cancer con 2 componentes:
+1. Examiná las cargas: ¿qué features originales contribuyen más a PC1? ¿Y a PC2?
+2. Creá un gráfico de barras de las 5 cargas absolutas principales de cada componente.
 
-**Question:** Can you interpret what PC1 and PC2 represent biologically?
+**Pregunta:** ¿Podés interpretar qué representan biológicamente PC1 y PC2?
 
-## Part 4: PCA vs. No Scaling
+## Parte 4: PCA vs. sin escalado
 
-Create data: `np.column_stack([feature1 * 1000, feature2, feature3])` where all features have built-in group structure. Run PCA with and without scaling.
+Creá datos: `np.column_stack([feature1 * 1000, feature2, feature3])` donde todas las features tengan estructura de grupo inherente. Corré PCA con y sin escalado.
 
-**Question:** How does scaling change the explained variance distribution?
+**Pregunta:** ¿Cómo cambia el escalado la distribución de la varianza explicada?
 
-## Part 5: PCA + K-Means
+## Parte 5: PCA + K-Means
 
-Apply PCA to reduce breast cancer to 2 components, then run K-Means (K=2) on the PCA-transformed data. Compare the clusters with the true labels.
+Aplicá PCA para reducir breast cancer a 2 componentes y después corré K-Means (K=2) sobre los datos transformados con PCA. Compará los clusters con las etiquetas reales.
 
-**Question:** Does K-Means on PCA space recover the malignant/benign split?
+**Pregunta:** ¿Recupera K-Means en el espacio de PCA la división maligno/benigno?
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Iris PCA plot (Part 1)
-- Scree plot with thresholds (Part 2)
-- Loadings bar plot (Part 3)
-- Scaling comparison (Part 4)
-- PCA + K-Means comparison (Part 5)
+- Notebook con las 5 partes
+- Gráfico PCA de iris (Parte 1)
+- Scree plot con umbrales (Parte 2)
+- Gráfico de barras de cargas (Parte 3)
+- Comparación de escalado (Parte 4)
+- Comparación PCA + K-Means (Parte 5)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

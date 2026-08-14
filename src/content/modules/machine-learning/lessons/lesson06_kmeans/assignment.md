@@ -1,15 +1,15 @@
-# Assignment 6: K-Means Clustering
+# Assignment 6: Agrupamiento K-Means
 
-## Objectives
+## Objetivos
 
-- Cluster real biological data to discover novel subtypes
-- Determine optimal K using multiple metrics
-- Interpret cluster profiles in biological context
-- Visualize high-dimensional clusters with PCA
+- Agrupá datos biológicos reales para descubrir subtipos novedosos
+- Determiná la K óptima usando múltiples métricas
+- Interpretá los perfiles de los clusters en contexto biológico
+- Visualizá clusters de alta dimensionalidad con PCA
 
 ## Dataset
 
-Use the **Breast Cancer** dataset from scikit-learn — but treat it as an unlabeled dataset for clustering (ignore the true labels during training, only use them for evaluation).
+Usá el dataset de **Breast Cancer** de scikit-learn — pero tratálo como un dataset sin etiquetar para el agrupamiento (ignorá las etiquetas reales durante el entrenamiento, usalas solo para la evaluación).
 
 ```python
 from sklearn.datasets import load_breast_cancer
@@ -17,40 +17,40 @@ data = load_breast_cancer()
 X = data.data  # No labels during training!
 ```
 
-## Scenario
+## Escenario
 
-You are a researcher studying breast cancer heterogeneity. You believe there are molecular subtypes beyond the standard malignant/benign classification. Use K-Means to discover potential subtypes.
+Sos un investigador estudiando la heterogeneidad del breast cancer. Creés que existen subtipos moleculares más allá de la clasificación estándar maligno/benigno. Usá K-Means para descubrir posibles subtipos.
 
-## Instructions
+## Instrucciones
 
-1. **Scale features** with StandardScaler
-2. **Determine optimal K** using elbow, silhouette, and domain knowledge (K=2..10)
-3. **Cluster with optimal K**
-4. **Visualize clusters** using PCA (2D scatter with cluster colors)
-5. **Profile clusters** — compute mean of each feature for each cluster
-6. **Compare with true labels** — create a cross-tabulation. Did K-Means recover the malignant/benign split? Or discover something different?
-7. **Interpret** — what distinguishes each cluster clinically?
+1. **Escalá las features** con StandardScaler
+2. **Determiná la K óptima** usando el codo, la silueta y conocimiento del dominio (K=2..10)
+3. **Agrupá con la K óptima**
+4. **Visualizá los clusters** usando PCA (scatter 2D con colores de cluster)
+5. **Perfilá los clusters** — calculá la media de cada feature para cada cluster
+6. **Compará con las etiquetas reales** — creá una tabla cruzada. ¿Recuperó K-Means la división maligno/benigno? ¿O descubrió algo diferente?
+7. **Interpretá** — ¿qué distingue clínicamente a cada cluster?
 
-## Deliverables
+## Entregables
 
-- Notebook with all steps
-- Elbow + silhouette plots
-- PCA visualization of clusters
-- Cluster profile table (mean feature values per cluster)
-- Cross-tabulation of clusters vs. true diagnosis
-- Report (max 300 words):
-  - What is the optimal K and why?
-  - Did clusters align with malignant/benign?
-  - What biological hypothesis would you propose?
+- Notebook con todos los pasos
+- Gráficos de codo + silueta
+- Visualización PCA de los clusters
+- Tabla de perfiles de cluster (valores medios de features por cluster)
+- Tabla cruzada de clusters vs. diagnóstico real
+- Informe (máx. 300 palabras):
+  - ¿Cuál es la K óptima y por qué?
+  - ¿Coincidieron los clusters con maligno/benigno?
+  - ¿Qué hipótesis biológica propondrías?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| K selection | Elbow + silhouette + justification | One method | No method | Missing |
-| Cluster profiling | Mean features + interpretation | Mean features | Basic | Missing |
-| Visualization | PCA plot with clear clusters | PCA plot | Basic plot | Missing |
-| Biological interpretation | Insightful hypothesis | Clear | Vague | Missing |
-| Code quality | Clean, well-documented | Readable | Messy | Does not run |
+| Selección de K | Codo + silueta + justificación | Un método | Sin método | Faltante |
+| Perfil de clusters | Medias de features + interpretación | Medias de features | Básico | Faltante |
+| Visualización | Gráfico PCA con clusters claros | Gráfico PCA | Gráfico básico | Faltante |
+| Interpretación biológica | Hipótesis con insights | Clara | Vaga | Faltante |
+| Calidad del código | Limpio, bien documentado | Legible | Desordenado | No corre |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas

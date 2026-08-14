@@ -1,53 +1,53 @@
-# Lab 5: Random Forest
+# Lab 5: Bosque Aleatorio
 
-## Objectives
+## Objetivos
 
-- Compare single trees vs. Random Forest
-- Use OOB score for model evaluation
-- Analyze feature importance
-- Tune hyperparameters
+- Compará árboles individuales vs. bosques aleatorios
+- Usá el OOB score para evaluar el modelo
+- Analizá la importancia de características
+- Ajustá los hiperparámetros
 
-## Part 1: Tree vs. Forest
+## Parte 1: Árbol vs. bosque
 
-On the breast cancer dataset, train:
-1. A single decision tree (max_depth=5)
-2. A Random Forest (n_estimators=100, max_depth=5)
+En el dataset de breast cancer, entrená:
+1. Un árbol de decisión individual (max_depth=5)
+2. Un bosque aleatorio (n_estimators=100, max_depth=5)
 
-Compare train and test accuracy.
+Compará la exactitud de entrenamiento y de prueba.
 
-**Question:** What improvement does the forest provide?
+**Pregunta:** ¿Qué mejora aporta el bosque?
 
-## Part 2: OOB Score as Validation
+## Parte 2: El OOB score como validación
 
-Train a Random Forest with `oob_score=True`. Compare OOB score to test set accuracy for n_estimators = [10, 25, 50, 100, 200].
+Entrená un bosque aleatorio con `oob_score=True`. Compará el OOB score con la exactitud del set de prueba para n_estimators = [10, 25, 50, 100, 200].
 
-**Question:** Is OOB score a reliable proxy for test accuracy?
+**Pregunta:** ¿Es el OOB score un proxy confiable de la exactitud de prueba?
 
-## Part 3: Feature Importance
+## Parte 3: Importancia de características
 
-Train a Random Forest with n_estimators=200. Plot the top 10 feature importances. Compare with the importance from a single tree (depth 5).
+Entrená un bosque aleatorio con n_estimators=200. Graficá las 10 importancias de características principales. Compará con la importancia de un árbol individual (profundidad 5).
 
-**Question:** Are the top features the same? If not, why?
+**Pregunta:** ¿Son las mismas las features principales? Si no lo son, ¿por qué?
 
-## Part 4: n_estimators and Diminishing Returns
+## Parte 4: n_estimators y rendimientos decrecientes
 
-Plot OOB score vs. n_estimators from 1 to 500 in steps of 10.
+Graficá el OOB score vs. n_estimators desde 1 hasta 500 en pasos de 10.
 
-**Question:** At what n do returns diminish? What's the cost-benefit sweet spot?
+**Pregunta:** ¿En qué n los rendimientos empiezan a decrecer? ¿Cuál es el punto óptimo costo-beneficio?
 
-## Part 5: Random Forest on Imbalanced Data
+## Parte 5: Bosque aleatorio con datos desbalanceados
 
-Use `make_classification(weights=[0.9, 0.1])` to create imbalanced data. Compare:
-1. Default Random Forest
-2. Random Forest with `class_weight='balanced'`
+Usá `make_classification(weights=[0.9, 0.1])` para crear datos desbalanceados. Compará:
+1. Bosque aleatorio por defecto
+2. Bosque aleatorio con `class_weight='balanced'`
 
-Report precision and recall for the minority class.
+Reportá la precisión y la sensibilidad para la clase minoritaria.
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- OOB vs. n_estimators plot
-- Feature importance comparison plot
-- Precision/recall comparison for imbalanced data
+- Notebook con las 5 partes
+- Gráfico de OOB vs. n_estimators
+- Gráfico de comparación de importancia de características
+- Comparación de precisión/sensibilidad para datos desbalanceados
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

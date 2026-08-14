@@ -1,55 +1,55 @@
 # Assignment 7: PCA
 
-## Objectives
+## Objetivos
 
-- Apply PCA to a high-dimensional biological dataset
-- Determine optimal number of components
-- Interpret components in biological terms
-- Use PCA as a preprocessing step for classification
+- Aplicá PCA a un dataset biológico de alta dimensionalidad
+- Determiná el número óptimo de componentes
+- Interpretá los componentes en términos biológicos
+- Usá PCA como paso de preprocesamiento para la clasificación
 
 ## Dataset
 
-Use the **Breast Cancer** dataset (30 features, 569 samples).
+Usá el dataset de **Breast Cancer** (30 features, 569 samples).
 
-## Scenario
+## Escenario
 
-You are analyzing high-dimensional patient data. You need to:
-1. Reduce dimensionality for visualization
-2. Determine how many dimensions capture the essential structure
-3. Understand what each component represents
-4. Test whether PCA improves classification performance
+Estás analizando datos de pacientes de alta dimensionalidad. Necesitás:
+1. Reducir la dimensionalidad para la visualización
+2. Determinar cuántas dimensiones capturan la estructura esencial
+3. Entender qué representa cada componente
+4. Probar si PCA mejora el rendimiento de clasificación
 
-## Instructions
+## Instrucciones
 
-1. **Scale data** with StandardScaler
-2. **Full PCA:** compute and plot explained variance; determine n for 80%, 90%, 95%, 99%
-3. **Interpret components:** for PC1 and PC2, list the top 5 features by loading magnitude. What biological theme does each component represent?
-4. **Classification experiment:**
-   - Train a LogisticRegression on original 30 features (scaled)
-   - Train LogisticRegression on PCA-reduced data (2, 5, 10 components)
-   - Train LogisticRegression on PCA-reduced data (optimal n for 90%)
-   - Compare test accuracies
-5. **Final conclusion:** Does PCA improve or hurt classification? Why?
+1. **Escalá los datos** con StandardScaler
+2. **PCA completo:** calculá y graficá la varianza explicada; determiná n para 80%, 90%, 95%, 99%
+3. **Interpretá los componentes:** para PC1 y PC2, listá las 5 features principales por magnitud de carga. ¿Qué tema biológico representa cada componente?
+4. **Experimento de clasificación:**
+   - Entrená una LogisticRegression con las 30 features originales (escaladas)
+   - Entrená LogisticRegression con los datos reducidos por PCA (2, 5, 10 componentes)
+   - Entrená LogisticRegression con los datos reducidos por PCA (n óptima para 90%)
+   - Compará las exactitudes de prueba
+5. **Conclusión final:** ¿PCA mejora o perjudica la clasificación? ¿Por qué?
 
-## Deliverables
+## Entregables
 
-- Notebook with all steps
-- Scree plot with thresholds
-- Loadings interpretation table
-- Classification comparison table
-- Report (max 300 words):
-  - How many components did you choose and why?
-  - What do the top components represent?
-  - Did PCA help classification? Why or why not?
+- Notebook con todos los pasos
+- Scree plot con umbrales
+- Tabla de interpretación de cargas
+- Tabla de comparación de clasificación
+- Informe (máx. 300 palabras):
+  - ¿Cuántos componentes elegiste y por qué?
+  - ¿Qué representan los componentes principales?
+  - ¿Ayudó PCA a la clasificación? ¿Por qué sí o por qué no?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Variance analysis | Complete with multiple thresholds | Single threshold | Basic | Missing |
-| Component interpretation | Meaningful biological interpretation | Clear | Vague | Missing |
-| Classification experiment | Multiple PCA dims compared | One comparison | Partial | Missing |
-| Conclusion | Insightful, nuanced | Clear | Basic | Missing |
-| Code quality | Clean, reproducible | Readable | Messy | Does not run |
+| Análisis de varianza | Completo con múltiples umbrales | Un solo umbral | Básico | Faltante |
+| Interpretación de componentes | Interpretación biológica significativa | Clara | Vaga | Faltante |
+| Experimento de clasificación | Múltiples dimensiones de PCA comparadas | Una comparación | Parcial | Faltante |
+| Conclusión | Con insights, matizada | Clara | Básica | Faltante |
+| Calidad del código | Limpio, reproducible | Legible | Desordenado | No corre |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas

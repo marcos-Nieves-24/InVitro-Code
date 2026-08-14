@@ -1,67 +1,67 @@
 # Quiz: Gradient Boosting
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** What is the key difference between bagging and boosting?
+**Q1.** ¿Cuál es la diferencia clave entre bagging y boosting?
 
-a) Bagging uses deep trees; boosting uses shallow trees
-b) Bagging trains trees independently; boosting trains trees sequentially
-c) Bagging is for regression; boosting is for classification
-d) They are the same algorithm with different names
+a) El bagging usa árboles profundos; el boosting usa árboles poco profundos
+b) El bagging entrena los árboles de forma independiente; el boosting los entrena secuencialmente
+c) El bagging es para regresión; el boosting es para clasificación
+d) Son el mismo algoritmo con diferentes nombres
 
-<details><summary>Answer</summary>b) Bagging trains trees independently in parallel; boosting trains trees sequentially, each correcting the errors of the previous ensemble</details>
+<details><summary>Respuesta</summary>b) El bagging entrena los árboles de forma independiente en paralelo; el boosting los entrena secuencialmente, cada uno corrigiendo los errores del conjunto anterior</details>
 
-**Q2.** In gradient boosting, each new tree is trained to predict:
+**Q2.** En gradient boosting, cada árbol nuevo se entrena para predecir:
 
-a) The original target variable
-b) The residuals (errors) of the current ensemble
-c) The average of all previous trees
-d) Random noise
+a) La variable objetivo original
+b) Los residuales (errores) del conjunto actual
+c) El promedio de todos los árboles anteriores
+d) Ruido aleatorio
 
-<details><summary>Answer</summary>b) The residuals (errors) of the current ensemble</details>
+<details><summary>Respuesta</summary>b) Los residuales (errores) del conjunto actual</details>
 
-**Q3.** A lower learning rate in gradient boosting typically requires:
+**Q3.** Una tasa de aprendizaje más baja en gradient boosting normalmente requiere:
 
-a) Fewer trees
-b) More trees
-c) Deeper trees
-d) No change in tree configuration
+a) Menos árboles
+b) Más árboles
+c) Árboles más profundos
+d) Ningún cambio en la configuración de los árboles
 
-<details><summary>Answer</summary>b) More trees. A lower learning rate shrinks each tree's contribution, so more trees are needed to achieve the same level of fit.</details>
+<details><summary>Respuesta</summary>b) Más árboles. Una tasa de aprendizaje más baja reduce la contribución de cada árbol, así que se necesitan más árboles para alcanzar el mismo nivel de ajuste.</details>
 
-**Q4.** Which of the following is TRUE about trees in gradient boosting?
+**Q4.** ¿Cuál de las siguientes afirmaciones es VERDADERA sobre los árboles en gradient boosting?
 
-a) Trees should be deep (depth 10+) to capture complex patterns
-b) Trees are typically shallow (depth 2-5), acting as weak learners
-c) Only one tree is used in boosting
-d) Trees are always deeper than in Random Forest
+a) Los árboles deberían ser profundos (profundidad 10+) para capturar patrones complejos
+b) Los árboles suelen ser poco profundos (profundidad 2-5), actuando como weak learners
+c) En boosting solo se usa un árbol
+d) Los árboles siempre son más profundos que en el bosque aleatorio
 
-<details><summary>Answer</summary>b) Trees are typically shallow (depth 2-5). Boosting works by combining many weak learners, not by using strong individual trees.</details>
+<details><summary>Respuesta</summary>b) Los árboles suelen ser poco profundos (profundidad 2-5). El boosting funciona combinando muchos weak learners, no usando árboles individuales fuertes.</details>
 
-**Q5.** XGBoost improves upon basic gradient boosting by adding:
+**Q5.** XGBoost mejora el gradient boosting básico agregando:
 
-a) Regularization to prevent overfitting
-b) Automatic feature selection
-c) Support for image data
-d) Replacement of trees with neural networks
+a) Regularización para prevenir el sobreajuste
+b) Selección automática de features
+c) Soporte para datos de imágenes
+d) El reemplazo de los árboles por redes neuronales
 
-<details><summary>Answer</summary>a) Regularization to prevent overfitting (L1 and L2 regularization on tree weights)</details>
+<details><summary>Respuesta</summary>a) Regularización para prevenir el sobreajuste (regularización L1 y L2 sobre los pesos de los árboles)</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain how early stopping works in gradient boosting and why it is important.
+**Q6.** Explicá cómo funciona el early stopping en gradient boosting y por qué es importante.
 
-<details><summary>Answer</summary>Early stopping monitors performance on a validation set after each tree is added. When validation performance stops improving (or starts decreasing) for a specified number of iterations, training stops. This prevents overfitting by finding the optimal number of trees without manual tuning. It's important because boosting can overfit if too many trees are added, especially with a low learning rate.</details>
+<details><summary>Respuesta</summary>El early stopping monitorea el rendimiento en un set de validación después de agregar cada árbol. Cuando el rendimiento de validación deja de mejorar (o empieza a decrecer) durante un número especificado de iteraciones, el entrenamiento se detiene. Esto previene el sobreajuste al encontrar el número óptimo de árboles sin ajuste manual. Es importante porque el boosting puede sobreajustarse si se agregan demasiados árboles, especialmente con una tasa de aprendizaje baja.</details>
 
-**Q7.** Compare the roles of learning rate and n_estimators in gradient boosting. What is the relationship between them?
+**Q7.** Compará los roles de la tasa de aprendizaje y n_estimators en gradient boosting. ¿Cuál es la relación entre ellos?
 
-<details><summary>Answer</summary>The learning rate (n) shrinks each tree's contribution to the ensemble. Lower n means each tree has less impact, requiring more trees (higher n_estimators) to achieve good performance. The relationship is approximately: optimal n_estimators * 1 / learning_rate. A common strategy: set learning_rate = 0.01-0.1 and use early stopping to determine n_estimators. Lower learning rates with more trees generally generalize better than higher learning rates with fewer trees.</details>
+<details><summary>Respuesta</summary>La tasa de aprendizaje (η) reduce la contribución de cada árbol al conjunto. Un η más bajo significa que cada árbol tiene menos impacto, requiriendo más árboles (n_estimators más alto) para lograr un buen rendimiento. La relación es aproximadamente: n_estimators óptimo × 1 / tasa de aprendizaje. Una estrategia común: establecé learning_rate = 0.01-0.1 y usá early stopping para determinar n_estimators. Las tasas de aprendizaje más bajas con más árboles generalmente generalizan mejor que las tasas más altas con menos árboles.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `compare_boosting_vs_bagging(X, y)` that trains a GradientBoostingClassifier and a RandomForestClassifier (both with 100 estimators, max_depth=3) and returns a DataFrame comparing their train and test accuracies.
+**Q8.** Escribí una función en Python `compare_boosting_vs_bagging(X, y)` que entrene un GradientBoostingClassifier y un RandomForestClassifier (ambos con 100 estimators, max_depth=3) y devuelva un DataFrame comparando sus exactitudes de entrenamiento y de prueba.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import pandas as pd

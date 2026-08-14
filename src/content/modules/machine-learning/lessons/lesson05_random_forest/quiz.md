@@ -1,67 +1,67 @@
-# Quiz: Random Forest
+# Quiz: Bosque Aleatorio
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** What is bagging?
+**Q1.** ¿Qué es el bagging?
 
-a) Building trees on bootstrap samples and averaging them
-b) Using all data to train a single deep tree
-c) Reducing features before training
-d) A type of neural network
+a) Construir árboles sobre bootstrap samples y promediarlos
+b) Usar todos los datos para entrenar un único árbol profundo
+c) Reducir las features antes de entrenar
+d) Un tipo de red neuronal
 
-<details><summary>Answer</summary>a) Building trees on bootstrap samples (samples with replacement) and averaging/averaging their predictions</details>
+<details><summary>Respuesta</summary>a) Construir árboles sobre bootstrap samples (muestras con reemplazo) y promediar sus predicciones</details>
 
-**Q2.** In Random Forest, why are only random subsets of features considered at each split?
+**Q2.** En un bosque aleatorio, ¿por qué solo se consideran subconjuntos aleatorios de features en cada split?
 
-a) To speed up training
-b) To decorrelate trees, making the ensemble more effective
-c) To reduce memory usage
-d) To prevent overfitting of individual trees
+a) Para acelerar el entrenamiento
+b) Para descorrelacionar los árboles, haciendo que el conjunto sea más efectivo
+c) Para reducir el uso de memoria
+d) Para prevenir el sobreajuste de los árboles individuales
 
-<details><summary>Answer</summary>b) To decorrelate trees. If all trees used the same best split, they would be highly correlated and averaging wouldn't help much.</details>
+<details><summary>Respuesta</summary>b) Para descorrelacionar los árboles. Si todos los árboles usaran el mismo mejor split, estarían altamente correlacionados y promediar no ayudaría mucho.</details>
 
-**Q3.** The out-of-bag (OOB) score is computed using:
+**Q3.** El out-of-bag (OOB) score se calcula usando:
 
-a) The training data
-b) The test data
-c) Samples not included in each bootstrap sample (~37%)
-d) A separate validation set
+a) Los datos de entrenamiento
+b) Los datos de prueba
+c) Las muestras no incluidas en cada bootstrap sample (~37%)
+d) Un set de validación separado
 
-<details><summary>Answer</summary>c) Samples not included in each bootstrap sample (~37% are left out on average)</details>
+<details><summary>Respuesta</summary>c) Las muestras no incluidas en cada bootstrap sample (en promedio se dejan fuera ~37%)</details>
 
-**Q4.** Which of the following is TRUE about Random Forest?
+**Q4.** ¿Cuál de las siguientes afirmaciones es VERDADERA sobre el bosque aleatorio?
 
-a) Increasing n_estimators always increases training time linearly
-b) More trees always guarantee better performance
-c) Random Forest can only be used for classification
-d) Feature importance is not available
+a) Aumentar n_estimators siempre aumenta el tiempo de entrenamiento de forma lineal
+b) Más árboles siempre garantizan un mejor rendimiento
+c) El bosque aleatorio solo puede usarse para clasificación
+d) La importancia de características no está disponible
 
-<details><summary>Answer</summary>a) Increasing n_estimators always increases training time linearly. (b is false — returns diminish; c is false — there's RandomForestRegressor; d is false — feature importance is a key output)</details>
+<details><summary>Respuesta</summary>a) Aumentar n_estimators siempre aumenta el tiempo de entrenamiento de forma lineal. (b es falsa — los rendimientos decrecen; c es falsa — existe RandomForestRegressor; d es falsa — la importancia de características es un resultado clave)</details>
 
-**Q5.** A Random Forest typically has _____ bias and _____ variance compared to a single decision tree.
+**Q5.** Un bosque aleatorio normalmente tiene _____ sesgo y _____ varianza comparado con un único árbol de decisión.
 
-a) Higher, lower
-b) Lower, lower
-c) Similar, lower
-d) Lower, higher
+a) Mayor, menor
+b) Menor, menor
+c) Similar, menor
+d) Menor, mayor
 
-<details><summary>Answer</summary>c) Similar bias, lower variance. Random Forest keeps the low bias of trees while reducing variance through averaging.</details>
+<details><summary>Respuesta</summary>c) Sesgo similar, varianza menor. El bosque aleatorio mantiene el bajo sesgo de los árboles y reduce la varianza a través del promediado.</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the relationship between the number of trees (n_estimators) and Random Forest performance. Why do returns diminish?
+**Q6.** Explicá la relación entre el número de árboles (n_estimators) y el rendimiento del bosque aleatorio. ¿Por qué los rendimientos decrecen?
 
-<details><summary>Answer</summary>As n_estimators increases, performance improves rapidly at first then plateaus. Each tree is an unbiased estimator with high variance. Averaging reduces variance by approximately 1/B where B is the number of trees. However, trees are correlated (ρ > 0), so even with infinite trees, the variance approaches ρσ². Empirical rule: start with 100 trees and increase until OOB score stabilizes.</details>
+<details><summary>Respuesta</summary>A medida que n_estimators aumenta, el rendimiento mejora rápido al principio y luego se estabiliza. Cada árbol es un estimador insesgado con alta varianza. El promediado reduce la varianza aproximadamente en 1/B donde B es el número de árboles. Sin embargo, los árboles están correlacionados (ρ > 0), así que incluso con infinitos árboles, la varianza se aproxima a ρσ². Regla empírica: empezá con 100 árboles y aumentá hasta que el OOB score se estabilice.</details>
 
-**Q7.** When would you use permutation importance instead of impurity-based feature importance in Random Forest?
+**Q7.** ¿Cuándo usarías la importancia por permutación en lugar de la importancia de características basada en impureza en un bosque aleatorio?
 
-<details><summary>Answer</summary>Impurity-based importance can be biased toward high-cardinality features (those with many unique values) and can be misleading when features are on different scales. Permutation importance directly measures the drop in performance when a feature's values are shuffled, making it more reliable. Use permutation importance for final feature selection, impurity importance for a quick overview.</details>
+<details><summary>Respuesta</summary>La importancia basada en impureza puede estar sesgada hacia features de alta cardinalidad (aquellas con muchos valores únicos) y puede ser engañosa cuando las features están en escalas diferentes. La importancia por permutación mide directamente la caída en el rendimiento cuando se barajan los valores de una feature, lo que la hace más confiable. Usá la importancia por permutación para la selección final de features y la importancia por impureza para una visión rápida.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `oob_vs_n_estimators(X, y, max_n=500)` that trains Random Forests with n_estimators from 1 to max_n (in steps of 10) and returns a list of OOB scores. Then plot OOB score vs. n_estimators.
+**Q8.** Escribí una función en Python `oob_vs_n_estimators(X, y, max_n=500)` que entrene bosques aleatorios con n_estimators desde 1 hasta max_n (en pasos de 10) y devuelva una lista de OOB scores. Después graficá el OOB score vs. n_estimators.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

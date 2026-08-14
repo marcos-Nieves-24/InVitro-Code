@@ -1,59 +1,59 @@
-# Lab 6: K-Means Clustering
+# Lab 6: Agrupamiento K-Means
 
-## Objectives
+## Objetivos
 
-- Implement K-Means with scikit-learn
-- Determine optimal K using elbow and silhouette
-- Understand the effect of scaling
-- Apply clustering to real-world segments
+- Implementá K-Means con scikit-learn
+- Determiná la K óptima usando el codo y la silueta
+- Entendé el efecto del escalado
+- Aplicá el agrupamiento a segmentos del mundo real
 
-## Part 1: Synthetic Data
+## Parte 1: Datos sintéticos
 
-Generate data with `make_blobs(n_samples=400, centers=5, cluster_std=0.9)`. Run K-Means with K=2 through K=10. Plot inertia and silhouette scores.
+Generá datos con `make_blobs(n_samples=400, centers=5, cluster_std=0.9)`. Corré K-Means con K=2 hasta K=10. Graficá la inercia y los silhouette scores.
 
-**Questions:**
-- What K does the elbow suggest?
-- What K does silhouette suggest?
-- Do they agree?
+**Preguntas:**
+- ¿Qué K sugiere el codo?
+- ¿Qué K sugiere la silueta?
+- ¿Coinciden?
 
-## Part 2: Scaling Experiment
+## Parte 2: Experimento de escalado
 
-Create data where one feature has 100× the scale of another:
+Creá datos donde una feature tenga 100× la escala de otra:
 ```python
 X_unscaled = np.column_stack([np.random.randn(200) * 100, np.random.randn(200)])
 ```
 
-Run K-Means (K=3) with and without StandardScaler. Plot both results side by side.
+Corré K-Means (K=3) con y sin StandardScaler. Graficá ambos resultados lado a lado.
 
-**Question:** How does scaling change the clustering?
+**Pregunta:** ¿Cómo cambia el escalado el agrupamiento?
 
-## Part 3: Iris Clustering
+## Parte 3: Agrupamiento de Iris
 
-Load `load_iris()`, scale features, run K-Means (K=3), and create a cross-tabulation of true species vs. cluster labels.
+Cargá `load_iris()`, escalá las features, corré K-Means (K=3) y creá una tabla cruzada de las especies reales vs. las etiquetas de los clusters.
 
-**Question:** Which species does K-Means confuse most often?
+**Pregunta:** ¿Qué especie confunde K-Means con más frecuencia?
 
-## Part 4: Customer Segmentation
+## Parte 4: Segmentación de clientes
 
-Create synthetic customer data (n=500) with features: spending score, purchase frequency, recency. Scale, cluster, and profile each segment (mean values).
+Creá datos sintéticos de clientes (n=500) con las features: spending score, frecuencia de compra, recencia. Escalá, agrupá y perfila cada segmento (valores medios).
 
-**Question:** Can you name each segment (e.g., "high-value loyal", "dormant", "new")?
+**Pregunta:** ¿Podés nombrar cada segmento (p. ej., "high-value loyal", "dormant", "new")?
 
-## Part 5: High-Dimensional Clustering
+## Parte 5: Agrupamiento de alta dimensionalidad
 
-Generate data with `make_blobs(n_samples=200, n_features=50, centers=4)`. Compute silhouette for K=2..10. Compare with 2D PCA visualization.
+Generá datos con `make_blobs(n_samples=200, n_features=50, centers=4)`. Calculá la silueta para K=2..10. Compará con la visualización 2D de PCA.
 
 ```python
 from sklearn.decomposition import PCA
 ```
 
-**Question:** Does K-Means still work well in 50 dimensions?
+**Pregunta:** ¿Sigue funcionando bien K-Means en 50 dimensiones?
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Elbow + silhouette plots (Part 1)
-- Scaling comparison plot (Part 2)
-- Segment profiles (Part 4)
+- Notebook con las 5 partes
+- Gráficos de codo + silueta (Parte 1)
+- Gráfico de comparación de escalado (Parte 2)
+- Perfiles de segmentos (Parte 4)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos
