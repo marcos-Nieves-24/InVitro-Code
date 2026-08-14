@@ -1,41 +1,41 @@
-# Assignment: Scientific Calculator
+# Assignment: Calculadora científica
 
-## Objectives
+## Objetivos
 
-- Implement arithmetic operations correctly
-- Use comparison and logical operators
-- Apply assignment operators
-- Handle operator precedence correctly
+- Implementar correctamente las operaciones aritméticas
+- Usar operadores de comparación y lógicos
+- Aplicar operadores de asignación
+- Manejar correctamente la precedencia de operadores
 
-## Instructions
+## Instrucciones
 
-Create a Python script `lab_calculator.py` that implements a simple laboratory calculator:
+Creá un script de Python `lab_calculator.py` que implemente una calculadora de laboratorio simple:
 
-1. **Solution dilution calculation**: Ask for stock concentration (M), desired concentration (M), and desired volume (mL). Calculate: `volume_stock = (desired_conc * desired_volume) / stock_conc`, then volume_water = desired_volume - volume_stock.
+1. **Cálculo de dilución de soluciones**: Pedí la concentración del stock (M), la concentración deseada (M) y el volumen deseado (mL). Calculá: `volume_stock = (desired_conc * desired_volume) / stock_conc`, y luego volume_water = desired_volume - volume_stock.
 
-2. **pH calculation**: Given hydrogen ion concentration [H⁺], calculate pH = -log10([H⁺]). Use `**` for log10: `pH = -math.log10(h_concentration)` (import math).
+2. **Cálculo de pH**: Dada la concentración de iones de hidrógeno [H⁺], calculá pH = -log10([H⁺]). Usá `**` para log10: `pH = -math.log10(h_concentration)` (import math).
 
-3. **Classification**: Based on pH output: acid (< 7), neutral (== 7), base (> 7).
+3. **Clasificación**: Según el valor del pH: ácido (< 7), neutro (== 7), base (> 7).
 
-4. **Statistical calculation**: Given 5 numbers, calculate the mean, variance, and standard deviation using operators (no statistical libraries).
+4. **Cálculo estadístico**: Dados 5 números, calculá la media, la varianza y la desviación estándar usando operadores (sin librerías estadísticas).
 
-5. **Budget check**: Given a total cost and budget, determine if the purchase is within budget. Apply an assignment operator.
+5. **Verificación de presupuesto**: Dado un costo total y un presupuesto, determiná si la compra está dentro del presupuesto. Aplicá un operador de asignación.
 
-## Deliverables
+## Entregables
 
-- `lab_calculator.py` with all functions
-- Documented output showing each calculation
+- `lab_calculator.py` con todas las funciones
+- Salida documentada que muestre cada cálculo
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Arithmetic | All calculations correct | Minor errors | Major errors |
-| Operators | Uses all operator types appropriately | Most types used | Few types used |
-| Logic | Correct branching with logical operators | Mostly correct | Logical errors |
-| Code Quality | Well-commented, PEP 8 | Adequate | Poor |
-| Output | Formatted, clear results | Acceptable | Hard to read |
+| Aritmética | Todos los cálculos correctos | Errores menores | Errores mayores |
+| Operadores | Usa todos los tipos de operadores apropiadamente | Usa la mayoría de los tipos | Usa pocos tipos |
+| Lógica | Ramificación correcta con operadores lógicos | Mayormente correcta | Errores de lógica |
+| Calidad del código | Bien comentado, PEP 8 | Adecuada | Mala |
+| Salida | Resultados formateados y claros | Aceptable | Difícil de leer |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-60 minutes
+60 minutos

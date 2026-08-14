@@ -1,30 +1,30 @@
-# Assignment: Clinical Decision Support System
+# Assignment: Sistema de soporte a decisiones clínicas
 
-## Objectives
+## Objetivos
 
-- Write complex conditional logic for real-world scenarios
-- Use if/elif/else with boolean expressions
-- Apply truthy/falsy concepts
-- Use ternary expressions and match statements
+- Escribir lógica condicional compleja para escenarios del mundo real
+- Usar if/elif/else con expresiones booleanas
+- Aplicar conceptos de truthy/falsy
+- Usar expresiones ternarias y sentencias match
 
-## Instructions
+## Instrucciones
 
-Create a Python script `clinical_triage.py` that implements a clinical triage system:
+Creá un script de Python `clinical_triage.py` que implemente un sistema de triaje clínico:
 
-1. **Vital signs assessment**: Given heart rate (bpm), systolic BP, diastolic BP, temperature (°C), and oxygen saturation (%), classify each as normal or abnormal.
+1. **Evaluación de signos vitales**: Dada la frecuencia cardíaca (bpm), la presión arterial sistólica, la presión arterial diastólica, la temperatura (°C) y la saturación de oxígeno (%), clasificá cada uno como normal o anormal.
 
-2. **Triage level**: Assign a triage level based on the number and severity of abnormal vitals:
-   - Level 1 (Resuscitation): Any life-threatening abnormality (e.g., O2 < 85%, HR > 140 or < 40)
-   - Level 2 (Emergency): 2+ abnormal vitals or any single severe abnormality
-   - Level 3 (Urgent): 1 abnormal vital
-   - Level 4 (Non-urgent): All vitals normal
-   - Level 5 (Routine): Follow-up only
+2. **Nivel de triaje**: Asigná un nivel de triaje según la cantidad y la gravedad de los signos vitales anormales:
+   - Nivel 1 (Reanimación): Cualquier anormalidad que ponga en riesgo la vida (por ejemplo, O2 < 85%, FC > 140 o < 40)
+   - Nivel 2 (Emergencia): 2+ signos vitales anormales o cualquier anormalidad grave aislada
+   - Nivel 3 (Urgente): 1 signo vital anormal
+   - Nivel 4 (No urgente): Todos los signos vitales normales
+   - Nivel 5 (Rutina): Solo seguimiento
 
-3. **Recommendation**: Based on triage level, output a recommendation.
+3. **Recomendación**: Según el nivel de triaje, emití una recomendación.
 
-4. Use a `match` statement for the triage level → recommendation mapping.
+4. Usá una sentencia `match` para el mapeo de nivel de triaje → recomendación.
 
-## Starter Code Sketch
+## Esquema de código inicial
 
 ```python
 def assess_vitals(hr, sbp, dbp, temp, spo2):
@@ -39,21 +39,21 @@ def get_recommendation(triage_level):
     """Returns recommendation based on triage level."""
 ```
 
-## Deliverables
+## Entregables
 
-- `clinical_triage.py` with all functions and demonstration
-- Test the system with at least 3 patient scenarios
+- `clinical_triage.py` con todas las funciones y la demostración
+- Probá el sistema con al menos 3 escenarios de pacientes
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Conditional Logic | Correct, comprehensive | Mostly correct | Logical errors |
-| Triage Rules | All levels correctly implemented | Most levels | Missing levels |
-| Match Statement | Used appropriately | Used but basic | Not used |
-| Testing | 3+ test cases with output | 2 test cases | 1 or none |
-| Code Quality | Clean, well-commented | Acceptable | Poor |
+| Lógica condicional | Correcta y completa | Mayormente correcta | Errores de lógica |
+| Reglas de triaje | Todos los niveles correctamente implementados | La mayoría de los niveles | Faltan niveles |
+| Sentencia match | Usada apropiadamente | Usada pero básica | No usada |
+| Pruebas | 3+ casos de prueba con salida | 2 casos de prueba | 1 o ninguno |
+| Calidad del código | Limpio, bien comentado | Aceptable | Mala |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-75 minutes
+75 minutos

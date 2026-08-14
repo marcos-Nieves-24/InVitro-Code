@@ -1,22 +1,22 @@
-# Lab: Writing Functions
+# Lab: Escribir funciones
 
-## Objective
+## Objetivo
 
-Practice defining functions, working with parameters, return values, and scope.
+Practicar la definición de funciones, el trabajo con parámetros, los valores de retorno y el scope.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 5: Operators
+Lección 5: Operadores
 
-## Instructions
+## Instrucciones
 
-### Part 1: Basic Function
+### Parte 1: Función básica
 
-Write a function `celsius_to_fahrenheit(c)` that converts Celsius to Fahrenheit: F = C * 9/5 + 32.
+Escribí una función `celsius_to_fahrenheit(c)` que convierta Celsius a Fahrenheit: F = C * 9/5 + 32.
 
 ```python
 def celsius_to_fahrenheit(c):
@@ -27,9 +27,9 @@ print(f"37°C = {celsius_to_fahrenheit(37)}°F")
 print(f"100°C = {celsius_to_fahrenheit(100)}°F")
 ```
 
-### Part 2: Multiple Parameters
+### Parte 2: Múltiples parámetros
 
-Write a function `bmi_category(weight, height)` that returns both BMI and category.
+Escribí una función `bmi_category(weight, height)` que devuelva tanto el BMI como la categoría.
 
 ```python
 def bmi_category(weight, height):
@@ -48,7 +48,7 @@ bmi, cat = bmi_category(70, 1.75)
 print(f"BMI: {bmi:.1f}, Category: {cat}")
 ```
 
-### Part 3: Default Parameters
+### Parte 3: Parámetros por defecto
 
 ```python
 def create_report(patient_name, age, blood_type="Unknown"):
@@ -58,7 +58,7 @@ print(create_report("Alice", 30, "A+"))
 print(create_report("Bob", 25))  # Uses default
 ```
 
-### Part 4: Lambda Practice
+### Parte 4: Práctica con lambdas
 
 ```python
 numbers = [5, 2, 8, 1, 9, 3]
@@ -74,7 +74,7 @@ squares = list(map(lambda x: x ** 2, numbers))
 print(f"Squares: {squares}")
 ```
 
-### Part 5: Scope Experiment
+### Parte 5: Experimento de scope
 
 ```python
 x = "global"
@@ -95,6 +95,6 @@ modify_global()
 print(f"After modification: {x}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `functions_lab.ipynb` with all exercises completed.
+Notebook de Jupyter `functions_lab.ipynb` con todos los ejercicios completados.

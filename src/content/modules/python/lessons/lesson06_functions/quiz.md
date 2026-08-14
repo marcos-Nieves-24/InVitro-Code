@@ -1,62 +1,62 @@
-# Quiz: Functions
+# Quiz: Funciones
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What keyword is used to define a function in Python?
+**Q1:** ¿Qué palabra clave se usa para definir una función en Python?
 - A) `function`
 - B) `def`
 - C) `define`
 - D) `func`
 
-**Q2:** What does a function return if no `return` statement is present?
+**Q2:** ¿Qué devuelve una función si no hay una sentencia `return`?
 - A) 0
 - B) False
 - C) None
 - D) Error
 
-**Q3:** Which type of argument allows you to specify which parameter receives the value?
-- A) Positional argument
-- B) Keyword argument
-- C) Default argument
-- D) Variable argument
+**Q3:** ¿Qué tipo de argumento te permite especificar qué parámetro recibe el valor?
+- A) Argumento posicional
+- B) Argumento de palabra clave
+- C) Argumento por defecto
+- D) Argumento variable
 
-**Q4:** What is a lambda function?
-- A) A function that takes no arguments
-- B) A function defined with `def`
-- C) An anonymous single-expression function
-- D) A function that returns None
+**Q4:** ¿Qué es una función lambda?
+- A) Una función que no toma argumentos
+- B) Una función definida con `def`
+- C) Una función anónima de una sola expresión
+- D) Una función que devuelve None
 
-**Q5:** Where is a variable created inside a function accessible?
-- A) Everywhere in the program
-- B) Only inside the function
-- C) Only in the main program
-- D) Only in other functions
+**Q5:** ¿Dónde es accesible una variable creada dentro de una función?
+- A) En todo el programa
+- B) Solo dentro de la función
+- C) Solo en el programa principal
+- D) Solo en otras funciones
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between `return` and `print()` inside a function.
+**Q6:** Explicá la diferencia entre `return` y `print()` dentro de una función.
 
-**Q7:** What is the problem with `def append_to(item, target=[])` and how do you fix it?
+**Q7:** ¿Cuál es el problema con `def append_to(item, target=[])` y cómo lo solucionás?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a function `is_even(n)` that returns `True` if `n` is even and `False` otherwise. Then write a lambda that does the same thing.
+**Q8:** Escribí una función `is_even(n)` que devuelva `True` si `n` es par y `False` en caso contrario. Después escribí una lambda que haga lo mismo.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) `def`
 
 **Q2:** C) None
 
-**Q3:** B) Keyword argument
+**Q3:** B) Argumento de palabra clave
 
-**Q4:** C) An anonymous single-expression function
+**Q4:** C) Una función anónima de una sola expresión
 
-**Q5:** B) Only inside the function
+**Q5:** B) Solo dentro de la función
 
-**Q6:** `return` sends a value back to the caller and exits the function. `print()` displays output to the console but does not return a value to the caller. A function can `print` without `return`ing (returns None), or `return` without `print`ing.
+**Q6:** `return` envía un valor de vuelta al llamador y sale de la función. `print()` muestra la salida en la consola pero no devuelve un valor al llamador. Una función puede hacer `print` sin `return` (devuelve None), o `return` sin `print`.
 
-**Q7:** The default list `[]` is created once when the function is defined, not each time it's called. All calls share the same list. Fix: use `def append_to(item, target=None)` and create a new list inside: `if target is None: target = []`.
+**Q7:** La lista por defecto `[]` se crea una sola vez cuando se define la función, no cada vez que se la llama. Todas las llamadas comparten la misma lista. Solución: usá `def append_to(item, target=None)` y creá una lista nueva adentro: `if target is None: target = []`.
 
 **Q8:**
 ```python

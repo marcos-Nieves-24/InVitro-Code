@@ -1,27 +1,27 @@
-# Assignment: Data Processing with Loops
+# Assignment: Procesamiento de datos con bucles
 
-## Objectives
+## Objetivos
 
-- Apply for and while loops to real-world data
-- Use break and continue for flow control
-- Implement nested loops for multi-dimensional processing
-- Use enumerate() and zip() for Pythonic iteration
+- Aplicar bucles for y while a datos del mundo real
+- Usar break y continue para el control de flujo
+- Implementar bucles anidados para procesamiento multidimensional
+- Usar enumerate() y zip() para iteración pitónica
 
-## Instructions
+## Instrucciones
 
-Create a Python script `data_processor.py` that:
+Creá un script de Python `data_processor.py` que:
 
-1. **Gene expression analysis**: Given a list of gene expression values and a threshold, count how many are above the threshold using a for loop.
+1. **Análisis de expresión génica**: Dada una lista de valores de expresión génica y un umbral, contá cuántos están por encima del umbral usando un bucle for.
 
-2. **Quality filtering**: Given a list of DNA sequences, filter out those shorter than a minimum length. Track how many were filtered.
+2. **Filtrado de calidad**: Dada una lista de secuencias de ADN, filtrá las que sean más cortas que una longitud mínima. Registrá cuántas fueron filtradas.
 
-3. **Running average**: Using a while loop, compute the running average of a list of numbers until a negative number is encountered (then stop with break).
+3. **Promedio acumulado**: Usando un bucle while, calculá el promedio acumulado de una lista de números hasta que aparezca un número negativo (después detené con break).
 
-4. **Matrix operations**: Given a 3×3 matrix (list of lists), compute the sum of each row and each column using nested loops.
+4. **Operaciones con matrices**: Dada una matriz de 3×3 (lista de listas), calculá la suma de cada fila y cada columna usando bucles anidados.
 
-5. **Cumulative metrics**: Given monthly revenue data, compute cumulative revenue and month-over-month growth rates.
+5. **Métricas acumulativas**: Dados los ingresos mensuales, calculá los ingresos acumulados y las tasas de crecimiento mes a mes.
 
-## Starter Data
+## Datos iniciales
 
 ```python
 gene_expression = [2.5, 0.8, 3.2, 1.1, 4.0, 0.3, 2.1, 1.8]
@@ -31,21 +31,21 @@ matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 monthly_revenue = [12000, 13500, 12800, 14200, 15100, 14800]
 ```
 
-## Deliverables
+## Entregables
 
-- `data_processor.py` with all 5 tasks implemented
-- Output showing the results of each task
+- `data_processor.py` con las 5 tareas implementadas
+- Salida que muestre los resultados de cada tarea
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| For Loops | Correct iteration and accumulation | Minor issues | Major errors |
-| While Loops | Proper condition and termination | Runs but imperfect | Infinite loop or wrong logic |
-| Break/Continue | Used appropriately | Used but not optimal | Not used |
-| Nested Loops | Correct multi-dimensional processing | Basic but works | Incorrect |
-| Pythonic Style | Uses enumerate/zip, clean code | Mostly clean | UnPythonic |
+| Bucles for | Iteración y acumulación correctas | Problemas menores | Errores mayores |
+| Bucles while | Condición y terminación adecuadas | Funciona pero imperfecto | Bucle infinito o lógica incorrecta |
+| Break/Continue | Usados apropiadamente | Usados pero no óptimos | No usados |
+| Bucles anidados | Procesamiento multidimensional correcto | Básico pero funciona | Incorrecto |
+| Estilo pitónico | Usa enumerate/zip, código limpio | Mayormente limpio | No pitónico |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

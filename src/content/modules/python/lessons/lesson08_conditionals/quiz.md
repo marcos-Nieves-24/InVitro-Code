@@ -1,62 +1,62 @@
-# Quiz: Conditionals
+# Quiz: Condicionales
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What is the output of `if 0: print("yes") else: print("no")`?
+**Q1:** ¿Cuál es la salida de `if 0: print("yes") else: print("no")`?
 - A) yes
 - B) no
 - C) Error
 - D) Nothing
 
-**Q2:** Which of the following values is truthy?
+**Q2:** ¿Cuál de los siguientes valores es truthy?
 - A) 0
 - B) ""
 - C) []
 - D) "False"
 
-**Q3:** What does `x = "Adult" if age >= 18 else "Minor"` do?
-- A) Assigns "Adult" if age ≥ 18 else "Minor"
-- B) Checks if "Adult" equals age
-- C) Raises a syntax error
-- D) Both A and B are assigned
+**Q3:** ¿Qué hace `x = "Adult" if age >= 18 else "Minor"`?
+- A) Asigna "Adult" si age ≥ 18, si no "Minor"
+- B) Verifica si "Adult" es igual a age
+- C) Produce un error de sintaxis
+- D) Se asignan tanto A como B
 
-**Q4:** What is the correct way to check if x is None?
+**Q4:** ¿Cuál es la forma correcta de verificar si x es None?
 - A) `if x == None`
 - B) `if x is None`
 - C) `if x = None`
 - D) `if equals(x, None)`
 
-**Q5:** What keyword is used to add an additional condition after `if`?
+**Q5:** ¿Qué palabra clave se usa para agregar una condición adicional después de `if`?
 - A) `else if`
 - B) `elif`
 - C) `elseif`
 - D) `elsif`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between truthy and falsy values in Python.
+**Q6:** Explicá la diferencia entre valores truthy y falsy en Python.
 
-**Q7:** What is a ternary conditional expression and when would you use it?
+**Q7:** ¿Qué es una expresión condicional ternaria y cuándo la usarías?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a function `grade_score(score)` that returns "Pass" if score ≥ 60 and "Fail" otherwise. Then rewrite it as a lambda.
+**Q8:** Escribí una función `grade_score(score)` que devuelva "Pass" si score ≥ 60 y "Fail" en caso contrario. Después reescribila como una lambda.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) no
 
 **Q2:** D) "False"
 
-**Q3:** A) Assigns "Adult" if age ≥ 18 else "Minor"
+**Q3:** A) Asigna "Adult" si age ≥ 18, si no "Minor"
 
 **Q4:** B) `if x is None`
 
 **Q5:** B) `elif`
 
-**Q6:** Truthy values evaluate to True in a boolean context (e.g., non-empty strings, non-zero numbers, non-empty containers). Falsy values evaluate to False (e.g., 0, "", [], None, False). This allows concise conditions like `if name:` instead of `if name != "":`.
+**Q6:** Los valores truthy se evalúan como True en un contexto booleano (por ejemplo, strings no vacíos, números distintos de cero, contenedores no vacíos). Los valores falsy se evalúan como False (por ejemplo, 0, "", [], None, False). Esto permite condiciones concisas como `if name:` en lugar de `if name != "":`.
 
-**Q7:** A ternary conditional expression is a one-line if/else: `value_if_true if condition else value_if_false`. Use it for simple, single-expression conditions where it improves readability over a full if/else block.
+**Q7:** Una expresión condicional ternaria es un if/else de una sola línea: `value_if_true if condition else value_if_false`. Usala para condiciones simples de una sola expresión donde mejore la legibilidad frente a un bloque if/else completo.
 
 **Q8:**
 ```python

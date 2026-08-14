@@ -1,20 +1,20 @@
-# Lab: Conditionals and Decision Making
+# Lab: Condicionales y toma de decisiones
 
-## Objective
+## Objetivo
 
-Practice if/elif/else, truthy/falsy, ternary expressions, and match statements.
+Practicar if/elif/else, truthy/falsy, expresiones ternarias y sentencias match.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 6: Functions
+Lección 6: Funciones
 
-## Instructions
+## Instrucciones
 
-### Part 1: Basic if/else
+### Parte 1: if/else básico
 
 ```python
 # Check if a number is positive, negative, or zero
@@ -27,7 +27,7 @@ else:
     print(f"{num} is zero")
 ```
 
-### Part 2: Truthy/Falsy
+### Parte 2: Truthy/Falsy
 
 ```python
 # Test various values for truthiness
@@ -39,7 +39,7 @@ for val in test_values:
         print(f"Falsy:  {val!r}")
 ```
 
-### Part 3: Ternary
+### Parte 3: Ternario
 
 ```python
 # Convert ternary to if/else and vice versa
@@ -55,7 +55,7 @@ else:
 print(f"Can vote: {can_vote}")
 ```
 
-### Part 4: Match Statement
+### Parte 4: Sentencia match
 
 ```python
 # Python 3.10+ match statement
@@ -73,7 +73,7 @@ print(get_day_type("Sunday"))
 print(get_day_type("Funday"))
 ```
 
-### Part 5: Nested Conditionals
+### Parte 5: Condicionales anidados
 
 ```python
 # Login system with nested conditions
@@ -91,6 +91,6 @@ else:
     print("Unknown user")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `conditionals_lab.ipynb` with all exercises.
+Notebook de Jupyter `conditionals_lab.ipynb` con todos los ejercicios.

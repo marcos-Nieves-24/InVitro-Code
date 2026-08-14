@@ -1,48 +1,48 @@
-# Quiz: Operators
+# Quiz: Operadores
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What is the result of `15 // 4`?
+**Q1:** ¿Cuál es el resultado de `15 // 4`?
 - A) 3.75
 - B) 3
 - C) 4
 - D) 0
 
-**Q2:** What does `15 % 4` return?
+**Q2:** ¿Qué devuelve `15 % 4`?
 - A) 3
 - B) 4
 - C) 0
 - D) 1
 
-**Q3:** Which operator checks if two values are equal?
+**Q3:** ¿Qué operador verifica si dos valores son iguales?
 - A) `=`
 - B) `!=`
 - C) `==`
 - D) `:=`
 
-**Q4:** What is the result of `not (True and False)`?
+**Q4:** ¿Cuál es el resultado de `not (True and False)`?
 - A) True
 - B) False
 - C) None
 - D) Error
 
-**Q5:** After `x = 5; x *= 3`, what is the value of `x`?
+**Q5:** Después de `x = 5; x *= 3`, ¿cuál es el valor de `x`?
 - A) 5
 - B) 3
 - C) 15
 - D) 8
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between `/` and `//` in Python.
+**Q6:** Explicá la diferencia entre `/` y `//` en Python.
 
-**Q7:** What is operator precedence and why is it important?
+**Q7:** ¿Qué es la precedencia de operadores y por qué es importante?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write code that checks if a number entered by the user is between 0 and 100 (inclusive). Use comparison operators and logical operators. Print "In range" or "Out of range".
+**Q8:** Escribí código que verifique si un número ingresado por el usuario está entre 0 y 100 (inclusive). Usá operadores de comparación y operadores lógicos. Imprimí "In range" o "Out of range".
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) 3
 
@@ -54,9 +54,9 @@
 
 **Q5:** C) 15
 
-**Q6:** `/` is float division that always returns a float (e.g., `9/4 = 2.25`). `//` is integer (floor) division that returns the integer quotient, discarding the remainder (e.g., `9//4 = 2`).
+**Q6:** `/` es la división de flotantes que siempre devuelve un flotante (por ejemplo, `9/4 = 2.25`). `//` es la división entera (división de piso) que devuelve el cociente entero, descartando el resto (por ejemplo, `9//4 = 2`).
 
-**Q7:** Operator precedence defines the order in which operations are evaluated in an expression. For example, in `3 + 4 * 2`, multiplication has higher precedence than addition, so the result is `11`, not `14`. Understanding precedence prevents calculation errors.
+**Q7:** La precedencia de operadores define el orden en el que se evalúan las operaciones en una expresión. Por ejemplo, en `3 + 4 * 2`, la multiplicación tiene mayor precedencia que la suma, así que el resultado es `11`, no `14`. Comprender la precedencia previene errores de cálculo.
 
 **Q8:**
 ```python

@@ -1,20 +1,20 @@
-# Lab: Operators in Action
+# Lab: Operadores en acción
 
-## Objective
+## Objetivo
 
-Practice using arithmetic, comparison, logical, and assignment operators.
+Practicar el uso de los operadores aritméticos, de comparación, lógicos y de asignación.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 4: Data Types
+Lección 4: Tipos de datos
 
-## Instructions
+## Instrucciones
 
-### Part 1: Arithmetic Operators
+### Parte 1: Operadores aritméticos
 
 ```python
 # Experiment with each arithmetic operator
@@ -28,7 +28,7 @@ print(f"a % b = {a % b}")
 print(f"a ** b = {a ** b}")
 ```
 
-### Part 2: Even or Odd Checker
+### Parte 2: Verificador de par o impar
 
 ```python
 num = int(input("Enter a number: "))
@@ -38,7 +38,7 @@ else:
     print(f"{num} is odd")
 ```
 
-### Part 3: Logical Operator Truth Table
+### Parte 3: Tabla de verdad de operadores lógicos
 
 ```python
 print("Truth Table:")
@@ -55,7 +55,7 @@ print(f"not True       = {not True}")
 print(f"not False      = {not False}")
 ```
 
-### Part 4: Assignment Operators
+### Parte 4: Operadores de asignación
 
 ```python
 x = 10
@@ -70,7 +70,7 @@ x //= 3
 print(f"After x //= 3: x = {x}")
 ```
 
-### Part 5: Compound Condition
+### Parte 5: Condición compuesta
 
 ```python
 temperature = float(input("Enter temperature (C): "))
@@ -86,6 +86,6 @@ print(f"Uncomfortable: {is_uncomfortable}")
 print(f"Pleasant: {is_pleasant}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `operators_lab.ipynb` with all results visible.
+Notebook de Jupyter `operators_lab.ipynb` con todos los resultados visibles.

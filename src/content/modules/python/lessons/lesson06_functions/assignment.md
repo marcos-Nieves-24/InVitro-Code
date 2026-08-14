@@ -1,44 +1,44 @@
-# Assignment: Sequence Analysis Toolkit
+# Assignment: Kit de análisis de secuencias
 
-## Objectives
+## Objetivos
 
-- Write well-structured functions with docstrings
-- Implement domain-specific functions for biotechnology
-- Use lambda functions appropriately
-- Demonstrate understanding of scope
+- Escribir funciones bien estructuradas con docstrings
+- Implementar funciones específicas del dominio para biotecnología
+- Usar funciones lambda apropiadamente
+- Demostrar comprensión del scope
 
-## Instructions
+## Instrucciones
 
-Create a Python module `sequence_tools.py` with the following functions:
+Creá un módulo de Python `sequence_tools.py` con las siguientes funciones:
 
-1. `gc_content(sequence)` — returns GC percentage
-2. `reverse_complement(sequence)` — returns reverse complement of DNA
-3. `transcribe(sequence)` — transcribes DNA to RNA (T → U)
-4. `translate(sequence)` — translates DNA to protein (using a provided codon table). For simplicity, translate the first reading frame only.
-5. `has_motif(sequence, motif)` — returns True if motif is found
-6. `filter_by_gc(sequences, min_gc, max_gc)` — uses a lambda to filter sequences by GC content range
+1. `gc_content(sequence)` — devuelve el porcentaje de GC
+2. `reverse_complement(sequence)` — devuelve el complemento inverso del ADN
+3. `transcribe(sequence)` — transcribe ADN a ARN (T → U)
+4. `translate(sequence)` — traduce ADN a proteína (usando una tabla de codones provista). Para simplificar, traducí solo el primer marco de lectura.
+5. `has_motif(sequence, motif)` — devuelve True si se encuentra el motivo
+6. `filter_by_gc(sequences, min_gc, max_gc)` — usa una lambda para filtrar secuencias por el rango de contenido de GC
 
-Include:
-- Docstrings for all functions (PEP 257 format)
-- Type hints for all functions
-- A demonstration in `if __name__ == "__main__":` block
+Incluí:
+- Docstrings para todas las funciones (formato PEP 257)
+- Type hints para todas las funciones
+- Una demostración en el bloque `if __name__ == "__main__":`
 
-## Deliverables
+## Entregables
 
 - `sequence_tools.py`
-- Example output from the demonstration block
+- Ejemplo de salida del bloque de demostración
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Function Design | Clear, single-purpose functions | Mostly clear | Unclear purpose |
-| Parameters/Return | Appropriate I/O for each function | Mostly appropriate | Poor design |
-| Docstrings | PEP 257 compliant, comprehensive | Present but incomplete | Missing |
-| Lambda Usage | Appropriate use of lambdas | Basic use | Not used |
-| Code Quality | PEP 8, type hints, organized | Mostly compliant | Poor quality |
-| Demonstration | Shows all functions, clear output | Shows most functions | Incomplete |
+| Diseño de funciones | Funciones claras, de un solo propósito | Mayormente claras | Propósito poco claro |
+| Parámetros/Retorno | E/S apropiada para cada función | Mayormente apropiada | Diseño deficiente |
+| Docstrings | Conformes a PEP 257, completos | Presentes pero incompletos | Ausentes |
+| Uso de lambdas | Uso apropiado de lambdas | Uso básico | No usadas |
+| Calidad del código | PEP 8, type hints, organizado | Mayormente conforme | Mala calidad |
+| Demostración | Muestra todas las funciones, salida clara | Muestra la mayoría de las funciones | Incompleta |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

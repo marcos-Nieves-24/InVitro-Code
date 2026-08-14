@@ -1,48 +1,48 @@
-# Quiz: Loops
+# Quiz: Bucles
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What does `for i in range(3): print(i)` output?
+**Q1:** ¿Qué genera `for i in range(3): print(i)`?
 - A) 1 2 3
 - B) 0 1 2
 - C) 0 1 2 3
 - D) 1 2
 
-**Q2:** What keyword exits a loop immediately?
+**Q2:** ¿Qué palabra clave sale de un bucle inmediatamente?
 - A) exit
 - B) stop
 - C) break
 - D) return
 
-**Q3:** What does `range(2, 8, 3)` generate?
+**Q3:** ¿Qué genera `range(2, 8, 3)`?
 - A) 2, 3, 4, 5, 6, 7
 - B) 2, 5
 - C) 2, 5, 8
 - D) 2, 5
 
-**Q4:** What happens when a `while` loop condition never becomes False?
-- A) Python stops the program
-- B) An infinite loop occurs
-- C) The loop runs once
-- D) Python crashes
+**Q4:** ¿Qué pasa cuando la condición de un bucle `while` nunca se vuelve False?
+- A) Python detiene el programa
+- B) Ocurre un bucle infinito
+- C) El bucle se ejecuta una vez
+- D) Python falla
 
-**Q5:** Which function provides both the index and value during iteration?
+**Q5:** ¿Qué función proporciona tanto el índice como el valor durante la iteración?
 - A) `index()`
 - B) `enumerate()`
 - C) `zip()`
 - D) `range()`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between `break` and `continue`.
+**Q6:** Explicá la diferencia entre `break` y `continue`.
 
-**Q7:** What is the purpose of the `else` clause in a loop?
+**Q7:** ¿Cuál es el propósito de la cláusula `else` en un bucle?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write a for loop that sums all even numbers from 1 to 50 and prints the result. Use `continue` to skip odd numbers.
+**Q8:** Escribí un bucle for que sume todos los números pares del 1 al 50 e imprima el resultado. Usá `continue` para saltar los números impares.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) 0 1 2
 
@@ -50,13 +50,13 @@
 
 **Q3:** D) 2, 5
 
-**Q4:** B) An infinite loop occurs
+**Q4:** B) Ocurre un bucle infinito
 
 **Q5:** B) `enumerate()`
 
-**Q6:** `break` immediately exits the entire loop. `continue` skips the rest of the current iteration and moves to the next iteration of the loop.
+**Q6:** `break` sale inmediatamente de todo el bucle. `continue` saltea el resto de la iteración actual y pasa a la siguiente iteración del bucle.
 
-**Q7:** The `else` clause executes when the loop completes normally (i.e., the condition becomes False for while, or the sequence is exhausted for for). It does NOT execute if the loop was terminated by `break`.
+**Q7:** La cláusula `else` se ejecuta cuando el bucle termina normalmente (es decir, cuando la condición se vuelve False en un while, o cuando la secuencia se agota en un for). NO se ejecuta si el bucle fue terminado por `break`.
 
 **Q8:**
 ```python

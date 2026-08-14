@@ -1,20 +1,20 @@
-# Lab: Loops and Iteration
+# Lab: Bucles e iteración
 
-## Objective
+## Objetivo
 
-Practice for loops, while loops, range(), break/continue, and nested loops.
+Practicar bucles for, bucles while, `range()`, break/continue y bucles anidados.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 6: Functions
+Lección 6: Funciones
 
-## Instructions
+## Instrucciones
 
-### Part 1: Basic for Loop
+### Parte 1: Bucle for básico
 
 ```python
 # Iterate over a list of fruits
@@ -23,7 +23,7 @@ for fruit in fruits:
     print(f"I like {fruit}s")
 ```
 
-### Part 2: range() Practice
+### Parte 2: Práctica con range()
 
 ```python
 # Print even numbers from 2 to 20
@@ -37,7 +37,7 @@ for i in range(10, 0, -1):
 print("Liftoff!")
 ```
 
-### Part 3: While Loop
+### Parte 3: Bucle while
 
 ```python
 # Countdown with while
@@ -48,7 +48,7 @@ while count > 0:
 print("Blast off!")
 ```
 
-### Part 4: Break and Continue
+### Parte 4: Break y continue
 
 ```python
 # Find first number divisible by 7 and 3
@@ -64,7 +64,7 @@ for i in range(1, 20):
     print(i, end=" ")
 ```
 
-### Part 5: Nested Loops
+### Parte 5: Bucles anidados
 
 ```python
 # Generate a coordinate grid
@@ -75,7 +75,7 @@ for x in range(3):
     print()
 ```
 
-### Part 6: Loop with else
+### Parte 6: Bucle con else
 
 ```python
 # Search with else clause
@@ -89,6 +89,6 @@ else:
     print(f"{search_for} not found")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `loops_lab.ipynb` with all exercises completed.
+Notebook de Jupyter `loops_lab.ipynb` con todos los ejercicios completados.
