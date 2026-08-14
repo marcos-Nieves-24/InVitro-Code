@@ -1,68 +1,68 @@
-# Quiz: Model Evaluation
+# Quiz: Evaluación de modelos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. What does RMSE stand for?**
+**1. ¿Qué significa RMSE?**
 
-a) Regularized Mean Squared Error
-b) Root Mean Squared Error
-c) Relative Mean Standard Error
-d) Regression Model Selection Error
+a) Error cuadrático medio regularizado
+b) Raíz del error cuadrático medio
+c) Error estándar medio relativo
+d) Error de selección del modelo de regresión
 
-**2. R² = 0 means:**
+**2. R² = 0 significa:**
 
-a) The model predicts perfectly
-b) The model performs no better than predicting the mean
-c) The model is overfit
-d) The model has negative performance
+a) El modelo predice perfectamente
+b) El modelo no rinde mejor que predecir la media
+c) El modelo está sobreajustado
+d) El modelo tiene un rendimiento negativo
 
-**3. In k-fold cross-validation, each data point is used for testing exactly:**
+**3. En la validación cruzada de k folds, cada punto de datos se usa para la prueba exactamente:**
 
-a) 0 times
-b) 1 time
-c) k times
-d) k-1 times
+a) 0 veces
+b) 1 vez
+c) k veces
+d) k-1 veces
 
-**4. Which metric penalizes large errors the most heavily?**
+**4. ¿Qué métrica penaliza más fuertemente los errores grandes?**
 
 a) MAE
 b) MSE
 c) R²
 d) RMSE
 
-**5. Data leakage occurs when:**
+**5. La fuga de datos (data leakage) ocurre cuando:**
 
-a) The test set is too small
-b) Information from outside the training set is used during training
-c) The model is too complex
-d) Cross-validation is not used
+a) El set de prueba es demasiado pequeño
+b) Se usa información de fuera del set de entrenamiento durante el entrenamiento
+c) El modelo es demasiado complejo
+d) No se usa validación cruzada
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Explain why it is a mistake to evaluate a model on the same data it was trained on.
+**6.** Explicá por qué es un error evaluar un modelo con los mismos datos con los que se entrenó.
 
-**7.** A regression model has MAE = $5,000 and RMSE = $12,000 for house price prediction. What does the difference between MAE and RMSE tell you?
+**7.** Un modelo de regresión tiene MAE = $5,000 y RMSE = $12,000 para la predicción de precios de casas. ¿Qué te dice la diferencia entre MAE y RMSE?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code using sklearn that:
-- Splits the diabetes dataset into train (80%) and test (20%)
-- Trains a LinearRegression
-- Computes and prints MAE, RMSE, and R² on the test set
+**8.** Escribí código en Python usando sklearn que:
+- Divida el dataset de diabetes en entrenamiento (80%) y prueba (20%)
+- Entrene un LinearRegression
+- Calcule e imprima MAE, RMSE y R² sobre el set de prueba
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. b) Root Mean Squared Error
-2. b) The model performs no better than predicting the mean
-3. b) 1 time
+1. b) Raíz del error cuadrático medio
+2. b) El modelo no rinde mejor que predecir la media
+3. b) 1 vez
 4. b) MSE
-5. b) Information from outside the training set is used during training
+5. b) Se usa información de fuera del set de entrenamiento durante el entrenamiento
 
-6. A model can memorize the training data (overfitting) and appear to perform well. But the goal is generalization — performance on new, unseen data. The test set simulates this scenario. Training performance is always optimistic.
+6. Un modelo puede memorizar los datos de entrenamiento (overfitting) y parecer que rinde bien. Pero el objetivo es la generalización: el rendimiento sobre datos nuevos, no vistos. El set de prueba simula este escenario. El rendimiento en entrenamiento siempre es optimista.
 
-7. RMSE is much larger than MAE (more than double), which means there are some predictions with very large errors. The squared term in MSE/RMSE amplifies large errors. Some houses have prediction errors much larger than the typical $5,000.
+7. RMSE es mucho más grande que MAE (más del doble), lo que significa que hay algunas predicciones con errores muy grandes. El término al cuadrado en MSE/RMSE amplifica los errores grandes. Algunas casas tienen errores de predicción mucho mayores que los $5,000 típicos.
 
 8. 
 ```python

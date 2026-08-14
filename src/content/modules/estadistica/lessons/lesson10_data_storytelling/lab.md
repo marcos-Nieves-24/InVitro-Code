@@ -1,62 +1,62 @@
-# Lab: Data Storytelling
+# Lab: Narración de datos
 
-## Objective
+## Objetivo
 
-Create effective visualizations and a data story from a real dataset.
+Creá visualizaciones efectivas y una historia de datos a partir de un dataset real.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
 ## Dataset
 
-Seaborn's `tips` dataset.
+El dataset `tips` de seaborn.
 
-## Instructions
+## Instrucciones
 
-### Part 1: Critique a Visualization (10 min)
+### Parte 1: Criticá una visualización (10 min)
 ```python
 tips = sns.load_dataset('tips')
 ```
 
-1. Create intentionally bad visualizations (3D pie chart, rainbow bar chart, truncated y-axis)
-2. In markdown, list what is wrong with each
+1. Creá visualizaciones intencionalmente malas (gráfico de torta 3D, gráfico de barras arcoíris, eje y truncado)
+2. En markdown, enumerá qué está mal en cada una
 
-### Part 2: Redesign (15 min)
-For one of the above "bad" visualizations:
-1. Redesign it following best practices
-2. Use appropriate chart type
-3. Use a colorblind-friendly palette
-4. Add clear labels, title, annotations
+### Parte 2: Rediseño (15 min)
+Para una de las visualizaciones "malas" anteriores:
+1. Rediseñala siguiendo las mejores prácticas
+2. Usá el tipo de gráfico apropiado
+3. Usá una paleta apta para daltonismo
+4. Agregá etiquetas claras, título y anotaciones
 
-### Part 3: Story-Driven Analysis (20 min)
-Create a data story about tipping behavior:
-1. Hook: "Waitstaff earn 70% of their income from tips — what factors affect tip amount?"
-2. Create 3 visualizations showing relationships:
-   - Tip amount by day of week
-   - Tip percentage by party size  
-   - Tip amount by time (lunch vs dinner) and sex
-3. Add annotations and a clear narrative
+### Parte 3: Análisis guiado por la historia (20 min)
+Creá una historia de datos sobre el comportamiento de las propinas:
+1. Gancho: "Los mozos ganan el 70% de sus ingresos por propinas: ¿qué factores afectan el monto de la propina?"
+2. Creá 3 visualizaciones que muestren relaciones:
+   - Monto de propina por día de la semana
+   - Porcentaje de propina por tamaño del grupo
+   - Monto de propina por momento (almuerzo vs cena) y sexo
+3. Agregá anotaciones y una narrativa clara
 
-### Part 4: Mini-Dashboard (15 min)
-Create a 2×2 dashboard layout with:
-- Total bill distribution (histogram)
-- Tip vs total bill (scatter with regression line)
-- Average tip by day (bar chart)
-- Tip percentage by smoker status (boxplot)
+### Parte 4: Mini-tablero (15 min)
+Creá un diseño de tablero de 2×2 con:
+- Distribución de la cuenta total (histograma)
+- Propina vs cuenta total (scatter plot con línea de regresión)
+- Propina promedio por día (gráfico de barras)
+- Porcentaje de propina por condición de fumador (boxplot)
 
-Use consistent colors, clear titles, and a figure-level suptitle.
+Usá colores consistentes, títulos claros y un suptítulo a nivel de figura.
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with bad/good visualizations, story, and dashboard
+- Notebook de Jupyter con visualizaciones malas/buenas, historia y tablero
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Critique and redesign | 3 |
-| Story-driven analysis | 3 |
-| Dashboard design | 2 |
-| Best practices followed | 2 |
-Total: 10 points
+| Crítica y rediseño | 3 |
+| Análisis guiado por la historia | 3 |
+| Diseño del tablero | 2 |
+| Mejores prácticas seguidas | 2 |
+Total: 10 puntos

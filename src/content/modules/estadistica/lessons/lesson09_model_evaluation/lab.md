@@ -1,58 +1,58 @@
-# Lab: Model Evaluation
+# Lab: Evaluación de modelos
 
-## Objective
+## Objetivo
 
-Train and evaluate a regression model using multiple metrics and cross-validation.
+Entrená y evaluá un modelo de regresión usando múltiples métricas y validación cruzada.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
 ## Dataset
 
-California Housing from sklearn.
+California Housing de sklearn.
 
-## Instructions
+## Instrucciones
 
-### Part 1: Train/Test Split (10 min)
-1. Load California housing dataset
-2. Split into 80% train, 20% test
-3. Train a LinearRegression model
-4. Predict on test set
+### Parte 1: División entrenamiento/prueba (10 min)
+1. Cargá el dataset de California housing
+2. Dividí en 80% entrenamiento, 20% prueba
+3. Entrená un modelo LinearRegression
+4. Predicí sobre el set de prueba
 
-### Part 2: Performance Metrics (15 min)
-1. Compute MAE, MSE, RMSE, R² on test set
-2. Also compute training set R²
-3. Is there evidence of overfitting? Compare train vs test R²
+### Parte 2: Métricas de rendimiento (15 min)
+1. Calculá MAE, MSE, RMSE, R² sobre el set de prueba
+2. Calculá también el R² del set de entrenamiento
+3. ¿Hay evidencia de sobreajuste? Compará el R² de entrenamiento vs prueba
 
-### Part 3: Cross-Validation (15 min)
-1. Perform 5-fold cross-validation
-2. Report mean and standard deviation of R²
-3. Perform 10-fold CV and compare with 5-fold
-4. Interpret: is the model stable across folds?
+### Parte 3: Validación cruzada (15 min)
+1. Realizá validación cruzada de 5 folds
+2. Informá la media y la desviación estándar del R²
+3. Realizá validación cruzada de 10 folds y comparala con la de 5 folds
+4. Interpretá: ¿es estable el modelo entre los folds?
 
-### Part 4: Residual Analysis (10 min)
-1. Plot residuals vs predicted values
-2. Plot histogram of residuals
-3. Are residuals centered at 0? Randomly scattered?
-4. What do the residual patterns tell you?
+### Parte 4: Análisis de residuos (10 min)
+1. Graficá los residuos vs los valores predichos
+2. Graficá un histograma de los residuos
+3. ¿Los residuos están centrados en 0? ¿Dispersos al azar?
+4. ¿Qué te dicen los patrones de residuos?
 
-### Part 5: Feature Importance (10 min)
-1. Extract model coefficients
-2. Sort by absolute value
-3. Which features are most influential?
-4. Interpret the top 2 features
+### Parte 5: Importancia de features (10 min)
+1. Extraé los coeficientes del modelo
+2. Ordenalos por valor absoluto
+3. ¿Qué features son las más influyentes?
+4. Interpretá las 2 features principales
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, plots, and interpretations
+- Notebook de Jupyter con código, gráficos e interpretaciones
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Train/test split and metrics | 3 |
-| Cross-validation | 2 |
-| Residual analysis | 2 |
-| Feature importance interpretation | 3 |
-Total: 10 points
+| División entrenamiento/prueba y métricas | 3 |
+| Validación cruzada | 2 |
+| Análisis de residuos | 2 |
+| Interpretación de la importancia de features | 3 |
+Total: 10 puntos

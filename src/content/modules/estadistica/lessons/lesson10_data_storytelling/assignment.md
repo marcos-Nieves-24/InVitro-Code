@@ -1,72 +1,72 @@
-# Assignment: Data Storytelling Portfolio
+# Assignment: Portafolio de narración de datos
 
-## Objectives
+## Objetivos
 
-- Create a compelling data story from raw data
-- Apply visualization best practices
-- Design an effective dashboard
-- Communicate findings to a non-technical audience
+- Crear una historia de datos convincente a partir de datos crudos
+- Aplicar las mejores prácticas de visualización
+- Diseñar un tablero efectivo
+- Comunicar los hallazgos a una audiencia no técnica
 
-## Instructions
+## Instrucciones
 
-### Part 1: Dataset Selection
-Choose one dataset:
-- `penguins` from seaborn
-- `mpg` from seaborn
-- `tips` from seaborn
-- `diamonds` from seaborn
+### Parte 1: Selección del dataset
+Elegí un dataset:
+- `penguins` de seaborn
+- `mpg` de seaborn
+- `tips` de seaborn
+- `diamonds` de seaborn
 
-### Part 2: The Data Story
+### Parte 2: La historia de datos
 
-Create a narrative with these elements:
-1. **Hook**: Why is this analysis important? (1 paragraph)
-2. **Context**: What data was used? (1 paragraph)
-3. **Question**: What specific question are you answering?
-4. **Analysis**: 3-4 visualizations that build toward the answer
-5. **Resolution**: What did you find? What should someone do with this information?
+Creá una narrativa con estos elementos:
+1. **Gancho**: ¿Por qué es importante este análisis? (1 párrafo)
+2. **Contexto**: ¿Qué datos se usaron? (1 párrafo)
+3. **Pregunta**: ¿Qué pregunta específica estás respondiendo?
+4. **Análisis**: 3-4 visualizaciones que construyan la respuesta
+5. **Resolución**: ¿Qué encontraste? ¿Qué debería hacer alguien con esta información?
 
-### Part 3: Visualization Gallery
+### Parte 3: Galería de visualizaciones
 
-Create 4 visualizations that follow best practices:
-- Appropriate chart types
-- Colorblind-friendly palette
-- Clear labels, titles, units
-- Annotations on key findings
-- No chartjunk
+Creá 4 visualizaciones que sigan las mejores prácticas:
+- Tipos de gráfico apropiados
+- Paleta apta para daltonismo
+- Etiquetas, títulos y unidades claros
+- Anotaciones sobre los hallazgos clave
+- Sin chartjunk
 
-### Part 4: Dashboard
+### Parte 4: Tablero
 
-Combine 4 visualizations into a 2×2 dashboard:
-- Consistent color scheme
-- Hierarchical layout (most important at top-left)
-- Figure-level title
-- Clean, professional appearance
+Combiná 4 visualizaciones en un tablero de 2×2:
+- Esquema de colores consistente
+- Diseño jerárquico (lo más importante arriba a la izquierda)
+- Título a nivel de figura
+- Apariencia limpia y profesional
 
-### Part 5: Executive Summary
+### Parte 5: Resumen ejecutivo
 
-Write a 1-page executive summary (non-technical audience):
-- No jargon
-- Clear recommendations
-- Data-backed conclusions
-- Bullet points for key findings
+Escribí un resumen ejecutivo de 1 página (audiencia no técnica):
+- Sin jerga
+- Recomendaciones claras
+- Conclusiones respaldadas por datos
+- Viñetas con los hallazgos clave
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with all code and visualizations
-- Executive summary as a markdown cell
+- Notebook de Jupyter con todo el código y las visualizaciones
+- Resumen ejecutivo como celda de markdown
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Story structure | Clear arc, compelling | Good narrative | Basic | Missing |
-| Visualizations | Best practices, effective | Good | Adequate | Poor |
-| Dashboard | Professional, consistent | Good layout | Basic | Missing |
-| Executive summary | Clear, persuasive | Good | Adequate | Missing |
-| Overall impact | Memorable, actionable | Good | Basic | Incomplete |
+| Estructura de la historia | Arco claro, convincente | Buena narrativa | Básica | Faltante |
+| Visualizaciones | Mejores prácticas, efectivas | Buenas | Adecuadas | Pobres |
+| Tablero | Profesional, consistente | Buen diseño | Básico | Faltante |
+| Resumen ejecutivo | Claro, persuasivo | Bueno | Adecuado | Faltante |
+| Impacto general | Memorable, accionable | Bueno | Básico | Incompleto |
 
-**Total: 20 points**
+**Total: 20 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-3 hours
+3 horas

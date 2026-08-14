@@ -1,70 +1,70 @@
-# Quiz: Data Storytelling
+# Quiz: Narración de datos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. The data-ink ratio measures:**
+**1. El ratio data-ink mide:**
 
-a) How much ink a printer uses
-b) The proportion of ink devoted to data vs decoration
-c) The number of colors in a visualization
-d) The size of the dataset
+a) Cuánta tinta usa una impresora
+b) La proporción de tinta dedicada a los datos vs la decoración
+c) La cantidad de colores en una visualización
+d) El tamaño del dataset
 
-**2. Which color combination should be avoided for accessibility?**
+**2. ¿Qué combinación de colores debería evitarse por accesibilidad?**
 
-a) Blue and orange
-b) Red and green
-c) Purple and yellow
-d) Black and white
+a) Azul y naranja
+b) Rojo y verde
+c) Púrpura y amarillo
+d) Negro y blanco
 
-**3. According to Tufte, the "lie factor" is:**
+**3. Según Tufte, el "lie factor" (factor de mentira) es:**
 
-a) The ratio of the size of the visual effect to the size of the data effect
-b) A measure of how many lies a chart contains
-c) The number of decimal places in the data
-d) The font size used in labels
+a) El ratio entre el tamaño del efecto visual y el tamaño del efecto en los datos
+b) Una medida de cuántas mentiras contiene un gráfico
+c) La cantidad de decimales en los datos
+d) El tamaño de fuente usado en las etiquetas
 
-**4. Which chart type is best for showing a trend over time?**
+**4. ¿Qué tipo de gráfico es mejor para mostrar una tendencia a lo largo del tiempo?**
 
-a) Pie chart
-b) Bar chart
-c) Line chart
+a) Gráfico de torta
+b) Gráfico de barras
+c) Gráfico de líneas
 d) Scatter plot
 
-**5. In dashboard design, the most important information should be placed:**
+**5. En el diseño de tableros, la información más importante debe ubicarse:**
 
-a) Bottom-right
-b) Top-left
-c) Center
-d) Bottom-left
+a) Abajo a la derecha
+b) Arriba a la izquierda
+c) En el centro
+d) Abajo a la izquierda
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** What is chartjunk? Give two examples.
+**6.** ¿Qué es el chartjunk? Da dos ejemplos.
 
-**7.** Explain why 3D charts are generally discouraged in data visualization.
+**7.** Explicá por qué los gráficos 3D se desaconsejan generalmente en la visualización de datos.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code that creates a simple bar chart with:
-- Categories: ['Q1', 'Q2', 'Q3', 'Q4']
-- Values: [25, 40, 35, 50]
-- A clear title, x-label, y-label
-- Values annotated on top of each bar
-- Consistent single color for all bars
+**8.** Escribí código en Python que cree un gráfico de barras simple con:
+- Categorías: ['Q1', 'Q2', 'Q3', 'Q4']
+- Valores: [25, 40, 35, 50]
+- Un título claro, etiqueta x, etiqueta y
+- Valores anotados encima de cada barra
+- Un solo color consistente para todas las barras
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. b) The proportion of ink devoted to data vs decoration
-2. b) Red and green
-3. a) The ratio of the size of the visual effect to the size of the data effect
-4. c) Line chart
-5. b) Top-left
+1. b) La proporción de tinta dedicada a los datos vs la decoración
+2. b) Rojo y verde
+3. a) El ratio entre el tamaño del efecto visual y el tamaño del efecto en los datos
+4. c) Gráfico de líneas
+5. b) Arriba a la izquierda
 
-6. Chartjunk refers to unnecessary visual elements that distract from the data. Examples: heavy gridlines, 3D effects, excessive colors, irrelevant images, decorative patterns on bars.
+6. El chartjunk se refiere a los elementos visuales innecesarios que distraen de los datos. Ejemplos: cuadrículas pesadas, efectos 3D, colores excesivos, imágenes irrelevantes, patrones decorativos en las barras.
 
-7. 3D charts distort perception — the perspective effect makes it difficult to accurately compare values. The "closer" bars appear larger even when they aren't. They also add visual clutter without adding information. Almost always, a 2D version is clearer.
+7. Los gráficos 3D distorsionan la percepción: el efecto de perspectiva dificulta comparar valores con precisión. Las barras "más cercanas" parecen más grandes aunque no lo sean. También agregan desorden visual sin aportar información. Casi siempre, una versión 2D es más clara.
 
 8. 
 ```python
