@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import type { ComponentProps } from "react";
+import { CodeBlock } from "@/components/lesson";
 
 // REQ-LABRUN-04: Lazy-load PyodideRunner with ssr: false so the page
 // paints before Pyodide initialises. One worker per code block (MVP).
@@ -77,17 +78,8 @@ export function LabCodeBlock({ children, className }: LabCodeBlockProps) {
     );
   }
 
-  // REQ-LABRUN-06: Everything else renders statically
-  return (
-    <div className="my-6">
-      <div className="mb-0 flex items-center justify-between rounded-t-lg border border-b-0 border-gray-200 bg-gray-50 px-4 py-2">
-        <span className="font-mono text-sm font-semibold text-gray-700">
-          {langId || "code"}
-        </span>
-      </div>
-      <pre className="m-0 overflow-x-auto rounded-b-lg border border-gray-200 bg-gray-900 p-4 text-sm leading-relaxed text-green-300 [font-family:var(--font-mono,ui-monospace,monospace)]">
-        {children}
-      </pre>
-    </div>
-  );
+  // REQ-LABRUN-06: Everything else (bash, shell, …) renders with the
+  // animated terminal CodeBlock already used in lessons (title bar,
+  // typing animation, simulated output, copy button).
+  return <CodeBlock className={className}>{children}</CodeBlock>;
 }
