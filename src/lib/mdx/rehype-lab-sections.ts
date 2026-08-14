@@ -83,11 +83,11 @@ export default function rehypeLabSections() {
 
       const tag = node.tagName;
 
-      // ── 1. Lab header: `# Lab: <title>` → <LabHeader title=…> ──
+      // ── 1. Lab header: `# Lab: <title>` / `# Lab N: <title>` → <LabHeader> ──
       if (tag === "h1") {
         const raw = toText(node);
-        if (/^lab\s*:/i.test(raw)) {
-          const title = raw.replace(/^lab\s*:/i, "").trim();
+        if (/^lab\s*(?:\d+)?\s*:/i.test(raw)) {
+          const title = raw.replace(/^lab\s*(?:\d+\s*)?:/i, "").trim();
           out.push(makeElement("LabHeader", { title }, []));
           continue;
         }
