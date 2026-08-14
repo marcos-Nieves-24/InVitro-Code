@@ -9,7 +9,7 @@
  */
 
 let workerInstance: Worker | null = null;
-let initPromise: Promise<void> | null = null;
+let readyPromise: Promise<void> | null = null;
 let requestCounter = 0;
 const pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void }>();
 
@@ -49,9 +49,36 @@ function getWorker(): Worker {
   return workerInstance;
 }
 
+/** Idempotent init handshake: resolves once the worker is ready. */
+function ensureReady(): Promise<void> {
+  if (readyPromise) return readyPromise;
+  const w = getWorker();
+  readyPromise = new Promise<void>((resolve, reject) => {
+    const id = ++requestCounter;
+    const timeout = setTimeout(() => {
+      pending.delete(id);
+      reject(new Error("Timeout esperando a Pyodide — el worker no respondió."));
+    }, 120_000);
+    pending.set(id, {
+      resolve: () => {
+        clearTimeout(timeout);
+        resolve();
+      },
+      reject: (e) => {
+        clearTimeout(timeout);
+        reject(e);
+      },
+    });
+    w.postMessage({ type: "init", requestId: id });
+  });
+  return readyPromise;
+}
+
 export interface PyodideWorkerAPI {
   /** Execute Python code in the worker. Context keys become Python globals. */
   run(code: string, context?: Record<string, unknown>): Promise<unknown>;
+  /** Resolves once the shared worker has initialised Pyodide. */
+  ready(): Promise<void>;
   /** Whether the worker exists (not necessarily ready). */
   isCreated(): boolean;
 }
@@ -70,6 +97,10 @@ export const pyodideWorker: PyodideWorkerAPI = {
     w.postMessage({ type: "runPython", code, context, requestId: id });
 
     return promise;
+  },
+
+  ready(): Promise<void> {
+    return ensureReady();
   },
 
   isCreated() {

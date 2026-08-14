@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import CodeEditor from "./CodeEditor";
 import OutputPanel from "./OutputPanel";
+import { pyodideWorker } from "@/lib/pyodide-worker";
 
 interface TestCase {
   input: string;
@@ -31,7 +32,6 @@ export default function PyodideRunner({
   language,
   certifyEnabled,
 }: PyodideRunnerProps) {
-  const [worker, setWorker] = useState<Worker | null>(null);
   const [isWorkerReady, setIsWorkerReady] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
@@ -41,51 +41,47 @@ export default function PyodideRunner({
     "" | "valid" | "invalid"
   >("");
 
-  // Initialize worker
+  // Initialise the SHARED Pyodide worker (one per session, not per block).
   useEffect(() => {
-    const w = new Worker("/pyodide-worker.js");
-
-    w.onmessage = (event) => {
-      const { type, output: out, error } = event.data;
-
-      if (type === "ready") {
+    let cancelled = false;
+    setIsLoading(true);
+    pyodideWorker
+      .ready()
+      .then(() => {
+        if (cancelled) return;
         setIsWorkerReady(true);
         setIsLoading(false);
-      } else if (type === "error") {
+      })
+      .catch((err) => {
+        if (cancelled) return;
         setIsLoading(false);
-        setOutput((prev) => [...prev, `Error del worker: ${error}`]);
-      } else if (type === "result") {
-        setIsRunning(false);
-        setOutput((prev) => {
-          const next = [...prev];
-          if (out) next.push(out);
-          if (error) next.push(`Error: ${error}`);
-          return next;
-        });
-      }
+        const msg = err instanceof Error ? err.message : String(err);
+        setOutput((prev) => [...prev, `Error del worker: ${msg}`]);
+      });
+    return () => {
+      cancelled = true;
     };
-
-    w.onerror = (err) => {
-      setIsLoading(false);
-      setIsRunning(false);
-      setOutput((prev) => [...prev, `Error del worker: ${err.message}`]);
-    };
-
-    w.postMessage({ type: "init" });
-    setWorker(w);
-
-    return () => w.terminate();
   }, []);
 
-  const handleRun = useCallback(() => {
-    if (!worker || !isWorkerReady || isRunning) return;
+  const handleRun = useCallback(async () => {
+    if (!isWorkerReady || isRunning) return;
 
     setIsRunning(true);
     setOutput([]);
     setValidationResult("");
 
-    worker.postMessage({ type: "runPython", code });
-  }, [worker, isWorkerReady, isRunning, code]);
+    try {
+      const out = await pyodideWorker.run(code);
+      if (out !== undefined && out !== null && out !== "") {
+        setOutput((prev) => [...prev, String(out)]);
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setOutput((prev) => [...prev, `Error: ${msg}`]);
+    } finally {
+      setIsRunning(false);
+    }
+  }, [isWorkerReady, isRunning, code]);
 
   const handleCodeChange = (newCode: string) => {
     setCode(newCode);

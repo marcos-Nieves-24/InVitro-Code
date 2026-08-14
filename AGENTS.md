@@ -27,9 +27,9 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 
 ## In-browser Python (Pyodide)
 
-- The REAL worker is `public/pyodide-worker.js` (static file, `new Worker("/pyodide-worker.js")`). `src/lib/pyodide/worker.ts` is a stub for future TS bundling — don't edit it expecting changes to apply.
+- The REAL worker is `public/pyodide-worker.js` (static file). All consumers go through the singleton `src/lib/pyodide-worker.ts` (one shared worker per session, `requestId` request/response correlation): `PyodideRunner` calls `pyodideWorker.ready()` + `pyodideWorker.run(code)`; `usePyodideWorker`/`ThresholdLab` use the same `run()`.
 - Pyodide v0.25.0 loads from jsdelivr CDN; `numpy` preloaded, `scikit-learn`/`matplotlib`/`pandas`/`scipy` loaded on demand, and `seaborn` via `micropip` from PyPI. **Labs require network access**; offline they break.
-- Two consumers with different message protocols, both served by the same worker: `src/components/editor/PyodideRunner.tsx` posts `{type:"init"|"runPython"}` and reads `type:"ready"|"result"`; `src/lib/pyodide-worker.ts` adds `requestId` request/response correlation. Keep both in sync when changing the worker protocol.
+- Worker protocol: post `{type:"init"|"runPython", code?, context?, requestId}` → receive `{type:"ready"|"result", output?, error?, requestId}`. Keep `public/pyodide-worker.js` and `src/lib/pyodide-worker.ts` in sync when changing it.
 - `/api/certify` is an MVP stub that always returns `certified: true` — the E2B sandbox integration point is marked in the file.
 
 ## Workflow artifacts
