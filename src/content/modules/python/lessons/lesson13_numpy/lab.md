@@ -1,20 +1,20 @@
-# Lab: NumPy Fundamentals
+# Lab: Fundamentos de NumPy
 
-## Objective
+## Objetivo
 
-Practice creating arrays, indexing, slicing, broadcasting, and universal functions.
+Practicar la creación de arrays, el indexado, el rebanado (slicing), el broadcasting y las funciones universales.
 
-## Duration
+## Duración
 
-90 minutes
+90 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lessons 9-12 (Lists, Tuples, Dicts, Sets)
+Lecciones 9-12 (Listas, Tuplas, Diccionarios, Conjuntos)
 
-## Instructions
+## Instrucciones
 
-### Part 1: Array Creation
+### Parte 1: Creación de arrays
 
 ```python
 import numpy as np
@@ -33,7 +33,7 @@ print(f"linspace: {f}")
 print(f"eye:\n{d}")
 ```
 
-### Part 2: Indexing and Slicing
+### Parte 2: Indexado y rebanado
 
 ```python
 matrix = np.arange(16).reshape(4, 4)
@@ -44,7 +44,7 @@ print(f"Every other element: {matrix[::2, ::2]}")
 print(f"Last column: {matrix[:, -1]}")
 ```
 
-### Part 3: Universal Functions
+### Parte 3: Funciones universales
 
 ```python
 arr = np.array([1, 4, 9, 16, 25])
@@ -58,7 +58,7 @@ angles = np.array([0, np.pi/2, np.pi])
 print(f"sin(angles): {np.sin(angles)}")
 ```
 
-### Part 4: Broadcasting
+### Parte 4: Broadcasting
 
 ```python
 # Add a vector to each row
@@ -73,7 +73,7 @@ scaled = matrix * factors
 print(f"Scaled:\n{scaled}")
 ```
 
-### Part 5: Statistical Operations
+### Parte 5: Operaciones estadísticas
 
 ```python
 data = np.random.randn(1000, 5)
@@ -87,6 +87,6 @@ centered = data - data.mean(axis=0)
 print(f"Centered mean (~0): {centered.mean(axis=0)}")
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `numpy_lab.ipynb` with all exercises.
+Notebook de Jupyter `numpy_lab.ipynb` con todos los ejercicios.

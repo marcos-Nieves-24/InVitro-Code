@@ -1,20 +1,20 @@
-# Lab: Statistical Visualization with Seaborn
+# Lab: Visualización estadística con Seaborn
 
-## Objective
+## Objetivo
 
-Practice creating Seaborn visualizations: box plots, violin plots, pairplots, heatmaps, and distribution plots.
+Practicar la creación de visualizaciones de Seaborn: box plots, violin plots, pairplots, heatmaps y gráficos de distribución.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 15: Matplotlib
+Lección 15: Matplotlib
 
-## Instructions
+## Instrucciones
 
-### Part 1: Getting Started
+### Parte 1: Para empezar
 
 ```python
 import seaborn as sns
@@ -27,7 +27,7 @@ tips = sns.load_dataset("tips")
 print(tips.head())
 ```
 
-### Part 2: Box Plot
+### Parte 2: Box plot
 
 ```python
 # Box plot of total_bill by day
@@ -37,7 +37,7 @@ plt.title("Bill Distribution by Day and Sex")
 plt.show()
 ```
 
-### Part 3: Violin Plot
+### Parte 3: Violin plot
 
 ```python
 # Violin plot (shows distribution shape)
@@ -47,7 +47,7 @@ plt.title("Bill Distribution (Violin)")
 plt.show()
 ```
 
-### Part 4: Pairplot
+### Parte 4: Pairplot
 
 ```python
 # Pairplot of numerical columns
@@ -56,7 +56,7 @@ plt.suptitle("Pairplot of Tips Data", y=1.02)
 plt.show()
 ```
 
-### Part 5: Heatmap
+### Parte 5: Heatmap
 
 ```python
 # Correlation heatmap
@@ -69,7 +69,7 @@ plt.title("Correlation Heatmap")
 plt.show()
 ```
 
-### Part 6: Customization
+### Parte 6: Personalización
 
 ```python
 # Apply theme and customize
@@ -82,6 +82,6 @@ plt.title("Tips Analysis with Custom Theme")
 plt.show()
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `seaborn_lab.ipynb` with all plots.
+Notebook de Jupyter `seaborn_lab.ipynb` con todos los gráficos.

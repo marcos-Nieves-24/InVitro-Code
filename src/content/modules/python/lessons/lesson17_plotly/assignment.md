@@ -1,64 +1,64 @@
-# Assignment: Interactive Data Exploration Dashboard
+# Assignment: Panel interactivo de exploración de datos
 
-## Objectives
+## Objetivos
 
-- Use Plotly Express for creating interactive visualizations
-- Work with real built-in datasets (gapminder)
-- Create animated scatter plots with `animation_frame`
-- Build multi-level sunburst charts
-- Add dropdown interactivity for switching metrics
-- Export interactive HTML dashboards
+- Usar Plotly Express para crear visualizaciones interactivas
+- Trabajar con datasets integrados reales (gapminder)
+- Crear scatter plots animados con `animation_frame`
+- Construir sunburst charts de múltiples niveles
+- Agregar interactividad con menús desplegables para cambiar métricas
+- Exportar paneles HTML interactivos
 
-## Instructions
+## Instrucciones
 
-Create a Python script `gapminder_dashboard.py` that:
+Creá un script de Python `gapminder_dashboard.py` que:
 
-1. **Load data**: Use `px.data.gapminder()` to get the dataset
+1. **Cargue datos**: usá `px.data.gapminder()` para obtener el dataset
 
-2. **Create 3 visualizations**:
+2. **Cree 3 visualizaciones**:
 
-   a. **Animated scatter plot**: Use `px.scatter()` with:
+   a. **Scatter plot animado**: usá `px.scatter()` con:
       - `x="gdpPercap"`, `y="lifeExp"`, `size="pop"`, `color="continent"`
-      - `animation_frame="year"` for animation over years
-      - `log_x=True` for log scale on GDP
-      - Title: "Evolución Global: GDP vs Esperanza de Vida"
+      - `animation_frame="year"` para la animación a lo largo de los años
+      - `log_x=True` para la escala logarítmica del PBI
+      - Título: "Evolución Global: GDP vs Esperanza de Vida"
 
-   b. **Histogram of life expectancy**: Use `px.histogram()` with:
+   b. **Histograma de esperanza de vida**: usá `px.histogram()` con:
       - `x="lifeExp"`, `color="continent"`, `nbins=40`
-      - Filter data for `year == 2007`
-      - Title: "Distribución de Esperanza de Vida por Continente (2007)"
+      - Filtrá los datos para `year == 2007`
+      - Título: "Distribución de Esperanza de Vida por Continente (2007)"
 
-   c. **Sunburst**: Use `px.sunburst()` with:
+   c. **Sunburst**: usá `px.sunburst()` con:
       - `path=["continent", "country"]`, `values="pop"`
-      - Filter data for `year == 2007`
-      - Title: "Población Mundial por Continente y País"
+      - Filtrá los datos para `year == 2007`
+      - Título: "Población Mundial por Continente y País"
 
-3. **Add dropdown interactivity**:
+3. **Agregá interactividad con menús desplegables**:
 
-   Create a line chart showing 4 countries of your choice over time, with a dropdown menu to switch between these metrics:
-   - `gdpPercap` (GDP per capita)
-   - `lifeExp` (Life expectancy)
-   - `pop` (Population)
+   Creá un line chart que muestre 4 países a elección a lo largo del tiempo, con un menú desplegable para cambiar entre estas métricas:
+   - `gdpPercap` (PBI per cápita)
+   - `lifeExp` (Esperanza de vida)
+   - `pop` (Población)
 
-   Use `fig.update_layout(updatemenus=[...])` to implement the dropdown.
+   Usá `fig.update_layout(updatemenus=[...])` para implementar el menú desplegable.
 
-4. **Export**: Save the final dashboard as `exploracion.html`
+4. **Exportación**: guardá el panel final como `exploracion.html`
 
-## Deliverables
+## Entregables
 
 - `gapminder_dashboard.py`
-- `exploracion.html` (exported from your script)
+- `exploracion.html` (exportado desde tu script)
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Visualizations | 3+ plots with correct data | 2-3 plots | < 2 plots |
-| Animation | Scatter with animation_frame works correctly | Animation present but buggy | No animation |
-| Interactivity | Dropdown works + hover/zoom | Dropdown works | No interactivity |
-| Export | HTML renders standalone, fully interactive | HTML works | No export |
-| Code Quality | Clean, well-structured, documented | Readable | Poor structure |
+| Visualizaciones | 3+ gráficos con datos correctos | 2-3 gráficos | < 2 gráficos |
+| Animación | Scatter con animation_frame funciona correctamente | Animación presente pero con bugs | Sin animación |
+| Interactividad | Menú desplegable funciona + hover/zoom | Menú desplegable funciona | Sin interactividad |
+| Exportación | HTML renderiza de forma independiente, totalmente interactivo | HTML funciona | Sin exportación |
+| Calidad del código | Limpio, bien estructurado, documentado | Legible | Mala estructura |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

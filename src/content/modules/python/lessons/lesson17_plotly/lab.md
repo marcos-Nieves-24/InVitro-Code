@@ -1,20 +1,20 @@
-# Lab: Interactive Visualization with Plotly
+# Lab: Visualización interactiva con Plotly
 
-## Objective
+## Objetivo
 
-Practice creating interactive visualizations with Plotly Express, customizing with Graph Objects, building subplots, and adding interactivity.
+Practicar la creación de visualizaciones interactivas con Plotly Express, la personalización con Graph Objects, la construcción de subplots y el agregado de interactividad.
 
-## Duration
+## Duración
 
-75 minutes
+75 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 16: Seaborn
+Lección 16: Seaborn
 
-## Instructions
+## Instrucciones
 
-### Part 1: Getting Started with Plotly Express
+### Parte 1: Para empezar con Plotly Express
 
 ```python
 import plotly.express as px
@@ -39,9 +39,9 @@ fig = px.bar(df, x="day", y="total_bill", color="sex",
 fig.show()
 ```
 
-**Task**: Create a scatter plot using `px.data.tips()` with `total_bill` on x-axis, `tip` on y-axis, colored by `time`, with markers sized by `size`. Add a title.
+**Tarea**: Creá un scatter plot usando `px.data.tips()` con `total_bill` en el eje x, `tip` en el eje y, coloreado por `time`, con marcadores cuyo tamaño dependa de `size`. Agregá un título.
 
-### Part 2: Customization with Graph Objects
+### Parte 2: Personalización con Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -60,9 +60,9 @@ fig.update_layout(title="Trigonometric Functions",
 fig.show()
 ```
 
-**Task**: Build a figure with 3 traces: a scatter, a line, and a bar trace using synthetic data. Use `update_layout()` to set title, axis labels, and template "plotly_white". Use magic underscore notation to set `title_text`, `xaxis_title`, and `yaxis_title`.
+**Tarea**: Construí una figura con 3 traces: un scatter, una línea y una barra usando datos sintéticos. Usá `update_layout()` para configurar el título, las etiquetas de los ejes y la plantilla "plotly_white". Usá la notación mágica de guion bajo para configurar `title_text`, `xaxis_title` y `yaxis_title`.
 
-### Part 3: Subplots with make_subplots
+### Parte 3: Subplots con make_subplots
 
 ```python
 from plotly.subplots import make_subplots
@@ -88,9 +88,9 @@ fig.update_layout(height=600, width=900, title_text="Multi-Panel Dashboard",
 fig.show()
 ```
 
-**Task**: Create a 1×3 subplot layout with a scatter, bar, and box plot using data from `px.data.tips()`. Set appropriate titles for each subplot.
+**Tarea**: Creá una disposición de subplots 1×3 con un scatter, una barra y un box plot usando datos de `px.data.tips()`. Configurá títulos apropiados para cada subplot.
 
-### Part 4: Interactivity and Export
+### Parte 4: Interactividad y exportación
 
 ```python
 # Dropdown menu
@@ -116,8 +116,8 @@ fig.write_html("gapminder_2007.html")
 fig.write_image("gapminder_2007.png")
 ```
 
-**Task**: Create a line chart of a country's GDP over time from `px.data.gapminder()`. Add a range slider to the x-axis. Add a dropdown menu to toggle between "GDP", "Life Exp", and "Population" views. Export the result to `dashboard.html`.
+**Tarea**: Creá un line chart del PBI de un país a lo largo del tiempo usando `px.data.gapminder()`. Agregá un range slider al eje x. Agregá un menú desplegable para alternar entre las vistas "PBI", "Esperanza de vida" y "Población". Exportá el resultado a `dashboard.html`.
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `plotly_lab.ipynb` with all plots visible and interactive.
+Notebook de Jupyter `plotly_lab.ipynb` con todos los gráficos visibles e interactivos.

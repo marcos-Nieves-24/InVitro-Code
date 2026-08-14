@@ -1,57 +1,57 @@
-# Assignment: Customer Segmentation Visualization
+# Assignment: Visualización de segmentación de clientes
 
-## Objectives
+## Objetivos
 
-- Use Seaborn to create statistical visualizations
-- Explore multi-variable relationships with pairplots and heatmaps
-- Customize Seaborn themes and palettes
-- Create a comprehensive EDA report
+- Usar Seaborn para crear visualizaciones estadísticas
+- Explorar relaciones multivariables con pairplots y heatmaps
+- Personalizar temas y paletas de Seaborn
+- Crear un informe completo de EDA (análisis exploratorio de datos)
 
-## Instructions
+## Instrucciones
 
-Create a Python script `customer_segmentation_viz.py` that:
+Creá un script de Python `customer_segmentation_viz.py` que:
 
-1. **Generate synthetic data**: 300 customers with:
+1. **Genere datos sintéticos**: 300 clientes con:
    - `age`: 18-70
    - `income`: 20k-150k
    - `spending_score`: 1-100
    - `membership_years`: 0-10
    - `region`: North, South, East, West
-   - `segment`: Low, Medium, High (based on spending_score percentiles)
+   - `segment`: Low, Medium, High (basado en los percentiles de spending_score)
 
-2. **Create visualizations**:
-   - Pairplot of numerical features colored by segment (use `sns.pairplot`)
-   - Correlation heatmap of all numerical features
-   - Box plot of spending_score by region, colored by segment
-   - Violin plot of income by segment
-   - Count plot of segments by region (use `sns.countplot`)
-   - Histogram of age with KDE, colored by segment (use `sns.histplot`)
-   - 3D-like scatter of income vs spending_score with hue=segment and size=membership_years
+2. **Cree visualizaciones**:
+   - Pairplot de las características numéricas coloreado por segment (usá `sns.pairplot`)
+   - Heatmap de correlación de todas las características numéricas
+   - Box plot de spending_score por region, coloreado por segment
+   - Violin plot de income por segment
+   - Count plot de los segmentos por region (usá `sns.countplot`)
+   - Histograma de age con KDE, coloreado por segment (usá `sns.histplot`)
+   - Scatter estilo 3D de income vs. spending_score con hue=segment y size=membership_years
 
-3. **Customization**:
-   - Apply `sns.set_theme(style="whitegrid")`
-   - Use a custom color palette: `sns.color_palette("viridis", 3)`
-   - All plots should have titles and appropriate axis labels
+3. **Personalización**:
+   - Aplicá `sns.set_theme(style="whitegrid")`
+   - Usá una paleta de colores personalizada: `sns.color_palette("viridis", 3)`
+   - Todos los gráficos deben tener títulos y etiquetas de ejes apropiadas
 
-4. **Layout**: Arrange at least 4 plots in a 2×2 subplot figure
+4. **Disposición**: organizá al menos 4 gráficos en una figura de subplots 2×2
 
-5. **Save** the combined figure as `segmentation_analysis.png`
+5. **Guardá** la figura combinada como `segmentation_analysis.png`
 
-## Deliverables
+## Entregables
 
 - `customer_segmentation_viz.py`
 - `segmentation_analysis.png`
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Plot Types | 6+ different Seaborn plots | 4-5 plots | < 4 plots |
-| Data Generation | Realistic, well-structured data | Basic data | Poor data |
-| Customization | Theme + palette + titles | Some customization | Minimal |
-| Layout | Organized 2×2 subplot | Basic layout | No layout |
-| Insight | Visualizations reveal clear patterns | Some insight | No clear findings |
+| Tipos de gráfico | 6+ gráficos distintos de Seaborn | 4-5 gráficos | < 4 gráficos |
+| Generación de datos | Datos realistas y bien estructurados | Datos básicos | Datos pobres |
+| Personalización | Tema + paleta + títulos | Alguna personalización | Mínima |
+| Disposición | Subplot 2×2 organizado | Disposición básica | Sin disposición |
+| Insights | Las visualizaciones revelan patrones claros | Algunos insights | Sin hallazgos claros |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

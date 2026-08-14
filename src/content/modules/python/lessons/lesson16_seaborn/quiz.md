@@ -1,52 +1,52 @@
 # Quiz: Seaborn
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** Which library is Seaborn built on top of?
+**Q1:** ¿Sobre qué biblioteca está construido Seaborn?
 - A) NumPy
 - B) Pandas
 - C) Matplotlib
 - D) Plotly
 
-**Q2:** What does `sns.pairplot()` display?
-- A) A single scatter plot
-- B) A matrix of scatter plots for all variable pairs
-- C) A heatmap of correlations
-- D) A box plot for each variable
+**Q2:** ¿Qué muestra `sns.pairplot()`?
+- A) Un solo scatter plot
+- B) Una matriz de scatter plots para todos los pares de variables
+- C) Un heatmap de correlaciones
+- D) Un box plot para cada variable
 
-**Q3:** Which parameter adds color coding for categorical variables?
+**Q3:** ¿Qué parámetro agrega codificación por color para variables categóricas?
 - A) `color`
 - B) `hue`
 - C) `palette`
 - D) `cmap`
 
-**Q4:** What type of plot combines a box plot with a kernel density estimate?
+**Q4:** ¿Qué tipo de gráfico combina un box plot con una estimación de densidad de kernel?
 - A) Boxen plot
 - B) Violin plot
 - C) Swarm plot
 - D) Strip plot
 
-**Q5:** How do you apply Seaborn's default theme?
+**Q5:** ¿Cómo aplicás el tema predeterminado de Seaborn?
 - A) `sns.default_theme()`
 - B) `sns.set_theme()`
 - C) `sns.apply_theme()`
 - D) `sns.theme()`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** What is a heatmap and when would you use it?
+**Q6:** ¿Qué es un heatmap y cuándo lo usarías?
 
-**Q7:** How does Seaborn differ from Matplotlib in terms of default design philosophy?
+**Q7:** ¿En qué se diferencia Seaborn de Matplotlib en cuanto a la filosofía de diseño predeterminada?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write code to create a box plot using Seaborn showing the distribution of `total_bill` by `day` from the tips dataset.
+**Q8:** Escribí código para crear un box plot con Seaborn que muestre la distribución de `total_bill` por `day` del dataset tips.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** C) Matplotlib
 
-**Q2:** B) A matrix of scatter plots for all variable pairs
+**Q2:** B) Una matriz de scatter plots para todos los pares de variables
 
 **Q3:** B) `hue`
 
@@ -54,9 +54,9 @@
 
 **Q5:** B) `sns.set_theme()`
 
-**Q6:** A heatmap is a color-coded matrix representation where values are represented by colors. It's commonly used to visualize correlation matrices, confusion matrices, or any grid of values where you want to quickly identify patterns, clusters, and high/low values.
+**Q6:** Un heatmap es una representación de matriz codificada por colores donde los valores se representan con colores. Se usa comúnmente para visualizar matrices de correlación, matrices de confusión o cualquier cuadrícula de valores donde quieras identificar patrones, agrupaciones y valores altos/bajos rápidamente.
 
-**Q7:** Matplotlib prioritizes control and customization, with basic default styling. Seaborn prioritizes statistical analysis and attractive defaults, requiring less code to create publication-quality plots. Seaborn provides built-in statistical aggregations, while Matplotlib requires manual computation.
+**Q7:** Matplotlib prioriza el control y la personalización, con un estilo predeterminado básico. Seaborn prioriza el análisis estadístico y los valores predeterminados atractivos, y requiere menos código para crear gráficos de calidad de publicación. Seaborn ofrece agregaciones estadísticas integradas, mientras que Matplotlib requiere el cálculo manual.
 
 **Q8:**
 ```python

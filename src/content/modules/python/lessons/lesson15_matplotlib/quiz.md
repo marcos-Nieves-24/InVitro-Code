@@ -1,48 +1,48 @@
 # Quiz: Matplotlib
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** What is the top-level container in Matplotlib?
+**Q1:** ¿Cuál es el contenedor de nivel superior en Matplotlib?
 - A) Axes
 - B) Figure
 - C) Plot
 - D) Canvas
 
-**Q2:** How do you create a figure with 2 rows and 3 columns of subplots?
+**Q2:** ¿Cómo creás una figura con 2 filas y 3 columnas de subplots?
 - A) `plt.subplot(2, 3)`
 - B) `plt.subplots(2, 3)`
 - C) `plt.figure(2, 3)`
 - D) `plt.create(2, 3)`
 
-**Q3:** Which function saves a figure to a file?
+**Q3:** ¿Qué función guarda una figura en un archivo?
 - A) `plt.save()`
 - B) `plt.export()`
 - C) `plt.savefig()`
 - D) `plt.write()`
 
-**Q4:** What does `plt.tight_layout()` do?
-- A) Adjusts spacing between subplots
-- B) Resizes the figure
-- C) Fits the plot to data
-- D) Compresses the image
+**Q4:** ¿Qué hace `plt.tight_layout()`?
+- A) Ajusta el espacio entre subplots
+- B) Cambia el tamaño de la figura
+- C) Ajusta el gráfico a los datos
+- D) Comprime la imagen
 
-**Q5:** Which parameter controls marker transparency in a scatter plot?
+**Q5:** ¿Qué parámetro controla la transparencia de los marcadores en un scatter plot?
 - A) `transparent`
 - B) `alpha`
 - C) `opacity`
 - D) `visible`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between the pyplot interface and the object-oriented interface in Matplotlib.
+**Q6:** Explicá la diferencia entre la interfaz de pyplot y la interfaz orientada a objetos en Matplotlib.
 
-**Q7:** Why should you save figures as SVG for publications instead of JPG?
+**Q7:** ¿Por qué deberías guardar las figuras como SVG para publicaciones en lugar de JPG?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write code to create a simple line plot of y = x² for x from 0 to 10, with labeled axes and a title.
+**Q8:** Escribí código para crear un line plot simple de y = x² para x de 0 a 10, con ejes etiquetados y un título.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) Figure
 
@@ -50,13 +50,13 @@
 
 **Q3:** C) `plt.savefig()`
 
-**Q4:** A) Adjusts spacing between subplots
+**Q4:** A) Ajusta el espacio entre subplots
 
 **Q5:** B) `alpha`
 
-**Q6:** The pyplot interface (`plt.plot()`, `plt.title()`) is a state-based interface that tracks the "current" figure and axes. It's convenient for quick plots. The object-oriented interface (`fig, ax = plt.subplots()` followed by `ax.plot()`, `ax.set_title()`) explicitly creates figure and axes objects, giving more control and making it better for complex, multi-panel figures.
+**Q6:** La interfaz de pyplot (`plt.plot()`, `plt.title()`) es una interfaz basada en estado que hace seguimiento de la figura y los ejes "actuales". Es conveniente para gráficos rápidos. La interfaz orientada a objetos (`fig, ax = plt.subplots()` seguido de `ax.plot()`, `ax.set_title()`) crea explícitamente objetos de figura y ejes, lo que da más control y la hace mejor para figuras complejas con múltiples paneles.
 
-**Q7:** SVG is a vector format that scales infinitely without losing quality, making it ideal for publications where figures may be resized. JPG is a raster format that loses quality when scaled and uses lossy compression. SVG also allows editing in vector graphics software and produces smaller files for simple plots.
+**Q7:** SVG es un formato vectorial que escala infinitamente sin perder calidad, lo que lo hace ideal para publicaciones donde las figuras pueden redimensionarse. JPG es un formato de mapa de bits que pierde calidad al escalarse y usa compresión con pérdida. SVG además permite editar en software de gráficos vectoriales y produce archivos más pequeños para gráficos simples.
 
 **Q8:**
 ```python

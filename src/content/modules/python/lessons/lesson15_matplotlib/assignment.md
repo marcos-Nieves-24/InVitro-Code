@@ -1,56 +1,56 @@
-# Assignment: Exploratory Visualization Dashboard
+# Assignment: Panel de visualización exploratoria
 
-## Objectives
+## Objetivos
 
-- Create a variety of plot types for data exploration
-- Customize figures with professional styling
-- Use subplots to create multi-panel dashboards
-- Save figures for reports
+- Crear una variedad de tipos de gráficos para la exploración de datos
+- Personalizar figuras con estilo profesional
+- Usar subplots para crear paneles con múltiples gráficos
+- Guardar figuras para informes
 
-## Instructions
+## Instrucciones
 
-Create a Python script `viz_dashboard.py` that generates a multi-panel dashboard figure for a synthetic dataset:
+Creá un script de Python `viz_dashboard.py` que genere una figura de panel con múltiples gráficos para un dataset sintético:
 
-1. **Generate data**: Create a DataFrame with 500 samples and the following columns:
-   - `date`: 500 consecutive dates
-   - `revenue`: random walk starting at 1000
-   - `users`: correlated with revenue + noise
-   - `conversion_rate`: between 2% and 5%
-   - `category`: A, B, or C
+1. **Generá datos**: creá un DataFrame con 500 muestras y las siguientes columnas:
+   - `date`: 500 fechas consecutivas
+   - `revenue`: random walk (camino aleatorio) que empieza en 1000
+   - `users`: correlacionado con revenue + ruido
+   - `conversion_rate`: entre 2% y 5%
+   - `category`: A, B o C
 
-2. **Create a 2×3 dashboard figure**:
-   - (1,1) Revenue over time (line plot)
-   - (1,2) Users vs Revenue (scatter plot)
-   - (1,3) Conversion rate histogram
-   - (2,1) Revenue by category (bar chart)
-   - (2,2) Revenue distribution (box plot)
-   - (2,3) Correlation heatmap of numeric columns
+2. **Creá una figura de panel 2×3**:
+   - (1,1) Ingresos a lo largo del tiempo (line plot)
+   - (1,2) Usuarios vs. ingresos (scatter plot)
+   - (1,3) Histograma de la tasa de conversión
+   - (2,1) Ingresos por categoría (gráfico de barras)
+   - (2,2) Distribución de ingresos (box plot)
+   - (2,3) Heatmap de correlación de las columnas numéricas
 
-3. **Customization**:
-   - Use a professional style (`seaborn-v0_8` or `ggplot`)
-   - All axes labeled with appropriate titles
-   - Consistent color scheme
-   - Grid lines with low alpha
-   - `tight_layout()` applied
+3. **Personalización**:
+   - Usá un estilo profesional (`seaborn-v0_8` o `ggplot`)
+   - Todos los ejes etiquetados con títulos apropiados
+   - Esquema de colores consistente
+   - Líneas de cuadrícula con alpha bajo
+   - Aplicá `tight_layout()`
 
-4. **Save** the dashboard as both PNG and SVG
+4. **Guardá** el panel como PNG y como SVG
 
-## Deliverables
+## Entregables
 
 - `viz_dashboard.py`
-- `dashboard.png` and `dashboard.svg`
-- The dashboard figure displayed in the console
+- `dashboard.png` y `dashboard.svg`
+- La figura del panel mostrada en la consola
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Plot Types | 6 different plot types used correctly | 4-5 plot types | < 4 plot types |
-| Customization | Professional styling, all labels | Adequate styling | Minimal customization |
-| Subplots | Correct 2×3 layout, all visible | Layout issues | Poor layout |
-| Data Generation | Realistic synthetic data | Basic data | Not generated |
-| Saving | Both PNG and SVG saved | One format | Not saved |
+| Tipos de gráfico | 6 tipos de gráfico distintos usados correctamente | 4-5 tipos de gráfico | < 4 tipos de gráfico |
+| Personalización | Estilo profesional, todas las etiquetas | Estilo adecuado | Personalización mínima |
+| Subplots | Disposición 2×3 correcta, todos visibles | Problemas de disposición | Mala disposición |
+| Generación de datos | Datos sintéticos realistas | Datos básicos | No generados |
+| Guardado | PNG y SVG guardados | Un formato | No guardado |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

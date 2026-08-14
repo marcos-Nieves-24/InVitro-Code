@@ -1,40 +1,40 @@
-# Assignment: E-commerce Data Analysis with Pandas
+# Assignment: Análisis de datos de comercio electrónico con Pandas
 
-## Objectives
+## Objetivos
 
-- Load and explore data with Pandas
-- Perform data cleaning and transformation
-- Use groupby for aggregation and analysis
-- Merge multiple DataFrames
-- Generate a summary report
+- Cargar y explorar datos con Pandas
+- Realizar limpieza y transformación de datos
+- Usar groupby para agregación y análisis
+- Fusionar múltiples DataFrames
+- Generar un informe resumido
 
-## Instructions
+## Instrucciones
 
-Create a Python script `ecommerce_analysis.py` that:
+Creá un script de Python `ecommerce_analysis.py` que:
 
-1. **Create synthetic data** (or load from CSV): Generate three DataFrames:
+1. **Cree datos sintéticos** (o los cargue desde CSV): generá tres DataFrames:
    - `customers`: customer_id, name, age, city, signup_date
    - `orders`: order_id, customer_id, order_date, amount, product_category
    - `products`: product_id, product_name, category, price, stock
 
-2. **Data cleaning**:
-   - Check for and handle missing values
-   - Remove duplicate orders
-   - Convert date columns to datetime
-   - Remove orders with amount ≤ 0
+2. **Limpieza de datos**:
+   - Revisá los valores nulos y manejalos
+   - Eliminá los pedidos duplicados
+   - Convertí las columnas de fecha a datetime
+   - Eliminá los pedidos con amount ≤ 0
 
-3. **Analysis**:
-   - Total revenue per product category
-   - Monthly revenue trend
-   - Top 10 customers by total spend
-   - Average order value by city
-   - Customer segmentation (new/regular/vip based on order count)
+3. **Análisis**:
+   - Ingresos totales por categoría de producto
+   - Tendencia de ingresos mensual
+   - Top 10 de clientes por gasto total
+   - Valor promedio de pedido por ciudad
+   - Segmentación de clientes (nuevo/regular/vip según la cantidad de pedidos)
 
-4. **Merge**: Join customers with orders to create a complete view
+4. **Fusión**: uní los clientes con los pedidos para crear una vista completa
 
-5. **Report**: Print a formatted summary of all findings
+5. **Informe**: imprimí un resumen formateado de todos los hallazgos
 
-## Starter Code
+## Código inicial
 
 ```python
 import pandas as pd
@@ -44,21 +44,21 @@ import numpy as np
 np.random.seed(42)
 ```
 
-## Deliverables
+## Entregables
 
 - `ecommerce_analysis.py`
-- Printed summary report with all findings
+- Informe resumido impreso con todos los hallazgos
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Needs Improvement (1-2 pts) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
 |----------|-------------------|--------------|-----------------------------|
-| Data Creation | All 3 DataFrames with realistic data | 2 DataFrames | 1 or missing |
-| Data Cleaning | Handles all issues correctly | Partial cleaning | No cleaning |
-| GroupBy | Correct aggregation, multiple metrics | Basic groupby | Errors |
-| Merging | Correct merge, all records accounted | Basic merge | Incorrect |
-| Report | Clear, formatted, comprehensive | Adequate | Missing/incomplete |
+| Creación de datos | Los 3 DataFrames con datos realistas | 2 DataFrames | 1 o faltantes |
+| Limpieza de datos | Maneja todos los problemas correctamente | Limpieza parcial | Sin limpieza |
+| GroupBy | Agregación correcta, múltiples métricas | groupby básico | Hay errores |
+| Fusión | Fusión correcta, todos los registros contemplados | Fusión básica | Incorrecta |
+| Informe | Claro, formateado, completo | Adecuado | Faltante/incompleto |
 
-## Estimated Completion Time
+## Tiempo estimado
 
-90 minutes
+90 minutos

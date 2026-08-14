@@ -1,20 +1,20 @@
-# Lab: Pandas Data Manipulation
+# Lab: Manipulación de datos con Pandas
 
-## Objective
+## Objetivo
 
-Practice creating DataFrames, filtering, grouping, merging, and applying functions.
+Practicar la creación de DataFrames, el filtrado, la agrupación, la fusión (merge) y la aplicación de funciones.
 
-## Duration
+## Duración
 
-90 minutes
+90 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 13: NumPy
+Lección 13: NumPy
 
-## Instructions
+## Instrucciones
 
-### Part 1: Creating DataFrames
+### Parte 1: Creación de DataFrames
 
 ```python
 import pandas as pd
@@ -39,7 +39,7 @@ print("\nFrom list of dicts:")
 print(df2)
 ```
 
-### Part 2: Exploring Data
+### Parte 2: Exploración de datos
 
 ```python
 # Create sample data
@@ -58,7 +58,7 @@ print("\nDescribe:")
 print(df.describe())
 ```
 
-### Part 3: Filtering and Selection
+### Parte 3: Filtrado y selección
 
 ```python
 # Boolean filtering
@@ -71,7 +71,7 @@ print(f"Category A: {len(category_a)} rows")
 print(f"High value + score: {len(high_value)} rows")
 ```
 
-### Part 4: GroupBy
+### Parte 4: GroupBy
 
 ```python
 # Group by category
@@ -86,7 +86,7 @@ print(grouped.agg({
 }))
 ```
 
-### Part 5: Merging
+### Parte 5: Fusión (merge)
 
 ```python
 # Merge two DataFrames
@@ -98,7 +98,7 @@ print("Left merge:")
 print(merged)
 ```
 
-### Part 6: Apply Functions
+### Parte 6: Aplicación de funciones
 
 ```python
 # Apply transformations
@@ -109,6 +109,6 @@ df["Score_Group"] = df["Score"].apply(
 print(df.head(10))
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `pandas_lab.ipynb` with all exercises.
+Notebook de Jupyter `pandas_lab.ipynb` con todos los ejercicios.

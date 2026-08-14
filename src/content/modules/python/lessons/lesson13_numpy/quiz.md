@@ -1,62 +1,62 @@
 # Quiz: NumPy
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1:** Which function creates an array of zeros with shape (3, 4)?
+**Q1:** ¿Qué función crea un array de ceros con forma (3, 4)?
 - A) `np.zeros([3, 4])`
 - B) `np.zeros((3, 4))`
 - C) `np.zero(3, 4)`
 - D) `np.zeros(3, 4)`
 
-**Q2:** What is the output of `np.array([1, 2, 3]) + 10`?
+**Q2:** ¿Cuál es la salida de `np.array([1, 2, 3]) + 10`?
 - A) [11, 12, 13]
 - B) [1, 2, 3, 10]
 - C) Error
 - D) [10, 11, 12, 13]
 
-**Q3:** For a 2D array with shape (5, 3), what does `arr[:, 1]` return?
-- A) Row 1
-- B) Column 1
-- C) The entire array
-- D) Element [1, 1]
+**Q3:** Para un array 2D con forma (5, 3), ¿qué devuelve `arr[:, 1]`?
+- A) La fila 1
+- B) La columna 1
+- C) El array completo
+- D) El elemento [1, 1]
 
-**Q4:** What does broadcasting allow you to do?
-- A) Operate on arrays with different shapes
-- B) Send arrays over the network
-- C) Broadcast warnings
-- D) Convert arrays to Python lists
+**Q4:** ¿Qué te permite hacer el broadcasting?
+- A) Operar sobre arrays con distintas formas
+- B) Enviar arrays por la red
+- C) Difundir advertencias
+- D) Convertir arrays en listas de Python
 
-**Q5:** Which operator performs matrix multiplication in Python 3.5+?
+**Q5:** ¿Qué operador realiza la multiplicación de matrices en Python 3.5+?
 - A) `*`
 - B) `@`
 - C) `&`
 - D) `%`
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6:** Explain the difference between a view and a copy in NumPy.
+**Q6:** Explicá la diferencia entre una vista y una copia en NumPy.
 
-**Q7:** What is vectorization and why is it faster than Python loops?
+**Q7:** ¿Qué es la vectorización y por qué es más rápida que los bucles de Python?
 
-## Coding Question
+## Pregunta de código
 
-**Q8:** Write NumPy code to create a 3×3 array of random numbers from a normal distribution, then compute the mean and standard deviation of all elements.
+**Q8:** Escribí código de NumPy para crear un array de 3×3 de números aleatorios de una distribución normal y después calculá la media y la desviación estándar de todos los elementos.
 
-## Answer Key
+## Clave de respuestas
 
 **Q1:** B) `np.zeros((3, 4))`
 
 **Q2:** A) [11, 12, 13]
 
-**Q3:** B) Column 1
+**Q3:** B) Columna 1
 
-**Q4:** A) Operate on arrays with different shapes
+**Q4:** A) Operar sobre arrays con distintas formas
 
 **Q5:** B) `@`
 
-**Q6:** A view is another way to access the same underlying data — modifying a view modifies the original. A copy is an independent array with its own data. Slicing returns a view; `.copy()` creates a copy. Use `.copy()` when you need to modify a slice independently.
+**Q6:** Una vista es otra forma de acceder a los mismos datos subyacentes: modificar una vista modifica el original. Una copia es un array independiente con sus propios datos. El rebanado devuelve una vista; `.copy()` crea una copia. Usá `.copy()` cuando necesites modificar una rebanada de forma independiente.
 
-**Q7:** Vectorization means applying an operation to an entire array at once rather than looping through individual elements. NumPy operations are implemented in C and operate on contiguous memory blocks, making them 10-100x faster than equivalent Python loops. NumPy also uses SIMD instructions on modern CPUs for parallel operations.
+**Q7:** La vectorización significa aplicar una operación a un array completo de una vez en lugar de recorrer los elementos individuales en un bucle. Las operaciones de NumPy están implementadas en C y operan sobre bloques de memoria contiguos, lo que las hace 10-100 veces más rápidas que los bucles equivalentes en Python. NumPy también usa instrucciones SIMD en CPUs modernas para operaciones en paralelo.
 
 **Q8:**
 ```python

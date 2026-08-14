@@ -1,20 +1,20 @@
-# Lab: Data Visualization with Matplotlib
+# Lab: Visualización de datos con Matplotlib
 
-## Objective
+## Objetivo
 
-Practice creating various plot types, customizing figures, and using subplots.
+Practicar la creación de varios tipos de gráficos, la personalización de figuras y el uso de subplots.
 
-## Duration
+## Duración
 
-75 minutes
+75 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 14: Pandas
+Lección 14: Pandas
 
-## Instructions
+## Instrucciones
 
-### Part 1: Line Plot
+### Parte 1: Gráfico de líneas (line plot)
 
 ```python
 import matplotlib.pyplot as plt
@@ -36,7 +36,7 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
-### Part 2: Scatter Plot
+### Parte 2: Gráfico de dispersión (scatter plot)
 
 ```python
 np.random.seed(42)
@@ -53,7 +53,7 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
-### Part 3: Bar Chart
+### Parte 3: Gráfico de barras
 
 ```python
 categories = ["A", "B", "C", "D", "E"]
@@ -68,7 +68,7 @@ plt.ylabel("Value")
 plt.show()
 ```
 
-### Part 4: Histogram
+### Parte 4: Histograma
 
 ```python
 data = np.random.randn(1000)
@@ -82,7 +82,7 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
-### Part 5: Subplots
+### Parte 5: Subplots
 
 ```python
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
@@ -104,6 +104,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Deliverables
+## Entregables
 
-Jupyter notebook `matplotlib_lab.ipynb` with all plots visible.
+Notebook de Jupyter `matplotlib_lab.ipynb` con todos los gráficos visibles.
