@@ -87,4 +87,3 @@ df = kmeans_with_metrics(X, range(2, 11))
 print(df.round(3))
 ```
 </details>
-</details>

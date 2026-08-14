@@ -97,4 +97,3 @@ model = LogisticRegression(max_iter=5000).fit(X_tr, y_tr)
 plot_precision_recall_vs_threshold(model, X_te, y_te)
 ```
 </details>
-</details>

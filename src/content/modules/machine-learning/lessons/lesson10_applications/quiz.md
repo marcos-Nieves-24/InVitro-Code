@@ -100,4 +100,3 @@ X, y = make_regression(n_samples=500, n_features=10, noise=20, random_state=42)
 print(regression_pipeline_comparison(X, y).to_string(index=False))
 ```
 </details>
-</details>

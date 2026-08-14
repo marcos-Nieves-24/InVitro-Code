@@ -86,4 +86,3 @@ print(f"Intercept match: {np.abs(int_s - ridge.intercept_) < 1e-8}")
 print(f"Coefficients match: {np.allclose(coef_s, ridge.coef_, atol=1e-8)}")
 ```
 </details>
-</details>

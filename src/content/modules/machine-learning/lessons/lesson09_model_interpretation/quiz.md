@@ -95,4 +95,3 @@ model = RandomForestRegressor(n_estimators=50).fit(housing.data, housing.target)
 plot_pdp_features(model, housing.data, housing.feature_names, ['MedInc', 'HouseAge', 'AveRooms', 'AveOccup', 'Latitude', 'Longitude'])
 ```
 </details>
-</details>

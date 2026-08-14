@@ -101,4 +101,3 @@ th, gain = find_best_split(iris.data, iris.target, 2)
 print(f"Best threshold for petal length: {th:.2f}, info gain: {gain:.4f}")
 ```
 </details>
-</details>

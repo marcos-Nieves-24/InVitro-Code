@@ -104,4 +104,3 @@ for deg in [1, 4, 15]:
     print(f"Degree {deg}: Train MSE = {tr:.4f}, Test MSE = {te:.4f}")
 ```
 </details>
-</details>

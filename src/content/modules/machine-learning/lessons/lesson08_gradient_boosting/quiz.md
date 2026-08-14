@@ -99,4 +99,3 @@ data = load_breast_cancer()
 print(compare_boosting_vs_bagging(data.data, data.target).to_string(index=False))
 ```
 </details>
-</details>

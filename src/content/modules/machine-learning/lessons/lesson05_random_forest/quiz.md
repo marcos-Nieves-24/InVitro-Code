@@ -90,4 +90,3 @@ plt.grid(True)
 plt.show()
 ```
 </details>
-</details>

@@ -95,4 +95,3 @@ from sklearn.datasets import load_iris
 pca = pca_scree_plot(load_iris().data, n_components=4)
 ```
 </details>
-</details>
