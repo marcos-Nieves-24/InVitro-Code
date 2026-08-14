@@ -11,19 +11,26 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getDisplayName } from "@/lib/gamification/user";
 import { LabTabs } from "@/components/labs/LabTabs";
 import { LabCodeBlock } from "@/components/labs/LabCodeBlock";
+import { LabHeader } from "@/components/labs/LabHeader";
+import { LabCallout } from "@/components/labs/LabCallout";
+import { ReflectionPrompt } from "@/components/labs/ReflectionPrompt";
 import { MarkdownTable } from "@/components/lesson";
+import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
 import type { ReactNode } from "react";
 
 const mdxConfig = {
   mdxOptions: {
     remarkPlugins: [remarkMath, remarkGfm],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [rehypeKatex, rehypeLabSections],
   },
 };
 
 const mdxComponents = {
   pre: LabCodeBlock,
   table: MarkdownTable,
+  LabHeader,
+  LabCallout,
+  ReflectionPrompt,
 };
 
 interface Props {

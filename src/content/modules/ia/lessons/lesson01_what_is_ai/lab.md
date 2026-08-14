@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Aplicar los conceptos de features (características) y reconocimiento de patrones para explorar un dataset real de diagnóstico médico. Al finalizar, vas a entender cómo los datos numéricos representan propiedades de células y por qué algunas features separan mejor las clases que otras.
+Aplicar los conceptos de **features** y reconocimiento de patrones que viste en la lección («Features: el idioma de la máquina») para explorar un dataset real de diagnóstico médico. Al finalizar, vas a poder explicar por qué algunas features separan mejor las clases que otras.
 
 ## Duración
 

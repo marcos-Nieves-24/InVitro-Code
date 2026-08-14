@@ -1,11 +1,11 @@
-# Assignment: Exploración de Features
+# Assignment: Selección de Features por Correlación
 
 ## Objetivos
 
-- Cargar y explorar el dataset Breast Cancer Wisconsin usando scikit-learn
-- Calcular estadísticas descriptivas por feature y por clase
-- Crear visualizaciones que revelen patrones en los datos
-- Interpretar los resultados en el contexto de clasificación
+- Cargar el dataset Breast Cancer Wisconsin usando scikit-learn
+- Analizar la correlación entre features para detectar redundancia
+- Identificar y justificar las 3 features más discriminativas entre maligno y benigno
+- Comunicar los hallazgos con visualizaciones y argumentos escritos
 
 ## Instrucciones
 
@@ -15,39 +15,37 @@ from sklearn.datasets import load_breast_cancer
 data = load_breast_cancer()
 X = data.data
 y = data.target
+feature_names = data.feature_names
 ```
 
-2. Para cada una de las 30 features, calculá:
-   - Media, mediana, desviación estándar
-   - Mínimo y máximo
-   - Rango intercuartílico (IQR)
+2. Calculá la **matriz de correlación** de las 30 features y creá un heatmap (usá `numpy.corrcoef` o `pandas.DataFrame.corr` + `matplotlib.imshow`/`seaborn.heatmap`).
 
-3. Creá un DataFrame `feature_stats` con una fila por feature y columnas para todas las estadísticas anteriores.
+3. Identificá los pares de features con correlación mayor a 0.9 (en valor absoluto). ¿Qué implica que dos features estén altamente correlacionadas? ¿Cuál conviene conservar y por qué?
 
-4. Separá los datos por clase (maligno vs benigno) y calculá las mismas estadísticas para cada clase.
+4. Separando por clase (maligno vs benigno), calculá la **diferencia relativa de medias** por feature (como en el laboratorio) y armá un ranking de discriminación. Elegí las **3 features más discriminativas**.
 
 5. Creá las siguientes visualizaciones:
-   - **Scatter plot 2D**: elegí las 2 features que mejor separan las clases y creá un scatter plot con colores por clase
-   - **Histogramas comparativos**: para las 3 features más discriminativas, creá histogramas superpuestos (maligno vs benigno)
-   - **Boxplot**: para las 5 features con mayor diferencia relativa entre clases
+   - **Heatmap de correlación**: matriz 30×30 con barra de color
+   - **Scatter plot 2D**: las 2 features más discriminativas, coloreadas por clase
+   - **Histogramas comparativos**: para las 3 features elegidas, superponiendo maligno vs benigno
 
 6. Respondé en una celda de markdown:
-   - ¿Cuáles son las 3 features más discriminativas? ¿Cómo lo determinaste?
-   - ¿Hay features donde las clases se superponen significativamente? ¿Qué implica esto?
-   - ¿Por qué es importante explorar los datos antes de entrenar un modelo de IA?
+   - ¿Cómo elegiste las 3 features más discriminativas? Mostrá el criterio numérico
+   - ¿Qué revela la matriz de correlación sobre la redundancia del dataset?
+   - ¿Por qué es importante explorar y seleccionar features antes de entrenar un modelo de IA?
 
 ## Entregables
 
-- Un notebook Jupyter (`.ipynb`) con todo el código, outputs y respuestas escritas
+- Un notebook Jupyter (`.ipynb`) con todo el código, outputs, visualizaciones y respuestas escritas
 
 ## Rúbrica de Evaluación
 
 | Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Insuficiente (1 pt) |
 |----------|-------------------|---------------|-------------------|---------------------|
-| Carga y exploración del dataset | Dataset cargado correctamente, todas las estadísticas calculadas sin errores | Estadísticas correctas con errores menores | Faltan 1-2 estadísticas | Faltan más de 2 estadísticas o errores graves |
-| Visualizaciones | Scatter plot, histogramas y boxplots con labels, títulos y leyendas correctas | Todas las visualizaciones presentes | Visualizaciones básicas sin formato adecuado | Faltan visualizaciones |
-| Análisis por clase | Comparación completa maligno vs benigno con estadísticas separadas | Comparación correcta | Comparación parcial | Sin separación por clase |
-| Interpretación | Análisis profundo, contextualizado, conecta features con clasificación | Buen análisis | Análisis superficial | Sin interpretación o incorrecta |
+| Análisis de correlación | Heatmap correcto, pares >0.9 identificados con justificación | Heatmap correcto, pares identificados | Heatmap con errores menores | Sin heatmap ni análisis de correlación |
+| Selección de features | 3 features elegidas con criterio numérico explícito | 3 features elegidas con justificación parcial | Features elegidas sin criterio claro | Sin selección justificada |
+| Visualizaciones | Scatter + histogramas + heatmap con labels y leyendas correctas | Todas las visualizaciones presentes | Visualizaciones básicas sin formato adecuado | Faltan visualizaciones |
+| Interpretación | Análisis profundo que conecta correlación, redundancia y selección | Buen análisis | Análisis superficial | Sin interpretación o incorrecta |
 
 **Total: 16 puntos**
 
