@@ -1,16 +1,16 @@
-# Lab: Descriptive Statistics
+# Lab: Estadística descriptiva
 
-## Objective
+## Objetivo
 
-Apply descriptive statistics to analyze a real-world dataset using Python.
+Aplicá la estadística descriptiva para analizar un dataset del mundo real usando Python.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
 ## Dataset
 
-We will use the Diabetes dataset from sklearn.
+Vamos a usar el dataset de Diabetes de sklearn.
 
 ```python
 from sklearn.datasets import load_diabetes
@@ -19,9 +19,9 @@ df = diabetes.data
 df['target'] = diabetes.target
 ```
 
-## Instructions
+## Instrucciones
 
-### Part 1: Data Overview (10 min)
+### Parte 1: Vista general de los datos (10 min)
 
 ```python
 import numpy as np
@@ -36,44 +36,44 @@ print(df.head())
 print(df.info())
 ```
 
-### Part 2: Central Tendency (10 min)
+### Parte 2: Tendencia central (10 min)
 
-Compute and interpret the mean, median, and mode for the `age`, `bmi`, and `bp` columns.
+Calculá e interpretá la media, la mediana y la moda de las columnas `age`, `bmi` y `bp`.
 
-### Part 3: Dispersion (10 min)
+### Parte 3: Dispersión (10 min)
 
-Compute variance, standard deviation, range, and IQR for all numeric columns.
+Calculá la varianza, la desviación estándar, el rango y el RIQ para todas las columnas numéricas.
 
-### Part 4: Outlier Detection (15 min)
+### Parte 4: Detección de valores atípicos (15 min)
 
-For the `bmi` column:
-1. Calculate Q1, Q3, and IQR
-2. Identify outliers using the IQR rule
-3. Create a boxplot
-4. Report how many outliers exist and whether they seem like data errors
+Para la columna `bmi`:
+1. Calculá Q1, Q3 y el RIQ
+2. Identificá los valores atípicos usando la regla del RIQ
+3. Creá un boxplot
+4. Informá cuántos valores atípicos existen y si parecen errores de datos
 
-### Part 5: Summary Report (15 min)
+### Parte 5: Informe resumen (15 min)
 
-Write a function `summarize(df)` that returns a DataFrame with:
-- Column name
-- Mean, median, std, min, max
-- Q1, Q3, IQR
-- Outlier count
+Escribí una función `summarize(df)` que devuelva un DataFrame con:
+- Nombre de la columna
+- Media, mediana, desv. estándar, mín., máx.
+- Q1, Q3, RIQ
+- Cantidad de valores atípicos
 
-## Deliverables
+## Entregables
 
-Submit a single Python script (`.py` or `.ipynb`) containing:
-- All code with comments
-- Interpretation of descriptive statistics for the diabetes dataset
-- A boxplot showing outliers in BMI
+Entregá un único script de Python (`.py` o `.ipynb`) que contenga:
+- Todo el código con comentarios
+- La interpretación de la estadística descriptiva para el dataset de diabetes
+- Un boxplot que muestre los valores atípicos en el BMI
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Correct descriptive statistics computation | 4 |
-| Outlier detection implementation | 3 |
-| Boxplot with proper formatting | 2 |
-| Written interpretation | 1 |
+| Cálculo correcto de la estadística descriptiva | 4 |
+| Implementación de la detección de valores atípicos | 3 |
+| Boxplot con formato adecuado | 2 |
+| Interpretación escrita | 1 |
 
-Total: 10 points
+Total: 10 puntos

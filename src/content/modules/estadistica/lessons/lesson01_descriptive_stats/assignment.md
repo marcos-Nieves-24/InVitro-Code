@@ -1,48 +1,48 @@
-# Assignment: Descriptive Statistics
+# Assignment: Estadística descriptiva
 
-## Objectives
+## Objetivos
 
-- Compute descriptive statistics using numpy and pandas
-- Identify outliers using the IQR method
-- Interpret statistical summaries in biological and business contexts
+- Calcular estadística descriptiva usando numpy y pandas
+- Identificar valores atípicos usando el método del RIQ
+- Interpretar los resúmenes estadísticos en contextos biológicos y de negocios
 
-## Instructions
+## Instrucciones
 
-1. Load the California housing dataset from sklearn:
+1. Cargá el dataset de viviendas de California desde sklearn:
 ```python
 from sklearn.datasets import fetch_california_housing
 housing = fetch_california_housing(as_frame=True)
 df = housing.data
 ```
 
-2. For each numeric column, compute:
-   - Mean, median, mode
-   - Variance, standard deviation, range, IQR
-   - Count of outliers using the IQR rule (1.5×IQR)
+2. Para cada columna numérica, calculá:
+   - Media, mediana, moda
+   - Varianza, desviación estándar, rango, RIQ
+   - Cantidad de valores atípicos usando la regla del RIQ (1.5×RIQ)
 
-3. Create a DataFrame called `summary_stats` with one row per feature and columns for all statistics above.
+3. Creá un DataFrame llamado `summary_stats` con una fila por feature y columnas para todas las estadísticas anteriores.
 
-4. Visualize the `MedInc` (median income) column using a boxplot.
+4. Visualizá la columna `MedInc` (ingreso medio) usando un boxplot.
 
-5. Answer in a markdown cell:
-   - Which feature has the most outliers? Why might this be?
-   - Should we remove these outliers? Justify your answer.
+5. Respondé en una celda de markdown:
+   - ¿Qué feature tiene más valores atípicos? ¿Por qué podría ser?
+   - ¿Deberíamos eliminar estos valores atípicos? Justificá tu respuesta.
 
-## Deliverables
+## Entregables
 
-- A Jupyter notebook (`.ipynb`) with all code, outputs, and written answers
+- Un notebook de Jupyter (`.ipynb`) con todo el código, las salidas y las respuestas escritas
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Descriptive statistics | All computed correctly | Minor errors | Missing 1-2 stats | Missing >2 stats |
-| Outlier detection | Correct IQR method | Correct but incomplete | Partially implemented | Not implemented |
-| Visualization | Boxplot with labels and title | Boxplot present | Basic plot | Missing |
-| Interpretation | Insightful, contextualized | Good analysis | Superficial | Missing |
+| Estadística descriptiva | Todo calculado correctamente | Errores menores | Faltan 1-2 estadísticas | Faltan más de 2 estadísticas |
+| Detección de valores atípicos | Método del RIQ correcto | Correcto pero incompleto | Implementado parcialmente | No implementado |
+| Visualización | Boxplot con etiquetas y título | Boxplot presente | Gráfico básico | Faltante |
+| Interpretación | Perspicaz, contextualizada | Buen análisis | Superficial | Faltante |
 
-**Total: 16 points**
+**Total: 16 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-2 hours
+2 horas

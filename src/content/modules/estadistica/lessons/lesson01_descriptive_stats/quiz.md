@@ -1,68 +1,68 @@
-# Quiz: Descriptive Statistics
+# Quiz: Estadística descriptiva
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. Which measure of central tendency is most affected by outliers?**
+**1. ¿Qué medida de tendencia central se ve más afectada por los valores atípicos?**
 
-a) Median
-b) Mode
-c) Mean
-d) Interquartile Range
+a) Mediana
+b) Moda
+c) Media
+d) Rango intercuartílico
 
-**2. The interquartile range (IQR) represents:**
+**2. El rango intercuartílico (RIQ) representa:**
 
-a) The range between the minimum and maximum values
-b) The middle 50% of the data
-c) The average distance from the mean
-d) The most frequent value
+a) El rango entre los valores mínimo y máximo
+b) El 50% central de los datos
+c) La distancia promedio desde la media
+d) El valor más frecuente
 
-**3. A dataset has values: 10, 12, 14, 15, 18, 100. What is the median?**
+**3. Un dataset tiene los valores: 10, 12, 14, 15, 18, 100. ¿Cuál es la mediana?**
 
 a) 14
 b) 14.5
 c) 15
 d) 28.17
 
-**4. If the standard deviation of a dataset is 0, what can we conclude?**
+**4. Si la desviación estándar de un dataset es 0, ¿qué podemos concluir?**
 
-a) All values are equal
-b) The mean is 0
-c) The data is symmetric
-d) There are no outliers
+a) Todos los valores son iguales
+b) La media es 0
+c) Los datos son simétricos
+d) No hay valores atípicos
 
-**5. According to the IQR rule, a data point is an outlier if it is:**
+**5. Según la regla del RIQ, un dato es un valor atípico si está:**
 
-a) Below Q1 or above Q3
-b) Below Q1 - 1.5×IQR or above Q3 + 1.5×IQR
-c) More than 2 standard deviations from the mean
-d) Below the mean minus the range
+a) Por debajo de Q1 o por encima de Q3
+b) Por debajo de Q1 - 1.5×RIQ o por encima de Q3 + 1.5×RIQ
+c) A más de 2 desviaciones estándar de la media
+d) Por debajo de la media menos el rango
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Explain why the median is preferred over the mean for reporting household income in a country with high income inequality.
+**6.** Explicá por qué se prefiere la mediana a la media para informar el ingreso familiar en un país con alta desigualdad de ingresos.
 
-**7.** A biotech researcher measures protein concentration in 100 samples. The mean is 45 mg/dL with a standard deviation of 3 mg/dL. Interpret these values in plain language.
+**7.** Una investigadora de biotecnología mide la concentración de proteína en 100 muestras. La media es 45 mg/dL con una desviación estándar de 3 mg/dL. Interpretá estos valores en lenguaje simple.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code using numpy to:
-- Create an array `data = np.array([2, 4, 6, 8, 10, 100])`
-- Compute the mean, median, variance, standard deviation, and IQR
-- Identify all outliers using the IQR method
+**8.** Escribí código en Python usando numpy para:
+- Crear un array `data = np.array([2, 4, 6, 8, 10, 100])`
+- Calcular la media, la mediana, la varianza, la desviación estándar y el RIQ
+- Identificar todos los valores atípicos usando el método del RIQ
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. c) Mean
-2. b) The middle 50% of the data
+1. c) Media
+2. b) El 50% central de los datos
 3. b) 14.5
-4. a) All values are equal
-5. b) Below Q1 - 1.5×IQR or above Q3 + 1.5×IQR
+4. a) Todos los valores son iguales
+5. b) Por debajo de Q1 - 1.5×RIQ o por encima de Q3 + 1.5×RIQ
 
-6. Income distributions are heavily right-skewed (a few very high incomes). The mean is pulled upward by these high values and does not represent the typical person. The median is robust to outliers and reflects the income of the middle person.
+6. Las distribuciones de ingresos están fuertemente sesgadas a la derecha (pocos ingresos muy altos). La media se ve empujada hacia arriba por esos valores altos y no representa a la persona típica. La mediana es robusta a los valores atípicos y refleja el ingreso de la persona del medio.
 
-7. The typical protein concentration is 45 mg/dL, and individual samples typically deviate from this average by about 3 mg/dL. Most samples (roughly 68%) fall between 42 and 48 mg/dL.
+7. La concentración típica de proteína es 45 mg/dL, y las muestras individuales típicamente se desvían de ese promedio en unos 3 mg/dL. La mayoría de las muestras (aproximadamente el 68%) caen entre 42 y 48 mg/dL.
 
 8. 
 ```python

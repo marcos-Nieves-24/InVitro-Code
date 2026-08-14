@@ -1,70 +1,70 @@
-# Quiz: Probability Fundamentals
+# Quiz: Fundamentos de probabilidad
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. Which of Kolmogorov's axioms states that the probability of the entire sample space is 1?**
+**1. ¿Cuál de los axiomas de Kolmogorov establece que la probabilidad de todo el espacio muestral es 1?**
 
-a) Non-negativity
-b) Normalization
-c) Additivity
-d) Complementarity
+a) No negatividad
+b) Normalización
+c) Aditividad
+d) Complementariedad
 
-**2. P(A|B) = P(A∩B) / P(B) is the formula for:**
+**2. P(A|B) = P(A∩B) / P(B) es la fórmula de:**
 
-a) Bayes' theorem
-b) Conditional probability
-c) Law of total probability
-d) Joint probability
+a) Teorema de Bayes
+b) Probabilidad condicional
+c) Ley de probabilidad total
+d) Probabilidad conjunta
 
-**3. Bayes' theorem allows us to:**
+**3. El teorema de Bayes nos permite:**
 
-a) Compute the probability of A without any data
-b) Update beliefs about A after observing evidence B
-c) Prove that A causes B
-d) Calculate the variance of a random variable
+a) Calcular la probabilidad de A sin ningún dato
+b) Actualizar las creencias sobre A después de observar la evidencia B
+c) Demostrar que A causa B
+d) Calcular la varianza de una variable aleatoria
 
-**4. The expected value of a random variable is:**
+**4. El valor esperado de una variable aleatoria es:**
 
-a) The most likely value
-b) The long-run average value
-c) Always equal to the median
-d) The square root of variance
+a) El valor más probable
+b) El valor promedio a largo plazo
+c) Siempre igual a la mediana
+d) La raíz cuadrada de la varianza
 
-**5. If events A and B are mutually exclusive:**
+**5. Si los eventos A y B son mutuamente excluyentes:**
 
 a) P(A∩B) = P(A) × P(B)
 b) P(A∪B) = P(A) + P(B)
 c) P(A|B) = P(A)
 d) P(A) + P(B) = 1
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** A test for a rare disease (prevalence 0.1%) has 99% sensitivity and 95% specificity. If a patient tests positive, what is the probability they actually have the disease? Show the calculation.
+**6.** Un test para una enfermedad rara (prevalencia 0.1%) tiene 99% de sensibilidad y 95% de especificidad. Si un paciente da positivo, ¿cuál es la probabilidad de que realmente tenga la enfermedad? Mostrá el cálculo.
 
-**7.** Explain the "base rate fallacy" and give an example from biotechnology.
+**7.** Explicá la "falacia de la tasa base" y da un ejemplo de biotecnología.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code using numpy to simulate 50,000 patients where:
-- Disease prevalence is 2%
-- Test sensitivity is 90%
-- Test specificity is 85%
+**8.** Escribí código en Python usando numpy para simular 50,000 pacientes donde:
+- La prevalencia de la enfermedad es del 2%
+- La sensibilidad del test es del 90%
+- La especificidad del test es del 85%
 
-Compute the empirical probability that a patient has the disease given a positive test.
+Calculá la probabilidad empírica de que un paciente tenga la enfermedad dado un test positivo.
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. b) Normalization
-2. b) Conditional probability
-3. b) Update beliefs about A after observing evidence B
-4. b) The long-run average value
+1. b) Normalización
+2. b) Probabilidad condicional
+3. b) Actualizar las creencias sobre A después de observar la evidencia B
+4. b) El valor promedio a largo plazo
 5. b) P(A∪B) = P(A) + P(B)
 
-6. P(disease|positive) = (0.99 × 0.001) / (0.99 × 0.001 + 0.05 × 0.999) = 0.00099 / 0.05094 = 0.0194 (1.94%)
+6. P(enfermedad|positivo) = (0.99 × 0.001) / (0.99 × 0.001 + 0.05 × 0.999) = 0.00099 / 0.05094 = 0.0194 (1.94%)
 
-7. The base rate fallacy occurs when people ignore the base rate (prevalence) and overestimate the probability of a rare event after positive evidence. In biotech: if a disease affects 1 in 10,000 and a test is 99% accurate, many doctors mistakenly believe a positive test means 99% chance of disease, when it's actually much lower.
+7. La falacia de la tasa base ocurre cuando la gente ignora la tasa base (prevalencia) y sobreestima la probabilidad de un evento raro después de una evidencia positiva. En biotecnología: si una enfermedad afecta a 1 de cada 10,000 personas y un test tiene 99% de precisión, muchos médicos creen erróneamente que un test positivo significa 99% de probabilidad de enfermedad, cuando en realidad es mucho menor.
 
 8. 
 ```python

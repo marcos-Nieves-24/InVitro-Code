@@ -1,43 +1,43 @@
-# Assignment: Data Distribution Analysis
+# Assignment: Análisis de distribución de datos
 
-## Objectives
+## Objetivos
 
-- Analyze the distribution of real-world data
-- Apply log-transformation for normalization
-- Interpret skewness and kurtosis in context
+- Analizar la distribución de datos del mundo real
+- Aplicar la transformación logarítmica para normalizar
+- Interpretar la asimetría (skewness) y la curtosis en contexto
 
-## Instructions
+## Instrucciones
 
-1. Load the `diamonds` dataset from seaborn
-2. For the `price` column:
-   - Create a histogram with KDE overlay
-   - Compute and interpret skewness and kurtosis
-   - Apply log transformation and repeat the analysis
-3. For each `cut` category, create a density plot of `price` (overlaid)
-4. For `carat`, `depth`, and `table` columns:
-   - Create a 2×2 grid of histograms
-   - Report shape statistics
-   - Identify which columns are approximately normal
-5. Write a summary (3-4 paragraphs) addressing:
-   - Why diamond prices are right-skewed
-   - How log transformation helps
-   - Which features might need transformation before ML modeling
+1. Cargá el dataset `diamonds` de seaborn
+2. Para la columna `price`:
+   - Creá un histograma con KDE superpuesto
+   - Calculá e interpretá la asimetría (skewness) y la curtosis
+   - Aplicá la transformación logarítmica y repetí el análisis
+3. Para cada categoría de `cut`, creá un gráfico de densidad de `price` (superpuestos)
+4. Para las columnas `carat`, `depth` y `table`:
+   - Creá una cuadrícula de 2×2 de histogramas
+   - Informá las estadísticas de forma
+   - Identificá qué columnas son aproximadamente normales
+5. Escribí un resumen (3-4 párrafos) que aborde:
+   - Por qué los precios de los diamantes están sesgados a la derecha
+   - Cómo ayuda la transformación logarítmica
+   - Qué features podrían necesitar transformación antes del modelado de machine learning
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, plots, and written summary
+- Notebook de Jupyter con el código, los gráficos y el resumen escrito
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Histograms/KDE | All correctly created | Minor issues | Missing elements | Poor quality |
-| Shape statistics | Correctly computed and interpreted | Correct but brief | Some errors | Missing/incomplete |
-| Log-transformation | Properly done with comparison | Done but no comparison | Incomplete | Missing |
-| Written summary | Insightful, well-structured | Good analysis | Superficial | Missing |
+| Histogramas/KDE | Todos creados correctamente | Problemas menores | Faltan elementos | Mala calidad |
+| Estadísticas de forma | Calculadas e interpretadas correctamente | Correctas pero breves | Algunos errores | Faltantes/incompletas |
+| Transformación logarítmica | Hecha correctamente con comparación | Hecha pero sin comparación | Incompleta | Faltante |
+| Resumen escrito | Perspicaz, bien estructurado | Buen análisis | Superficial | Faltante |
 
-**Total: 16 points**
+**Total: 16 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-2 hours
+2 horas

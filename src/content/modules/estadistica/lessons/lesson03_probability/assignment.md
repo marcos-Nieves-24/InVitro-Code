@@ -1,51 +1,51 @@
-# Assignment: Probability Applications
+# Assignment: Aplicaciones de la probabilidad
 
-## Objectives
+## Objetivos
 
-- Apply Bayes' theorem to diagnostic testing
-- Simulate probability experiments in Python
-- Interpret probabilistic results in context
+- Aplicar el teorema de Bayes a pruebas de diagnóstico
+- Simular experimentos de probabilidad en Python
+- Interpretar resultados probabilísticos en contexto
 
-## Instructions
+## Instrucciones
 
-1. **Medical Screening**: A hospital implements a screening program for a disease with:
-   - Prevalence: 0.5%
-   - Test sensitivity: 98%
-   - Test specificity: 97%
+1. **Cribado médico**: Un hospital implementa un programa de cribado para una enfermedad con:
+   - Prevalencia: 0.5%
+   - Sensibilidad del test: 98%
+   - Especificidad del test: 97%
 
-   a) Calculate P(disease | positive) using Bayes' theorem
-   b) If 10,000 people are screened, how many false positives do you expect?
-   c) The hospital decides to only inform patients if they test positive twice (assuming independent tests). Recalculate P(disease | two positives).
+   a) Calculá P(enfermedad | positivo) usando el teorema de Bayes
+   b) Si se criban 10,000 personas, ¿cuántos falsos positivos esperás?
+   c) El hospital decide informar solo a los pacientes que den positivo dos veces (asumiendo tests independientes). Recalculá P(enfermedad | dos positivos).
 
-2. **Simulation**: Write a simulation of the above scenario with 1 million virtual patients to verify your calculations.
+2. **Simulación**: Escribí una simulación del escenario anterior con 1 millón de pacientes virtuales para verificar tus cálculos.
 
-3. **SaaS Churn Model**: A SaaS company predicts churn with:
-   - Prior churn rate: 8%
-   - Model sensitivity: 85%
-   - Model specificity: 80%
+3. **Modelo de churn de SaaS**: Una empresa SaaS predice el churn con:
+   - Tasa de churn previa (prior): 8%
+   - Sensibilidad del modelo: 85%
+   - Especificidad del modelo: 80%
 
-   Create a function `churn_probability(prior, sensitivity, specificity)` that returns the posterior probability. Use it to:
-   - Calculate P(churn | predicted churn)
-   - Create a plot showing how posterior changes as prior varies from 0.01 to 0.50
+   Creá una función `churn_probability(prior, sensitivity, specificity)` que devuelva la probabilidad posterior. Usala para:
+   - Calcular P(churn | churn predicho)
+   - Crear un gráfico que muestre cómo cambia la probabilidad posterior a medida que el prior varía de 0.01 a 0.50
 
-4. **Write a short report** (1 page) interpreting these results for a non-technical audience.
+4. **Escribí un informe breve** (1 página) que interprete estos resultados para una audiencia no técnica.
 
-## Deliverables
+## Entregables
 
-- Jupyter notebook with code, simulations, and plots
-- A markdown report section
+- Notebook de Jupyter con el código, las simulaciones y los gráficos
+- Una sección de informe en markdown
 
-## Evaluation Rubric
+## Rúbrica de evaluación
 
-| Criteria | Excellent (4 pts) | Good (3 pts) | Adequate (2 pts) | Poor (1 pt) |
+| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
 |----------|------------------|--------------|------------------|-------------|
-| Bayes calculations | All correct | Minor errors | One correct | Missing |
-| Simulation | Verified analytically | Works but limited | Partially works | Missing |
-| Churn model + plot | Complete and clear | Minor issues | Incomplete | Missing |
-| Report | Clear, non-technical | Good but technical | Too brief | Missing |
+| Cálculos de Bayes | Todos correctos | Errores menores | Uno correcto | Faltante |
+| Simulación | Verificada analíticamente | Funciona pero limitada | Funciona parcialmente | Faltante |
+| Modelo de churn + gráfico | Completo y claro | Problemas menores | Incompleto | Faltante |
+| Informe | Claro, no técnico | Bueno pero técnico | Demasiado breve | Faltante |
 
-**Total: 16 points**
+**Total: 16 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-2.5 hours
+2.5 horas

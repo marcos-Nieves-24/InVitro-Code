@@ -1,68 +1,68 @@
-# Quiz: Data Distribution
+# Quiz: Distribución de datos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**1. A distribution with skewness = -1.5 is:**
+**1. Una distribución con asimetría (skewness) = -1.5 es:**
 
-a) Symmetric
-b) Right-skewed
-c) Left-skewed
+a) Simétrica
+b) Sesgada a la derecha
+c) Sesgada a la izquierda
 d) Bimodal
 
-**2. Excess kurtosis of 0 indicates:**
+**2. Una curtosis excesiva de 0 indica:**
 
-a) Heavy tails
-b) Light tails
-c) Normal distribution tail weight
-d) Bimodality
+a) Colas pesadas
+b) Colas ligeras
+c) Peso de cola de la distribución normal
+d) Bimodalidad
 
-**3. In a right-skewed distribution, which is true?**
+**3. En una distribución sesgada a la derecha, ¿cuál es verdadera?**
 
-a) Mean < Median
-b) Mean > Median
-c) Mean = Median
-d) Mode > Median
+a) Media < Mediana
+b) Media > Mediana
+c) Media = Mediana
+d) Moda > Mediana
 
-**4. The Freedman-Diaconis rule determines:**
+**4. La regla de Freedman-Diaconis determina:**
 
-a) The number of bins for a histogram
-b) The bandwidth for KDE
-c) Whether data is normally distributed
-d) The significance level
+a) La cantidad de bins para un histograma
+b) El ancho de banda para el KDE
+c) Si los datos se distribuyen normalmente
+d) El nivel de significancia
 
-**5. A leptokurtic distribution (kurtosis > 0) has:**
+**5. Una distribución leptocúrtica (curtosis > 0) tiene:**
 
-a) Fewer outliers than normal
-b) More outliers than normal
-c) No outliers
-d) The same number of outliers as normal
+a) Menos valores atípicos que la normal
+b) Más valores atípicos que la normal
+c) Ningún valor atípico
+d) La misma cantidad de valores atípicos que la normal
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**6.** Explain why log-transforming right-skewed gene expression data makes it approximately normal. What is the practical benefit?
+**6.** Explicá por qué la transformación logarítmica de datos de expresión génica sesgados a la derecha los hace aproximadamente normales. ¿Cuál es el beneficio práctico?
 
-**7.** You plot a histogram and see two distinct peaks. What does this suggest about the data? What should you investigate next?
+**7.** Graficás un histograma y ves dos picos distintos. ¿Qué sugiere esto sobre los datos? ¿Qué deberías investigar a continuación?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**8.** Write Python code that:
-- Generates 1000 samples from an exponential distribution with scale=5
-- Creates a histogram with KDE overlay
-- Computes and prints skewness and kurtosis
+**8.** Escribí código en Python que:
+- Genere 1000 muestras de una distribución exponencial con scale=5
+- Cree un histograma con KDE superpuesto
+- Calcule e imprima la asimetría (skewness) y la curtosis
 
 ---
 
-# Answer Key
+# Clave de respuestas
 
-1. c) Left-skewed
-2. c) Normal distribution tail weight
-3. b) Mean > Median
-4. a) The number of bins for a histogram
-5. b) More outliers than normal
+1. c) Sesgada a la izquierda
+2. c) Peso de cola de la distribución normal
+3. b) Media > Mediana
+4. a) La cantidad de bins para un histograma
+5. b) Más valores atípicos que la normal
 
-6. Log-transformation compresses the long right tail and expands the left tail, making the distribution more symmetric. The practical benefit is that many statistical methods (t-tests, linear models, PCA) assume normality, so transformed data meets these assumptions better.
+6. La transformación logarítmica comprime la cola larga derecha y expande la cola izquierda, haciendo la distribución más simétrica. El beneficio práctico es que muchos métodos estadísticos (pruebas t, modelos lineales, PCA) asumen normalidad, así que los datos transformados cumplen mejor estos supuestos.
 
-7. Two peaks (bimodal distribution) suggest the data contains two distinct subgroups. This might indicate different species, treatment vs control groups, or different customer segments. Investigate by coloring the histogram by a categorical variable.
+7. Dos picos (distribución bimodal) sugieren que los datos contienen dos subgrupos distintos. Esto podría indicar diferentes especies, grupos de tratamiento vs. control, o diferentes segmentos de clientes. Investigá coloreando el histograma por una variable categórica.
 
 8. 
 ```python

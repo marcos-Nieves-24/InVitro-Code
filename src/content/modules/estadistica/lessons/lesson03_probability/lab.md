@@ -1,55 +1,55 @@
-# Lab: Probability Fundamentals
+# Lab: Fundamentos de probabilidad
 
-## Objective
+## Objetivo
 
-Apply Bayes' theorem and probability concepts to real-world problems through simulation.
+Aplicá el teorema de Bayes y conceptos de probabilidad a problemas del mundo real mediante simulación.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Instructions
+## Instrucciones
 
-### Part 1: Diagnostic Test Analysis (20 min)
+### Parte 1: Análisis de un test de diagnóstico (20 min)
 
-A biotech company has developed a test for a biomarker.
-- Prevalence: 3%
-- Sensitivity: 92% 
-- Specificity: 88%
+Una empresa de biotecnología desarrolló un test para un biomarcador.
+- Prevalencia: 3%
+- Sensibilidad: 92% 
+- Especificidad: 88%
 
-1. Calculate P(disease | positive) using Bayes' theorem
-2. Simulate 100,000 patients to verify empirically
-3. Calculate P(no disease | negative) — the negative predictive value
-4. Plot posterior probability as a function of prevalence
+1. Calculá P(enfermedad | positivo) usando el teorema de Bayes
+2. Simulá 100,000 pacientes para verificar empíricamente
+3. Calculá P(sin enfermedad | negativo) — el valor predictivo negativo
+4. Graficá la probabilidad posterior como función de la prevalencia
 
-### Part 2: Spam Filter (20 min)
+### Parte 2: Filtro de spam (20 min)
 
-A spam filter has these rates:
-- False positive: 1% (flags legitimate email as spam)
-- False negative: 0.5% (misses spam)
-- 60% of all emails are spam
+Un filtro de spam tiene estas tasas:
+- Falso positivo: 1% (marca correos legítimos como spam)
+- Falso negativo: 0.5% (no detecta el spam)
+- El 60% de todos los correos son spam
 
-1. If an email is flagged as spam, what is the probability it is actually spam?
-2. If an email passes the filter, what is the probability it is actually spam?
+1. Si un correo se marca como spam, ¿cuál es la probabilidad de que realmente sea spam?
+2. Si un correo pasa el filtro, ¿cuál es la probabilidad de que realmente sea spam?
 
-### Part 3: Random Variable Exploration (20 min)
+### Parte 3: Exploración de variables aleatorias (20 min)
 
-1. Define a random variable X = sum of two dice
-2. Compute its PMF theoretically
-3. Simulate 50,000 rolls to verify
-4. Compute E[X] and Var(X)
+1. Definí una variable aleatoria X = suma de dos dados
+2. Calculá su PMF teóricamente
+3. Simulá 50,000 lanzamientos para verificar
+4. Calculá E[X] y Var(X)
 
-## Deliverables
+## Entregables
 
-- Python script with all calculations, simulations, and a plot
-- Written interpretations for each part
+- Script de Python con todos los cálculos, las simulaciones y un gráfico
+- Interpretaciones escritas para cada parte
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Correct Bayes calculations | 3 |
-| Simulation verification | 2 |
-| Spam filter analysis | 2 |
-| Random variable exploration | 3 |
-Total: 10 points
+| Cálculos de Bayes correctos | 3 |
+| Verificación con simulación | 2 |
+| Análisis del filtro de spam | 2 |
+| Exploración de variables aleatorias | 3 |
+Total: 10 puntos

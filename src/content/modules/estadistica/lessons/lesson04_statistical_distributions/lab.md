@@ -1,59 +1,59 @@
-# Lab: Statistical Distributions
+# Lab: Distribuciones estadísticas
 
-## Objective
+## Objetivo
 
-Work with named distributions to model real-world phenomena and understand standardization.
+Trabajá con distribuciones conocidas para modelar fenómenos del mundo real y entendé la estandarización.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
 ## Dataset
 
-Synthetic and real data (iris dataset).
+Datos sintéticos y reales (dataset iris).
 
-## Instructions
+## Instrucciones
 
-### Part 1: Distribution Identification (15 min)
+### Parte 1: Identificación de distribuciones (15 min)
 
-For each scenario, identify the appropriate distribution and compute the requested probability using scipy.stats:
+Para cada escenario, identificá la distribución adecuada y calculá la probabilidad pedida usando scipy.stats:
 
-1. A drug works for 70% of patients. Out of 30 patients, what is the probability exactly 20 respond?
-2. A lab receives an average of 5 samples per hour. What is the probability of receiving exactly 3 samples in the next hour?
-3. Blood glucose levels follow N(100, 15) mg/dL. What percentage of patients have glucose > 140 mg/dL?
+1. Una droga funciona en el 70% de los pacientes. De 30 pacientes, ¿cuál es la probabilidad de que exactamente 20 respondan?
+2. Un laboratorio recibe en promedio 5 muestras por hora. ¿Cuál es la probabilidad de recibir exactamente 3 muestras en la próxima hora?
+3. Los niveles de glucosa en sangre siguen N(100, 15) mg/dL. ¿Qué porcentaje de pacientes tiene glucosa > 140 mg/dL?
 
-### Part 2: Fitting a Normal Distribution (20 min)
+### Parte 2: Ajuste de una distribución normal (20 min)
 
-1. Load the iris dataset
-2. For `sepal_length`, fit a normal distribution (compute mu and sigma from data)
-3. Plot the histogram with the fitted normal PDF overlaid
-4. Create a Q-Q plot using `stats.probplot()` to check normality
-5. Does sepal_length appear normally distributed?
+1. Cargá el dataset iris
+2. Para `sepal_length`, ajustá una distribución normal (calculá mu y sigma a partir de los datos)
+3. Graficá el histograma con la PDF normal ajustada superpuesta
+4. Creá un gráfico Q-Q usando `stats.probplot()` para verificar la normalidad
+5. ¿`sepal_length` parece tener distribución normal?
 
-### Part 3: Standardization (15 min)
+### Parte 3: Estandarización (15 min)
 
-1. Standardize all numeric columns in the iris dataset
-2. Verify mean ≈ 0 and std ≈ 1 for each column
-3. Plot boxplots of original vs standardized data side by side
+1. Estandarizá todas las columnas numéricas del dataset iris
+2. Verificá que la media ≈ 0 y la desv. estándar ≈ 1 para cada columna
+3. Graficá boxplots de los datos originales vs. los estandarizados lado a lado
 
-### Part 4: Central Limit Theorem Demo (10 min)
+### Parte 4: Demostración del teorema central del límite (10 min)
 
-1. Generate 1000 samples from an exponential distribution (skewed!)
-2. Take sample means for sample sizes n = 5, 10, 30, 100 (1000 each)
-3. Plot histograms of the sample means
-4. Observe how the distribution becomes normal as n increases
+1. Generá 1000 muestras de una distribución exponencial (¡sesgada!)
+2. Tomá medias muestrales para tamaños de muestra n = 5, 10, 30, 100 (1000 cada uno)
+3. Graficá histogramas de las medias muestrales
+4. Observá cómo la distribución se vuelve normal a medida que n aumenta
 
-## Deliverables
+## Entregables
 
-- Python script or notebook with all computations and plots
-- Written answers to the interpretation questions
+- Script de Python o notebook con todos los cálculos y gráficos
+- Respuestas escritas a las preguntas de interpretación
 
-## Rubric
+## Rúbrica
 
-| Criteria | Points |
+| Criterio | Puntos |
 |----------|--------|
-| Distribution identification | 3 |
-| Normal fitting and Q-Q plot | 3 |
-| Standardization | 2 |
-| CLT demonstration | 2 |
-Total: 10 points
+| Identificación de distribuciones | 3 |
+| Ajuste normal y gráfico Q-Q | 3 |
+| Estandarización | 2 |
+| Demostración del TCL | 2 |
+Total: 10 puntos
