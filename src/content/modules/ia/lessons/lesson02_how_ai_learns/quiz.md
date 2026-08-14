@@ -1,5 +1,5 @@
 # Quiz: ¿Cómo aprende la IA?
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
 **1. ¿Qué es una frontera de decisión?**
 a) El límite ético de lo que la IA puede decidir
@@ -32,7 +32,7 @@ c) Porque usa demasiada memoria RAM
 d) Porque solo funciona con redes neuronales
 
 ---
-## Answer Key
+## Clave de respuestas
 
 1. **b)** La frontera separa clases. En 2D es una línea; en 3D es un plano; en más dimensiones es un hiperplano.
 2. **b)** k grande suaviza la frontera pero puede perder detalle local. Es un balance.

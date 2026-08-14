@@ -1,5 +1,5 @@
 # Quiz: ¿Qué es la Inteligencia Artificial?
-## Multiple Choice (3 questions)
+## Opción múltiple (3 preguntas)
 
 **1. ¿Cuál de las siguientes NO es una feature (característica medible) para clasificar una célula o conidia?**
 a) El área en µm²
@@ -20,7 +20,7 @@ c) Conversando con los científicos
 d) Siguiendo las instrucciones de un manual de biología
 
 ---
-## Answer Key
+## Clave de respuestas
 
 1. **c)** El nombre del laboratorio no es una propiedad medible de los datos.
 2. **b)** Cada fila es una muestra (biopsia) con sus 30 features.

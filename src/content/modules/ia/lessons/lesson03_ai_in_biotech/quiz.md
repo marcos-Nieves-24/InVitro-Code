@@ -1,5 +1,5 @@
 # Quiz: IA en la Biotecnología
-## Multiple Choice (4 questions)
+## Opción múltiple (4 preguntas)
 
 **1. ¿Qué representa cada punto en el visualizador 3D de proteínas?**
 a) Un átomo de hidrógeno
@@ -26,7 +26,7 @@ c) Los parámetros internos del modelo
 d) El tiempo que tardó el entrenamiento
 
 ---
-## Answer Key
+## Clave de respuestas
 
 1. **b)** Cada Cα representa un aminoácido. La nube de puntos forma el esqueleto de la proteína.
 2. **b)** La velocidad y accesibilidad. AlphaFold predice en horas lo que antes tomaba meses.
