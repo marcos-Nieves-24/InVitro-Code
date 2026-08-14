@@ -1,67 +1,67 @@
-# Quiz: Decision Trees
+# Quiz: Árboles de Decisión
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Gini impurity measures:
+**Q1.** La impureza de Gini mide:
 
-a) The depth of a decision tree
-b) The probability of incorrect classification in a node
-c) The number of samples in a node
-d) The accuracy of the model
+a) La profundidad de un árbol de decisión
+b) La probabilidad de clasificación incorrecta en un nodo
+c) El número de muestras en un nodo
+d) La exactitud del modelo
 
-<details><summary>Answer</summary>b) The probability of incorrect classification in a node (Gini = 1 - Σ(pᵢ²))</details>
+<details><summary>Respuesta</summary>b) La probabilidad de clasificación incorrecta en un nodo (Gini = 1 - Σ(pᵢ²))</details>
 
-**Q2.** A node contains 60 samples of class A and 40 samples of class B. What is the Gini impurity?
+**Q2.** Un nodo contiene 60 muestras de la clase A y 40 de la clase B. ¿Cuál es la impureza de Gini?
 
 a) 0.50
 b) 0.48
 c) 0.52
 d) 0.60
 
-<details><summary>Answer</summary>b) 0.48. Gini = 1 - (0.6² + 0.4²) = 1 - (0.36 + 0.16) = 0.48</details>
+<details><summary>Respuesta</summary>b) 0.48. Gini = 1 - (0.6² + 0.4²) = 1 - (0.36 + 0.16) = 0.48</details>
 
-**Q3.** Information gain is:
+**Q3.** La ganancia de información es:
 
-a) The accuracy of a split
-b) The reduction in impurity after a split
-c) The number of samples in a leaf
-d) The depth of the tree
+a) La exactitud de una división
+b) La reducción de la impureza después de una división
+c) El número de muestras en una hoja
+d) La profundidad del árbol
 
-<details><summary>Answer</summary>b) The reduction in impurity after a split (parent impurity minus weighted child impurities)</details>
+<details><summary>Respuesta</summary>b) La reducción de la impureza después de una división (impureza del nodo padre menos las impurezas ponderadas de los hijos)</details>
 
-**Q4.** A decision tree that grows until every leaf is pure is likely suffering from:
+**Q4.** Un árbol de decisión que crece hasta que cada hoja es pura probablemente sufre de:
 
-a) Underfitting
-b) Overfitting
-c) Multicollinearity
-d) Class imbalance
+a) Subajuste
+b) Sobreajuste
+c) Multicolinealidad
+d) Desbalance de clases
 
-<details><summary>Answer</summary>b) Overfitting — the tree has memorized the training data, including noise</details>
+<details><summary>Respuesta</summary>b) Sobreajuste — el árbol memorizó los datos de entrenamiento, incluido el ruido</details>
 
-**Q5.** Which of the following is NOT a valid way to prevent overfitting in decision trees?
+**Q5.** ¿Cuál de los siguientes NO es una forma válida de prevenir el sobreajuste en los árboles de decisión?
 
-a) Limiting max_depth
-b) Setting min_samples_split to a higher value
-c) Increasing the number of features
-d) Pruning the tree after training
+a) Limitar max_depth
+b) Poner min_samples_split en un valor más alto
+c) Aumentar el número de features
+d) Podar el árbol después del entrenamiento
 
-<details><summary>Answer</summary>c) Increasing the number of features (more features can actually increase overfitting risk)</details>
+<details><summary>Respuesta</summary>c) Aumentar el número de features (más features en realidad pueden aumentar el riesgo de sobreajuste)</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain why decision trees are considered "unstable" classifiers. What does this mean in practice?
+**Q6.** Explicá por qué se considera que los árboles de decisión son clasificadores "inestables". ¿Qué significa esto en la práctica?
 
-<details><summary>Answer</summary>Decision trees are unstable because small changes in the training data can lead to very different trees. A few different samples at the top of the tree change the entire structure. In practice, this means variance is high — trees from different data splits can give different feature importance rankings and predictions. Random Forests address this by averaging many trees.</details>
+<details><summary>Respuesta</summary>Los árboles de decisión son inestables porque pequeños cambios en los datos de entrenamiento pueden llevar a árboles muy diferentes. Unos pocos samples distintos en la parte superior del árbol cambian toda la estructura. En la práctica, esto significa que la varianza es alta — árboles de diferentes divisiones de datos pueden dar distintos rankings de importancia de features y distintas predicciones. Los bosques aleatorios (Random Forests) abordan esto promediando muchos árboles.</details>
 
-**Q7.** Compare Gini impurity and entropy as splitting criteria. When would you choose one over the other?
+**Q7.** Compará la impureza de Gini y la entropía como criterios de división. ¿Cuándo elegirías una sobre la otra?
 
-<details><summary>Answer</summary>Both measure node impurity and produce similar trees in practice. Gini ranges from 0 to 0.5 (binary), entropy from 0 to 1. Gini is slightly faster to compute (no log). Entropy is more sensitive to changes in probability near 0.5. scikit-learn uses Gini by default. The practical difference is minimal — both will find the same splits in most cases.</details>
+<details><summary>Respuesta</summary>Ambas miden la impureza de un nodo y producen árboles similares en la práctica. Gini va de 0 a 0.5 (binario), la entropía de 0 a 1. Gini es ligeramente más rápido de calcular (sin log). La entropía es más sensible a los cambios en la probabilidad cerca de 0.5. scikit-learn usa Gini por defecto. La diferencia práctica es mínima — ambas encontrarán las mismas divisiones en la mayoría de los casos.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `compute_gini(y)` that computes Gini impurity from an array of class labels. Then, write `find_best_split(X, y, feature_idx)` that finds the best threshold for a given feature (maximizing information gain using Gini).
+**Q8.** Escribí una función en Python `compute_gini(y)` que calcule la impureza de Gini a partir de un array de etiquetas de clase. Después, escribí `find_best_split(X, y, feature_idx)` que encuentre el mejor umbral para una feature dada (maximizando la ganancia de información usando Gini).
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

@@ -1,13 +1,13 @@
-# Lab 1: ML Fundamentals — Diagnosing Model Fit
+# Lab 1: Fundamentos de ML — Diagnóstico del ajuste del modelo
 
-## Objectives
+## Objetivos
 
-- Implement train/test split with scikit-learn
-- Train a linear regression model and evaluate performance
-- Diagnose overfitting and underfitting using learning curves
-- Visualize the bias-variance tradeoff
+- Implementá la división entrenamiento/prueba con scikit-learn
+- Entrená un modelo de regresión lineal y evaluá su rendimiento
+- Diagnosticá el sobreajuste y el subajuste usando curvas de aprendizaje
+- Visualizá el tradeoff entre sesgo y varianza
 
-## Setup
+## Configuración
 
 ```python
 import numpy as np
@@ -23,9 +23,9 @@ plt.style.use('seaborn-v0_8-whitegrid')
 np.random.seed(42)
 ```
 
-## Part 1: Train/Test Split
+## Parte 1: División entrenamiento/prueba
 
-Load the diabetes dataset, split into train (80%) and test (20%), train a `LinearRegression`, and print train and test R².
+Cargá el dataset de diabetes, dividilo en entrenamiento (80%) y prueba (20%), entrená un `LinearRegression` e imprimí el R² de entrenamiento y de prueba.
 
 ```python
 data = load_diabetes()
@@ -33,39 +33,39 @@ X, y = data.data, data.target
 # YOUR CODE HERE
 ```
 
-**Check:** Test R² should be approximately 0.45.
+**Verificación:** El R² de prueba debería ser de aproximadamente 0.45.
 
-## Part 2: Learning Curves
+## Parte 2: Curvas de aprendizaje
 
-Use polynomial regression with varying degrees [1, 2, 3, 5, 10, 15] on a synthetic sine wave. For each degree, record train MSE and test MSE. Plot both against degree on a log scale.
+Usá regresión polinómica con grados variables [1, 2, 3, 5, 10, 15] sobre una onda senoidal sintética. Para cada grado, registrá el MSE de entrenamiento y el MSE de prueba. Graficá ambos contra el grado en una escala logarítmica.
 
-**Question:** At what degree does overfitting begin?
+**Pregunta:** ¿A partir de qué grado comienza el sobreajuste?
 
-## Part 3: Diagnose a Mystery Model
+## Parte 3: Diagnóstico de un modelo misterioso
 
-You are given three pre-trained models (A, B, C) with these performances:
+Te dan tres modelos pre-entrenados (A, B, C) con estos rendimientos:
 
-| Model | Train R² | Test R² |
+| Modelo | R² entrenamiento | R² prueba |
 |-------|----------|---------|
 | A | 0.32 | 0.28 |
 | B | 0.99 | 0.99 |
 | C | 0.99 | 0.55 |
 
-Classify each as underfitting, well-fit, overfitting, or suspicious.
+Clasificá cada uno como subajuste, ajuste correcto, sobreajuste o sospechoso.
 
-## Part 4: Cross-Validation
+## Parte 4: Validación cruzada
 
-Use 5-fold cross-validation on the diabetes dataset with `LinearRegression`. Report the mean and standard deviation of the 5 R² scores.
+Usá validación cruzada de 5 pliegues sobre el dataset de diabetes con `LinearRegression`. Informá la media y la desviación estándar de los 5 puntajes de R².
 
 ```python
 scores = cross_val_score(LinearRegression(), X, y, cv=5)
 print(f"CV R²: {scores.mean():.3f} ± {scores.std():.3f}")
 ```
 
-## Deliverables
+## Entregables
 
-- A single notebook or Python script with all parts completed
-- Clearly labeled plots
-- Written answers for Part 3
+- Un único notebook o script de Python con todas las partes completas
+- Gráficos claramente etiquetados
+- Respuestas escritas para la Parte 3
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

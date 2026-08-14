@@ -1,72 +1,72 @@
-# Quiz: ML Fundamentals
+# Quiz: Fundamentos de ML
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** What distinguishes Machine Learning from traditional programming?
+**Q1.** ¿Qué distingue al Machine Learning de la programación tradicional?
 
-a) ML requires more code than traditional programming
-b) In ML, the computer learns rules from data instead of following explicit rules
-c) ML only works with images
-d) ML does not require a computer
+a) El ML requiere más código que la programación tradicional
+b) En el ML, la computadora aprende reglas a partir de los datos en lugar de seguir reglas explícitas
+c) El ML solo funciona con imágenes
+d) El ML no requiere una computadora
 
-<details><summary>Answer</summary>b) In ML, the computer learns rules from data instead of following explicit rules</details>
+<details><summary>Respuesta</summary>b) En el ML, la computadora aprende reglas a partir de los datos en lugar de seguir reglas explícitas</details>
 
-**Q2.** In ML terminology, what is a "feature"?
+**Q2.** En la terminología de ML, ¿qué es una "feature"?
 
-a) The output variable we want to predict
-b) An input variable used to make predictions
-c) A special property of neural networks
-d) The model's accuracy score
+a) La variable de salida que queremos predecir
+b) Una variable de entrada que se usa para hacer predicciones
+c) Una propiedad especial de las redes neuronales
+d) El puntaje de exactitud del modelo
 
-<details><summary>Answer</summary>b) An input variable used to make predictions</details>
+<details><summary>Respuesta</summary>b) Una variable de entrada que se usa para hacer predicciones</details>
 
-**Q3.** A model achieves 99% accuracy on training data but only 62% on test data. This is most likely:
+**Q3.** Un modelo alcanza 99% de exactitud en los datos de entrenamiento pero solo 62% en los datos de prueba. Lo más probable es que sea:
 
-a) Underfitting
-b) Optimal generalization
-c) Overfitting
-d) Data leakage in the test set
+a) Subajuste
+b) Generalización óptima
+c) Sobreajuste
+d) Fuga de datos en el set de prueba
 
-<details><summary>Answer</summary>c) Overfitting</details>
+<details><summary>Respuesta</summary>c) Sobreajuste</details>
 
-**Q4.** The bias-variance tradeoff states that:
+**Q4.** El tradeoff sesgo-varianza establece que:
 
-a) High bias always leads to high variance
-b) As model complexity increases, bias tends to decrease and variance tends to increase
-c) Bias and variance are unrelated
-d) Simple models always outperform complex models
+a) Un sesgo alto siempre lleva a una varianza alta
+b) A medida que aumenta la complejidad del modelo, el sesgo tiende a disminuir y la varianza tiende a aumentar
+c) El sesgo y la varianza no están relacionados
+d) Los modelos simples siempre superan a los complejos
 
-<details><summary>Answer</summary>b) As model complexity increases, bias tends to decrease and variance tends to increase</details>
+<details><summary>Respuesta</summary>b) A medida que aumenta la complejidad del modelo, el sesgo tiende a disminuir y la varianza tiende a aumentar</details>
 
-**Q5.** Which of the following is an example of unsupervised learning?
+**Q5.** ¿Cuál de los siguientes es un ejemplo de aprendizaje no supervisado?
 
-a) Predicting house prices from bedroom count and square footage
-b) Clustering customer purchase patterns without predefined categories
-c) Classifying emails as spam or not spam
-d) Predicting whether a patient has a disease
+a) Predecir precios de casas a partir de la cantidad de dormitorios y los metros cuadrados
+b) Agrupar patrones de compra de clientes sin categorías predefinidas
+c) Clasificar correos como spam o no spam
+d) Predecir si un paciente tiene una enfermedad
 
-<details><summary>Answer</summary>b) Clustering customer purchase patterns without predefined categories</details>
+<details><summary>Respuesta</summary>b) Agrupar patrones de compra de clientes sin categorías predefinidas</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the difference between training and prediction in Machine Learning.
+**Q6.** Explicá la diferencia entre entrenamiento y predicción en el Machine Learning.
 
-<details><summary>Answer</summary>Training is the process where the model learns patterns from labeled data by adjusting its internal parameters. Prediction is applying the trained model to new, unseen data to generate outputs. Training requires labeled data and computational effort; prediction is fast and can be applied to unlabeled data.</details>
+<details><summary>Respuesta</summary>El entrenamiento es el proceso en el que el modelo aprende patrones a partir de datos etiquetados ajustando sus parámetros internos. La predicción consiste en aplicar el modelo entrenado a datos nuevos, nunca vistos, para generar salidas. El entrenamiento requiere datos etiquetados y esfuerzo computacional; la predicción es rápida y puede aplicarse a datos sin etiquetar.</details>
 
-**Q7.** A colleague tells you: "My model has R² = 0.95 on the training set, so it's excellent." Why might this be misleading?
+**Q7.** Un colega te dice: "Mi modelo tiene R² = 0.95 en el set de entrenamiento, así que es excelente". ¿Por qué esto podría ser engañoso?
 
-<details><summary>Answer</summary>A high training R² does not guarantee good generalization. The model could be overfitting — memorizing noise in the training data rather than learning true patterns. The test set R² is the reliable measure of performance. The colleague should evaluate on a held-out test set or use cross-validation.</details>
+<details><summary>Respuesta</summary>Un R² alto en entrenamiento no garantiza una buena generalización. El modelo podría estar sobreajustado — memorizando el ruido de los datos de entrenamiento en lugar de aprender patrones verdaderos. El R² del set de prueba es la medida confiable del rendimiento. El colega debería evaluar en un set de prueba reservado o usar validación cruzada.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `bias_variance_demo(degree)` that:
-1. Generates synthetic sinusoidal data with noise (20 points, `np.sin(2πx) + N(0, 0.2)`)
-2. Fits a polynomial regression of the given degree
-3. Returns the train MSE and test MSE
+**Q8.** Escribí una función en Python `bias_variance_demo(degree)` que:
+1. Genere datos sinusoidales sintéticos con ruido (20 puntos, `np.sin(2πx) + N(0, 0.2)`)
+2. Ajuste una regresión polinómica del grado dado
+3. Devuelva el MSE de entrenamiento y el MSE de prueba
 
-Test your function with degree=1, degree=4, and degree=15.
+Probá tu función con degree=1, degree=4 y degree=15.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

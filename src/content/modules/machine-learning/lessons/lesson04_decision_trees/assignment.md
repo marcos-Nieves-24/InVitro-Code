@@ -1,52 +1,52 @@
-# Assignment 4: Decision Trees
+# Assignment 4: Árboles de Decisión
 
-## Objectives
+## Objetivos
 
-- Build an interpretable decision tree for a medical diagnosis problem
-- Tune hyperparameters to prevent overfitting
-- Present a visual tree that can be explained to clinicians
+- Construir un árbol de decisión interpretable para un problema de diagnóstico médico
+- Ajustar los hiperparámetros para prevenir el sobreajuste
+- Presentar un árbol visual que pueda explicarse a los clínicos
 
 ## Dataset
 
-Use the **Breast Cancer Wisconsin** dataset from scikit-learn.
+Usá el dataset de **Breast Cancer Wisconsin** de scikit-learn.
 
-## Scenario
+## Escenario
 
-You are building a clinical decision support tool. The tool must:
-1. Be interpretable (doctors need to understand why a prediction is made)
-2. Be as small as possible (max 5 levels deep for readability)
-3. Achieve at least 90% test accuracy
+Estás construyendo una herramienta de soporte a decisiones clínicas. La herramienta debe:
+1. Ser interpretable (los médicos necesitan entender por qué se hace una predicción)
+2. Ser lo más pequeña posible (máx. 5 niveles de profundidad para la legibilidad)
+3. Alcanzar al menos 90% de exactitud en prueba
 
-## Instructions
+## Instrucciones
 
-1. **Split** train (70%), validation (15%), test (15%)
-2. **Tune hyperparameters** using validation set:
+1. **Dividí** entrenamiento (70%), validación (15%) y prueba (15%)
+2. **Ajustá los hiperparámetros** usando el set de validación:
    - max_depth: [2, 3, 4, 5]
    - min_samples_split: [2, 5, 10, 20]
    - min_samples_leaf: [1, 5, 10]
-3. **Select the best model** that meets all requirements
-4. **Visualize** the final tree
-5. **Extract decision rules** from the tree (e.g., "If worst radius > 15 and worst concave points > 0.1 → malignant")
-6. **Evaluate** on test set
+3. **Seleccioná el mejor modelo** que cumpla todos los requisitos
+4. **Visualizá** el árbol final
+5. **Extraé las reglas de decisión** del árbol (p. ej., "Si worst radius > 15 y worst concave points > 0.1 → malignant")
+6. **Evaluá** en el set de prueba
 
-## Deliverables
+## Entregables
 
-- Notebook with code
-- Visualized decision tree (export as PNG)
-- List of 5-10 decision rules extracted from the tree
-- Short report answering:
-  - What hyperparameters did you choose and why?
-  - What is the test accuracy?
-  - How many rules are needed to cover 90% of cases?
+- Notebook con el código
+- Árbol de decisión visualizado (exportado como PNG)
+- Lista de 5-10 reglas de decisión extraídas del árbol
+- Informe corto que responda:
+  - ¿Qué hiperparámetros elegiste y por qué?
+  - ¿Cuál es la exactitud de prueba?
+  - ¿Cuántas reglas se necesitan para cubrir el 90% de los casos?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Hyperparameter tuning | Systematic search, justified | Basic search | Minimal | Missing |
-| Tree visualization | Clear, labeled, exported | Visible | Poor quality | Missing |
-| Decision rules | 5+ clear rules | 3-4 rules | 1-2 rules | Missing |
-| Interpretability | Doctor-friendly explanation | Clear | Vague | Missing |
-| Performance | ≥90% with ≤5 depth | Meets one | Meets neither | Not evaluated |
+| Ajuste de hiperparámetros | Búsqueda sistemática, justificada | Búsqueda básica | Mínima | Faltante |
+| Visualización del árbol | Clara, etiquetada, exportada | Visible | Mala calidad | Faltante |
+| Reglas de decisión | 5+ reglas claras | 3-4 reglas | 1-2 reglas | Faltante |
+| Interpretabilidad | Explicación apta para médicos | Clara | Vaga | Faltante |
+| Rendimiento | ≥90% con ≤5 de profundidad | Cumple uno | No cumple ninguno | No evaluado |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas

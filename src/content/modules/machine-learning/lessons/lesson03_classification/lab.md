@@ -1,13 +1,13 @@
-# Lab 3: Classification
+# Lab 3: Clasificación
 
-## Objectives
+## Objetivos
 
-- Train logistic regression models with scikit-learn
-- Evaluate using confusion matrix, precision, recall, F1, ROC AUC
-- Visualize decision boundaries
-- Tune classification thresholds
+- Entrenar modelos de regresión logística con scikit-learn
+- Evaluar usando matriz de confusión, precisión, sensibilidad, F1 y ROC AUC
+- Visualizar los límites de decisión
+- Ajustar los umbrales de clasificación
 
-## Part 1: Synthetic Data
+## Parte 1: Datos sintéticos
 
 ```python
 from sklearn.datasets import make_classification
@@ -15,24 +15,24 @@ X, y = make_classification(n_samples=300, n_features=2, n_redundant=0,
                             class_sep=1.0, random_state=42)
 ```
 
-Train a logistic regression model and plot the decision boundary (similar to the notebook example).
+Entrená un modelo de regresión logística y graficá el límite de decisión (similar al ejemplo del notebook).
 
-## Part 2: Breast Cancer Classification
+## Parte 2: Clasificación de cáncer de mama
 
-Load `load_breast_cancer()`, split with `stratify=y`, train logistic regression, and report:
+Cargá `load_breast_cancer()`, dividí con `stratify=y`, entrená una regresión logística e informá:
 
-- Confusion matrix
-- Precision, recall, F1 for both classes
-- ROC curve with AUC
+- Matriz de confusión
+- Precisión, sensibilidad y F1 para ambas clases
+- Curva ROC con AUC
 
-## Part 3: Threshold Exploration
+## Parte 3: Exploración del umbral
 
-For the breast cancer model:
-1. Compute precision, recall, and F1 for thresholds [0.1, 0.3, 0.5, 0.7, 0.9]
-2. For each threshold, explain what kind of errors increase
-3. Which threshold would you choose if false negatives are 10× more costly than false positives?
+Para el modelo de cáncer de mama:
+1. Calculá la precisión, la sensibilidad y el F1 para los umbrales [0.1, 0.3, 0.5, 0.7, 0.9]
+2. Para cada umbral, explicá qué tipo de errores aumentan
+3. ¿Qué umbral elegirías si los falsos negativos cuestan 10× más que los falsos positivos?
 
-## Part 4: Imbalanced Data
+## Parte 4: Datos desbalanceados
 
 ```python
 from sklearn.datasets import make_classification
@@ -40,14 +40,14 @@ X_imb, y_imb = make_classification(n_samples=1000, weights=[0.95, 0.05],
                                     random_state=42)
 ```
 
-Train logistic regression. Report accuracy, precision, recall, F1. Why is accuracy misleading here?
+Entrená una regresión logística. Informá exactitud, precisión, sensibilidad y F1. ¿Por qué la exactitud es engañosa aquí?
 
-## Deliverables
+## Entregables
 
-- Notebook with all 4 parts
-- Decision boundary plot (Part 1)
-- ROC curve (Part 2)
-- Table of threshold metrics (Part 3)
-- Written explanation of accuracy vs. F1 (Part 4)
+- Notebook con las 4 partes
+- Gráfico del límite de decisión (Parte 1)
+- Curva ROC (Parte 2)
+- Tabla de métricas por umbral (Parte 3)
+- Explicación escrita de exactitud vs. F1 (Parte 4)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

@@ -1,67 +1,67 @@
-# Quiz: Linear Regression
+# Quiz: Regresión Lineal
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** In simple linear regression, what does the coefficient $\beta_1$ represent?
+**Q1.** En la regresión lineal simple, ¿qué representa el coeficiente $\beta_1$?
 
-a) The predicted value of y when x = 0
-b) The change in y for a one-unit change in x
-c) The correlation between x and y
-d) The error term
+a) El valor predicho de y cuando x = 0
+b) El cambio en y por un cambio de una unidad en x
+c) La correlación entre x e y
+d) El término de error
 
-<details><summary>Answer</summary>b) The change in y for a one-unit change in x</details>
+<details><summary>Respuesta</summary>b) El cambio en y por un cambio de una unidad en x</details>
 
-**Q2.** What does R² = 0.70 mean?
+**Q2.** ¿Qué significa R² = 0.70?
 
-a) The model is 70% likely to be correct
-b) 70% of the variance in the target is explained by the features
-c) 30% of predictions are wrong
-d) The correlation coefficient is 0.70
+a) El modelo tiene 70% de probabilidad de ser correcto
+b) El 70% de la varianza del target se explica por las features
+c) El 30% de las predicciones son incorrectas
+d) El coeficiente de correlación es 0.70
 
-<details><summary>Answer</summary>b) 70% of the variance in the target is explained by the features</details>
+<details><summary>Respuesta</summary>b) El 70% de la varianza del target se explica por las features</details>
 
-**Q3.** Which of the following is NOT an assumption of linear regression?
+**Q3.** ¿Cuál de los siguientes NO es un supuesto de la regresión lineal?
 
-a) Linearity between features and target
-b) Independence of observations
-c) Features must be normally distributed
-d) Homoscedasticity (constant variance of residuals)
+a) Linealidad entre las features y el target
+b) Independencia de las observaciones
+c) Las features deben distribuirse normalmente
+d) Homocedasticidad (varianza constante de los residuos)
 
-<details><summary>Answer</summary>c) Features must be normally distributed (only residuals need normality for inference)</details>
+<details><summary>Respuesta</summary>c) Las features deben distribuirse normalmente (solo los residuos necesitan normalidad para la inferencia)</details>
 
-**Q4.** Gradient descent is preferred over the closed-form OLS solution when:
+**Q4.** Se prefiere el descenso por gradiente sobre la solución OLS de forma cerrada cuando:
 
-a) The number of features is very large
-b) The dataset has fewer than 100 samples
-c) The features are categorical
-d) R² is negative
+a) El número de features es muy grande
+b) El dataset tiene menos de 100 muestras
+c) Las features son categóricas
+d) El R² es negativo
 
-<details><summary>Answer</summary>a) The number of features is very large (computational cost of matrix inversion is O(n³))</details>
+<details><summary>Respuesta</summary>a) El número de features es muy grande (el costo computacional de la inversión de matrices es O(n³))</details>
 
-**Q5.** A negative R² value indicates:
+**Q5.** Un valor de R² negativo indica:
 
-a) The model is overfitting
-b) The model performs worse than predicting the mean
-c) The data has no variance
-d) The coefficients are negative
+a) Que el modelo está sobreajustado
+b) Que el modelo rinde peor que predecir la media
+c) Que los datos no tienen varianza
+d) Que los coeficientes son negativos
 
-<details><summary>Answer</summary>b) The model performs worse than predicting the mean</details>
+<details><summary>Respuesta</summary>b) Que el modelo rinde peor que predecir la media</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** A colleague fits a linear regression and gets R² = 0.92 on training data and R² = 0.15 on test data. What is happening and how would you fix it?
+**Q6.** Un colega ajusta una regresión lineal y obtiene R² = 0.92 en los datos de entrenamiento y R² = 0.15 en los de prueba. ¿Qué está pasando y cómo lo arreglarías?
 
-<details><summary>Answer</summary>The model is overfitting — it memorizes training data but fails to generalize. Possible fixes: reduce model complexity (fewer features, polynomial degree), apply regularization (Ridge/Lasso), get more training data, or simplify the feature set.</details>
+<details><summary>Respuesta</summary>El modelo está sobreajustado — memoriza los datos de entrenamiento pero no logra generalizar. Posibles soluciones: reducir la complejidad del modelo (menos features, menor grado polinómico), aplicar regularización (Ridge/Lasso), obtener más datos de entrenamiento o simplificar el conjunto de features.</details>
 
-**Q7.** Explain why the closed-form OLS solution $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ is problematic when $\mathbf{X}^\top\mathbf{X}$ is not invertible. When does this occur?
+**Q7.** Explicá por qué la solución OLS de forma cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ es problemática cuando $\mathbf{X}^\top\mathbf{X}$ no es invertible. ¿Cuándo ocurre esto?
 
-<details><summary>Answer</summary>When $\mathbf{X}^\top\mathbf{X}$ is singular (determinant = 0), it has no inverse. This occurs when features are perfectly multicollinear (one feature is a linear combination of others) or when there are fewer samples than features (n < p). Solutions include removing correlated features, using pseudoinverse, or applying regularization (Ridge adds $\lambda I$ making the matrix invertible).</details>
+<details><summary>Respuesta</summary>Cuando $\mathbf{X}^\top\mathbf{X}$ es singular (determinante = 0), no tiene inversa. Esto ocurre cuando las features son perfectamente multicolineales (una feature es una combinación lineal de otras) o cuando hay menos muestras que features (n < p). Las soluciones incluyen eliminar features correlacionadas, usar la pseudoinversa o aplicar regularización (Ridge agrega $\lambda I$ haciendo la matriz invertible).</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `ridge_regression_scratch(X, y, lambda_val)` that implements Ridge regression (OLS with L2 penalty) using the closed-form solution: $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$. Test it against `sklearn.linear_model.Ridge`.
+**Q8.** Escribí una función en Python `ridge_regression_scratch(X, y, lambda_val)` que implemente la regresión Ridge (OLS con penalización L2) usando la solución de forma cerrada: $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$. Probalo contra `sklearn.linear_model.Ridge`.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

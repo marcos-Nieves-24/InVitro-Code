@@ -1,52 +1,52 @@
-# Assignment 1: ML Fundamentals
+# Assignment 1: Fundamentos de ML
 
-## Objectives
+## Objetivos
 
-- Apply the ML workflow to a real-world dataset
-- Diagnose and fix overfitting and underfitting
-- Write a clear report explaining your findings
+- Aplicar el flujo de trabajo de ML a un dataset del mundo real
+- Diagnosticar y corregir el sobreajuste y el subajuste
+- Escribir un informe claro que explique tus hallazgos
 
 ## Dataset
 
-Use the **California Housing dataset** from scikit-learn:
+Usá el dataset de **California Housing** de scikit-learn:
 
 ```python
 from sklearn.datasets import fetch_california_housing
 data = fetch_california_housing()
 ```
 
-This dataset contains 20,640 samples with 8 features (MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude) and targets are median house values.
+Este dataset contiene 20,640 muestras con 8 features (MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude) y los targets son los valores medios de las casas.
 
-## Instructions
+## Instrucciones
 
-1. **Load and explore** the dataset (shape, feature names, target distribution)
-2. **Split** into train (70%), validation (15%), and test (15%)
-3. **Train a baseline** `LinearRegression` model
-4. **Experiment with complexity:**
-   - Create polynomial features (degree 2, 3, 5)
-   - Train models on each
-   - Plot train vs validation R² against complexity
-5. **Diagnose fit** for each model
-6. **Select the best model** based on validation performance
-7. **Final evaluation** on test set
+1. **Cargá y explorá** el dataset (forma, nombres de las features, distribución del target)
+2. **Dividí** en entrenamiento (70%), validación (15%) y prueba (15%)
+3. **Entrená un modelo baseline** `LinearRegression`
+4. **Experimentá con la complejidad:**
+   - Creá características polinómicas (grado 2, 3, 5)
+   - Entrená modelos con cada una
+   - Graficá el R² de entrenamiento vs validación contra la complejidad
+5. **Diagnosticá el ajuste** de cada modelo
+6. **Seleccioná el mejor modelo** según el rendimiento en validación
+7. **Evaluación final** sobre el set de prueba
 
-## Deliverables
+## Entregables
 
-- Python script or notebook with all code
-- A plot showing train vs validation R² vs model complexity
-- A short report (max 1 page) answering:
-  - Which degree polynomial was optimal?
-  - How did you diagnose overfitting/underfitting?
-  - What is the final test R²?
+- Script de Python o notebook con todo el código
+- Un gráfico que muestre el R² de entrenamiento vs validación contra la complejidad del modelo
+- Un informe corto (máx. 1 página) que responda:
+  - ¿Qué grado de polinomio fue el óptimo?
+  - ¿Cómo diagnosticaste el sobreajuste/subajuste?
+  - ¿Cuál es el R² final de prueba?
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Code correctness | All code runs, no errors | Minor issues | Some errors | Does not run |
-| Train/test split | Correct with validation split | Train/test only | Split incorrect | No split |
-| Complexity experiment | 4+ degrees tested with plot | 3 degrees tested | 1-2 degrees | Missing |
-| Diagnosis | Clear classification of fit | Mostly correct | Vague | Missing |
-| Report | Well-written, insightful | Good insights | Basic | Minimal |
+| Corrección del código | Todo el código corre, sin errores | Problemas menores | Algunos errores | No corre |
+| División entrenamiento/prueba | Correcta con split de validación | Solo entrenamiento/prueba | Split incorrecto | Sin split |
+| Experimento de complejidad | 4+ grados probados con gráfico | 3 grados probados | 1-2 grados | Faltante |
+| Diagnóstico | Clasificación clara del ajuste | Mayormente correcto | Vago | Faltante |
+| Informe | Bien escrito, con perspectiva | Buenas observaciones | Básico | Mínimo |
 
-## Estimated time: 1.5 hours
+## Tiempo estimado: 1.5 horas

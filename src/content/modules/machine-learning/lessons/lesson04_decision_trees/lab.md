@@ -1,55 +1,55 @@
-# Lab 4: Decision Trees
+# Lab 4: Árboles de Decisión
 
-## Objectives
+## Objetivos
 
-- Train and visualize decision trees
-- Understand how depth affects overfitting
-- Compute feature importance
-- Compare Gini vs. entropy
+- Entrenar y visualizar árboles de decisión
+- Entender cómo afecta la profundidad al sobreajuste
+- Calcular la importancia de las features
+- Comparar Gini vs. entropía
 
-## Part 1: Visualize a Tree
+## Parte 1: Visualizar un árbol
 
-Load `load_iris()`, train a `DecisionTreeClassifier(max_depth=3)`, and visualize it using `plot_tree`.
+Cargá `load_iris()`, entrená un `DecisionTreeClassifier(max_depth=3)` y visualizalo usando `plot_tree`.
 
-**Questions:**
-- Which feature is used at the root split?
-- What is the Gini impurity of each leaf?
+**Preguntas:**
+- ¿Qué feature se usa en la división raíz?
+- ¿Cuál es la impureza de Gini de cada hoja?
 
-## Part 2: Depth and Overfitting
+## Parte 2: Profundidad y sobreajuste
 
-On the breast cancer dataset, train trees with max_depth = 1 through 15. Plot train and test accuracy vs. depth.
+Sobre el dataset de cáncer de mama, entrená árboles con max_depth = 1 a 15. Graficá la exactitud de entrenamiento y prueba vs. la profundidad.
 
-**Questions:**
-- At what depth does the tree start overfitting?
-- What is the optimal depth?
-- What happens when max_depth = None?
+**Preguntas:**
+- ¿A qué profundidad empieza el árbol a sobreajustarse?
+- ¿Cuál es la profundidad óptima?
+- ¿Qué pasa cuando max_depth = None?
 
-## Part 3: Feature Importance
+## Parte 3: Importancia de las features
 
-Train a tree with `max_depth=4` on breast cancer. Print feature importances sorted by value.
+Entrená un árbol con `max_depth=4` sobre el cáncer de mama. Imprimí las importancias de las features ordenadas por valor.
 
-- Which are the top 5 features?
-- Do the importances align with domain knowledge (e.g., worst radius, worst concavity are typically important)?
+- ¿Cuáles son las 5 features principales?
+- ¿Las importancias coinciden con el conocimiento del dominio (p. ej., worst radius, worst concavity suelen ser importantes)?
 
-## Part 4: Gini vs. Entropy
+## Parte 4: Gini vs. Entropía
 
-Compare `criterion='gini'` vs `criterion='entropy'` on breast cancer with max_depth=4. Report test accuracy for both.
+Compará `criterion='gini'` vs `criterion='entropy'` en el cáncer de mama con max_depth=4. Informá la exactitud de prueba para ambos.
 
-**Question:** Is there a meaningful difference?
+**Pregunta:** ¿Hay una diferencia significativa?
 
-## Part 5: Decision Tree Regressor
+## Parte 5: Regresor de árbol de decisión
 
-Use `DecisionTreeRegressor` on the diabetes dataset. Report train and test R² at various depths.
+Usá `DecisionTreeRegressor` sobre el dataset de diabetes. Informá el R² de entrenamiento y prueba en varias profundidades.
 
 ```python
 from sklearn.tree import DecisionTreeRegressor
 ```
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Tree visualization (Part 1)
-- Depth vs. accuracy plot (Part 2)
-- Feature importance bar plot (Part 3)
+- Notebook con las 5 partes
+- Visualización del árbol (Parte 1)
+- Gráfico de profundidad vs. exactitud (Parte 2)
+- Gráfico de barras de importancia de features (Parte 3)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

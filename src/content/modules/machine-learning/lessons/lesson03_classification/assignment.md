@@ -1,49 +1,49 @@
-# Assignment 3: Classification
+# Assignment 3: Clasificación
 
-## Objectives
+## Objetivos
 
-- Build a complete classification pipeline
-- Handle imbalanced data appropriately
-- Choose evaluation metrics based on business context
-- Write a data-driven recommendation
+- Construir un pipeline de clasificación completo
+- Manejar datos desbalanceados de forma apropiada
+- Elegir métricas de evaluación según el contexto del negocio
+- Escribir una recomendación basada en datos
 
-## Scenario
+## Escenario
 
-You work for a **healthtech startup** that has developed a blood test to detect a disease. The disease has 3% prevalence in the screened population. Your test produces 30 biomarker measurements per patient.
+Trabajás en una **startup de healthtech** que desarrolló un análisis de sangre para detectar una enfermedad. La enfermedad tiene 3% de prevalencia en la población evaluada. Tu análisis produce 30 mediciones de biomarcadores por paciente.
 
 ## Dataset
 
-Use `load_breast_cancer()` from scikit-learn. Treat malignant = positive (disease present), benign = negative.
+Usá `load_breast_cancer()` de scikit-learn. Tratá malignant = positivo (enfermedad presente), benign = negativo.
 
-## Instructions
+## Instrucciones
 
-1. **Split** into train (60%), validation (20%), test (20%) with stratification
-2. **Train** logistic regression (default settings)
-3. **Evaluate** using all metrics on validation set
-4. **Find optimal threshold** for two scenarios:
-   - Scenario A: Missing a case costs 50× more than a false alarm
-   - Scenario B: False alarms cost 10× more than missing a case
-5. **Final evaluation** on test set using the chosen thresholds
-6. **Write a recommendation** (max 300 words) to the CEO:
-   - What threshold would you use for screening the general population?
-   - What is the tradeoff you are making?
-   - What is the expected false positive rate?
+1. **Dividí** en entrenamiento (60%), validación (20%) y prueba (20%) con estratificación
+2. **Entrená** una regresión logística (configuración por defecto)
+3. **Evaluá** usando todas las métricas en el set de validación
+4. **Encontrá el umbral óptimo** para dos escenarios:
+   - Escenario A: Perderse un caso cuesta 50× más que una falsa alarma
+   - Escenario B: Las falsas alarmas cuestan 10× más que perderse un caso
+5. **Evaluación final** en el set de prueba usando los umbrales elegidos
+6. **Escribí una recomendación** (máx. 300 palabras) para el CEO:
+   - ¿Qué umbral usarías para evaluar a la población general?
+   - ¿Qué tradeoff estás haciendo?
+   - ¿Cuál es la tasa esperada de falsos positivos?
 
-## Deliverables
+## Entregables
 
-- Python script or notebook
-- Table with metrics at different thresholds
-- ROC curve with annotated operating points
-- Recommendation memo to CEO
+- Script de Python o notebook
+- Tabla con métricas en diferentes umbrales
+- Curva ROC con puntos de operación anotados
+- Memo de recomendación para el CEO
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Pipeline | Complete, stratified split | Complete | Partial | Missing |
-| Threshold analysis | Both scenarios with justification | One scenario | Basic | Missing |
-| Metrics | Full set with interpretation | Most metrics | Few metrics | Missing |
-| Recommendation | Insightful, business-aware | Clear | Basic | Missing |
-| Code quality | Clean, documented | Readable | Messy | Does not run |
+| Pipeline | Completo, split estratificado | Completo | Parcial | Faltante |
+| Análisis de umbral | Ambos escenarios con justificación | Un escenario | Básico | Faltante |
+| Métricas | Conjunto completo con interpretación | La mayoría de las métricas | Pocas métricas | Faltante |
+| Recomendación | Con perspectiva, orientada al negocio | Clara | Básica | Faltante |
+| Calidad del código | Limpio, documentado | Legible | Desordenado | No corre |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas
