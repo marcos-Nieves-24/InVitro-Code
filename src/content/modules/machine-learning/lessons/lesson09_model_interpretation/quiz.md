@@ -1,67 +1,67 @@
-# Quiz: Model Interpretation
+# Quiz: Interpretación de modelos
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Permutation importance measures:
+**Q1.** La importancia por permutación mide:
 
-a) How often a feature appears in the model
-b) The drop in model performance when a feature's values are randomly shuffled
-c) The correlation between a feature and the target
-d) The computational cost of using a feature
+a) Con qué frecuencia aparece una feature en el modelo
+b) La caída en el rendimiento del modelo cuando los valores de una feature se mezclan aleatoriamente
+c) La correlación entre una feature y el target
+d) El costo computacional de usar una feature
 
-<details><summary>Answer</summary>b) The drop in model performance when a feature's values are randomly shuffled. A large drop = important feature.</details>
+<details><summary>Respuesta</summary>b) La caída en el rendimiento del modelo cuando los valores de una feature se mezclan aleatoriamente. Una caída grande = feature importante.</details>
 
-**Q2.** A partial dependence plot shows:
+**Q2.** Un gráfico de dependencia parcial muestra:
 
-a) The distribution of a feature
-b) The average model prediction as a function of one feature, averaging out others
-c) The correlation between two features
-d) The training time vs. feature count
+a) La distribución de una feature
+b) La predicción promedio del modelo en función de una feature, promediando las demás
+c) La correlación entre dos features
+d) El tiempo de entrenamiento vs. la cantidad de features
 
-<details><summary>Answer</summary>b) The average model prediction as a function of one feature, holding other features constant through averaging</details>
+<details><summary>Respuesta</summary>b) La predicción promedio del modelo en función de una feature, manteniendo las demás constantes mediante promediado</details>
 
-**Q3.** Which of the following is a LOCAL interpretability method?
+**Q3.** ¿Cuál de las siguientes es un método de interpretabilidad LOCAL?
 
-a) Permutation importance
-b) Partial dependence plot
-c) SHAP values
-d) Impurity-based feature importance
+a) Importancia por permutación
+b) Gráfico de dependencia parcial
+c) Valores SHAP
+d) Importancia de características basada en impureza
 
-<details><summary>Answer</summary>c) SHAP values provide explanations for individual predictions (local), while the others are global methods</details>
+<details><summary>Respuesta</summary>c) Los valores SHAP brindan explicaciones para predicciones individuales (local), mientras que los otros son métodos globales</details>
 
-**Q4.** Impurity-based feature importance can be misleading because:
+**Q4.** La importancia de características basada en impureza puede ser engañosa porque:
 
-a) It is too slow to compute
-b) It favors high-cardinality features (features with many unique values)
-c) It only works for linear models
-d) It always gives the same results as permutation importance
+a) Es demasiado lenta de calcular
+b) Favorece a las features de alta cardinalidad (features con muchos valores únicos)
+c) Solo funciona para modelos lineales
+d) Siempre da los mismos resultados que la importancia por permutación
 
-<details><summary>Answer</summary>b) It favors high-cardinality features because those features create more splits and accumulate more impurity reduction</details>
+<details><summary>Respuesta</summary>b) Favorece a las features de alta cardinalidad porque esas features generan más splits y acumulan más reducción de impureza</details>
 
-**Q5.** Two features are highly correlated (r = 0.95). How does this affect permutation importance?
+**Q5.** Dos features están altamente correlacionadas (r = 0.95). ¿Cómo afecta esto a la importancia por permutación?
 
-a) Both features will show high importance
-b) Both features may show low importance because the model can substitute one for the other
-c) Only the first feature will show importance
-d) Permutation importance handles correlation perfectly
+a) Ambas features mostrarán una importancia alta
+b) Ambas features pueden mostrar una importancia baja porque el modelo puede sustituir una por la otra
+c) Solo la primera feature mostrará importancia
+d) La importancia por permutación maneja las correlaciones perfectamente
 
-<details><summary>Answer</summary>b) Both features may show low importance because when one is shuffled, the model still uses the correlated counterpart to make predictions, so performance drops little</details>
+<details><summary>Respuesta</summary>b) Ambas features pueden mostrar una importancia baja porque cuando se mezcla una, el modelo sigue usando la contraparte correlacionada para hacer predicciones, así que el rendimiento cae poco</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the difference between global and local interpretability. When would you use each?
+**Q6.** Explicá la diferencia entre interpretabilidad global y local. ¿Cuándo usarías cada una?
 
-<details><summary>Answer</summary>Global interpretability explains the overall model behavior — which features matter most and how they affect predictions on average (e.g., permutation importance, PDP). Local interpretability explains a single prediction — why this specific patient was classified as high-risk (e.g., SHAP, LIME). Use global methods for model understanding and debugging; use local methods when you need to explain individual decisions (e.g., why was this loan denied?).</details>
+<details><summary>Respuesta</summary>La interpretabilidad global explica el comportamiento general del modelo: qué features importan más y cómo afectan a las predicciones en promedio (por ejemplo, importancia por permutación, PDP). La interpretabilidad local explica una sola predicción: por qué este paciente puntual fue clasificado como de alto riesgo (por ejemplo, SHAP, LIME). Usá métodos globales para entender y depurar el modelo; usá métodos locales cuando necesitás explicar decisiones individuales (por ejemplo, ¿por qué se rechazó este préstamo?).</details>
 
-**Q7.** A partial dependence plot for "years of experience" in a salary prediction model shows a flat line from 0-2 years, a steep increase from 2-15 years, and a plateau after 15 years. Interpret this.
+**Q7.** Un gráfico de dependencia parcial para "años de experiencia" en un modelo de predicción de salarios muestra una línea plana de 0 a 2 años, un aumento pronunciado de 2 a 15 años y una meseta después de los 15 años. Interpretá esto.
 
-<details><summary>Answer</summary>The PDP shows a non-linear marginal effect: salary is insensitive to experience in the first 2 years (entry-level jobs), increases rapidly between 2-15 years (career progression and skill accumulation), then plateaus after 15 years (senior roles with diminishing returns to additional experience). This suggests the relationship between experience and salary is non-linear and cannot be captured by a simple linear coefficient.</details>
+<details><summary>Respuesta</summary>El PDP muestra un efecto marginal no lineal: el salario es insensible a la experiencia en los primeros 2 años (trabajos de nivel inicial), aumenta rápidamente entre los 2 y los 15 años (progresión de carrera y acumulación de habilidades), y luego se estabiliza después de los 15 años (roles senior con rendimientos decrecientes ante más experiencia). Esto sugiere que la relación entre experiencia y salario es no lineal y no puede capturarse con un coeficiente lineal simple.</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a function `plot_pdp_features(model, X_val, feature_names, features_to_plot)` that creates a 2x3 grid of partial dependence plots for 6 features using `PartialDependenceDisplay.from_estimator`.
+**Q8.** Escribí una función `plot_pdp_features(model, X_val, feature_names, features_to_plot)` que cree una grilla de 2x3 de gráficos de dependencia parcial para 6 features usando `PartialDependenceDisplay.from_estimator`.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import matplotlib.pyplot as plt

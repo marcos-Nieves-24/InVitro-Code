@@ -1,49 +1,49 @@
-# Lab 10: Applications — End-to-End Pipelines
+# Lab 10: Aplicaciones — Pipelines de extremo a extremo
 
-## Objectives
+## Objetivos
 
-- Build complete ML pipelines for regression and classification
-- Work with mixed data types (numeric + categorical)
-- Use GridSearchCV for hyperparameter tuning
-- Combine clustering with classification
+- Construí pipelines de ML completos para regresión y clasificación
+- Trabajá con tipos de datos mixtos (numéricos + categóricos)
+- Usá GridSearchCV para el ajuste de hiperparámetros
+- Combiná clustering con clasificación
 
-## Part 1: Biotech Quality Pipeline
+## Parte 1: Pipeline de calidad biotecnológica
 
-Create a pipeline for the biotech quality dataset:
-1. Create the synthetic dataset (500 samples)
-2. Build a Pipeline: StandardScaler → RandomForestRegressor
-3. Perform GridSearchCV over n_estimators and max_depth
-4. Report best parameters and CV R²
+Creá un pipeline para el dataset de calidad biotecnológica:
+1. Creá el dataset sintético (500 muestras)
+2. Construí un Pipeline: StandardScaler → RandomForestRegressor
+3. Realizá GridSearchCV sobre n_estimators y max_depth
+4. Reportá los mejores parámetros y el R² de validación cruzada
 
-## Part 2: Model Comparison
+## Parte 2: Comparación de modelos
 
-Compare LinearRegression, RandomForestRegressor, and GradientBoostingRegressor on the biotech dataset. Use pipelines with StandardScaler. Report RMSE and R².
+Compará LinearRegression, RandomForestRegressor y GradientBoostingRegressor en el dataset biotecnológico. Usá pipelines con StandardScaler. Reportá RMSE y R².
 
-**Question:** Which model performs best and why?
+**Pregunta:** ¿Cuál modelo rinde mejor y por qué?
 
-## Part 3: Pipeline with Mixed Data
+## Parte 3: Pipeline con datos mixtos
 
-Add a categorical feature `batch_type` to the biotech data. Create a ColumnTransformer that scales numeric features and one-hot encodes categorical features. Build a full pipeline and tune it.
+Agregá una feature categórica `batch_type` a los datos biotecnológicos. Creá un ColumnTransformer que escale las features numéricas y haga one-hot encoding de las features categóricas. Construí un pipeline completo y ajustálo.
 
-## Part 4: SaaS Segmentation + Churn
+## Parte 4: Segmentación SaaS + churn
 
-1. Generate the SaaS customer dataset
-2. Segment customers with K-Means (K=3)
-3. Profile each segment
-4. Train a churn model per segment
-5. Compare AUC across segments
+1. Generá el dataset de clientes SaaS
+2. Segmentá los clientes con K-Means (K=3)
+3. Perfilá cada segmento
+4. Entrená un modelo de churn por segmento
+5. Compará el AUC entre segmentos
 
-**Question:** Do different segments have different churn drivers?
+**Pregunta:** ¿Los distintos segmentos tienen diferentes drivers de churn?
 
-## Part 5: Full Pipeline Function
+## Parte 5: Función de pipeline completo
 
-Write a reusable function that takes X, y, a model, and a param_grid, and returns the best pipeline after GridSearchCV with 5-fold CV.
+Escribí una función reutilizable que tome X, y, un modelo y un param_grid, y devuelva el mejor pipeline después de GridSearchCV con validación cruzada de 5 folds.
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Pipeline with GridSearchCV results (Part 1)
-- Model comparison table (Part 2)
-- Segment profiles (Part 4)
+- Notebook con las 5 partes
+- Pipeline con resultados de GridSearchCV (Parte 1)
+- Tabla de comparación de modelos (Parte 2)
+- Perfiles de segmento (Parte 4)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

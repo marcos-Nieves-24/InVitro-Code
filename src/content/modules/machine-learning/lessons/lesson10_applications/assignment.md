@@ -1,19 +1,19 @@
-# Assignment 10: Applications — Final Integration
+# Assignment 10: Aplicaciones — Integración final
 
-## Objectives
+## Objetivos
 
-- Build a complete end-to-end ML application
-- Choose appropriate models and metrics for the business context
-- Interpret and communicate results
-- Write a professional data science report
+- Construí una aplicación de ML completa de extremo a extremo
+- Elegí modelos y métricas apropiados para el contexto de negocio
+- Interpretá y comunicá los resultados
+- Escribí un informe profesional de data science
 
-## Scenario
+## Escenario
 
-**Choose ONE of the following two scenarios and complete all tasks.**
+**Elegí UNA de las siguientes dos opciones y completá todas las tareas.**
 
-### Option A: Biotech — Cell Culture Yield Prediction
+### Opción A: Biotecnología — Predicción de rendimiento de cultivo celular
 
-A biotech company produces monoclonal antibodies. You have process data from 800 batches. Predict the final **titer (g/L)** and identify which process parameters most affect yield.
+Una empresa biotecnológica produce anticuerpos monoclonales. Tenés datos de proceso de 800 lotes. Predecí el **titer (g/L)** final e identificá qué parámetros de proceso afectan más al rendimiento.
 
 ```python
 np.random.seed(42)
@@ -40,9 +40,9 @@ titer = (
 biotech['titer'] = titer.clip(0)
 ```
 
-### Option B: SaaS — Customer Health Scoring
+### Opción B: SaaS — Customer Health Scoring
 
-A SaaS company wants a **customer health score** (0-100) that predicts churn risk. You have usage data for 2000 accounts.
+Una empresa SaaS quiere un **customer health score** (0-100) que prediga el riesgo de churn. Tenés datos de uso de 2000 cuentas.
 
 ```python
 np.random.seed(42)
@@ -70,37 +70,37 @@ saas['health_score'] = health.clip(0, 100)
 saas['churned_3m'] = (saas['health_score'] < 30).astype(int)
 ```
 
-## Instructions (applies to both options)
+## Instrucciones (aplican a ambas opciones)
 
-1. **EDA:** Explore the data (distributions, correlations, missing values)
-2. **Preprocessing:** Scale numeric features, encode categorical, split
-3. **Modeling:** Compare at least 3 models with cross-validation
-4. **Tuning:** GridSearchCV for the best model
-5. **Interpretation:** Feature importance, PDPs for top features
-6. **Business recommendation:** Write a report (max 500 words)
+1. **EDA:** Explorá los datos (distribuciones, correlaciones, valores faltantes)
+2. **Preprocesamiento:** Escalá las features numéricas, codificá las categóricas, dividí
+3. **Modelado:** Compará al menos 3 modelos con validación cruzada
+4. **Ajuste:** GridSearchCV para el mejor modelo
+5. **Interpretación:** Importancia de características, PDP de las top features
+6. **Recomendación de negocio:** Escribí un informe (máx. 500 palabras)
 
-## Deliverables
+## Entregables
 
-- Notebook with complete analysis
-- Model comparison table
-- Feature importance plot
-- PDPs for top 2 features
-- Business report (max 500 words):
-  - Key findings
-  - Model performance and limitations
-  - Actionable recommendations
-  - Next steps
+- Notebook con el análisis completo
+- Tabla de comparación de modelos
+- Gráfico de importancia de características
+- PDP de las top 2 features
+- Informe de negocio (máx. 500 palabras):
+  - Hallazgos clave
+  - Rendimiento del modelo y limitaciones
+  - Recomendaciones accionables
+  - Próximos pasos
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| EDA | Thorough, with visualizations | Good | Basic | Missing |
-| Preprocessing | Correct scaling + encoding + split | Complete | Partial | Missing |
-| Model comparison | 3+ models, CV, comparison table | 2 models | 1 model | Missing |
-| Hyperparameter tuning | GridSearchCV with justification | GridSearch | Manual | Missing |
-| Interpretation | Importance + PDP + insight | One method | Basic | Missing |
-| Business report | Professional, actionable | Clear | Basic | Missing |
-| Code quality | Clean, reproducible | Readable | Messy | Does not run |
+| EDA | Exhaustivo, con visualizaciones | Bueno | Básico | Faltante |
+| Preprocesamiento | Scaling + encoding + split correctos | Completo | Parcial | Faltante |
+| Comparación de modelos | 3+ modelos, CV, tabla comparativa | 2 modelos | 1 modelo | Faltante |
+| Ajuste de hiperparámetros | GridSearchCV con justificación | GridSearch | Manual | Faltante |
+| Interpretación | Importancia + PDP + insight | Un método | Básica | Faltante |
+| Informe de negocio | Profesional, accionable | Claro | Básico | Faltante |
+| Calidad del código | Limpio, reproducible | Legible | Desordenado | No corre |
 
-## Estimated time: 3 hours
+## Tiempo estimado: 3 horas

@@ -1,25 +1,25 @@
-# Lab 9: Model Interpretation
+# Lab 9: Interpretación de modelos
 
-## Objectives
+## Objetivos
 
-- Compute and interpret permutation importance
-- Generate and interpret partial dependence plots
-- Compare built-in vs. permutation importance
-- Understand how correlations affect importance
+- Calculá e interpretá la importancia por permutación
+- Generá e interpretá los gráficos de dependencia parcial
+- Compará la importancia basada en impureza vs. la importancia por permutación
+- Entendé cómo afectan las correlaciones a la importancia
 
-## Part 1: Permutation Importance on Breast Cancer
+## Parte 1: Importancia por permutación en breast cancer
 
-Train a `RandomForestClassifier` on breast cancer. Compute both impurity and permutation importance. Create a DataFrame comparing them. Plot the top 10 features by permutation importance with error bars.
+Entrená un `RandomForestClassifier` en breast cancer. Calculá tanto la importancia por impureza como la importancia por permutación. Creá un DataFrame que las compare. Graficá las top 10 features según la importancia por permutación con barras de error.
 
-**Question:** Which top features differ between the two methods?
+**Pregunta:** ¿Cuáles top features difieren entre los dos métodos?
 
-## Part 2: Partial Dependence
+## Parte 2: Dependencia parcial
 
-Create PDPs for the top 3 features from permutation importance. For each, describe the shape of the curve.
+Creá los PDP de las top 3 features según la importancia por permutación. Para cada una, describí la forma de la curva.
 
-**Question:** Does the PDP match clinical knowledge about breast cancer?
+**Pregunta:** ¿El PDP coincide con el conocimiento clínico sobre breast cancer?
 
-## Part 3: Correlated Features Experiment
+## Parte 3: Experimento con features correlacionadas
 
 ```python
 np.random.seed(42)
@@ -29,25 +29,25 @@ X_corr[:, 1] = X_corr[:, 0] * 0.95 + np.random.randn(n) * 0.1  # Correlated
 y_corr = X_corr[:, 0] + X_corr[:, 2] + np.random.randn(n) * 0.5
 ```
 
-Train a RandomForestRegressor. Compute permutation importance.
+Entrená un RandomForestRegressor. Calculá la importancia por permutación.
 
-**Question:** What happens to the importance of feature 0 and feature 1? Why?
+**Pregunta:** ¿Qué pasa con la importancia de la feature 0 y la feature 1? ¿Por qué?
 
-## Part 4: PDP for California Housing
+## Parte 4: PDP para California Housing
 
-Train RF on California Housing. Create PDPs for MedInc, AveOccup, and Latitude.
+Entrená un RF en California Housing. Creá los PDP de MedInc, AveOccup y Latitude.
 
-**Question:** What does the Latitude PDP reveal about California real estate?
+**Pregunta:** ¿Qué revela el PDP de Latitude sobre el mercado inmobiliario de California?
 
-## Part 5: Local Explanation with SHAP (conceptual)
+## Parte 5: Explicación local con SHAP (conceptual)
 
-If SHAP is installed: pick one test sample and create a SHAP waterfall plot. If not, explain what you would expect to see.
+Si SHAP está instalado: elegí una muestra de prueba y creá un SHAP waterfall plot. Si no, explicá qué esperarías ver.
 
-## Deliverables
+## Entregables
 
-- Notebook with all 5 parts
-- Importance comparison bar plot (Part 1)
-- PDPs for top features (Part 2)
-- Correlation experiment results (Part 3)
+- Notebook con las 5 partes
+- Gráfico de barras con la comparación de importancia (Parte 1)
+- PDP de las top features (Parte 2)
+- Resultados del experimento de correlación (Parte 3)
 
-## Estimated time: 45 minutes
+## Tiempo estimado: 45 minutos

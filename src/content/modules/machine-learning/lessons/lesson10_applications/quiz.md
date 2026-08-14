@@ -1,67 +1,67 @@
-# Quiz: Applications
+# Quiz: Aplicaciones
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** What is the main benefit of using a Pipeline in scikit-learn?
+**Q1.** ¿Cuál es el principal beneficio de usar un Pipeline en scikit-learn?
 
-a) It trains models faster
-b) It chains preprocessing and modeling into a single reproducible object
-c) It automatically selects the best model
-d) It generates visualizations
+a) Entrena los modelos más rápido
+b) Encadena el preprocesamiento y el modelado en un único objeto reproducible
+c) Selecciona automáticamente el mejor modelo
+d) Genera visualizaciones
 
-<details><summary>Answer</summary>b) It chains preprocessing and modeling into a single reproducible object, ensuring the same preprocessing is applied to train and test data</details>
+<details><summary>Respuesta</summary>b) Encadena el preprocesamiento y el modelado en un único objeto reproducible, garantizando que se aplique el mismo preprocesamiento a los datos de entrenamiento y de prueba</details>
 
-**Q2.** In the biotech quality prediction case study, which process parameter likely has the largest impact on quality?
+**Q2.** En el case study de predicción de calidad biotecnológica, ¿qué parámetro de proceso probablemente tiene el mayor impacto en la calidad?
 
-a) Agitation speed
-b) pH deviation from 7.2
-c) Culture time
-d) Feed rate
+a) Velocidad de agitación
+b) Desviación del pH respecto de 7.2
+c) Tiempo de cultivo
+d) Tasa de alimentación (feed rate)
 
-<details><summary>Answer</summary>b) pH deviation from 7.2 (the simulated formula has a coefficient of 5 for pH deviation, making it the strongest factor)</details>
+<details><summary>Respuesta</summary>b) La desviación del pH respecto de 7.2 (la fórmula simulada tiene un coeficiente de 5 para la desviación del pH, lo que lo convierte en el factor más fuerte)</details>
 
-**Q3.** Why might you build separate churn models per customer segment instead of one global model?
+**Q3.** ¿Por qué podrías construir modelos de churn separados por segmento de clientes en lugar de un único modelo global?
 
-a) It is always more accurate
-b) Different segments may have different churn drivers
-c) It requires less data
-d) It converges faster
+a) Siempre es más preciso
+b) Distintos segmentos pueden tener diferentes drivers de churn
+c) Requiere menos datos
+d) Converge más rápido
 
-<details><summary>Answer</summary>b) Different segments may have different churn drivers. A high-value segment might churn due to price, while a low-engagement segment might churn due to lack of feature adoption.</details>
+<details><summary>Respuesta</summary>b) Distintos segmentos pueden tener diferentes drivers de churn. Un segmento de alto valor podría perder clientes por el precio, mientras que un segmento de baja participación podría perderlos por falta de adopción de features.</details>
 
-**Q4.** ColumnTransformer is useful when:
+**Q4.** ColumnTransformer es útil cuando:
 
-a) All features are numeric
-b) Different columns need different preprocessing (e.g., scaling for numeric, encoding for categorical)
-c) The dataset has no missing values
-d) Only one model is being tested
+a) Todas las features son numéricas
+b) Distintas columnas necesitan distinto preprocesamiento (por ejemplo, scaling para numéricas, encoding para categóricas)
+c) El dataset no tiene valores faltantes
+d) Solo se está probando un modelo
 
-<details><summary>Answer</summary>b) It applies different preprocessing pipelines to different columns, which is essential when working with mixed data types</details>
+<details><summary>Respuesta</summary>b) Aplica distintos pipelines de preprocesamiento a distintas columnas, lo cual es esencial cuando se trabaja con tipos de datos mixtos</details>
 
-**Q5.** GridSearchCV performs:
+**Q5.** GridSearchCV realiza:
 
-a) A random search of hyperparameters
-b) An exhaustive search over specified parameter values with cross-validation
-c) A single model evaluation
-d) Feature selection
+a) Una búsqueda aleatoria de hiperparámetros
+b) Una búsqueda exhaustiva sobre los valores de parámetros especificados con validación cruzada
+c) Una evaluación de un único modelo
+d) Selección de features
 
-<details><summary>Answer</summary>b) An exhaustive search over specified parameter values with cross-validation to find the best hyperparameters</details>
+<details><summary>Respuesta</summary>b) Una búsqueda exhaustiva sobre los valores de parámetros especificados con validación cruzada para encontrar los mejores hiperparámetros</details>
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Describe an end-to-end ML pipeline from raw data to deployment decision. Name at least 5 stages.
+**Q6.** Describí un pipeline de ML de extremo a extremo desde los datos crudos hasta la decisión de despliegue. Nombrá al menos 5 etapas.
 
-<details><summary>Answer</summary>1) Data collection and understanding (EDA), 2) Data preprocessing (cleaning, scaling, encoding), 3) Model training and selection (compare multiple algorithms), 4) Model evaluation (cross-validation, test set, business metrics), 5) Model interpretation (feature importance, PDP), 6) Deployment and monitoring (track performance over time).</details>
+<details><summary>Respuesta</summary>1) Recolección y entendimiento de los datos (EDA), 2) Preprocesamiento de los datos (limpieza, scaling, encoding), 3) Entrenamiento y selección del modelo (comparar múltiples algoritmos), 4) Evaluación del modelo (validación cruzada, set de prueba, métricas de negocio), 5) Interpretación del modelo (importancia de características, PDP), 6) Despliegue y monitoreo (trackear el rendimiento a lo largo del tiempo).</details>
 
-**Q7.** A biotech company's quality prediction model achieves excellent accuracy. However, the manufacturing team refuses to use it. What steps would you take to gain adoption?
+**Q7.** El modelo de predicción de calidad de una empresa biotecnológica logra una exactitud excelente. Sin embargo, el equipo de manufactura se niega a usarlo. ¿Qué pasos darías para lograr su adopción?
 
-<details><summary>Answer</summary>1) Build trust through interpretability: show feature importance and PDPs so the team understands the drivers. 2) Start with a pilot: run the model alongside existing processes without replacing them. 3) Involve domain experts in validating the features and predictions. 4) Communicate in business/process language, not ML jargon. 5) Document limitations clearly. 6) Demonstrate ROI with a concrete example (e.g., "if we had this model last month, we would have caught 3 quality issues earlier").</details>
+<details><summary>Respuesta</summary>1) Generá confianza mediante la interpretabilidad: mostrá la importancia de características y los PDP para que el equipo entienda los drivers. 2) Empezá con un piloto: corré el modelo en paralelo con los procesos existentes sin reemplazarlos. 3) Involucrá a los expertos del dominio en la validación de las features y las predicciones. 4) Comunicate en lenguaje de negocio/proceso, no en jerga de ML. 5) Documentá las limitaciones con claridad. 6) Demostrá el ROI con un ejemplo concreto (por ejemplo, "si hubiéramos tenido este modelo el mes pasado, habríamos detectado 3 problemas de calidad antes").</details>
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `regression_pipeline_comparison(X, y)` that creates a pipeline with StandardScaler for each of LinearRegression, RandomForestRegressor (n=100), and GradientBoostingRegressor (n=100). It returns a DataFrame comparing their RMSE and R² using 5-fold cross-validation.
+**Q8.** Escribí una función en Python `regression_pipeline_comparison(X, y)` que cree un pipeline con StandardScaler para cada uno de LinearRegression, RandomForestRegressor (n=100) y GradientBoostingRegressor (n=100). Devuelve un DataFrame comparando su RMSE y su R² usando validación cruzada de 5 folds.
 
-<details><summary>Answer</summary>
+<details><summary>Respuesta</summary>
 
 ```python
 import numpy as np

@@ -1,55 +1,55 @@
-# Assignment 9: Model Interpretation
+# Assignment 9: Interpretación de modelos
 
-## Objectives
+## Objetivos
 
-- Interpret a complex model using multiple methods
-- Communicate findings to a non-technical audience
-- Make a data-driven recommendation
+- Interpretá un modelo complejo usando múltiples métodos
+- Comunicá los hallazgos a una audiencia no técnica
+- Hacé una recomendación basada en datos
 
 ## Dataset
 
-Use the **Breast Cancer** dataset. Train a `RandomForestClassifier`.
+Usá el dataset de **Breast Cancer**. Entrená un `RandomForestClassifier`.
 
-## Scenario
+## Escenario
 
-You are a data scientist at a hospital. You've built a cancer diagnosis model with >95% accuracy. The clinical team wants to understand the model before deploying it.
+Sos una data scientist en un hospital. Construiste un modelo de diagnóstico de cáncer con >95% de exactitud. El equipo clínico quiere entender el modelo antes de desplegarlo.
 
-## Instructions
+## Instrucciones
 
-1. **Train** a Random Forest (tune briefly)
-2. **Global interpretation:**
-   - Compute permutation importance (top 5 features)
-   - Create PDPs for the top 2 features
-   - Write a plain-English explanation of what drives cancer predictions
-3. **Local interpretation:**
-   - Pick 2 test samples (one malignant, one benign)
-   - Explain each prediction using the top features
-   - For each, say what pushed the prediction toward malignant or benign
-4. **Validate with domain knowledge:**
-   - Check: do the important features make clinical sense?
-   - Are there any suspicious features that might cause bias?
-5. **Write a memo** (max 500 words) to the clinical team:
-   - How does the model work?
-   - Which features are most important?
-   - What are the limitations?
-   - Would you recommend deployment?
+1. **Entrená** un Random Forest (ajustálo brevemente)
+2. **Interpretación global:**
+   - Calculá la importancia por permutación (top 5 features)
+   - Creá los PDP de las top 2 features
+   - Escribí una explicación en lenguaje sencillo de qué impulsa las predicciones de cáncer
+3. **Interpretación local:**
+   - Elegí 2 muestras de prueba (una maligna, una benigna)
+   - Explicá cada predicción usando las top features
+   - Para cada una, decí qué empujó la predicción hacia maligno o benigno
+4. **Validá con conocimiento del dominio:**
+   - Verificá: ¿las features importantes tienen sentido clínico?
+   - ¿Hay alguna feature sospechosa que pueda causar sesgo?
+5. **Escribí un memo** (máx. 500 palabras) para el equipo clínico:
+   - ¿Cómo funciona el modelo?
+   - ¿Qué features son las más importantes?
+   - ¿Cuáles son las limitaciones?
+   - ¿Recomendarías el despliegue?
 
-## Deliverables
+## Entregables
 
-- Notebook with all analyses
-- Permutation importance plot
-- PDP plots for top 2 features
-- Two local explanations (one per class)
-- Memo to clinical team
+- Notebook con todos los análisis
+- Gráfico de importancia por permutación
+- Gráficos PDP de las top 2 features
+- Dos explicaciones locales (una por clase)
+- Memo para el equipo clínico
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Adequate (2) | Needs Work (1) |
+| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
 |----------|--------------|----------|-------------|----------------|
-| Global interpretation | Clear, thorough | Mostly clear | Basic | Missing |
-| Local interpretation | Detailed, insightful | Clear | Basic | Missing |
-| Clinical validation | Meaningful domain discussion | Some discussion | Minimal | Missing |
-| Memo | Professional, persuasive | Clear | Basic | Unclear |
-| Code quality | Clean, documented | Readable | Messy | Does not run |
+| Interpretación global | Clara, exhaustiva | Bastante clara | Básica | Faltante |
+| Interpretación local | Detallada, perspicaz | Clara | Básica | Faltante |
+| Validación clínica | Discusión de dominio significativa | Alguna discusión | Mínima | Faltante |
+| Memo | Profesional, convincente | Claro | Básico | Confuso |
+| Calidad del código | Limpio, documentado | Legible | Desordenado | No corre |
 
-## Estimated time: 2 hours
+## Tiempo estimado: 2 horas
