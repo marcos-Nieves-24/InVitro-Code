@@ -1,76 +1,76 @@
-# Quiz: Transparency and Explainability
+# Quiz: Transparencia y explicabilidad
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Which of the following best describes the difference between interpretability and explainability?
+**Q1.** ¿Cuál de las siguientes describe mejor la diferencia entre interpretabilidad y explicabilidad?
 
-A. Interpretability is about global understanding; explainability is about local understanding
-B. Interpretability refers to understanding the model's inner workings; explainability refers to understanding why a specific prediction was made
-C. Interpretability is for linear models; explainability is for tree-based models
-D. There is no meaningful difference
+A. La interpretabilidad trata sobre la comprensión global; la explicabilidad trata sobre la comprensión local
+B. La interpretabilidad se refiere a comprender el funcionamiento interno del modelo; la explicabilidad se refiere a comprender por qué se hizo una predicción específica
+C. La interpretabilidad es para modelos lineales; la explicabilidad es para modelos basados en árboles
+D. No hay una diferencia significativa
 
-**Q2.** LIME explains a prediction by:
+**Q2.** LIME explica una predicción:
 
-A. Computing gradients through the model to identify influential features
-B. Fitting a simple interpretable model locally around the prediction
-C. Calculating each feature's contribution using game theory
-D. Visualizing the decision tree that produced the prediction
+A. Calculando gradientes a través del modelo para identificar features influyentes
+B. Ajustando un modelo simple e interpretable localmente alrededor de la predicción
+C. Calculando la contribución de cada feature usando teoría de juegos
+D. Visualizando el árbol de decisión que produjo la predicción
 
-**Q3.** Which property of SHAP values ensures that the sum of feature attributions equals the prediction minus the average prediction?
+**Q3.** ¿Qué propiedad de los valores SHAP garantiza que la suma de las atribuciones de features sea igual a la predicción menos la predicción promedio?
 
-A. Symmetry
-B. Efficiency
-C. Additivity
+A. Simetría
+B. Eficiencia
+C. Aditividad
 D. Dummy
 
-**Q4.** A model-agnostic explanation method:
+**Q4.** Un método de explicación agnóstico del modelo:
 
-A. Only works for neural networks
-B. Works with any machine learning model
-C. Requires access to the training data
-D. Only works for classification problems
+A. Solo funciona para redes neuronales
+B. Funciona con cualquier modelo de machine learning
+C. Requiere acceso a los datos de entrenamiento
+D. Solo funciona para problemas de clasificación
 
-**Q5.** What is a key limitation of post-hoc explanation methods like LIME?
+**Q5.** ¿Cuál es una limitación clave de los métodos de explicación post-hoc como LIME?
 
-A. They are too slow for real-time use
-B. They approximate the model and can be incorrect or unstable
-C. They only work for linear models
-D. They require the model to be open-source
+A. Son demasiado lentos para uso en tiempo real
+B. Aproximan el modelo y pueden ser incorrectos o inestables
+C. Solo funcionan para modelos lineales
+D. Requieren que el modelo sea de código abierto
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the black box problem. Why is it especially concerning in healthcare and criminal justice applications?
+**Q6.** Explicá el problema de la caja negra. ¿Por qué es especialmente preocupante en las aplicaciones de salud y justicia penal?
 
-**Q7.** A bank uses a Gradient Boosting model for loan approvals and uses LIME to generate explanations for denied applicants. A denied applicant receives an explanation and sues, claiming the model is discriminatory. The bank argues the explanation shows the model is fair. What are the weaknesses of the bank's position?
+**Q7.** Un banco usa un modelo Gradient Boosting para aprobar préstamos y usa LIME para generar explicaciones para los postulantes rechazados. Un postulante rechazado recibe una explicación y demanda, alegando que el modelo es discriminatorio. El banco argumenta que la explicación demuestra que el modelo es equitativo. ¿Cuáles son las debilidades de la posición del banco?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `explain_prediction(model, instance, feature_names, explainer_type='lime')` that:
-- Takes a trained classifier, a single instance (1D array), feature names, and explainer type
-- If `explainer_type='lime'`, creates a LIME explainer and returns the explanation as a list of (feature, weight) tuples
-- If `explainer_type='shap'`, creates a SHAP explainer (assume model supports SHAP) and returns the SHAP values for the instance
+**Q8.** Escribí una función de Python `explain_prediction(model, instance, feature_names, explainer_type='lime')` que:
+- Reciba un clasificador entrenado, una sola instancia (array 1D), los nombres de las features y el tipo de explainer
+- Si `explainer_type='lime'`, cree un explainer de LIME y devuelva la explicación como una lista de tuplas (feature, weight)
+- Si `explainer_type='shap'`, cree un explainer de SHAP (asumí que el modelo soporta SHAP) y devuelva los valores SHAP para la instancia
 
-You do not need to train the model. Assume `lime` and `shap` libraries are imported.
+No necesitás entrenar el modelo. Asumí que las librerías `lime` y `shap` están importadas.
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** B — Interpretability = understanding model inner workings; explainability = understanding why a specific prediction was made.
+**Q1.** B — Interpretabilidad = comprender el funcionamiento interno del modelo; explicabilidad = comprender por qué se hizo una predicción específica.
 
-**Q2.** B — LIME fits a simple interpretable model locally around the prediction.
+**Q2.** B — LIME ajusta un modelo simple e interpretable localmente alrededor de la predicción.
 
-**Q3.** B — Efficiency ensures the sum of Shapley values equals the prediction minus the average prediction.
+**Q3.** B — La eficiencia garantiza que la suma de los valores Shapley sea igual a la predicción menos la predicción promedio.
 
-**Q4.** B — Model-agnostic methods work with any model type.
+**Q4.** B — Los métodos agnósticos del modelo funcionan con cualquier tipo de modelo.
 
-**Q5.** B — Post-hoc explanations approximate the model and can be incorrect, unstable, or misleading.
+**Q5.** B — Las explicaciones post-hoc aproximan el modelo y pueden ser incorrectas, inestables o engañosas.
 
-**Q6.** The black box problem refers to the opacity of complex ML models (deep neural networks, ensembles) whose internal decision processes are not directly understandable. In healthcare, a black box diagnostic model could miss rare conditions without anyone understanding why. In criminal justice, a defendant's sentence could be influenced by an unexplainable model, violating due process and making accountability impossible.
+**Q6.** El problema de la caja negra se refiere a la opacidad de los modelos complejos de machine learning (redes neuronales profundas, ensembles) cuyos procesos internos de decisión no son directamente comprensibles. En salud, un modelo de diagnóstico de caja negra podría no detectar enfermedades raras sin que nadie entienda por qué. En justicia penal, la sentencia de un acusado podría verse influida por un modelo inexplicable, violando el debido proceso e imposibilitando la responsabilidad.
 
-**Q7.** Weaknesses: (1) LIME explanations are approximations and can be unstable — different perturbation parameters might yield different explanations. (2) LIME explains individual predictions but may miss systematic biases that only appear across populations. (3) The explanation may highlight non-discriminatory features while the model still uses proxy features for protected attributes. (4) An explanation does not prove the model is fair overall — a local explanation can be correct while global behavior is discriminatory.
+**Q7.** Debilidades: (1) Las explicaciones de LIME son aproximaciones y pueden ser inestables — diferentes parámetros de perturbación podrían producir explicaciones diferentes. (2) LIME explica predicciones individuales pero puede pasar por alto biases sistemáticos que solo aparecen entre poblaciones. (3) La explicación puede destacar features no discriminatorias mientras el modelo sigue usando features proxy de atributos protegidos. (4) Una explicación no demuestra que el modelo sea equitativo en general — una explicación local puede ser correcta mientras el comportamiento global es discriminatorio.
 
-**Q8.** Sample solution:
+**Q8.** Solución de ejemplo:
 
 ```python
 def explain_prediction(model, instance, feature_names, explainer_type='lime'):

@@ -1,69 +1,69 @@
-# Lab: Ethical Analysis of an AI System
+# Lab: Análisis ético de un sistema de IA
 
-## Objective
+## Objetivo
 
-Practice applying the five ethical principles of AI ethics to real-world systems. Develop the ability to identify ethical risks, trade-offs, and mitigation strategies.
+Practicar la aplicación de los cinco principios éticos de la ética de la IA a sistemas del mundo real. Desarrollar la capacidad de identificar riesgos éticos, concesiones y estrategias de mitigación.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 1: Introduction to AI Ethics
+Lección 1: Introducción a la ética de la IA
 
-## Materials
+## Materiales
 
-- Pen and paper or a text editor
-- Access to news articles or case studies about AI systems (provided below)
+- Lapicera y papel o un editor de texto
+- Acceso a artículos de noticias o casos de estudio sobre sistemas de IA (provistos abajo)
 
-## Instructions
+## Instrucciones
 
-### Part 1: Ethical Analysis (20 minutes)
+### Parte 1: Análisis ético (20 minutos)
 
-Choose one of the following AI systems. Read the brief description and conduct an ethical analysis.
+Elegí uno de los siguientes sistemas de IA. Leé la descripción breve y realizá un análisis ético.
 
-**Option A: AI Recruiting Tool**
+**Opción A: Herramienta de reclutamiento con IA**
 
-A company develops an ML system to screen job applicants. The model is trained on the company's historical hiring data (past 10 years). The company's workforce is 70% male and 85% from the same demographic group. The model learns to favor candidates who match this profile. It filters out resumes from women's colleges and lowers scores for candidates with non-English names.
+Una empresa desarrolla un sistema de machine learning para filtrar postulantes a un puesto. El modelo se entrena con los datos históricos de contratación de la empresa (últimos 10 años). La fuerza laboral de la empresa es 70% masculina y 85% del mismo grupo demográfico. El modelo aprende a favorecer candidatos que coinciden con este perfil. Filtra los currículums de universidades femeninas y reduce los puntajes de candidatos con nombres no ingleses.
 
-**Option B: AI Detection of Sepsis**
+**Opción B: Detección de sepsis con IA**
 
-A hospital deploys an AI system that monitors ICU patients and predicts sepsis onset. The model was trained on data from urban hospitals with predominantly white patients. When deployed in a rural hospital serving a predominantly Indigenous population, the model triggers false alarms 3x more frequently and misses true sepsis cases 2x more frequently compared to its performance at the original hospital.
+Un hospital implementa un sistema de IA que monitorea a pacientes de UCI y predice el inicio de sepsis. El modelo se entrenó con datos de hospitales urbanos con pacientes predominantemente blancos. Cuando se implementa en un hospital rural que atiende a una población predominantemente indígena, el modelo dispara alarmas falsas 3 veces más seguido y no detecta casos reales de sepsis 2 veces más seguido en comparación con su desempeño en el hospital original.
 
-**Option C: SaaS Content Moderation**
+**Opción C: Moderación de contenido SaaS**
 
-A social media platform uses an ML system to automatically moderate content. The model is trained on human-labeled data where moderators flagged hate speech. The model systematically flags African American Vernacular English (AAVE) as toxic at a much higher rate than Standard American English, silencing minority voices.
+Una plataforma de redes sociales usa un sistema de machine learning para moderar contenido automáticamente. El modelo se entrena con datos etiquetados por humanos donde los moderadores marcaban discurso de odio. El modelo marca el inglés vernáculo afroamericano (AAVE) como tóxico a una tasa mucho más alta que el inglés americano estándar, silenciando las voces de las minorías.
 
-For your chosen system, write a short analysis addressing each of the five principles:
+Para tu sistema elegido, escribí un análisis breve que aborde cada uno de los cinco principios:
 
-1. **Beneficence:** What benefits does this system produce? Who benefits?
-2. **Non-maleficence:** What harm could this system cause? Who might be harmed?
-3. **Autonomy:** Does the system respect human agency? Are affected people informed?
-4. **Justice:** Are benefits and burdens distributed equitably? Are vulnerable groups protected?
-5. **Explicability:** Is the system's decision process transparent? Who is accountable?
+1. **Beneficencia:** ¿Qué beneficios produce este sistema? ¿Quién se beneficia?
+2. **No maleficencia:** ¿Qué daño podría causar este sistema? ¿Quién podría resultar perjudicado?
+3. **Autonomía:** ¿El sistema respeta la agencia humana? ¿Las personas afectadas están informadas?
+4. **Justicia:** ¿Los beneficios y las cargas se distribuyen de forma equitativa? ¿Los grupos vulnerables están protegidos?
+5. **Explicabilidad:** ¿El proceso de decisión del sistema es transparente? ¿Quién es responsable?
 
-### Part 2: Mitigation Design (15 minutes)
+### Parte 2: Diseño de mitigación (15 minutos)
 
-For the system you analyzed, propose three concrete changes to address the ethical problems you identified. Be specific — not just "reduce bias" but "retrain the model using stratified sampling to ensure demographic representation in the training data."
+Para el sistema que analizaste, proponé tres cambios concretos para abordar los problemas éticos que identificaste. Sé específico — no solo "reducir el bias" sino "reentrenar el modelo con muestreo estratificado para asegurar representación demográfica en los datos de entrenamiento."
 
-### Part 3: Group Discussion (10 minutes)
+### Parte 3: Discusión grupal (10 minutos)
 
-Share your analysis with a partner or in a small group. Discuss:
+Compartí tu análisis con un compañero o en un grupo pequeño. Debatí:
 
-- Did you identify different ethical problems?
-- How did you resolve trade-offs between principles?
-- Are your proposed mitigations feasible? What barriers might exist?
+- ¿Identificaron problemas éticos diferentes?
+- ¿Cómo resolvieron las concesiones entre principios?
+- ¿Son viables las mitigaciones que propusieron? ¿Qué barreras podrían existir?
 
-## Deliverables
+## Entregables
 
-Submit your written analysis (Part 1) and mitigation proposals (Part 2) as a PDF or text document.
+Enviá tu análisis escrito (Parte 1) y tus propuestas de mitigación (Parte 2) como PDF o documento de texto.
 
-## Rubric
+## Rúbrica
 
-| Criteria | Excellent (4) | Good (3) | Satisfactory (2) | Needs Improvement (1) |
+| Criterio | Excelente (4) | Bueno (3) | Satisfactorio (2) | Necesita mejorar (1) |
 |----------|--------------|----------|-----------------|----------------------|
-| Principle identification | All five principles correctly identified and applied | Four principles correctly applied | Three principles correctly applied | Fewer than three |
-| Depth of analysis | Analysis shows nuanced understanding of trade-offs | Analysis identifies key issues | Surface-level analysis | Missing or incorrect |
-| Mitigation quality | Three specific, feasible mitigations | Two specific mitigations | One mitigation | No mitigations or unrealistic |
-| Clarity | Well-organized, clear writing | Mostly clear | Somewhat unclear | Difficult to follow |
+| Identificación de principios | Los cinco principios correctamente identificados y aplicados | Cuatro principios correctamente aplicados | Tres principios correctamente aplicados | Menos de tres |
+| Profundidad del análisis | El análisis muestra comprensión matizada de las concesiones | El análisis identifica los problemas clave | Análisis superficial | Faltante o incorrecto |
+| Calidad de la mitigación | Tres mitigaciones específicas y viables | Dos mitigaciones específicas | Una mitigación | Sin mitigaciones o poco realistas |
+| Claridad | Escritura bien organizada y clara | Mayormente clara | Algo poco clara | Difícil de seguir |

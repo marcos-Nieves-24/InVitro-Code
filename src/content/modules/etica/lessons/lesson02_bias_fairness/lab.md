@@ -1,80 +1,80 @@
-# Lab: Fairness Audit of a Machine Learning Model
+# Lab: Auditoría de equidad de un modelo de machine learning
 
-## Objective
+## Objetivo
 
-Conduct a complete fairness audit of a classification model. You will detect bias, compute multiple fairness metrics, and apply a mitigation strategy.
+Realizar una auditoría de equidad completa de un modelo de clasificación. Vas a detectar bias, calcular múltiples métricas de equidad y aplicar una estrategia de mitigación.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 2: Bias and Fairness, Python (pandas, sklearn)
+Lección 2: Bias y equidad, Python (pandas, sklearn)
 
 ## Dataset
 
-We provide a synthetic dataset `credit_data.csv` with the following columns:
+Proveemos un dataset sintético `credit_data.csv` con las siguientes columnas:
 
-- `age`: applicant age
-- `income`: annual income (USD)
-- `credit_score`: credit score (300–850)
-- `loan_amount`: requested loan amount
-- `gender`: applicant gender (M/F)
-- `default`: whether the applicant defaulted (1 = default, 0 = repaid)
+- `age`: edad del postulante
+- `income`: ingreso anual (USD)
+- `credit_score`: score de crédito (300–850)
+- `loan_amount`: monto del préstamo solicitado
+- `gender`: género del postulante (M/F)
+- `default`: si el postulante incurrió en default (1 = default, 0 = pagó)
 
-The dataset contains 10,000 records.
+El dataset contiene 10,000 registros.
 
-## Instructions
+## Instrucciones
 
-### Part 1: Data Exploration (10 minutes)
+### Parte 1: Exploración de datos (10 minutos)
 
-1. Load the dataset. Compute the default rate by gender.
-2. Check the distribution of income and credit score by gender.
-3. Are there any obvious disparities?
+1. Cargá el dataset. Calculá la tasa de default por género.
+2. Revisá la distribución de ingresos y score de crédito por género.
+3. ¿Hay disparidades evidentes?
 
-### Part 2: Model Training and Fairness Metrics (20 minutes)
+### Parte 2: Entrenamiento del modelo y métricas de equidad (20 minutos)
 
-1. Train a logistic regression model to predict `default` (do NOT include `gender`).
-2. Evaluate accuracy, precision, recall, F1 on the test set.
-3. Compute and report the following fairness metrics:
-   - Demographic parity difference
-   - Equal opportunity difference (TPR difference)
-   - FPR difference
-   - Disparate impact ratio
-4. Visualize the metrics using a bar chart.
+1. Entrená un modelo de regresión logística para predecir `default` (NO incluyas `gender`).
+2. Evaluá accuracy, precision, recall, F1 en el conjunto de prueba.
+3. Calculá y reportá las siguientes métricas de equidad:
+   - Diferencia de paridad demográfica
+   - Diferencia de igualdad de oportunidades (diferencia de TPR)
+   - Diferencia de FPR
+   - Ratio de impacto dispar
+4. Visualizá las métricas con un gráfico de barras.
 
-### Part 3: Threshold Analysis (10 minutes)
+### Parte 3: Análisis de umbrales (10 minutos)
 
-1. Vary the decision threshold from 0.1 to 0.9 in steps of 0.1.
-2. For each threshold, compute demographic parity and equal opportunity differences.
-3. Plot both metrics as a function of threshold.
-4. Is there a threshold that minimizes unfairness? What happens to accuracy?
+1. Variá el umbral de decisión de 0.1 a 0.9 en pasos de 0.1.
+2. Para cada umbral, calculá las diferencias de paridad demográfica e igualdad de oportunidades.
+3. Graficá ambas métricas en función del umbral.
+4. ¿Hay un umbral que minimice la inequidad? ¿Qué pasa con la accuracy?
 
-### Part 4: Mitigation (15 minutes)
+### Parte 4: Mitigación (15 minutos)
 
-1. Apply sample reweighing (as shown in the lesson) to balance representation by gender.
-2. Retrain the model with sample weights.
-3. Recompute all fairness metrics.
-4. Compare accuracy before and after mitigation.
+1. Aplicá el reponderado de muestras (como se mostró en la lección) para balancear la representación por género.
+2. Reentrená el modelo con los pesos de las muestras.
+3. Recalculá todas las métricas de equidad.
+4. Compará la accuracy antes y después de la mitigación.
 
-### Part 5: Discussion (5 minutes)
+### Parte 5: Discusión (5 minutos)
 
-Write a paragraph summarizing your findings. Which fairness definition is most appropriate for credit default prediction? What are the limitations of your mitigation approach?
+Escribí un párrafo resumiendo tus hallazgos. ¿Qué definición de equidad es más apropiada para la predicción de default de crédito? ¿Cuáles son las limitaciones de tu enfoque de mitigación?
 
-## Deliverables
+## Entregables
 
-Submit a Jupyter notebook (`.ipynb`) with:
-- All code and outputs
-- Answers to the discussion questions in markdown cells
-- Visualizations
+Enviá un notebook de Jupyter (`.ipynb`) con:
+- Todo el código y las salidas
+- Respuestas a las preguntas de discusión en celdas de markdown
+- Visualizaciones
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Data exploration | 15 | Thorough with observations | Adequate | Minimal | Missing |
-| Fairness metrics | 30 | All computed and interpreted | Most computed | Some computed | Missing |
-| Threshold analysis | 20 | Complete with plot and interpretation | Partial | Minimal | Missing |
-| Mitigation | 20 | Applied and compared correctly | Applied but incomplete | Attempted | Missing |
-| Discussion | 15 | Insightful analysis | Good observations | Basic | Missing |
+| Exploración de datos | 15 | Completa con observaciones | Adecuada | Mínima | Faltante |
+| Métricas de equidad | 30 | Todas calculadas e interpretadas | La mayoría calculadas | Algunas calculadas | Faltantes |
+| Análisis de umbrales | 20 | Completo con gráfico e interpretación | Parcial | Mínimo | Faltante |
+| Mitigación | 20 | Aplicada y comparada correctamente | Aplicada pero incompleta | Intentada | Faltante |
+| Discusión | 15 | Análisis perspicaz | Buenas observaciones | Básica | Faltante |

@@ -1,70 +1,70 @@
-# Assignment: Building an Explanation Dashboard
+# Assignment: Construcción de un dashboard de explicaciones
 
-## Objectives
+## Objetivos
 
-- Implement LIME and SHAP for a real dataset
-- Build a function that generates explanations for multiple instances
-- Critically evaluate explanation quality
-- Write a report suitable for a non-technical audience
+- Implementar LIME y SHAP para un dataset real
+- Construir una función que genere explicaciones para múltiples instancias
+- Evaluar críticamente la calidad de las explicaciones
+- Escribir un informe adecuado para una audiencia no técnica
 
-## Instructions
+## Instrucciones
 
-### Part 1: Model and Data (1 hour)
+### Parte 1: Modelo y datos (1 hora)
 
-Choose a dataset with at least 5 features and a binary classification target. Options:
-- UCI Heart Disease dataset
-- UCI Adult Income dataset (predict income > 50K)
-- A synthetic dataset you create
+Elegí un dataset con al menos 5 features y un objetivo de clasificación binaria. Opciones:
+- Dataset de enfermedades cardíacas UCI
+- Dataset de ingresos de adultos UCI (predecir ingresos > 50K)
+- Un dataset sintético que crees
 
-Train at least two models:
-- An interpretable model (Logistic Regression)
-- A black box model (Random Forest or Gradient Boosting)
+Entrená al menos dos modelos:
+- Un modelo interpretable (regresión logística)
+- Un modelo de caja negra (Random Forest o Gradient Boosting)
 
-### Part 2: Explanation Functions (2 hours)
+### Parte 2: Funciones de explicación (2 horas)
 
-Implement the following functions:
+Implementá las siguientes funciones:
 
-1. `global_explanation(model, X, feature_names, method='shap')` — returns a DataFrame of global feature importance
-2. `local_explanation_lime(model, instance, feature_names)` — returns (features, weights) for a single prediction
-3. `local_explanation_shap(model, instance, feature_names)` — returns SHAP values for a single prediction
-4. `explanation_dashboard(model, X_test, y_test, n_instances=10)` — generates explanations for n_instances and returns a comparison table
+1. `global_explanation(model, X, feature_names, method='shap')` — devuelve un DataFrame con la importancia global de las features
+2. `local_explanation_lime(model, instance, feature_names)` — devuelve (features, weights) para una sola predicción
+3. `local_explanation_shap(model, instance, feature_names)` — devuelve los valores SHAP para una sola predicción
+4. `explanation_dashboard(model, X_test, y_test, n_instances=10)` — genera explicaciones para n_instances y devuelve una tabla comparativa
 
-### Part 3: Analysis (2 hours)
+### Parte 3: Análisis (2 horas)
 
-1. For 10 test instances, compare LIME and SHAP explanations. Report the rank correlation of feature importance between the two methods.
-2. For each instance, check whether the most important feature according to the explanation matches the most important feature globally.
-3. If the black box model misclassifies an instance, does the explanation reveal why?
+1. Para 10 instancias de prueba, compará las explicaciones de LIME y SHAP. Reportá la correlación de rango de la importancia de features entre los dos métodos.
+2. Para cada instancia, verificá si la feature más importante según la explicación coincide con la feature más importante a nivel global.
+3. Si el modelo de caja negra clasifica mal una instancia, ¿la explicación revela por qué?
 
-### Part 4: Report (1 hour)
+### Parte 4: Informe (1 hora)
 
-Write a 500-word report explaining your findings for a non-technical audience (e.g., a product manager or regulator). Include:
-- What is explainable AI and why it matters
-- What LIME and SHAP do (in plain language)
-- Key findings from your analysis
-- Limitations of the methods
-- Recommendations for using explanations in practice
+Escribí un informe de 500 palabras explicando tus hallazgos para una audiencia no técnica (p. ej., un gerente de producto o un regulador). Incluí:
+- Qué es la IA explicable y por qué importa
+- Qué hacen LIME y SHAP (en lenguaje simple)
+- Hallazgos clave de tu análisis
+- Limitaciones de los métodos
+- Recomendaciones para usar explicaciones en la práctica
 
-## Deliverables
+## Entregables
 
-- A Jupyter notebook with Parts 1–3
-- A PDF report (Part 4)
+- Un notebook de Jupyter con las Partes 1–3
+- Un informe en PDF (Parte 4)
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Models and data | 15 | Two models, appropriate dataset | Two models | One model | Missing |
-| Explanation functions | 25 | All four functions, clean code | Three functions | Two or fewer | Not working |
-| Comparative analysis | 25 | Rigorous comparison, statistical test | Good comparison | Basic | Missing |
-| Report | 25 | Clear, non-technical, complete | Mostly clear | Partial | Missing or unclear |
-| Reflection on limitations | 10 | Nuanced understanding demonstrated | Good awareness | Basic | Missing |
+| Modelos y datos | 15 | Dos modelos, dataset apropiado | Dos modelos | Un modelo | Faltantes |
+| Funciones de explicación | 25 | Las cuatro funciones, código limpio | Tres funciones | Dos o menos | No funciona |
+| Análisis comparativo | 25 | Comparación rigurosa, prueba estadística | Buena comparación | Básica | Faltante |
+| Informe | 25 | Claro, no técnico, completo | Mayormente claro | Parcial | Faltante o poco claro |
+| Reflexión sobre limitaciones | 10 | Comprensión matizada demostrada | Buena conciencia | Básica | Faltante |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-6–8 hours
+6–8 horas
 
-## Submission
+## Entrega
 
-Submit notebook and PDF via the course learning management system.
+Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.

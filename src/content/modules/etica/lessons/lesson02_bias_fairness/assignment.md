@@ -1,64 +1,64 @@
-# Assignment: Fairness Analysis of COMPAS
+# Assignment: Análisis de equidad de COMPAS
 
-## Objectives
+## Objetivos
 
-- Analyze a real-world algorithmic bias case using multiple fairness definitions
-- Implement fairness metrics and interpret results
-- Critically evaluate competing claims about algorithmic fairness
+- Analizar un caso real de bias algorítmico usando múltiples definiciones de equidad
+- Implementar métricas de equidad e interpretar resultados
+- Evaluar críticamente afirmaciones contrapuestas sobre la equidad algorítmica
 
-## Instructions
+## Instrucciones
 
-### Part 1: Read and Summarize (500 words)
+### Parte 1: Leé y resumí (500 palabras)
 
-Read ProPublica's "Machine Bias" article (Angwin et al., 2016) and summarize:
-1. What is COMPAS? What does it predict?
-2. How did ProPublica evaluate its fairness?
-3. What were the main findings?
-4. How did Northpointe (the developer) respond?
+Leé el artículo "Machine Bias" de ProPublica (Angwin et al., 2016) y resumí:
+1. ¿Qué es COMPAS? ¿Qué predice?
+2. ¿Cómo evaluó ProPublica su equidad?
+3. ¿Cuáles fueron los hallazgos principales?
+4. ¿Cómo respondió Northpointe (el desarrollador)?
 
-### Part 2: Replicate the Analysis (Python)
+### Parte 2: Replicá el análisis (Python)
 
-Using the COMPAS dataset from ProPublica (available at https://github.com/propublica/compas-analysis), replicate the key fairness analysis:
+Usando el dataset de COMPAS de ProPublica (disponible en https://github.com/propublica/compas-analysis), replicá el análisis de equidad clave:
 
-1. Load the raw COMPAS data (arrest date from 2013–2014).
-2. Filter to create the same sample used in the ProPublica analysis (same filtering criteria).
-3. Compute accuracy, TPR, FPR by race (Black and White defendants only).
-4. Compute demographic parity, equal opportunity, and equalized odds.
-5. Create a visualization showing the disparities.
+1. Cargá los datos crudos de COMPAS (fecha de arresto de 2013–2014).
+2. Filtrá para crear la misma muestra usada en el análisis de ProPublica (mismos criterios de filtrado).
+3. Calculá accuracy, TPR, FPR por raza (solo acusados negros y blancos).
+4. Calculá paridad demográfica, igualdad de oportunidades y probabilidades igualadas.
+5. Creá una visualización que muestre las disparidades.
 
-### Part 3: Compare Definitions (500 words)
+### Parte 3: Compará definiciones (500 palabras)
 
-Write an analysis comparing the ProPublica and Northpointe positions:
-1. What fairness definition did ProPublica use?
-2. What fairness definition did Northpointe use (calibration)?
-3. Can both be correct? Explain the impossibility theorem in this context.
-4. Which fairness definition do you think is more appropriate for criminal sentencing? Why?
+Escribí un análisis que compare las posiciones de ProPublica y Northpointe:
+1. ¿Qué definición de equidad usó ProPublica?
+2. ¿Qué definición de equidad usó Northpointe (calibración)?
+3. ¿Pueden tener razón ambas? Explicá el teorema de imposibilidad en este contexto.
+4. ¿Qué definición de equidad creés que es más apropiada para las sentencias penales? ¿Por qué?
 
-### Part 4: Recommendations (300 words)
+### Parte 4: Recomendaciones (300 palabras)
 
-Propose at least three recommendations for how COMPAS (or similar risk assessment tools) should be improved. Consider technical, procedural, and policy changes.
+Proponé al menos tres recomendaciones sobre cómo se deberían mejorar COMPAS (o herramientas similares de evaluación de riesgo). Considerá cambios técnicos, procedimentales y de política.
 
-## Deliverables
+## Entregables
 
-- A Jupyter notebook with Part 2 (code and outputs)
-- A PDF report with Parts 1, 3, and 4
+- Un notebook de Jupyter con la Parte 2 (código y salidas)
+- Un informe en PDF con las Partes 1, 3 y 4
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Case summary | 15 | Accurate, thorough | Mostly accurate | Basic | Missing or incorrect |
-| Code implementation | 30 | Correct, clean, well-commented | Mostly correct | Partial | Not working |
-| Fairness analysis | 25 | All metrics computed and interpreted | Most metrics | Some metrics | Missing |
-| Definition comparison | 20 | Nuanced understanding of competing definitions | Good analysis | Basic | Limited or incorrect |
-| Recommendations | 10 | Specific, feasible, thoughtful | Reasonable | Generic | Missing |
+| Resumen del caso | 15 | Preciso, exhaustivo | Mayormente preciso | Básico | Faltante o incorrecto |
+| Implementación del código | 30 | Correcto, limpio, bien comentado | Mayormente correcto | Parcial | No funciona |
+| Análisis de equidad | 25 | Todas las métricas calculadas e interpretadas | La mayoría de las métricas | Algunas métricas | Faltantes |
+| Comparación de definiciones | 20 | Comprensión matizada de definiciones contrapuestas | Buen análisis | Básico | Limitado o incorrecto |
+| Recomendaciones | 10 | Específicas, viables, reflexivas | Razonables | Genéricas | Faltantes |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-5–6 hours
+5–6 horas
 
-## Submission
+## Entrega
 
-Submit notebook and PDF via the course learning management system.
+Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.

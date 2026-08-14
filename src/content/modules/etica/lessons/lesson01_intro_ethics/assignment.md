@@ -1,51 +1,51 @@
-# Assignment: Ethical Analysis of an AI System
+# Assignment: Análisis ético de un sistema de IA
 
-## Objectives
+## Objetivos
 
-- Apply the five ethical principles of AI to a real or hypothetical system
-- Identify ethical trade-offs and propose mitigations
-- Communicate ethical reasoning clearly and concisely
+- Aplicar los cinco principios éticos de la IA a un sistema real o hipotético
+- Identificar concesiones éticas y proponer mitigaciones
+- Comunicar el razonamiento ético de forma clara y concisa
 
-## Instructions
+## Instrucciones
 
-Choose an AI system that has been deployed in the real world (or is proposed for deployment). It could be:
+Elegí un sistema de IA que se haya implementado en el mundo real (o que se proponga implementar). Podría ser:
 
-- An AI system in healthcare (diagnosis, drug discovery, patient monitoring)
-- An AI system in SaaS (recommendation, moderation, personalization)
-- An AI system in criminal justice (predictive policing, sentencing, parole)
-- An AI system in finance (credit scoring, fraud detection, loan underwriting)
-- An AI system in hiring (resume screening, interview analysis)
+- Un sistema de IA en salud (diagnóstico, descubrimiento de fármacos, monitoreo de pacientes)
+- Un sistema de IA en SaaS (recomendación, moderación, personalización)
+- Un sistema de IA en justicia penal (policía predictiva, sentencias, libertad condicional)
+- Un sistema de IA en finanzas (score de crédito, detección de fraude, suscripción de préstamos)
+- Un sistema de IA en contratación (filtrado de currículums, análisis de entrevistas)
 
-Write a report of 1000–1500 words addressing the following:
+Escribí un informe de 1000–1500 palabras que aborde lo siguiente:
 
-1. **System Description** (200 words): Describe what the system does, what data it uses, and who developed/deployed it.
+1. **Descripción del sistema** (200 palabras): Describí qué hace el sistema, qué datos usa y quién lo desarrolló/implementó.
 
-2. **Ethical Analysis** (600 words): Apply each of the five principles (beneficence, non-maleficence, autonomy, justice, explicability) to the system. For each principle, state whether the system satisfies it, partially satisfies it, or violates it, and explain your reasoning.
+2. **Análisis ético** (600 palabras): Aplicá cada uno de los cinco principios (beneficencia, no maleficencia, autonomía, justicia, explicabilidad) al sistema. Para cada principio, indicá si el sistema lo cumple, lo cumple parcialmente o lo viola, y explicá tu razonamiento.
 
-3. **Trade-offs** (200 words): Identify at least one trade-off between principles. Explain how you would resolve it and why.
+3. **Concesiones** (200 palabras): Identificá al menos una concesión entre principios. Explicá cómo la resolverías y por qué.
 
-4. **Mitigation Recommendations** (200 words): Propose at least three concrete recommendations to improve the ethical performance of the system.
+4. **Recomendaciones de mitigación** (200 palabras): Proponé al menos tres recomendaciones concretas para mejorar el desempeño ético del sistema.
 
-## Deliverables
+## Entregables
 
-Submit a single PDF document. Use APA 7 format for any references.
+Enviá un único documento PDF. Usá el formato APA 7 para cualquier referencia.
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| System description | 10 | Clear, detailed, accurate | Mostly clear | Somewhat unclear | Missing or inaccurate |
-| Five principles analysis | 40 | Each principle correctly applied with nuanced reasoning | Four principles well applied | Three or fewer | Missing or incorrect |
-| Trade-off identification | 20 | Identifies and resolves trade-off convincingly | Identifies trade-off | Mentions but does not resolve | No trade-off discussed |
-| Mitigation recommendations | 20 | Three specific, feasible recommendations | Two recommendations | One recommendation | None or unrealistic |
-| Writing quality | 10 | Clear, organized, professional | Mostly clear | Readable but disorganized | Difficult to follow |
+| Descripción del sistema | 10 | Clara, detallada, precisa | Mayormente clara | Algo poco clara | Faltante o imprecisa |
+| Análisis de los cinco principios | 40 | Cada principio correctamente aplicado con razonamiento matizado | Cuatro principios bien aplicados | Tres o menos | Faltante o incorrecto |
+| Identificación de concesiones | 20 | Identifica y resuelve la concesión de forma convincente | Identifica la concesión | La menciona pero no la resuelve | No se discute ninguna concesión |
+| Recomendaciones de mitigación | 20 | Tres recomendaciones específicas y viables | Dos recomendaciones | Una recomendación | Ninguna o poco realistas |
+| Calidad de escritura | 10 | Clara, organizada, profesional | Mayormente clara | Legible pero desorganizada | Difícil de seguir |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-3–4 hours
+3–4 horas
 
-## Submission
+## Entrega
 
-Upload PDF to the course learning management system.
+Subí el PDF al sistema de gestión de aprendizaje del curso.

@@ -1,75 +1,75 @@
-# Assignment: Privacy Impact Assessment for an ML System
+# Assignment: Evaluación de impacto sobre la privacidad de un sistema de ML
 
-## Objectives
+## Objetivos
 
-- Conduct a privacy impact assessment for a real or hypothetical ML system
-- Identify privacy risks at each stage of the ML lifecycle
-- Propose privacy-preserving mitigations
-- Analyze the privacy-utility trade-off
+- Realizar una evaluación de impacto sobre la privacidad para un sistema de ML real o hipotético
+- Identificar riesgos de privacidad en cada etapa del ciclo de vida del ML
+- Proponer mitigaciones de preservación de privacidad
+- Analizar la concesión entre privacidad y utilidad
 
-## Instructions
+## Instrucciones
 
-### Part 1: System Description (300 words)
+### Parte 1: Descripción del sistema (300 palabras)
 
-Describe an ML system that processes personal data. Choose one:
-- A diagnostic AI that analyzes patient medical records
-- A SaaS product analytics platform that tracks user behavior
-- A recruitment AI that screens job candidates
-- A social media recommendation system
+Describí un sistema de ML que procesa datos personales. Elegí uno:
+- Una IA de diagnóstico que analiza registros médicos de pacientes
+- Una plataforma SaaS de análisis de producto que rastrea el comportamiento de los usuarios
+- Una IA de reclutamiento que filtra postulantes
+- Un sistema de recomendación de redes sociales
 
-Include: what data is collected, how it is processed, what the model predicts, who has access, and where the system is deployed.
+Incluí: qué datos se recolectan, cómo se procesan, qué predice el modelo, quién tiene acceso y dónde está implementado el sistema.
 
-### Part 2: Privacy Risk Identification (500 words)
+### Parte 2: Identificación de riesgos de privacidad (500 palabras)
 
-For each stage of the ML lifecycle, identify privacy risks:
+Para cada etapa del ciclo de vida del ML, identificá los riesgos de privacidad:
 
-| Stage | Privacy Risks |
+| Etapa | Riesgos de privacidad |
 |-------|--------------|
-| Data collection | Consent, transparency, data minimization |
-| Data storage | Security, access control, retention |
-| Model training | Memorization, membership inference |
-| Model deployment | API access, model inversion |
-| Model sharing | Data leakage in parameters |
-| Data deletion | Right to erasure, model retraining |
+| Recolección de datos | Consentimiento, transparencia, minimización de datos |
+| Almacenamiento de datos | Seguridad, control de acceso, retención |
+| Entrenamiento del modelo | Memorización, inferencia de membresía |
+| Implementación del modelo | Acceso por API, inversión de modelo |
+| Compartición del modelo | Fuga de datos en los parámetros |
+| Eliminación de datos | Derecho al olvido, reentrenamiento del modelo |
 
-### Part 3: Regulatory Analysis (500 words)
+### Parte 3: Análisis regulatorio (500 palabras)
 
-Analyze how two regulations apply to your system:
-1. GDPR: Which articles are most relevant? Is your system compliant?
-2. Either HIPAA (if health data) or CCPA/other regulation relevant to your domain
+Analizá cómo se aplican dos regulaciones a tu sistema:
+1. GDPR: ¿Qué artículos son más relevantes? ¿Tu sistema cumple?
+2. HIPAA (si hay datos de salud) o CCPA/otra regulación relevante para tu dominio
 
-### Part 4: Privacy-Preserving Design (500 words)
+### Parte 4: Diseño con preservación de privacidad (500 palabras)
 
-Propose a privacy-preserving redesign of your system. Include:
-1. What data minimization measures would you implement?
-2. Would you use differential privacy? What epsilon would you choose? Why?
-3. How would you handle user consent and data deletion requests?
-4. What technical controls would you implement (encryption, access control, audit logging)?
+Proponé un rediseño de tu sistema con preservación de privacidad. Incluí:
+1. ¿Qué medidas de minimización de datos implementarías?
+2. ¿Usarías privacidad diferencial? ¿Qué epsilon elegirías? ¿Por qué?
+3. ¿Cómo manejarías el consentimiento de los usuarios y las solicitudes de eliminación de datos?
+4. ¿Qué controles técnicos implementarías (cifrado, control de acceso, registro de auditoría)?
 
-### Part 5: Technical Appendix (optional, extra credit)
+### Parte 5: Apéndice técnico (opcional, crédito extra)
 
-Implement a differentially private version of a key statistic or model output from your system. Show the privacy-utility trade-off.
+Implementá una versión con privacidad diferencial de una estadística clave o de una salida del modelo de tu sistema. Mostrá la concesión entre privacidad y utilidad.
 
-## Deliverables
+## Entregables
 
-A single PDF report with Parts 1–4 (and optionally Part 5 as a notebook).
+Un único informe en PDF con las Partes 1–4 (y opcionalmente la Parte 5 como notebook).
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| System description | 10 | Clear, detailed | Adequate | Vague | Missing |
-| Risk identification | 25 | All stages, specific risks | Most stages | Some stages | Missing |
-| Regulatory analysis | 25 | Thorough, correct application | Good | Basic | Incorrect |
-| Privacy redesign | 30 | Thoughtful, specific, feasible | Reasonable | Generic | Missing |
-| Writing quality | 10 | Professional, clear | Good | Acceptable | Poor |
+| Descripción del sistema | 10 | Clara, detallada | Adecuada | Vaga | Faltante |
+| Identificación de riesgos | 25 | Todas las etapas, riesgos específicos | La mayoría de las etapas | Algunas etapas | Faltantes |
+| Análisis regulatorio | 25 | Exhaustivo, aplicación correcta | Bueno | Básico | Incorrecto |
+| Rediseño de privacidad | 30 | Reflexivo, específico, viable | Razonable | Genérico | Faltante |
+| Calidad de escritura | 10 | Profesional, clara | Buena | Aceptable | Pobre |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-5–7 hours
+5–7 horas
 
-## Submission
+## Entrega
 
-Upload PDF via the course learning management system.
+Subí el PDF a través del sistema de gestión de aprendizaje del curso.

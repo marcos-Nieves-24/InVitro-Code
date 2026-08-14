@@ -1,65 +1,65 @@
-# Lab: Privacy-Preserving Data Analysis
+# Lab: Análisis de datos con preservación de privacidad
 
-## Objective
+## Objetivo
 
-Implement and compare privacy-preserving techniques for releasing statistical summaries. Evaluate the privacy-utility trade-off for different epsilon values.
+Implementar y comparar técnicas de preservación de privacidad para publicar resúmenes estadísticos. Evaluar la concesión entre privacidad y utilidad para diferentes valores de epsilon.
 
-## Duration
+## Duración
 
-60 minutes
+60 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 4, Python (numpy, pandas, matplotlib)
+Lección 4, Python (numpy, pandas, matplotlib)
 
 ## Dataset
 
-Use the Adult Income dataset from UCI (or a synthetic dataset with demographic and income columns).
+Usá el dataset de ingresos de adultos de UCI (o un dataset sintético con columnas demográficas y de ingresos).
 
-## Instructions
+## Instrucciones
 
-### Part 1: Baseline Statistics (10 minutes)
+### Parte 1: Estadísticas de base (10 minutos)
 
-1. Load the Adult dataset.
-2. Compute and report: mean age, mean income, income distribution by gender, education distribution.
-3. These are your "true" values. They cannot be released if the data is sensitive.
+1. Cargá el dataset de Adultos.
+2. Calculá y reportá: edad media, ingreso medio, distribución de ingresos por género, distribución de educación.
+3. Estos son tus valores "verdaderos". No pueden publicarse si los datos son sensibles.
 
-### Part 2: Differential Privacy for Summary Statistics (20 minutes)
+### Parte 2: Privacidad diferencial para estadísticas resumidas (20 minutos)
 
-1. Implement the Laplace mechanism function (from the lesson).
-2. For each statistic (mean age, mean income, proportion female), release a differentially private version.
-3. For epsilon = [0.01, 0.1, 0.5, 1, 5, 10], run 100 trials each and compute:
-   - Mean Absolute Error
-   - Standard deviation of error
-4. Create a plot showing MAE vs. epsilon for each statistic.
-5. Which statistic is easiest to release with high accuracy? Why?
+1. Implementá la función del mecanismo de Laplace (de la lección).
+2. Para cada estadística (edad media, ingreso medio, proporción de mujeres), publicá una versión con privacidad diferencial.
+3. Para epsilon = [0.01, 0.1, 0.5, 1, 5, 10], ejecutá 100 pruebas por cada uno y calculá:
+   - Error absoluto medio
+   - Desviación estándar del error
+4. Creá un gráfico que muestre el MAE vs. epsilon para cada estadística.
+5. ¿Qué estadística es más fácil de publicar con alta precisión? ¿Por qué?
 
-### Part 3: Differential Privacy for a Histogram (15 minutes)
+### Parte 3: Privacidad diferencial para un histograma (15 minutos)
 
-1. Create a histogram of income (10 bins).
-2. Release a differentially private histogram with epsilon = [0.1, 1, 10].
-3. Plot the true histogram vs. the private histograms.
-4. At what epsilon does the histogram become recognizable?
+1. Creá un histograma de ingresos (10 bins).
+2. Publicá un histograma con privacidad diferencial con epsilon = [0.1, 1, 10].
+3. Graficá el histograma verdadero vs. los histogramas privados.
+4. ¿Con qué epsilon el histograma se vuelve reconocible?
 
-### Part 4: Composition (15 minutes)
+### Parte 4: Composición (15 minutos)
 
-1. Suppose you release three statistics: mean age, mean income, and a 10-bin histogram.
-2. With basic composition, the total epsilon is the sum of individual epsilons.
-3. For a total budget of epsilon=1, how would you allocate the budget across the three statistics to minimize total error?
-4. Implement and test your allocation strategy.
+1. Suponé que publicás tres estadísticas: edad media, ingreso medio y un histograma de 10 bins.
+2. Con composición básica, el epsilon total es la suma de los epsilones individuales.
+3. Para un presupuesto total de epsilon=1, ¿cómo asignarías el presupuesto entre las tres estadísticas para minimizar el error total?
+4. Implementá y probá tu estrategia de asignación.
 
-## Deliverables
+## Entregables
 
-Submit a Jupyter notebook with:
-- All code and visualizations
-- A paragraph on your budget allocation strategy and the rationale
+Enviá un notebook de Jupyter con:
+- Todo el código y las visualizaciones
+- Un párrafo sobre tu estrategia de asignación de presupuesto y la justificación
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Baseline statistics | 10 | All computed correctly | Most | Some | Missing |
-| DP for statistics | 25 | Full implementation with analysis | Good | Partial | Missing |
-| DP histogram | 25 | Clear visualization and comparison | Adequate | Basic | Missing |
-| Composition analysis | 25 | Thoughtful allocation, tested | Good strategy | Basic | Missing |
-| Discussion | 15 | Insightful on privacy-utility trade-off | Good | Basic | Missing |
+| Estadísticas de base | 10 | Todas calculadas correctamente | La mayoría | Algunas | Faltantes |
+| DP para estadísticas | 25 | Implementación completa con análisis | Buena | Parcial | Faltante |
+| Histograma DP | 25 | Visualización y comparación claras | Adecuada | Básica | Faltante |
+| Análisis de composición | 25 | Asignación reflexiva, probada | Buena estrategia | Básica | Faltante |
+| Discusión | 15 | Perspicaz sobre la concesión privacidad-utilidad | Buena | Básica | Faltante |

@@ -1,76 +1,76 @@
-# Quiz: Bias and Fairness
+# Quiz: Bias y equidad
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Which type of bias arises when the training data does not accurately represent the population the model will be applied to?
+**Q1.** ¿Qué tipo de bias surge cuando los datos de entrenamiento no representan con precisión la población a la que se aplicará el modelo?
 
-A. Algorithmic bias
-B. Societal bias
-C. Data bias
-D. Confirmation bias
+A. Bias algorítmico
+B. Bias social
+C. Bias de datos
+D. Sesgo de confirmación
 
-**Q2.** A model predicts loan repayment. The approval rate is 60% for Group A and 40% for Group B. Which fairness definition is violated?
+**Q2.** Un modelo predice el pago de préstamos. La tasa de aprobación es 60% para el Grupo A y 40% para el Grupo B. ¿Qué definición de equidad se viola?
 
-A. Equal opportunity
-B. Demographic parity
-C. Equalized odds
-D. Individual fairness
+A. Igualdad de oportunidades
+B. Paridad demográfica
+C. Probabilidades igualadas
+D. Equidad individual
 
-**Q3.** The "impossibility theorem" in algorithmic fairness states that:
+**Q3.** El "teorema de imposibilidad" en la equidad algorítmica establece que:
 
-A. Fair AI systems are mathematically impossible
-B. Multiple fairness definitions cannot be simultaneously satisfied unless base rates are equal or the classifier is perfect
-C. Bias can never be fully removed from any ML model
-D. Fairness metrics are not well-defined mathematically
+A. Los sistemas de IA equitativos son matemáticamente imposibles
+B. Múltiples definiciones de equidad no pueden satisfacerse simultáneamente a menos que las tasas base sean iguales o el clasificador sea perfecto
+C. El bias nunca puede eliminarse por completo de ningún modelo de machine learning
+D. Las métricas de equidad no están bien definidas matemáticamente
 
-**Q4.** In the COMPAS recidivism case, ProPublica found that:
+**Q4.** En el caso de reincidencia de COMPAS, ProPublica encontró que:
 
-A. The algorithm was perfectly calibrated across racial groups
-B. Black defendants had higher false positive rates than white defendants
-C. The algorithm was ruled unconstitutional by the Supreme Court
-D. The algorithm was more accurate than human judges for all groups
+A. El algoritmo estaba perfectamente calibrado entre grupos raciales
+B. Los acusados negros tenían tasas de falsos positivos más altas que los acusados blancos
+C. El algoritmo fue declarado inconstitucional por la Corte Suprema
+D. El algoritmo era más preciso que los jueces humanos para todos los grupos
 
-**Q5.** "Fairness through unawareness" refers to:
+**Q5.** "Equidad mediante ignorancia" (fairness through unawareness) se refiere a:
 
-A. Removing protected attributes from the model
-B. Not telling users how the model works
-C. Using unsupervised learning to avoid bias
-D. Blindly selecting features without domain knowledge
+A. Eliminar los atributos protegidos del modelo
+B. No decirles a los usuarios cómo funciona el modelo
+C. Usar aprendizaje no supervisado para evitar el bias
+D. Seleccionar features a ciegas sin conocimiento del dominio
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain how a feature like "zip code" can act as a proxy for race even when race is removed from the model. What does this imply about "fairness through unawareness"?
+**Q6.** Explicá cómo una feature como "código postal" puede actuar como proxy de la raza incluso cuando la raza se elimina del modelo. ¿Qué implica esto sobre la "equidad mediante ignorancia"?
 
-**Q7.** What is intersectionality in the context of algorithmic bias? Provide an example where bias might not be visible when analyzing groups on a single attribute.
+**Q7.** ¿Qué es la interseccionalidad en el contexto del bias algorítmico? Proporcioná un ejemplo donde el bias podría no ser visible al analizar grupos según un solo atributo.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `compute_equalized_odds(y_true, y_pred, protected_attr)` that:
-- Takes three arrays: true labels, predicted labels, and a binary protected attribute
-- Returns a dictionary with the True Positive Rate (TPR) and False Positive Rate (FPR) for each group
-- Also returns the absolute difference in TPR and FPR between the two groups
+**Q8.** Escribí una función de Python `compute_equalized_odds(y_true, y_pred, protected_attr)` que:
+- Reciba tres arrays: etiquetas reales, etiquetas predichas y un atributo protegido binario
+- Devuelva un diccionario con la tasa de verdaderos positivos (TPR) y la tasa de falsos positivos (FPR) para cada grupo
+- También devuelva la diferencia absoluta en TPR y FPR entre los dos grupos
 
-You may use `sklearn.metrics.confusion_matrix`.
+Podés usar `sklearn.metrics.confusion_matrix`.
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** C — Data bias (also called representation or sample bias).
+**Q1.** C — Bias de datos (también llamado bias de representación o de muestra).
 
-**Q2.** B — Demographic parity requires equal rates of positive predictions across groups. The approval rate differs between groups.
+**Q2.** B — La paridad demográfica exige tasas iguales de predicciones positivas entre grupos. La tasa de aprobación difiere entre grupos.
 
-**Q3.** B — Multiple fairness definitions (e.g., demographic parity and equalized odds) cannot simultaneously be satisfied unless base rates are equal or the classifier is perfect.
+**Q3.** B — Múltiples definiciones de equidad (p. ej., paridad demográfica y probabilidades igualadas) no pueden satisfacerse simultáneamente a menos que las tasas base sean iguales o el clasificador sea perfecto.
 
-**Q4.** B — Black defendants had higher false positive rates (labeled high risk but did not recidivate) compared to white defendants.
+**Q4.** B — Los acusados negros tenían tasas de falsos positivos más altas (marcados como alto riesgo pero no reincidieron) en comparación con los acusados blancos.
 
-**Q5.** A — Removing protected attributes from the model, under the (incorrect) assumption that this eliminates bias.
+**Q5.** A — Eliminar los atributos protegidos del modelo, bajo el (incorrecto) supuesto de que esto elimina el bias.
 
-**Q6.** Zip code correlates strongly with race due to historical housing discrimination and segregation (redlining). When race is removed, a model can still discriminate using zip code as a proxy. This means fairness through unawareness is insufficient — models must be tested for disparate impact even when protected attributes are excluded.
+**Q6.** El código postal se correlaciona fuertemente con la raza debido a la discriminación histórica en la vivienda y la segregación (redlining). Cuando se elimina la raza, un modelo aún puede discriminar usando el código postal como proxy. Esto significa que la equidad mediante ignorancia es insuficiente — los modelos deben probarse para detectar impacto dispar incluso cuando los atributos protegidos se excluyen.
 
-**Q7.** Intersectionality recognizes that people hold multiple identities (race, gender, class, etc.) and that bias at the intersection may differ from bias along any single dimension. For example, a facial recognition system might have similar error rates for Black men and white women overall, but much higher error rates for Black women specifically. Analyzing race alone or gender alone would miss this compounded disparity.
+**Q7.** La interseccionalidad reconoce que las personas tienen múltiples identidades (raza, género, clase, etc.) y que el bias en la intersección puede diferir del bias a lo largo de cualquier dimensión individual. Por ejemplo, un sistema de reconocimiento facial podría tener tasas de error similares para hombres negros y mujeres blancas en general, pero tasas de error mucho más altas para mujeres negras específicamente. Analizar solo la raza o solo el género perdería esta disparidad compuesta.
 
-**Q8.** Sample solution:
+**Q8.** Solución de ejemplo:
 
 ```python
 def compute_equalized_odds(y_true, y_pred, protected_attr):

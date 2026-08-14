@@ -1,68 +1,68 @@
-# Quiz: Introduction to AI Ethics
+# Quiz: Introducción a la ética de la IA
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Which of the following best defines AI ethics?
+**Q1.** ¿Cuál de las siguientes define mejor la ética de la IA?
 
-A. The study of how to make AI systems more profitable
-B. The application of moral principles to the design, development, and deployment of AI systems
-C. A set of laws that all AI systems must follow
-D. The mathematical analysis of algorithmic fairness
+A. El estudio de cómo hacer que los sistemas de IA sean más rentables
+B. La aplicación de principios morales al diseño, desarrollo e implementación de sistemas de IA
+C. Un conjunto de leyes que todos los sistemas de IA deben seguir
+D. El análisis matemático de la equidad algorítmica
 
-**Q2.** According to Floridi and Cowls (2019), how many core ethical principles synthesize the majority of AI ethics guidelines worldwide?
+**Q2.** Según Floridi y Cowls (2019), ¿cuántos principios éticos centrales sintetizan la mayoría de las guías de ética de la IA en el mundo?
 
-A. Three
-B. Five
-C. Seven
-D. Ten
+A. Tres
+B. Cinco
+C. Siete
+D. Diez
 
-**Q3.** A hospital deploys an AI diagnostic system that is 96% accurate overall but systematically misdiagnoses a rare condition that disproportionately affects a specific ethnic group. Which principle does this primarily violate?
+**Q3.** Un hospital implementa un sistema de diagnóstico con IA que es 96% preciso en general pero diagnostica mal de forma sistemática una enfermedad rara que afecta desproporcionadamente a un grupo étnico específico. ¿Qué principio viola principalmente?
 
-A. Beneficence
-B. Autonomy
-C. Justice
-D. Explicability
+A. Beneficencia
+B. Autonomía
+C. Justicia
+D. Explicabilidad
 
-**Q4.** The principle of explicability in AI ethics requires that:
+**Q4.** El principio de explicabilidad en la ética de la IA exige que:
 
-A. The AI system must be open-source
-B. The AI system's decisions should be understandable and accountable to those affected
-C. The AI system must explain itself in natural language at all times
-D. The training data must be publicly available
+A. El sistema de IA deba ser de código abierto
+B. Las decisiones del sistema de IA deban ser comprensibles y que rindan cuentas a los afectados
+C. El sistema de IA deba explicarse en lenguaje natural todo el tiempo
+D. Los datos de entrenamiento deban estar disponibles públicamente
 
-**Q5.** Which of the following is NOT one of the five principles identified by Floridi and Cowls?
+**Q5.** ¿Cuál de los siguientes NO es uno de los cinco principios identificados por Floridi y Cowls?
 
-A. Beneficence
-B. Non-maleficence
-C. Profitability
-D. Autonomy
+A. Beneficencia
+B. No maleficencia
+C. Rentabilidad
+D. Autonomía
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain why a machine learning model that achieves high average accuracy can still be ethically problematic. Provide a concrete example.
+**Q6.** Explicá por qué un modelo de machine learning que logra alta precisión promedio puede seguir siendo éticamente problemático. Proporcioná un ejemplo concreto.
 
-**Q7.** Describe an ethical trade-off between the principles of privacy and transparency. How might a system designer navigate this conflict?
+**Q7.** Describí una concesión ética entre los principios de privacidad y transparencia. ¿Cómo podría un diseñador de sistemas resolver este conflicto?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** (Conceptual — no coding) You are designing an AI system to help university admissions committees evaluate applications. Write a short analysis (approximately 150 words) explaining how each of the five ethical principles applies to this system. Identify at least one potential conflict between principles.
+**Q8.** (Conceptual — sin código) Estás diseñando un sistema de IA para ayudar a los comités de admisión universitarios a evaluar solicitudes. Escribí un análisis breve (aproximadamente 150 palabras) explicando cómo se aplica cada uno de los cinco principios éticos a este sistema. Identificá al menos un conflicto potencial entre principios.
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** B — The application of moral principles to the design, development, and deployment of AI systems.
+**Q1.** B — La aplicación de principios morales al diseño, desarrollo e implementación de sistemas de IA.
 
-**Q2.** B — Five principles: beneficence, non-maleficence, autonomy, justice, explicability.
+**Q2.** B — Cinco principios: beneficencia, no maleficencia, autonomía, justicia, explicabilidad.
 
-**Q3.** C — Justice, because the system distributes benefits (accurate diagnosis) and burdens (misdiagnosis) inequitably across groups.
+**Q3.** C — Justicia, porque el sistema distribuye beneficios (diagnóstico preciso) y cargas (diagnóstico erróneo) de manera inequitativa entre los grupos.
 
-**Q4.** B — The AI system's decisions should be understandable and accountable to those affected.
+**Q4.** B — Las decisiones del sistema de IA deben ser comprensibles y rendir cuentas a los afectados.
 
-**Q5.** C — Profitability is not one of the five principles.
+**Q5.** C — La rentabilidad no es uno de los cinco principios.
 
-**Q6.** A model can be accurate on average but perform poorly for specific subgroups. Example: a skin cancer classifier trained mostly on light skin images achieves 95% accuracy overall but only 70% accuracy on dark skin. The average hides the disparity. This violates the justice principle.
+**Q6.** Un modelo puede ser preciso en promedio pero rendir mal para subgrupos específicos. Ejemplo: un clasificador de cáncer de piel entrenado mayormente con imágenes de piel clara logra 95% de precisión en general pero solo 70% en piel oscura. El promedio oculta la disparidad. Esto viola el principio de justicia.
 
-**Q7.** Privacy requires protecting personal data; transparency requires explaining how decisions are made. If an AI denies a loan, transparency demands an explanation, but the explanation might reveal sensitive patterns in the training data. A designer could use post-hoc explainability methods (like LIME or SHAP) that provide explanations without exposing raw data.
+**Q7.** La privacidad exige proteger los datos personales; la transparencia exige explicar cómo se toman las decisiones. Si una IA niega un préstamo, la transparencia exige una explicación, pero la explicación podría revelar patrones sensibles de los datos de entrenamiento. Un diseñador podría usar métodos de explicabilidad post-hoc (como LIME o SHAP) que brindan explicaciones sin exponer los datos en bruto.
 
-**Q8.** (Sample response) Beneficence: the system could reduce human bias in admissions and identify qualified candidates who might otherwise be overlooked. Non-maleficence: the system must not systematically disadvantage applicants from under-resourced schools or specific demographic groups. Autonomy: applicants should know an AI is involved in the decision and have the right to appeal. Justice: the system must be tested for fairness across socioeconomic, racial, and geographic groups before deployment. Explicability: rejected applicants deserve meaningful explanations, not just a score. Conflict: maximizing predictive accuracy (beneficence) may require using features that correlate with demographic characteristics (violating justice); the designer must decide which features to exclude even if they improve performance.
+**Q8.** (Respuesta de ejemplo) Beneficencia: el sistema podría reducir el bias humano en las admisiones e identificar candidatos calificados que de otro modo podrían pasar desapercibidos. No maleficencia: el sistema no debe perjudicar sistemáticamente a los postulantes de escuelas con menos recursos ni a grupos demográficos específicos. Autonomía: los postulantes deben saber que una IA participa en la decisión y tener derecho a apelar. Justicia: el sistema debe probarse para verificar la equidad entre grupos socioeconómicos, raciales y geográficos antes de su implementación. Explicabilidad: los postulantes rechazados merecen explicaciones significativas, no solo un puntaje. Conflicto: maximizar la precisión predictiva (beneficencia) puede requerir usar features que se correlacionan con características demográficas (violando la justicia); el diseñador debe decidir qué features excluir incluso si mejoran el desempeño.
