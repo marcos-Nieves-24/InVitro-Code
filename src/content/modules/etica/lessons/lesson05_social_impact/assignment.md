@@ -1,78 +1,78 @@
-# Assignment: Social Impact Assessment Report
+# Assignment: Informe de Evaluación de Impacto Social
 
-## Objectives
+## Objetivos
 
-- Conduct a comprehensive social impact assessment of a real AI system
-- Analyze multiple dimensions of social impact using evidence
-- Develop policy recommendations
-- Communicate findings in a professional report format
+- Realizá una evaluación integral de impacto social de un sistema de IA real
+- Analizá múltiples dimensiones del impacto social usando evidencia
+- Desarrollá recomendaciones de política
+- Comunicá los hallazgos en un formato de informe profesional
 
-## Instructions
+## Instrucciones
 
-Select a real, deployed AI system with documented social impact. Examples:
+Seleccioná un sistema de IA real y desplegado con impacto social documentado. Ejemplos:
 
-- **GPT-4 / ChatGPT** — impact on education, creative work, misinformation
-- **Tesla Autopilot / Waymo** — autonomous driving safety, employment
-- **TikTok recommendation algorithm** — misinformation, youth mental health
-- **Amazon Go / cashierless stores** — retail employment
-- **Midjourney / DALL-E** — creative professionals, copyright
-- **Clearview AI** — facial recognition, privacy, surveillance
+- **GPT-4 / ChatGPT** — impacto en educación, trabajo creativo, desinformación
+- **Tesla Autopilot / Waymo** — seguridad en conducción autónoma, empleo
+- **Algoritmo de recomendación de TikTok** — desinformación, salud mental juvenil
+- **Amazon Go / tiendas sin cajeros** — empleo en el comercio minorista
+- **Midjourney / DALL-E** — profesionales creativos, derechos de autor
+- **Clearview AI** — reconocimiento facial, privacidad, vigilancia
 
-Write a report of 2000–2500 words with the following sections:
+Escribí un informe de 2000–2500 palabras con las siguientes secciones:
 
-### 1. System Description (300 words)
-Describe the AI system, what it does, who created it, how widely it is deployed, and what data it uses.
+### 1. Descripción del sistema (300 palabras)
+Describí el sistema de IA, qué hace, quién lo creó, qué tan extendido está su despliegue y qué datos usa.
 
-### 2. Employment Impact (400 words)
-Analyze the impact on employment:
-- Which jobs are displaced or augmented?
-- What new jobs or industries might emerge?
-- What is the net effect on employment in affected sectors? Use available data or estimates.
+### 2. Impacto en el empleo (400 palabras)
+Analizá el impacto en el empleo:
+- ¿Qué trabajos se desplazan o se potencian?
+- ¿Qué nuevos trabajos o industrias podrían surgir?
+- ¿Cuál es el efecto neto sobre el empleo en los sectores afectados? Usá datos o estimaciones disponibles.
 
-### 3. Environmental Impact (300 words)
-Analyze the environmental footprint:
-- Training energy and CO2 (cite estimates if available)
-- Inference energy
-- Hardware lifecycle
-- Any secondary environmental effects
+### 3. Impacto ambiental (300 palabras)
+Analizá la huella ambiental:
+- Energía de entrenamiento y CO2 (citá estimaciones si están disponibles)
+- Energía de inferencia
+- Ciclo de vida del hardware
+- Cualquier efecto ambiental secundario
 
-### 4. Safety and Robustness (400 words)
-Evaluate safety:
-- Known failures or incidents
-- Potential failure modes
-- Alignment and robustness challenges
-- Current safety mitigations
+### 4. Seguridad y robustez (400 palabras)
+Evaluá la seguridad:
+- Fallas o incidentes conocidos
+- Modos de falla potenciales
+- Desafíos de alignment y robustez
+- Mitigaciones de seguridad actuales
 
-### 5. Misinformation and Societal Effects (400 words)
-- Does the system affect the information ecosystem?
-- Is it used to generate or amplify misinformation?
-- What are the effects on democratic processes, mental health, or social cohesion?
+### 5. Desinformación y efectos sociales (400 palabras)
+- ¿Afecta el sistema al ecosistema de información?
+- ¿Se usa para generar o amplificar desinformación?
+- ¿Cuáles son los efectos sobre los procesos democráticos, la salud mental o la cohesión social?
 
-### 6. Recommendations (200 words)
-Propose 3 specific recommendations for the company, regulators, or society to address the impacts you identified.
+### 6. Recomendaciones (200 palabras)
+Proponé 3 recomendaciones específicas para la empresa, los reguladores o la sociedad para abordar los impactos que identificaste.
 
-## Deliverables
+## Entregables
 
-A single PDF document.
+Un único documento PDF.
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| System description | 10 | Accurate, detailed | Adequate | Vague | Missing |
-| Employment analysis | 20 | Evidence-based, nuanced | Good | Basic | Missing/inaccurate |
-| Environmental analysis | 15 | Specific data, thoughtful | Good | Basic | Missing |
-| Safety analysis | 20 | Thorough, specific examples | Good | Basic | Missing |
-| Societal/misinformation | 20 | Insightful, well-researched | Good | Basic | Missing |
-| Recommendations | 10 | Specific, actionable | Reasonable | Generic | Missing |
-| Writing quality | 5 | Professional, clear | Good | Acceptable | Poor |
+| Descripción del sistema | 10 | Preciso, detallado | Adecuado | Vago | Faltante |
+| Análisis de empleo | 20 | Basado en evidencia, matizado | Bueno | Básico | Faltante/inexacto |
+| Análisis ambiental | 15 | Datos específicos, reflexivo | Bueno | Básico | Faltante |
+| Análisis de seguridad | 20 | Minucioso, ejemplos específicos | Bueno | Básico | Faltante |
+| Social/desinformación | 20 | Perspicaz, bien investigado | Bueno | Básico | Faltante |
+| Recomendaciones | 10 | Específicas, accionables | Razonables | Genéricas | Faltantes |
+| Calidad de redacción | 5 | Profesional, clara | Buena | Aceptable | Pobre |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-6–8 hours
+6–8 horas
 
-## Submission
+## Entrega
 
-Upload PDF via the course learning management system.
+Subí el PDF a través del sistema de gestión de aprendizaje del curso.

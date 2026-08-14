@@ -1,80 +1,80 @@
-# Lab: Analyzing the Social Impact of an AI System
+# Lab: Análisis del Impacto Social de un Sistema de IA
 
-## Objective
+## Objetivo
 
-Conduct a social impact analysis of a real or proposed AI system. Evaluate its effects on employment, environment, safety, and the information ecosystem.
+Realizá un análisis de impacto social de un sistema de IA real o propuesto. Evaluá sus efectos sobre el empleo, el ambiente, la seguridad y el ecosistema de información.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 5
+Lección 5
 
-## Instructions
+## Instrucciones
 
-### Part 1: Select a System (5 minutes)
+### Parte 1: Seleccioná un sistema (5 minutos)
 
-Choose one of these AI systems:
+Elegí uno de estos sistemas de IA:
 
-1. **Self-checkout kiosks** in retail stores (replacing cashiers)
-2. **AI-generated news articles** by a major news organization
-3. **AI-powered resume screening** by a large employer
-4. **Autonomous delivery drones** for food/package delivery
-5. **A large language model chatbot** deployed for customer service
+1. **Kioscos de autopago** en tiendas minoristas (reemplazando cajeros)
+2. **Artículos de noticias generados por IA** de una organización de noticias importante
+3. **Selección de currículums impulsada por IA** de un gran empleador
+4. **Drones de entrega autónomos** para envío de comida/paquetes
+5. **Un chatbot de modelo de lenguaje grande** implementado para atención al cliente
 
-### Part 2: Social Impact Analysis (25 minutes)
+### Parte 2: Análisis de impacto social (25 minutos)
 
-For your chosen system, analyze the following dimensions:
+Para el sistema que elegiste, analizá las siguientes dimensiones:
 
-**Employment:**
-- What jobs might be affected? How many workers?
-- Are new jobs likely to be created?
-- What skills would become more/less valuable?
+**Empleo:**
+- ¿Qué trabajos podrían verse afectados? ¿Cuántos trabajadores?
+- ¿Es probable que se creen nuevos trabajos?
+- ¿Qué habilidades se volverían más/menos valiosas?
 
-**Environmental:**
-- What is the likely energy footprint of training and running this system?
-- Could there be secondary environmental effects (e.g., reduced transportation)?
-- How could the system be made more environmentally sustainable?
+**Ambiente:**
+- ¿Cuál es la probable huella energética de entrenar y ejecutar este sistema?
+- ¿Podría haber efectos ambientales secundarios (p. ej., menos transporte)?
+- ¿Cómo podría hacerse el sistema más sostenible desde el punto de vista ambiental?
 
-**Safety:**
-- What could go wrong? Identify at least 3 failure modes.
-- Are there adversarial attack vectors?
-- What safety mitigations should be in place before deployment?
+**Seguridad:**
+- ¿Qué podría salir mal? Identificá al menos 3 modos de falla.
+- ¿Existen vectores de ataque adversario?
+- ¿Qué mitigaciones de seguridad deberían estar en marcha antes del despliegue?
 
-**Misinformation/Democracy:**
-- Could the system be used to mislead people?
-- Does it affect the information ecosystem?
-- Does it concentrate power in ways that threaten democratic governance?
+**Desinformación/Democracia:**
+- ¿Podría el sistema usarse para engañar a la gente?
+- ¿Afecta al ecosistema de información?
+- ¿Concentra el poder de maneras que amenacen la gobernanza democrática?
 
-**Distribution of benefits:**
-- Who benefits most from this system?
-- Who bears the costs or risks?
-- Is the distribution equitable?
+**Distribución de beneficios:**
+- ¿Quién se beneficia más con este sistema?
+- ¿Quién asume los costos o riesgos?
+- ¿Es equitativa la distribución?
 
-### Part 3: Stakeholder Map (10 minutes)
+### Parte 3: Mapa de actores interesados (10 minutos)
 
-Draw a stakeholder map (or write a list) identifying at least 5 groups affected by this system. For each group, indicate:
-- How they are affected (positively or negatively)
-- Their power to influence the system's design or deployment
-- What they might advocate for
+Dibujá un mapa de actores interesados (o escribí una lista) identificando al menos 5 grupos afectados por este sistema. Para cada grupo, indicá:
+- Cómo se ven afectados (positiva o negativamente)
+- Su poder para influir en el diseño o el despliegue del sistema
+- Qué podrían defender o exigir
 
-### Part 4: Recommendation (5 minutes)
+### Parte 4: Recomendación (5 minutos)
 
-Write one specific, actionable recommendation for the developers or deployers of the system to address the most significant social impact you identified.
+Escribí una recomendación específica y accionable para los desarrolladores o implementadores del sistema que aborde el impacto social más significativo que identificaste.
 
-## Deliverables
+## Entregables
 
-Submit your analysis (Parts 2–4) as a document (PDF or text).
+Enviá tu análisis (Partes 2–4) como documento (PDF o texto).
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Employment analysis | 15 | Nuanced, specific | Good | Basic | Missing |
-| Environmental analysis | 15 | Specific estimate, mitigation ideas | Good | Basic | Missing |
-| Safety analysis | 20 | Multiple failure modes, mitigations | Good | One or two | Missing |
-| Misinformation analysis | 15 | Thoughtful, connected to system | Good | Basic | Missing |
-| Stakeholder map | 20 | 5+ groups, detailed | 4 groups | 2-3 groups | 1 or none |
-| Recommendation | 15 | Specific, actionable | Good | Vague | Missing |
+| Análisis de empleo | 15 | Matizado, específico | Bueno | Básico | Faltante |
+| Análisis ambiental | 15 | Estimación específica, ideas de mitigación | Bueno | Básico | Faltante |
+| Análisis de seguridad | 20 | Múltiples modos de falla, mitigaciones | Bueno | Uno o dos | Faltante |
+| Análisis de desinformación | 15 | Reflexivo, conectado al sistema | Bueno | Básico | Faltante |
+| Mapa de actores interesados | 20 | 5+ grupos, detallado | 4 grupos | 2-3 grupos | 1 o ninguno |
+| Recomendación | 15 | Específica, accionable | Bueno | Vaga | Faltante |

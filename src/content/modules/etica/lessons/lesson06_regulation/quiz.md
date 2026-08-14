@@ -1,68 +1,68 @@
-# Quiz: Regulation and Governance of AI
+# Quiz: Regulación y Gobernanza de la IA
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** Under the EU AI Act, which risk level requires the most stringent compliance requirements (excluding prohibited systems)?
+**P1.** Según la Ley de IA de la UE, ¿qué nivel de riesgo exige los requisitos de cumplimiento más estrictos (excluyendo los sistemas prohibidos)?
 
-A. Minimal risk
-B. Limited risk
-C. High risk
-D. General-purpose AI
+A. Riesgo mínimo
+B. Riesgo limitado
+C. Riesgo alto
+D. IA de propósito general
 
-**Q2.** Which of the following is classified as "unacceptable risk" under the EU AI Act?
+**P2.** ¿Cuál de los siguientes se clasifica como "riesgo inaceptable" según la Ley de IA de la UE?
 
-A. AI-powered chatbot
-B. AI system for credit scoring
-C. Real-time biometric surveillance in public spaces
-D. AI system for medical diagnosis
+A. Chatbot impulsado por IA
+B. Sistema de IA para scoring crediticio
+C. Vigilancia biométrica en tiempo real en espacios públicos
+D. Sistema de IA para diagnóstico médico
 
-**Q3.** The "pacing problem" in AI regulation refers to:
+**P3.** El "pacing problem" en la regulación de la IA se refiere a:
 
-A. The slow speed of AI systems compared to human decision-making
-B. The challenge of regulating technology that evolves faster than lawmaking
-C. The need to pace AI development to match computing power
-D. The difficulty of enforcing regulations across jurisdictions
+A. La lentitud de los sistemas de IA comparada con la toma de decisiones humana
+B. El desafío de regular tecnología que evoluciona más rápido que la creación de leyes
+C. La necesidad de ajustar el ritmo del desarrollo de la IA a la potencia de cómputo
+D. La dificultad de hacer cumplir las regulaciones entre jurisdicciones
 
-**Q4.** Which of the following best describes "ethics washing"?
+**P4.** ¿Cuál de los siguientes describe mejor el "ethics washing"?
 
-A. Using ethics processes to create an appearance of responsibility without substantive change
-B. Cleaning training data to remove ethical concerns
-C. Publishing AI ethics research that has no practical application
-D. Applying ethical principles to AI system design
+A. Usar procesos de ética para crear una apariencia de responsabilidad sin cambios sustanciales
+B. Limpiar los datos de entrenamiento para eliminar preocupaciones éticas
+C. Publicar investigación de ética de la IA que no tiene aplicación práctica
+D. Aplicar principios éticos al diseño de sistemas de IA
 
-**Q5.** What is a key difference between the EU and US approaches to AI regulation?
+**P5.** ¿Cuál es una diferencia clave entre los enfoques de la UE y de EE. UU. para regular la IA?
 
-A. The EU has comprehensive legislation; the US has sectoral regulation and executive action
-B. The US has comprehensive legislation; the EU has sectoral regulation
-C. Both have comprehensive legislation but different enforcement mechanisms
-D. Neither has enacted any AI-specific regulation
+A. La UE tiene legislación integral; EE. UU. tiene regulación sectorial y acción ejecutiva
+B. EE. UU. tiene legislación integral; la UE tiene regulación sectorial
+C. Ambos tienen legislación integral pero diferentes mecanismos de aplicación
+D. Ninguno ha promulgado regulación específica de IA
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Describe the four risk levels of the EU AI Act. For each level, give an example and state the key regulatory requirement.
+**P6.** Describí los cuatro niveles de riesgo de la Ley de IA de la UE. Para cada nivel, dá un ejemplo y enunciá el requisito regulatorio clave.
 
-**Q7.** What are the components of a robust internal corporate AI governance framework? Why might a company's ethics board fail to prevent harm?
+**P7.** ¿Cuáles son los componentes de un marco sólido interno de gobernanza corporativa de IA? ¿Por qué podría fallar el comité de ética de una empresa a la hora de prevenir daños?
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** (Conceptual — no coding) You are the head of AI governance at a company developing a high-risk AI system for medical diagnosis. Write a brief compliance checklist (150 words) covering the key requirements under the EU AI Act.
+**P8.** (Conceptual — sin código) Sos el responsable de gobernanza de IA en una empresa que desarrolla un sistema de IA de riesgo alto para diagnóstico médico. Escribí una checklist de cumplimiento breve (150 palabras) que cubra los requisitos clave según la Ley de IA de la UE.
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** C — High risk (e.g., medical devices, hiring, credit scoring) requires conformity assessment, risk management, human oversight, etc. General-purpose AI has additional but different requirements.
+**P1.** C — El riesgo alto (p. ej., dispositivos médicos, contratación, scoring crediticio) requiere evaluación de conformidad, gestión de riesgos, supervisión humana, etc. La IA de propósito general tiene requisitos adicionales pero distintos.
 
-**Q2.** C — Real-time biometric surveillance in public spaces is prohibited (with limited exceptions for law enforcement).
+**P2.** C — La vigilancia biométrica en tiempo real en espacios públicos está prohibida (con excepciones limitadas para las fuerzas del orden).
 
-**Q3.** B — The pacing problem is the challenge of regulating technology that evolves faster than the legal system can respond.
+**P3.** B — El pacing problem es el desafío de regular tecnología que evoluciona más rápido de lo que el sistema legal puede responder.
 
-**Q4.** A — Ethics washing is using ethics processes (boards, principles, audits) to create the appearance of responsibility without making substantive changes.
+**P4.** A — El ethics washing es usar procesos de ética (comités, principios, auditorías) para crear la apariencia de responsabilidad sin hacer cambios sustanciales.
 
-**Q5.** A — The EU has comprehensive legislation (AI Act); the US has sectoral regulation (FDA for medical devices) plus executive action (Executive Order on AI).
+**P5.** A — La UE tiene legislación integral (Ley de IA); EE. UU. tiene regulación sectorial (FDA para dispositivos médicos) más acción ejecutiva (Orden Ejecutiva sobre IA).
 
-**Q6.** (1) Unacceptable risk: social scoring, banned outright. (2) High risk: hiring AI, requires conformity assessment, risk management, human oversight. (3) Limited risk: chatbots, requires transparency (disclose AI interaction). (4) Minimal risk: spam filters, no obligations.
+**P6.** (1) Riesgo inaceptable: scoring social, prohibido por completo. (2) Riesgo alto: IA de contratación, requiere evaluación de conformidad, gestión de riesgos, supervisión humana. (3) Riesgo limitado: chatbots, requiere transparencia (revelar la interacción con IA). (4) Riesgo mínimo: filtros de spam, sin obligaciones.
 
-**Q7.** Components: AI principles, governance body with authority, risk assessment process, technical standards, training, auditing, incident response. An ethics board may fail if it lacks enforcement power, lacks independence from business interests, can be dissolved when inconvenient, or functions as ethics washing without real authority over product decisions.
+**P7.** Componentes: principios de IA, órgano de gobernanza con autoridad, proceso de evaluación de riesgos, estándares técnicos, capacitación, auditoría, respuesta a incidentes. Un comité de ética puede fallar si carece de poder de aplicación, carece de independencia frente a los intereses comerciales, puede disolverse cuando resulta inconveniente o funciona como ethics washing sin autoridad real sobre las decisiones de producto.
 
-**Q8.** (Sample response) Our medical AI diagnostic system is classified as high-risk under the EU AI Act. Key compliance requirements: (1) Conformity assessment: self-assessment or notified body review depending on whether the system also requires CE marking under MDR. (2) Risk management system: document all known and foreseeable risks, implement mitigation measures, monitor post-deployment. (3) Data governance: ensure training data is representative, complete, and free from errors; document data provenance. (4) Technical documentation: maintain detailed documentation of model architecture, training methodology, evaluation results, and fairness testing. (5) Human oversight: ensure clinicians can override AI recommendations. (6) Transparency: disclose AI involvement to patients. (7) Accuracy and robustness: test performance across demographic subgroups and under distribution shift.
+**P8.** (Respuesta de ejemplo) Nuestro sistema de diagnóstico médico por IA se clasifica como de riesgo alto según la Ley de IA de la UE. Requisitos de cumplimiento clave: (1) Evaluación de conformidad: autoevaluación o revisión de organismo notificado dependiendo de si el sistema también requiere marcado CE bajo el MDR. (2) Sistema de gestión de riesgos: documentar todos los riesgos conocidos y previsibles, implementar medidas de mitigación, monitorear post-despliegue. (3) Gobernanza de datos: garantizar que los datos de entrenamiento sean representativos, completos y sin errores; documentar la procedencia de los datos. (4) Documentación técnica: mantener documentación detallada de la arquitectura del modelo, la metodología de entrenamiento, los resultados de evaluación y las pruebas de fairness. (5) Supervisión humana: garantizar que los clínicos puedan anular las recomendaciones de la IA. (6) Transparencia: revelar la participación de la IA a los pacientes. (7) Precisión y robustez: probar el rendimiento en subgrupos demográficos y bajo cambio de distribución.

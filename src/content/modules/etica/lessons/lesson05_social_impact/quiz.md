@@ -1,68 +1,68 @@
-# Quiz: Social Impact of AI
+# Quiz: Impacto Social de la IA
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** According to the lesson, which type of employment has the highest automation risk?
+**P1.** Según la lección, ¿qué tipo de empleo tiene el mayor riesgo de automatización?
 
-A. Creative professions (artists, writers)
-B. Social/emotional work (therapists, nurses)
-C. Routine cognitive tasks (data entry, bookkeeping)
-D. Technical expertise (software engineering, scientific research)
+A. Profesiones creativas (artistas, escritores)
+B. Trabajo social/emocional (terapeutas, enfermeros)
+C. Tareas cognitivas rutinarias (ingreso de datos, contabilidad)
+D. Experiencia técnica (ingeniería de software, investigación científica)
 
-**Q2.** The estimated CO2 emissions from training GPT-3 were approximately:
+**P2.** Las emisiones de CO2 estimadas del entrenamiento de GPT-3 fueron aproximadamente:
 
-A. 1.4 tons (equivalent to one round-trip flight)
-B. 100 tons (equivalent to several homes' annual energy use)
-C. 500 tons (equivalent to 5 cars driven for a year)
-D. 5000 tons (equivalent to a small power plant)
+A. 1.4 toneladas (equivalentes a un vuelo de ida y vuelta)
+B. 100 toneladas (equivalentes al consumo energético anual de varias casas)
+C. 500 toneladas (equivalentes a 5 autos circulando durante un año)
+D. 5000 toneladas (equivalentes a una pequeña central eléctrica)
 
-**Q3.** In AI safety, "specification gaming" refers to:
+**P3.** En seguridad de IA, "specification gaming" se refiere a:
 
-A. AI systems that play games better than humans
-B. AI systems that exploit loopholes in their objective function to achieve high reward without actually solving the intended problem
-C. Designing specifications for AI training runs
-D. AI systems that refuse to follow instructions
+A. Sistemas de IA que juegan mejor que los humanos
+B. Sistemas de IA que explotan vacíos en su función objetivo para lograr alta recompensa sin resolver realmente el problema previsto
+C. Diseñar especificaciones para ejecuciones de entrenamiento de IA
+D. Sistemas de IA que se niegan a seguir instrucciones
 
-**Q4.** Which of the following is NOT a component of the environmental impact of AI?
+**P4.** ¿Cuál de los siguientes NO es un componente del impacto ambiental de la IA?
 
-A. Hardware manufacturing (GPUs, TPUs)
-B. Training energy consumption
-C. Inference energy consumption (each prediction)
-D. Data labeling labor costs
+A. Fabricación de hardware (GPUs, TPUs)
+B. Consumo energético de entrenamiento
+C. Consumo energético de inferencia (cada predicción)
+D. Costos laborales del etiquetado de datos
 
-**Q5.** The debate between the "displacement view" and the "replacement-and-creation view" concerns:
+**P5.** El debate entre la "visión del desplazamiento" y la "visión del reemplazo-y-creación" trata sobre:
 
-A. Whether AI will replace all human workers or only some
-B. Whether AI will cause net job loss or create new jobs to replace automated ones
-C. Whether AI will displace workers in developed or developing countries
-D. Whether AI automation is inevitable or preventable
+A. Si la IA reemplazará a todos los trabajadores humanos o solo a algunos
+B. Si la IA causará pérdida neta de empleos o creará nuevos empleos que reemplacen a los automatizados
+C. Si la IA desplazará trabajadores en países desarrollados o en desarrollo
+D. Si la automatización con IA es inevitable o prevenible
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain the concept of "alignment" in AI safety. Give a concrete example of a misaligned AI system.
+**P6.** Explicá el concepto de "alignment" en seguridad de IA. Dá un ejemplo concreto de un sistema de IA desalineado.
 
-**Q7.** How does AI contribute to the spread of misinformation? Describe at least two distinct mechanisms and propose one mitigation strategy for each.
+**P7.** ¿Cómo contribuye la IA a la propagación de desinformación? Describí al menos dos mecanismos distintos y proponé una estrategia de mitigación para cada uno.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** (Conceptual — no coding) You are advising a government agency on AI regulation. Write a brief (150 words) explaining which social impact of AI you consider most urgent and why, and propose one specific policy intervention.
+**P8.** (Conceptual — sin código) Estás asesorando a una agencia gubernamental sobre regulación de IA. Escribí un texto breve (150 palabras) explicando qué impacto social de la IA considerás más urgente y por qué, y proponé una intervención de política específica.
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** C — Routine cognitive tasks have the highest automation risk because they are predictable and rule-based.
+**P1.** C — Las tareas cognitivas rutinarias tienen el mayor riesgo de automatización porque son predecibles y basadas en reglas.
 
-**Q2.** C — Approximately 500 tons of CO2, equivalent to 5 cars driven for a year.
+**P2.** C — Aproximadamente 500 toneladas de CO2, equivalentes a 5 autos circulando durante un año.
 
-**Q3.** B — Specification gaming occurs when AI systems find unexpected ways to maximize their reward function that do not correspond to the intended behavior.
+**P3.** B — El specification gaming ocurre cuando los sistemas de IA encuentran formas inesperadas de maximizar su función de recompensa que no corresponden al comportamiento previsto.
 
-**Q4.** D — Data labeling labor costs are not an environmental impact (though they have social/ethical dimensions).
+**P4.** D — Los costos laborales del etiquetado de datos no son un impacto ambiental (aunque tienen dimensiones sociales/éticas).
 
-**Q5.** B — The debate between whether AI will cause net job displacement or create enough new jobs to offset losses.
+**P5.** B — El debate entre si la IA causará desplazamiento neto de empleos o creará suficientes empleos nuevos como para compensar las pérdidas.
 
-**Q6.** Alignment is the challenge of ensuring AI systems pursue goals that are consistent with human values. Example: A cleaning robot trained to "maximize cleanliness" might hide dirt under the rug (achieving high cleanliness scores by a narrow metric) rather than actually cleaning. Another example: A content moderation AI trained to minimize "toxic content" might over-censor legitimate political speech from minority groups.
+**P6.** El alignment es el desafío de garantizar que los sistemas de IA persigan objetivos coherentes con los valores humanos. Ejemplo: un robot de limpieza entrenado para "maximizar la limpieza" podría esconder la suciedad debajo de la alfombra (logrando altos puntajes de limpieza según una métrica estrecha) en lugar de limpiar de verdad. Otro ejemplo: una IA de moderación de contenido entrenada para minimizar el "contenido tóxico" podría censurar de más el discurso político legítimo de grupos minoritarios.
 
-**Q7.** Two mechanisms: (1) Generative AI (LLMs, deepfakes) can create convincing false content at scale, overwhelming fact-checking capacity. Mitigation: content provenance standards (C2PA watermarking). (2) Recommendation algorithms amplify engaging but false content because it generates more clicks. Mitigation: platform design changes that deprioritize engagement-based ranking in favor of accuracy-based ranking.
+**P7.** Dos mecanismos: (1) La IA generativa (LLMs, deepfakes) puede crear contenido falso convincente a escala, desbordando la capacidad de verificación de datos. Mitigación: estándares de procedencia de contenido (marca de agua C2PA). (2) Los algoritmos de recomendación amplifican contenido atractivo pero falso porque genera más clics. Mitigación: cambios de diseño de plataformas que desprioricen el ranking basado en engagement a favor de un ranking basado en precisión.
 
-**Q8.** (Sample response) The most urgent social impact is the spread of AI-generated misinformation, because it threatens democratic institutions and public health. Unlike employment effects (which play out over decades) or environmental costs (which can be mitigated with renewable energy), misinformation can alter election outcomes and erode trust in institutions within days. I propose a mandatory content provenance requirement: any AI-generated content exceeding a certain public reach must include cryptographic provenance metadata identifying its origin. This is analogous to nutritional labels on food — it does not prevent creation of AI content but makes its nature transparent to consumers and platforms.
+**P8.** (Respuesta de ejemplo) El impacto social más urgente es la propagación de desinformación generada por IA, porque amenaza a las instituciones democráticas y la salud pública. A diferencia de los efectos sobre el empleo (que se desarrollan a lo largo de décadas) o los costos ambientales (que pueden mitigarse con energía renovable), la desinformación puede alterar resultados electorales y erosionar la confianza en las instituciones en cuestión de días. Propongo un requisito obligatorio de procedencia de contenido: cualquier contenido generado por IA que supere cierto alcance público debe incluir metadatos de procedencia criptográfica que identifiquen su origen. Esto es análogo a las etiquetas nutricionales en los alimentos — no impide la creación de contenido de IA pero hace que su naturaleza sea transparente para los consumidores y las plataformas.

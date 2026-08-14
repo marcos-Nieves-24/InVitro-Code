@@ -1,93 +1,93 @@
-# Lab: Comprehensive AI Ethics Case Study Analysis
+# Lab: Análisis Integral de Casos de Estudio de Ética de la IA
 
-## Objective
+## Objetivo
 
-Conduct a full ethical analysis of a real or hypothetical AI system, applying all concepts from Module 5 (principles, bias, fairness, transparency, privacy, social impact, regulation).
+Realizá un análisis ético completo de un sistema de IA real o hipotético, aplicando todos los conceptos del Módulo 5 (principios, bias, fairness, transparencia, privacidad, impacto social, regulación).
 
-## Duration
+## Duración
 
-75 minutes
+75 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lessons 1–7
+Lecciones 1–7
 
-## Instructions
+## Instrucciones
 
-### Part 1: Case Selection and Description (10 minutes)
+### Parte 1: Selección y descripción del caso (10 minutos)
 
-Choose one of the following cases. Read the description and any linked resources.
+Elegí uno de los siguientes casos. Leé la descripción y los recursos vinculados.
 
-**Case A: AI-Powered Resume Screening**
+**Caso A: Selección de currículums impulsada por IA**
 
-A company deploys an AI system to screen resumes and rank candidates for interview. The system was trained on the company's historical hiring data (10 years). The company's engineering team is 82% male and 74% white. The system ranks candidates. After deployment, the diversity of candidates reaching interviews drops by 40%.
+Una empresa despliega un sistema de IA para filtrar currículums y ordenar a los candidatos para entrevistas. El sistema se entrenó con los datos históricos de contratación de la empresa (10 años). El equipo de ingeniería de la empresa es 82% masculino y 74% blanco. El sistema ordena a los candidatos. Después del despliegue, la diversidad de los candidatos que llegan a entrevistas cae un 40%.
 
-**Case B: AI in Clinical Trial Recruitment**
+**Caso B: IA en el reclutamiento para ensayos clínicos**
 
-A pharmaceutical company uses an AI system to identify eligible patients for a clinical trial of a new cardiac drug. The model is trained on electronic health records from major urban hospitals. The model identifies fewer eligible patients from rural areas and minority populations. The drug must be tested on a diverse population for FDA approval.
+Una empresa farmacéutica usa un sistema de IA para identificar pacientes elegibles para un ensayo clínico de un nuevo fármaco cardíaco. El modelo se entrena con historias clínicas electrónicas de grandes hospitales urbanos. El modelo identifica menos pacientes elegibles de zonas rurales y poblaciones minoritarias. El fármaco debe probarse en una población diversa para la aprobación de la FDA.
 
-**Case C: AI Chatbot for Mental Health Support**
+**Caso C: Chatbot de IA para apoyo de salud mental**
 
-A SaaS company launches an AI chatbot that provides mental health support to users. The chatbot was trained on therapy transcripts and licensed clinical data. Users share sensitive personal information with the chatbot. The company wants to use the conversation data to improve the model.
+Una empresa SaaS lanza un chatbot de IA que brinda apoyo de salud mental a los usuarios. El chatbot se entrenó con transcripciones de terapia y datos clínicos licenciados. Los usuarios comparten información personal sensible con el chatbot. La empresa quiere usar los datos de las conversaciones para mejorar el modelo.
 
-### Part 2: Structured Analysis (35 minutes)
+### Parte 2: Análisis estructurado (35 minutos)
 
-For your chosen case, analyze using the following framework:
+Para tu caso elegido, analizá usando el siguiente marco:
 
-**1. Five Principles Analysis (10 min)**
-For each principle (beneficence, non-maleficence, autonomy, justice, explicability), state whether the system satisfies, partially satisfies, or violates the principle. Explain your reasoning.
+**1. Análisis de los cinco principios (10 min)**
+Para cada principio (beneficencia, no maleficencia, autonomía, justicia, explicabilidad), indicá si el sistema satisface, satisface parcialmente o viola el principio. Explicá tu razonamiento.
 
-**2. Bias Analysis (5 min)**
-- What types of bias might be present (data, algorithmic, societal)?
-- What fairness metrics would you compute?
-- What bias mitigation strategies would you recommend?
+**2. Análisis de bias (5 min)**
+- ¿Qué tipos de bias podrían estar presentes (de datos, algorítmico, social)?
+- ¿Qué métricas de fairness calcularías?
+- ¿Qué estrategias de mitigación de bias recomendarías?
 
-**3. Explainability Analysis (5 min)**
-- Does the system need to be explainable? Why or why not?
-- What kind of explanations are needed (global, local, both)?
-- Which method (LIME, SHAP, or other) would you use?
+**3. Análisis de explicabilidad (5 min)**
+- ¿El sistema necesita ser explicable? ¿Por qué sí o por qué no?
+- ¿Qué tipo de explicaciones se necesitan (globales, locales, ambas)?
+- ¿Qué método (LIME, SHAP u otro) usarías?
 
-**4. Privacy Analysis (5 min)**
-- What data does the system collect?
-- What privacy risks exist?
-- Would differential privacy be appropriate? What epsilon would you use?
+**4. Análisis de privacidad (5 min)**
+- ¿Qué datos recolecta el sistema?
+- ¿Qué riesgos de privacidad existen?
+- ¿Sería apropiada la privacidad diferencial? ¿Qué epsilon usarías?
 
-**5. Social Impact (5 min)**
-- What are the broader social impacts (employment, equity, misinformation)?
-- Who benefits? Who bears costs or risks?
+**5. Impacto social (5 min)**
+- ¿Cuáles son los impactos sociales más amplios (empleo, equidad, desinformación)?
+- ¿Quién se beneficia? ¿Quién asume los costos o riesgos?
 
-**6. Regulatory Analysis (5 min)**
-- Which regulations apply (EU AI Act, GDPR, HIPAA, other)?
-- What risk classification under EU AI Act?
-- What compliance steps are needed?
+**6. Análisis regulatorio (5 min)**
+- ¿Qué regulaciones aplican (Ley de IA de la UE, GDPR, HIPAA, otras)?
+- ¿Qué clasificación de riesgo según la Ley de IA de la UE?
+- ¿Qué pasos de cumplimiento se necesitan?
 
-### Part 3: Recommendations (15 minutes)
+### Parte 3: Recomendaciones (15 minutos)
 
-Write three specific, actionable recommendations:
-1. A quick fix (implementable in < 1 month)
-2. A medium-term improvement (1–6 months)
-3. A long-term systemic change (6+ months)
+Escribí tres recomendaciones específicas y accionables:
+1. Un arreglo rápido (implementable en < 1 mes)
+2. Una mejora a mediano plazo (1–6 meses)
+3. Un cambio sistémico a largo plazo (6+ meses)
 
-### Part 4: Group Discussion (15 minutes)
+### Parte 4: Discusión en grupo (15 minutos)
 
-Share your analysis with a partner or small group. Discuss:
-- Did you identify different risks for the same case?
-- What trade-offs did you encounter?
-- Are your recommendations feasible?
-- What would you prioritize?
+Compartí tu análisis con un compañero o un grupo pequeño. Discutí:
+- ¿Identificaron riesgos distintos para el mismo caso?
+- ¿Qué compensaciones encontraron?
+- ¿Son factibles sus recomendaciones?
+- ¿Qué priorizarían?
 
-## Deliverables
+## Entregables
 
-Submit your structured analysis (Part 2) and recommendations (Part 3).
+Enviá tu análisis estructurado (Parte 2) y tus recomendaciones (Parte 3).
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Five principles | 20 | All correctly applied with nuance | Four correct | Three correct | < 3 or incorrect |
-| Bias and fairness | 15 | Types, metrics, mitigations all addressed | Good | Basic | Missing |
-| Explainability | 15 | Appropriate method, audience-appropriate | Good | Basic | Missing |
-| Privacy | 15 | Risks identified, appropriate protections | Good | Basic | Missing |
-| Social impact | 10 | Thorough, nuanced | Good | Basic | Missing |
-| Regulation | 10 | Correct classification, specific requirements | Good | Basic | Missing |
-| Recommendations | 15 | Three specific, feasible, time-bounded | Two good | One good | Missing |
+| Cinco principios | 20 | Todos aplicados correctamente con matices | Cuatro correctos | Tres correctos | < 3 o incorrectos |
+| Bias y fairness | 15 | Tipos, métricas y mitigaciones todos abordados | Bueno | Básico | Faltante |
+| Explicabilidad | 15 | Método apropiado, adecuado a la audiencia | Bueno | Básico | Faltante |
+| Privacidad | 15 | Riesgos identificados, protecciones apropiadas | Bueno | Básico | Faltante |
+| Impacto social | 10 | Minucioso, matizado | Bueno | Básico | Faltante |
+| Regulación | 10 | Clasificación correcta, requisitos específicos | Bueno | Básico | Faltante |
+| Recomendaciones | 15 | Tres específicas, factibles, con plazos | Dos buenas | Una buena | Faltantes |

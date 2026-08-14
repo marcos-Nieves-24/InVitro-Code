@@ -1,74 +1,74 @@
-# Assignment: AI Regulatory Compliance Report
+# Assignment: Informe de Cumplimiento Regulatorio de IA
 
-## Objectives
+## Objetivos
 
-- Conduct a detailed regulatory compliance analysis for a real AI system
-- Apply EU AI Act requirements to a concrete case
-- Develop a compliance roadmap
-- Communicate findings in a professional report
+- Realizá un análisis detallado de cumplimiento regulatorio para un sistema de IA real
+- Aplicá los requisitos de la Ley de IA de la UE a un caso concreto
+- Desarrollá una hoja de ruta de cumplimiento
+- Comunicá los hallazgos en un informe profesional
 
-## Instructions
+## Instrucciones
 
-Select a real AI system that would likely be classified as high-risk under the EU AI Act. Examples:
+Seleccioná un sistema de IA real que probablemente se clasificaría como de riesgo alto según la Ley de IA de la UE. Ejemplos:
 
-- An AI hiring/recruitment platform (e.g., HireVue, Pymetrics)
-- An AI medical diagnostic system (e.g., IDx-DR for diabetic retinopathy)
-- An AI credit scoring system (e.g., FICO, Upstart)
-- An AI system used in law enforcement (e.g., facial recognition, predictive policing)
-- An AI system used in education (e.g., automated grading, admissions)
+- Una plataforma de contratación/reclutamiento con IA (p. ej., HireVue, Pymetrics)
+- Un sistema de diagnóstico médico con IA (p. ej., IDx-DR para retinopatía diabética)
+- Un sistema de scoring crediticio con IA (p. ej., FICO, Upstart)
+- Un sistema de IA usado en la aplicación de la ley (p. ej., reconocimiento facial, policía predictiva)
+- Un sistema de IA usado en educación (p. ej., calificación automatizada, admisiones)
 
-Write a 2000–2500 word compliance report with the following sections:
+Escribí un informe de cumplimiento de 2000–2500 palabras con las siguientes secciones:
 
-### 1. System Description (300 words)
-Describe the system, its purpose, how it works, who developed it, and where it is deployed.
+### 1. Descripción del sistema (300 palabras)
+Describí el sistema, su propósito, cómo funciona, quién lo desarrolló y dónde está desplegado.
 
-### 2. EU AI Act Classification (400 words)
-- Classify the system under the EU AI Act
-- Justify your classification (which article applies)
-- Identify whether it is high-risk (Annex III) and which category
-- Discuss whether any unacceptable practices are implicated
+### 2. Clasificación según la Ley de IA de la UE (400 palabras)
+- Clasificá el sistema según la Ley de IA de la UE
+- Justificá tu clasificación (qué artículo aplica)
+- Identificá si es de riesgo alto (Anexo III) y en qué categoría
+- Discutí si están implicadas prácticas inaceptables
 
-### 3. Compliance Requirements (600 words)
-For each of the following high-risk requirements, explain what the system developer must do:
-- Risk management system (Art. 9)
-- Data governance (Art. 10)
-- Technical documentation (Art. 11)
-- Record-keeping and logging (Art. 12)
-- Transparency (Art. 13)
-- Human oversight (Art. 14)
-- Accuracy, robustness, cybersecurity (Art. 15)
+### 3. Requisitos de cumplimiento (600 palabras)
+Para cada uno de los siguientes requisitos de riesgo alto, explicá qué debe hacer el desarrollador del sistema:
+- Sistema de gestión de riesgos (Art. 9)
+- Gobernanza de datos (Art. 10)
+- Documentación técnica (Art. 11)
+- Registro y registro de actividad (Art. 12)
+- Transparencia (Art. 13)
+- Supervisión humana (Art. 14)
+- Precisión, robustez, ciberseguridad (Art. 15)
 
-### 4. Current Compliance Status (300 words)
-Research (or estimate based on public information) how compliant the system currently is. Identify specific gaps.
+### 4. Estado actual de cumplimiento (300 palabras)
+Investigá (o estimá en base a información pública) qué tan conforme está actualmente el sistema. Identificá brechas específicas.
 
-### 5. Compliance Roadmap (400 words)
-Propose a timeline and action plan for achieving compliance:
-- Immediate actions (0–6 months)
-- Medium-term (6–18 months)
-- Long-term (18–36 months)
-- Estimated resources needed
+### 5. Hoja de ruta de cumplimiento (400 palabras)
+Proponé un cronograma y un plan de acción para lograr el cumplimiento:
+- Acciones inmediatas (0–6 meses)
+- Mediano plazo (6–18 meses)
+- Largo plazo (18–36 meses)
+- Recursos estimados necesarios
 
-## Deliverables
+## Entregables
 
-A single PDF document.
+Un único documento PDF.
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| System description | 10 | Accurate, detailed | Adequate | Vague | Missing |
-| Classification | 20 | Correct, well-justified | Correct | Partially correct | Incorrect |
-| Compliance requirements | 25 | Specific, thorough | Good | Basic | Missing or incorrect |
-| Current status | 15 | Well-researched, specific | Good | Basic | Missing |
-| Roadmap | 20 | Detailed, practical | Reasonable | Generic | Missing |
-| Writing quality | 10 | Professional, clear | Good | Acceptable | Poor |
+| Descripción del sistema | 10 | Preciso, detallado | Adecuado | Vago | Faltante |
+| Clasificación | 20 | Correcta, bien justificada | Correcta | Parcialmente correcta | Incorrecta |
+| Requisitos de cumplimiento | 25 | Específicos, minuciosos | Bueno | Básico | Faltantes o incorrectos |
+| Estado actual | 15 | Bien investigado, específico | Bueno | Básico | Faltante |
+| Hoja de ruta | 20 | Detallada, práctica | Razonable | Genérica | Faltante |
+| Calidad de redacción | 10 | Profesional, clara | Buena | Aceptable | Pobre |
 
-**Total: 100 points**
+**Total: 100 puntos**
 
-## Estimated Time
+## Tiempo estimado
 
-6–8 hours
+6–8 horas
 
-## Submission
+## Entrega
 
-Upload PDF via the course learning management system.
+Subí el PDF a través del sistema de gestión de aprendizaje del curso.

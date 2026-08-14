@@ -1,74 +1,74 @@
-# Quiz: Case Studies in Health and SaaS
+# Quiz: Casos de Estudio en Salud y SaaS
 
-## Multiple Choice (5 questions)
+## Opción múltiple (5 preguntas)
 
-**Q1.** In the Obermeyer et al. (2019) healthcare algorithm study, what was the root cause of racial bias?
+**P1.** En el estudio sobre algoritmos de atención médica de Obermeyer et al. (2019), ¿cuál fue la causa raíz del sesgo racial?
 
-A. The algorithm explicitly used race as a feature
-B. The algorithm used health costs as a proxy for health needs, and costs are lower for Black patients due to unequal access to care
-C. The training data included too few Black patients
-D. The algorithm was trained on biased labels provided by physicians
+A. El algoritmo usaba explícitamente la raza como característica
+B. El algoritmo usaba los costos de salud como proxy de las necesidades de salud, y los costos son más bajos para pacientes negros debido al acceso desigual a la atención
+C. Los datos de entrenamiento incluían muy pocos pacientes negros
+D. El algoritmo se entrenó con etiquetas sesgadas proporcionadas por médicos
 
-**Q2.** What percentage of the bias was eliminated when Obermeyer et al. retrained the algorithm to predict number of chronic conditions instead of cost?
+**P2.** ¿Qué porcentaje del sesgo se eliminó cuando Obermeyer et al. reentrenaron el algoritmo para predecir la cantidad de condiciones crónicas en lugar del costo?
 
 A. 25%
 B. 50%
 C. 84%
 D. 100%
 
-**Q3.** Under the Equal Credit Opportunity Act (ECOA), lenders must:
+**P3.** Según la Equal Credit Opportunity Act (ECOA), los prestamistas deben:
 
-A. Approve all applicants regardless of credit history
-B. Provide specific reasons for adverse credit decisions (adverse action notice)
-C. Use only income and credit score in lending decisions
-D. Achieve demographic parity in approval rates
+A. Aprobar a todos los solicitantes independientemente del historial crediticio
+B. Proporcionar razones específicas para decisiones crediticias adversas (aviso de acción adversa)
+C. Usar solo ingresos y score crediticio en las decisiones de préstamo
+D. Lograr paridad demográfica en las tasas de aprobación
 
-**Q4.** In the context of the healthcare algorithm case study, the "proxy problem" refers to:
+**P4.** En el contexto del caso de estudio del algoritmo de atención médica, el "proxy problem" se refiere a:
 
-A. Using hidden variables that cannot be measured directly
-B. Using a variable (cost) that correlates with the target (need) but has group-level bias
-C. Using patient data without consent
-D. Delegating medical decisions to an algorithm
+A. Usar variables ocultas que no pueden medirse directamente
+B. Usar una variable (costo) que se correlaciona con el objetivo (necesidad) pero tiene sesgo a nivel de grupo
+C. Usar datos de pacientes sin consentimiento
+D. Delegar decisiones médicas a un algoritmo
 
-**Q5.** Which fairness metric is most directly relevant to the healthcare algorithm case (equal identification of high-need patients across groups)?
+**P5.** ¿Qué métrica de fairness es más directamente relevante para el caso del algoritmo de atención médica (identificación igual de pacientes de alta necesidad entre grupos)?
 
-A. Demographic parity
-B. Equal opportunity (equal TPR)
-C. Individual fairness
-D. Disparate impact ratio
+A. Paridad demográfica
+B. Igualdad de oportunidades (TPR igual)
+C. Fairness individual
+D. Razón de impacto dispar
 
-## Short Answer (2 questions)
+## Respuesta corta (2 preguntas)
 
-**Q6.** Explain how the Obermeyer algorithm caused harm despite being well-intentioned. What ethical principle (from Lesson 1) was primarily violated?
+**P6.** Explicá cómo el algoritmo de Obermeyer causó daño a pesar de estar bien intencionado. ¿Qué principio ético (de la Lección 1) se vio violado principalmente?
 
-**Q7.** A SaaS company builds a churn prediction model and plans to offer retention discounts only to customers predicted as high-churn. Discuss at least two ethical concerns with this approach.
+**P7.** Una empresa SaaS construye un modelo de predicción de churn y planea ofrecer descuentos de retención solo a los clientes predichos como de alto churn. Discutí al menos dos preocupaciones éticas con este enfoque.
 
-## Coding Question (1 question)
+## Pregunta de código (1 pregunta)
 
-**Q8.** Write a Python function `audit_healthcare_algorithm(y_true, y_pred, protected_attr, group_names=None)` that:
-- Takes true labels, predicted labels, and a protected attribute
-- Returns a dictionary with: overall accuracy, TPR by group, FPR by group, TPR difference, FPR difference
-- Uses sklearn's confusion_matrix
+**P8.** Escribí una función de Python `audit_healthcare_algorithm(y_true, y_pred, protected_attr, group_names=None)` que:
+- Reciba etiquetas reales, etiquetas predichas y un atributo protegido
+- Devuelva un diccionario con: precisión general, TPR por grupo, FPR por grupo, diferencia de TPR, diferencia de FPR
+- Use la confusion_matrix de sklearn
 
 ---
 
-## Answer Key
+## Clave de respuestas
 
-**Q1.** B — The algorithm used cost as a proxy for need. Due to unequal access to care, Black patients with the same health needs had lower costs, so the algorithm systematically underestimated their needs.
+**P1.** B — El algoritmo usaba el costo como proxy de la necesidad. Debido al acceso desigual a la atención, los pacientes negros con las mismas necesidades de salud tenían costos más bajos, por lo que el algoritmo subestimaba sistemáticamente sus necesidades.
 
-**Q2.** C — 84% of the bias was eliminated by using number of chronic conditions instead of cost.
+**P2.** C — El 84% del sesgo se eliminó usando la cantidad de condiciones crónicas en lugar del costo.
 
-**Q3.** B — ECOA requires lenders to provide specific reasons for adverse actions (adverse action notice).
+**P3.** B — La ECOA exige que los prestamistas proporcionen razones específicas para las acciones adversas (aviso de acción adversa).
 
-**Q4.** B — The proxy problem is using a proxy variable that correlates with the target but has group-level bias.
+**P4.** B — El proxy problem es usar una variable proxy que se correlaciona con el objetivo pero tiene sesgo a nivel de grupo.
 
-**Q5.** B — Equal opportunity (equal TPR) is most relevant: the algorithm should identify high-need patients at equal rates across groups.
+**P5.** B — La igualdad de oportunidades (TPR igual) es la más relevante: el algoritmo debería identificar pacientes de alta necesidad a tasas iguales entre grupos.
 
-**Q6.** The algorithm used cost as a proxy for health need. Because Black patients have historically lower access to healthcare (systemic racism, insurance disparities), their costs are lower even when they have the same health needs. The algorithm learned that low cost = healthy, which was incorrect for Black patients. This primarily violated the **justice** principle — distributing healthcare resources inequitably — and **non-maleficence** by causing real harm.
+**P6.** El algoritmo usaba el costo como proxy de la necesidad de salud. Debido a que los pacientes negros tienen históricamente menor acceso a la atención médica (racismo sistémico, disparidades de seguro), sus costos son más bajos incluso cuando tienen las mismas necesidades de salud. El algoritmo aprendió que costo bajo = sano, lo cual era incorrecto para pacientes negros. Esto violó principalmente el principio de **justicia** — distribuyendo los recursos de atención médica de manera inequitativa — y la **no maleficencia** al causar daño real.
 
-**Q7.** (1) Transparency: customers may not know their behavior is being modeled for retention targeting. (2) Fairness: enterprise customers (high revenue, lower churn risk) receive fewer discounts than small businesses (lower revenue, higher churn risk), which may be seen as punishing smaller customers or as fair resource allocation depending on perspective. (3) Manipulation: personalized discounts based on predicted behavior may cross into manipulative practices. (4) Privacy: churn prediction requires collecting detailed usage data.
+**P7.** (1) Transparencia: los clientes pueden no saber que su comportamiento se está modelando para el targeting de retención. (2) Fairness: los clientes empresariales (altos ingresos, menor riesgo de churn) reciben menos descuentos que las pequeñas empresas (menores ingresos, mayor riesgo de churn), lo que puede verse como un castigo a los clientes más pequeños o como una asignación justa de recursos según la perspectiva. (3) Manipulación: los descuentos personalizados basados en el comportamiento predicho pueden cruzar la línea hacia prácticas manipuladoras. (4) Privacidad: la predicción de churn requiere recolectar datos detallados de uso.
 
-**Q8.** Sample solution:
+**P8.** Solución de ejemplo:
 
 ```python
 def audit_healthcare_algorithm(y_true, y_pred, protected_attr, group_names=None):

@@ -1,63 +1,63 @@
-# Lab: Regulatory Compliance Analysis
+# Lab: Análisis de Cumplimiento Regulatorio
 
-## Objective
+## Objetivo
 
-Apply the EU AI Act framework to real AI systems. Analyze compliance requirements and identify gaps.
+Aplicá el marco de la Ley de IA de la UE a sistemas de IA reales. Analizá los requisitos de cumplimiento e identificá brechas.
 
-## Duration
+## Duración
 
-45 minutes
+45 minutos
 
-## Prerequisites
+## Requisitos previos
 
-Lesson 6
+Lección 6
 
-## Instructions
+## Instrucciones
 
-### Part 1: Classification Exercise (15 minutes)
+### Parte 1: Ejercicio de clasificación (15 minutos)
 
-For each of the following AI systems, classify it under the EU AI Act (unacceptable, high-risk, limited risk, minimal risk) and justify your decision:
+Para cada uno de los siguientes sistemas de IA, clasificalo bajo la Ley de IA de la UE (riesgo inaceptable, riesgo alto, riesgo limitado, riesgo mínimo) y justificá tu decisión:
 
-1. An AI system used by a bank to automatically approve or deny small business loans.
-2. A deepfake video generator used for entertainment (creating parody videos).
-3. An AI system that monitors employee behavior and productivity in real-time.
-4. A spam filter for email.
-5. An AI system used by a university to rank applicants for admission.
-6. An AI-powered toy that interacts with children and adapts to their behavior.
+1. Un sistema de IA usado por un banco para aprobar o rechazar automáticamente préstamos para pequeñas empresas.
+2. Un generador de videos deepfake usado para entretenimiento (creando videos de parodia).
+3. Un sistema de IA que monitorea el comportamiento y la productividad de los empleados en tiempo real.
+4. Un filtro de spam para correo electrónico.
+5. Un sistema de IA usado por una universidad para ordenar los postulantes para la admisión.
+6. Un juguete impulsado por IA que interactúa con niños y se adapta a su comportamiento.
 
-### Part 2: Compliance Mapping (20 minutes)
+### Parte 2: Mapeo de cumplimiento (20 minutos)
 
-Choose one of the high-risk systems from Part 1. Create a compliance map showing:
+Elegí uno de los sistemas de riesgo alto de la Parte 1. Creá un mapa de cumplimiento que muestre:
 
-- Which articles of the EU AI Act apply
-- What technical documentation is needed
-- What data governance requirements exist
-- What human oversight measures are needed
-- What transparency obligations exist
+- Qué artículos de la Ley de IA de la UE aplican
+- Qué documentación técnica se necesita
+- Qué requisitos de gobernanza de datos existen
+- Qué medidas de supervisión humana se necesitan
+- Qué obligaciones de transparencia existen
 
-Use the following template:
+Usá la siguiente plantilla:
 
-| Requirement | Specific Action | Evidence Needed | Responsible Party |
+| Requisito | Acción específica | Evidencia necesaria | Parte responsable |
 |-------------|----------------|----------------|-------------------|
-| Risk management | Systematically identify risks | Risk assessment document | ML team |
+| Gestión de riesgos | Identificar sistemáticamente los riesgos | Documento de evaluación de riesgos | Equipo de ML |
 | ... | ... | ... | ... |
 
-### Part 3: Gap Analysis (10 minutes)
+### Parte 3: Análisis de brechas (10 minutos)
 
-For the same system, identify:
-1. Three gaps between current practice (assume typical development) and regulatory requirements
-2. The cost and difficulty of closing each gap
-3. Priority order for remediation
+Para el mismo sistema, identificá:
+1. Tres brechas entre la práctica actual (asumí un desarrollo típico) y los requisitos regulatorios
+2. El costo y la dificultad de cerrar cada brecha
+3. El orden de prioridad para la remediación
 
-## Deliverables
+## Entregables
 
-Submit your classification (Part 1), compliance map (Part 2), and gap analysis (Part 3).
+Enviá tu clasificación (Parte 1), el mapa de cumplimiento (Parte 2) y el análisis de brechas (Parte 3).
 
-## Rubric
+## Rúbrica
 
-| Criterion | Points | Excellent | Good | Satisfactory | Needs Improvement |
+| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
 |-----------|--------|-----------|------|--------------|-------------------|
-| Classification accuracy | 25 | All correct with justification | 5/6 correct | 4/6 correct | < 4 correct |
-| Compliance map | 35 | Comprehensive, specific | Good coverage | Partial | Missing |
-| Gap analysis | 25 | Insightful, practical | Good | Basic | Missing |
-| Clarity | 15 | Well-organized, clear | Mostly clear | Somewhat clear | Unclear |
+| Precisión de la clasificación | 25 | Todas correctas con justificación | 5/6 correctas | 4/6 correctas | < 4 correctas |
+| Mapa de cumplimiento | 35 | Integral, específico | Buena cobertura | Parcial | Faltante |
+| Análisis de brechas | 25 | Perspicaz, práctico | Bueno | Básico | Faltante |
+| Claridad | 15 | Bien organizado, claro | Mayormente claro | Algo claro | Poco claro |
