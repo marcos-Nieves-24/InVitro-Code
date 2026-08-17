@@ -44,6 +44,9 @@ async function ensureStats() {
 
 async function ensurePlotly() {
   if (plotlyReady) return;
+  // plotly.express requires pandas under the hood (it converts inputs to
+  // DataFrames), so we load it here — otherwise plotly-only labs fail.
+  await pyodide.loadPackage("pandas");
   // plotly is not a native Pyodide package — install via micropip from PyPI
   await pyodide.loadPackage("micropip");
   const micropip = pyodide.pyimport("micropip");
