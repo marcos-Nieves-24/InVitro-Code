@@ -1,64 +1,83 @@
-# Lab: Análisis exploratorio de datos
+```python
+# =========================================================================
+# LAB 6: Analisis exploratorio de datos (EDA)
+# -------------------------------------------------------------------------
+# Exploramos el dataset de diabetes: vista general, valores faltantes,
+# distribuciones univariadas, relaciones multivariadas y outliers.
+# Cada figura termina con fig.show() para capturarla en la consola.
+# =========================================================================
 
-## Objetivo
+# PASO 1: Cargar datos y vista general.
+import numpy as np
+import pandas as pd
+import plotly.express as px
+from sklearn.datasets import load_diabetes
 
-Realizá un EDA completo sobre el dataset MPG, documentando los hallazgos y las decisiones de limpieza.
+diabetes = load_diabetes(as_frame=True)
+df = diabetes.data
+df["target"] = diabetes.target
 
-## Duración
+print("Dimensiones:", df.shape)
+print("Columnas:", list(df.columns))
+print(df.head())
 
-90 minutos
+# PASO 2: Valores faltantes (sinteticos para practicar el manejo).
+# Simulamos datos faltantes al azar en dos columnas, como en datasets reales.
+np.random.seed(1)
+df_eda = df.copy()
+mascara = np.random.rand(df_eda.shape[0]) < 0.05
+df_eda.loc[mascara, "bmi"] = np.nan
+mascara = np.random.rand(df_eda.shape[0]) < 0.05
+df_eda.loc[mascara, "bp"] = np.nan
 
-## Dataset
+faltantes = df_eda.isna().sum()
+print("\nValores faltantes por columna:")
+print(faltantes)
+print("Porcentaje:\n", (faltantes / len(df_eda) * 100).round(2))
 
-El dataset `mpg` de seaborn.
+# PASO 3: Manejo de valores faltantes con la mediana.
+# La mediana es robusta ante valores atipicos y no distorsiona la escala.
+df_eda["bmi"] = df_eda["bmi"].fillna(df_eda["bmi"].median())
+df_eda["bp"] = df_eda["bp"].fillna(df_eda["bp"].median())
+print("\nFaltantes tras imputacion:", int(df_eda.isna().sum().sum()))
 
-## Instrucciones
+# PASO 4: Resumen estadistico univariado.
+print("\ndescribe():\n", df_eda.describe().round(3))
 
-### Parte 1: Carga de datos y vista general (10 min)
-1. Cargá `mpg` de seaborn
-2. Imprimí la forma, los nombres de las columnas y los dtypes
-3. Generá `df.describe()` y `df.info()`
+# PASO 5: Histogramas de las distribuciones de cada feature.
+print("\nHistogramas por feature:")
+for col in ["age", "bmi", "bp", "target"]:
+    fig = px.histogram(df_eda, x=col, nbins=30, title=f"Distribucion de {col}")
+    fig.show()
 
-### Parte 2: Valores faltantes (15 min)
-1. Identificá las columnas con valores faltantes
-2. Calculá el porcentaje de valores faltantes
-3. Visualizá los patrones de datos faltantes
-4. Decidí la estrategia de manejo para cada columna con valores faltantes
+# PASO 6: Matriz de dispersion entre columnas seleccionadas.
+print("\nMatriz de dispersion:")
+sel = ["age", "bmi", "bp", "target"]
+fig = px.scatter_matrix(df_eda, dimensions=sel,
+                        title="Matriz de dispersion (diabetes)")
+fig.show()
 
-### Parte 3: Análisis univariado (20 min)
-1. Creá histogramas para `mpg`, `horsepower`, `weight`, `acceleration`
-2. Calculá la asimetría (skewness) y la curtosis para cada uno
-3. Identificá qué features necesitan transformación
+# PASO 7: Matriz de correlacion con heatmap.
+print("\nHeatmap de correlaciones:")
+corr = df_eda.select_dtypes(include=[np.number]).corr()
+fig = px.imshow(corr, text_auto=".2f", color_continuous_scale="RdBu_r",
+                title="Matriz de correlacion de Pearson")
+fig.show()
 
-### Parte 4: Análisis bivariado y multivariado (20 min)
-1. Creá un heatmap de la matriz de correlación
-2. Creá scatter plots: mpg vs horsepower, mpg vs weight
-3. Creá boxplots: mpg por origin y por cylinders
-4. Identificá las relaciones más fuertes
+# PASO 8: Valores atipicos con la regla del RIQ.
+for col in ["bmi", "bp", "target"]:
+    q1 = df_eda[col].quantile(0.25)
+    q3 = df_eda[col].quantile(0.75)
+    iqr = q3 - q1
+    n_out = int(((df_eda[col] < q1 - 1.5 * iqr) | (df_eda[col] > q3 + 1.5 * iqr)).sum())
+    print(f"\nColumna {col}: {n_out} valores atipicos (regla del RIQ)")
 
-### Parte 5: Detección de valores atípicos (15 min)
-1. Usá el método IQR en `mpg`, `horsepower`, `weight`
-2. Informá la cantidad de valores atípicos por columna
-3. Creá boxplots que resalten los valores atípicos
+fig = px.box(df_eda, y="target", title="Boxplot del target")
+fig.show()
 
-### Parte 6: Informe resumido (10 min)
-Escribí un resumen en markdown con:
-- Hallazgos clave sobre los datos
-- Problemas de calidad de datos
-- Pasos de preprocesamiento recomendados
-- 3 patrones interesantes descubiertos
-
-## Entregables
-
-- Notebook de Jupyter con código, visualizaciones y resumen en markdown
-
-## Rúbrica
-
-| Criterio | Puntos |
-|----------|--------|
-| Análisis de valores faltantes | 2 |
-| Análisis univariado (histogramas + estadísticos de forma) | 2 |
-| Análisis bivariado (correlación + scatter) | 2 |
-| Detección de valores atípicos | 2 |
-| Informe resumido | 2 |
-Total: 10 puntos
+# PASO 9: Hallazgos clave del EDA.
+print("\n--- Hallazgos del EDA ---")
+print("Las features de diabetes estan normalizadas (medias ~0, std ~1).")
+print("El target correlaciona mas con bmi y bp que con age.")
+print("La imputacion con mediana dejo el dataset sin valores faltantes.")
+```

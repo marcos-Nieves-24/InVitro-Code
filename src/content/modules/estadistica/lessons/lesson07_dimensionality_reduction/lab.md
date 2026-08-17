@@ -1,52 +1,71 @@
-# Lab: Reducción de dimensionalidad con PCA
+```python
+# =========================================================================
+# LAB 7: Reduccion de dimensionalidad con PCA
+# -------------------------------------------------------------------------
+# Aplicamos PCA al dataset iris: varianza explicada, proyeccion 2D y
+# analisis de las cargas de los componentes. Cada figura termina con
+# fig.show() para capturarla en la consola.
+# =========================================================================
 
-## Objetivo
+# PASO 1: Cargar iris y estandarizar los features.
+import numpy as np
+import pandas as pd
+import plotly.express as px
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
-Aplicá PCA a datos de alta dimensionalidad reales y sintéticos e interpretá los resultados.
+iris = load_iris()
+X = iris.data
+y = iris.target
+nombres = iris.target_names
+features = iris.feature_names
 
-## Duración
+escalador = StandardScaler()
+X_std = escalador.fit_transform(X)
+print("Datos estandarizados:", X_std.shape)
+print("Media por feature (aprox 0):", np.round(X_std.mean(axis=0), 3))
+print("Desvio por feature (aprox 1):", np.round(X_std.std(axis=0), 3))
 
-60 minutos
+# PASO 2: Aplicar PCA conservando todos los componentes.
+pca = PCA(n_components=4)
+X_pca = pca.fit_transform(X_std)
 
-## Dataset
+print("\nVarianza explicada por componente:")
+print(np.round(pca.explained_variance_ratio_, 4))
+print("Varianza acumulada:", np.round(np.cumsum(pca.explained_variance_ratio_), 4))
 
-Dataset Wine de sklearn.
+# PASO 3: Scree plot de la varianza explicada (individual y acumulada).
+print("\nScree plot de la varianza explicada:")
+componentes = [f"PC{i+1}" for i in range(4)]
+fig = px.bar(x=componentes, y=pca.explained_variance_ratio_,
+             title="Varianza explicada por cada componente")
+fig.add_scatter(x=componentes, y=np.cumsum(pca.explained_variance_ratio_),
+                mode="lines+markers", name="Acumulada")
+fig.show()
 
-## Instrucciones
+# PASO 4: Proyeccion en 2D coloreada por especie.
+print("\nProyeccion PCA 2D coloreada por especie:")
+df_pca = pd.DataFrame({"PC1": X_pca[:, 0], "PC2": X_pca[:, 1],
+                       "especie": [nombres[i] for i in y]})
+fig = px.scatter(df_pca, x="PC1", y="PC2", color="especie",
+                 title="Proyeccion PCA 2D del dataset iris")
+fig.show()
 
-### Parte 1: PCA sobre el dataset Wine (20 min)
-1. Cargá el dataset wine
-2. Estandarizá los features
-3. Aplicá PCA (conservá todos los componentes)
-4. Graficá el scree plot con la varianza explicada acumulada
-5. ¿Cuántos componentes explican el 90% de la varianza?
+# PASO 5: Analisis de cargas (contribucion de cada feature).
+cargas = pd.DataFrame(pca.components_.T,
+                      index=features,
+                      columns=[f"PC{i+1}" for i in range(4)])
+print("\nCargas de PC1 y PC2 (por feature):")
+print(cargas[["PC1", "PC2"]].round(3))
+print("\nFeature con mayor carga en PC1:", cargas["PC1"].abs().idxmax())
 
-### Parte 2: Visualización 2D (15 min)
-1. Proyectá los datos sobre los primeros 2 PCs
-2. Creá un scatter plot coloreado por cultivar
-3. Interpretá: ¿los cultivares son separables?
+fig = px.imshow(cargas, text_auto=".2f", color_continuous_scale="RdBu_r",
+                title="Heatmap de las cargas de los componentes")
+fig.show()
 
-### Parte 3: Análisis de cargas (15 min)
-1. Extraé las cargas de PC1 y PC2
-2. Identificá los 3 features principales que contribuyen a cada uno
-3. Creá un heatmap de las cargas
-4. Interpretá PC1 y PC2 en términos de los features originales
-
-### Parte 4: Impacto de la reducción de dimensionalidad (10 min)
-1. Reconstruí los datos usando solo los primeros 3 PCs
-2. Calculá el error de reconstrucción (MSE entre el original y el reconstruido)
-3. Discutí: ¿cuánta información se pierde?
-
-## Entregables
-
-- Notebook de Jupyter con todos los análisis e interpretaciones
-
-## Rúbrica
-
-| Criterio | Puntos |
-|----------|--------|
-| Aplicación de PCA y scree plot | 3 |
-| Visualización 2D con interpretación | 2 |
-| Análisis de cargas | 3 |
-| Análisis de reconstrucción | 2 |
-Total: 10 puntos
+# PASO 6: Resumen del laboratorio.
+print("\n--- Resumen ---")
+print("Los primeros 2 PCs explican la mayor parte de la varianza.")
+print("PC1 separa la especie setosa del resto; las cargas muestran que feature pesa mas.")
+```

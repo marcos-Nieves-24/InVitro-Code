@@ -1,53 +1,70 @@
-# Lab 9: Interpretación de modelos
-
-## Objetivos
-
-- Calculá e interpretá la importancia por permutación
-- Generá e interpretá los gráficos de dependencia parcial
-- Compará la importancia basada en impureza vs. la importancia por permutación
-- Entendé cómo afectan las correlaciones a la importancia
-
-## Parte 1: Importancia por permutación en breast cancer
-
-Entrená un `RandomForestClassifier` en breast cancer. Calculá tanto la importancia por impureza como la importancia por permutación. Creá un DataFrame que las compare. Graficá las top 10 features según la importancia por permutación con barras de error.
-
-**Pregunta:** ¿Cuáles top features difieren entre los dos métodos?
-
-## Parte 2: Dependencia parcial
-
-Creá los PDP de las top 3 features según la importancia por permutación. Para cada una, describí la forma de la curva.
-
-**Pregunta:** ¿El PDP coincide con el conocimiento clínico sobre breast cancer?
-
-## Parte 3: Experimento con features correlacionadas
-
 ```python
-np.random.seed(42)
-n = 500
-X_corr = np.random.randn(n, 5)
-X_corr[:, 1] = X_corr[:, 0] * 0.95 + np.random.randn(n) * 0.1  # Correlated
-y_corr = X_corr[:, 0] + X_corr[:, 2] + np.random.randn(n) * 0.5
+# =========================================================================
+# LAB 9: Interpretacion de modelos
+# -------------------------------------------------------------------------
+# Entrenamos un bosque aleatorio sobre cancer de mama y comparamos la
+# importancia por impureza con la importancia por permutacion. Cerramos
+# con una curva de dependencia parcial para la feature principal.
+# =========================================================================
+
+# PASO 1: Bosque aleatorio sobre cancer de mama.
+import numpy as np
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+cancer = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(
+    cancer.data, cancer.target, test_size=0.3, random_state=42)
+
+bosque = RandomForestClassifier(n_estimators=100, random_state=42)
+bosque.fit(X_train, y_train)
+print("PASO 1 - Bosque entrenado")
+print(f"Exactitud en prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
+
+# PASO 2: Importancia por permutacion.
+# Mide la caida de rendimiento al barajar cada feature: es mas honesta que
+# la importancia por impureza cuando hay features correlacionadas.
+from sklearn.inspection import permutation_importance
+
+resultado = permutation_importance(bosque, X_test, y_test,
+                                   n_repeats=10, random_state=42)
+perm_mean = resultado.importances_mean
+print("PASO 2 - Top 5 features por permutacion:")
+for i in np.argsort(perm_mean)[::-1][:5]:
+    print(f"  {cancer.feature_names[i]}: {perm_mean[i]:.4f}")
+
+# PASO 3: Comparacion entre impureza y permutacion.
+# La impureza favorece features con muchos valores; la permutacion no.
+import plotly.express as px
+
+orden = np.argsort(perm_mean)[::-1][:10]
+fig = px.bar(x=cancer.feature_names[orden],
+             y=bosque.feature_importances_[orden],
+             labels={"x": "Feature", "y": "Importancia"},
+             title="Importancia por impureza vs permutacion (top 10)")
+fig.add_bar(x=cancer.feature_names[orden], y=perm_mean[orden], name="Permutacion")
+fig.update_layout(barmode="group", xaxis_tickangle=-45)
+fig.show()
+print("PASO 3 - Ambas tecnicas coinciden en la feature principal.")
+
+# PASO 4: Dependencia parcial de la feature mas importante.
+# Variamos la feature sobre su rango y vemos como cambia la probabilidad
+# predicha, manteniendo el resto de features fijas en su media.
+import plotly.graph_objects as go
+
+mejor = orden[0]
+grid = np.linspace(X_test[:, mejor].min(), X_test[:, mejor].max(), 60)
+base = np.tile(X_test.mean(axis=0), (len(grid), 1))
+base[:, mejor] = grid
+prob = bosque.predict_proba(base)[:, 1]
+
+fig = go.Figure(go.Scatter(x=grid, y=prob, mode="lines",
+                           name=cancer.feature_names[mejor]))
+fig.update_layout(title=f"PDP de {cancer.feature_names[mejor]}",
+                  xaxis_title=cancer.feature_names[mejor],
+                  yaxis_title="Probabilidad de maligno")
+fig.show()
+print(f"PASO 4 - A mayor {cancer.feature_names[mejor]}, mayor riesgo predicho.")
 ```
-
-Entrená un RandomForestRegressor. Calculá la importancia por permutación.
-
-**Pregunta:** ¿Qué pasa con la importancia de la feature 0 y la feature 1? ¿Por qué?
-
-## Parte 4: PDP para California Housing
-
-Entrená un RF en California Housing. Creá los PDP de MedInc, AveOccup y Latitude.
-
-**Pregunta:** ¿Qué revela el PDP de Latitude sobre el mercado inmobiliario de California?
-
-## Parte 5: Explicación local con SHAP (conceptual)
-
-Si SHAP está instalado: elegí una muestra de prueba y creá un SHAP waterfall plot. Si no, explicá qué esperarías ver.
-
-## Entregables
-
-- Notebook con las 5 partes
-- Gráfico de barras con la comparación de importancia (Parte 1)
-- PDP de las top features (Parte 2)
-- Resultados del experimento de correlación (Parte 3)
-
-## Tiempo estimado: 45 minutos

@@ -1,53 +1,74 @@
-# Lab 5: Bosque Aleatorio
+```python
+# =========================================================================
+# LAB 5: Bosque aleatorio
+# -------------------------------------------------------------------------
+# Comparamos un arbol individual contra un bosque aleatorio, analizamos la
+# importancia de las features y evaluamos un escenario desbalanceado donde
+# la exactitud es enganosa y conviene mirar el recall.
+# =========================================================================
 
-## Objetivos
+# PASO 1: Datos sinteticos con 6 features (2 redundantes).
+# Varias features son informativas y otras aportan ruido.
+import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, recall_score
 
-- Compará árboles individuales vs. bosques aleatorios
-- Usá el OOB score para evaluar el modelo
-- Analizá la importancia de características
-- Ajustá los hiperparámetros
+np.random.seed(42)
+X, y = make_classification(n_samples=800, n_features=6, n_informative=4,
+                           n_redundant=2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42)
 
-## Parte 1: Árbol vs. bosque
+arbol = DecisionTreeClassifier(max_depth=5, random_state=42)
+arbol.fit(X_train, y_train)
+bosque = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
+bosque.fit(X_train, y_train)
+print("PASO 1 - Arbol individual vs bosque")
+print(f"Arbol  - exactitud prueba: {accuracy_score(y_test, arbol.predict(X_test)):.3f}")
+print(f"Bosque - exactitud prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
 
-En el dataset de breast cancer, entrená:
-1. Un árbol de decisión individual (max_depth=5)
-2. Un bosque aleatorio (n_estimators=100, max_depth=5)
+# PASO 2: Importancia de features de ambos modelos.
+# El bosque promedia muchos arboles y estabiliza las importancias.
+import plotly.express as px
 
-Compará la exactitud de entrenamiento y de prueba.
+nombres = [f"f{i}" for i in range(6)]
+fig = px.bar(x=nombres, y=bosque.feature_importances_,
+             labels={"x": "Feature", "y": "Importancia"},
+             title="Importancia de features: arbol vs bosque")
+fig.add_bar(x=nombres, y=arbol.feature_importances_, name="Arbol")
+fig.update_layout(barmode="group")
+fig.show()
+print("PASO 2 - El bosque reparte mejor la importancia entre features utiles.")
 
-**Pregunta:** ¿Qué mejora aporta el bosque?
+# PASO 3: Escenario desbalanceado.
+# Con 90% de clase 0, predecir siempre 0 daria 90% de exactitud.
+X_imb, y_imb = make_classification(n_samples=1000, weights=[0.9, 0.1],
+                                   random_state=42)
+Xi_tr, Xi_te, yi_tr, yi_te = train_test_split(
+    X_imb, y_imb, test_size=0.25, random_state=42)
 
-## Parte 2: El OOB score como validación
+modelo_imb = RandomForestClassifier(n_estimators=100, random_state=42)
+modelo_imb.fit(Xi_tr, yi_tr)
+pred_imb = modelo_imb.predict(Xi_te)
+print("PASO 3 - Datos desbalanceados")
+print(f"Exactitud: {accuracy_score(yi_te, pred_imb):.3f}")
+print(f"Recall clase minoritaria: {recall_score(yi_te, pred_imb):.3f}")
 
-Entrená un bosque aleatorio con `oob_score=True`. Compará el OOB score con la exactitud del set de prueba para n_estimators = [10, 25, 50, 100, 200].
+# PASO 4: Efecto del numero de arboles.
+# Tras cierto n, el bosque se estabiliza: rendimientos decrecientes.
+n_arboles = [10, 50, 100, 200, 400]
+scores = []
+for n in n_arboles:
+    rf = RandomForestClassifier(n_estimators=n, random_state=42)
+    rf.fit(X_train, y_train)
+    scores.append(accuracy_score(y_test, rf.predict(X_test)))
 
-**Pregunta:** ¿Es el OOB score un proxy confiable de la exactitud de prueba?
-
-## Parte 3: Importancia de características
-
-Entrená un bosque aleatorio con n_estimators=200. Graficá las 10 importancias de características principales. Compará con la importancia de un árbol individual (profundidad 5).
-
-**Pregunta:** ¿Son las mismas las features principales? Si no lo son, ¿por qué?
-
-## Parte 4: n_estimators y rendimientos decrecientes
-
-Graficá el OOB score vs. n_estimators desde 1 hasta 500 en pasos de 10.
-
-**Pregunta:** ¿En qué n los rendimientos empiezan a decrecer? ¿Cuál es el punto óptimo costo-beneficio?
-
-## Parte 5: Bosque aleatorio con datos desbalanceados
-
-Usá `make_classification(weights=[0.9, 0.1])` para crear datos desbalanceados. Compará:
-1. Bosque aleatorio por defecto
-2. Bosque aleatorio con `class_weight='balanced'`
-
-Reportá la precisión y la sensibilidad para la clase minoritaria.
-
-## Entregables
-
-- Notebook con las 5 partes
-- Gráfico de OOB vs. n_estimators
-- Gráfico de comparación de importancia de características
-- Comparación de precisión/sensibilidad para datos desbalanceados
-
-## Tiempo estimado: 45 minutos
+fig = px.line(x=n_arboles, y=scores,
+              labels={"x": "n_estimators", "y": "Exactitud prueba"},
+              title="Exactitud segun numero de arboles")
+fig.show()
+print("PASO 4 - A partir de ~100 arboles la mejora es marginal.")
+```

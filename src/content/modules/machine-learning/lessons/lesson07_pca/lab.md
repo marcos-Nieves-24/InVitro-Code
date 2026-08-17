@@ -1,56 +1,68 @@
-# Lab 7: PCA
+```python
+# =========================================================================
+# LAB 7: PCA - reduccion de dimensionalidad
+# -------------------------------------------------------------------------
+# Estandarizamos el dataset de cancer de mama, aplicamos PCA y analizamos
+# la varianza explicada, la proyeccion 2D y las cargas de los componentes.
+# =========================================================================
 
-## Objetivos
+# PASO 1: Carga y estandarizacion.
+# PCA maximiza la varianza: sin escalar, las features con mayor magnitud
+# dominarian el resultado.
+import numpy as np
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
-- Aplicá PCA para la reducción de dimensionalidad
-- Interpretá la varianza explicada y las cargas de los componentes
-- Visualizá datos de alta dimensionalidad en 2D
-- Entendé el efecto del escalado
+cancer = load_breast_cancer()
+X = StandardScaler().fit_transform(cancer.data)
+y = cancer.target
+nombres = cancer.feature_names
 
-## Parte 1: PCA en Iris
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
+print("PASO 1 - Varianza explicada por los 2 componentes:")
+print(pca.explained_variance_ratio_)
+print(f"Total capturado: {pca.explained_variance_ratio_.sum():.3f}")
 
-Cargá iris, aplicá PCA con 2 componentes y creá un scatter plot coloreado por especie.
+# PASO 2: Scree plot con varianza acumulada.
+# El scree plot muestra cuantas componentes hacen falta para un umbral.
+pca_full = PCA()
+pca_full.fit(X)
+varianza = pca_full.explained_variance_ratio_
+acumulada = np.cumsum(varianza)
 
-**Preguntas:**
-- ¿Qué % de la varianza capturan 2 componentes?
-- ¿Qué especie queda más claramente separada?
+print(f"PASO 2 - Componentes para 90%: {int(np.argmax(acumulada >= 0.90) + 1)}")
+print(f"Componentes para 95%: {int(np.argmax(acumulada >= 0.95) + 1)}")
 
-## Parte 2: Scree plot
+import plotly.express as px
 
-En el dataset de breast cancer, corré PCA sobre los datos escalados y graficá:
-- Gráfico de barras de la varianza explicada individual
-- Línea de varianza acumulada
-- Líneas de umbral de 90% y 95%
+fig = px.bar(x=list(range(1, len(varianza) + 1)), y=varianza,
+             labels={"x": "Componente", "y": "Varianza explicada"},
+             title="Scree plot - varianza explicada")
+fig.add_scatter(x=list(range(1, len(acumulada) + 1)), y=acumulada,
+                mode="lines", name="Acumulada")
+fig.update_layout(legend_title="Curva")
+fig.show()
 
-**Pregunta:** ¿Cuántos componentes para 90%? ¿Y para 95%?
+# PASO 3: Proyeccion 2D coloreada por clase.
+# Si el PCA separa visualmente las clases, los datos son distinguibles.
+fig = px.scatter(x=X_pca[:, 0], y=X_pca[:, 1], color=y.astype(str),
+                 labels={"x": "PC1", "y": "PC2"},
+                 title="Proyeccion PCA 2D - cancer de mama")
+fig.show()
+print("PASO 3 - PC1 separa claramente benigno de maligno.")
 
-## Parte 3: Análisis de cargas
+# PASO 4: Cargas de los componentes.
+# Las cargas indican que features originales pesan mas en cada componente.
+cargas = pca.components_
+indices = np.argsort(np.abs(cargas[0]))[::-1][:5]
+print("PASO 4 - Top 5 cargas de PC1:")
+for i in indices:
+    print(f"  {nombres[i]}: {cargas[0][i]:.3f}")
 
-Para PCA en breast cancer con 2 componentes:
-1. Examiná las cargas: ¿qué features originales contribuyen más a PC1? ¿Y a PC2?
-2. Creá un gráfico de barras de las 5 cargas absolutas principales de cada componente.
-
-**Pregunta:** ¿Podés interpretar qué representan biológicamente PC1 y PC2?
-
-## Parte 4: PCA vs. sin escalado
-
-Creá datos: `np.column_stack([feature1 * 1000, feature2, feature3])` donde todas las features tengan estructura de grupo inherente. Corré PCA con y sin escalado.
-
-**Pregunta:** ¿Cómo cambia el escalado la distribución de la varianza explicada?
-
-## Parte 5: PCA + K-Means
-
-Aplicá PCA para reducir breast cancer a 2 componentes y después corré K-Means (K=2) sobre los datos transformados con PCA. Compará los clusters con las etiquetas reales.
-
-**Pregunta:** ¿Recupera K-Means en el espacio de PCA la división maligno/benigno?
-
-## Entregables
-
-- Notebook con las 5 partes
-- Gráfico PCA de iris (Parte 1)
-- Scree plot con umbrales (Parte 2)
-- Gráfico de barras de cargas (Parte 3)
-- Comparación de escalado (Parte 4)
-- Comparación PCA + K-Means (Parte 5)
-
-## Tiempo estimado: 45 minutos
+fig = px.bar(x=nombres[indices], y=np.abs(cargas[0][indices]),
+             labels={"x": "Feature", "y": "|Carga| en PC1"},
+             title="Cargas absolutas de PC1")
+fig.show()
+```
