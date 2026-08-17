@@ -44,7 +44,8 @@ export default function VisualizationPanel({
                     Gráfico {i + 1}
                   </p>
                   <Plot
-                    figure={parsed}
+                    data={parsed.data}
+                    layout={parsed.layout}
                     style={{ width: "100%" }}
                     useResizeHandler
                   />
