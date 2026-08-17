@@ -1,109 +1,93 @@
-# Lab: Visualización de datos con Matplotlib
-
-## Objetivo
-
-Practicar la creación de varios tipos de gráficos, la personalización de figuras y el uso de subplots.
-
-## Duración
-
-75 minutos
-
-## Requisitos previos
-
-Lección 14: Pandas
-
-## Instrucciones
-
-### Parte 1: Gráfico de líneas (line plot)
-
 ```python
-import matplotlib.pyplot as plt
+# =========================================================================
+# LAB 15: Visualizacion de datos con Plotly
+# -------------------------------------------------------------------------
+# El laboratorio original usaba Matplotlib; aqui reescribimos los mismos
+# graficos con Plotly para que se muestren de forma INTERACTIVA en la
+# consola de visualizacion: lineas, dispersion, barras, histograma y un
+# panel de subplots 2x2. Cada figura termina con fig.show().
+# =========================================================================
+
+# PASO 1: Grafico de lineas (line plot).
+# Graficamos dos ondas senoidales con un desfase. px.line recibe un
+# DataFrame, por eso construimos uno con pandas.
 import numpy as np
+import pandas as pd
+import plotly.express as px
 
-# Create a line plot with multiple lines
 x = np.linspace(0, 4 * np.pi, 100)
-y1 = np.sin(x)
-y2 = np.sin(x + np.pi / 2)
+df_sine = pd.DataFrame({
+    "x": x,
+    "sin(x)": np.sin(x),
+    "sin(x + pi/2)": np.sin(x + np.pi / 2),
+})
 
-plt.figure(figsize=(10, 6))
-plt.plot(x, y1, label="sin(x)", color="blue")
-plt.plot(x, y2, label="sin(x + π/2)", color="red", linestyle="--")
-plt.title("Sine Waves")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.show()
-```
+fig = px.line(df_sine, x="x", y=["sin(x)", "sin(x + pi/2)"],
+              title="Ondas senoidales",
+              labels={"x": "x", "value": "y", "variable": "Funcion"})
+fig.update_layout(legend=dict(orientation="h", y=1.1))
+fig.show()
 
-### Parte 2: Gráfico de dispersión (scatter plot)
-
-```python
+# PASO 2: Grafico de dispersion (scatter).
+# Datos con ruido alrededor de una recta y=2x. El color de cada punto
+# depende del valor de y (color_continuous_scale = viridis).
 np.random.seed(42)
 x = np.random.randn(100)
 y = 2 * x + np.random.randn(100) * 0.5
+df_scatter = pd.DataFrame({"X": x, "Y": y})
 
-plt.figure(figsize=(8, 6))
-plt.scatter(x, y, c=y, cmap="viridis", alpha=0.7, s=50)
-plt.colorbar(label="Y value")
-plt.title("Scatter with Color Mapping")
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.grid(True, alpha=0.3)
-plt.show()
-```
+fig = px.scatter(df_scatter, x="X", y="Y", color="Y",
+                 color_continuous_scale="viridis",
+                 title="Dispersion con mapeo de color",
+                 labels={"X": "X", "Y": "Y"})
+fig.show()
 
-### Parte 3: Gráfico de barras
-
-```python
+# PASO 3: Grafico de barras.
+# Barras con colores personalizados tomados de una escala continua.
 categories = ["A", "B", "C", "D", "E"]
 values = [23, 45, 12, 67, 34]
-colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(categories)))
+df_bar = pd.DataFrame({"Categoria": categories, "Valor": values})
 
-plt.figure(figsize=(8, 6))
-bars = plt.bar(categories, values, color=colors)
-plt.title("Bar Chart with Custom Colors")
-plt.xlabel("Category")
-plt.ylabel("Value")
-plt.show()
-```
+fig = px.bar(df_bar, x="Categoria", y="Valor", color="Valor",
+             color_continuous_scale="viridis",
+             title="Grafico de barras con colores personalizados",
+             labels={"Categoria": "Categoria", "Valor": "Valor"})
+fig.show()
 
-### Parte 4: Histograma
-
-```python
+# PASO 4: Histograma.
+# px.histogram agrupa los datos en intervalos automaticamente y muestra
+# la distribucion. Con histnorm="probability" normalizamos la altura.
 data = np.random.randn(1000)
+df_hist = pd.DataFrame({"Valor": data})
 
-plt.figure(figsize=(10, 6))
-plt.hist(data, bins=30, density=True, alpha=0.7, edgecolor="white")
-plt.title("Distribution (Histogram)")
-plt.xlabel("Value")
-plt.ylabel("Density")
-plt.grid(True, alpha=0.3)
-plt.show()
-```
+fig = px.histogram(df_hist, x="Valor", nbins=30, histnorm="probability",
+                   title="Distribucion (histograma)",
+                   labels={"Valor": "Valor", "probability": "Probabilidad"})
+fig.show()
 
-### Parte 5: Subplots
+# PASO 5: Panel de subplots 2x2.
+# make_subplots crea una cuadricula de paneles y add_trace ubica cada
+# grafico con los argumentos row y col. Aqui combinamos linea, barras,
+# dispersion e histograma en una sola figura.
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 
-```python
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+fig = make_subplots(rows=2, cols=2, subplot_titles=("Seno", "Barras", "Dispersion", "Histograma"))
 
 x = np.linspace(0, 10, 100)
-axes[0, 0].plot(x, np.sin(x))
-axes[0, 0].set_title("Sine")
+fig.add_trace(go.Scatter(x=x, y=np.sin(x), mode="lines", name="Seno"), row=1, col=1)
+fig.add_trace(go.Bar(x=["A", "B", "C"], y=[10, 20, 15], name="Barras"), row=1, col=2)
+fig.add_trace(go.Scatter(x=np.random.randn(50), y=np.random.randn(50),
+                         mode="markers", name="Dispersion"), row=2, col=1)
+fig.add_trace(go.Histogram(x=np.random.randn(500), nbinsx=20, name="Histograma"), row=2, col=2)
 
-axes[0, 1].bar(["A", "B", "C"], [10, 20, 15])
-axes[0, 1].set_title("Bar")
+fig.update_layout(title="Panel de graficos 2x2", height=600,
+                  showlegend=False)
+fig.show()
 
-axes[1, 0].scatter(np.random.randn(50), np.random.randn(50))
-axes[1, 0].set_title("Scatter")
-
-axes[1, 1].hist(np.random.randn(500), bins=20)
-axes[1, 1].set_title("Histogram")
-
-plt.tight_layout()
-plt.show()
+# PASO 6: Resumen del laboratorio.
+print("\n--- Resumen ---")
+print("Creamos lineas, dispersion, barras e histogramas con Plotly.")
+print("Todo es interactivo: puedes hacer zoom, pan y ver tooltips.")
+print("El panel 2x2 combina 4 graficos con make_subplots.")
 ```
-
-## Entregables
-
-Notebook de Jupyter `matplotlib_lab.ipynb` con todos los gráficos visibles.

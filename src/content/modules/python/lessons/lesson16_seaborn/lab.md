@@ -1,87 +1,83 @@
-# Lab: Visualización estadística con Seaborn
-
-## Objetivo
-
-Practicar la creación de visualizaciones de Seaborn: box plots, violin plots, pairplots, heatmaps y gráficos de distribución.
-
-## Duración
-
-60 minutos
-
-## Requisitos previos
-
-Lección 15: Matplotlib
-
-## Instrucciones
-
-### Parte 1: Para empezar
-
 ```python
-import seaborn as sns
-import matplotlib.pyplot as plt
+# =========================================================================
+# LAB 16: Visualizacion estadistica con Plotly
+# -------------------------------------------------------------------------
+# El laboratorio original usaba bibliotecas de graficos estaticos; aqui
+# reescribimos las mismas visualizaciones estadisticas con Plotly sobre el
+# dataset "tips" (propinas de un restaurante), incluido en plotly.express:
+# px.data.tips(). Cada figura termina con fig.show() para la consola.
+# =========================================================================
+
+# PASO 1: Cargar el dataset "tips".
+# plotly.express trae datasets de ejemplo empaquetados. "tips" registra
+# el total de la cuenta, la propina, el dia, el sexo, etc. por cliente.
+import plotly.express as px
 import pandas as pd
 import numpy as np
 
-# Load tips dataset
-tips = sns.load_dataset("tips")
+tips = px.data.tips()
+print("Primeras filas del dataset 'tips':")
 print(tips.head())
-```
+print("\nDimensiones:", tips.shape)
 
-### Parte 2: Box plot
+# PASO 2: Box plot.
+# El box plot resume la distribucion con cuartiles y valores atipicos.
+# Mostramos la cuenta total por dia, separada por sexo (color).
+fig = px.box(tips, x="day", y="total_bill", color="sex",
+             title="Distribucion de la cuenta por dia y sexo",
+             labels={"total_bill": "Total de la cuenta ($)", "day": "Dia"})
+fig.show()
 
-```python
-# Box plot of total_bill by day
-plt.figure(figsize=(10, 6))
-sns.boxplot(data=tips, x="day", y="total_bill", hue="sex")
-plt.title("Bill Distribution by Day and Sex")
-plt.show()
-```
+# PASO 3: Violin plot.
+# El violin agrega la forma completa de la distribucion (densidad) al
+# resumen del box plot. Con split=True comparamos ambos sexos en un solo
+# violin, como en el original.
+import plotly.graph_objects as go
 
-### Parte 3: Violin plot
+fig = go.Figure()
+for sex in ["Male", "Female"]:
+    sub = tips[tips["sex"] == sex]
+    fig.add_trace(go.Violin(
+        x=sub["day"], y=sub["total_bill"], name=sex,
+        box_visible=True, meanline_visible=True,
+        points="outliers", side="positive" if sex == "Male" else "negative",
+        line_color="steelblue" if sex == "Male" else "tomato"
+    ))
+fig.update_layout(title="Distribucion de la cuenta (violin por sexo)",
+                  yaxis_title="Total de la cuenta ($)", violinmode="overlay")
+fig.show()
 
-```python
-# Violin plot (shows distribution shape)
-plt.figure(figsize=(10, 6))
-sns.violinplot(data=tips, x="day", y="total_bill", hue="sex", split=True)
-plt.title("Bill Distribution (Violin)")
-plt.show()
-```
+# PASO 4: Matriz de dispersion (pairplot).
+# px.scatter_matrix reproduce el pairplot: relacion entre cada par de
+# columnas numericas, coloreada por sexo. Los histogramas de la diagonal
+# se sustituyen por los valores de cada variable en su propio eje.
+fig = px.scatter_matrix(tips, dimensions=["total_bill", "tip", "size"],
+                        color="sex",
+                        title="Matriz de dispersion de 'tips' por sexo")
+fig.show()
 
-### Parte 4: Pairplot
-
-```python
-# Pairplot of numerical columns
-sns.pairplot(data=tips, hue="sex", diag_kind="kde")
-plt.suptitle("Pairplot of Tips Data", y=1.02)
-plt.show()
-```
-
-### Parte 5: Heatmap
-
-```python
-# Correlation heatmap
+# PASO 5: Mapa de calor (heatmap) de correlaciones.
+# La correlacion mide la relacion lineal entre pares de variables
+# numericas. px.imshow la visualiza con una escala divergente.
 numeric = tips.select_dtypes(include=[np.number])
 corr = numeric.corr()
+fig = px.imshow(corr, text_auto=True, color_continuous_scale="RdBu_r",
+                zmin=-1, zmax=1,
+                title="Mapa de calor de correlaciones")
+fig.show()
 
-plt.figure(figsize=(8, 6))
-sns.heatmap(corr, annot=True, cmap="coolwarm", center=0, square=True)
-plt.title("Correlation Heatmap")
-plt.show()
+# PASO 6: Dispersion personalizada.
+# Grafico de total vs propina coloreado por momento del dia (time) y con
+# el tamano del marcador proporcional al numero de comensales (size).
+fig = px.scatter(tips, x="total_bill", y="tip", color="time", size="size",
+                 size_max=30, title="Analisis de propinas",
+                 labels={"total_bill": "Total de la cuenta ($)", "tip": "Propina ($)"})
+fig.update_layout(legend=dict(orientation="h", y=1.1))
+fig.show()
+
+# PASO 7: Resumen del laboratorio.
+print("\n--- Resumen ---")
+print("Box plot y violin para comparar distribuciones por dia y sexo.")
+print("Matriz de dispersion y mapa de calor de correlaciones.")
+print("Graficos interactivos de Plotly en lugar de Seaborn/Matplotlib.")
 ```
-
-### Parte 6: Personalización
-
-```python
-# Apply theme and customize
-sns.set_theme(style="whitegrid")
-sns.set_palette("husl")
-
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time", size="size", sizes=(20, 200))
-plt.title("Tips Analysis with Custom Theme")
-plt.show()
-```
-
-## Entregables
-
-Notebook de Jupyter `seaborn_lab.ipynb` con todos los gráficos.

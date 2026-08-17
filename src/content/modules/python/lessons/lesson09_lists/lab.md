@@ -1,94 +1,77 @@
-# Lab: Trabajando con listas
-
-## Objetivo
-
-Practicar la creación, el acceso, la modificación y la comprensión de listas.
-
-## Duración
-
-60 minutos
-
-## Requisitos previos
-
-Lecciones 7 (Bucles), 8 (Condicionales)
-
-## Instrucciones
-
-### Parte 1: Operaciones básicas con listas
-
 ```python
-# Create a list of 10 numbers
+# =========================================================================
+# LAB 9: Trabajando con listas
+# -------------------------------------------------------------------------
+# Practicamos la creacion de listas, el acceso por indices y rebanadas,
+# los metodos de listas, las listas por comprension, matrices 2D y la
+# combinacion de zip() con enumerate().
+# =========================================================================
+
+# PASO 1: Operaciones basicas con listas.
+# Acceso por indice (0 = primero, -1 = ultimo) y rebanadas [inicio:fin:paso].
 numbers = [3, 7, 1, 9, 4, 6, 8, 2, 5, 0]
 print(f"Original: {numbers}")
-print(f"First: {numbers[0]}, Last: {numbers[-1]}")
-print(f"First 5: {numbers[:5]}")
-print(f"Every other: {numbers[::2]}")
-print(f"Reversed: {numbers[::-1]}")
+print(f"Primero: {numbers[0]}, Ultimo: {numbers[-1]}")
+print(f"Primeros 5: {numbers[:5]}")
+print(f"Cada dos elementos: {numbers[::2]}")
+print(f"Reversa: {numbers[::-1]}")
 
 numbers.sort()
-print(f"Sorted: {numbers}")
-```
+print(f"Ordenada: {numbers}")
 
-### Parte 2: Métodos de listas
-
-```python
+# PASO 2: Metodos de listas.
+# append() agrega al final, insert() en una posicion, pop() extrae el
+# ultimo y index() busca la posicion de un elemento.
 tasks = []
-tasks.append("Learn Python")
-tasks.append("Practice lists")
-tasks.append("Build a project")
-tasks.insert(0, "Install Python")
-print(f"Tasks: {tasks}")
+tasks.append("Aprender Python")
+tasks.append("Practicar listas")
+tasks.append("Construir un proyecto")
+tasks.insert(0, "Instalar Python")
+print(f"\nTareas: {tasks}")
 
 completed = tasks.pop()
-print(f"Completed: {completed}")
-print(f"Remaining: {tasks}")
+print(f"Completada: {completed}")
+print(f"Pendientes: {tasks}")
+print(f"Indice de 'Aprender Python': {tasks.index('Aprender Python')}")
 
-print(f"Index of 'Learn Python': {tasks.index('Learn Python')}")
-```
-
-### Parte 3: List comprehension
-
-```python
-# Create lists with comprehension
+# PASO 3: Listas por comprension.
+# Una forma compacta de construir listas aplicando una transformacion.
 celsius = [0, 10, 20, 30, 40]
-fahrenheit = [(c * 9/5) + 32 for c in celsius]
-print(f"C: {celsius}")
+fahrenheit = [(c * 9 / 5) + 32 for c in celsius]
+print(f"\nC: {celsius}")
 print(f"F: {fahrenheit}")
 
-# Filtering
-numbers = range(-5, 6)
-positive = [n for n in numbers if n > 0]
-negative = [n for n in numbers if n < 0]
-print(f"Positive: {positive}")
-print(f"Negative: {negative}")
-```
+# Tambien podemos filtrar con un condicional dentro de la comprension.
+values = list(range(-5, 6))
+positive = [n for n in values if n > 0]
+negative = [n for n in values if n < 0]
+print(f"Positivos: {positive}")
+print(f"Negativos: {negative}")
 
-### Parte 4: Operaciones con matrices
-
-```python
-# Create a 3x3 matrix
+# PASO 4: Operaciones con matrices.
+# Una matriz es una lista de listas. La construimos con comprensiones.
 matrix = [[i * 3 + j + 1 for j in range(3)] for i in range(3)]
-print("Matrix:")
+print("\nMatriz 3x3:")
 for row in matrix:
     print(row)
 
-# Sum of each column
+# Sumamos cada columna recorriendo los indices de las columnas.
 cols = [sum(matrix[i][j] for i in range(3)) for j in range(3)]
-print(f"Column sums: {cols}")
-```
+print(f"Sumas por columna: {cols}")
 
-### Parte 5: Zip y enumerate
-
-```python
+# PASO 5: Zip y enumerate en un contexto biologico.
+# zip() combina varias listas en pares; enumerate() agrega un indice.
 genes = ["BRCA1", "TP53", "EGFR"]
 expressions = [2.5, 1.8, 3.2]
 p_values = [0.001, 0.08, 0.003]
 
 for i, (gene, expr, p) in enumerate(zip(genes, expressions, p_values)):
-    status = "significant" if p < 0.05 else "not significant"
+    status = "significativo" if p < 0.05 else "no significativo"
     print(f"{i}. {gene}: expr={expr}, p={p} ({status})")
+
+# PASO 6: Resumen del laboratorio.
+print("\n--- Resumen ---")
+print("Accedimos con indices y rebanadas, ordenamos y usamos metodos.")
+print("Construimos listas con comprensiones y filtros.")
+print("Combinamos zip(), enumerate() y condicionales en contexto real.")
 ```
-
-## Entregables
-
-Notebook de Jupyter `lists_lab.ipynb` con todas las celdas ejecutadas.

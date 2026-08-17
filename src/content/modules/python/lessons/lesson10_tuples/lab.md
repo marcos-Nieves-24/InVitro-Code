@@ -1,92 +1,73 @@
-# Lab: Trabajando con tuplas
-
-## Objetivo
-
-Practicar la creación de tuplas, el desempaquetado y la comprensión de la inmutabilidad.
-
-## Duración
-
-30 minutos
-
-## Requisitos previos
-
-Lección 9: Listas
-
-## Instrucciones
-
-### Parte 1: Creación y acceso a tuplas
-
 ```python
-# Create various tuples
+# =========================================================================
+# LAB 10: Trabajando con tuplas
+# -------------------------------------------------------------------------
+# Practicamos la creacion de tuplas, el desempaquetado, la inmutabilidad,
+# el uso de tuplas como claves de diccionarios y la devolucion de
+# multiples valores desde una funcion.
+# =========================================================================
+
+# PASO 1: Creacion y acceso a tuplas.
+# Las tuplas son secuencias INMUTABLES. Se crean con parentesis, o incluso
+# sin ellos. Para una tupla de un solo elemento el parentesis no basta:
+# hace falta la coma.
 empty = ()
 single = (42,)
 pair = (10, 20)
-triple = 1, 2, 3  # parentheses optional
+triple = 1, 2, 3  # los parentesis son opcionales
 nested = ((1, 2), (3, 4))
 
-print(f"Empty: {empty}, type: {type(empty)}")
-print(f"Single: {single}, type: {type(single)}")
-print(f"Pair: {pair}")
+print(f"Vacia: {empty}, tipo: {type(empty).__name__}")
+print(f"Un elemento: {single}, tipo: {type(single).__name__}")
+print(f"Par: {pair}")
 print(f"Triple: {triple}")
-print(f"Nested: {nested}")
-```
+print(f"Anidada: {nested}")
 
-### Parte 2: Desempaquetado de tuplas
-
-```python
-# Basic unpacking
+# PASO 2: Desempaquetado de tuplas.
+# Podemos asignar cada elemento a una variable en una sola linea.
 point = (3, 7)
 x, y = point
-print(f"x={x}, y={y}")
+print(f"\nx={x}, y={y}")
 
-# Swapping
+# Desempaquetado para intercambiar valores.
 a, b = 10, 20
 a, b = b, a
-print(f"After swap: a={a}, b={b}")
+print(f"Despues del intercambio: a={a}, b={b}")
 
-# Extended unpacking
+# Desempaquetado extendido: *middle captura los elementos del medio.
 first, *middle, last = (1, 2, 3, 4, 5)
 print(f"first={first}, middle={middle}, last={last}")
-```
 
-### Parte 3: Demostración de la inmutabilidad
-
-```python
+# PASO 3: Demostracion de la inmutabilidad.
+# Las tuplas NO se pueden modificar despues de crearse. Descomenta la
+# siguiente linea para ver el error (TypeError):
+# t[0] = 99  # TypeError: 'tuple' object does not support item assignment
+# Para "cambiar" una tupla creamos una NUEVA tupla combinando partes.
 t = (1, 2, 3)
-print(f"Original: {t}")
-
-# This will fail — uncomment to see the error
-# t[0] = 99
-
-# But we can create new tuples
+print(f"\nTupla original: {t}")
 t2 = (99,) + t[1:]
-print(f"New tuple: {t2}")
-```
+print(f"Nueva tupla (se crea, no se modifica): {t2}")
 
-### Parte 4: Tuplas como claves de diccionarios
-
-```python
-# Using tuples as keys for location data
+# PASO 4: Tuplas como claves de diccionarios.
+# Como son inmutables (hashables), las tuplas pueden ser claves de un
+# diccionario. Perfecto para datos geoespaciales.
 locations = {
     (40.7128, -74.0060): "New York",
     (34.0522, -118.2437): "Los Angeles",
     (41.8781, -87.6298): "Chicago",
 }
 
-# Lookup by coordinates
 coords = (40.7128, -74.0060)
-print(f"Coordinates {coords} → {locations[coords]}")
+print(f"\nCoordenadas {coords} -> {locations[coords]}")
 
-# List all locations
 for coords, city in locations.items():
     print(f"{city}: {coords}")
-```
 
-### Parte 5: Múltiples valores de retorno
-
-```python
+# PASO 5: Multiples valores de retorno.
+# Las funciones devuelven varios valores como una tupla; luego la
+# desempaquetamos.
 def analyze(numbers):
-    """Return multiple statistics as a tuple."""
+    """Devuelve estadisticas basicas como una tupla."""
     return (
         min(numbers),
         max(numbers),
@@ -96,10 +77,12 @@ def analyze(numbers):
 
 data = [3, 1, 7, 2, 9, 4]
 minimum, maximum, mean, count = analyze(data)
-print(f"Data: {data}")
-print(f"Min: {minimum}, Max: {maximum}, Mean: {mean:.2f}, Count: {count}")
+print(f"\nDatos: {data}")
+print(f"Min: {minimum}, Max: {maximum}, Media: {mean:.2f}, Total: {count}")
+
+# PASO 6: Resumen del laboratorio.
+print("\n--- Resumen ---")
+print("Las tuplas son inmutables: no se modifican, se recrean.")
+print("Se desempaquetan en variables y sirven como claves de diccionarios.")
+print("Las funciones devuelven multiples valores como tuplas.")
 ```
-
-## Entregables
-
-Notebook de Jupyter `tuples_lab.ipynb` con todos los ejercicios.
