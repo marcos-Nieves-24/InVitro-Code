@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import CodeEditor from "./CodeEditor";
 import OutputPanel from "./OutputPanel";
+import VisualizationPanel from "./VisualizationPanel";
 import { pyodideWorker } from "@/lib/pyodide-worker";
 
 interface TestCase {
@@ -37,6 +38,7 @@ export default function PyodideRunner({
   const [isRunning, setIsRunning] = useState(false);
   const [code, setCode] = useState(defaultValue);
   const [output, setOutput] = useState<string[]>([]);
+  const [figures, setFigures] = useState<string[]>([]);
   const [validationResult, setValidationResult] = useState<
     "" | "valid" | "invalid"
   >("");
@@ -68,12 +70,16 @@ export default function PyodideRunner({
 
     setIsRunning(true);
     setOutput([]);
+    setFigures([]);
     setValidationResult("");
 
     try {
-      const out = await pyodideWorker.run(code);
-      if (out !== undefined && out !== null && out !== "") {
-        setOutput((prev) => [...prev, String(out)]);
+      const result = await pyodideWorker.run(code);
+      if (result.output !== undefined && result.output !== null && result.output !== "") {
+        setOutput((prev) => [...prev, String(result.output)]);
+      }
+      if (Array.isArray(result.figures)) {
+        setFigures(result.figures);
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -107,24 +113,10 @@ export default function PyodideRunner({
 
   return (
     <div className="my-6">
-      {/* Status bar */}
-      <div className="mb-4 flex items-center justify-between rounded-t-lg border border-b-0 border-gray-200 bg-gray-50 px-4 py-2">
-        <span className="font-mono text-sm font-semibold text-gray-700">
-          Python
-        </span>
-        <span className="text-xs text-gray-500">
-          {isLoading
-            ? "Cargando Pyodide..."
-            : isWorkerReady
-              ? "Listo"
-              : "Error al cargar"}
-        </span>
-      </div>
-
       {/* Editor + Output side by side on desktop */}
-      <div className="flex flex-col gap-0 lg:flex-row lg:gap-4">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
         {/* Editor */}
-        <div className="flex-1 lg:w-1/2">
+        <div className="flex-1">
           <CodeEditor
             value={code}
             onChange={handleCodeChange}
@@ -133,11 +125,18 @@ export default function PyodideRunner({
             onRun={handleRun}
             isRunning={isRunning}
             isWorkerReady={isWorkerReady}
+            status={
+              isLoading
+                ? "Cargando Pyodide…"
+                : isWorkerReady
+                  ? "Listo"
+                  : "Error al cargar"
+            }
           />
         </div>
 
         {/* Output */}
-        <div className="flex-1 lg:w-1/2">
+        <div className="flex-1">
           <OutputPanel
             output={output}
             validationResult={validationResult}
@@ -149,6 +148,9 @@ export default function PyodideRunner({
           />
         </div>
       </div>
+
+      {/* Visualization console — always visible so labs know it exists */}
+      <VisualizationPanel figures={figures} isRunning={isRunning} />
     </div>
   );
 }

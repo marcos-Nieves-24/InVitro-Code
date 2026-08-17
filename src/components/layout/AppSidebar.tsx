@@ -14,6 +14,8 @@ import {
   Users,
   Menu,
   X,
+  ChevronLeft,
+  ChevronRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -37,11 +39,15 @@ const NAV_ITEMS: NavItem[] = [
 interface AppSidebarProps {
   userName?: string;
   userMeta?: string;
+  collapsed?: boolean;
+  onToggle?: () => void;
 }
 
 export function AppSidebar({
   userName = "Investigador",
   userMeta = "Investigador",
+  collapsed = false,
+  onToggle,
 }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
@@ -80,23 +86,47 @@ export function AppSidebar({
 
       {/* Sidebar HUD */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col gap-8 border-r border-outline-variant bg-surface px-6 py-8 transition-transform duration-300 ${
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col gap-8 border-r border-outline-variant bg-surface py-8 transition-[width,transform] duration-300 ${
+          collapsed ? "md:w-[72px] md:px-2" : "md:w-[280px] md:px-6"
+        } ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-on-primary">
-            <Boxes className="h-5 w-5" />
+        {/* Logo + desktop collapse toggle */}
+        <div
+          className={`flex items-center ${
+            collapsed ? "md:flex-col md:gap-3" : "justify-between"
+          }`}
+        >
+          <div
+            className={`flex items-center gap-3 ${collapsed ? "md:mx-auto" : ""}`}
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-on-primary">
+              <Boxes className="h-5 w-5" />
+            </div>
+            {!collapsed && (
+              <div>
+                <h1 className="text-lg font-bold leading-none tracking-tight text-on-surface">
+                  InVitro-Code
+                </h1>
+                <p className="text-xs font-medium text-on-surface-variant">
+                  AI LEARNING
+                </p>
+              </div>
+            )}
           </div>
-          <div>
-            <h1 className="text-lg font-bold leading-none tracking-tight text-on-surface">
-              InVitro-Code
-            </h1>
-            <p className="text-xs font-medium text-on-surface-variant">
-              AI LEARNING
-            </p>
-          </div>
+
+          {/* Desktop-only collapse toggle */}
+          {onToggle && (
+            <button
+              onClick={onToggle}
+              className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-full border border-outline-variant bg-surface-container text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface md:flex"
+              aria-label={collapsed ? "Expandir navegación" : "Colapsar navegación"}
+              type="button"
+            >
+              {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            </button>
+          )}
         </div>
 
         {/* Nav */}
@@ -108,14 +138,17 @@ export function AppSidebar({
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-colors ${
+                title={collapsed ? item.label : undefined}
+                className={`flex items-center gap-3 rounded-xl py-3 text-sm transition-colors ${
+                  collapsed ? "md:justify-center md:px-0" : "px-4"
+                } ${
                   active
                     ? "bg-primary-fixed font-semibold text-primary"
                     : "text-on-surface-variant hover:bg-surface-container"
                 }`}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
-                <span>{item.label}</span>
+                {!collapsed && <span>{item.label}</span>}
               </Link>
             );
           })}
@@ -123,16 +156,22 @@ export function AppSidebar({
 
         {/* User card */}
         <div className="mt-auto flex flex-col gap-4 border-t border-outline-variant pt-6">
-          <div className="glass-card flex items-center gap-3 rounded-xl p-4">
+          <div
+            className={`glass-card flex items-center gap-3 rounded-xl p-4 ${
+              collapsed ? "md:justify-center md:p-2" : ""
+            }`}
+          >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary-container text-sm font-bold text-on-secondary">
               {initials}
             </div>
-            <div className="flex flex-col overflow-hidden">
-              <span className="text-xs font-bold text-primary">{userMeta}</span>
-              <span className="truncate text-sm font-semibold text-on-surface">
-                {userName}
-              </span>
-            </div>
+            {!collapsed && (
+              <div className="flex flex-col overflow-hidden">
+                <span className="text-xs font-bold text-primary">{userMeta}</span>
+                <span className="truncate text-sm font-semibold text-on-surface">
+                  {userName}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </aside>

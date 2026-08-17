@@ -4,6 +4,7 @@ let pyodide = null;
 let numpyReady = false;
 let sklearnReady = false;
 let statsReady = false;
+let plotlyReady = false;
 let initPromise = null;
 
 async function ensurePyodide() {
@@ -39,6 +40,48 @@ async function ensureStats() {
   const micropip = pyodide.pyimport("micropip");
   await micropip.install("seaborn");
   statsReady = true;
+}
+
+async function ensurePlotly() {
+  if (plotlyReady) return;
+  // plotly is not a native Pyodide package — install via micropip from PyPI
+  await pyodide.loadPackage("micropip");
+  const micropip = pyodide.pyimport("micropip");
+  await micropip.install("plotly");
+  plotlyReady = true;
+}
+
+// Prepended to user code so Plotly figures are captured as JSON instead of
+// trying to render in the worker (which has no display). Patches Figure.show
+// to append the figure JSON to _captured_figures.
+const PLOTLY_CAPTURE_PREAMBLE = `import plotly.graph_objects as _go
+_captured_figures = []
+def _capture_show(self, *args, **kwargs):
+    _captured_figures.append(self.to_json())
+    return None
+_go.Figure.show = _capture_show
+`;
+
+// Reads the captured figure JSON strings out of Pyodide globals (a Python
+// list of str auto-converts to a JS array). Falls back to [] on any error.
+function readCapturedFigures() {
+  try {
+    const figures = pyodide.globals.get("_captured_figures");
+    if (figures) {
+      // Python lists may come back as a PyProxy — normalize to a JS array
+      const arr = Array.isArray(figures)
+        ? figures
+        : typeof figures.toJs === "function"
+          ? figures.toJs()
+          : null;
+      if (Array.isArray(arr)) {
+        return arr.filter((f) => typeof f === "string");
+      }
+    }
+  } catch (err) {
+    // ignore — no figures captured
+  }
+  return [];
 }
 
 self.addEventListener("message", async (event) => {
@@ -124,6 +167,17 @@ self.addEventListener("message", async (event) => {
         await ensureStats();
       }
 
+      // Install plotly if the code references it (lazy, one-time)
+      if (
+        plotlyReady === false &&
+        (code.includes("plotly") ||
+          code.includes("px.") ||
+          code.includes("go.") ||
+          code.includes("make_subplots"))
+      ) {
+        await ensurePlotly();
+      }
+
       // Capture stdout from Python print() calls
       let stdout = "";
       pyodide.setStdout({
@@ -132,10 +186,17 @@ self.addEventListener("message", async (event) => {
         },
       });
 
-      const pyResult = await pyodide.runPythonAsync(code);
+      // Prepend the plotly capture preamble ONLY when plotly is installed,
+      // otherwise a plain non-plotly run would fail on `import plotly`.
+      const pyCode = (plotlyReady ? PLOTLY_CAPTURE_PREAMBLE : "") + code;
+
+      const pyResult = await pyodide.runPythonAsync(pyCode);
 
       // Reset stdout to default
       pyodide.setStdout();
+
+      // Collect captured Plotly figures (both success and error paths)
+      const figures = readCapturedFigures();
 
       // Build output: stdout first, then return value
       let output = stdout.trimEnd();
@@ -153,6 +214,7 @@ self.addEventListener("message", async (event) => {
         type: "result",
         output: output || null,
         error,
+        figures,
         sklearnReady,
         requestId,
       });
@@ -161,6 +223,7 @@ self.addEventListener("message", async (event) => {
         type: "result",
         output: null,
         error: err instanceof Error ? err.message : String(err),
+        figures: [],
         sklearnReady,
         requestId,
       });

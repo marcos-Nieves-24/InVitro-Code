@@ -1,6 +1,7 @@
 "use client";
 
 import Editor, { OnMount } from "@monaco-editor/react";
+import { ConsoleFrame } from "./ConsoleFrame";
 
 interface CodeEditorProps {
   value?: string;
@@ -11,6 +12,8 @@ interface CodeEditorProps {
   onRun?: (code: string) => void;
   isRunning?: boolean;
   isWorkerReady?: boolean;
+  title?: string;
+  status?: string;
 }
 
 export default function CodeEditor({
@@ -22,6 +25,8 @@ export default function CodeEditor({
   onRun,
   isRunning = false,
   isWorkerReady = false,
+  title = "main.py",
+  status,
 }: CodeEditorProps) {
   const handleEditorMount: OnMount = (editor, monaco) => {
     // Register Shift+Enter to run code
@@ -33,6 +38,21 @@ export default function CodeEditor({
         if (onRun) onRun(editor.getValue());
       },
     });
+
+    monaco.editor.defineTheme("console-dark", {
+      base: "vs-dark",
+      inherit: true,
+      rules: [],
+      colors: {
+        "editor.background": "#0a0a0a",
+        "editorGutter.background": "#0a0a0a",
+        "editor.lineHighlightBackground": "#111111",
+        "editorLineNumber.foreground": "#3b3b3b",
+        "editorLineNumber.activeForeground": "#888888",
+        "editor.selectionBackground": "#264f78",
+        "editorCursor.foreground": "#3fb950",
+      },
+    });
   };
 
   const handleChange = (val: string | undefined) => {
@@ -42,29 +62,34 @@ export default function CodeEditor({
   };
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="mb-2 flex items-center justify-between">
-        <span className="text-sm font-medium text-gray-700">
-          Editor ({language})
-        </span>
-        <button
-          onClick={() => onRun?.(value ?? defaultValue)}
-          disabled={!isWorkerReady || isRunning}
-          className={`px-4 py-1.5 rounded text-sm font-medium transition-colors ${
-            !isWorkerReady || isRunning
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-green-600 text-white hover:bg-green-700"
-          }`}
-        >
-          {isRunning ? "Ejecutando..." : "Ejecutar"}
-        </button>
-      </div>
-
-      <div className="flex-1 overflow-hidden rounded-lg border border-gray-200">
+    <ConsoleFrame
+      title={title}
+      action={
+        <>
+          {status ? (
+            <span className="hidden font-mono text-[11px] text-[#888] sm:inline">
+              {status}
+            </span>
+          ) : null}
+          <button
+            onClick={() => onRun?.(value ?? defaultValue)}
+            disabled={!isWorkerReady || isRunning}
+            className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-[12px] font-medium transition-all ${
+              !isWorkerReady || isRunning
+                ? "cursor-not-allowed bg-[#1d1d1d] text-[#555]"
+                : "bg-[#27c93f] text-[#0a0a0a] hover:bg-[#3fb950] active:scale-95"
+            }`}
+          >
+            {isRunning ? "Ejecutando..." : "Ejecutar"}
+          </button>
+        </>
+      }
+    >
+      <div className="overflow-hidden rounded-lg border border-[#222]">
         <Editor
           height={height}
           language={language}
-          theme="vs-dark"
+          theme="console-dark"
           value={value}
           defaultValue={defaultValue}
           onChange={handleChange}
@@ -81,6 +106,6 @@ export default function CodeEditor({
           }}
         />
       </div>
-    </div>
+    </ConsoleFrame>
   );
 }

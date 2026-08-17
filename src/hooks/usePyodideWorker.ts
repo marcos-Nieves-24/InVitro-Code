@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
-import { pyodideWorker } from "@/lib/pyodide-worker";
+import { pyodideWorker, type PyodideRunResult } from "@/lib/pyodide-worker";
 
 export type PyodideStatus = "idle" | "loading" | "ready" | "error";
 
 interface UsePyodideWorkerReturn {
   status: PyodideStatus;
-  run: (code: string, context?: Record<string, unknown>) => Promise<unknown>;
+  run: (code: string, context?: Record<string, unknown>) => Promise<PyodideRunResult>;
   error: string | null;
 }
 

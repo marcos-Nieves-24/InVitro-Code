@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { ConsoleFrame } from "./ConsoleFrame";
 
 interface OutputPanelProps {
   output: string[];
@@ -65,114 +66,105 @@ export default function OutputPanel({
   };
 
   return (
-    <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="p-4 border-b bg-gray-50">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">
-            Consola de Salida
-          </h3>
-          <div className="flex items-center gap-2">
-            {/* Estoy listo — only when client-side validation passed AND flag on */}
-            {validationResult === "valid" && certifyEnabled && (
-              <button
-                onClick={handleCertify}
-                disabled={certifyState === "loading"}
-                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-                  certifyState === "loading"
-                    ? "bg-yellow-100 text-yellow-700 cursor-wait"
-                    : "bg-purple-600 text-white hover:bg-purple-700"
-                }`}
-              >
-                {certifyState === "loading"
-                  ? "Certificando..."
-                  : "Estoy listo"}
-              </button>
-            )}
-
+    <ConsoleFrame
+      title="Consola de Salida"
+      action={
+        <>
+          {/* Estoy listo — only when client-side validation passed AND flag on */}
+          {validationResult === "valid" && certifyEnabled && (
             <button
-              onClick={onClear}
-              className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
-            >
-              Limpiar
-            </button>
-          </div>
-        </div>
-
-        {/* Certification status */}
-        {certifyState !== "idle" && (
-          <div
-            className={`mt-2 text-sm px-3 py-1.5 rounded ${
-              certifyState === "loading"
-                ? "bg-yellow-50 text-yellow-800"
-                : certifyState === "passed"
-                  ? "bg-green-50 text-green-800"
-                  : certifyState === "failed"
-                    ? "bg-red-50 text-red-800"
-                    : "bg-gray-50 text-gray-600"
-            }`}
-          >
-            {certifyState === "loading"
-              ? "Ejecutando certificacion server-side..."
-              : certifyState === "passed"
-                ? `${certifyMessage}`
-                : `${certifyMessage}`}
-          </div>
-        )}
-
-        {exercise && (
-          <div className="mt-2 text-sm text-gray-600">
-            {exercise.testCases.length} test
-            {exercise.testCases.length !== 1 ? "s" : ""}
-            {" | "}Estado:{" "}
-            <span
-              className={`font-medium ${
-                validationResult === "valid"
-                  ? "text-green-600"
-                  : validationResult === "invalid"
-                    ? "text-red-600"
-                    : "text-gray-600"
+              onClick={handleCertify}
+              disabled={certifyState === "loading"}
+              className={`rounded-md px-3 py-1 text-[12px] font-medium transition-colors ${
+                certifyState === "loading"
+                  ? "cursor-wait bg-yellow-900/30 text-yellow-400"
+                  : "bg-[#27c93f] text-[#0a0a0a] hover:bg-[#3fb950]"
               }`}
             >
-              {validationResult === "valid"
-                ? "Validacion superada"
+              {certifyState === "loading"
+                ? "Certificando..."
+                : "Estoy listo"}
+            </button>
+          )}
+
+          <button
+            onClick={onClear}
+            className="rounded-md bg-[#1d1d1d] px-3 py-1 text-[12px] font-medium text-[#888] transition-colors hover:bg-[#2a2a2a] hover:text-white"
+          >
+            Limpiar
+          </button>
+        </>
+      }
+    >
+      {/* Certification status */}
+      {certifyState !== "idle" && (
+        <div
+          className={`border-b border-[#1d1d1d] px-4 py-2 text-sm ${
+            certifyState === "loading"
+              ? "bg-yellow-900/20 text-yellow-400"
+              : certifyState === "passed"
+                ? "bg-green-900/20 text-green-400"
+                : certifyState === "failed"
+                  ? "bg-red-950/40 text-red-400"
+                  : "bg-[#111] text-[#888]"
+          }`}
+        >
+          {certifyState === "loading"
+            ? "Ejecutando certificacion server-side..."
+            : `${certifyMessage}`}
+        </div>
+      )}
+
+      {exercise && (
+        <div className="border-b border-[#1d1d1d] px-4 py-2 text-sm text-[#888]">
+          {exercise.testCases.length} test
+          {exercise.testCases.length !== 1 ? "s" : ""}
+          {" | "}Estado:{" "}
+          <span
+            className={`font-medium ${
+              validationResult === "valid"
+                ? "text-green-400"
                 : validationResult === "invalid"
-                  ? "No superado"
-                  : "En espera"}
-            </span>
-          </div>
-        )}
+                  ? "text-red-400"
+                  : "text-[#888]"
+            }`}
+          >
+            {validationResult === "valid"
+              ? "Validacion superada"
+              : validationResult === "invalid"
+                ? "No superado"
+                : "En espera"}
+          </span>
+        </div>
+      )}
 
-        {/* Per-test-case hints when validation fails */}
-        {exercise && validationResult === "invalid" && (
-          <div className="mt-2 text-sm bg-orange-50 border border-orange-200 rounded p-2">
-            <p className="font-medium text-orange-800 mb-1">
-              Pistas
+      {/* Per-test-case hints when validation fails */}
+      {exercise && validationResult === "invalid" && (
+        <div className="mx-4 mt-4 rounded-md border border-orange-900/50 bg-orange-950/30 p-3">
+          <p className="mb-1 font-medium text-orange-400">Pistas</p>
+          {exercise.testCases.map((tc, i) => (
+            <p key={i} className="ml-2 text-xs text-orange-300/80">
+              Test {i + 1}: {tc.note}
             </p>
-            {exercise.testCases.map((tc, i) => (
-              <p key={i} className="text-orange-700 text-xs ml-2">
-                Test {i + 1}: {tc.note}
-              </p>
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
+      )}
 
-        {isRunning && (
-          <div className="mt-2 flex items-center gap-2">
-            <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600" />
-            <span className="text-sm text-blue-600">Ejecutando...</span>
-          </div>
-        )}
-      </div>
+      {isRunning && (
+        <div className="flex items-center gap-2 px-4 pt-4 text-sm text-[#888]">
+          <div className="h-3 w-3 animate-spin rounded-full border-b-2 border-[#3fb950]" />
+          <span>Ejecutando...</span>
+        </div>
+      )}
 
       {/* Output Content */}
       <div
         ref={outputRef}
-        className="flex-1 overflow-auto p-4 font-mono text-sm bg-gray-900 text-gray-100"
+        className="overflow-auto p-4 font-mono text-sm text-[#e6edf3]"
         style={{ minHeight: "200px", maxHeight: "600px" }}
       >
         {output.length === 0 ? (
-          <div className="text-gray-500 text-center mt-8">
+          <div className="mt-8 text-center text-[#888]">
             La salida aparecerá aquí cuando ejecutes tu código.
             <br />
             <span className="text-xs">
@@ -186,9 +178,9 @@ export default function OutputPanel({
 
             if (isLast && validationResult === "valid") {
               return (
-                <div key={i} className="flex items-center gap-2 my-2">
-                  <span className="text-green-400 text-lg font-bold">OK</span>
-                  <span className="text-green-300 font-semibold bg-green-900/30 px-3 py-1 rounded-full">
+                <div key={i} className="my-2 flex items-center gap-2">
+                  <span className="text-lg font-bold text-green-400">OK</span>
+                  <span className="rounded-full bg-green-900/30 px-3 py-1 font-semibold text-green-300">
                     Correcto — todos los tests pasaron
                   </span>
                 </div>
@@ -197,9 +189,9 @@ export default function OutputPanel({
 
             if (isLast && validationResult === "invalid") {
               return (
-                <div key={i} className="flex items-center gap-2 my-2">
-                  <span className="text-red-400 text-lg font-bold">X</span>
-                  <span className="text-red-300 font-semibold bg-red-900/30 px-3 py-1 rounded-full">
+                <div key={i} className="my-2 flex items-center gap-2">
+                  <span className="text-lg font-bold text-red-400">X</span>
+                  <span className="rounded-full bg-red-900/30 px-3 py-1 font-semibold text-red-300">
                     No coincide con el test — intentá de nuevo
                   </span>
                 </div>
@@ -211,8 +203,8 @@ export default function OutputPanel({
                 key={i}
                 className={
                   isError
-                    ? "text-red-400 bg-red-950/30 border-l-2 border-red-500 pl-3 py-1.5 rounded"
-                    : "pl-3 py-1"
+                    ? "rounded border-l-2 border-red-500 bg-red-950/30 py-1.5 pl-3 text-red-400"
+                    : "py-1 pl-3"
                 }
               >
                 {line}
@@ -221,6 +213,6 @@ export default function OutputPanel({
           })
         )}
       </div>
-    </div>
+    </ConsoleFrame>
   );
 }
