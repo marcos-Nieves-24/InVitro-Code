@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle2, Clock, BookOpen, GraduationCap } from "lucide-react";
+import { CheckCircle2, BookOpen, GraduationCap } from "lucide-react";
 import type { LessonFrontmatter } from "@/lib/content/modules";
 
 interface LabCardProps {
@@ -89,14 +89,6 @@ export function LabCard({
           <GraduationCap className="h-3 w-3" />
           {badge.label}
         </span>
-
-        {/* Duration */}
-        {lesson.duration && (
-          <span className="inline-flex items-center gap-1">
-            <Clock className="h-3 w-3" />
-            {lesson.duration}
-          </span>
-        )}
 
         {/* Prerequisites (only if meaningful) */}
         {lesson.prerequisites &&

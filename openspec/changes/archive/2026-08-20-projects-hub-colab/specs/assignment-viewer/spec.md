@@ -1,14 +1,11 @@
-# Assignment Viewer Specification
+# Delta for Assignment Viewer
 
-## Purpose
-
-The assignment viewer compiles `assignment.md` through the MDX pipeline so instructions and deliverables render readably — tables styled by `MarkdownTable`, code blocks as interactive `LabCodeBlock` consoles — and offers the lesson notebook via `NotebookActions` (download + "Abrir en Colab"). It is used by the project detail route and by the lab page when the lesson has a notebook.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: REQ-ASGN-01 MDX Render
 
 The assignment viewer MUST compile `assignment.md` with the same plugins as lessons (`remarkMath`, `remarkGfm`, `rehypeKatex`) and the same components map, including `table: MarkdownTable` and `pre: LabCodeBlock`.
+(Previously: it rendered only in the lab "Proyecto" tab with no `LabCodeBlock` consoles.)
 
 #### Scenario: Assignment compiles
 
@@ -19,6 +16,7 @@ The assignment viewer MUST compile `assignment.md` with the same plugins as less
 ### Requirement: REQ-ASGN-03 Notebook Actions
 
 The viewer MUST render `NotebookActions` (Download + "Abrir en Colab"). When `notebook.ipynb` is absent, the actions MUST be disabled or hidden.
+(Previously: a download-only control via `NotebookDownloadButton`.)
 
 #### Scenario: Actions available
 
@@ -32,18 +30,9 @@ The viewer MUST render `NotebookActions` (Download + "Abrir en Colab"). When `no
 - WHEN the viewer renders
 - THEN the notebook actions are disabled or hidden
 
-### Requirement: REQ-ASGN-04 Compile Failure Fallback
+## REMOVED Requirements
 
-If compilation fails, the tab MUST render raw markdown with a notice and MUST NOT crash the page.
+### Requirement: REQ-ASGN-02 Rubric Styling
 
-#### Scenario: Malformed assignment
-
-- GIVEN an `assignment.md` that fails to compile
-- WHEN the Proyecto tab renders
-- THEN raw content shows with a "no disponible" notice
-
-## Out of Scope
-
-- Submission or grading of assignments (phase 2)
-- Editing assignment content
-- Live notebook rendering (phase 3; download and Colab open only)
+(Reason: `Rúbrica` sections are stripped from `assignment.md` by the assignment-content-cleanup change; no rubric tables remain to style.)
+(Migration: `MarkdownTable` stays in the components map for other tables; no consumer change required.)

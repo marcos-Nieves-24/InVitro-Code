@@ -264,7 +264,6 @@ export function hasNotebook(modSlug: string, lessonSlug: string): boolean {
 export interface LessonFrontmatter {
   title: string;
   difficulty?: string;
-  duration?: string;
   prerequisites?: string;
 }
 
@@ -289,7 +288,6 @@ export function getLessonFrontmatter(
         (typeof data["title"] === "string" && data["title"]) ||
         formatLessonName(lessonSlug),
       difficulty: typeof data["Difficulty"] === "string" ? data["Difficulty"] : undefined,
-      duration: typeof data["Estimated Duration"] === "string" ? data["Estimated Duration"] : undefined,
       prerequisites: typeof data["Prerequisites"] === "string" ? data["Prerequisites"] : undefined,
     };
   } catch {

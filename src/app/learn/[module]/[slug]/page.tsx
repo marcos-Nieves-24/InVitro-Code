@@ -106,9 +106,6 @@ function renderHeader(data: Record<string, unknown>) {
         {(data.Difficulty as string) && (
           <Badge variant="info">{data.Difficulty as string}</Badge>
         )}
-        {(data["Estimated Duration"] as string) && (
-          <Badge variant="success">{data["Estimated Duration"] as string}</Badge>
-        )}
         {(data.Prerequisites as string) &&
           data.Prerequisites !== "Ninguno" && (
             <Badge variant="warning">{data.Prerequisites as string}</Badge>
