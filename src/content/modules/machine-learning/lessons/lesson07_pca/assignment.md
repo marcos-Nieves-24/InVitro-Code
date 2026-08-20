@@ -31,25 +31,3 @@ Estás analizando datos de pacientes de alta dimensionalidad. Necesitás:
    - Compará las exactitudes de prueba
 5. **Conclusión final:** ¿PCA mejora o perjudica la clasificación? ¿Por qué?
 
-## Entregables
-
-- Notebook con todos los pasos
-- Scree plot con umbrales
-- Tabla de interpretación de cargas
-- Tabla de comparación de clasificación
-- Informe (máx. 300 palabras):
-  - ¿Cuántos componentes elegiste y por qué?
-  - ¿Qué representan los componentes principales?
-  - ¿Ayudó PCA a la clasificación? ¿Por qué sí o por qué no?
-
-## Rúbrica
-
-| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
-|----------|--------------|----------|-------------|----------------|
-| Análisis de varianza | Completo con múltiples umbrales | Un solo umbral | Básico | Faltante |
-| Interpretación de componentes | Interpretación biológica significativa | Clara | Vaga | Faltante |
-| Experimento de clasificación | Múltiples dimensiones de PCA comparadas | Una comparación | Parcial | Faltante |
-| Conclusión | Con insights, matizada | Clara | Básica | Faltante |
-| Calidad del código | Limpio, reproducible | Legible | Desordenado | No corre |
-
-## Tiempo estimado: 2 horas

@@ -38,23 +38,3 @@ cancer = load_breast_cancer()
 
 7. **Informe**: Escribí un resumen que interprete qué revela PCA sobre el dataset de cáncer de mama
 
-## Entregables
-
-- Notebook de Jupyter con código, gráficos e interpretaciones escritas
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
-|----------|------------------|--------------|------------------|-------------|
-| Aplicación de PCA | Correcta con todos los pasos | Problemas menores | Parcial | Faltante |
-| Scree + selección de componentes | Clara y justificada | Básica | Confusa | Faltante |
-| Visualización 2D | Informativa con interpretación | Buen gráfico | Básica | Faltante |
-| Análisis de cargas | Interpretación con insight | Buena | Superficial | Faltante |
-| Reconstrucción | Correcta con discusión | Correcta solamente | Incompleta | Faltante |
-| Resumen escrito | Síntesis excelente | Bueno | Básico | Faltante |
-
-**Total: 24 puntos**
-
-## Tiempo estimado
-
-3 horas

@@ -38,27 +38,6 @@ Escribí un análisis que compare las posiciones de ProPublica y Northpointe:
 
 Proponé al menos tres recomendaciones sobre cómo se deberían mejorar COMPAS (o herramientas similares de evaluación de riesgo). Considerá cambios técnicos, procedimentales y de política.
 
-## Entregables
-
-- Un notebook de Jupyter con la Parte 2 (código y salidas)
-- Un informe en PDF con las Partes 1, 3 y 4
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Resumen del caso | 15 | Preciso, exhaustivo | Mayormente preciso | Básico | Faltante o incorrecto |
-| Implementación del código | 30 | Correcto, limpio, bien comentado | Mayormente correcto | Parcial | No funciona |
-| Análisis de equidad | 25 | Todas las métricas calculadas e interpretadas | La mayoría de las métricas | Algunas métricas | Faltantes |
-| Comparación de definiciones | 20 | Comprensión matizada de definiciones contrapuestas | Buen análisis | Básico | Limitado o incorrecto |
-| Recomendaciones | 10 | Específicas, viables, reflexivas | Razonables | Genéricas | Faltantes |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-5–6 horas
-
 ## Entrega
 
 Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.

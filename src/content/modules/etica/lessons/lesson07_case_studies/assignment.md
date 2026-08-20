@@ -71,31 +71,6 @@ Tres recomendaciones específicas y accionables con plazos.
 ### Referencias
 Usá el formato APA 7.
 
-## Entregables
-
-Un único documento PDF (3000–4000 palabras).
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Resumen ejecutivo | 5 | Claro, integral | Bueno | Básico | Faltante |
-| Descripción del sistema | 10 | Detallado, preciso | Adecuado | Vago | Faltante |
-| Cinco principios | 15 | Matizado, basado en evidencia | Bueno | Básico | Faltante/incorrecto |
-| Bias y fairness | 15 | Tipos, métricas, evidencia | Bueno | Básico | Faltante |
-| Transparencia | 10 | Análisis minucioso | Bueno | Básico | Faltante |
-| Privacidad | 10 | Riesgos y protecciones | Bueno | Básico | Faltante |
-| Impacto social | 10 | Reflexivo, específico | Bueno | Básico | Faltante |
-| Regulación | 15 | Correcta, específica, actual | Bueno | Básico | Faltante/incorrecta |
-| Recomendaciones | 10 | Específicas, accionables | Bueno | Genéricas | Faltantes |
-| Redacción y referencias | 10 | Profesional, APA 7 | Buena | Aceptable | Pobre |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-8–10 horas
-
 ## Entrega
 
 Subí el PDF a través del sistema de gestión de aprendizaje del curso.

@@ -33,21 +33,3 @@ sales_data = {
 }
 ```
 
-## Entregables
-
-- `sales_analyzer.py`
-- Salida formateada de todos los resultados del análisis
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Uso de diccionarios | Uso eficaz y apropiado | Mayormente apropiado | Uso deficiente |
-| Funciones | Todas las funciones correctas, reutilizables | La mayoría correctas | Faltan funciones |
-| Comprehensions | Usadas donde corresponde | Usadas pero innecesarias | No usadas |
-| Salida | Informe claro y formateado | Adecuada | Difícil de leer |
-| Calidad del código | PEP 8, comentado, limpio | Aceptable | Mala |
-
-## Tiempo estimado
-
-60 minutos

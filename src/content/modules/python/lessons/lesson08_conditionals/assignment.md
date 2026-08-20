@@ -39,21 +39,3 @@ def get_recommendation(triage_level):
     """Returns recommendation based on triage level."""
 ```
 
-## Entregables
-
-- `clinical_triage.py` con todas las funciones y la demostración
-- Probá el sistema con al menos 3 escenarios de pacientes
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Lógica condicional | Correcta y completa | Mayormente correcta | Errores de lógica |
-| Reglas de triaje | Todos los niveles correctamente implementados | La mayoría de los niveles | Faltan niveles |
-| Sentencia match | Usada apropiadamente | Usada pero básica | No usada |
-| Pruebas | 3+ casos de prueba con salida | 2 casos de prueba | 1 o ninguno |
-| Calidad del código | Limpio, bien comentado | Aceptable | Mala |
-
-## Tiempo estimado
-
-75 minutos

@@ -29,24 +29,3 @@ Estás construyendo una herramienta de soporte a decisiones clínicas. La herram
 5. **Extraé las reglas de decisión** del árbol (p. ej., "Si worst radius > 15 y worst concave points > 0.1 → malignant")
 6. **Evaluá** en el set de prueba
 
-## Entregables
-
-- Notebook con el código
-- Árbol de decisión visualizado (exportado como PNG)
-- Lista de 5-10 reglas de decisión extraídas del árbol
-- Informe corto que responda:
-  - ¿Qué hiperparámetros elegiste y por qué?
-  - ¿Cuál es la exactitud de prueba?
-  - ¿Cuántas reglas se necesitan para cubrir el 90% de los casos?
-
-## Rúbrica
-
-| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
-|----------|--------------|----------|-------------|----------------|
-| Ajuste de hiperparámetros | Búsqueda sistemática, justificada | Búsqueda básica | Mínima | Faltante |
-| Visualización del árbol | Clara, etiquetada, exportada | Visible | Mala calidad | Faltante |
-| Reglas de decisión | 5+ reglas claras | 3-4 reglas | 1-2 reglas | Faltante |
-| Interpretabilidad | Explicación apta para médicos | Clara | Vaga | Faltante |
-| Rendimiento | ≥90% con ≤5 de profundidad | Cumple uno | No cumple ninguno | No evaluado |
-
-## Tiempo estimado: 2 horas

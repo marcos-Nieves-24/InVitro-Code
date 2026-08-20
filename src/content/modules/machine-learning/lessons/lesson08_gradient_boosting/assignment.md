@@ -31,25 +31,3 @@ Una empresa de análisis inmobiliario necesita un modelo para predecir precios d
 4. **Seleccioná el mejor modelo** y evaluálo en el set de prueba
 5. **Creá una curva de aprendizaje** para el mejor modelo (R² vs. n_estimators)
 
-## Entregables
-
-- Notebook con todos los pasos
-- Tabla que compare todos los modelos (R², RMSE en entrenamiento/validación)
-- Curva de aprendizaje del mejor modelo
-- Informe (máx. 300 palabras):
-  - ¿Qué modelo rindió mejor y por qué?
-  - ¿Cuáles fueron los hiperparámetros óptimos?
-  - ¿Cómo se compara boosting con bagging para este problema?
-  - ¿Usarías este modelo en producción? ¿Por qué sí o por qué no?
-
-## Rúbrica
-
-| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
-|----------|--------------|----------|-------------|----------------|
-| Comparación de modelos | 3+ modelos con ajuste | 2 modelos | 1 modelo | Faltante |
-| Ajuste de hiperparámetros | Búsqueda sistemática | Parcial | Mínimo | Faltante |
-| Evaluación | R² + RMSE con interpretación | Ambas métricas | Una métrica | Faltante |
-| Curva de aprendizaje | Clara, anotada | Presente | Poco clara | Faltante |
-| Recomendación | Con insights, consciente de producción | Clara | Básica | Faltante |
-
-## Tiempo estimado: 2 horas

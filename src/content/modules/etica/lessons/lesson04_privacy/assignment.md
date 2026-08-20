@@ -50,26 +50,6 @@ Proponé un rediseño de tu sistema con preservación de privacidad. Incluí:
 
 Implementá una versión con privacidad diferencial de una estadística clave o de una salida del modelo de tu sistema. Mostrá la concesión entre privacidad y utilidad.
 
-## Entregables
-
-Un único informe en PDF con las Partes 1–4 (y opcionalmente la Parte 5 como notebook).
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Descripción del sistema | 10 | Clara, detallada | Adecuada | Vaga | Faltante |
-| Identificación de riesgos | 25 | Todas las etapas, riesgos específicos | La mayoría de las etapas | Algunas etapas | Faltantes |
-| Análisis regulatorio | 25 | Exhaustivo, aplicación correcta | Bueno | Básico | Incorrecto |
-| Rediseño de privacidad | 30 | Reflexivo, específico, viable | Razonable | Genérico | Faltante |
-| Calidad de escritura | 10 | Profesional, clara | Buena | Aceptable | Pobre |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-5–7 horas
-
 ## Entrega
 
 Subí el PDF a través del sistema de gestión de aprendizaje del curso.

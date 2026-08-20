@@ -31,22 +31,3 @@ X = np.random.randn(100, 5)
 y = X @ np.array([1.5, -2.0, 0.5, 3.0, -1.0]) + np.random.randn(100) * 0.1
 ```
 
-## Entregables
-
-- `numpy_ops.py` con todas las funciones
-- Script de demostración que muestre que cada función funciona correctamente
-- Comparación de tiempos: implementación vectorizada vs. basada en bucles para `pairwise_distance`
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Vectorización | Todas las funciones vectorizadas (sin bucles de Python) | La mayoría de las funciones vectorizadas | Basada en bucles |
-| Operaciones con arrays | Broadcasting, indexado y reshape correctos | En su mayoría correctos | Hay errores |
-| Álgebra lineal | Operaciones con matrices correctas (inversa, multiplicación, transpuesta) | En su mayoría correctas | Errores graves |
-| Funciones | Las 6 implementadas correctamente | 4-5 implementadas | < 4 implementadas |
-| Rendimiento | Incluye comparación de tiempos | El código corre pero es lento | No se midió |
-
-## Tiempo estimado
-
-90 minutos

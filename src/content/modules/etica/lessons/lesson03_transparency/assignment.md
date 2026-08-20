@@ -44,27 +44,6 @@ Escribí un informe de 500 palabras explicando tus hallazgos para una audiencia 
 - Limitaciones de los métodos
 - Recomendaciones para usar explicaciones en la práctica
 
-## Entregables
-
-- Un notebook de Jupyter con las Partes 1–3
-- Un informe en PDF (Parte 4)
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Modelos y datos | 15 | Dos modelos, dataset apropiado | Dos modelos | Un modelo | Faltantes |
-| Funciones de explicación | 25 | Las cuatro funciones, código limpio | Tres funciones | Dos o menos | No funciona |
-| Análisis comparativo | 25 | Comparación rigurosa, prueba estadística | Buena comparación | Básica | Faltante |
-| Informe | 25 | Claro, no técnico, completo | Mayormente claro | Parcial | Faltante o poco claro |
-| Reflexión sobre limitaciones | 10 | Comprensión matizada demostrada | Buena conciencia | Básica | Faltante |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-6–8 horas
-
 ## Entrega
 
 Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.
