@@ -2,7 +2,7 @@
 
 import { AlertTriangle } from "lucide-react";
 import type { ReactNode } from "react";
-import { NotebookDownloadButton } from "./NotebookDownloadButton";
+import { NotebookActions } from "./NotebookActions";
 import { labProseClass } from "@/lib/ui/prose";
 
 interface AssignmentViewerProps {
@@ -16,12 +16,11 @@ interface AssignmentViewerProps {
 }
 
 /**
- * REQ-ASGN-01/02/03/04: Renders pre-compiled assignment.md MDX.
+ * REQ-ASGN-01/03/04: Renders pre-compiled assignment.md MDX.
  *
  * - REQ-ASGN-01: Same MDX pipeline as lessons (remarkMath, remarkGfm,
- *   rehypeKatex, table: MarkdownTable).
- * - REQ-ASGN-02: Rubric tables styled by MarkdownTable.
- * - REQ-ASGN-03: Notebook download control (hidden when notebook absent).
+ *   rehypeKatex, table: MarkdownTable, pre: LabCodeBlock).
+ * - REQ-ASGN-03: Notebook actions (Download + Colab, hidden when absent).
  * - REQ-ASGN-04: Compile failure fallback.
  */
 export function AssignmentViewer({
@@ -56,17 +55,13 @@ export function AssignmentViewer({
 
   return (
     <div className="space-y-6">
-      {/* REQ-ASGN-01/02: Compiled MDX with MarkdownTable for rubric tables */}
+      {/* REQ-ASGN-01: Compiled MDX (pre: LabCodeBlock consoles) */}
       <div className={labProseClass}>
         {content}
       </div>
 
-      {/* REQ-ASGN-03: Notebook download */}
-      <NotebookDownloadButton
-        mod={mod}
-        lesson={lesson}
-        disabled={!hasNotebook}
-      />
+      {/* REQ-ASGN-03: Notebook actions (hidden when notebook absent) */}
+      <NotebookActions mod={mod} lesson={lesson} hasNotebook={hasNotebook} />
     </div>
   );
 }
