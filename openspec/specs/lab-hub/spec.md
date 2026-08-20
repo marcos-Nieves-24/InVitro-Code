@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`/laboratorios` becomes a content-driven hub: modules grouped in order with collapsible cards, each card showing the lesson's title, difficulty, duration, and prerequisites plus the user's completion state. It replaces the hardcoded `LabMission` stepper as the page's main content.
+`/laboratorios` becomes a content-driven hub: modules grouped in order with collapsible cards, each card showing the lesson's title, difficulty, and prerequisites plus the user's completion state. It replaces the hardcoded `LabMission` stepper as the page's main content.
 
 ## Requirements
 
@@ -28,13 +28,13 @@ The hub MUST list every module from `getModules()` sorted by `module.json` `orde
 
 ### Requirement: REQ-HUB-03 Card Metadata
 
-Each lesson card MUST show `Lesson Title`, `Difficulty`, `Estimated Duration`, and `Prerequisites` from `lesson.md` frontmatter, falling back to a slug-derived title when frontmatter is missing.
+Each lesson card MUST show `Lesson Title`, `Difficulty`, and `Prerequisites` from `lesson.md` frontmatter, falling back to a slug-derived title when frontmatter is missing. The card MUST NOT show `Estimated Duration`.
 
 #### Scenario: Card from frontmatter
 
 - GIVEN a lesson with frontmatter metadata
 - WHEN the hub renders its card
-- THEN title, difficulty, duration, and prereqs are displayed
+- THEN title, difficulty, and prereqs are displayed and no duration row appears
 
 ### Requirement: REQ-HUB-04 Completion State
 
