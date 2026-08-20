@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useCallback, type ReactNode } from "react";
-import { FlaskConical, FileText, ClipboardCheck } from "lucide-react";
+import { FlaskConical, ClipboardCheck } from "lucide-react";
 import { LabRunner } from "./LabRunner";
 import { QuizRunner } from "./QuizRunner";
-import { AssignmentViewer } from "./AssignmentViewer";
+import { NotebookActions } from "./NotebookActions";
 
-type TabId = "lab" | "quiz" | "proyecto";
+type TabId = "lab" | "quiz";
 
 const STORAGE_KEY = "lab-active-tab";
 
@@ -16,18 +16,16 @@ interface LabTabsProps {
   labContent: ReactNode;
   labRawFallback: string | null;
   quizRaw: string | null;
-  assignmentContent: ReactNode;
-  assignmentRawFallback: string | null;
   hasNotebook: boolean;
 }
 
 /**
- * REQ-LABPAGE-04: Tab container with three panels — Laboratorio,
- * Cuestionario, Proyecto — that switch without reloading.
+ * REQ-LABPAGE-04/06: Tab container with two panels — Laboratorio,
+ * Cuestionario — that switch without reloading.
  *
  * - Hides Cuestionario tab when quiz.md is missing (quizRaw === null).
- * - Hides Proyecto tab when assignment.md is missing (assignmentContent
- *   is null and no rawFallback).
+ * - Notebook actions (Download + Colab) shown in the tab-bar header,
+ *   gated on hasNotebook.
  * - Active tab persists in localStorage per-lesson.
  * - Spanish labels per REQ-LABPAGE-05.
  */
@@ -37,8 +35,6 @@ export function LabTabs({
   labContent,
   labRawFallback,
   quizRaw,
-  assignmentContent,
-  assignmentRawFallback,
   hasNotebook,
 }: LabTabsProps) {
   const [activeTab, setActiveTab] = useState<TabId>("lab");
@@ -47,7 +43,7 @@ export function LabTabs({
   useEffect(() => {
     try {
       const stored = localStorage.getItem(`${STORAGE_KEY}-${mod}-${lesson}`);
-      if (stored === "lab" || stored === "quiz" || stored === "proyecto") {
+      if (stored === "lab" || stored === "quiz") {
         setActiveTab(stored as TabId);
       }
     } catch {
@@ -68,18 +64,16 @@ export function LabTabs({
   );
 
   const hasQuiz = quizRaw !== null;
-  const hasAssignment = assignmentContent !== null || assignmentRawFallback !== null;
 
   // If active tab is hidden, switch to lab
   useEffect(() => {
     if (activeTab === "quiz" && !hasQuiz) setActiveTab("lab");
-    if (activeTab === "proyecto" && !hasAssignment) setActiveTab("lab");
-  }, [activeTab, hasQuiz, hasAssignment]);
+  }, [activeTab, hasQuiz]);
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-8">
       {/* Tab bar */}
-      <div className="mb-8 flex border-b border-gray-200" role="tablist">
+      <div className="mb-8 flex items-center border-b border-gray-200" role="tablist">
         <TabButton
           active={activeTab === "lab"}
           onClick={() => handleTabChange("lab")}
@@ -96,15 +90,11 @@ export function LabTabs({
             id="quiz"
           />
         )}
-        {hasAssignment && (
-          <TabButton
-            active={activeTab === "proyecto"}
-            onClick={() => handleTabChange("proyecto")}
-            icon={<FileText className="h-4 w-4" />}
-            label="Proyecto"
-            id="proyecto"
-          />
-        )}
+
+        {/* Notebook actions, right-aligned (self-gated on hasNotebook) */}
+        <div className="ml-auto">
+          <NotebookActions mod={mod} lesson={lesson} hasNotebook={hasNotebook} />
+        </div>
       </div>
 
       {/* Tab panels */}
@@ -112,15 +102,6 @@ export function LabTabs({
         <LabRunner content={labContent} rawFallback={labRawFallback} />
       )}
       {activeTab === "quiz" && hasQuiz && <QuizRunner raw={quizRaw} />}
-      {activeTab === "proyecto" && hasAssignment && (
-        <AssignmentViewer
-          content={assignmentContent}
-          rawFallback={assignmentRawFallback}
-          module={mod}
-          lesson={lesson}
-          hasNotebook={hasNotebook}
-        />
-      )}
     </div>
   );
 }

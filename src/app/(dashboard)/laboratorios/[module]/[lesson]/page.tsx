@@ -39,8 +39,8 @@ interface Props {
 
 /**
  * REQ-LABPAGE-01/02/03/05: Server component — auth gate, existence check,
- * convention-based content reads, compileMDX for lab + assignment,
- * InVitroShell wrap, Spanish chrome via LabTabs.
+ * convention-based content reads (lab.md, quiz.md, notebook.ipynb),
+ * compileMDX for lab, InVitroShell wrap, Spanish chrome via LabTabs.
  */
 export default async function LabLessonPage({ params }: Props) {
   // REQ-LABPAGE-01: Clerk auth gate
@@ -103,25 +103,6 @@ export default async function LabLessonPage({ params }: Props) {
     quizRaw = fs.readFileSync(quizPath, "utf8");
   }
 
-  // assignment.md — optional; null hides the Proyecto tab
-  const assignmentPath = path.join(lessonDir, "assignment.md");
-  let assignmentContent: ReactNode = null;
-  let assignmentRawFallback: string | null = null;
-  if (fs.existsSync(assignmentPath)) {
-    const assignmentRaw = fs.readFileSync(assignmentPath, "utf8");
-    try {
-      const result = await compileMDX({
-        source: assignmentRaw,
-        components: mdxComponents,
-        options: mdxConfig,
-      });
-      assignmentContent = result.content;
-    } catch {
-      // REQ-ASGN-04: Compile failure fallback
-      assignmentRawFallback = assignmentRaw;
-    }
-  }
-
   // notebook.ipynb — optional
   const notebookPath = path.join(lessonDir, "notebook.ipynb");
   const hasNotebook = fs.existsSync(notebookPath);
@@ -134,8 +115,6 @@ export default async function LabLessonPage({ params }: Props) {
         labContent={labContent}
         labRawFallback={labRawFallback}
         quizRaw={quizRaw}
-        assignmentContent={assignmentContent}
-        assignmentRawFallback={assignmentRawFallback}
         hasNotebook={hasNotebook}
       />
     </InVitroShell>
