@@ -30,22 +30,3 @@
 
 4. **Escribí un informe breve** (1 página) que interprete estos resultados para una audiencia no técnica.
 
-## Entregables
-
-- Notebook de Jupyter con el código, las simulaciones y los gráficos
-- Una sección de informe en markdown
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
-|----------|------------------|--------------|------------------|-------------|
-| Cálculos de Bayes | Todos correctos | Errores menores | Uno correcto | Faltante |
-| Simulación | Verificada analíticamente | Funciona pero limitada | Funciona parcialmente | Faltante |
-| Modelo de churn + gráfico | Completo y claro | Problemas menores | Incompleto | Faltante |
-| Informe | Claro, no técnico | Bueno pero técnico | Demasiado breve | Faltante |
-
-**Total: 16 puntos**
-
-## Tiempo estimado
-
-2.5 horas

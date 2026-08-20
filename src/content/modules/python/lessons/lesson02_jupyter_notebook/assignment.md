@@ -21,22 +21,3 @@ Creá un notebook de Jupyter llamado `portfolio.ipynb` que incluya:
 
 Exportá el notebook como HTML y como script de Python (`.py`).
 
-## Entregables
-
-- `portfolio.ipynb`
-- `portfolio.html`
-- `portfolio.py`
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Celdas de markdown | Bien estructuradas con encabezados, listas y formato | Estructura adecuada | Pobres o faltantes |
-| Celdas de código | Todas se ejecutan correctamente, bien comentadas | La mayoría se ejecuta | Presentan errores |
-| Exportación | HTML y .py exportados correctamente | Falta una exportación | Sin exportaciones |
-| Organización | Flujo lógico, presentación limpia | Flujo aceptable | Desorganizado |
-| Atajos de teclado | Demuestra uso eficiente (A, B, DD, M, Y) | Uso básico de atajos | Sin evidencia de atajos |
-
-## Tiempo estimado
-
-60 minutos

@@ -31,25 +31,3 @@ kidney = {"TP53", "EGFR", "KRAS", "GATA2", "FOXA1", "HNF4A", "UMOD"}
 lung = {"BRCA1", "TP53", "EGFR", "KRAS", "ALK", "MYC", "NKX2-1"}
 ```
 
-## Entregables
-
-- `gene_set_analysis.py` con todas las funciones
-- Salida que muestre:
-  - Matriz de similitud de Jaccard
-  - Genes comunes en todos los tejidos
-  - Genes exclusivos por tejido
-  - Recomendaciones para un tejido dado
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Operaciones de conjuntos | Todas correctas | La mayoría correctas | Hay errores |
-| Funciones | Bien diseñadas, todas implementadas | La mayoría implementadas | Faltan funciones |
-| Jaccard | Cálculo y matriz correctos | Calculado pero sin matriz | Incorrecto |
-| Recomendaciones | Sistema de recomendación funcional | Básico | No implementado |
-| Calidad del código | Limpio, documentado | Aceptable | Mala |
-
-## Tiempo estimado
-
-60 minutos

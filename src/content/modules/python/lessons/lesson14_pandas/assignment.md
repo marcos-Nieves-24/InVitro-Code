@@ -44,21 +44,3 @@ import numpy as np
 np.random.seed(42)
 ```
 
-## Entregables
-
-- `ecommerce_analysis.py`
-- Informe resumido impreso con todos los hallazgos
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Creación de datos | Los 3 DataFrames con datos realistas | 2 DataFrames | 1 o faltantes |
-| Limpieza de datos | Maneja todos los problemas correctamente | Limpieza parcial | Sin limpieza |
-| GroupBy | Agregación correcta, múltiples métricas | groupby básico | Hay errores |
-| Fusión | Fusión correcta, todos los registros contemplados | Fusión básica | Incorrecta |
-| Informe | Claro, formateado, completo | Adecuado | Faltante/incompleto |
-
-## Tiempo estimado
-
-90 minutos

@@ -35,22 +35,3 @@ Creá un script de Python `viz_dashboard.py` que genere una figura de panel con 
 
 4. **Guardá** el panel como PNG y como SVG
 
-## Entregables
-
-- `viz_dashboard.py`
-- `dashboard.png` y `dashboard.svg`
-- La figura del panel mostrada en la consola
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Tipos de gráfico | 6 tipos de gráfico distintos usados correctamente | 4-5 tipos de gráfico | < 4 tipos de gráfico |
-| Personalización | Estilo profesional, todas las etiquetas | Estilo adecuado | Personalización mínima |
-| Subplots | Disposición 2×3 correcta, todos visibles | Problemas de disposición | Mala disposición |
-| Generación de datos | Datos sintéticos realistas | Datos básicos | No generados |
-| Guardado | PNG y SVG guardados | Un formato | No guardado |
-
-## Tiempo estimado
-
-90 minutos

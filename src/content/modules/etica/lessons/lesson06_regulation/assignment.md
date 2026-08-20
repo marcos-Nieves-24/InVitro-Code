@@ -48,27 +48,6 @@ Proponé un cronograma y un plan de acción para lograr el cumplimiento:
 - Largo plazo (18–36 meses)
 - Recursos estimados necesarios
 
-## Entregables
-
-Un único documento PDF.
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Descripción del sistema | 10 | Preciso, detallado | Adecuado | Vago | Faltante |
-| Clasificación | 20 | Correcta, bien justificada | Correcta | Parcialmente correcta | Incorrecta |
-| Requisitos de cumplimiento | 25 | Específicos, minuciosos | Bueno | Básico | Faltantes o incorrectos |
-| Estado actual | 15 | Bien investigado, específico | Bueno | Básico | Faltante |
-| Hoja de ruta | 20 | Detallada, práctica | Razonable | Genérica | Faltante |
-| Calidad de redacción | 10 | Profesional, clara | Buena | Aceptable | Pobre |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-6–8 horas
-
 ## Entrega
 
 Subí el PDF a través del sistema de gestión de aprendizaje del curso.

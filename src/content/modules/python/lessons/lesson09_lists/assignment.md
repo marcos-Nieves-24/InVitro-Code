@@ -31,21 +31,3 @@ dna = "ATGCGATCGAATTCGATCGATCGAATTCGATCGA"
 data_points = [10, 12, 11, 13, 45, 12, 11, 10, 13, 12, 48, 11, 10, 13]
 ```
 
-## Entregables
-
-- `list_processor.py` con las 5 tareas
-- Salida de cada tarea
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Operaciones con listas | Todas las operaciones correctas y eficientes | La mayoría correctas | Hay errores |
-| List comprehensions | Usadas apropiadamente en todo el código | Usadas ocasionalmente | No usadas |
-| Operaciones con matrices | Transpuesta y multiplicación correctas | Una correcta | Ninguna correcta |
-| Funciones | Bien definidas, reutilizables | Definidas pero básicas | Faltan |
-| Calidad del código | PEP 8, comentado, limpio | Aceptable | Mala |
-
-## Tiempo estimado
-
-90 minutos

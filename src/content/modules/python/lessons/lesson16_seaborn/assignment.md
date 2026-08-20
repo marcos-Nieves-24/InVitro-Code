@@ -37,21 +37,3 @@ Creá un script de Python `customer_segmentation_viz.py` que:
 
 5. **Guardá** la figura combinada como `segmentation_analysis.png`
 
-## Entregables
-
-- `customer_segmentation_viz.py`
-- `segmentation_analysis.png`
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Tipos de gráfico | 6+ gráficos distintos de Seaborn | 4-5 gráficos | < 4 gráficos |
-| Generación de datos | Datos realistas y bien estructurados | Datos básicos | Datos pobres |
-| Personalización | Tema + paleta + títulos | Alguna personalización | Mínima |
-| Disposición | Subplot 2×2 organizado | Disposición básica | Sin disposición |
-| Insights | Las visualizaciones revelan patrones claros | Algunos insights | Sin hallazgos claros |
-
-## Tiempo estimado
-
-90 minutos

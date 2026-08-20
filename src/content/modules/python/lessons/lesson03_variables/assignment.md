@@ -29,21 +29,3 @@ Creá un script de Python `patient_analysis.py` que:
 
 4. **Salida**: Imprimí un informe resumido del paciente con formato
 
-## Entregables
-
-- `patient_analysis.py` (bien comentado, conforme a PEP 8)
-- Ejemplo de salida mostrando los resultados
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Uso de variables | Nombres claros y descriptivos, mayúsculas adecuadas | Nombres aceptables | Malos nombres |
-| Conversión de tipos | Conversión correcta de los resultados de `input()` | Mayormente correcta | Conversiones faltantes |
-| Cálculos | Todas las fórmulas correctas | Errores menores | Errores mayores |
-| Salida | Resumen formateado y legible | Adecuada | Difícil de leer |
-| Calidad del código | PEP 8, comentado, organizado | Mayormente conforme | Desorganizado |
-
-## Tiempo estimado
-
-60 minutos

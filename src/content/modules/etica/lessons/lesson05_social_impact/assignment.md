@@ -51,28 +51,6 @@ Evaluá la seguridad:
 ### 6. Recomendaciones (200 palabras)
 Proponé 3 recomendaciones específicas para la empresa, los reguladores o la sociedad para abordar los impactos que identificaste.
 
-## Entregables
-
-Un único documento PDF.
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Descripción del sistema | 10 | Preciso, detallado | Adecuado | Vago | Faltante |
-| Análisis de empleo | 20 | Basado en evidencia, matizado | Bueno | Básico | Faltante/inexacto |
-| Análisis ambiental | 15 | Datos específicos, reflexivo | Bueno | Básico | Faltante |
-| Análisis de seguridad | 20 | Minucioso, ejemplos específicos | Bueno | Básico | Faltante |
-| Social/desinformación | 20 | Perspicaz, bien investigado | Bueno | Básico | Faltante |
-| Recomendaciones | 10 | Específicas, accionables | Razonables | Genéricas | Faltantes |
-| Calidad de redacción | 5 | Profesional, clara | Buena | Aceptable | Pobre |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-6–8 horas
-
 ## Entrega
 
 Subí el PDF a través del sistema de gestión de aprendizaje del curso.

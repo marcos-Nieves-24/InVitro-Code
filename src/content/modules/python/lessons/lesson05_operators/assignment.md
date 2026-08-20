@@ -21,21 +21,3 @@ Creá un script de Python `lab_calculator.py` que implemente una calculadora de 
 
 5. **Verificación de presupuesto**: Dado un costo total y un presupuesto, determiná si la compra está dentro del presupuesto. Aplicá un operador de asignación.
 
-## Entregables
-
-- `lab_calculator.py` con todas las funciones
-- Salida documentada que muestre cada cálculo
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Aritmética | Todos los cálculos correctos | Errores menores | Errores mayores |
-| Operadores | Usa todos los tipos de operadores apropiadamente | Usa la mayoría de los tipos | Usa pocos tipos |
-| Lógica | Ramificación correcta con operadores lógicos | Mayormente correcta | Errores de lógica |
-| Calidad del código | Bien comentado, PEP 8 | Adecuada | Mala |
-| Salida | Resultados formateados y claros | Aceptable | Difícil de leer |
-
-## Tiempo estimado
-
-60 minutos

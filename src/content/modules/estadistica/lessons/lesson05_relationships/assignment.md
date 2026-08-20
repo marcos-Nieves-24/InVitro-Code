@@ -27,21 +27,3 @@
 
 4. **Correlaciones espurias**: Encontrá un ejemplo de dos variables de los datasets que estén correlacionadas pero no tengan una relación causal plausible. Explicá por qué existe la correlación a pesar de no haber causalidad.
 
-## Entregables
-
-- Notebook de Jupyter con código, visualizaciones e interpretaciones escritas
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Adecuado (2 pts) | Deficiente (1 pt) |
-|----------|------------------|--------------|------------------|-------------|
-| Pearson vs Spearman | Comparación correcta | Problemas menores | Parcial | Faltante |
-| Matriz de correlación | Clara e informativa | Buena pero básica | Faltan elementos | Mala calidad |
-| Análisis de Anscombe | Completo con insight | Buen análisis | Básico | Faltante |
-| Correlaciones espurias | Plausible y bien explicada | Aceptable | Débil | Faltante |
-
-**Total: 16 puntos**
-
-## Tiempo estimado
-
-2 horas

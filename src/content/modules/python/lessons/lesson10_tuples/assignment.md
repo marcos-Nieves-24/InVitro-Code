@@ -33,21 +33,3 @@ students = [
 ]
 ```
 
-## Entregables
-
-- `student_records.py`
-- Salida mostrando el análisis
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Uso de tuplas | Uso apropiado en todo el código | Mayormente apropiado | Uso deficiente |
-| Desempaquetado | Usado eficazmente en todas las funciones | Usado ocasionalmente | No usado |
-| Funciones | Bien diseñadas, I/O clara | Mayormente claras | Mal diseño |
-| Análisis | Resumen de salida completo | Salida parcial | Falta |
-| Calidad del código | Limpio, comentado | Aceptable | Mala |
-
-## Tiempo estimado
-
-45 minutos

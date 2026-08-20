@@ -26,26 +26,6 @@ Escribí un informe de 1000–1500 palabras que aborde lo siguiente:
 
 4. **Recomendaciones de mitigación** (200 palabras): Proponé al menos tres recomendaciones concretas para mejorar el desempeño ético del sistema.
 
-## Entregables
-
-Enviá un único documento PDF. Usá el formato APA 7 para cualquier referencia.
-
-## Rúbrica
-
-| Criterio | Puntos | Excelente | Bueno | Satisfactorio | Necesita mejorar |
-|-----------|--------|-----------|------|--------------|-------------------|
-| Descripción del sistema | 10 | Clara, detallada, precisa | Mayormente clara | Algo poco clara | Faltante o imprecisa |
-| Análisis de los cinco principios | 40 | Cada principio correctamente aplicado con razonamiento matizado | Cuatro principios bien aplicados | Tres o menos | Faltante o incorrecto |
-| Identificación de concesiones | 20 | Identifica y resuelve la concesión de forma convincente | Identifica la concesión | La menciona pero no la resuelve | No se discute ninguna concesión |
-| Recomendaciones de mitigación | 20 | Tres recomendaciones específicas y viables | Dos recomendaciones | Una recomendación | Ninguna o poco realistas |
-| Calidad de escritura | 10 | Clara, organizada, profesional | Mayormente clara | Legible pero desorganizada | Difícil de seguir |
-
-**Total: 100 puntos**
-
-## Tiempo estimado
-
-3–4 horas
-
 ## Entrega
 
 Subí el PDF al sistema de gestión de aprendizaje del curso.

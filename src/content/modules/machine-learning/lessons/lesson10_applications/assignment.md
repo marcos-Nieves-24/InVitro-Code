@@ -79,28 +79,3 @@ saas['churned_3m'] = (saas['health_score'] < 30).astype(int)
 5. **Interpretación:** Importancia de características, PDP de las top features
 6. **Recomendación de negocio:** Escribí un informe (máx. 500 palabras)
 
-## Entregables
-
-- Notebook con el análisis completo
-- Tabla de comparación de modelos
-- Gráfico de importancia de características
-- PDP de las top 2 features
-- Informe de negocio (máx. 500 palabras):
-  - Hallazgos clave
-  - Rendimiento del modelo y limitaciones
-  - Recomendaciones accionables
-  - Próximos pasos
-
-## Rúbrica
-
-| Criterio | Excelente (4) | Bueno (3) | Adecuado (2) | Deficiente (1) |
-|----------|--------------|----------|-------------|----------------|
-| EDA | Exhaustivo, con visualizaciones | Bueno | Básico | Faltante |
-| Preprocesamiento | Scaling + encoding + split correctos | Completo | Parcial | Faltante |
-| Comparación de modelos | 3+ modelos, CV, tabla comparativa | 2 modelos | 1 modelo | Faltante |
-| Ajuste de hiperparámetros | GridSearchCV con justificación | GridSearch | Manual | Faltante |
-| Interpretación | Importancia + PDP + insight | Un método | Básica | Faltante |
-| Informe de negocio | Profesional, accionable | Claro | Básico | Faltante |
-| Calidad del código | Limpio, reproducible | Legible | Desordenado | No corre |
-
-## Tiempo estimado: 3 horas

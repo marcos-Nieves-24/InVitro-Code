@@ -31,21 +31,3 @@ matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 monthly_revenue = [12000, 13500, 12800, 14200, 15100, 14800]
 ```
 
-## Entregables
-
-- `data_processor.py` con las 5 tareas implementadas
-- Salida que muestre los resultados de cada tarea
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Bucles for | Iteración y acumulación correctas | Problemas menores | Errores mayores |
-| Bucles while | Condición y terminación adecuadas | Funciona pero imperfecto | Bucle infinito o lógica incorrecta |
-| Break/Continue | Usados apropiadamente | Usados pero no óptimos | No usados |
-| Bucles anidados | Procesamiento multidimensional correcto | Básico pero funciona | Incorrecto |
-| Estilo pitónico | Usa enumerate/zip, código limpio | Mayormente limpio | No pitónico |
-
-## Tiempo estimado
-
-90 minutos

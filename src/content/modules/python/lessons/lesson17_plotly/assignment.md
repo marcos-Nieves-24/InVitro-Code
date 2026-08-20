@@ -44,21 +44,3 @@ Creá un script de Python `gapminder_dashboard.py` que:
 
 4. **Exportación**: guardá el panel final como `exploracion.html`
 
-## Entregables
-
-- `gapminder_dashboard.py`
-- `exploracion.html` (exportado desde tu script)
-
-## Rúbrica de evaluación
-
-| Criterio | Excelente (4 pts) | Bueno (3 pts) | Necesita mejorar (1-2 pts) |
-|----------|-------------------|--------------|-----------------------------|
-| Visualizaciones | 3+ gráficos con datos correctos | 2-3 gráficos | < 2 gráficos |
-| Animación | Scatter con animation_frame funciona correctamente | Animación presente pero con bugs | Sin animación |
-| Interactividad | Menú desplegable funciona + hover/zoom | Menú desplegable funciona | Sin interactividad |
-| Exportación | HTML renderiza de forma independiente, totalmente interactivo | HTML funciona | Sin exportación |
-| Calidad del código | Limpio, bien estructurado, documentado | Legible | Mala estructura |
-
-## Tiempo estimado
-
-90 minutos
