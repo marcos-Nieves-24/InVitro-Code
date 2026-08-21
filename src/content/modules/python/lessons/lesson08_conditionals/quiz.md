@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre valores truthy y falsy en Python.
+**Q6:** Explica la diferencia entre valores truthy y falsy en Python.
 
 **Q7:** ¿Qué es una expresión condicional ternaria y cuándo la usarías?
 
 ## Pregunta de código
 
-**Q8:** Escribí una función `grade_score(score)` que devuelva "Pass" si score ≥ 60 y "Fail" en caso contrario. Después reescribila como una lambda.
+**Q8:** Escribe una función `grade_score(score)` que devuelva "Pass" si score ≥ 60 y "Fail" en caso contrario. Después reescríbila como una lambda.
 
 ## Clave de respuestas
 
@@ -56,7 +56,7 @@
 
 **Q6:** Los valores truthy se evalúan como True en un contexto booleano (por ejemplo, strings no vacíos, números distintos de cero, contenedores no vacíos). Los valores falsy se evalúan como False (por ejemplo, 0, "", [], None, False). Esto permite condiciones concisas como `if name:` en lugar de `if name != "":`.
 
-**Q7:** Una expresión condicional ternaria es un if/else de una sola línea: `value_if_true if condition else value_if_false`. Usala para condiciones simples de una sola expresión donde mejore la legibilidad frente a un bloque if/else completo.
+**Q7:** Una expresión condicional ternaria es un if/else de una sola línea: `value_if_true if condition else value_if_false`. Úsala para condiciones simples de una sola expresión donde mejore la legibilidad frente a un bloque if/else completo.
 
 **Q8:**
 ```python

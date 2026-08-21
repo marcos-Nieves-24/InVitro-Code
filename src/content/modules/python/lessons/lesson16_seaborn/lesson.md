@@ -41,7 +41,7 @@ En la lección anterior aprendiste Matplotlib — la base para la visualización
 
 Seaborn provee:
 - **Tipos de gráficos estadísticos**: box, violin, swarm, pair, heatmap
-- **Agregación automática**: calcula estadísticas por vos
+- **Agregación automática**: calcula estadísticas por ti
 - **Mapeo de colores inteligente**: paletas categóricas y continuas
 - **Temas**: Estilos profesionales predeterminados
 - **Integración con Pandas**: Funciona directamente con DataFrames
@@ -287,17 +287,17 @@ plt.show()
 1. **Olvidar importar matplotlib**: Seaborn necesita `plt.show()` para mostrar gráficos
 2. **Sobrescribir los estilos de Seaborn**: Configurar estilos de Matplotlib después de importar seaborn puede causar conflictos
 3. **Usar Seaborn para todo**: Algunos gráficos (como líneas con muchas series) son mejores con Matplotlib puro
-4. **Ignorar los parámetros `hue` y `style`**: Estos hacen poderoso a Seaborn — ¡usalos!
+4. **Ignorar los parámetros `hue` y `style`**: Estos hacen poderoso a Seaborn — ¡úsalos!
 5. **No usar DataFrames de Pandas**: Seaborn funciona mejor con DataFrames; usar arrays crudos pierde funcionalidad
 
 ## Buenas Prácticas
 
-- Usá `sns.set_theme()` al inicio para estilo consistente
-- Usá `hue` para coloración categórica y `size` para valores continuos
-- Usá los parámetros `col` y `row` para gráficos facetados
-- Usá `sns.color_palette()` para crear esquemas de colores personalizados
-- Combiná gráficos de Seaborn con `plt.subplots()` de Matplotlib para diseños complejos
-- Usá `sns.heatmap()` con `annot=True` para matrices de correlación
+- Usa `sns.set_theme()` al inicio para estilo consistente
+- Usa `hue` para coloración categórica y `size` para valores continuos
+- Usa los parámetros `col` y `row` para gráficos facetados
+- Usa `sns.color_palette()` para crear esquemas de colores personalizados
+- Combina gráficos de Seaborn con `plt.subplots()` de Matplotlib para diseños complejos
+- Usa `sns.heatmap()` con `annot=True` para matrices de correlación
 
 </Section>
 
@@ -332,13 +332,13 @@ plt.show()
 ### Nivel 1: Básico
 
 1. ¿Cuál es la principal ventaja de Seaborn sobre Matplotlib?
-2. ¿Cómo agregás codificación de color para una variable categórica en un gráfico de Seaborn?
+2. ¿Cómo agregas codificación de color para una variable categórica en un gráfico de Seaborn?
 3. ¿Qué muestra `sns.pairplot()`?
 
 ### Nivel 2: Implementación
 
-4. Usando el dataset tips, creá un box plot de total_bill agrupado por día y sexo.
-5. Creá un heatmap de la matriz de correlación de las columnas numéricas de cualquier dataset.
+4. Usando el dataset tips, crea un box plot de total_bill agrupado por día y sexo.
+5. Crea un heatmap de la matriz de correlación de las columnas numéricas de cualquier dataset.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -347,11 +347,11 @@ plt.show()
 
 ## Desafío de Código
 
-Creá un **reporte EDA integral** de un dataset sintético de clientes usando Seaborn:
+Crea un **reporte EDA integral** de un dataset sintético de clientes usando Seaborn:
 
-1. Generá un dataset con 300 clientes y características: `age`, `income`, `spending_score` (1-100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regiones), `segment` (Low/Medium/High)
+1. Genera un dataset con 300 clientes y características: `age`, `income`, `spending_score` (1-100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regiones), `segment` (Low/Medium/High)
 
-2. Creá las siguientes visualizaciones:
+2. Crea las siguientes visualizaciones:
    - Pairplot de variables numéricas coloreado por segment
    - Heatmap de correlaciones entre todas las variables numéricas
    - Box plots de spending_score por región
@@ -359,10 +359,10 @@ Creá un **reporte EDA integral** de un dataset sintético de clientes usando Se
    - Count plot de segments por región
    - Histograma de age con superposición KDE, coloreado por segment
 
-3. Aplicá un tema profesional de Seaborn y una paleta de colores personalizada
+3. Aplica un tema profesional de Seaborn y una paleta de colores personalizada
 
-4. Organizá múltiples gráficos en una sola figura usando `plt.subplots()` con ejes de Seaborn
+4. Organiza múltiples gráficos en una sola figura usando `plt.subplots()` con ejes de Seaborn
 
-5. Guardá la figura final como `eda_report.png`
+5. Guarda la figura final como `eda_report.png`
 
 </Section>

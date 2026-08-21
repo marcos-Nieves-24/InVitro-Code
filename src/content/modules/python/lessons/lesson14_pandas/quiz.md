@@ -8,7 +8,7 @@
 - C) Un tensor 3D
 - D) Una lista de arrays de NumPy
 
-**Q2:** ¿Cómo leés un archivo CSV en un DataFrame?
+**Q2:** ¿Cómo lees un archivo CSV en un DataFrame?
 - A) `pd.load_csv()`
 - B) `pd.read_csv()`
 - C) `pd.csv_to_df()`
@@ -20,7 +20,7 @@
 - C) `loc` usa posiciones enteras, `iloc` usa etiquetas
 - D) `loc` funciona con columnas, `iloc` funciona con filas
 
-**Q4:** ¿Cómo seleccionás las filas donde la columna "Age" > 30?
+**Q4:** ¿Cómo seleccionas las filas donde la columna "Age" > 30?
 - A) `df[df["Age"] > 30]`
 - B) `df[Age > 30]`
 - C) `df.select("Age" > 30)`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá qué hace `groupby()` en Pandas.
+**Q6:** Explica qué hace `groupby()` en Pandas.
 
 **Q7:** ¿Qué es el encadenamiento de métodos y por qué es útil en Pandas?
 
 ## Pregunta de código
 
-**Q8:** Escribí código de Pandas para: crear un DataFrame a partir de un diccionario con las columnas "Name" y "Score", y después agregar una columna nueva "Passed" que sea True si Score ≥ 60.
+**Q8:** Escribe código de Pandas para: crear un DataFrame a partir de un diccionario con las columnas "Name" y "Score", y después agregar una columna nueva "Passed" que sea True si Score ≥ 60.
 
 ## Clave de respuestas
 

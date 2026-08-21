@@ -25,7 +25,7 @@ Quiz: quiz.md
 
 ## Motivación
 
-Las funciones son bloques de código reutilizables que resuelven una tarea específica. En lugar de escribir el mismo código varias veces, lo definís una vez en una función y la llamás cuando sea necesario. Esta es la base de la programación modular y mantenible. En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos. En SaaS, las funciones calculan métricas, filtran datos y generan reportes.
+Las funciones son bloques de código reutilizables que resuelven una tarea específica. En lugar de escribir el mismo código varias veces, lo defines una vez en una función y la llamas cuando sea necesario. Esta es la base de la programación modular y mantenible. En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos. En SaaS, las funciones calculan métricas, filtran datos y generan reportes.
 
 ## Panorama General
 
@@ -147,14 +147,14 @@ def calculate_bmi(weight, height):
 
 ### Ejercicio 1: Tu primera función
 
-Escribí una función `celsius_to_fahrenheit(c)` que convierta grados Celsius a Fahrenheit usando la fórmula: F = C * 9/5 + 32. Después llamala con 0, 37 y 100.
+Escribe una función `celsius_to_fahrenheit(c)` que convierta grados Celsius a Fahrenheit usando la fórmula: F = C * 9/5 + 32. Después llamala con 0, 37 y 100.
 
 <CodeEditor
-  defaultValue={`# Escribí tu función acá
+  defaultValue={`# Escribe tu función aquí
 def celsius_to_fahrenheit(c):
     return c * 9 / 5 + 32
 
-# Probala
+# Pruébala
 print(f"0°C = {celsius_to_fahrenheit(0)}°F")
 print(f"37°C = {celsius_to_fahrenheit(37)}°F")
 print(f"100°C = {celsius_to_fahrenheit(100)}°F")`}
@@ -170,7 +170,7 @@ print(f"100°C = {celsius_to_fahrenheit(100)}°F")`}
 
 ### Ejercicio 2: Múltiples parámetros y return
 
-Escribí una función `bmi_category(weight, height)` que calcule el IMC y devuelva tanto el valor como la categoría.
+Escribe una función `bmi_category(weight, height)` que calcule el IMC y devuelva tanto el valor como la categoría.
 
 <CodeEditor
   defaultValue={`def bmi_category(weight, height):
@@ -185,7 +185,7 @@ Escribí una función `bmi_category(weight, height)` que calcule el IMC y devuel
         category = "obese"
     return bmi, category
 
-# Probala
+# Pruébala
 bmi, cat = bmi_category(70, 1.75)
 print(f"BMI: {bmi:.1f}, Category: {cat}")`}
   exercise={{
@@ -203,7 +203,7 @@ print(f"BMI: {bmi:.1f}, Category: {cat}")`}
   defaultValue={`def create_report(patient_name, age, blood_type="Unknown"):
     return f"Patient: {patient_name}, Age: {age}, Blood Type: {blood_type}"
 
-# Probá con y sin el tercer parámetro
+# Prueba con y sin el tercer parámetro
 print(create_report("Alice", 30, "A+"))
 print(create_report("Bob", 25))`}
   exercise={{
@@ -217,7 +217,7 @@ print(create_report("Bob", 25))`}
 
 ### Ejercicio 4: Lambda functions
 
-Usá lambda para ordenar una lista, filtrar pares, y elevar al cuadrado.
+Usa lambda para ordenar una lista, filtrar pares, y elevar al cuadrado.
 
 <CodeEditor
   defaultValue={`numbers = [5, 2, 8, 1, 9, 3]
@@ -312,19 +312,19 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 ## Errores Comunes
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
-2. **Modificar variables globales dentro de funciones**: Usá la palabra clave `global` si es necesario, pero preferí pasar parámetros
-3. **Argumentos mutables por defecto**: `def f(x=[])` — la lista se comparte entre llamadas. Usá `def f(x=None)` en su lugar.
+2. **Modificar variables globales dentro de funciones**: Usa la palabra clave `global` si es necesario, pero prefiere pasar parámetros
+3. **Argumentos mutables por defecto**: `def f(x=[])` — la lista se comparte entre llamadas. Usa `def f(x=None)` en su lugar.
 4. **No devolver un valor**: Las funciones sin `return` devuelven `None`
 5. **Sombrear funciones incorporadas**: No nombres variables `list`, `str`, `print`
 
 ## Buenas Prácticas
 
 - Las funciones deberían hacer una sola cosa bien (Principio de Responsabilidad Única)
-- Usá nombres descriptivos que indiquen lo que hace la función
-- Escribí docstrings para todas las funciones públicas
-- Mantené las funciones cortas (típicamente < 20-30 líneas)
-- Usá type hints para mejor legibilidad (Python 3.5+)
-- Preferí devolver valores en lugar de imprimir dentro de las funciones
+- Usa nombres descriptivos que indiquen lo que hace la función
+- Escribe docstrings para todas las funciones públicas
+- Mantén las funciones cortas (típicamente < 20-30 líneas)
+- Usa type hints para mejor legibilidad (Python 3.5+)
+- Prefiere devolver valores en lugar de imprimir dentro de las funciones
 
 </Section>
 
@@ -356,17 +356,17 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 ## Desafío de Código
 
-Escribí una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluí un docstring y probala con diferentes secuencias.
+Escribe una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluye un docstring y pruébala con diferentes secuencias.
 
 <CodeEditor
-  defaultValue={`# Escribí tu función acá
+  defaultValue={`# Escribe tu función aquí
 def gc_content(sequence):
     \"\"\"Calculate GC content percentage of a DNA sequence.\"\"\"
     seq = sequence.upper()
     gc = seq.count("G") + seq.count("C")
     return (gc / len(seq)) * 100
 
-# Probala
+# Pruébala
 print(f"GC: {gc_content('ATCGATCG'):.1f}%")
 print(f"GC: {gc_content('GGGGCCCC'):.1f}%")
 print(f"GC: {gc_content('AAAAATTT'):.1f}%")`}

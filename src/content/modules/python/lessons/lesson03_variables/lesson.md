@@ -37,7 +37,7 @@ En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook
 
 ### ¿Qué es una Variable?
 
-Una **variable** es una ubicación nombrada en memoria que almacena un valor. Pensála como una caja etiquetada donde podés poner datos. La etiqueta es el nombre de la variable y el contenido es el valor.
+Una **variable** es una ubicación nombrada en memoria que almacena un valor. Piénsala como una caja etiquetada donde puedes poner datos. La etiqueta es el nombre de la variable y el contenido es el valor.
 
 ### Asignación de Variables
 
@@ -49,15 +49,15 @@ name = "Alice" # Asigna el string "Alice" a la variable name
 pi = 3.14159   # Asigna el float 3.14159 a la variable pi
 ```
 
-**Probálo vos mismo.** Escribí tres variables: una para el nombre de una especie, otra para el número de cromosomas, y otra para el tamaño del genoma. Después mostralas con `print()`.
+**Pruébalo tú mismo.** Escribe tres variables: una para el nombre de una especie, otra para el número de cromosomas, y otra para el tamaño del genoma. Después muéstralas con `print()`.
 
 <CodeEditor
-  defaultValue={`# Asigná tus variables acá
+  defaultValue={`# Asigna tus variables aquí
 species = "Homo sapiens"
 chromosome_count = 46
 genome_size = 3.1
 
-# Mostrá cada variable
+# Muestra cada variable
 print(species)
 print(chromosome_count)
 print(genome_size)`}
@@ -94,7 +94,7 @@ Los nombres de variables en Python deben seguir estas reglas:
 - Distinguen mayúsculas y minúsculas (`age` ≠ `Age`)
 - No pueden ser palabras clave de Python (`if`, `for`, `while`, `class`, etc.)
 
-**Estilo recomendado (PEP 8):** Usá `snake_case` para nombres de variables:
+**Estilo recomendado (PEP 8):** Usa `snake_case` para nombres de variables:
 ```python
 gene_expression = 0.85
 max_iterations = 1000
@@ -111,13 +111,13 @@ PI = 3.14159
 
 ### Asignación Múltiple
 
-Podés asignar múltiples variables en una línea:
+Puedes asignar múltiples variables en una línea:
 ```python
 a, b, c = 1, 2, 3
 x = y = z = 0  # Las tres variables reciben el valor 0
 ```
 
-**Probá el swapping de variables** — una forma pitónica de intercambiar valores:
+**Prueba el swapping de variables** — una forma pitónica de intercambiar valores:
 
 <CodeEditor
   defaultValue={`# Variable swapping
@@ -155,7 +155,7 @@ name = input("Enter your name: ")
 
 ## Implementación en Python
 
-**Ejercicio 1:** Asigná una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
+**Ejercicio 1:** Asigna una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
 
 <CodeEditor
   defaultValue={`# Variable assignment
@@ -169,14 +169,14 @@ print(mutation_rate)`}
   exercise={{
     lessonId: "lesson03_variables",
     testCases: [
-      { input: "", expectedOutput: "ATCGATCGATCG", note: "¿Mostrás dna_sequence?" },
-      { input: "", expectedOutput: "25000", note: "¿Mostrás gene_count?" },
-      { input: "", expectedOutput: "0.001", note: "¿Mostrás mutation_rate?" },
+      { input: "", expectedOutput: "ATCGATCGATCG", note: "¿Muestras dna_sequence?" },
+      { input: "", expectedOutput: "25000", note: "¿Muestras gene_count?" },
+      { input: "", expectedOutput: "0.001", note: "¿Muestras mutation_rate?" },
     ]
   }}
 />
 
-**Ejercicio 2:** Demostración de dynamic typing. Creá una variable, mostrá su tipo, reasignala con otro tipo, y volvé a mostrar.
+**Ejercicio 2:** Demostración de dynamic typing. Crea una variable, muestra su tipo, reasígnala con otro tipo, y vuelve a mostrar.
 
 <CodeEditor
   defaultValue={`# Dynamic typing demonstration
@@ -228,16 +228,16 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 1. **Usar variables no definidas**: `print(x)` antes de `x = 5` lanza `NameError`
 2. **Escribir mal los nombres de variables**: `temperature` vs `temperture`
 3. **Usar palabras clave reservadas**: `if = 10` lanza `SyntaxError`
-4. **Olvidarse de convertir la entrada**: `input()` devuelve un string; usá `int()` o `float()` para números
+4. **Olvidarse de convertir la entrada**: `input()` devuelve un string; usa `int()` o `float()` para números
 5. **Confundir mayúsculas y minúsculas**: `data` y `Data` son variables diferentes
 
 ## Buenas Prácticas
 
-- Usá nombres de variables descriptivos y significativos
-- Seguí la convención `snake_case`
-- Evitá nombres de una sola letra excepto para contadores (i, j, k)
-- Inicializá las variables antes de usarlas
-- Usá constantes para valores fijos (UPPER_SNAKE_CASE)
+- Usa nombres de variables descriptivos y significativos
+- Sigue la convención `snake_case`
+- Evita nombres de una sola letra excepto para contadores (i, j, k)
+- Inicializa las variables antes de usarlas
+- Usa constantes para valores fijos (UPPER_SNAKE_CASE)
 - Una variable por propósito lógico
 
 </Section>
@@ -248,7 +248,7 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 - Las variables almacenan valores en ubicaciones de memoria nombradas
 - Python tiene tipado dinámico — los tipos se infieren
-- Usá `=` para asignación y `print()` para salida
+- Usa `=` para asignación y `print()` para salida
 - Los nombres de variables deben seguir reglas (letras, dígitos, guiones bajos)
 - PEP 8 recomienda nomenclatura `snake_case`
 - `input()` lee la entrada del usuario como string
@@ -269,15 +269,15 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 ## Desafío de Código
 
-Escribí un programa que calcule el **GC content** de una secuencia de ADN más larga. Usá variables para cada paso.
+Escribe un programa que calcule el **GC content** de una secuencia de ADN más larga. Usa variables para cada paso.
 
 <CodeEditor
-  defaultValue={`# Calculá el GC content de esta secuencia
+  defaultValue={`# Calcula el GC content de esta secuencia
 dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
 
-# Paso 1: contá G y C
-# Paso 2: calculá el porcentaje
-# Paso 3: mostrá el resultado
+# Paso 1: cuenta G y C
+# Paso 2: calcula el porcentaje
+# Paso 3: muestra el resultado
 
 # Ejemplo:
 # gc_count = dna.count("G") + dna.count("C")
@@ -287,11 +287,11 @@ dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
   exercise={{
     lessonId: "lesson03_variables",
     testCases: [
-      { input: "", expectedOutput: "GC content:", note: "Mostrá el resultado como 'GC content: X.X%'" },
+      { input: "", expectedOutput: "GC content:", note: "Muestra el resultado como 'GC content: X.X%'" },
     ]
   }}
 />
 
-> **Pista:** Usá `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
+> **Pista:** Usa `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
 
 </Section>

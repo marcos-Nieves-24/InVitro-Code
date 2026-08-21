@@ -22,12 +22,12 @@ Quiz: quiz.md
 <Section number={1} title="Instalando Python" eyebrow="INICIO">
 
 <MascotMessage>
-Bienvenido al curso práctico. Antes de escribir una sola línea de código necesitás un entorno Python funcional. Todo científico de datos, ingeniero de machine learning y desarrollador de software arranca acá. Una instalación correcta te ahorra horas de debugging después.
+Bienvenido al curso práctico. Antes de escribir una sola línea de código necesitas un entorno Python funcional. Todo científico de datos, ingeniero de machine learning y desarrollador de software arranca aquí. Una instalación correcta te ahorra horas de debugging después.
 </MascotMessage>
 
 En biotecnología vas a usar Python para analizar secuencias de ADN, procesar datos clínicos y entrenar modelos predictivos. En SaaS, Python impulsa motores de recomendación, análisis de clientes y reportes automatizados. Todo esto empieza con una instalación de Python bien configurada.
 
-Esta es la base de todo el curso: sin Python instalado no podés ejecutar ningún código. En el módulo anterior aprendiste qué es la IA. Ahora vas a construir las habilidades prácticas que necesitás para implementar soluciones de IA.
+Esta es la base de todo el curso: sin Python instalado no puedes ejecutar ningún código. En el módulo anterior aprendiste qué es la IA. Ahora vas a construir las habilidades prácticas que necesitas para implementar soluciones de IA.
 
 En la próxima lección vas a aprender a usar Jupyter Notebook, un entorno interactivo que corre sobre tu instalación de Python.
 
@@ -39,10 +39,10 @@ En la próxima lección vas a aprender a usar Jupyter Notebook, un entorno inter
 **Python** es un lenguaje de programación interpretado de alto nivel creado por **Guido van Rossum** en 1991. Enfatiza la legibilidad del código y la simplicidad. Es el lenguaje más popular para ciencia de datos y machine learning.
 </ConceptCard>
 
-Cuando instalás Python obtenés el **intérprete**, un programa que lee y ejecuta código Python. Funciona en dos modos:
+Cuando instalas Python obtienes el **intérprete**, un programa que lee y ejecuta código Python. Funciona en dos modos:
 
-1. **Modo interactivo (REPL)** — escribís comandos y ves los resultados al instante
-2. **Modo script** — ejecutás archivos `.py` con código Python
+1. **Modo interactivo (REPL)** — escribes comandos y ves los resultados al instante
+2. **Modo script** — ejecutas archivos `.py` con código Python
 
 <CalloutCheck>
 **Dato clave**: Python tiene un ecosistema de librerías enorme: NumPy, Pandas, scikit-learn, TensorFlow, Biopython... todas las que vas a usar en este curso. Cada una se instala con un solo comando.
@@ -52,7 +52,7 @@ Cuando instalás Python obtenés el **intérprete**, un programa que lee y ejecu
 
 <Section number={3} title="Distribuciones de Python" eyebrow="CONCEPTO">
 
-Hay varias formas de obtener Python. Acá las principales:
+Hay varias formas de obtener Python. Aquí las principales:
 
 | Distribución | Descripción | Veredicto |
 |---|---|---|
@@ -71,10 +71,10 @@ Para este curso recomendamos instalar Python directamente desde **python.org**. 
 
 ### Windows
 
-1. Andá a [python.org](https://python.org) y descargá el instalador más reciente
-2. **IMPORTANTE**: marcá **"Add Python to PATH"**
-3. Hacé clic en "Install Now"
-4. Abrí el Símbolo del Sistema y verificá:
+1. Ve a [python.org](https://python.org) y descarga el instalador más reciente
+2. **IMPORTANTE**: marca **"Add Python to PATH"**
+3. Haz clic en "Install Now"
+4. Abre el Símbolo del Sistema y verifica:
 
 ```bash
 python --version
@@ -84,13 +84,13 @@ pip --version
 ### macOS
 
 ```bash
-# Instalá Homebrew (recomendado)
+# Instala Homebrew (recomendado)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Instalá Python
+# Instala Python
 brew install python
 
-# Verificá
+# Verifica
 python3 --version
 pip3 --version
 ```
@@ -98,7 +98,7 @@ pip3 --version
 ### Linux
 
 ```bash
-# Verificá si ya está instalado
+# Verifica si ya está instalado
 python3 --version
 
 # Si no está:
@@ -113,7 +113,7 @@ sudo dnf install python3 python3-pip
 
 <Section number={5} title="El Intérprete Interactivo" eyebrow="IMPLEMENTACIÓN">
 
-Una vez que Python está instalado, abrí una terminal y ejecutá:
+Una vez que Python está instalado, abre una terminal y ejecuta:
 
 ```bash
 python --version
@@ -121,13 +121,13 @@ python --version
 
 Salida esperada: `Python 3.x.x`
 
-Ahora probá el modo interactivo (REPL):
+Ahora prueba el modo interactivo (REPL):
 
 ```bash
 python
 ```
 
-Dentro del intérprete, escribí:
+Dentro del intérprete, escribe:
 
 ```python
 print("¡Hola, Python!")
@@ -136,7 +136,7 @@ print(result)
 ```
 
 <CalloutInfo>
-Para salir del intérprete interactivo escribí `exit()` o presioná **Ctrl+D** (Linux/macOS) / **Ctrl+Z + Enter** (Windows).
+Para salir del intérprete interactivo escribe `exit()` o presiona **Ctrl+D** (Linux/macOS) / **Ctrl+Z + Enter** (Windows).
 </CalloutInfo>
 
 </Section>
@@ -158,7 +158,7 @@ Comandos fundamentales:
 pip install numpy pandas matplotlib
 ```
 
-El comando `pip freeze` es especialmente útil porque te da una lista exacta de dependencias que podés compartir:
+El comando `pip freeze` es especialmente útil porque te da una lista exacta de dependencias que puedes compartir:
 
 ```bash
 pip freeze > requirements.txt
@@ -192,7 +192,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-Una vez activado, el prompt cambia para mostrar `(venv)`. Ahí instalás tus paquetes:
+Una vez activado, el prompt cambia para mostrar `(venv)`. Ahí instalas tus paquetes:
 
 ```bash
 pip install numpy pandas matplotlib
@@ -200,7 +200,7 @@ pip freeze > requirements.txt
 ```
 
 <CalloutInfo>
-Cuando terminás de trabajar, desactivás el entorno con el comando `deactivate`.
+Cuando terminas de trabajar, desactivas el entorno con el comando `deactivate`.
 </CalloutInfo>
 
 </Section>
@@ -262,21 +262,21 @@ pip install -r requirements.txt
 
 ### Errores Comunes
 
-1. **Olvidarse de marcar "Add Python to PATH"** → Python no es reconocido como comando. Reinstalá y marcá la opción.
-2. **Usar el Python del sistema directamente** → siempre creá un entorno virtual para cada proyecto.
-3. **Subir `venv/` al control de versiones** → agregá `venv/` al `.gitignore`.
+1. **Olvidarse de marcar "Add Python to PATH"** → Python no es reconocido como comando. Reinstala y marca la opción.
+2. **Usar el Python del sistema directamente** → siempre crea un entorno virtual para cada proyecto.
+3. **Subir `venv/` al control de versiones** → agrega `venv/` al `.gitignore`.
 4. **Ejecutar `pip install` sin un entorno virtual** → puede romper el Python del sistema.
-5. **Confundir `pip` y `pip3`** → en algunos sistemas `pip` apunta a Python 2. Usá `pip3` para Python 3.
+5. **Confundir `pip` y `pip3`** → en algunos sistemas `pip` apunta a Python 2. Usa `pip3` para Python 3.
 
 ### Buenas Prácticas
 
 <CalloutCheck>
-- Usá **siempre** entornos virtuales para aislar proyectos
-- Usá `requirements.txt` para reproducibilidad
-- Mantené Python actualizado (dentro de la misma versión mayor)
-- Documentá la versión de Python que requiere tu proyecto
+- Usa **siempre** entornos virtuales para aislar proyectos
+- Usa `requirements.txt` para reproducibilidad
+- Mantén Python actualizado (dentro de la misma versión mayor)
+- Documenta la versión de Python que requiere tu proyecto
 - Nunca uses `sudo pip install` — puede corromper paquetes del sistema
-- Considerá **pyenv** para gestionar múltiples versiones de Python
+- Considera **pyenv** para gestionar múltiples versiones de Python
 </CalloutCheck>
 
 </Section>
@@ -286,13 +286,13 @@ pip install -r requirements.txt
 | Concepto | Idea clave |
 |----------|------------|
 | **Python** | Lenguaje interpretado de alto nivel, esencial para ciencia de datos |
-| **Instalación** | Descargá desde python.org y verificá con `python --version` |
+| **Instalación** | Descarga desde python.org y verifica con `python --version` |
 | **pip** | Instala paquetes desde PyPI |
 | **Entorno virtual** | Aísla las dependencias de cada proyecto |
 | **requirements.txt** | Lista exacta de dependencias para reproducibilidad |
 
 <MascotMessage mood="celebrating">
-Todo esto es la base. Una vez que tenés Python funcionando, todo lo demás — Jupyter, NumPy, Pandas, scikit-learn — está a un `pip install` de distancia.
+Todo esto es la base. Una vez que tienes Python funcionando, todo lo demás — Jupyter, NumPy, Pandas, scikit-learn — está a un `pip install` de distancia.
 </MascotMessage>
 
 ### Términos Clave
@@ -310,18 +310,18 @@ Todo esto es la base. Una vez que tenés Python funcionando, todo lo demás — 
 
 ### Nivel 1: Básico
 
-1. ¿Qué comando usás para verificar la versión de Python?
+1. ¿Qué comando usas para verificar la versión de Python?
 2. ¿Cuál es el propósito de un entorno virtual?
 3. ¿Qué hace `pip freeze`?
 
 ### Nivel 2: Implementación
 
-4. Instalá Python (si no está instalado), creá un entorno virtual e instalá NumPy. Verificá la instalación ejecutando `python -c "import numpy; print(numpy.__version__)"`.
-5. Creá un archivo `requirements.txt` para un proyecto que depende de pandas y matplotlib.
+4. Instala Python (si no está instalado), crea un entorno virtual e instala NumPy. Verifica la instalación ejecutando `python -c "import numpy; print(numpy.__version__)"`.
+5. Crea un archivo `requirements.txt` para un proyecto que depende de pandas y matplotlib.
 
 ### Nivel 3: Pensamiento Crítico
 
-6. Compará la distribución oficial de Python con Anaconda. ¿Cuándo usarías cada una?
+6. Compara la distribución oficial de Python con Anaconda. ¿Cuándo usarías cada una?
 7. ¿Por qué es mala práctica instalar paquetes globalmente con `sudo pip install`? ¿Qué alternativas existen?
 
 <AnswerReveal summary="Ver respuestas">
@@ -334,7 +334,7 @@ Todo esto es la base. Una vez que tenés Python funcionando, todo lo demás — 
 
 **4.** Los comandos: `python -m venv venv` → `source venv/bin/activate` (o `venv\Scripts\activate` en Windows) → `pip install numpy` → `python -c "import numpy; print(numpy.__version__)"`.
 
-**5.** Ejecutá `pip freeze > requirements.txt` después de instalar pandas y matplotlib.
+**5.** Ejecuta `pip freeze > requirements.txt` después de instalar pandas y matplotlib.
 
 **6.** La distribución oficial es más liviana y te da control total. Anaconda viene con muchos paquetes preinstalados, ideal para alguien que quiere empezar rápido sin pensar en dependencias, pero ocupa mucho espacio.
 
@@ -344,12 +344,12 @@ Todo esto es la base. Una vez que tenés Python funcionando, todo lo demás — 
 
 ### Desafío de Código
 
-Escribí un script de Python llamado `check_env.py` que:
+Escribe un script de Python llamado `check_env.py` que:
 1. Imprima la versión de Python
 2. Imprima la ubicación del intérprete de Python
 3. Liste todos los paquetes instalados
 4. Intente importar numpy, pandas y matplotlib, informando si cada uno está disponible
 
-Ejecutá el script y verificá la salida.
+Ejecuta el script y verifica la salida.
 
 </Section>

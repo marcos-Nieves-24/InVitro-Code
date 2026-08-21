@@ -61,7 +61,7 @@ point[0] = 5  # TypeError: 'tuple' object does not support item assignment
 
 ### Desempaquetado de Tuplas
 
-Asigná elementos de una tupla a múltiples variables:
+Asigna elementos de una tupla a múltiples variables:
 
 ```python
 point = (3, 4)
@@ -236,17 +236,17 @@ for ts, uid, event_type, meta in events:
 
 1. **Olvidar la coma en tuplas de un elemento**: `(5)` es un int, `(5,)` es una tupla
 2. **Intentar modificar una tupla**: Lanza TypeError
-3. **Usar tupla cuando se necesita lista**: Si necesitás modificar datos, usá una lista
+3. **Usar tupla cuando se necesita lista**: Si necesitas modificar datos, usa una lista
 4. **Desajuste en desempaquetado**: La cantidad de variables debe coincidir con el largo de la tupla
 5. **Usar elementos mutables en una tupla**: Una tupla con una lista adentro no es realmente inmutable
 
 ## Buenas Prácticas
 
-- Usá tuplas para datos fijos y estructurados (como registros de base de datos)
-- Usá tuplas para múltiples valores de retorno de funciones
-- Usá desempaquetado de tuplas para código más limpio
-- Usá tuplas como claves de diccionarios cuando necesites claves compuestas
-- Preferí tuplas sobre listas para datos que no deberían cambiar
+- Usa tuplas para datos fijos y estructurados (como registros de base de datos)
+- Usa tuplas para múltiples valores de retorno de funciones
+- Usa desempaquetado de tuplas para código más limpio
+- Usa tuplas como claves de diccionarios cuando necesites claves compuestas
+- Prefiere tuplas sobre listas para datos que no deberían cambiar
 
 </Section>
 
@@ -259,7 +259,7 @@ for ts, uid, event_type, meta in events:
 - El desempaquetado asigna elementos a múltiples variables
 - Las tuplas son hashables y se pueden usar como claves de diccionarios
 - Las tuplas protegen los datos de modificaciones accidentales
-- Usá tuplas para registros fijos y múltiples valores de retorno
+- Usa tuplas para registros fijos y múltiples valores de retorno
 
 ## Términos Clave
 
@@ -277,14 +277,14 @@ for ts, uid, event_type, meta in events:
 
 ### Nivel 1: Básico
 
-1. ¿Cómo creás una tupla con un solo elemento?
-2. ¿Qué pasa si intentás cambiar un elemento de una tupla?
+1. ¿Cómo creas una tupla con un solo elemento?
+2. ¿Qué pasa si intentas cambiar un elemento de una tupla?
 3. ¿Cuál es la salida de `a, b, *rest = (1, 2, 3, 4, 5)`?
 
 ### Nivel 2: Implementación
 
-4. Escribí una función `divide_y_resto(a, b)` que devuelva una tupla (cociente, resto) y usá desempaquetado para imprimir ambos valores.
-5. Creá una lista de tuplas que representen pares (nombre, puntaje) para 5 estudiantes. Encontrá al estudiante con el puntaje más alto.
+4. Escribe una función `divide_y_resto(a, b)` que devuelva una tupla (cociente, resto) y usa desempaquetado para imprimir ambos valores.
+5. Crea una lista de tuplas que representen pares (nombre, puntaje) para 5 estudiantes. Encuentra al estudiante con el puntaje más alto.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -293,12 +293,12 @@ for ts, uid, event_type, meta in events:
 
 ## Desafío de Código
 
-Escribí un programa que administre **ítems de inventario** como tuplas:
+Escribe un programa que administre **ítems de inventario** como tuplas:
 1. Cada ítem es una tupla: `(item_id, nombre, cantidad, precio)`
-2. Creá una lista de al menos 5 ítems de inventario
-3. Escribí una función `total_value(inventario)` que devuelva el valor total (suma de cantidad * precio de todos los ítems)
-4. Escribí una función `find_item(inventario, item_id)` que busque por item_id
-5. Escribí una función `sort_by_value(inventario)` que devuelva los ítems ordenados por valor total (cantidad * precio), usando tuplas
-6. Demostrá todas las funciones con tu inventario
+2. Crea una lista de al menos 5 ítems de inventario
+3. Escribe una función `total_value(inventario)` que devuelva el valor total (suma de cantidad * precio de todos los ítems)
+4. Escribe una función `find_item(inventario, item_id)` que busque por item_id
+5. Escribe una función `sort_by_value(inventario)` que devuelva los ítems ordenados por valor total (cantidad * precio), usando tuplas
+6. Demuestra todas las funciones con tu inventario
 
 </Section>

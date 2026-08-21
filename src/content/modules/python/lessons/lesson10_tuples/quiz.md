@@ -2,13 +2,13 @@
 
 ## Opción múltiple (5 preguntas)
 
-**Q1:** ¿Cómo creás una tupla con un solo elemento?
+**Q1:** ¿Cómo creas una tupla con un solo elemento?
 - A) `t = (5)`
 - B) `t = (5,)`
 - C) `t = tuple(5)`
 - D) `t = [5]`
 
-**Q2:** ¿Qué pasa si intentás modificar un elemento de una tupla?
+**Q2:** ¿Qué pasa si intentas modificar un elemento de una tupla?
 - A) El elemento cambia silenciosamente
 - B) Python lanza un TypeError
 - C) Se crea una tupla nueva
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre una tupla y una lista.
+**Q6:** Explica la diferencia entre una tupla y una lista.
 
 **Q7:** ¿Qué es el desempaquetado de tuplas y por qué es útil?
 
 ## Pregunta de código
 
-**Q8:** Escribí una función `swap(a, b)` que devuelva una tupla con los valores intercambiados. Después demostrala con `x=5, y=10`.
+**Q8:** Escribe una función `swap(a, b)` que devuelva una tupla con los valores intercambiados. Después demuéstrala con `x=5, y=10`.
 
 ## Clave de respuestas
 

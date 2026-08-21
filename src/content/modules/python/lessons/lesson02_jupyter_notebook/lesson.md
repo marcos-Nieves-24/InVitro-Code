@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 ## Motivación
 
-Escribir código Python en una terminal es funcional pero no es ideal para análisis de datos. Jupyter Notebook proporciona un entorno interactivo basado en la web donde podés combinar código, visualizaciones y texto explicativo en un solo documento. Es la herramienta estándar para científicos de datos en todo el mundo. En biotecnología, los notebooks de Jupyter se usan para documentar y compartir análisis de investigación. En SaaS, se usan para análisis exploratorio de datos y generación de reportes.
+Escribir código Python en una terminal es funcional pero no es ideal para análisis de datos. Jupyter Notebook proporciona un entorno interactivo basado en la web donde puedes combinar código, visualizaciones y texto explicativo en un solo documento. Es la herramienta estándar para científicos de datos en todo el mundo. En biotecnología, los notebooks de Jupyter se usan para documentar y compartir análisis de investigación. En SaaS, se usan para análisis exploratorio de datos y generación de reportes.
 
 ## Panorama General
 
@@ -59,7 +59,7 @@ Jupyter tiene dos modos de teclado:
 
 ### Modelo de Ejecución
 
-Cuando ejecutás una celda de código, el kernel ejecuta el código. Las variables y funciones definidas en una celda están disponibles en las celdas siguientes. El kernel mantiene el estado hasta que se reinicia.
+Cuando ejecutas una celda de código, el kernel ejecuta el código. Las variables y funciones definidas en una celda están disponibles en las celdas siguientes. El kernel mantiene el estado hasta que se reinicia.
 
 ## Explicación Visual
 
@@ -107,19 +107,19 @@ Esto abre el dashboard de Jupyter en tu navegador en `http://localhost:8888`.
 
 ### Creando un Nuevo Notebook
 
-1. Hacé clic en "New" → "Python 3"
+1. Haz clic en "New" → "Python 3"
 2. Se abre un nuevo notebook con una celda de código vacía
 
 ### Trabajando con Celdas
 
 ```python
-# Esta es una celda de código — presioná Shift+Enter para ejecutarla
+# Esta es una celda de código — presiona Shift+Enter para ejecutarla
 print("¡Hola, Jupyter!")
 ```
 
 ### Formato Markdown
 
-En una celda markdown podés escribir:
+En una celda markdown puedes escribir:
 ```markdown
 # Encabezado 1
 ## Encabezado 2
@@ -197,20 +197,20 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 ## Errores Comunes
 
-1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usá "Run All" (Cell → Run All) para ejecutar secuencialmente.
-2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reiniciá el kernel (Kernel → Restart & Run All).
-3. **Olvidarse de guardar**: Jupyter guarda automáticamente, pero guardá manualmente antes de cerrar.
+1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell → Run All) para ejecutar secuencialmente.
+2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel → Restart & Run All).
+3. **Olvidarse de guardar**: Jupyter guarda automáticamente, pero guarda manualmente antes de cerrar.
 4. **Usar print() excesivamente**: La última expresión de una celda se muestra automáticamente.
 5. **Cerrar la terminal**: El servidor de Jupyter corre en la terminal. Cerrarla detiene el servidor.
 
 ## Buenas Prácticas
 
-- Usá celdas markdown para documentar tu análisis
-- Mantené las celdas enfocadas en una sola tarea
-- Ejecutá las celdas en orden de arriba hacia abajo
-- Reiniciá y ejecutá todo antes de compartir un notebook
-- Usá nombres de archivo significativos (ej: `analisis_expresion_genica.ipynb`)
-- Limpiá las salidas antes de subir notebooks al control de versiones
+- Usa celdas markdown para documentar tu análisis
+- Mantén las celdas enfocadas en una sola tarea
+- Ejecuta las celdas en orden de arriba hacia abajo
+- Reinicia y ejecuta todo antes de compartir un notebook
+- Usa nombres de archivo significativos (ej: `analisis_expresion_genica.ipynb`)
+- Limpia las salidas antes de subir notebooks al control de versiones
 
 </Section>
 
@@ -223,7 +223,7 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - Las celdas de código ejecutan Python; las celdas markdown muestran texto e imágenes formateados
 - El kernel mantiene el estado entre ejecuciones de celdas
 - Los atajos de teclado agilizan el flujo de trabajo
-- Exportá notebooks para compartir resultados
+- Exporta notebooks para compartir resultados
 
 ## Términos Clave
 
@@ -245,12 +245,12 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 1. ¿Cuál es la diferencia entre una celda de código y una celda markdown?
 2. ¿Qué hace `Shift+Enter` en Jupyter?
-3. ¿Cómo creás una nueva celda debajo de la actual?
+3. ¿Cómo creas una nueva celda debajo de la actual?
 
 ### Nivel 2: Implementación
 
-4. Creá un notebook con al menos una celda markdown (con un título y una lista con viñetas) y una celda de código que imprima "¡Jupyter está funcionando!"
-5. Exportá tu notebook como HTML.
+4. Crea un notebook con al menos una celda markdown (con un título y una lista con viñetas) y una celda de código que imprima "¡Jupyter está funcionando!"
+5. Exporta tu notebook como HTML.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -259,12 +259,12 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 ## Desafío de Código
 
-Creá un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
+Crea un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
 1. Tenga una celda de título (Markdown H1): "Mi Primer Notebook"
 2. Una celda markdown explicando de qué trata el notebook
 3. Una celda de código que cree una lista de tus 5 cosas favoritas
 4. Una celda de código que imprima cada elemento con un número
 5. Una celda markdown con una conclusión
-Exportá el notebook como HTML.
+Exporta el notebook como HTML.
 
 </Section>

@@ -10,18 +10,18 @@
 
 ## Instrucciones
 
-Creá un script de Python `ecommerce_analysis.py` que:
+Crea un script de Python `ecommerce_analysis.py` que:
 
-1. **Cree datos sintéticos** (o los cargue desde CSV): generá tres DataFrames:
+1. **Cree datos sintéticos** (o los cargue desde CSV): genera tres DataFrames:
    - `customers`: customer_id, name, age, city, signup_date
    - `orders`: order_id, customer_id, order_date, amount, product_category
    - `products`: product_id, product_name, category, price, stock
 
 2. **Limpieza de datos**:
-   - Revisá los valores nulos y manejalos
-   - Eliminá los pedidos duplicados
-   - Convertí las columnas de fecha a datetime
-   - Eliminá los pedidos con amount ≤ 0
+   - Revisa los valores nulos y manéjalos
+   - Elimina los pedidos duplicados
+   - Convierte las columnas de fecha a datetime
+   - Elimina los pedidos con amount ≤ 0
 
 3. **Análisis**:
    - Ingresos totales por categoría de producto
@@ -30,9 +30,9 @@ Creá un script de Python `ecommerce_analysis.py` que:
    - Valor promedio de pedido por ciudad
    - Segmentación de clientes (nuevo/regular/vip según la cantidad de pedidos)
 
-4. **Fusión**: uní los clientes con los pedidos para crear una vista completa
+4. **Fusión**: une los clientes con los pedidos para crear una vista completa
 
-5. **Informe**: imprimí un resumen formateado de todos los hallazgos
+5. **Informe**: imprime un resumen formateado de todos los hallazgos
 
 ## Código inicial
 

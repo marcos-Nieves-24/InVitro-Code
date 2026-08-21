@@ -26,7 +26,7 @@
 - C) str
 - D) Depende de lo que escriba el usuario
 
-**Q5:** ¿Qué excepción se lanza cuando intentás `"Hello" + 5`?
+**Q5:** ¿Qué excepción se lanza cuando intentas `"Hello" + 5`?
 - A) ValueError
 - B) NameError
 - C) TypeError
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `/` y `//` en Python.
+**Q6:** Explica la diferencia entre `/` y `//` en Python.
 
 **Q7:** ¿Qué significa inmutable, y cuáles de los tipos primitivos son inmutables?
 
 ## Pregunta de código
 
-**Q8:** Escribí código que:
+**Q8:** Escribe código que:
 1. Cree un string `"42"`
 2. Lo convierta a un entero y luego a un flotante
 3. Le sume 10.5 al flotante

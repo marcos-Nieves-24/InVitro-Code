@@ -321,20 +321,20 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 
 ## Errores Comunes
 
-1. **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usá `df.loc[0, "A"]`
-2. **Modificar una vista vs copia**: `SettingWithCopyWarning` — usá `.copy()` explícitamente
-3. **Olvidar el parámetro `axis=`**: `drop("col")` usa axis=0 por defecto (filas). Usá `axis=1` para columnas
+1. **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usa `df.loc[0, "A"]`
+2. **Modificar una vista vs copia**: `SettingWithCopyWarning` — usa `.copy()` explícitamente
+3. **Olvidar el parámetro `axis=`**: `drop("col")` usa axis=0 por defecto (filas). Usa `axis=1` para columnas
 4. **Operaciones inplace**: Muchos métodos tienen `inplace=True`, pero el encadenamiento suele ser más limpio
 5. **Combinar sin especificar clave**: Puede crear un producto cartesiano
 
 ## Buenas Prácticas
 
-- Usá `loc` e `iloc` para selección explícita
-- Usá `query()` para filtrado complejo
-- Usá encadenamiento de métodos para legibilidad
-- Usá `pd.cut()` y `pd.qcut()` para discretización
-- Usá `to_datetime()` para columnas de fecha
-- Perfilá el rendimiento: las operaciones vectorizadas son más rápidas que `apply()`
+- Usa `loc` e `iloc` para selección explícita
+- Usa `query()` para filtrado complejo
+- Usa encadenamiento de métodos para legibilidad
+- Usa `pd.cut()` y `pd.qcut()` para discretización
+- Usa `to_datetime()` para columnas de fecha
+- Perfila el rendimiento: las operaciones vectorizadas son más rápidas que `apply()`
 
 </Section>
 
@@ -343,11 +343,11 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 ## Resumen
 
 - Pandas provee Series (1D) y DataFrame (2D) para análisis de datos
-- Leé datos con `read_csv()`, explorá con `head()`, `info()`, `describe()`
-- Seleccioná datos con `loc`, `iloc`, indexación booleana
-- Agrupá y agregá con `groupby()` y `agg()`
-- Combiná DataFrames con `merge()` y `concat()`
-- Aplicá funciones con `apply()` y `map()`
+- Lee datos con `read_csv()`, explora con `head()`, `info()`, `describe()`
+- Selecciona datos con `loc`, `iloc`, indexación booleana
+- Agrupa y agrega con `groupby()` y `agg()`
+- Combina DataFrames con `merge()` y `concat()`
+- Aplica funciones con `apply()` y `map()`
 
 ## Términos Clave
 
@@ -368,32 +368,32 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 
 ### Nivel 1: Básico
 
-1. ¿Cómo leés un archivo CSV en un DataFrame?
+1. ¿Cómo lees un archivo CSV en un DataFrame?
 2. ¿Cuál es la diferencia entre `loc` e `iloc`?
-3. ¿Cómo verificás si hay valores faltantes en un DataFrame?
+3. ¿Cómo verificas si hay valores faltantes en un DataFrame?
 
 ### Nivel 2: Implementación
 
-4. Cargá un CSV y calculá la media de cada columna numérica agrupada por una columna categórica.
-5. Dado un DataFrame con datos de clientes, creá una nueva columna "Segment" que etiquete clientes como "High Value" (gasto > 100) o "Standard" (caso contrario).
+4. Carga un CSV y calcula la media de cada columna numérica agrupada por una columna categórica.
+5. Dado un DataFrame con datos de clientes, crea una nueva columna "Segment" que etiquete clientes como "High Value" (gasto > 100) o "Standard" (caso contrario).
 
 ### Nivel 3: Pensamiento Crítico
 
-6. Compará y contrastá el rendimiento de `apply()` vs operaciones vectorizadas en Pandas. ¿Cuándo necesitarías usar `apply()`?
-7. ¿Cómo manejarías valores faltantes en un dataset? Compará `dropna()`, `fillna()` y métodos de interpolación.
+6. Compara y contrasta el rendimiento de `apply()` vs operaciones vectorizadas en Pandas. ¿Cuándo necesitarías usar `apply()`?
+7. ¿Cómo manejarías valores faltantes en un dataset? Compara `dropna()`, `fillna()` y métodos de interpolación.
 
 ## Desafío de Código
 
-Creá un **análisis de segmentación de clientes** usando Pandas:
+Crea un **análisis de segmentación de clientes** usando Pandas:
 
-1. Generá un dataset sintético con 500 clientes, incluyendo características: `age`, `income`, `spending_score`, `purchase_frequency`, `last_purchase_days`
-2. Limpiá los datos (manejá valores faltantes, eliminá outliers)
-3. Creá segmentos:
+1. Genera un dataset sintético con 500 clientes, incluyendo características: `age`, `income`, `spending_score`, `purchase_frequency`, `last_purchase_days`
+2. Limpia los datos (maneja valores faltantes, elimina outliers)
+3. Crea segmentos:
    - Por grupo etario (Young/Middle/Senior)
    - Por valor (Low/Medium/High spender basado en percentiles de spending_score)
    - Por recencia (Active/At Risk/Lost basado en last_purchase_days)
-4. Analizá cada segmento: calculá ingreso promedio, gasto y frecuencia de compra
-5. Encontrá el top 10% de clientes por un puntaje compuesto (20% income + 50% spending_score + 30% purchase_frequency, normalizado)
-6. Generá un reporte resumen con todos los hallazgos
+4. Analiza cada segmento: calcula ingreso promedio, gasto y frecuencia de compra
+5. Encuentra el top 10% de clientes por un puntaje compuesto (20% income + 50% spending_score + 30% purchase_frequency, normalizado)
+6. Genera un reporte resumen con todos los hallazgos
 
 </Section>

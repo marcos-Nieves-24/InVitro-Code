@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá por qué deberías usar virtual environments en lugar de instalar paquetes de forma global.
+**Q6:** Explica por qué deberías usar virtual environments en lugar de instalar paquetes de forma global.
 
 **Q7:** ¿Cuál es la diferencia entre pip y pip3?
 
 ## Pregunta de código
 
-**Q8:** Escribí la secuencia de comandos de terminal para:
+**Q8:** Escribe la secuencia de comandos de terminal para:
 1. Crear un virtual environment llamado `ml_env`
 2. Activarlo (en macOS/Linux)
 3. Instalar el paquete `scikit-learn`

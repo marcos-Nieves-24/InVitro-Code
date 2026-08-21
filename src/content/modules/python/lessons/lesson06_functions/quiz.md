@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `return` y `print()` dentro de una función.
+**Q6:** Explica la diferencia entre `return` y `print()` dentro de una función.
 
-**Q7:** ¿Cuál es el problema con `def append_to(item, target=[])` y cómo lo solucionás?
+**Q7:** ¿Cuál es el problema con `def append_to(item, target=[])` y cómo lo solucionas?
 
 ## Pregunta de código
 
-**Q8:** Escribí una función `is_even(n)` que devuelva `True` si `n` es par y `False` en caso contrario. Después escribí una lambda que haga lo mismo.
+**Q8:** Escribe una función `is_even(n)` que devuelva `True` si `n` es par y `False` en caso contrario. Después escribe una lambda que haga lo mismo.
 
 ## Clave de respuestas
 
@@ -56,7 +56,7 @@
 
 **Q6:** `return` envía un valor de vuelta al llamador y sale de la función. `print()` muestra la salida en la consola pero no devuelve un valor al llamador. Una función puede hacer `print` sin `return` (devuelve None), o `return` sin `print`.
 
-**Q7:** La lista por defecto `[]` se crea una sola vez cuando se define la función, no cada vez que se la llama. Todas las llamadas comparten la misma lista. Solución: usá `def append_to(item, target=None)` y creá una lista nueva adentro: `if target is None: target = []`.
+**Q7:** La lista por defecto `[]` se crea una sola vez cuando se define la función, no cada vez que se la llama. Todas las llamadas comparten la misma lista. Solución: usa `def append_to(item, target=None)` y crea una lista nueva adentro: `if target is None: target = []`.
 
 **Q8:**
 ```python

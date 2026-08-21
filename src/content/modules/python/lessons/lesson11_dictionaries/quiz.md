@@ -20,7 +20,7 @@
 - C) KeyError
 - D) False
 
-**Q4:** ¿Cómo iterás sobre claves y valores a la vez en un diccionario d?
+**Q4:** ¿Cómo iteras sobre claves y valores a la vez en un diccionario d?
 - A) `for k in d:`
 - B) `for k, v in d:`
 - C) `for k, v in d.items():`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá por qué las listas no pueden usarse como claves de diccionario pero las tuplas sí.
+**Q6:** Explica por qué las listas no pueden usarse como claves de diccionario pero las tuplas sí.
 
 **Q7:** ¿Cuál es la diferencia entre `d.get(key)` y `d[key]`?
 
 ## Pregunta de código
 
-**Q8:** Escribí una función `count_characters(s)` que devuelva un diccionario con las frecuencias de cada carácter de una cadena. Por ejemplo, `count_characters("hello")` debería devolver `{"h": 1, "e": 1, "l": 2, "o": 1}`.
+**Q8:** Escribe una función `count_characters(s)` que devuelva un diccionario con las frecuencias de cada carácter de una cadena. Por ejemplo, `count_characters("hello")` debería devolver `{"h": 1, "e": 1, "l": 2, "o": 1}`.
 
 ## Clave de respuestas
 
@@ -56,7 +56,7 @@
 
 **Q6:** Las claves de los diccionarios deben ser hashables — necesitan un valor de hash estable que no cambie. Las listas son mutables (se pueden modificar), así que su hash cambiaría si se modificaran, rompiendo el diccionario. Las tuplas son inmutables, por lo que su hash es estable y se pueden usar como claves.
 
-**Q7:** `d[key]` lanza un KeyError si la clave no existe. `d.get(key)` devuelve None si la clave no existe (o un valor por defecto si se lo proporcionás). `get()` es más seguro y se prefiere cuando no estás seguro de que la clave exista.
+**Q7:** `d[key]` lanza un KeyError si la clave no existe. `d.get(key)` devuelve None si la clave no existe (o un valor por defecto si se lo proporcionas). `get()` es más seguro y se prefiere cuando no estás seguro de que la clave exista.
 
 **Q8:**
 ```python

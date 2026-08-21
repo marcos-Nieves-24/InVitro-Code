@@ -29,7 +29,7 @@ Los condicionales permiten que los programas tomen decisiones. Sin ellos, el có
 
 ## Panorama General
 
-En la lección anterior aprendiste bucles (repetición). Ahora aprendés condicionales (toma de decisiones). Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales. Junto con funciones y operadores, ahora tenés todo lo necesario para escribir lógica de procesamiento de datos sofisticada.
+En la lección anterior aprendiste bucles (repetición). Ahora aprendes condicionales (toma de decisiones). Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales. Junto con funciones y operadores, ahora tienes todo lo necesario para escribir lógica de procesamiento de datos sofisticada.
 
 </Section>
 
@@ -57,7 +57,7 @@ else:
 
 ### if/elif/else
 
-Encadená múltiples condiciones:
+Encadena múltiples condiciones:
 
 ```python
 if condition1:
@@ -331,18 +331,18 @@ print(f"Descuento: {discount:.0%}")
 1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
 2. **Olvidar los dos puntos**: `if x > 5` sin `:` lanza SyntaxError
 3. **Errores de indentación**: Indentación inconsistente rompe los condicionales
-4. **Comparar None con `==`**: Usá `is None` en lugar de `== None`
-5. **Verificar booleanos con `== True`**: Es redundante — usá `if condition:`
+4. **Comparar None con `==`**: Usa `is None` en lugar de `== None`
+5. **Verificar booleanos con `== True`**: Es redundante — usa `if condition:`
 6. **Anidamiento profundo**: Más de 3 niveles de anidamiento sugiere refactorización
 
 ## Buenas Prácticas
 
-- Usá `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
-- Mantené las condiciones simples — extraé lógica compleja a variables booleanas
-- Usá verificaciones truthy/falsy de forma natural: `if items:` en lugar de `if len(items) > 0:`
-- Evitá anidamiento profundo (máx. 3 niveles)
-- Usá cláusulas de guarda (returns tempranos) para reducir el anidamiento
-- Usá `in` para comparaciones múltiples: `if x in (1, 2, 3):`
+- Usa `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
+- Mantén las condiciones simples — extrae lógica compleja a variables booleanas
+- Usa verificaciones truthy/falsy de forma natural: `if items:` en lugar de `if len(items) > 0:`
+- Evita anidamiento profundo (máx. 3 niveles)
+- Usa cláusulas de guarda (returns tempranos) para reducir el anidamiento
+- Usa `in` para comparaciones múltiples: `if x in (1, 2, 3):`
 
 </Section>
 
@@ -356,7 +356,7 @@ print(f"Descuento: {discount:.0%}")
 - Los valores son truthy (True) o falsy (False, None, 0, secuencias vacías)
 - Ternario: `x if condition else y`
 - Sentencia match (3.10+) para pattern matching
-- Evitá anidamiento profundo; usá cláusulas de guarda
+- Evita anidamiento profundo; usa cláusulas de guarda
 
 ## Términos Clave
 
@@ -382,17 +382,17 @@ print(f"Descuento: {discount:.0%}")
 
 ### Nivel 2: Implementación
 
-4. Escribí una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
-5. Escribí una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
+4. Escribe una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
+5. Escribe una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
 
 ### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `if x == True:` se considera mal estilo? ¿Cuál es la alternativa pitónica?
-7. Compará y contrastá las cadenas if/elif/else con las sentencias match. ¿Cuándo usarías cada una?
+7. Compara y contrasta las cadenas if/elif/else con las sentencias match. ¿Cuándo usarías cada una?
 
 ## Desafío de Código
 
-Escribí un sistema de **puntaje crediticio** que:
+Escribe un sistema de **puntaje crediticio** que:
 1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados
 2. Calcule un puntaje crediticio (0-100) usando una fórmula ponderada
 3. Asigne una calificación: Excelente (≥ 80), Buena (60-79), Regular (40-59), Mala (< 40)

@@ -253,7 +253,7 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 
 ## Errores Comunes
 
-1. **Usar `{}` para conjunto vacío**: Crea un dict vacío, no un conjunto. Usá `set()`
+1. **Usar `{}` para conjunto vacío**: Crea un dict vacío, no un conjunto. Usa `set()`
 2. **Asumir orden en conjuntos**: Los conjuntos no tienen orden — no confíes en el orden de los elementos
 3. **Agregar elementos mutables**: No se pueden agregar listas o dicts a un conjunto
 4. **Modificar un conjunto mientras se itera**: Mismo problema que con listas
@@ -261,11 +261,11 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 
 ## Buenas Prácticas
 
-- Usá conjuntos para prueba de pertenencia rápida (`in` es O(1))
-- Usá conjuntos para eliminar duplicados de secuencias
-- Usá operaciones de conjuntos (unión, intersección, diferencia) para análisis
-- Usá `frozenset` cuando necesites un conjunto inmutable y hashable (ej. como clave de dict)
-- Preferí `discard` sobre `remove` cuando no estés seguro de que el elemento exista
+- Usa conjuntos para prueba de pertenencia rápida (`in` es O(1))
+- Usa conjuntos para eliminar duplicados de secuencias
+- Usa operaciones de conjuntos (unión, intersección, diferencia) para análisis
+- Usa `frozenset` cuando necesites un conjunto inmutable y hashable (ej. como clave de dict)
+- Prefiere `discard` sobre `remove` cuando no estés seguro de que el elemento exista
 
 </Section>
 
@@ -299,14 +299,14 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 
 ### Nivel 1: Básico
 
-1. ¿Cómo creás un conjunto vacío?
+1. ¿Cómo creas un conjunto vacío?
 2. ¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?
 3. ¿Cuál es la diferencia entre `add()` y `update()` para conjuntos?
 
 ### Nivel 2: Implementación
 
-4. Escribí una función `unique_words(texto)` que devuelva un conjunto de palabras únicas en un string.
-5. Dadas dos listas (ej. usuarios que vieron una página y usuarios que compraron), encontrá los usuarios que vieron pero no compraron.
+4. Escribe una función `unique_words(texto)` que devuelva un conjunto de palabras únicas en un string.
+5. Dadas dos listas (ej. usuarios que vieron una página y usuarios que compraron), encuentra los usuarios que vieron pero no compraron.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -315,11 +315,11 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 
 ## Desafío de Código
 
-Escribí un programa que implemente un calculador de **similitud de Jaccard**:
+Escribe un programa que implemente un calculador de **similitud de Jaccard**:
 1. Similitud de Jaccard = |A ∩ B| / |A ∪ B| (tamaño de intersección / tamaño de unión)
-2. Escribí `jaccard_similarity(conjunto1, conjunto2)` que devuelva un valor entre 0 y 1
-3. Dada una lista de conjuntos de genes (cada uno un conjunto de nombres de genes), encontrá el par con la mayor similitud de Jaccard
-4. También encontrá el par con la menor similitud de Jaccard
-5. Probá con al menos 5 conjuntos de genes de diferentes tamaños
+2. Escribe `jaccard_similarity(conjunto1, conjunto2)` que devuelva un valor entre 0 y 1
+3. Dada una lista de conjuntos de genes (cada uno un conjunto de nombres de genes), encuentra el par con la mayor similitud de Jaccard
+4. También encuentra el par con la menor similitud de Jaccard
+5. Prueba con al menos 5 conjuntos de genes de diferentes tamaños
 
 </Section>

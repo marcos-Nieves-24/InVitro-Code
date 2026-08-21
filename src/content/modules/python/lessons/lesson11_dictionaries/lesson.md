@@ -29,7 +29,7 @@ Los diccionarios almacenan datos como pares clave-valor, permitiéndote buscar v
 
 ## Panorama General
 
-Después de aprender sobre listas (ordenadas, indexadas por posición) y tuplas (inmutables), los diccionarios introducen una nueva forma de organizar datos: por clave en lugar de por posición. Esto se acerca más a cómo funcionan los datos del mundo real — buscás un paciente por ID, no por índice numérico. La próxima lección sobre conjuntos usa tecnología similar basada en hash. Más adelante, vas a usar diccionarios extensivamente con Pandas DataFrames.
+Después de aprender sobre listas (ordenadas, indexadas por posición) y tuplas (inmutables), los diccionarios introducen una nueva forma de organizar datos: por clave en lugar de por posición. Esto se acerca más a cómo funcionan los datos del mundo real — buscas un paciente por ID, no por índice numérico. La próxima lección sobre conjuntos usa tecnología similar basada en hash. Más adelante, vas a usar diccionarios extensivamente con Pandas DataFrames.
 
 </Section>
 
@@ -262,20 +262,20 @@ for user, events in sorted(user_events.items()):
 
 ## Errores Comunes
 
-1. **Acceder a una clave inexistente directamente**: `d["missing"]` lanza KeyError. Usá `d.get("missing")`
-2. **Claves mutables**: Las listas no pueden ser claves de diccionarios. Usá tuplas en su lugar
+1. **Acceder a una clave inexistente directamente**: `d["missing"]` lanza KeyError. Usa `d.get("missing")`
+2. **Claves mutables**: Las listas no pueden ser claves de diccionarios. Usa tuplas en su lugar
 3. **Sobrescribir claves sin querer**: Cada clave solo puede aparecer una vez; asignar a una clave existente la sobrescribe
 4. **Asumir orden en diccionarios**: Python 3.7+ preserva el orden de inserción, pero no confíes en eso para versiones anteriores
 5. **Confundir `in` para claves vs valores**: `"key" in d` verifica claves, no valores
 
 ## Buenas Prácticas
 
-- Usá `get()` con valores por defecto para acceso seguro
-- Usá `defaultdict` para diccionarios anidados o de conteo
-- Usá dictionary comprehensions para creación concisa
-- Usá `items()` cuando iteres sobre claves y valores
-- Usá `setdefault()` para inserción condicional
-- Preferí `collections.Counter` para tareas de conteo
+- Usa `get()` con valores por defecto para acceso seguro
+- Usa `defaultdict` para diccionarios anidados o de conteo
+- Usa dictionary comprehensions para creación concisa
+- Usa `items()` cuando iteres sobre claves y valores
+- Usa `setdefault()` para inserción condicional
+- Prefiere `collections.Counter` para tareas de conteo
 
 </Section>
 
@@ -284,12 +284,12 @@ for user, events in sorted(user_events.items()):
 ## Resumen
 
 - Los diccionarios almacenan pares clave-valor usando `{}`
-- Accedé a valores con `d[clave]` (inseguro) o `d.get(clave)` (seguro)
+- Accede a valores con `d[clave]` (inseguro) o `d.get(clave)` (seguro)
 - Las claves deben ser inmutables y hashables (strings, números, tuplas)
 - Métodos: keys(), values(), items(), get(), update(), pop()
 - Dictionary comprehensions: `{k: v for k, v in iterable}`
 - Los diccionarios tienen búsqueda O(1) — muy rápida
-- Usá defaultdict y Counter para necesidades especializadas
+- Usa defaultdict y Counter para necesidades especializadas
 
 ## Términos Clave
 
@@ -309,28 +309,28 @@ for user, events in sorted(user_events.items()):
 
 ### Nivel 1: Básico
 
-1. ¿Qué pasa si intentás acceder a una clave que no existe usando `d["missing"]`?
+1. ¿Qué pasa si intentas acceder a una clave que no existe usando `d["missing"]`?
 2. ¿Qué tipos se pueden usar como claves de diccionarios?
 3. ¿Qué devuelve `d.get("key", default)` si "key" no está en el diccionario?
 
 ### Nivel 2: Implementación
 
-4. Escribí una función `word_count(texto)` que devuelva un diccionario contando frecuencias de palabras en un string.
-5. Dado un diccionario de calificaciones de estudiantes, escribí una función que devuelva el estudiante con el promedio más alto.
+4. Escribe una función `word_count(texto)` que devuelva un diccionario contando frecuencias de palabras en un string.
+5. Dado un diccionario de calificaciones de estudiantes, escribe una función que devuelva el estudiante con el promedio más alto.
 
 ### Nivel 3: Pensamiento Crítico
 
 6. ¿Cómo logran los diccionarios de Python un tiempo de búsqueda O(1)? ¿Qué es una colisión de hash y cómo se resuelve?
-7. ¿Cuándo usarías un defaultdict en lugar de un diccionario común con `get()`? Proporcioná un ejemplo concreto.
+7. ¿Cuándo usarías un defaultdict en lugar de un diccionario común con `get()`? Proporciona un ejemplo concreto.
 
 ## Desafío de Código
 
-Escribí un programa que implemente un **almacén clave-valor en memoria** (como una base de datos simple):
-1. Empezá con un diccionario vacío
-2. Implementá funciones: `put(key, value)`, `get(key)`, `delete(key)`, `keys()`, `values()`, `search(campo, valor)`
-3. Almacená datos estructurados: cada valor debe ser un diccionario con campos como `{"name": "...", "age": ..., "city": "..."}`
-4. Implementá `search(campo, valor)` que devuelva todas las entradas donde `entrada[campo] == valor`
-5. Demostrá con al menos 10 registros y 3 búsquedas
-6. Usá un `defaultdict` para indexar datos por campos para búsqueda más rápida
+Escribe un programa que implemente un **almacén clave-valor en memoria** (como una base de datos simple):
+1. Empieza con un diccionario vacío
+2. Implementa funciones: `put(key, value)`, `get(key)`, `delete(key)`, `keys()`, `values()`, `search(campo, valor)`
+3. Almacena datos estructurados: cada valor debe ser un diccionario con campos como `{"name": "...", "age": ..., "city": "..."}`
+4. Implementa `search(campo, valor)` que devuelva todas las entradas donde `entrada[campo] == valor`
+5. Demuestra con al menos 10 registros y 3 búsquedas
+6. Usa un `defaultdict` para indexar datos por campos para búsqueda más rápida
 
 </Section>

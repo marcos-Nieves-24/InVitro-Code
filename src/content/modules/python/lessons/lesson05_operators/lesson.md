@@ -25,7 +25,7 @@ Quiz: quiz.md
 
 ## Motivación
 
-Los operadores son las herramientas que te permiten computar, comparar y combinar valores. Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores. En biotecnología usás operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia. En SaaS los usás para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.
+Los operadores son las herramientas que te permiten computar, comparar y combinar valores. Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores. En biotecnología usas operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia. En SaaS los usas para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.
 
 ## Panorama General
 
@@ -212,11 +212,11 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 ## Buenas Prácticas
 
-- Usá paréntesis para hacer explícita la precedencia
-- Usá `+=` y operadores similares para código más limpio
-- Usá `==` con cuidado para comparar floats; usá `abs(a-b) < epsilon`
-- Aprovechá las comparaciones encadenadas de Python: `0 <= x <= 100`
-- Usá `not` con moderación — reformulá las condiciones para que sean legibles
+- Usa paréntesis para hacer explícita la precedencia
+- Usa `+=` y operadores similares para código más limpio
+- Usa `==` con cuidado para comparar floats; usa `abs(a-b) < epsilon`
+- Aprovecha las comparaciones encadenadas de Python: `0 <= x <= 100`
+- Usa `not` con moderación — reformula las condiciones para que sean legibles
 
 </Section>
 
@@ -229,7 +229,7 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - Lógicos: `and`, `or`, `not`
 - Asignación: `=`, `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `**=`
 - Precedencia: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`
-- Usá paréntesis para mayor claridad
+- Usa paréntesis para mayor claridad
 
 ## Términos Clave
 
@@ -254,8 +254,8 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 ### Nivel 2: Implementación
 
-4. Escribí código que verifique si un número es par (usá `%`) e imprima "par" o "impar".
-5. Escribí una calculadora de IMC: peso (kg) / altura² (m). Clasificá como bajo peso (< 18.5), normal (18.5-24.9), sobrepeso (25-29.9), obeso (≥ 30).
+4. Escribe código que verifique si un número es par (usa `%`) e imprima "par" o "impar".
+5. Escribe una calculadora de IMC: peso (kg) / altura² (m). Clasifica como bajo peso (< 18.5), normal (18.5-24.9), sobrepeso (25-29.9), obeso (≥ 30).
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -264,7 +264,7 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 ## Desafío de Código
 
-Escribí un programa que:
+Escribe un programa que:
 1. Pregunte la cantidad de muestras de ADN, el costo por muestra y el presupuesto disponible
 2. Calcule el costo total y si está dentro del presupuesto
 3. Aplique un descuento del 15% si la cantidad de muestras > 100

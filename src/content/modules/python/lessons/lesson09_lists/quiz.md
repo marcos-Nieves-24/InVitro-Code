@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `append()` y `extend()` para listas.
+**Q6:** Explica la diferencia entre `append()` y `extend()` para listas.
 
-**Q7:** ¿Qué significa que las listas sean mutables? Dá un ejemplo.
+**Q7:** ¿Qué significa que las listas sean mutables? Da un ejemplo.
 
 ## Pregunta de código
 
-**Q8:** Escribí una list comprehension que cree una lista de los primeros 10 números cuadrados (1, 4, 9, 16, ..., 100).
+**Q8:** Escribe una list comprehension que cree una lista de los primeros 10 números cuadrados (1, 4, 9, 16, ..., 100).
 
 ## Clave de respuestas
 

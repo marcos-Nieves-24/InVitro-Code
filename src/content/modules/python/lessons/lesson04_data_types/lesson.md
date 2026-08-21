@@ -23,7 +23,7 @@ Quiz: quiz.md
 
 ## Motivación
 
-Cada pieza de datos en Python tiene un tipo que determina qué operaciones son posibles. Sumar dos números es aritmética; sumar dos strings es concatenación. Entender los tipos es crucial porque los errores de tipo están entre los bugs más comunes en programas Python. En biotecnología necesitás distinguir entre conteos enteros (cantidad de células), mediciones float (ratios de expresión génica), strings (secuencias de ADN) y booleanos (mutación presente/ausente). En SaaS trabajás con conteos enteros de usuarios, ingresos float, nombres de clientes string y estado de suscripción booleano.
+Cada pieza de datos en Python tiene un tipo que determina qué operaciones son posibles. Sumar dos números es aritmética; sumar dos strings es concatenación. Entender los tipos es crucial porque los errores de tipo están entre los bugs más comunes en programas Python. En biotecnología necesitas distinguir entre conteos enteros (cantidad de células), mediciones float (ratios de expresión génica), strings (secuencias de ADN) y booleanos (mutación presente/ausente). En SaaS trabajas con conteos enteros de usuarios, ingresos float, nombres de clientes string y estado de suscripción booleano.
 
 ## Panorama General
 
@@ -74,7 +74,7 @@ print(type(w))       # <class 'bool'>
 
 ### Conversión de Tipos (Casting)
 
-Podés convertir explícitamente entre tipos:
+Puedes convertir explícitamente entre tipos:
 
 ```python
 # int a float
@@ -246,15 +246,15 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 2. **Perder precisión con float**: `0.1 + 0.2 != 0.3` exactamente (aritmética de coma flotante)
 3. **División entera en Python 3**: `5 / 2 = 2.5` (float), pero `5 // 2 = 2` (entero)
 4. **Confundir `=` y `==`**: Asignación vs comparación de igualdad
-5. **Olvidar que `input()` devuelve un string**: Siempre convertí la entrada numérica
+5. **Olvidar que `input()` devuelve un string**: Siempre convierte la entrada numérica
 
 ## Buenas Prácticas
 
-- Usá `isinstance()` para verificar tipos en lugar de `type() ==`
-- Convertí tipos explícitamente en lugar de confiar en la conversión implícita
-- Usá `//` para división entera, `/` para división float
-- Usá guiones bajos en números grandes: `1_000_000` en lugar de `1000000`
-- Tené en cuenta las limitaciones de precisión de coma flotante
+- Usa `isinstance()` para verificar tipos en lugar de `type() ==`
+- Convierte tipos explícitamente en lugar de confiar en la conversión implícita
+- Usa `//` para división entera, `/` para división float
+- Usa guiones bajos en números grandes: `1_000_000` en lugar de `1000000`
+- Ten en cuenta las limitaciones de precisión de coma flotante
 
 </Section>
 
@@ -263,7 +263,7 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 ## Resumen
 
 - Python tiene cuatro tipos primitivos: int, float, str, bool
-- Usá `type()` para verificar el tipo de un valor
+- Usa `type()` para verificar el tipo de un valor
 - La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`
 - Los strings son inmutables — no se pueden modificar en su lugar
 - `None` representa la ausencia de un valor
@@ -294,8 +294,8 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 ### Nivel 2: Implementación
 
-4. Escribí una función que reciba un string como "3.14" y devuelva tanto la parte float como la entera.
-5. Preguntale al usuario dos números, sumalos e imprimí el resultado. Manejá la conversión de tipos correctamente.
+4. Escribe una función que reciba un string como "3.14" y devuelva tanto la parte float como la entera.
+5. Pregúntale al usuario dos números, súmalos e imprime el resultado. Maneja la conversión de tipos correctamente.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -304,9 +304,9 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 ## Desafío de Código
 
-Escribí un programa que:
+Escribe un programa que:
 1. Pregunte el nombre del usuario (string), edad (int) y salario (float)
-2. Pregunte si es estudiante (convertí la respuesta a bool: "sí"/"no")
+2. Pregunte si es estudiante (convierte la respuesta a bool: "sí"/"no")
 3. Almacene cada valor con el tipo correcto
 4. Imprima un resumen: "[Nombre] tiene [edad] años, gana $[salario], estudiante: [True/False]"
 5. Calcule e imprima: "Salario después de aumento del 10%: $[monto]"

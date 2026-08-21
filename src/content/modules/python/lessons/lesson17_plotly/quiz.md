@@ -8,7 +8,7 @@
 - C) Una cadena JSON
 - D) Un elemento HTML
 
-**Q2:** ¿Cómo agregás una trace nueva a un `go.Figure()` existente?
+**Q2:** ¿Cómo agregas una trace nueva a un `go.Figure()` existente?
 - A) `fig.append_trace()`
 - B) `fig.add_trace()`
 - C) `fig.insert_trace()`
@@ -20,7 +20,7 @@
 - C) `px.subplots()`
 - D) `go.Subplots()`
 
-**Q4:** ¿Cómo exportás una figura de Plotly a un archivo interactivo independiente?
+**Q4:** ¿Cómo exportas una figura de Plotly a un archivo interactivo independiente?
 - A) `fig.save("file.html")`
 - B) `fig.export("file.html")`
 - C) `fig.write_html("file.html")`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre Plotly Express y Graph Objects. ¿Cuándo usarías cada uno?
+**Q6:** Explica la diferencia entre Plotly Express y Graph Objects. ¿Cuándo usarías cada uno?
 
 **Q7:** ¿Por qué importa la visualización interactiva en biotecnología? Da al menos dos casos de uso específicos.
 
 ## Pregunta de código
 
-**Q8:** Escribí código con Plotly Express para crear una scatter matrix (pair plot) del dataset iris (`px.data.iris()`), coloreando los puntos por especie. Usá las columnas: `sepal_length`, `sepal_width`, `petal_length`, `petal_width`.
+**Q8:** Escribe código con Plotly Express para crear una scatter matrix (pair plot) del dataset iris (`px.data.iris()`), coloreando los puntos por especie. Usa las columnas: `sepal_length`, `sepal_width`, `petal_length`, `petal_width`.
 
 ## Clave de respuestas
 
@@ -54,7 +54,7 @@
 
 **Q5:** B) Exportación de imágenes estáticas (PNG, SVG, PDF)
 
-**Q6:** Plotly Express es una API de alto nivel que crea figuras completas con una sola llamada a una función: es ideal para exploración rápida y gráficos estándar. Graph Objects es una API de menor nivel que da control total sobre cada elemento de la figura (traces, layout, anotaciones): es ideal para paneles personalizados, figuras con múltiples traces y disposiciones de subplots. Empezá con Express y migrá a Graph Objects cuando necesites un control más fino.
+**Q6:** Plotly Express es una API de alto nivel que crea figuras completas con una sola llamada a una función: es ideal para exploración rápida y gráficos estándar. Graph Objects es una API de menor nivel que da control total sobre cada elemento de la figura (traces, layout, anotaciones): es ideal para paneles personalizados, figuras con múltiples traces y disposiciones de subplots. Empieza con Express y migra a Graph Objects cuando necesites un control más fino.
 
 **Q7:** La visualización interactiva importa en biotecnología porque: (1) los volcano plots con hover permiten identificar genes específicos por nombre sin saturar el gráfico con etiquetas; (2) los scatter plots 3D de datos de PCA o t-SNE con zoom/rotación permiten identificar agrupaciones visualmente; (3) los paneles con menús desplegables permiten que los biólogos cambien entre métricas de expresión génica sin reescribir código; (4) los scatter plots animados muestran la evolución temporal de datos moleculares.
 

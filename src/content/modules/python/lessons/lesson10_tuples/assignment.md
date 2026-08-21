@@ -9,9 +9,9 @@
 
 ## Instrucciones
 
-Creá un script de Python `student_records.py` que:
+Crea un script de Python `student_records.py` que:
 
-1. **Definición de registros**: Creá una lista de registros de estudiantes, cada uno como tupla: `(student_id, name, [grades])` donde grades es una lista de notas de exámenes.
+1. **Definición de registros**: Crea una lista de registros de estudiantes, cada uno como tupla: `(student_id, name, [grades])` donde grades es una lista de notas de exámenes.
 
 2. **Funciones con tuplas**:
    - `average_grade(student)` — devuelve `(student_id, name, avg_score)`
@@ -19,7 +19,7 @@ Creá un script de Python `student_records.py` que:
    - `passed_students(students, threshold=60)` — devuelve una lista de tuplas de estudiantes aprobados
    - `grade_summary(students)` — devuelve una tupla con (class_average, highest_avg, lowest_avg, num_passed, num_failed)
 
-3. **Análisis**: Usá las funciones para analizar los datos e imprimí un resumen formateado.
+3. **Análisis**: Usa las funciones para analizar los datos e imprime un resumen formateado.
 
 ## Datos iniciales
 

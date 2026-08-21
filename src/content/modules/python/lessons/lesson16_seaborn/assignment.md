@@ -9,7 +9,7 @@
 
 ## Instrucciones
 
-Creá un script de Python `customer_segmentation_viz.py` que:
+Crea un script de Python `customer_segmentation_viz.py` que:
 
 1. **Genere datos sintéticos**: 300 clientes con:
    - `age`: 18-70
@@ -20,20 +20,20 @@ Creá un script de Python `customer_segmentation_viz.py` que:
    - `segment`: Low, Medium, High (basado en los percentiles de spending_score)
 
 2. **Cree visualizaciones**:
-   - Pairplot de las características numéricas coloreado por segment (usá `sns.pairplot`)
+   - Pairplot de las características numéricas coloreado por segment (usa `sns.pairplot`)
    - Heatmap de correlación de todas las características numéricas
    - Box plot de spending_score por region, coloreado por segment
    - Violin plot de income por segment
-   - Count plot de los segmentos por region (usá `sns.countplot`)
-   - Histograma de age con KDE, coloreado por segment (usá `sns.histplot`)
+   - Count plot de los segmentos por region (usa `sns.countplot`)
+   - Histograma de age con KDE, coloreado por segment (usa `sns.histplot`)
    - Scatter estilo 3D de income vs. spending_score con hue=segment y size=membership_years
 
 3. **Personalización**:
-   - Aplicá `sns.set_theme(style="whitegrid")`
-   - Usá una paleta de colores personalizada: `sns.color_palette("viridis", 3)`
+   - Aplica `sns.set_theme(style="whitegrid")`
+   - Usa una paleta de colores personalizada: `sns.color_palette("viridis", 3)`
    - Todos los gráficos deben tener títulos y etiquetas de ejes apropiadas
 
-4. **Disposición**: organizá al menos 4 gráficos en una figura de subplots 2×2
+4. **Disposición**: organiza al menos 4 gráficos en una figura de subplots 2×2
 
-5. **Guardá** la figura combinada como `segmentation_analysis.png`
+5. **Guarda** la figura combinada como `segmentation_analysis.png`
 

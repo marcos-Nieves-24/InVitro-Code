@@ -9,17 +9,17 @@
 
 ## Instrucciones
 
-Creá un script de Python `list_processor.py` que realice las siguientes tareas:
+Crea un script de Python `list_processor.py` que realice las siguientes tareas:
 
-1. **Análisis de temperaturas**: Dada una lista de temperaturas diarias, calculá el mínimo, el máximo y el promedio, e identificá los días por encima del promedio.
+1. **Análisis de temperaturas**: Dada una lista de temperaturas diarias, calcula el mínimo, el máximo y el promedio, e identifica los días por encima del promedio.
 
-2. **Transposición de matrices**: Dada una matriz (lista de listas), calculá su transpuesta y la multiplicación de matrices (producto punto) con otra matriz.
+2. **Transposición de matrices**: Dada una matriz (lista de listas), calcula su transpuesta y la multiplicación de matrices (producto punto) con otra matriz.
 
-3. **Análisis de secuencias**: Dada una secuencia de ADN como cadena, creá una lista de todos los codones (bloques de 3 bases), contá las ocurrencias de cada codón y encontrá el codón más frecuente.
+3. **Análisis de secuencias**: Dada una secuencia de ADN como cadena, crea una lista de todos los codones (bloques de 3 bases), cuenta las ocurrencias de cada codón y encuentra el codón más frecuente.
 
-4. **Promedio móvil**: Implementá una función `moving_average(data, window_size)` usando list comprehension.
+4. **Promedio móvil**: Implementa una función `moving_average(data, window_size)` usando list comprehension.
 
-5. **Detección de valores atípicos**: Dada una lista de números, identificá los valores atípicos usando el método IQR (Q1 - 1.5*IQR, Q3 + 1.5*IQR).
+5. **Detección de valores atípicos**: Dada una lista de números, identifica los valores atípicos usando el método IQR (Q1 - 1.5*IQR, Q3 + 1.5*IQR).
 
 ## Datos iniciales
 

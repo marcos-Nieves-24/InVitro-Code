@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre una vista y una copia en NumPy.
+**Q6:** Explica la diferencia entre una vista y una copia en NumPy.
 
 **Q7:** ¿Qué es la vectorización y por qué es más rápida que los bucles de Python?
 
 ## Pregunta de código
 
-**Q8:** Escribí código de NumPy para crear un array de 3×3 de números aleatorios de una distribución normal y después calculá la media y la desviación estándar de todos los elementos.
+**Q8:** Escribe código de NumPy para crear un array de 3×3 de números aleatorios de una distribución normal y después calcula la media y la desviación estándar de todos los elementos.
 
 ## Clave de respuestas
 
@@ -54,7 +54,7 @@
 
 **Q5:** B) `@`
 
-**Q6:** Una vista es otra forma de acceder a los mismos datos subyacentes: modificar una vista modifica el original. Una copia es un array independiente con sus propios datos. El rebanado devuelve una vista; `.copy()` crea una copia. Usá `.copy()` cuando necesites modificar una rebanada de forma independiente.
+**Q6:** Una vista es otra forma de acceder a los mismos datos subyacentes: modificar una vista modifica el original. Una copia es un array independiente con sus propios datos. El rebanado devuelve una vista; `.copy()` crea una copia. Usa `.copy()` cuando necesites modificar una rebanada de forma independiente.
 
 **Q7:** La vectorización significa aplicar una operación a un array completo de una vez en lugar de recorrer los elementos individuales en un bucle. Las operaciones de NumPy están implementadas en C y operan sobre bloques de memoria contiguos, lo que las hace 10-100 veces más rápidas que los bucles equivalentes en Python. NumPy también usa instrucciones SIMD en CPUs modernas para operaciones en paralelo.
 

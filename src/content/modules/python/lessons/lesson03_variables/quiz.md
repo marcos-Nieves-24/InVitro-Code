@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá qué significa el tipado dinámico en Python y da un ejemplo.
+**Q6:** Explica qué significa el tipado dinámico en Python y da un ejemplo.
 
-**Q7:** ¿Por qué no podés usar `if` o `for` como nombres de variables?
+**Q7:** ¿Por qué no puedes usar `if` o `for` como nombres de variables?
 
 ## Pregunta de código
 
-**Q8:** Escribí código que:
+**Q8:** Escribe código que:
 1. Le pregunte al usuario su nombre, edad y color favorito
 2. Los almacene en variables
 3. Imprima "Hello [name], you are [age] years old and your favorite color is [color]."

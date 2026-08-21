@@ -25,7 +25,7 @@ Quiz: quiz.md
 
 ## Motivación
 
-Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escribir el mismo código para cada elemento de un dataset, escribís un bucle que procesa todos los elementos automáticamente. En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes. En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características. Sin bucles, el análisis de datos a escala sería imposible.
+Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escribir el mismo código para cada elemento de un dataset, escribes un bucle que procesa todos los elementos automáticamente. En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes. En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características. Sin bucles, el análisis de datos a escala sería imposible.
 
 ## Panorama General
 
@@ -249,18 +249,18 @@ print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 ## Errores Comunes
 
 1. **Bucles while infinitos**: Olvidarse de actualizar la variable de condición
-2. **Modificar una lista mientras se itera**: Puede saltear elementos o causar errores. Iterá sobre una copia
+2. **Modificar una lista mientras se itera**: Puede saltear elementos o causar errores. Itera sobre una copia
 3. **Errores de off-by-one**: `range(n)` da de 0 a n-1, no de 1 a n
 4. **Usar `range(len(lista))` en lugar de iterar directamente**: El estilo pitónico prefiere la iteración directa
 5. **Olvidar los dos puntos y la indentación**: Sintaxis requerida para los bloques de bucle
 
 ## Buenas Prácticas
 
-- Preferí bucles `for` sobre `while` cuando iteres sobre secuencias
-- Usá `enumerate()` cuando necesites tanto el índice como el valor
-- Usá `zip()` para iterar sobre múltiples secuencias en paralelo
-- Mantené los cuerpos de los bucles cortos — extraé lógica compleja a funciones
-- Usá nombres de variables de bucle descriptivos (no solo `i`, `j` para casos complejos)
+- Prefiere bucles `for` sobre `while` cuando iteres sobre secuencias
+- Usa `enumerate()` cuando necesites tanto el índice como el valor
+- Usa `zip()` para iterar sobre múltiples secuencias en paralelo
+- Mantén los cuerpos de los bucles cortos — extrae lógica compleja a funciones
+- Usa nombres de variables de bucle descriptivos (no solo `i`, `j` para casos complejos)
 
 ```python
 # Patrones pitónicos
@@ -307,21 +307,21 @@ for gene, expression in zip(genes, expressions):
 
 ### Nivel 2: Implementación
 
-4. Escribí un bucle for que calcule la suma de los números del 1 al 100.
-5. Escribí un bucle while que imprima la secuencia de Fibonacci hasta 100 (cada número es la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8...).
+4. Escribe un bucle for que calcule la suma de los números del 1 al 100.
+5. Escribe un bucle while que imprima la secuencia de Fibonacci hasta 100 (cada número es la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8...).
 
 ### Nivel 3: Pensamiento Crítico
 
-6. Compará los bucles `for` y `while`. ¿Cuándo elegirías uno sobre el otro?
-7. ¿Por qué modificar una lista mientras se itera sobre ella es problemático? Mostrá un ejemplo y el enfoque correcto.
+6. Compara los bucles `for` y `while`. ¿Cuándo elegirías uno sobre el otro?
+7. ¿Por qué modificar una lista mientras se itera sobre ella es problemático? Muestra un ejemplo y el enfoque correcto.
 
 ## Desafío de Código
 
-Escribí un programa que implemente la **Criba de Eratóstenes** para encontrar todos los números primos hasta un límite `n`:
-1. Creá una lista de booleanos de 0 a n, inicialmente todos True
-2. Para cada número del 2 a sqrt(n), marcá los múltiplos como False
+Escribe un programa que implemente la **Criba de Eratóstenes** para encontrar todos los números primos hasta un límite `n`:
+1. Crea una lista de booleanos de 0 a n, inicialmente todos True
+2. Para cada número del 2 a sqrt(n), marca los múltiplos como False
 3. Los índices que quedan True son números primos
-4. Usá bucles anidados y `break`/`continue` apropiadamente
-5. Imprimí todos los primos encontrados
+4. Usa bucles anidados y `break`/`continue` apropiadamente
+5. Imprime todos los primos encontrados
 
 </Section>

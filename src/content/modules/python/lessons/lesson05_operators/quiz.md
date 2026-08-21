@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `/` y `//` en Python.
+**Q6:** Explica la diferencia entre `/` y `//` en Python.
 
 **Q7:** ¿Qué es la precedencia de operadores y por qué es importante?
 
 ## Pregunta de código
 
-**Q8:** Escribí código que verifique si un número ingresado por el usuario está entre 0 y 100 (inclusive). Usá operadores de comparación y operadores lógicos. Imprimí "In range" o "Out of range".
+**Q8:** Escribe código que verifique si un número ingresado por el usuario está entre 0 y 100 (inclusive). Usa operadores de comparación y operadores lógicos. Imprime "In range" o "Out of range".
 
 ## Clave de respuestas
 

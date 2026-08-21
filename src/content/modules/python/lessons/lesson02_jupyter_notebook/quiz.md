@@ -20,11 +20,11 @@
 - C) Shift+Enter
 - D) Tab+Enter
 
-**Q4:** ¿Cómo cambiás una celda al tipo markdown en modo comando?
-- A) Presioná M
-- B) Presioná Y
-- C) Presioná D
-- D) Presioná A
+**Q4:** ¿Cómo cambias una celda al tipo markdown en modo comando?
+- A) Presiona M
+- B) Presiona Y
+- C) Presiona D
+- D) Presiona A
 
 **Q5:** ¿Qué comando lanza Jupyter Notebook desde la terminal?
 - A) `jupyter start`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre el modo comando y el modo edición en Jupyter.
+**Q6:** Explica la diferencia entre el modo comando y el modo edición en Jupyter.
 
 **Q7:** ¿Por qué deberías reiniciar el kernel y ejecutar todas las celdas antes de compartir un notebook?
 
 ## Pregunta de código
 
-**Q8:** Escribí una celda de markdown que muestre:
+**Q8:** Escribe una celda de markdown que muestre:
 - Un encabezado de nivel 2 que diga "Results"
 - Una lista con viñetas con tres elementos
 - El texto "p-value < 0.05" formateado como código inline
@@ -53,7 +53,7 @@
 
 **Q3:** C) Shift+Enter
 
-**Q4:** A) Presioná M
+**Q4:** A) Presiona M
 
 **Q5:** B) `jupyter notebook`
 

@@ -305,18 +305,18 @@ plt.show()
 3. **Demasiados elementos en el gráfico**: Gráficos recargados confunden en lugar de informar
 4. **Formas incompatibles**: x e y deben tener el mismo largo
 5. **Olvidar `tight_layout()`**: Las etiquetas pueden cortarse
-6. **Usar colores/estilos por defecto**: Personalizá para gráficos con aspecto profesional
+6. **Usar colores/estilos por defecto**: Personaliza para gráficos con aspecto profesional
 
 ## Buenas Prácticas
 
-- Usá la interfaz OO (`fig, ax = plt.subplots()`) para gráficos complejos
-- Siempre etiquetá los ejes e incluí unidades
-- Usá esquemas de colores aptos para daltonismo
-- Establecé tamaños de figura apropiados con `figsize`
-- Usá `alpha` para elementos superpuestos
-- Guardá como SVG para publicaciones (formato vectorial)
-- Agregá líneas de cuadrícula con alpha bajo para legibilidad
-- Usá `tight_layout()` para evitar que se corten las etiquetas
+- Usa la interfaz OO (`fig, ax = plt.subplots()`) para gráficos complejos
+- Siempre etiqueta los ejes e incluye unidades
+- Usa esquemas de colores aptos para daltonismo
+- Establece tamaños de figura apropiados con `figsize`
+- Usa `alpha` para elementos superpuestos
+- Guarda como SVG para publicaciones (formato vectorial)
+- Agrega líneas de cuadrícula con alpha bajo para legibilidad
+- Usa `tight_layout()` para evitar que se corten las etiquetas
 
 </Section>
 
@@ -327,10 +327,10 @@ plt.show()
 - El pyplot de Matplotlib proporciona gráficos estilo MATLAB
 - Dos interfaces: pyplot (simple) y OO (flexible)
 - Gráficos básicos: líneas, dispersión, barras, histograma
-- Personalizá con títulos, etiquetas, leyendas, colores
+- Personaliza con títulos, etiquetas, leyendas, colores
 - Subplots permiten figuras multi-panel
-- Guardá en formatos PNG, PDF, SVG
-- Siempre etiquetá los ejes e incluí leyendas
+- Guarda en formatos PNG, PDF, SVG
+- Siempre etiqueta los ejes e incluye leyendas
 
 ## Términos Clave
 
@@ -352,13 +352,13 @@ plt.show()
 ### Nivel 1: Básico
 
 1. ¿Cuál es la diferencia entre `plt.plot()` y `plt.scatter()`?
-2. ¿Cómo guardás una figura como archivo PNG?
+2. ¿Cómo guardas una figura como archivo PNG?
 3. ¿Qué crea `fig, ax = plt.subplots(2, 3)`?
 
 ### Nivel 2: Implementación
 
-4. Graficá la función f(x) = x² de -10 a 10 con ejes etiquetados y un título.
-5. Creá un gráfico de barras mostrando las 5 palabras más frecuentes en un texto dado.
+4. Grafica la función f(x) = x² de -10 a 10 con ejes etiquetados y un título.
+5. Crea un gráfico de barras mostrando las 5 palabras más frecuentes en un texto dado.
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -367,13 +367,13 @@ plt.show()
 
 ## Desafío de Código
 
-Creá un **reporte de datos integral** con los siguientes gráficos:
+Crea un **reporte de datos integral** con los siguientes gráficos:
 
-1. **Gráfico de líneas**: Graficá 4 funciones matemáticas diferentes (sen, cos, sen², cos²) en los mismos ejes con diferentes estilos y una leyenda
-2. **Gráfico de dispersión**: Generá 200 puntos (x, y) aleatorios con una tendencia lineal clara, agregá una línea de regresión
-3. **Gráfico de barras**: Mostrá la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
-4. **Histograma**: Graficá la distribución de 10.000 valores aleatorios y superponé una curva de distribución normal
-5. **Figura multi-panel**: Creá un subplot 2×2 combinando lo anterior en una sola figura
-6. Estilo: Usá un estilo profesional (`plt.style.use("seaborn-v0_8")` o similar), incluí líneas de cuadrícula y guardá como PDF
+1. **Gráfico de líneas**: Grafica 4 funciones matemáticas diferentes (sen, cos, sen², cos²) en los mismos ejes con diferentes estilos y una leyenda
+2. **Gráfico de dispersión**: Genera 200 puntos (x, y) aleatorios con una tendencia lineal clara, agrega una línea de regresión
+3. **Gráfico de barras**: Muestra la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
+4. **Histograma**: Grafica la distribución de 10.000 valores aleatorios y superpon una curva de distribución normal
+5. **Figura multi-panel**: Crea un subplot 2×2 combinando lo anterior en una sola figura
+6. Estilo: Usa un estilo profesional (`plt.style.use("seaborn-v0_8")` o similar), incluye líneas de cuadrícula y guarda como PDF
 
 </Section>

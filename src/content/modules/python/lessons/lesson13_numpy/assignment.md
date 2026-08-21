@@ -9,19 +9,19 @@
 
 ## Instrucciones
 
-Creá un script de Python `numpy_ops.py` que implemente las siguientes funciones **usando solo NumPy** (sin bucles explícitos de Python):
+Crea un script de Python `numpy_ops.py` que implemente las siguientes funciones **usando solo NumPy** (sin bucles explícitos de Python):
 
-1. `create_design_matrix(X)` — dado un vector de características N×1, creá una matriz de diseño N×2 con [X, 1] (para regresión lineal con intersección)
+1. `create_design_matrix(X)` — dado un vector de características N×1, crea una matriz de diseño N×2 con [X, 1] (para regresión lineal con intersección)
 
-2. `standardize(X)` — centrá y escalá cada columna para que tenga media=0, desviación estándar=1
+2. `standardize(X)` — centra y escala cada columna para que tenga media=0, desviación estándar=1
 
-3. `covariance_matrix(X)` — calculá la matriz de covarianza (N características × N características)
+3. `covariance_matrix(X)` — calcula la matriz de covarianza (N características × N características)
 
-4. `pairwise_distance(X)` — calculá la distancia euclidiana entre todos los pares de filas de X (devolvé una matriz de distancias N×N)
+4. `pairwise_distance(X)` — calcula la distancia euclidiana entre todos los pares de filas de X (devuelve una matriz de distancias N×N)
 
-5. `ridge_regression(X, y, lambda_)` — implementá la regresión ridge: β = (XᵀX + λI)⁻¹ Xᵀy
+5. `ridge_regression(X, y, lambda_)` — implementa la regresión ridge: β = (XᵀX + λI)⁻¹ Xᵀy
 
-6. `mse(y_true, y_pred)` — calculá el error cuadrático medio
+6. `mse(y_true, y_pred)` — calcula el error cuadrático medio
 
 ## Datos iniciales
 

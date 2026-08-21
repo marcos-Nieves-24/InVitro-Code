@@ -50,7 +50,7 @@ nested = [[1, 2], [3, 4], [5, 6]]
 
 ### Indexación
 
-Accedé a los elementos por posición (indexación desde 0):
+Accede a los elementos por posición (indexación desde 0):
 
 ```python
 fruits = ["apple", "banana", "cherry", "date"]
@@ -61,7 +61,7 @@ fruits[-2]   # "cherry" (penúltimo)
 
 ### Slicing
 
-Extraé sublistas con `[inicio:fin:paso]`:
+Extrae sublistas con `[inicio:fin:paso]`:
 
 ```python
 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -124,7 +124,7 @@ matrix = [[i * j for j in range(3)] for i in range(3)]
 
 ### Mutabilidad
 
-Las listas son **mutables** — podés cambiar elementos:
+Las listas son **mutables** — puedes cambiar elementos:
 
 ```python
 fruits = ["apple", "banana", "cherry"]
@@ -275,18 +275,18 @@ print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 
 1. **Índice fuera de rango**: Acceder a un índice ≥ len(lista) lanza IndexError
 2. **Confundir append y extend**: `append` agrega un elemento; `extend` agrega elementos de un iterable
-3. **Modificar la lista mientras se itera**: Crea bugs sutiles. Iterá sobre una copia: `for x in lista[:]:`
-4. **Confusión con copia superficial**: `lista2 = lista1` no copia; referencian al mismo objeto. Usá `lista2 = lista1.copy()` o `lista2 = lista1[:]`
+3. **Modificar la lista mientras se itera**: Crea bugs sutiles. Itera sobre una copia: `for x in lista[:]:`
+4. **Confusión con copia superficial**: `lista2 = lista1` no copia; referencian al mismo objeto. Usa `lista2 = lista1.copy()` o `lista2 = lista1[:]`
 5. **Error de off-by-one en slicing**: `lista[a:b]` incluye a, excluye b
 
 ## Buenas Prácticas
 
-- Usá list comprehensions para transformaciones simples
-- Usá `enumerate()` cuando necesites índice y valor
-- Usá `zip()` para iterar sobre múltiples listas en paralelo
-- Preferí `in` para pruebas de pertenencia sobre bucles manuales
-- Usá `copy()` o `[:]` para crear copias independientes
-- Evitá modificar listas mientras iterás
+- Usa list comprehensions para transformaciones simples
+- Usa `enumerate()` cuando necesites índice y valor
+- Usa `zip()` para iterar sobre múltiples listas en paralelo
+- Prefiere `in` para pruebas de pertenencia sobre bucles manuales
+- Usa `copy()` o `[:]` para crear copias independientes
+- Evita modificar listas mientras iteras
 
 </Section>
 
@@ -325,22 +325,22 @@ print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 
 ### Nivel 2: Implementación
 
-4. Escribí una función `remove_duplicates(items)` que devuelva una nueva lista sin duplicados, preservando el orden.
-5. Usá un list comprehension para crear una lista de todos los cuadrados pares (cuadrados de números pares) del 1 al 20.
+4. Escribe una función `remove_duplicates(items)` que devuelva una nueva lista sin duplicados, preservando el orden.
+5. Usa un list comprehension para crear una lista de todos los cuadrados pares (cuadrados de números pares) del 1 al 20.
 
 ### Nivel 3: Pensamiento Crítico
 
-6. Compará la complejidad temporal de las operaciones con listas: indexación, append, insert, remove, in. ¿Por qué `in` en una lista es lento para listas grandes?
+6. Compara la complejidad temporal de las operaciones con listas: indexación, append, insert, remove, in. ¿Por qué `in` en una lista es lento para listas grandes?
 7. ¿Cuándo elegirías una lista sobre una tupla, y viceversa? ¿Cuáles son los trade-offs?
 
 ## Desafío de Código
 
-Escribí un programa que implemente un calculador de **promedio móvil con ventana**:
+Escribe un programa que implemente un calculador de **promedio móvil con ventana**:
 1. Dada una lista de números y un tamaño de ventana k
-2. Calculá el promedio de cada k elementos consecutivos
-3. Devolvé una lista de estos promedios
+2. Calcula el promedio de cada k elementos consecutivos
+3. Devuelve una lista de estos promedios
 4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)` → `[2.0, 3.0, 4.0]`
-5. Usá list comprehension y slicing
-6. Manejá casos borde: lista vacía, k > len(lista), k = 1
+5. Usa list comprehension y slicing
+6. Maneja casos borde: lista vacía, k > len(lista), k = 1
 
 </Section>

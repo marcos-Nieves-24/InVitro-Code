@@ -9,17 +9,17 @@
 
 ## Instrucciones
 
-Creá un script de Python `gene_set_analysis.py` que:
+Crea un script de Python `gene_set_analysis.py` que:
 
-1. **Conjuntos de genes**: Creá al menos 5 conjuntos que representen genes expresados en distintos tejidos o experimentos.
+1. **Conjuntos de genes**: Crea al menos 5 conjuntos que representen genes expresados en distintos tejidos o experimentos.
 
 2. **Funciones**:
-   - `jaccard(set1, set2)` — calculá la similitud de Jaccard
-   - `common_genes(*sets)` — encontrá los genes comunes a todos los conjuntos de entrada
-   - `unique_genes(*sets)` — encontrá los genes exclusivos de cada conjunto (devolvé una lista de conjuntos)
-   - `gene_recommendations(known_genes, all_sets, threshold=0.5)` — dado un conjunto de genes conocidos, encontrá qué otros conjuntos comparten al menos `threshold` de similitud de Jaccard
+   - `jaccard(set1, set2)` — calcula la similitud de Jaccard
+   - `common_genes(*sets)` — encuentra los genes comunes a todos los conjuntos de entrada
+   - `unique_genes(*sets)` — encuentra los genes exclusivos de cada conjunto (devuelve una lista de conjuntos)
+   - `gene_recommendations(known_genes, all_sets, threshold=0.5)` — dado un conjunto de genes conocidos, encuentra qué otros conjuntos comparten al menos `threshold` de similitud de Jaccard
 
-3. **Análisis**: Imprimí una matriz de similitud que muestre la similitud de Jaccard entre todos los pares.
+3. **Análisis**: Imprime una matriz de similitud que muestre la similitud de Jaccard entre todos los pares.
 
 ## Datos iniciales
 

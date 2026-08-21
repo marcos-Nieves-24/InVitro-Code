@@ -26,7 +26,7 @@
 - C) Swarm plot
 - D) Strip plot
 
-**Q5:** ¿Cómo aplicás el tema predeterminado de Seaborn?
+**Q5:** ¿Cómo aplicas el tema predeterminado de Seaborn?
 - A) `sns.default_theme()`
 - B) `sns.set_theme()`
 - C) `sns.apply_theme()`
@@ -40,7 +40,7 @@
 
 ## Pregunta de código
 
-**Q8:** Escribí código para crear un box plot con Seaborn que muestre la distribución de `total_bill` por `day` del dataset tips.
+**Q8:** Escribe código para crear un box plot con Seaborn que muestre la distribución de `total_bill` por `day` del dataset tips.
 
 ## Clave de respuestas
 

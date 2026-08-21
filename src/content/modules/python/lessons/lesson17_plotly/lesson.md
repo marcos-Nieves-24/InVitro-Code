@@ -42,7 +42,7 @@ En las lecciones anteriores aprendiste Matplotlib (control total, salida estáti
 Plotly genera figuras como estructuras de árbol serializadas a JSON que Plotly.js interpreta en el navegador. Tres capas:
 
 - **plotly.express (`px`)**: Alta abstracción, una llamada = figura completa
-- **plotly.graph_objects (`go`)**: Control medio, construís traza por traza
+- **plotly.graph_objects (`go`)**: Control medio, construyes traza por traza
 - **Plotly.js**: Renderizador JavaScript en el navegador
 
 ### La Figura Plotly
@@ -181,7 +181,7 @@ fig.show()
 
 ## Graph Objects
 
-Con `go.Figure()` armás la figura traza por traza, con control total sobre cada elemento.
+Con `go.Figure()` armas la figura traza por traza, con control total sobre cada elemento.
 
 ### Construir desde Cero
 
@@ -243,7 +243,7 @@ fig.show()
 
 ## Subplots con make_subplots
 
-`make_subplots` crea una grilla de subplots donde podés agregar trazas a celdas específicas.
+`make_subplots` crea una grilla de subplots donde puedes agregar trazas a celdas específicas.
 
 ```python
 from plotly.subplots import make_subplots
@@ -277,7 +277,7 @@ fig.show()
 
 ### Hover Templates
 
-Personalizá el tooltip que aparece al pasar el mouse:
+Personaliza el tooltip que aparece al pasar el mouse:
 
 ```python
 fig = px.scatter(px.data.iris(), x="sepal_width", y="sepal_length",
@@ -288,7 +288,7 @@ fig.show()
 
 ### Dropdown Menu
 
-Agregá un menú desplegable para cambiar entre métricas:
+Agrega un menú desplegable para cambiar entre métricas:
 
 ```python
 df = px.data.gapminder().query("country.isin(['Argentina', 'Brazil', 'Chile', 'Uruguay'])")
@@ -305,7 +305,7 @@ fig.show()
 
 ### Range Slider
 
-Agregá un slider para navegar rangos en el eje X:
+Agrega un slider para navegar rangos en el eje X:
 
 ```python
 fig.update_layout(xaxis=dict(rangeslider=dict(visible=True), type="linear"))
@@ -387,18 +387,18 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
 
 1. **No instalar kaleido**: `fig.write_image()` falla si no instalaste `pip install kaleido`
 2. **Olvidar `fig.show()`**: En scripts, la figura no se renderiza sin `fig.show()`
-3. **Mezclar px y go sin entender el flujo**: `px` devuelve `go.Figure` — podés usar `.update_layout()` y `.update_traces()` en figuras de Express
-4. **Muchos datos sin downsampling**: Plotly renderiza en el navegador; más de ~100k puntos puede colgar el browser. Usá `sample()` o agregación
-5. **No configurar hovermode**: El valor default no siempre es el más útil; usá `hovermode="x unified"` para series temporales
+3. **Mezclar px y go sin entender el flujo**: `px` devuelve `go.Figure` — puedes usar `.update_layout()` y `.update_traces()` en figuras de Express
+4. **Muchos datos sin downsampling**: Plotly renderiza en el navegador; más de ~100k puntos puede colgar el browser. Usa `sample()` o agregación
+5. **No configurar hovermode**: El valor default no siempre es el más útil; usa `hovermode="x unified"` para series temporales
 
 ## Buenas Prácticas
 
-- Empezá con `px` y migrá a `go` cuando necesités control fino
-- Usá templates incorporados: `"plotly_white"`, `"plotly_dark"`, `"seaborn"`, `"ggplot2"`
-- Configurá `hovermode` temprano para mejorar la experiencia
-- Exportá a HTML para compartir — `write_html()` produce un archivo standalone
-- Usá `fig.update_layout(margin=dict(...))` para controlar bordes
-- Para presentaciones, exportá a SVG con `write_image("fig.svg")`
+- Empieza con `px` y migra a `go` cuando necesitas control fino
+- Usa templates incorporados: `"plotly_white"`, `"plotly_dark"`, `"seaborn"`, `"ggplot2"`
+- Configura `hovermode` temprano para mejorar la experiencia
+- Exporta a HTML para compartir — `write_html()` produce un archivo standalone
+- Usa `fig.update_layout(margin=dict(...))` para controlar bordes
+- Para presentaciones, exporta a SVG con `write_image("fig.svg")`
 
 </Section>
 
@@ -437,13 +437,13 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
 ### Nivel 1: Básico
 
 1. ¿Qué tipo de objeto devuelve una función de Plotly Express como `px.scatter()`?
-2. ¿Cómo agregás una segunda traza a una figura existente de Graph Objects?
+2. ¿Cómo agregas una segunda traza a una figura existente de Graph Objects?
 3. ¿Cuál es la diferencia entre `fig.show()` y `fig.write_html()`?
 
 ### Nivel 2: Implementación
 
-4. Usando `px.data.tips()`, creá un scatter plot de `total_bill` vs `tip` coloreado por `time` y con tamaño según `size`.
-5. Construí una figura con `go.Figure()` que contenga dos trazas: un scatter y una línea, con template "plotly_dark".
+4. Usando `px.data.tips()`, crea un scatter plot de `total_bill` vs `tip` coloreado por `time` y con tamaño según `size`.
+5. Construye una figura con `go.Figure()` que contenga dos trazas: un scatter y una línea, con template "plotly_dark".
 
 ### Nivel 3: Pensamiento Crítico
 
@@ -452,13 +452,13 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
 
 ## Desafío de Código
 
-Creá un **scatter 3D interactivo** usando `px.scatter_3d()` del dataset iris:
+Crea un **scatter 3D interactivo** usando `px.scatter_3d()` del dataset iris:
 
-1. Usá `px.data.iris()` como fuente de datos
+1. Usa `px.data.iris()` como fuente de datos
 2. Ejes: `sepal_length` (x), `sepal_width` (y), `petal_length` (z)
 3. Color por `species`
 4. Tamaño de los puntos según `petal_width`
-5. Agregá hover_data mostrando todas las columnas
-6. Exportá la figura a `iris_3d.html`
+5. Agrega hover_data mostrando todas las columnas
+6. Exporta la figura a `iris_3d.html`
 
 </Section>

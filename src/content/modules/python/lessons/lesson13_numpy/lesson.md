@@ -310,19 +310,19 @@ print(f"\nMatriz de correlación:\n{corr}")
 
 1. **Confundir np.array() con listas de Python**: Los arrays soportan operaciones elemento a elemento; las listas no
 2. **Precisión de coma flotante**: `np.float64` tiene precisión limitada como los floats de Python
-3. **Confundir copia vs vista**: El slicing devuelve una vista, no una copia. Usá `.copy()` para datos independientes
-4. **Errores de broadcasting**: Formas incompatibles lanzan ValueError. Verificá las formas con `.shape`
-5. **Usar `==` con floats**: Mismos problemas de precisión que Python; usá `np.isclose()`
+3. **Confundir copia vs vista**: El slicing devuelve una vista, no una copia. Usa `.copy()` para datos independientes
+4. **Errores de broadcasting**: Formas incompatibles lanzan ValueError. Verifica las formas con `.shape`
+5. **Usar `==` con floats**: Mismos problemas de precisión que Python; usa `np.isclose()`
 6. **Olvidar el dtype**: Tipos mixtos en lista → dtype string (todos los elementos se vuelven strings)
 
 ## Buenas Prácticas
 
-- Usá `np.array()` con dtype explícito cuando sea necesario
-- Usá operaciones vectorizadas en lugar de bucles de Python (mucho más rápido)
-- Usá `.copy()` cuando necesites modificar un slice de forma independiente
-- Usá `np.isclose()` para comparaciones de coma flotante
-- Usá el parámetro `axis=` para operaciones por fila/columna
-- Perfilá el código: NumPy vectorizado es 10-100x más rápido que bucles de Python
+- Usa `np.array()` con dtype explícito cuando sea necesario
+- Usa operaciones vectorizadas en lugar de bucles de Python (mucho más rápido)
+- Usa `.copy()` cuando necesites modificar un slice de forma independiente
+- Usa `np.isclose()` para comparaciones de coma flotante
+- Usa el parámetro `axis=` para operaciones por fila/columna
+- Perfila el código: NumPy vectorizado es 10-100x más rápido que bucles de Python
 
 </Section>
 
@@ -331,12 +331,12 @@ print(f"\nMatriz de correlación:\n{corr}")
 ## Resumen
 
 - NumPy provee el ndarray: rápido, eficiente en memoria, multidimensional
-- Creá arrays con `np.array()`, `np.zeros()`, `np.ones()`, `np.arange()`, etc.
+- Crea arrays con `np.array()`, `np.zeros()`, `np.ones()`, `np.arange()`, etc.
 - Indexación y slicing similares a listas, pero con capacidades multidimensionales
 - Las funciones universales (ufuncs) operan elemento a elemento a velocidad C
 - Broadcasting permite operaciones sobre arrays de diferentes formas
 - Álgebra lineal: `@`, `np.linalg.inv`, `np.linalg.eig`
-- Siempre preferí operaciones vectorizadas sobre bucles de Python
+- Siempre prefiere operaciones vectorizadas sobre bucles de Python
 
 ## Términos Clave
 
@@ -358,30 +358,30 @@ print(f"\nMatriz de correlación:\n{corr}")
 
 ### Nivel 1: Básico
 
-1. Creá un array 4×4 de ceros. ¿Cómo crearías su versión de matriz identidad?
+1. Crea un array 4×4 de ceros. ¿Cómo crearías su versión de matriz identidad?
 2. ¿Cuál es la diferencia entre `arr[1]` y `arr[:, 1]` para un array 2D?
 3. ¿Qué devuelve `np.arange(2, 10, 3)`?
 
 ### Nivel 2: Implementación
 
-4. Escribí una función que normalice una matriz para que tenga media=0 y std=1 en cada columna.
-5. Implementá multiplicación de matrices manualmente (con bucles) y luego con `@`. Compará el rendimiento en matrices de 100×100.
+4. Escribe una función que normalice una matriz para que tenga media=0 y std=1 en cada columna.
+5. Implementa multiplicación de matrices manualmente (con bucles) y luego con `@`. Compara el rendimiento en matrices de 100×100.
 
 ### Nivel 3: Pensamiento Crítico
 
 6. ¿Cómo logra NumPy su ventaja de velocidad sobre las listas de Python? ¿Cuál es el rol de la memoria contigua y la vectorización?
-7. ¿Cuándo fallaría el broadcasting? Dá un ejemplo de formas incompatibles y explicá cómo solucionarlo.
+7. ¿Cuándo fallaría el broadcasting? Da un ejemplo de formas incompatibles y explica cómo solucionarlo.
 
 ## Desafío de Código
 
-Escribí un programa que implemente **Análisis de Componentes Principales (PCA)** desde cero usando NumPy:
-1. Generá un dataset aleatorio (100 muestras, 5 características)
-2. Centrá los datos (restá la media de cada columna)
-3. Calculá la matriz de covarianza
-4. Calculá autovalores y autovectores de la matriz de covarianza
-5. Ordená los autovectores por autovalores (descendente)
-6. Proyectá los datos sobre las primeras 2 componentes principales
-7. Verificá tu resultado comparando con el error de reconstrucción (reconstruí el original desde los datos reducidos)
-8. Usá solo NumPy — nada de scikit-learn
+Escribe un programa que implemente **Análisis de Componentes Principales (PCA)** desde cero usando NumPy:
+1. Genera un dataset aleatorio (100 muestras, 5 características)
+2. Centra los datos (resta la media de cada columna)
+3. Calcula la matriz de covarianza
+4. Calcula autovalores y autovectores de la matriz de covarianza
+5. Ordena los autovectores por autovalores (descendente)
+6. Proyecta los datos sobre las primeras 2 componentes principales
+7. Verifica tu resultado comparando con el error de reconstrucción (reconstruye el original desde los datos reducidos)
+8. Usa solo NumPy — nada de scikit-learn
 
 </Section>

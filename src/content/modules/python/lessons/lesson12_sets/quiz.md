@@ -2,7 +2,7 @@
 
 ## Opción múltiple (5 preguntas)
 
-**Q1:** ¿Cómo creás un conjunto vacío en Python?
+**Q1:** ¿Cómo creas un conjunto vacío en Python?
 - A) `{}`
 - B) `set()`
 - C) `[]`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `remove()` y `discard()` para conjuntos.
+**Q6:** Explica la diferencia entre `remove()` y `discard()` para conjuntos.
 
 **Q7:** ¿Qué es un frozenset y cuándo lo usarías?
 
 ## Pregunta de código
 
-**Q8:** Escribí una función `common_elements(list1, list2)` que devuelva un conjunto con los elementos que aparecen en ambas listas.
+**Q8:** Escribe una función `common_elements(list1, list2)` que devuelva un conjunto con los elementos que aparecen en ambas listas.
 
 ## Clave de respuestas
 
@@ -54,9 +54,9 @@
 
 **Q5:** A) O(1)
 
-**Q6:** `remove(x)` elimina x del conjunto pero lanza un KeyError si x no está presente. `discard(x)` también elimina x pero no hace nada si x no está presente (sin error). Usá `discard` cuando no estés seguro de que el elemento exista.
+**Q6:** `remove(x)` elimina x del conjunto pero lanza un KeyError si x no está presente. `discard(x)` también elimina x pero no hace nada si x no está presente (sin error). Usa `discard` cuando no estés seguro de que el elemento exista.
 
-**Q7:** Un frozenset es una versión inmutable de un conjunto. No se puede modificar después de su creación (sin add, remove, etc.). Usá frozenset cuando necesites un objeto con características de conjunto y hashable, como usar un conjunto como clave de diccionario o como elemento de otro conjunto.
+**Q7:** Un frozenset es una versión inmutable de un conjunto. No se puede modificar después de su creación (sin add, remove, etc.). Usa frozenset cuando necesites un objeto con características de conjunto y hashable, como usar un conjunto como clave de diccionario o como elemento de otro conjunto.
 
 **Q8:**
 ```python

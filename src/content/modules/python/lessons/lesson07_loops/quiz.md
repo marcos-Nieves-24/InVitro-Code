@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre `break` y `continue`.
+**Q6:** Explica la diferencia entre `break` y `continue`.
 
 **Q7:** ¿Cuál es el propósito de la cláusula `else` en un bucle?
 
 ## Pregunta de código
 
-**Q8:** Escribí un bucle for que sume todos los números pares del 1 al 50 e imprima el resultado. Usá `continue` para saltar los números impares.
+**Q8:** Escribe un bucle for que sume todos los números pares del 1 al 50 e imprima el resultado. Usa `continue` para saltar los números impares.
 
 ## Clave de respuestas
 

@@ -8,7 +8,7 @@
 - C) Plot
 - D) Canvas
 
-**Q2:** ¿Cómo creás una figura con 2 filas y 3 columnas de subplots?
+**Q2:** ¿Cómo creas una figura con 2 filas y 3 columnas de subplots?
 - A) `plt.subplot(2, 3)`
 - B) `plt.subplots(2, 3)`
 - C) `plt.figure(2, 3)`
@@ -34,13 +34,13 @@
 
 ## Respuesta corta (2 preguntas)
 
-**Q6:** Explicá la diferencia entre la interfaz de pyplot y la interfaz orientada a objetos en Matplotlib.
+**Q6:** Explica la diferencia entre la interfaz de pyplot y la interfaz orientada a objetos en Matplotlib.
 
 **Q7:** ¿Por qué deberías guardar las figuras como SVG para publicaciones en lugar de JPG?
 
 ## Pregunta de código
 
-**Q8:** Escribí código para crear un line plot simple de y = x² para x de 0 a 10, con ejes etiquetados y un título.
+**Q8:** Escribe código para crear un line plot simple de y = x² para x de 0 a 10, con ejes etiquetados y un título.
 
 ## Clave de respuestas
 
