@@ -49,17 +49,17 @@ d) Menor, mayor
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá la relación entre el número de árboles (n_estimators) y el rendimiento del bosque aleatorio. ¿Por qué los rendimientos decrecen?
+**Q6.** Explica la relación entre el número de árboles (n_estimators) y el rendimiento del bosque aleatorio. ¿Por qué los rendimientos decrecen?
 
-<details><summary>Respuesta</summary>A medida que n_estimators aumenta, el rendimiento mejora rápido al principio y luego se estabiliza. Cada árbol es un estimador insesgado con alta varianza. El promediado reduce la varianza aproximadamente en 1/B donde B es el número de árboles. Sin embargo, los árboles están correlacionados (ρ > 0), así que incluso con infinitos árboles, la varianza se aproxima a ρσ². Regla empírica: empezá con 100 árboles y aumentá hasta que el OOB score se estabilice.</details>
+<details><summary>Respuesta</summary>A medida que n_estimators aumenta, el rendimiento mejora rápido al principio y luego se estabiliza. Cada árbol es un estimador insesgado con alta varianza. El promediado reduce la varianza aproximadamente en 1/B donde B es el número de árboles. Sin embargo, los árboles están correlacionados (ρ > 0), así que incluso con infinitos árboles, la varianza se aproxima a ρσ². Regla empírica: empieza con 100 árboles y aumenta hasta que el OOB score se estabilice.</details>
 
 **Q7.** ¿Cuándo usarías la importancia por permutación en lugar de la importancia de características basada en impureza en un bosque aleatorio?
 
-<details><summary>Respuesta</summary>La importancia basada en impureza puede estar sesgada hacia features de alta cardinalidad (aquellas con muchos valores únicos) y puede ser engañosa cuando las features están en escalas diferentes. La importancia por permutación mide directamente la caída en el rendimiento cuando se barajan los valores de una feature, lo que la hace más confiable. Usá la importancia por permutación para la selección final de features y la importancia por impureza para una visión rápida.</details>
+<details><summary>Respuesta</summary>La importancia basada en impureza puede estar sesgada hacia features de alta cardinalidad (aquellas con muchos valores únicos) y puede ser engañosa cuando las features están en escalas diferentes. La importancia por permutación mide directamente la caída en el rendimiento cuando se barajan los valores de una feature, lo que la hace más confiable. Usa la importancia por permutación para la selección final de features y la importancia por impureza para una visión rápida.</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `oob_vs_n_estimators(X, y, max_n=500)` que entrene bosques aleatorios con n_estimators desde 1 hasta max_n (en pasos de 10) y devuelva una lista de OOB scores. Después graficá el OOB score vs. n_estimators.
+**Q8.** Escribe una función en Python `oob_vs_n_estimators(X, y, max_n=500)` que entrene bosques aleatorios con n_estimators desde 1 hasta max_n (en pasos de 10) y devuelva una lista de OOB scores. Después grafica el OOB score vs. n_estimators.
 
 <details><summary>Respuesta</summary>
 

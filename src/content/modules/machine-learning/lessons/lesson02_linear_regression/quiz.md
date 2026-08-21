@@ -53,13 +53,13 @@ d) Que los coeficientes son negativos
 
 <details><summary>Respuesta</summary>El modelo está sobreajustado — memoriza los datos de entrenamiento pero no logra generalizar. Posibles soluciones: reducir la complejidad del modelo (menos features, menor grado polinómico), aplicar regularización (Ridge/Lasso), obtener más datos de entrenamiento o simplificar el conjunto de features.</details>
 
-**Q7.** Explicá por qué la solución OLS de forma cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ es problemática cuando $\mathbf{X}^\top\mathbf{X}$ no es invertible. ¿Cuándo ocurre esto?
+**Q7.** Explica por qué la solución OLS de forma cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ es problemática cuando $\mathbf{X}^\top\mathbf{X}$ no es invertible. ¿Cuándo ocurre esto?
 
 <details><summary>Respuesta</summary>Cuando $\mathbf{X}^\top\mathbf{X}$ es singular (determinante = 0), no tiene inversa. Esto ocurre cuando las features son perfectamente multicolineales (una feature es una combinación lineal de otras) o cuando hay menos muestras que features (n < p). Las soluciones incluyen eliminar features correlacionadas, usar la pseudoinversa o aplicar regularización (Ridge agrega $\lambda I$ haciendo la matriz invertible).</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `ridge_regression_scratch(X, y, lambda_val)` que implemente la regresión Ridge (OLS con penalización L2) usando la solución de forma cerrada: $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$. Probalo contra `sklearn.linear_model.Ridge`.
+**Q8.** Escribe una función en Python `ridge_regression_scratch(X, y, lambda_val)` que implemente la regresión Ridge (OLS con penalización L2) usando la solución de forma cerrada: $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}$. Pruébalo contra `sklearn.linear_model.Ridge`.
 
 <details><summary>Respuesta</summary>
 

@@ -49,17 +49,17 @@ d) Selección de features
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Describí un pipeline de ML de extremo a extremo desde los datos crudos hasta la decisión de despliegue. Nombrá al menos 5 etapas.
+**Q6.** Describe un pipeline de ML de extremo a extremo desde los datos crudos hasta la decisión de despliegue. Nombra al menos 5 etapas.
 
 <details><summary>Respuesta</summary>1) Recolección y entendimiento de los datos (EDA), 2) Preprocesamiento de los datos (limpieza, scaling, encoding), 3) Entrenamiento y selección del modelo (comparar múltiples algoritmos), 4) Evaluación del modelo (validación cruzada, set de prueba, métricas de negocio), 5) Interpretación del modelo (importancia de características, PDP), 6) Despliegue y monitoreo (trackear el rendimiento a lo largo del tiempo).</details>
 
 **Q7.** El modelo de predicción de calidad de una empresa biotecnológica logra una exactitud excelente. Sin embargo, el equipo de manufactura se niega a usarlo. ¿Qué pasos darías para lograr su adopción?
 
-<details><summary>Respuesta</summary>1) Generá confianza mediante la interpretabilidad: mostrá la importancia de características y los PDP para que el equipo entienda los drivers. 2) Empezá con un piloto: corré el modelo en paralelo con los procesos existentes sin reemplazarlos. 3) Involucrá a los expertos del dominio en la validación de las features y las predicciones. 4) Comunicate en lenguaje de negocio/proceso, no en jerga de ML. 5) Documentá las limitaciones con claridad. 6) Demostrá el ROI con un ejemplo concreto (por ejemplo, "si hubiéramos tenido este modelo el mes pasado, habríamos detectado 3 problemas de calidad antes").</details>
+<details><summary>Respuesta</summary>1) Genera confianza mediante la interpretabilidad: muestra la importancia de características y los PDP para que el equipo entienda los drivers. 2) Empieza con un piloto: corre el modelo en paralelo con los procesos existentes sin reemplazarlos. 3) Involucra a los expertos del dominio en la validación de las features y las predicciones. 4) Comunícate en lenguaje de negocio/proceso, no en jerga de ML. 5) Documenta las limitaciones con claridad. 6) Demuestra el ROI con un ejemplo concreto (por ejemplo, "si hubiéramos tenido este modelo el mes pasado, habríamos detectado 3 problemas de calidad antes").</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `regression_pipeline_comparison(X, y)` que cree un pipeline con StandardScaler para cada uno de LinearRegression, RandomForestRegressor (n=100) y GradientBoostingRegressor (n=100). Devuelve un DataFrame comparando su RMSE y su R² usando validación cruzada de 5 folds.
+**Q8.** Escribe una función en Python `regression_pipeline_comparison(X, y)` que cree un pipeline con StandardScaler para cada uno de LinearRegression, RandomForestRegressor (n=100) y GradientBoostingRegressor (n=100). Devuelve un DataFrame comparando su RMSE y su R² usando validación cruzada de 5 folds.
 
 <details><summary>Respuesta</summary>
 

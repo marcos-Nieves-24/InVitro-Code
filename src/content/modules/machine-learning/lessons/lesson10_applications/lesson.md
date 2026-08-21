@@ -42,7 +42,7 @@ Una empresa produce proteínas terapéuticas. Cada lote mide: temperatura del bi
 **Pipeline:**
 - Features numéricas → `StandardScaler`
 - Modelos a comparar: `LinearRegression`, `RandomForestRegressor`, `GradientBoostingRegressor`
-- Métrica: RMSE (necesitás saber cuánto te equivocás en la escala de calidad)
+- Métrica: RMSE (necesitas saber cuánto te equivocas en la escala de calidad)
 - Hiperparámetros: `GridSearchCV` para encontrar la mejor combinación
 
 <CalloutCheck>
@@ -66,7 +66,7 @@ Una empresa SaaS tiene datos de 5000 clientes: frecuencia de uso, features utili
   moduleSlug="machine-learning"
   lessonSlug="lesson10_applications"
   prompt="El modelo de abandono tiene 85% de accuracy. El CEO quiere saber: '¿cuánta plata nos ahorra esto?' ¿Cómo traducirías accuracy a impacto de negocio?"
-  answer="Convertí las predicciones en acciones y las acciones en dinero. Ejemplo: si el modelo identifica 100 clientes en riesgo y contactás a 50, asumiendo que retenés al 40% de los contactados (20 clientes), y cada cliente vale $500/mes → ahorraste $10,000/mes. La accuracy es irrelevante para el CEO — lo que importa es: ¿cuántos abandonos prevenís y cuánto vale cada uno?"
+  answer="Convierte las predicciones en acciones y las acciones en dinero. Ejemplo: si el modelo identifica 100 clientes en riesgo y contactas a 50, asumiendo que retienes al 40% de los contactados (20 clientes), y cada cliente vale $500/mes → ahorraste $10,000/mes. La accuracy es irrelevante para el CEO — lo que importa es: ¿cuántos abandonos previenes y cuánto vale cada uno?"
 />
 
 </Section>
@@ -77,8 +77,8 @@ Una empresa SaaS tiene datos de 5000 clientes: frecuencia de uso, features utili
   rows={[
     { feature: "¿Interpretabilidad crítica?", left: "Regresión lineal, Árbol de decisión, Regresión logística", right: "Random Forest, Gradient Boosting, XGBoost" },
     { feature: "¿Datos pequeños (<1000 filas)?", left: "Regresión lineal/logística, Árboles shallow", right: "Cualquiera con regularización" },
-    { feature: "¿Muchas features (>100)?", left: "PCA + modelo lineal, Random Forest", right: "Red neuronal (si tenés MUCHOS datos)" },
-    { feature: "¿Necesitás producir ya?", left: "Random Forest con defaults", right: "Gradient Boosting con GridSearch" },
+    { feature: "¿Muchas features (>100)?", left: "PCA + modelo lineal, Random Forest", right: "Red neuronal (si tienes MUCHOS datos)" },
+    { feature: "¿Necesitas producir ya?", left: "Random Forest con defaults", right: "Gradient Boosting con GridSearch" },
   ]}
 />
 
@@ -91,11 +91,11 @@ La pregunta más importante no es "¿qué modelo es mejor?" sino "¿qué modelo 
 <Section number={5} title="Lo que sigue" eyebrow="RESUMEN">
 
 <ConceptCard variant="key-idea">
-Completaste el módulo de Machine Learning. Sabés predecir números (regresión), clasificar categorías (clasificación), agrupar sin etiquetas (clustering), reducir dimensiones (PCA), y construir ensembles (Random Forest, Gradient Boosting). Lo que sigue es practicar con datos reales. El ML se aprende haciendo.
+Completaste el módulo de Machine Learning. Sabes predecir números (regresión), clasificar categorías (clasificación), agrupar sin etiquetas (clustering), reducir dimensiones (PCA), y construir ensembles (Random Forest, Gradient Boosting). Lo que sigue es practicar con datos reales. El ML se aprende haciendo.
 </ConceptCard>
 
 <CalloutCheck>
-**Próximo paso:** Proyecto final donde apliques estos pipelines a un dataset de tu interés — biotecnología, SaaS, o lo que te apasione. Elegí el problema, los datos, el modelo, y contá la historia. Eso es lo que hace un Data Scientist de verdad.
+**Próximo paso:** Proyecto final donde apliques estos pipelines a un dataset de tu interés — biotecnología, SaaS, o lo que te apasione. Elige el problema, los datos, el modelo, y cuenta la historia. Eso es lo que hace un Data Scientist de verdad.
 </CalloutCheck>
 
 </Section>
@@ -103,7 +103,7 @@ Completaste el módulo de Machine Learning. Sabés predecir números (regresión
 <Section number={6} title="Ejercicio final" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío final:** Construí un pipeline completo: desde datos crudos hasta selección de modelo.
+**Desafío final:** Construye un pipeline completo: desde datos crudos hasta selección de modelo.
 </ConceptCard>
 
 <CodeEditor

@@ -49,7 +49,7 @@ d) Predecir si un paciente tiene una enfermedad
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá la diferencia entre entrenamiento y predicción en el Machine Learning.
+**Q6.** Explica la diferencia entre entrenamiento y predicción en el Machine Learning.
 
 <details><summary>Respuesta</summary>El entrenamiento es el proceso en el que el modelo aprende patrones a partir de datos etiquetados ajustando sus parámetros internos. La predicción consiste en aplicar el modelo entrenado a datos nuevos, nunca vistos, para generar salidas. El entrenamiento requiere datos etiquetados y esfuerzo computacional; la predicción es rápida y puede aplicarse a datos sin etiquetar.</details>
 
@@ -59,12 +59,12 @@ d) Predecir si un paciente tiene una enfermedad
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `bias_variance_demo(degree)` que:
+**Q8.** Escribe una función en Python `bias_variance_demo(degree)` que:
 1. Genere datos sinusoidales sintéticos con ruido (20 puntos, `np.sin(2πx) + N(0, 0.2)`)
 2. Ajuste una regresión polinómica del grado dado
 3. Devuelva el MSE de entrenamiento y el MSE de prueba
 
-Probá tu función con degree=1, degree=4 y degree=15.
+Prueba tu función con degree=1, degree=4 y degree=15.
 
 <details><summary>Respuesta</summary>
 

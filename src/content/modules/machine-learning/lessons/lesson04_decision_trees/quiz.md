@@ -49,17 +49,17 @@ d) Podar el árbol después del entrenamiento
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá por qué se considera que los árboles de decisión son clasificadores "inestables". ¿Qué significa esto en la práctica?
+**Q6.** Explica por qué se considera que los árboles de decisión son clasificadores "inestables". ¿Qué significa esto en la práctica?
 
 <details><summary>Respuesta</summary>Los árboles de decisión son inestables porque pequeños cambios en los datos de entrenamiento pueden llevar a árboles muy diferentes. Unos pocos samples distintos en la parte superior del árbol cambian toda la estructura. En la práctica, esto significa que la varianza es alta — árboles de diferentes divisiones de datos pueden dar distintos rankings de importancia de features y distintas predicciones. Los bosques aleatorios (Random Forests) abordan esto promediando muchos árboles.</details>
 
-**Q7.** Compará la impureza de Gini y la entropía como criterios de división. ¿Cuándo elegirías una sobre la otra?
+**Q7.** Compara la impureza de Gini y la entropía como criterios de división. ¿Cuándo elegirías una sobre la otra?
 
 <details><summary>Respuesta</summary>Ambas miden la impureza de un nodo y producen árboles similares en la práctica. Gini va de 0 a 0.5 (binario), la entropía de 0 a 1. Gini es ligeramente más rápido de calcular (sin log). La entropía es más sensible a los cambios en la probabilidad cerca de 0.5. scikit-learn usa Gini por defecto. La diferencia práctica es mínima — ambas encontrarán las mismas divisiones en la mayoría de los casos.</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `compute_gini(y)` que calcule la impureza de Gini a partir de un array de etiquetas de clase. Después, escribí `find_best_split(X, y, feature_idx)` que encuentre el mejor umbral para una feature dada (maximizando la ganancia de información usando Gini).
+**Q8.** Escribe una función en Python `compute_gini(y)` que calcule la impureza de Gini a partir de un array de etiquetas de clase. Después, escribe `find_best_split(X, y, feature_idx)` que encuentre el mejor umbral para una feature dada (maximizando la ganancia de información usando Gini).
 
 <details><summary>Respuesta</summary>
 

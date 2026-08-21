@@ -2,7 +2,7 @@
 
 ## Descripción
 
-El aprendizaje supervisado es el tipo de ML más común: tenés features (X) y etiquetas (y), y el modelo aprende a mapear unas a otras. Esta subunidad cubre desde los fundamentos conceptuales hasta ensembles avanzados.
+El aprendizaje supervisado es el tipo de ML más común: tienes features (X) y etiquetas (y), y el modelo aprende a mapear unas a otras. Esta subunidad cubre desde los fundamentos conceptuales hasta ensembles avanzados.
 
 ## Lecciones
 

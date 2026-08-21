@@ -49,7 +49,7 @@ d) El primer componente siempre separa las clases
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá la relación entre los eigenvalues y la varianza explicada en PCA.
+**Q6.** Explica la relación entre los eigenvalues y la varianza explicada en PCA.
 
 <details><summary>Respuesta</summary>Cada eigenvalue (λₖ) representa la varianza capturada por su componente principal correspondiente. El ratio de varianza explicada del componente k es λₖ / Σλⱼ. Los componentes con eigenvalues más grandes capturan más varianza. El primer componente tiene el eigenvalue más grande, el segundo el siguiente más grande, y así sucesivamente. La suma de todos los eigenvalues equivale a la varianza total del dataset.</details>
 
@@ -59,7 +59,7 @@ d) El primer componente siempre separa las clases
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `pca_scree_plot(X, n_components=10)` que:
+**Q8.** Escribe una función en Python `pca_scree_plot(X, n_components=10)` que:
 1. Escale los datos
 2. Ajuste PCA con n_components
 3. Cree un scree plot (gráfico de barras de los ratios de varianza explicada)

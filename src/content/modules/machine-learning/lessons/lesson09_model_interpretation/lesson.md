@@ -23,10 +23,10 @@ Quiz: quiz.md
 <Section number={1} title="No basta con predecir bien — hay que explicar por qué" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Un modelo que predice con 99% de accuracy pero no podés explicar por qué decidió algo es inútil en medicina, finanzas o justicia. La interpretabilidad no es un lujo — es un requisito ético y legal.
+Un modelo que predice con 99% de accuracy pero no puedes explicar por qué decidió algo es inútil en medicina, finanzas o justicia. La interpretabilidad no es un lujo — es un requisito ético y legal.
 </MascotMessage>
 
-Los modelos complejos (Random Forest, Gradient Boosting) son cajas negras: funcionan muy bien pero no te dicen por qué. En biotecnología necesitás saber qué genes predicen una enfermedad. En SaaS necesitás saber qué comportamientos predicen abandono. La **interpretabilidad** cierra esa brecha.
+Los modelos complejos (Random Forest, Gradient Boosting) son cajas negras: funcionan muy bien pero no te dicen por qué. En biotecnología necesitas saber qué genes predicen una enfermedad. En SaaS necesitas saber qué comportamientos predicen abandono. La **interpretabilidad** cierra esa brecha.
 
 <ConceptCard variant="key-idea">
 Interpretar no es solo mirar feature importance del modelo. Es responder: ¿qué features importan? ¿en qué dirección? ¿el efecto es lineal o no lineal? ¿esta predicción individual por qué se hizo?
@@ -34,12 +34,12 @@ Interpretar no es solo mirar feature importance del modelo. Es responder: ¿qué
 
 </Section>
 
-<Section number={2} title="Importancia por permutación: la que te podés creer" eyebrow="CONCEPTO">
+<Section number={2} title="Importancia por permutación: la que te puedes creer" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
 **Importancia por impureza:** Cuánto reduce Gini/Entropía cada feature durante el entrenamiento. Rápida pero sesgada — favorece features con muchos valores únicos y features correlacionadas.
 
-**Importancia por permutación:** Mezclá aleatoriamente una feature y medí cuánto empeora el modelo. Si la feature era importante, el rendimiento cae. Si era irrelevante, no cambia nada. Mucho más confiable.
+**Importancia por permutación:** Mezcla aleatoriamente una feature y mide cuánto empeora el modelo. Si la feature era importante, el rendimiento cae. Si era irrelevante, no cambia nada. Mucho más confiable.
 </ConceptCard>
 
 <ComparisonTable
@@ -55,7 +55,7 @@ Interpretar no es solo mirar feature importance del modelo. Es responder: ¿qué
 <Section number={3} title="Dependencia parcial: el efecto de una feature aislada" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
-Un **Partial Dependence Plot (PDP)** muestra cómo cambia la predicción promedio cuando variás una feature, manteniendo todas las demás constantes. Responde: "si todo lo demás sigue igual, ¿subir la edad del paciente aumenta o disminuye el riesgo predicho?"
+Un **Partial Dependence Plot (PDP)** muestra cómo cambia la predicción promedio cuando varías una feature, manteniendo todas las demás constantes. Responde: "si todo lo demás sigue igual, ¿subir la edad del paciente aumenta o disminuye el riesgo predicho?"
 </ConceptCard>
 
 ```python
@@ -84,7 +84,7 @@ Limitación del PDP: asume que las features son independientes. Si "edad" y "añ
 </ConceptCard>
 
 <CalloutCheck>
-En medicina: "Este paciente fue clasificado como alto riesgo porque tiene biomarker_1 elevado (+30% riesgo), age > 65 (+15%), y gene_mutation_count = 5 (+20%)." Eso es lo que SHAP te permite decir. Es la diferencia entre "confiá en mí" y "acá está la evidencia."
+En medicina: "Este paciente fue clasificado como alto riesgo porque tiene biomarker_1 elevado (+30% riesgo), age > 65 (+15%), y gene_mutation_count = 5 (+20%)." Eso es lo que SHAP te permite decir. Es la diferencia entre "confía en mí" y "aquí está la evidencia."
 </CalloutCheck>
 
 </Section>
@@ -100,7 +100,7 @@ La importancia por permutación es más confiable que la de impureza. Los PDP mu
 <Section number={6} title="Ejercicios" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Compará importancia por impureza vs permutación en un Random Forest.
+**Desafío:** Compara importancia por impureza vs permutación en un Random Forest.
 </ConceptCard>
 
 <CodeEditor

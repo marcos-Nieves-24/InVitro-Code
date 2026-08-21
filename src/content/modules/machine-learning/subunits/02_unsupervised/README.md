@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Cuando no tenés etiquetas, necesitás que el modelo descubra estructura por sí mismo. Esta subunidad cubre los dos enfoques principales del aprendizaje no supervisado: clustering (agrupar) y reducción de dimensionalidad (comprimir).
+Cuando no tienes etiquetas, necesitas que el modelo descubra estructura por sí mismo. Esta subunidad cubre los dos enfoques principales del aprendizaje no supervisado: clustering (agrupar) y reducción de dimensionalidad (comprimir).
 
 ## Lecciones
 

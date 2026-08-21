@@ -49,17 +49,17 @@ d) El reemplazo de los árboles por redes neuronales
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá cómo funciona el early stopping en gradient boosting y por qué es importante.
+**Q6.** Explica cómo funciona el early stopping en gradient boosting y por qué es importante.
 
 <details><summary>Respuesta</summary>El early stopping monitorea el rendimiento en un set de validación después de agregar cada árbol. Cuando el rendimiento de validación deja de mejorar (o empieza a decrecer) durante un número especificado de iteraciones, el entrenamiento se detiene. Esto previene el sobreajuste al encontrar el número óptimo de árboles sin ajuste manual. Es importante porque el boosting puede sobreajustarse si se agregan demasiados árboles, especialmente con una tasa de aprendizaje baja.</details>
 
-**Q7.** Compará los roles de la tasa de aprendizaje y n_estimators en gradient boosting. ¿Cuál es la relación entre ellos?
+**Q7.** Compara los roles de la tasa de aprendizaje y n_estimators en gradient boosting. ¿Cuál es la relación entre ellos?
 
-<details><summary>Respuesta</summary>La tasa de aprendizaje (η) reduce la contribución de cada árbol al conjunto. Un η más bajo significa que cada árbol tiene menos impacto, requiriendo más árboles (n_estimators más alto) para lograr un buen rendimiento. La relación es aproximadamente: n_estimators óptimo × 1 / tasa de aprendizaje. Una estrategia común: establecé learning_rate = 0.01-0.1 y usá early stopping para determinar n_estimators. Las tasas de aprendizaje más bajas con más árboles generalmente generalizan mejor que las tasas más altas con menos árboles.</details>
+<details><summary>Respuesta</summary>La tasa de aprendizaje (η) reduce la contribución de cada árbol al conjunto. Un η más bajo significa que cada árbol tiene menos impacto, requiriendo más árboles (n_estimators más alto) para lograr un buen rendimiento. La relación es aproximadamente: n_estimators óptimo × 1 / tasa de aprendizaje. Una estrategia común: establece learning_rate = 0.01-0.1 y usa early stopping para determinar n_estimators. Las tasas de aprendizaje más bajas con más árboles generalmente generalizan mejor que las tasas más altas con menos árboles.</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `compare_boosting_vs_bagging(X, y)` que entrene un GradientBoostingClassifier y un RandomForestClassifier (ambos con 100 estimators, max_depth=3) y devuelva un DataFrame comparando sus exactitudes de entrenamiento y de prueba.
+**Q8.** Escribe una función en Python `compare_boosting_vs_bagging(X, y)` que entrene un GradientBoostingClassifier y un RandomForestClassifier (ambos con 100 estimators, max_depth=3) y devuelva un DataFrame comparando sus exactitudes de entrenamiento y de prueba.
 
 <details><summary>Respuesta</summary>
 

@@ -61,15 +61,15 @@ $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}
 
 <Section number={3} title="Descenso por gradiente: la alternativa iterativa" eyebrow="MATEMÁTICA">
 
-Cuando tenés miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es carísimo. El descenso por gradiente ofrece un camino iterativo:
+Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es carísimo. El descenso por gradiente ofrece un camino iterativo:
 
-1. Iniciá con $\boldsymbol{\beta}$ aleatorio
-2. Calculá el gradiente del error respecto a $\boldsymbol{\beta}$
-3. Actualizá: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
-4. Repetí hasta converger
+1. Inicia con $\boldsymbol{\beta}$ aleatorio
+2. Calcula el gradiente del error respecto a $\boldsymbol{\beta}$
+3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
+4. Repite hasta converger
 
 <CalloutInfo>
-$\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardás una eternidad. Si es muy grande, pasás de largo y nunca convergés. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
+$\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardas una eternidad. Si es muy grande, pasas de largo y nunca converges. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
 </CalloutInfo>
 
 ### Supuestos del modelo
@@ -82,7 +82,7 @@ $\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardás
 
 </Section>
 
-<Section number={4} title="Las 3 métricas que necesitás saber" eyebrow="CONCEPTO">
+<Section number={4} title="Las 3 métricas que necesitas saber" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
 **MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
@@ -93,7 +93,7 @@ Penaliza fuerte los errores grandes (los eleva al cuadrado). La métrica que el 
 <ConceptCard variant="definition">
 **RMSE (Raíz del MSE):** $\sqrt{\text{MSE}}$
 
-La ventaja: está en las mismas unidades que $y$. Si predecís precios en dólares, el RMSE te dice "me equivoco en promedio por \$X".
+La ventaja: está en las mismas unidades que $y$. Si predices precios en dólares, el RMSE te dice "me equivoco en promedio por \$X".
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -104,7 +104,7 @@ Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bu
 
 </Section>
 
-<Section number={5} title="Visualizá tu primera regresión" eyebrow="INTERACTIVA">
+<Section number={5} title="Visualiza tu primera regresión" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -173,7 +173,7 @@ print(f"R²:   {r2_score(y_test, y_pred):.3f}")
   blockId="reflection-l02-coefficients"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Mirá los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
+  prompt="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
   answer="No necesariamente. Los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, sus coeficientes no son comparables directamente. Para comparar importancia real hay que estandarizar las features primero (restar media, dividir por desvío)."
 />
 
@@ -243,7 +243,7 @@ print(f"R²: {model_s.score(X_s, y_s):.3f}")
 ```
 
 <ConceptCard variant="key-idea">
-La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confiás más en el modelo.
+La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
 </ConceptCard>
 
 </Section>
@@ -292,7 +292,7 @@ for col, coef in zip(X_r.columns, model_r.coef_):
 
 2. **Ignorar multicolinealidad.** Si dos features están muy correlacionadas (ej. "pies cuadrados" y "número de habitaciones"), los coeficientes se vuelven inestables y sus valores individuales pierden sentido.
 
-3. **No mirar los residuales.** Si graficás residuales vs predicciones y ves un patrón curvo, tus datos no son lineales. Necesitás features polinómicas u otro modelo.
+3. **No mirar los residuales.** Si graficas residuales vs predicciones y ves un patrón curvo, tus datos no son lineales. Necesitas features polinómicas u otro modelo.
 
 4. **Usar solo R².** Un R² alto no garantiza un buen modelo. Podrías estar sobreajustando o teniendo errores sistemáticos que R² no captura.
 
@@ -304,15 +304,15 @@ for col, coef in zip(X_r.columns, model_r.coef_):
 <Section number={11} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
 
 <CalloutCheck>
-Visualizá siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
+Visualiza siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
 
-Revisá los gráficos de residuales (residuales vs. ajustados, Q-Q plot). Son tu alerta temprana de violaciones de supuestos.
+Revisa los gráficos de residuales (residuales vs. ajustados, Q-Q plot). Son tu alerta temprana de violaciones de supuestos.
 
-Usá RMSE en lugar de MSE para comunicar resultados. "El modelo se equivoca en promedio por \$3,200" es más claro que "MSE = 10,240,000".
+Usa RMSE en lugar de MSE para comunicar resultados. "El modelo se equivoca en promedio por \$3,200" es más claro que "MSE = 10,240,000".
 
-Compará contra una línea base simple (predecir siempre el promedio). Si tu modelo no le gana a la línea base, algo anda mal.
+Compara contra una línea base simple (predecir siempre el promedio). Si tu modelo no le gana a la línea base, algo anda mal.
 
-Considerá regularización (Ridge, Lasso) cuando tengas muchas features. La regresión lineal simple se descontrola con alta dimensionalidad.
+Considera regularización (Ridge, Lasso) cuando tengas muchas features. La regresión lineal simple se descontrola con alta dimensionalidad.
 </CalloutCheck>
 
 </Section>
@@ -320,7 +320,7 @@ Considerá regularización (Ridge, Lasso) cuando tengas muchas features. La regr
 <Section number={12} title="Resumen y glosario" eyebrow="RESUMEN">
 
 <ConceptCard variant="key-idea">
-La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicás, RMSE mide cuánto te equivocás en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
+La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicas, RMSE mide cuánto te equivocas en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
 </ConceptCard>
 
 <InteractiveTable
@@ -356,12 +356,12 @@ La regresión lineal modela el objetivo como suma ponderada de features. OLS enc
   blockId="reflection-l02-feature-importance"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Nivel 3 — Tenés 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
-  answer="No necesariamente. Tres explicaciones posibles: (1) Las features no están escaladas — si una feature va de 0 a 0.001, necesita un coeficiente enorme para tener impacto. (2) Hay multicolinealidad — dos features correlacionadas se reparten el peso y ambas parecen chicas. (3) Efectivamente son irrelevantes. Para saberlo, estandarizá las features y usá regularización Lasso, que lleva coeficientes irrelevantes a cero."
+  prompt="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
+  answer="No necesariamente. Tres explicaciones posibles: (1) Las features no están escaladas — si una feature va de 0 a 0.001, necesita un coeficiente enorme para tener impacto. (2) Hay multicolinealidad — dos features correlacionadas se reparten el peso y ambas parecen chicas. (3) Efectivamente son irrelevantes. Para saberlo, estandariza las features y usa regularización Lasso, que lleva coeficientes irrelevantes a cero."
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Implementá OLS desde cero con la solución cerrada. Compará tus coeficientes con `sklearn`.
+**Desafío:** Implementa OLS desde cero con la solución cerrada. Compara tus coeficientes con `sklearn`.
 </ConceptCard>
 
 <CodeEditor
@@ -385,7 +385,7 @@ def linear_regression_from_scratch(X, y):
     
     return coefs, intercept, r2
 
-# Probá con datos sintéticos
+# Prueba con datos sintéticos
 np.random.seed(42)
 X = np.random.rand(100, 3) * 10
 y = 2.5 + 1.3 * X[:, 0] - 0.7 * X[:, 1] + 0.5 * X[:, 2] + np.random.normal(0, 1, 100)

@@ -27,10 +27,10 @@ Quiz: quiz.md
 El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La razón? Funciona bien casi siempre, sin requerir mucho ajuste. Es el "caballo de batalla" del ML supervisado.
 </MascotMessage>
 
-Un árbol de decisión solo es inestable y sobreajusta. Pero si entrenás 100 árboles con variaciones aleatorias de los datos y los ponés a votar, el resultado es sorprendentemente robusto. Esto es un **ensemble**: combinar modelos débiles para crear uno fuerte.
+Un árbol de decisión solo es inestable y sobreajusta. Pero si entrenas 100 árboles con variaciones aleatorias de los datos y los pones a votar, el resultado es sorprendentemente robusto. Esto es un **ensemble**: combinar modelos débiles para crear uno fuerte.
 
 <ConceptCard variant="key-idea">
-**Bagging (Bootstrap Aggregating):** Tomás muchas muestras bootstrap de tus datos, entrenás un árbol en cada una, y promediás (regresión) o hacés votación mayoritaria (clasificación). La magia: cada árbol tiene varianza alta, pero el promedio de B árboles reduce la varianza ~B veces sin aumentar el sesgo.
+**Bagging (Bootstrap Aggregating):** Tomas muchas muestras bootstrap de tus datos, entrenas un árbol en cada una, y promedias (regresión) o haces votación mayoritaria (clasificación). La magia: cada árbol tiene varianza alta, pero el promedio de B árboles reduce la varianza ~B veces sin aumentar el sesgo.
 </ConceptCard>
 
 </Section>
@@ -47,17 +47,17 @@ Un árbol de decisión solo es inestable y sobreajusta. Pero si entrenás 100 á
 />
 
 <ConceptCard variant="definition">
-**OOB (Out-of-Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out-of-bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtenés una estimación de rendimiento sin necesidad de dividir train/test.
+**OOB (Out-of-Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out-of-bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtienes una estimación de rendimiento sin necesidad de dividir train/test.
 </ConceptCard>
 
 </Section>
 
 <Section number={3} title="Importancia de características: el superpoder del RF" eyebrow="CONCEPTO">
 
-El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclás aleatoriamente cada feature:
+El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclas aleatoriamente cada feature:
 
 <CalloutCheck>
-La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top-3 en 100 árboles distintos, podés confiar en que realmente importa.
+La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top-3 en 100 árboles distintos, puedes confiar en que realmente importa.
 </CalloutCheck>
 
 <ReflectionCheck
@@ -65,7 +65,7 @@ La importancia por permutación del RF es más confiable que la importancia de u
   moduleSlug="machine-learning"
   lessonSlug="lesson05_random_forest"
   prompt="Dos features tienen importancia similar según el RF. ¿Significa que son igualmente importantes para tu problema?"
-  answer="No necesariamente. Si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Para saberlo, eliminá una y reentrená: si la otra captura toda la importancia, son redundantes. Además, la importancia mide utilidad predictiva, no causalidad."
+  answer="No necesariamente. Si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Para saberlo, elimina una y reentrena: si la otra captura toda la importancia, son redundantes. Además, la importancia mide utilidad predictiva, no causalidad."
 />
 
 </Section>
@@ -99,7 +99,7 @@ print(importance)
 ```
 
 <CalloutInfo>
-Ni siquiera necesitás un conjunto de validación separado: el OOB score te da una estimación honesta del rendimiento. Si OOB ≈ test accuracy, sabés que no hay fuga de datos y el modelo generaliza bien.
+Ni siquiera necesitas un conjunto de validación separado: el OOB score te da una estimación honesta del rendimiento. Si OOB ≈ test accuracy, sabes que no hay fuga de datos y el modelo generaliza bien.
 </CalloutInfo>
 
 </Section>
@@ -130,17 +130,17 @@ print(tree_imp.sort_values('forest', ascending=False).head(10))
 ```
 
 <ConceptCard variant="key-idea">
-El RF casi siempre supera al árbol individual. La diferencia es más notable cuando hay mucho ruido en los datos. Si el RF no mejora significativamente al árbol, probablemente tus datos son muy simples o tenés pocas features.
+El RF casi siempre supera al árbol individual. La diferencia es más notable cuando hay mucho ruido en los datos. Si el RF no mejora significativamente al árbol, probablemente tus datos son muy simples o tienes pocas features.
 </ConceptCard>
 
 </Section>
 
 <Section number={6} title="Biotecnología: genómica y biomarcadores" eyebrow="APLICACIÓN">
 
-En descubrimiento de fármacos, tenés datos de expresión de miles de genes pero solo cientos de pacientes. El RF brilla en este escenario:
+En descubrimiento de fármacos, tienes datos de expresión de miles de genes pero solo cientos de pacientes. El RF brilla en este escenario:
 
 - **Maneja p >> n** (más features que muestras) mejor que la regresión
-- **Selecciona features automáticamente** — identificás qué genes predicen respuesta al tratamiento
+- **Selecciona features automáticamente** — identificas qué genes predicen respuesta al tratamiento
 - **Robusto a features irrelevantes** — la aleatoriedad en cada split ignora features ruidosas
 
 <CalloutInfo>
@@ -152,7 +152,7 @@ En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para
 <Section number={7} title="Errores comunes" eyebrow="PELIGROS">
 
 <CalloutInfo>
-1. **Pocos árboles.** Con n_estimators=10 dejás mucha varianza sin reducir. Empezá con 100 y subí si tenés recursos. Después de ~500 árboles, la mejora marginal es mínima.
+1. **Pocos árboles.** Con n_estimators=10 dejas mucha varianza sin reducir. Empieza con 100 y sube si tienes recursos. Después de ~500 árboles, la mejora marginal es mínima.
 
 2. **No usar OOB.** Estás desperdiciando validación gratis. Siempre `oob_score=True`.
 
@@ -196,7 +196,7 @@ El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Analizá cómo mejora el OOB score al aumentar árboles. ¿Dónde deja de valer la pena?
+**Desafío:** Analiza cómo mejora el OOB score al aumentar árboles. ¿Dónde deja de valer la pena?
 </ConceptCard>
 
 <CodeEditor
@@ -217,7 +217,7 @@ for n in n_trees:
     oob_scores.append(rf.oob_score_)
     print(f"n_estimators={n:3d}: OOB = {rf.oob_score_:.4f}")
 
-# Visualizá
+# Visualiza
 plt.figure(figsize=(8, 5))
 plt.plot(n_trees, oob_scores, 'bo-', linewidth=2)
 plt.xlabel('Número de árboles')

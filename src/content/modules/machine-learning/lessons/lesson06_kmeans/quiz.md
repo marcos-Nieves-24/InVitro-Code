@@ -49,7 +49,7 @@ d) No es importante — K-Means maneja la escala automáticamente
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá la diferencia entre la inercia y el silhouette score. ¿Cuándo podría ser engañoso cada uno?
+**Q6.** Explica la diferencia entre la inercia y el silhouette score. ¿Cuándo podría ser engañoso cada uno?
 
 <details><summary>Respuesta</summary>La inercia mide qué tan compactos son los clusters (suma de distancias al cuadrado a los centroides). Siempre decrece a medida que K aumenta (eventualmente a 0 cuando K=n). Puede ser engañosa porque favorece muchos clusters pequeños. La silueta mide tanto la cohesión (dentro del cluster) como la separación (entre clusters). Un punto con silueta negativa probablemente está en el cluster incorrecto. La silueta puede ser engañosa en clusters muy pequeños o de forma irregular.</details>
 
@@ -59,7 +59,7 @@ d) No es importante — K-Means maneja la escala automáticamente
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función en Python `kmeans_with_metrics(X, K_range)` que realice K-Means para cada K en K_range, calcule la inercia y los silhouette scores, y devuelva un DataFrame con las columnas ['K', 'inertia', 'silhouette'].
+**Q8.** Escribe una función en Python `kmeans_with_metrics(X, K_range)` que realice K-Means para cada K en K_range, calcule la inercia y los silhouette scores, y devuelva un DataFrame con las columnas ['K', 'inertia', 'silhouette'].
 
 <details><summary>Respuesta</summary>
 

@@ -46,11 +46,11 @@ El Bosque Aleatorio entrena árboles en **paralelo** y los promedia. Gradient Bo
 Cada nuevo árbol no predice la variable objetivo directamente — predice los **residuales** (errores) del ensemble actual. Luego se suma al ensemble con un peso controlado por la **tasa de aprendizaje** (learning rate).
 </ConceptCard>
 
-1. Empezá con una predicción constante (el promedio)
-2. Calculá los residuales (error = real − predicción actual)
-3. Entrená un árbol para predecir esos residuales
-4. Actualizá: nueva predicción = predicción anterior + learning_rate × predicción del árbol
-5. Repetí 2-4 para n_estimators árboles
+1. Empieza con una predicción constante (el promedio)
+2. Calcula los residuales (error = real − predicción actual)
+3. Entrena un árbol para predecir esos residuales
+4. Actualiza: nueva predicción = predicción anterior + learning_rate × predicción del árbol
+5. Repite 2-4 para n_estimators árboles
 
 <CalloutInfo>
 El **learning rate** (típicamente 0.01–0.1) es el hiperparámetro más importante. Controla cuánto contribuye cada árbol. LR bajo + muchos árboles = mejor generalización pero más lento. LR alto + pocos árboles = rápido pero riesgo de sobreajuste.
@@ -61,11 +61,11 @@ El **learning rate** (típicamente 0.01–0.1) es el hiperparámetro más import
 <Section number={3} title="Los 3 hiperparámetros que importan" eyebrow="CONCEPTO">
 
 <ConceptCard variant="key-idea">
-**n_estimators:** Cuántos árboles. Más = mejor (hasta cierto punto). Con early stopping, dejás que crezca y parás cuando la validación deja de mejorar.
+**n_estimators:** Cuántos árboles. Más = mejor (hasta cierto punto). Con early stopping, dejas que crezca y paras cuando la validación deja de mejorar.
 
 **learning_rate:** Cuánto aporta cada árbol (0.01–0.3). Valores bajos necesitan más árboles pero generalizan mejor. Es la perilla fina del modelo.
 
-**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3–5 (¡mucho menor que en Random Forest!). Árboles shallow = aprendices débiles, que es justo lo que querés.
+**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3–5 (¡mucho menor que en Random Forest!). Árboles shallow = aprendices débiles, que es justo lo que quieres.
 </ConceptCard>
 
 <CalloutCheck>
@@ -82,7 +82,7 @@ El Gradient Boosting de sklearn es la versión académica. En producción se usa
   rows={[
     { feature: "XGBoost", left: "Regularización L1/L2 incorporada, manejo de valores nulos, paralelización por feature. El estándar de facto en competencias." },
     { feature: "LightGBM", left: "Entrena con histogramas (no ordena todos los datos), crece por hoja (no por nivel). Más rápido y menos memoria que XGBoost en datasets grandes." },
-    { feature: "CatBoost", left: "Maneja variables categóricas nativamente sin one-hot encoding. Bueno cuando tenés muchas features categóricas." },
+    { feature: "CatBoost", left: "Maneja variables categóricas nativamente sin one-hot encoding. Bueno cuando tienes muchas features categóricas." },
   ]}
 />
 
@@ -139,7 +139,7 @@ Gradient Boosting entrena árboles secuencialmente, cada uno corrigiendo los err
 <Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Compará GB vs Random Forest y analizá el efecto del learning rate.
+**Desafío:** Compara GB vs Random Forest y analiza el efecto del learning rate.
 </ConceptCard>
 
 <CodeEditor

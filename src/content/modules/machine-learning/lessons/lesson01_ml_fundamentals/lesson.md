@@ -24,16 +24,16 @@ Quiz: quiz.md
 <Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
 <MascotMessage mood="celebrating">
-¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: acá dejás de decirle a la computadora qué hacer y empezás a enseñarle a descubrir patrones por sí misma.
+¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: aquí dejas de decirle a la computadora qué hacer y empiezas a enseñarle a descubrir patrones por sí misma.
 </MascotMessage>
 
-Todos los días usás Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:
+Todos los días usas Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:
 
 <ConceptCard variant="key-idea">
-En la programación tradicional escribís **reglas explícitas**. En ML, la computadora **aprende las reglas** a partir de ejemplos. Es la diferencia entre darle una receta a alguien y mostrarle 1000 fotos de gatos hasta que pueda identificarlos solo.
+En la programación tradicional escribes **reglas explícitas**. En ML, la computadora **aprende las reglas** a partir de ejemplos. Es la diferencia entre darle una receta a alguien y mostrarle 1000 fotos de gatos hasta que pueda identificarlos solo.
 </ConceptCard>
 
-En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitás para cada algoritmo del curso.
+En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitas para cada algoritmo del curso.
 
 </Section>
 
@@ -41,12 +41,12 @@ En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. 
 
 **Anterior:** El Módulo 3 te enseñó a describir y visualizar datos con estadística.
 
-**Esta lección:** Aprendés cómo los algoritmos *aprenden de los datos* y qué puede salir mal en el proceso.
+**Esta lección:** Aprendes cómo los algoritmos *aprenden de los datos* y qué puede salir mal en el proceso.
 
 **Siguiente:** Regresión lineal — tu primer algoritmo de ML real, donde todo esto cobra vida.
 
 <ConceptCard variant="key-idea">
-Antes de lanzarte a implementar algoritmos, necesitás entender los fundamentos: ¿qué significa que un modelo "aprenda"? ¿Cómo sabés si aprendió bien? ¿Por qué un modelo perfecto en entrenamiento puede fallar estrepitosamente en producción?
+Antes de lanzarte a implementar algoritmos, necesitas entender los fundamentos: ¿qué significa que un modelo "aprenda"? ¿Cómo sabes si aprendió bien? ¿Por qué un modelo perfecto en entrenamiento puede fallar estrepitosamente en producción?
 </ConceptCard>
 
 </Section>
@@ -72,11 +72,11 @@ Le damos ejemplos a la computadora, y ella descubre el patrón subyacente. Simpl
 <Section number={4} title="Vocabulario que vas a usar todo el curso" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
-**Característica (X):** Una variable de entrada usada para hacer predicciones. Cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión. Todo lo que *medís* para predecir algo.
+**Característica (X):** Una variable de entrada usada para hacer predicciones. Cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión. Todo lo que *mides* para predecir algo.
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**Etiqueta (y):** La variable de salida que queremos predecir. Precio de una casa, estado de enfermedad, probabilidad de abandono. Es lo que querés *saber*.
+**Etiqueta (y):** La variable de salida que queremos predecir. Precio de una casa, estado de enfermedad, probabilidad de abandono. Es lo que quieres *saber*.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -116,7 +116,7 @@ La **generalización** es la capacidad del modelo de funcionar bien con datos *q
 Si un modelo solo funciona con los datos que usaste para entrenarlo, no sirve. Es como un estudiante que se memoriza las respuestas del examen de práctica pero no entiende los conceptos.
 
 <CalloutInfo>
-La división train/test es la herramienta más básica para medir generalización: entrenás con una parte de los datos y evaluás con otra que el modelo nunca vio.
+La división train/test es la herramienta más básica para medir generalización: entrenas con una parte de los datos y evalúas con otra que el modelo nunca vio.
 </CalloutInfo>
 
 </Section>
@@ -136,7 +136,7 @@ La división train/test es la herramienta más básica para medir generalizació
   blockId="reflection-l01-overfit-underfit"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
+  prompt="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
   answer="Es un caso claro de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Tres cosas que probaría: (1) simplificar el modelo (reducir complejidad), (2) agregar más datos de entrenamiento si es posible, (3) aplicar regularización para penalizar la complejidad excesiva."
 />
 
@@ -157,14 +157,14 @@ $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-**La compensación:** A medida que aumentás la complejidad del modelo, el sesgo baja (capturás más patrones) pero la varianza sube (empezás a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo — existe el modelo adecuado para tu problema.
+**La compensación:** A medida que aumentas la complejidad del modelo, el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo — existe el modelo adecuado para tu problema.
 </ConceptCard>
 
 </Section>
 
-<Section number={9} title="Visualizá el sesgo y la varianza" eyebrow="INTERACTIVA">
+<Section number={9} title="Visualiza el sesgo y la varianza" eyebrow="INTERACTIVA">
 
-Veamos la compensación sesgo-varianza en acción con un ejemplo que podés ejecutar:
+Veamos la compensación sesgo-varianza en acción con un ejemplo que puedes ejecutar:
 
 ```python
 import numpy as np
@@ -213,7 +213,7 @@ plt.show()
 ```
 
 <CalloutInfo>
-Ejecutá este código en tu notebook. Vas a ver tres paneles:
+Ejecuta este código en tu notebook. Vas a ver tres paneles:
 - **Grado 1 (subajuste):** Una línea recta que ni siquiera pasa cerca de los puntos. Sesgo altísimo.
 - **Grado 4 (buen ajuste):** La curva sigue la tendencia de los datos sin perseguir cada punto. Equilibrio justo.
 - **Grado 15 (sobreajuste):** La curva zigzaguea para tocar cada punto de entrenamiento. En datos nuevos sería un desastre.
@@ -270,7 +270,7 @@ Si el R² de entrenamiento es mucho mayor que el de prueba, tu modelo está sobr
 En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es el puente entre el laboratorio húmedo y la medicina personalizada.
 </ConceptCard>
 
-Imaginá que tenés datos de expresión génica de 500 pacientes con cáncer y querés predecir qué pacientes responderán a un fármaco específico:
+Imagina que tienes datos de expresión génica de 500 pacientes con cáncer y quieres predecir qué pacientes responderán a un fármaco específico:
 
 - **Características (X):** Niveles de expresión de 1000 genes
 - **Etiqueta (y):** Respondedor (1) o no respondedor (0)
@@ -293,7 +293,7 @@ El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
   prompt="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
-  answer="Porque predecir antes permite actuar: podés enviar un descuento, una sesión de onboarding personalizada, o contactar al usuario para resolver sus problemas. Si solo registrás quién abandonó, ya es tarde — ese cliente se fue. La predicción temprana convierte un problema reactivo en uno proactivo."
+  answer="Porque predecir antes permite actuar: puedes enviar un descuento, una sesión de onboarding personalizada, o contactar al usuario para resolver sus problemas. Si solo registras quién abandonó, ya es tarde — ese cliente se fue. La predicción temprana convierte un problema reactivo en uno proactivo."
 />
 
 </Section>
@@ -301,9 +301,9 @@ El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días
 <Section number={13} title="Los 4 errores que todo principiante comete" eyebrow="PELIGROS">
 
 <CalloutInfo>
-1. **Entrenar con todos los datos y después dividir.** Hacés trampa sin darte cuenta: el modelo ya "vio" los datos de prueba durante el preprocesamiento. Siempre dividí primero.
+1. **Entrenar con todos los datos y después dividir.** Haces trampa sin darte cuenta: el modelo ya "vio" los datos de prueba durante el preprocesamiento. Siempre divide primero.
 
-2. **Usar el conjunto de prueba para ajustar hiperparámetros.** El conjunto de prueba es sagrado — solo se toca una vez al final. Para ajustar parámetros usá validación cruzada sobre el conjunto de entrenamiento.
+2. **Usar el conjunto de prueba para ajustar hiperparámetros.** El conjunto de prueba es sagrado — solo se toca una vez al final. Para ajustar parámetros usa validación cruzada sobre el conjunto de entrenamiento.
 
 3. **Asumir que precisión de entrenamiento alta = buen modelo.** Si tu modelo tiene 99% en train y 65% en test, no es bueno — está sobreajustado. La métrica que importa es la de test.
 
@@ -315,15 +315,15 @@ El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días
 <Section number={14} title="Buenas prácticas desde el día 1" eyebrow="BUENAS PRÁCTICAS">
 
 <CalloutCheck>
-Siempre dividí los datos **antes** de cualquier preprocesamiento. Es la regla #1.
+Siempre divide los datos **antes** de cualquier preprocesamiento. Es la regla #1.
 
-Mantené un conjunto de prueba completamente oculto hasta la evaluación final. No lo mires, no lo toques, no lo uses para decidir nada.
+Mantén un conjunto de prueba completamente oculto hasta la evaluación final. No lo mires, no lo toques, no lo uses para decidir nada.
 
-Usá validación cruzada para estimaciones de rendimiento confiables. Un solo split train/test puede engañarte.
+Usa validación cruzada para estimaciones de rendimiento confiables. Un solo split train/test puede engañarte.
 
-Empezá con modelos simples antes de probar arquitecturas complejas. Si una regresión lineal resuelve el problema, no necesitás una red neuronal.
+Empieza con modelos simples antes de probar arquitecturas complejas. Si una regresión lineal resuelve el problema, no necesitas una red neuronal.
 
-Graficá curvas de aprendizaje para diagnosticar si necesitás más datos o un modelo más complejo. Los números sin visualización mienten.
+Grafica curvas de aprendizaje para diagnosticar si necesitas más datos o un modelo más complejo. Los números sin visualización mienten.
 </CalloutCheck>
 
 </Section>
@@ -360,7 +360,7 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
   blockId="reflection-l01-trad-vs-ml"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 1 — Explicá con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
+  prompt="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
   answer="En programación tradicional escribo reglas explícitas (if temperatura > 38: alerta_fiebre()). En ML le doy ejemplos etiquetados al algoritmo y él descubre las reglas. Usaría programación tradicional para problemas con reglas claras y estables (cálculo de impuestos, validación de formularios). Usaría ML cuando las reglas son difíciles de expresar (reconocimiento de imágenes, predicción de abandono de clientes, diagnóstico médico)."
 />
 
@@ -368,12 +368,12 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
   blockId="reflection-l01-overfit-diagnosis"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 3 — Entrenás un modelo y obtenés precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
+  prompt="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
   answer="Es sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Soluciones: (1) Simplificar el modelo — reducir complejidad, menos features, regularización. (2) Conseguir más datos de entrenamiento si es posible. (3) Usar validación cruzada para detectar el sobreajuste más temprano y parar el entrenamiento antes (early stopping)."
 />
 
 <ConceptCard variant="key-idea">
-**Desafío de programación:** Escribí una función `diagnose_fit` que detecte sobreajuste. Ejecutá tu código con Shift+Enter.
+**Desafío de programación:** Escribe una función `diagnose_fit` que detecte sobreajuste. Ejecuta tu código con Shift+Enter.
 </ConceptCard>
 
 <CodeEditor
@@ -394,7 +394,7 @@ def diagnose_fit(model, X_train, X_test, y_train, y_test):
     else:
         return "BIEN EQUILIBRADO"
 
-# Probá tu función
+# Prueba tu función
 data = load_diabetes()
 X, y = data.data, data.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

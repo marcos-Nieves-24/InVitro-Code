@@ -24,13 +24,13 @@ Quiz: quiz.md
 <Section number={1} title="Predecir categorías, no números" eyebrow="INICIO">
 
 <MascotMessage mood="celebrating">
-¿Spam o no spam? ¿Cáncer o benigno? ¿Se va a dar de baja o se queda? La clasificación es el tipo de ML más usado en el mundo real. Hoy aprendés a separar el sí del no con matemática.
+¿Spam o no spam? ¿Cáncer o benigno? ¿Se va a dar de baja o se queda? La clasificación es el tipo de ML más usado en el mundo real. Hoy aprendes a separar el sí del no con matemática.
 </MascotMessage>
 
 La regresión lineal predice números. Pero muchos problemas del mundo real requieren predecir **categorías**. La clasificación binaria — dos clases posibles — es el punto de partida. Biotecnología: diagnóstico de enfermedades. SaaS: predicción de abandono. Finanzas: detección de fraude. Todo es clasificación.
 
 <ConceptCard variant="key-idea">
-La regresión logística toma una combinación lineal de features, la pasa por una función sigmoide, y produce una probabilidad entre 0 y 1. Con un umbral (típicamente 0.5), decidís la clase.
+La regresión logística toma una combinación lineal de features, la pasa por una función sigmoide, y produce una probabilidad entre 0 y 1. Con un umbral (típicamente 0.5), decides la clase.
 </ConceptCard>
 
 </Section>
@@ -49,7 +49,7 @@ $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$ → probabilidad cercana a 1. Valores muy negativos → probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
 </CalloutInfo>
 
-**Regla de decisión:** si $\hat{p} \geq 0.5$, predecís clase 1. Si $\hat{p} < 0.5$, clase 0. La **frontera de decisión** es el hiperplano donde $\hat{p} = 0.5$, es decir, $z = 0$.
+**Regla de decisión:** si $\hat{p} \geq 0.5$, predices clase 1. Si $\hat{p} < 0.5$, clase 0. La **frontera de decisión** es el hiperplano donde $\hat{p} = 0.5$, es decir, $z = 0$.
 
 <ConceptCard variant="definition">
 **Log Loss (Entropía Cruzada):** La función de pérdida que optimiza la regresión logística. Penaliza fuertemente las predicciones incorrectas con alta confianza — si el modelo dice "99% seguro que es clase 1" y resulta ser clase 0, el castigo es enorme.
@@ -83,8 +83,8 @@ De la matriz salen todas las métricas:
 
 <ComparisonTable
   rows={[
-    { feature: "Priorizás Precisión cuando", left: "El costo de un falso positivo es alto. Ej: enviar una notificación push molesta a un usuario que no iba a abandonar." },
-    { feature: "Priorizás Recall cuando", left: "El costo de un falso negativo es alto. Ej: no detectar un tumor maligno porque pensaste que era benigno." },
+    { feature: "Priorizas Precisión cuando", left: "El costo de un falso positivo es alto. Ej: enviar una notificación push molesta a un usuario que no iba a abandonar." },
+    { feature: "Priorizas Recall cuando", left: "El costo de un falso negativo es alto. Ej: no detectar un tumor maligno porque pensaste que era benigno." },
   ]}
 />
 
@@ -93,7 +93,7 @@ De la matriz salen todas las métricas:
 <Section number={4} title="Curva ROC: más allá de un solo número" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
-La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras variás el umbral de decisión de 0 a 1. Cada punto de la curva es un umbral diferente.
+La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras varías el umbral de decisión de 0 a 1. Cada punto de la curva es un umbral diferente.
 
 **AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0 → clasificador perfecto. AUC = 0.5 → no mejor que tirar una moneda. AUC < 0.5 → estás haciendo todo al revés.
 </ConceptCard>
@@ -104,7 +104,7 @@ La curva ROC es independiente del umbral — te dice qué tan bien separa el mod
 
 </Section>
 
-<Section number={5} title="Visualizá la frontera de decisión" eyebrow="INTERACTIVA">
+<Section number={5} title="Visualiza la frontera de decisión" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -199,7 +199,7 @@ Una farmacéutica entrena un clasificador para predecir si un paciente responder
 
 - **Features:** niveles de 50 proteínas en sangre
 - **Etiqueta:** respondedor (1) o no respondedor (0)
-- **Prioridad:** Alto recall — no querés dejar a ningún paciente que podría beneficiarse sin tratamiento
+- **Prioridad:** Alto recall — no quieres dejar a ningún paciente que podría beneficiarse sin tratamiento
 
 <CalloutInfo>
 En medicina personalizada, la clasificación permite evitar tratamientos costosos e invasivos en pacientes que no se beneficiarían. Un modelo con AUC > 0.85 se considera clínicamente útil.
@@ -213,10 +213,10 @@ Un clasificador predice qué usuarios cancelarán su suscripción:
 
 - **Features:** días desde último login, tickets de soporte, uso de features premium, tipo de plan
 - **Etiqueta:** abandonó (1) o se quedó (0)
-- **Prioridad:** Alta precisión — no querés molestar con descuentos a usuarios que no iban a abandonar
+- **Prioridad:** Alta precisión — no quieres molestar con descuentos a usuarios que no iban a abandonar
 
 <ConceptCard variant="key-idea">
-El mismo algoritmo, métricas distintas según el contexto. En salud priorizás recall (no dejar escapar ningún caso). En negocio priorizás precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta — la estrategia cambia según el problema.
+El mismo algoritmo, métricas distintas según el contexto. En salud priorizas recall (no dejar escapar ningún caso). En negocio priorizas precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta — la estrategia cambia según el problema.
 </ConceptCard>
 
 </Section>
@@ -226,7 +226,7 @@ El mismo algoritmo, métricas distintas según el contexto. En salud priorizás 
 <CalloutInfo>
 1. **Usar accuracy con clases desbalanceadas.** Si el 95% de tus muestras son negativas, un modelo que siempre predice "negativo" tiene 95% de accuracy. Es un mal modelo, pero la métrica no te lo dice.
 
-2. **Elegir el umbral 0.5 sin pensar.** El umbral óptimo depende del costo relativo de FP vs FN. En detección de fraude quizás querés umbral 0.3 para ser más sensible.
+2. **Elegir el umbral 0.5 sin pensar.** El umbral óptimo depende del costo relativo de FP vs FN. En detección de fraude quizás quieres umbral 0.3 para ser más sensible.
 
 3. **Interpretar coeficientes como en regresión lineal.** En regresión logística, un coeficiente $\beta$ significa que por cada unidad de aumento en $x$, los *log-odds* aumentan en $\beta$. No es un efecto directo sobre la probabilidad.
 
@@ -238,15 +238,15 @@ El mismo algoritmo, métricas distintas según el contexto. En salud priorizás 
 <Section number={10} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
 
 <CalloutCheck>
-Siempre mirá la matriz de confusión, no solo un número. Accuracy = 0.92 suena bien hasta que ves que todos los falsos negativos son casos de cáncer.
+Siempre mira la matriz de confusión, no solo un número. Accuracy = 0.92 suena bien hasta que ves que todos los falsos negativos son casos de cáncer.
 
-Elegí tu métrica principal según el problema de negocio. No existe "la mejor métrica" — existe la métrica correcta para tu contexto.
+Elige tu métrica principal según el problema de negocio. No existe "la mejor métrica" — existe la métrica correcta para tu contexto.
 
-Graficá la curva ROC y reportá AUC. Es independiente del umbral y del balance de clases.
+Grafica la curva ROC y reporta AUC. Es independiente del umbral y del balance de clases.
 
-Ajustá el umbral de decisión según el costo de cada tipo de error. No tiene por qué ser 0.5.
+Ajusta el umbral de decisión según el costo de cada tipo de error. No tiene por qué ser 0.5.
 
-Con clases desbalanceadas, usá `class_weight='balanced'` en scikit-learn para que el modelo preste atención a la clase minoritaria.
+Con clases desbalanceadas, usa `class_weight='balanced'` en scikit-learn para que el modelo preste atención a la clase minoritaria.
 </CalloutCheck>
 
 </Section>
@@ -254,7 +254,7 @@ Con clases desbalanceadas, usá `class_weight='balanced'` en scikit-learn para q
 <Section number={11} title="Resumen y glosario" eyebrow="RESUMEN">
 
 <ConceptCard variant="key-idea">
-La regresión logística convierte una combinación lineal en una probabilidad mediante la sigmoide. La matriz de confusión es la base de precisión, recall y F1. La curva ROC con AUC es la métrica estándar para comparar clasificadores. Elegí tu métrica según el costo de equivocarte en cada dirección.
+La regresión logística convierte una combinación lineal en una probabilidad mediante la sigmoide. La matriz de confusión es la base de precisión, recall y F1. La curva ROC con AUC es la métrica estándar para comparar clasificadores. Elige tu métrica según el costo de equivocarte en cada dirección.
 </ConceptCard>
 
 <InteractiveTable
@@ -282,12 +282,12 @@ La regresión logística convierte una combinación lineal en una probabilidad m
   blockId="reflection-l03-accuracy-trap"
   moduleSlug="machine-learning"
   lessonSlug="lesson03_classification"
-  prompt="Nivel 1 — Tenés 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
-  answer="No. Tiene 95% de accuracy pero 0% de recall para spam — no detecta ningún spam. En datasets desbalanceados, accuracy es engañosa. Necesitás mirar precisión y recall por clase. Este modelo es inútil: es equivalente a no tener filtro de spam."
+  prompt="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
+  answer="No. Tiene 95% de accuracy pero 0% de recall para spam — no detecta ningún spam. En datasets desbalanceados, accuracy es engañosa. Necesitas mirar precisión y recall por clase. Este modelo es inútil: es equivalente a no tener filtro de spam."
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Implementá regresión logística con descenso por gradiente desde cero.
+**Desafío:** Implementa regresión logística con descenso por gradiente desde cero.
 </ConceptCard>
 
 <CodeEditor
@@ -308,7 +308,7 @@ def logistic_regression_from_scratch(X, y, lr=0.01, epochs=1000):
     
     return theta[0], theta[1:]  # intercept, coefs
 
-# Probá con datos sintéticos
+# Prueba con datos sintéticos
 np.random.seed(42)
 X = np.random.randn(200, 2)
 y = (X[:, 0] + X[:, 1] > 0).astype(int)

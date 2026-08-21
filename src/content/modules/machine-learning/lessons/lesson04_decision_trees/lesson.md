@@ -24,7 +24,7 @@ Quiz: quiz.md
 <Section number={1} title="El algoritmo que piensa como un médico" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Los árboles de decisión son el algoritmo más intuitivo del ML. Hacen exactamente lo que harías vos: una serie de preguntas de sí/no hasta llegar a una conclusión. Y lo mejor: podés dibujar el resultado y explicárselo a cualquiera.
+Los árboles de decisión son el algoritmo más intuitivo del ML. Hacen exactamente lo que harías tú: una serie de preguntas de sí/no hasta llegar a una conclusión. Y lo mejor: puedes dibujar el resultado y explicárselo a cualquiera.
 </MascotMessage>
 
 Un médico diagnostica pacientes así: "¿El tumor mide más de 2 cm? Sí → ¿Los ganglios están comprometidos? No → ¿Edad > 50? Sí → Alto riesgo." Un árbol de decisión automatiza exactamente este proceso, aprendiendo de los datos qué preguntas hacer y en qué orden.
@@ -73,7 +73,7 @@ Otra medida de "desorden". Entropía = 0 → pureza total. La entropía penaliza
 $$\text{IG} = \text{Impureza}_{\text{padre}} - \sum_{j} \frac{n_j}{n} \text{Impureza}_{\text{hijo}_j}$$
 
 <CalloutCheck>
-En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es más rápido computacionalmente y es el default de scikit-learn. Usá Entropía solo si tenés razones teóricas para preferirla.
+En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es más rápido computacionalmente y es el default de scikit-learn. Usa Entropía solo si tienes razones teóricas para preferirla.
 </CalloutCheck>
 
 </Section>
@@ -95,13 +95,13 @@ Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan 
   blockId="reflection-l04-depth-overfit"
   moduleSlug="machine-learning"
   lessonSlug="lesson04_decision_trees"
-  prompt="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglás?"
+  prompt="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglas?"
   answer="Sobreajuste clásico: el árbol creció hasta memorizar cada muestra. Tres estrategias: (1) limitar max_depth con validación cruzada para encontrar el punto óptimo, (2) aumentar min_samples_split para forzar hojas con más muestras, (3) usar ccp_alpha para poda por costo-complejidad que elimina ramas con poca ganancia."
 />
 
 </Section>
 
-<Section number={5} title="Visualizá tu primer árbol" eyebrow="INTERACTIVA">
+<Section number={5} title="Visualiza tu primer árbol" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -179,7 +179,7 @@ print(f"Importancias: {dict(zip(bio_data.columns[:-1], tree.feature_importances_
 ```
 
 <ConceptCard variant="key-idea">
-La ventaja del árbol en medicina: es **explicable**. Podés mostrarle al médico el diagrama y decirle "el modelo decidió alto riesgo porque biomarker_1 > 0.5 Y edad > 60". Con una red neuronal, no podrías.
+La ventaja del árbol en medicina: es **explicable**. Puedes mostrarle al médico el diagrama y decirle "el modelo decidió alto riesgo porque biomarker_1 > 0.5 Y edad > 60". Con una red neuronal, no podrías.
 </ConceptCard>
 
 </Section>
@@ -209,7 +209,7 @@ print(f"Importancias: {dict(zip(lead_data.columns[:-1], tree.feature_importances
 <Section number={9} title="Errores y buenas prácticas" eyebrow="PELIGROS">
 
 <CalloutInfo>
-1. **Sin límite de profundidad.** El árbol crece hasta pureza total y sobreajusta catastróficamente. Siempre poné max_depth.
+1. **Sin límite de profundidad.** El árbol crece hasta pureza total y sobreajusta catastróficamente. Siempre pon max_depth.
 
 2. **Ignorar feature importance.** Los árboles te regalan un ranking de features. No lo desperdicies — es oro para entender tu problema.
 
@@ -219,7 +219,7 @@ print(f"Importancias: {dict(zip(lead_data.columns[:-1], tree.feature_importances
 </CalloutInfo>
 
 <CalloutCheck>
-Limitá profundidad con validación cruzada. Visualizá el árbol para comunicar resultados. Usá feature importance para selección de variables. Compará siempre contra un stump.
+Limita profundidad con validación cruzada. Visualiza el árbol para comunicar resultados. Usa feature importance para selección de variables. Compara siempre contra un stump.
 </CalloutCheck>
 
 </Section>
@@ -250,7 +250,7 @@ Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpret
 <Section number={11} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Encontrá la profundidad óptima para un árbol de decisión.
+**Desafío:** Encuentra la profundidad óptima para un árbol de decisión.
 </ConceptCard>
 
 <CodeEditor
@@ -273,7 +273,7 @@ def tree_depth_tuner(X_train, X_val, y_train, y_val, max_depths):
         print(f"Depth {str(depth):>3s}: val_acc = {acc:.3f}")
     return best_depth, scores
 
-# Probá con breast cancer
+# Prueba con breast cancer
 data = load_breast_cancer()
 X, y = data.data, data.target
 X_tr, X_val, y_tr, y_val = train_test_split(X, y, test_size=0.2, random_state=42)

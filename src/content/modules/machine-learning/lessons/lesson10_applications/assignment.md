@@ -2,18 +2,18 @@
 
 ## Objetivos
 
-- Construí una aplicación de ML completa de extremo a extremo
-- Elegí modelos y métricas apropiados para el contexto de negocio
-- Interpretá y comunicá los resultados
-- Escribí un informe profesional de data science
+- Construye una aplicación de ML completa de extremo a extremo
+- Elige modelos y métricas apropiados para el contexto de negocio
+- Interpreta y comunica los resultados
+- Escribe un informe profesional de data science
 
 ## Escenario
 
-**Elegí UNA de las siguientes dos opciones y completá todas las tareas.**
+**Elige UNA de las siguientes dos opciones y completa todas las tareas.**
 
 ### Opción A: Biotecnología — Predicción de rendimiento de cultivo celular
 
-Una empresa biotecnológica produce anticuerpos monoclonales. Tenés datos de proceso de 800 lotes. Predecí el **titer (g/L)** final e identificá qué parámetros de proceso afectan más al rendimiento.
+Una empresa biotecnológica produce anticuerpos monoclonales. Tienes datos de proceso de 800 lotes. Predice el **titer (g/L)** final e identifica qué parámetros de proceso afectan más al rendimiento.
 
 ```python
 np.random.seed(42)
@@ -42,7 +42,7 @@ biotech['titer'] = titer.clip(0)
 
 ### Opción B: SaaS — Customer Health Scoring
 
-Una empresa SaaS quiere un **customer health score** (0-100) que prediga el riesgo de churn. Tenés datos de uso de 2000 cuentas.
+Una empresa SaaS quiere un **customer health score** (0-100) que prediga el riesgo de churn. Tienes datos de uso de 2000 cuentas.
 
 ```python
 np.random.seed(42)
@@ -72,10 +72,10 @@ saas['churned_3m'] = (saas['health_score'] < 30).astype(int)
 
 ## Instrucciones (aplican a ambas opciones)
 
-1. **EDA:** Explorá los datos (distribuciones, correlaciones, valores faltantes)
-2. **Preprocesamiento:** Escalá las features numéricas, codificá las categóricas, dividí
-3. **Modelado:** Compará al menos 3 modelos con validación cruzada
+1. **EDA:** Explora los datos (distribuciones, correlaciones, valores faltantes)
+2. **Preprocesamiento:** Escala las features numéricas, codifica las categóricas, divide
+3. **Modelado:** Compara al menos 3 modelos con validación cruzada
 4. **Ajuste:** GridSearchCV para el mejor modelo
 5. **Interpretación:** Importancia de características, PDP de las top features
-6. **Recomendación de negocio:** Escribí un informe (máx. 500 palabras)
+6. **Recomendación de negocio:** Escribe un informe (máx. 500 palabras)
 

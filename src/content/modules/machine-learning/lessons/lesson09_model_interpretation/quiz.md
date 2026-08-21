@@ -49,17 +49,17 @@ d) La importancia por permutación maneja las correlaciones perfectamente
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá la diferencia entre interpretabilidad global y local. ¿Cuándo usarías cada una?
+**Q6.** Explica la diferencia entre interpretabilidad global y local. ¿Cuándo usarías cada una?
 
-<details><summary>Respuesta</summary>La interpretabilidad global explica el comportamiento general del modelo: qué features importan más y cómo afectan a las predicciones en promedio (por ejemplo, importancia por permutación, PDP). La interpretabilidad local explica una sola predicción: por qué este paciente puntual fue clasificado como de alto riesgo (por ejemplo, SHAP, LIME). Usá métodos globales para entender y depurar el modelo; usá métodos locales cuando necesitás explicar decisiones individuales (por ejemplo, ¿por qué se rechazó este préstamo?).</details>
+<details><summary>Respuesta</summary>La interpretabilidad global explica el comportamiento general del modelo: qué features importan más y cómo afectan a las predicciones en promedio (por ejemplo, importancia por permutación, PDP). La interpretabilidad local explica una sola predicción: por qué este paciente puntual fue clasificado como de alto riesgo (por ejemplo, SHAP, LIME). Usa métodos globales para entender y depurar el modelo; usa métodos locales cuando necesitas explicar decisiones individuales (por ejemplo, ¿por qué se rechazó este préstamo?).</details>
 
-**Q7.** Un gráfico de dependencia parcial para "años de experiencia" en un modelo de predicción de salarios muestra una línea plana de 0 a 2 años, un aumento pronunciado de 2 a 15 años y una meseta después de los 15 años. Interpretá esto.
+**Q7.** Un gráfico de dependencia parcial para "años de experiencia" en un modelo de predicción de salarios muestra una línea plana de 0 a 2 años, un aumento pronunciado de 2 a 15 años y una meseta después de los 15 años. Interpreta esto.
 
 <details><summary>Respuesta</summary>El PDP muestra un efecto marginal no lineal: el salario es insensible a la experiencia en los primeros 2 años (trabajos de nivel inicial), aumenta rápidamente entre los 2 y los 15 años (progresión de carrera y acumulación de habilidades), y luego se estabiliza después de los 15 años (roles senior con rendimientos decrecientes ante más experiencia). Esto sugiere que la relación entre experiencia y salario es no lineal y no puede capturarse con un coeficiente lineal simple.</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función `plot_pdp_features(model, X_val, feature_names, features_to_plot)` que cree una grilla de 2x3 de gráficos de dependencia parcial para 6 features usando `PartialDependenceDisplay.from_estimator`.
+**Q8.** Escribe una función `plot_pdp_features(model, X_val, feature_names, features_to_plot)` que cree una grilla de 2x3 de gráficos de dependencia parcial para 6 features usando `PartialDependenceDisplay.from_estimator`.
 
 <details><summary>Respuesta</summary>
 

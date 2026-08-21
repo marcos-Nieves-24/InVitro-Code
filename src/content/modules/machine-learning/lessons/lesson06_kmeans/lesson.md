@@ -24,10 +24,10 @@ Quiz: quiz.md
 <Section number={1} title="Descubrir grupos sin etiquetas" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tenés etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
+Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tienes etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
 </MascotMessage>
 
-Hasta acá todo fue **aprendizaje supervisado**: tenías features (X) y etiquetas (y), y el modelo aprendía a predecir. Ahora entramos al territorio del **no supervisado**: solo tenés X. No hay "respuesta correcta". El objetivo es descubrir patrones, grupos, estructura oculta.
+Hasta aquí todo fue **aprendizaje supervisado**: tenías features (X) y etiquetas (y), y el modelo aprendía a predecir. Ahora entramos al territorio del **no supervisado**: solo tienes X. No hay "respuesta correcta". El objetivo es descubrir patrones, grupos, estructura oculta.
 
 <ConceptCard variant="key-idea">
 K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, rápido, y sorprendentemente efectivo para segmentación de clientes, descubrimiento de subtipos de enfermedades, y compresión de imágenes.
@@ -37,11 +37,11 @@ K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, r
 
 <Section number={2} title="El algoritmo en 4 pasos" eyebrow="CONCEPTO">
 
-1. **Elegí K:** ¿Cuántos grupos querés encontrar?
-2. **Inicializá:** Poné K centroides en posiciones aleatorias
-3. **Asigná:** Cada punto va al centroide más cercano (distancia euclidiana)
-4. **Actualizá:** Mové cada centroide al promedio de los puntos que le asignaste
-5. **Repetí 3-4** hasta que los centroides dejen de moverse
+1. **Elige K:** ¿Cuántos grupos quieres encontrar?
+2. **Inicializa:** Pon K centroides en posiciones aleatorias
+3. **Asigna:** Cada punto va al centroide más cercano (distancia euclidiana)
+4. **Actualiza:** Mueve cada centroide al promedio de los puntos que le asignaste
+5. **Repite 3-4** hasta que los centroides dejen de moverse
 
 <CalloutInfo>
 K-Means garantiza convergencia (los centroides eventualmente se estabilizan), pero el resultado depende de dónde empezaron los centroides. Por eso sklearn corre el algoritmo varias veces con inicializaciones distintas (`n_init=10`) y se queda con la mejor.
@@ -59,23 +59,23 @@ $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\
 
 <ComparisonTable
   rows={[
-    { feature: "Método del codo", left: "Graficás inercia vs K. Donde la curva hace \"codo\" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro." },
+    { feature: "Método del codo", left: "Graficas inercia vs K. Donde la curva hace \"codo\" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro." },
     { feature: "Puntaje de silueta", left: "Mide qué tan similar es cada punto a su propio clúster vs. el clúster más cercano. Varía de -1 a 1. Más alto = mejor separación. Más objetivo que el codo." },
   ]}
 />
 
 $$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
 
-- $a(i)$: distancia promedio a puntos del mismo clúster (querés que sea chica)
-- $b(i)$: distancia promedio al clúster vecino más cercano (querés que sea grande)
+- $a(i)$: distancia promedio a puntos del mismo clúster (quieres que sea chica)
+- $b(i)$: distancia promedio al clúster vecino más cercano (quieres que sea grande)
 
 <CalloutCheck>
-Regla práctica: probá K desde 2 hasta ~10, calculá silueta para cada uno, y elegí el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen — tus datos no tienen estructura de grupos.
+Regla práctica: prueba K desde 2 hasta ~10, calcula silueta para cada uno, y elige el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen — tus datos no tienen estructura de grupos.
 </CalloutCheck>
 
 </Section>
 
-<Section number={4} title="Visualizá K-Means en acción" eyebrow="INTERACTIVA">
+<Section number={4} title="Visualiza K-Means en acción" eyebrow="INTERACTIVA">
 
 ```python
 import numpy as np
@@ -136,15 +136,15 @@ plt.tight_layout(); plt.show()
 <Section number={6} title="Aplicaciones" eyebrow="APLICACIÓN">
 
 <ConceptCard variant="key-idea">
-**Biotecnología:** Agrupá pacientes por perfiles de expresión génica para descubrir subtipos de cáncer que responden distinto a tratamientos.
+**Biotecnología:** Agrupa pacientes por perfiles de expresión génica para descubrir subtipos de cáncer que responden distinto a tratamientos.
 
-**SaaS:** Segmentá usuarios por comportamiento (frecuencia de uso, features usadas, gasto) para campañas de marketing personalizadas.
+**SaaS:** Segmenta usuarios por comportamiento (frecuencia de uso, features usadas, gasto) para campañas de marketing personalizadas.
 
-**Genómica:** Agrupá genes por patrones de co-expresión para inferir funciones biológicas compartidas.
+**Genómica:** Agrupa genes por patrones de co-expresión para inferir funciones biológicas compartidas.
 </ConceptCard>
 
 <CalloutCheck>
-La gran ventaja del no supervisado: no necesitás datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K-Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
+La gran ventaja del no supervisado: no necesitas datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K-Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
 </CalloutCheck>
 
 </Section>
@@ -173,12 +173,12 @@ K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamen
   blockId="reflection-l06-elbow-vs-silhouette"
   moduleSlug="machine-learning"
   lessonSlug="lesson06_kmeans"
-  prompt="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál elegís y por qué?"
-  answer="Depende del contexto. Si el objetivo es exploratorio (descubrir estructura), elegiría K=5 porque la silueta más alta indica clústeres mejor definidos. Si el objetivo es comunicación (explicar los grupos a stakeholders), K=3 puede ser preferible por simplicidad aunque la calidad sea menor. En la práctica, inspeccioná ambos: a veces K=5 revela un grupo pequeño pero biológicamente relevante que K=3 esconde."
+  prompt="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál eliges y por qué?"
+  answer="Depende del contexto. Si el objetivo es exploratorio (descubrir estructura), elegiría K=5 porque la silueta más alta indica clústeres mejor definidos. Si el objetivo es comunicación (explicar los grupos a stakeholders), K=3 puede ser preferible por simplicidad aunque la calidad sea menor. En la práctica, inspecciona ambos: a veces K=5 revela un grupo pequeño pero biológicamente relevante que K=3 esconde."
 />
 
 <ConceptCard variant="key-idea">
-**Desafío:** Encontrá el K óptimo para un dataset sintético usando inercia y silueta.
+**Desafío:** Encuentra el K óptimo para un dataset sintético usando inercia y silueta.
 </ConceptCard>
 
 <CodeEditor
@@ -190,7 +190,7 @@ import matplotlib.pyplot as plt
 
 X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=0)
 
-# Explorá K de 2 a 10
+# Explora K de 2 a 10
 K_range = range(2, 11)
 inertias = []
 silhouettes = []

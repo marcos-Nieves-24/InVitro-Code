@@ -20,13 +20,13 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-<Section number={1} title="Cuando tenés demasiadas dimensiones" eyebrow="INICIO">
+<Section number={1} title="Cuando tienes demasiadas dimensiones" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-¿Mil features pero solo podés graficar en 2D? PCA comprime la información en pocas dimensiones preservando lo más importante. Es la navaja suiza del preprocesamiento.
+¿Mil features pero solo puedes graficar en 2D? PCA comprime la información en pocas dimensiones preservando lo más importante. Es la navaja suiza del preprocesamiento.
 </MascotMessage>
 
-En genómica tenés 20,000 genes pero solo 100 pacientes. En SaaS tenés cientos de métricas de comportamiento. Visualizar, modelar y entender datos de alta dimensionalidad es difícil. **PCA (Principal Component Analysis)** resuelve esto: encuentra las direcciones de máxima varianza en tus datos y proyecta todo a un espacio más chico.
+En genómica tienes 20,000 genes pero solo 100 pacientes. En SaaS tienes cientos de métricas de comportamiento. Visualizar, modelar y entender datos de alta dimensionalidad es difícil. **PCA (Principal Component Analysis)** resuelve esto: encuentra las direcciones de máxima varianza en tus datos y proyecta todo a un espacio más chico.
 
 <ConceptCard variant="key-idea">
 PCA no selecciona features — crea **nuevas features** (componentes principales) que son combinaciones lineales de las originales. El primer componente captura la dirección de mayor varianza, el segundo la siguiente (ortogonal al primero), y así.
@@ -36,18 +36,18 @@ PCA no selecciona features — crea **nuevas features** (componentes principales
 
 <Section number={2} title="¿Cómo funciona?" eyebrow="CONCEPTO">
 
-1. **Estandarizá los datos** (media 0, varianza 1 por feature)
-2. **Calculá la matriz de covarianza** entre features
-3. **Encontrá valores y vectores propios** de la matriz de covarianza
-4. **Ordená los vectores propios** por valor propio (mayor → más varianza explicada)
-5. **Proyectá** los datos al subespacio de los primeros K vectores propios
+1. **Estandariza los datos** (media 0, varianza 1 por feature)
+2. **Calcula la matriz de covarianza** entre features
+3. **Encuentra valores y vectores propios** de la matriz de covarianza
+4. **Ordena los vectores propios** por valor propio (mayor → más varianza explicada)
+5. **Proyecta** los datos al subespacio de los primeros K vectores propios
 
 <CalloutInfo>
 Los **valores propios** miden cuánta varianza captura cada componente. La suma de todos los valores propios es la varianza total. Dividir cada valor propio por la suma total te da el porcentaje de varianza explicada por ese componente.
 </CalloutInfo>
 
 <ConceptCard variant="definition">
-**Varianza explicada acumulada:** Qué porcentaje de la información original retenés con K componentes. Si los primeros 3 componentes explican el 95% de la varianza, podés reducir tus datos de 100 dimensiones a 3 perdiendo solo el 5% de la información.
+**Varianza explicada acumulada:** Qué porcentaje de la información original retienes con K componentes. Si los primeros 3 componentes explican el 95% de la varianza, puedes reducir tus datos de 100 dimensiones a 3 perdiendo solo el 5% de la información.
 </ConceptCard>
 
 </Section>
@@ -88,12 +88,12 @@ plt.show()
 ```
 
 <CalloutCheck>
-Con solo 2 componentes capturás >95% de la varianza del Iris dataset. Pasaste de 4 dimensiones (sépalos y pétalos) a 2 que podés graficar, y las especies siguen siendo separables. Eso es PCA en una frase: **comprimir sin perder lo esencial**.
+Con solo 2 componentes capturas >95% de la varianza del Iris dataset. Pasaste de 4 dimensiones (sépalos y pétalos) a 2 que puedes graficar, y las especies siguen siendo separables. Eso es PCA en una frase: **comprimir sin perder lo esencial**.
 </CalloutCheck>
 
 </Section>
 
-<Section number={4} title="¿Cuántos componentes necesitás?" eyebrow="CÓDIGO">
+<Section number={4} title="¿Cuántos componentes necesitas?" eyebrow="CÓDIGO">
 
 ```python
 # Varianza explicada acumulada
@@ -114,7 +114,7 @@ plt.show()
   blockId="reflection-l07-pca-components"
   moduleSlug="machine-learning"
   lessonSlug="lesson07_pca"
-  prompt="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo hacés?"
+  prompt="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo haces?"
   answer="PCA es sensible a la escala. Si una feature va de 0 a 1000 y otra de 0 a 1, la primera domina la matriz de covarianza y el primer componente principal será básicamente esa feature. Estandarizar (restar media, dividir por desvío) pone todas las features en igualdad de condiciones y deja que PCA descubra las verdaderas direcciones de varianza."
 />
 
@@ -123,9 +123,9 @@ plt.show()
 <Section number={5} title="Aplicaciones" eyebrow="APLICACIÓN">
 
 <ConceptCard variant="key-idea">
-**Biotecnología — Genómica:** Reducís 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
+**Biotecnología — Genómica:** Reduces 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
 
-**SaaS — Visualización de usuarios:** Proyectás cientos de métricas de comportamiento a 2D y ves clústeres naturales de usuarios: "power users", "en riesgo", "casuales". Sin PCA, estas estructuras serían invisibles.
+**SaaS — Visualización de usuarios:** Proyectas cientos de métricas de comportamiento a 2D y ves clústeres naturales de usuarios: "power users", "en riesgo", "casuales". Sin PCA, estas estructuras serían invisibles.
 
 **Preprocesamiento:** Antes de aplicar K-Means o cualquier modelo, PCA elimina ruido y features redundantes, acelerando el entrenamiento y mejorando la generalización.
 </ConceptCard>
@@ -153,7 +153,7 @@ PCA reduce dimensionalidad creando nuevas features (componentes principales) que
 <Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
 
 <ConceptCard variant="key-idea">
-**Desafío:** Aplicá PCA a breast cancer y compará rendimiento con features originales.
+**Desafío:** Aplica PCA a breast cancer y compara rendimiento con features originales.
 </ConceptCard>
 
 <CodeEditor

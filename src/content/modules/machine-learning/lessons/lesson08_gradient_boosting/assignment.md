@@ -2,14 +2,14 @@
 
 ## Objetivos
 
-- Aplicá gradient boosting a un problema de regresión
-- Ajustá los hiperparámetros de forma sistemática
-- Compará múltiples métodos de conjunto
-- Escribí una recomendación de selección de modelo
+- Aplica gradient boosting a un problema de regresión
+- Ajusta los hiperparámetros de forma sistemática
+- Compara múltiples métodos de conjunto
+- Escribe una recomendación de selección de modelo
 
 ## Dataset
 
-Usá el dataset de **California Housing**.
+Usa el dataset de **California Housing**.
 
 ```python
 from sklearn.datasets import fetch_california_housing
@@ -18,16 +18,16 @@ data = fetch_california_housing()
 
 ## Escenario
 
-Una empresa de análisis inmobiliario necesita un modelo para predecir precios de casas. Tenés que comparar múltiples métodos de conjunto y recomendar el mejor.
+Una empresa de análisis inmobiliario necesita un modelo para predecir precios de casas. Tienes que comparar múltiples métodos de conjunto y recomendar el mejor.
 
 ## Instrucciones
 
-1. **Dividí** en entrenamiento (70%), validación (15%) y prueba (15%)
-2. **Entrená los siguientes modelos** (usá el set de validación para el ajuste):
-   - DecisionTreeRegressor (ajustá max_depth)
-   - RandomForestRegressor (ajustá n_estimators, max_depth)
-   - GradientBoostingRegressor (ajustá learning_rate, n_estimators, max_depth)
-3. **Compará los modelos** en el set de validación usando R² y RMSE
-4. **Seleccioná el mejor modelo** y evaluálo en el set de prueba
-5. **Creá una curva de aprendizaje** para el mejor modelo (R² vs. n_estimators)
+1. **Divide** en entrenamiento (70%), validación (15%) y prueba (15%)
+2. **Entrena los siguientes modelos** (usa el set de validación para el ajuste):
+   - DecisionTreeRegressor (ajusta max_depth)
+   - RandomForestRegressor (ajusta n_estimators, max_depth)
+   - GradientBoostingRegressor (ajusta learning_rate, n_estimators, max_depth)
+3. **Compara los modelos** en el set de validación usando R² y RMSE
+4. **Selecciona el mejor modelo** y evalúalo en el set de prueba
+5. **Crea una curva de aprendizaje** para el mejor modelo (R² vs. n_estimators)
 
