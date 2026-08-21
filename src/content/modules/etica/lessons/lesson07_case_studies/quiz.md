@@ -39,13 +39,13 @@ D. Razón de impacto dispar
 
 ## Respuesta corta (2 preguntas)
 
-**P6.** Explicá cómo el algoritmo de Obermeyer causó daño a pesar de estar bien intencionado. ¿Qué principio ético (de la Lección 1) se vio violado principalmente?
+**P6.** Explica cómo el algoritmo de Obermeyer causó daño a pesar de estar bien intencionado. ¿Qué principio ético (de la Lección 1) se vio violado principalmente?
 
-**P7.** Una empresa SaaS construye un modelo de predicción de churn y planea ofrecer descuentos de retención solo a los clientes predichos como de alto churn. Discutí al menos dos preocupaciones éticas con este enfoque.
+**P7.** Una empresa SaaS construye un modelo de predicción de churn y planea ofrecer descuentos de retención solo a los clientes predichos como de alto churn. Discute al menos dos preocupaciones éticas con este enfoque.
 
 ## Pregunta de código (1 pregunta)
 
-**P8.** Escribí una función de Python `audit_healthcare_algorithm(y_true, y_pred, protected_attr, group_names=None)` que:
+**P8.** Escribe una función de Python `audit_healthcare_algorithm(y_true, y_pred, protected_attr, group_names=None)` que:
 - Reciba etiquetas reales, etiquetas predichas y un atributo protegido
 - Devuelva un diccionario con: precisión general, TPR por grupo, FPR por grupo, diferencia de TPR, diferencia de FPR
 - Use la confusion_matrix de sklearn

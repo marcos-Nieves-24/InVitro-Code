@@ -26,7 +26,7 @@ Quiz: quiz.md
 En 1997, investigadores de Harvard re-identificaron al gobernador de Massachusetts en una base de datos "anónima" de registros médicos usando solo su fecha de nacimiento, género y código postal. Tres datos. La anonimización es un mito.
 </MascotMessage>
 
-Los modelos de ML necesitan datos. Muchos datos. Pero en biotecnología y salud, esos datos son de pacientes reales con derecho a la privacidad. Cada dataset que usás es un riesgo potencial de exposición. Y "anonimizar" los datos no es suficiente.
+Los modelos de ML necesitan datos. Muchos datos. Pero en biotecnología y salud, esos datos son de pacientes reales con derecho a la privacidad. Cada dataset que usas es un riesgo potencial de exposición. Y "anonimizar" los datos no es suficiente.
 
 <ConceptCard variant="key-idea">
 La privacidad no es binaria (anónimo vs identificable). Es un espectro. La pregunta correcta no es "¿están anonimizados estos datos?" sino "¿cuál es el riesgo de re-identificación y qué protecciones existen?"
@@ -43,7 +43,7 @@ El 87% de la población de EE.UU. es identificable de manera única con solo tre
 </CalloutInfo>
 
 <ConceptCard variant="definition">
-**Re-identificación:** Vincular datos "anónimos" con individuos reales cruzando múltiples fuentes. Cuantos más atributos tenés (quasi-identifiers), más fácil es identificar a alguien aunque hayas eliminado nombre, DNI y email.
+**Re-identificación:** Vincular datos "anónimos" con individuos reales cruzando múltiples fuentes. Cuantos más atributos tienes (quasi-identifiers), más fácil es identificar a alguien aunque hayas eliminado nombre, DNI y email.
 </ConceptCard>
 
 </Section>
@@ -59,7 +59,7 @@ El 87% de la población de EE.UU. es identificable de manera única con solo tre
 - **Limitación:** Agregar ruido reduce la precisión del modelo. Hay una compensación privacidad-utilidad
 
 <CalloutCheck>
-La privacidad diferencial no promete que tus datos sean secretos. Promete que incluirte o excluirte del dataset no cambia significativamente lo que un atacante puede aprender sobre vos. Es una garantía sobre el proceso, no sobre el resultado.
+La privacidad diferencial no promete que tus datos sean secretos. Promete que incluirte o excluirte del dataset no cambia significativamente lo que un atacante puede aprender sobre ti. Es una garantía sobre el proceso, no sobre el resultado.
 </CalloutCheck>
 
 </Section>
@@ -81,7 +81,7 @@ La privacidad diferencial no promete que tus datos sean secretos. Promete que in
 
 </Section>
 
-<Section number={5} title="GDPR: lo que necesitás saber" eyebrow="REGULACIÓN">
+<Section number={5} title="GDPR: lo que necesitas saber" eyebrow="REGULACIÓN">
 
 <CalloutInfo>
 El **GDPR (Reglamento General de Protección de Datos)** de la UE establece derechos que todo sistema de ML que procesa datos de europeos debe respetar:
@@ -97,8 +97,8 @@ El **GDPR (Reglamento General de Protección de Datos)** de la UE establece dere
   blockId="reflection-e04-right-to-be-forgotten"
   moduleSlug="etica"
   lessonSlug="lesson04_privacy"
-  prompt="Un usuario ejerce su 'derecho al olvido' y pide eliminar sus datos. Pero tu modelo ya fue entrenado con esos datos. ¿Es suficiente con borrarlos de la base de datos? ¿Tenés que re-entrenar el modelo?"
-  answers="El GDPR no es explícito sobre modelos ya entrenados, pero el espíritu de la ley sugiere que sí: si los datos de una persona influyeron en los pesos del modelo, el derecho al olvido debería extenderse a des-aprender esa influencia. Esto es 'machine unlearning', un área activa de investigación. En la práctica: (1) borrá los datos del dataset, (2) documentá la solicitud, (3) si es factible, re-entrená. Si no es factible (modelos muy grandes), documentá por qué y evaluá el riesgo residual."
+  prompt="Un usuario ejerce su 'derecho al olvido' y pide eliminar sus datos. Pero tu modelo ya fue entrenado con esos datos. ¿Es suficiente con borrarlos de la base de datos? ¿Tienes que re-entrenar el modelo?"
+  answers="El GDPR no es explícito sobre modelos ya entrenados, pero el espíritu de la ley sugiere que sí: si los datos de una persona influyeron en los pesos del modelo, el derecho al olvido debería extenderse a des-aprender esa influencia. Esto es 'machine unlearning', un área activa de investigación. En la práctica: (1) borra los datos del dataset, (2) documenta la solicitud, (3) si es factible, re-entrena. Si no es factible (modelos muy grandes), documenta por qué y evalúa el riesgo residual."
 />
 
 </Section>

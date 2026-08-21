@@ -65,7 +65,7 @@ Northpointe, la empresa, se defendió: "para cualquier puntaje dado, la probabil
 
 </Section>
 
-<Section number={3} title="Tres definiciones de equidad (y por qué no podés tener las tres)" eyebrow="MATEMÁTICA">
+<Section number={3} title="Tres definiciones de equidad (y por qué no puedes tener las tres)" eyebrow="MATEMÁTICA">
 
 <ComparisonTable
   rows={[
@@ -76,7 +76,7 @@ Northpointe, la empresa, se defendió: "para cualquier puntaje dado, la probabil
 />
 
 <ConceptCard variant="key-idea">
-**Teorema de imposibilidad:** No podés tener simultáneamente calibración (mismo puntaje = misma probabilidad real) Y paridad demográfica, a menos que las tasas base sean iguales entre grupos o el modelo sea perfecto. La equidad implica elegir qué definición priorizar. No hay atajo matemático.
+**Teorema de imposibilidad:** No puedes tener simultáneamente calibración (mismo puntaje = misma probabilidad real) Y paridad demográfica, a menos que las tasas base sean iguales entre grupos o el modelo sea perfecto. La equidad implica elegir qué definición priorizar. No hay atajo matemático.
 </ConceptCard>
 
 </Section>
@@ -134,7 +134,7 @@ La **regla del 80%** (o disparate impact): la tasa de selección del grupo minor
 />
 
 <CalloutCheck>
-Regla práctica: empezá siempre por auditar tus datos. La mayoría del sesgo viene de los datos, no del algoritmo. Si tus datos de entrenamiento no representan a la población que vas a afectar, ningún truco algorítmico te salva.
+Regla práctica: empieza siempre por auditar tus datos. La mayoría del sesgo viene de los datos, no del algoritmo. Si tus datos de entrenamiento no representan a la población que vas a afectar, ningún truco algorítmico te salva.
 </CalloutCheck>
 
 </Section>
@@ -142,7 +142,7 @@ Regla práctica: empezá siempre por auditar tus datos. La mayoría del sesgo vi
 <Section number={6} title="Resumen" eyebrow="RESUMEN">
 
 <ConceptCard variant="key-idea">
-El sesgo tiene tres fuentes entrelazadas: datos, algoritmo y sociedad. Existen múltiples definiciones de equidad matemática y no podés satisfacerlas todas a la vez. Elegir cuál priorizar es una decisión ética, no técnica. Medí disparidades por grupo, no solo accuracy general. La regla del 80% es tu mínimo.
+El sesgo tiene tres fuentes entrelazadas: datos, algoritmo y sociedad. Existen múltiples definiciones de equidad matemática y no puedes satisfacerlas todas a la vez. Elegir cuál priorizar es una decisión ética, no técnica. Mide disparidades por grupo, no solo accuracy general. La regla del 80% es tu mínimo.
 </ConceptCard>
 
 </Section>

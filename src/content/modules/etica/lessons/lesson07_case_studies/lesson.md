@@ -64,7 +64,7 @@ La ética en IA se aprende en los casos reales. Cada falla tiene un patrón, una
 
 **Principios violados:** Justicia, No maleficencia.
 
-**Lección:** Amazon detectó el sesgo y **canceló el proyecto**. Hicieron lo correcto. No todo modelo que construís debe desplegarse.
+**Lección:** Amazon detectó el sesgo y **canceló el proyecto**. Hicieron lo correcto. No todo modelo que construyes debe desplegarse.
 
 </Section>
 
@@ -93,7 +93,7 @@ Los cinco casos comparten patrones: (1) el sesgo estaba en los datos, no en el c
 </ConceptCard>
 
 <CalloutCheck>
-**Checklist para no ser el próximo caso de estudio:** (1) Auditá tus datos antes de entrenar. (2) Medí disparidades entre grupos. (3) Preguntate qué pasa si tu modelo falla. (4) Documentá tus decisiones. (5) Tené un plan B si descubrís sesgo en producción.
+**Checklist para no ser el próximo caso de estudio:** (1) Audita tus datos antes de entrenar. (2) Mide disparidades entre grupos. (3) Pregúntate qué pasa si tu modelo falla. (4) Documenta tus decisiones. (5) Ten un plan B si descubres sesgo en producción.
 </CalloutCheck>
 
 </Section>

@@ -39,13 +39,13 @@ D. Autonomía
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá por qué un modelo de machine learning que logra alta precisión promedio puede seguir siendo éticamente problemático. Proporcioná un ejemplo concreto.
+**Q6.** Explica por qué un modelo de machine learning que logra alta precisión promedio puede seguir siendo éticamente problemático. Proporciona un ejemplo concreto.
 
-**Q7.** Describí una concesión ética entre los principios de privacidad y transparencia. ¿Cómo podría un diseñador de sistemas resolver este conflicto?
+**Q7.** Describe una concesión ética entre los principios de privacidad y transparencia. ¿Cómo podría un diseñador de sistemas resolver este conflicto?
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** (Conceptual — sin código) Estás diseñando un sistema de IA para ayudar a los comités de admisión universitarios a evaluar solicitudes. Escribí un análisis breve (aproximadamente 150 palabras) explicando cómo se aplica cada uno de los cinco principios éticos a este sistema. Identificá al menos un conflicto potencial entre principios.
+**Q8.** (Conceptual — sin código) Estás diseñando un sistema de IA para ayudar a los comités de admisión universitarios a evaluar solicitudes. Escribe un análisis breve (aproximadamente 150 palabras) explicando cómo se aplica cada uno de los cinco principios éticos a este sistema. Identifica al menos un conflicto potencial entre principios.
 
 ---
 

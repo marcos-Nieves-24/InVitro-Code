@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Realizá un análisis ético completo de un sistema de IA real o hipotético, aplicando todos los conceptos del Módulo 5 (principios, bias, fairness, transparencia, privacidad, impacto social, regulación).
+Realiza un análisis ético completo de un sistema de IA real o hipotético, aplicando todos los conceptos del Módulo 5 (principios, bias, fairness, transparencia, privacidad, impacto social, regulación).
 
 ## Duración
 
@@ -16,7 +16,7 @@ Lecciones 1–7
 
 ### Parte 1: Selección y descripción del caso (10 minutos)
 
-Elegí uno de los siguientes casos. Leé la descripción y los recursos vinculados.
+Elige uno de los siguientes casos. Lee la descripción y los recursos vinculados.
 
 **Caso A: Selección de currículums impulsada por IA**
 
@@ -32,10 +32,10 @@ Una empresa SaaS lanza un chatbot de IA que brinda apoyo de salud mental a los u
 
 ### Parte 2: Análisis estructurado (35 minutos)
 
-Para tu caso elegido, analizá usando el siguiente marco:
+Para tu caso elegido, analiza usando el siguiente marco:
 
 **1. Análisis de los cinco principios (10 min)**
-Para cada principio (beneficencia, no maleficencia, autonomía, justicia, explicabilidad), indicá si el sistema satisface, satisface parcialmente o viola el principio. Explicá tu razonamiento.
+Para cada principio (beneficencia, no maleficencia, autonomía, justicia, explicabilidad), indica si el sistema satisface, satisface parcialmente o viola el principio. Explica tu razonamiento.
 
 **2. Análisis de bias (5 min)**
 - ¿Qué tipos de bias podrían estar presentes (de datos, algorítmico, social)?
@@ -63,14 +63,14 @@ Para cada principio (beneficencia, no maleficencia, autonomía, justicia, explic
 
 ### Parte 3: Recomendaciones (15 minutos)
 
-Escribí tres recomendaciones específicas y accionables:
+Escribe tres recomendaciones específicas y accionables:
 1. Un arreglo rápido (implementable en < 1 mes)
 2. Una mejora a mediano plazo (1–6 meses)
 3. Un cambio sistémico a largo plazo (6+ meses)
 
 ### Parte 4: Discusión en grupo (15 minutos)
 
-Compartí tu análisis con un compañero o un grupo pequeño. Discutí:
+Comparte tu análisis con un compañero o un grupo pequeño. Discute:
 - ¿Identificaron riesgos distintos para el mismo caso?
 - ¿Qué compensaciones encontraron?
 - ¿Son factibles sus recomendaciones?
@@ -78,7 +78,7 @@ Compartí tu análisis con un compañero o un grupo pequeño. Discutí:
 
 ## Entregables
 
-Enviá tu análisis estructurado (Parte 2) y tus recomendaciones (Parte 3).
+Envía tu análisis estructurado (Parte 2) y tus recomendaciones (Parte 3).
 
 ## Rúbrica
 

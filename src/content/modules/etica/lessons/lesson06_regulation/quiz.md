@@ -39,13 +39,13 @@ D. Ninguno ha promulgado regulación específica de IA
 
 ## Respuesta corta (2 preguntas)
 
-**P6.** Describí los cuatro niveles de riesgo de la Ley de IA de la UE. Para cada nivel, dá un ejemplo y enunciá el requisito regulatorio clave.
+**P6.** Describe los cuatro niveles de riesgo de la Ley de IA de la UE. Para cada nivel, da un ejemplo y enuncia el requisito regulatorio clave.
 
 **P7.** ¿Cuáles son los componentes de un marco sólido interno de gobernanza corporativa de IA? ¿Por qué podría fallar el comité de ética de una empresa a la hora de prevenir daños?
 
 ## Pregunta de código (1 pregunta)
 
-**P8.** (Conceptual — sin código) Sos el responsable de gobernanza de IA en una empresa que desarrolla un sistema de IA de riesgo alto para diagnóstico médico. Escribí una checklist de cumplimiento breve (150 palabras) que cubra los requisitos clave según la Ley de IA de la UE.
+**P8.** (Conceptual — sin código) Eres el responsable de gobernanza de IA en una empresa que desarrolla un sistema de IA de riesgo alto para diagnóstico médico. Escribe una checklist de cumplimiento breve (150 palabras) que cubra los requisitos clave según la Ley de IA de la UE.
 
 ---
 

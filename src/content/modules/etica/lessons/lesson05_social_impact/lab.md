@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Realizá un análisis de impacto social de un sistema de IA real o propuesto. Evaluá sus efectos sobre el empleo, el ambiente, la seguridad y el ecosistema de información.
+Realiza un análisis de impacto social de un sistema de IA real o propuesto. Evalúa sus efectos sobre el empleo, el ambiente, la seguridad y el ecosistema de información.
 
 ## Duración
 
@@ -14,9 +14,9 @@ Lección 5
 
 ## Instrucciones
 
-### Parte 1: Seleccioná un sistema (5 minutos)
+### Parte 1: Selecciona un sistema (5 minutos)
 
-Elegí uno de estos sistemas de IA:
+Elige uno de estos sistemas de IA:
 
 1. **Kioscos de autopago** en tiendas minoristas (reemplazando cajeros)
 2. **Artículos de noticias generados por IA** de una organización de noticias importante
@@ -26,7 +26,7 @@ Elegí uno de estos sistemas de IA:
 
 ### Parte 2: Análisis de impacto social (25 minutos)
 
-Para el sistema que elegiste, analizá las siguientes dimensiones:
+Para el sistema que elegiste, analiza las siguientes dimensiones:
 
 **Empleo:**
 - ¿Qué trabajos podrían verse afectados? ¿Cuántos trabajadores?
@@ -39,7 +39,7 @@ Para el sistema que elegiste, analizá las siguientes dimensiones:
 - ¿Cómo podría hacerse el sistema más sostenible desde el punto de vista ambiental?
 
 **Seguridad:**
-- ¿Qué podría salir mal? Identificá al menos 3 modos de falla.
+- ¿Qué podría salir mal? Identifica al menos 3 modos de falla.
 - ¿Existen vectores de ataque adversario?
 - ¿Qué mitigaciones de seguridad deberían estar en marcha antes del despliegue?
 
@@ -55,18 +55,18 @@ Para el sistema que elegiste, analizá las siguientes dimensiones:
 
 ### Parte 3: Mapa de actores interesados (10 minutos)
 
-Dibujá un mapa de actores interesados (o escribí una lista) identificando al menos 5 grupos afectados por este sistema. Para cada grupo, indicá:
+Dibuja un mapa de actores interesados (o escribe una lista) identificando al menos 5 grupos afectados por este sistema. Para cada grupo, indica:
 - Cómo se ven afectados (positiva o negativamente)
 - Su poder para influir en el diseño o el despliegue del sistema
 - Qué podrían defender o exigir
 
 ### Parte 4: Recomendación (5 minutos)
 
-Escribí una recomendación específica y accionable para los desarrolladores o implementadores del sistema que aborde el impacto social más significativo que identificaste.
+Escribe una recomendación específica y accionable para los desarrolladores o implementadores del sistema que aborde el impacto social más significativo que identificaste.
 
 ## Entregables
 
-Enviá tu análisis (Partes 2–4) como documento (PDF o texto).
+Envía tu análisis (Partes 2–4) como documento (PDF o texto).
 
 ## Rúbrica
 

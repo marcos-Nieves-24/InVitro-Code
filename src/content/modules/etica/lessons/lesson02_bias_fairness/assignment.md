@@ -8,36 +8,36 @@
 
 ## Instrucciones
 
-### Parte 1: Leé y resumí (500 palabras)
+### Parte 1: Lee y resume (500 palabras)
 
-Leé el artículo "Machine Bias" de ProPublica (Angwin et al., 2016) y resumí:
+Lee el artículo "Machine Bias" de ProPublica (Angwin et al., 2016) y resume:
 1. ¿Qué es COMPAS? ¿Qué predice?
 2. ¿Cómo evaluó ProPublica su equidad?
 3. ¿Cuáles fueron los hallazgos principales?
 4. ¿Cómo respondió Northpointe (el desarrollador)?
 
-### Parte 2: Replicá el análisis (Python)
+### Parte 2: Replica el análisis (Python)
 
-Usando el dataset de COMPAS de ProPublica (disponible en https://github.com/propublica/compas-analysis), replicá el análisis de equidad clave:
+Usando el dataset de COMPAS de ProPublica (disponible en https://github.com/propublica/compas-analysis), replica el análisis de equidad clave:
 
-1. Cargá los datos crudos de COMPAS (fecha de arresto de 2013–2014).
-2. Filtrá para crear la misma muestra usada en el análisis de ProPublica (mismos criterios de filtrado).
-3. Calculá accuracy, TPR, FPR por raza (solo acusados negros y blancos).
-4. Calculá paridad demográfica, igualdad de oportunidades y probabilidades igualadas.
-5. Creá una visualización que muestre las disparidades.
+1. Carga los datos crudos de COMPAS (fecha de arresto de 2013–2014).
+2. Filtra para crear la misma muestra usada en el análisis de ProPublica (mismos criterios de filtrado).
+3. Calcula accuracy, TPR, FPR por raza (solo acusados negros y blancos).
+4. Calcula paridad demográfica, igualdad de oportunidades y probabilidades igualadas.
+5. Crea una visualización que muestre las disparidades.
 
-### Parte 3: Compará definiciones (500 palabras)
+### Parte 3: Compara definiciones (500 palabras)
 
-Escribí un análisis que compare las posiciones de ProPublica y Northpointe:
+Escribe un análisis que compare las posiciones de ProPublica y Northpointe:
 1. ¿Qué definición de equidad usó ProPublica?
 2. ¿Qué definición de equidad usó Northpointe (calibración)?
-3. ¿Pueden tener razón ambas? Explicá el teorema de imposibilidad en este contexto.
-4. ¿Qué definición de equidad creés que es más apropiada para las sentencias penales? ¿Por qué?
+3. ¿Pueden tener razón ambas? Explica el teorema de imposibilidad en este contexto.
+4. ¿Qué definición de equidad crees que es más apropiada para las sentencias penales? ¿Por qué?
 
 ### Parte 4: Recomendaciones (300 palabras)
 
-Proponé al menos tres recomendaciones sobre cómo se deberían mejorar COMPAS (o herramientas similares de evaluación de riesgo). Considerá cambios técnicos, procedimentales y de política.
+Propone al menos tres recomendaciones sobre cómo se deberían mejorar COMPAS (o herramientas similares de evaluación de riesgo). Considera cambios técnicos, procedimentales y de política.
 
 ## Entrega
 
-Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.
+Envía el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.

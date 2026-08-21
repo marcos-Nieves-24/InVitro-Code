@@ -23,7 +23,7 @@ Quiz: quiz.md
 <Section number={1} title="La ley alcanzó a la IA" eyebrow="INICIO">
 
 <MascotMessage mood="neutral">
-La era del "move fast and break things" en IA se terminó. La EU AI Act entró en vigor. Si construís sistemas de IA para salud, biotecnología o SaaS en Europa, cumplir no es opcional — es legalmente obligatorio.
+La era del "move fast and break things" en IA se terminó. La EU AI Act entró en vigor. Si construyes sistemas de IA para salud, biotecnología o SaaS en Europa, cumplir no es opcional — es legalmente obligatorio.
 </MascotMessage>
 
 Durante años, la IA operó en un vacío regulatorio. Las empresas se auto-regulaban con "principios éticos" voluntarios. Eso cambió. La **EU AI Act** (2024) es la primera regulación integral de IA del mundo, y establece un marco basado en riesgo que clasifica los sistemas en cuatro niveles.
@@ -62,7 +62,7 @@ La regulación no es el enemigo de la innovación. Es el marco que establece las
 />
 
 <CalloutCheck>
-Si tu SaaS opera globalmente, necesitás cumplir con las regulaciones de cada mercado. La EU AI Act es la más estricta, y su efecto Bruselas significa que muchas empresas globales la adoptan como estándar mínimo en todas sus operaciones.
+Si tu SaaS opera globalmente, necesitas cumplir con las regulaciones de cada mercado. La EU AI Act es la más estricta, y su efecto Bruselas significa que muchas empresas globales la adoptan como estándar mínimo en todas sus operaciones.
 </CalloutCheck>
 
 </Section>
@@ -70,12 +70,12 @@ Si tu SaaS opera globalmente, necesitás cumplir con las regulaciones de cada me
 <Section number={4} title="Gobernanza interna: lo que tu equipo necesita" eyebrow="HERRAMIENTA">
 
 <ConceptCard variant="key-idea">
-La gobernanza de IA no es solo cumplir regulaciones externas. Es establecer procesos internos para que cada modelo que construís pase por un checklist ético antes de desplegarse.
+La gobernanza de IA no es solo cumplir regulaciones externas. Es establecer procesos internos para que cada modelo que construyes pase por un checklist ético antes de desplegarse.
 </ConceptCard>
 
 **Checklist mínimo de gobernanza:**
 
-1. **Inventario de modelos:** ¿Qué modelos tenés en producción? ¿Qué datos usan? ¿A quién afectan?
+1. **Inventario de modelos:** ¿Qué modelos tienes en producción? ¿Qué datos usan? ¿A quién afectan?
 2. **Clasificación de riesgo:** ¿Es alto riesgo según EU AI Act? ¿Qué pasaría si falla?
 3. **Auditoría de sesgo:** ¿Mediste disparidades entre grupos? ¿Documentaste los resultados?
 4. **Registro de decisiones:** ¿Por qué elegiste este modelo y no otro? ¿Qué métricas priorizaste?
@@ -85,8 +85,8 @@ La gobernanza de IA no es solo cumplir regulaciones externas. Es establecer proc
   blockId="reflection-e06-governance-gap"
   moduleSlug="etica"
   lessonSlug="lesson06_regulation"
-  prompt="Tu startup de biotech tiene 5 personas. ¿Necesitás gobernanza de IA? ¿O eso es solo para Google y OpenAI?"
-  answer="Sí, necesitás gobernanza — adaptada a tu escala. No necesitás un comité de ética de 20 personas. Pero sí necesitás: (1) documentar qué modelos usás y por qué, (2) un checklist de 5 preguntas que todo modelo debe responder antes de deploy, (3) saber quién es responsable si algo sale mal. La gobernanza escala con la empresa. Lo que no escala es la responsabilidad: un modelo que causa daño no es menos dañino porque lo hizo una startup."
+  prompt="Tu startup de biotech tiene 5 personas. ¿Necesitas gobernanza de IA? ¿O eso es solo para Google y OpenAI?"
+  answer="Sí, necesitas gobernanza — adaptada a tu escala. No necesitas un comité de ética de 20 personas. Pero sí necesitas: (1) documentar qué modelos usas y por qué, (2) un checklist de 5 preguntas que todo modelo debe responder antes de deploy, (3) saber quién es responsable si algo sale mal. La gobernanza escala con la empresa. Lo que no escala es la responsabilidad: un modelo que causa daño no es menos dañino porque lo hizo una startup."
 />
 
 </Section>

@@ -41,11 +41,11 @@ D. Determinación de expertos de que el riesgo de re-identificación es pequeño
 
 **Q6.** ¿Qué es un ataque de inferencia de membresía? ¿Cómo ayuda la privacidad diferencial a defenderse de él?
 
-**Q7.** Explicá el principio de "minimización de datos". Dá un ejemplo de cómo un proyecto de machine learning podría violar este principio y cómo solucionarlo.
+**Q7.** Explica el principio de "minimización de datos". Da un ejemplo de cómo un proyecto de machine learning podría violar este principio y cómo solucionarlo.
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función de Python `differentially_private_histogram(data, bins, epsilon)` que:
+**Q8.** Escribe una función de Python `differentially_private_histogram(data, bins, epsilon)` que:
 - Reciba un array de valores, los bordes de los bins y un presupuesto de privacidad epsilon
 - Calcule el histograma verdadero (conteos por bin)
 - Agregue ruido de Laplace a cada conteo de bin con sensibilidad = 1 (agregar/eliminar una persona cambia el conteo de un bin en como máximo 1)
@@ -67,7 +67,7 @@ D. Determinación de expertos de que el riesgo de re-identificación es pequeño
 
 **Q6.** Un ataque de inferencia de membresía intenta determinar si los datos de un individuo específico se incluyeron en el conjunto de entrenamiento de un modelo. Los atacantes explotan el hecho de que los modelos suelen mostrar mayor confianza en los ejemplos de entrenamiento que en ejemplos no vistos. La privacidad diferencial se defiende de esto acotando la influencia que cualquier registro individual puede tener en la salida del modelo — si el comportamiento del modelo cambia muy poco cuando se agrega o elimina un registro, un atacante no puede inferir la membresía de forma confiable.
 
-**Q7.** La minimización de datos significa recolectar solo los datos necesarios para el propósito declarado. Un proyecto de machine learning podría violar esto recolectando todas las features posibles (p. ej., recolectar datos genéticos cuando solo se necesitan edad e IMC para la tarea de predicción). Para solucionarlo: realizá una evaluación de impacto sobre la privacidad, identificá el conjunto mínimo de features necesario y recolectá solo esas features.
+**Q7.** La minimización de datos significa recolectar solo los datos necesarios para el propósito declarado. Un proyecto de machine learning podría violar esto recolectando todas las features posibles (p. ej., recolectar datos genéticos cuando solo se necesitan edad e IMC para la tarea de predicción). Para solucionarlo: realiza una evaluación de impacto sobre la privacidad, identifica el conjunto mínimo de features necesario y recolecta solo esas features.
 
 **Q8.** Solución de ejemplo:
 

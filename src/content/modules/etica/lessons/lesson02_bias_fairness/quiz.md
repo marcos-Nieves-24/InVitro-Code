@@ -39,18 +39,18 @@ D. Seleccionar features a ciegas sin conocimiento del dominio
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá cómo una feature como "código postal" puede actuar como proxy de la raza incluso cuando la raza se elimina del modelo. ¿Qué implica esto sobre la "equidad mediante ignorancia"?
+**Q6.** Explica cómo una feature como "código postal" puede actuar como proxy de la raza incluso cuando la raza se elimina del modelo. ¿Qué implica esto sobre la "equidad mediante ignorancia"?
 
-**Q7.** ¿Qué es la interseccionalidad en el contexto del bias algorítmico? Proporcioná un ejemplo donde el bias podría no ser visible al analizar grupos según un solo atributo.
+**Q7.** ¿Qué es la interseccionalidad en el contexto del bias algorítmico? Proporciona un ejemplo donde el bias podría no ser visible al analizar grupos según un solo atributo.
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función de Python `compute_equalized_odds(y_true, y_pred, protected_attr)` que:
+**Q8.** Escribe una función de Python `compute_equalized_odds(y_true, y_pred, protected_attr)` que:
 - Reciba tres arrays: etiquetas reales, etiquetas predichas y un atributo protegido binario
 - Devuelva un diccionario con la tasa de verdaderos positivos (TPR) y la tasa de falsos positivos (FPR) para cada grupo
 - También devuelva la diferencia absoluta en TPR y FPR entre los dos grupos
 
-Podés usar `sklearn.metrics.confusion_matrix`.
+Puedes usar `sklearn.metrics.confusion_matrix`.
 
 ---
 

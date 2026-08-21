@@ -24,15 +24,15 @@ Quiz: quiz.md
 <Section number={1} title="Cuando la precisión no alcanza" eyebrow="INICIO">
 
 <MascotMessage mood="neutral">
-La ética en IA no es filosofía abstracta. Es ingeniería aplicada. Un modelo con 94% de accuracy puede estar matando gente si ese 6% de error se concentra en una población vulnerable. Hoy aprendés a ver lo que las métricas no muestran.
+La ética en IA no es filosofía abstracta. Es ingeniería aplicada. Un modelo con 94% de accuracy puede estar matando gente si ese 6% de error se concentra en una población vulnerable. Hoy aprendes a ver lo que las métricas no muestran.
 </MascotMessage>
 
-Imaginá que construís un modelo que predice diabetes con 94% de precisión. Lo desplegás en un hospital. Meses después descubrís que subdiagnostica sistemáticamente a mujeres de color — justamente la población que más necesita detección temprana.
+Imagina que construyes un modelo que predice diabetes con 94% de precisión. Lo despliegas en un hospital. Meses después descubres que subdiagnostica sistemáticamente a mujeres de color — justamente la población que más necesita detección temprana.
 
 Esto no es hipotético. En 2019, investigadores descubrieron que un algoritmo de salud usado en hospitales de EE.UU. estaba sesgado contra pacientes negros, clasificándolos como más saludables que pacientes blancos igualmente enfermos (Obermeyer et al., 2019). El algoritmo estaba desplegado en hospitales que atienden a millones.
 
 <ConceptCard variant="key-idea">
-La ética en IA pregunta: ¿Qué deberíamos construir? ¿Cómo deberíamos construirlo? ¿Quién podría resultar dañado? ¿Qué responsabilidades tenemos hacia las personas afectadas por nuestros sistemas? Si trabajás en biotecnología, salud o SaaS, entender esto es tan esencial como entender el gradiente descendente.
+La ética en IA pregunta: ¿Qué deberíamos construir? ¿Cómo deberíamos construirlo? ¿Quién podría resultar dañado? ¿Qué responsabilidades tenemos hacia las personas afectadas por nuestros sistemas? Si trabajas en biotecnología, salud o SaaS, entender esto es tan esencial como entender el gradiente descendente.
 </ConceptCard>
 
 </Section>
@@ -46,7 +46,7 @@ La ética en IA pregunta: ¿Qué deberíamos construir? ¿Cómo deberíamos cons
 
 3. **Cumplimiento legal.** La EU AI Act, GDPR, HIPAA imponen requisitos legales. La ignorancia no es defensa.
 
-4. **Mejor ciencia.** Considerar quién está en tus datos, cómo construís features, y para qué optimizás conduce a modelos más robustos.
+4. **Mejor ciencia.** Considerar quién está en tus datos, cómo construyes features, y para qué optimizas conduce a modelos más robustos.
 </CalloutInfo>
 
 </Section>
@@ -56,11 +56,11 @@ La ética en IA pregunta: ¿Qué deberíamos construir? ¿Cómo deberíamos cons
 Floridi y Cowls (2019) sintetizaron más de 50 guías de ética en IA en cinco principios:
 
 <ConceptCard variant="definition">
-**1. Beneficencia — Hacer el bien.** Los sistemas de IA deben diseñarse para beneficiar a la humanidad. Evaluá no solo la precisión, sino si el sistema realmente mejora resultados. Una IA de diagnóstico debe medirse por si los pacientes mejoran, no solo por su accuracy.
+**1. Beneficencia — Hacer el bien.** Los sistemas de IA deben diseñarse para beneficiar a la humanidad. Evalúa no solo la precisión, sino si el sistema realmente mejora resultados. Una IA de diagnóstico debe medirse por si los pacientes mejoran, no solo por su accuracy.
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**2. No maleficencia — No hacer daño.** Prevenir daño directo (diagnóstico erróneo), indirecto (sesgo, discriminación) y a largo plazo (desigualdad social). Antes de desplegar un sistema de contratación, evaluá si rechaza desproporcionadamente a ciertos grupos.
+**2. No maleficencia — No hacer daño.** Prevenir daño directo (diagnóstico erróneo), indirecto (sesgo, discriminación) y a largo plazo (desigualdad social). Antes de desplegar un sistema de contratación, evalúa si rechaza desproporcionadamente a ciertos grupos.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -92,8 +92,8 @@ Floridi y Cowls (2019) sintetizaron más de 50 guías de ética en IA en cinco p
   blockId="reflection-e01-tradeoffs"
   moduleSlug="etica"
   lessonSlug="lesson01_intro_ethics"
-  prompt="Estás diseñando un sistema de diagnóstico de cáncer. ¿Qué principio priorizás si tenés que elegir entre maximizar la precisión (más vidas salvadas en general) y garantizar justicia (igual precisión en todos los grupos demográficos)?"
-  answer="No hay respuesta universal — es una decisión de diseño con implicaciones éticas. Podés argumentar justicia: si el modelo falla más en ciertos grupos, estás creando un sistema de dos niveles donde algunos reciben peor atención médica. O podés argumentar beneficencia: más vidas totales salvadas es mejor, aunque la distribución no sea perfecta. La clave es hacer la decisión explícita y documentarla, no pretender que la métrica la tomó por vos."
+  prompt="Estás diseñando un sistema de diagnóstico de cáncer. ¿Qué principio priorizas si tienes que elegir entre maximizar la precisión (más vidas salvadas en general) y garantizar justicia (igual precisión en todos los grupos demográficos)?"
+  answer="No hay respuesta universal — es una decisión de diseño con implicaciones éticas. Puedes argumentar justicia: si el modelo falla más en ciertos grupos, estás creando un sistema de dos niveles donde algunos reciben peor atención médica. O puedes argumentar beneficencia: más vidas totales salvadas es mejor, aunque la distribución no sea perfecta. La clave es hacer la decisión explícita y documentarla, no pretender que la métrica la tomó por ti."
 />
 
 </Section>
@@ -119,7 +119,7 @@ La lección de COMPAS: que tu modelo no use una variable protegida (raza, géner
 
 <Section number={6} title="Marco para análisis ético" eyebrow="HERRAMIENTA">
 
-Cuando evalúes un sistema de IA, hacete estas preguntas:
+Cuando evalúes un sistema de IA, hazte estas preguntas:
 
 1. **¿A quién afecta?** ¿Quiénes son los stakeholders? ¿Hay grupos vulnerables?
 2. **¿Qué podría salir mal?** ¿Cuáles son los peores escenarios?
@@ -136,7 +136,7 @@ Este marco no reemplaza el juicio ético — lo estructura. La ética no se auto
 <Section number={7} title="Resumen" eyebrow="RESUMEN">
 
 <ConceptCard variant="key-idea">
-La ética en IA es una disciplina de ingeniería, no filosofía abstracta. Los cinco principios — beneficencia, no maleficencia, autonomía, justicia, explicabilidad — son tu checklist. Los principios chocan en la práctica y tenés que elegir. La precisión no es suficiente: un modelo puede ser preciso en promedio y causar daño real. Los datos heredan los sesgos del mundo que los produjo.
+La ética en IA es una disciplina de ingeniería, no filosofía abstracta. Los cinco principios — beneficencia, no maleficencia, autonomía, justicia, explicabilidad — son tu checklist. Los principios chocan en la práctica y tienes que elegir. La precisión no es suficiente: un modelo puede ser preciso en promedio y causar daño real. Los datos heredan los sesgos del mundo que los produjo.
 </ConceptCard>
 
 </Section>

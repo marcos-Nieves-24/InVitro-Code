@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Aplicá el marco de la Ley de IA de la UE a sistemas de IA reales. Analizá los requisitos de cumplimiento e identificá brechas.
+Aplica el marco de la Ley de IA de la UE a sistemas de IA reales. Analiza los requisitos de cumplimiento e identifica brechas.
 
 ## Duración
 
@@ -16,7 +16,7 @@ Lección 6
 
 ### Parte 1: Ejercicio de clasificación (15 minutos)
 
-Para cada uno de los siguientes sistemas de IA, clasificalo bajo la Ley de IA de la UE (riesgo inaceptable, riesgo alto, riesgo limitado, riesgo mínimo) y justificá tu decisión:
+Para cada uno de los siguientes sistemas de IA, clasifícalo bajo la Ley de IA de la UE (riesgo inaceptable, riesgo alto, riesgo limitado, riesgo mínimo) y justifica tu decisión:
 
 1. Un sistema de IA usado por un banco para aprobar o rechazar automáticamente préstamos para pequeñas empresas.
 2. Un generador de videos deepfake usado para entretenimiento (creando videos de parodia).
@@ -27,7 +27,7 @@ Para cada uno de los siguientes sistemas de IA, clasificalo bajo la Ley de IA de
 
 ### Parte 2: Mapeo de cumplimiento (20 minutos)
 
-Elegí uno de los sistemas de riesgo alto de la Parte 1. Creá un mapa de cumplimiento que muestre:
+Elige uno de los sistemas de riesgo alto de la Parte 1. Crea un mapa de cumplimiento que muestre:
 
 - Qué artículos de la Ley de IA de la UE aplican
 - Qué documentación técnica se necesita
@@ -35,7 +35,7 @@ Elegí uno de los sistemas de riesgo alto de la Parte 1. Creá un mapa de cumpli
 - Qué medidas de supervisión humana se necesitan
 - Qué obligaciones de transparencia existen
 
-Usá la siguiente plantilla:
+Usa la siguiente plantilla:
 
 | Requisito | Acción específica | Evidencia necesaria | Parte responsable |
 |-------------|----------------|----------------|-------------------|
@@ -44,14 +44,14 @@ Usá la siguiente plantilla:
 
 ### Parte 3: Análisis de brechas (10 minutos)
 
-Para el mismo sistema, identificá:
-1. Tres brechas entre la práctica actual (asumí un desarrollo típico) y los requisitos regulatorios
+Para el mismo sistema, identifica:
+1. Tres brechas entre la práctica actual (asume un desarrollo típico) y los requisitos regulatorios
 2. El costo y la dificultad de cerrar cada brecha
 3. El orden de prioridad para la remediación
 
 ## Entregables
 
-Enviá tu clasificación (Parte 1), el mapa de cumplimiento (Parte 2) y el análisis de brechas (Parte 3).
+Envía tu clasificación (Parte 1), el mapa de cumplimiento (Parte 2) y el análisis de brechas (Parte 3).
 
 ## Rúbrica
 

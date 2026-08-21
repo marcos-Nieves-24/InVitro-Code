@@ -23,7 +23,7 @@ Quiz: quiz.md
 <Section number={1} title="Más allá del modelo: el mundo que cambia" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Un modelo de ML no vive en un vacío. Cuando lo desplegás, cambia el comportamiento de las personas que interactúan con él. Y ese cambio genera nuevos datos. Y esos datos re-entrenan el modelo. Entender estos bucles es tan importante como entender el algoritmo.
+Un modelo de ML no vive en un vacío. Cuando lo despliegas, cambia el comportamiento de las personas que interactúan con él. Y ese cambio genera nuevos datos. Y esos datos re-entrenan el modelo. Entender estos bucles es tan importante como entender el algoritmo.
 </MascotMessage>
 
 Los modelos de ML no solo hacen predicciones — cambian el mundo. Un sistema de recomendación de contenido no solo sugiere videos; moldea lo que la gente ve, piensa y comparte. Un algoritmo de contratación no solo filtra candidatos; redefine qué significa "ser un buen candidato". Estos efectos de segundo orden son el impacto social de la IA.
@@ -73,7 +73,7 @@ Entrenar un solo modelo de lenguaje grande (LLM) puede emitir tanto CO₂ como 5
 </CalloutInfo>
 
 <CalloutCheck>
-Buenas prácticas: preferí modelos más chicos cuando la ganancia marginal no justifica el costo. Reportá el costo ambiental junto con las métricas de accuracy. Elegí regiones de nube con energía renovable. La sustentabilidad es un requisito ético, no un nice-to-have.
+Buenas prácticas: prefiere modelos más chicos cuando la ganancia marginal no justifica el costo. Reporta el costo ambiental junto con las métricas de accuracy. Elige regiones de nube con energía renovable. La sustentabilidad es un requisito ético, no un nice-to-have.
 </CalloutCheck>
 
 </Section>

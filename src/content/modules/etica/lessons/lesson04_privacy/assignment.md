@@ -11,17 +11,17 @@
 
 ### Parte 1: Descripción del sistema (300 palabras)
 
-Describí un sistema de ML que procesa datos personales. Elegí uno:
+Describe un sistema de ML que procesa datos personales. Elige uno:
 - Una IA de diagnóstico que analiza registros médicos de pacientes
 - Una plataforma SaaS de análisis de producto que rastrea el comportamiento de los usuarios
 - Una IA de reclutamiento que filtra postulantes
 - Un sistema de recomendación de redes sociales
 
-Incluí: qué datos se recolectan, cómo se procesan, qué predice el modelo, quién tiene acceso y dónde está implementado el sistema.
+Incluye: qué datos se recolectan, cómo se procesan, qué predice el modelo, quién tiene acceso y dónde está implementado el sistema.
 
 ### Parte 2: Identificación de riesgos de privacidad (500 palabras)
 
-Para cada etapa del ciclo de vida del ML, identificá los riesgos de privacidad:
+Para cada etapa del ciclo de vida del ML, identifica los riesgos de privacidad:
 
 | Etapa | Riesgos de privacidad |
 |-------|--------------|
@@ -34,13 +34,13 @@ Para cada etapa del ciclo de vida del ML, identificá los riesgos de privacidad:
 
 ### Parte 3: Análisis regulatorio (500 palabras)
 
-Analizá cómo se aplican dos regulaciones a tu sistema:
+Analiza cómo se aplican dos regulaciones a tu sistema:
 1. GDPR: ¿Qué artículos son más relevantes? ¿Tu sistema cumple?
 2. HIPAA (si hay datos de salud) o CCPA/otra regulación relevante para tu dominio
 
 ### Parte 4: Diseño con preservación de privacidad (500 palabras)
 
-Proponé un rediseño de tu sistema con preservación de privacidad. Incluí:
+Propone un rediseño de tu sistema con preservación de privacidad. Incluye:
 1. ¿Qué medidas de minimización de datos implementarías?
 2. ¿Usarías privacidad diferencial? ¿Qué epsilon elegirías? ¿Por qué?
 3. ¿Cómo manejarías el consentimiento de los usuarios y las solicitudes de eliminación de datos?
@@ -48,8 +48,8 @@ Proponé un rediseño de tu sistema con preservación de privacidad. Incluí:
 
 ### Parte 5: Apéndice técnico (opcional, crédito extra)
 
-Implementá una versión con privacidad diferencial de una estadística clave o de una salida del modelo de tu sistema. Mostrá la concesión entre privacidad y utilidad.
+Implementa una versión con privacidad diferencial de una estadística clave o de una salida del modelo de tu sistema. Muestra la concesión entre privacidad y utilidad.
 
 ## Entrega
 
-Subí el PDF a través del sistema de gestión de aprendizaje del curso.
+Sube el PDF a través del sistema de gestión de aprendizaje del curso.

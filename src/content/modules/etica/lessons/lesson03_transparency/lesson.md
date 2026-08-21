@@ -20,13 +20,13 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
-<Section number={1} title="No alcanza con decir 'confiá en mí'" eyebrow="INICIO">
+<Section number={1} title="No alcanza con decir 'confía en mí'" eyebrow="INICIO">
 
 <MascotMessage mood="neutral">
-Un modelo de crédito te rechaza. Preguntás por qué. "El algoritmo decidió." Eso no es una respuesta. La transparencia no es un lujo — es un derecho. Y en medicina, puede ser la diferencia entre confianza y abandono del tratamiento.
+Un modelo de crédito te rechaza. Preguntas por qué. "El algoritmo decidió." Eso no es una respuesta. La transparencia no es un lujo — es un derecho. Y en medicina, puede ser la diferencia entre confianza y abandono del tratamiento.
 </MascotMessage>
 
-Los modelos complejos (Random Forest, Gradient Boosting, redes neuronales) son **cajas negras**: funcionan muy bien pero no te dicen por qué decidieron algo. En aplicaciones de alto impacto —diagnóstico médico, concesión de crédito, justicia penal— necesitás poder explicar cada decisión.
+Los modelos complejos (Random Forest, Gradient Boosting, redes neuronales) son **cajas negras**: funcionan muy bien pero no te dicen por qué decidieron algo. En aplicaciones de alto impacto —diagnóstico médico, concesión de crédito, justicia penal— necesitas poder explicar cada decisión.
 
 <ConceptCard variant="key-idea">
 **Transparencia:** ¿Puedo ver cómo funciona el sistema? **Explicabilidad:** ¿Puedo entender por qué tomó esta decisión? **Interpretabilidad:** ¿Puedo entender el modelo en sí mismo? Son conceptos relacionados pero distintos.
@@ -43,7 +43,7 @@ Los modelos complejos (Random Forest, Gradient Boosting, redes neuronales) son *
 Ventajas de SHAP:
 - **Aditivo:** los aportes suman la predicción (propiedad de eficiencia)
 - **Consistente:** si una feature se vuelve más importante, su valor SHAP no disminuye
-- **Local y global:** explicás predicciones individuales y promediás para entender el modelo completo
+- **Local y global:** explicas predicciones individuales y promedias para entender el modelo completo
 
 <ComparisonTable
   rows={[
@@ -83,7 +83,7 @@ print(importance_df.to_string(index=False))
 ```
 
 <CalloutInfo>
-La importancia por permutación te dice qué features importan **en general**. Pero para un paciente específico, necesitás una explicación **local**: ¿por qué a ESTE paciente el modelo le dio alto riesgo? Para eso existen SHAP y LIME.
+La importancia por permutación te dice qué features importan **en general**. Pero para un paciente específico, necesitas una explicación **local**: ¿por qué a ESTE paciente el modelo le dio alto riesgo? Para eso existen SHAP y LIME.
 </CalloutInfo>
 
 </Section>

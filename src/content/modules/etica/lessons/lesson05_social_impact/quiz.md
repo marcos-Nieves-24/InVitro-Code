@@ -39,13 +39,13 @@ D. Si la automatización con IA es inevitable o prevenible
 
 ## Respuesta corta (2 preguntas)
 
-**P6.** Explicá el concepto de "alignment" en seguridad de IA. Dá un ejemplo concreto de un sistema de IA desalineado.
+**P6.** Explica el concepto de "alignment" en seguridad de IA. Da un ejemplo concreto de un sistema de IA desalineado.
 
-**P7.** ¿Cómo contribuye la IA a la propagación de desinformación? Describí al menos dos mecanismos distintos y proponé una estrategia de mitigación para cada uno.
+**P7.** ¿Cómo contribuye la IA a la propagación de desinformación? Describe al menos dos mecanismos distintos y propone una estrategia de mitigación para cada uno.
 
 ## Pregunta de código (1 pregunta)
 
-**P8.** (Conceptual — sin código) Estás asesorando a una agencia gubernamental sobre regulación de IA. Escribí un texto breve (150 palabras) explicando qué impacto social de la IA considerás más urgente y por qué, y proponé una intervención de política específica.
+**P8.** (Conceptual — sin código) Estás asesorando a una agencia gubernamental sobre regulación de IA. Escribe un texto breve (150 palabras) explicando qué impacto social de la IA consideras más urgente y por qué, y propone una intervención de política específica.
 
 ---
 

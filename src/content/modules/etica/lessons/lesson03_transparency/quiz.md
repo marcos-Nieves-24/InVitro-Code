@@ -39,18 +39,18 @@ D. Requieren que el modelo sea de código abierto
 
 ## Respuesta corta (2 preguntas)
 
-**Q6.** Explicá el problema de la caja negra. ¿Por qué es especialmente preocupante en las aplicaciones de salud y justicia penal?
+**Q6.** Explica el problema de la caja negra. ¿Por qué es especialmente preocupante en las aplicaciones de salud y justicia penal?
 
 **Q7.** Un banco usa un modelo Gradient Boosting para aprobar préstamos y usa LIME para generar explicaciones para los postulantes rechazados. Un postulante rechazado recibe una explicación y demanda, alegando que el modelo es discriminatorio. El banco argumenta que la explicación demuestra que el modelo es equitativo. ¿Cuáles son las debilidades de la posición del banco?
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribí una función de Python `explain_prediction(model, instance, feature_names, explainer_type='lime')` que:
+**Q8.** Escribe una función de Python `explain_prediction(model, instance, feature_names, explainer_type='lime')` que:
 - Reciba un clasificador entrenado, una sola instancia (array 1D), los nombres de las features y el tipo de explainer
 - Si `explainer_type='lime'`, cree un explainer de LIME y devuelva la explicación como una lista de tuplas (feature, weight)
-- Si `explainer_type='shap'`, cree un explainer de SHAP (asumí que el modelo soporta SHAP) y devuelva los valores SHAP para la instancia
+- Si `explainer_type='shap'`, cree un explainer de SHAP (asume que el modelo soporta SHAP) y devuelva los valores SHAP para la instancia
 
-No necesitás entrenar el modelo. Asumí que las librerías `lime` y `shap` están importadas.
+No necesitas entrenar el modelo. Asume que las librerías `lime` y `shap` están importadas.
 
 ---
 

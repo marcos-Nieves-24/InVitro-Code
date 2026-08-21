@@ -21,7 +21,7 @@ Lección 1: Introducción a la ética de la IA
 
 ### Parte 1: Análisis ético (20 minutos)
 
-Elegí uno de los siguientes sistemas de IA. Leé la descripción breve y realizá un análisis ético.
+Elige uno de los siguientes sistemas de IA. Lee la descripción breve y realiza un análisis ético.
 
 **Opción A: Herramienta de reclutamiento con IA**
 
@@ -35,7 +35,7 @@ Un hospital implementa un sistema de IA que monitorea a pacientes de UCI y predi
 
 Una plataforma de redes sociales usa un sistema de machine learning para moderar contenido automáticamente. El modelo se entrena con datos etiquetados por humanos donde los moderadores marcaban discurso de odio. El modelo marca el inglés vernáculo afroamericano (AAVE) como tóxico a una tasa mucho más alta que el inglés americano estándar, silenciando las voces de las minorías.
 
-Para tu sistema elegido, escribí un análisis breve que aborde cada uno de los cinco principios:
+Para tu sistema elegido, escribe un análisis breve que aborde cada uno de los cinco principios:
 
 1. **Beneficencia:** ¿Qué beneficios produce este sistema? ¿Quién se beneficia?
 2. **No maleficencia:** ¿Qué daño podría causar este sistema? ¿Quién podría resultar perjudicado?
@@ -45,11 +45,11 @@ Para tu sistema elegido, escribí un análisis breve que aborde cada uno de los 
 
 ### Parte 2: Diseño de mitigación (15 minutos)
 
-Para el sistema que analizaste, proponé tres cambios concretos para abordar los problemas éticos que identificaste. Sé específico — no solo "reducir el bias" sino "reentrenar el modelo con muestreo estratificado para asegurar representación demográfica en los datos de entrenamiento."
+Para el sistema que analizaste, propone tres cambios concretos para abordar los problemas éticos que identificaste. Sé específico — no solo "reducir el bias" sino "reentrenar el modelo con muestreo estratificado para asegurar representación demográfica en los datos de entrenamiento."
 
 ### Parte 3: Discusión grupal (10 minutos)
 
-Compartí tu análisis con un compañero o en un grupo pequeño. Debatí:
+Comparte tu análisis con un compañero o en un grupo pequeño. Debate:
 
 - ¿Identificaron problemas éticos diferentes?
 - ¿Cómo resolvieron las concesiones entre principios?
@@ -57,7 +57,7 @@ Compartí tu análisis con un compañero o en un grupo pequeño. Debatí:
 
 ## Entregables
 
-Enviá tu análisis escrito (Parte 1) y tus propuestas de mitigación (Parte 2) como PDF o documento de texto.
+Envía tu análisis escrito (Parte 1) y tus propuestas de mitigación (Parte 2) como PDF o documento de texto.
 
 ## Rúbrica
 

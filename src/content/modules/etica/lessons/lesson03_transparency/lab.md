@@ -20,40 +20,40 @@ Usamos el dataset de Vino UCI (incluido en sklearn) para una tarea de clasificac
 
 ### Parte 1: Preparación de datos y entrenamiento del modelo (10 minutos)
 
-1. Cargá el dataset de Vino con `sklearn.datasets.load_wine`.
-2. Dividilo en conjuntos de entrenamiento y prueba.
-3. Entrená un clasificador Random Forest con 200 árboles.
-4. Reportá la accuracy en el conjunto de prueba.
+1. Carga el dataset de Vino con `sklearn.datasets.load_wine`.
+2. Divídelo en conjuntos de entrenamiento y prueba.
+3. Entrena un clasificador Random Forest con 200 árboles.
+4. Reporta la accuracy en el conjunto de prueba.
 
 ### Parte 2: Explicación global (10 minutos)
 
-1. Extraé y visualizá la importancia de features incorporada en el Random Forest.
-2. Calculá y visualizá el SHAP summary plot (explicación global).
-3. Compará las dos explicaciones globales. ¿Coinciden en las 3 features principales?
+1. Extrae y visualiza la importancia de features incorporada en el Random Forest.
+2. Calcula y visualiza el SHAP summary plot (explicación global).
+3. Compara las dos explicaciones globales. ¿Coinciden en las 3 features principales?
 
 ### Parte 3: Explicación local con LIME (15 minutos)
 
-1. Seleccioná dos instancias de prueba: una clasificada correctamente y una mal clasificada.
-2. Para cada instancia, generá una explicación LIME.
-3. Mostrá la explicación como un gráfico de barras que muestre las contribuciones de las features.
+1. Selecciona dos instancias de prueba: una clasificada correctamente y una mal clasificada.
+2. Para cada instancia, genera una explicación LIME.
+3. Muestra la explicación como un gráfico de barras que muestre las contribuciones de las features.
 4. ¿Las explicaciones sugieren por qué ocurrió la clasificación errónea?
 
 ### Parte 4: Explicación local con SHAP (15 minutos)
 
-1. Para las mismas dos instancias, generá SHAP waterfall plots.
-2. Compará las explicaciones de SHAP y LIME para cada instancia.
+1. Para las mismas dos instancias, genera SHAP waterfall plots.
+2. Compara las explicaciones de SHAP y LIME para cada instancia.
 3. ¿Coinciden los métodos? ¿En qué se diferencian?
 
 ### Parte 5: Análisis de estabilidad (10 minutos)
 
-1. Ejecutá LIME 5 veces sobre la misma instancia.
-2. Registrá las 3 features principales cada vez.
+1. Ejecuta LIME 5 veces sobre la misma instancia.
+2. Registra las 3 features principales cada vez.
 3. ¿Es estable LIME? ¿Cuál es la varianza en la importancia de las features?
-4. Repetí con SHAP. ¿Es SHAP más estable?
+4. Repite con SHAP. ¿Es SHAP más estable?
 
 ## Entregables
 
-Enviá un notebook de Jupyter con:
+Envía un notebook de Jupyter con:
 - Todo el código y las visualizaciones
 - Celdas de markdown que respondan las preguntas de comparación
 - Un párrafo final que resuma tus hallazgos

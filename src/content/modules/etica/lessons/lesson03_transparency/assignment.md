@@ -11,18 +11,18 @@
 
 ### Parte 1: Modelo y datos (1 hora)
 
-Elegí un dataset con al menos 5 features y un objetivo de clasificación binaria. Opciones:
+Elige un dataset con al menos 5 features y un objetivo de clasificación binaria. Opciones:
 - Dataset de enfermedades cardíacas UCI
 - Dataset de ingresos de adultos UCI (predecir ingresos > 50K)
 - Un dataset sintético que crees
 
-Entrená al menos dos modelos:
+Entrena al menos dos modelos:
 - Un modelo interpretable (regresión logística)
 - Un modelo de caja negra (Random Forest o Gradient Boosting)
 
 ### Parte 2: Funciones de explicación (2 horas)
 
-Implementá las siguientes funciones:
+Implementa las siguientes funciones:
 
 1. `global_explanation(model, X, feature_names, method='shap')` — devuelve un DataFrame con la importancia global de las features
 2. `local_explanation_lime(model, instance, feature_names)` — devuelve (features, weights) para una sola predicción
@@ -31,13 +31,13 @@ Implementá las siguientes funciones:
 
 ### Parte 3: Análisis (2 horas)
 
-1. Para 10 instancias de prueba, compará las explicaciones de LIME y SHAP. Reportá la correlación de rango de la importancia de features entre los dos métodos.
-2. Para cada instancia, verificá si la feature más importante según la explicación coincide con la feature más importante a nivel global.
+1. Para 10 instancias de prueba, compara las explicaciones de LIME y SHAP. Reporta la correlación de rango de la importancia de features entre los dos métodos.
+2. Para cada instancia, verifica si la feature más importante según la explicación coincide con la feature más importante a nivel global.
 3. Si el modelo de caja negra clasifica mal una instancia, ¿la explicación revela por qué?
 
 ### Parte 4: Informe (1 hora)
 
-Escribí un informe de 500 palabras explicando tus hallazgos para una audiencia no técnica (p. ej., un gerente de producto o un regulador). Incluí:
+Escribe un informe de 500 palabras explicando tus hallazgos para una audiencia no técnica (p. ej., un gerente de producto o un regulador). Incluye:
 - Qué es la IA explicable y por qué importa
 - Qué hacen LIME y SHAP (en lenguaje simple)
 - Hallazgos clave de tu análisis
@@ -46,4 +46,4 @@ Escribí un informe de 500 palabras explicando tus hallazgos para una audiencia 
 
 ## Entrega
 
-Enviá el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.
+Envía el notebook y el PDF a través del sistema de gestión de aprendizaje del curso.
