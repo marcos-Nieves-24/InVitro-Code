@@ -41,7 +41,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
       }
     } catch {
       setStatus("error");
-      setMessage("Error de conexión — intentá de nuevo");
+      setMessage("Error de conexión — intenta de nuevo");
     }
   };
 

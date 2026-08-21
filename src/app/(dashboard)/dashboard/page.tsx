@@ -169,7 +169,7 @@ export default async function DashboardPage() {
         <div className="flex items-center gap-4 md:gap-6">
           <div className="flex items-center gap-2 rounded-full bg-primary-fixed px-3 py-1.5 text-sm font-bold text-primary">
             <Gem className="h-4 w-4" />
-            <span>{totalXp.toLocaleString("es-AR")} XP</span>
+            <span>{totalXp.toLocaleString("es")} XP</span>
           </div>
           <div className="flex items-center gap-2 rounded-full bg-surface-container px-3 py-1.5 text-sm font-bold text-on-surface">
             <Flame className="h-4 w-4 text-error" />
@@ -194,7 +194,7 @@ export default async function DashboardPage() {
                   </h2>
                   <p className="mb-8 mt-4 max-w-lg text-on-surface-variant">
                     Estás construyendo tu camino en InVitro-Code.
-                    Continúa tu investigación y descubrí nuevas formas de
+                    Continúa tu investigación y descubre nuevas formas de
                     aplicar la Inteligencia Artificial.
                   </p>
                   <div className="flex flex-wrap gap-4">
@@ -218,7 +218,7 @@ export default async function DashboardPage() {
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-on-primary">
                     <Gem className="mb-2 h-14 w-14 opacity-80" fill="currentColor" />
                     <span className="text-3xl font-black">
-                      {totalXp.toLocaleString("es-AR")}
+                      {totalXp.toLocaleString("es")}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-widest opacity-80">
                       XP totales
@@ -243,7 +243,7 @@ export default async function DashboardPage() {
                   Puntos totales
                 </h3>
                 <p className="mt-2 font-display text-2xl font-semibold text-on-surface">
-                  {totalXp.toLocaleString("es-AR")} XP
+                  {totalXp.toLocaleString("es")} XP
                 </p>
               </div>
               <div className="glass-card flex flex-col rounded-xl p-4">
@@ -450,9 +450,9 @@ export default async function DashboardPage() {
                   <p className="font-bold">{rankTitle(levelInfo.level)}</p>
                   <p className="mt-1 text-xs text-on-surface-variant">
                     <span className="font-bold text-primary">
-                      {totalXp.toLocaleString("es-AR")}
+                      {totalXp.toLocaleString("es")}
                     </span>{" "}
-                    / {levelInfo.nextLevelXp.toLocaleString("es-AR")} XP
+                    / {levelInfo.nextLevelXp.toLocaleString("es")} XP
                   </p>
                   <div className="mt-2 h-1.5 w-32 overflow-hidden rounded-full bg-surface-container">
                     <div

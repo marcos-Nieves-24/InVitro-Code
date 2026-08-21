@@ -13,7 +13,7 @@ export interface EmptyStateCopy {
 export const EMPTY_STATES: Record<string, EmptyStateCopy> = {
   achievements: {
     title: "Sin logros desbloqueados",
-    description: "Completá tu primera lección para desbloquear logros.",
+    description: "Completa tu primera lección para desbloquear logros.",
   },
   leaderboard: {
     title: "El ranking todavía está vacío",
@@ -25,18 +25,18 @@ export const EMPTY_STATES: Record<string, EmptyStateCopy> = {
   },
   currentProject: {
     title: "Sin proyecto en curso",
-    description: "Empezá tu primera lección para ver tu Proyecto Actual.",
+    description: "Empieza tu primera lección para ver tu Proyecto Actual.",
   },
   currentMission: {
     title: "Sin misión pendiente",
-    description: "Completá una lección para que tu Misión aparezca acá.",
+    description: "Completa una lección para que tu Misión aparezca aquí.",
   },
   labProgress: {
     title: "Sin progreso en este laboratorio",
-    description: "Ejecutá el código para ver tu progreso real.",
+    description: "Ejecuta el código para ver tu progreso real.",
   },
   challengeLab: {
-    title: "Ejecutá el modelo en el laboratorio",
+    title: "Ejecuta el modelo en el laboratorio",
     description:
       "Este desafío de calidad de vino se resuelve en las lecciones del módulo de Machine Learning: ahí vas a entrenar tu modelo y ver tus métricas reales.",
   },

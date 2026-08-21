@@ -25,7 +25,7 @@ export function InVitroTopBar({ totalXp, currentStreak, trail }: InVitroTopBarPr
       <div className="flex items-center gap-4 md:gap-6">
         <div className="flex items-center gap-2 rounded-full bg-primary-fixed px-3 py-1.5 text-sm font-bold text-primary">
           <Gem className="h-4 w-4" fill="currentColor" />
-          <span>{totalXp.toLocaleString("es-AR")} XP</span>
+          <span>{totalXp.toLocaleString("es")} XP</span>
         </div>
         <div className="flex items-center gap-2 rounded-full bg-surface-container px-3 py-1.5 text-sm font-bold text-on-surface">
           <Flame className="h-4 w-4 text-error" />

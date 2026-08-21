@@ -553,7 +553,7 @@ export function OverfittingTrainer() {
               Entrenador de sobreajuste
             </h3>
             <p className="text-sm text-gray-500 mt-1">
-              Explorá cómo la complejidad del modelo afecta la generalización con datos reales de biopsias.
+              Explora cómo la complejidad del modelo afecta la generalización con datos reales de biopsias.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
@@ -667,7 +667,7 @@ export function OverfittingTrainer() {
               {diagnosis.label}
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              Probá arrastrar el slider: grados bajos subajustan, grados altos sobreajustan.
+              Prueba arrastrar el slider: grados bajos subajustan, grados altos sobreajustan.
               Con datos reales el error de entrenamiento nunca llega a cero — el piso es ~0.10.
             </p>
           </div>

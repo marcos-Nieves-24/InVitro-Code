@@ -183,7 +183,7 @@ export function RegressionTrainer() {
 
     const val = parseFloat(predictInput);
     if (isNaN(val)) {
-      setPredictError("Ingresá un valor numérico.");
+      setPredictError("Ingresa un valor numérico.");
       return;
     }
     if (!norm) return;
@@ -347,7 +347,7 @@ export function RegressionTrainer() {
               Entrenador de regresión
             </h3>
             <p className="text-sm text-gray-500 mt-1">
-              Ajustá la mejor recta sobre biopsias reales y explorá el error.
+              Ajusta la mejor recta sobre biopsias reales y explora el error.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
@@ -379,7 +379,7 @@ export function RegressionTrainer() {
                 </p>
               ) : (
                 <p className="text-xs text-gray-500">
-                  Probá "Predecir" para estimar la textura a partir de un valor de radio.
+                  Prueba "Predecir" para estimar la textura a partir de un valor de radio.
                 </p>
               )}
             </div>

@@ -54,13 +54,13 @@ export default function OutputPanel({
       } else {
         setCertifyState("failed");
         setCertifyMessage(
-          data.message ?? "No pasaste todos los tests — intentá de nuevo.",
+          data.message ?? "No pasaste todos los tests — intenta de nuevo.",
         );
       }
     } catch {
       setCertifyState("unavailable");
       setCertifyMessage(
-        "Certificación no disponible — intentá de nuevo más tarde.",
+        "Certificación no disponible — intenta de nuevo más tarde.",
       );
     }
   };
@@ -168,7 +168,7 @@ export default function OutputPanel({
             La salida aparecerá aquí cuando ejecutes tu código.
             <br />
             <span className="text-xs">
-              Usá "Ejecutar" para probar tu código
+              Usa "Ejecutar" para probar tu código
             </span>
           </div>
         ) : (
@@ -192,7 +192,7 @@ export default function OutputPanel({
                 <div key={i} className="my-2 flex items-center gap-2">
                   <span className="text-lg font-bold text-red-400">X</span>
                   <span className="rounded-full bg-red-900/30 px-3 py-1 font-semibold text-red-300">
-                    No coincide con el test — intentá de nuevo
+                    No coincide con el test — intenta de nuevo
                   </span>
                 </div>
               );

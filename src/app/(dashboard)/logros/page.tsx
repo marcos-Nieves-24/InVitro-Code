@@ -151,7 +151,7 @@ export default async function LogrosPage() {
                       XP de esta semana
                     </span>
                     <span className="font-bold text-on-surface">
-                      {weeklyXp.total.toLocaleString("es-AR")} XP
+                      {weeklyXp.total.toLocaleString("es")} XP
                     </span>
                   </div>
                   <div className="grid grid-cols-7 items-end gap-1">
@@ -174,7 +174,7 @@ export default async function LogrosPage() {
                 </>
               ) : (
                 <p className="text-sm text-on-surface-variant">
-                  Aún no ganaste XP esta semana. Completá una lección para
+                  Aún no ganaste XP esta semana. Completa una lección para
                   sumar.
                 </p>
               )}

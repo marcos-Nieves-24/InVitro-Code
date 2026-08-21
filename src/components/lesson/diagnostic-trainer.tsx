@@ -505,7 +505,7 @@ export function DiagnosticTrainer({
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Resumen de Rondas</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="text-sm text-gray-700">
-                    Vos: {streak}/8 · KNN real (scikit-learn): 8/8
+                    Tú: {streak}/8 · KNN real (scikit-learn): 8/8
                   </div>
                 </div>
                 <button

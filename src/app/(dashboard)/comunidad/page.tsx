@@ -221,11 +221,11 @@ export default async function ComunidadPage() {
                             }`}
                           >
                             {row.username ?? "Investigador"}
-                            {isMe ? " (vos)" : ""}
+                            {isMe ? " (tú)" : ""}
                           </span>
                         </div>
                         <span className="text-xs font-bold text-primary">
-                          {(row.totalXp ?? 0).toLocaleString("es-AR")} XP
+                          {(row.totalXp ?? 0).toLocaleString("es")} XP
                         </span>
                       </div>
                     );
@@ -251,15 +251,15 @@ export default async function ComunidadPage() {
                   </p>
                   <p className="text-xs text-on-surface-variant">
                     {myEntry
-                      ? `${(myEntry.totalXp ?? 0).toLocaleString("es-AR")} XP reales`
+                      ? `${(myEntry.totalXp ?? 0).toLocaleString("es")} XP reales`
                       : "Ranking calculado sobre XP real."}
                   </p>
                 </>
               ) : (
                 <p className="text-sm text-on-surface-variant">
                   {totalXp > 0
-                    ? `Todavía no entrás en el top 50 — tenés ${totalXp.toLocaleString("es-AR")} XP.`
-                    : "Completá tu primera lección para aparecer en el ranking."}
+                    ? `Todavía no entras en el top 50 — tienes ${totalXp.toLocaleString("es")} XP.`
+                    : "Completa tu primera lección para aparecer en el ranking."}
                 </p>
               )}
             </div>

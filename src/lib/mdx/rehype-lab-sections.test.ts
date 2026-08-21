@@ -61,7 +61,7 @@ from sklearn.datasets import load_breast_cancer
 
 ### Parte 1: Carga (10 min)
 
-Cargá el dataset.
+Carga el dataset.
 
 **Preguntas para reflexionar:**
 - ¿Cuántas muestras tiene?
@@ -69,7 +69,7 @@ Cargá el dataset.
 
 ## Entregables
 
-Entregá un notebook.
+Entrega un notebook.
 
 ## Rúbrica
 

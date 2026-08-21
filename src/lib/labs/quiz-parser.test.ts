@@ -75,7 +75,7 @@ b) No
     const raw = `# Quiz
 ## Respuesta corta (1 pregunta)
 
-**1.** Explicá la diferencia entre media y mediana.
+**1.** Explica la diferencia entre media y mediana.
 
 ## Clave de respuestas
 

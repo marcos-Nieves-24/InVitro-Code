@@ -52,7 +52,7 @@ export function ProjectHub({ modules }: ProjectHubProps) {
           No hay proyectos disponibles
         </p>
         <p className="text-xs text-on-surface-variant">
-          Agregá contenido en <code>src/content/modules/</code> para empezar.
+          Agrega contenido en <code>src/content/modules/</code> para empezar.
         </p>
       </div>
     );

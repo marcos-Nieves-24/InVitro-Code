@@ -495,7 +495,7 @@ export function PerceptronTrainer() {
               Entrenador de perceptrón
             </h3>
             <p className="text-sm text-gray-500 mt-1">
-              Aprendé a separar biopsias benignas de malignas con una línea.
+              Aprende a separar biopsias benignas de malignas con una línea.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
@@ -556,7 +556,7 @@ export function PerceptronTrainer() {
                 </ul>
               ) : (
                 <p className="text-xs text-gray-500">
-                  Hacé clic en una zona vacía del gráfico para predecir una muestra hipotética.
+                  Haz clic en una zona vacía del gráfico para predecir una muestra hipotética.
                 </p>
               )}
             </div>

@@ -746,7 +746,7 @@ export function KnnTrainer() {
               Entrenador de KNN
             </h3>
             <p className="text-sm text-gray-500 mt-1">
-              Elegí k y explorá cómo los vecinos más cercanos clasifican cada biopsia.
+              Elige k y explora cómo los vecinos más cercanos clasifican cada biopsia.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
@@ -803,7 +803,7 @@ export function KnnTrainer() {
                 <p className="text-xs text-gray-500">Calculando predicción…</p>
               )}
               <p className="text-xs text-gray-500 mt-1">
-                Hacé clic en una zona vacía del gráfico para mover el punto de prueba.
+                Haz clic en una zona vacía del gráfico para mover el punto de prueba.
               </p>
             </div>
 

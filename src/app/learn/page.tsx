@@ -13,7 +13,7 @@ export default function LearnIndexPage() {
             Expediciones
           </p>
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-deep-navy">
-            Elegí tu Expedición
+            Elige tu Expedición
           </h2>
           <p className="mt-1 text-on-surface-variant">
             Cada módulo es una expedición hacia el dominio de la Inteligencia

@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       {
         certified: false,
         message:
-          "Error interno del servidor. Intentá de nuevo más tarde.",
+          "Error interno del servidor. Intenta de nuevo más tarde.",
       },
       { status: 500 },
     );

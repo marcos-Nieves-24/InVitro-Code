@@ -41,7 +41,7 @@ export interface AchievementsSummary {
 }
 
 export interface WeeklyXp {
-  /** 7 slots, Monday first (es-AR week). */
+  /** 7 slots, Monday first ("es" locale week). */
   days: number[];
   total: number;
 }
@@ -228,7 +228,7 @@ export async function evaluateAchievements(
 }
 
 /**
- * Weekly XP from the current week (Monday start, es-AR): sum of
+ * Weekly XP from the current week (Monday start, "es" locale): sum of
  * progress.xp_earned + reflection_completions.xp_earned with
  * completed_at NOT NULL and within the week (REQ-ACH-06, REQ-UP-05).
  */

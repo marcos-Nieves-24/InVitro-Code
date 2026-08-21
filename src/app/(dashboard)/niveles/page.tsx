@@ -195,8 +195,8 @@ export default async function NivelesPage() {
                     {current && (
                       <div className="absolute -bottom-3 inset-x-0 flex justify-center">
                         <div className="rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-white shadow-lg">
-                          {totalXp.toLocaleString("es-AR")} /{" "}
-                          {(nextRank?.xp ?? totalXp).toLocaleString("es-AR")} XP
+                          {totalXp.toLocaleString("es")} /{" "}
+                          {(nextRank?.xp ?? totalXp).toLocaleString("es")} XP
                         </div>
                       </div>
                     )}
@@ -291,7 +291,7 @@ export default async function NivelesPage() {
                       XP acumulada
                     </p>
                     <p className="text-lg font-bold text-deep-navy">
-                      {totalXp.toLocaleString("es-AR")} XP
+                      {totalXp.toLocaleString("es")} XP
                     </p>
                   </div>
                   <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-3">
@@ -300,7 +300,7 @@ export default async function NivelesPage() {
                     </p>
                     <p className="text-lg font-bold text-primary">
                       {nextRank
-                        ? Math.max(0, xpToNext).toLocaleString("es-AR") + " XP"
+                        ? Math.max(0, xpToNext).toLocaleString("es") + " XP"
                         : "🏆"}
                     </p>
                   </div>

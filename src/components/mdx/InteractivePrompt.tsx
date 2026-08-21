@@ -8,7 +8,7 @@ export default function InteractivePrompt({
   return (
     <div className="my-3 rounded-card border border-brand bg-brand-soft p-4">
       <strong className="mb-2 block font-display text-sm font-semibold tracking-tight">
-        Antes de interactuar, respondé:
+        Antes de interactuar, responde:
       </strong>
 
       <p className="italic text-gray-700">

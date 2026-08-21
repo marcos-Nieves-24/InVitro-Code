@@ -214,7 +214,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                 value={userValue}
                 onChange={(e) => handleTextChange(question.id, e.target.value)}
                 disabled={submitted}
-                placeholder="Escribí tu respuesta..."
+                placeholder="Escribe tu respuesta..."
                 rows={3}
                 className="w-full rounded-btn border border-gray-200 bg-gray-50 p-3 text-sm text-gray-800 placeholder-gray-400 transition-colors focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand disabled:cursor-not-allowed disabled:opacity-60"
               />
@@ -226,7 +226,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                 value={userValue}
                 onChange={(e) => handleTextChange(question.id, e.target.value)}
                 disabled={submitted}
-                placeholder="Escribí tu código..."
+                placeholder="Escribe tu código..."
                 rows={6}
                 className="w-full rounded-btn border border-gray-200 bg-gray-900 p-3 font-mono text-sm text-green-300 placeholder-gray-500 transition-colors focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand disabled:cursor-not-allowed disabled:opacity-60"
               />

@@ -90,7 +90,7 @@ export default async function LaboratoriosPage() {
             Laboratorios
           </h1>
           <p className="mt-1 text-sm text-outline">
-            Cada módulo tiene lecciones con laboratorios interactivos. Completá
+            Cada módulo tiene lecciones con laboratorios interactivos. Completa
             los ejercicios para dominar los conceptos.
           </p>
         </div>

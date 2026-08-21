@@ -99,7 +99,7 @@ export function ConidiaSortGame() {
             ? "¡Perfecto!"
             : correctCount >= 6
               ? "Muy bien"
-              : "Seguí practicando"}
+              : "Sigue practicando"}
         </p>
         <p className="mb-4 text-sm text-gray-600">
           Acertaste {correctCount} de {PATTERNS.length}

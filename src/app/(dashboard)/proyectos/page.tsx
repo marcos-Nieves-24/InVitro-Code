@@ -53,7 +53,7 @@ export default async function ProyectosPage() {
           </h1>
           <p className="mt-1 text-sm text-outline">
             Cada módulo incluye proyectos guiados con consolas interactivas.
-            Abrí el notebook en Colab o descargalo para trabajar en tu entorno.
+            Abre el notebook en Colab o descárgalo para trabajar en tu entorno.
           </p>
         </div>
 

@@ -49,7 +49,7 @@ export function ReflectionCheck({
       setRevealed(true);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Error de conexión — intentá de nuevo",
+        err instanceof Error ? err.message : "Error de conexión — intenta de nuevo",
       );
     } finally {
       setSubmitting(false);
@@ -68,7 +68,7 @@ export function ReflectionCheck({
         disabled={revealed}
         rows={3}
         className="block w-full resize-none rounded-btn border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
-        placeholder="Escribí tu respuesta acá..."
+        placeholder="Escribe tu respuesta aquí..."
       />
 
       <div className="mt-3 flex items-center gap-3">
