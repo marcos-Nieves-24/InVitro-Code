@@ -8,23 +8,23 @@
 
 ## Instrucciones
 
-1. Cargá el dataset de viviendas de California desde sklearn:
+1. Carga el dataset de viviendas de California desde sklearn:
 ```python
 from sklearn.datasets import fetch_california_housing
 housing = fetch_california_housing(as_frame=True)
 df = housing.data
 ```
 
-2. Para cada columna numérica, calculá:
+2. Para cada columna numérica, calcula:
    - Media, mediana, moda
    - Varianza, desviación estándar, rango, RIQ
    - Cantidad de valores atípicos usando la regla del RIQ (1.5×RIQ)
 
-3. Creá un DataFrame llamado `summary_stats` con una fila por feature y columnas para todas las estadísticas anteriores.
+3. Crea un DataFrame llamado `summary_stats` con una fila por feature y columnas para todas las estadísticas anteriores.
 
-4. Visualizá la columna `MedInc` (ingreso medio) usando un boxplot.
+4. Visualiza la columna `MedInc` (ingreso medio) usando un boxplot.
 
-5. Respondé en una celda de markdown:
+5. Responde en una celda de markdown:
    - ¿Qué feature tiene más valores atípicos? ¿Por qué podría ser?
-   - ¿Deberíamos eliminar estos valores atípicos? Justificá tu respuesta.
+   - ¿Deberíamos eliminar estos valores atípicos? Justifica tu respuesta.
 

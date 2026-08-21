@@ -8,8 +8,8 @@
 
 ## Instrucciones
 
-1. Cargá el dataset `diamonds` de seaborn
-2. Completá el EDA siguiendo este flujo de trabajo:
+1. Carga el dataset `diamonds` de seaborn
+2. Completa el EDA siguiendo este flujo de trabajo:
    - Vista general de los datos (forma, columnas, tipos, memoria)
    - Análisis de valores faltantes (cantidad, porcentaje, patrones)
    - Estadísticos descriptivos para todas las columnas numéricas
@@ -18,9 +18,9 @@
    - Detección de valores atípicos: método IQR en `price` y `carat`
    - Análisis agrupado: distribución de precios por cut, color, clarity
 
-3. Creá una función `eda_pipeline(df)` que automatice los pasos anteriores
+3. Crea una función `eda_pipeline(df)` que automatice los pasos anteriores
 
-4. Escribí un informe (2-3 párrafos):
+4. Escribe un informe (2-3 párrafos):
    - ¿Cuáles son las características clave de los precios de los diamantes?
    - ¿Qué features están más correlacionados con el precio?
    - ¿Hay valores atípicos? ¿Deberían eliminarse?

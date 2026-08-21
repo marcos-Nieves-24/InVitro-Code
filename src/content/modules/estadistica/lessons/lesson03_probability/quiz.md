@@ -39,18 +39,18 @@ d) P(A) + P(B) = 1
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Un test para una enfermedad rara (prevalencia 0.1%) tiene 99% de sensibilidad y 95% de especificidad. Si un paciente da positivo, ¿cuál es la probabilidad de que realmente tenga la enfermedad? Mostrá el cálculo.
+**6.** Un test para una enfermedad rara (prevalencia 0.1%) tiene 99% de sensibilidad y 95% de especificidad. Si un paciente da positivo, ¿cuál es la probabilidad de que realmente tenga la enfermedad? Muestra el cálculo.
 
-**7.** Explicá la "falacia de la tasa base" y da un ejemplo de biotecnología.
+**7.** Explica la "falacia de la tasa base" y da un ejemplo de biotecnología.
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando numpy para simular 50,000 pacientes donde:
+**8.** Escribe código en Python usando numpy para simular 50,000 pacientes donde:
 - La prevalencia de la enfermedad es del 2%
 - La sensibilidad del test es del 90%
 - La especificidad del test es del 85%
 
-Calculá la probabilidad empírica de que un paciente tenga la enfermedad dado un test positivo.
+Calcula la probabilidad empírica de que un paciente tenga la enfermedad dado un test positivo.
 
 ---
 

@@ -39,13 +39,13 @@ d) No se usa validación cruzada
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá por qué es un error evaluar un modelo con los mismos datos con los que se entrenó.
+**6.** Explica por qué es un error evaluar un modelo con los mismos datos con los que se entrenó.
 
 **7.** Un modelo de regresión tiene MAE = $5,000 y RMSE = $12,000 para la predicción de precios de casas. ¿Qué te dice la diferencia entre MAE y RMSE?
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando sklearn que:
+**8.** Escribe código en Python usando sklearn que:
 - Divida el dataset de diabetes en entrenamiento (80%) y prueba (20%)
 - Entrene un LinearRegression
 - Calcule e imprima MAE, RMSE y R² sobre el set de prueba

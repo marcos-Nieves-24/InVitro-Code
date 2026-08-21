@@ -39,13 +39,13 @@ d) Los residuos después de la transformación
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá por qué PCA se considera una técnica no supervisada.
+**6.** Explica por qué PCA se considera una técnica no supervisada.
 
-**7.** Un dataset con 100 features se reduce a 3 PCs que explican el 85% de la varianza. Interpretá este resultado y discutí el trade-off.
+**7.** Un dataset con 100 features se reduce a 3 PCs que explican el 85% de la varianza. Interpreta este resultado y discutí el trade-off.
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando sklearn que:
+**8.** Escribe código en Python usando sklearn que:
 - Cargue el dataset iris
 - Estandarice los features
 - Aplique PCA y conserve 2 componentes

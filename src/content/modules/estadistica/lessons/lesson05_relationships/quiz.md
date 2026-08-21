@@ -39,13 +39,13 @@ d) Que los datos se distribuyen normalmente
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá la diferencia entre una relación lineal y una monótona. Da un ejemplo de cada una.
+**6.** Explica la diferencia entre una relación lineal y una monótona. Da un ejemplo de cada una.
 
 **7.** ¿Por qué es importante verificar la multicolinealidad antes de construir un modelo de regresión lineal?
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python que:
+**8.** Escribe código en Python que:
 - Cree dos arrays: x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] y y = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 - Calcule las correlaciones de Pearson y Spearman
 - Explique por qué difieren

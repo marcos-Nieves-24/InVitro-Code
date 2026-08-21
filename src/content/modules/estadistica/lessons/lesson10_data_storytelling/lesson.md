@@ -24,7 +24,7 @@ Quiz: data_storytelling_quiz.md
 <Section number={1} title="El análisis qué nadie lee" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Hiciste el EDA, corriste PCA, evaluaste tu modelo con validacion cruzada... y ahora que? Si no podes comunicar tus resultados, es cómo si no hubieras hecho nada. La narracion de datos convierte análisis en accion.
+Hiciste el EDA, corriste PCA, evaluaste tu modelo con validacion cruzada... y ahora que? Si no puedes comunicar tus resultados, es cómo si no hubieras hecho nada. La narracion de datos convierte análisis en accion.
 </MascotMessage>
 
 El mejor análisis del mundo es inútil si no convence a quién toma decisiones. Un médico necesita entender por qué tu modelo recomienda un tratamiento. Un CEO necesita ver el ROI, no el RMSE. La narracion de datos es el puente entre el análisis tecnico y la decision humana.
@@ -84,7 +84,7 @@ Errores clasicos de visualizacion: ejes truncados qué exageran diferencias, 3D 
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
   prompt="Un dashboard tiene 12 graficos y ocupa 3 pantallas de scroll. Cuál es el problema y cómo lo arreglarias?"
-  answer="Nadie mira 12 graficos. La atencion es el recurso más escaso. Solucion: (1) elegi los 3 KPIs qué realmente importan, (2) ponelos en la primera pantalla sin scroll, (3) los otros 9 graficos movelos a una pagina secundaria. La regla: si el CEO no puede entender el dashboard en 10 segundos, fallaste."
+  answer="Nadie mira 12 graficos. La atencion es el recurso más escaso. Solucion: (1) elige los 3 KPIs qué realmente importan, (2) ponlos en la primera pantalla sin scroll, (3) los otros 9 graficos muévelos a una pagina secundaria. La regla: si el CEO no puede entender el dashboard en 10 segundos, fallaste."
 />
 
 </Section>
@@ -132,7 +132,7 @@ Plotly genera graficos interactivos: zoom, hover con datos, seleccion. Son ideal
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
   prompt="Tu modelo de ML predice qué pacientes responderan a un tratamiento con 85% de accuracy. El director médico te pregunta si deberian usarlo en el hospital. Qué le decis?"
-  answer="No le digas '85% accuracy'. Decile: 'De cada 100 pacientes, el modelo identifica correctamente a 85. Pero de los 15 qué se equivoca, algunos son pacientes qué SI responderian y el modelo dijo qué no (pierden la oportunidad de tratarse). Otros son pacientes qué NO responderian pero el modelo dijo qué si (reciben un tratamiento inútil con efectos secundarios). Qué error es más grave para el hospital?' Esto convierte una metrica abstracta en un dilema médico real qué el director puede evaluar."
+  answer="No le digas '85% accuracy'. Dile: 'De cada 100 pacientes, el modelo identifica correctamente a 85. Pero de los 15 qué se equivoca, algunos son pacientes qué SI responderian y el modelo dijo qué no (pierden la oportunidad de tratarse). Otros son pacientes qué NO responderian pero el modelo dijo qué si (reciben un tratamiento inútil con efectos secundarios). Qué error es más grave para el hospital?' Esto convierte una metrica abstracta en un dilema médico real qué el director puede evaluar."
 />
 
 <AnswerReveal summary="Ver respuesta">

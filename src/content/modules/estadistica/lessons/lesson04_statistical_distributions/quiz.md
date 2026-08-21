@@ -45,7 +45,7 @@ d) La varianza es igual a la media para todas las distribuciones
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando scipy.stats para:
+**8.** Escribe código en Python usando scipy.stats para:
 - Crear una distribución binomial con n=15, p=0.4
 - Calcular P(X = 7)
 - Calcular P(X ≤ 5)

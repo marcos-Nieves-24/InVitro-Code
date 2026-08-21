@@ -93,7 +93,7 @@ $$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sig
 />
 
 <ConceptCard variant="key-idea">
-En una distribución con asimetría a la derecha, la media es mayor qué la mediana por qué los valores extremos altos jalan la media. ¡Siempre reportá la mediana en estos casos!
+En una distribución con asimetría a la derecha, la media es mayor qué la mediana por qué los valores extremos altos jalan la media. ¡Siempre reporta la mediana en estos casos!
 </ConceptCard>
 
 </Section>
@@ -251,11 +251,11 @@ plt.show()
 
 <CalloutInfo>
 **Mejores prácticas:**
-- Visualizá siempre tus datos antes de calcular estadísticos
-- Probá múltiples anchos de bin para ver diferentes niveles de detalle
-- Usá gráficos KDE junto con histogramas
-- Reportá asimetría y curtosis junto con media y desviación estándar
-- Aplicá transformación logarítmica a datos con asimetría derecha para ML
+- Visualiza siempre tus datos antes de calcular estadísticos
+- Prueba múltiples anchos de bin para ver diferentes niveles de detalle
+- Usa gráficos KDE junto con histogramas
+- Reporta asimetría y curtosis junto con media y desviación estándar
+- Aplica transformación logarítmica a datos con asimetría derecha para ML
 </CalloutInfo>
 
 </Section>
@@ -267,7 +267,7 @@ plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
   prompt="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
-  answer="Es asimétrica a la derecha (cola a la derecha). En esta distribución, la media es mayor qué la mediana por qué las casas muy caras jalan la media hacia arriba. Para reportar un precio 'típico', usá la mediana. La media puede ser engañosa por qué está distorsionada por un puñado de mansiones."
+  answer="Es asimétrica a la derecha (cola a la derecha). En esta distribución, la media es mayor qué la mediana por qué las casas muy caras jalan la media hacia arriba. Para reportar un precio 'típico', usa la mediana. La media puede ser engañosa por qué está distorsionada por un puñado de mansiones."
 />
 
 <AnswerReveal summary="Ver más respuestas">
@@ -299,7 +299,7 @@ plt.show()
 <Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Ya sabés ver la forma de los datos! Esto es fundamental: si no entendés la distribución, no podés elegir el modelo correcto.
+¡Ya sabes ver la forma de los datos! Esto es fundamental: si no entiendes la distribución, no puedes elegir el modelo correcto.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

@@ -41,11 +41,11 @@ d) Superpuestos
 
 **6.** ¿Por qué es importante estandarizar los features antes de aplicar K-Means?
 
-**7.** Un bioinformático aplica K-Means a datos de single-cell RNA-seq y encuentra clusters que no coinciden con los tipos celulares conocidos. Mencioná tres explicaciones posibles.
+**7.** Un bioinformático aplica K-Means a datos de single-cell RNA-seq y encuentra clusters que no coinciden con los tipos celulares conocidos. Menciona tres explicaciones posibles.
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando sklearn que:
+**8.** Escribe código en Python usando sklearn que:
 - Genere datos sintéticos con `make_blobs` (300 muestras, 3 centros)
 - Aplique K-Means con k=3
 - Calcule e imprima el silhouette score

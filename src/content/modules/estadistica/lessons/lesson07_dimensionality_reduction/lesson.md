@@ -24,7 +24,7 @@ Quiz: pca_quiz.md
 <Section number={1} title="Cuando hay demasiadas dimensiones" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-¿Qué pasa cuándo tenés 10,000 genes pero sólo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
+¿Qué pasa cuándo tienes 10,000 genes pero sólo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
 </MascotMessage>
 
 En biotecnología, los datasets de expresión génica tienen miles de genes (features) pero pocas muestras. En SaaS, cientos de métricas de comportamiento de usuario. PCA encuentra las direcciones de máxima varianza y proyecta los datos a un espacio de menor dimensión.
@@ -34,7 +34,7 @@ En biotecnología, los datasets de expresión génica tienen miles de genes (fea
 <Section number={2} title="La intuición de PCA" eyebrow="CONCEPTO">
 
 <ConceptCard variant="key-idea">
-Imaginá una nube de puntos en 3D. PCA encuentra la dirección dónde los puntos están más "estirados" (máxima varianza) — ese es el primer componente principal. Luego busca la siguiente dirección más estirada perpendicular a la primera, y así sucesivamente.
+Imagina una nube de puntos en 3D. PCA encuentra la dirección dónde los puntos están más "estirados" (máxima varianza) — ese es el primer componente principal. Luego busca la siguiente dirección más estirada perpendicular a la primera, y así sucesivamente.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -137,7 +137,7 @@ plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson07_dimensionality_reduction"
   prompt="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
-  answer="Es ambas. Ventaja: captura patrones multivariados qué ningún gen individual muestra (perfiles de expresión). Desventaja: perdés interpretabilidad — PC1 = 0.3×genA + 0.1×genB − 0.5×genC... no es accionable para un biólogo qué quiere saber '¿qué gen causa esto?'. En la práctica, usamos PCA para visualización/clustering y luego volvemos a los genes originales para interpretación biológica."
+  answer="Es ambas. Ventaja: captura patrones multivariados qué ningún gen individual muestra (perfiles de expresión). Desventaja: pierdes interpretabilidad — PC1 = 0.3×genA + 0.1×genB − 0.5×genC... no es accionable para un biólogo qué quiere saber '¿qué gen causa esto?'. En la práctica, usamos PCA para visualización/clustering y luego volvemos a los genes originales para interpretación biológica."
 />
 
 </Section>
@@ -146,7 +146,7 @@ plt.show()
 
 <AnswerReveal summary="Ver respuestas">
 <p><strong>¿Por qué estandarizar antes de PCA?</strong> PCA se basa en la varianza. Si una variable está en metros (0-2) y otra en dólares (0-100000), la segunda domina completamente el primer componente sólo por su escala, no por qué sea más importante. Estandarizar (μ=0, σ=1) pone todas las variables en igualdad de condiciones.</p>
-<p><strong>¿Cuándo NO usarías PCA?</strong> Cuándo necesitás interpretabilidad (cada feature debe ser explicable), cuándo las relaciones son no lineales (PCA asume linealidad), o cuándo tus features ya son independientes y pocas.</p>
+<p><strong>¿Cuándo NO usarías PCA?</strong> Cuándo necesitas interpretabilidad (cada feature debe ser explicable), cuándo las relaciones son no lineales (PCA asume linealidad), o cuándo tus features ya son independientes y pocas.</p>
 </AnswerReveal>
 
 </Section>
@@ -173,7 +173,7 @@ plt.show()
 <Section number={8} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡PCA es magia matemática! De 1000 dimensiones a 2, manteniendo la esencia de los datos. Ahora qué sabés reducir dimensiones, estás listo para agrupar.
+¡PCA es magia matemática! De 1000 dimensiones a 2, manteniendo la esencia de los datos. Ahora qué sabes reducir dimensiones, estás listo para agrupar.
 </MascotMessage>
 
 **En la Lección 8** vamos a hacer **Clustering con K-Means**: encontrar grupos naturales en los datos sin etiquetas. Vas a usar el método del codo, el puntaje de silueta, y PCA para visualizar clusters. Aprendizaje no supervisado en acción.

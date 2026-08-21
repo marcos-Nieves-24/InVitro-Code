@@ -9,24 +9,24 @@
 
 ## Instrucciones
 
-1. Cargá el dataset de California housing
-2. Entrená y compará 3 modelos:
+1. Carga el dataset de California housing
+2. Entrena y compara 3 modelos:
    - LinearRegression
    - Un modelo que siempre predice la media (baseline)
    - Regresión Ridge (de sklearn.linear_model)
 
 3. Para cada modelo:
-   - Realizá validación cruzada de 10 folds
-   - Informá la media ± desviación estándar de R², MAE, RMSE
-   - Compará el rendimiento en entrenamiento vs prueba
+   - Realiza validación cruzada de 10 folds
+   - Informa la media ± desviación estándar de R², MAE, RMSE
+   - Compara el rendimiento en entrenamiento vs prueba
 
 4. **Análisis profundo del mejor modelo**:
-   - Tomá el mejor modelo (mayor R² de VC)
-   - Ajustalo sobre el set de entrenamiento completo
-   - Creá gráficos de residuos
-   - Verificá la homocedasticidad (varianza constante de los residuos)
-   - Verificá la normalidad de los residuos
-   - Informá las 3 features más influyentes
+   - Toma el mejor modelo (mayor R² de VC)
+   - Ajústalo sobre el set de entrenamiento completo
+   - Crea gráficos de residuos
+   - Verifica la homocedasticidad (varianza constante de los residuos)
+   - Verifica la normalidad de los residuos
+   - Informa las 3 features más influyentes
 
 5. **Estructura del informe**:
    - Resumen ejecutivo (3-4 oraciones)

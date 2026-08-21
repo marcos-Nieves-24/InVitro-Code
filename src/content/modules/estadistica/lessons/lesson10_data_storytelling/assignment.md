@@ -10,7 +10,7 @@
 ## Instrucciones
 
 ### Parte 1: Selección del dataset
-Elegí un dataset:
+Elige un dataset:
 - `penguins` de seaborn
 - `mpg` de seaborn
 - `tips` de seaborn
@@ -18,7 +18,7 @@ Elegí un dataset:
 
 ### Parte 2: La historia de datos
 
-Creá una narrativa con estos elementos:
+Crea una narrativa con estos elementos:
 1. **Gancho**: ¿Por qué es importante este análisis? (1 párrafo)
 2. **Contexto**: ¿Qué datos se usaron? (1 párrafo)
 3. **Pregunta**: ¿Qué pregunta específica estás respondiendo?
@@ -27,7 +27,7 @@ Creá una narrativa con estos elementos:
 
 ### Parte 3: Galería de visualizaciones
 
-Creá 4 visualizaciones que sigan las mejores prácticas:
+Crea 4 visualizaciones que sigan las mejores prácticas:
 - Tipos de gráfico apropiados
 - Paleta apta para daltonismo
 - Etiquetas, títulos y unidades claros
@@ -36,7 +36,7 @@ Creá 4 visualizaciones que sigan las mejores prácticas:
 
 ### Parte 4: Tablero
 
-Combiná 4 visualizaciones en un tablero de 2×2:
+Combina 4 visualizaciones en un tablero de 2×2:
 - Esquema de colores consistente
 - Diseño jerárquico (lo más importante arriba a la izquierda)
 - Título a nivel de figura
@@ -44,7 +44,7 @@ Combiná 4 visualizaciones en un tablero de 2×2:
 
 ### Parte 5: Resumen ejecutivo
 
-Escribí un resumen ejecutivo de 1 página (audiencia no técnica):
+Escribe un resumen ejecutivo de 1 página (audiencia no técnica):
 - Sin jerga
 - Recomendaciones claras
 - Conclusiones respaldadas por datos

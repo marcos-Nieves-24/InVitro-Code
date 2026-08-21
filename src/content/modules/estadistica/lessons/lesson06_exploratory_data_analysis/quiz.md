@@ -39,13 +39,13 @@ d) Todos son igualmente problemáticos
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá la diferencia entre los datos faltantes MAR y MNAR. Da un ejemplo de cada uno en un ensayo clínico.
+**6.** Explica la diferencia entre los datos faltantes MAR y MNAR. Da un ejemplo de cada uno en un ensayo clínico.
 
 **7.** ¿Por qué deberías mantener los datos originales intactos durante el EDA y trabajar sobre copias?
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python que cargue el dataset `titanic` de seaborn y:
+**8.** Escribe código en Python que cargue el dataset `titanic` de seaborn y:
 - Imprima el porcentaje de valores faltantes por columna
 - Cree un heatmap de los valores faltantes
 - Impute los valores faltantes de `age` con la mediana

@@ -39,13 +39,13 @@ d) La misma cantidad de valores atípicos que la normal
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá por qué la transformación logarítmica de datos de expresión génica sesgados a la derecha los hace aproximadamente normales. ¿Cuál es el beneficio práctico?
+**6.** Explica por qué la transformación logarítmica de datos de expresión génica sesgados a la derecha los hace aproximadamente normales. ¿Cuál es el beneficio práctico?
 
-**7.** Graficás un histograma y ves dos picos distintos. ¿Qué sugiere esto sobre los datos? ¿Qué deberías investigar a continuación?
+**7.** Graficas un histograma y ves dos picos distintos. ¿Qué sugiere esto sobre los datos? ¿Qué deberías investigar a continuación?
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python que:
+**8.** Escribe código en Python que:
 - Genere 1000 muestras de una distribución exponencial con scale=5
 - Cree un histograma con KDE superpuesto
 - Calcule e imprima la asimetría (skewness) y la curtosis
@@ -62,7 +62,7 @@ d) La misma cantidad de valores atípicos que la normal
 
 6. La transformación logarítmica comprime la cola larga derecha y expande la cola izquierda, haciendo la distribución más simétrica. El beneficio práctico es que muchos métodos estadísticos (pruebas t, modelos lineales, PCA) asumen normalidad, así que los datos transformados cumplen mejor estos supuestos.
 
-7. Dos picos (distribución bimodal) sugieren que los datos contienen dos subgrupos distintos. Esto podría indicar diferentes especies, grupos de tratamiento vs. control, o diferentes segmentos de clientes. Investigá coloreando el histograma por una variable categórica.
+7. Dos picos (distribución bimodal) sugieren que los datos contienen dos subgrupos distintos. Esto podría indicar diferentes especies, grupos de tratamiento vs. control, o diferentes segmentos de clientes. Investiga coloreando el histograma por una variable categórica.
 
 8. 
 ```python

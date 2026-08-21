@@ -41,11 +41,11 @@ d) Abajo a la izquierda
 
 **6.** ¿Qué es el chartjunk? Da dos ejemplos.
 
-**7.** Explicá por qué los gráficos 3D se desaconsejan generalmente en la visualización de datos.
+**7.** Explica por qué los gráficos 3D se desaconsejan generalmente en la visualización de datos.
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python que cree un gráfico de barras simple con:
+**8.** Escribe código en Python que cree un gráfico de barras simple con:
 - Categorías: ['Q1', 'Q2', 'Q3', 'Q4']
 - Valores: [25, 40, 35, 50]
 - Un título claro, etiqueta x, etiqueta y

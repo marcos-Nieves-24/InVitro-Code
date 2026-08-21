@@ -24,7 +24,7 @@ Quiz: eda_quiz.md
 <Section number={1} title="La fase más importante del ML" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-El 80% del trabajo de un científico de datos es entender y limpiar los datos. Sólo el 20% es modelar. El Análisis Exploratorio de Datos (EDA) es dónde realmente conocés tus datos — y dónde se evitan los errores más costosos.
+El 80% del trabajo de un científico de datos es entender y limpiar los datos. Sólo el 20% es modelar. El Análisis Exploratorio de Datos (EDA) es dónde realmente conoces tus datos — y dónde se evitan los errores más costosos.
 </MascotMessage>
 
 EDA es el proceso de examinar datos antes de modelar: detectar patrones, valores faltantes, outliers, y relaciones entre variables. Un buen EDA puede ahorrarte semanas de debugging de modelos mal alimentados.
@@ -83,7 +83,7 @@ Nunca imputes sin entender POR QUÉ faltan los datos. Si los valores faltan por 
 />
 
 <ConceptCard variant="warning">
-Un outlier NO siempre es basura. En genómica, un outlier puede ser el descubrimiento del año. En SaaS, puede ser tu cliente más valioso. Investigá antes de eliminar.
+Un outlier NO siempre es basura. En genómica, un outlier puede ser el descubrimiento del año. En SaaS, puede ser tu cliente más valioso. Investiga antes de eliminar.
 </ConceptCard>
 
 </Section>
@@ -168,7 +168,7 @@ expression_filled = expression.fillna(expression.median())
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
   prompt="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
-  answer="Seguro: cuándo los valores faltantes son MCAR (Missing Completely At Random), cómo errores aleatorios de medición. La mediana es representativa de la distribución subyacente. Peligroso: cuándo son MNAR (Missing Not At Random). Ejemplo: genes con expresión extremadamente baja o alta qué el secuenciador no puede medir. Imputar con la mediana enmascara los casos más interesantes (expresión anormal = posible cáncer). Ahí necesitás un indicador de 'estaba faltante' o un modelo específico."
+  answer="Seguro: cuándo los valores faltantes son MCAR (Missing Completely At Random), cómo errores aleatorios de medición. La mediana es representativa de la distribución subyacente. Peligroso: cuándo son MNAR (Missing Not At Random). Ejemplo: genes con expresión extremadamente baja o alta qué el secuenciador no puede medir. Imputar con la mediana enmascara los casos más interesantes (expresión anormal = posible cáncer). Ahí necesitas un indicador de 'estaba faltante' o un modelo específico."
 />
 
 </Section>
@@ -179,8 +179,8 @@ expression_filled = expression.fillna(expression.median())
   blockId="reflection-l06-eda-flow"
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  prompt="¿Por qué hacés EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelás primero?"
-  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué sólo podés verificar con EDA. Si modelás primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitás transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
+  prompt="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
+  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué sólo puedes verificar con EDA. Si modelas primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitas transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
 />
 
 </Section>
@@ -208,7 +208,7 @@ expression_filled = expression.fillna(expression.median())
 <Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡EDA dominado! Ahora tenés el superpoder de entender cualquier dataset antes de tocarlo. Esto te diferencia del 90% de los principiantes qué corren `.fit()` sin mirar los datos.
+¡EDA dominado! Ahora tienes el superpoder de entender cualquier dataset antes de tocarlo. Esto te diferencia del 90% de los principiantes qué corren `.fit()` sin mirar los datos.
 </MascotMessage>
 
 **En la Lección 7** vamos a entrar en una de las técnicas más elegantes del ML: **PCA (Análisis de Componentes Principales)**. ¿Cómo reducir 100 dimensiones a 2 sin perder la información importante? Te va a volar la cabeza.

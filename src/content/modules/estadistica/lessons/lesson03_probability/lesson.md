@@ -24,7 +24,7 @@ Quiz: probability_quiz.md
 <Section number={1} title="La ciencia de la incertidumbre" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza. La probabilidad es el lenguaje matemático para expresar esa incertidumbre. Sin ella, no podés interpretar la confianza de un modelo ni evaluar métodos bayesianos.
+Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza. La probabilidad es el lenguaje matemático para expresar esa incertidumbre. Sin ella, no puedes interpretar la confianza de un modelo ni evaluar métodos bayesianos.
 </MascotMessage>
 
 En biotecnología, la probabilidad cuantifica la precisión de tests diagnósticos: "Si un paciente da positivo, ¿cuál es la probabilidad de qué realmente tenga la enfermedad?" En SaaS, modelos de probabilidad predicen la deserción: "¿Cuál es la probabilidad de qué este usuario cancele en 30 días?"
@@ -66,7 +66,7 @@ $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 Intuición: Si sabemos qué B ocurrió, restringimos nuestra atención al "mundo" dónde B es cierto. La probabilidad de A en ese mundo es la porción de A qué se superpone con B, renormalizada.
 
 <ConceptCard variant="warning">
-**Error clásico**: confundir $P(A|B)$ con $P(B|A)$. La probabilidad de tener cáncer dado un test positivo NO es igual a la probabilidad de un test positivo dado qué tenés cáncer. Esto se llama la "falacia del fiscal".
+**Error clásico**: confundir $P(A|B)$ con $P(B|A)$. La probabilidad de tener cáncer dado un test positivo NO es igual a la probabilidad de un test positivo dado qué tienes cáncer. Esto se llama la "falacia del fiscal".
 </ConceptCard>
 
 </Section>
@@ -87,7 +87,7 @@ $P(A)$ es la **probabilidad a priori** (lo qué creíamos antes). $P(A|B)$ es la
 
 $$P(A) = \sum_{i=1}^{k} P(A \mid B_i) \cdot P(B_i)$$
 
-Para encontrar la probabilidad total de A, considerás todas las formas en qué A puede ocurrir, ponderadas por la probabilidad de cada escenario.
+Para encontrar la probabilidad total de A, consideras todas las formas en qué A puede ocurrir, ponderadas por la probabilidad de cada escenario.
 
 </Section>
 
@@ -194,7 +194,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
   prompt="De los clientes marcados cómo 'en riesgo de cancelar', sólo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
-  answer="Depende del costo de contactar vs el costo de perder un cliente. Si contactar es barato (email automático), conviene contactar a todos — rescatás al 80% de los qué iban a cancelar. Si contactar es caro (llamada de un account manager), quizás querés un modelo más preciso. Es un trade-off clásico entre recall (detectar todos los qué cancelan) y precision (no molestar a los qué no van a cancelar)."
+  answer="Depende del costo de contactar vs el costo de perder un cliente. Si contactar es barato (email automático), conviene contactar a todos — rescatas al 80% de los qué iban a cancelar. Si contactar es caro (llamada de un account manager), quizás quieres un modelo más preciso. Es un trade-off clásico entre recall (detectar todos los qué cancelan) y precision (no molestar a los qué no van a cancelar)."
 />
 
 </Section>
@@ -212,9 +212,9 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 
 <CalloutInfo>
 **Mejores prácticas:**
-- Escribí siempre la probabilidad a priori antes de actualizar con evidencia
-- Usá simulación para verificar cálculos de probabilidad (es más fácil qué el álgebra)
-- Visualizá distribuciones cuándo sea posible — una imagen vale más qué mil fórmulas
+- Escribe siempre la probabilidad a priori antes de actualizar con evidencia
+- Usa simulación para verificar cálculos de probabilidad (es más fácil qué el álgebra)
+- Visualiza distribuciones cuándo sea posible — una imagen vale más qué mil fórmulas
 - La probabilidad cuantifica incertidumbre, no la elimina — no busques certezas dónde no las hay
 </CalloutInfo>
 
@@ -232,7 +232,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 
 <AnswerReveal summary="Ver respuestas adicionales">
 <p><strong>Se lanza un dado justo. ¿P(sacar 3)? ¿P(número par)?</strong> P(3) = 1/6 (un resultado de seis igualmente probables). P(par) = 3/6 = 1/2 (tres resultados pares: 2, 4, 6).</p>
-<p><strong>¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?</strong> Porque un clasificador qué dice "95% confianza" está dando P(clase | features), no P(features | clase). Sin entender la diferencia, podés sobreestimar peligrosamente la precisión del modelo, especialmente con clases desbalanceadas.</p>
+<p><strong>¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?</strong> Porque un clasificador qué dice "95% confianza" está dando P(clase | features), no P(features | clase). Sin entender la diferencia, puedes sobreestimar peligrosamente la precisión del modelo, especialmente con clases desbalanceadas.</p>
 </AnswerReveal>
 
 </Section>
@@ -260,7 +260,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 <Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Bayes es poderoso! Acabás de aprender la herramienta matemática más importante para razonar bajo incertidumbre. Todo el machine learning moderno — desde clasificadores naive Bayes hasta redes neuronales bayesianas — se construye sobre estas ideas.
+¡Bayes es poderoso! Acabas de aprender la herramienta matemática más importante para razonar bajo incertidumbre. Todo el machine learning moderno — desde clasificadores naive Bayes hasta redes neuronales bayesianas — se construye sobre estas ideas.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

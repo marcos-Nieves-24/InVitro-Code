@@ -24,7 +24,7 @@ Quiz: clustering_quiz.md
 <Section number={1} title="Agrupar sin etiquetas" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Hasta ahora trabajamos con datos etiquetados. Pero en el mundo real, la mayoría de los datos no tienen etiquetas. ¿Cómo encontrás grupos naturales? K-Means clustering: el algoritmo de aprendizaje no supervisado más popular.
+Hasta ahora trabajamos con datos etiquetados. Pero en el mundo real, la mayoría de los datos no tienen etiquetas. ¿Cómo encuentras grupos naturales? K-Means clustering: el algoritmo de aprendizaje no supervisado más popular.
 </MascotMessage>
 
 Clustering agrupa puntos similares sin conocer las categorías de antemano. En biotecnología, agrupa pacientes por perfiles de expresión génica. En SaaS, segmenta usuarios por comportamiento. En marketing, encuentra grupos de clientes con patrones de compra similares.
@@ -62,7 +62,7 @@ K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a 
 />
 
 <CalloutInfo>
-Siempre usá **ambos métodos juntos**. Si el codo y la silueta coinciden en k, tenés alta confianza. Si difieren, explorá visualmente los clusters con PCA para decidir.
+Siempre usa **ambos métodos juntos**. Si el codo y la silueta coinciden en k, tienes alta confianza. Si difieren, explora visualmente los clusters con PCA para decidir.
 </CalloutInfo>
 
 </Section>
@@ -163,13 +163,13 @@ En la práctica, clustering de expresión génica ha llevado al descubrimiento d
 **K-Means asume:**
 - Clusters **esféricos** (misma varianza en todas direcciones)
 - Clusters de **tamaño similar**
-- **Necesitás especificar k** (no lo descubre solo)
+- **Necesitas especificar k** (no lo descubre solo)
 - **Sensible a la inicialización** (K-Means++ mitiga esto)
 - **SIEMPRE estandarizar** antes (sensible a la escala)
 </ConceptCard>
 
 <CalloutInfo>
-Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí necesitás DBSCAN o clustering jerárquico. Pero K-Means es rápido, simple, y sorprendentemente efectivo para la mayoría de casos.
+Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí necesitas DBSCAN o clustering jerárquico. Pero K-Means es rápido, simple, y sorprendentemente efectivo para la mayoría de casos.
 </CalloutInfo>
 
 </Section>
@@ -196,7 +196,7 @@ Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí 
 <Section number={9} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Primer algoritmo de ML no supervisado dominado! K-Means es simple pero poderoso. Con PCA para visualizar y silhouette para validar, tenés un toolkit completo de clustering.
+¡Primer algoritmo de ML no supervisado dominado! K-Means es simple pero poderoso. Con PCA para visualizar y silhouette para validar, tienes un toolkit completo de clustering.
 </MascotMessage>
 
 **En la Lección 9** cerramos el módulo con **Evaluación de Modelos**: train/test split, validación cruzada, y todas las métricas (MAE, MSE, RMSE, R²). Porque crear modelos es fácil — saber si son buenos es lo difícil.

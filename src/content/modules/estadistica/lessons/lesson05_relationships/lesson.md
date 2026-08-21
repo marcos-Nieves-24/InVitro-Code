@@ -27,7 +27,7 @@ Quiz: relationships_quiz.md
 En machine learning, raramente trabajamos con variables aisladas. Dos genes pueden estar co-expresados, la edad del cliente y la duración de suscripción correlacionan. Entender estas relaciones te ayuda a seleccionar features y detectar multicolinealidad.
 </MascotMessage>
 
-Ya sabés describir variables individuales. Ahora aprenderás a cuantificar relaciones entre pares de variables. Esto es esencial para EDA (Lección 6), PCA (Lección 7), y todo el Módulo 4 de Machine Learning.
+Ya sabes describir variables individuales. Ahora aprenderás a cuantificar relaciones entre pares de variables. Esto es esencial para EDA (Lección 6), PCA (Lección 7), y todo el Módulo 4 de Machine Learning.
 
 </Section>
 
@@ -137,7 +137,7 @@ plt.show()
 ```
 
 <ConceptCard variant="key-idea">
-La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma). Buscá valores $|r| > 0.8$ fuera de la diagonal — indican multicolinealidad, qué degrada la estabilidad de modelos lineales.
+La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma). Busca valores $|r| > 0.8$ fuera de la diagonal — indican multicolinealidad, qué degrada la estabilidad de modelos lineales.
 </ConceptCard>
 
 </Section>
@@ -152,7 +152,7 @@ La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma)
 </ConceptCard>
 
 <CalloutInfo>
-Siempre preguntate: ¿hay una tercera variable qué explique ambas? ¿Podría ser al revés la causalidad? ¿Es sólo coincidencia? La correlación es una pista, no una conclusión.
+Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría ser al revés la causalidad? ¿Es sólo coincidencia? La correlación es una pista, no una conclusión.
 </CalloutInfo>
 
 </Section>
@@ -194,7 +194,7 @@ Siempre preguntate: ¿hay una tercera variable qué explique ambas? ¿Podría se
 <Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Correlación ≠ causalidad! Grabate eso a fuego. Ahora tenés las herramientas para explorar relaciones entre variables — una habilidad fundamental para el análisis exploratorio de datos.
+¡Correlación ≠ causalidad! Recuerda eso a fuego. Ahora tienes las herramientas para explorar relaciones entre variables — una habilidad fundamental para el análisis exploratorio de datos.
 </MascotMessage>
 
 **En la Lección 6** vamos a juntar TODO lo aprendido hasta ahora en un Análisis Exploratorio de Datos (EDA) completo: valores faltantes, outliers, visualizaciones, y exploración de features. Vas a aplicar estadística descriptiva, distribuciones y correlaciones en un flujo de trabajo real de científico de datos.

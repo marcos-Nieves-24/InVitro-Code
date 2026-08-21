@@ -27,7 +27,7 @@ Quiz: descriptive_statistics_quiz.md
 Bienvenido al Laboratorio de Datos. Hoy vamos a aprender cómo resumir miles de números en un puñado de medidas significativas. Es la primera herramienta de todo científico de datos.
 </MascotMessage>
 
-Imaginá qué acabás de secuenciar 10.000 genes de una muestra de un paciente. Necesitás comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías qué leer 10.000 números uno por uno.
+Imagina qué acabas de secuenciar 10.000 genes de una muestra de un paciente. Necesitas comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías qué leer 10.000 números uno por uno.
 
 La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
 
@@ -128,7 +128,7 @@ print(f"Moda: {mode}")
 ```
 
 <CalloutInfo>
-Ejecutá este código en tu notebook. ¿Están cerca la media y la mediana? Cuándo son similares, es una buena señal de qué los datos son simétricos. Si difieren mucho, hay sesgo.
+Ejecuta este código en tu notebook. ¿Están cerca la media y la mediana? Cuándo son similares, es una buena señal de qué los datos son simétricos. Si difieren mucho, hay sesgo.
 </CalloutInfo>
 
 <ReflectionCheck
@@ -314,26 +314,26 @@ plt.show()
 <ConceptCard variant="warning">
 **Cuatro errores qué todo principiante comete:**
 
-1. **Usar la media para datos sesgados** — la media se va con los outliers. Usá la mediana para ingresos, precios, o cualquier distribución con cola larga.
-2. **Confundir varianza muestral y poblacional** — `np.var(x)` usa ddof=0 (poblacional). Para una muestra, usá `np.var(x, ddof=1)`.
+1. **Usar la media para datos sesgados** — la media se va con los outliers. Usa la mediana para ingresos, precios, o cualquier distribución con cola larga.
+2. **Confundir varianza muestral y poblacional** — `np.var(x)` usa ddof=0 (poblacional). Para una muestra, usa `np.var(x, ddof=1)`.
 3. **Interpretar la desviación estándar sin contexto** — una std de 10 puede ser enorme o insignificante según la escala.
-4. **Asumir qué la moda es única** — en datos continuos, agrupá o redondeá para encontrar modas significativas.
+4. **Asumir qué la moda es única** — en datos continuos, agrupa o redondea para encontrar modas significativas.
 </ConceptCard>
 
 <CalloutInfo>
 **Mejores prácticas:**
-- Calculá siempre juntas las medidas de tendencia central y dispersión
-- Reportá **mediana + IQR** para distribuciones sesgadas
-- Reportá **media + desviación estándar** para distribuciones simétricas
-- Visualizá los datos con un diagrama de caja junto con los resúmenes numéricos
-- Usá `df.describe()` para una visión rápida en pandas
+- Calcula siempre juntas las medidas de tendencia central y dispersión
+- Reporta **mediana + IQR** para distribuciones sesgadas
+- Reporta **media + desviación estándar** para distribuciones simétricas
+- Visualiza los datos con un diagrama de caja junto con los resúmenes numéricos
+- Usa `df.describe()` para una visión rápida en pandas
 </CalloutInfo>
 
 </Section>
 
 <Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-Poné a prueba lo qué aprendiste:
+Pon a prueba lo qué aprendiste:
 
 1. **Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. ¿Qué medida representa mejor el centro?**
 2. **¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué se reporta más la segunda?**
@@ -364,7 +364,7 @@ Poné a prueba lo qué aprendiste:
     ["Valor Atípico (Outlier)", "Punto qué difiere significativamente del resto; detectado con la regla 1.5×IQR"],
   ]}
   searchable={true}
-  caption="Términos clave de estadística descriptiva — usá la búsqueda para encontrar definiciones rápido"
+  caption="Términos clave de estadística descriptiva — usa la búsqueda para encontrar definiciones rápido"
 />
 
 </Section>
@@ -372,7 +372,7 @@ Poné a prueba lo qué aprendiste:
 <Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Excelente trabajo! Ya tenés las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, IQR, outliers — son el pan de cada día de un científico de datos.
+¡Excelente trabajo! Ya tienes las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, IQR, outliers — son el pan de cada día de un científico de datos.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

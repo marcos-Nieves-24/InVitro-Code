@@ -66,7 +66,7 @@ Intuición: Lanzar una moneda 10 veces y contar caras. De 100 pacientes tratados
 </ConceptCard>
 
 <ConceptCard variant="key-idea">
-Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitás un modelo más complejo.
+Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitas un modelo más complejo.
 </ConceptCard>
 
 Ejemplos: mutaciones en una secuencia de ADN, llegadas de clientes por hora, llamadas a un call center por minuto.
@@ -143,7 +143,7 @@ print(f"P(40 < X < 60) = {norm.cdf(60) - norm.cdf(40):.3f}")
 ```
 
 <CalloutInfo>
-**PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$ — siempre usá CDF para rangos.
+**PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$ — siempre usa CDF para rangos.
 </CalloutInfo>
 
 </Section>
@@ -175,8 +175,8 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   blockId="reflection-l04-choose-dist"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="Tenés datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
-  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verificá: si la varianza empírica es mucho mayor qué 5 (sobredispersión), considerá binomial negativa. Si hay patrones temporales (hora pico), necesitás un Poisson no homogéneo con λ(t) variable."
+  prompt="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
+  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verifica: si la varianza empírica es mucho mayor qué 5 (sobredispersión), considera binomial negativa. Si hay patrones temporales (hora pico), necesitas un Poisson no homogéneo con λ(t) variable."
 />
 
 <AnswerReveal summary="Ver respuestas">
@@ -210,7 +210,7 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 <Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Cuatro distribuciones fundamentales dominadas! Bernoulli, Binomial, Poisson, Normal — con estas cuatro ya podés modelar una enorme variedad de fenómenos reales.
+¡Cuatro distribuciones fundamentales dominadas! Bernoulli, Binomial, Poisson, Normal — con estas cuatro ya puedes modelar una enorme variedad de fenómenos reales.
 </MascotMessage>
 
 **En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento — todo está conectado.

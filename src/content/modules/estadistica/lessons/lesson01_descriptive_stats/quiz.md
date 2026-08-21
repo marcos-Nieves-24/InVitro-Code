@@ -39,13 +39,13 @@ d) Por debajo de la media menos el rango
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explicá por qué se prefiere la mediana a la media para informar el ingreso familiar en un país con alta desigualdad de ingresos.
+**6.** Explica por qué se prefiere la mediana a la media para informar el ingreso familiar en un país con alta desigualdad de ingresos.
 
-**7.** Una investigadora de biotecnología mide la concentración de proteína en 100 muestras. La media es 45 mg/dL con una desviación estándar de 3 mg/dL. Interpretá estos valores en lenguaje simple.
+**7.** Una investigadora de biotecnología mide la concentración de proteína en 100 muestras. La media es 45 mg/dL con una desviación estándar de 3 mg/dL. Interpreta estos valores en lenguaje simple.
 
 ## Pregunta de código (1 pregunta)
 
-**8.** Escribí código en Python usando numpy para:
+**8.** Escribe código en Python usando numpy para:
 - Crear un array `data = np.array([2, 4, 6, 8, 10, 100])`
 - Calcular la media, la mediana, la varianza, la desviación estándar y el RIQ
 - Identificar todos los valores atípicos usando el método del RIQ
