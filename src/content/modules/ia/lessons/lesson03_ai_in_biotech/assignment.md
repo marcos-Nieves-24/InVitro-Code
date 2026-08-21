@@ -9,7 +9,7 @@
 
 ## Instrucciones
 
-1. Cargá el dataset Breast Cancer Wisconsin:
+1. Carga el dataset Breast Cancer Wisconsin:
 
 ```python
 from sklearn.datasets import load_breast_cancer
@@ -19,16 +19,16 @@ X = data.data
 y = data.target
 ```
 
-2. Separá los datos en entrenamiento (70%) y prueba (30%) usando `train_test_split` con `stratify=y` y `random_state=42`.
+2. Separa los datos en entrenamiento (70%) y prueba (30%) usando `train_test_split` con `stratify=y` y `random_state=42`.
 
-3. Entrená un clasificador `KNeighborsClassifier` con `k=5`. Predecí sobre el conjunto de prueba y calculá:
+3. Entrena un clasificador `KNeighborsClassifier` con `k=5`. Predice sobre el conjunto de prueba y calcula:
    - Matriz de confusión (TP, FP, FN, TN)
    - Accuracy
    - Precision
    - Recall
    - F1-score
 
-4. Implementá un clasificador baseline basado en una regla simple. Por ejemplo, predecir siempre la clase mayoritaria, o usar un solo feature threshold:
+4. Implementa un clasificador baseline basado en una regla simple. Por ejemplo, predecir siempre la clase mayoritaria, o usar un solo feature threshold:
 
 ```python
 import numpy as np
@@ -43,9 +43,9 @@ print("Matriz de confusión baseline:")
 print(confusion_matrix(y_test, y_baseline))
 ```
 
-5. Compará KNN vs baseline en una tabla con accuracy, precision, recall y F1-score.
+5. Compara KNN vs baseline en una tabla con accuracy, precision, recall y F1-score.
 
-6. Respondé en una celda de markdown:
+6. Responde en una celda de markdown:
    - ¿Cuál modelo tiene mejor F1-score? ¿Por qué?
    - ¿Cuántos falsos negativos comete KNN? ¿Qué implicaría eso si el modelo se usara como ayuda al diagnóstico?
    - ¿Cuándo una regla simple puede ser útil y cuándo preferirías un modelo de ML?

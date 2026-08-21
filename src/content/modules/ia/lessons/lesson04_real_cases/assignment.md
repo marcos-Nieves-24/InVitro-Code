@@ -11,7 +11,7 @@
 
 ### Tarea 1: Construir el pipeline completo
 
-Implementá un notebook que ejecute el siguiente flujo:
+Implementa un notebook que ejecute el siguiente flujo:
 
 1. **Carga de datos**: usar `sklearn.datasets.load_breast_cancer()`.
 2. **División**: separar en `train` y `test` con `train_test_split` (20% de prueba, `stratify` por clase, `random_state=42`).
@@ -26,16 +26,16 @@ Implementá un notebook que ejecute el siguiente flujo:
 
 ### Tarea 2: Escribir un reporte de análisis
 
-Incluí una celda de markdown con las siguientes secciones:
+Incluye una celda de markdown con las siguientes secciones:
 
 - **Resumen ejecutivo**: qué hiciste, con qué datos y qué modelos probaste.
-- **Interpretación de métricas**: explicá qué significa cada métrica en este contexto médico.
-- **Análisis de errores**: identificá cuántos falsos positivos y falsos negativos tuvo cada modelo.
-- **Recomendación final**: elegí un modelo y justificá por qué es el más adecuado para un screening de cáncer de mama.
+- **Interpretación de métricas**: explica qué significa cada métrica en este contexto médico.
+- **Análisis de errores**: identifica cuántos falsos positivos y falsos negativos tuvo cada modelo.
+- **Recomendación final**: elige un modelo y justifica por qué es el más adecuado para un screening de cáncer de mama.
 
 ### Tarea 3: Tradeoffs de selección de modelo
 
-Respondé en una celda de markdown:
+Responde en una celda de markdown:
 
 - ¿Por qué accuracy puede ser una métrica engañosa en problemas médicos?
 - ¿Qué ventaja tiene LogisticRegression sobre KNN en términos de interpretabilidad?

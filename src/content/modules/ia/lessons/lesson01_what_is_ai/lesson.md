@@ -23,9 +23,9 @@ Datasets Used: module01_ai_cell_features.csv
 Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
 </MascotMessage>
 
-Imaginá que sos microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitás identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
+Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 
-Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por vos, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
+Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por ti, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
 
 </Section>
 
@@ -35,7 +35,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
 </ConceptCard>
 
-**Intuición**: Cuando ves una foto y reconocés que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
+**Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 
 </Section>
 
@@ -99,7 +99,7 @@ Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las 
 
 <DiagnosticTrainer />
 
-Cada punto en el gráfico es un caso real de biopsia. Cambiá las features con el menú desplegable. Notá cómo algunas combinaciones separan mejor tumores benignos de malignos que otras.
+Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el menú desplegable. Nota cómo algunas combinaciones separan mejor tumores benignos de malignos que otras.
 
 </Section>
 
@@ -117,9 +117,9 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={7} title="Vos como clasificador" eyebrow="INTERACTIVA">
+<Section number={7} title="Tú como clasificador" eyebrow="INTERACTIVA">
 
-Ahora vamos a hacer el ejercicio inverso: vos actuás como clasificador.
+Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.
 
 <ReflectionCheck
   blockId="reflection-l01-patrones"
@@ -163,7 +163,7 @@ Antes de que existiera el machine learning, se usaban **sistemas basados en regl
 
 <ThresholdLab />
 
-Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
+Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 
 </Section>
 
@@ -176,7 +176,7 @@ Mové los sliders para ajustar los umbrales. Fijate cómo cambiar las reglas afe
 - Hay **superposición natural** entre especies: algunas conidias de *Aspergillus* se parecen a *Penicillium*
 - Para capturar la complejidad, necesitaríamos **cientos de reglas** → imposible de mantener
 - Cada regla nueva puede contradecir a las anteriores
-- **Acá entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
+- **Aquí entra el machine learning**: en lugar de programar reglas, la máquina *aprende* los patrones de los datos
 
 </Section>
 

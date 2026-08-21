@@ -50,7 +50,7 @@ El PDB es como una biblioteca de planos arquitectónicos de proteínas. Cada ent
 
 Pero hay un problema enorme: secuenciar una proteína es barato y rápido. Determinar su estructura experimentalmente es caro y lento. De millones de proteínas conocidas, solo ~200,000 tienen estructura resuelta.
 
-Acá entra AlphaFold.
+Aquí entra AlphaFold.
 
 </Section>
 
@@ -64,10 +64,10 @@ Acá entra AlphaFold.
 
 <InteractiveFrame src="/interactives/demo_07_protein_viewer.html" height="700px" caption="visualización interactiva de datos reales del PDB" />
 
-**Explorá el visualizador:**
-- Rotá la proteína arrastrando el mouse
-- Cambiá entre modos de visualización (cintas, esferas, líneas)
-- Observá las diferentes regiones: hélices alfa, láminas beta, loops
+**Explora el visualizador:**
+- Rota la proteína arrastrando el mouse
+- Cambia entre modos de visualización (cintas, esferas, líneas)
+- Observa las diferentes regiones: hélices alfa, láminas beta, loops
 
 <ConceptCard variant="key-idea">
 Cada átomo en esa visualización tiene coordenadas (x, y, z) determinadas experimentalmente. Para el modelo de ML, predecir estas coordenadas es un problema de regresión — como el de la Lección 2, pero en 3D y con miles de puntos.
@@ -144,7 +144,7 @@ Cada etapa del pipeline tiene desafíos específicos:
 
 <ReflectionCheck
   blockId="reflection-l03-pipeline"
-  prompt="En un pipeline de ML para clasificación de conidias (microscopía), ¿cuál etapa del pipeline creés que consume más tiempo? ¿Y cuál tiene más probabilidad de errores silenciosos — errores que parecen estar bien pero después arruinan todo?"
+  prompt="En un pipeline de ML para clasificación de conidias (microscopía), ¿cuál etapa del pipeline crees que consume más tiempo? ¿Y cuál tiene más probabilidad de errores silenciosos — errores que parecen estar bien pero después arruinan todo?"
   answer="En la práctica, la limpieza de datos consume >60% del tiempo en proyectos de ML biotecnológico. La etapa con más errores silenciosos es feature engineering: si un feature tiene un error sistemático (ej., calibración del microscopio), el modelo 'aprende' a explotar ese error y funciona en el laboratorio de origen pero falla al transferirse."
 />
 
@@ -152,13 +152,13 @@ Cada etapa del pipeline tiene desafíos específicos:
 
 **¿Qué muestra exactamente?**
 - Cada etapa del pipeline es un paso que transforma datos biológicos en un modelo
-- Podés simular el efecto de diferentes parámetros en cada etapa
+- Puedes simular el efecto de diferentes parámetros en cada etapa
 - Las barras de error muestran dónde se introducen imprecisiones
 
-**Probá:**
-1. Recorré cada etapa del pipeline haciendo clic
-2. Cambiá parámetros como tamaño de muestra, calidad de imagen, o método de clustering
-3. Observá cómo las decisiones tempranas afectan el resultado final
+**Prueba:**
+1. Recorre cada etapa del pipeline haciendo clic
+2. Cambia parámetros como tamaño de muestra, calidad de imagen, o método de clustering
+3. Observa cómo las decisiones tempranas afectan el resultado final
 
 </Section>
 
@@ -166,7 +166,7 @@ Cada etapa del pipeline tiene desafíos específicos:
 
 <ReflectionCheck
   blockId="reflection-l03-pipeline-real"
-  prompt="En el problema de las conidias que venimos trabajando, ¿cómo aplicarías un pipeline de ML? ¿Dónde entrenarías y dónde probarías si trabajás con datos de 3 laboratorios diferentes que usan distintos microscopios? ¿Qué problema del overfitting vimos en la Lección 2 que puede aparecer si mezclás los datos de todos los laboratorios?"
+  prompt="En el problema de las conidias que venimos trabajando, ¿cómo aplicarías un pipeline de ML? ¿Dónde entrenarías y dónde probarías si trabajas con datos de 3 laboratorios diferentes que usan distintos microscopios? ¿Qué problema del overfitting vimos en la Lección 2 que puede aparecer si mezclas los datos de todos los laboratorios?"
   answer="Pipeline: recolección de imágenes → extracción de features (área, circularidad, textura) → entrenar clasificador → validar. Con 3 laboratorios, lo correcto es entrenar con 2 y probar en el 3° (validación cruzada por laboratorio). Si mezclamos todo, el modelo aprende a reconocer cada microscopio (ruido de laboratorio) en lugar de conidias — es sobreajuste aplicado al equipamiento."
 />
 
@@ -188,7 +188,7 @@ En una clasificación binaria:
 - **Verdadero Negativo (TN)**: el modelo predijo negativo y realmente era negativo.
 </ConceptCard>
 
-Imaginá un clasificador de conidias que etiqueta como positiva a *Aspergillus*. De 100 conidias analizadas, obtuvimos estos resultados:
+Imagina un clasificador de conidias que etiqueta como positiva a *Aspergillus*. De 100 conidias analizadas, obtuvimos estos resultados:
 
 <InteractiveTable
   headers={["", "Predicho Aspergillus", "Predicho Penicillium"]}

@@ -20,7 +20,7 @@ Datasets Used: Ninguno específico
 <Section number={1} title="De los fundamentos a las aplicaciones" eyebrow="INICIO">
 
 <MascotMessage>
-Llegamos a la última lección del módulo. Hasta acá viste features, reglas, algoritmos, y pipelines. Ahora veamos dónde se aplica TODO.
+Llegamos a la última lección del módulo. Hasta aquí viste features, reglas, algoritmos, y pipelines. Ahora veamos dónde se aplica TODO.
 </MascotMessage>
 
 En tres lecciones recorrimos un camino enorme:
@@ -41,7 +41,7 @@ A principios de 2020, el mundo enfrentó una pandemia. En menos de un año se de
 El **desafío de una vacuna** es encontrar la molécula que le enseñe al sistema inmune a reconocer un patógeno sin causar la enfermedad. Con la vacuna mRNA, en lugar de inyectar el virus inactivado, se inyecta el **mensaje genético** para que nuestras propias células produzcan la proteína viral y generen inmunidad.
 </ConceptCard>
 
-Pero el mRNA es frágil y no entra fácilmente a las células. Acá es donde la IA entró en juego.
+Pero el mRNA es frágil y no entra fácilmente a las células. Aquí es donde la IA entró en juego.
 
 </Section>
 
@@ -71,7 +71,7 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
   blockId="reflection-l04-reposicionamiento"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  prompt="Si tenés datos de interacciones molecular-detector (qué fármacos se unen a qué proteínas virales), ¿cómo models el problema: clasificación o regresión? ¿Qué métrica usarías para evaluar si un modelo así es confiable en un contexto clínico donde un falso negativo puede costar vidas?"
+  prompt="Si tienes datos de interacciones molecular-detector (qué fármacos se unen a qué proteínas virales), ¿cómo modelas el problema: clasificación o regresión? ¿Qué métrica usarías para evaluar si un modelo así es confiable en un contexto clínico donde un falso negativo puede costar vidas?"
   answer="Es clasificación binaria (se une / no se une). La métrica clave es sensibilidad (recall): minimizar falsos negativos (fármacos que sí funcionan pero el modelo descartó). En un contexto clínico, también importa la especificidad para evitar falsos positivos que lleven a ensayos clínicos costosos e inútiles. Se necesita un balance cuidadoso."
 />
 
@@ -290,14 +290,14 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 <Section number={12} title="Fin del Módulo 1" eyebrow="COMPLETADO">
 
 <MascotMessage mood="celebrating">
-Completaste el Módulo 1. Features, algoritmos, pipelines, casos reales. Tenés las bases para entender cómo la IA está transformando la biotecnología.
+Completaste el Módulo 1. Features, algoritmos, pipelines, casos reales. Tienes las bases para entender cómo la IA está transformando la biotecnología.
 </MascotMessage>
 
 **¿Qué sigue?**
 - **Módulo 2**: Deep Learning — redes neuronales, CNNs para imágenes de microscopía, y modelos generativos
 - **Módulo 3**: ML en producción — cómo llevar un modelo del Jupyter Notebook al laboratorio real
 
-Pero antes, tomate un momento para mirar lo que lograste hoy. Pasaste de no saber qué es un feature a entender AlphaFold, overfitting, pipelines de ML, y cómo la IA aceleró una vacuna que salvó millones de vidas.
+Pero antes, tómate un momento para mirar lo que lograste hoy. Pasaste de no saber qué es un feature a entender AlphaFold, overfitting, pipelines de ML, y cómo la IA aceleró una vacuna que salvó millones de vidas.
 
 **No es poco.**
 

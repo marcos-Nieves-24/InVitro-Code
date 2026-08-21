@@ -25,7 +25,7 @@ En la lección anterior viste que las reglas fijas tienen límites. Ahora vamos 
 
 En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.
 
-Acá entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
+Aquí entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
 
 Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
 
@@ -49,7 +49,7 @@ Ejemplos de entrenamiento → Algoritmo → Modelo → Predicciones
 **Modelo**: es el resultado del aprendizaje. Una representación matemática de los patrones que el algoritmo encontró en los datos.
 </ConceptCard>
 
-Pensalo así:
+Piénsalo así:
 - Los **datos de entrenamiento** son como los ejercicios resueltos de un libro de texto
 - El **algoritmo** es como el estudiante que estudia
 - El **modelo** es el conocimiento que el estudiante adquirió
@@ -84,12 +84,12 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 - El perceptrón traza una **frontera de decisión** lineal para separar las clases
 - La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos
 
-**Probá vos:**
-1. Ajustá la tasa de aprendizaje con el slider
-2. Presioná "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
-3. Usá "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
-4. Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética
-5. Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
+**Prueba tú:**
+1. Ajusta la tasa de aprendizaje con el slider
+2. Presiona "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
+3. Usa "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
+4. Haz clic en un punto vacío del gráfico para predecir una muestra hipotética
+5. Fíjate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
 
 <ConceptCard variant="key-idea">
 El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cuando su predicción es incorrecta, moviendo la frontera de decisión en la dirección correcta.
@@ -137,16 +137,16 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
 
 **¿Cómo funciona KNN?**
 1. El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)
-2. Elegí un valor de k con el slider — es la cantidad de vecinos que votan
-3. Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
+2. Elige un valor de k con el slider — es la cantidad de vecinos que votan
+3. Haz clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
 4. Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo
 5. La zona sombreada muestra la **frontera de decisión**: de un lado KNN predice benigno, del otro maligno
 
-**Experimentá:**
-1. Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
-2. Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
-3. Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
-4. Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
+**Experimenta:**
+1. Pon k=1 y mueve el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
+2. Sube k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
+3. Mira la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
+4. Compara con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
 
 <ConceptCard variant="key-idea">
 KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perceptrón. Simplemente **recuerda** todos los datos y, para cada predicción nueva, consulta a los k vecinos más cercanos. La elección de k es un **hiperparámetro**: no lo aprende el algoritmo, lo elegimos nosotros.
@@ -190,11 +190,11 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 - El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta — con datos reales, siempre hay dispersión
 - Las líneas verticales (residuales) muestran la distancia de cada punto a la recta
 
-**Probá:**
-1. Mové los sliders de pendiente e intercepto para ajustar la recta manualmente
-2. Fijate cómo el ECM y R² cambian en vivo al mover la recta
-3. Presioná "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
-4. Usá "Predecir" para estimar la textura a partir de un valor de radio
+**Prueba:**
+1. Mueve los sliders de pendiente e intercepto para ajustar la recta manualmente
+2. Fíjate cómo el ECM y R² cambian en vivo al mover la recta
+3. Presiona "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
+4. Usa "Predecir" para estimar la textura a partir de un valor de radio
 
 </Section>
 
@@ -222,7 +222,7 @@ No toda relación es lineal; en biología muchas variables tienen relaciones com
   blockId="reflection-l02-overfitting-predict"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?"
+  prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿crees que funcionará igual de bien con datos nuevos?"
   answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
 />
 
@@ -321,9 +321,9 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entendés cómo aprenden las máquinas.
+Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entiendes cómo aprenden las máquinas.
 </MascotMessage>
 
-Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+Ahora que entiendes cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
 
 </Section>
