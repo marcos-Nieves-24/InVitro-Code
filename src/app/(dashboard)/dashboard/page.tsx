@@ -190,7 +190,7 @@ export default async function DashboardPage() {
               <div className="flex items-center gap-8 p-10">
                 <div className="flex-1">
                   <h2 className="font-display text-3xl font-extrabold tracking-tight text-on-surface md:text-4xl">
-                    ¡Bienvenido de vuelta, {userName}! 👋
+                    ¡Bienvenido de vuelta, {userName}! 
                   </h2>
                   <p className="mb-8 mt-4 max-w-lg text-on-surface-variant">
                     Estás construyendo tu camino en InVitro-Code.
