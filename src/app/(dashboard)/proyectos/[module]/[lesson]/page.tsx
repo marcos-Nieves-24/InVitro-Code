@@ -109,7 +109,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <InVitroShell userName={userName}>
-      <div className="mx-auto max-w-4xl px-6 py-8">
+      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8">
         <Link
           href="/proyectos"
           className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-outline transition-colors hover:text-primary"

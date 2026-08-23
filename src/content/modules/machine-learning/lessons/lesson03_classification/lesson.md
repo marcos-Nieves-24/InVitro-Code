@@ -64,15 +64,15 @@ $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$
 <ComparisonTable
   rows={[
     { feature: "", left: "Predicho Positivo", right: "Predicho Negativo" },
-    { feature: "Real Positivo", left: "✅ VP (Verdadero Positivo)", right: "❌ FN (Falso Negativo)" },
-    { feature: "Real Negativo", left: "❌ FP (Falso Positivo)", right: "✅ VN (Verdadero Negativo)" },
+    { feature: "Real Positivo", left: "VP (Verdadero Positivo)", right: "FN (Falso Negativo)" },
+    { feature: "Real Negativo", left: "FP (Falso Positivo)", right: "VN (Verdadero Negativo)" },
   ]}
 />
 
 De la matriz salen todas las métricas:
 
 <ConceptCard variant="definition">
-**Exactitud (Accuracy):** $\frac{VP + VN}{\text{Total}}$ — ¿qué porcentaje acerté? 🚨 No uses accuracy solo si las clases están desbalanceadas.
+**Exactitud (Accuracy):** $\frac{VP + VN}{\text{Total}}$ — ¿qué porcentaje acerté? No uses accuracy solo si las clases están desbalanceadas.
 
 **Precisión (Precision):** $\frac{VP}{VP + FP}$ — de todo lo que dije que era positivo, ¿cuánto era realmente positivo?
 

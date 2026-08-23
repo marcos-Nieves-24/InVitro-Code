@@ -6,7 +6,6 @@ describe("calcXpForLesson", () => {
     expect(calcXpForLesson("ia", "lesson01_what_is_ai")).toBe(25);
     expect(calcXpForLesson("python", "lesson03_variables")).toBe(25);
     expect(calcXpForLesson("estadistica", "lesson01_descriptive_stats")).toBe(25);
-    expect(calcXpForLesson("etica", "lesson01_intro_ethics")).toBe(25);
   });
 
   it("applies machine-learning multiplier", () => {

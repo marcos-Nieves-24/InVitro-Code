@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
+import { Flame, BarChart3 } from "lucide-react";
 
 // Plotly MUST be loaded only on the client — it accesses browser globals (self) at import time
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false }) as React.ComponentType<any>;
@@ -417,7 +418,7 @@ export function DiagnosticTrainer({
             <div className="flex items-center gap-4">
               {streak > 0 && (
                 <div className={`flex items-center gap-2 ${streakColorClass}`}>
-                  <span className="text-lg">🔥</span>
+                  <Flame className="h-5 w-5" />
                   <span className="text-sm font-medium">Racha: {streak}/8</span>
                 </div>
               )}
@@ -482,7 +483,7 @@ export function DiagnosticTrainer({
             {showDiagnosis && currentTest && (
               <div className={`bg-white rounded-lg border-l-4 p-6 ${isCorrect ? 'border-teal-500 bg-teal-50' : 'border-orange-500 bg-orange-50'}`}>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg">📊</span>
+                  <BarChart3 className="h-5 w-5" />
                   <h3 className="text-lg font-semibold">
                     {isCorrect ? 'Diagnóstico correcto ✓' : 'No coincidía'}
                   </h3>

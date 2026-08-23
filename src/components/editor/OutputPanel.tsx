@@ -68,6 +68,8 @@ export default function OutputPanel({
   return (
     <ConsoleFrame
       title="Consola de Salida"
+      maximizable
+      storageKey="console-output"
       action={
         <>
           {/* Estoy listo — only when client-side validation passed AND flag on */}

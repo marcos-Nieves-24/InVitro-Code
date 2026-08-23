@@ -8,7 +8,6 @@ export function calcXpForLesson(moduleSlug: string, lessonSlug: string): number 
     "python": 1.0,
     "estadistica": 1.0,
     "machine-learning": 1.2,
-    "etica": 1.0,
   };
   const multiplier = moduleMultipliers[moduleSlug] || 1.0;
 

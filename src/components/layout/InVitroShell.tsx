@@ -25,7 +25,7 @@ export function InVitroShell({
         onToggle={() => setCollapsed(!collapsed)}
       />
       <main
-        className={`flex-1 pb-12 transition-[padding] duration-300 ${
+        className={`flex-1 pt-14 pb-12 transition-[padding] duration-300 md:pt-0 ${
           collapsed ? "md:pl-[72px]" : "md:pl-[280px]"
         }`}
       >

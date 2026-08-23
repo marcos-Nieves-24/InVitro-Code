@@ -79,7 +79,7 @@ export function AppSidebar({
       {/* Mobile backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-deep-navy/30 md:hidden"
+          className="fixed inset-0 z-30 bg-deep-navy/30 md:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { Flame } from "lucide-react";
 
 interface ConidiaPattern {
   id: number;
@@ -118,7 +119,7 @@ export function ConidiaSortGame() {
     <div className="my-4">
       {/* Streak */}
       <div className={`mb-3 text-center text-sm font-semibold transition-opacity ${streak >= 3 ? "animate-pulse text-orange-500" : "text-gray-400"}`}>
-        Racha: 🔥 {streak}
+        Racha: <Flame className="inline h-4 w-4" /> {streak}
       </div>
 
       {/* Grid */}

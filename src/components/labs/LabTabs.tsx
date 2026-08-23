@@ -71,7 +71,7 @@ export function LabTabs({
   }, [activeTab, hasQuiz]);
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-8">
+    <div className="mx-auto w-full max-w-screen-2xl px-6 py-8">
       {/* Tab bar */}
       <div className="mb-8 flex items-center border-b border-gray-200" role="tablist">
         <TabButton

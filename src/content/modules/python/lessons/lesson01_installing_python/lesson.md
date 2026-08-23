@@ -56,10 +56,10 @@ Hay varias formas de obtener Python. Aquí las principales:
 
 | Distribución | Descripción | Veredicto |
 |---|---|---|
-| **Python Oficial** (python.org) | Implementación de referencia (CPython) | ✅ Recomendada para este curso |
+| **Python Oficial** (python.org) | Implementación de referencia (CPython) | Recomendada para este curso |
 | **Anaconda Distribution** | Python + 250+ paquetes preinstalados | Buena para comenzar pero pesada |
 | **Miniconda** | Solo conda y Python mínimo | Liviana pero requiere conda |
-| **Microsoft Store** (Windows) | Conveniente para Windows | ⚠️ Puede tener problemas de PATH |
+| **Microsoft Store** (Windows) | Conveniente para Windows | Puede tener problemas de PATH |
 
 <ConceptCard variant="key-idea">
 Para este curso recomendamos instalar Python directamente desde **python.org**. Es la opción más limpia, predecible y con menos sorpresas.

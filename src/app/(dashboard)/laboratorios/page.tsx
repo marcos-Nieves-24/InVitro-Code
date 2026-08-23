@@ -84,7 +84,7 @@ export default async function LaboratoriosPage() {
         trail={trail}
       />
 
-      <div className="mx-auto max-w-[1440px] px-6 py-8 md:px-10">
+      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <div className="mb-8">
           <h1 className="font-display text-3xl font-extrabold text-deep-navy">
             Laboratorios

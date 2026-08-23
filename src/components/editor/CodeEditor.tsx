@@ -64,6 +64,8 @@ export default function CodeEditor({
   return (
     <ConsoleFrame
       title={title}
+      maximizable
+      storageKey="console-editor"
       action={
         <>
           {status ? (

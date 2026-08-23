@@ -18,7 +18,11 @@ export default function VisualizationPanel({
   isRunning = false,
 }: VisualizationPanelProps) {
   return (
-    <ConsoleFrame title="Consola de Visualización">
+    <ConsoleFrame
+      title="Consola de Visualización"
+      maximizable
+      storageKey="console-viz"
+    >
       {figures.length === 0 ? (
         <div className="flex min-h-[200px] flex-col items-center justify-center gap-3 px-4 py-12 text-center">
           {isRunning ? (
