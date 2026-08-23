@@ -72,11 +72,11 @@ export default async function Home() {
               Curso interactivo
             </p>
             <h1 className="font-display text-4xl font-extrabold tracking-tight text-deep-navy md:text-6xl">
-              Aprendé IA y Machine Learning con Python desde cero
+              Aprende IA y Machine Learning con Python desde cero
             </h1>
             <p className="mt-6 max-w-xl text-lg text-on-surface-variant">
-              Un curso interactivo para estudiantes de biotecnología. Aprendé
-              haciendo — con terminales, labs y progreso gamificado.
+              Una experiencia interactiva para estudiantes de biotecnología. Aprende
+              Machine Learning e inteligencia artificial mediante clases y proyectos gamificados.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
