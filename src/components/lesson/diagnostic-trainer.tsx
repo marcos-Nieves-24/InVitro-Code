@@ -485,7 +485,7 @@ export function DiagnosticTrainer({
                 <div className="flex items-center gap-2 mb-2">
                   <BarChart3 className="h-5 w-5" />
                   <h3 className="text-lg font-semibold">
-                    {isCorrect ? 'Diagnóstico correcto ✓' : 'No coincidía'}
+                    {isCorrect ? 'Diagnóstico correcto' : 'No coincidía'}
                   </h3>
                 </div>
                 <p className="text-sm text-gray-700 mb-2">

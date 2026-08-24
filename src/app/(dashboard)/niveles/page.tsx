@@ -17,6 +17,7 @@ import {
   Lock,
   ArrowRight,
   Target,
+  Trophy,
 } from "lucide-react";
 
 interface Rank {
@@ -301,7 +302,7 @@ export default async function NivelesPage() {
                     <p className="text-lg font-bold text-primary">
                       {nextRank
                         ? Math.max(0, xpToNext).toLocaleString("es") + " XP"
-                        : "🏆"}
+                        : <Trophy className="h-5 w-5" />}
                     </p>
                   </div>
                 </div>

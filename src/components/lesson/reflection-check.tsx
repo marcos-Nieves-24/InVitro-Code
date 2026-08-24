@@ -80,7 +80,7 @@ export function ReflectionCheck({
           {submitting
             ? "Guardando..."
             : revealed
-              ? "✓ Respuesta revelada"
+              ? "Respuesta revelada"
               : "Revelar respuesta modelo"}
         </Button>
 

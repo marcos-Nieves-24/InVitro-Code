@@ -27,6 +27,7 @@ import {
   CheckCircle2,
   Cpu,
   Flame,
+  Check,
   FlaskConical,
   Gem,
   Map,
@@ -483,7 +484,7 @@ export default async function DashboardPage() {
                         {current ? (
                           <span className="h-2 w-2 rounded-full bg-primary" />
                         ) : completed ? (
-                          <span className="text-xs">✓</span>
+                          <Check className="h-3 w-3" />
                         ) : (
                           <span className="text-xs">○</span>
                         )}

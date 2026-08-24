@@ -338,7 +338,7 @@ function resolveSingleShellCommand(cmd: string): string | null {
   // brew install
   if (/\bbrew\s+install\b/.test(cmd)) {
     const pkg = cmd.replace(/^.*\binstall\s+/, "").split(/\s+/)[0];
-    return `==> Fetching ${pkg}\n==> Pouring ${pkg}... \n🍺  /opt/homebrew/Cellar/${pkg}/3.12.0: 3,000 files, 60MB`;
+    return `==> Fetching ${pkg}\n==> Pouring ${pkg}...\n/opt/homebrew/Cellar/${pkg}/3.12.0: 3,000 files, 60MB`;
   }
 
   // pip / pip3 install -r
