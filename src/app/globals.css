@@ -2,6 +2,11 @@
 @plugin "@tailwindcss/typography";
 @import "katex/dist/katex.min.css";
 
+/* ─── Sidebar Offset (responsive overlay) ─────────────── */
+:root {
+  --sidebar-offset: 0px;
+}
+
 /* ─── Design Tokens ─────────────────────────────────── */
 
 @theme {

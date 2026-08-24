@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -20,6 +20,20 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopCollapsed, setDesktopCollapsed] = useState(false);
   const pathname = usePathname();
+
+  // Set --sidebar-offset on documentElement for ConsoleFrame overlay
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const update = () => {
+      document.documentElement.style.setProperty(
+        "--sidebar-offset",
+        mql.matches ? (desktopCollapsed ? "0px" : "256px") : "0px"
+      );
+    };
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, [desktopCollapsed]);
 
   // Extract current module and lesson from path: /learn/{module}/{lesson}
   const pathParts = pathname.split("/").filter(Boolean);

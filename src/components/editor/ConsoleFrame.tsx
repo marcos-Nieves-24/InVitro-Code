@@ -102,7 +102,13 @@ export function ConsoleFrame({
   // Maximised overlay: fixed fullscreen below sidebar (z-40 < z-50)
   if (isMaximized) {
     return (
-      <div className="fixed inset-0 z-40 flex flex-col overflow-auto bg-[#0a0a0a] p-4 md:pl-[72px] lg:pl-[280px]">
+      <div
+        className="fixed inset-0 z-40 flex flex-col overflow-auto bg-[#0a0a0a] py-4 pr-4"
+        style={{
+          paddingLeft: "var(--sidebar-offset, 0px)",
+          transition: "padding-left 300ms ease-in-out",
+        }}
+      >
         <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-[#222] bg-[#0a0a0a] shadow-2xl shadow-black/40">
           {titleBar}
           {body}
