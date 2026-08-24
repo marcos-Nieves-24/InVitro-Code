@@ -147,7 +147,7 @@ print("Value:", 42)
 name = input("Enter your name: ")
 ```
 
-> ⚠️ **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
+> **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
 
 </Section>
 
