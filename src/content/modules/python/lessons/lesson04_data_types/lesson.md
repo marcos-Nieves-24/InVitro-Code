@@ -213,7 +213,7 @@ print(f"Sample size: {sample_count}")
 
 # Verificación de tipo antes del análisis
 if isinstance(expression_ratio, float):
-    print("Valid expression ratio type ✓")
+    print("Valid expression ratio type")
 ```
 
 ## Ejemplo SaaS
