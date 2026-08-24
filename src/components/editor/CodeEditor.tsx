@@ -1,6 +1,6 @@
 "use client";
 
-import Editor, { OnMount } from "@monaco-editor/react";
+import Editor, { OnMount, BeforeMount } from "@monaco-editor/react";
 import { ConsoleFrame } from "./ConsoleFrame";
 
 interface CodeEditorProps {
@@ -28,17 +28,10 @@ export default function CodeEditor({
   title = "main.py",
   status,
 }: CodeEditorProps) {
-  const handleEditorMount: OnMount = (editor, monaco) => {
-    // Register Shift+Enter to run code
-    editor.addAction({
-      id: "run-code",
-      label: "Run Code",
-      keybindings: [monaco.KeyMod.Shift | monaco.KeyCode.Enter],
-      run: () => {
-        if (onRun) onRun(editor.getValue());
-      },
-    });
-
+  // Define the dark console theme BEFORE the editor is created so the
+  // `theme="console-dark"` prop resolves on first paint. Defining it inside
+  // onMount (after mount) left the editor on the default (light) theme.
+  const handleEditorBeforeMount: BeforeMount = (monaco) => {
     monaco.editor.defineTheme("console-dark", {
       base: "vs-dark",
       inherit: true,
@@ -51,6 +44,18 @@ export default function CodeEditor({
         "editorLineNumber.activeForeground": "#888888",
         "editor.selectionBackground": "#264f78",
         "editorCursor.foreground": "#3fb950",
+      },
+    });
+  };
+
+  const handleEditorMount: OnMount = (editor, monaco) => {
+    // Register Shift+Enter to run code
+    editor.addAction({
+      id: "run-code",
+      label: "Run Code",
+      keybindings: [monaco.KeyMod.Shift | monaco.KeyCode.Enter],
+      run: () => {
+        if (onRun) onRun(editor.getValue());
       },
     });
   };
@@ -96,6 +101,7 @@ export default function CodeEditor({
           defaultValue={defaultValue}
           onChange={handleChange}
           onMount={handleEditorMount}
+          beforeMount={handleEditorBeforeMount}
           options={{
             minimap: { enabled: false },
             fontSize: 14,
