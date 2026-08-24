@@ -47,3 +47,6 @@ src/**/*.js
 
 # Local editor config (contains API keys — never commit)
 opencode.json
+
+# Browser test artifacts (may capture third-party/Google console keys — never commit)
+.playwright-mcp/
