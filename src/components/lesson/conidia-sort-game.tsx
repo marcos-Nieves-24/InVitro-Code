@@ -22,7 +22,17 @@ const PATTERNS: ConidiaPattern[] = [
 
 type FeedbackType = "correct" | "wrong" | null;
 
-export function ConidiaSortGame() {
+interface ConidiaSortGameProps {
+  moduleSlug?: string;
+  lessonSlug?: string;
+  blockId?: string;
+}
+
+export function ConidiaSortGame({
+  moduleSlug = "ia",
+  lessonSlug = "lesson01_what_is_ai",
+  blockId = "interactive-l01-patterns",
+}: ConidiaSortGameProps = {}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [streak, setStreak] = useState(0);
   const [results, setResults] = useState<{ userChoice: string; correct: string; isCorrect: boolean }[]>([]);
@@ -56,9 +66,9 @@ export function ConidiaSortGame() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        moduleSlug: "ia",
-        lessonSlug: "lesson01_what_is_ai",
-        blockId: "interactive-l01-patterns",
+        moduleSlug,
+        lessonSlug,
+        blockId,
       }),
     })
       .then(() => setPosted(true))

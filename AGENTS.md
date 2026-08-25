@@ -22,7 +22,7 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 - **Clerk is the ONLY auth provider. Supabase Auth is NOT used.** RLS compares `auth.jwt() ->> 'sub'` against TEXT columns `id`/`user_id` — never `auth.uid()`. See `supabase-migration.sql` header.
 - Server-side mutations use the service-role client `createAdminClient()` (`src/lib/supabase/admin.ts`) with `SUPABASE_SERVICE_ROLE_KEY` and derive the user from Clerk `auth()`. Never use the anon key for server writes.
 - `src/proxy.ts` is the Next.js middleware; add public routes there (API → 401, pages → redirect to `/sign-in`).
-- Schema is applied manually via `supabase-migration.sql` in the Supabase SQL editor. Tables: `profiles`, `progress`, `streaks`, `reflection_completions`. Gamification widgets subscribe via `supabase_realtime` publication — new tables used by realtime widgets must be added to it.
+- Schema is applied manually via `supabase-migration.sql` in the Supabase SQL editor. Tables: `profiles`, `progress`, `streaks`, `reflection_completions`, `achievements`, `user_achievements`. Gamification widgets subscribe via `supabase_realtime` publication — new tables used by realtime widgets must be added to it.
 - Required env (`.env.local.example`): Clerk `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `CLERK_SIGNING_SECRET`; Supabase `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
 
 ## In-browser Python (Pyodide)

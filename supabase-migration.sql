@@ -116,6 +116,8 @@ ALTER PUBLICATION supabase_realtime ADD TABLE profiles;
 ALTER PUBLICATION supabase_realtime ADD TABLE progress;
 ALTER PUBLICATION supabase_realtime ADD TABLE streaks;
 ALTER PUBLICATION supabase_realtime ADD TABLE reflection_completions;
+ALTER PUBLICATION supabase_realtime ADD TABLE achievements;
+ALTER PUBLICATION supabase_realtime ADD TABLE user_achievements;
 
 -- 6. Achievements catalog (real-data-replace-mocks, REQ-ACH-01)
 CREATE TABLE IF NOT EXISTS achievements (

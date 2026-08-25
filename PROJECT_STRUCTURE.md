@@ -134,7 +134,7 @@ modules/<modulo>/
 | Introducción a la IA | `ia` | 4 |
 | Machine Learning | `machine-learning` | 10 |
 | Estadística | `estadistica` | 10 |
-| Ética de la IA | `etica` | 7 |
+> **Nota**: `supabase-migration.sql` siembra un logro `etica-en-ia` (condición `module_completed: etica`), pero el módulo `etica` **no existe todavía** en el filesystem. Se creará cuando se desarrolle ese contenido.
 
 ---
 
