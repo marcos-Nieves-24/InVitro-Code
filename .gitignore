@@ -50,3 +50,6 @@ opencode.json
 
 # Browser test artifacts (may capture third-party/Google console keys — never commit)
 .playwright-mcp/
+
+# clerk configuration (can include secrets)
+/.clerk/

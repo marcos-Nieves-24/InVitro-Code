@@ -1,6 +1,6 @@
 # InVitro-Code
 
-Plataforma interactiva de aprendizaje (estilo Duolingo) para estudiantes de biotecnología que quieren aprender IA/ML mediante desafíos de programación.
+Plataforma interactiva de aprendizaje para estudiantes de biotecnología que quieren aprender IA/ML mediante desafíos de programación.
 
 **Stack**: Next.js 16 (App Router, Turbopack) · TypeScript · Tailwind CSS v4 · MDX (`next-mdx-remote/rsc`) · Clerk (auth) · Supabase (datos) · Pyodide (Python en el navegador) · Vercel (deploy)
 
@@ -10,7 +10,7 @@ Todo el contenido orientado al usuario está en **español**.
 
 ## Requisitos
 
-- **Node ≥ 20.9** (Next 16 lo exige). El Node por defecto de la máquina puede ser 18 — usar una versión nueva: `nvm use 22` antes de `npm install`/dev/build.
+- **Node ≥ 20.9** (Next 16 lo exige). El Node por defecto de la máquina puede ser 18,  usar una versión nueva: `nvm use 22` antes de `npm install`/dev/build.
 - Claves de Clerk y Supabase (ver `.env.local.example`).
 
 ## Comandos
