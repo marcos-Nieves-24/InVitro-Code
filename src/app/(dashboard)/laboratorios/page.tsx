@@ -86,10 +86,10 @@ export default async function LaboratoriosPage() {
 
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <div className="mb-8">
-          <h1 className="font-display text-3xl font-extrabold text-deep-navy">
+          <h1 className="font-display text-3xl font-extrabold text-ink">
             Laboratorios
           </h1>
-          <p className="mt-1 text-sm text-outline">
+          <p className="mt-1 text-sm text-storm">
             Cada módulo tiene lecciones con laboratorios interactivos. Completa
             los ejercicios para dominar los conceptos.
           </p>

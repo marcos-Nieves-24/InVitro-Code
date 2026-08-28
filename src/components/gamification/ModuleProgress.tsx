@@ -15,7 +15,7 @@ export function ModuleProgress({
 
   if (totalLessons === 0) {
     return (
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-storm">
         No hay lecciones disponibles
       </div>
     );
@@ -26,19 +26,19 @@ export function ModuleProgress({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">{moduleName}</span>
-        <span className="text-sm text-gray-600">
+        <span className="text-sm font-medium text-ink">{moduleName}</span>
+        <span className="text-sm text-storm">
           {completedLessons}/{totalLessons} lecciones
         </span>
       </div>
-      <div className="relative h-3 w-full overflow-hidden rounded-full bg-gray-200">
+      <div className="relative h-3 w-full overflow-hidden rounded-full bg-surface-raised">
         <div
-          className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-500"
+          className="absolute inset-0 rounded-full bg-mint transition-all duration-500"
           style={{ width: `${progressPercentage}%` }}
         />
       </div>
       {completedLessons === totalLessons && totalLessons > 0 && (
-        <div className="text-sm font-medium text-green-600">
+        <div className="text-sm font-medium text-mint">
           Módulo completo
         </div>
       )}

@@ -88,7 +88,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
             </p>
           </div>
         </div>
-        <pre className="max-h-96 overflow-y-auto whitespace-pre-wrap rounded-lg border border-amber-200 bg-amber-100/50 p-4 font-mono text-sm text-gray-800">
+        <pre className="max-h-96 overflow-y-auto whitespace-pre-wrap rounded-lg border border-amber-200 bg-amber-100/50 p-4 font-mono text-sm text-graphite">
           {renderMarkdownFallback(raw)}
         </pre>
       </div>
@@ -131,26 +131,26 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
         return (
           <div
             key={question.id}
-            className="rounded-card border border-gray-200 bg-white p-6 shadow-sm"
+            className="rounded-card border border-gray-200 bg-surface-card p-6 shadow-sm"
           >
             {/* Question header */}
             <div className="mb-4 flex items-start justify-between gap-2">
-              <p className="text-sm font-semibold text-gray-900">
-                <span className="mr-2 text-xs font-bold uppercase tracking-wider text-brand">
+              <p className="text-sm font-semibold text-ink">
+                <span className="mr-2 text-xs font-bold uppercase tracking-wider text-mint">
                   Pregunta {question.id}
                 </span>
                 {question.type === "mcq" && (
-                  <span className="text-[10px] font-black uppercase tracking-widest text-outline">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-storm">
                     Opción múltiple
                   </span>
                 )}
                 {question.type === "short-answer" && (
-                  <span className="text-[10px] font-black uppercase tracking-widest text-outline">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-storm">
                     Respuesta corta
                   </span>
                 )}
                 {question.type === "coding" && (
-                  <span className="text-[10px] font-black uppercase tracking-widest text-outline">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-storm">
                     Código
                   </span>
                 )}
@@ -188,7 +188,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                           : isMcqWrong
                             ? "border-red-300 bg-red-50"
                             : selected
-                              ? "border-brand bg-brand/5"
+                              ? "border-mint bg-mint/5"
                               : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
@@ -201,7 +201,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                         disabled={submitted}
                         className="mt-0.5 h-4 w-4 shrink-0 accent-brand"
                       />
-                      <span className="text-sm text-gray-800">{option}</span>
+                      <span className="text-sm text-graphite">{option}</span>
                     </label>
                   );
                 })}
@@ -216,7 +216,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                 disabled={submitted}
                 placeholder="Escribe tu respuesta..."
                 rows={3}
-                className="w-full rounded-btn border border-gray-200 bg-gray-50 p-3 text-sm text-gray-800 placeholder-gray-400 transition-colors focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-btn border border-gray-200 bg-gray-50 p-3 text-sm text-graphite placeholder-gray-400 transition-colors focus:border-mint focus:outline-none focus:ring-1 focus:ring-mint disabled:cursor-not-allowed disabled:opacity-60"
               />
             )}
 
@@ -228,24 +228,24 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
                 disabled={submitted}
                 placeholder="Escribe tu código..."
                 rows={6}
-                className="w-full rounded-btn border border-gray-200 bg-gray-900 p-3 font-mono text-sm text-green-300 placeholder-gray-500 transition-colors focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-btn border border-gray-200 bg-gray-900 p-3 font-mono text-sm text-green-300 placeholder-gray-500 transition-colors focus:border-mint focus:outline-none focus:ring-1 focus:ring-mint disabled:cursor-not-allowed disabled:opacity-60"
               />
             )}
 
             {/* Feedback — answer key reveal */}
             {showAnswers && question.correctAnswer && (
-              <div className="mt-4 rounded-lg border border-brand/20 bg-brand/5 p-4">
-                <p className="text-xs font-black uppercase tracking-widest text-brand">
+              <div className="mt-4 rounded-lg border border-mint/20 bg-mint/5 p-4">
+                <p className="text-xs font-black uppercase tracking-widest text-mint">
                   Respuesta correcta
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-900">
+                <p className="mt-1 text-sm font-medium text-ink">
                   {question.type === "mcq"
                     ? `${question.correctAnswer}) ${question.options?.find((o) => o.startsWith(question.correctAnswer ?? ""))?.slice(3) ?? ""}`
                     : question.correctAnswer}
                 </p>
                 {question.explanation &&
                   question.explanation !== question.correctAnswer && (
-                    <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                    <p className="mt-2 text-sm leading-relaxed text-storm">
                       {question.explanation}
                     </p>
                   )}
@@ -261,7 +261,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
           onClick={handleSubmit}
           disabled={submitted || result.questions.length === 0}
           type="button"
-          className="inline-flex items-center gap-2 rounded-btn bg-brand px-4 py-2 text-sm font-medium text-white shadow-sm shadow-brand/20 transition-colors hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-white shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50"
         >
           {submitted ? "Revisado" : "Verificar respuestas"}
         </button>
@@ -269,7 +269,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
         <button
           onClick={handleToggleAnswers}
           type="button"
-          className="inline-flex items-center gap-2 rounded-btn border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="inline-flex items-center gap-2 rounded-btn border border-gray-200 bg-surface-card px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
         >
           {showAnswers ? (
             <>

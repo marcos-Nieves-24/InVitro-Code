@@ -13,8 +13,8 @@ const KIND_STYLES: Record<
 > = {
   objetivo: {
     icon: Target,
-    variant: "border-brand/25 bg-brand-soft/40",
-    labelClass: "text-brand",
+    variant: "border-mint/25 bg-mint/10",
+    labelClass: "text-mint",
   },
   duracion: {
     icon: Clock,
@@ -68,7 +68,7 @@ export function LabCallout({ kind, title, children }: LabCalloutProps) {
         <Icon className="h-3.5 w-3.5" />
         {label}
       </p>
-      <div className="space-y-2 text-sm leading-relaxed text-gray-800 [&_strong]:font-semibold [&_strong]:text-gray-900 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-5 [&_code]:rounded [&_code]:bg-surface-container [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[12px]">
+      <div className="space-y-2 text-sm leading-relaxed text-graphite [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-5 [&_code]:rounded [&_code]:bg-surface-raised [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[12px]">
         {children}
       </div>
     </div>

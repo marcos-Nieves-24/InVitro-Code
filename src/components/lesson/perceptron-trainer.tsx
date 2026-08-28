@@ -318,10 +318,10 @@ export function PerceptronTrainer() {
   if (fetchLoading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-card border border-gray-200 shadow-sm p-8 text-center">
+        <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-8 text-center">
           <div className="inline-flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-brand"></div>
-            <span className="text-sm text-gray-600">Cargando datos de biopsias…</span>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-mint"></div>
+            <span className="text-sm text-storm">Cargando datos de biopsias…</span>
           </div>
         </div>
       </div>
@@ -479,26 +479,26 @@ export function PerceptronTrainer() {
   };
 
   const primaryBtnClass =
-    "px-4 py-2 bg-brand text-white rounded-btn hover:bg-brand-hover transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-mint text-ink rounded-btn hover:bg-fog transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
   const secondaryBtnClass =
-    "px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-surface-card text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="bg-white rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
+      <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
-            <h3 className="font-display text-lg font-semibold text-gray-900">
+            <h3 className="font-display text-lg font-semibold text-ink">
               Entrenador de perceptrón
             </h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-storm mt-1">
               Aprende a separar biopsias benignas de malignas con una línea.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-storm">
             <span className="inline-flex items-center gap-1.5">
               <span
                 className="inline-block h-3 w-3 rounded-full bg-[#14b8a6]"
@@ -513,7 +513,7 @@ export function PerceptronTrainer() {
               ></span>
               Maligno ({dataset?.n_malignant ?? 0})
             </span>
-            <span className="font-mono text-gray-500">{nSamples} muestras</span>
+            <span className="font-mono text-storm">{nSamples} muestras</span>
           </div>
         </div>
 
@@ -555,21 +555,21 @@ export function PerceptronTrainer() {
                   ))}
                 </ul>
               ) : (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-storm">
                   Haz clic en una zona vacía del gráfico para predecir una muestra hipotética.
                 </p>
               )}
             </div>
 
             {/* Dataset citation */}
-            <p className="mt-3 text-xs text-gray-500 leading-relaxed">
+            <p className="mt-3 text-xs text-storm leading-relaxed">
               Street, W.N., Wolberg, W.H. &amp; Mangasarian, O.L. (1993) — Breast Cancer Wisconsin
               (Diagnostic), UCI Machine Learning Repository.{" "}
               <a
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand underline underline-offset-2 hover:text-brand-hover"
+                className="text-mint underline underline-offset-2 hover:text-fog"
               >
                 archive.ics.uci.edu
               </a>
@@ -580,31 +580,31 @@ export function PerceptronTrainer() {
           <div className="space-y-4">
             {/* Status */}
             <div className="rounded-card border border-gray-200 p-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-3">
                 Estado del modelo
               </h4>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">w₁ (radio)</span>
-                  <span className="font-mono text-gray-900">{formatWeights(weights.w1)}</span>
+                  <span className="text-storm">w₁ (radio)</span>
+                  <span className="font-mono text-ink">{formatWeights(weights.w1)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">w₂ (textura)</span>
-                  <span className="font-mono text-gray-900">{formatWeights(weights.w2)}</span>
+                  <span className="text-storm">w₂ (textura)</span>
+                  <span className="font-mono text-ink">{formatWeights(weights.w2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">b (sesgo)</span>
-                  <span className="font-mono text-gray-900">{formatWeights(weights.b)}</span>
+                  <span className="text-storm">b (sesgo)</span>
+                  <span className="font-mono text-ink">{formatWeights(weights.b)}</span>
                 </div>
                 <div className="flex justify-between text-sm pt-2 border-t border-gray-100">
-                  <span className="text-gray-500">Accuracy</span>
-                  <span className="font-mono font-semibold text-gray-900">
+                  <span className="text-storm">Accuracy</span>
+                  <span className="font-mono font-semibold text-ink">
                     {(accuracy * 100).toFixed(1)}%
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Progreso</span>
-                  <span className="font-mono text-gray-900">
+                  <span className="text-storm">Progreso</span>
+                  <span className="font-mono text-ink">
                     Época {displayEpoch} · muestra {displaySample}/{nSamples}
                   </span>
                 </div>
@@ -618,7 +618,7 @@ export function PerceptronTrainer() {
                   <label htmlFor="lr-slider" className="text-sm font-medium text-gray-700">
                     Tasa de aprendizaje
                   </label>
-                  <span className="font-mono text-sm text-gray-900">{learningRate.toFixed(2)}</span>
+                  <span className="font-mono text-sm text-ink">{learningRate.toFixed(2)}</span>
                 </div>
                 <input
                   id="lr-slider"
@@ -672,7 +672,7 @@ export function PerceptronTrainer() {
 
             {/* Update log */}
             <div className="rounded-card border border-gray-200 p-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-2">
                 Bitácora de actualizaciones
               </h4>
               <div role="log" aria-live="polite" className="max-h-52 overflow-y-auto space-y-1 pr-1">
@@ -685,7 +685,7 @@ export function PerceptronTrainer() {
                       {classLabel(entry.predicted)} ·{" "}
                       <span
                         className={
-                          entry.updated ? "font-semibold text-brand" : "text-gray-500"
+                          entry.updated ? "font-semibold text-mint" : "text-storm"
                         }
                       >
                         {entry.updated ? "pesos actualizados" : "sin cambio"}

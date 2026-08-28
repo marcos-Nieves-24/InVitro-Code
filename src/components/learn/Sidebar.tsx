@@ -50,7 +50,7 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-btn border border-gray-200 bg-white shadow-sm transition-colors hover:bg-gray-50 lg:hidden"
+        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-btn border border-gray-200 bg-surface-card shadow-sm transition-colors hover:bg-gray-50 lg:hidden"
         aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
         type="button"
       >
@@ -68,7 +68,7 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
       {/* Desktop collapse toggle */}
       <button
         onClick={() => setDesktopCollapsed(!desktopCollapsed)}
-        className="fixed top-1/2 z-[60] hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-r-md border border-l-0 border-gray-200 bg-white text-gray-400 shadow-sm transition-all hover:bg-gray-50 hover:text-gray-600 lg:flex"
+        className="fixed top-1/2 z-[60] hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-r-md border border-l-0 border-gray-200 bg-surface-card text-gray-400 shadow-sm transition-all hover:bg-gray-50 hover:text-storm lg:flex"
         aria-label={desktopCollapsed ? "Expandir sidebar" : "Colapsar sidebar"}
         type="button"
         style={{ left: desktopCollapsed ? 0 : "16rem" }}
@@ -78,24 +78,25 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
 
       <aside
         className={`
-          fixed inset-y-0 left-0 z-40 w-64 shrink-0 overflow-y-auto border-r border-gray-200 bg-white
+          fixed inset-y-0 left-0 z-40 w-64 shrink-0 overflow-y-auto border-r border-gray-200 bg-surface-card
           transition-transform duration-300 ease-in-out
           lg:static lg:translate-x-0
           ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
           ${desktopCollapsed ? "lg:w-0 lg:overflow-hidden lg:border-r-0" : "lg:w-64"}
         `}
+        aria-label="Lecciones"
       >
         <div className="p-4 pt-16 lg:pt-4">
           <div className="mb-6">
             <Link
               href="/"
-              className="font-display text-base font-semibold tracking-tight text-gray-900 hover:text-brand"
+              className="font-display text-base font-semibold tracking-tight text-ink hover:text-mint"
             >
               InVitro-Code
             </Link>
             <Link
               href="/dashboard"
-              className="mt-2 block text-sm text-brand hover:underline"
+              className="mt-2 block text-sm text-mint hover:underline"
             >
               ← Dashboard
             </Link>
@@ -103,9 +104,9 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
 
           <h2 className="eyebrow mb-4">Módulos</h2>
 
-          <nav>
+          <nav aria-label="Módulos">
             {modules.length === 0 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-storm">
                 No hay módulos disponibles aún.
               </p>
             )}
@@ -115,8 +116,8 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
                 <h3
                   className={`mb-2 font-display text-sm font-semibold tracking-tight ${
                     isModuleActive(mod.slug)
-                      ? "text-brand"
-                      : "text-gray-800"
+                      ? "text-mint"
+                      : "text-graphite"
                   }`}
                 >
                   {mod.name}
@@ -131,8 +132,8 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
                           onClick={() => setMobileOpen(false)}
                           className={`block rounded-btn px-2 py-1.5 text-sm transition-colors ${
                             active
-                              ? "bg-brand/10 font-medium text-brand"
-                              : "text-gray-600 hover:bg-brand-soft hover:text-brand"
+                              ? "bg-mint/10 font-medium text-mint"
+                              : "text-storm hover:bg-mint/15 hover:text-mint"
                           }`}
                         >
                           {lesson.title}

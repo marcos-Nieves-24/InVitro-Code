@@ -58,7 +58,7 @@ export function CelebrationOverlay({
       </div>
 
       {/* card */}
-      <div className="relative mx-4 max-w-md rounded-[16px] border border-gray-200 bg-white p-8 text-center shadow-2xl">
+      <div className="relative mx-4 max-w-md rounded-[16px] border border-gray-200 bg-surface-card p-8 text-center shadow-2xl">
         <div className="mb-4 flex justify-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-teal-50">
             <svg
@@ -75,10 +75,10 @@ export function CelebrationOverlay({
           </div>
         </div>
 
-        <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+        <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink">
           Leccion completada
         </h2>
-        <p className="mb-6 text-sm text-gray-500">{lessonTitle}</p>
+        <p className="mb-6 text-sm text-storm">{lessonTitle}</p>
 
         <div className="mb-6 text-left">
           <MascotMessage mood="celebrating">
@@ -91,14 +91,14 @@ export function CelebrationOverlay({
           {nextLessonHref && (
             <Link
               href={nextLessonHref}
-              className="rounded-lg border-2 border-brand bg-white px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white"
+              className="rounded-lg border-2 border-mint bg-surface-card px-6 py-3 text-sm font-semibold text-mint transition-colors hover:bg-fog hover:text-ink"
             >
               Siguiente lección
             </Link>
           )}
           <Link
             href="/"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+            className="rounded-lg px-4 py-2 text-sm font-medium text-storm transition-colors hover:text-ink"
           >
             Volver al inicio
           </Link>
@@ -107,7 +107,7 @@ export function CelebrationOverlay({
         {onClose && (
           <button
             onClick={onClose}
-            className="mt-4 text-xs text-gray-400 underline hover:text-gray-600"
+            className="mt-4 text-xs text-gray-400 underline hover:text-storm"
           >
             Seguir viendo esta leccion
           </button>

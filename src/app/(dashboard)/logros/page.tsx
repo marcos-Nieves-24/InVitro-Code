@@ -75,24 +75,24 @@ export default async function LogrosPage() {
         <section className="space-y-6">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <h2 className="font-display text-3xl font-extrabold text-deep-navy">
+              <h2 className="font-display text-3xl font-extrabold text-ink">
                 Mis Logros
               </h2>
-              <p className="text-on-surface-variant">
+              <p className="text-storm">
                 Tu camino hacia la excelencia en Inteligencia Artificial y
                 biotecnología.
               </p>
             </div>
             <div className="text-left md:text-right">
-              <span className="font-display text-2xl font-bold text-primary">
+              <span className="font-display text-2xl font-bold text-mint">
                 {summary.percent}% Completado
               </span>
-              <p className="text-sm text-on-surface-variant">
+                <p className="text-sm text-storm">
                 {summary.unlocked} de {summary.total} Logros Desbloqueados
               </p>
             </div>
           </div>
-          <div className="h-4 w-full overflow-hidden rounded-full bg-surface-container-high">
+          <div className="h-4 w-full overflow-hidden rounded-full bg-surface-raised">
             <div
               className="progress-gradient relative h-full"
               style={{ width: `${summary.percent}%` }}
@@ -111,10 +111,10 @@ export default async function LogrosPage() {
                 return (
                   <section key={category.name} className="space-y-4">
                     <div className="flex items-center justify-between px-2">
-                      <h3 className="font-display text-xl font-semibold text-on-surface">
-                        {category.name}
-                      </h3>
-                      <span className="rounded-full bg-primary-container px-3 py-1 text-xs font-semibold text-primary">
+                    <h3 className="font-display text-xl font-semibold text-ink">
+                      {category.name}
+                    </h3>
+                    <span className="rounded-full bg-fog/20 px-3 py-1 text-xs font-semibold text-mint">
                         {unlocked} de {category.items.length}
                       </span>
                     </div>
@@ -140,17 +140,17 @@ export default async function LogrosPage() {
           {/* Side panel — real weekly XP (REQ-ACH-06) */}
           <aside className="space-y-6">
             <div className="glass-card space-y-6 rounded-2xl p-6">
-              <h3 className="flex items-center justify-between font-display text-lg font-semibold text-on-surface">
+              <h3 className="flex items-center justify-between font-display text-lg font-semibold text-ink">
                 Recompensa Semanal
-                <Gift className="h-5 w-5 text-xp-gold" />
+                <Gift className="h-5 w-5 text-mint" />
               </h3>
               {weeklyXp.total > 0 ? (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span className="text-on-surface-variant">
+                    <span className="text-storm">
                       XP de esta semana
                     </span>
-                    <span className="font-bold text-on-surface">
+                    <span className="font-bold text-ink">
                       {weeklyXp.total.toLocaleString("es")} XP
                     </span>
                   </div>
@@ -158,14 +158,14 @@ export default async function LogrosPage() {
                     {WEEK_DAYS.map((day, i) => (
                       <div key={day} className="flex flex-col items-center gap-2">
                         <div
-                          className="w-2 rounded-full bg-primary"
+                          className="w-2 rounded-full bg-mint"
                           style={{
                             height: `${
                               Math.round((weeklyXp.days[i] / maxDayXp) * 64) || 2
                             }px`,
                           }}
                         />
-                        <span className="text-[10px] uppercase text-on-surface-variant">
+                        <span className="text-[10px] uppercase text-storm">
                           {day}
                         </span>
                       </div>
@@ -173,7 +173,7 @@ export default async function LogrosPage() {
                   </div>
                 </>
               ) : (
-                <p className="text-sm text-on-surface-variant">
+              <p className="text-sm text-storm">
                   Aún no ganaste XP esta semana. Completa una lección para
                   sumar.
                 </p>

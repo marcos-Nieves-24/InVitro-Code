@@ -14,7 +14,7 @@ const COLAB_BASE =
   "https://colab.research.google.com/github/marcos-Nieves-24/InVitro-Code/blob/main";
 
 const actionClass =
-  "inline-flex items-center gap-2 rounded-btn bg-brand px-4 py-2 text-sm font-medium text-white shadow-sm shadow-brand/20 transition-colors hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-white shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50";
 
 /**
  * REQ-NB-01/02/03/04: Shared notebook actions — Download (GET

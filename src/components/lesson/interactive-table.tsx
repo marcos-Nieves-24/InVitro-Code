@@ -96,6 +96,8 @@ export function InteractiveTable(props: InteractiveTableProps) {
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
+              aria-label="Buscar en la tabla"
+              autoComplete="off"
               placeholder="Buscar en la tabla…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -112,8 +114,17 @@ export function InteractiveTable(props: InteractiveTableProps) {
               {headers.map((header, i) => (
                 <th
                   key={i}
+                  role="columnheader"
+                  tabIndex={0}
                   onClick={() => handleSort(i)}
-                  className="group cursor-pointer select-none px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500 transition-colors hover:text-gray-800"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSort(i);
+                    }
+                  }}
+                  aria-sort={sortColumn === i ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+                  className="group cursor-pointer select-none px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500 transition-colors hover:text-gray-800 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-blue-500"
                 >
                   <span className="inline-flex items-center gap-1.5">
                     {header}

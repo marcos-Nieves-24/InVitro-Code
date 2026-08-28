@@ -18,7 +18,7 @@ export function PageShell({
   const maxW =
     width === "marketing"
       ? "max-w-5xl"
-      : "max-w-[var(--width-layout-max)]";
+      : "max-w-[var(--width-layout)]";
 
   return (
     <div className={`min-h-screen bg-dot-grid ${className}`}>

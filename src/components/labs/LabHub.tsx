@@ -45,13 +45,13 @@ export function LabHub({ modules }: LabHubProps) {
   if (modules.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-fixed text-primary">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-fog/20 text-mint">
           <FlaskConical className="h-7 w-7" />
         </div>
-        <p className="text-sm font-bold text-on-surface">
+        <p className="text-sm font-bold text-ink">
           No hay módulos disponibles
         </p>
-        <p className="text-xs text-on-surface-variant">
+        <p className="text-xs text-storm">
           Agrega contenido en <code>src/content/modules/</code> para empezar.
         </p>
       </div>
@@ -71,19 +71,19 @@ export function LabHub({ modules }: LabHubProps) {
             <button
               type="button"
               onClick={() => toggle(mod.slug)}
-              className="mb-4 flex w-full items-center gap-3 rounded-xl px-2 py-1 text-left transition-colors hover:bg-surface-container-low"
+              className="mb-4 flex w-full items-center gap-3 rounded-xl px-2 py-1 text-left transition-colors hover:bg-surface-raised"
             >
-              <span className="text-outline">
+              <span className="text-storm">
                 {isOpen ? (
                   <ChevronDown className="h-5 w-5" />
                 ) : (
                   <ChevronRight className="h-5 w-5" />
                 )}
               </span>
-              <h2 className="font-display text-xl font-bold text-deep-navy">
+              <h2 className="font-display text-xl font-bold text-ink">
                 {mod.name}
               </h2>
-              <span className="ml-auto text-xs font-medium text-outline">
+              <span className="ml-auto text-xs font-medium text-storm">
                 {completedCount}/{total} completadas
               </span>
             </button>

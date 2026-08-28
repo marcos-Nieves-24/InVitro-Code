@@ -48,10 +48,10 @@ export default async function ProyectosPage() {
     <InVitroShell userName={userName}>
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <div className="mb-8">
-          <h1 className="font-display text-3xl font-extrabold text-deep-navy">
+          <h1 className="font-display text-3xl font-extrabold text-ink">
             Proyectos
           </h1>
-          <p className="mt-1 text-sm text-outline">
+          <p className="mt-1 text-sm text-storm">
             Cada módulo incluye proyectos guiados con consolas interactivas.
             Abre el notebook en Colab o descárgalo para trabajar en tu entorno.
           </p>

@@ -115,14 +115,14 @@ export default async function ComunidadPage() {
           <div className="space-y-6 lg:col-span-8">
             {/* Desafío real de la expedición (D1: static, no fake numbers) */}
             <div className="glass-card flex flex-col gap-4 rounded-2xl p-6 md:flex-row md:items-center">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-fixed text-primary">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fog/20 text-mint">
                 <FlaskConical className="h-6 w-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <h2 className="font-display text-2xl font-bold text-on-surface">
+                <h2 className="font-display text-2xl font-bold text-ink">
                   Desafío Bio-Data 2026
                 </h2>
-                <p className="mt-1 text-sm text-on-surface-variant">
+                <p className="mt-1 text-sm text-storm">
                   Análisis de 11 variables físico-químicas para predecir la
                   calidad sensorial del vino. Resolvelo en las lecciones del
                   módulo de Machine Learning.
@@ -130,7 +130,7 @@ export default async function ComunidadPage() {
               </div>
               <a
                 href="/proyectos"
-                className="flex shrink-0 items-center gap-1 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-primary/90"
+                className="flex shrink-0 items-center gap-1 rounded-xl bg-mint px-5 py-3 text-sm font-bold text-ink shadow-lg transition-colors hover:bg-mint/90"
               >
                 Explorar
                 <ArrowRight className="h-4 w-4" />
@@ -139,7 +139,7 @@ export default async function ComunidadPage() {
 
             {/* Active researchers (real) */}
             <div className="space-y-4">
-              <h2 className="font-display text-2xl font-bold text-on-surface">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Investigadores Activos
               </h2>
               {researchers.length > 0 ? (
@@ -147,23 +147,23 @@ export default async function ComunidadPage() {
                   {researchers.map((researcher) => (
                     <div
                       key={researcher.id}
-                      className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-container-low"
+                        className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-card"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/20 bg-secondary-container text-xs font-bold text-on-secondary">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-mint/20 bg-fog/20 text-xs font-bold text-ink">
                         {initials(researcher.name)}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold text-on-surface">
+                        <p className="truncate text-sm font-bold text-ink">
                           {researcher.name}
                         </p>
-                        <p className="flex items-center gap-1 truncate text-xs text-on-surface-variant">
+                        <p className="flex items-center gap-1 truncate text-xs text-storm">
                           <Flame className="h-3.5 w-3.5 text-error" />
                           Racha de {researcher.streak}{" "}
                           {researcher.streak !== 1 ? "días" : "día"}
                         </p>
                       </div>
                       {researcher.xp !== null ? (
-                        <span className="rounded-full bg-primary-container px-2.5 py-0.5 text-[10px] font-bold text-primary">
+                        <span className="rounded-full bg-fog/20 px-2.5 py-0.5 text-[10px] font-bold text-mint">
                           {rankTitle(calcLevel(researcher.xp).level)}
                         </span>
                       ) : null}
@@ -178,7 +178,7 @@ export default async function ComunidadPage() {
 
           {/* Right column: real global leaderboard */}
           <div className="space-y-6 lg:col-span-4">
-            <h2 className="font-display text-2xl font-bold text-on-surface">
+            <h2 className="font-display text-2xl font-bold text-ink">
               Global Leaderboard
             </h2>
             {entries.length > 0 ? (
@@ -189,22 +189,22 @@ export default async function ComunidadPage() {
                     return (
                       <div
                         key={row.userId}
-                        className={`flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-container-low ${
+                        className={`flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-card ${
                           isMe
-                            ? "border border-primary/30 bg-primary-fixed/40"
+                            ? "border border-mint/30 bg-fog/20"
                             : ""
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-container-highest text-xs font-black text-on-surface-variant">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-raised text-xs font-black text-storm">
                             {index < 3 ? (
                               <Medal
                                 className={`h-4 w-4 ${
                                   index === 0
-                                    ? "text-xp-gold"
+                                    ? "text-mint"
                                     : index === 1
-                                      ? "text-streak-orange"
-                                      : "text-outline"
+                                      ? "text-fog"
+                                      : "text-storm"
                                 }`}
                                 fill="currentColor"
                               />
@@ -212,19 +212,19 @@ export default async function ComunidadPage() {
                               index + 1
                             )}
                           </span>
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-highest text-[10px] font-bold">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-raised text-[10px] font-bold">
                             {initials(row.username ?? "Investigador")}
                           </div>
                           <span
                             className={`text-sm font-bold ${
-                              isMe ? "text-primary" : "text-on-surface"
+                              isMe ? "text-mint" : "text-ink"
                             }`}
                           >
                             {row.username ?? "Investigador"}
                             {isMe ? " (tú)" : ""}
                           </span>
                         </div>
-                        <span className="text-xs font-bold text-primary">
+                        <span className="text-xs font-bold text-mint">
                           {(row.totalXp ?? 0).toLocaleString("es")} XP
                         </span>
                       </div>
@@ -237,26 +237,26 @@ export default async function ComunidadPage() {
             )}
 
             {/* Tu posición — real rank from get_leaderboard_rank */}
-            <div className="rounded-2xl border-t-4 border-t-tertiary glass-card space-y-4 p-6">
+            <div className="rounded-2xl border-t-4 border-t-mint glass-card space-y-4 p-6">
               <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-tertiary" />
-                <span className="text-sm font-black uppercase tracking-widest text-on-surface">
+                <Trophy className="h-5 w-5 text-mint" />
+                <span className="text-sm font-black uppercase tracking-widest text-ink">
                   Tu posición
                 </span>
               </div>
               {myRank && entries.length > 0 ? (
                 <>
-                  <p className="text-3xl font-black text-tertiary">
+                  <p className="text-3xl font-black text-mint">
                     #{myRank.position}
                   </p>
-                  <p className="text-xs text-on-surface-variant">
+                  <p className="text-xs text-storm">
                     {myEntry
                       ? `${(myEntry.totalXp ?? 0).toLocaleString("es")} XP reales`
                       : "Ranking calculado sobre XP real."}
                   </p>
                 </>
               ) : (
-                <p className="text-sm text-on-surface-variant">
+                <p className="text-sm text-storm">
                   {totalXp > 0
                     ? `Todavía no entras en el top 50 — tienes ${totalXp.toLocaleString("es")} XP.`
                     : "Completa tu primera lección para aparecer en el ranking."}

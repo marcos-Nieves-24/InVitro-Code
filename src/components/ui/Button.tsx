@@ -6,10 +6,10 @@ type Size = "sm" | "md" | "lg";
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "bg-brand text-white hover:bg-brand-hover shadow-sm shadow-brand/20",
+    "bg-mint text-ink hover:brightness-95 shadow-sm",
   secondary:
-    "border border-gray-200 bg-white text-gray-800 hover:bg-gray-50",
-  ghost: "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+    "border border-surface-raised bg-surface-card text-ink hover:bg-surface-raised",
+  ghost: "text-storm hover:bg-surface-raised hover:text-ink",
 };
 
 const sizeClass: Record<Size, string> = {
@@ -19,7 +19,7 @@ const sizeClass: Record<Size, string> = {
 };
 
 const baseClass =
-  "inline-flex items-center justify-center gap-2 rounded-btn font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-btn font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50";
 
 type ButtonProps = {
   variant?: Variant;

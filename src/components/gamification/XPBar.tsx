@@ -11,14 +11,14 @@ export function XPBar({ totalXp }: XPBarProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Nivel {levelInfo.level}</span>
-        <span className="text-sm text-gray-600">
+        <span className="text-sm font-medium text-ink">Nivel {levelInfo.level}</span>
+        <span className="text-sm text-storm">
           {totalXp} XP / {levelInfo.nextLevelXp} XP para siguiente nivel
         </span>
       </div>
-      <div className="relative h-4 w-full overflow-hidden rounded-full bg-gray-200">
+      <div className="relative h-4 w-full overflow-hidden rounded-full bg-surface-raised">
         <div
-          className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500"
+          className="absolute inset-0 rounded-full xp-gradient transition-all duration-500"
           style={{ width: `${progressPercentage}%` }}
         />
       </div>

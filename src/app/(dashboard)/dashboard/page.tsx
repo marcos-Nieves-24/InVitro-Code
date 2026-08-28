@@ -7,6 +7,7 @@ import { LevelBadge } from "@/components/gamification/LevelBadge";
 import { ModuleProgress } from "@/components/gamification/ModuleProgress";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { InVitroShell } from "@/components/layout/InVitroShell";
+import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   getModulesInfo,
@@ -159,39 +160,26 @@ export default async function DashboardPage() {
     <InVitroShell
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
+      topBar={
+        <InVitroTopBar
+          totalXp={totalXp}
+          currentStreak={streakData.current_streak}
+          trail="Dashboard de Expedición"
+        />
+      }
     >
-      {/* Top bar (REQ-UI-03: no notification bell) */}
-      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-outline-variant bg-surface/80 px-8 pl-16 backdrop-blur-md md:pl-8">
-        <div className="hidden text-sm font-semibold text-on-surface md:block">
-          Dashboard de Expedición
-        </div>
-        <div className="flex items-center gap-4 md:gap-6">
-          <div className="flex items-center gap-2 rounded-full bg-primary-fixed px-3 py-1.5 text-sm font-bold text-primary">
-            <Gem className="h-4 w-4" />
-            <span>{totalXp.toLocaleString("es")} XP</span>
-          </div>
-          <div className="flex items-center gap-2 rounded-full bg-surface-container px-3 py-1.5 text-sm font-bold text-on-surface">
-            <Flame className="h-4 w-4 text-error" />
-            <span>
-              {streakData.current_streak} día
-              {streakData.current_streak !== 1 ? "s" : ""}
-            </span>
-          </div>
-        </div>
-      </header>
-
       <div className="p-8">
         <div className="flex gap-8">
           {/* Central feed */}
           <div className="flex-grow space-y-8">
             {/* Hero banner */}
-            <section className="relative overflow-hidden rounded-2xl border border-outline-variant bg-white shadow-sm">
+            <section className="relative overflow-hidden rounded-2xl border border-surface-raised bg-surface-card shadow-sm">
               <div className="flex items-center gap-8 p-10">
                 <div className="flex-1">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-on-surface md:text-4xl">
+                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
                     ¡Bienvenido de vuelta, {userName}!
                   </h2>
-                  <p className="mb-8 mt-4 max-w-lg text-on-surface-variant">
+                  <p className="mb-8 mt-4 max-w-lg text-storm">
                     Estás construyendo tu camino en InVitro-Code.
                     Continúa tu investigación y descubre nuevas formas de
                     aplicar la Inteligencia Artificial.
@@ -199,22 +187,22 @@ export default async function DashboardPage() {
                   <div className="flex flex-wrap gap-4">
                     <Link
                       href={startHref}
-                      className="flex items-center gap-2 rounded-xl bg-primary px-8 py-4 font-bold text-on-primary shadow-lg shadow-primary/30 transition-transform hover:scale-105"
+                      className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
                     >
                       <Play className="h-4 w-4" fill="currentColor" />
                       Continuar Misión
                     </Link>
                     <Link
                       href="/niveles"
-                      className="glass-card flex items-center gap-2 rounded-xl border border-outline-variant px-8 py-4 font-bold text-on-surface transition-colors hover:bg-white"
+                      className="glass-card flex items-center gap-2 rounded-xl border border-surface-raised px-8 py-4 font-bold text-ink transition-colors hover:bg-surface-card"
                     >
                       <Map className="h-4 w-4" />
                       Explorar Mapa
                     </Link>
                   </div>
                 </div>
-                <div className="relative hidden h-64 w-64 shrink-0 overflow-hidden rounded-2xl border-4 border-white bg-gradient-to-br from-primary to-secondary shadow-2xl lg:block">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-on-primary">
+                <div className="relative hidden h-64 w-64 shrink-0 overflow-hidden rounded-2xl border-4 border-surface-card bg-gradient-to-br from-mint to-fog shadow-2xl lg:block">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-ink">
                     <Gem className="mb-2 h-14 w-14 opacity-80" fill="currentColor" />
                     <span className="text-3xl font-black">
                       {totalXp.toLocaleString("es")}
@@ -230,7 +218,7 @@ export default async function DashboardPage() {
             {/* Stats row */}
             <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
                   Nivel actual
                 </h3>
                 <div className="mt-2">
@@ -238,15 +226,15 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
                   Puntos totales
                 </h3>
-                <p className="mt-2 font-display text-2xl font-semibold text-on-surface">
+                <p className="mt-2 font-display text-2xl font-semibold text-ink">
                   {totalXp.toLocaleString("es")} XP
                 </p>
               </div>
               <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
                   Racha actual
                 </h3>
                 <div className="mt-2">
@@ -257,7 +245,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
                   Siguiente nivel
                 </h3>
                 <div className="mt-2">
@@ -270,20 +258,20 @@ export default async function DashboardPage() {
             <section className="grid gap-6 md:grid-cols-2">
               {/* Proyecto Actual (REQ-UP-01) */}
               <div className="glass-card flex flex-col rounded-xl p-6">
-                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">
                   Proyecto Actual
                 </h3>
                 {projectModule ? (
                   <>
                     <div className="mb-6 flex gap-4">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary-fixed-dim text-primary">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-fog/20 text-mint">
                         {ProjectIcon ? <ProjectIcon className="h-8 w-8" /> : null}
                       </div>
                       <div>
                         <h4 className="font-display text-lg font-semibold">
                           {projectModule.name}
                         </h4>
-                        <p className="text-sm text-on-surface-variant">
+                        <p className="text-sm text-storm">
                           {projectCompleted} de {projectModule.totalLessons}{" "}
                           lecciones completadas
                         </p>
@@ -291,14 +279,14 @@ export default async function DashboardPage() {
                     </div>
                     <div className="mt-auto">
                       <div className="mb-2 flex items-end justify-between">
-                        <span className="text-xs font-bold text-on-surface-variant">
+                        <span className="text-xs font-bold text-storm">
                           Progreso
                         </span>
-                        <span className="text-sm font-bold text-primary">
+                        <span className="text-sm font-bold text-mint">
                           {projectPercent}%
                         </span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-surface-container">
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
                         <div
                           className="xp-gradient h-full rounded-full"
                           style={{ width: `${projectPercent}%` }}
@@ -307,7 +295,7 @@ export default async function DashboardPage() {
                     </div>
                     <Link
                       href={projectHref}
-                      className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container py-3 text-sm font-bold text-primary transition-colors hover:bg-outline-variant"
+                      className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-raised py-3 text-sm font-bold text-mint transition-colors hover:bg-surface-card"
                     >
                       Continuar módulo <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -322,25 +310,25 @@ export default async function DashboardPage() {
 
               {/* Misión Actual (REQ-UP-02) */}
               <div className="glass-card flex flex-col rounded-xl p-6">
-                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">
                   Misión Actual
                 </h3>
                 {nextLesson ? (
                   <>
                     <div className="mb-6 flex gap-4">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-tertiary-fixed-dim text-tertiary">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
                         {MissionIcon ? <MissionIcon className="h-8 w-8" /> : null}
                       </div>
                       <div>
                         <h4 className="font-display text-lg font-semibold">
                           {nextLesson.title}
                         </h4>
-                        <p className="text-sm text-on-surface-variant">
+                        <p className="text-sm text-storm">
                           {getModuleDisplayName(nextLesson.moduleSlug)}
                         </p>
                       </div>
                     </div>
-                    <div className="mb-2 flex items-center gap-1 text-primary">
+                    <div className="mb-2 flex items-center gap-1 text-mint">
                       <Gem className="h-4 w-4" fill="currentColor" />
                       <span className="text-sm font-bold">
                         +{nextLesson.xp} XP
@@ -348,7 +336,7 @@ export default async function DashboardPage() {
                     </div>
                     <Link
                       href={missionHref ?? "/learn"}
-                      className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-on-primary transition-all hover:opacity-90"
+                      className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-mint py-3 text-sm font-bold text-ink transition-all hover:opacity-90"
                     >
                       Continuar misión <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -371,13 +359,13 @@ export default async function DashboardPage() {
                     <h2 className="font-display text-xl font-bold">
                       Progreso de módulos
                     </h2>
-                    <p className="text-sm text-on-surface-variant">
+                    <p className="text-sm text-storm">
                       Tu avance real a través de las expediciones.
                     </p>
                   </div>
                   <Link
                     href="/learn"
-                    className="flex items-center gap-1 text-sm font-bold text-primary hover:underline"
+                    className="flex items-center gap-1 text-sm font-bold text-mint hover:underline"
                   >
                     Ver expediciones <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -406,7 +394,7 @@ export default async function DashboardPage() {
                 <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
                 <Link
                   href="/niveles"
-                  className="flex items-center gap-1 text-xs font-bold text-primary hover:underline"
+                  className="flex items-center gap-1 text-xs font-bold text-mint hover:underline"
                 >
                   Ver roadmap <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
@@ -421,7 +409,7 @@ export default async function DashboardPage() {
                       r={ringRadius}
                       stroke="currentColor"
                       strokeWidth="8"
-                      className="text-surface-container-highest"
+                      className="text-surface-raised"
                     />
                     <circle
                       cx="64"
@@ -433,29 +421,29 @@ export default async function DashboardPage() {
                       strokeDasharray={ringCircumference}
                       strokeDashoffset={ringOffset}
                       strokeLinecap="round"
-                      className="text-primary"
+                      className="text-mint"
                     />
                   </svg>
                   <div className="absolute flex flex-col items-center">
-                    <span className="text-xs font-bold text-on-surface-variant">
+                    <span className="text-xs font-bold text-storm">
                       Nivel
                     </span>
-                    <span className="text-3xl font-black text-primary">
+                    <span className="text-3xl font-black text-mint">
                       {levelInfo.level}
                     </span>
                   </div>
                 </div>
                 <div className="mt-4 text-center">
                   <p className="font-bold">{rankTitle(levelInfo.level)}</p>
-                  <p className="mt-1 text-xs text-on-surface-variant">
-                    <span className="font-bold text-primary">
+                  <p className="mt-1 text-xs text-storm">
+                    <span className="font-bold text-mint">
                       {totalXp.toLocaleString("es")}
                     </span>{" "}
                     / {levelInfo.nextLevelXp.toLocaleString("es")} XP
                   </p>
-                  <div className="mt-2 h-1.5 w-32 overflow-hidden rounded-full bg-surface-container">
+                  <div className="mt-2 h-1.5 w-32 overflow-hidden rounded-full bg-surface-raised">
                     <div
-                      className="h-full rounded-full bg-primary"
+                      className="h-full rounded-full bg-mint"
                       style={{ width: `${ringProgress}%` }}
                     />
                   </div>
@@ -470,19 +458,19 @@ export default async function DashboardPage() {
                       key={step}
                       className={`flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-bold ${
                         current
-                          ? "bg-primary-fixed text-primary ring-2 ring-primary/20"
+                          ? "bg-fog/20 text-mint ring-2 ring-mint/20"
                           : completed
-                            ? "bg-tertiary-fixed text-on-surface-variant opacity-60"
-                            : "bg-surface-container text-on-surface-variant"
+                            ? "bg-mint/30 text-storm opacity-60"
+                            : "bg-surface-raised text-storm"
                       }`}
                     >
                       <span
                         className={`flex h-4 w-4 items-center justify-center rounded-full ${
-                          current ? "border-2 border-primary" : ""
+                          current ? "border-2 border-mint" : ""
                         }`}
                       >
                         {current ? (
-                          <span className="h-2 w-2 rounded-full bg-primary" />
+                          <span className="h-2 w-2 rounded-full bg-mint" />
                         ) : completed ? (
                           <Check className="h-3 w-3" />
                         ) : (
@@ -504,7 +492,7 @@ export default async function DashboardPage() {
                 </h3>
                 <Link
                   href="/logros"
-                  className="text-xs font-bold text-primary hover:underline"
+                  className="text-xs font-bold text-mint hover:underline"
                 >
                   Ver todos
                 </Link>
@@ -515,7 +503,7 @@ export default async function DashboardPage() {
                     const Icon = achievementIcon(achievement.icon);
                     return (
                       <div key={achievement.id} className="flex gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-tertiary-fixed-dim text-tertiary">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-fog/20 text-mint">
                           <Icon className="h-5 w-5" />
                         </div>
                         <div className="flex-grow">
@@ -523,11 +511,11 @@ export default async function DashboardPage() {
                             <h5 className="text-xs font-bold">
                               {achievement.title}
                             </h5>
-                            <span className="text-[10px] font-bold text-tertiary">
+                            <span className="text-[10px] font-bold text-mint">
                               +{achievement.xpReward} XP
                             </span>
                           </div>
-                          <p className="text-[10px] text-on-surface-variant">
+                          <p className="text-[10px] text-storm">
                             {achievement.description}
                           </p>
                         </div>

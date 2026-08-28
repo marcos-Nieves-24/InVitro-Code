@@ -16,18 +16,18 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   return (
     <header
-      className={`flex items-center justify-between rounded-card border border-gray-200 bg-white px-5 py-3.5 shadow-sm ${className}`}
-    >
+      className={`flex items-center justify-between rounded-card border border-surface-raised bg-surface-card px-5 py-3.5 shadow-sm ${className}`}
+      >
       <Link href="/" className="group flex flex-col leading-tight">
-        <span className="font-display text-lg font-semibold tracking-tight text-gray-900 transition-colors group-hover:text-brand">
+        <span className="font-display text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-mint">
           InVitro-Code
         </span>
-        <span className="eyebrow text-[10px] text-gray-400">
+        <span className="eyebrow text-[10px] text-storm">
           Biotecnología · IA · Python
         </span>
       </Link>
 
-      <nav className="flex items-center gap-2">
+      <nav className="flex items-center gap-2" aria-label="Navegación principal">
         {showDashboard && (
           <Button href="/dashboard" variant="ghost" size="sm">
             Dashboard

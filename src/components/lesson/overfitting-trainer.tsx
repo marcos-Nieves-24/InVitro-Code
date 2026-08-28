@@ -372,10 +372,10 @@ export function OverfittingTrainer() {
   if (fetchLoading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-card border border-gray-200 shadow-sm p-8 text-center">
+        <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-8 text-center">
           <div className="inline-flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-brand"></div>
-            <span className="text-sm text-gray-600">Cargando datos de biopsias…</span>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-mint"></div>
+            <span className="text-sm text-storm">Cargando datos de biopsias…</span>
           </div>
         </div>
       </div>
@@ -524,11 +524,11 @@ export function OverfittingTrainer() {
   };
 
   const primaryBtnClass =
-    "px-4 py-2 bg-brand text-white rounded-btn hover:bg-brand-hover transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-mint text-ink rounded-btn hover:bg-fog transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
   const secondaryBtnClass =
-    "px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-surface-card text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const severityColors: Record<string, string> = {
     subajuste: "text-amber-700 bg-amber-50 border-amber-200",
@@ -545,18 +545,18 @@ export function OverfittingTrainer() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="bg-white rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
+      <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
-            <h3 className="font-display text-lg font-semibold text-gray-900">
+            <h3 className="font-display text-lg font-semibold text-ink">
               Entrenador de sobreajuste
             </h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-storm mt-1">
               Explora cómo la complejidad del modelo afecta la generalización con datos reales de biopsias.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-storm">
             <span className="inline-flex items-center gap-1.5">
               <span
                 className="inline-block h-3 w-3 rounded-full bg-[#14b8a6]"
@@ -568,7 +568,7 @@ export function OverfittingTrainer() {
               <span className="text-[#f59e0b] font-bold">×</span>
               {testAbs.length} prueba
             </span>
-            <span className="font-mono text-gray-500">
+            <span className="font-mono text-storm">
               50 biopsias de entrenamiento (submuestra fija) · 172 de prueba
             </span>
           </div>
@@ -603,7 +603,7 @@ export function OverfittingTrainer() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Degree slider */}
           <div className="rounded-card border border-gray-200 p-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-3">
               Grado del polinomio
             </h4>
             <div className="mb-3">
@@ -611,7 +611,7 @@ export function OverfittingTrainer() {
                 <label htmlFor="degree-slider" className="text-sm font-medium text-gray-700">
                   Grado
                 </label>
-                <span className="font-mono text-sm text-gray-900">{degree}</span>
+                <span className="font-mono text-sm text-ink">{degree}</span>
               </div>
               <input
                 id="degree-slider"
@@ -640,24 +640,24 @@ export function OverfittingTrainer() {
 
           {/* Metrics */}
           <div className="rounded-card border border-gray-200 p-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-3">
               Métricas — Grado {degree}
             </h4>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">ECM Entrenamiento</span>
-                <span className="font-mono text-gray-900">{formatECM(currentFit.ecmTrain)}</span>
+                <span className="text-storm">ECM Entrenamiento</span>
+                <span className="font-mono text-ink">{formatECM(currentFit.ecmTrain)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">ECM Prueba</span>
-                <span className="font-mono text-gray-900">{formatECM(currentFit.ecmTest)}</span>
+                <span className="text-storm">ECM Prueba</span>
+                <span className="font-mono text-ink">{formatECM(currentFit.ecmTest)}</span>
               </div>
             </div>
           </div>
 
           {/* Diagnosis */}
           <div className="rounded-card border border-gray-200 p-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-3">
               Diagnóstico
             </h4>
             <div
@@ -666,7 +666,7 @@ export function OverfittingTrainer() {
             >
               {diagnosis.label}
             </div>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-storm mt-2">
               Prueba arrastrar el slider: grados bajos subajustan, grados altos sobreajustan.
               Con datos reales el error de entrenamiento nunca llega a cero — el piso es ~0.10.
             </p>
@@ -674,14 +674,14 @@ export function OverfittingTrainer() {
         </div>
 
         {/* Dataset citation */}
-        <p className="mt-4 text-xs text-gray-500 leading-relaxed">
+        <p className="mt-4 text-xs text-storm leading-relaxed">
           Street, W.N., Wolberg, W.H. &amp; Mangasarian, O.L. (1993) — Breast Cancer Wisconsin
           (Diagnostic), UCI Machine Learning Repository.{" "}
           <a
             href={sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand underline underline-offset-2 hover:text-brand-hover"
+            className="text-mint underline underline-offset-2 hover:text-fog"
           >
             archive.ics.uci.edu
           </a>

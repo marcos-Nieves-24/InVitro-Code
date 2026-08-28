@@ -112,13 +112,13 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8">
         <Link
           href="/proyectos"
-          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-outline transition-colors hover:text-primary"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-outline transition-colors hover:text-mint"
         >
           <ArrowLeft className="h-4 w-4" />
           Volver a proyectos
         </Link>
 
-        <h1 className="mb-8 font-display text-3xl font-extrabold text-deep-navy">
+        <h1 className="mb-8 font-display text-3xl font-extrabold text-ink">
           {title}
         </h1>
 

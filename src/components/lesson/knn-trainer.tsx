@@ -444,10 +444,10 @@ export function KnnTrainer() {
   if (fetchLoading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-card border border-gray-200 shadow-sm p-8 text-center">
+        <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-8 text-center">
           <div className="inline-flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-brand"></div>
-            <span className="text-sm text-gray-600">Cargando datos de biopsias…</span>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-mint"></div>
+            <span className="text-sm text-storm">Cargando datos de biopsias…</span>
           </div>
         </div>
       </div>
@@ -730,26 +730,26 @@ export function KnnTrainer() {
   };
 
   const primaryBtnClass =
-    "px-4 py-2 bg-brand text-white rounded-btn hover:bg-brand-hover transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-mint text-ink rounded-btn hover:bg-fog transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
   const secondaryBtnClass =
-    "px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
-    "focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-4 py-2 bg-surface-card text-gray-700 border border-gray-200 rounded-btn hover:bg-gray-50 transition-colors text-sm font-medium " +
+    "focus:outline-none focus:ring-2 focus:ring-mint/40 disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="bg-white rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
+      <div className="bg-surface-card rounded-card border border-gray-200 shadow-sm p-4 md:p-6">
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
-            <h3 className="font-display text-lg font-semibold text-gray-900">
+            <h3 className="font-display text-lg font-semibold text-ink">
               Entrenador de KNN
             </h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-storm mt-1">
               Elige k y explora cómo los vecinos más cercanos clasifican cada biopsia.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-storm">
             <span className="inline-flex items-center gap-1.5">
               <span
                 className="inline-block h-3 w-3 rounded-full bg-[#14b8a6]"
@@ -764,7 +764,7 @@ export function KnnTrainer() {
               ></span>
               Maligno ({dataset.n_malignant})
             </span>
-            <span className="font-mono text-gray-500">{dataset.n_samples} muestras</span>
+            <span className="font-mono text-storm">{dataset.n_samples} muestras</span>
           </div>
         </div>
 
@@ -800,22 +800,22 @@ export function KnnTrainer() {
                   </span>
                 </p>
               ) : (
-                <p className="text-xs text-gray-500">Calculando predicción…</p>
+                <p className="text-xs text-storm">Calculando predicción…</p>
               )}
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-storm mt-1">
                 Haz clic en una zona vacía del gráfico para mover el punto de prueba.
               </p>
             </div>
 
             {/* Dataset citation */}
-            <p className="mt-3 text-xs text-gray-500 leading-relaxed">
+            <p className="mt-3 text-xs text-storm leading-relaxed">
               Street, W.N., Wolberg, W.H. &amp; Mangasarian, O.L. (1993) — Breast Cancer Wisconsin
               (Diagnostic), UCI Machine Learning Repository.{" "}
               <a
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand underline underline-offset-2 hover:text-brand-hover"
+                className="text-mint underline underline-offset-2 hover:text-fog"
               >
                 archive.ics.uci.edu
               </a>
@@ -826,20 +826,20 @@ export function KnnTrainer() {
           <div className="space-y-4">
             {/* Accuracy */}
             <div className="rounded-card border border-gray-200 p-4">
-              <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-storm mb-3">
                 Accuracy (k={k})
               </h4>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Entreno</span>
-                  <span className="font-mono text-gray-900">{trainAcc.toFixed(1)}%</span>
+                  <span className="text-storm">Entreno</span>
+                  <span className="font-mono text-ink">{trainAcc.toFixed(1)}%</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Prueba</span>
-                  <span className="font-mono text-gray-900">{testAcc.toFixed(1)}%</span>
+                  <span className="text-storm">Prueba</span>
+                  <span className="font-mono text-ink">{testAcc.toFixed(1)}%</span>
                 </div>
               </div>
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-storm">
                 Split estratificado 70/30 (seed 42): {accuracyData?.trainSize} de entrenamiento ·{" "}
                 {accuracyData?.testSize} de prueba. Con k=1 el accuracy de entreno es 100%: el
                 modelo "memoriza".
@@ -866,7 +866,7 @@ export function KnnTrainer() {
                   <label htmlFor="k-slider" className="text-sm font-medium text-gray-700">
                     k (vecinos)
                   </label>
-                  <span className="font-mono text-sm text-gray-900">{k}</span>
+                  <span className="font-mono text-sm text-ink">{k}</span>
                 </div>
                 <input
                   id="k-slider"

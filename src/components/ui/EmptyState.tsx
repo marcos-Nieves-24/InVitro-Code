@@ -21,14 +21,14 @@ export function EmptyState({
   href,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-outline-variant bg-surface-container-low px-6 py-10 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-fixed text-primary">
+    <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-surface-raised bg-surface-card px-6 py-10 text-center">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-fog/20 text-ink">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </div>
       <div>
-        <h3 className="text-base font-bold text-on-surface">{title}</h3>
+        <h3 className="text-base font-bold text-ink">{title}</h3>
         {description ? (
-          <p className="mx-auto mt-1 max-w-sm text-sm text-on-surface-variant">
+          <p className="mx-auto mt-1 max-w-sm text-sm text-storm">
             {description}
           </p>
         ) : null}
@@ -36,7 +36,7 @@ export function EmptyState({
       {actionLabel && href ? (
         <Link
           href={href}
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-on-primary transition-colors hover:bg-primary-container"
+          className="rounded-lg bg-mint px-4 py-2 text-sm font-bold text-on-primary transition-all hover:brightness-95"
         >
           {actionLabel}
         </Link>

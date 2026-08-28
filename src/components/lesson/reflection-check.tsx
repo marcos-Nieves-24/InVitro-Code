@@ -57,8 +57,8 @@ export function ReflectionCheck({
   };
 
   return (
-    <div className="my-3 rounded-card border border-brand bg-brand-soft p-4">
-      <p className="mb-3 text-sm font-semibold leading-relaxed text-gray-900">
+    <div className="my-3 rounded-card border border-mint bg-mint/15 p-4">
+      <p className="mb-3 text-sm font-semibold leading-relaxed text-ink">
         {prompt}
       </p>
 
@@ -67,7 +67,7 @@ export function ReflectionCheck({
         onChange={(e) => setUserAnswer(e.target.value)}
         disabled={revealed}
         rows={3}
-        className="block w-full resize-none rounded-btn border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
+        className="block w-full resize-none rounded-btn border border-gray-300 bg-surface-card px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/20 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-storm"
         placeholder="Escribe tu respuesta aquí..."
       />
 
@@ -88,8 +88,8 @@ export function ReflectionCheck({
       </div>
 
       {revealed && (
-        <div className="mt-4 rounded-btn border border-brand/20 bg-white px-4 py-3 text-sm leading-relaxed text-gray-800">
-          <p className="eyebrow mb-1 text-[10px] text-brand">Respuesta modelo</p>
+        <div className="mt-4 rounded-btn border border-mint/20 bg-surface-card px-4 py-3 text-sm leading-relaxed text-graphite">
+          <p className="eyebrow mb-1 text-[10px] text-mint">Respuesta modelo</p>
           {answer}
         </div>
       )}

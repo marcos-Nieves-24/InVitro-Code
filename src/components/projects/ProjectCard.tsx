@@ -33,7 +33,7 @@ function difficultyBadge(difficulty: string | undefined): {
     return DIFFICULTY_MAP[difficulty];
   }
   return {
-    color: "bg-surface-container text-outline border-outline-variant",
+    color: "bg-surface-raised text-storm border-surface-raised",
     label: difficulty ?? "—",
   };
 }
@@ -56,20 +56,20 @@ export function ProjectCard({
   return (
     <Link
       href={href}
-      className="group relative flex flex-col gap-3 rounded-2xl border border-surface-container bg-white p-5 transition-all hover:shadow-md"
+      className="group relative flex flex-col gap-3 rounded-2xl border border-surface-container bg-surface-card p-5 transition-all hover:shadow-md"
     >
       {/* Module name chip */}
-      <span className="w-fit rounded-full border border-outline-variant bg-surface-container-low px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-outline">
+      <span className="w-fit rounded-full border border-surface-raised bg-surface-raised px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-storm">
         {moduleName}
       </span>
 
       {/* Title */}
-      <h3 className="text-sm font-bold leading-snug text-deep-navy transition-colors group-hover:text-primary">
+      <h3 className="text-sm font-bold leading-snug text-ink transition-colors group-hover:text-mint">
         {lesson.title}
       </h3>
 
       {/* Metadata row */}
-      <div className="flex flex-wrap items-center gap-4 text-[11px] text-outline">
+      <div className="flex flex-wrap items-center gap-4 text-[11px] text-storm">
         {/* Difficulty badge */}
         <span
           className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[10px] font-semibold ${badge.color}`}

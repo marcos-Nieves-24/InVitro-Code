@@ -7,12 +7,14 @@ interface InVitroShellProps {
   children: ReactNode;
   userName?: string;
   userMeta?: string;
+  topBar?: ReactNode;
 }
 
 export function InVitroShell({
   children,
   userName,
   userMeta,
+  topBar,
 }: InVitroShellProps) {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -31,7 +33,7 @@ export function InVitroShell({
   }, [collapsed]);
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface">
+    <div className="min-h-screen bg-surface text-ink">
       <AppSidebar
         userName={userName}
         userMeta={userMeta}
@@ -39,10 +41,14 @@ export function InVitroShell({
         onToggle={() => setCollapsed(!collapsed)}
       />
       <main
+        id="main-content"
         className={`flex-1 pt-14 pb-12 transition-[padding] duration-300 md:pt-0 ${
           collapsed ? "md:pl-[72px]" : "md:pl-[280px]"
         }`}
       >
+        {topBar && (
+          <div className="sticky top-0 z-40">{topBar}</div>
+        )}
         {children}
       </main>
     </div>

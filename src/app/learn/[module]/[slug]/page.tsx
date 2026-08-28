@@ -84,18 +84,18 @@ function renderHeader(data: Record<string, unknown>) {
         <span className="h-px w-3 bg-gray-300" />
         <span>Lección {data["Lesson Number"] as string}</span>
       </p>
-      <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-gray-900">
+      <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-ink">
         {data["Lesson Title"] as string}
       </h1>
       {objectives.length > 0 && (
         <div className="mt-3">
-          <p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+          <p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-storm">
             Objetivos de aprendizaje
           </p>
           <ul className="space-y-0.5">
             {objectives.map((obj: string, i: number) => (
-              <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
+              <li key={i} className="flex items-start gap-2 text-xs text-storm">
+                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-mint" />
                 {obj}
               </li>
             ))}
