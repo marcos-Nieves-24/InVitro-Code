@@ -73,13 +73,13 @@ export default async function Home() {
           </Link>
           <nav className="flex items-center gap-3">
             <Link
-              href="/dashboard"
+              href="/sign-in"
               className="hidden rounded-lg border border-surface-raised px-4 py-2 text-sm font-bold text-storm transition-colors hover:bg-surface-raised md:block"
             >
-              Dashboard
+              Iniciar sesión
             </Link>
             <Link
-              href={startHref}
+              href="/sign-up"
               className="flex items-center gap-2 rounded-lg bg-mint px-5 py-2 text-sm font-bold text-ink transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-glow"
             >
               Comenzar <ArrowRight className="h-4 w-4" />
@@ -108,16 +108,16 @@ export default async function Home() {
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link
-                  href={startHref}
+                  href="/sign-up"
                   className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-all hover:scale-105 hover:shadow-glow"
                 >
                   Empezar ahora <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/dashboard"
+                  href="/sign-in"
                   className="flex items-center gap-2 rounded-xl border border-white/15 px-8 py-4 font-bold text-white/70 transition-colors hover:border-white/30 hover:text-white"
                 >
-                  Ver progreso
+                  Iniciar sesión
                 </Link>
               </div>
             </div>
