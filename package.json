@@ -11,6 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@clerk/nextjs": "latest",
     "@monaco-editor/react": "^4.7.0",
     "@supabase/supabase-js": "latest",
     "@tailwindcss/typography": "^0.5.20",
@@ -28,11 +29,11 @@
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
+    "svix": "latest",
     "tailwindcss": "latest",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "@clerk/nextjs": "latest",
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
@@ -43,7 +44,6 @@
     "eslint-config-next": "latest",
     "postcss": "latest",
     "shadcn-ui": "latest",
-    "svix": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
     "vitest": "^4.1.10"

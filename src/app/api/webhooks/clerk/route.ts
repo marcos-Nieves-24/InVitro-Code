@@ -1,6 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireEnv } from "@/lib/env";
 
 function getAdmin() {
   return createAdminClient();
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
   }
 
   const payload = await req.text();
-  const wh = new Webhook(process.env.CLERK_SIGNING_SECRET!);
+  const wh = new Webhook(requireEnv("CLERK_SIGNING_SECRET"));
 
   let evt: ClerkEvent;
   try {
