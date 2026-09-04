@@ -49,6 +49,7 @@ export async function POST(req: Request) {
       id,
       email,
       username: first_name ?? email.split("@")[0],
+      role: "user",
     });
   }
 

@@ -19,8 +19,24 @@ CREATE TABLE IF NOT EXISTS profiles (
   id TEXT PRIMARY KEY,
   email TEXT,
   username TEXT,
+  role TEXT DEFAULT 'user',
+  avatar_url TEXT,
+  bio TEXT,
+  theme TEXT DEFAULT 'system',
+  notification_prefs JSONB DEFAULT '{"email": true, "streak": true}'::jsonb,
+  is_banned BOOLEAN DEFAULT false,
+  last_active_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Admin check function
+CREATE OR REPLACE FUNCTION is_admin(user_id TEXT)
+RETURNS BOOLEAN AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM profiles
+    WHERE id = user_id AND role = 'admin'
+  );
+$$ LANGUAGE sql STABLE;
 
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 

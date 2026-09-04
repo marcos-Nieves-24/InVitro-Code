@@ -12,6 +12,9 @@ import {
   BarChart3,
   Trophy,
   Users,
+  User,
+  Settings,
+  Shield,
   Menu,
   X,
   ChevronLeft,
@@ -34,6 +37,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: BarChart3 },
   { label: "Logros", href: "/logros", icon: Trophy },
   { label: "Comunidad", href: "/comunidad", icon: Users },
+  { label: "Perfil", href: "/perfil", icon: User },
+  { label: "Configuración", href: "/configuracion", icon: Settings },
+  { label: "Admin", href: "/admin", icon: Shield },
 ];
 
 interface AppSidebarProps {
@@ -157,8 +163,9 @@ export function AppSidebar({
 
         {/* User card */}
         <div className="mt-auto flex flex-col gap-4 border-t border-surface-raised pt-6">
-          <div
-            className={`glass-card flex items-center gap-3 rounded-xl p-4 ${
+          <Link
+            href="/perfil"
+            className={`glass-card flex items-center gap-3 rounded-xl p-4 transition-colors hover:bg-surface-raised ${
               collapsed ? "md:justify-center md:p-2" : ""
             }`}
           >
@@ -173,7 +180,7 @@ export function AppSidebar({
                 </span>
               </div>
             )}
-          </div>
+          </Link>
         </div>
       </aside>
     </>

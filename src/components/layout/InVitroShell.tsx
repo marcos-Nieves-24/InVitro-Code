@@ -8,6 +8,7 @@ interface InVitroShellProps {
   userName?: string;
   userMeta?: string;
   topBar?: ReactNode;
+  theme?: string | null;
 }
 
 export function InVitroShell({
@@ -15,6 +16,7 @@ export function InVitroShell({
   userName,
   userMeta,
   topBar,
+  theme,
 }: InVitroShellProps) {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -31,6 +33,20 @@ export function InVitroShell({
     mql.addEventListener("change", update);
     return () => mql.removeEventListener("change", update);
   }, [collapsed]);
+
+  // Apply theme to html element
+  useEffect(() => {
+    if (!theme) return;
+
+    document.documentElement.classList.remove("light", "dark");
+
+    if (theme === "system") {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.classList.add(prefersDark ? "dark" : "light");
+    } else {
+      document.documentElement.classList.add(theme);
+    }
+  }, [theme]);
 
   return (
     <div className="min-h-screen bg-surface text-ink">

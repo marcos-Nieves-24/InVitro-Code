@@ -1,5 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 const publicRoutes = [
   "/",
@@ -8,6 +9,8 @@ const publicRoutes = [
   "/api/webhooks/clerk",
   "/api/diagnose",
 ];
+
+const adminRoutes = ["/admin", "/api/admin"];
 
 export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
@@ -30,6 +33,28 @@ export default clerkMiddleware(async (auth, req) => {
       const signInUrl = new URL("/sign-in", req.url);
       signInUrl.searchParams.set("redirect_url", pathname);
       return NextResponse.redirect(signInUrl);
+    }
+
+    // Check admin routes
+    const isAdminRoute = adminRoutes.some(
+      (route) => pathname === route || pathname.startsWith(route + "/"),
+    );
+
+    if (isAdminRoute && session.userId) {
+      const supabase = createAdminClient();
+      const { data } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", session.userId)
+        .maybeSingle();
+
+      if (data?.role !== "admin") {
+        // Non-admin trying to access admin route
+        if (pathname.startsWith("/api/")) {
+          return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+        }
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
     }
   }
 });
