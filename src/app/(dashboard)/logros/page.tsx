@@ -31,7 +31,7 @@ export default async function LogrosPage() {
     await Promise.all([
       supabase
         .from("profiles")
-        .select("username, email")
+        .select("username, email, role")
         .eq("id", userId)
         .maybeSingle(),
       supabase
@@ -63,6 +63,7 @@ export default async function LogrosPage() {
     <InVitroShell
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
+      userRole={profileRes.data?.role}
     >
       <InVitroTopBar
         totalXp={totalXp}

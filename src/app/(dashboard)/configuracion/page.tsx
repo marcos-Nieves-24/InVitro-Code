@@ -22,7 +22,7 @@ export default async function SettingsPage() {
   const userName = getDisplayName(profile ?? {});
 
   return (
-    <InVitroShell userName={userName} theme={profile?.theme}>
+    <InVitroShell userName={userName} userRole={profile?.role} theme={profile?.theme}>
       <div className="p-8">
         <div className="mx-auto max-w-2xl space-y-8">
           <h1 className="font-display text-3xl font-bold text-ink">

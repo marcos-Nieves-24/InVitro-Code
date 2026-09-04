@@ -55,7 +55,7 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <InVitroShell userName={userName} userMeta="Administrador" theme={fullProfileRes.data?.theme}>
+    <InVitroShell userName={userName} userMeta="Administrador" userRole={fullProfileRes.data?.role} theme={fullProfileRes.data?.theme}>
       <div className="p-8">
         <div className="mx-auto max-w-6xl space-y-8">
           <h1 className="font-display text-3xl font-bold text-ink">

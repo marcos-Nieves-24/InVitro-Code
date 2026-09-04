@@ -27,7 +27,7 @@ export default async function ProyectosPage() {
   const supabase = createAdminClient();
   const profileRes = await supabase
     .from("profiles")
-    .select("username, email")
+    .select("username, email, role")
     .eq("id", userId)
     .maybeSingle();
   const userName = getDisplayName(profileRes.data ?? {});
@@ -45,7 +45,7 @@ export default async function ProyectosPage() {
   }));
 
   return (
-    <InVitroShell userName={userName}>
+    <InVitroShell userName={userName} userRole={profileRes.data?.role}>
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <div className="mb-8">
           <h1 className="font-display text-3xl font-extrabold text-ink">

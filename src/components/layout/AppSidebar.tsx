@@ -45,6 +45,7 @@ const NAV_ITEMS: NavItem[] = [
 interface AppSidebarProps {
   userName?: string;
   userMeta?: string;
+  userRole?: string | null;
   collapsed?: boolean;
   onToggle?: () => void;
 }
@@ -52,11 +53,16 @@ interface AppSidebarProps {
 export function AppSidebar({
   userName = "Investigador",
   userMeta = "Investigador",
+  userRole,
   collapsed = false,
   onToggle,
 }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  const navItems = NAV_ITEMS.filter(
+    (item) => item.href !== "/admin" || userRole === "admin"
+  );
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -138,7 +144,7 @@ export function AppSidebar({
 
         {/* Nav */}
         <nav className="flex flex-grow flex-col gap-2" aria-label="Navegación de módulos">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const active = isActive(item.href);
             return (
               <Link

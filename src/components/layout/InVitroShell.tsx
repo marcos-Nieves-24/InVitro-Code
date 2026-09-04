@@ -7,6 +7,7 @@ interface InVitroShellProps {
   children: ReactNode;
   userName?: string;
   userMeta?: string;
+  userRole?: string | null;
   topBar?: ReactNode;
   theme?: string | null;
 }
@@ -15,6 +16,7 @@ export function InVitroShell({
   children,
   userName,
   userMeta,
+  userRole,
   topBar,
   theme,
 }: InVitroShellProps) {
@@ -53,6 +55,7 @@ export function InVitroShell({
       <AppSidebar
         userName={userName}
         userMeta={userMeta}
+        userRole={userRole}
         collapsed={collapsed}
         onToggle={() => setCollapsed(!collapsed)}
       />

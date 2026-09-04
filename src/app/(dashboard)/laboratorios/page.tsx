@@ -32,7 +32,7 @@ export default async function LaboratoriosPage() {
   const [profileRes, progressRes, streakRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("username, email")
+      .select("username, email, role")
       .eq("id", userId)
       .maybeSingle(),
     supabase
@@ -77,6 +77,7 @@ export default async function LaboratoriosPage() {
     <InVitroShell
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
+      userRole={profileRes.data?.role}
     >
       <InVitroTopBar
         totalXp={totalXp}
