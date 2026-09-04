@@ -10,13 +10,13 @@
 
 # PASO 1: Cargar el dataset de diabetes y dividir en entrenamiento/prueba.
 # load_diabetes trae 442 muestras con 10 features numericas normalizadas.
-import numpy as np
-import pandas as pd
-import plotly.express as px
-from sklearn.datasets import load_diabetes
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np                         # Operaciones matematicas
+import pandas as pd                        # DataFrames y manipulacion
+import plotly.express as px                # Graficos interactivos
+from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
+from sklearn.model_selection import train_test_split, cross_val_score  # Division train/test y validacion
+from sklearn.linear_model import LinearRegression  # Modelos de regresion
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score  # Metricas de evaluacion
 
 diabetes = load_diabetes(as_frame=True)
 X = diabetes.data
@@ -55,7 +55,7 @@ fig = px.scatter(x=y_test, y=y_pred,
 fig.add_scatter(x=[y_test.min(), y_test.max()],
                 y=[y_test.min(), y_test.max()],
                 mode="lines", name="Perfecto")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 5: Validacion cruzada de 5 y 10 folds.
 # cross_val_score entrena y evalua el modelo en cada particion.
@@ -78,12 +78,12 @@ fig = px.scatter(x=y_pred, y=residuos,
                  title="Residuos vs predicciones",
                  labels={"x": "Valor predicho", "y": "Residuo"})
 fig.add_hline(y=0, line_dash="dash", line_color="red")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 fig = px.histogram(x=residuos, nbins=30,
                    title="Histograma de residuos",
                    labels={"x": "Residuo"})
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Importancia de features por coeficiente.
 # En regresion lineal, |coeficiente| indica la influencia de la feature.
@@ -97,7 +97,7 @@ print(importancias.head(3).to_string(index=False))
 fig = px.bar(importancias, x="Feature", y="Coef",
              title="Coeficientes del modelo (importancia de features)",
              labels={"Coef": "Coeficiente"})
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
 print("\n--- Resumen ---")

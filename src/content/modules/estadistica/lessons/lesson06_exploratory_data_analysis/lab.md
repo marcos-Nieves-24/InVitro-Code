@@ -8,10 +8,10 @@
 # =========================================================================
 
 # PASO 1: Cargar datos y vista general.
-import numpy as np
-import pandas as pd
-import plotly.express as px
-from sklearn.datasets import load_diabetes
+import numpy as np                         # Operaciones matematicas
+import pandas as pd                        # DataFrames y manipulacion
+import plotly.express as px                # Graficos interactivos
+from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
 
 diabetes = load_diabetes(as_frame=True)
 df = diabetes.data
@@ -48,21 +48,21 @@ print("\ndescribe():\n", df_eda.describe().round(3))
 print("\nHistogramas por feature:")
 for col in ["age", "bmi", "bp", "target"]:
     fig = px.histogram(df_eda, x=col, nbins=30, title=f"Distribucion de {col}")
-    fig.show()
+    fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 6: Matriz de dispersion entre columnas seleccionadas.
 print("\nMatriz de dispersion:")
 sel = ["age", "bmi", "bp", "target"]
 fig = px.scatter_matrix(df_eda, dimensions=sel,
                         title="Matriz de dispersion (diabetes)")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Matriz de correlacion con heatmap.
 print("\nHeatmap de correlaciones:")
 corr = df_eda.select_dtypes(include=[np.number]).corr()
 fig = px.imshow(corr, text_auto=".2f", color_continuous_scale="RdBu_r",
                 title="Matriz de correlacion de Pearson")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Valores atipicos con la regla del RIQ.
 for col in ["bmi", "bp", "target"]:
@@ -73,7 +73,7 @@ for col in ["bmi", "bp", "target"]:
     print(f"\nColumna {col}: {n_out} valores atipicos (regla del RIQ)")
 
 fig = px.box(df_eda, y="target", title="Boxplot del target")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 9: Hallazgos clave del EDA.
 print("\n--- Hallazgos del EDA ---")

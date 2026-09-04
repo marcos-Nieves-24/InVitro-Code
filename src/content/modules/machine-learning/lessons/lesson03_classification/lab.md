@@ -10,13 +10,13 @@
 
 # PASO 1: Datos sinteticos de dos features.
 # Con n_redundant=0 ambas features aportan informacion para separar clases.
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.datasets import make_classification, load_breast_cancer
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (accuracy_score, confusion_matrix,
+import numpy as np                         # Operaciones matematicas
+import plotly.express as px                # Graficos interactivos
+import plotly.graph_objects as go       # Graficos de bajo nivel
+from sklearn.datasets import make_classification, load_breast_cancer  # Cargar datasets de ejemplo
+from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.linear_model import LogisticRegression  # Modelos de regresion
+from sklearn.metrics import (accuracy_score, confusion_matrix,  # Metricas de evaluacion
                              classification_report, precision_score,
                              recall_score, f1_score, roc_curve, auc)
 
@@ -47,7 +47,7 @@ fig.add_trace(go.Scatter(x=X[:, 0], y=X[:, 1], mode="markers",
                          name="Datos reales"))
 fig.update_layout(title="Limite de decision",
                   xaxis_title="Feature 1", yaxis_title="Feature 2")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 2 - El limite de decision separa visualmente las dos clases.")
 
 # PASO 3: Exactitud y matriz de confusion en el conjunto de prueba.
@@ -80,7 +80,7 @@ fig = px.line(x=fpr, y=tpr,
               labels={"x": "Tasa de falsos positivos",
                       "y": "Tasa de verdaderos positivos"})
 fig.add_scatter(x=[0, 1], y=[0, 1], mode="lines", name="Modelo aleatorio")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 5: Exploracion del umbral de clasificacion.
 # Bajando el umbral ganamos sensibilidad (detectar mas positivos) pero
@@ -102,7 +102,7 @@ fig = px.line(x=umbrales, y=[precs, recs],
               title="Precision y sensibilidad segun el umbral",
               labels={"x": "Umbral", "value": "Metrica", "variable": "Metrica"})
 fig.update_layout(legend=dict(orientation="h", y=1.1))
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("Si los falsos negativos cuestan 10x mas, conviene un umbral BAJO.")
 
 # PASO 6: Datos desbalanceados.

@@ -8,8 +8,8 @@
 # =========================================================================
 
 # PASO 1: Simulacion de lanzamientos de una moneda justa.
-import numpy as np
-import plotly.express as px
+import numpy as np                         # Operaciones matematicas
+import plotly.express as px                # Graficos interactivos
 
 np.random.seed(7)
 n = 100000
@@ -25,7 +25,7 @@ fig = px.line(x=np.arange(1, n + 1), y=acumulado,
               title="Ley de los grandes numeros: frecuencia de cara",
               labels={"x": "Lanzamientos", "y": "Frecuencia acumulada"})
 fig.add_hline(y=0.5, line_dash="dash", line_color="red")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 3: Variable aleatoria X = suma de dos dados.
 # PMF teorica: hay 36 combinaciones equiprobables (2..12).
@@ -46,7 +46,7 @@ print(f"Var(X) empirica: {suma_obs.var():.3f} (teorica: {35/6:.3f})")
 print("\nGraficando la PMF teorica vs la empirica:")
 fig = px.bar(x=sumas, y=pmf_teorica, title="PMF teorica de la suma de dos dados")
 fig.add_scatter(x=sumas, y=freq_obs, mode="markers+lines", name="Empirica")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 5: Simulacion de Monty Hall.
 # Cambiar de puerta gana en 2/3 de los casos; mantener solo en 1/3.
@@ -85,7 +85,7 @@ print(f"P(enfermedad | positivo) = {np.mean(enfermos[positivo]):.4f}")
 exitos = np.random.binomial(30, 0.7, size=100000)
 print(f"\nP(X=20) empirica: {np.mean(exitos == 20):.4f}")
 fig = px.histogram(exitos, nbins=31, title="Distribucion binomial(n=30, p=0.7)")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
 print("\n--- Resumen ---")

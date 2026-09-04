@@ -9,11 +9,11 @@
 
 # PASO 1: Datos y entrenamiento del arbol.
 # Limitamos la profundidad a 3 para obtener un arbol interpretable.
-import numpy as np
-from sklearn.datasets import load_iris
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+import numpy as np                         # Operaciones matematicas
+from sklearn.datasets import load_iris  # Cargar datasets de ejemplo
+from sklearn.tree import DecisionTreeClassifier  # Arboles de decision
+from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.metrics import accuracy_score  # Metricas de evaluacion
 
 iris = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(
@@ -48,19 +48,19 @@ imprimir_nodo(arbol, iris.feature_names)
 
 # PASO 3: Importancia de las features.
 # Mide cuanta impureza reduce cada feature en las divisiones del arbol.
-import plotly.express as px
+import plotly.express as px                # Graficos interactivos
 
 importancias = arbol.feature_importances_
 fig = px.bar(x=iris.feature_names, y=importancias,
              labels={"x": "Feature", "y": "Importancia"},
              title="Importancia de features - DecisionTreeClassifier")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 3 - Feature mas importante:",
       iris.feature_names[int(np.argmax(importancias))])
 
 # PASO 4: Profundidad y sobreajuste.
 # Un arbol profundo memoriza los datos y degrada su rendimiento en prueba.
-from sklearn.datasets import load_breast_cancer
+from sklearn.datasets import load_breast_cancer  # Cargar datasets de ejemplo
 
 cancer = load_breast_cancer()
 Xc_train, Xc_test, yc_train, yc_test = train_test_split(
@@ -79,7 +79,7 @@ fig = px.line(x=profundidades, y=acc_test,
               title="Exactitud segun profundidad")
 fig.add_scatter(x=profundidades, y=acc_train, mode="lines",
                 name="Entrenamiento")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 4 - Profundidad optima en prueba:",
       profundidades[int(np.argmax(acc_test))])
 ```

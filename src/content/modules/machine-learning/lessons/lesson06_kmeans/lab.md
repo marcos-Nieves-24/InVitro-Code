@@ -9,14 +9,14 @@
 
 # PASO 1: Datos sinteticos con 5 grupos reales.
 # Generamos 400 puntos alrededor de 5 centroides con dispersion controlada.
-import numpy as np
-from sklearn.datasets import make_blobs, load_iris
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
+import numpy as np                         # Operaciones matematicas
+from sklearn.datasets import make_blobs, load_iris  # Cargar datasets de ejemplo
+from sklearn.cluster import KMeans  # Algoritmos de clustering
+from sklearn.metrics import silhouette_score  # Metricas de evaluacion
+from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
+from sklearn.decomposition import PCA  # Reduccion de dimensionalidad (PCA)
 
-np.random.seed(42)
+np.random.seed(42)                         # Fijar semilla para reproducibilidad
 X, y_true = make_blobs(n_samples=400, centers=5, cluster_std=0.9,
                        random_state=42)
 
@@ -32,22 +32,22 @@ print("PASO 1 - K optima segun silueta:", Ks[int(np.argmax(silueta))])
 
 # PASO 2: Curvas de inercia y silueta.
 # La inercia siempre baja; la silueta indica la cohesion entre clusters.
-import plotly.express as px
+import plotly.express as px                # Graficos interactivos
 
 fig = px.line(x=Ks, y=inercia,
               labels={"x": "K", "y": "Inercia"},
               title="Metodo del codo (inercia)")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 fig = px.line(x=Ks, y=silueta,
               labels={"x": "K", "y": "Silhouette"},
               title="Silhouette segun K")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 2 - El codo y la silueta sugieren K=5.")
 
 # PASO 3: Clusters finales con K=5 y sus centroides.
 # Coloreamos cada punto por su cluster y superponemos los centroides.
-import plotly.graph_objects as go
+import plotly.graph_objects as go       # Graficos de bajo nivel
 
 km_final = KMeans(n_clusters=5, n_init=10, random_state=42)
 etiquetas = km_final.fit_predict(X)
@@ -61,7 +61,7 @@ fig.add_trace(go.Scatter(x=km_final.cluster_centers_[:, 0],
                          marker=dict(symbol="x", size=14, color="black"),
                          name="Centroides"))
 fig.update_layout(showlegend=False)
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 3 - Los centroides (X negros) marcan el nucleo de cada cluster.")
 
 # PASO 4: Iris escalado con K=3 y tabla cruzada.
@@ -91,5 +91,5 @@ fig = px.scatter(x=proyeccion[:, 0], y=proyeccion[:, 1],
                  color=etiquetas_alto.astype(str),
                  title="Clusters en 50D proyectados con PCA",
                  labels={"x": "PC1", "y": "PC2"})
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 ```

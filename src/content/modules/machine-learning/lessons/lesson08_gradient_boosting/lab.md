@@ -9,11 +9,11 @@
 
 # PASO 1: Datos y modelo de referencia (regresion lineal).
 # La linea de base ayuda a medir la ganancia real del boosting.
-import numpy as np
-from sklearn.datasets import load_diabetes
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np                         # Operaciones matematicas
+from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
+from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.linear_model import LinearRegression  # Modelos de regresion
+from sklearn.metrics import mean_squared_error, r2_score  # Metricas de evaluacion
 
 data = load_diabetes()
 X_train, X_test, y_train, y_test = train_test_split(
@@ -28,7 +28,7 @@ print(f"R2 prueba: {r2_score(y_test, pred_lineal):.3f}")
 
 # PASO 2: Entrenamiento del GradientBoostingRegressor.
 # Cada arbol nuevo corrige los residuos del conjunto de etapas anteriores.
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingRegressor  # Ensembles (Random Forest, etc.)
 
 gb = GradientBoostingRegressor(n_estimators=200, learning_rate=0.1,
                                max_depth=3, random_state=42)
@@ -50,14 +50,14 @@ print("PASO 3 - Error de prueba en algunas etapas:")
 for n in [10, 50, 100, 150, 200]:
     print(f"  n_estimators={n}: MSE prueba {errores_test[n - 1]:.2f}")
 
-import plotly.express as px
+import plotly.express as px                # Graficos interactivos
 
 fig = px.line(x=list(range(1, 201)), y=errores_test,
               labels={"x": "n_estimators", "y": "MSE"},
               title="Error por etapa del boosting")
 fig.add_scatter(x=list(range(1, 201)), y=errores_train, mode="lines",
                 name="Entrenamiento")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 4: Importancia de las features del boosting.
 # Las features mas usadas en los arboles reducen mas el error residual.
@@ -65,7 +65,7 @@ importancias = gb.feature_importances_
 fig = px.bar(x=data.feature_names, y=importancias,
              labels={"x": "Feature", "y": "Importancia"},
              title="Importancia de features - GradientBoosting")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 4 - Feature mas importante:",
       data.feature_names[int(np.argmax(importancias))])
 ```

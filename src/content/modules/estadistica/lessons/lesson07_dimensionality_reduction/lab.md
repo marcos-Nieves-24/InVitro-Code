@@ -8,12 +8,12 @@
 # =========================================================================
 
 # PASO 1: Cargar iris y estandarizar los features.
-import numpy as np
-import pandas as pd
-import plotly.express as px
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
+import numpy as np                         # Operaciones matematicas
+import pandas as pd                        # DataFrames y manipulacion
+import plotly.express as px                # Graficos interactivos
+from sklearn.datasets import load_iris  # Cargar datasets de ejemplo
+from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
+from sklearn.decomposition import PCA  # Reduccion de dimensionalidad (PCA)
 
 iris = load_iris()
 X = iris.data
@@ -42,7 +42,7 @@ fig = px.bar(x=componentes, y=pca.explained_variance_ratio_,
              title="Varianza explicada por cada componente")
 fig.add_scatter(x=componentes, y=np.cumsum(pca.explained_variance_ratio_),
                 mode="lines+markers", name="Acumulada")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 4: Proyeccion en 2D coloreada por especie.
 print("\nProyeccion PCA 2D coloreada por especie:")
@@ -50,7 +50,7 @@ df_pca = pd.DataFrame({"PC1": X_pca[:, 0], "PC2": X_pca[:, 1],
                        "especie": [nombres[i] for i in y]})
 fig = px.scatter(df_pca, x="PC1", y="PC2", color="especie",
                  title="Proyeccion PCA 2D del dataset iris")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 5: Analisis de cargas (contribucion de cada feature).
 cargas = pd.DataFrame(pca.components_.T,
@@ -62,7 +62,7 @@ print("\nFeature con mayor carga en PC1:", cargas["PC1"].abs().idxmax())
 
 fig = px.imshow(cargas, text_auto=".2f", color_continuous_scale="RdBu_r",
                 title="Heatmap de las cargas de los componentes")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")

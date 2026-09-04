@@ -8,10 +8,10 @@
 # =========================================================================
 
 # PASO 1: Cuarteto de Anscombe embebido (4 series clasicas de 11 puntos).
-import numpy as np
-import pandas as pd
-import plotly.express as px
-from scipy.stats import pearsonr, spearmanr
+import numpy as np                         # Operaciones matematicas
+import pandas as pd                        # DataFrames y manipulacion
+import plotly.express as px                # Graficos interactivos
+from scipy.stats import pearsonr, spearmanr  # Funciones estadisticas
 
 x_ans = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5]
 anscombe = [
@@ -43,10 +43,10 @@ for i, (x, y) in enumerate(anscombe, start=1):
     x_linea = np.linspace(min(x), max(x), 50)
     fig.add_scatter(x=x_linea, y=pendiente * x_linea + intercepto,
                     mode="lines", name="OLS")
-    fig.show()
+    fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 4: Covarianza y correlaciones sobre el dataset de diabetes.
-from sklearn.datasets import load_diabetes
+from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
 
 diabetes = load_diabetes(as_frame=True)
 dfd = diabetes.data
@@ -66,7 +66,7 @@ print("\nHeatmap de la matriz de correlacion de Pearson:")
 corr_pearson = dfd.select_dtypes(include=[np.number]).corr(method="pearson")
 fig = px.imshow(corr_pearson, text_auto=".2f", color_continuous_scale="RdBu_r",
                 title="Matriz de correlacion de Pearson (diabetes)")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Resumen del laboratorio.
 print("\n--- Resumen ---")

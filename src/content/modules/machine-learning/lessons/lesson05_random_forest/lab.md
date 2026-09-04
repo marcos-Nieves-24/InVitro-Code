@@ -9,14 +9,14 @@
 
 # PASO 1: Datos sinteticos con 6 features (2 redundantes).
 # Varias features son informativas y otras aportan ruido.
-import numpy as np
-from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, recall_score
+import numpy as np                         # Operaciones matematicas
+from sklearn.datasets import make_classification  # Cargar datasets de ejemplo
+from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.tree import DecisionTreeClassifier  # Arboles de decision
+from sklearn.ensemble import RandomForestClassifier  # Ensembles (Random Forest, etc.)
+from sklearn.metrics import accuracy_score, recall_score  # Metricas de evaluacion
 
-np.random.seed(42)
+np.random.seed(42)                         # Fijar semilla para reproducibilidad
 X, y = make_classification(n_samples=800, n_features=6, n_informative=4,
                            n_redundant=2, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(
@@ -32,7 +32,7 @@ print(f"Bosque - exactitud prueba: {accuracy_score(y_test, bosque.predict(X_test
 
 # PASO 2: Importancia de features de ambos modelos.
 # El bosque promedia muchos arboles y estabiliza las importancias.
-import plotly.express as px
+import plotly.express as px                # Graficos interactivos
 
 nombres = [f"f{i}" for i in range(6)]
 fig = px.bar(x=nombres, y=bosque.feature_importances_,
@@ -40,7 +40,7 @@ fig = px.bar(x=nombres, y=bosque.feature_importances_,
              title="Importancia de features: arbol vs bosque")
 fig.add_bar(x=nombres, y=arbol.feature_importances_, name="Arbol")
 fig.update_layout(barmode="group")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 2 - El bosque reparte mejor la importancia entre features utiles.")
 
 # PASO 3: Escenario desbalanceado.
@@ -69,6 +69,6 @@ for n in n_arboles:
 fig = px.line(x=n_arboles, y=scores,
               labels={"x": "n_estimators", "y": "Exactitud prueba"},
               title="Exactitud segun numero de arboles")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 4 - A partir de ~100 arboles la mejora es marginal.")
 ```

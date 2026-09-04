@@ -9,10 +9,10 @@
 
 # PASO 1: Cargar el dataset de diabetes de sklearn.
 # load_diabetes devuelve los datos y el target listos para analizar.
-import numpy as np
-import pandas as pd
-import plotly.express as px
-from sklearn.datasets import load_diabetes
+import numpy as np                         # Operaciones matematicas
+import pandas as pd                        # DataFrames y manipulacion
+import plotly.express as px                # Graficos interactivos
+from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
 
 diabetes = load_diabetes(as_frame=True)
 df = diabetes.data
@@ -51,7 +51,7 @@ print(f"Cantidad de valores atipicos en bmi: {len(atipicos)}")
 # PASO 5: Boxplot del bmi para visualizar los valores atipicos.
 print(f"\nBoxplot del bmi con {len(atipicos)} valores atipicos:") 
 fig = px.box(df, y=col, title="Boxplot del indice de masa corporal (bmi)")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 6: Histograma del bmi con la media y la mediana marcadas.
 print("\nHistograma del bmi con la media y la mediana marcadas:")
@@ -60,7 +60,7 @@ mediana = df[col].median()
 fig = px.histogram(df, x=col, nbins=30, title="Distribucion del bmi")
 fig.add_vline(x=media, line_dash="dash", line_color="red", annotation_text="media")
 fig.add_vline(x=mediana, line_dash="dot", line_color="green", annotation_text="mediana")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Funcion summarize(df) que resume cada columna numerica.
 # Devuelve media, mediana, desvio, minimo, maximo, cuartiles, RIQ y

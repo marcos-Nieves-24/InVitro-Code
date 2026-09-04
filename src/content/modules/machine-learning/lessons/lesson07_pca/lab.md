@@ -9,10 +9,10 @@
 # PASO 1: Carga y estandarizacion.
 # PCA maximiza la varianza: sin escalar, las features con mayor magnitud
 # dominarian el resultado.
-import numpy as np
-from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
+import numpy as np                         # Operaciones matematicas
+from sklearn.datasets import load_breast_cancer  # Cargar datasets de ejemplo
+from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
+from sklearn.decomposition import PCA  # Reduccion de dimensionalidad (PCA)
 
 cancer = load_breast_cancer()
 X = StandardScaler().fit_transform(cancer.data)
@@ -35,7 +35,7 @@ acumulada = np.cumsum(varianza)
 print(f"PASO 2 - Componentes para 90%: {int(np.argmax(acumulada >= 0.90) + 1)}")
 print(f"Componentes para 95%: {int(np.argmax(acumulada >= 0.95) + 1)}")
 
-import plotly.express as px
+import plotly.express as px                # Graficos interactivos
 
 fig = px.bar(x=list(range(1, len(varianza) + 1)), y=varianza,
              labels={"x": "Componente", "y": "Varianza explicada"},
@@ -43,14 +43,14 @@ fig = px.bar(x=list(range(1, len(varianza) + 1)), y=varianza,
 fig.add_scatter(x=list(range(1, len(acumulada) + 1)), y=acumulada,
                 mode="lines", name="Acumulada")
 fig.update_layout(legend_title="Curva")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 3: Proyeccion 2D coloreada por clase.
 # Si el PCA separa visualmente las clases, los datos son distinguibles.
 fig = px.scatter(x=X_pca[:, 0], y=X_pca[:, 1], color=y.astype(str),
                  labels={"x": "PC1", "y": "PC2"},
                  title="Proyeccion PCA 2D - cancer de mama")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 print("PASO 3 - PC1 separa claramente benigno de maligno.")
 
 # PASO 4: Cargas de los componentes.
@@ -64,5 +64,5 @@ for i in indices:
 fig = px.bar(x=nombres[indices], y=np.abs(cargas[0][indices]),
              labels={"x": "Feature", "y": "|Carga| en PC1"},
              title="Cargas absolutas de PC1")
-fig.show()
+fig.show()                                 # Mostrar grafico interactivo
 ```

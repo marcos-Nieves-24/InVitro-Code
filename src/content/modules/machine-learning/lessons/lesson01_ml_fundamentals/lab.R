@@ -10,11 +10,23 @@ cat("  LAB 1: Fundamentos de ML\n")
 cat("═══════════════════════════════════════════════════════════════\n\n")
 
 # ══════════════════════════════════════════════════════════════════
+# DATOS: Generamos dataset sintetico de diabetes
+# ══════════════════════════════════════════════════════════════════
+set.seed(42)
+n <- 442
+diabetes <- data.frame(
+  age = rnorm(n), sex = sample(c(-0.05, 0.05), n, replace = TRUE),
+  bmi = rnorm(n), bp = rnorm(n),
+  s1 = rnorm(n), s2 = rnorm(n), s3 = rnorm(n),
+  s4 = rnorm(n), s5 = rnorm(n), s6 = rnorm(n),
+  y = 152 + 77 * rnorm(n)
+)
+
+# ══════════════════════════════════════════════════════════════════
 # ESCENARIO 1: Base R (sin paquetes externos)
 # ══════════════════════════════════════════════════════════════════
 cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
 
-data("diabetes", package = "MASS")
 X <- as.matrix(diabetes[, 1:10])
 y <- diabetes$y
 
@@ -55,7 +67,6 @@ cat("\n── Escenario 2: Tidyverse ──────────────�
 library(dplyr)
 library(ggplot2)
 
-data("diabetes", package = "MASS")
 df <- diabetes %>% mutate(id = row_number())
 
 set.seed(42)
@@ -91,7 +102,6 @@ cat("\n── Escenario 3: tidymodels ──────────────
 
 library(tidymodels)
 
-data("diabetes", package = "MASS")
 df <- as_tibble(diabetes)
 
 set.seed(42)
@@ -126,7 +136,6 @@ cat("\n── Escenario 4: Paquetes especializados ─────────�
 
 library(randomForest)
 
-data("diabetes", package = "MASS")
 df <- as.data.frame(diabetes)
 
 set.seed(42)

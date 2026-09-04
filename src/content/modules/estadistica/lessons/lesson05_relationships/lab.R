@@ -10,6 +10,19 @@ cat("  LAB 5: Relaciones entre variables\n")
 cat("═══════════════════════════════════════════════════════════════\n\n")
 
 # ══════════════════════════════════════════════════════════════════
+# DATOS: Generamos dataset sintetico de diabetes
+# ══════════════════════════════════════════════════════════════════
+set.seed(42)
+n <- 442
+diabetes <- data.frame(
+  age = rnorm(n), sex = sample(c(-0.05, 0.05), n, replace = TRUE),
+  bmi = rnorm(n), bp = rnorm(n),
+  s1 = rnorm(n), s2 = rnorm(n), s3 = rnorm(n),
+  s4 = rnorm(n), s5 = rnorm(n), s6 = rnorm(n),
+  y = 152 + 77 * rnorm(n)
+)
+
+# ══════════════════════════════════════════════════════════════════
 # ESCENARIO 1: Base R
 # ══════════════════════════════════════════════════════════════════
 cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
@@ -69,7 +82,6 @@ cat("\n── Escenario 3: tidymodels ──────────────
 
 library(tidymodels)
 
-data("diabetes", package = "MASS")
 dfd <- as_tibble(diabetes)
 
 cat("Covarianza bmi-target:\n")
@@ -80,7 +92,6 @@ dfd %>% select(bmi, target) %>% cov() %>% print()
 # ══════════════════════════════════════════════════════════════════
 cat("\n── Escenario 4: Paquetes especializados ────────────────────\n")
 
-data("diabetes", package = "MASS")
 
 cat("Pearson y Spearman para pares seleccionados:\n")
 for (a in c("age", "bmi", "bp")) {

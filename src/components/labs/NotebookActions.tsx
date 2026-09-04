@@ -13,8 +13,11 @@ interface NotebookActionsProps {
 const COLAB_BASE =
   "https://colab.research.google.com/github/marcos-Nieves-24/InVitro-Code/blob/main";
 
-const actionClass =
-  "inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-white shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50";
+const downloadClass =
+  "inline-flex items-center gap-2 rounded-btn bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:pointer-events-none disabled:opacity-50";
+
+const colabClass =
+  "inline-flex items-center gap-2 rounded-btn bg-slate-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600";
 
 /**
  * REQ-NB-01/02/03/04: Shared notebook actions — Download (GET
@@ -73,7 +76,7 @@ export function NotebookActions({
           onClick={handleDownload}
           disabled={loading}
           type="button"
-          className={actionClass}
+          className={downloadClass}
         >
           {loading ? (
             <>
@@ -92,7 +95,7 @@ export function NotebookActions({
           href={colabHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={actionClass}
+          className={colabClass}
         >
           <ExternalLink className="h-4 w-4" />
           Abrir en Colab
