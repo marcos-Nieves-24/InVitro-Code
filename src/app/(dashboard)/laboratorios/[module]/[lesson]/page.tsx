@@ -107,6 +107,10 @@ export default async function LabLessonPage({ params }: Props) {
   const notebookPath = path.join(lessonDir, "notebook.ipynb");
   const hasNotebook = fs.existsSync(notebookPath);
 
+  // lab.R — optional
+  const rScriptPath = path.join(lessonDir, "lab.R");
+  const hasRScript = fs.existsSync(rScriptPath);
+
   return (
     <InVitroShell userName={userName}>
       <LabTabs
@@ -116,6 +120,7 @@ export default async function LabLessonPage({ params }: Props) {
         labRawFallback={labRawFallback}
         quizRaw={quizRaw}
         hasNotebook={hasNotebook}
+        hasRScript={hasRScript}
       />
     </InVitroShell>
   );
