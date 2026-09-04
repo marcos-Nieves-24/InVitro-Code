@@ -4,36 +4,14 @@
 # Buscamos la K optima con inercia y silueta, visualizamos los clusters
 # con sus centroides y agrupamos iris escalado con una tabla cruzada.
 # =========================================================================
+# ══════════════════════════════════════════════════════════════════
+# DATOS: Cargamos dataset real de iris (R base)
+# ══════════════════════════════════════════════════════════════════
+data("iris", package = "datasets")
+
 
 cat("═══════════════════════════════════════════════════════════════\n")
-cat("  LAB 6: Agrupamiento K-Means\n")
-cat("═══════════════════════════════════════════════════════════════\n\n")
 
-# ══════════════════════════════════════════════════════════════════
-# ESCENARIO 1: Base R
-# ══════════════════════════════════════════════════════════════════
-cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
-
-library(cluster)
-
-set.seed(42)
-n <- 400
-X <- rbind(
-  matrix(rnorm(n/5 * 2, mean = c(2, 2)), ncol = 2),
-  matrix(rnorm(n/5 * 2, mean = c(-2, 2)), ncol = 2),
-  matrix(rnorm(n/5 * 2, mean = c(0, -2)), ncol = 2),
-  matrix(rnorm(n/5 * 2, mean = c(2, -2)), ncol = 2),
-  matrix(rnorm(n/5 * 2, mean = c(-2, -2)), ncol = 2)
-)
-
-Ks <- 2:10
-inercia <- numeric(length(Ks))
-silueta <- numeric(length(Ks))
-for (i in seq_along(Ks)) {
-  km <- kmeans(X, centers = Ks[i], nstart = 10)
-  inercia[i] <- km$tot.withinss
-  silueta[i] <- mean(silhouette(km$cluster, dist(X))[, 3])
-}
 
 cat("K optima segun silueta:", Ks[which.max(silueta)], "\n")
 
@@ -99,7 +77,6 @@ cat("\n── Escenario 4: Paquetes especializados ─────────�
 
 library(cluster)
 
-data("iris", package = "datasets")
 X_iris <- scale(iris[, 1:4])
 
 km_iris <- kmeans(X_iris, centers = 3, nstart = 10)

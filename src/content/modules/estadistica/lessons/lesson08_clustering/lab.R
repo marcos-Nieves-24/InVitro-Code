@@ -4,33 +4,14 @@
 # Buscamos el k optimo con inercia y silhouette sobre blobs sinteticos y
 # luego agrupamos el dataset iris, comparando con las especies reales.
 # =========================================================================
+# ══════════════════════════════════════════════════════════════════
+# DATOS: Cargamos dataset real de iris (R base)
+# ══════════════════════════════════════════════════════════════════
+data("iris", package = "datasets")
+
 
 cat("═══════════════════════════════════════════════════════════════\n")
-cat("  LAB 8: Clustering con K-Means\n")
-cat("═══════════════════════════════════════════════════════════════\n\n")
 
-# ══════════════════════════════════════════════════════════════════
-# ESCENARIO 1: Base R
-# ══════════════════════════════════════════════════════════════════
-cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
-
-library(cluster)
-
-set.seed(42)
-centers <- matrix(c(2, 2, -2, 2, 0, -2, 2, -2, -2, -2), ncol = 2, byrow = TRUE)
-X <- do.call(rbind, lapply(1:5, function(i) {
-  m <- matrix(rnorm(80 * 2, mean = centers[i, ], sd = 0.9), ncol = 2)
-}))
-
-ks <- 2:8
-inercia <- numeric(length(ks))
-sil <- numeric(length(ks))
-for (i in seq_along(ks)) {
-  km <- kmeans(X, centers = ks[i], nstart = 10)
-  inercia[i] <- km$tot.withinss
-  sil[i] <- mean(silhouette(km$cluster, dist(X))[, 3])
-  cat(sprintf("k=%d: inercia=%.1f, silhouette=%.3f\n", ks[i], inercia[i], sil[i]))
-}
 
 par(mfrow = c(1, 2))
 plot(ks, inercia, type = "b", xlab = "k", ylab = "Inercia",
@@ -68,7 +49,6 @@ cat("\n── Escenario 3: tidymodels ──────────────
 
 library(tidymodels)
 
-data("iris", package = "datasets")
 iris_scaled <- iris %>%
   select(where(is.numeric)) %>%
   scale() %>%

@@ -4,62 +4,14 @@
 # Estandarizamos el dataset de cancer de mama, aplicamos PCA y analizamos
 # la varianza explicada, la proyeccion 2D y las cargas de los componentes.
 # =========================================================================
+# ══════════════════════════════════════════════════════════════════
+# DATOS: Cargamos dataset real de iris (R base)
+# ══════════════════════════════════════════════════════════════════
+data("iris", package = "datasets")
+
 
 cat("═══════════════════════════════════════════════════════════════\n")
-cat("  LAB 7: PCA - reduccion de dimensionalidad\n")
-cat("═══════════════════════════════════════════════════════════════\n\n")
 
-# ══════════════════════════════════════════════════════════════════
-# ESCENARIO 1: Base R
-# ══════════════════════════════════════════════════════════════════
-cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
-
-# Generamos datos similares a breast cancer
-set.seed(42)
-n <- 300
-radio_benigno <- rnorm(200, mean = 14, sd = 3)
-textura_benigno <- rnorm(200, mean = 19, sd = 3)
-perimetro_benigno <- radio_benigno * 2 * pi + rnorm(200, 0, 5)
-area_benigno <- pi * radio_benigno^2 + rnorm(200, 0, 50)
-
-radio_maligno <- rnorm(100, mean = 25, sd = 5)
-textura_maligno <- rnorm(100, mean = 25, sd = 4)
-perimetro_maligno <- radio_maligno * 2 * pi + rnorm(100, 0, 8)
-area_maligno <- pi * radio_maligno^2 + rnorm(100, 0, 100)
-
-X <- rbind(
-  cbind(radio_benigno, textura_benigno, perimetro_benigno, area_benigno),
-  cbind(radio_maligno, textura_maligno, perimetro_maligno, area_maligno)
-)
-y <- factor(rep(c("benigno", "maligno"), c(200, 100)))
-nombres <- c("radio", "textura", "perimetro", "area")
-
-X_std <- scale(X)
-pca <- prcomp(X_std)
-cat("Varianza explicada por componente:\n")
-print(round(pca$sdev^2 / sum(pca$sdev^2), 3))
-
-# Scree plot
-varianza <- pca$sdev^2 / sum(pca$sdev^2)
-acumulada <- cumsum(varianza)
-barplot(varianza, names.arg = paste0("PC", 1:4),
-        main = "Varianza explicada por componente", col = "#60a5fa")
-lines(acumulada * max(varianza), type = "b", pch = 19, col = "red")
-
-# Proyeccion 2D
-plot(pca$x[, 1], pca$x[, 2], col = ifelse(y == "benigno", "#3b82f6", "#ef4444"),
-     pch = 19, xlab = "PC1", ylab = "PC2",
-     main = "Proyeccion PCA 2D")
-legend("topright", legend = c("Benigno", "Maligno"),
-       col = c("#3b82f6", "#ef4444"), pch = 19)
-
-# Cargas
-cargas <- pca$rotation
-cat("\nTop 3 cargas de PC1:\n")
-orden <- order(abs(cargas[, 1]), decreasing = TRUE)[1:3]
-for (i in orden) {
-  cat(sprintf("  %s: %.3f\n", nombres[i], cargas[i, 1]))
-}
 
 # ══════════════════════════════════════════════════════════════════
 # ESCENARIO 2: Tidyverse

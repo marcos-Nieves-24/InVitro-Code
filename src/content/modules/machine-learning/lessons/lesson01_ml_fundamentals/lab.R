@@ -4,23 +4,21 @@
 # Cargamos el dataset de diabetes, dividimos en entrenamiento y prueba,
 # entrenamos una regresion lineal de referencia y evaluamos MSE y R2.
 # =========================================================================
+# ══════════════════════════════════════════════════════════════════
+# DATOS: Cargamos dataset real de diabetes (MASS)
+# ══════════════════════════════════════════════════════════════════
+if (!requireNamespace("MASS", quietly = TRUE)) {
+  install.packages("MASS", repos = "https://repo.r-wasm.org")
+}
+data("diabetes", package = "MASS")
+
 
 cat("═══════════════════════════════════════════════════════════════\n")
+
 cat("  LAB 1: Fundamentos de ML\n")
 cat("═══════════════════════════════════════════════════════════════\n\n")
 
-# ══════════════════════════════════════════════════════════════════
-# DATOS: Generamos dataset sintetico de diabetes
-# ══════════════════════════════════════════════════════════════════
-set.seed(42)
-n <- 442
-diabetes <- data.frame(
-  age = rnorm(n), sex = sample(c(-0.05, 0.05), n, replace = TRUE),
-  bmi = rnorm(n), bp = rnorm(n),
-  s1 = rnorm(n), s2 = rnorm(n), s3 = rnorm(n),
-  s4 = rnorm(n), s5 = rnorm(n), s6 = rnorm(n),
-  y = 152 + 77 * rnorm(n)
-)
+
 
 # ══════════════════════════════════════════════════════════════════
 # ESCENARIO 1: Base R (sin paquetes externos)

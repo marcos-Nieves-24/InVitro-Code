@@ -5,50 +5,14 @@
 # y analizamos la importancia de cada feature junto con el efecto de la
 # profundidad.
 # =========================================================================
+# ══════════════════════════════════════════════════════════════════
+# DATOS: Cargamos dataset real de iris (R base)
+# ══════════════════════════════════════════════════════════════════
+data("iris", package = "datasets")
+
 
 cat("═══════════════════════════════════════════════════════════════\n")
-cat("  LAB 4: Arboles de decision\n")
-cat("═══════════════════════════════════════════════════════════════\n\n")
 
-# ══════════════════════════════════════════════════════════════════
-# ESCENARIO 1: Base R
-# ══════════════════════════════════════════════════════════════════
-cat("\n── Escenario 1: Base R ─────────────────────────────────────\n")
-
-data("iris", package = "datasets")
-set.seed(42)
-n <- nrow(iris)
-idx <- sample(1:n, floor(0.7 * n))
-train <- iris[idx, ]
-test <- iris[-idx, ]
-
-# Usamos rpart (disponible en webR)
-library(rpart)
-
-arbol <- rpart(Species ~ ., data = train, method = "class",
-               control = rpart.control(maxdepth = 3))
-pred <- predict(arbol, newdata = test, type = "class")
-exactitud <- sum(pred == test$Species) / nrow(test)
-cat(sprintf("PASO 1 - Exactitud en prueba: %.3f\n", exactitud))
-
-cat("PASO 2 - Estructura del arbol:\n")
-print(arbol)
-
-# Importancia de variables
-importancias <- arbol$variable.importance
-barplot(importancias, main = "Importancia de features",
-        col = "#60a5fa", las = 2)
-
-# Profundidad y sobreajuste
-profundidades <- 1:10
-acc_train <- numeric(10)
-acc_test <- numeric(10)
-for (p in profundidades) {
-  arbol_p <- rpart(Species ~ ., data = train, method = "class",
-                   control = rpart.control(maxdepth = p))
-  acc_train[p] <- sum(predict(arbol_p, newdata = train, type = "class") == train$Species) / nrow(train)
-  acc_test[p] <- sum(predict(arbol_p, newdata = test, type = "class") == test$Species) / nrow(test)
-}
 plot(profundidades, acc_test, type = "b", xlab = "Profundidad", ylab = "Exactitud",
      main = "Exactitud segun profundidad", ylim = c(0.5, 1), pch = 19)
 lines(profundidades, acc_train, type = "b", col = "blue", pch = 17)
@@ -63,7 +27,6 @@ cat("\n── Escenario 2: Tidyverse ──────────────�
 library(dplyr)
 library(ggplot2)
 
-data("iris", package = "datasets")
 df <- as_tibble(iris)
 
 df %>%
@@ -84,7 +47,6 @@ cat("\n── Escenario 3: tidymodels ──────────────
 
 library(tidymodels)
 
-data("iris", package = "datasets")
 df <- as_tibble(iris)
 
 set.seed(42)
@@ -117,7 +79,6 @@ cat("\n── Escenario 4: Paquetes especializados ─────────�
 library(rpart)
 library(randomForest)
 
-data("iris", package = "datasets")
 set.seed(42)
 idx <- sample(1:nrow(iris), floor(0.7 * nrow(iris)))
 train <- iris[idx, ]
