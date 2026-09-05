@@ -12,8 +12,22 @@ const publicRoutes = [
 
 const adminRoutes = ["/admin", "/api/admin"];
 
+const authRoutes = ["/sign-in", "/sign-up"];
+
 export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
+
+  // If user is already signed in and visits sign-in/sign-up, redirect to dashboard
+  const isAuthRoute = authRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + "/"),
+  );
+
+  if (isAuthRoute) {
+    const session = await auth();
+    if (session.userId) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+  }
 
   // Check if the path starts with any public route
   const isPublic = publicRoutes.some(
