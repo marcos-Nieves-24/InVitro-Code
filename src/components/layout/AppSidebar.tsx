@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useClerk } from "@clerk/nextjs";
 import {
   Boxes,
   Compass,
@@ -19,6 +20,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  LogOut,
   type LucideIcon,
 } from "lucide-react";
 
@@ -59,6 +61,7 @@ export function AppSidebar({
 }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { signOut } = useClerk();
 
   const navItems = NAV_ITEMS.filter(
     (item) => item.href !== "/admin" || userRole === "admin"
@@ -187,6 +190,17 @@ export function AppSidebar({
               </div>
             )}
           </Link>
+          <button
+            onClick={() => signOut()}
+            className={`flex items-center gap-3 rounded-xl py-3 text-sm text-storm transition-colors hover:bg-red-500/10 hover:text-red-400 ${
+              collapsed ? "md:justify-center md:px-0" : "px-4"
+            }`}
+            title="Cerrar sesión"
+            type="button"
+          >
+            <LogOut className="h-5 w-5 shrink-0" />
+            {!collapsed && <span>Cerrar sesión</span>}
+          </button>
         </div>
       </aside>
     </>
