@@ -37,7 +37,7 @@ export function ComparisonTable({
           {rows.map((row, i) => (
             <tr
               key={i}
-              className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
+              className={i % 2 === 0 ? "bg-surface-card" : "bg-gray-50/50"}
             >
               <td className="px-4 py-3 font-medium text-gray-900">
                 {row.feature}

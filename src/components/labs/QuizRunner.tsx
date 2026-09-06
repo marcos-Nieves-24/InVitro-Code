@@ -261,7 +261,7 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
           onClick={handleSubmit}
           disabled={submitted || result.questions.length === 0}
           type="button"
-          className="inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-white shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-graphite shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50"
         >
           {submitted ? "Revisado" : "Verificar respuestas"}
         </button>

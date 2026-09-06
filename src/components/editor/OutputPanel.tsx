@@ -91,7 +91,7 @@ export default function OutputPanel({
 
           <button
             onClick={onClear}
-            className="rounded-md bg-[#1d1d1d] px-3 py-1 text-[12px] font-medium text-[#888] transition-colors hover:bg-[#2a2a2a] hover:text-white"
+            className="rounded-md bg-[#1d1d1d] px-3 py-1 text-[12px] font-medium text-[#a0a0a0] transition-colors hover:bg-[#2a2a2a] hover:text-white"
           >
             Limpiar
           </button>
@@ -108,7 +108,7 @@ export default function OutputPanel({
                 ? "bg-green-900/20 text-green-400"
                 : certifyState === "failed"
                   ? "bg-red-950/40 text-red-400"
-                  : "bg-[#111] text-[#888]"
+                  : "bg-[#111] text-[#a0a0a0]"
           }`}
         >
           {certifyState === "loading"
@@ -118,7 +118,7 @@ export default function OutputPanel({
       )}
 
       {exercise && (
-        <div className="border-b border-[#1d1d1d] px-4 py-2 text-sm text-[#888]">
+        <div className="border-b border-[#1d1d1d] px-4 py-2 text-sm text-[#a0a0a0]">
           {exercise.testCases.length} test
           {exercise.testCases.length !== 1 ? "s" : ""}
           {" | "}Estado:{" "}
@@ -128,7 +128,7 @@ export default function OutputPanel({
                 ? "text-green-400"
                 : validationResult === "invalid"
                   ? "text-red-400"
-                  : "text-[#888]"
+                  : "text-[#a0a0a0]"
             }`}
           >
             {validationResult === "valid"
@@ -153,7 +153,7 @@ export default function OutputPanel({
       )}
 
       {isRunning && (
-        <div className="flex items-center gap-2 px-4 pt-4 text-sm text-[#888]">
+        <div className="flex items-center gap-2 px-4 pt-4 text-sm text-[#a0a0a0]">
           <div className="h-3 w-3 animate-spin rounded-full border-b-2 border-[#3fb950]" />
           <span>Ejecutando...</span>
         </div>
@@ -166,7 +166,7 @@ export default function OutputPanel({
         style={{ minHeight: "200px", maxHeight: "600px" }}
       >
         {output.length === 0 ? (
-          <div className="mt-8 text-center text-[#888]">
+          <div className="mt-8 text-center text-[#a0a0a0]">
             La salida aparecerá aquí cuando ejecutes tu código.
             <br />
             <span className="text-xs">

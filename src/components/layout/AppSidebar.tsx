@@ -102,7 +102,7 @@ export function AppSidebar({
       {/* Sidebar HUD */}
       <aside
         aria-label="Navegación principal"
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col gap-8 border-r border-surface-raised bg-graphite py-8 transition-[width,transform] duration-300 ${
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col gap-6 border-r border-surface-raised bg-graphite py-4 overflow-y-auto transition-[width,transform] duration-300 ${
           collapsed ? "md:w-[72px] md:px-2" : "md:w-[280px] md:px-6"
         } ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
@@ -125,7 +125,7 @@ export function AppSidebar({
                 <h1 className="text-lg font-bold leading-none tracking-tight text-ink">
                   InVitro-Code
                 </h1>
-                <p className="text-xs font-medium text-storm">
+                <p className="text-xs font-medium text-surface/70">
                   AI LEARNING
                 </p>
               </div>
@@ -146,7 +146,7 @@ export function AppSidebar({
         </div>
 
         {/* Nav */}
-        <nav className="flex flex-grow flex-col gap-2" aria-label="Navegación de módulos">
+        <nav className="flex min-h-0 flex-grow flex-col gap-1" aria-label="Navegación de módulos">
           {navItems.map((item) => {
             const active = isActive(item.href);
             return (
@@ -159,8 +159,8 @@ export function AppSidebar({
                   collapsed ? "md:justify-center md:px-0" : "px-4"
                 } ${
                   active
-                    ? "bg-mint/30 font-semibold text-ink"
-                    : "text-storm hover:bg-surface-raised"
+                    ? "bg-mint/20 font-semibold text-mint"
+                    : "text-surface hover:bg-white/10"
                 }`}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
@@ -183,7 +183,7 @@ export function AppSidebar({
             </div>
             {!collapsed && (
               <div className="flex flex-col overflow-hidden">
-                <span className="text-xs font-bold text-mint">{userMeta}</span>
+                <span className="text-xs font-bold text-mint/80">{userMeta}</span>
                 <span className="truncate text-sm font-semibold text-ink">
                   {userName}
                 </span>
@@ -192,7 +192,7 @@ export function AppSidebar({
           </Link>
           <button
             onClick={() => signOut()}
-            className={`flex items-center gap-3 rounded-xl py-3 text-sm text-storm transition-colors hover:bg-red-500/10 hover:text-red-400 ${
+            className={`flex items-center gap-3 rounded-xl py-2.5 text-sm text-surface/70 transition-colors hover:bg-red-500/10 hover:text-red-400 ${
               collapsed ? "md:justify-center md:px-0" : "px-4"
             }`}
             title="Cerrar sesión"

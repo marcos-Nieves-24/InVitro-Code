@@ -101,7 +101,7 @@ export function InteractiveTable(props: InteractiveTableProps) {
               placeholder="Buscar en la tabla…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white py-1.5 pl-9 pr-3 text-sm text-gray-700 placeholder:text-gray-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg border border-gray-300 bg-surface-card py-1.5 pl-9 pr-3 text-sm text-gray-700 placeholder:text-gray-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ export function InteractiveTable(props: InteractiveTableProps) {
                 <tr
                   key={i}
                   className={`transition-colors hover:bg-blue-50/40 ${
-                    i % 2 === 0 ? "bg-white" : "bg-gray-50/30"
+                    i % 2 === 0 ? "bg-surface-card" : "bg-gray-50/30"
                   }`}
                 >
                   {row.map((cell, j) => (

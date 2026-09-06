@@ -74,7 +74,7 @@ export default function CodeEditor({
       action={
         <>
           {status ? (
-            <span className="hidden font-mono text-[11px] text-[#888] sm:inline">
+            <span className="hidden font-mono text-[11px] text-[#a0a0a0] sm:inline">
               {status}
             </span>
           ) : null}

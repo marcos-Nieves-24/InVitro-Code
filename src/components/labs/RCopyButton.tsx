@@ -65,7 +65,7 @@ export function RCopyButton({ mod, lesson, hasRScript }: RCopyButtonProps) {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="mx-4 max-w-lg rounded-xl bg-white p-6 shadow-xl">
+          <div className="mx-4 max-w-lg rounded-xl bg-surface-card p-6 shadow-xl">
             <div className="mb-4 flex items-center gap-3">
               <FileCode className="h-6 w-6 text-emerald-600" />
               <h3 className="text-lg font-semibold">Ejecutar código R</h3>

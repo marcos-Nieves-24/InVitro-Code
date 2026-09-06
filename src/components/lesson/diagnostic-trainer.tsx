@@ -350,7 +350,7 @@ export function DiagnosticTrainer({
         <select
           value={selectedXFeature}
           onChange={(e) => setSelectedXFeature(Number(e.target.value))}
-          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-surface-card text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
         >
           {FEATURE_KEYS.map((key, idx) => (
             <option key={idx} value={idx}>
@@ -364,7 +364,7 @@ export function DiagnosticTrainer({
         <select
           value={selectedYFeature}
           onChange={(e) => setSelectedYFeature(Number(e.target.value))}
-          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-surface-card text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
         >
           {FEATURE_KEYS.map((key, idx) => (
             <option key={idx} value={idx}>
@@ -381,7 +381,7 @@ export function DiagnosticTrainer({
   if (fetchLoading) {
     return (
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+        <div className="bg-surface-card rounded-lg border border-gray-200 p-8 text-center">
           <div className="inline-flex items-center gap-3">
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-teal-600"></div>
             <span className="text-sm text-gray-600">Cargando datos del modelo de diagnóstico...</span>
@@ -412,7 +412,7 @@ export function DiagnosticTrainer({
   return (
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-surface-card rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">Entrenamiento de Diagnóstico con KNN</h2>
             <div className="flex items-center gap-4">
@@ -439,7 +439,7 @@ export function DiagnosticTrainer({
           {/* Left column - Features and controls */}
           <div className="space-y-6">
             {currentTest && !isLoading && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="bg-surface-card rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Características del Caso</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {getFeatureDisplayItems().map((feature, index) => (
@@ -457,7 +457,7 @@ export function DiagnosticTrainer({
             )}
 
             {currentTest && !isLoading && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="bg-surface-card rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Tu Respuesta</h3>
                 <div className="flex gap-4">
                   <button
@@ -481,7 +481,7 @@ export function DiagnosticTrainer({
             )}
 
             {showDiagnosis && currentTest && (
-              <div className={`bg-white rounded-lg border-l-4 p-6 ${isCorrect ? 'border-teal-500 bg-teal-50' : 'border-orange-500 bg-orange-50'}`}>
+              <div className={`bg-surface-card rounded-lg border-l-4 p-6 ${isCorrect ? 'border-teal-500 bg-teal-50' : 'border-orange-500 bg-orange-50'}`}>
                 <div className="flex items-center gap-2 mb-2">
                   <BarChart3 className="h-5 w-5" />
                   <h3 className="text-lg font-semibold">
@@ -502,7 +502,7 @@ export function DiagnosticTrainer({
             )}
 
             {currentTest && currentTest.round >= 8 && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="bg-surface-card rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Resumen de Rondas</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="text-sm text-gray-700">
@@ -521,7 +521,7 @@ export function DiagnosticTrainer({
 
           {/* Right column - Plot */}
           <div className="space-y-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="bg-surface-card rounded-lg border border-gray-200 p-4">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-900">Visualización de Datos de Entrenamiento</h3>
                 <div className="text-xs text-gray-500">
@@ -543,7 +543,7 @@ export function DiagnosticTrainer({
         {/* Loading overlay (brief round transitions only) */}
         {isLoading && (
           <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 shadow-lg">
+            <div className="bg-surface-card rounded-lg p-6 shadow-lg">
               <div className="flex items-center gap-3">
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-teal-600"></div>
                 <span className="text-sm text-gray-700">Cargando siguiente caso...</span>

@@ -53,7 +53,7 @@ export function MascotMessage({
       }`}
     >
       {avatar}
-      <div className="min-w-0 rounded-[12px] border border-gray-200 bg-white px-4 py-3 text-sm leading-relaxed text-gray-700 shadow-sm">
+      <div className="min-w-0 rounded-[12px] border border-gray-200 bg-surface-card px-4 py-3 text-sm leading-relaxed text-gray-700 shadow-sm">
         {children}
       </div>
     </div>

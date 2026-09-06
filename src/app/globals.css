@@ -14,8 +14,8 @@
   --color-ink: #000000;
   --color-graphite: #2a272a;
   --color-slate: #4b4a54;
-  --color-storm: #677381;
-  --color-fog: #82a0aa;
+  --color-storm: #5e6872;
+  --color-fog: #6d8e99;
   --color-mint: #a3cfcd;
   --color-surface: #f4f6f8;
   --color-surface-card: #ffffff;
@@ -62,6 +62,16 @@
   --shadow-glow: 0 0 20px rgba(163, 207, 205, 0.3);
 }
 
+/* ─── Dark Mode Overrides ────────────────────────────── */
+.dark {
+  --color-surface: #0f0f0f;
+  --color-surface-card: #1a1a1a;
+  --color-surface-raised: #2a2a2a;
+  --color-ink: #e0e0e0;
+  --color-on-surface: #e0e0e0;
+  --color-on-surface-variant: #9ca3af;
+}
+
 /* ─── Font Utilities ────────────────────────────────── */
 body {
   font-family: var(--font-body), sans-serif;
@@ -82,7 +92,11 @@ body {
   font-size: 0.75rem; /* 12px */
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #6b7280; /* gray-500 */
+  color: var(--color-storm);
+}
+
+.dark .eyebrow {
+  color: var(--color-on-surface-variant);
 }
 
 /* ─── Dot Grid Background ────────────────────────────── */
@@ -99,6 +113,12 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 4px 24px -1px rgba(15, 23, 42, 0.05);
+}
+
+.dark .glass-card {
+  background: rgba(26, 26, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Skeleton loading (DESIGN.md §5.2) ─────────── */
@@ -118,11 +138,11 @@ body {
 }
 
 .xp-gradient {
-  background: linear-gradient(90deg, #82a0aa 0%, #a3cfcd 100%);
+  background: linear-gradient(90deg, var(--color-fog) 0%, var(--color-mint) 100%);
 }
 
 .progress-gradient {
-  background: linear-gradient(90deg, #82a0aa 0%, #a3cfcd 100%);
+  background: linear-gradient(90deg, var(--color-fog) 0%, var(--color-mint) 100%);
 }
 
 .sidebar-active {

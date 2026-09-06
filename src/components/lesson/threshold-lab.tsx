@@ -208,7 +208,7 @@ export function ThresholdLab({
         {/* Slider section */}
         <div className="lg:col-span-2 space-y-6">
           {/* Slider card */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <label htmlFor="threshold-slider" className="text-sm font-medium text-gray-700">
@@ -250,7 +250,7 @@ export function ThresholdLab({
           {metrics && (
             <div className="space-y-4">
               {/* Current accuracy card */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Accuracy actual</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -288,7 +288,7 @@ export function ThresholdLab({
               </div>
 
               {/* Confusion matrix style cards */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Matriz de confusión</h3>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -332,7 +332,7 @@ export function ThresholdLab({
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Best accuracy card */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
             <div className="flex items-center gap-2 mb-3">
               <TrendingUp className="h-5 w-5 text-blue-600" />
               <h3 className="text-lg font-semibold text-gray-900">Mejor accuracy</h3>
@@ -370,7 +370,7 @@ export function ThresholdLab({
           </div>
 
           {/* Best possible accuracy card */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Ver resultado</h3>
 
             <p className="text-sm text-gray-600 mb-4">
@@ -409,7 +409,7 @@ export function ThresholdLab({
           </div>
 
           {/* Complete button */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-surface-card rounded-xl border border-gray-200 p-6">
             <button
               onClick={handleComplete}
               disabled={hasCompleted}

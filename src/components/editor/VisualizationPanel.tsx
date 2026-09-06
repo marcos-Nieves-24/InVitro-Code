@@ -28,10 +28,10 @@ export default function VisualizationPanel({
           {isRunning ? (
             <>
               <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-[#3fb950]" />
-              <span className="text-sm text-[#888]">Ejecutando...</span>
+              <span className="text-sm text-[#a0a0a0]">Ejecutando...</span>
             </>
           ) : (
-            <span className="text-sm text-[#888]">
+            <span className="text-sm text-[#a0a0a0]">
               La visualización aparecerá aquí cuando ejecutes código que genere
               gráficos.
             </span>
@@ -44,7 +44,7 @@ export default function VisualizationPanel({
               const parsed = JSON.parse(figureJson);
               return (
                 <div key={i} className="bg-[#0a0a0a]">
-                  <p className="mb-2 font-mono text-[11px] text-[#888]">
+                  <p className="mb-2 font-mono text-[11px] text-[#a0a0a0]">
                     Gráfico {i + 1}
                   </p>
                   <Plot

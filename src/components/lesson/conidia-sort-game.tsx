@@ -104,7 +104,7 @@ export function ConidiaSortGame({
   if (gameOver) {
     const correctCount = results.filter((r) => r.isCorrect).length;
     return (
-      <div className="my-4 rounded-[12px] border border-gray-200 bg-white p-6 text-center">
+      <div className="my-4 rounded-[12px] border border-gray-200 bg-surface-card p-6 text-center">
         <p className="mb-2 text-lg font-semibold text-gray-900">
           {correctCount === PATTERNS.length
             ? "¡Perfecto!"

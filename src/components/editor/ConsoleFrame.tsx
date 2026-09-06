@@ -61,7 +61,7 @@ export function ConsoleFrame({
         <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
         <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
         <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-3 font-mono text-[12px] font-medium tracking-tight text-[#888]">
+        <span className="ml-3 font-mono text-[12px] font-medium tracking-tight text-[#a0a0a0]">
           {title}
         </span>
       </div>
@@ -72,7 +72,7 @@ export function ConsoleFrame({
           <button
             onClick={() => setIsMaximized((prev) => !prev)}
             aria-label={isMaximized ? "Restaurar" : "Maximizar"}
-            className="rounded-md p-1 text-[#888] transition-colors hover:bg-[#2a2a2a] hover:text-white"
+            className="rounded-md p-1 text-[#a0a0a0] transition-colors hover:bg-[#2a2a2a] hover:text-white"
           >
             {isMaximized ? (
               <Minimize2 size={16} />

@@ -60,7 +60,7 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
       {/* Mobile backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/30 lg:hidden"
+          className="fixed inset-0 z-30 bg-graphite/40 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
