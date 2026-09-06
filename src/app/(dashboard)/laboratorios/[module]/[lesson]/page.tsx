@@ -67,7 +67,7 @@ export default async function LabLessonPage({ params }: Props) {
   const supabase = createAdminClient();
   const profileRes = await supabase
     .from("profiles")
-    .select("username, email")
+    .select("username, email, role, theme")
     .eq("id", userId)
     .maybeSingle();
   const userName = getDisplayName(profileRes.data ?? {});
@@ -112,7 +112,7 @@ export default async function LabLessonPage({ params }: Props) {
   const hasRScript = fs.existsSync(rScriptPath);
 
   return (
-    <InVitroShell userName={userName}>
+    <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
       <LabTabs
         module={modSlug}
         lesson={lessonSlug}

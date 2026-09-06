@@ -91,7 +91,7 @@ export default async function NivelesPage() {
   const [profileRes, streakRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("username, email, role")
+      .select("username, email, role, theme")
       .eq("id", userId)
       .maybeSingle(),
     supabase
@@ -133,6 +133,7 @@ export default async function NivelesPage() {
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${currentRank.name}`}
       userRole={profileRes.data?.role}
+      theme={profileRes.data?.theme}
     >
       <InVitroTopBar totalXp={totalXp} currentStreak={currentStreak} />
 

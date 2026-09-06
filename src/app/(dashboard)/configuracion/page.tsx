@@ -35,14 +35,16 @@ export default async function SettingsPage() {
               notification_prefs={profile?.notification_prefs}
               onSave={async (data) => {
                 "use server";
-                await fetch(
-                  `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/profile`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                  }
-                );
+                const { userId: uid } = await auth();
+                if (!uid) return;
+                const sb = createAdminClient();
+                await sb
+                  .from("profiles")
+                  .update({
+                    theme: data.theme,
+                    notification_prefs: data.notification_prefs,
+                  })
+                  .eq("id", uid);
               }}
             />
           </div>

@@ -45,7 +45,7 @@ export default async function ComunidadPage() {
         .limit(20),
       supabase
         .from("profiles")
-        .select("username, email, role")
+        .select("username, email, role, theme")
         .eq("id", userId)
         .maybeSingle(),
       supabase
@@ -103,6 +103,7 @@ export default async function ComunidadPage() {
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
       userRole={profileRes.data?.role}
+      theme={profileRes.data?.theme}
     >
       <InVitroTopBar
         totalXp={totalXp}

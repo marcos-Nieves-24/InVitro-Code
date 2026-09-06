@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const supabase = createAdminClient();
   const profileRes = await supabase
     .from("profiles")
-    .select("username, email")
+    .select("username, email, role, theme")
     .eq("id", userId)
     .maybeSingle();
   const userName = getDisplayName(profileRes.data ?? {});
@@ -108,7 +108,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     lessonSlug.replace(/^lesson\d+_/, "").split(/[-_]/).join(" ");
 
   return (
-    <InVitroShell userName={userName}>
+    <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8">
         <Link
           href="/proyectos"

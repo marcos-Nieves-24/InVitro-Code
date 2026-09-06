@@ -35,6 +35,7 @@ export default function RootLayout({
       <html
         lang="es"
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrains_Mono.variable}`}
+        suppressHydrationWarning
       >
         <body className="antialiased">
         <a
