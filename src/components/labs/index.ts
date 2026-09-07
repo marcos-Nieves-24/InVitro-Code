@@ -6,3 +6,6 @@ export { NotebookActions } from "./NotebookActions";
 export { LabTabs } from "./LabTabs";
 export { LabHub } from "./LabHub";
 export { LabCard } from "./LabCard";
+export { LabHeader } from "./LabHeader";
+export { LabCallout } from "./LabCallout";
+export { ReflectionPrompt } from "./ReflectionPrompt";
