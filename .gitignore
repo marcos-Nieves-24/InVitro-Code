@@ -39,9 +39,10 @@ src/**/*.js
 *~
 .DS_Store
 .vercel
-.env*
+
 # Local AI runtime state
 .atl/
+.agents/
 .codegraph/
 .stitch-screens/
 
@@ -54,3 +55,15 @@ skills-lock.json
 
 # clerk configuration (can include secrets)
 /.clerk/
+
+# Docker (local only)
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Untracked SDD artifacts (local only)
+openspec/changes/archive/
+openspec/changes/fix-oauth-middleware/
+openspec/changes/r-labs-multi-scenario/
+openspec/specs/middleware-file-convention/
+openspec/specs/platform-architecture-docs/
