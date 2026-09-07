@@ -32,18 +32,11 @@ import {
   OverfittingTrainer,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
-import dynamic from "next/dynamic";
+import {
+  LessonCodeEditor,
+  LessonCompleteButton,
+} from "@/components/LessonComponents";
 import { lessonProseClass } from "@/lib/ui/prose";
-
-const LessonCodeEditor = dynamic(
-  () => import("@/components/editor/PyodideRunner"),
-  { ssr: false },
-);
-
-const LessonCompleteButton = dynamic(
-  () => import("@/components/CompleteLessonButton"),
-  { ssr: false },
-);
 
 const mdxConfig = {
   blockJS: false,
