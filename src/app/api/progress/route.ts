@@ -6,17 +6,16 @@ import { evaluateAchievements } from "@/lib/gamification/achievements";
 
 /** Number of consecutive days with activity to count as a streak day. */
 function isNextDay(a: string, b: string): boolean {
-  const dateA = new Date(a);
-  const dateB = new Date(b);
+  // a and b are "YYYY-MM-DD" strings — parse at noon UTC to avoid DST issues
+  const dateA = new Date(a + "T12:00:00Z");
+  const dateB = new Date(b + "T12:00:00Z");
   const diffMs = dateB.getTime() - dateA.getTime();
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
   return diffDays === 1;
 }
 
 function isSameDay(a: string, b: string): boolean {
-  const dateA = new Date(a);
-  const dateB = new Date(b);
-  return dateA.toDateString() === dateB.toDateString();
+  return a === b;
 }
 
 export async function POST(request: NextRequest) {
@@ -56,7 +55,6 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (progressError) {
-      console.error("Progress upsert error:", progressError);
       return NextResponse.json(
         { error: `Failed to upsert progress: ${progressError.message}` },
         { status: 500 },
@@ -74,7 +72,6 @@ export async function POST(request: NextRequest) {
       .maybeSingle();
 
     if (streakReadError) {
-      console.error("Streak fetch error:", streakReadError);
       return NextResponse.json(
         { error: `Failed to fetch streak: ${streakReadError.message}` },
         { status: 500 },
@@ -118,7 +115,6 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (streakWriteError) {
-      console.error("Streak update error:", streakWriteError);
       return NextResponse.json(
         { error: `Failed to update streak: ${streakWriteError.message}` },
         { status: 500 },
@@ -129,8 +125,8 @@ export async function POST(request: NextRequest) {
     // A failure here must never break the lesson completion flow.
     try {
       await evaluateAchievements(userId, supabase);
-    } catch (error) {
-      console.error("Achievement evaluation error:", error);
+    } catch {
+      // Achievement evaluation is non-fatal — never break lesson completion
     }
 
     return NextResponse.json({
@@ -139,8 +135,7 @@ export async function POST(request: NextRequest) {
       streak: updatedStreak,
       xpEarned,
     });
-  } catch (error) {
-    console.error("Error in progress API:", error);
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

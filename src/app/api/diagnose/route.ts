@@ -30,7 +30,6 @@ export async function GET(request: Request) {
   const result: Record<string, unknown> = {
     module,
     slug,
-    filePath,
     fileExists: fs.existsSync(filePath),
   };
 

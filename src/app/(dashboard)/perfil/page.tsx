@@ -46,12 +46,18 @@ export default async function ProfilePage() {
               currentAvatar={profile?.avatar_url}
               onUpload={async (file) => {
                 "use server";
-                const formData = new FormData();
-                formData.append("avatar", file);
-                await fetch(
-                  `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/profile/avatar`,
-                  { method: "POST", body: formData }
-                );
+                const { userId: uid } = await auth();
+                if (!uid) return;
+                const admin = createAdminClient();
+                const fileExt = file.name.split(".").pop();
+                const fileName = `${uid}-${Date.now()}.${fileExt}`;
+                const filePath = `avatars/${fileName}`;
+                const { error: uploadError } = await admin.storage
+                  .from("avatars")
+                  .upload(filePath, file, { upsert: true });
+                if (uploadError) throw new Error(uploadError.message);
+                const { data: urlData } = admin.storage.from("avatars").getPublicUrl(filePath);
+                await admin.from("profiles").update({ avatar_url: urlData.publicUrl }).eq("id", uid);
               }}
             />
           </div>
@@ -65,14 +71,13 @@ export default async function ProfilePage() {
               bio={profile?.bio}
               onSave={async (data) => {
                 "use server";
-                await fetch(
-                  `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/profile`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                  }
-                );
+                const { userId: uid } = await auth();
+                if (!uid) return;
+                const admin = createAdminClient();
+                await admin.from("profiles").update({
+                  username: data.username,
+                  bio: data.bio,
+                }).eq("id", uid);
               }}
             />
           </div>

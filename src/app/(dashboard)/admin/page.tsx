@@ -74,27 +74,15 @@ export default async function AdminPage() {
             </h2>
             <UsersTable
               users={users}
-              onBanToggle={async (userId, isBanned) => {
+              onBanToggle={async (targetUserId, isBanned) => {
                 "use server";
-                await fetch(
-                  `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/admin/users/${userId}`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ is_banned: isBanned }),
-                  }
-                );
+                const admin = createAdminClient();
+                await admin.from("profiles").update({ is_banned: isBanned }).eq("id", targetUserId);
               }}
-              onRoleChange={async (userId, role) => {
+              onRoleChange={async (targetUserId, role) => {
                 "use server";
-                await fetch(
-                  `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/admin/users/${userId}`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ role }),
-                  }
-                );
+                const admin = createAdminClient();
+                await admin.from("profiles").update({ role }).eq("id", targetUserId);
               }}
             />
           </div>
