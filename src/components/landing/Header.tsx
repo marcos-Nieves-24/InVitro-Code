@@ -53,7 +53,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="#contacto"
+            href="/sign-up"
             className="rounded-[10px] bg-mint px-5 py-2.5 text-sm font-medium text-ink transition-all hover:shadow-glow"
           >
             Comenzar
@@ -83,7 +83,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contacto"
+              href="/sign-up"
               onClick={() => setMobileOpen(false)}
               className="rounded-[10px] bg-mint px-5 py-2.5 text-center text-sm font-medium text-ink"
             >
