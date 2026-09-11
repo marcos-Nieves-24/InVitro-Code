@@ -10,16 +10,16 @@
 /* ─── Design Tokens ─────────────────────────────────── */
 
 @theme {
-  /* ── DESIGN.md §1.1 Palette ── */
-  --color-ink: #000000;
-  --color-graphite: #2a272a;
-  --color-slate: #4b4a54;
-  --color-storm: #5e6872;
-  --color-fog: #6d8e99;
-  --color-mint: #a3cfcd;
-  --color-surface: #f4f6f8;
-  --color-surface-card: #ffffff;
-  --color-surface-raised: #e8ecf0;
+  /* ── NEW PALETTE ── */
+  --color-ink: #111439;
+  --color-graphite: #005f88;
+  --color-slate: #3A4A5C;
+  --color-storm: #3A4A5C;
+  --color-fog: #5A7A8A;
+  --color-mint: #00b2b2;
+  --color-surface: #FFFFFF;
+  --color-surface-card: #F8FAFB;
+  --color-surface-raised: #E2E8F0;
 
   /* ── Semantic helpers (mapped to palette) ── */
   --color-on-surface: var(--color-ink);
@@ -376,49 +376,71 @@ body {
   to { opacity: 1; }
 }
 
-/* ─── Landing: Module Pathway (horizontal scroll) ──── */
-
-.pathway-track {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0 24px 16px;
+/* ─── Typewriter Animation ────────────────────────── */
+@keyframes typewriter-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.pathway-track::-webkit-scrollbar {
-  display: none;
+/* ─── SVG Draw Animation ──────────────────────────── */
+@keyframes draw-line {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
 }
 
-.pathway-node {
-  flex: 0 0 auto;
-  scroll-snap-align: center;
-  position: relative;
+@keyframes node-appear {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.pathway-connector {
-  flex: 0 0 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+/* ─── Dendrogram Line Draw ─────────────────────────── */
+.dendro-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.2s ease-out;
 }
 
-.pathway-connector::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-outline-variant) 0,
-    var(--color-outline-variant) 6px,
-    transparent 6px,
-    transparent 12px
-  );
-  transform: translateY(-50%);
+.dendro-line.is-drawn {
+  stroke-dashoffset: 0;
+}
+
+/* ─── Dendrogram Node Fade-in ──────────────────────── */
+.dendro-node {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.dendro-node.is-visible {
+  opacity: 1;
+}
+
+/* ─── Terminal Output Fade-in ──────────────────────── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* ─── Card Hover Elevation ─────────────────────────── */
+.card-hover {
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── Header Background Transition ─────────────────── */
+.header-bg {
+  transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
 }

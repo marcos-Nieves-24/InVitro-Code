@@ -1,10 +1,15 @@
 # openspec/config.yaml
 schema: spec-driven
 
+project: invitro-code
+stack: nextjs-16-typescript-tailwind-v4
+language: spanish
+strict_tdd: false
+
 context: |
   Project: invitro-code
   Vision: Interactive learning platform (Duolingo-style) for biotech students to learn AI/ML fundamentals through coding challenges.
-  Stack: Next.js (App Router), TypeScript, Tailwind CSS, MDX (next-mdx-remote), Plotly.js, Monaco Editor, Supabase (auth/DB), Clerk auth
+  Stack: Next.js 16 (App Router, Turbopack), TypeScript, Tailwind v4, MDX (next-mdx-remote/rsc), Plotly.js, Monaco Editor, Supabase (auth/DB), Clerk auth
   Architecture: Content-driven — modules (python, ia, estadistica, etica, machine-learning) with lesson.md files containing MDX components (<Section>, <ConceptCard>, etc.). Lesson page splits by <Section> blocks into a carousel.
   Testing: Manual test file exists (src/__tests__/requestId-descarte.test.mjs) but no test runner configured in npm scripts.
   Strict TDD: false (no test runner available)
@@ -32,8 +37,9 @@ rules:
     tdd: false
     test_command: ""
   verify:
+    type-check: "npm run type-check"
+    build: "npm run build"
     test_command: ""
-    build_command: "npm run build"
     coverage_threshold: 0
   archive:
     - Warn before merging destructive deltas

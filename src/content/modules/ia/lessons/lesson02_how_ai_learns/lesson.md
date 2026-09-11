@@ -65,6 +65,12 @@ Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza
 La **frontera de decisión** es la línea (o superficie) que separa diferentes clases en el espacio de características. Del lado azul, el modelo predice *Aspergillus*; del lado rojo, *Penicillium*.
 </ConceptCard>
 
+Cuando apilamos varias capas de perceptrones, obtenemos una **red neuronal**. Cada capa transforma las señales de la capa anterior, y así la red puede aprender fronteras mucho más complejas que una línea recta. La siguiente animación muestra cómo fluye la información en una red neuronal *feedforward*: los datos entran por la **capa de entrada**, se propagan por las **capas ocultas** y producen una predicción en la **capa de salida**.
+
+<NeuralNetworkIntro />
+
+Observa el recorrido de los pulsos de datos: cada conexión tiene un **peso** que amplifica o atenúa la señal, igual que los pesos $w_1, w_2$ del perceptrón. Una red neuronal no es más que muchos perceptrones conectados en capas.
+
 </Section>
 
 <Section number={4} title="Perceptrón en acción" eyebrow="INTERACTIVA">

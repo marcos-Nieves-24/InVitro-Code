@@ -190,7 +190,7 @@ export default async function ComunidadPage() {
                     const isMe = row.userId === userId;
                     return (
                       <div
-                        key={row.userId}
+                        key={`${row.userId}-${index}`}
                         className={`flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-card ${
                           isMe
                             ? "border border-mint/30 bg-fog/20"
