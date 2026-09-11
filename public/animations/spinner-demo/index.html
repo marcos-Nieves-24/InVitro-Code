@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Loading Spinner — 3s Loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="viewport">
+<div class="stage" id="stage">
+
+  <!-- Ambient background orbs for depth -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-a" data-anim="orb-a"></div>
+    <div class="orb orb-b" data-anim="orb-b"></div>
+  </div>
+
+  <!-- Film grain overlay -->
+  <div class="grain-overlay" aria-hidden="true" data-anim="grain"></div>
+
+  <!-- Main spinner assembly -->
+  <div class="spinner-wrap" id="spinnerWrap" data-el="spinner" data-anim="spinner-wrap">
+    <!-- Outer ring -->
+    <div class="spinner-ring" id="spinnerRing" data-anim="spinner-ring"></div>
+    <!-- Inner glow dot -->
+    <div class="spinner-dot" id="spinnerDot" data-anim="spinner-dot"></div>
+    <!-- Pulsing halo -->
+    <div class="spinner-halo" id="spinnerHalo" data-anim="spinner-halo"></div>
+  </div>
+
+  <!-- Loading text -->
+  <div class="loading-text" id="loadingText" data-el="loadingText" data-anim="loading-text">
+    <span>Loading</span>
+    <span class="dots" id="loadingDots" data-anim="loading-dots"></span>
+  </div>
+
+</div><!-- /stage -->
+</div><!-- /viewport -->
+
+<!-- Playback controls -->
+<div class="playback" id="playback">
+  <button id="playbtn" title="Play / Pause (Space)" aria-label="Play / Pause">&#9654;</button>
+  <div class="tc" id="tc">00:00 / 00:03</div>
+</div>
+
+<script src="timeline.js"></script>
+  <script src="/animations/bridge.js"></script>
+</body>
+</html>

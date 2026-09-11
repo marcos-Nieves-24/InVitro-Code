@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920">
+<title>Red Neuronal Feedforward</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ===== BACKGROUND AMBIENT MESH ===== -->
+<div class="bg-wash" aria-hidden="true">
+  <div class="bg-orb bg-orb-a"></div>
+  <div class="bg-orb bg-orb-b"></div>
+  <div class="bg-orb bg-orb-c"></div>
+  <div class="bg-grain"></div>
+</div>
+
+<!-- ===== STAGE ===== -->
+<div id="viewport">
+<div id="stage">
+
+  <!-- ===== TITLE ===== -->
+  <div class="title-bar" id="title-bar" data-el="title-bar" data-anim="title">
+    <h1 id="title" data-el="title">Red Neuronal Feedforward</h1>
+  </div>
+
+  <!-- ===== LAYER LABELS ===== -->
+  <div class="layer-label" id="label-entrada" data-el="label-entrada" style="left:255px; top:260px;">Entrada</div>
+  <div class="layer-label" id="label-oculta" data-el="label-oculta" style="left:910px; top:190px;">Oculta</div>
+  <div class="layer-label" id="label-salida" data-el="label-salida" style="left:1565px; top:320px;">Salida</div>
+
+  <!-- ===== SVG CONNECTIONS + PULSES ===== -->
+  <svg class="nn-svg" id="nn-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <filter id="glow-teal">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow-pulse">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="line-grad-i2h" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.6"/>
+        <stop offset="50%" stop-color="#818cf8" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="line-grad-h2o" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.6"/>
+        <stop offset="50%" stop-color="#00f5ff" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#30d158" stop-opacity="0.6"/>
+      </linearGradient>
+    </defs>
+
+    <!-- INPUT→HIDDEN connections (12 lines) -->
+    <line id="c-x1-h1" class="conn conn-i2h" x1="300" y1="370" x2="960" y2="290" data-el="conn"/>
+    <line id="c-x1-h2" class="conn conn-i2h" x1="300" y1="370" x2="960" y2="440" data-el="conn"/>
+    <line id="c-x1-h3" class="conn conn-i2h" x1="300" y1="370" x2="960" y2="590" data-el="conn"/>
+    <line id="c-x1-h4" class="conn conn-i2h" x1="300" y1="370" x2="960" y2="740" data-el="conn"/>
+    <line id="c-x2-h1" class="conn conn-i2h" x1="300" y1="540" x2="960" y2="290" data-el="conn"/>
+    <line id="c-x2-h2" class="conn conn-i2h" x1="300" y1="540" x2="960" y2="440" data-el="conn"/>
+    <line id="c-x2-h3" class="conn conn-i2h" x1="300" y1="540" x2="960" y2="590" data-el="conn"/>
+    <line id="c-x2-h4" class="conn conn-i2h" x1="300" y1="540" x2="960" y2="740" data-el="conn"/>
+    <line id="c-x3-h1" class="conn conn-i2h" x1="300" y1="710" x2="960" y2="290" data-el="conn"/>
+    <line id="c-x3-h2" class="conn conn-i2h" x1="300" y1="710" x2="960" y2="440" data-el="conn"/>
+    <line id="c-x3-h3" class="conn conn-i2h" x1="300" y1="710" x2="960" y2="590" data-el="conn"/>
+    <line id="c-x3-h4" class="conn conn-i2h" x1="300" y1="710" x2="960" y2="740" data-el="conn"/>
+
+    <!-- HIDDEN→OUTPUT connections (8 lines) -->
+    <line id="c-h1-y1" class="conn conn-h2o" x1="960" y1="290" x2="1620" y2="430" data-el="conn"/>
+    <line id="c-h1-y2" class="conn conn-h2o" x1="960" y1="290" x2="1620" y2="610" data-el="conn"/>
+    <line id="c-h2-y1" class="conn conn-h2o" x1="960" y1="440" x2="1620" y2="430" data-el="conn"/>
+    <line id="c-h2-y2" class="conn conn-h2o" x1="960" y1="440" x2="1620" y2="610" data-el="conn"/>
+    <line id="c-h3-y1" class="conn conn-h2o" x1="960" y1="590" x2="1620" y2="430" data-el="conn"/>
+    <line id="c-h3-y2" class="conn conn-h2o" x1="960" y1="590" x2="1620" y2="610" data-el="conn"/>
+    <line id="c-h4-y1" class="conn conn-h2o" x1="960" y1="740" x2="1620" y2="430" data-el="conn"/>
+    <line id="c-h4-y2" class="conn conn-h2o" x1="960" y1="740" x2="1620" y2="610" data-el="conn"/>
+
+    <!-- DATA PULSE CIRCLES -->
+    <circle id="pulse-1" class="pulse-dot" cx="0" cy="0" r="7" filter="url(#glow-pulse)" data-el="pulse"/>
+    <circle id="pulse-2" class="pulse-dot" cx="0" cy="0" r="6" filter="url(#glow-pulse)" data-el="pulse"/>
+    <circle id="pulse-3" class="pulse-dot" cx="0" cy="0" r="7" filter="url(#glow-pulse)" data-el="pulse"/>
+    <circle id="pulse-4" class="pulse-dot" cx="0" cy="0" r="5" filter="url(#glow-pulse)" data-el="pulse"/>
+    <circle id="pulse-5" class="pulse-dot" cx="0" cy="0" r="6" filter="url(#glow-pulse)" data-el="pulse"/>
+    <circle id="pulse-6" class="pulse-dot" cx="0" cy="0" r="5" filter="url(#glow-pulse)" data-el="pulse"/>
+    <!-- Wave 2 pulses (hidden→output) -->
+    <circle id="pulse-w2-1" class="pulse-dot pulse-w2" cx="0" cy="0" r="7" filter="url(#glow-pulse)" data-el="pulse-w2"/>
+    <circle id="pulse-w2-2" class="pulse-dot pulse-w2" cx="0" cy="0" r="6" filter="url(#glow-pulse)" data-el="pulse-w2"/>
+    <circle id="pulse-w2-3" class="pulse-dot pulse-w2" cx="0" cy="0" r="7" filter="url(#glow-pulse)" data-el="pulse-w2"/>
+  </svg>
+
+  <!-- ===== INPUT NODES ===== -->
+  <div class="nn-node" id="node-x1" data-el="node" style="left:264px; top:334px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">x₁</div>
+  </div>
+  <div class="nn-node" id="node-x2" data-el="node" style="left:264px; top:504px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">x₂</div>
+  </div>
+  <div class="nn-node" id="node-x3" data-el="node" style="left:264px; top:674px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">x₃</div>
+  </div>
+
+  <!-- ===== HIDDEN NODES ===== -->
+  <div class="nn-node nn-node-hidden" id="node-h1" data-el="node" style="left:924px; top:254px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">h₁</div>
+  </div>
+  <div class="nn-node nn-node-hidden" id="node-h2" data-el="node" style="left:924px; top:404px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">h₂</div>
+  </div>
+  <div class="nn-node nn-node-hidden" id="node-h3" data-el="node" style="left:924px; top:554px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">h₃</div>
+  </div>
+  <div class="nn-node nn-node-hidden" id="node-h4" data-el="node" style="left:924px; top:704px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">h₄</div>
+  </div>
+
+  <!-- ===== OUTPUT NODES ===== -->
+  <div class="nn-node nn-node-output" id="node-y1" data-el="node" style="left:1584px; top:394px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">y₁</div>
+  </div>
+  <div class="nn-node nn-node-output" id="node-y2" data-el="node" style="left:1584px; top:574px;">
+    <div class="node-ring" data-el="ring-node"></div>
+    <div class="node-core">y₂</div>
+  </div>
+
+  <!-- ===== WEIGHT LABELS ===== -->
+  <div class="weight-label" id="w1" data-el="weight" style="left:595px; top:382px;">0.42</div>
+  <div class="weight-label" id="w2" data-el="weight" style="left:595px; top:548px;">−0.18</div>
+  <div class="weight-label" id="w3" data-el="weight" style="left:1255px; top:422px;">0.73</div>
+  <div class="weight-label" id="w4" data-el="weight" style="left:1255px; top:588px;">0.55</div>
+  <div class="weight-label" id="w5" data-el="weight" style="left:595px; top:660px;">0.31</div>
+
+  <!-- ===== LEGEND ===== -->
+  <div class="legend-bar" id="legend-bar" data-el="legend">
+    <div class="legend-inner">
+      <span class="legend-arrow" data-el="legend-arrow">▶</span>
+      <span class="legend-text" data-el="legend-text">Forward Pass</span>
+      <span class="legend-arrow legend-arrow-right" data-el="legend-arrow2">▶</span>
+    </div>
+  </div>
+
+  <!-- ===== GRADIENT ACCENT LINE (bottom) ===== -->
+  <div class="accent-line" id="accent-line" data-el="accent-line"></div>
+
+</div><!-- /stage -->
+</div><!-- /viewport -->
+
+<!-- ===== PLAY/PAUSE BUTTON (preview only) ===== -->
+<div class="playback" id="playback">
+  <button id="playbtn" title="Play / Pause (Space)" aria-label="Play / Pause">&#9654;</button>
+  <div class="tc" id="tc">00:00 / 00:15</div>
+</div>
+
+<script src="assets/sfx.js"></script>
+<script src="assets/timeline.js"></script>
+<script src="timeline.js"></script>
+  <script src="/animations/bridge.js"></script>
+</body>
+</html>

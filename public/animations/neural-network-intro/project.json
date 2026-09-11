@@ -1,0 +1,8 @@
+{
+  "name": "a-15-second-educational-animation-explaining",
+  "createdAt": "2026-09-11T19:08:12.397Z",
+  "prompt": "A 15-second educational animation explaining a feedforward neural network. Dark background. 3 layers of circular nodes: input layer 3 nodes labeled x1 x2 x3 on the left, hidden layer 4 nodes labeled h1 h2 h3 h4 in the middle, output layer 2 nodes labeled y1 y2 on the right. Neon teal glow borders. Animated connection lines where a data pulse travels left to right through the network, lighting up each node as it arrives. Small weight numbers on a few connections. Legend text 'Forward Pass' with a right arrow at bottom. Smooth easing, cinematic, bold title at top 'Red Neuronal Feedforward'. false",
+  "model": "mimo-v2.5",
+  "source": "cli",
+  "updatedAt": "2026-09-11T19:08:12.397Z"
+}
