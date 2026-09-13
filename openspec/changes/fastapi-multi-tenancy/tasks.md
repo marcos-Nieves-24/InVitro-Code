@@ -53,15 +53,15 @@ Chain strategy: feature-branch-chain
 - [x] 3.1 Create `backend/app/routers/admin.py` with GET `/api/admin/users` and admin role guard
 - [x] 3.2 Create `backend/app/gamification.py` with Python ports: `calc_xp_for_lesson`, `calc_level`, `rank_title`
 - [x] 3.3 Add to `backend/app/gamification.py`: `evaluate_achievements`, `get_weekly_xp`, `get_total_xp`
-- [ ] 3.4 Create `src/lib/api-client.ts` fetch wrapper forwarding Clerk JWT to FastAPI
+- [x] 3.4 Create `src/lib/api-client.ts` fetch wrapper forwarding Clerk JWT to FastAPI
 - [ ] 3.5 Modify `src/app/api/progress/route.ts` with `MIGRATE_PROGRESS` feature-flag proxy
 - [x] 3.6 Modify `supabase-migration.sql` to add `modules` table
 - [ ] 3.7 Modify `src/lib/gamification/achievements.ts` to query `modules` table instead of filesystem
 
 ## Phase 4: WebSocket
 
-- [ ] 4.1 Create `backend/app/routers/ws.py` with WebSocket endpoint and first-message JWT validation
-- [ ] 4.2 Create connection manager class for tracking active WebSocket connections
+- [x] 4.1 Create `backend/app/ws.py` with WebSocket endpoint and first-message JWT validation
+- [x] 4.2 Create `ConnectionManager` class for tracking active WebSocket connections
 
 ## Phase 5: Testing
 
@@ -75,5 +75,5 @@ Chain strategy: feature-branch-chain
 ## Phase 6: Cleanup / Documentation
 
 - [x] 6.1 Update `docker-compose.yml` with production-ready health check config
-- [ ] 6.2 Verify `npm run build` and `npm run type-check` pass after frontend changes
+- [x] 6.2 Verify `npm run build` and `npm run type-check` pass after frontend changes
 - [ ] 6.3 Run full backend test suite: `cd backend && python -m pytest`
