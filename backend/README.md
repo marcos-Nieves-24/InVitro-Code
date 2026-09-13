@@ -182,3 +182,45 @@ const profile = await apiFetch("/api/v1/profile");
 ```
 
 Set `NEXT_PUBLIC_FASTAPI_URL=http://localhost:8000` in your frontend `.env.local`.
+
+## Production Deployment
+
+### Option A: Railway (Recommended)
+
+1. **Create a new Railway service** from the `backend/` directory
+2. **Set environment variables** in Railway dashboard:
+   - `DATABASE_URL` — Your Supabase connection string (use pooler: `postgresql://postgres.xxx:password@aws-0-us-east-1.pooler.supabase.com:6543/postgres`)
+   - `CLERK_JWKS_URL` — `https://your-app.clerk.accounts.dev/.well-known/jwks.json`
+   - `CLERK_ISSUER` — `https://your-app.clerk.accounts.dev`
+   - `CORS_ORIGINS` — `["https://your-app.vercel.app"]`
+   - `ENVIRONMENT` — `production`
+3. **Deploy** — Railway auto-deploys from the repo
+
+### Option B: Fly.io
+
+1. **Install flyctl** and run `fly launch` in the `backend/` directory
+2. **Set secrets**:
+   ```bash
+   fly secrets set DATABASE_URL="postgresql://..." CLERK_JWKS_URL="https://..." CLERK_ISSUER="https://..." CORS_ORIGINS='["https://your-app.vercel.app"]'
+   ```
+3. **Deploy**: `fly deploy`
+
+### Post-Deployment
+
+1. **Run the modules migration** in Supabase SQL Editor:
+   ```bash
+   # Copy the contents of backend/migrations/001_add_modules_table.sql
+   # and run it in Supabase Dashboard → SQL Editor
+   ```
+
+2. **Set frontend env var** in Vercel:
+   - `NEXT_PUBLIC_FASTAPI_URL` — Your FastAPI service URL (e.g., `https://your-app.fly.dev`)
+
+3. **Update Clerk allowed origins**:
+   - Add your FastAPI URL to Clerk Dashboard → Configure → Restrictions → Allowed origins
+
+4. **Test the connection**:
+   ```bash
+   curl https://your-fastapi-url/health
+   # Should return {"status": "ok"}
+   ```

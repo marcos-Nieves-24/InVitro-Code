@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AlertCircle, CheckCircle2, Target, TrendingUp } from "lucide-react";
+import { useApiClient } from "@/hooks/useApiClient";
 
 interface Metrics {
   accuracy: number;
@@ -67,6 +68,7 @@ export function ThresholdLab({
   const [prevBestAccuracy, setPrevBestAccuracy] = useState<number>(0);
 
   const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { apiClient } = useApiClient();
 
   // Fetch pre-computed dataset on mount
   useEffect(() => {
@@ -128,9 +130,8 @@ export function ThresholdLab({
   const handleComplete = async () => {
     if (!hasCompleted) {
       try {
-        await fetch("/api/progress/reflection", {
+        await apiClient("/api/v1/progress/reflection", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             moduleSlug,
             lessonSlug,

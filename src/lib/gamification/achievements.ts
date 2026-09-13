@@ -1,5 +1,4 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { getLessonCount } from "@/lib/content/modules";
 
 /**
  * Achievement helpers (real-data-replace-mocks, REQ-ACH-04/06, REQ-UP-05).
@@ -48,6 +47,16 @@ export interface WeeklyXp {
 
 function emptyState(): { achievements: AchievementState[]; summary: AchievementsSummary } {
   return { achievements: [], summary: { total: 0, unlocked: 0, percent: 0 } };
+}
+
+/** Query the modules table for lesson count instead of filesystem. */
+async function getLessonCountFromDB(moduleSlug: string, supabase: SupabaseClient): Promise<number> {
+  const { data } = await supabase
+    .from("modules")
+    .select("lesson_count")
+    .eq("slug", moduleSlug)
+    .single();
+  return data?.lesson_count ?? 0;
 }
 
 function startOfWeekMonday(): Date {
@@ -118,14 +127,15 @@ export async function evaluateAchievements(
       (progressRes.data ?? []).reduce((sum, row) => sum + (row.xp_earned ?? 0), 0) +
       (reflectionsRes.data ?? []).reduce((sum, row) => sum + (row.xp_earned ?? 0), 0);
 
-    // Modules fully completed (completed count >= real lesson count)
+    // Modules fully completed (completed count >= real lesson count from DB)
     const completedModules = new Set<string>();
     const byModule = new Map<string, number>();
     for (const row of moduleRes.data ?? []) {
       byModule.set(row.module_slug, (byModule.get(row.module_slug) ?? 0) + 1);
     }
     for (const [slug, count] of byModule) {
-      if (count >= getLessonCount(slug)) {
+      const lessonCount = await getLessonCountFromDB(slug, supabase);
+      if (count >= lessonCount) {
         completedModules.add(slug);
       }
     }

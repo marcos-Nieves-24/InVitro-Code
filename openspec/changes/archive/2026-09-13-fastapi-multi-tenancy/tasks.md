@@ -54,9 +54,9 @@ Chain strategy: feature-branch-chain
 - [x] 3.2 Create `backend/app/gamification.py` with Python ports: `calc_xp_for_lesson`, `calc_level`, `rank_title`
 - [x] 3.3 Add to `backend/app/gamification.py`: `evaluate_achievements`, `get_weekly_xp`, `get_total_xp`
 - [x] 3.4 Create `src/lib/api-client.ts` fetch wrapper forwarding Clerk JWT to FastAPI
-- [ ] 3.5 Modify `src/app/api/progress/route.ts` with `MIGRATE_PROGRESS` feature-flag proxy
+- [x] 3.5 Modify `src/app/api/progress/route.ts` with `MIGRATE_PROGRESS` feature-flag proxy
 - [x] 3.6 Modify `supabase-migration.sql` to add `modules` table
-- [ ] 3.7 Modify `src/lib/gamification/achievements.ts` to query `modules` table instead of filesystem
+- [x] 3.7 Modify `src/lib/gamification/achievements.ts` to query `modules` table instead of filesystem
 
 ## Phase 4: WebSocket
 
@@ -76,4 +76,7 @@ Chain strategy: feature-branch-chain
 
 - [x] 6.1 Update `docker-compose.yml` with production-ready health check config
 - [x] 6.2 Verify `npm run build` and `npm run type-check` pass after frontend changes
-- [ ] 6.3 Run full backend test suite: `cd backend && python -m pytest`
+- [x] 6.3 Run full backend test suite: `cd backend && python -m pytest` — 51/51 passed
+- [x] 6.4 Verify all routes registered in `backend/app/main.py` — profile, progress, achievements, leaderboard, admin, ws
+- [x] 6.5 Create `backend/README.md` — setup instructions, environment variables, API endpoints, WebSocket guide
+- [x] 6.6 Final git commit with all changes — 12 files, 1366 insertions

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { Flame } from "lucide-react";
+import { useApiClient } from "@/hooks/useApiClient";
 
 interface ConidiaPattern {
   id: number;
@@ -40,6 +41,7 @@ export function ConidiaSortGame({
   const [gameOver, setGameOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [posted, setPosted] = useState(false);
+  const { apiClient } = useApiClient();
 
   const current = PATTERNS[currentIndex];
   const isLast = currentIndex >= PATTERNS.length - 1;
@@ -62,9 +64,8 @@ export function ConidiaSortGame({
   useEffect(() => {
     if (!gameOver || posted || submitting) return;
     setSubmitting(true);
-    fetch("/api/progress/reflection", {
+    apiClient("/api/v1/progress/reflection", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         moduleSlug,
         lessonSlug,
