@@ -180,7 +180,7 @@ export function OrbitalModules() {
                 className="card-hover flex h-full flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                  <img src={mod.iconSrc} alt="" className="h-6 w-6" />
+                  <img src={mod.iconSrc} alt="" className="h-10 w-10" />
                 </div>
                 <p className="eyebrow text-storm mb-2">{mod.slug}</p>
                 <h3 className="font-display text-lg font-bold text-ink mb-2">
@@ -290,7 +290,7 @@ export function OrbitalModules() {
                   }}
                 >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                  <img src={mod.iconSrc} alt="" className="h-6 w-6" />
+                  <img src={mod.iconSrc} alt="" className="h-10 w-10" />
                 </div>
                 <p className="eyebrow text-storm mb-2">{mod.slug}</p>
                 <h3 className="font-display text-lg font-bold text-ink mb-2">

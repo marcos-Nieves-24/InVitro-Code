@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description:
     "Aprende IA y Machine Learning con Python — aprendizaje interactivo para estudiantes de biotecnología",
   icons: {
-    icon: "/logo-negativo.svg",
+    icon: "/favicon.svg",
   },
 };
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -13,7 +12,6 @@ const navLinks = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -67,49 +65,7 @@ export function Header() {
             Comenzar
           </a>
         </nav>
-
-        <button
-          className={scrolled ? "text-ink" : "text-white"}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
-
-      {mobileOpen && (
-        <nav
-          className={`border-t px-6 py-4 md:hidden ${
-            scrolled
-              ? "border-surface-raised bg-surface-card"
-              : "border-white/10 bg-transparent"
-          }`}
-        >
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`text-sm font-medium ${
-                  scrolled
-                    ? "text-slate hover:text-ink"
-                    : "text-white/70 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="/sign-up"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-[10px] bg-mint px-5 py-2.5 text-center text-sm font-medium text-ink"
-            >
-              Comenzar
-            </a>
-          </div>
-        </nav>
-      )}
     </header>
   );
 }
