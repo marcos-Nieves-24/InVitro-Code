@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { getModules } from "@/lib/content/modules";
-import { BookOpen, ArrowRight, Compass } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
+
+const MODULE_FAVICON: Record<string, string> = {
+  ia: "/favicon-modulo-1.png",
+  python: "/favicon-modulo-2.png",
+  estadistica: "/favicon-modulo-3.png",
+  "machine-learning": "/favicon-modulo-4.png",
+};
 
 export default function LearnIndexPage() {
   const modules = getModules();
@@ -34,8 +41,12 @@ export default function LearnIndexPage() {
             }
             className="glass-card group flex h-full flex-col rounded-2xl p-6 transition-all hover:border-mint/50"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-fog/20 text-mint">
-              <BookOpen className="h-6 w-6" />
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-fog/20">
+              <img
+                src={MODULE_FAVICON[mod.slug] || "/favicon-modulo-1-sin-fondo.svg"}
+                alt=""
+                className="h-8 w-8"
+              />
             </div>
             <p className="eyebrow mb-1 text-[10px]">{mod.slug}</p>
             <h3 className="font-display text-lg font-semibold text-ink">

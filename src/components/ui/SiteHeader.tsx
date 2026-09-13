@@ -18,13 +18,21 @@ export function SiteHeader({
     <header
       className={`flex items-center justify-between rounded-card border border-surface-raised bg-surface-card px-5 py-3.5 shadow-sm ${className}`}
       >
-      <Link href="/" className="group flex flex-col leading-tight">
-        <span className="font-display text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-mint">
-          InVitro-Code
-        </span>
-        <span className="eyebrow text-[10px] text-storm">
-          Biotecnología · IA · Python
-        </span>
+      <Link href="/" className="group flex items-center gap-2 leading-tight">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-negativo.svg"
+          alt="InVitro-Code"
+          className="h-8 w-8"
+        />
+        <div className="flex flex-col">
+          <span className="font-display text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-mint">
+            InVitro-Code
+          </span>
+          <span className="eyebrow text-[10px] text-storm">
+            Biotecnología · IA · Python
+          </span>
+        </div>
       </Link>
 
       <nav className="flex items-center gap-2" aria-label="Navegación principal">

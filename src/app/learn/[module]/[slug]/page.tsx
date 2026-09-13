@@ -30,8 +30,10 @@ import {
   PerceptronTrainer,
   RegressionTrainer,
   OverfittingTrainer,
+  LessonVideo,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
+import { AnymotionPlayer, NeuralNetworkIntro, SpinnerDeCargaAnimadoPlayer } from "@/components/anymotion";
 import {
   LessonCodeEditor,
   LessonCompleteButton,
@@ -154,6 +156,10 @@ export default async function LessonPage({ params }: Props) {
     PerceptronTrainer,
     RegressionTrainer,
     OverfittingTrainer,
+    LessonVideo,
+    AnymotionPlayer,
+    NeuralNetworkIntro,
+    SpinnerDeCargaAnimadoPlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

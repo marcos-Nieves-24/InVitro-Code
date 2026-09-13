@@ -1,0 +1,37 @@
+{
+  "animations": [
+    {
+      "slug": "spinner-demo",
+      "title": "Spinner de carga animado",
+      "type": "concept",
+      "duration": 3,
+      "src": "/animations/spinner-demo/index.html",
+      "reactComponent": "SpinnerDeCargaAnimadoPlayer",
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-11"
+    },
+    {
+      "slug": "neural-network-intro",
+      "title": "Red neuronal feedforward",
+      "type": "concept",
+      "duration": 15,
+      "src": "/animations/neural-network-intro/index.html",
+      "reactComponent": "NeuralNetworkIntro",
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-11"
+    },
+    {
+      "slug": "hero-lab-bg",
+      "title": "Hero Lab Background",
+      "type": "concept",
+      "duration": 15,
+      "src": "/animations/hero-lab-bg/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-13"
+    }
+  ]
+}

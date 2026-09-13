@@ -30,6 +30,12 @@ plan-estudio.docx
 # build artifacts (Turbopack generates .js from .tsx)
 src/**/*.js
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
 # IDE
 .vscode/*
 !.vscode/settings.json
@@ -57,7 +63,7 @@ skills-lock.json
 /.clerk/
 
 # Docker (local only)
-Dockerfile
+Dockerfile.nextjs
 .dockerignore
 docker-compose*.yml
 

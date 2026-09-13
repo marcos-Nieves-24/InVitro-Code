@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "anim:generate": "node scripts/anyim.mjs generate --prompt",
+    "anim:import": "node scripts/anyim.mjs import --source",
+    "anim:convert": "node scripts/anyim.mjs convert --slug",
+    "anim:list": "node scripts/anyim.mjs list",
+    "anim:verify": "node scripts/anyim.mjs verify",
+    "anymotion:patch": "bash scripts/anymotion-patch.sh"
   },
   "dependencies": {
     "@clerk/nextjs": "latest",

@@ -233,3 +233,22 @@ RETURNS INTEGER LANGUAGE sql STABLE AS $$
     ) me
   ), 0);
 $$;
+
+-- ──────────────────────────────────────────────────────────
+-- 11. Modules table (replaces filesystem dependency for lesson counts)
+-- ──────────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS modules (
+    slug TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    lesson_count INTEGER NOT NULL DEFAULT 0,
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Seed with actual content from src/content/modules/
+INSERT INTO modules (slug, name, lesson_count) VALUES
+    ('python', 'Python', 17),
+    ('ia', 'Fundamentos de IA', 4),
+    ('estadistica', 'Estadística', 10),
+    ('machine-learning', 'Machine Learning', 10)
+ON CONFLICT (slug) DO NOTHING;

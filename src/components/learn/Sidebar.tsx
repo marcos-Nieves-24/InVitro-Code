@@ -90,8 +90,14 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
           <div className="mb-6">
             <Link
               href="/"
-              className="font-display text-base font-semibold tracking-tight text-ink hover:text-mint"
+              className="flex items-center gap-2 font-display text-base font-semibold tracking-tight text-ink hover:text-mint"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo-negativo.svg"
+                alt="InVitro-Code"
+                className="h-6 w-6"
+              />
               InVitro-Code
             </Link>
             <Link

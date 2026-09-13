@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "InVitro-Code",
   description:
     "Aprende IA y Machine Learning con Python — aprendizaje interactivo para estudiantes de biotecnología",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useApiClient } from "@/hooks/useApiClient";
 
 interface Props {
   module: string;
@@ -12,6 +13,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
     "idle" | "loading" | "done" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+  const { apiClient } = useApiClient();
 
   const handleComplete = async () => {
     if (status !== "idle") return;
@@ -19,16 +21,18 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
     setStatus("loading");
 
     try {
-      const res = await fetch("/api/progress", {
+      const data = await apiClient<{
+        success: boolean;
+        xpEarned: number;
+        streak: { current_streak: number };
+        error?: string;
+      }>("/api/v1/progress", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           moduleSlug: module,
           lessonSlug: lesson,
         }),
       });
-
-      const data = await res.json();
 
       if (data.success) {
         setStatus("done");

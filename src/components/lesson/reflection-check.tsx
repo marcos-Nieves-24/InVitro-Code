@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui";
+import { useApiClient } from "@/hooks/useApiClient";
 
 interface ReflectionCheckProps {
   prompt: string;
@@ -22,6 +23,7 @@ export function ReflectionCheck({
   const [revealed, setRevealed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { apiClient } = useApiClient();
 
   const handleReveal = async () => {
     if (revealed || submitting) return;
@@ -30,19 +32,19 @@ export function ReflectionCheck({
     setError(null);
 
     try {
-      const res = await fetch("/api/progress/reflection", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          moduleSlug,
-          lessonSlug,
-          blockId,
-        }),
-      });
+      const data = await apiClient<{ success: boolean; error?: string }>(
+        "/api/v1/progress/reflection",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            moduleSlug,
+            lessonSlug,
+            blockId,
+          }),
+        },
+      );
 
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
+      if (!data.success) {
         throw new Error(data.error ?? "Error al guardar progreso");
       }
 
