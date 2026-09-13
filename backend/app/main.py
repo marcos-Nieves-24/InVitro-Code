@@ -54,10 +54,14 @@ async def health_check() -> dict[str, str]:
         return {"status": "degraded"}
 
 
-# Import and register routers here as they are created
-# from app.routers import progress, profile, achievements, leaderboard, admin
-# app.include_router(progress.router, prefix="/api")
-# app.include_router(profile.router, prefix="/api")
-# app.include_router(achievements.router, prefix="/api")
-# app.include_router(leaderboard.router, prefix="/api")
-# app.include_router(admin.router, prefix="/api")
+# Register routers
+from app.routers import profile
+
+app.include_router(profile.router)
+
+# Future routers (Work Units 3+):
+# from app.routers import progress, achievements, leaderboard, admin
+# app.include_router(progress.router)
+# app.include_router(achievements.router)
+# app.include_router(leaderboard.router)
+# app.include_router(admin.router)
