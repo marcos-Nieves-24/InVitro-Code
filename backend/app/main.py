@@ -55,13 +55,10 @@ async def health_check() -> dict[str, str]:
 
 
 # Register routers
-from app.routers import profile
+from app.routers import profile, progress, achievements, leaderboard, admin
 
 app.include_router(profile.router)
-
-# Future routers (Work Units 3+):
-# from app.routers import progress, achievements, leaderboard, admin
-# app.include_router(progress.router)
-# app.include_router(achievements.router)
-# app.include_router(leaderboard.router)
-# app.include_router(admin.router)
+app.include_router(progress.router)
+app.include_router(achievements.router)
+app.include_router(leaderboard.router)
+app.include_router(admin.router)
