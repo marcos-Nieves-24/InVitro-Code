@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.config import settings
 from db.pool import init_pool, close_pool, get_pool
@@ -44,14 +45,14 @@ async def health_check() -> dict[str, str]:
     """
     pool = get_pool()
     if pool is None:
-        return {"status": "degraded"}
+        return JSONResponse(status_code=503, content={"status": "degraded"})
 
     try:
         async with pool.acquire() as conn:
             await conn.fetchval("SELECT 1")
         return {"status": "ok"}
     except Exception:
-        return {"status": "degraded"}
+        return JSONResponse(status_code=503, content={"status": "degraded"})
 
 
 # Register routers

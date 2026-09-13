@@ -1,7 +1,11 @@
+import asyncio
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from app.security import validate_token
+from app.config import settings
 
 router = APIRouter()
+
+WS_IDLE_TIMEOUT = getattr(settings, "WS_IDLE_TIMEOUT", 300)  # 5 min default
 
 
 class ConnectionManager:
@@ -76,9 +80,16 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
         # Confirm connection
         await websocket.send_json({"type": "connected", "user_id": user_id})
 
-        # Listen for messages
+        # Listen for messages with idle timeout
         while True:
-            data = await websocket.receive_json()
+            try:
+                data = await asyncio.wait_for(
+                    websocket.receive_json(), timeout=WS_IDLE_TIMEOUT
+                )
+            except asyncio.TimeoutError:
+                await websocket.close(code=4000, reason="Idle timeout")
+                manager.disconnect(websocket, user_id)
+                return
             # Echo back for now — handlers will be added per feature
             await websocket.send_json({
                 "type": "ack",
