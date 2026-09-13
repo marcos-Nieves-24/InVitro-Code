@@ -2,53 +2,49 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import {
-  Brain,
-  Code,
-  BarChart3,
-  FlaskConical,
   ArrowRight,
 } from "lucide-react";
 
 interface ModuleData {
-  icon: typeof Brain;
   slug: string;
   title: string;
   lessons: number;
   description: string;
+  iconSrc: string;
 }
 
 const modules: ModuleData[] = [
   {
-    icon: Brain,
     slug: "MOD-01",
     title: "Introduccion a la IA",
     lessons: 4,
     description:
       "Fundamentos de inteligencia artificial aplicados a biotecnologia.",
+    iconSrc: "/favicon-modulo-1-sin-fondo.svg",
   },
   {
-    icon: Code,
     slug: "MOD-02",
     title: "Python para Biotecnologia",
     lessons: 17,
     description:
       "Programacion en Python aplicada al analisis de datos biologicos.",
+    iconSrc: "/favicon-modulo-2-sin-fondo.svg",
   },
   {
-    icon: BarChart3,
     slug: "MOD-03",
     title: "Estadistica y Probabilidad",
     lessons: 10,
     description:
       "Fundamentos estadisticos para el analisis de datos en investigacion biomedica.",
+    iconSrc: "/favicon-modulo-3-sin-fondo.svg",
   },
   {
-    icon: FlaskConical,
     slug: "MOD-04",
     title: "Machine Learning",
     lessons: 10,
     description:
       "Algoritmos de aprendizaje automatico para aplicaciones biotecnologicas.",
+    iconSrc: "/favicon-modulo-4-sin-fondo.svg",
   },
 ];
 
@@ -177,7 +173,6 @@ export function OrbitalModules() {
         className="grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {modules.map((mod) => {
-          const Icon = mod.icon;
           return (
             <li key={mod.slug}>
               <a
@@ -185,7 +180,7 @@ export function OrbitalModules() {
                 className="card-hover flex h-full flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                  <Icon size={24} className="text-mint" />
+                  <img src={mod.iconSrc} alt="" className="h-6 w-6" />
                 </div>
                 <p className="eyebrow text-storm mb-2">{mod.slug}</p>
                 <h3 className="font-display text-lg font-bold text-ink mb-2">
@@ -240,7 +235,6 @@ export function OrbitalModules() {
         }}
       >
         {modules.map((mod, i) => {
-          const Icon = mod.icon;
           const isHovered = hoveredIndex === i;
           const angle = i * ANGLE_PER_CARD;
 
@@ -295,17 +289,17 @@ export function OrbitalModules() {
                       : undefined,
                   }}
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                    <Icon size={24} className="text-mint" />
-                  </div>
-                  <p className="eyebrow text-storm mb-2">{mod.slug}</p>
-                  <h3 className="font-display text-lg font-bold text-ink mb-2">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate mb-4">
-                    {mod.description}
-                  </p>
-                  {isHovered && (
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
+                  <img src={mod.iconSrc} alt="" className="h-6 w-6" />
+                </div>
+                <p className="eyebrow text-storm mb-2">{mod.slug}</p>
+                <h3 className="font-display text-lg font-bold text-ink mb-2">
+                  {mod.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate mb-4">
+                  {mod.description}
+                </p>
+                {isHovered && (
                     <p className="text-xs leading-relaxed text-storm mb-4">
                       {mod.lessons} lecciones interactivas con labs y desafios de
                       codigo.
