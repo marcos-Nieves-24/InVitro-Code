@@ -28,7 +28,7 @@ Chain strategy: stacked-to-main
 
 ## Phase 1: Asset Pipeline (AnyMotion — pre-commit manual step)
 
-- [ ] 1.1 Copy reference PNG: `cp ~/proyectos/material-visual-invitro-code/landing-background.png public/landing/landing-background.png` — verify file exists at destination
+- [x] 1.1 Copy reference PNG: `cp ~/proyectos/material-visual-invitro-code/landing-background.png public/landing/landing-background.png` — verify file exists at destination
 - [ ] 1.2 Run `anymotion render --help` and `anymotion config` to discover exact render flags; document the exact command
 - [ ] 1.3 Generate AnyMotion project: `npm run anim:generate -- --prompt "Cinematic scientific laboratory background..."` — verify slug derived
 - [ ] 1.4 Copy PNG into AnyMotion project workspace: `cp public/landing/landing-background.png ~/anymotion-projects/<slug>/landing-background.png`
@@ -39,17 +39,17 @@ Chain strategy: stacked-to-main
 
 ## Phase 2: Hero Background + Dark Integration
 
-- [ ] 2.1 Create `src/components/landing/HeroBackground.tsx` — client component with ink base, `<video autoPlay muted loop playsInline>` over `poster="/landing/landing-background.png"`, dark overlay `bg-[#111439]/60`, `prefers-reduced-motion` → poster-only, `aria-hidden="true"`, `pointer-events-none`
+- [x] 2.1 Create `src/components/landing/HeroBackground.tsx` — client component with ink base, `<video autoPlay muted loop playsInline>` over `poster="/landing/landing-background.png"`, dark overlay `bg-[#111439]/60`, `prefers-reduced-motion` → poster-only, `aria-hidden="true"`, `pointer-events-none`
 - [ ] 2.2 Add `@keyframes orbital-glow` to `src/app/globals.css` (mint glow pulse for carousel hover)
-- [ ] 2.3 Modify `src/app/page.tsx` hero `<section>`: change `bg-white` → `bg-[#111439]`, insert `<HeroBackground />` as first child, remove grid overlay div
-- [ ] 2.4 Update hero copy tokens: `text-graphite` → `text-white/70`, `text-ink` → `text-white` (h1), `text-slate` → `text-white/70` (body); verify `text-mint` on span preserved
-- [ ] 2.5 Verify z-index stacking: HeroBackground z-0, content grid z-10, Header z-50
+- [x] 2.3 Modify `src/app/page.tsx` hero `<section>`: change `bg-white` → `bg-[#111439]`, insert `<HeroBackground />` as first child, remove grid overlay div
+- [x] 2.4 Update hero copy tokens: `text-graphite` → `text-white/70`, `text-ink` → `text-white` (h1), `text-slate` → `text-white/70` (body); verify `text-mint` on span preserved
+- [x] 2.5 Verify z-index stacking: HeroBackground z-0, content grid z-10, Header z-50
 
 ## Phase 3: Header Scroll-Aware Light Tokens
 
-- [ ] 3.1 Modify `src/components/landing/Header.tsx`: when `!scrolled`, logo `text-white`, nav links `text-white/70` hover `text-white`, hamburger `text-white`
-- [ ] 3.2 When `scrolled`, keep existing tokens: logo `text-ink`, nav `text-slate` hover `text-ink`, hamburger `text-ink`
-- [ ] 3.3 Mobile menu: `!scrolled` → `bg-transparent` with `border-white/10`; scrolled → existing `bg-surface-card` with `border-surface-raised`
+- [x] 3.1 Modify `src/components/landing/Header.tsx`: when `!scrolled`, logo `text-white`, nav links `text-white/70` hover `text-white`, hamburger `text-white`
+- [x] 3.2 When `scrolled`, keep existing tokens: logo `text-ink`, nav `text-slate` hover `text-ink`, hamburger `text-ink`
+- [x] 3.3 Mobile menu: `!scrolled` → `bg-transparent` with `border-white/10`; scrolled → existing `bg-surface-card` with `border-surface-raised`
 
 ## Phase 4: Orbital Module Carousel
 
@@ -66,8 +66,8 @@ Chain strategy: stacked-to-main
 
 ## Phase 5: Verification
 
-- [ ] 5.1 Run `npm run type-check` — fix any TypeScript errors in new/modified components
-- [ ] 5.2 Run `npm run build` — verify successful build with no SSR/hydration issues
+- [x] 5.1 Run `npm run type-check` — fix any TypeScript errors in new/modified components
+- [x] 5.2 Run `npm run build` — verify successful build with no SSR/hydration issues
 - [ ] 5.3 Manual visual: hero renders video loop with poster fallback; dark overlay provides sufficient contrast for white/mint text
 - [ ] 5.4 Manual visual: header transitions smoothly between light and dark tokens on scroll
 - [ ] 5.5 Manual visual: carousel rotates continuously at 60 FPS; hover pauses, scales, glows; reduced-motion shows static grid

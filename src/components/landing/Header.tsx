@@ -35,9 +35,13 @@ export function Header() {
           <img
             src="/logo-negativo.svg"
             alt="InVitro-Code"
-            className="h-8 w-8"
+            className={`h-8 w-8 ${scrolled ? "" : "brightness-0 invert"}`}
           />
-          <span className="font-display text-lg font-bold text-ink">
+          <span
+            className={`font-display text-lg font-bold ${
+              scrolled ? "text-ink" : "text-white"
+            }`}
+          >
             InVitro-Code
           </span>
         </a>
@@ -47,7 +51,11 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-slate transition-colors hover:text-ink"
+              className={`text-sm font-medium transition-colors ${
+                scrolled
+                  ? "text-slate hover:text-ink"
+                  : "text-white/70 hover:text-white"
+              }`}
             >
               {link.label}
             </a>
@@ -61,7 +69,7 @@ export function Header() {
         </nav>
 
         <button
-          className="text-ink md:hidden"
+          className={scrolled ? "text-ink" : "text-white"}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -70,14 +78,24 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="border-t border-surface-raised bg-surface-card px-6 py-4 md:hidden">
+        <nav
+          className={`border-t px-6 py-4 md:hidden ${
+            scrolled
+              ? "border-surface-raised bg-surface-card"
+              : "border-white/10 bg-transparent"
+          }`}
+        >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-medium text-slate hover:text-ink"
+                className={`text-sm font-medium ${
+                  scrolled
+                    ? "text-slate hover:text-ink"
+                    : "text-white/70 hover:text-white"
+                }`}
               >
                 {link.label}
               </a>

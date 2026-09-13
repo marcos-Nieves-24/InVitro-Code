@@ -1,9 +1,8 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Menu,
-  X,
 } from "lucide-react";
+import { HeroBackground } from "@/components/landing/HeroBackground";
 import { InteractiveTerminal } from "@/components/landing/InteractiveTerminal";
 import { MissionDendrogram } from "@/components/landing/MissionDendrogram";
 import { Modules } from "@/components/landing/Modules";
@@ -23,30 +22,22 @@ export default function Home() {
       <Header />
 
       <main id="main-content">
-        {/* ── Hero: Dark bioluminescent section ──────── */}
-        <section className="relative overflow-hidden bg-white px-6 pt-20 pb-16 md:px-10 md:pt-32 md:pb-24">
-          {/* Subtle grid background */}
-          <div
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--color-graphite) 1px, transparent 1px), linear-gradient(90deg, var(--color-graphite) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
+        {/* ── Hero: Dark cinematic section ──────────────── */}
+        <section className="relative overflow-hidden bg-[#111439] px-6 pt-20 pb-16 md:px-10 md:pt-32 md:pb-24">
+          <HeroBackground />
 
           <div className="relative z-10 mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-            {/* Left: copy */}
+            {/* Left: copy — light tokens over dark hero */}
             <div className="flex flex-col gap-6">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-graphite">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                 Aprendizaje Interactivo
               </p>
-              <h1 className="font-display text-4xl font-bold tracking-tight text-ink md:text-6xl">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-white md:text-6xl">
                 Aprende{" "}
-                <span className="text-graphite">IA y Machine Learning</span> con
+                <span className="text-mint">IA y Machine Learning</span> con
                 Python para Biotecnologia
               </h1>
-              <p className="max-w-md text-lg leading-relaxed text-slate">
+              <p className="max-w-md text-lg leading-relaxed text-white/70">
                 Un curso para biotecnologos que quieren entender datos, modelos
                 y decisiones desde el pregrado. Terminales interactivas, labs en
                 vivo y desafios de codigo real.
