@@ -20,3 +20,4 @@ export { KnnTrainer } from "./knn-trainer";
 export { MarkdownTable } from "./markdown-table";
 export { RegressionTrainer } from "./regression-trainer";
 export { OverfittingTrainer } from "./overfitting-trainer";
+export { LessonVideo } from "./lesson-video";

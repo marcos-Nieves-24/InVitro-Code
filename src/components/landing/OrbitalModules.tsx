@@ -262,8 +262,11 @@ export function OrbitalModules() {
               className="absolute"
               style={{
                 transformStyle: "preserve-3d",
-                transform: `rotateY(${angle}deg) translateZ(${radius}px) translate(-50%, -50%)`,
-                left: "0",
+                // translateY(-50%) centres the card vertically; the horizontal
+                // centre must come from `left` because transform-origin is the
+                // box centre — a translateX here would offset the rotateY orbit.
+                transform: `rotateY(${angle}deg) translateZ(${radius}px) translateY(-50%)`,
+                left: `${-CARD_WIDTH / 2}px`,
                 top: "0",
                 width: `${CARD_WIDTH}px`,
               }}
