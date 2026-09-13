@@ -346,7 +346,7 @@ export function MissionDendrogram() {
                 filter="url(#glow)"
               />
               <image
-                href="/logo.svg"
+                href="/logo-negativo.svg"
                 x={ROOT_X - 16}
                 y={ROOT_Y - 16}
                 width={32}
@@ -503,7 +503,7 @@ export function MissionDendrogram() {
                     cx={pilar.x - CARD_W / 2 + 32}
                     cy={CARDS_Y + 32}
                     r={20}
-                    fill="#F8FAFB"
+                    fill="#ffffff"
                   />
                   <foreignObject
                     x={pilar.x - CARD_W / 2 + 12}
@@ -609,7 +609,7 @@ export function MissionDendrogram() {
                 cx={VISION_X - CARD_W / 2 + 32}
                 cy={CARDS_Y + 32}
                 r={20}
-                fill="#F8FAFB"
+                fill="#ffffff"
               />
               <foreignObject
                 x={VISION_X - CARD_W / 2 + 12}
@@ -665,7 +665,7 @@ export function MissionDendrogram() {
             <div className="rounded-2xl bg-ink p-5 text-center">
               <p className="eyebrow text-mint mb-1">Raiz</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.svg" alt="InVitro-Code" className="mx-auto h-8 w-8" />
+              <img src="/logo-negativo.svg" alt="InVitro-Code" className="mx-auto h-8 w-8" />
             </div>
           </div>
 

@@ -117,9 +117,12 @@ export function AppSidebar({
           <div
             className={`flex items-center gap-3 ${collapsed ? "md:mx-auto" : ""}`}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-mint text-ink">
-              <Boxes className="h-5 w-5" aria-hidden="true" />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-negativo.svg"
+              alt="InVitro-Code"
+              className="h-10 w-10"
+            />
             {!collapsed && (
               <div>
                 <h1 className="text-lg font-bold leading-none tracking-tight text-ink">

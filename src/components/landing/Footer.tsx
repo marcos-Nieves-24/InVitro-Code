@@ -26,7 +26,7 @@ export function Footer() {
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo.svg"
+              src="/logo-negativo.svg"
               alt="InVitro-Code"
               className="h-8 w-8"
             />
