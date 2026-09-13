@@ -86,6 +86,7 @@ export function InteractiveTerminal() {
   const [runCount, setRunCount] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reducedMotion = useRef(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     reducedMotion.current = getPrefersReducedMotion();
@@ -183,6 +184,20 @@ export function InteractiveTerminal() {
     };
   }, [phase]);
 
+  // Auto-scroll terminal body to the bottom as content is typed/output shown.
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [displayedLines, currentLine, outputDisplayed]);
+
+  // When the dendrogram appears, reset scroll to the top so the tree is visible.
+  useEffect(() => {
+    if (phase === "dendrogram" && scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
+  }, [phase]);
+
   // Loop: auto-restart after dendrogram shown
   useEffect(() => {
     if (phase !== "dendrogram") return;
@@ -221,7 +236,7 @@ export function InteractiveTerminal() {
       </div>
 
       {/* Terminal body — code OR dendrogram */}
-      <div className="relative min-h-[400px] overflow-y-auto p-5 font-mono text-sm text-white/80">
+      <div ref={scrollRef} className="relative h-[460px] overflow-y-auto p-5 font-mono text-sm text-white/80">
         {/* Code output (typing + output phases) */}
         <div
           className={`transition-opacity duration-300 ${

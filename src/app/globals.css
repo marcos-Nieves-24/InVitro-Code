@@ -444,3 +444,13 @@ body {
 .header-bg {
   transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
 }
+
+/* ─── Orbital Carousel Glow Pulse ─────────────────── */
+@keyframes orbital-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 178, 178, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(0, 178, 178, 0.4); }
+}
+
+.orbital-card-glow {
+  animation: orbital-glow 2s ease-in-out infinite;
+}

@@ -216,13 +216,20 @@ Same 4 modules from current `Modules.tsx` (lines 6-38), same icons from `lucide-
 ### 3D Technique
 
 ```
-Container: perspective: 1000px, relative, height ~400px (desktop)
+Container: perspective: 1600 * fitScale; relative; height 460px;
+           overflow-x: clip; overflow-y: visible
 Ring: position: relative, transform-style: preserve-3d
-Card i:  transform: rotateY(i * 90deg) translateZ(radius)
-          where radius = 280px (desktop), 180px (tablet), 0 (mobile)
+Card i:  transform: rotateY(i * 90deg) translateZ(340px) translate(-50%, -50%)
+          (mobile < 768px renders the static grid instead of the ring)
 ```
 
-**Billboard counter-rotation**: Each card has an inner wrapper with `transform: rotateY(-currentAngle)` so text stays legible as the ring rotates.
+**Anti-overlap radius**: The perspective magnification inflates the front card (~1.27× at 1600px), so a small radius makes it overlap its neighbours and clip their text. `RING_RADIUS = 340` is the smallest radius that keeps the magnified front card clear of the card at 90°; solve `radius >= (CARD_WIDTH/2) * (1 + P/(P - radius))`. The perspective distance was raised from 1000 to 1600 for the same reason (less magnification).
+
+**Billboard counter-rotation**: Each card has an inner wrapper with `transform: rotateY(-(currentAngle + i * 90deg))` so text stays legible as the ring rotates. The counter-rotation MUST cancel the card's own ring angle (`i * 90deg`), not only `currentAngle`; otherwise cards at 90°/270° render edge-on and the card at 180° renders mirrored. The billboard lives on its own wrapper, separate from the hover transform, so the hover transition never lags the per-frame rotation.
+
+**Angular fade (no visible occlusion)**: A card is fully opaque within ±90° of the front and fades to 0 by ±105° — just before it starts passing behind the front card (measured overlap onset ≈105.5°). This guarantees a card is never visible while partially occluded. Because a 4-card ring has a card directly behind the front one, only 2–3 cards are visible at any instant by construction.
+
+**Responsive fit**: `fitScale = clamp((containerWidth/2 - 16) / (2.05 * radius), 0.3, 1)` with `containerWidth = min(vw - 48px, 1280px)`. The scene is scaled with `scale3d(fitScale, fitScale, fitScale)` AND the perspective is scaled by the same factor, so the projection stays exactly proportional and no card escapes the container at any viewport width.
 
 **Rotation**: `requestAnimationFrame` updating a `currentAngle` state (or ref + forceUpdate) that increments ~15°/sec. Applied to the ring container as `transform: rotateY(${currentAngle}deg)`.
 

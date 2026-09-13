@@ -21,6 +21,17 @@
       "generated": true,
       "inLesson": false,
       "updatedAt": "2026-09-11"
+    },
+    {
+      "slug": "hero-lab-bg",
+      "title": "Hero Lab Background",
+      "type": "concept",
+      "duration": 15,
+      "src": "/animations/hero-lab-bg/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-13"
     }
   ]
 }

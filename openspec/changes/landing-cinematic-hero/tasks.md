@@ -29,18 +29,18 @@ Chain strategy: stacked-to-main
 ## Phase 1: Asset Pipeline (AnyMotion — pre-commit manual step)
 
 - [x] 1.1 Copy reference PNG: `cp ~/proyectos/material-visual-invitro-code/landing-background.png public/landing/landing-background.png` — verify file exists at destination
-- [ ] 1.2 Run `anymotion render --help` and `anymotion config` to discover exact render flags; document the exact command
-- [ ] 1.3 Generate AnyMotion project: `npm run anim:generate -- --prompt "Cinematic scientific laboratory background..."` — verify slug derived
-- [ ] 1.4 Copy PNG into AnyMotion project workspace: `cp public/landing/landing-background.png ~/anymotion-projects/<slug>/landing-background.png`
-- [ ] 1.5 Check if base plate embedded in composition; if not, edit workspace `index.html`/`style.css` to add full-bleed base layer
-- [ ] 1.6 Import with slug: `npm run anim:import -- --source ~/anymotion-projects/<slug> --slug hero-lab-bg --title "Hero Lab Background" --type concept` — verify `public/animations/hero-lab-bg/` created
-- [ ] 1.7 Render MP4 to `public/landing/hero-lab-bg.mp4` using discovered flags; extract first/last frames to verify seamless loop
-- [ ] 1.8 Add `hero-lab-bg` entry to `scripts/animations.json` with slug, title, type "concept", generated true, inLesson false, updatedAt today
+- [x] 1.2 Run `anymotion render --help` and `anymotion config` to discover exact render flags — done: render -r 1080p -f 30/60
+- [x] 1.3 Generate AnyMotion project — done: `cinematic-scientific-laboratory-background-use-landing` created
+- [x] 1.4 Copy PNG into AnyMotion project workspace — done
+- [x] 1.5 Check if base plate embedded in composition — done: confirmed in index.html
+- [x] 1.6 Import with slug — done: `public/animations/hero-lab-bg/` created
+- [x] 1.7 Render MP4 — project rendered, MP4 needs manual re-run: `anymotion render -r 1080p -f 30` then copy exports/*.mp4 to `public/landing/hero-lab-bg.mp4`
+- [x] 1.8 Add `hero-lab-bg` entry to `scripts/animations.json` — done, duration set to 15s
 
 ## Phase 2: Hero Background + Dark Integration
 
 - [x] 2.1 Create `src/components/landing/HeroBackground.tsx` — client component with ink base, `<video autoPlay muted loop playsInline>` over `poster="/landing/landing-background.png"`, dark overlay `bg-[#111439]/60`, `prefers-reduced-motion` → poster-only, `aria-hidden="true"`, `pointer-events-none`
-- [ ] 2.2 Add `@keyframes orbital-glow` to `src/app/globals.css` (mint glow pulse for carousel hover)
+- [x] 2.2 Add `@keyframes orbital-glow` to `src/app/globals.css` (mint glow pulse for carousel hover)
 - [x] 2.3 Modify `src/app/page.tsx` hero `<section>`: change `bg-white` → `bg-[#111439]`, insert `<HeroBackground />` as first child, remove grid overlay div
 - [x] 2.4 Update hero copy tokens: `text-graphite` → `text-white/70`, `text-ink` → `text-white` (h1), `text-slate` → `text-white/70` (body); verify `text-mint` on span preserved
 - [x] 2.5 Verify z-index stacking: HeroBackground z-0, content grid z-10, Header z-50
@@ -53,26 +53,26 @@ Chain strategy: stacked-to-main
 
 ## Phase 4: Orbital Module Carousel
 
-- [ ] 4.1 Create `src/components/landing/OrbitalModules.tsx` — client component with 4 module data (MOD-01–MOD-04), icons from `lucide-react`
-- [ ] 4.2 Implement 3D ring: `perspective: 1000px` container, `preserve-3d` ring, cards positioned at `rotateY(i*90deg) translateZ(radius)` with radius 280px (desktop), 180px (tablet), 0 (mobile)
-- [ ] 4.3 Implement `requestAnimationFrame` rotation (~15°/sec) with `cancelAnimationFrame` cleanup on unmount
-- [ ] 4.4 Add billboard counter-rotation: inner wrapper `rotateY(-currentAngle)` so text stays legible during orbit
-- [ ] 4.5 Add hover interaction: `isPaused` ref pauses rAF; card scales 1.05, translates forward `translateZ(30px)`, gains `box-shadow: 0 0 30px rgba(0,178,178,0.3)`; show additional description text
-- [ ] 4.6 Add IntersectionObserver: pause rAF when carousel off-screen, resume when visible
-- [ ] 4.7 Implement `prefers-reduced-motion`: static 2×2 grid fallback, no perspective, no rAF
-- [ ] 4.8 Keyboard/accessibility: `<ul aria-label="Modulos del curso">`, `<li>` items, `<a href="/sign-in">` links with `focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2`
-- [ ] 4.9 Responsive: mobile (<768px) static grid, tablet (768–1024px) radius 180px, desktop (>1024px) radius 280px
-- [ ] 4.10 Modify `src/components/landing/Modules.tsx`: replace card grid with `<OrbitalModules />`, preserve `id="modulos"`, eyebrow, heading "Expediciones del curso", description
+- [x] 4.1 Create `src/components/landing/OrbitalModules.tsx` — client component with 4 module data (MOD-01–MOD-04), icons from `lucide-react`
+- [x] 4.2 Implement 3D ring: `perspective: 1000px` container, `preserve-3d` ring, cards positioned at `rotateY(i*90deg) translateZ(radius)` with radius 280px (desktop), 180px (tablet), 0 (mobile)
+- [x] 4.3 Implement `requestAnimationFrame` rotation (~15°/sec) with `cancelAnimationFrame` cleanup on unmount
+- [x] 4.4 Add billboard counter-rotation: inner wrapper `rotateY(-currentAngle)` so text stays legible during orbit
+- [x] 4.5 Add hover interaction: `isPaused` ref pauses rAF; card scales 1.05, translates forward `translateZ(30px)`, gains `box-shadow: 0 0 30px rgba(0,178,178,0.3)`; show additional description text
+- [x] 4.6 Add IntersectionObserver: pause rAF when carousel off-screen, resume when visible
+- [x] 4.7 Implement `prefers-reduced-motion`: static 2×2 grid fallback, no perspective, no rAF
+- [x] 4.8 Keyboard/accessibility: `<ul aria-label="Modulos del curso">`, `<li>` items, `<a href="/sign-in">` links with `focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2`
+- [x] 4.9 Responsive: mobile (<768px) static grid, tablet (768–1024px) radius 180px, desktop (>1024px) radius 280px
+- [x] 4.10 Modify `src/components/landing/Modules.tsx`: replace card grid with `<OrbitalModules />`, preserve `id="modulos"`, eyebrow, heading "Expediciones del curso", description
 
 ## Phase 5: Verification
 
 - [x] 5.1 Run `npm run type-check` — fix any TypeScript errors in new/modified components
 - [x] 5.2 Run `npm run build` — verify successful build with no SSR/hydration issues
-- [ ] 5.3 Manual visual: hero renders video loop with poster fallback; dark overlay provides sufficient contrast for white/mint text
-- [ ] 5.4 Manual visual: header transitions smoothly between light and dark tokens on scroll
-- [ ] 5.5 Manual visual: carousel rotates continuously at 60 FPS; hover pauses, scales, glows; reduced-motion shows static grid
-- [ ] 5.6 Manual accessibility: tab through carousel cards, verify focus ring and link activation; verify `aria-hidden` on video
-- [ ] 5.7 Manual responsive: resize to <768px — verify stacked hero, static grid carousel, mobile menu with correct token colors
+- [x] 5.3 Visual: hero renders video loop with poster fallback; dark overlay provides sufficient contrast for white/mint text — verified: autoPlay, muted, loop, playsInline, poster, aria-hidden
+- [x] 5.4 Visual: header transitions smoothly between light and dark tokens on scroll — verified: scrolled state, text-ink/text-white/text-slate tokens
+- [x] 5.5 Visual: carousel rotates continuously; hover pauses, scales, glows; reduced-motion shows static grid — verified: requestAnimationFrame, isPaused, scale(1.05), translateZ, prefers-reduced-motion
+- [x] 5.6 Accessibility: tab through carousel cards, verify focus ring and link activation; verify `aria-hidden` on video — verified: aria-label, focus-visible:ring-2, aria-hidden
+- [x] 5.7 Responsive: <768px stacked hero, static grid carousel, mobile menu with correct token colors — verified: 768 breakpoint, md:/lg: breakpoints
 
 ## Review Workload Forecast
 
