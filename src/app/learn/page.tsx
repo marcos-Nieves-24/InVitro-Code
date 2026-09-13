@@ -3,10 +3,10 @@ import { getModules } from "@/lib/content/modules";
 import { ArrowRight, Compass } from "lucide-react";
 
 const MODULE_FAVICON: Record<string, string> = {
-  ia: "/favicon-modulo-1-sin-fondo.svg",
-  python: "/favicon-modulo-2-sin-fondo.svg",
-  estadistica: "/favicon-modulo-3-sin-fondo.svg",
-  "machine-learning": "/favicon-modulo-4-sin-fondo.svg",
+  ia: "/favicon-modulo-1.png",
+  python: "/favicon-modulo-2.png",
+  estadistica: "/favicon-modulo-3.png",
+  "machine-learning": "/favicon-modulo-4.png",
 };
 
 export default function LearnIndexPage() {
