@@ -45,20 +45,26 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       }
 
       const { error: signInError } = await signIn.password({
-        identifier: email,
+        emailAddress: email,
         password,
       });
 
       // Sign-in succeeded — finalize the session
       if (!signInError && signIn.status === "complete") {
-        const { error: finalizeError } = await signIn.finalize();
-        if (!finalizeError) {
-          onStatusChange?.("success");
-          window.location.href = "/";
-          return;
+        const { error: finalizeError } = await signIn.finalize({
+          navigate: ({ session, decorateUrl }) => {
+            if (session?.currentTask) {
+              console.log("Session task:", session.currentTask);
+              return;
+            }
+            const url = decorateUrl("/");
+            window.location.href = url;
+          },
+        });
+        if (finalizeError) {
+          setError(finalizeError.message || "Error al iniciar sesión.");
+          onStatusChange?.("error");
         }
-        setError(finalizeError.message || "Error al iniciar sesión.");
-        onStatusChange?.("error");
         return;
       }
 
@@ -89,19 +95,26 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
 
         // Sign-up complete — finalize the session
         if (signUp.status === "complete") {
-          const { error: finalizeError } = await signUp.finalize();
-          if (!finalizeError) {
-            onStatusChange?.("success");
-            window.location.href = "/";
-            return;
+          const { error: finalizeError } = await signUp.finalize({
+            navigate: ({ session, decorateUrl }) => {
+              if (session?.currentTask) {
+                console.log("Session task:", session.currentTask);
+                return;
+              }
+              const url = decorateUrl("/");
+              window.location.href = url;
+            },
+          });
+          if (finalizeError) {
+            setError(finalizeError.message || "Error al crear la cuenta.");
+            onStatusChange?.("error");
           }
-          setError(finalizeError.message || "Error al crear la cuenta.");
-          onStatusChange?.("error");
           return;
         }
 
-        // Email verification required
+        // Email verification required — send code first
         if (signUp.status === "missing_requirements") {
+          await signUp.verifications.sendEmailCode();
           setShowVerification(true);
           onStatusChange?.("idle");
           return;
@@ -162,11 +175,17 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       }
 
       if (signUp.status === "complete") {
-        const { error: finalizeError } = await signUp.finalize();
-        if (!finalizeError) {
-          onStatusChange?.("success");
-          window.location.href = "/";
-        } else {
+        const { error: finalizeError } = await signUp.finalize({
+          navigate: ({ session, decorateUrl }) => {
+            if (session?.currentTask) {
+              console.log("Session task:", session.currentTask);
+              return;
+            }
+            const url = decorateUrl("/");
+            window.location.href = url;
+          },
+        });
+        if (finalizeError) {
           setError(finalizeError.message || "Error al verificar.");
           onStatusChange?.("error");
         }
