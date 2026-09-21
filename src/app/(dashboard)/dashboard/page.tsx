@@ -166,7 +166,7 @@ export default async function DashboardPage() {
           {/* Central feed — scroll fluido, full width */}
           <div className="space-y-16">
             {/* Hero */}
-            <section id="hero" className="relative min-h-[400px] rounded-2xl lg:min-h-[500px]">
+            <section id="hero" className="relative min-h-[400px] overflow-hidden rounded-3xl lg:min-h-[480px]">
               {/* Background image */}
               <div className="absolute inset-0 z-0">
                 <img
@@ -176,61 +176,41 @@ export default async function DashboardPage() {
                 />
               </div>
 
-              <div className="relative z-[2] flex items-center gap-6 p-8 lg:p-10">
-                {/* Hero card */}
-                <div className="flex-1 rounded-3xl border border-[#044A68] bg-[#001329]/80 p-6 lg:p-8 backdrop-blur-sm">
-                  <h2 className="font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl lg:text-4xl">
+              <div className="relative z-[2] flex items-center justify-center gap-6 p-8 lg:p-12">
+                {/* Hero card — matching dashboard-1.svg */}
+                <div className="relative z-[1] max-w-lg rounded-3xl border border-[#044A68] bg-[#001329]/85 p-8 backdrop-blur-sm">
+                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
                     ¡Bienvenido, investigador!
                   </h2>
-                  <p className="mt-3 max-w-md text-base lg:text-lg text-white/80">
+                  <p className="mt-4 text-lg text-white/80">
                     Continua entrenando modelos y explorando la inteligencia artificial
                   </p>
                   <Link
                     href={startHref}
-                    className="mt-5 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
                   >
                     Iniciar Lección
                   </Link>
                 </div>
 
-                {/* SVG scientist illustration — full height, touching right edge */}
-                <div className="hidden h-[480px] w-[320px] shrink-0 self-end overflow-visible lg:block lg:-mr-10 lg:-mb-6">
+                {/* SVG scientist illustration — absolute centered, large */}
+                <div className="pointer-events-none absolute inset-0 z-[0] flex items-center justify-center overflow-visible">
                   <img
                     src="/dashboard/cientifica-1.svg"
                     alt="Científica con hélice de ADN"
-                    className="h-full w-full object-contain object-bottom"
+                    className="h-[550px] w-auto object-contain object-bottom opacity-90 lg:h-[600px]"
                   />
                 </div>
               </div>
 
               {/* Scroll indicator */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3]">
-                <a href="#mission" className="flex flex-col items-center gap-2 text-white/60 transition-colors hover:text-white">
+                <a href="#stats" className="flex flex-col items-center gap-2 text-white/60 transition-colors hover:text-white">
                   <span className="text-xs font-medium">Siguiente</span>
                   <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </a>
-              </div>
-            </section>
-
-            {/* Stats row — debajo del hero */}
-            <section id="stats" className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Nivel actual</h3>
-                <div className="mt-2"><LevelBadge totalXp={totalXp} /></div>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Puntos totales</h3>
-                <p className="mt-2 font-display text-2xl font-semibold text-ink">{totalXp.toLocaleString("es")} XP</p>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Racha actual</h3>
-                <div className="mt-2"><StreakBadge currentStreak={streakData.current_streak} longestStreak={streakData.longest_streak} /></div>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Siguiente nivel</h3>
-                <div className="mt-2"><XPBar totalXp={totalXp} /></div>
               </div>
             </section>
 
