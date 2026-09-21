@@ -31,8 +31,6 @@ import {
   Check,
   FlaskConical,
   Gem,
-  Map,
-  Play,
   Terminal,
   Trophy,
   type LucideIcon,
@@ -184,38 +182,26 @@ export default async function DashboardPage() {
                   className="h-full w-full object-cover object-center"
                 />
               </div>
-              {/* Gradient overlay for text contrast */}
-              <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#0b0e2a]/70 via-[#0b0e2a]/40 to-transparent" />
 
               <div className="relative z-[2] flex items-center gap-8 p-10">
-                <div className="flex-1">
+                {/* Dark card with welcome message — matches dashboard-1.svg */}
+                <div className="rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
                   <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                    ¡Bienvenido de vuelta, {userName}!
+                    ¡Bienvenido, investigador!
                   </h2>
-                  <p className="mb-8 mt-4 max-w-lg text-white/80">
-                    Estás construyendo tu camino en InVitro-Code.
-                    Continúa tu investigación y descubre nuevas formas de
-                    aplicar la Inteligencia Artificial.
+                  <p className="mt-4 max-w-md text-lg text-white/80">
+                    Continua entrenando modelos y explorando la inteligencia
+                    artificial
                   </p>
-                  <div className="flex flex-wrap gap-4">
-                    <Link
-                      href={startHref}
-                      className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-                    >
-                      <Play className="h-4 w-4" fill="currentColor" />
-                      Continuar Misión
-                    </Link>
-                    <Link
-                      href="/niveles"
-                      className="glass-card flex items-center gap-2 rounded-xl border border-white/20 px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
-                    >
-                      <Map className="h-4 w-4" />
-                      Explorar Mapa
-                    </Link>
-                  </div>
+                  <Link
+                    href={startHref}
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+                  >
+                    Iniciar Lección
+                  </Link>
                 </div>
 
-                {/* SVG scientist illustration — bleeds off right edge like reference */}
+                {/* SVG scientist illustration — bleeds off right edge */}
                 <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
                   <img
                     src="/dashboard/cientifica-1.svg"
@@ -223,11 +209,6 @@ export default async function DashboardPage() {
                     className="h-full w-full object-contain object-bottom"
                   />
                 </div>
-              </div>
-
-              {/* Decorative chip */}
-              <div className="absolute right-6 top-6 z-[3] rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-                IA + Biotecnología = Mejor futuro
               </div>
             </section>
 
