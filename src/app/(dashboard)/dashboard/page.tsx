@@ -176,9 +176,9 @@ export default async function DashboardPage() {
                 />
               </div>
 
-              <div className="relative z-[2] flex items-stretch p-8 lg:p-12">
-                {/* Hero card — matching dashboard-1.svg, left side */}
-                <div className="relative z-[1] flex-1 max-w-lg rounded-3xl border border-[#044A68] bg-[#001329]/85 p-8 backdrop-blur-sm">
+              <div className="relative z-[2] flex items-stretch gap-0 p-8 lg:p-12">
+                {/* Hero card — compact, left side */}
+                <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[#044A68] bg-[#001329]/85 p-8 backdrop-blur-sm">
                   <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
                     ¡Bienvenido, investigador!
                   </h2>
@@ -194,7 +194,7 @@ export default async function DashboardPage() {
                 </div>
 
                 {/* SVG scientist illustration — touching card border */}
-                <div className="hidden shrink-0 self-end overflow-visible lg:block lg:w-[320px] lg:-ml-4">
+                <div className="hidden shrink-0 self-end overflow-visible lg:block lg:w-[350px] lg:-ml-2">
                   <img
                     src="/dashboard/cientifica-1.svg"
                     alt="Científica con hélice de ADN"
