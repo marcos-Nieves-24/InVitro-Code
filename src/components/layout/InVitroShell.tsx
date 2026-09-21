@@ -4,7 +4,7 @@ import { useState, useEffect, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
 import { LogOut, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { SectionsDrawer } from "./SectionsDrawer";
+import { SectionsDropdown } from "./SectionsDropdown";
 
 interface InVitroShellProps {
   children: ReactNode;
@@ -46,14 +46,14 @@ export function InVitroShell({
     <div className="min-h-screen bg-surface text-ink">
       <header className="sticky top-0 z-50 border-b border-surface-raised bg-surface/80 backdrop-blur-xl">
         <div className="flex h-14 items-center justify-between px-4 md:px-8">
-          {/* Left: Logo + Sections drawer */}
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2">
+          {/* Left: Logo + Sections dropdown */}
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 mr-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-negativo.svg" alt="InVitro-Code" className="h-8 w-8" />
               <span className="font-display text-lg font-bold hidden sm:inline">InVitro-Code</span>
             </Link>
-            <SectionsDrawer />
+            <SectionsDropdown />
           </div>
 
           {/* Right: User info + Logout */}
