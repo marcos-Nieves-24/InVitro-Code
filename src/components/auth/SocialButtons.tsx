@@ -17,8 +17,8 @@ export function SocialButtons({ disabled }: SocialButtonsProps) {
     if (!signIn) return;
     signIn.sso({
       strategy,
-      redirectUrl: "/sso-callback",
-      redirectCallbackUrl: "/",
+      redirectUrl: "/",
+      redirectCallbackUrl: "/sso-callback",
     });
   };
 
