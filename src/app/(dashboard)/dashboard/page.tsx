@@ -8,7 +8,6 @@ import { ModuleProgress } from "@/components/gamification/ModuleProgress";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
-import { FloatingNav } from "@/components/layout/FloatingNav";
 import { CommandPalette } from "@/components/layout/CommandPalette";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
@@ -173,11 +172,11 @@ export default async function DashboardPage() {
     >
       <div className="p-8">
         <div className="flex gap-8">
-          {/* Central feed */}
-          <div className="flex-grow space-y-8">
-            {/* Hero banner */}
-            <section id="hero" className="relative min-h-[320px] rounded-2xl lg:min-h-[400px]">
-              {/* Background image — anime-style */}
+          {/* Central feed — scroll fluido */}
+          <div className="flex-grow space-y-16">
+            {/* Hero + Stats fusionados */}
+            <section id="hero" className="relative min-h-[500px] rounded-2xl lg:min-h-[600px]">
+              {/* Background image */}
               <div className="absolute inset-0 z-0">
                 <img
                   src="/dashboard/dashboard-fondo-anime.png"
@@ -186,352 +185,260 @@ export default async function DashboardPage() {
                 />
               </div>
 
-              <div className="relative z-[2] flex items-center gap-8 p-10">
-                {/* Dark card with welcome message — matches dashboard-1.svg */}
-                <div className="rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                    ¡Bienvenido, investigador!
-                  </h2>
-                  <p className="mt-4 max-w-md text-lg text-white/80">
-                    Continua entrenando modelos y explorando la inteligencia
-                    artificial
-                  </p>
-                  <Link
-                    href={startHref}
-                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-                  >
-                    Iniciar Lección
-                  </Link>
-                </div>
-
-                {/* SVG scientist illustration — bleeds off right edge */}
-                <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
-                  <img
-                    src="/dashboard/cientifica-1.svg"
-                    alt="Científica con hélice de ADN"
-                    className="h-full w-full object-contain object-bottom"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Stats row */}
-            <section id="stats" className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-                  Nivel actual
-                </h3>
-                <div className="mt-2">
-                  <LevelBadge totalXp={totalXp} />
-                </div>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-                  Puntos totales
-                </h3>
-                <p className="mt-2 font-display text-2xl font-semibold text-ink">
-                  {totalXp.toLocaleString("es")} XP
-                </p>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-                  Racha actual
-                </h3>
-                <div className="mt-2">
-                  <StreakBadge
-                    currentStreak={streakData.current_streak}
-                    longestStreak={streakData.longest_streak}
-                  />
-                </div>
-              </div>
-              <div className="glass-card flex flex-col rounded-xl p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-                  Siguiente nivel
-                </h3>
-                <div className="mt-2">
-                  <XPBar totalXp={totalXp} />
-                </div>
-              </div>
-            </section>
-
-            {/* Current work */}
-            <section className="grid gap-6 md:grid-cols-2">
-              {/* Proyecto Actual (REQ-UP-01) */}
-              <div className="glass-card flex flex-col rounded-xl p-6">
-                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">
-                  Proyecto Actual
-                </h3>
-                {projectModule ? (
-                  <>
-                    <div className="mb-6 flex gap-4">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-fog/20 text-mint">
-                        {ProjectIcon ? <ProjectIcon className="h-8 w-8" /> : null}
-                      </div>
-                      <div>
-                        <h4 className="font-display text-lg font-semibold">
-                          {projectModule.name}
-                        </h4>
-                        <p className="text-sm text-storm">
-                          {projectCompleted} de {projectModule.totalLessons}{" "}
-                          lecciones completadas
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mt-auto">
-                      <div className="mb-2 flex items-end justify-between">
-                        <span className="text-xs font-bold text-storm">
-                          Progreso
-                        </span>
-                        <span className="text-sm font-bold text-mint">
-                          {projectPercent}%
-                        </span>
-                      </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
-                        <div
-                          className="xp-gradient h-full rounded-full"
-                          style={{ width: `${projectPercent}%` }}
-                        />
-                      </div>
-                    </div>
+              <div className="relative z-[2] flex flex-col gap-8 p-10">
+                {/* Hero card */}
+                <div className="flex items-center gap-8">
+                  <div className="rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
+                    <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                      ¡Bienvenido, investigador!
+                    </h2>
+                    <p className="mt-4 max-w-md text-lg text-white/80">
+                      Continua entrenando modelos y explorando la inteligencia artificial
+                    </p>
                     <Link
-                      href={projectHref}
-                      className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-raised py-3 text-sm font-bold text-mint transition-colors hover:bg-surface-card"
+                      href={startHref}
+                      className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
                     >
-                      Continuar módulo <ArrowRight className="h-4 w-4" />
+                      Iniciar Lección
                     </Link>
-                  </>
-                ) : (
-                  <EmptyState
-                    icon={FlaskConical}
-                    {...EMPTY_STATES.currentProject}
-                  />
-                )}
+                  </div>
+
+                  {/* SVG scientist illustration */}
+                  <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
+                    <img
+                      src="/dashboard/cientifica-1.svg"
+                      alt="Científica con hélice de ADN"
+                      className="h-full w-full object-contain object-bottom"
+                    />
+                  </div>
+                </div>
+
+                {/* Stats row */}
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                  <div className="glass-card flex flex-col rounded-xl p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Nivel actual</h3>
+                    <div className="mt-2"><LevelBadge totalXp={totalXp} /></div>
+                  </div>
+                  <div className="glass-card flex flex-col rounded-xl p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Puntos totales</h3>
+                    <p className="mt-2 font-display text-2xl font-semibold text-ink">{totalXp.toLocaleString("es")} XP</p>
+                  </div>
+                  <div className="glass-card flex flex-col rounded-xl p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Racha actual</h3>
+                    <div className="mt-2"><StreakBadge currentStreak={streakData.current_streak} longestStreak={streakData.longest_streak} /></div>
+                  </div>
+                  <div className="glass-card flex flex-col rounded-xl p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Siguiente nivel</h3>
+                    <div className="mt-2"><XPBar totalXp={totalXp} /></div>
+                  </div>
+                </div>
               </div>
 
-              {/* Misión Actual (REQ-UP-02) */}
-              <div id="mission" className="glass-card flex flex-col rounded-xl p-6">
-                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">
-                  Misión Actual
-                </h3>
-                {nextLesson ? (
-                  <>
-                    <div className="mb-6 flex gap-4">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {MissionIcon ? <MissionIcon className="h-8 w-8" /> : null}
-                      </div>
-                      <div>
-                        <h4 className="font-display text-lg font-semibold">
-                          {nextLesson.title}
-                        </h4>
-                        <p className="text-sm text-storm">
-                          {getModuleDisplayName(nextLesson.moduleSlug)}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mb-2 flex items-center gap-1 text-mint">
-                      <Gem className="h-4 w-4" fill="currentColor" />
-                      <span className="text-sm font-bold">
-                        +{nextLesson.xp} XP
-                      </span>
-                    </div>
-                    <Link
-                      href={missionHref ?? "/learn"}
-                      className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-mint py-3 text-sm font-bold text-ink transition-all hover:opacity-90"
-                    >
-                      Continuar misión <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </>
-                ) : (
-                  <EmptyState
-                    icon={CheckCircle2}
-                    title="¡Completaste todas las lecciones!"
-                    description="No quedan misiones pendientes en ninguna expedición."
-                  />
-                )}
+              {/* Scroll indicator */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3]">
+                <a href="#mission" className="flex flex-col items-center gap-2 text-white/60 transition-colors hover:text-white">
+                  <span className="text-xs font-medium">Siguiente</span>
+                  <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </a>
               </div>
             </section>
 
-            {/* Modules */}
+            {/* Misión Actual */}
+            <section id="mission" className="scroll-mt-20">
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="font-display text-2xl font-bold">Misión Actual</h2>
+                <a href="#modules" className="flex items-center gap-1 text-sm text-mint hover:underline">
+                  Ver módulos
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Proyecto Actual */}
+                <div className="glass-card flex flex-col rounded-xl p-6">
+                  <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">Proyecto Actual</h3>
+                  {projectModule ? (
+                    <>
+                      <div className="mb-6 flex gap-4">
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-fog/20 text-mint">
+                          {ProjectIcon ? <ProjectIcon className="h-8 w-8" /> : null}
+                        </div>
+                        <div>
+                          <h4 className="font-display text-lg font-semibold">{projectModule.name}</h4>
+                          <p className="text-sm text-storm">{projectCompleted} de {projectModule.totalLessons} lecciones completadas</p>
+                        </div>
+                      </div>
+                      <div className="mt-auto">
+                        <div className="mb-2 flex items-end justify-between">
+                          <span className="text-xs font-bold text-storm">Progreso</span>
+                          <span className="text-sm font-bold text-mint">{projectPercent}%</span>
+                        </div>
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
+                          <div className="xp-gradient h-full rounded-full" style={{ width: `${projectPercent}%` }} />
+                        </div>
+                      </div>
+                      <Link href={projectHref} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-surface-raised py-3 text-sm font-bold text-mint transition-colors hover:bg-surface-card">
+                        Continuar módulo <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </>
+                  ) : (
+                    <EmptyState icon={FlaskConical} {...EMPTY_STATES.currentProject} />
+                  )}
+                </div>
+
+                {/* Misión Actual */}
+                <div className="glass-card flex flex-col rounded-xl p-6">
+                  <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
+                  {nextLesson ? (
+                    <>
+                      <div className="mb-6 flex gap-4">
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
+                          {MissionIcon ? <MissionIcon className="h-8 w-8" /> : null}
+                        </div>
+                        <div>
+                          <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
+                          <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
+                        </div>
+                      </div>
+                      <div className="mb-2 flex items-center gap-1 text-mint">
+                        <Gem className="h-4 w-4" fill="currentColor" />
+                        <span className="text-sm font-bold">+{nextLesson.xp} XP</span>
+                      </div>
+                      <Link href={missionHref ?? "/learn"} className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-mint py-3 text-sm font-bold text-ink transition-all hover:opacity-90">
+                        Continuar misión <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </>
+                  ) : (
+                    <EmptyState icon={CheckCircle2} title="¡Completaste todas las lecciones!" description="No quedan misiones pendientes en ninguna expedición." />
+                  )}
+                </div>
+              </div>
+
+              {/* Scroll indicator */}
+              <div className="mt-12 flex justify-center">
+                <a href="#modules" className="flex flex-col items-center gap-2 text-storm/60 transition-colors hover:text-mint">
+                  <span className="text-xs font-medium">Siguiente</span>
+                  <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </a>
+              </div>
+            </section>
+
+            {/* Progreso de módulos */}
             {modules.length > 0 && (
-              <section id="modules" className="glass-card rounded-xl p-6">
+              <section id="modules" className="scroll-mt-20">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <h2 className="font-display text-xl font-bold">
-                      Progreso de módulos
-                    </h2>
-                    <p className="text-sm text-storm">
-                      Tu avance real a través de las expediciones.
-                    </p>
+                    <h2 className="font-display text-2xl font-bold">Progreso de módulos</h2>
+                    <p className="text-sm text-storm">Tu avance real a través de las expediciones.</p>
                   </div>
-                  <Link
-                    href="/learn"
-                    className="flex items-center gap-1 text-sm font-bold text-mint hover:underline"
-                  >
+                  <Link href="/learn" className="flex items-center gap-1 text-sm font-bold text-mint hover:underline">
                     Ver expediciones <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
-                <div className="space-y-6">
-                  {modules.map((mod) => (
-                    <ModuleProgress
-                      key={mod.slug}
-                      moduleSlug={mod.slug}
-                      moduleName={mod.name}
-                      totalLessons={mod.totalLessons}
-                      initialCompletedLessons={
-                        completedByModule[mod.slug] ?? 0
-                      }
-                    />
-                  ))}
+
+                <div className="glass-card rounded-xl p-6">
+                  <div className="space-y-6">
+                    {modules.map((mod) => (
+                      <ModuleProgress
+                        key={mod.slug}
+                        moduleSlug={mod.slug}
+                        moduleName={mod.name}
+                        totalLessons={mod.totalLessons}
+                        initialCompletedLessons={completedByModule[mod.slug] ?? 0}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scroll indicator */}
+                <div className="mt-12 flex justify-center">
+                  <a href="#progress" className="flex flex-col items-center gap-2 text-storm/60 transition-colors hover:text-mint">
+                    <span className="text-xs font-medium">Siguiente</span>
+                    <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </a>
                 </div>
               </section>
             )}
-          </div>
 
-          {/* Side progress panel */}
-          <aside className="hidden w-80 flex-col gap-6 lg:flex">
-            <div className="glass-card rounded-2xl p-6">
+            {/* Tu Progreso — movido del sidebar */}
+            <section id="progress" className="scroll-mt-20">
               <div className="mb-6 flex items-center justify-between">
-                <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
-                <Link
-                  href="/niveles"
-                  className="flex items-center gap-1 text-xs font-bold text-mint hover:underline"
-                >
-                  Ver roadmap <ArrowRight className="h-3.5 w-3.5" />
+                <h2 className="font-display text-2xl font-bold">Tu Progreso</h2>
+                <Link href="/niveles" className="flex items-center gap-1 text-sm font-bold text-mint hover:underline">
+                  Ver roadmap <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-              <div className="mb-8 flex flex-col items-center">
-                <div className="relative flex items-center justify-center">
-                  <svg className="h-32 w-32 -rotate-90">
-                    <circle
-                      cx="64"
-                      cy="64"
-                      fill="transparent"
-                      r={ringRadius}
-                      stroke="currentColor"
-                      strokeWidth="8"
-                      className="text-surface-raised"
-                    />
-                    <circle
-                      cx="64"
-                      cy="64"
-                      fill="transparent"
-                      r={ringRadius}
-                      stroke="currentColor"
-                      strokeWidth="8"
-                      strokeDasharray={ringCircumference}
-                      strokeDashoffset={ringOffset}
-                      strokeLinecap="round"
-                      className="text-mint"
-                    />
-                  </svg>
-                  <div className="absolute flex flex-col items-center">
-                    <span className="text-xs font-bold text-storm">
-                      Nivel
-                    </span>
-                    <span className="text-3xl font-black text-mint">
-                      {levelInfo.level}
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-4 text-center">
-                  <p className="font-bold">{rankTitle(levelInfo.level)}</p>
-                  <p className="mt-1 text-xs text-storm">
-                    <span className="font-bold text-mint">
-                      {totalXp.toLocaleString("es")}
-                    </span>{" "}
-                    / {levelInfo.nextLevelXp.toLocaleString("es")} XP
-                  </p>
-                  <div className="mt-2 h-1.5 w-32 overflow-hidden rounded-full bg-surface-raised">
-                    <div
-                      className="h-full rounded-full bg-mint"
-                      style={{ width: `${ringProgress}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {LEVEL_STEPS.map((step, i) => {
-                  const completed = i < rankLevel;
-                  const current = i === rankLevel;
-                  return (
-                    <div
-                      key={step}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-bold ${
-                        current
-                          ? "bg-fog/20 text-mint ring-2 ring-mint/20"
-                          : completed
-                            ? "bg-mint/30 text-storm opacity-60"
-                            : "bg-surface-raised text-storm"
-                      }`}
-                    >
-                      <span
-                        className={`flex h-4 w-4 items-center justify-center rounded-full ${
-                          current ? "border-2 border-mint" : ""
-                        }`}
-                      >
-                        {current ? (
-                          <span className="h-2 w-2 rounded-full bg-mint" />
-                        ) : completed ? (
-                          <Check className="h-3 w-3" />
-                        ) : (
-                          <span className="text-xs">○</span>
-                        )}
-                      </span>
-                      {i + 1} {step}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
 
-            {/* Logros Recientes (REQ-ACH-08) */}
-            <div className="glass-card rounded-2xl p-6">
-              <div className="mb-6 flex items-center justify-between">
-                <h3 className="font-display text-lg font-bold">
-                  Logros Recientes
-                </h3>
-                <Link
-                  href="/logros"
-                  className="text-xs font-bold text-mint hover:underline"
-                >
-                  Ver todos
-                </Link>
-              </div>
-              {recentAchievements.length > 0 ? (
-                <div className="space-y-4">
-                  {recentAchievements.map((achievement) => {
-                    const Icon = achievementIcon(achievement.icon);
-                    return (
-                      <div key={achievement.id} className="flex gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-fog/20 text-mint">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div className="flex-grow">
-                          <div className="flex justify-between">
-                            <h5 className="text-xs font-bold">
-                              {achievement.title}
-                            </h5>
-                            <span className="text-[10px] font-bold text-mint">
-                              +{achievement.xpReward} XP
-                            </span>
-                          </div>
-                          <p className="text-[10px] text-storm">
-                            {achievement.description}
-                          </p>
-                        </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Nivel y XP */}
+                <div className="glass-card rounded-xl p-6">
+                  <div className="flex items-center gap-6">
+                    <div className="relative flex items-center justify-center">
+                      <svg className="h-32 w-32 -rotate-90">
+                        <circle cx="64" cy="64" fill="transparent" r={ringRadius} stroke="currentColor" strokeWidth="8" className="text-surface-raised" />
+                        <circle cx="64" cy="64" fill="transparent" r={ringRadius} stroke="currentColor" strokeWidth="8" strokeDasharray={ringCircumference} strokeDashoffset={ringOffset} strokeLinecap="round" className="text-mint" />
+                      </svg>
+                      <div className="absolute flex flex-col items-center">
+                        <span className="text-xs font-bold text-storm">Nivel</span>
+                        <span className="text-3xl font-black text-mint">{levelInfo.level}</span>
                       </div>
-                    );
-                  })}
+                    </div>
+                    <div>
+                      <p className="font-bold">{rankTitle(levelInfo.level)}</p>
+                      <p className="mt-1 text-sm text-storm">
+                        <span className="font-bold text-mint">{totalXp.toLocaleString("es")}</span> / {levelInfo.nextLevelXp.toLocaleString("es")} XP
+                      </p>
+                      <div className="mt-3 h-2 w-40 overflow-hidden rounded-full bg-surface-raised">
+                        <div className="h-full rounded-full bg-mint transition-all duration-500" style={{ width: `${ringProgress}%` }} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ) : (
-                <EmptyState icon={Trophy} {...EMPTY_STATES.achievements} />
-              )}
-            </div>
-          </aside>
+
+                {/* Logros Recientes */}
+                <div className="glass-card rounded-xl p-6">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="font-display text-lg font-bold">Logros Recientes</h3>
+                    <Link href="/logros" className="text-xs font-bold text-mint hover:underline">Ver todos</Link>
+                  </div>
+                  {recentAchievements.length > 0 ? (
+                    <div className="space-y-3">
+                      {recentAchievements.slice(0, 3).map((achievement) => {
+                        const Icon = achievementIcon(achievement.icon);
+                        return (
+                          <div key={achievement.id} className="flex gap-3">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-fog/20 text-mint">
+                              <Icon className="h-5 w-5" />
+                            </div>
+                            <div className="flex-grow">
+                              <div className="flex justify-between">
+                                <h5 className="text-xs font-bold">{achievement.title}</h5>
+                                <span className="text-[10px] font-bold text-mint">+{achievement.xpReward} XP</span>
+                              </div>
+                              <p className="text-[10px] text-storm">{achievement.description}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <EmptyState icon={Trophy} {...EMPTY_STATES.achievements} />
+                  )}
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </InVitroShell>
-    <FloatingNav />
     <CommandPalette />
     </>
   );
