@@ -8,19 +8,27 @@ interface SocialButtonsProps {
 
 /**
  * OAuth social login buttons for Google and GitHub.
- * Uses Clerk's signIn.authenticateWithRedirect() for OAuth flow.
+ * Uses Clerk's signIn.sso() for OAuth flow (Core 3 API).
  */
 export function SocialButtons({ disabled }: SocialButtonsProps) {
-  const { signIn } = useSignIn();
+  const { signIn, fetchStatus } = useSignIn();
+  const isLoaded = fetchStatus !== "idle" || !!signIn;
 
-  const handleOAuth = (strategy: "oauth_google" | "oauth_github") => {
-    if (!signIn) return;
-    signIn.sso({
+  const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
+    if (!isLoaded || !signIn) return;
+
+    const { error } = await signIn.sso({
       strategy,
       redirectUrl: "/",
       redirectCallbackUrl: "/sso-callback",
     });
+
+    if (error) {
+      console.error("OAuth error:", error);
+    }
   };
+
+  const isDisabled = disabled || !isLoaded;
 
   return (
     <div className="space-y-4">
@@ -40,7 +48,7 @@ export function SocialButtons({ disabled }: SocialButtonsProps) {
         <button
           type="button"
           onClick={() => handleOAuth("oauth_google")}
-          disabled={disabled}
+          disabled={isDisabled}
           className="flex items-center justify-center gap-2 rounded-lg border border-[#E2E8F0] bg-white px-4 py-2.5 text-sm font-medium text-[#111439] transition-all hover:border-[#00b2b2] hover:bg-[#F8FAFB] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50"
         >
           <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
@@ -68,7 +76,7 @@ export function SocialButtons({ disabled }: SocialButtonsProps) {
         <button
           type="button"
           onClick={() => handleOAuth("oauth_github")}
-          disabled={disabled}
+          disabled={isDisabled}
           className="flex items-center justify-center gap-2 rounded-lg border border-[#E2E8F0] bg-white px-4 py-2.5 text-sm font-medium text-[#111439] transition-all hover:border-[#00b2b2] hover:bg-[#F8FAFB] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50"
         >
           <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
