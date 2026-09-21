@@ -18,8 +18,11 @@
   "dependencies": {
     "@clerk/nextjs": "latest",
     "@monaco-editor/react": "^4.7.0",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-tooltip": "^1.2.16",
     "@supabase/supabase-js": "latest",
     "@tailwindcss/typography": "^0.5.20",
+    "framer-motion": "^13.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.25.0",
     "next": "latest",

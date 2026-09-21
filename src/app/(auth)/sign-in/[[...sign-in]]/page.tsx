@@ -1,19 +1,26 @@
-import { SignIn } from "@clerk/nextjs";
-import { PageShell, SiteHeader } from "@/components/ui";
+"use client";
+
+import { useState } from "react";
+import { AuthShell } from "@/components/auth/AuthShell";
+import { AuthCard } from "@/components/auth/AuthCard";
+import { AuthForm } from "@/components/auth/AuthForm";
+import { SocialButtons } from "@/components/auth/SocialButtons";
+import { type AuthStatus } from "@/components/auth/LiquidWave";
 
 export default function SignInPage() {
+  const [status, setStatus] = useState<AuthStatus>("idle");
+
   return (
-    <PageShell width="marketing">
-      <SiteHeader showDashboard={false} showSignIn />
-      <div className="mt-10 flex justify-center pb-16">
-        <div className="rounded-card border border-surface-raised bg-surface-card p-6 shadow-sm">
-          <p className="eyebrow mb-4 text-center">Acceso</p>
-          <h1 className="mb-6 text-center font-display text-xl font-semibold tracking-tight text-ink">
-            InVitro-Code
-          </h1>
-          <SignIn />
-        </div>
-      </div>
-    </PageShell>
+    <AuthShell variant="sign-in">
+      <AuthCard
+        status={status}
+        mode="signin"
+        title="Iniciar sesión"
+        subtitle="Bienvenido de vuelta"
+      >
+        <AuthForm mode="signin" onStatusChange={setStatus} />
+        <SocialButtons />
+      </AuthCard>
+    </AuthShell>
   );
 }
