@@ -175,13 +175,24 @@ export default async function DashboardPage() {
           {/* Central feed */}
           <div className="flex-grow space-y-8">
             {/* Hero banner */}
-            <section className="relative overflow-hidden rounded-2xl border border-surface-raised bg-surface-card shadow-sm">
-              <div className="flex items-center gap-8 p-10">
+            <section className="relative min-h-[320px] overflow-hidden rounded-2xl lg:min-h-[400px]">
+              {/* Background image — anime-style */}
+              <div className="absolute inset-0 z-0">
+                <img
+                  src="/dashboard/dashboard-fondo-anime.png"
+                  alt=""
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+              {/* Gradient overlay for text contrast */}
+              <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#0b0e2a]/70 via-[#0b0e2a]/40 to-transparent" />
+
+              <div className="relative z-[2] flex items-center gap-8 p-10">
                 <div className="flex-1">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
+                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
                     ¡Bienvenido de vuelta, {userName}!
                   </h2>
-                  <p className="mb-8 mt-4 max-w-lg text-storm">
+                  <p className="mb-8 mt-4 max-w-lg text-white/80">
                     Estás construyendo tu camino en InVitro-Code.
                     Continúa tu investigación y descubre nuevas formas de
                     aplicar la Inteligencia Artificial.
@@ -196,24 +207,27 @@ export default async function DashboardPage() {
                     </Link>
                     <Link
                       href="/niveles"
-                      className="glass-card flex items-center gap-2 rounded-xl border border-surface-raised px-8 py-4 font-bold text-ink transition-colors hover:bg-surface-card"
+                      className="glass-card flex items-center gap-2 rounded-xl border border-white/20 px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
                     >
                       <Map className="h-4 w-4" />
                       Explorar Mapa
                     </Link>
                   </div>
                 </div>
-                <div className="relative hidden h-64 w-64 shrink-0 overflow-hidden rounded-2xl border-4 border-surface-card bg-gradient-to-br from-mint to-fog shadow-2xl lg:block">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-ink">
-                    <Gem className="mb-2 h-14 w-14 opacity-80" fill="currentColor" />
-                    <span className="text-3xl font-black">
-                      {totalXp.toLocaleString("es")}
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-widest opacity-80">
-                      XP totales
-                    </span>
-                  </div>
+
+                {/* SVG scientist illustration */}
+                <div className="hidden h-[380px] w-80 shrink-0 self-end overflow-visible lg:block">
+                  <img
+                    src="/dashboard/cientifica-1.svg"
+                    alt="Científica con hélice de ADN"
+                    className="h-full w-full object-contain object-bottom"
+                  />
                 </div>
+              </div>
+
+              {/* Decorative chip */}
+              <div className="absolute right-6 top-6 z-[3] rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
+                IA + Biotecnología = Mejor futuro
               </div>
             </section>
 
