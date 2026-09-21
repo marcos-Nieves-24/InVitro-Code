@@ -15,7 +15,7 @@ export function StreakBadge({ currentStreak, longestStreak }: StreakBadgeProps) 
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-full bg-fog/20 px-3 py-1">
+    <div className="flex items-center gap-2 rounded-full bg-fog/15 border border-fog/20 px-3 py-1">
       <Flame className="h-4 w-4 text-mint" />
       <span className="text-sm font-semibold text-storm">
         {currentStreak} día{currentStreak !== 1 ? "s" : ""}

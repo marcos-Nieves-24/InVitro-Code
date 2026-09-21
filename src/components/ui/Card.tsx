@@ -20,13 +20,13 @@ const paddingClass = {
 
 const variantClass: Record<CardVariant, string> = {
   default:
-    "rounded-xl border border-surface-raised bg-surface-card shadow-md",
+    "rounded-xl border border-surface-raised bg-surface-card shadow-sm",
   glass:
     "rounded-xl glass-card",
   elevated:
     "rounded-xl border border-surface-raised bg-surface-card shadow-lg hover:shadow-xl",
   interactive:
-    "rounded-xl border border-surface-raised bg-surface-card shadow-md hover:shadow-lg hover:border-mint/30 cursor-pointer transition-all duration-200",
+    "rounded-xl border border-surface-raised bg-surface-card shadow-sm hover:shadow-md hover:-translate-y-[2px] hover:border-mint/30 cursor-pointer transition-all duration-200",
 };
 
 export function Card({

@@ -66,7 +66,7 @@ export function ModuleProgress({
           }`}
           initial={shouldReduceMotion ? false : { width: 0 }}
           animate={mounted ? { width: `${progressPercentage}%` } : {}}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         />
         {/* Milestone markers */}
         {[25, 50, 75].map((milestone) => (

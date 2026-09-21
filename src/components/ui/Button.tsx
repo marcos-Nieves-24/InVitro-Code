@@ -19,7 +19,7 @@ const sizeClass: Record<Size, string> = {
 };
 
 const baseClass =
-  "inline-flex items-center justify-center gap-2 rounded-btn font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-btn font-medium transition-all btn-press focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50";
 
 type ButtonProps = {
   variant?: Variant;
