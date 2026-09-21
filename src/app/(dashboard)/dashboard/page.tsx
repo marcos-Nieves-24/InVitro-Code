@@ -161,19 +161,12 @@ export default async function DashboardPage() {
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
       userRole={profileRes.data?.role}
       theme={profileRes.data?.theme}
-      topBar={
-        <InVitroTopBar
-          totalXp={totalXp}
-          currentStreak={streakData.current_streak}
-          trail="Dashboard de Expedición"
-        />
-      }
     >
       <div className="p-4 md:p-8">
           {/* Central feed — scroll fluido, full width */}
           <div className="space-y-16">
-            {/* Hero + Stats fusionados */}
-            <section id="hero" className="relative min-h-[500px] rounded-2xl lg:min-h-[600px]">
+            {/* Hero */}
+            <section id="hero" className="relative min-h-[400px] rounded-2xl lg:min-h-[500px]">
               {/* Background image */}
               <div className="absolute inset-0 z-0">
                 <img
@@ -183,52 +176,30 @@ export default async function DashboardPage() {
                 />
               </div>
 
-              <div className="relative z-[2] flex flex-col gap-8 p-10">
+              <div className="relative z-[2] flex items-center gap-8 p-10">
                 {/* Hero card */}
-                <div className="flex items-center gap-8">
-                  <div className="rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
-                    <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                      ¡Bienvenido, investigador!
-                    </h2>
-                    <p className="mt-4 max-w-md text-lg text-white/80">
-                      Continua entrenando modelos y explorando la inteligencia artificial
-                    </p>
-                    <Link
-                      href={startHref}
-                      className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-                    >
-                      Iniciar Lección
-                    </Link>
-                  </div>
-
-                  {/* SVG scientist illustration */}
-                  <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
-                    <img
-                      src="/dashboard/cientifica-1.svg"
-                      alt="Científica con hélice de ADN"
-                      className="h-full w-full object-contain object-bottom"
-                    />
-                  </div>
+                <div className="flex-1 rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
+                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                    ¡Bienvenido, investigador!
+                  </h2>
+                  <p className="mt-4 max-w-md text-lg text-white/80">
+                    Continua entrenando modelos y explorando la inteligencia artificial
+                  </p>
+                  <Link
+                    href={startHref}
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+                  >
+                    Iniciar Lección
+                  </Link>
                 </div>
 
-                {/* Stats row */}
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                  <div className="glass-card flex flex-col rounded-xl p-4">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Nivel actual</h3>
-                    <div className="mt-2"><LevelBadge totalXp={totalXp} /></div>
-                  </div>
-                  <div className="glass-card flex flex-col rounded-xl p-4">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Puntos totales</h3>
-                    <p className="mt-2 font-display text-2xl font-semibold text-ink">{totalXp.toLocaleString("es")} XP</p>
-                  </div>
-                  <div className="glass-card flex flex-col rounded-xl p-4">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Racha actual</h3>
-                    <div className="mt-2"><StreakBadge currentStreak={streakData.current_streak} longestStreak={streakData.longest_streak} /></div>
-                  </div>
-                  <div className="glass-card flex flex-col rounded-xl p-4">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Siguiente nivel</h3>
-                    <div className="mt-2"><XPBar totalXp={totalXp} /></div>
-                  </div>
+                {/* SVG scientist illustration — touching right edge */}
+                <div className="hidden h-[450px] w-[350px] shrink-0 self-end overflow-visible lg:block lg:-mr-10">
+                  <img
+                    src="/dashboard/cientifica-1.svg"
+                    alt="Científica con hélice de ADN"
+                    className="h-full w-full object-contain object-bottom"
+                  />
                 </div>
               </div>
 
@@ -240,6 +211,26 @@ export default async function DashboardPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </a>
+              </div>
+            </section>
+
+            {/* Stats row — debajo del hero */}
+            <section id="stats" className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div className="glass-card flex flex-col rounded-xl p-4">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Nivel actual</h3>
+                <div className="mt-2"><LevelBadge totalXp={totalXp} /></div>
+              </div>
+              <div className="glass-card flex flex-col rounded-xl p-4">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Puntos totales</h3>
+                <p className="mt-2 font-display text-2xl font-semibold text-ink">{totalXp.toLocaleString("es")} XP</p>
+              </div>
+              <div className="glass-card flex flex-col rounded-xl p-4">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Racha actual</h3>
+                <div className="mt-2"><StreakBadge currentStreak={streakData.current_streak} longestStreak={streakData.longest_streak} /></div>
+              </div>
+              <div className="glass-card flex flex-col rounded-xl p-4">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-storm">Siguiente nivel</h3>
+                <div className="mt-2"><XPBar totalXp={totalXp} /></div>
               </div>
             </section>
 
