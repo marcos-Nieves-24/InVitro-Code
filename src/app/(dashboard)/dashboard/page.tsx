@@ -175,7 +175,7 @@ export default async function DashboardPage() {
           {/* Central feed */}
           <div className="flex-grow space-y-8">
             {/* Hero banner */}
-            <section className="relative min-h-[320px] overflow-hidden rounded-2xl lg:min-h-[400px]">
+            <section className="relative min-h-[320px] rounded-2xl lg:min-h-[400px]">
               {/* Background image — anime-style */}
               <div className="absolute inset-0 z-0">
                 <img
@@ -215,8 +215,8 @@ export default async function DashboardPage() {
                   </div>
                 </div>
 
-                {/* SVG scientist illustration */}
-                <div className="hidden h-[380px] w-80 shrink-0 self-end overflow-visible lg:block">
+                {/* SVG scientist illustration — bleeds off right edge like reference */}
+                <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
                   <img
                     src="/dashboard/cientifica-1.svg"
                     alt="Científica con hélice de ADN"
