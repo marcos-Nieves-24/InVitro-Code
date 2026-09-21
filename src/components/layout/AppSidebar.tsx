@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useClerk } from "@clerk/nextjs";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import {
   Boxes,
   Compass,
@@ -30,18 +31,48 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-const NAV_ITEMS: NavItem[] = [
-  { label: "Inicio", href: "/", icon: Boxes },
-  { label: "Expediciones", href: "/learn", icon: Compass },
-  { label: "Laboratorios", href: "/laboratorios", icon: FlaskConical },
-  { label: "Proyectos", href: "/proyectos", icon: Landmark },
-  { label: "Misiones", href: "/niveles", icon: ClipboardList },
-  { label: "Dashboard", href: "/dashboard", icon: BarChart3 },
-  { label: "Logros", href: "/logros", icon: Trophy },
-  { label: "Comunidad", href: "/comunidad", icon: Users },
-  { label: "Perfil", href: "/perfil", icon: User },
-  { label: "Configuración", href: "/configuracion", icon: Settings },
-  { label: "Admin", href: "/admin", icon: Shield },
+interface NavSection {
+  label: string;
+  items: NavItem[];
+}
+
+const NAV_SECTIONS: NavSection[] = [
+  {
+    label: "Principal",
+    items: [
+      { label: "Inicio", href: "/", icon: Boxes },
+    ],
+  },
+  {
+    label: "Aprender",
+    items: [
+      { label: "Expediciones", href: "/learn", icon: Compass },
+      { label: "Laboratorios", href: "/laboratorios", icon: FlaskConical },
+      { label: "Proyectos", href: "/proyectos", icon: Landmark },
+    ],
+  },
+  {
+    label: "Progreso",
+    items: [
+      { label: "Misiones", href: "/niveles", icon: ClipboardList },
+      { label: "Dashboard", href: "/dashboard", icon: BarChart3 },
+      { label: "Logros", href: "/logros", icon: Trophy },
+    ],
+  },
+  {
+    label: "Social",
+    items: [
+      { label: "Comunidad", href: "/comunidad", icon: Users },
+    ],
+  },
+  {
+    label: "Cuenta",
+    items: [
+      { label: "Perfil", href: "/perfil", icon: User },
+      { label: "Configuración", href: "/configuracion", icon: Settings },
+      { label: "Admin", href: "/admin", icon: Shield },
+    ],
+  },
 ];
 
 interface AppSidebarProps {
@@ -63,9 +94,12 @@ export function AppSidebar({
   const pathname = usePathname();
   const { signOut } = useClerk();
 
-  const navItems = NAV_ITEMS.filter(
-    (item) => item.href !== "/admin" || userRole === "admin"
-  );
+  const navSections = NAV_SECTIONS.map((section) => ({
+    ...section,
+    items: section.items.filter(
+      (item) => item.href !== "/admin" || userRole === "admin"
+    ),
+  })).filter((section) => section.items.length > 0);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -149,28 +183,62 @@ export function AppSidebar({
         </div>
 
         {/* Nav */}
-        <nav className="flex min-h-0 flex-grow flex-col gap-1" aria-label="Navegación de módulos">
-          {navItems.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                title={collapsed ? item.label : undefined}
-                className={`flex items-center gap-3 rounded-xl py-3 text-sm transition-colors ${
-                  collapsed ? "md:justify-center md:px-0" : "px-4"
-                } ${
-                  active
-                    ? "bg-mint/20 font-semibold text-mint"
-                    : "text-surface hover:bg-white/10"
-                }`}
-              >
-                <item.icon className="h-5 w-5 shrink-0" />
-                {!collapsed && <span>{item.label}</span>}
-              </Link>
-            );
-          })}
+        <nav className="flex min-h-0 flex-grow flex-col gap-4" aria-label="Navegación de módulos">
+          <Tooltip.Provider delayDuration={300}>
+            {navSections.map((section) => (
+              <div key={section.label}>
+                {!collapsed && (
+                  <p className="mb-1 px-4 text-[11px] font-semibold uppercase tracking-wider text-surface/40">
+                    {section.label}
+                  </p>
+                )}
+                <div className="flex flex-col gap-0.5">
+                  {section.items.map((item) => {
+                    const active = isActive(item.href);
+                    const linkContent = (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`flex items-center gap-3 rounded-xl py-2.5 text-sm transition-colors ${
+                          collapsed ? "md:justify-center md:px-0" : "px-4"
+                        } ${
+                          active
+                            ? "bg-mint/20 font-semibold text-mint"
+                            : "text-surface hover:bg-white/10"
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5 shrink-0" />
+                        {!collapsed && <span>{item.label}</span>}
+                      </Link>
+                    );
+
+                    if (collapsed) {
+                      return (
+                        <Tooltip.Root key={item.label}>
+                          <Tooltip.Trigger asChild>
+                            {linkContent}
+                          </Tooltip.Trigger>
+                          <Tooltip.Portal>
+                            <Tooltip.Content
+                              side="right"
+                              sideOffset={8}
+                              className="z-[70] rounded-lg bg-graphite px-3 py-1.5 text-sm font-medium text-surface shadow-lg"
+                            >
+                              {item.label}
+                              <Tooltip.Arrow className="fill-graphite" />
+                            </Tooltip.Content>
+                          </Tooltip.Portal>
+                        </Tooltip.Root>
+                      );
+                    }
+
+                    return linkContent;
+                  })}
+                </div>
+              </div>
+            ))}
+          </Tooltip.Provider>
         </nav>
 
         {/* User card */}
