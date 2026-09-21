@@ -8,6 +8,8 @@ import { ModuleProgress } from "@/components/gamification/ModuleProgress";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
+import { FloatingNav } from "@/components/layout/FloatingNav";
+import { CommandPalette } from "@/components/layout/CommandPalette";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   getModulesInfo,
@@ -155,6 +157,7 @@ export default async function DashboardPage() {
   const rankLevel = Math.min(levelInfo.level, LEVEL_STEPS.length - 1);
 
   return (
+    <>
     <InVitroShell
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
@@ -173,7 +176,7 @@ export default async function DashboardPage() {
           {/* Central feed */}
           <div className="flex-grow space-y-8">
             {/* Hero banner */}
-            <section className="relative min-h-[320px] rounded-2xl lg:min-h-[400px]">
+            <section id="hero" className="relative min-h-[320px] rounded-2xl lg:min-h-[400px]">
               {/* Background image — anime-style */}
               <div className="absolute inset-0 z-0">
                 <img
@@ -213,7 +216,7 @@ export default async function DashboardPage() {
             </section>
 
             {/* Stats row */}
-            <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <section id="stats" className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               <div className="glass-card flex flex-col rounded-xl p-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
                   Nivel actual
@@ -306,7 +309,7 @@ export default async function DashboardPage() {
               </div>
 
               {/* Misión Actual (REQ-UP-02) */}
-              <div className="glass-card flex flex-col rounded-xl p-6">
+              <div id="mission" className="glass-card flex flex-col rounded-xl p-6">
                 <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">
                   Misión Actual
                 </h3>
@@ -350,7 +353,7 @@ export default async function DashboardPage() {
 
             {/* Modules */}
             {modules.length > 0 && (
-              <section className="glass-card rounded-xl p-6">
+              <section id="modules" className="glass-card rounded-xl p-6">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
                     <h2 className="font-display text-xl font-bold">
@@ -528,5 +531,8 @@ export default async function DashboardPage() {
         </div>
       </div>
     </InVitroShell>
+    <FloatingNav />
+    <CommandPalette />
+    </>
   );
 }
