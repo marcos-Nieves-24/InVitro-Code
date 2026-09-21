@@ -2,9 +2,9 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
-import { LogOut, Search, Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { CommandPalette } from "./CommandPalette";
+import { SectionsDrawer } from "./SectionsDrawer";
 
 interface InVitroShellProps {
   children: ReactNode;
@@ -18,14 +18,12 @@ interface InVitroShellProps {
 export function InVitroShell({
   children,
   userName,
-  userMeta,
   topBar,
   theme,
 }: InVitroShellProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { signOut } = useClerk();
 
-  // Apply theme to html element
   useEffect(() => {
     if (!theme) return;
     document.documentElement.classList.remove("light", "dark");
@@ -46,39 +44,28 @@ export function InVitroShell({
 
   return (
     <div className="min-h-screen bg-surface text-ink">
-      {/* Top Header */}
       <header className="sticky top-0 z-50 border-b border-surface-raised bg-surface/80 backdrop-blur-xl">
         <div className="flex h-14 items-center justify-between px-4 md:px-8">
-          {/* Logo */}
+          {/* Left: Logo + Sections drawer */}
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-negativo.svg" alt="InVitro-Code" className="h-8 w-8" />
               <span className="font-display text-lg font-bold hidden sm:inline">InVitro-Code</span>
             </Link>
+            <SectionsDrawer />
           </div>
 
-          {/* Center: Search trigger */}
-          <button
-            onClick={() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }))}
-            className="flex items-center gap-2 rounded-lg border border-surface-raised bg-surface-card px-4 py-2 text-sm text-storm transition-colors hover:bg-surface-raised"
-          >
-            <Search className="h-4 w-4" />
-            <span className="hidden md:inline">Buscar...</span>
-            <kbd className="hidden rounded border border-surface-raised bg-surface px-1.5 py-0.5 text-[10px] font-medium md:inline">Ctrl+K</kbd>
-          </button>
-
-          {/* Right: User info */}
+          {/* Right: User info + Logout */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2">
+            <Link href="/perfil" className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-surface-raised">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
                 {initials}
               </div>
               <div className="hidden lg:block">
                 <p className="text-xs font-bold text-ink">{userName}</p>
-                <p className="text-[10px] text-storm">{userMeta}</p>
               </div>
-            </div>
+            </Link>
             <button
               onClick={() => signOut()}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-storm transition-colors hover:bg-red-500/10 hover:text-red-500"
@@ -86,8 +73,6 @@ export function InVitroShell({
             >
               <LogOut className="h-4 w-4" />
             </button>
-
-            {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-storm md:hidden"
@@ -97,7 +82,6 @@ export function InVitroShell({
           </div>
         </div>
 
-        {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="border-t border-surface-raised px-4 py-3 md:hidden">
             <nav className="flex flex-col gap-2">
@@ -116,13 +100,10 @@ export function InVitroShell({
         )}
       </header>
 
-      {/* Main content — full width, no sidebar */}
       <main id="main-content" className="min-h-[calc(100vh-56px)]">
         {topBar && <div className="sticky top-14 z-40">{topBar}</div>}
         {children}
       </main>
-
-      <CommandPalette />
     </div>
   );
 }
