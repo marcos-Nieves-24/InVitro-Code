@@ -176,25 +176,25 @@ export default async function DashboardPage() {
                 />
               </div>
 
-              <div className="relative z-[2] flex items-center gap-8 p-10">
+              <div className="relative z-[2] flex items-center gap-6 p-8 lg:p-10">
                 {/* Hero card */}
-                <div className="flex-1 rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                <div className="flex-1 rounded-3xl border border-[#044A68] bg-[#001329]/80 p-6 lg:p-8 backdrop-blur-sm">
+                  <h2 className="font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl lg:text-4xl">
                     ¡Bienvenido, investigador!
                   </h2>
-                  <p className="mt-4 max-w-md text-lg text-white/80">
+                  <p className="mt-3 max-w-md text-base lg:text-lg text-white/80">
                     Continua entrenando modelos y explorando la inteligencia artificial
                   </p>
                   <Link
                     href={startHref}
-                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+                    className="mt-5 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
                   >
                     Iniciar Lección
                   </Link>
                 </div>
 
-                {/* SVG scientist illustration — touching right edge */}
-                <div className="hidden h-[450px] w-[350px] shrink-0 self-end overflow-visible lg:block lg:-mr-10">
+                {/* SVG scientist illustration — full height, touching right edge */}
+                <div className="hidden h-[480px] w-[320px] shrink-0 self-end overflow-visible lg:block lg:-mr-10 lg:-mb-6">
                   <img
                     src="/dashboard/cientifica-1.svg"
                     alt="Científica con hélice de ADN"
