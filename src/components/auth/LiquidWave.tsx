@@ -5,7 +5,7 @@ import {
   useReducedMotion,
   type TargetAndTransition,
   type Transition,
-} from "motion/react";
+} from "framer-motion";
 import { useMemo } from "react";
 
 export type AuthStatus = "idle" | "loading" | "success" | "error";

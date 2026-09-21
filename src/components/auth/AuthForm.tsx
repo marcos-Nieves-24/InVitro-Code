@@ -39,82 +39,57 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     onStatusChange?.("loading");
 
     try {
-      // Always attempt signIn first using Core 3 API
+      // Always attempt signIn first
       if (!signIn) {
         throw new Error("Sign-in not initialized");
       }
 
-      const { error: signInError } = await signIn.password({
-        emailAddress: email,
+      const signInResult = await signIn.create({
+        identifier: email,
         password,
       });
 
-      // Sign-in succeeded — finalize the session
-      if (!signInError && signIn.status === "complete") {
-        const { error: finalizeError } = await signIn.finalize({
-          navigate: ({ session, decorateUrl }) => {
-            if (session?.currentTask) {
-              console.log("Session task:", session.currentTask);
-              return;
-            }
-            const url = decorateUrl("/");
-            window.location.href = url;
-          },
-        });
-        if (finalizeError) {
-          setError(finalizeError.message || "Error al iniciar sesión.");
-          onStatusChange?.("error");
-        }
+      // Sign-in succeeded
+      if (signIn.status === "complete") {
+        onStatusChange?.("success");
+        router.push("/");
         return;
       }
 
       // Check if the error indicates user doesn't exist
       if (
-        signInError &&
-        isClerkAPIResponseError(signInError) &&
-        signInError.errors[0]?.code === "form_identifier_not_found"
+        signInResult.error &&
+        isClerkAPIResponseError(signInResult.error) &&
+        signInResult.error.errors[0]?.code === "form_identifier_not_found"
       ) {
-        // User doesn't exist — attempt sign-up using Core 3 API
+        // User doesn't exist — attempt sign-up
         if (!signUp) {
           throw new Error("Sign-up not initialized");
         }
 
-        const { error: signUpError } = await signUp.password({
+        const signUpResult = await signUp.create({
           emailAddress: email,
           password,
         });
 
-        if (signUpError) {
+        if (signUpResult.error) {
           onStatusChange?.("error");
           setError(
-            signUpError.message ||
+            signUpResult.error.message ||
               "No se pudo crear la cuenta. Intenta de nuevo.",
           );
           return;
         }
 
-        // Sign-up complete — finalize the session
+        // Sign-up complete — user is now signed in
         if (signUp.status === "complete") {
-          const { error: finalizeError } = await signUp.finalize({
-            navigate: ({ session, decorateUrl }) => {
-              if (session?.currentTask) {
-                console.log("Session task:", session.currentTask);
-                return;
-              }
-              const url = decorateUrl("/");
-              window.location.href = url;
-            },
-          });
-          if (finalizeError) {
-            setError(finalizeError.message || "Error al crear la cuenta.");
-            onStatusChange?.("error");
-          }
+          onStatusChange?.("success");
+          router.push("/");
           return;
         }
 
-        // Email verification required — send code first
+        // Email verification required
         if (signUp.status === "missing_requirements") {
-          await signUp.verifications.sendEmailCode();
           setShowVerification(true);
           onStatusChange?.("idle");
           return;
@@ -128,7 +103,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       // Other sign-in error (wrong password, etc.)
       onStatusChange?.("error");
       setError(
-        signInError?.message ||
+        signInResult.error?.message ||
           "Ocurrió un error. Intenta de nuevo.",
       );
     } catch (err: unknown) {
@@ -161,34 +136,22 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     onStatusChange?.("loading");
 
     try {
-      const { error: verifyError } = await signUp.verifications.verifyEmailCode({
+      const result = await signUp.verifications.verifyEmailCode({
         code: verificationCode,
       });
 
-      if (verifyError) {
+      if (result.error) {
         onStatusChange?.("error");
         setError(
-          verifyError.message ||
+          result.error.message ||
             "Código inválido. Intenta de nuevo.",
         );
         return;
       }
 
       if (signUp.status === "complete") {
-        const { error: finalizeError } = await signUp.finalize({
-          navigate: ({ session, decorateUrl }) => {
-            if (session?.currentTask) {
-              console.log("Session task:", session.currentTask);
-              return;
-            }
-            const url = decorateUrl("/");
-            window.location.href = url;
-          },
-        });
-        if (finalizeError) {
-          setError(finalizeError.message || "Error al verificar.");
-          onStatusChange?.("error");
-        }
+        onStatusChange?.("success");
+        router.push("/");
       }
     } catch (err: unknown) {
       onStatusChange?.("error");
