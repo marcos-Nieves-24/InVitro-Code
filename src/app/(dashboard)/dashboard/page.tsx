@@ -156,7 +156,6 @@ export default async function DashboardPage() {
   const rankLevel = Math.min(levelInfo.level, LEVEL_STEPS.length - 1);
 
   return (
-    <>
     <InVitroShell
       userName={userName}
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
@@ -170,10 +169,9 @@ export default async function DashboardPage() {
         />
       }
     >
-      <div className="p-8">
-        <div className="flex gap-8">
-          {/* Central feed — scroll fluido */}
-          <div className="flex-grow space-y-16">
+      <div className="p-4 md:p-8">
+          {/* Central feed — scroll fluido, full width */}
+          <div className="space-y-16">
             {/* Hero + Stats fusionados */}
             <section id="hero" className="relative min-h-[500px] rounded-2xl lg:min-h-[600px]">
               {/* Background image */}
@@ -436,10 +434,7 @@ export default async function DashboardPage() {
               </div>
             </section>
           </div>
-        </div>
       </div>
     </InVitroShell>
-    <CommandPalette />
-    </>
   );
 }
