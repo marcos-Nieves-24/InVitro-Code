@@ -13,7 +13,7 @@ export default function LearnIndexPage() {
   const modules = getModules();
 
   return (
-    <div className="px-6 py-10 md:px-10">
+    <div className="px-6 py-8 md:px-10">
       <div className="mb-10 flex items-start justify-between">
         <div>
           <p className="mb-1 text-sm font-bold uppercase tracking-widest text-mint">
@@ -30,7 +30,7 @@ export default function LearnIndexPage() {
         <Compass className="hidden h-10 w-10 text-mint md:block" />
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {modules.map((mod) => (
           <Link
             key={mod.slug}

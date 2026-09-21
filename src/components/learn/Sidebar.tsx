@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
 interface Lesson {
   slug: string;
@@ -19,7 +19,54 @@ interface ModuleEntry {
 export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopCollapsed, setDesktopCollapsed] = useState(false);
+  const [openModule, setOpenModule] = useState<string | null>(null);
   const pathname = usePathname();
+  const activeLessonRef = useRef<HTMLAnchorElement | null>(null);
+
+  // Extract current module and lesson from path: /learn/{module}/{lesson}
+  const pathParts = pathname.split("/").filter(Boolean);
+  const currentModule = pathParts[1] === "learn" ? pathParts[2] : undefined;
+  const currentLesson = pathParts[1] === "learn" ? pathParts[3] : undefined;
+
+  const isActive = (modSlug: string, lessonSlug: string) =>
+    currentModule === modSlug && currentLesson === lessonSlug;
+
+  const isModuleActive = (modSlug: string) => currentModule === modSlug;
+
+  // Default-expand the active module when pathname changes
+  useEffect(() => {
+    if (currentModule) {
+      setOpenModule(currentModule);
+    } else {
+      setOpenModule(null);
+    }
+  }, [currentModule]);
+
+  // Scroll active lesson into view when module opens
+  useEffect(() => {
+    if (openModule && activeLessonRef.current) {
+      activeLessonRef.current.scrollIntoView({ block: "nearest" });
+    }
+  }, [openModule]);
+
+  const toggleModule = useCallback(
+    (slug: string) => {
+      setOpenModule((prev) => (prev === slug ? null : slug));
+    },
+    []
+  );
+
+  const handleHeaderKeyDown = useCallback(
+    (e: React.KeyboardEvent, slug: string) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleModule(slug);
+      } else if (e.key === "Escape") {
+        setOpenModule(null);
+      }
+    },
+    [toggleModule]
+  );
 
   // Set --sidebar-offset on documentElement for ConsoleFrame overlay
   useEffect(() => {
@@ -34,16 +81,6 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
     mql.addEventListener("change", update);
     return () => mql.removeEventListener("change", update);
   }, [desktopCollapsed]);
-
-  // Extract current module and lesson from path: /learn/{module}/{lesson}
-  const pathParts = pathname.split("/").filter(Boolean);
-  const currentModule = pathParts[1] === "learn" ? pathParts[2] : undefined;
-  const currentLesson = pathParts[1] === "learn" ? pathParts[3] : undefined;
-
-  const isActive = (modSlug: string, lessonSlug: string) =>
-    currentModule === modSlug && currentLesson === lessonSlug;
-
-  const isModuleActive = (modSlug: string) => currentModule === modSlug;
 
   return (
     <>
@@ -117,39 +154,76 @@ export function Sidebar({ modules }: { modules: ModuleEntry[] }) {
               </p>
             )}
 
-            {modules.map((mod) => (
-              <div key={mod.slug} className="mb-4">
-                <h3
-                  className={`mb-2 font-display text-sm font-semibold tracking-tight ${
-                    isModuleActive(mod.slug)
-                      ? "text-mint"
-                      : "text-graphite"
-                  }`}
-                >
-                  {mod.name}
-                </h3>
-                <ul className="ml-1 space-y-0.5">
-                  {mod.lessons.map((lesson) => {
-                    const active = isActive(mod.slug, lesson.slug);
-                    return (
-                      <li key={lesson.slug}>
-                        <Link
-                          href={`/learn/${mod.slug}/${lesson.slug}`}
-                          onClick={() => setMobileOpen(false)}
-                          className={`block rounded-btn px-2 py-1.5 text-sm transition-colors ${
-                            active
-                              ? "bg-mint/10 font-medium text-mint"
-                              : "text-storm hover:bg-mint/15 hover:text-mint"
-                          }`}
-                        >
-                          {lesson.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+            {modules.map((mod) => {
+              const isOpen = openModule === mod.slug;
+              const panelId = `module-panel-${mod.slug}`;
+
+              return (
+                <div key={mod.slug} className="mb-2">
+                  {/* Module header button */}
+                  <button
+                    type="button"
+                    onClick={() => toggleModule(mod.slug)}
+                    onKeyDown={(e) => handleHeaderKeyDown(e, mod.slug)}
+                    onMouseEnter={() => {
+                      // Desktop hover-open: only on devices with hover capability
+                      if (window.matchMedia("(min-width: 1024px) and (hover: hover)").matches) {
+                        setOpenModule(mod.slug);
+                      }
+                    }}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    className={`flex w-full items-center justify-between rounded-btn px-2 py-2 text-left font-display text-sm font-semibold tracking-tight transition-colors ${
+                      isModuleActive(mod.slug)
+                        ? "text-mint"
+                        : "text-graphite hover:bg-gray-50"
+                    }`}
+                  >
+                    <span>{mod.name}</span>
+                    <ChevronDown
+                      size={14}
+                      className={`shrink-0 text-gray-400 transition-transform duration-200 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {/* Accordion panel */}
+                  <div
+                    id={panelId}
+                    className="accordion-panel"
+                    data-open={isOpen}
+                    role="region"
+                    aria-label={mod.name}
+                  >
+                    <div className="overflow-y-auto max-h-[38vh]">
+                      <ul className="ml-1 space-y-0.5 py-1">
+                        {mod.lessons.map((lesson) => {
+                          const active = isActive(mod.slug, lesson.slug);
+                          return (
+                            <li key={lesson.slug}>
+                              <Link
+                                ref={active ? activeLessonRef : undefined}
+                                href={`/learn/${mod.slug}/${lesson.slug}`}
+                                onClick={() => setMobileOpen(false)}
+                                aria-current={active ? "page" : undefined}
+                                className={`block rounded-btn px-2 py-1.5 text-sm transition-colors ${
+                                  active
+                                    ? "bg-mint/10 font-medium text-mint"
+                                    : "text-storm hover:bg-mint/15 hover:text-mint"
+                                }`}
+                              >
+                                {lesson.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </nav>
         </div>
       </aside>

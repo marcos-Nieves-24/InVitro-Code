@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { CommandPalette } from "@/components/layout/CommandPalette";
+import { HeroBanner } from "@/components/dashboard/HeroBanner";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   getModulesInfo,
@@ -162,57 +163,11 @@ export default async function DashboardPage() {
       userRole={profileRes.data?.role}
       theme={profileRes.data?.theme}
     >
-      <div className="p-4 md:p-8">
+      <div className="px-6 py-8 md:px-10">
           {/* Central feed — scroll fluido, full width */}
-          <div className="space-y-16">
+          <div className="space-y-12">
             {/* Hero */}
-            <section id="hero" className="relative min-h-[400px] overflow-hidden rounded-3xl lg:min-h-[480px]">
-              {/* Background image */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src="/dashboard/dashboard-fondo-anime.png"
-                  alt=""
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-
-              <div className="relative z-[2] flex items-stretch gap-0 p-8 lg:p-12">
-                {/* Hero card — compact, left side */}
-                <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[#044A68] bg-[#001329]/85 p-8 backdrop-blur-sm">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                    ¡Bienvenido, investigador!
-                  </h2>
-                  <p className="mt-4 text-lg text-white/80">
-                    Continua entrenando modelos y explorando la inteligencia artificial
-                  </p>
-                  <Link
-                    href={startHref}
-                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-                  >
-                    Iniciar Lección
-                  </Link>
-                </div>
-
-                {/* SVG scientist illustration — touching card border */}
-                <div className="hidden shrink-0 self-end overflow-visible lg:block lg:w-[350px] lg:-ml-2">
-                  <img
-                    src="/dashboard/cientifica-1.svg"
-                    alt="Científica con hélice de ADN"
-                    className="h-[480px] w-full object-contain object-bottom"
-                  />
-                </div>
-              </div>
-
-              {/* Scroll indicator */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3]">
-                <a href="#stats" className="flex flex-col items-center gap-2 text-white/60 transition-colors hover:text-white">
-                  <span className="text-xs font-medium">Siguiente</span>
-                  <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </a>
-              </div>
-            </section>
+            <HeroBanner userName={userName} startHref={startHref} />
 
             {/* Misión Actual */}
             <section id="mission" className="scroll-mt-20">
@@ -365,8 +320,8 @@ export default async function DashboardPage() {
                       <p className="mt-1 text-sm text-storm">
                         <span className="font-bold text-mint">{totalXp.toLocaleString("es")}</span> / {levelInfo.nextLevelXp.toLocaleString("es")} XP
                       </p>
-                      <div className="mt-3 h-2 w-40 overflow-hidden rounded-full bg-surface-raised">
-                        <div className="h-full rounded-full bg-mint transition-all duration-500" style={{ width: `${ringProgress}%` }} />
+                      <div className="mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised">
+                        <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint transition-all duration-500" style={{ width: `${ringProgress}%` }} />
                       </div>
                     </div>
                   </div>

@@ -37,7 +37,7 @@ export function XPBar({ totalXp }: XPBarProps) {
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-fog to-mint"
           initial={shouldReduceMotion ? false : { width: 0 }}
           animate={mounted ? { width: `${progressPercentage}%` } : {}}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
         />
         {/* Shimmer effect */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />

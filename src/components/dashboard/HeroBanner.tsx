@@ -1,80 +1,60 @@
 // Server component — no "use client"
-import Image from "next/image";
 import Link from "next/link";
 import { Play, Map } from "lucide-react";
-import { DashboardHero3DWrapper } from "./DashboardHero3DWrapper";
 
 interface HeroBannerProps {
   userName: string;
   startHref: string;
-  totalXp: number;
 }
 
 export function HeroBanner({ userName, startHref }: HeroBannerProps) {
   return (
-    <section className="relative flex min-h-[320px] rounded-2xl lg:min-h-[480px]">
-      {/* Layer 0: Background image — anime-style dashboard background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
+    <section className="relative min-h-[400px] overflow-hidden rounded-3xl lg:min-h-[480px]">
+      {/* Layer 0: Background image */}
+      <div className="absolute inset-0 z-0">
+        <img
           src="/dashboard/dashboard-fondo-anime.png"
           alt=""
-          fill
-          priority
-          sizes="100vw"
-          aria-hidden="true"
-          className="pointer-events-none object-cover object-center"
+          className="h-full w-full object-cover object-center"
         />
       </div>
 
-      {/* Layer 1: Gradient overlay for text contrast — softer for anime bg */}
-      <div className="absolute inset-0 z-[1] overflow-hidden bg-gradient-to-r from-[#0b0e2a]/70 via-[#0b0e2a]/40 to-transparent" />
-
-      {/* Layer 2: Content.
-          The section is a flex container so this row stretches to the hero's full
-          height at every viewport. Without it the row stayed content-sized and
-          top-aligned, leaving a 40px dead band above the bottom edge wherever the
-          hero hit its min-height (~1920px wide) and the bust looked amputated. */}
-      <div className="relative z-[2] flex w-full items-center gap-8 p-10">
-        <div className="flex-1">
+      <div className="relative z-[2] flex items-stretch gap-0 p-8 lg:p-12">
+        {/* Hero card */}
+        <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[#044A68] bg-[#001329]/85 p-8 backdrop-blur-sm">
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            ¡Bienvenido de vuelta, {userName}!
+            ¡Bienvenido, investigador!
           </h2>
-          <p className="mb-8 mt-4 max-w-lg text-white/80">
-            Estás construyendo tu camino en InVitro-Code. Continúa tu
-            investigación y descubre nuevas formas de aplicar la Inteligencia
-            Artificial.
+          <p className="mt-4 text-lg text-white/80">
+            Continua entrenando modelos y explorando la inteligencia artificial
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href={startHref}
-              className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-            >
-              <Play className="h-4 w-4" fill="currentColor" />
-              Continuar Misión
-            </Link>
-            <Link
-              href="/niveles"
-              className="glass-card flex items-center gap-2 rounded-xl border border-white/20 px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
-            >
-              <Map className="h-4 w-4" />
-              Explorar Mapa
-            </Link>
-          </div>
+          <Link
+            href={startHref}
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+          >
+            <Play className="h-4 w-4" fill="currentColor" />
+            Iniciar Lección
+          </Link>
         </div>
 
-        {/* Layer 3: 3D canvas — client boundary.
-            Anchored to the hero's real bottom-right edge: self-end + -mb-10 closes
-            the bust crop against the bottom, and -mr-10 pulls the canvas through the
-            right padding so the figure bleeds off the hero edge like the reference.
-            Without -mr-10 the canvas bled off only its own box, leaving a 40px band. */}
-        <div className="hidden h-[480px] w-96 shrink-0 self-end overflow-visible lg:-mb-6 lg:-mr-2 lg:block">
-          <DashboardHero3DWrapper />
+        {/* SVG scientist illustration */}
+        <div className="hidden shrink-0 self-end overflow-visible lg:block lg:w-[350px] lg:-ml-2">
+          <img
+            src="/dashboard/cientifica-1.svg"
+            alt="Científica con hélice de ADN"
+            className="h-[480px] w-full object-contain object-bottom"
+          />
         </div>
       </div>
 
-      {/* Layer 4: Decorative chip */}
-      <div className="absolute right-6 top-6 z-[3] rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-        IA + Biotecnología = Mejor futuro
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 left-1/2 z-[3] -translate-x-1/2">
+        <a href="#stats" className="flex flex-col items-center gap-2 text-white/60 transition-colors hover:text-white">
+          <span className="text-xs font-medium">Siguiente</span>
+          <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
       </div>
     </section>
   );

@@ -11,15 +11,15 @@
 
 @theme {
   /* ── NEW PALETTE ── */
-  --color-ink: #111439;
-  --color-graphite: #005f88;
-  --color-slate: #3A4A5C;
-  --color-storm: #3A4A5C;
-  --color-fog: #5A7A8A;
-  --color-mint: #00b2b2;
-  --color-surface: #FFFFFF;
-  --color-surface-card: #F8FAFB;
-  --color-surface-raised: #E2E8F0;
+  --color-ink: #000000;
+  --color-graphite: #2a272a;
+  --color-slate: #4b4a54;
+  --color-storm: #677381;
+  --color-fog: #82a0aa;
+  --color-mint: #a3cfcd;
+  --color-surface: #f4f6f8;
+  --color-surface-card: #ffffff;
+  --color-surface-raised: #e8ecf0;
 
   /* ── Semantic helpers (mapped to palette) ── */
   --color-on-surface: var(--color-ink);
@@ -60,6 +60,8 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
   --shadow-glow: 0 0 20px rgba(163, 207, 205, 0.3);
+  --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.03);
+  --shadow-widget-hover: 0 4px 16px rgba(0, 178, 178, 0.08);
 
   /* ── Animation Tokens ── */
   --duration-fast: 150ms;
@@ -119,7 +121,13 @@ body {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 24px -1px rgba(15, 23, 42, 0.05);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .dark .glass-card {
@@ -656,6 +664,47 @@ body {
 .stagger-item:nth-child(4) { animation-delay: 150ms; }
 .stagger-item:nth-child(5) { animation-delay: 200ms; }
 .stagger-item:nth-child(6) { animation-delay: 250ms; }
+
+/* ─── Widget Hover Lift ─────────────────────────────── */
+.widget-hover {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+.widget-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Button Press Scale ────────────────────────────── */
+.btn-press {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* ─── Link Arrow ────────────────────────────────────── */
+.link-arrow {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.link-arrow:hover {
+  transform: translateX(4px);
+}
+
+/* ─── Accordion Panel ───────────────────────────────── */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+}
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.accordion-panel > div {
+  min-height: 0;
+  overflow-y: auto;
+}
 
 /* ─── Skip to Content ───────────────────────────────── */
 .skip-to-content {
