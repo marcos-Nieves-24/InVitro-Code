@@ -39,52 +39,64 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     onStatusChange?.("loading");
 
     try {
-      // Always attempt signIn first
+      // Always attempt signIn first using Core 3 API
       if (!signIn) {
         throw new Error("Sign-in not initialized");
       }
 
-      const signInResult = await signIn.create({
+      const { error: signInError } = await signIn.password({
         identifier: email,
         password,
       });
 
-      // Sign-in succeeded
-      if (signIn.status === "complete") {
-        onStatusChange?.("success");
-        router.push("/");
+      // Sign-in succeeded — finalize the session
+      if (!signInError && signIn.status === "complete") {
+        const { error: finalizeError } = await signIn.finalize();
+        if (!finalizeError) {
+          onStatusChange?.("success");
+          window.location.href = "/";
+          return;
+        }
+        setError(finalizeError.message || "Error al iniciar sesión.");
+        onStatusChange?.("error");
         return;
       }
 
       // Check if the error indicates user doesn't exist
       if (
-        signInResult.error &&
-        isClerkAPIResponseError(signInResult.error) &&
-        signInResult.error.errors[0]?.code === "form_identifier_not_found"
+        signInError &&
+        isClerkAPIResponseError(signInError) &&
+        signInError.errors[0]?.code === "form_identifier_not_found"
       ) {
-        // User doesn't exist — attempt sign-up
+        // User doesn't exist — attempt sign-up using Core 3 API
         if (!signUp) {
           throw new Error("Sign-up not initialized");
         }
 
-        const signUpResult = await signUp.create({
+        const { error: signUpError } = await signUp.password({
           emailAddress: email,
           password,
         });
 
-        if (signUpResult.error) {
+        if (signUpError) {
           onStatusChange?.("error");
           setError(
-            signUpResult.error.message ||
+            signUpError.message ||
               "No se pudo crear la cuenta. Intenta de nuevo.",
           );
           return;
         }
 
-        // Sign-up complete — user is now signed in
+        // Sign-up complete — finalize the session
         if (signUp.status === "complete") {
-          onStatusChange?.("success");
-          router.push("/");
+          const { error: finalizeError } = await signUp.finalize();
+          if (!finalizeError) {
+            onStatusChange?.("success");
+            window.location.href = "/";
+            return;
+          }
+          setError(finalizeError.message || "Error al crear la cuenta.");
+          onStatusChange?.("error");
           return;
         }
 
@@ -103,7 +115,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       // Other sign-in error (wrong password, etc.)
       onStatusChange?.("error");
       setError(
-        signInResult.error?.message ||
+        signInError?.message ||
           "Ocurrió un error. Intenta de nuevo.",
       );
     } catch (err: unknown) {
@@ -136,22 +148,28 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     onStatusChange?.("loading");
 
     try {
-      const result = await signUp.verifications.verifyEmailCode({
+      const { error: verifyError } = await signUp.verifications.verifyEmailCode({
         code: verificationCode,
       });
 
-      if (result.error) {
+      if (verifyError) {
         onStatusChange?.("error");
         setError(
-          result.error.message ||
+          verifyError.message ||
             "Código inválido. Intenta de nuevo.",
         );
         return;
       }
 
       if (signUp.status === "complete") {
-        onStatusChange?.("success");
-        router.push("/");
+        const { error: finalizeError } = await signUp.finalize();
+        if (!finalizeError) {
+          onStatusChange?.("success");
+          window.location.href = "/";
+        } else {
+          setError(finalizeError.message || "Error al verificar.");
+          onStatusChange?.("error");
+        }
       }
     } catch (err: unknown) {
       onStatusChange?.("error");
