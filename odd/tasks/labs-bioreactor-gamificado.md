@@ -36,7 +36,11 @@
   - Archivos creados: LabCardTheme.ts (54L), LabCardArt.tsx (37L), LabProgressRing.tsx (53L), LabStreakPill.tsx (28L)
   - Archivos modificados: LabCard.tsx (138L → refactor completo), LabHub.tsx (142L → headers temáticos), index.ts (exports +4), modules.ts (LessonFrontmatter +estimatedDuration)
   - Gotchas: `framer-motion` motion import requiere client boundary en LabCard (ya era server-only antes, ahora importa desde client-safe). `LabCardTheme` type export con `export type` necesario por `isolatedModules`. SVG `currentColor` no hereda sin CSS `color` en el parent — LabCardArt aplica `style={{ color: theme.accent }}` al img. `aria-disabled` + `tabIndex=-1` para cards bloqueadas sin wrapper `<div>`.
-- [ ] **LAB-04 F3 Lección** — `LabLessonHero` compacto en `laboratorios/[module]/[lesson]/page.tsx:112` + `LabCallout` tint tema. Verif: build + navegación lección.
+- [x] **LAB-04 F3 Lección** — `LabLessonHero` compacto en `laboratorios/[module]/[lesson]/page.tsx:112` + `LabCallout` tint tema. Verif: build + navegación lección.
+  - Commit: `b4e9339`
+  - Archivos creados: LabLessonHero.tsx (92L)
+  - Archivos modificados: page.tsx (imports + LabLessonHero render), LabCallout.tsx (+themeAccent prop), LabHeader.tsx (+theme prop), index.ts (+1 export)
+  - Gotchas: `dynamic ssr:false` solo permitido en Client Components (Next.js 16) — LabLessonHero es client component con Rive loaded via dynamic. `LabCardTheme` type import necesario por `isolatedModules`. Breadcrumb en `nav` con aria-label para accesibilidad.
 - [ ] **LAB-05 F4 Polish** — `LabXpToast` + `framer-motion` hover + `vitest` para theme map + `globals.css` keyframes burbuja. Verif: `npm run test`, `type-check`, `build`.
 
 ## Progreso
@@ -45,6 +49,7 @@
 - 2026-09-21: LAB-01 completado. Commit `d44e5c0` en `feat/uiux-master-redesign`.
 - 2026-09-21: LAB-02 completado. Commit `b980dc6` en `feat/uiux-master-redesign`.
 - 2026-09-21: LAB-03 completado. Commit `7752079` en `feat/uiux-master-redesign`.
+- 2026-09-21: LAB-04 completado. Commit `b4e9339` en `feat/uiux-master-redesign`.
 
 ## Criterios de aceptación
 
@@ -55,4 +60,4 @@
 
 ## Próximo paso
 
-Ejecutar LAB-03.
+Ejecutar LAB-05.
