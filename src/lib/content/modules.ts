@@ -265,6 +265,7 @@ export interface LessonFrontmatter {
   title: string;
   difficulty?: string;
   prerequisites?: string;
+  estimatedDuration?: string;
 }
 
 /** Per-lesson frontmatter for hub cards (D13). Slug-derived title fallback. */
@@ -289,6 +290,7 @@ export function getLessonFrontmatter(
         formatLessonName(lessonSlug),
       difficulty: typeof data["Difficulty"] === "string" ? data["Difficulty"] : undefined,
       prerequisites: typeof data["Prerequisites"] === "string" ? data["Prerequisites"] : undefined,
+      estimatedDuration: typeof data["Estimated Duration"] === "string" ? data["Estimated Duration"] : undefined,
     };
   } catch {
     return null;
