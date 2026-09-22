@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Gem } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { LabCardTheme } from "./LabCardTheme";
+import { LabXpToast } from "./LabXpToast";
 
 const RiveBioreactor = dynamic(
   () => import("./LabHero/RiveBioreactor").then((m) => m.RiveBioreactor),
@@ -19,6 +21,7 @@ interface LabLessonHeroProps {
     completed: number;
     totalXpForLesson: number;
   };
+  showXpToast?: boolean;
 }
 
 /**
@@ -31,7 +34,9 @@ export function LabLessonHero({
   moduleLabel,
   theme,
   progress,
+  showXpToast = false,
 }: LabLessonHeroProps) {
+  const [toastVisible, setToastVisible] = useState(showXpToast);
   const xpPercent =
     progress.completed > 0
       ? Math.round(
@@ -107,6 +112,13 @@ export function LabLessonHero({
           />
         </div>
       )}
+
+      {/* XP Toast — shown when showXpToast is true */}
+      <LabXpToast
+        xp={progress.totalXpForLesson}
+        visible={toastVisible}
+        onDismiss={() => setToastVisible(false)}
+      />
     </section>
   );
 }
