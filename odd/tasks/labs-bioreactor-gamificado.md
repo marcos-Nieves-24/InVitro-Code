@@ -31,7 +31,11 @@
   - page.tsx modificado: InVitroTopBar removido, LabHeroLoader importado con `dynamic ssr:false`, título/desc movidos al hero, id="hub" añadido al contenedor LabHub
   - Deps: `@rive-app/canvas ^2.42.2`, `typed.js ^3.0.0` añadidos, gsap sin duplicar
   - Gotchas: `dynamic ssr:false` no permitido en Server Components (Next.js 16) — requiere wrapper client `LabHeroLoader.tsx`. GSAP SplitText accessible en `gsap/SplitText` (no necesita Club GreenSock). `prefers-reduced-motion` se maneja en `useLabHeroMotion` (guard early return) + CSS tokens `--motion-*` en globals.css.
-- [ ] **LAB-03 F2 Hub/Cards** — `LabCardTheme.ts` + `LabCardArt.tsx` + refactor `LabHub.tsx:28` + `LabCard.tsx:43` con identidad por tema, `LabProgressRing`, `LabStreakPill`. Verif: visual 4 temas, estados card.
+- [x] **LAB-03 F2 Hub/Cards** — `LabCardTheme.ts` + `LabCardArt.tsx` + refactor `LabHub.tsx:28` + `LabCard.tsx:43` con identidad por tema, `LabProgressRing`, `LabStreakPill`. Verif: visual 4 temas, estados card.
+  - Commit: `7752079`
+  - Archivos creados: LabCardTheme.ts (54L), LabCardArt.tsx (37L), LabProgressRing.tsx (53L), LabStreakPill.tsx (28L)
+  - Archivos modificados: LabCard.tsx (138L → refactor completo), LabHub.tsx (142L → headers temáticos), index.ts (exports +4), modules.ts (LessonFrontmatter +estimatedDuration)
+  - Gotchas: `framer-motion` motion import requiere client boundary en LabCard (ya era server-only antes, ahora importa desde client-safe). `LabCardTheme` type export con `export type` necesario por `isolatedModules`. SVG `currentColor` no hereda sin CSS `color` en el parent — LabCardArt aplica `style={{ color: theme.accent }}` al img. `aria-disabled` + `tabIndex=-1` para cards bloqueadas sin wrapper `<div>`.
 - [ ] **LAB-04 F3 Lección** — `LabLessonHero` compacto en `laboratorios/[module]/[lesson]/page.tsx:112` + `LabCallout` tint tema. Verif: build + navegación lección.
 - [ ] **LAB-05 F4 Polish** — `LabXpToast` + `framer-motion` hover + `vitest` para theme map + `globals.css` keyframes burbuja. Verif: `npm run test`, `type-check`, `build`.
 
@@ -40,6 +44,7 @@
 - 2026-09-21: Feature creado, 5 tasks. Branch pendiente. Mirror Engram pendiente sync.
 - 2026-09-21: LAB-01 completado. Commit `d44e5c0` en `feat/uiux-master-redesign`.
 - 2026-09-21: LAB-02 completado. Commit `b980dc6` en `feat/uiux-master-redesign`.
+- 2026-09-21: LAB-03 completado. Commit `7752079` en `feat/uiux-master-redesign`.
 
 ## Criterios de aceptación
 

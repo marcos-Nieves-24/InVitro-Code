@@ -37,6 +37,7 @@ interface LabCalloutProps {
   kind: string;
   title?: string;
   children: ReactNode;
+  themeAccent?: string;
 }
 
 /**
@@ -46,7 +47,7 @@ interface LabCalloutProps {
  * the Spanish default label. `not-prose` prevents prose typography from
  * cascading into the card; inner content keeps light utility styling.
  */
-export function LabCallout({ kind, title, children }: LabCalloutProps) {
+export function LabCallout({ kind, title, children, themeAccent }: LabCalloutProps) {
   const styles = KIND_STYLES[kind as LabCalloutKind] ?? KIND_STYLES.objetivo;
   const Icon = styles.icon;
   const label =
@@ -61,6 +62,7 @@ export function LabCallout({ kind, title, children }: LabCalloutProps) {
   return (
     <div
       className={`not-prose my-5 rounded-card border p-4 md:p-5 ${styles.variant}`}
+      style={themeAccent ? { borderLeftColor: themeAccent } : undefined}
     >
       <p
         className={`mb-2 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] ${styles.labelClass}`}
