@@ -13,6 +13,7 @@ interface InVitroShellProps {
   userRole?: string | null;
   topBar?: ReactNode;
   theme?: string | null;
+  hud?: ReactNode;
 }
 
 export function InVitroShell({
@@ -20,6 +21,7 @@ export function InVitroShell({
   userName,
   topBar,
   theme,
+  hud,
 }: InVitroShellProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { signOut } = useClerk();
@@ -99,6 +101,12 @@ export function InVitroShell({
           </div>
         )}
       </header>
+
+      {hud && (
+        <div className="hud-bar sticky top-14 z-40 border-b border-[var(--color-hud-border)] bg-[var(--color-hud-bg)] backdrop-blur-xl">
+          {hud}
+        </div>
+      )}
 
       <main id="main-content" className="min-h-[calc(100vh-56px)]">
         {topBar && <div className="sticky top-14 z-40">{topBar}</div>}
