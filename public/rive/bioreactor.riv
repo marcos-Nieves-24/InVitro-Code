@@ -1,0 +1,10 @@
+PLACEHOLDER — Replace with Rive Studio export
+
+This file is a placeholder for the bioreactor Rive animation.
+Export the final .riv file from Rive Studio and replace this file.
+
+Expected specs:
+- State machine: BioreactorBubbles
+- Inputs: bubbleSpeed (number), isActive (boolean)
+- Artboard: 1254x1254
+- Theme: currentColor-compatible (dark mode support)
