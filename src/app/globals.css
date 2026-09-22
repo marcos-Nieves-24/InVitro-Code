@@ -69,6 +69,28 @@
   --duration-slow: 400ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Gaming: Comic vignette ── */
+  --color-comic-bg: #001329;
+  --color-comic-border: #044a68;
+  --color-comic-text: #ffffff;
+  --color-comic-accent: #a3cfcd;
+  /* ── Gaming: Bubble / bioreactor ── */
+  --color-bubble: #a3cfcd;
+  --color-bubble-highlight: #e8ecf0;
+  --color-bubble-glow: rgba(163, 207, 205, 0.35);
+  /* ── Gaming: HUD ── */
+  --color-hud-bg: rgba(0, 19, 41, 0.85);
+  --color-hud-border: rgba(163, 207, 205, 0.3);
+  --color-hud-text: #ffffff;
+  --color-hud-muted: #82a0aa;
+  /* ── Gaming: Motion ── */
+  --motion-hero-enter: 0.6s;
+  --motion-bubble-pop: 0.45s;
+  --motion-bubble-duration: 3s;
+  --motion-typewriter-step: 35ms;
+  /* ── Gaming: Shape ── */
+  --radius-bubble: 16px;
 }
 
 /* ─── Dark Mode Overrides ────────────────────────────── */
@@ -79,6 +101,21 @@
   --color-ink: #e0e0e0;
   --color-on-surface: #e0e0e0;
   --color-on-surface-variant: #9ca3af;
+  --color-comic-bg: #0a1628;
+  --color-hud-bg: rgba(10, 22, 40, 0.9);
+}
+
+/* ─── Gaming reduced-motion kill-switch ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-hero-enter: 0s;
+    --motion-bubble-duration: 0s;
+  }
+  .bubble-layer,
+  .hero-timeline {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ─── Font Utilities ────────────────────────────────── */

@@ -252,3 +252,16 @@ INSERT INTO modules (slug, name, lesson_count) VALUES
     ('estadistica', 'Estadística', 10),
     ('machine-learning', 'Machine Learning', 10)
 ON CONFLICT (slug) DO NOTHING;
+
+-- ──────────────────────────────────────────────────────────
+-- 12. Gender preference column (dashboard-gaming-refactor PR-1)
+-- ──────────────────────────────────────────────────────────
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'profiles' AND column_name = 'gender'
+  ) THEN
+    ALTER TABLE profiles ADD COLUMN gender TEXT CHECK (gender IN ('f','m','x'));
+  END IF;
+END $$;

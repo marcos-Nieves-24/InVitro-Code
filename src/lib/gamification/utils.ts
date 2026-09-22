@@ -29,6 +29,15 @@ export function calcLevel(totalXp: number): { level: number; nextLevelXp: number
   return { level, nextLevelXp, progressToNext };
 }
 
+export type ScientistVariant = 'f' | 'm' | 'x';
+
+export function getScientistVariant(gender: string | null | undefined): ScientistVariant {
+  if (gender === 'm') return 'm';
+  if (gender === 'x') return 'f';
+  if (gender === 'f') return 'f';
+  return 'f';
+}
+
 /** Rank name for a level (D10: shared between dashboard and labs). */
 export function rankTitle(level: number): string {
   if (level < 2) return "Novato";
