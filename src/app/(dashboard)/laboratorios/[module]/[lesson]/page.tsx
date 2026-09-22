@@ -12,8 +12,12 @@ import { getDisplayName } from "@/lib/gamification/user";
 import { LabTabs } from "@/components/labs/LabTabs";
 import { LabCodeBlock } from "@/components/labs/LabCodeBlock";
 import { LabHeader, LabCallout, ReflectionPrompt } from "@/components/labs";
+import { LabLessonHero } from "@/components/labs/LabLessonHero";
+import { getLabCardTheme } from "@/components/labs/LabCardTheme";
 import { MarkdownTable } from "@/components/lesson";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
+import { getModuleDisplayName, getLessonFrontmatter } from "@/lib/content/modules";
+import { calcXpForLesson } from "@/lib/gamification/utils";
 import type { ReactNode } from "react";
 
 const mdxConfig = {
@@ -109,8 +113,21 @@ export default async function LabLessonPage({ params }: Props) {
   const rScriptPath = path.join(lessonDir, "lab.R");
   const hasRScript = fs.existsSync(rScriptPath);
 
+  const moduleLabel = getModuleDisplayName(modSlug);
+  const lessonFrontmatter = getLessonFrontmatter(modSlug, lessonSlug);
+  const lessonTitle = lessonFrontmatter?.title ?? lessonSlug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
+  const theme = getLabCardTheme(modSlug);
+  const totalXpForLesson = calcXpForLesson(modSlug, lessonSlug);
+
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
+      <LabLessonHero
+        moduleSlug={modSlug}
+        lessonTitle={lessonTitle}
+        moduleLabel={moduleLabel}
+        theme={theme}
+        progress={{ completed: 0, totalXpForLesson }}
+      />
       <LabTabs
         module={modSlug}
         lesson={lessonSlug}
