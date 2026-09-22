@@ -3,16 +3,20 @@
 import { useState } from "react";
 import { Save, Loader2 } from "lucide-react";
 
+type GenderOption = "f" | "m" | "x" | null;
+
 interface ProfileFormProps {
   username?: string | null;
   bio?: string | null;
-  onSave: (data: { username: string; bio: string }) => Promise<void>;
+  gender?: string | null;
+  onSave: (data: { username: string; bio: string; gender: GenderOption }) => Promise<void>;
 }
 
-export function ProfileForm({ username, bio, onSave }: ProfileFormProps) {
+export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps) {
   const [formData, setFormData] = useState({
     username: username || "",
     bio: bio || "",
+    gender: (gender === "f" || gender === "m" || gender === "x" ? gender : null) as GenderOption,
   });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -69,6 +73,35 @@ export function ProfileForm({ username, bio, onSave }: ProfileFormProps) {
           className="w-full rounded-btn border border-surface-raised bg-surface-card px-4 py-2 text-sm text-ink placeholder-storm transition-colors focus:border-mint focus:outline-none focus:ring-1 focus:ring-mint"
           placeholder="Cuéntanos sobre ti..."
         />
+      </div>
+
+      <div>
+        <label
+          htmlFor="gender"
+          className="mb-1 block text-sm font-medium text-ink"
+        >
+          Figura científica preferida
+        </label>
+        <p id="gender-help" className="mb-2 text-xs text-storm">
+          Elige la variante que verás en el panel principal. Puedes cambiarla cuando quieras.
+        </p>
+        <select
+          id="gender"
+          aria-describedby="gender-help"
+          value={formData.gender ?? ""}
+          onChange={(e) =>
+            setFormData((prev) => ({
+              ...prev,
+              gender: (e.target.value === "" ? null : e.target.value) as GenderOption,
+            }))
+          }
+          className="w-full rounded-btn border border-surface-raised bg-surface-card px-4 py-2 text-sm text-ink transition-colors focus:border-mint focus:outline-none focus:ring-1 focus:ring-mint focus-visible:ring-2 focus-visible:ring-mint"
+        >
+          <option value="">Prefiero no decirlo</option>
+          <option value="f">Femenina</option>
+          <option value="m">Masculina</option>
+          <option value="x">No binaria</option>
+        </select>
       </div>
 
       <button
