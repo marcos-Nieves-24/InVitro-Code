@@ -21,11 +21,16 @@
 ## Tasks
 
 - [x] **LAB-01 F0 Assets** — Optimizar 4 favicons → `public/labs/modules/{ia,python,estadistica,ml}.svg` + placeholder `public/rive/bioreactor.riv` (+ `public/rive/README.md`). Verif: `ls -lh`, `npm run type-check` (svgo no disponible, limpieza manual con node script).
-  - Commit: `c6a0f31`
+  - Commit: `de388b2`
   - Tamaños antes: ia=52KB, python=47KB, estadistica=49KB, ml=56KB (total 204KB)
   - Tamaños después: ia=9.1KB, python=5.7KB, estadistica=7.2KB, ml=12KB (total 34KB, 83% reducción)
   - Gotchas: c2pa manifest = ~40KB de metadata por archivo; fill original `#0F161F` y `#080808`;svgo no instalado, limpieza manual con regex node; viewBox se rompía al comprimir whitespace (proteger con split por quotes)
-- [ ] **LAB-02 F1 LabHero** — `src/components/labs/LabHero/{LabHero.tsx,RiveBioreactor.tsx,LabHeroCopy.tsx,useLabHeroMotion.ts}` + integración `laboratorios/page.tsx:76` (quitar `InVitroTopBar`, inyectar `LabHero` + HUD `calcLevel/rankTitle` `utils.ts:23,42`). Frases typed.js reales. Verif: `type-check + build`, Lighthouse perf.
+- [x] **LAB-02 F1 LabHero** — `src/components/labs/LabHero/{LabHero.tsx,RiveBioreactor.tsx,LabHeroCopy.tsx,useLabHeroMotion.ts}` + integración `laboratorios/page.tsx:76` (quitar `InVitroTopBar`, inyectar `LabHero` + HUD `calcLevel/rankTitle` `utils.ts:23,42`). Frases typed.js reales. Verif: `type-check + build`, Lighthouse perf.
+  - Commit: `b980dc6`
+  - Archivos creados: LabHero.tsx (174L), LabHeroCopy.tsx (54L), RiveBioreactor.tsx (101L), useLabHeroMotion.ts (110L), LabHeroLoader.tsx (29L), index.ts
+  - page.tsx modificado: InVitroTopBar removido, LabHeroLoader importado con `dynamic ssr:false`, título/desc movidos al hero, id="hub" añadido al contenedor LabHub
+  - Deps: `@rive-app/canvas ^2.42.2`, `typed.js ^3.0.0` añadidos, gsap sin duplicar
+  - Gotchas: `dynamic ssr:false` no permitido en Server Components (Next.js 16) — requiere wrapper client `LabHeroLoader.tsx`. GSAP SplitText accessible en `gsap/SplitText` (no necesita Club GreenSock). `prefers-reduced-motion` se maneja en `useLabHeroMotion` (guard early return) + CSS tokens `--motion-*` en globals.css.
 - [ ] **LAB-03 F2 Hub/Cards** — `LabCardTheme.ts` + `LabCardArt.tsx` + refactor `LabHub.tsx:28` + `LabCard.tsx:43` con identidad por tema, `LabProgressRing`, `LabStreakPill`. Verif: visual 4 temas, estados card.
 - [ ] **LAB-04 F3 Lección** — `LabLessonHero` compacto en `laboratorios/[module]/[lesson]/page.tsx:112` + `LabCallout` tint tema. Verif: build + navegación lección.
 - [ ] **LAB-05 F4 Polish** — `LabXpToast` + `framer-motion` hover + `vitest` para theme map + `globals.css` keyframes burbuja. Verif: `npm run test`, `type-check`, `build`.
@@ -34,6 +39,7 @@
 
 - 2026-09-21: Feature creado, 5 tasks. Branch pendiente. Mirror Engram pendiente sync.
 - 2026-09-21: LAB-01 completado. Commit `d44e5c0` en `feat/uiux-master-redesign`.
+- 2026-09-21: LAB-02 completado. Commit `b980dc6` en `feat/uiux-master-redesign`.
 
 ## Criterios de aceptación
 
@@ -44,4 +50,4 @@
 
 ## Próximo paso
 
-Ejecutar LAB-02.
+Ejecutar LAB-03.
