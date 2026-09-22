@@ -41,7 +41,7 @@
   - Archivos creados: LabLessonHero.tsx (92L)
   - Archivos modificados: page.tsx (imports + LabLessonHero render), LabCallout.tsx (+themeAccent prop), LabHeader.tsx (+theme prop), index.ts (+1 export)
   - Gotchas: `dynamic ssr:false` solo permitido en Client Components (Next.js 16) — LabLessonHero es client component con Rive loaded via dynamic. `LabCardTheme` type import necesario por `isolatedModules`. Breadcrumb en `nav` con aria-label para accesibilidad.
-- [ ] **LAB-05 F4 Polish** — `LabXpToast` + `framer-motion` hover + `vitest` para theme map + `globals.css` keyframes burbuja. Verif: `npm run test`, `type-check`, `build`.
+- [x] **LAB-05 F4 Polish** — `LabXpToast` + `framer-motion` hover + `vitest` para theme map + `globals.css` keyframes burbuja. Verif: `npm run test`, `type-check`, `build`.
 
 ## Progreso
 
@@ -50,13 +50,14 @@
 - 2026-09-21: LAB-02 completado. Commit `b980dc6` en `feat/uiux-master-redesign`.
 - 2026-09-21: LAB-03 completado. Commit `7752079` en `feat/uiux-master-redesign`.
 - 2026-09-21: LAB-04 completado. Commit `b4e9339` en `feat/uiux-master-redesign`.
+- 2026-09-21: LAB-05 completado. Commit `0bd67a3` en `feat/uiux-master-redesign`.
 
 ## Criterios de aceptación
 
-- [ ] `Nivel 0 · Novato / 0 XP / 0 días` no visible en `/laboratorios` y lección; HUD integrado en hero muestra progreso real.
-- [ ] 4 cards con favicon vectorial + tint por módulo, sin emojis, hover `card-hover/widget-hover`.
-- [ ] Hero con Rive burbujas + GSAP burbujas ascendentes + Typed 7 frases reales, respeta `prefers-reduced-motion`.
-- [ ] `npm run type-check` + `npm run build` verdes.
+- [x] `Nivel 0 · Novato / 0 XP / 0 días` no visible en `/laboratorios` y lección; HUD integrado en hero muestra progreso real.
+- [x] 4 cards con favicon vectorial + tint por módulo, sin emojis, hover `card-hover/widget-hover`.
+- [x] Hero con Rive burbujas + GSAP burbujas ascendentes + Typed 7 frases reales, respeta `prefers-reduced-motion`.
+- [x] `npm run type-check` + `npm run build` verdes.
 
 ## Próximo paso
 
