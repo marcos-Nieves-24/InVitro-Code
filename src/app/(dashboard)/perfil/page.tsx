@@ -69,15 +69,28 @@ export default async function ProfilePage() {
             <ProfileForm
               username={profile?.username}
               bio={profile?.bio}
+              gender={profile?.gender ?? null}
               onSave={async (data) => {
                 "use server";
                 const { userId: uid } = await auth();
                 if (!uid) return;
                 const admin = createAdminClient();
-                await admin.from("profiles").update({
-                  username: data.username,
-                  bio: data.bio,
-                }).eq("id", uid);
+                const allowed = ["f", "m", "x"] as const;
+                const gender =
+                  data.gender !== null && (allowed as readonly string[]).includes(data.gender)
+                    ? data.gender
+                    : null;
+                const { revalidatePath } = await import("next/cache");
+                await admin
+                  .from("profiles")
+                  .update({
+                    username: data.username,
+                    bio: data.bio,
+                    gender,
+                  })
+                  .eq("id", uid);
+                revalidatePath("/perfil");
+                revalidatePath("/dashboard");
               }}
             />
           </div>
