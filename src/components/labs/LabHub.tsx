@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronRight, FlaskConical } from "lucide-react";
+import { ChevronDown, ChevronRight, FlaskConical, Zap } from "lucide-react";
 import { LabCard } from "./LabCard";
+import { LabCardArt } from "./LabCardArt";
+import { LabProgressRing } from "./LabProgressRing";
+import { LabStreakPill } from "./LabStreakPill";
+import { getLabCardTheme } from "./LabCardTheme";
+import { calcXpForLesson } from "@/lib/gamification/utils";
 import type { LessonFrontmatter } from "@/lib/content/modules";
 
 export interface LabModuleGroup {
@@ -21,12 +26,11 @@ interface LabHubProps {
 }
 
 /**
- * REQ-HUB-02/04: Collapsible module sections with LabCard grid.
- * Client component — collapse state is local. Data (modules, lessons,
- * completion) comes from the server page.
+ * REQ-HUB-02/04: Collapsible module sections with themed headers,
+ * progress rings, XP totals, and LabCard grid.
+ * Client component — collapse state is local.
  */
 export function LabHub({ modules }: LabHubProps) {
-  // All modules start expanded.
   const [expanded, setExpanded] = useState<Set<string>>(() => {
     const initial = new Set<string>();
     for (const mod of modules) initial.add(mod.slug);
@@ -49,7 +53,7 @@ export function LabHub({ modules }: LabHubProps) {
           <FlaskConical className="h-7 w-7" />
         </div>
         <p className="text-sm font-bold text-ink">
-          No hay módulos disponibles
+          No hay modulos disponibles
         </p>
         <p className="text-xs text-storm">
           Agrega contenido en <code>src/content/modules/</code> para empezar.
@@ -64,10 +68,17 @@ export function LabHub({ modules }: LabHubProps) {
         const total = mod.lessons.length;
         const completedCount = mod.lessons.filter((l) => l.completed).length;
         const isOpen = expanded.has(mod.slug);
+        const theme = getLabCardTheme(mod.slug);
+
+        // XP total for this module
+        const moduleXp = mod.lessons.reduce(
+          (sum, l) => sum + calcXpForLesson(mod.slug, l.slug),
+          0,
+        );
 
         return (
           <section key={mod.slug}>
-            {/* Module header — collapsible */}
+            {/* Module header — themed with art + progress ring + XP */}
             <button
               type="button"
               onClick={() => toggle(mod.slug)}
@@ -80,12 +91,34 @@ export function LabHub({ modules }: LabHubProps) {
                   <ChevronRight className="h-5 w-5" />
                 )}
               </span>
+
+              {/* Module art inline */}
+              <LabCardArt theme={theme} size={20} />
+
               <h2 className="font-display text-xl font-bold text-ink">
                 {mod.name}
               </h2>
-              <span className="ml-auto text-xs font-medium text-storm">
-                {completedCount}/{total} completadas
+
+              {/* Progress ring */}
+              <LabProgressRing
+                completed={completedCount}
+                total={total}
+                size={28}
+                strokeWidth={2.5}
+                accent={theme.accent}
+              />
+
+              {/* Completed text */}
+              <span className="text-xs font-medium text-storm">
+                {completedCount}/{total}
               </span>
+
+              {/* XP total pill */}
+              <LabStreakPill
+                icon={<Zap className="h-3 w-3" />}
+                value={`${moduleXp} XP`}
+                accent={theme.accent}
+              />
             </button>
 
             {/* Lesson card grid (collapsed when !isOpen) */}
