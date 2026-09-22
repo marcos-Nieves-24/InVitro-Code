@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
-import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
+import { LabHeroLoader } from "@/components/labs/LabHero/LabHeroLoader";
 import { LabHub } from "@/components/labs/LabHub";
 import type { LabModuleGroup } from "@/components/labs/LabHub";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -53,8 +53,6 @@ export default async function LaboratoriosPage() {
   const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);
 
-  const trail = `Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`;
-
   // ── Build completed lesson key set from real progress ──
   const completedLessonKeys = new Set(
     (progressRes.data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
@@ -80,23 +78,14 @@ export default async function LaboratoriosPage() {
       userRole={profileRes.data?.role}
       theme={profileRes.data?.theme}
     >
-      <InVitroTopBar
+      <LabHeroLoader
         totalXp={totalXp}
         currentStreak={currentStreak}
-        trail={trail}
+        levelInfo={levelInfo}
+        rankTitle={rankTitle(levelInfo.level)}
       />
 
-      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
-        <div className="mb-8">
-          <h1 className="font-display text-3xl font-extrabold text-ink">
-            Laboratorios
-          </h1>
-          <p className="mt-1 text-sm text-storm">
-            Cada módulo tiene lecciones con laboratorios interactivos. Completa
-            los ejercicios para dominar los conceptos.
-          </p>
-        </div>
-
+      <div id="hub" className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <LabHub modules={labModules} />
       </div>
     </InVitroShell>
