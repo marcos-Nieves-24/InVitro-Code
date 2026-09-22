@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { calcLevel } from "@/lib/gamification/utils";
 import { Gem, Star } from "lucide-react";
+import { BioreactorProgress } from "./BioreactorProgress";
 
 interface XPBarProps {
   totalXp: number;
+  variant?: "linear" | "bioreactor";
 }
 
-export function XPBar({ totalXp }: XPBarProps) {
+export function XPBar({ totalXp, variant = "linear" }: XPBarProps) {
   const levelInfo = calcLevel(totalXp);
   const progressPercentage = (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100;
   const shouldReduceMotion = useReducedMotion();
@@ -39,6 +41,9 @@ export function XPBar({ totalXp }: XPBarProps) {
           animate={mounted ? { width: `${progressPercentage}%` } : {}}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
         />
+        {variant === "bioreactor" && (
+          <BioreactorProgress progressPercentage={progressPercentage} />
+        )}
         {/* Shimmer effect */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
       </div>

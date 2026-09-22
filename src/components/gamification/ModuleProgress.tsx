@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, Circle, BookOpen } from "lucide-react";
+import { BioreactorProgress } from "./BioreactorProgress";
 
 interface ModuleProgressProps {
   moduleSlug: string;
   moduleName: string;
   totalLessons: number;
   initialCompletedLessons: number;
+  variant?: "linear" | "bioreactor";
 }
 
 export function ModuleProgress({
@@ -16,6 +18,7 @@ export function ModuleProgress({
   moduleName,
   totalLessons,
   initialCompletedLessons,
+  variant = "linear",
 }: ModuleProgressProps) {
   const completedLessons = initialCompletedLessons;
   const shouldReduceMotion = useReducedMotion();
@@ -68,6 +71,9 @@ export function ModuleProgress({
           animate={mounted ? { width: `${progressPercentage}%` } : {}}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         />
+        {variant === "bioreactor" && (
+          <BioreactorProgress progressPercentage={progressPercentage} />
+        )}
         {/* Milestone markers */}
         {[25, 50, 75].map((milestone) => (
           <div

@@ -118,6 +118,50 @@
   }
 }
 
+/* ─── Bioreactor bubble layer ──────────────────────── */
+.bubble-layer {
+  pointer-events: none;
+}
+
+.bubble {
+  will-change: transform, opacity;
+}
+
+.bubble-static {
+  will-change: auto;
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-120px) translateX(var(--bubble-x, 0px)) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes hud-gem-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.hud-gem-pulse {
+  animation: hud-gem-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble,
+  .bubble-static,
+  .hud-gem-pulse {
+    animation: none !important;
+  }
+}
+
 /* ─── Font Utilities ────────────────────────────────── */
 body {
   font-family: var(--font-body), sans-serif;
