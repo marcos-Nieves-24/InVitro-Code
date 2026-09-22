@@ -13,9 +13,14 @@ type ClerkEvent = {
     email_addresses: { email_address: string }[];
     first_name?: string;
     last_name?: string;
+    public_metadata?: { gender?: unknown };
   };
   type: string;
 };
+
+function parseGender(raw: unknown): "f" | "m" | "x" | undefined {
+  return raw === "f" || raw === "m" || raw === "x" ? raw : undefined;
+}
 
 export async function POST(req: Request) {
   const headerPayload = await headers();
@@ -41,17 +46,35 @@ export async function POST(req: Request) {
     return new Response("Invalid signature", { status: 400 });
   }
 
-  if (evt.type === "user.created") {
-    const { id, email_addresses, first_name } = evt.data;
+  if (evt.type === "user.created" || evt.type === "user.updated") {
+    const { id, email_addresses, first_name, public_metadata } = evt.data;
     const email = email_addresses[0]?.email_address ?? "";
-
+    const gender = parseGender(public_metadata?.gender);
     const admin = getAdmin();
-    await admin.from("profiles").upsert({
-      id,
-      email,
-      username: first_name ?? email.split("@")[0],
-      role: "user",
-    });
+
+    if (gender) {
+      await admin.from("profiles").upsert(
+        {
+          id,
+          email,
+          username: first_name ?? email.split("@")[0],
+          role: "user",
+          gender,
+        },
+        { onConflict: "id" },
+      );
+    } else if (evt.type === "user.created") {
+      await admin.from("profiles").upsert(
+        {
+          id,
+          email,
+          username: first_name ?? email.split("@")[0],
+          role: "user",
+        },
+        { onConflict: "id" },
+      );
+    }
+    // user.updated without valid gender → preserve existing Supabase value (no NULL overwrite)
   }
 
   return new Response("OK", { status: 200 });
