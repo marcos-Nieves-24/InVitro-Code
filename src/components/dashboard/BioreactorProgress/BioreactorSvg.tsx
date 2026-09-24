@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
+import { getBioreactorPhysics } from "./useBioreactorMotion";
 
 type Props = {
   percent: number;
@@ -9,24 +10,34 @@ type Props = {
   shouldReduce: boolean;
 };
 
-type SvgBubble = { id: number; cx: number; r: number; delay: number; duration: number; wobble: number };
+type SvgBubble = { id: number; cx: number; r: number; wobble: number };
 
-const SVG_BUBBLES: SvgBubble[] = [
-  { id: 0, cx: 88, r: 5, delay: 0, duration: 2.8, wobble: 3 },
-  { id: 1, cx: 108, r: 4, delay: 0.4, duration: 3.1, wobble: -2.5 },
-  { id: 2, cx: 128, r: 6, delay: 0.7, duration: 2.9, wobble: 2 },
-  { id: 3, cx: 142, r: 3.5, delay: 1.0, duration: 3.0, wobble: -3 },
-  { id: 4, cx: 100, r: 4.5, delay: 1.3, duration: 2.7, wobble: 2.8 },
-  { id: 5, cx: 132, r: 4, delay: 1.6, duration: 3.2, wobble: -2 },
-  { id: 6, cx: 118, r: 5.5, delay: 0.2, duration: 2.85, wobble: 1.5 },
+const SVG_BUBBLE_TEMPLATES: SvgBubble[] = [
+  { id: 0, cx: 88, r: 5, wobble: 3 },
+  { id: 1, cx: 108, r: 4, wobble: -2.5 },
+  { id: 2, cx: 128, r: 6, wobble: 2 },
+  { id: 3, cx: 142, r: 3.5, wobble: -3 },
+  { id: 4, cx: 100, r: 4.5, wobble: 2.8 },
+  { id: 5, cx: 132, r: 4, wobble: -2 },
+  { id: 6, cx: 118, r: 5.5, wobble: 1.5 },
+  { id: 7, cx: 112, r: 3.8, wobble: -1.8 },
 ];
 
 export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
-  const clamped = Math.min(100, Math.max(0, percent));
+  const physics = getBioreactorPhysics(percent);
+  const clamped = physics.clamped;
+  const h = physics.h;
+  const impellerDuration = physics.duration;
+  const sloshAmplitude = physics.sloshAmplitude;
+  const squashDuration = physics.squashDuration;
+  const squashMin = physics.squashMin;
+  const visibleBubbles = physics.visibleBubbles;
+  const bubbleDuration = physics.bubbleDuration;
+
   const targetY = 230 - (clamped / 100) * 200;
   const yMotion = useMotionValue(230);
   const springY = useSpring(yMotion, {
-    stiffness: fast ? 220 : 180,
+    stiffness: fast ? 220 : 180 + 40 * h,
     damping: fast ? 14 : 15,
     mass: 0.8,
   });
@@ -34,12 +45,6 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
   useEffect(() => {
     yMotion.set(targetY);
   }, [targetY, yMotion]);
-
-  const impellerClass = shouldReduce
-    ? ""
-    : fast
-      ? "animate-impeller-fast"
-      : "animate-impeller-normal";
 
   const motorClass = shouldReduce ? "" : "animate-motor-hum";
 
@@ -98,7 +103,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
         strokeWidth="1.5"
       />
 
-      {/* Liquid — 21st Liquid Button contained ellipse technique */}
+      {/* Liquid — 21st Liquid Button contained ellipse technique, slosh coupled to impeller rpm */}
       <g clipPath="url(#vesselInnerClip)">
         <motion.g
           id="waveRoot"
@@ -109,99 +114,124 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
           }}
         >
           <motion.g
-            id="liquidSquash"
+            id="sloshGroup"
             animate={
-              shouldReduce || !fast ? undefined : { scaleY: [1, 0.985, 1] }
+              shouldReduce || h < 0.02
+                ? undefined
+                : { x: [-sloshAmplitude, sloshAmplitude] }
             }
             transition={
-              shouldReduce || !fast
+              shouldReduce || h < 0.02
                 ? undefined
-                : { duration: 0.7, repeat: Infinity, ease: "easeInOut" }
+                : {
+                    duration: impellerDuration * 2,
+                    repeat: Infinity,
+                    repeatType: "mirror",
+                    ease: "easeInOut",
+                  }
             }
             style={{
-              transformOrigin: "120px 280px",
               willChange: shouldReduce ? "auto" : "transform",
             }}
           >
-            <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
-            {shouldReduce ? (
-              <>
-                <ellipse cx="120" cy="12" rx="110" ry="34" fill="var(--color-mint)" opacity="0.92" />
-                <ellipse cx="120" cy="16" rx="105" ry="30" fill="var(--color-fog)" opacity="0.55" />
-              </>
-            ) : (
-              <>
-                <motion.ellipse
-                  cx="120"
-                  cy="12"
-                  rx="110"
-                  ry="34"
-                  fill="var(--color-mint)"
-                  opacity={0.92}
-                  className="liquid-wave liquid-wave-1"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: fast ? 4 : 7,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{
-                    transformOrigin: "120px 12px",
-                    willChange: "transform",
-                  }}
-                />
-                <motion.ellipse
-                  cx="120"
-                  cy="16"
-                  rx="105"
-                  ry="30"
-                  fill="var(--color-fog)"
-                  opacity={0.55}
-                  className="liquid-wave liquid-wave-2"
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{
-                    transformOrigin: "120px 16px",
-                    willChange: "transform",
-                  }}
-                />
-              </>
-            )}
+            <motion.g
+              id="liquidSquash"
+              animate={
+                shouldReduce || h < 0.02 ? undefined : { scaleY: [1, squashMin, 1] }
+              }
+              transition={
+                shouldReduce || h < 0.02
+                  ? undefined
+                  : { duration: squashDuration, repeat: Infinity, ease: "easeInOut" }
+              }
+              style={{
+                transformOrigin: "120px 280px",
+                willChange: shouldReduce ? "auto" : "transform",
+              }}
+            >
+              <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
+              {shouldReduce ? (
+                <>
+                  <ellipse cx="120" cy="12" rx="110" ry="34" fill="var(--color-mint)" opacity="0.92" />
+                  <ellipse cx="120" cy="16" rx="105" ry="30" fill="var(--color-fog)" opacity="0.55" />
+                </>
+              ) : (
+                <>
+                  <motion.ellipse
+                    cx="120"
+                    cy="12"
+                    rx="110"
+                    ry="34"
+                    fill="var(--color-mint)"
+                    opacity={0.92}
+                    className="liquid-wave liquid-wave-1"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: fast ? 4 : 7,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    style={{
+                      transformOrigin: "120px 12px",
+                      willChange: "transform",
+                    }}
+                  />
+                  <motion.ellipse
+                    cx="120"
+                    cy="16"
+                    rx="105"
+                    ry="30"
+                    fill="var(--color-fog)"
+                    opacity={0.55}
+                    className="liquid-wave liquid-wave-2"
+                    animate={{ rotate: -360 }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    style={{
+                      transformOrigin: "120px 16px",
+                      willChange: "transform",
+                    }}
+                  />
+                </>
+              )}
+            </motion.g>
           </motion.g>
         </motion.g>
 
-        {/* Bubbles rising inside liquid — clipped, visible against mint/fog */}
+        {/* Bubbles rising inside liquid — clipped, visible against mint/fog, count/speed ∝ fill */}
         {!shouldReduce && clamped >= 5 && (
           <g id="bubbleGroup" aria-hidden="true">
-            {SVG_BUBBLES.map((b) => (
-              <motion.circle
-                key={b.id}
-                cx={b.cx}
-                cy={272}
-                r={b.r}
-                fill="var(--color-surface-card)"
-                fillOpacity="0.92"
-                stroke="var(--color-bubble-highlight)"
-                strokeOpacity="0.9"
-                strokeWidth="0.9"
-                style={{ willChange: "transform, opacity" }}
-                animate={{
-                  cy: [272, 90],
-                  opacity: [0, 0.95, 0],
-                  x: [0, b.wobble, -b.wobble * 0.6, 0],
-                }}
-                transition={{
-                  duration: b.duration,
-                  repeat: Infinity,
-                  delay: b.delay,
-                  ease: "easeOut",
-                }}
-              />
-            ))}
+            {SVG_BUBBLE_TEMPLATES.slice(0, visibleBubbles).map((b, i) => {
+              const delay = (i * 1.6) / visibleBubbles;
+              return (
+                <motion.circle
+                  key={b.id}
+                  cx={b.cx}
+                  cy={272}
+                  r={b.r}
+                  fill="var(--color-surface-card)"
+                  fillOpacity="0.92"
+                  stroke="var(--color-bubble-highlight)"
+                  strokeOpacity="0.9"
+                  strokeWidth="0.9"
+                  style={{ willChange: "transform, opacity" }}
+                  animate={{
+                    cy: [272, 90],
+                    opacity: [0, 0.95, 0],
+                    x: [0, b.wobble, -b.wobble * 0.6, 0],
+                  }}
+                  transition={{
+                    duration: bubbleDuration,
+                    repeat: Infinity,
+                    delay,
+                    ease: "easeOut",
+                  }}
+                />
+              );
+            })}
           </g>
         )}
         {shouldReduce && clamped >= 5 && (
@@ -216,13 +246,25 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       {/* Agitator shaft */}
       <rect x="115" y="45" width="10" height="220" rx="3" fill="url(#metalGradient)" />
 
-      {/* Impeller group */}
-      <g id="impellerGroup" className={impellerClass} style={{ transformOrigin: "120px 240px" }}>
+      {/* Impeller group — rpm = 60 + 120*h*(1-slip), duration = 60/rpm */}
+      <motion.g
+        id="impellerGroup"
+        animate={shouldReduce ? undefined : { rotate: 360 }}
+        transition={
+          shouldReduce
+            ? undefined
+            : { duration: impellerDuration, repeat: Infinity, ease: "linear" }
+        }
+        style={{
+          transformOrigin: "120px 240px",
+          willChange: shouldReduce ? "auto" : "transform",
+        }}
+      >
         <ellipse cx="120" cy="240" rx="22" ry="6" fill="var(--color-graphite)" opacity="0.9" />
         <path d="M98,238 L75,232 L75,248 L98,242 Z" fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8" />
         <path d="M142,238 L165,232 L165,248 L142,242 Z" fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8" />
         <circle cx="120" cy="240" r="5" fill="var(--color-graphite)" />
-      </g>
+      </motion.g>
 
       {/* Top flange */}
       <rect x="36" y="52" width="168" height="16" rx="3" fill="url(#metalGradient)" stroke="var(--color-graphite)" strokeWidth="0.6" />

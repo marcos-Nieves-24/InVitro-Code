@@ -31,12 +31,12 @@ Align UI with biotech lab aesthetic; improve hierarchy and engagement; add physi
 - **Verification:** `npm run type-check && npm run build`
 - **Status:** ☑ done — palette brand scale + hero anchoring implemented; `type-check` PASS, `build` PASS (warn only)
 
-### T2 — Bioreactor física acoplada impeller-fluido + bubbles [ ]
+### T2 — Bioreactor física acoplada impeller-fluido + bubbles [x]
 - **Description:** Implement coupled physics: impeller rotation drives fluid surface/movement + bubble emission; hook `useBioreactorMotion` drives `BioreactorSvg.tsx`; provide preview harness.
-- **Files:** `src/components/lab/BioreactorSvg.tsx`, `src/hooks/useBioreactorMotion.ts`, `src/app/(preview)/bioreactor/page.tsx` (or `src/components/lab/__preview__/`)
+- **Files:** `src/components/dashboard/BioreactorProgress/BioreactorProgress.tsx`, `src/components/dashboard/BioreactorProgress/BioreactorSvg.tsx`, `src/components/dashboard/BioreactorProgress/useBioreactorMotion.ts`, `src/app/preview/bioreactor/page.tsx`
 - **Acceptance:** Impeller speed ∝ fluid displacement + bubble rate; animation is frame-stable, pausable, respects reduced-motion.
 - **Verification:** `npm run type-check && npm run build`
-- **Status:** ☐ unchecked
+- **Status:** ☑ done — coupled physics implemented: rpm=60+120*h*(1-slip) slip=exp(-4h) duration=60/rpm, slosh 8*h*(rpm/120) mirrored, squash 0.9-0.3h amplitude ∝ rpm/120, bubbles 4+round(h*4) duration 3.2-1.5h; motion.g rotate impeller, reduced-motion static fallback; `type-check` PASS, `build` PASS
 
 ### T3 — TestTube component + Dashboard grid [ ]
 - **Description:** Create `TestTube` component; update Dashboard grid: remove Progreso/Logros/Proyecto cards, place Misión Actual next to Tu progreso, TestTube anchored in corner.
@@ -76,14 +76,18 @@ Standard Mode — `strict_tdd: false` per `sdd-init` / `openspec/config.yaml`. N
 ## Progress
 - 2026-09-24 — Feature document created; no source writes yet. All tasks ☐ unchecked.
 - 2026-09-24 — T1 completed: mapped scientific palette (#22005A → #45DCC6 + #FFFFFF) in `src/app/globals.css` via `--color-brand-*` + rewired semantics (`--color-comic-bg/border`, `--color-mint/fog/slate`); fixed HeroBanner anchoring (`absolute bottom-0 right-8 lg:right-12`, `items-end`, `pb-0`) in both `LegacyStatic` + `HeroComic`; figure removed from flex flow, responsive `hidden lg:block` preserved. Commit: `<pending — not committed per T1 instructions>` (branch `odd/ui-revamp-bioreactor-dashboard`).
+- 2026-09-24 — T2 completed: coupled bioreactor physics in `src/components/dashboard/BioreactorProgress/useBioreactorMotion.ts` (`getBioreactorPhysics`, `BioreactorPhysics` interface, slip/rpm/duration/slosh/squash/bubbles) and `src/components/dashboard/BioreactorProgress/BioreactorSvg.tsx` (motion.g impeller rotate duration=60/rpm, sloshGroup x=[-A,A] duration=2*duration, squash scaleY [1,squashMin,1] duration 0.9-0.3h, bubbles sliced 4+round(h*4) duration 3.2-1.5h delay 0-1.6, spring stiffness 180+40h, reduced-motion branches preserved, clipPath/a11y IDs intact); verified preview harness `src/app/preview/bioreactor/page.tsx` still works (slider 0-100).
 
 ## Verification Evidence
-- `npm run type-check` — PASS (tsc --noEmit, no errors)
-- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully, warn only: `middleware` → `proxy` deprecation)
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T1
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully, warn only: `middleware` → `proxy` deprecation) — T1
 - Checked: `white` text on `var(--color-brand-950) #22005A` contrast ok; `glass-card`, `hud`, `hero-terminal`, `comic-bg/border` resolve via `var()`; no hardcoded hex outside `@theme`; scientist `absolute bottom-0` inside `relative` hero not clipped (`overflow-hidden` container contains absolute).
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T2 (BioreactorSvg + useBioreactorMotion physics, impeller/slosh/squash/bubbles, preserves clipPath vesselInnerClip, IDs standBase/impellerGroup/motor, a11y role=img/progressbar)
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully 13.5s, Generating static pages 19/19, warn only middleware→proxy) — T2, preview route `/preview/bioreactor` built, no regression in DashboardContainer/BioreactorProgress orchestrator
+- Checked: rpm 60→178 as h 0→1 (slip exp(-4h) low-fill slip, high-fill coupled), impellerDuration 1.0s→0.34s drives sloshAmplitude 0→11.9 and squashDuration 0.9→0.6s + squashMin ∝ rpm/120; bubbles visible 4→8, bubbleDuration 3.2→1.7s, delay spread 0-1.6; prefers-reduced-motion renders static ellipses/bubbles, no motion.g animate; liquidGrad still fog→mint via brand tokens.
 
 ## Next Step
-Start T2 (Bioreactor física acoplada) — T1 done, other tasks remain unchecked.
+Start T3 (TestTube component + Dashboard grid) — T1–T2 done, T3–T5 remain unchecked.
 
 ---
 *Locator: `odd/tasks/ui-revamp-bioreactor-dashboard.md` | Engram mirror: `odd/ui-revamp-bioreactor-dashboard/tasks`*
