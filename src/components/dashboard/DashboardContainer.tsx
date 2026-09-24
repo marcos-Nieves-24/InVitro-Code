@@ -155,11 +155,11 @@ export async function DashboardContainer() {
                         <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <TestTube progress={overallProgress} size="sm" label={`${overallProgress}%`} />
+                        <TestTube progress={overallProgress} size="lg" label={`${overallProgress}%`} />
                       </div>
                     </div>
                     <div className="mb-4 flex justify-center sm:hidden">
-                      <TestTube progress={overallProgress} size="sm" label={`${overallProgress}%`} />
+                      <TestTube progress={overallProgress} size="md" label={`${overallProgress}%`} />
                     </div>
                     <div className="mb-2 flex items-center gap-1 text-mint">
                       <Gem className="h-4 w-4" fill="currentColor" />

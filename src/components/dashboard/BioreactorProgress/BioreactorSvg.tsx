@@ -153,24 +153,24 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
               <rect x="45" y="15" width="150" height="300" fill={`url(#liquidGrad-${uid})`} />
               {shouldReduce ? (
                 <>
-                  <ellipse cx="120" cy="12" rx="110" ry="34" fill="var(--color-mint)" opacity="0.92" />
-                  <ellipse cx="120" cy="16" rx="105" ry="30" fill="var(--color-fog)" opacity="0.55" />
+                  <ellipse cx="120" cy="12" rx="72" ry="8" fill="var(--color-mint)" opacity="0.92" />
+                  <ellipse cx="120" cy="14" rx="68" ry="6" fill="var(--color-fog)" opacity="0.55" />
                 </>
               ) : (
                 <>
                   <motion.ellipse
                     cx="120"
                     cy="12"
-                    rx="110"
-                    ry="34"
+                    rx="72"
+                    ry="8"
                     fill="var(--color-mint)"
                     opacity={0.92}
-                    className="liquid-wave liquid-wave-1"
-                    animate={{ rotate: 360 }}
+                    className="liquid-wave"
+                    animate={{ scaleX: [1, 1.06, 1], x: [0, 2, 0] }}
                     transition={{
-                      duration: fast ? 4 : 7,
+                      duration: 2.2,
                       repeat: Infinity,
-                      ease: "linear",
+                      ease: "easeInOut",
                     }}
                     style={{
                       transformOrigin: "120px 12px",
@@ -179,20 +179,21 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
                   />
                   <motion.ellipse
                     cx="120"
-                    cy="16"
-                    rx="105"
-                    ry="30"
+                    cy="14"
+                    rx="68"
+                    ry="6"
                     fill="var(--color-fog)"
                     opacity={0.55}
-                    className="liquid-wave liquid-wave-2"
-                    animate={{ rotate: -360 }}
+                    className="liquid-wave"
+                    animate={{ scaleX: [1, 1.08, 1], x: [0, -2, 0] }}
                     transition={{
-                      duration: 5,
+                      duration: 2.8,
                       repeat: Infinity,
-                      ease: "linear",
+                      ease: "easeInOut",
+                      delay: 0.4,
                     }}
                     style={{
-                      transformOrigin: "120px 16px",
+                      transformOrigin: "120px 14px",
                       willChange: "transform",
                     }}
                   />
