@@ -58,7 +58,11 @@ export function BioreactorProgress({
         animate={shouldReduce ? undefined : derivedState}
         style={{ willChange: shouldReduce ? "auto" : "transform" }}
       >
-        <BioreactorVessel percent={percent} shouldReduce={!!shouldReduce} />
+        <BioreactorVessel
+          percent={percent}
+          fast={derivedState === "levelUp" || percent > 80}
+          shouldReduce={!!shouldReduce}
+        />
         {shouldReduce ? <BubbleStatic /> : <BubbleLayer percent={percent} />}
 
         {/* Level badge over vessel */}

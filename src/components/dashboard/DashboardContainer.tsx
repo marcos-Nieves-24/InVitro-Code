@@ -15,8 +15,9 @@ import {
   getLessonSlugs,
   getModuleDisplayName,
 } from "@/lib/content/modules";
-import { calcLevel } from "@/lib/gamification/utils";
+import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
+import { BioreactorProgress } from "./BioreactorProgress";
 import { evaluateAchievements } from "@/lib/gamification/achievements";
 import { EMPTY_STATES } from "@/lib/ui/empty-states";
 import {
@@ -139,6 +140,45 @@ export async function DashboardContainer() {
       <div className="px-6 py-8 md:px-10">
         <div className="space-y-12">
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
+
+          {/* Tu Progreso — bioreactor below Hero, left corner, reactive to real XP */}
+          <section className="scroll-mt-20">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="glass-card rounded-xl p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
+                  <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
+                    Ver roadmap
+                  </Link>
+                </div>
+                <div className="flex flex-col items-center gap-6 md:flex-row md:items-center">
+                  <BioreactorProgress
+                    exp={totalXp}
+                    expToNext={levelInfo.nextLevelXp}
+                    level={levelInfo.level}
+                    rank={rankTitle(levelInfo.level)}
+                    progressToNext={levelInfo.progressToNext}
+                    size="md"
+                  />
+                  <div className="text-center md:text-left">
+                    <p className="font-display text-lg font-bold">{rankTitle(levelInfo.level)}</p>
+                    <p className="mt-1 text-sm text-storm">
+                      <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
+                    </p>
+                    <div className="mx-auto mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised md:mx-0">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-fog to-mint"
+                        style={{
+                          width: `${Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100)}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="hidden md:block" />
+            </div>
+          </section>
 
           {/* Misión Actual */}
           <section id="mission" className="scroll-mt-20">

@@ -162,6 +162,76 @@
   }
 }
 
+/* ─── Bioreactor SVG — impeller / waves / motor ─── */
+@keyframes rotate-impeller-3d {
+  0% { transform: scaleX(1); }
+  25% { transform: scaleX(0.15); }
+  50% { transform: scaleX(-0.85); }
+  75% { transform: scaleX(-0.15); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes wave-smooth-1 {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-30px) scaleY(1.05); }
+  100% { transform: translateX(-60px) scaleY(1); }
+}
+
+@keyframes wave-smooth-2 {
+  0% { transform: translateX(-40px) scaleY(1); }
+  50% { transform: translateX(-10px) scaleY(1.04); }
+  100% { transform: translateX(-40px) scaleY(1); }
+}
+
+@keyframes motor-hum {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { stroke-opacity: 0.12; }
+  50% { stroke-opacity: 0.28; }
+}
+
+.animate-impeller-normal {
+  transform-origin: 120px 240px;
+  animation: rotate-impeller-3d 0.5s infinite linear;
+}
+
+.animate-impeller-fast {
+  transform-origin: 120px 240px;
+  animation: rotate-impeller-3d 0.18s infinite linear;
+}
+
+.wave-1 {
+  animation: wave-smooth-1 3.5s infinite linear;
+  will-change: transform;
+}
+
+.wave-2 {
+  animation: wave-smooth-2 2.8s infinite linear;
+  will-change: transform;
+}
+
+.animate-motor-hum {
+  animation: motor-hum 0.15s infinite ease-in-out;
+}
+
+.bioreactor-glow {
+  animation: pulse-glow 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-impeller-normal,
+  .animate-impeller-fast,
+  .wave-1,
+  .wave-2,
+  .animate-motor-hum,
+  .bioreactor-glow {
+    animation: none !important;
+  }
+}
+
 /* ─── Font Utilities ────────────────────────────────── */
 body {
   font-family: var(--font-body), sans-serif;
