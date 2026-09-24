@@ -15,7 +15,8 @@ import {
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import { BioreactorProgress } from "./BioreactorProgress";
-import { TestTube } from "./TestTube";
+import { BiotechGrowthTube } from "./BiotechGrowthTube";
+import { ScienceLabBackground } from "@/components/layout/ScienceLabBackground";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import {
   BarChart3,
@@ -106,9 +107,11 @@ export async function DashboardContainer() {
         <div className="space-y-12">
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
 
-          {/* Tu Progreso + Misión Actual — paired grid (T3) */}
+          {/* Tu Progreso + Misión Actual — paired grid (T3) + lab gutter */}
           <section className="scroll-mt-20">
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="relative rounded-2xl">
+              <ScienceLabBackground className="absolute inset-0 rounded-2xl overflow-hidden" />
+              <div className="relative grid gap-6 md:grid-cols-2 p-2">
               <div className="glass-card rounded-xl p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
@@ -142,24 +145,24 @@ export async function DashboardContainer() {
                 </div>
               </div>
 
-              <div className="glass-card relative flex flex-col overflow-hidden rounded-xl p-6">
-                <h3 className="mb-6 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
+              <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-5">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
-                    <div className="mb-6 flex gap-4">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {MissionIcon ? <MissionIcon className="h-8 w-8" /> : null}
+                    <div className="mb-4 flex gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
+                        {MissionIcon ? <MissionIcon className="h-6 w-6" /> : null}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
                         <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <TestTube progress={overallProgress} size="lg" label={`${overallProgress}%`} />
+                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />
                       </div>
                     </div>
-                    <div className="mb-4 flex justify-center sm:hidden">
-                      <TestTube progress={overallProgress} size="md" label={`${overallProgress}%`} />
+                    <div className="mb-3 flex justify-center sm:hidden">
+                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />
                     </div>
                     <div className="mb-2 flex items-center gap-1 text-mint">
                       <Gem className="h-4 w-4" fill="currentColor" />
@@ -179,6 +182,7 @@ export async function DashboardContainer() {
                     description="No quedan misiones pendientes en ninguna expedición."
                   />
                 )}
+              </div>
               </div>
             </div>
           </section>
