@@ -12,7 +12,7 @@ export interface SlideArrowButtonProps extends ButtonHTMLAttributes<HTMLButtonEl
 
 export function SlideArrowButton({
   text = "Get Started",
-  primaryColor = "#00B5C5",
+  primaryColor = "var(--color-brand-400)",
   className = "",
   href,
   ...props

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { getBioreactorPhysics } from "./useBioreactorMotion";
 
@@ -24,6 +24,7 @@ const SVG_BUBBLE_TEMPLATES: SvgBubble[] = [
 ];
 
 export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
+  const uid = useId().replace(/:/g, "");
   const physics = getBioreactorPhysics(percent);
   const clamped = physics.clamped;
   const h = physics.h;
@@ -58,7 +59,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       style={{ overflow: "hidden", contain: "paint" as const }}
     >
       <defs>
-        <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id={`metalGradient-${uid}`} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="var(--color-graphite)" />
           <stop offset="25%" stopColor="var(--color-slate)" />
           <stop offset="50%" stopColor="var(--color-surface-raised)" />
@@ -66,23 +67,23 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
           <stop offset="100%" stopColor="var(--color-graphite)" />
         </linearGradient>
 
-        <linearGradient id="motorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={`motorGradient-${uid}`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="var(--color-fog)" />
           <stop offset="100%" stopColor="var(--color-slate)" />
         </linearGradient>
 
-        <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id={`liquidGrad-${uid}`} x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="var(--color-fog)" />
           <stop offset="100%" stopColor="var(--color-mint)" />
         </linearGradient>
 
-        <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id={`glassShine-${uid}`} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="var(--color-surface-card)" stopOpacity="0" />
           <stop offset="15%" stopColor="var(--color-surface-card)" stopOpacity="0.45" />
           <stop offset="35%" stopColor="var(--color-surface-card)" stopOpacity="0" />
         </linearGradient>
 
-        <clipPath id="vesselInnerClip">
+        <clipPath id={`vesselInnerClip-${uid}`}>
           <path d="M45,65 L195,65 L195,225 C195,268 162,288 120,288 C78,288 45,268 45,225 Z" />
         </clipPath>
       </defs>
@@ -104,7 +105,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       />
 
       {/* Liquid — 21st Liquid Button contained ellipse technique, slosh coupled to impeller rpm */}
-      <g clipPath="url(#vesselInnerClip)">
+      <g clipPath={`url(#vesselInnerClip-${uid})`}>
         <motion.g
           id="waveRoot"
           style={{
@@ -149,7 +150,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
                 willChange: shouldReduce ? "auto" : "transform",
               }}
             >
-              <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
+              <rect x="45" y="15" width="150" height="300" fill={`url(#liquidGrad-${uid})`} />
               {shouldReduce ? (
                 <>
                   <ellipse cx="120" cy="12" rx="110" ry="34" fill="var(--color-mint)" opacity="0.92" />
@@ -244,7 +245,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       </g>
 
       {/* Agitator shaft */}
-      <rect x="115" y="45" width="10" height="220" rx="3" fill="url(#metalGradient)" />
+      <rect x="115" y="45" width="10" height="220" rx="3" fill={`url(#metalGradient-${uid})`} />
 
       {/* Impeller group — rpm = 60 + 120*h*(1-slip), duration = 60/rpm */}
       <motion.g
@@ -267,11 +268,11 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       </motion.g>
 
       {/* Top flange */}
-      <rect x="36" y="52" width="168" height="16" rx="3" fill="url(#metalGradient)" stroke="var(--color-graphite)" strokeWidth="0.6" />
+      <rect x="36" y="52" width="168" height="16" rx="3" fill={`url(#metalGradient-${uid})`} stroke="var(--color-graphite)" strokeWidth="0.6" />
 
       {/* Motor */}
       <g id="motor" className={motorClass}>
-        <rect x="90" y="8" width="60" height="30" rx="4" fill="url(#motorGradient)" stroke="var(--color-graphite)" strokeWidth="0.8" />
+        <rect x="90" y="8" width="60" height="30" rx="4" fill={`url(#motorGradient-${uid})`} stroke="var(--color-graphite)" strokeWidth="0.8" />
         {/* Motor vents */}
         <rect x="98" y="16" width="44" height="2.5" rx="1" fill="var(--color-graphite)" opacity="0.7" />
         <rect x="98" y="22" width="44" height="2.5" rx="1" fill="var(--color-graphite)" opacity="0.7" />
@@ -283,7 +284,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       {/* Glass reflection */}
       <path
         d="M50,70 Q 62,150 58,230 Q 72,260 88,278 L 76,282 Q 52,268 50,230 Z"
-        fill="url(#glassShine)"
+        fill={`url(#glassShine-${uid})`}
         opacity="0.9"
         pointerEvents="none"
       />
