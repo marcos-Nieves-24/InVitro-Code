@@ -193,6 +193,11 @@
   50% { stroke-opacity: 0.28; }
 }
 
+@keyframes liquid-button-wave {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 .animate-impeller-normal {
   transform-origin: 120px 240px;
   animation: rotate-impeller-3d 0.5s infinite linear;
@@ -213,6 +218,16 @@
   will-change: transform;
 }
 
+.liquid-wave {
+  will-change: transform;
+}
+
+.liquid-wave-1,
+.liquid-wave-2 {
+  will-change: transform;
+  transform-origin: center;
+}
+
 .animate-motor-hum {
   animation: motor-hum 0.15s infinite ease-in-out;
 }
@@ -227,7 +242,10 @@
   .wave-1,
   .wave-2,
   .animate-motor-hum,
-  .bioreactor-glow {
+  .bioreactor-glow,
+  .liquid-wave,
+  .liquid-wave-1,
+  .liquid-wave-2 {
     animation: none !important;
   }
 }

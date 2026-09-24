@@ -31,9 +31,6 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       : "animate-impeller-normal";
 
   const motorClass = shouldReduce ? "" : "animate-motor-hum";
-  const sloshDuration = fast ? 1.8 : 2.8;
-  const waveDuration1 = fast ? 1.8 : 3.5;
-  const waveDuration2 = fast ? 1.6 : 2.8;
 
   return (
     <svg
@@ -42,7 +39,7 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       role="presentation"
       aria-hidden="true"
       className="h-full w-full"
-      style={{ overflow: "visible" }}
+      style={{ overflow: "hidden", contain: "paint" as const }}
     >
       <defs>
         <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -90,61 +87,86 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
         strokeWidth="1.5"
       />
 
-      {/* Liquid — clipped to vessel interior, with 21st-style fluid sloshing */}
+      {/* Liquid — 21st Liquid Button contained ellipse technique */}
       <g clipPath="url(#vesselInnerClip)">
         <motion.g
-          id="liquidSlosh"
-          animate={
-            shouldReduce
-              ? undefined
-              : { x: [-1.5, 1.5, -1.5], rotate: [-0.6, 0.6, -0.6] }
-          }
-          transition={
-            shouldReduce
-              ? undefined
-              : { duration: sloshDuration, repeat: Infinity, ease: "easeInOut" }
-          }
+          id="waveRoot"
+          animate={{ y }}
+          transition={{
+            type: "spring",
+            stiffness: fast ? 220 : 180,
+            damping: fast ? 14 : 15,
+            mass: 0.8,
+          }}
           style={{
-            transformOrigin: "120px 180px",
+            overflow: "hidden",
             willChange: shouldReduce ? "auto" : "transform",
           }}
         >
-          <g id="liquidContainer" transform={`translate(0, ${y})`}>
+          <motion.g
+            id="liquidSquash"
+            animate={
+              shouldReduce || !fast ? undefined : { scaleY: [1, 0.985, 1] }
+            }
+            transition={
+              shouldReduce || !fast
+                ? undefined
+                : { duration: 0.7, repeat: Infinity, ease: "easeInOut" }
+            }
+            style={{
+              transformOrigin: "120px 280px",
+              willChange: shouldReduce ? "auto" : "transform",
+            }}
+          >
             <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
             {shouldReduce ? (
               <>
-                <path
-                  d="M45,15 Q 82.5,0 120,15 T195,15 L195,30 Q 157.5,30 120,15 T45,30 Z"
-                  fill="var(--color-mint)"
-                  opacity="0.9"
-                />
-                <path
-                  d="M45,18 Q 82.5,6 120,18 T195,18 L195,28 Q 157.5,28 120,18 T45,28 Z"
-                  fill="var(--color-fog)"
-                  opacity="0.55"
-                />
+                <ellipse cx="120" cy="12" rx="110" ry="34" fill="var(--color-mint)" opacity="0.92" />
+                <ellipse cx="120" cy="16" rx="105" ry="30" fill="var(--color-fog)" opacity="0.55" />
               </>
             ) : (
               <>
-                <motion.path
-                  d="M45,15 Q 82.5,0 120,15 T195,15 L195,30 Q 157.5,30 120,15 T45,30 Z"
+                <motion.ellipse
+                  cx="120"
+                  cy="12"
+                  rx="110"
+                  ry="34"
                   fill="var(--color-mint)"
-                  opacity="0.9"
-                  animate={{ x: [0, -30, 0] }}
-                  transition={{ duration: waveDuration1, repeat: Infinity, ease: "linear" }}
-                  style={{ willChange: "transform" }}
+                  opacity={0.92}
+                  className="liquid-wave liquid-wave-1"
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: fast ? 4 : 7,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    transformOrigin: "120px 12px",
+                    willChange: "transform",
+                  }}
                 />
-                <motion.path
-                  d="M45,18 Q 82.5,6 120,18 T195,18 L195,28 Q 157.5,28 120,18 T45,28 Z"
+                <motion.ellipse
+                  cx="120"
+                  cy="16"
+                  rx="105"
+                  ry="30"
                   fill="var(--color-fog)"
-                  opacity="0.55"
-                  animate={{ x: [-40, -10, -40] }}
-                  transition={{ duration: waveDuration2, repeat: Infinity, ease: "linear" }}
-                  style={{ willChange: "transform" }}
+                  opacity={0.55}
+                  className="liquid-wave liquid-wave-2"
+                  animate={{ rotate: -360 }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    transformOrigin: "120px 16px",
+                    willChange: "transform",
+                  }}
                 />
               </>
             )}
-          </g>
+          </motion.g>
         </motion.g>
 
         {/* Bubbles rising inside liquid — clipped, visible against mint/fog */}
