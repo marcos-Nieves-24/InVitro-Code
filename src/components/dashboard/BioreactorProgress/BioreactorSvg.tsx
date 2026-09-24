@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
 type Props = {
   percent: number;
@@ -22,7 +23,17 @@ const SVG_BUBBLES: SvgBubble[] = [
 
 export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
   const clamped = Math.min(100, Math.max(0, percent));
-  const y = 230 - (clamped / 100) * 200;
+  const targetY = 230 - (clamped / 100) * 200;
+  const yMotion = useMotionValue(230);
+  const springY = useSpring(yMotion, {
+    stiffness: fast ? 220 : 180,
+    damping: fast ? 14 : 15,
+    mass: 0.8,
+  });
+
+  useEffect(() => {
+    yMotion.set(targetY);
+  }, [targetY, yMotion]);
 
   const impellerClass = shouldReduce
     ? ""
@@ -91,14 +102,8 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       <g clipPath="url(#vesselInnerClip)">
         <motion.g
           id="waveRoot"
-          animate={{ y }}
-          transition={{
-            type: "spring",
-            stiffness: fast ? 220 : 180,
-            damping: fast ? 14 : 15,
-            mass: 0.8,
-          }}
           style={{
+            y: springY,
             overflow: "hidden",
             willChange: shouldReduce ? "auto" : "transform",
           }}

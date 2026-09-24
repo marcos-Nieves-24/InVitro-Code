@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { FlaskConical } from "lucide-react";
 import { BioreactorVessel } from "./BioreactorVessel";
 import { useBioreactorMotion, type BioreactorState } from "./useBioreactorMotion";
@@ -39,7 +39,7 @@ export function BioreactorProgress({
   const derivedState: BioreactorState = state ?? (percent >= 100 ? "levelUp" : percent > 80 ? "filling" : "idle");
   const shouldReduce = useReducedMotion();
   const { vesselVariants: rawVariants } = useBioreactorMotion(derivedState, percent);
-  const vesselVariants = Object.keys(rawVariants ?? {}).length ? (rawVariants as import("framer-motion").Variants) : undefined;
+  const vesselVariants = Object.keys(rawVariants ?? {}).length ? (rawVariants as import("motion/react").Variants) : undefined;
 
   const a11yLabel = `Progreso de nivel: ${exp.toLocaleString("es")} de ${expToNext.toLocaleString("es")} puntos, ${Math.round(percent)} por ciento al siguiente nivel, Nivel ${level} ${rank}`;
 
