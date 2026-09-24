@@ -19,21 +19,25 @@ export function BubbleLayer({ percent }: { percent: number }) {
   if (shouldReduce || percent < 5) return null;
 
   return (
-    <div className="bubble-layer pointer-events-none absolute inset-x-0 bottom-0 h-full overflow-hidden">
+    <div
+      className="bubble-layer pointer-events-none absolute inset-0 overflow-hidden"
+      style={{ clipPath: "url(#vesselInnerClip)", willChange: "transform" } as React.CSSProperties}
+      aria-hidden="true"
+    >
       {BUBBLES_MD.map((b) => (
         <motion.div
           key={b.id}
-          className="bubble absolute bottom-2 rounded-full border border-bubble-highlight/40 bg-bubble"
+          className="bubble absolute bottom-5 rounded-full border border-bubble-highlight/50 bg-surface-card"
           style={
             {
               left: `calc(50% + ${b.x}px)`,
               width: b.size,
               height: b.size,
-              // fallback CSS var for bubble-rise keyframes
               ["--bubble-x" as string]: `${b.x * 0.3}px`,
+              boxShadow: "0 0 6px var(--color-bubble-glow)",
             } as React.CSSProperties
           }
-          animate={{ y: [0, -120], opacity: [0.65, 0] }}
+          animate={{ y: [0, -140], opacity: [0, 0.92, 0], x: [0, b.x * 0.08, 0] }}
           transition={{
             duration: b.duration,
             repeat: Infinity,
@@ -48,10 +52,14 @@ export function BubbleLayer({ percent }: { percent: number }) {
 
 export function BubbleStatic() {
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center gap-1 opacity-40">
-      <span className="h-1.5 w-1.5 rounded-full bg-bubble" />
-      <span className="h-2 w-2 rounded-full bg-bubble" />
-      <span className="h-1.5 w-1.5 rounded-full bg-bubble" />
+    <div
+      className="pointer-events-none absolute inset-0 flex items-end justify-center gap-1 overflow-hidden pb-6 opacity-40"
+      style={{ clipPath: "url(#vesselInnerClip)" } as React.CSSProperties}
+      aria-hidden="true"
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-surface-card border border-bubble-highlight/40" />
+      <span className="h-2 w-2 rounded-full bg-surface-card border border-bubble-highlight/40" />
+      <span className="h-1.5 w-1.5 rounded-full bg-surface-card border border-bubble-highlight/40" />
     </div>
   );
 }
