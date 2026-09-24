@@ -51,8 +51,8 @@ function LegacyStatic({
               repeat={false}
               smooth={false}
               hideCursorOnComplete={false}
-              cursor={<span className="text-[#45DCC6]">█</span>}
-              className="text-sm font-bold text-[#45DCC6]"
+              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+              className="text-sm font-bold text-[var(--color-brand-300)]"
             />
             <TypingText
               text="Continua entrenando modelos y explorando la inteligencia artificial"
@@ -65,7 +65,7 @@ function LegacyStatic({
           </div>
           <SlideArrowButton
             text="Iniciar Lección"
-            primaryColor="#00B5C5"
+            primaryColor="var(--color-brand-400)"
             href={startHref}
             className="mt-6"
           />
@@ -238,8 +238,8 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
               repeat={false}
               smooth={false}
               hideCursorOnComplete={false}
-              cursor={<span className="text-[#45DCC6]">█</span>}
-              className="text-sm font-bold text-[#45DCC6]"
+              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+              className="text-sm font-bold text-[var(--color-brand-300)]"
             />
             <TypingText
               text="Continua entrenando modelos y explorando la inteligencia artificial"
@@ -252,7 +252,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
           </div>
           <SlideArrowButton
             text="Iniciar Lección"
-            primaryColor="#00B5C5"
+            primaryColor="var(--color-brand-400)"
             href={startHref}
             className="w-fit"
           />

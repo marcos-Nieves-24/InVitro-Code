@@ -35,7 +35,9 @@ export function BioreactorProgress({
   state,
   className,
 }: BioreactorProgressProps) {
-  const percent = Math.min(100, Math.max(0, (progressToNext / expToNext) * 100));
+  const expSafe = Number.isFinite(expToNext) && expToNext > 0 ? expToNext : 1;
+  const raw = Number.isFinite(progressToNext) ? progressToNext : 0;
+  const percent = Math.min(100, Math.max(0, (raw / expSafe) * 100));
   const derivedState: BioreactorState = state ?? (percent >= 100 ? "levelUp" : percent > 80 ? "filling" : "idle");
   const shouldReduce = useReducedMotion();
   const { vesselVariants: rawVariants } = useBioreactorMotion(derivedState, percent);

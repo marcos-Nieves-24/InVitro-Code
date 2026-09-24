@@ -167,7 +167,7 @@ export async function DashboardContainer() {
                     </div>
                     <SlideArrowButton
                       text="Continuar misión"
-                      primaryColor="#00B5C5"
+                      primaryColor="var(--color-brand-400)"
                       href={missionHref ?? "/learn"}
                       className="mt-auto w-full text-sm"
                     />

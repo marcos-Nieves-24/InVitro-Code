@@ -16,7 +16,7 @@ const sizeMap: Record<NonNullable<TestTubeProps["size"]>, string> = {
 };
 
 export function TestTube({ progress, size = "md", label }: TestTubeProps) {
-  const clamped = Math.min(100, Math.max(0, progress));
+  const clamped = Number.isFinite(progress) ? Math.min(100, Math.max(0, progress)) : 0;
   const uid = useId();
   const clipId = `testtube-clip-${uid.replace(/:/g, "")}`;
   const gradId = `testtube-grad-${uid.replace(/:/g, "")}`;
