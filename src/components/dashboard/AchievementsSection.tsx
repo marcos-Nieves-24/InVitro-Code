@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { achievementIcon } from "@/lib/gamification/icons";
 import { rankTitle } from "@/lib/gamification/utils";
 import { EMPTY_STATES } from "@/lib/ui/empty-states";
+import { BioreactorProgress } from "./BioreactorProgress";
 
 export interface AchievementsSectionProps {
   levelInfo: { level: number; nextLevelXp: number; progressToNext: number };
@@ -18,11 +19,6 @@ export interface AchievementsSectionProps {
 }
 
 export function AchievementsSection({ levelInfo, totalXp, recentAchievements }: AchievementsSectionProps) {
-  const ringRadius = 56;
-  const ringCircumference = 2 * Math.PI * ringRadius;
-  const ringProgress = Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100);
-  const ringOffset = ringCircumference - (ringProgress / 100) * ringCircumference;
-
   return (
     <section id="progress" className="scroll-mt-20">
       <div className="mb-6 flex items-center justify-between">
@@ -33,37 +29,27 @@ export function AchievementsSection({ levelInfo, totalXp, recentAchievements }: 
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Nivel y XP */}
+        {/* Nivel y XP — Bioreactor */}
         <div className="glass-card rounded-xl p-6">
-          <div className="flex items-center gap-6">
-            <div className="relative flex items-center justify-center">
-              <svg className="h-32 w-32 -rotate-90">
-                <circle cx="64" cy="64" fill="transparent" r={ringRadius} stroke="currentColor" strokeWidth="8" className="text-surface-raised" />
-                <circle
-                  cx="64"
-                  cy="64"
-                  fill="transparent"
-                  r={ringRadius}
-                  stroke="currentColor"
-                  strokeWidth="8"
-                  strokeDasharray={ringCircumference}
-                  strokeDashoffset={ringOffset}
-                  strokeLinecap="round"
-                  className="text-mint"
-                />
-              </svg>
-              <div className="absolute flex flex-col items-center">
-                <span className="text-xs font-bold text-storm">Nivel</span>
-                <span className="text-3xl font-black text-mint">{levelInfo.level}</span>
-              </div>
-            </div>
-            <div>
-              <p className="font-bold">{rankTitle(levelInfo.level)}</p>
+          <div className="flex flex-col items-center gap-6 md:flex-row md:items-center">
+            <BioreactorProgress
+              exp={totalXp}
+              expToNext={levelInfo.nextLevelXp}
+              level={levelInfo.level}
+              rank={rankTitle(levelInfo.level)}
+              progressToNext={levelInfo.progressToNext}
+              size="md"
+            />
+            <div className="text-center md:text-left">
+              <p className="font-display text-lg font-bold">{rankTitle(levelInfo.level)}</p>
               <p className="mt-1 text-sm text-storm">
                 <span className="font-bold text-mint">{totalXp.toLocaleString("es")}</span> / {levelInfo.nextLevelXp.toLocaleString("es")} XP
               </p>
-              <div className="mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised">
-                <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint transition-all duration-500" style={{ width: `${ringProgress}%` }} />
+              <div className="mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised md:mx-0 mx-auto">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-fog to-mint transition-all duration-500"
+                  style={{ width: `${Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100)}%` }}
+                />
               </div>
             </div>
           </div>
