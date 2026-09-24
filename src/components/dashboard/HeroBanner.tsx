@@ -274,9 +274,9 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
           priority
           alt="Científica con hélice de ADN"
         />
-        {/* Hover speech bubble — bouncy expand/shrink adapted from jQuery snippet */}
+        {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
         <motion.div
-          className="pointer-events-none absolute -left-[140px] top-6 hidden lg:block"
+          className="pointer-events-none absolute -left-[168px] top-[68px] hidden lg:block"
           initial={{ scale: 0 }}
           animate={
             isHoverScientist
@@ -288,17 +288,17 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
               ? { duration: 0.25, times: [0, 0.5, 1], ease: "easeOut" }
               : { duration: 0.1, ease: "easeIn" }
           }
-          style={{ transformOrigin: "0% 100%" }}
+          style={{ transformOrigin: "100% 100%" }}
           aria-hidden={!isHoverScientist}
         >
           <div className="relative rounded-[10px] bg-[#5a5a5a] px-4 py-3 text-center text-sm font-bold text-white shadow-lg">
             {BUBBLE_TEXT}
             <span
-              className="absolute -bottom-[22px] left-4 block h-0 w-0 border-[15px] border-solid border-transparent"
+              className="absolute -bottom-[10px] right-6 block h-0 w-0 border-[10px] border-solid border-transparent"
               style={{
                 borderTopColor: "#5a5a5a",
-                borderLeftColor: "#5a5a5a",
-                transform: "rotate(10deg)",
+                borderRightColor: "#5a5a5a",
+                transform: "rotate(-10deg)",
               }}
               aria-hidden="true"
             />
