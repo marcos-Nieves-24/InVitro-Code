@@ -10,14 +10,20 @@
 /* ─── Design Tokens ─────────────────────────────────── */
 
 @theme {
-  /* ── NEW PALETTE ── */
+  /* ── NEW PALETTE (scientific gradient) ── */
   --color-ink: #000000;
   --color-graphite: #2a272a;
-  --color-slate: #4b4a54;
+  --color-brand-950: #22005A;
+  --color-brand-800: #00388C;
+  --color-brand-600: #0063AE;
+  --color-brand-500: #008DBF;
+  --color-brand-400: #00B5C5;
+  --color-brand-300: #45DCC6;
+  --color-slate: var(--color-brand-800);
   --color-storm: #677381;
-  --color-fog: #82a0aa;
-  --color-mint: #a3cfcd;
-  --color-surface: #f4f6f8;
+  --color-fog: var(--color-brand-500);
+  --color-mint: var(--color-brand-400);
+  --color-surface: #FFFFFF;
   --color-surface-card: #ffffff;
   --color-surface-raised: #e8ecf0;
 
@@ -71,10 +77,10 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* ── Gaming: Comic vignette ── */
-  --color-comic-bg: #001329;
-  --color-comic-border: #044a68;
+  --color-comic-bg: var(--color-brand-950);
+  --color-comic-border: var(--color-brand-800);
   --color-comic-text: #ffffff;
-  --color-comic-accent: #a3cfcd;
+  --color-comic-accent: var(--color-brand-300);
   /* ── Gaming: Bubble / bioreactor ── */
   --color-bubble: #a3cfcd;
   --color-bubble-highlight: #e8ecf0;
