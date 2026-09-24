@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 type Bubble = { id: number; x: number; size: number; delay: number; duration: number };
 
