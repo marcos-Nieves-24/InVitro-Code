@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FlaskConical } from "lucide-react";
 import { BioreactorVessel } from "./BioreactorVessel";
-import { BubbleLayer, BubbleStatic } from "./BubbleLayer";
 import { useBioreactorMotion, type BioreactorState } from "./useBioreactorMotion";
 
 export type BioreactorSize = "sm" | "md" | "lg";
@@ -63,25 +62,25 @@ export function BioreactorProgress({
           fast={derivedState === "levelUp" || percent > 80}
           shouldReduce={!!shouldReduce}
         />
-        {shouldReduce ? <BubbleStatic /> : <BubbleLayer percent={percent} />}
-
-        {/* Level badge over vessel */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-storm">
-            <FlaskConical className="h-3 w-3" /> Nivel
-          </span>
-          <span className="font-display text-3xl font-black text-ink drop-shadow-sm">{level}</span>
-          {derivedState === "levelUp" && !shouldReduce && (
-            <motion.span
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-1 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-ink"
-            >
-              ¡Subiste de nivel!
-            </motion.span>
-          )}
-        </div>
+        {/* Bubbles now rendered inside BioreactorSvg clipped liquid for correct tank containment */}
       </motion.div>
+
+      <div className="mt-3 flex flex-col items-center">
+        <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-storm">
+          <FlaskConical className="h-3 w-3" /> Nivel
+        </span>
+        <span className="font-display text-4xl font-black text-ink leading-none">{level}</span>
+        <span className="text-xs font-bold text-storm">{rank}</span>
+        {derivedState === "levelUp" && !shouldReduce && (
+          <motion.span
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-2 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-ink"
+          >
+            ¡Subiste de nivel!
+          </motion.span>
+        )}
+      </div>
 
       {/* Semántica progressbar para AT */}
       <div

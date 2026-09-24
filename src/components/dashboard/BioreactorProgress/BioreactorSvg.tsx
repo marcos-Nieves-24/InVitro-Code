@@ -1,10 +1,24 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 type Props = {
   percent: number;
   fast: boolean;
   shouldReduce: boolean;
 };
+
+type SvgBubble = { id: number; cx: number; r: number; delay: number; duration: number; wobble: number };
+
+const SVG_BUBBLES: SvgBubble[] = [
+  { id: 0, cx: 88, r: 5, delay: 0, duration: 2.8, wobble: 3 },
+  { id: 1, cx: 108, r: 4, delay: 0.4, duration: 3.1, wobble: -2.5 },
+  { id: 2, cx: 128, r: 6, delay: 0.7, duration: 2.9, wobble: 2 },
+  { id: 3, cx: 142, r: 3.5, delay: 1.0, duration: 3.0, wobble: -3 },
+  { id: 4, cx: 100, r: 4.5, delay: 1.3, duration: 2.7, wobble: 2.8 },
+  { id: 5, cx: 132, r: 4, delay: 1.6, duration: 3.2, wobble: -2 },
+  { id: 6, cx: 118, r: 5.5, delay: 0.2, duration: 2.85, wobble: 1.5 },
+];
 
 export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
   const clamped = Math.min(100, Math.max(0, percent));
@@ -16,9 +30,10 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
       ? "animate-impeller-fast"
       : "animate-impeller-normal";
 
-  const wave1Class = shouldReduce ? "" : "wave-1";
-  const wave2Class = shouldReduce ? "" : "wave-2";
   const motorClass = shouldReduce ? "" : "animate-motor-hum";
+  const sloshDuration = fast ? 1.8 : 2.8;
+  const waveDuration1 = fast ? 1.8 : 3.5;
+  const waveDuration2 = fast ? 1.6 : 2.8;
 
   return (
     <svg
@@ -75,35 +90,101 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
         strokeWidth="1.5"
       />
 
-      {/* Liquid container clipped */}
+      {/* Liquid — clipped to vessel interior, with 21st-style fluid sloshing */}
       <g clipPath="url(#vesselInnerClip)">
-        <g id="liquidContainer" transform={`translate(0, ${y})`}>
-          {/* Liquid body */}
-          <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
-          {/* Wave top layers */}
-          <path
-            className={wave1Class}
-            d="M45,15 Q 82.5,0 120,15 T195,15 L195,30 Q 157.5,30 120,15 T45,30 Z"
-            fill="var(--color-mint)"
-            opacity="0.9"
-          />
-          <path
-            className={wave2Class}
-            d="M45,18 Q 82.5,6 120,18 T195,18 L195,28 Q 157.5,28 120,18 T45,28 Z"
-            fill="var(--color-fog)"
-            opacity="0.55"
-          />
-        </g>
-      </g>
+        <motion.g
+          id="liquidSlosh"
+          animate={
+            shouldReduce
+              ? undefined
+              : { x: [-1.5, 1.5, -1.5], rotate: [-0.6, 0.6, -0.6] }
+          }
+          transition={
+            shouldReduce
+              ? undefined
+              : { duration: sloshDuration, repeat: Infinity, ease: "easeInOut" }
+          }
+          style={{
+            transformOrigin: "120px 180px",
+            willChange: shouldReduce ? "auto" : "transform",
+          }}
+        >
+          <g id="liquidContainer" transform={`translate(0, ${y})`}>
+            <rect x="45" y="15" width="150" height="300" fill="url(#liquidGrad)" />
+            {shouldReduce ? (
+              <>
+                <path
+                  d="M45,15 Q 82.5,0 120,15 T195,15 L195,30 Q 157.5,30 120,15 T45,30 Z"
+                  fill="var(--color-mint)"
+                  opacity="0.9"
+                />
+                <path
+                  d="M45,18 Q 82.5,6 120,18 T195,18 L195,28 Q 157.5,28 120,18 T45,28 Z"
+                  fill="var(--color-fog)"
+                  opacity="0.55"
+                />
+              </>
+            ) : (
+              <>
+                <motion.path
+                  d="M45,15 Q 82.5,0 120,15 T195,15 L195,30 Q 157.5,30 120,15 T45,30 Z"
+                  fill="var(--color-mint)"
+                  opacity="0.9"
+                  animate={{ x: [0, -30, 0] }}
+                  transition={{ duration: waveDuration1, repeat: Infinity, ease: "linear" }}
+                  style={{ willChange: "transform" }}
+                />
+                <motion.path
+                  d="M45,18 Q 82.5,6 120,18 T195,18 L195,28 Q 157.5,28 120,18 T45,28 Z"
+                  fill="var(--color-fog)"
+                  opacity="0.55"
+                  animate={{ x: [-40, -10, -40] }}
+                  transition={{ duration: waveDuration2, repeat: Infinity, ease: "linear" }}
+                  style={{ willChange: "transform" }}
+                />
+              </>
+            )}
+          </g>
+        </motion.g>
 
-      {/* Bubble tank foreignObject — BubbleLayer renders overlay, left empty for DOM overlay */}
-      <foreignObject x="45" y="65" width="150" height="223" style={{ overflow: "visible", pointerEvents: "none" }}>
-        <div
-          // @ts-expect-error foreignObject child
-          xmlns="http://www.w3.org/1999/xhtml"
-          style={{ width: "100%", height: "100%" }}
-        />
-      </foreignObject>
+        {/* Bubbles rising inside liquid — clipped, visible against mint/fog */}
+        {!shouldReduce && clamped >= 5 && (
+          <g id="bubbleGroup" aria-hidden="true">
+            {SVG_BUBBLES.map((b) => (
+              <motion.circle
+                key={b.id}
+                cx={b.cx}
+                cy={272}
+                r={b.r}
+                fill="var(--color-surface-card)"
+                fillOpacity="0.92"
+                stroke="var(--color-bubble-highlight)"
+                strokeOpacity="0.9"
+                strokeWidth="0.9"
+                style={{ willChange: "transform, opacity" }}
+                animate={{
+                  cy: [272, 90],
+                  opacity: [0, 0.95, 0],
+                  x: [0, b.wobble, -b.wobble * 0.6, 0],
+                }}
+                transition={{
+                  duration: b.duration,
+                  repeat: Infinity,
+                  delay: b.delay,
+                  ease: "easeOut",
+                }}
+              />
+            ))}
+          </g>
+        )}
+        {shouldReduce && clamped >= 5 && (
+          <g id="bubbleGroupStatic" aria-hidden="true" opacity="0.45">
+            <circle cx="100" cy="250" r="3.5" fill="var(--color-surface-card)" stroke="var(--color-bubble-highlight)" strokeWidth="0.6" />
+            <circle cx="120" cy="260" r="4" fill="var(--color-surface-card)" stroke="var(--color-bubble-highlight)" strokeWidth="0.6" />
+            <circle cx="135" cy="255" r="3" fill="var(--color-surface-card)" stroke="var(--color-bubble-highlight)" strokeWidth="0.6" />
+          </g>
+        )}
+      </g>
 
       {/* Agitator shaft */}
       <rect x="115" y="45" width="10" height="220" rx="3" fill="url(#metalGradient)" />
