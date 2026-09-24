@@ -108,7 +108,7 @@ export function BiotechGrowthTube({
           <ellipse cx="160" cy="86" rx="68" ry="8" fill="#04111d" fillOpacity=".65" stroke="#e7ffff" strokeOpacity=".55" strokeWidth="1.4" />
           <path d="M89 91c4 4 11 6 18 7" fill="none" stroke="#fff" strokeOpacity=".56" strokeWidth="1.5" strokeLinecap="round" />
         </g>
-        <text x="160" y="402" textAnchor="middle" fill="#bcecf2" opacity=".82" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" fontSize="11" letterSpacing="1.3">{Math.round(progress * 100)}% GROWTH</text>
+        <text x="160" y="402" textAnchor="middle" fill="#0f172a" opacity="1" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" fontSize="13" fontWeight="700" letterSpacing="1.3">{Math.round(progress * 100)}% crecimiento</text>
       </svg>
     </div>
   );
