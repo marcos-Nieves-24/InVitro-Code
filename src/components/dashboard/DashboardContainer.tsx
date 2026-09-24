@@ -108,12 +108,7 @@ export async function DashboardContainer() {
 
           {/* Tu Progreso + Misión Actual — paired grid (T3) + lab gutter */}
           <section className="scroll-mt-20">
-            <div className="relative rounded-2xl overflow-hidden">
-              <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover">
-                <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
-              </video>
-              <div aria-hidden="true" className="absolute inset-0 bg-white/30 backdrop-blur-[1px] dark:bg-black/20" />
-              <div className="relative grid gap-6 md:grid-cols-2 p-2">
+            <div className="grid gap-6 md:grid-cols-2">
               <div className="glass-card rounded-xl p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
@@ -198,9 +193,18 @@ export async function DashboardContainer() {
                   />
                 )}
               </div>
-              </div>
             </div>
           </section>
+
+          <footer className="relative mt-12 overflow-hidden rounded-2xl">
+            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover">
+              <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
+            </video>
+            <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
+            <div className="relative p-8 text-center text-sm text-storm">
+              <p>InVitro-Code — Cultivando biotecnología</p>
+            </div>
+          </footer>
         </div>
       </div>
     </InVitroShell>
