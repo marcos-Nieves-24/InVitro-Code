@@ -16,29 +16,22 @@ import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import { BioreactorProgress } from "./BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
-import { ScienceLabBackground } from "@/components/layout/ScienceLabBackground";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import {
   BarChart3,
-  Brain,
   CheckCircle2,
   Cpu,
   FlaskConical,
   Gem,
   Terminal,
-  type LucideIcon,
 } from "lucide-react";
 
-const MODULE_ICONS: Record<string, LucideIcon> = {
-  python: Terminal,
-  ia: Brain,
-  estadistica: BarChart3,
-  "machine-learning": Cpu,
+const MODULE_FAVICON: Record<string, string> = {
+  ia: "/labs/modules/ia.svg",
+  python: "/labs/modules/python.svg",
+  estadistica: "/labs/modules/estadistica.svg",
+  "machine-learning": "/labs/modules/ml.svg",
 };
-
-function moduleIcon(slug: string): LucideIcon {
-  return MODULE_ICONS[slug] ?? FlaskConical;
-}
 
 export async function DashboardContainer() {
   const { userId } = await auth();
@@ -92,7 +85,13 @@ export async function DashboardContainer() {
 
   const startHref = getResumeHref(completedLessonKeys);
 
-  const MissionIcon = nextLesson ? moduleIcon(nextLesson.moduleSlug) : null;
+  const completedByModule = new Map<string, number>();
+  for (const row of completedRows) completedByModule.set(row.module_slug, (completedByModule.get(row.module_slug) ?? 0) + 1);
+  const currentModule = nextLesson ? modules.find((m) => m.slug === nextLesson.moduleSlug) ?? null : null;
+  const currentModuleCompleted = nextLesson ? completedByModule.get(nextLesson.moduleSlug) ?? 0 : 0;
+  const currentModuleTotal = currentModule?.totalLessons ?? 0;
+  const currentModulePct = currentModuleTotal > 0 ? Math.round((currentModuleCompleted / currentModuleTotal) * 100) : 0;
+  const missionFavicon = nextLesson ? MODULE_FAVICON[nextLesson.moduleSlug] ?? "/labs/modules/ia.svg" : null;
   const gender = (profileRes.data as { gender?: string | null } | null)?.gender ?? null;
 
   return (
@@ -109,8 +108,11 @@ export async function DashboardContainer() {
 
           {/* Tu Progreso + Misión Actual — paired grid (T3) + lab gutter */}
           <section className="scroll-mt-20">
-            <div className="relative rounded-2xl">
-              <ScienceLabBackground className="absolute inset-0 rounded-2xl overflow-hidden" />
+            <div className="relative rounded-2xl overflow-hidden">
+              <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover">
+                <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
+              </video>
+              <div aria-hidden="true" className="absolute inset-0 bg-white/30 backdrop-blur-[1px] dark:bg-black/20" />
               <div className="relative grid gap-6 md:grid-cols-2 p-2">
               <div className="glass-card rounded-xl p-6">
                 <div className="mb-4 flex items-center justify-between">
@@ -151,7 +153,7 @@ export async function DashboardContainer() {
                   <>
                     <div className="mb-4 flex gap-3">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {MissionIcon ? <MissionIcon className="h-6 w-6" /> : null}
+                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-8 w-8 object-contain" /> : null}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
@@ -164,6 +166,19 @@ export async function DashboardContainer() {
                     <div className="mb-3 flex justify-center sm:hidden">
                       <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />
                     </div>
+                    {nextLesson && currentModule && (
+                      <div className="mb-3">
+                        <div className="mb-1 flex items-center justify-between text-xs">
+                          <span className="font-medium text-storm">{currentModule.name}</span>
+                          <span className="font-bold text-ink">
+                            {currentModuleCompleted}/{currentModuleTotal} · {currentModulePct}%
+                          </span>
+                        </div>
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
+                          <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
+                        </div>
+                      </div>
+                    )}
                     <div className="mb-2 flex items-center gap-1 text-mint">
                       <Gem className="h-4 w-4" fill="currentColor" />
                       <span className="text-sm font-bold">+{nextLesson.xp} XP</span>
