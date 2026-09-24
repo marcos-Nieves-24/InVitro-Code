@@ -16,8 +16,8 @@ import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import { BioreactorProgress } from "./BioreactorProgress";
 import { TestTube } from "./TestTube";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import {
-  ArrowRight,
   BarChart3,
   Brain,
   CheckCircle2,
@@ -165,12 +165,12 @@ export async function DashboardContainer() {
                       <Gem className="h-4 w-4" fill="currentColor" />
                       <span className="text-sm font-bold">+{nextLesson.xp} XP</span>
                     </div>
-                    <Link
+                    <SlideArrowButton
+                      text="Continuar misión"
+                      primaryColor="#00B5C5"
                       href={missionHref ?? "/learn"}
-                      className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-mint py-3 text-sm font-bold text-ink transition-all hover:opacity-90"
-                    >
-                      Continuar misión <ArrowRight className="h-4 w-4" />
-                    </Link>
+                      className="mt-auto w-full text-sm"
+                    />
                   </>
                 ) : (
                   <EmptyState

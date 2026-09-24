@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { Play } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { getScientistVariant } from "@/lib/gamification/utils";
 import { ComicBubble } from "./ComicBubble";
 import { ScientistFigure } from "./ScientistFigure";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
+import { TypingText } from "@/components/ui/TypingText";
 
 export interface HeroBannerProps {
   userName: string;
@@ -44,19 +44,31 @@ function LegacyStatic({
 
       <div className="relative z-[2] flex items-end gap-0 p-8 pb-0 lg:p-12 lg:pb-0">
         <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-[var(--color-comic-text)] md:text-4xl">
-            ¡Bienvenido, investigador!
-          </h2>
-          <p className="mt-4 text-lg text-[var(--color-comic-text)]/80">
-            Continua entrenando modelos y explorando la inteligencia artificial
-          </p>
-          <Link
+          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
+            <TypingText
+              text="> Bienvenido, investigador // sistema listo"
+              delay={28}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete={false}
+              cursor={<span className="text-[#45DCC6]">█</span>}
+              className="text-sm font-bold text-[#45DCC6]"
+            />
+            <TypingText
+              text="Continua entrenando modelos y explorando la inteligencia artificial"
+              delay={18}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-1 block text-sm text-white/80"
+            />
+          </div>
+          <SlideArrowButton
+            text="Iniciar Lección"
+            primaryColor="#00B5C5"
             href={startHref}
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-          >
-            <Play className="h-4 w-4" fill="currentColor" />
-            Iniciar Lección
-          </Link>
+            className="mt-6"
+          />
         </div>
       </div>
 
@@ -219,19 +231,31 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
 
       <div className="relative z-[2] flex items-end gap-0 p-8 pb-0 lg:p-12 lg:pb-0">
         <div className="relative z-[1] flex w-[420px] shrink-0 flex-col gap-4 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-[var(--color-comic-text)] md:text-4xl">
-            ¡Bienvenido, investigador!
-          </h2>
-          <p className="text-lg text-[var(--color-comic-text)]/80">
-            Continua entrenando modelos y explorando la inteligencia artificial
-          </p>
-          <Link
+          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
+            <TypingText
+              text="> Bienvenido, investigador // sistema listo"
+              delay={28}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete={false}
+              cursor={<span className="text-[#45DCC6]">█</span>}
+              className="text-sm font-bold text-[#45DCC6]"
+            />
+            <TypingText
+              text="Continua entrenando modelos y explorando la inteligencia artificial"
+              delay={18}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-1 block text-sm text-white/80"
+            />
+          </div>
+          <SlideArrowButton
+            text="Iniciar Lección"
+            primaryColor="#00B5C5"
             href={startHref}
-            className="inline-flex w-fit items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-          >
-            <Play className="h-4 w-4" fill="currentColor" />
-            Iniciar Lección
-          </Link>
+            className="w-fit"
+          />
 
           <div
             ref={bubbleRef}
