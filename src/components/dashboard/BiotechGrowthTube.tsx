@@ -69,7 +69,7 @@ export function BiotechGrowthTube({
         @keyframes bgt-complete { 0%{filter:brightness(1)} 45%{filter:brightness(1.38) drop-shadow(0 0 13px #67f7ff)} 100%{filter:brightness(1)} }
         @media (prefers-reduced-motion: reduce) { .bgt-root * { animation:none!important; transition:none!important; } }
       `}</style>
-      <svg className="bgt-root" viewBox="0 0 320 420" role="img" aria-labelledby={`bgt-title-${id} bgt-desc-${id}`}>
+      <svg className="bgt-root" viewBox="0 100 420 420" role="img" aria-labelledby={`bgt-title-${id} bgt-desc-${id}`}>
         <title id={`bgt-title-${id}`}>{label}</title>
         <desc id={`bgt-desc-${id}`}>A glass laboratory tube with a cyan nutrient solution and a seedling whose growth reflects experience progress.</desc>
         <defs>
@@ -108,7 +108,7 @@ export function BiotechGrowthTube({
           <ellipse cx="160" cy="86" rx="68" ry="8" fill="#04111d" fillOpacity=".65" stroke="#e7ffff" strokeOpacity=".55" strokeWidth="1.4" />
           <path d="M89 91c4 4 11 6 18 7" fill="none" stroke="#fff" strokeOpacity=".56" strokeWidth="1.5" strokeLinecap="round" />
         </g>
-        <text x="160" y="402" textAnchor="middle" fill="#0f172a" opacity="1" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" fontSize="13" fontWeight="700" letterSpacing="1.3">{Math.round(progress * 100)}% crecimiento</text>
+        <text x="160" y="402" textAnchor="middle" fill="#0f172a" opacity="1" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" fontSize="22" fontWeight="700" letterSpacing="1.3">{Math.round(progress * 100)}% crecimiento</text>
       </svg>
     </div>
   );

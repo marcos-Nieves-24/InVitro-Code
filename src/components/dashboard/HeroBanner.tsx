@@ -16,7 +16,7 @@ export interface HeroBannerProps {
   levelInfo?: { level: number; nextLevelXp: number; progressToNext: number };
 }
 
-const BUBBLE_TEXT = "¡Listo para tu próxima misión?";
+const BUBBLE_TEXT = "¿Listo para tu próxima misión?";
 
 function LegacyStatic({
   userName: _userName,
@@ -46,13 +46,21 @@ function LegacyStatic({
         <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
           <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
             <TypingText
-              text="> Bienvenido, investigador // sistema listo"
+              text="> Bienvenido, investigador"
               delay={28}
               repeat={false}
               smooth={false}
               hideCursorOnComplete={false}
               cursor={<span className="text-[var(--color-brand-300)]">█</span>}
               className="text-sm font-bold text-[var(--color-brand-300)]"
+            />
+            <TypingText
+              text="// sistema listo"
+              delay={22}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-2 block text-xs text-white/60"
             />
             <TypingText
               text="Continua entrenando modelos y explorando la inteligencia artificial"
@@ -72,7 +80,7 @@ function LegacyStatic({
         </div>
       </div>
 
-      <div className="absolute bottom-0 right-8 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-12 lg:block">
+      <div className="absolute bottom-2 right-10 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-14 lg:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={scientistSrc}
@@ -81,28 +89,6 @@ function LegacyStatic({
         />
       </div>
 
-      <div className="absolute bottom-6 left-1/2 z-[3] -translate-x-1/2">
-        <a
-          href="#stats"
-          className="flex flex-col items-center gap-2 text-[var(--color-comic-text)]/60 transition-colors hover:text-[var(--color-comic-text)]"
-        >
-          <span className="text-xs font-medium">Siguiente</span>
-          <svg
-            className="h-5 w-5 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </a>
-      </div>
     </section>
   );
 }
@@ -234,13 +220,21 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
         <div className="relative z-[1] flex w-[420px] shrink-0 flex-col gap-4 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
           <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
             <TypingText
-              text="> Bienvenido, investigador // sistema listo"
+              text="> Bienvenido, investigador"
               delay={28}
               repeat={false}
               smooth={false}
               hideCursorOnComplete={false}
               cursor={<span className="text-[var(--color-brand-300)]">█</span>}
               className="text-sm font-bold text-[var(--color-brand-300)]"
+            />
+            <TypingText
+              text="// sistema listo"
+              delay={22}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-2 block text-xs text-white/60"
             />
             <TypingText
               text="Continua entrenando modelos y explorando la inteligencia artificial"
@@ -265,7 +259,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
       <div
         ref={figureRef}
         style={figureInitialStyle}
-        className="absolute bottom-0 right-8 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-12 lg:block"
+        className="absolute bottom-2 right-10 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-14 lg:block"
         onMouseEnter={() => setIsHoverScientist(true)}
         onMouseLeave={() => setIsHoverScientist(false)}
       >
@@ -306,28 +300,6 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 z-[3] -translate-x-1/2">
-        <a
-          href="#stats"
-          className="flex flex-col items-center gap-2 text-[var(--color-comic-text)]/60 transition-colors hover:text-[var(--color-comic-text)]"
-        >
-          <span className="text-xs font-medium">Siguiente</span>
-          <svg
-            className="h-5 w-5 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </a>
-      </div>
     </section>
   );
 }

@@ -108,14 +108,14 @@ export async function DashboardContainer() {
 
           {/* Tu Progreso + Misión Actual — video circuit cubre cards + footer */}
           <div className="relative overflow-hidden rounded-2xl">
-            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover">
+            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover rounded-2xl">
               <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
             </video>
             <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
-            <div className="relative p-2">
+            <div className="relative p-0">
               <section className="scroll-mt-20">
                 <div className="grid gap-6 md:grid-cols-2">
-              <div className="glass-card rounded-xl p-6">
+              <div className="glass-card rounded-xl p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
                   <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
@@ -153,19 +153,19 @@ export async function DashboardContainer() {
                 {nextLesson ? (
                   <>
                     <div className="mb-4 flex gap-3">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-8 w-8 object-contain" /> : null}
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
+                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-12 w-12 object-contain" /> : null}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
                         <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />
+                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
                       </div>
                     </div>
                     <div className="mb-3 flex justify-center sm:hidden">
-                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />
+                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
                     </div>
                     {nextLesson && currentModule && (
                       <div className="mb-3">
@@ -202,9 +202,7 @@ export async function DashboardContainer() {
             </div>
           </section>
 
-          <footer className="relative mt-8 p-8 text-center text-sm text-storm">
-            <p>InVitro-Code — Cultivando biotecnología</p>
-          </footer>
+          <footer className="relative mt-8 p-8 text-center text-sm text-storm" aria-hidden="true" />
         </div>
       </div>
         </div>
