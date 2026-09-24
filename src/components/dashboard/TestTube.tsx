@@ -5,14 +5,15 @@ import { motion, useReducedMotion } from "motion/react";
 
 export interface TestTubeProps {
   progress: number;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   label?: string;
 }
 
 const sizeMap: Record<NonNullable<TestTubeProps["size"]>, string> = {
   sm: "w-[52px] h-[88px]",
-  md: "w-[68px] h-[116px]",
-  lg: "w-[84px] h-[144px]",
+  md: "w-[78px] h-[132px]",
+  lg: "w-[104px] h-[176px]",
+  xl: "w-[156px] h-[264px]",
 };
 
 export function TestTube({ progress, size = "md", label }: TestTubeProps) {

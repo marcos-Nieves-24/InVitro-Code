@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { getScientistVariant } from "@/lib/gamification/utils";
 import { ComicBubble } from "./ComicBubble";
 import { ScientistFigure } from "./ScientistFigure";
@@ -30,8 +30,8 @@ function LegacyStatic({
       : "/dashboard/cientifica-1.svg";
 
   return (
-    <section className="relative min-h-[400px] overflow-hidden rounded-3xl lg:min-h-[480px]">
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-[400px] rounded-3xl lg:min-h-[480px]">
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
         <Image
           src="/dashboard/dashboard-fondo-anime.png"
           alt=""
@@ -121,6 +121,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
   const figureRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<HTMLDivElement>(null);
   const [typeActive, setTypeActive] = useState(() => !!shouldReduceMotion);
+  const [isHoverScientist, setIsHoverScientist] = useState(false);
 
   useEffect(() => {
     if (shouldReduceMotion) {
@@ -217,8 +218,8 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
     : { transform: "translateX(40px)", opacity: 0 };
 
   return (
-    <section className="relative min-h-[400px] overflow-hidden rounded-3xl lg:min-h-[480px]">
-      <div ref={fondoRef} className="absolute inset-0 z-0">
+    <section className="relative min-h-[400px] rounded-3xl lg:min-h-[480px]">
+      <div ref={fondoRef} className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
         <Image
           src="/dashboard/dashboard-fondo-anime.png"
           alt=""
@@ -257,17 +258,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
             className="w-fit"
           />
 
-          <div
-            ref={bubbleRef}
-            style={bubbleInitialStyle}
-            className="mt-2"
-          >
-            {typeActive ? (
-              <ComicBubble text={BUBBLE_TEXT} />
-            ) : (
-              <div aria-hidden="true" className="h-[72px]" />
-            )}
-          </div>
+          {/* Static bubble removed — now appears on scientist hover (see figure hover bubble) */}
         </div>
       </div>
 
@@ -275,12 +266,44 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
         ref={figureRef}
         style={figureInitialStyle}
         className="absolute bottom-0 right-8 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-12 lg:block"
+        onMouseEnter={() => setIsHoverScientist(true)}
+        onMouseLeave={() => setIsHoverScientist(false)}
       >
         <ScientistFigure
           variant={getScientistVariant(gender)}
           priority
           alt="Científica con hélice de ADN"
         />
+        {/* Hover speech bubble — bouncy expand/shrink adapted from jQuery snippet */}
+        <motion.div
+          className="pointer-events-none absolute -left-[140px] top-6 hidden lg:block"
+          initial={{ scale: 0 }}
+          animate={
+            isHoverScientist
+              ? { scale: [0, 1.25, 1] }
+              : { scale: 0 }
+          }
+          transition={
+            isHoverScientist
+              ? { duration: 0.25, times: [0, 0.5, 1], ease: "easeOut" }
+              : { duration: 0.1, ease: "easeIn" }
+          }
+          style={{ transformOrigin: "0% 100%" }}
+          aria-hidden={!isHoverScientist}
+        >
+          <div className="relative rounded-[10px] bg-[#5a5a5a] px-4 py-3 text-center text-sm font-bold text-white shadow-lg">
+            {BUBBLE_TEXT}
+            <span
+              className="absolute -bottom-[22px] left-4 block h-0 w-0 border-[15px] border-solid border-transparent"
+              style={{
+                borderTopColor: "#5a5a5a",
+                borderLeftColor: "#5a5a5a",
+                transform: "rotate(10deg)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
+        </motion.div>
       </div>
 
       <div className="absolute bottom-6 left-1/2 z-[3] -translate-x-1/2">
