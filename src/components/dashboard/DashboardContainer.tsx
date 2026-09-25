@@ -106,13 +106,13 @@ export async function DashboardContainer() {
         <div className="space-y-12">
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
 
-          {/* Tu Progreso + Misión Actual — video circuit cubre cards + footer */}
+          {/* Tu Progreso + Misión Actual — video circuit a la destra */}
           <div className="relative overflow-hidden rounded-2xl">
-            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover rounded-2xl">
+            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-y-0 right-0 w-[38%] h-full object-cover rounded-r-2xl">
               <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
             </video>
-            <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
-            <div className="relative p-0">
+            <div aria-hidden="true" className="absolute inset-y-0 right-0 w-[38%] bg-white/10 dark:bg-black/10 rounded-r-2xl" />
+            <div className="relative p-2">
               <section className="scroll-mt-20">
                 <div className="grid gap-6 md:grid-cols-2">
               <div className="glass-card rounded-xl p-4">
