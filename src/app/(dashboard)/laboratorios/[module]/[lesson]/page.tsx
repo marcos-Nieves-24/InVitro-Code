@@ -11,7 +11,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getDisplayName } from "@/lib/gamification/user";
 import { LabCodeBlock } from "@/components/labs/LabCodeBlock";
 import { LabHeader, LabCallout, ReflectionPrompt } from "@/components/labs";
-import { getLabCardTheme } from "@/components/labs/LabCardTheme";
+import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
 import { MarkdownTable } from "@/components/lesson";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
 import { getModuleDisplayName, getLessonFrontmatter } from "@/lib/content/modules";
@@ -133,7 +133,7 @@ export default async function LabLessonPage({ params }: Props) {
   const lessonTitle =
     lessonFrontmatter?.title ??
     lessonSlug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
-  const theme = getLabCardTheme(modSlug);
+  const theme = toSerializableTheme(getLabCardTheme(modSlug));
   const totalXpForLesson = calcXpForLesson(modSlug, lessonSlug);
 
   return (

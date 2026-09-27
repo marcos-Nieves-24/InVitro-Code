@@ -9,7 +9,7 @@ import { NotebookActions } from "../NotebookActions";
 import { RCopyButton } from "../RCopyButton";
 import { OnboardingController } from "@/components/onboarding/OnboardingController";
 import PyodideRunner from "@/components/editor/PyodideRunner";
-import type { LabCardTheme } from "../LabCardTheme";
+import type { SerializableLabCardTheme } from "../LabCardTheme";
 
 type TabId = "lab" | "quiz";
 
@@ -25,7 +25,7 @@ interface LabWorkspaceProps {
   quizRaw: string | null;
   hasNotebook: boolean;
   hasRScript: boolean;
-  theme: LabCardTheme;
+  theme: SerializableLabCardTheme;
   totalXpForLesson: number;
   showOnboarding?: boolean;
 }
