@@ -105,7 +105,7 @@ export function LabHero({
             ref={h1Ref}
             className="font-display text-4xl font-extrabold leading-tight text-[var(--color-comic-text)] md:text-5xl lg:text-6xl"
           >
-            Sala de Bioreactores
+            Sala de laboratorios
           </h1>
 
           <div className="mt-4 min-h-[3.5rem]">
@@ -164,7 +164,7 @@ export function LabHero({
             onClick={scrollToHub}
             className="flex items-center gap-1.5 rounded-full bg-[var(--color-comic-accent)] px-4 py-1.5 text-xs font-bold text-[var(--color-comic-bg)] transition-transform hover:scale-105"
           >
-            Explorar bioreactores
+            Explorar laboratorios
             <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>

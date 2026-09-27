@@ -4,13 +4,13 @@ import { useEffect, useRef } from "react";
 import Typed from "typed.js";
 
 const PHRASES = [
-  "Los biorreactores mantienen condiciones optimales para el crecimiento celular.",
-  "pH, oxígeno disuelto y temperatura determinan la productividad metabólica.",
-  "Del laboratorio a planta piloto: el escalado exige control preciso de parámetros.",
-  "Las células CHO producen anticuerpos monoclonales en biorreactores de 2000L.",
-  "La cinética de Monod describe el crecimiento microbiano como función del sustrato.",
-  "El control de espuma previene la degradación de proteínas recombinantes.",
-  "fermentación continua vs batch: cada estrategia tiene ventajas específicas.",
+  "Python potencia el análisis de datos biotecnológicos, del laboratorio al código.",
+  "La estadística revela patrones ocultos en tus experimentos.",
+  "Machine learning predice resultados a partir de datos biológicos.",
+  "Cada proyecto te acerca a dominar IA aplicada a biotech.",
+  "Visualiza, analiza y modela: tus datos cobran vida en el laboratorio.",
+  "De secuencias genómicas a modelos predictivos: programa tu descubrimiento.",
+  "Entrena modelos, valida hipótesis y acelera tu investigación.",
 ];
 
 interface LabHeroCopyProps {
@@ -18,7 +18,7 @@ interface LabHeroCopyProps {
 }
 
 /**
- * Rotating typed phrases about bioreactors.
+ * Rotating typed phrases about lab projects.
  * Uses typed.js — must be client-only.
  */
 export function LabHeroCopy({ className }: LabHeroCopyProps) {
