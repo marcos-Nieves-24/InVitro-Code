@@ -70,13 +70,13 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Route:** delegated (5 components + wiring + persistence)
 - **Status:** ☑ done (2026-09-27 — motion/AnimatePresence, spotlight rect with padding+border-mint+shadow-glow, prefers-reduced-motion, ESC handler, localStorage gate with 500ms delay)
 
-### T7 — Interactive Lab Workspace [ ]
+### T7 — Interactive Lab Workspace [x]
 - **Description:** Refactorizar `laboratorios/[module]/[lesson]/page.tsx` + `LabTabs.tsx` en `LabWorkspace.tsx` con layout 2-col desktop: izquierda instrucciones MDX scrollable, derecha stack (Editor `CodeEditor`/`PyodideRunner`, Console `OutputPanel`, Results `VisualizationPanel`). Mantener `LabRunner`/`PyodideRunner` intactos, solo envolver con grid y header con mini ProgressTube.
 - **Files:** `src/components/labs/workspace/LabWorkspace.tsx`, `src/app/(dashboard)/laboratorios/[module]/[lesson]/page.tsx`, `src/components/labs/LabTabs.tsx` (refactor o wrapper)
 - **Acceptance:** Visual consistente `DESIGN.md` (surface-card, radius-lg, fog/mint accents), sin decoraciones AI, responsive: stacked en mobile, paneles con altura controlada, Pyodide ready/run intacto.
-- **Verification:** `npm run type-check && npm run build`
+- **Verification:** `npm run type-check && npm run build` ✓ (2026-09-27 — type-check PASS, build PASS 19/19)
 - **Route:** delegated (workspace layout + page wiring)
-- **Status:** ☐ pending
+- **Status:** ☑ done (2026-09-27 — LabWorkspace 2-col grid instructions/Editor/Results, onboarding attrs instructions/editor/run-button/results, CodeEditor run-button data attr, page progress gate completedCount===0)
 
 ### T8 — Pulido, a11y y verificación final [ ]
 - **Description:** QA cross-task: responsive breakpoints (`mobile <768 / tablet 768-1024 / desktop >1024`), contraste, `prefers-reduced-motion`, navegación por teclado, `grep` final biorreactores, revisión build/type, limpieza de `RiveBioreactor` si deprecated.
