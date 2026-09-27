@@ -62,13 +62,13 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Route:** delegated (asset pipeline + verification)
 - **Status:** ☑ done (2026-09-27 — placeholder strategy: copied circuit-growth-animation.mp4 → 4 hero MP4s + ffmpeg h264 crf23 faststart 1920w optimization 71K each; posters 1920x746 8.5K via ffmpeg frame extraction; heroVideos.ts mapping verified, no fix needed)
 
-### T6 — Guided Onboarding (solo primer laboratorio) [ ]
+### T6 — Guided Onboarding (solo primer laboratorio) [x]
 - **Description:** Crear `ScientistGuide.tsx`, `MangaSpeechBubble.tsx`, `SpotlightOverlay.tsx` (fixed overlay con clip-path hole via getBoundingClientRect), `CoachMarks.tsx` (1/5 + Siguiente/Omitir), `OnboardingController.tsx` (5 pasos: navigation, console, editor, run button, ecosystem). Persistencia `localStorage lab-onboarding-completed` + `supabase.profiles.onboarding_seen` (migration si falta). Solo muestra si `completedCount===0`.
-- **Files:** `src/components/onboarding/ScientistGuide.tsx`, `src/components/onboarding/MangaSpeechBubble.tsx`, `src/components/onboarding/SpotlightOverlay.tsx`, `src/components/onboarding/CoachMarks.tsx`, `src/components/onboarding/OnboardingController.tsx`
+- **Files:** `src/components/onboarding/ScientistGuide.tsx`, `src/components/onboarding/MangaSpeechBubble.tsx`, `src/components/onboarding/SpotlightOverlay.tsx`, `src/components/onboarding/CoachMarks.tsx`, `src/components/onboarding/OnboardingController.tsx`, `src/components/onboarding/index.ts`
 - **Acceptance:** Secuencial 5 pasos, `Omitir` siempre visible, ESC cierra, reduce-motion sin transiciones, primer laboratorio solamente, no bloquea Pyodide.
-- **Verification:** `npm run type-check && npm run build`
+- **Verification:** `npm run type-check && npm run build` ✓ (2026-09-27 — type-check PASS, build PASS 19/19)
 - **Route:** delegated (5 components + wiring + persistence)
-- **Status:** ☐ pending
+- **Status:** ☑ done (2026-09-27 — motion/AnimatePresence, spotlight rect with padding+border-mint+shadow-glow, prefers-reduced-motion, ESC handler, localStorage gate with 500ms delay)
 
 ### T7 — Interactive Lab Workspace [ ]
 - **Description:** Refactorizar `laboratorios/[module]/[lesson]/page.tsx` + `LabTabs.tsx` en `LabWorkspace.tsx` con layout 2-col desktop: izquierda instrucciones MDX scrollable, derecha stack (Editor `CodeEditor`/`PyodideRunner`, Console `OutputPanel`, Results `VisualizationPanel`). Mantener `LabRunner`/`PyodideRunner` intactos, solo envolver con grid y header con mini ProgressTube.
