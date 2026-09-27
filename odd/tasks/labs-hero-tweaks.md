@@ -57,9 +57,17 @@ Standard Mode.
 - Decision ODD (no SDD) — 5 tweaks claros, baja ambigüedad.
 - 2026-09-27 — T1-T5 done (3747369) — hero without progress/CTA, racha in header, biotech tube 96, favicon 88, parity colors — type-check PASS, build PASS 19/19
 
+### T6 — Hero console bg spritecook sin HUD nivel [x]
+- **Files:** src/components/labs/LabHero/LabHero.tsx, public/images/spritecook/lab-hero-256-complete-enhanced-1024x576.png (pre-existente 1024×576)
+- **Acceptance:** section bg-black (console dark, no bg-graphite); purple div comic-bg eliminado; consola ampliada w-full max-w-[520px] p-6 bg-[#0a0a0a] shadow-2xl; TypingText // 4 laboratorios eliminado (2 líneas restantes); HUD footer Nivel eliminado por completo; video 4K preservado con opacity-40 + overlay bg-black/60; spritecook img 512×288 a la derecha flex-row lg, stack flex-col mobile, rounded-xl shadow-xl; layout flex gap-8 items-center justify-between p-8 lg:p-12.
+- **Status:** ☑ done — bg-graphite→bg-black, video opacity-40 + bg-black/60 overlay, unwrapped comic 420px div, console 520px #0a0a0a p-6, removed // line, removed HUD border-t hud-bg Niv. span, added spritecook img 1024×576 displayed 480/512, type-check PASS build PASS 19/19, grep Niv. 0 comic-bg 0 "4 laboratorios" 0
+- **Verification:** type-check PASS, build PASS 19/19, grep checks 0
+
 ## Verification Evidence
 - type-check: `npm run type-check` → PASS (no errors)
 - build: `npm run build` → PASS (19/19, compiled 16.9s)
+- T6 grep: `grep "Niv\." LabHero.tsx` → 0, `grep "comic-bg" LabHero.tsx` → 0, `grep "4 laboratorios" LabHero.tsx` → 0
+- InVitroShell racha header untouched (Flame badge preserved)
 
 ---
 *Locator: odd/tasks/labs-hero-tweaks.md*
