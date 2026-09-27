@@ -76,6 +76,50 @@
       "generated": true,
       "inLesson": false,
       "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "lab-hero-ia",
+      "title": "Introducción a la IA",
+      "type": "concept",
+      "duration": 6,
+      "src": "/animations/lab-hero-ia/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "lab-hero-python",
+      "title": "Python para Biotecnología",
+      "type": "concept",
+      "duration": 6,
+      "src": "/animations/lab-hero-python/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "lab-hero-estadistica",
+      "title": "Estadística",
+      "type": "concept",
+      "duration": 6,
+      "src": "/animations/lab-hero-estadistica/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "lab-hero-ml",
+      "title": "Machine Learning",
+      "type": "concept",
+      "duration": 6,
+      "src": "/animations/lab-hero-ml/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
     }
   ]
 }
