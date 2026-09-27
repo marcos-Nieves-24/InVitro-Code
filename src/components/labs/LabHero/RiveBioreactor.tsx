@@ -9,7 +9,7 @@ interface RiveBioreactorProps {
 }
 
 /**
- * Rive-powered bioreactor canvas. Falls back to static SVG if Rive fails.
+ * Rive-powered lab canvas. Falls back to static SVG if Rive fails.
  * dynamic import with ssr:false — must be wrapped in next/dynamic at parent level.
  */
 export function RiveBioreactor({ progress }: RiveBioreactorProps) {
@@ -78,7 +78,7 @@ export function RiveBioreactor({ progress }: RiveBioreactorProps) {
       <div className="flex items-center justify-center">
         <Image
           src="/labs/modules/ia.svg"
-          alt="Bioreactor"
+          alt="Laboratorio"
           width={280}
           height={280}
           className="opacity-80"
@@ -94,7 +94,7 @@ export function RiveBioreactor({ progress }: RiveBioreactorProps) {
       width={400}
       height={400}
       className="max-w-[280px] md:max-w-[340px]"
-      aria-label="Bioreactor animado"
+      aria-label="Laboratorio animado"
       role="img"
     />
   );

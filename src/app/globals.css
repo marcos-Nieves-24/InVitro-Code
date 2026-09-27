@@ -81,7 +81,7 @@
   --color-comic-border: var(--color-brand-800);
   --color-comic-text: #ffffff;
   --color-comic-accent: var(--color-brand-300);
-  /* ── Gaming: Bubble / bioreactor ── */
+  /* ── Gaming: Bubble / lab ── */
   --color-bubble: #a3cfcd;
   --color-bubble-highlight: #e8ecf0;
   --color-bubble-glow: rgba(163, 207, 205, 0.35);
@@ -124,7 +124,7 @@
   }
 }
 
-/* ─── Bioreactor bubble layer ──────────────────────── */
+/* ─── Lab bubble layer ──────────────────────── */
 .bubble-layer {
   pointer-events: none;
 }
@@ -168,7 +168,7 @@
   }
 }
 
-/* ─── Bioreactor SVG — impeller / waves / motor ─── */
+/* ─── Lab vessel SVG — impeller / waves / motor ─── */
 @keyframes rotate-impeller-3d {
   0% { transform: scaleX(1); }
   25% { transform: scaleX(0.15); }
