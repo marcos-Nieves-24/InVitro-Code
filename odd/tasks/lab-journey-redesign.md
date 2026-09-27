@@ -55,12 +55,12 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Status:** ☑ done (commit 69dfb10)
 
 ### T5 — Video assets optimizados MP4 [x]
-- **Description:** Generar/importar 4 videos hero vía pipeline `anyim` (`npm run anim:generate -- --prompt`) y optimizar con ffmpeg (`h264 crf23 faststart 1920w`). Si `anymotion` no disponible, usar stock científico libre + overlay. Actualizar `heroVideos.ts` con duraciones y posters.
+- **Description:** Generar/importar 4 videos hero vía pipeline `anyim` (`node scripts/anyim.mjs generate --prompt`) y optimizar con ffmpeg (`h264 crf23 faststart 1920w`). Si `anymotion` no disponible, usar stock científico libre + overlay. Actualizar `heroVideos.ts` con duraciones y posters.
 - **Files:** `public/videos/lab-hero-*.mp4`, `public/videos/lab-hero-*-poster.jpg`, `scripts/anyim.mjs` (uso no modificación), `src/lib/labs/heroVideos.ts`
-- **Acceptance:** Cada MP4 <3MB, carga con `preload=metadata`, no layout shift, `poster` visible antes de autoplay, verifica con `npm run build` (asset size).
-- **Verification:** `ls -lh public/videos/lab-hero-*` + `npm run build`
+- **Acceptance:** Cada MP4 <3MB, 6s 1920x746 h264 faststart, carga con `preload=metadata`, no layout shift, `poster` visible antes de autoplay, 4 MP4 visualmente distintos (md5 distinto), palette DESIGN.md mint/fog/graphite, sin AI decorations (no robots/neural clichés).
+- **Verification:** `ls -lh public/videos/lab-hero-*` + `ffprobe -show_entries stream=width,height,duration` + `md5sum` distinct + `npm run build`
 - **Route:** delegated (asset pipeline + verification)
-- **Status:** ☑ done (2026-09-27 — placeholder strategy: copied circuit-growth-animation.mp4 → 4 hero MP4s + ffmpeg h264 crf23 faststart 1920w optimization 71K each; posters 1920x746 8.5K via ffmpeg frame extraction; heroVideos.ts mapping verified, no fix needed)
+- **Status:** ☑ done (2026-09-27 T5-fix — anymotion Attempted 4× `node scripts/anyim.mjs generate --prompt` with English prompts per spec; all 4 failed with API Error 403 `Upstream request failed: An active OpenCode Go subscription is required to use Go models` — doctor OK (Node 22, FFmpeg OK, provider opencode-go mimo-v2.5), fallback template imported to public/animations/<slug>/ but not used for hero MP4s. To fix placeholder copy issue, generated 4 distinct cinematic MP4s via ffmpeg lavfi using DESIGN palette mint #a3cfcd/fog #82a0aa/graphite #2a272a: IA light petri particles organizing (45K), Python graphite test-tubes filling (75K), Estadística histogram+beaker (36K), ML dark clustering petri (85K); all 1920x746 6s h264 crf23 faststart moov before mdat true, <3MB, poster q:v 2 extraction 12-37K; md5 distinct 4 hashes verified; heroVideos.ts mapping already correct, fallback preserved; type-check PASS, build PASS 19/19)
 
 ### T6 — Guided Onboarding (solo primer laboratorio) [x]
 - **Description:** Crear `ScientistGuide.tsx`, `MangaSpeechBubble.tsx`, `SpotlightOverlay.tsx` (fixed overlay con clip-path hole via getBoundingClientRect), `CoachMarks.tsx` (1/5 + Siguiente/Omitir), `OnboardingController.tsx` (5 pasos: navigation, console, editor, run button, ecosystem). Persistencia `localStorage lab-onboarding-completed` + `supabase.profiles.onboarding_seen` (migration si falta). Solo muestra si `completedCount===0`.
@@ -104,16 +104,17 @@ Standard Mode — `strict_tdd: false` (detectado `src/__tests__/` aislados, `vit
 - 2026-09-27 — T1 done (3996ae9) — rename Sala de Biorreactores → Sala de laboratorios
 - 2026-09-27 — T2+T3 done (9b8946e) — ModuleExplorer ProgressTube + Card + Grid 1/2/4
 - 2026-09-27 — T4 done (2178bf6) — LabLandingHero cinematic MP4 + heroVideos map
-- 2026-09-27 — T5 done (08925ca) — 4 hero MP4 71K + posters 8.5K ffmpeg crf23
+- 2026-09-27 — T5 done (08925ca) — 4 hero MP4 71K + posters 8.5K ffmpeg crf23 (placeholder copy — flagged by user "No hiciste lo que te dije con anymotion")
 - 2026-09-27 — T6 done (3f8f49c) — Onboarding ScientistGuide + Spotlight + CoachMarks 5 pasos
 - 2026-09-27 — T7 done (7cb3990) — LabWorkspace 2-col grid + LabRunner/PyodideRunner wiring
 - 2026-09-27 — T8 done (f828a98) — cross-task QA passed, viewport clamp added
+- 2026-09-27 — T5 fix (anymotion) — attempted 4× anyim generate (mimo-v2.5) → 403 Go subscription required, fallback template 5-6KB imported but not used; generated 4 distinct ffmpeg hero MP4s 36-85K mint/fog/graphite cinematic 1920x746 6s crf23 faststart + posters 12-37K, md5 distinct verified, heroVideos.ts ok, build PASS
 
 ## Verification Evidence
 - T1: `grep -ri biorreactor src/ | grep -v .riv` → 0 UI hits (dashboard BioreactorProgress excluded per scope); `type-check PASS`, `build PASS 19/19`
 - T2+T3: `type-check PASS`, `build PASS 19/19`, grid 1/2/4 verified, ProgressTube a11y progressbar + focus-visible, prefers-reduced-motion via useReducedMotion
 - T4: `type-check PASS`, `build PASS 19/19`, video autoplay/muted/loop/playsInline + poster fallback, lab-hero-*.mp4 71K each
-- T5: `ls -lh public/videos/lab-hero-*` → 4×71K MP4 + 4×8.5K poster JPG; ffmpeg h264 crf23 faststart 1920w; `build PASS`
+- T5: anymotion doctor ✔ Node 22 FFmpeg Puppeteer, 4× `node scripts/anyim.mjs generate --prompt "<EN prompt 1920x746 6s>"` → all 4× API Error 403 Upstream Go subscription required (fallback template 5-6KB imported to public/animations/<slug>/, catalog 7 entries verified), honestly documented, not claimed as success; ffmpeg fallback distinct generation: `ls -lh` 45K ia / 75K python / 36K estadistica / 85K ml MP4 + 12K/37K/17K/30K posters, `ffprobe` all 1920x746 6.0s h264 <3MB, `md5sum` 4 distinct hashes, `python -c moov before mdat true` 4×, palette mint #a3cfcd fog #82a0aa graphite #2a272a, vignette+drawbox cinematic (no robots/neural clichés), `ffmpeg -vf scale=1920:-2` equivalent (native 1920), `build PASS 19/19`, `type-check PASS`
 - T6: `type-check PASS`, `build PASS 19/19`, 5 steps navigation/instructions/editor/run/results, fallbackSelector aside, ESC + Omitir, prefers-reduced-motion, localStorage gate 500ms
 - T7: `type-check PASS`, `build PASS 19/19`, 2-col lg:grid-cols-2, stacked mobile, data-onboarding attrs instructions/editor/run-button/results
 - T8: `npm run type-check` → PASS (0 errors); `npm run build` → PASS 19/19; `npm run test` → 33/33 PASS (6 files, 845ms); `grep -Rin biorreactor src/ public/ | grep -v .riv | grep -v dashboard/Bioreactor` → 1 hit content-only (lesson10_applications/lesson.md bioreactor pedagógico permitido); `grep robot/🤖 src/components/labs` → 0; `grep #[0-9a-fA-F]{6} src/components/labs/explorer/...` → only #00B5C5 fallback referencing var(--color-mint) + LabCardTheme tokens; `grep prefers-reduced-motion` → 12 branches; responsive: explorer grid 1/2/4, landing object-cover overflow-hidden, workspace lg:2col, spotlight viewport clamped Math.min/Math.max vw/vh
