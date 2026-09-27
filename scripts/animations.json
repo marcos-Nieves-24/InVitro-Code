@@ -32,6 +32,50 @@
       "generated": true,
       "inLesson": false,
       "updatedAt": "2026-09-13"
+    },
+    {
+      "slug": "minimal-scientific-laboratory-for-introduction-to",
+      "title": "Minimal scientific laboratory for Introduction to AI — clean white lab with petri dishes",
+      "type": "concept",
+      "duration": 0,
+      "src": "/animations/minimal-scientific-laboratory-for-introduction-to/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "python-programming-lab-clean-editor-with",
+      "title": "Python programming lab — clean editor with pipette transforming code brackets into samples, test tubes filling with color, laboratory bench aesthetic, mint graphite palette, cinematic, 6 seconds, 1920x746",
+      "type": "concept",
+      "duration": 0,
+      "src": "/animations/python-programming-lab-clean-editor-with/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "biostatistics-laboratory-bell-curves-and-distribution",
+      "title": "Biostatistics laboratory — bell curves and distribution histograms forming from beaker measurements, clean scientific minimal, pipettes and measurement tools, mint fog palette, cinematic, 6 seconds, 1920x746",
+      "type": "concept",
+      "duration": 0,
+      "src": "/animations/biostatistics-laboratory-bell-curves-and-distribution/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
+    },
+    {
+      "slug": "machine-learning-laboratory-data-points-clustering",
+      "title": "Machine learning laboratory — data points clustering in petri dish, scientific experiment visualization minimal, soft glow, gamified progress tube, clean lab, mint graphite, cinematic, 6 seconds, 1920x746",
+      "type": "concept",
+      "duration": 0,
+      "src": "/animations/machine-learning-laboratory-data-points-clustering/index.html",
+      "reactComponent": null,
+      "generated": true,
+      "inLesson": false,
+      "updatedAt": "2026-09-27"
     }
   ]
 }
