@@ -78,12 +78,12 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Route:** delegated (workspace layout + page wiring)
 - **Status:** ☑ done (2026-09-27 — LabWorkspace 2-col grid instructions/Editor/Results, onboarding attrs instructions/editor/run-button/results, CodeEditor run-button data attr, page progress gate completedCount===0)
 
-### T8 — Pulido, a11y y verificación final [ ]
+### T8 — Pulido, a11y y verificación final [x]
 - **Description:** QA cross-task: responsive breakpoints (`mobile <768 / tablet 768-1024 / desktop >1024`), contraste, `prefers-reduced-motion`, navegación por teclado, `grep` final biorreactores, revisión build/type, limpieza de `RiveBioreactor` si deprecated.
 - **Files:** `odd/tasks/lab-journey-redesign.md`, `globals.css` (tokens spotlight/tube si faltan), touched files polish
 - **Acceptance:** Todos T1–T7 acceptance cumplidos juntos; `type-check` y `build` verdes; sin regresiones en `/learn` y `/dashboard`.
 - **Verification:** `npm run type-check && npm run build && npm run test` (vitest si aplica)
-- **Status:** ☐ pending
+- **Status:** ☑ done (commit 670866f — 2026-09-27 — polish: SpotlightOverlay viewport clamp (padding 8px + Math.min/Math.max vw/vh), biorreactor grep 0 UI hits, AI decorations 0, hex audit OK, responsive 1/2/4 + object-cover + lg:2col verified, a11y progressbar/aria/focus-visible 12 prefers-reduced-motion branches)
 
 ## Authorized Scope
 Rediseño experiencia laboratorios 4 fases + renombrado. No tocar `supabase-migration.sql` salvo columna `onboarding_seen` opcional, ni `learn/[module]/[slug]`, ni evaluación `calcLevel`.
@@ -101,9 +101,23 @@ Standard Mode — `strict_tdd: false` (detectado `src/__tests__/` aislados, `vit
 
 ## Progress
 - 2026-09-27 — Feature document created; no source writes yet. All tasks ☐ unchecked. Branch `odd/lab-journey-redesign` pending.
+- 2026-09-27 — T1 done (3996ae9) — rename Sala de Biorreactores → Sala de laboratorios
+- 2026-09-27 — T2+T3 done (9b8946e) — ModuleExplorer ProgressTube + Card + Grid 1/2/4
+- 2026-09-27 — T4 done (2178bf6) — LabLandingHero cinematic MP4 + heroVideos map
+- 2026-09-27 — T5 done (08925ca) — 4 hero MP4 71K + posters 8.5K ffmpeg crf23
+- 2026-09-27 — T6 done (3f8f49c) — Onboarding ScientistGuide + Spotlight + CoachMarks 5 pasos
+- 2026-09-27 — T7 done (7cb3990) — LabWorkspace 2-col grid + LabRunner/PyodideRunner wiring
+- 2026-09-27 — T8 done (670866f) — cross-task QA passed, viewport clamp added
 
 ## Verification Evidence
-- (pending per task)
+- T1: `grep -ri biorreactor src/ | grep -v .riv` → 0 UI hits (dashboard BioreactorProgress excluded per scope); `type-check PASS`, `build PASS 19/19`
+- T2+T3: `type-check PASS`, `build PASS 19/19`, grid 1/2/4 verified, ProgressTube a11y progressbar + focus-visible, prefers-reduced-motion via useReducedMotion
+- T4: `type-check PASS`, `build PASS 19/19`, video autoplay/muted/loop/playsInline + poster fallback, lab-hero-*.mp4 71K each
+- T5: `ls -lh public/videos/lab-hero-*` → 4×71K MP4 + 4×8.5K poster JPG; ffmpeg h264 crf23 faststart 1920w; `build PASS`
+- T6: `type-check PASS`, `build PASS 19/19`, 5 steps navigation/instructions/editor/run/results, fallbackSelector aside, ESC + Omitir, prefers-reduced-motion, localStorage gate 500ms
+- T7: `type-check PASS`, `build PASS 19/19`, 2-col lg:grid-cols-2, stacked mobile, data-onboarding attrs instructions/editor/run-button/results
+- T8: `npm run type-check` → PASS (0 errors); `npm run build` → PASS 19/19; `npm run test` → 33/33 PASS (6 files, 845ms); `grep -Rin biorreactor src/ public/ | grep -v .riv | grep -v dashboard/Bioreactor` → 1 hit content-only (lesson10_applications/lesson.md bioreactor pedagógico permitido); `grep robot/🤖 src/components/labs` → 0; `grep #[0-9a-fA-F]{6} src/components/labs/explorer/...` → only #00B5C5 fallback referencing var(--color-mint) + LabCardTheme tokens; `grep prefers-reduced-motion` → 12 branches; responsive: explorer grid 1/2/4, landing object-cover overflow-hidden, workspace lg:2col, spotlight viewport clamped Math.min/Math.max vw/vh
+- No regressions: `/learn` and `/dashboard` builds intact, RiveBioreactor kept as fallback per T1 (LabHeroLoader still used for hub, LabLessonHero deprecated not deleted)
 
 ---
 *Locator: `odd/tasks/lab-journey-redesign.md` | Engram mirror: `odd/lab-journey-redesign/tasks`*

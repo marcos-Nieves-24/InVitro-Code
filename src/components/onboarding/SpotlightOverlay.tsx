@@ -29,12 +29,31 @@ export function SpotlightOverlay({
   }, []);
 
   const holeStyle = targetRect
-    ? {
-        left: targetRect.left - padding,
-        top: targetRect.top - padding,
-        width: targetRect.width + padding * 2,
-        height: targetRect.height + padding * 2,
-      }
+    ? (() => {
+        const rawLeft = targetRect.left - padding;
+        const rawTop = targetRect.top - padding;
+        const rawWidth = targetRect.width + padding * 2;
+        const rawHeight = targetRect.height + padding * 2;
+        // Clamp hole to viewport so spotlight never overflows on mobile
+        if (typeof window !== "undefined") {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const clampedWidth = Math.min(rawWidth, vw - 16);
+          const clampedHeight = Math.min(rawHeight, vh - 16);
+          return {
+            left: Math.max(8, Math.min(rawLeft, vw - clampedWidth - 8)),
+            top: Math.max(8, Math.min(rawTop, vh - clampedHeight - 8)),
+            width: clampedWidth,
+            height: clampedHeight,
+          };
+        }
+        return {
+          left: rawLeft,
+          top: rawTop,
+          width: rawWidth,
+          height: rawHeight,
+        };
+      })()
     : null;
 
   return (
