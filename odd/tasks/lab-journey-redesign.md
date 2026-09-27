@@ -28,23 +28,23 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Acceptance:** `grep -ri biorreactor` no retorna hits de UI visible; `LabHero`/`LabHeroCopy` muestran copy de proyectos; video hero ya no referencia bioreactor.
 - **Verification:** `grep -ri biorreactor src/ | grep -v ".riv"` → vacío (excepto tokens internos/dashboard futuros T2/T8); `npm run type-check && npm run build` ✓
 - **Route:** inline (mechanical string replace, 1-3 files + grep)
-- **Status:** ☑ done (commit <hash>)
+- **Status:** ☑ done (commit 3996ae9)
 
-### T2 — Module Explorer: Progress Tube + Card [ ]
+### T2 — Module Explorer: Progress Tube + Card [x]
 - **Description:** Crear `ProgressTube.tsx` (test tube SVG vertical con fill `mint` proporcional a `completed/total`, ticks 25/50/75, label, a11y `progressbar`, reduce-motion static) y `ModuleExplorerCard.tsx` (title, XP reward via `calcXpForLesson` sum, lab count, ProgressTube, hover `motion` y: -4px + shadow-lg + border glow, click `Link` a `/laboratorios/[module]`).
 - **Files:** `src/components/labs/explorer/ProgressTube.tsx`, `src/components/labs/explorer/ModuleExplorerCard.tsx`, `src/components/labs/explorer/index.ts`
 - **Acceptance:** 4 estados visuales (0%/50%/100%/over), hover eleva card y escala `LabCardArt`, click navega y respeta `tabIndex`; a11y contraste ≥4.5:1, reduce-motion sin animación.
 - **Verification:** `npm run type-check && npm run build`
 - **Route:** delegated (2+ non-trivial files, new logic + art)
-- **Status:** ☐ pending
+- **Status:** ☑ done (commit 76bcef2)
 
-### T3 — Module Explorer: Integración en /laboratorios [ ]
+### T3 — Module Explorer: Integración en /laboratorios [x]
 - **Description:** Reemplazar `LabHub` colapsable por `ModuleExplorerGrid` de 4 cards en `/laboratorios/page.tsx`. Calcular por módulo: `xpReward=sum(calcXpForLesson)`, `labCount=getLessonCount`, `completed=getProgress(module)`, reusar `getLabCardTheme`. Mantener `LabHeroLoader` o sustituir por hero simplificado "Sala de laboratorios" sin Rive.
 - **Files:** `src/components/labs/explorer/ModuleExplorerGrid.tsx`, `src/app/(dashboard)/laboratorios/page.tsx`, `src/lib/content/modules.ts` (si añade `getModuleXpTotal`)
 - **Acceptance:** Grid `1col mobile / 2col tablet / 4col desktop`, stagger 0/50/100/150ms, hero sin referencias bioreactor; `LabHub.tsx` queda deprecated pero no roto.
-- **Verification:** `npm run type-check && npm run build`
+- **Verification:** `npm run type-check && npm run build` ✓ (19/19)
 - **Route:** delegated (page + grid + data wiring)
-- **Status:** ☐ pending
+- **Status:** ☑ done (commit 76bcef2)
 
 ### T4 — Lab Landing Screen por módulo (MP4 cinemático) [ ]
 - **Description:** Crear ruta `src/app/(dashboard)/laboratorios/[module]/page.tsx` (Server Component) con hero video MP4 optimizado full-bleed + overlay gradient, eyebrow (slug·N labs·XP), h1 module title, descripción `module.json:description`, CTA primario `[Empezar]` → primera lección incompleta (`getNextLesson` scoped). Añadir `src/lib/labs/heroVideos.ts` map 4 módulos → `{src,poster,alt}`.
