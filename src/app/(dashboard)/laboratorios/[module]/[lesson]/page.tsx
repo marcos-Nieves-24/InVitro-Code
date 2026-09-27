@@ -9,15 +9,14 @@ import path from "path";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getDisplayName } from "@/lib/gamification/user";
-import { LabTabs } from "@/components/labs/LabTabs";
 import { LabCodeBlock } from "@/components/labs/LabCodeBlock";
 import { LabHeader, LabCallout, ReflectionPrompt } from "@/components/labs";
-import { LabLessonHero } from "@/components/labs/LabLessonHero";
 import { getLabCardTheme } from "@/components/labs/LabCardTheme";
 import { MarkdownTable } from "@/components/lesson";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
 import { getModuleDisplayName, getLessonFrontmatter } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
+import { LabWorkspace } from "@/components/labs/workspace/LabWorkspace";
 import type { ReactNode } from "react";
 
 const mdxConfig = {
@@ -42,7 +41,7 @@ interface Props {
 /**
  * REQ-LABPAGE-01/02/03/05: Server component — auth gate, existence check,
  * convention-based content reads (lab.md, quiz.md, notebook.ipynb),
- * compileMDX for lab, InVitroShell wrap, Spanish chrome via LabTabs.
+ * compileMDX for lab, InVitroShell wrap, LabWorkspace 2-col layout.
  */
 export default async function LabLessonPage({ params }: Props) {
   // REQ-LABPAGE-01: Clerk auth gate
@@ -73,6 +72,22 @@ export default async function LabLessonPage({ params }: Props) {
     .eq("id", userId)
     .maybeSingle();
   const userName = getDisplayName(profileRes.data ?? {});
+
+  // ── Onboarding gate: completedCount === 0 → show onboarding ──
+  let completedCount = 0;
+  try {
+    const { data, error } = await supabase
+      .from("progress")
+      .select("module_slug,lesson_slug")
+      .eq("user_id", userId)
+      .eq("completed", true);
+    if (!error && Array.isArray(data)) {
+      completedCount = data.length;
+    }
+  } catch {
+    completedCount = 0;
+  }
+  const showOnboarding = completedCount === 0;
 
   // ── Content reads (REQ-LABPAGE-03: convention-based, no frontmatter) ──
 
@@ -115,27 +130,27 @@ export default async function LabLessonPage({ params }: Props) {
 
   const moduleLabel = getModuleDisplayName(modSlug);
   const lessonFrontmatter = getLessonFrontmatter(modSlug, lessonSlug);
-  const lessonTitle = lessonFrontmatter?.title ?? lessonSlug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
+  const lessonTitle =
+    lessonFrontmatter?.title ??
+    lessonSlug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
   const theme = getLabCardTheme(modSlug);
   const totalXpForLesson = calcXpForLesson(modSlug, lessonSlug);
 
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
-      <LabLessonHero
+      <LabWorkspace
         moduleSlug={modSlug}
+        lessonSlug={lessonSlug}
         lessonTitle={lessonTitle}
         moduleLabel={moduleLabel}
-        theme={theme}
-        progress={{ completed: 0, totalXpForLesson }}
-      />
-      <LabTabs
-        module={modSlug}
-        lesson={lessonSlug}
         labContent={labContent}
         labRawFallback={labRawFallback}
         quizRaw={quizRaw}
         hasNotebook={hasNotebook}
         hasRScript={hasRScript}
+        theme={theme}
+        totalXpForLesson={totalXpForLesson}
+        showOnboarding={showOnboarding}
       />
     </InVitroShell>
   );
