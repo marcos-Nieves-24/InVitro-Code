@@ -83,7 +83,7 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Files:** `odd/tasks/lab-journey-redesign.md`, `globals.css` (tokens spotlight/tube si faltan), touched files polish
 - **Acceptance:** Todos T1–T7 acceptance cumplidos juntos; `type-check` y `build` verdes; sin regresiones en `/learn` y `/dashboard`.
 - **Verification:** `npm run type-check && npm run build && npm run test` (vitest si aplica)
-- **Status:** ☑ done (commit 670866f — 2026-09-27 — polish: SpotlightOverlay viewport clamp (padding 8px + Math.min/Math.max vw/vh), biorreactor grep 0 UI hits, AI decorations 0, hex audit OK, responsive 1/2/4 + object-cover + lg:2col verified, a11y progressbar/aria/focus-visible 12 prefers-reduced-motion branches)
+- **Status:** ☑ done (commit f828a98 — 2026-09-27 — polish: SpotlightOverlay viewport clamp (padding 8px + Math.min/Math.max vw/vh), biorreactor grep 0 UI hits, AI decorations 0, hex audit OK, responsive 1/2/4 + object-cover + lg:2col verified, a11y progressbar/aria/focus-visible 12 prefers-reduced-motion branches)
 
 ## Authorized Scope
 Rediseño experiencia laboratorios 4 fases + renombrado. No tocar `supabase-migration.sql` salvo columna `onboarding_seen` opcional, ni `learn/[module]/[slug]`, ni evaluación `calcLevel`.
@@ -107,7 +107,7 @@ Standard Mode — `strict_tdd: false` (detectado `src/__tests__/` aislados, `vit
 - 2026-09-27 — T5 done (08925ca) — 4 hero MP4 71K + posters 8.5K ffmpeg crf23
 - 2026-09-27 — T6 done (3f8f49c) — Onboarding ScientistGuide + Spotlight + CoachMarks 5 pasos
 - 2026-09-27 — T7 done (7cb3990) — LabWorkspace 2-col grid + LabRunner/PyodideRunner wiring
-- 2026-09-27 — T8 done (670866f) — cross-task QA passed, viewport clamp added
+- 2026-09-27 — T8 done (f828a98) — cross-task QA passed, viewport clamp added
 
 ## Verification Evidence
 - T1: `grep -ri biorreactor src/ | grep -v .riv` → 0 UI hits (dashboard BioreactorProgress excluded per scope); `type-check PASS`, `build PASS 19/19`
