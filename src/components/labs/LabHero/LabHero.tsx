@@ -17,14 +17,14 @@ interface LabHeroProps {
 }
 
 /**
- * LabHero — video 4K + consola + HUD footer (solo Nivel).
- * T1 labs-hero-tweaks: sin XP bar, sin racha, sin CTA.
+ * LabHero — video 4K (subtle) + consola ampliada + spritecook image.
+ * T2 hero-lab-tweaks: bg-black, sin HUD, sin purple wrapper, sin // line.
  */
 export function LabHero({
   totalXp: _totalXp,
   currentStreak: _currentStreak,
-  levelInfo,
-  rankTitle: rank,
+  levelInfo: _levelInfo,
+  rankTitle: _rank,
 }: LabHeroProps) {
   const heroRef = useRef<HTMLElement>(null);
 
@@ -36,12 +36,12 @@ export function LabHero({
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden rounded-3xl bg-graphite"
+      className="relative overflow-hidden rounded-3xl bg-black"
       style={{ opacity: 1 }}
     >
-      {/* ── Video layer ── */}
+      {/* ── Video layer — subtle behind console+image ── */}
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover opacity-40"
         autoPlay={!prefersReducedMotion}
         muted
         loop
@@ -57,60 +57,42 @@ export function LabHero({
         <img
           src="/videos/hero-lab-4k-poster.jpg"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
           aria-hidden="true"
         />
       )}
-      {/* ── Gradient overlay ── */}
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/50 to-transparent"
-        aria-hidden="true"
-      />
+      {/* ── Overlay for readability — console color dominates ── */}
+      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
 
-      {/* ── Content grid — console card ── */}
-      <div className="relative z-10 mx-auto flex max-w-screen-2xl flex-col gap-0 p-8 lg:p-12 pb-0">
-        <div className="w-[420px] shrink-0 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
-          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
-            <TypingText
-              text="> Sala de laboratorios"
-              delay={28}
-              repeat={false}
-              smooth={false}
-              hideCursorOnComplete={false}
-              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
-              className="text-sm font-bold text-[var(--color-brand-300)]"
-            />
-            <TypingText
-              text="// 4 laboratorios · IA · Python · Bioestadística · ML"
-              delay={22}
-              repeat={false}
-              smooth={false}
-              hideCursorOnComplete
-              className="mt-2 block text-xs text-white/60"
-            />
-            <TypingText
-              text="Completa los ejercicios interactivos y domina los conceptos."
-              delay={18}
-              repeat={false}
-              smooth={false}
-              hideCursorOnComplete
-              className="mt-1 block text-sm text-white/80"
-            />
-          </div>
+      {/* ── Content: consola + spritecook image ── */}
+      <div className="relative z-10 mx-auto flex max-w-screen-2xl flex-col items-center justify-between gap-8 p-8 lg:flex-row lg:p-12">
+        <div className="font-mono w-full max-w-[520px] rounded-xl bg-[#0a0a0a] border border-white/10 p-6 shadow-2xl">
+          <TypingText
+            text="> Sala de laboratorios"
+            delay={28}
+            repeat={false}
+            smooth={false}
+            hideCursorOnComplete={false}
+            cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+            className="text-sm font-bold text-[var(--color-brand-300)]"
+          />
+          <TypingText
+            text="Completa los ejercicios interactivos y domina los conceptos."
+            delay={18}
+            repeat={false}
+            smooth={false}
+            hideCursorOnComplete
+            className="mt-1 block text-sm text-white/80"
+          />
         </div>
-      </div>
-
-      {/* ── HUD footer — solo Nivel + rank ── */}
-      <div className="relative z-10 border-t border-[var(--color-hud-border)] bg-[var(--color-hud-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center gap-4 px-6 py-3 md:gap-8 md:px-10">
-          {/* Level */}
-          <div className="flex items-center gap-2 text-sm font-bold text-[var(--color-hud-text)]">
-            <span className="rounded bg-[var(--color-hud-border)] px-2 py-0.5 text-xs tabular-nums">
-              Niv. {levelInfo.level}
-            </span>
-            <span className="hidden text-[var(--color-hud-muted)] sm:inline">{rank}</span>
-          </div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/spritecook/lab-hero-256-complete-enhanced-1024x576.png"
+          alt="Laboratorio"
+          width={512}
+          height={288}
+          className="w-full max-w-[480px] shrink-0 rounded-xl object-contain shadow-xl lg:max-w-[512px] h-auto"
+        />
       </div>
     </section>
   );
