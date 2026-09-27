@@ -9,6 +9,17 @@ export interface LabCardTheme {
   art: string;
 }
 
+export interface SerializableLabCardTheme {
+  accent: string;
+  tint: string;
+  label: string;
+  art: string;
+}
+
+export function toSerializableTheme(theme: LabCardTheme): SerializableLabCardTheme {
+  return { accent: theme.accent, tint: theme.tint, label: theme.label, art: theme.art };
+}
+
 const THEMES: Record<string, LabCardTheme> = {
   ia: {
     accent: "#0F161F",

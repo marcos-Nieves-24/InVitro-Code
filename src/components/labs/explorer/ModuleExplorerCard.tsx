@@ -33,7 +33,7 @@ export function ModuleExplorerCard({
       aria-label={`${title} — ${completed} de ${total} completados`}
     >
       <motion.div
-        className="relative flex flex-col rounded-2xl border border-surface-raised bg-surface-card p-5 transition-colors duration-[250ms] ease-out hover:shadow-lg"
+        className="relative flex min-h-[220px] flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 md:p-7 transition-colors duration-[250ms] ease-out hover:shadow-lg"
         style={
           {
             // expose accent for hover glow via CSS var
@@ -59,31 +59,31 @@ export function ModuleExplorerCard({
           >
             {theme.label}
           </span>
-          <span className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-105">
-            <LabCardArt theme={theme} size={36} />
+          <span className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-110">
+            <LabCardArt theme={theme} size={44} />
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="font-display mt-4 text-lg font-bold leading-tight text-ink transition-colors duration-[250ms] group-hover:text-mint">
+        <h3 className="font-display mt-4 text-xl font-bold leading-tight text-ink transition-colors duration-[250ms] group-hover:text-mint">
           {title}
         </h3>
 
         {/* Meta row */}
-        <div className="mt-2 flex items-center gap-3 font-mono text-xs text-storm">
-          <span className="inline-flex items-center gap-1">
+        <div className="mt-3 flex items-center gap-3 font-mono text-sm text-storm">
+          <span className="inline-flex items-center gap-1 rounded-full bg-surface-raised px-2 py-0.5">
             <Zap className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {xpReward} XP
           </span>
-          <span className="inline-flex items-center gap-1">
+          <span className="inline-flex items-center gap-1 rounded-full bg-surface-raised px-2 py-0.5">
             <FlaskConical className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {labCount} labs
           </span>
         </div>
 
         {/* Progress row */}
-        <div className="mt-5 flex items-center gap-4">
-          <ProgressTube completed={completed} total={total} size="md" accent={theme.accent} />
+        <div className="mt-6 flex items-center gap-4">
+          <ProgressTube completed={completed} total={total} size="lg" accent={theme.accent} />
           <div className="flex flex-col gap-0.5">
             <span className="font-mono text-sm font-semibold text-ink">
               {completed}/{total} completados
