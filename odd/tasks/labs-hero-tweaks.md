@@ -63,10 +63,17 @@ Standard Mode.
 - **Status:** ☑ done — bg-graphite→bg-black, video opacity-40 + bg-black/60 overlay, unwrapped comic 420px div, console 520px #0a0a0a p-6, removed // line, removed HUD border-t hud-bg Niv. span, added spritecook img 1024×576 displayed 480/512, type-check PASS build PASS 19/19, grep Niv. 0 comic-bg 0 "4 laboratorios" 0
 - **Verification:** type-check PASS, build PASS 19/19, grep checks 0
 
+### T7 — Pixel-art background reemplaza video 4K [x]
+- **Files:** src/components/labs/LabHero/LabHero.tsx, public/images/spritecook/lab-hero-256-complete-enhanced-1024x576.png (pre-existente)
+- **Acceptance:** `<video>` + poster + `prefersReducedMotion` img fallback + `bg-black/60` overlay removidos; pixel-art img full-bleed `absolute inset-0 object-cover` con `imageRendering: pixelated` como background; overlay `bg-black/55 backdrop-blur-[1px]` para legibilidad consola; foreground img duplicado a la derecha removido; layout `flex items-center justify-center min-h-[380px] p-8 lg:p-12` con consola centrada `max-w-[560px] bg-[#0a0a0a]/90 backdrop-blur-sm`; `prefersReducedMotion` var removida (TS unused clean); `hero-lab-4k` 0, `spritecook` 1.
+- **Status:** ☑ done — video 4K (lines 42-63) + poster fallback + overlay bg-black/60 removed, pixel-art background + bg-black/55 overlay added, foreground duplicate img removed, console centered 560px, type-check PASS build PASS 19/19
+- **Verification:** type-check PASS, build PASS 19/19, grep hero-lab-4k 0 spritecook 1
+
 ## Verification Evidence
 - type-check: `npm run type-check` → PASS (no errors)
 - build: `npm run build` → PASS (19/19, compiled 16.9s)
 - T6 grep: `grep "Niv\." LabHero.tsx` → 0, `grep "comic-bg" LabHero.tsx` → 0, `grep "4 laboratorios" LabHero.tsx` → 0
+- T7 grep: `grep "hero-lab-4k" LabHero.tsx` → 0, `grep "spritecook" LabHero.tsx` → 1
 - InVitroShell racha header untouched (Flame badge preserved)
 
 ---
