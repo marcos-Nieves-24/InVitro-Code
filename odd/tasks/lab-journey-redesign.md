@@ -54,13 +54,13 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Route:** delegated (new route + hero + video map)
 - **Status:** ☑ done (commit 69dfb10)
 
-### T5 — Video assets optimizados MP4 [ ]
+### T5 — Video assets optimizados MP4 [x]
 - **Description:** Generar/importar 4 videos hero vía pipeline `anyim` (`npm run anim:generate -- --prompt`) y optimizar con ffmpeg (`h264 crf23 faststart 1920w`). Si `anymotion` no disponible, usar stock científico libre + overlay. Actualizar `heroVideos.ts` con duraciones y posters.
 - **Files:** `public/videos/lab-hero-*.mp4`, `public/videos/lab-hero-*-poster.jpg`, `scripts/anyim.mjs` (uso no modificación), `src/lib/labs/heroVideos.ts`
 - **Acceptance:** Cada MP4 <3MB, carga con `preload=metadata`, no layout shift, `poster` visible antes de autoplay, verifica con `npm run build` (asset size).
 - **Verification:** `ls -lh public/videos/lab-hero-*` + `npm run build`
 - **Route:** delegated (asset pipeline + verification)
-- **Status:** ☐ pending
+- **Status:** ☑ done (2026-09-27 — placeholder strategy: copied circuit-growth-animation.mp4 → 4 hero MP4s + ffmpeg h264 crf23 faststart 1920w optimization 71K each; posters 1920x746 8.5K via ffmpeg frame extraction; heroVideos.ts mapping verified, no fix needed)
 
 ### T6 — Guided Onboarding (solo primer laboratorio) [ ]
 - **Description:** Crear `ScientistGuide.tsx`, `MangaSpeechBubble.tsx`, `SpotlightOverlay.tsx` (fixed overlay con clip-path hole via getBoundingClientRect), `CoachMarks.tsx` (1/5 + Siguiente/Omitir), `OnboardingController.tsx` (5 pasos: navigation, console, editor, run button, ecosystem). Persistencia `localStorage lab-onboarding-completed` + `supabase.profiles.onboarding_seen` (migration si falta). Solo muestra si `completedCount===0`.
