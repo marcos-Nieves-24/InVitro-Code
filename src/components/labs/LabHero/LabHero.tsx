@@ -1,15 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import { Gem, Flame, ArrowRight } from "lucide-react";
-import { useLabHeroMotion } from "./useLabHeroMotion";
-import { LabHeroCopy } from "./LabHeroCopy";
-
-const RiveBioreactor = dynamic(
-  () => import("./RiveBioreactor").then((m) => m.RiveBioreactor),
-  { ssr: false },
-);
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
+import { TypingText } from "@/components/ui/TypingText";
 
 interface LevelInfo {
   level: number;
@@ -24,18 +18,9 @@ interface LabHeroProps {
   rankTitle: string;
 }
 
-/** 20 bubble positions (pre-computed for deterministic layout) */
-const BUBBLES = Array.from({ length: 20 }, (_, i) => ({
-  id: i,
-  left: `${5 + (i * 47) % 90}%`,
-  bottom: `${(i * 31) % 60}%`,
-  size: 6 + (i % 5) * 4,
-  delay: (i * 0.3) % 3,
-}));
-
 /**
- * LabHero — animated hero for /laboratorios.
- * Replaces the old InVitroTopBar + static h1 on this route.
+ * LabHero — video 4K + consola + HUD footer.
+ * T2 hero-lab-4k-console: video bg, console TypingText, HUD preserved.
  */
 export function LabHero({
   totalXp,
@@ -44,26 +29,18 @@ export function LabHero({
   rankTitle: rank,
 }: LabHeroProps) {
   const heroRef = useRef<HTMLElement>(null);
-  const h1Ref = useRef<HTMLHeadingElement>(null);
-  const bubblesRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLDivElement>(null);
 
   const prefersReducedMotion =
     typeof window !== "undefined"
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : false;
 
-  useLabHeroMotion({
-    heroRef,
-    h1Ref,
-    bubblesRef,
-    canvasRef,
-    prefersReducedMotion,
-  });
-
-  const xpPercent = levelInfo.nextLevelXp > 0
-    ? Math.round((levelInfo.progressToNext / (levelInfo.nextLevelXp - levelInfo.level * 100)) * 100)
-    : 0;
+  const xpPercent =
+    levelInfo.nextLevelXp > 0
+      ? Math.round(
+          (levelInfo.progressToNext / (levelInfo.nextLevelXp - levelInfo.level * 100)) * 100,
+        )
+      : 0;
 
   const scrollToHub = () => {
     document.getElementById("hub")?.scrollIntoView({ behavior: "smooth" });
@@ -72,55 +49,73 @@ export function LabHero({
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden bg-[var(--color-comic-bg)] bg-dot-grid"
-      style={{ opacity: 0 }}
+      className="relative overflow-hidden rounded-3xl bg-graphite"
+      style={{ opacity: 1 }}
     >
-      {/* ── Bubble layer ── */}
-      <div ref={bubblesRef} className="bubble-layer absolute inset-0 z-0">
-        {BUBBLES.map((b) => (
-          <div
-            key={b.id}
-            className="bubble absolute rounded-full bg-[var(--color-bubble)]"
-            style={{
-              left: b.left,
-              bottom: b.bottom,
-              width: b.size,
-              height: b.size,
-              opacity: 0.55,
-              animationDelay: `${b.delay}s`,
-              "--bubble-x": `${(b.id % 2 === 0 ? 1 : -1) * (8 + (b.id % 12))}px`,
-            } as React.CSSProperties}
-          />
-        ))}
-      </div>
+      {/* ── Video layer ── */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay={!prefersReducedMotion}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/videos/hero-lab-4k-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/videos/hero-lab-4k.mp4" type="video/mp4" />
+      </video>
+      {prefersReducedMotion && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/videos/hero-lab-4k-poster.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden="true"
+        />
+      )}
+      {/* ── Gradient overlay ── */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/50 to-transparent"
+        aria-hidden="true"
+      />
 
-      {/* ── Content grid ── */}
-      <div className="relative z-10 mx-auto flex max-w-screen-2xl flex-col items-center gap-8 px-6 py-16 md:flex-row md:items-center md:gap-12 md:px-10 md:py-24">
-        {/* Left: Copy */}
-        <div className="flex-1 text-center md:text-left">
-          <p className="eyebrow mb-3 text-[var(--color-comic-accent)]">
-            Laboratorio &middot; InVitro-Code
-          </p>
-          <h1
-            ref={h1Ref}
-            className="font-display text-4xl font-extrabold leading-tight text-[var(--color-comic-text)] md:text-5xl lg:text-6xl"
-          >
-            Sala de laboratorios
-          </h1>
-
-          <div className="mt-4 min-h-[3.5rem]">
-            <LabHeroCopy />
+      {/* ── Content grid — console card ── */}
+      <div className="relative z-10 mx-auto flex max-w-screen-2xl flex-col gap-0 p-8 lg:p-12 pb-0">
+        <div className="w-[420px] shrink-0 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
+          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
+            <TypingText
+              text="> Sala de laboratorios"
+              delay={28}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete={false}
+              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+              className="text-sm font-bold text-[var(--color-brand-300)]"
+            />
+            <TypingText
+              text="// 4 laboratorios · IA · Python · Bioestadística · ML"
+              delay={22}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-2 block text-xs text-white/60"
+            />
+            <TypingText
+              text="Completa los ejercicios interactivos y domina los conceptos."
+              delay={18}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-1 block text-sm text-white/80"
+            />
           </div>
-
-          <p className="mt-3 max-w-lg text-sm text-[var(--color-comic-accent)] md:text-base">
-            Cada módulo tiene lecciones con laboratorios interactivos. Completa
-            los ejercicios para dominar los conceptos.
-          </p>
-        </div>
-
-        {/* Right: Rive canvas */}
-        <div ref={canvasRef} className="flex-shrink-0">
-          <RiveBioreactor progress={levelInfo.progressToNext} />
+          <SlideArrowButton
+            text="Explorar laboratorios"
+            primaryColor="var(--color-brand-400)"
+            onClick={scrollToHub}
+            className="mt-6"
+          />
         </div>
       </div>
 
@@ -132,9 +127,7 @@ export function LabHero({
             <span className="rounded bg-[var(--color-hud-border)] px-2 py-0.5 text-xs tabular-nums">
               Niv. {levelInfo.level}
             </span>
-            <span className="hidden text-[var(--color-hud-muted)] sm:inline">
-              {rank}
-            </span>
+            <span className="hidden text-[var(--color-hud-muted)] sm:inline">{rank}</span>
           </div>
 
           {/* XP bar */}
