@@ -77,6 +77,7 @@ export default async function LaboratoriosPage() {
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
       userRole={profileRes.data?.role}
       theme={profileRes.data?.theme}
+      currentStreak={currentStreak}
     >
       <LabHeroLoader
         totalXp={totalXp}

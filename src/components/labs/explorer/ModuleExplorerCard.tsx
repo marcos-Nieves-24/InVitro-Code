@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { Zap, FlaskConical } from "lucide-react";
 import type { LabCardTheme } from "../LabCardTheme";
 import { LabCardArt } from "../LabCardArt";
-import { ProgressTube } from "./ProgressTube";
+import { BiotechGrowthTube } from "@/components/dashboard/BiotechGrowthTube";
 
 export interface ModuleExplorerCardProps {
   moduleSlug: string;
@@ -60,7 +60,7 @@ export function ModuleExplorerCard({
             {theme.label}
           </span>
           <span className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-110">
-            <LabCardArt theme={theme} size={44} />
+            <LabCardArt theme={theme} size={88} />
           </span>
         </div>
 
@@ -81,9 +81,9 @@ export function ModuleExplorerCard({
           </span>
         </div>
 
-        {/* Progress row */}
+        {/* Progress row — BiotechGrowthTube */}
         <div className="mt-6 flex items-center gap-4">
-          <ProgressTube completed={completed} total={total} size="lg" accent={theme.accent} />
+          <BiotechGrowthTube exp={completed} maxExp={total} size={96} label={`${completed}/${total}`} className="shrink-0" />
           <div className="flex flex-col gap-0.5">
             <span className="font-mono text-sm font-semibold text-ink">
               {completed}/{total} completados

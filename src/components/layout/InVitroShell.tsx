@@ -2,7 +2,7 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
-import { LogOut, Menu, X } from "lucide-react";
+import { Flame, LogOut, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { SectionsDropdown } from "./SectionsDropdown";
 
@@ -14,6 +14,7 @@ interface InVitroShellProps {
   topBar?: ReactNode;
   theme?: string | null;
   hud?: ReactNode;
+  currentStreak?: number;
 }
 
 export function InVitroShell({
@@ -22,6 +23,7 @@ export function InVitroShell({
   topBar,
   theme,
   hud,
+  currentStreak,
 }: InVitroShellProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { signOut } = useClerk();
@@ -58,8 +60,14 @@ export function InVitroShell({
             <SectionsDropdown />
           </div>
 
-          {/* Right: User info + Logout */}
+          {/* Right: Streak + User info + Logout */}
           <div className="flex items-center gap-3">
+            {currentStreak !== undefined && (
+              <div className="hidden sm:flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1 text-xs font-bold text-ink">
+                <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
+                {currentStreak} días
+              </div>
+            )}
             <Link href="/perfil" className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-surface-raised">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
                 {initials}
@@ -86,6 +94,12 @@ export function InVitroShell({
 
         {mobileMenuOpen && (
           <div className="border-t border-surface-raised px-4 py-3 md:hidden">
+            {currentStreak !== undefined && (
+              <div className="mb-3 flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1.5 text-xs font-bold text-ink w-fit">
+                <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
+                {currentStreak} días de racha
+              </div>
+            )}
             <nav className="flex flex-col gap-2">
               <Link href="/" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Inicio</Link>
               <Link href="/learn" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Expediciones</Link>
