@@ -46,13 +46,13 @@ Un recorrido estructurado aumenta retención y reduce fricción cognitiva para e
 - **Route:** delegated (page + grid + data wiring)
 - **Status:** ☑ done (commit 76bcef2)
 
-### T4 — Lab Landing Screen por módulo (MP4 cinemático) [ ]
+### T4 — Lab Landing Screen por módulo (MP4 cinemático) [x]
 - **Description:** Crear ruta `src/app/(dashboard)/laboratorios/[module]/page.tsx` (Server Component) con hero video MP4 optimizado full-bleed + overlay gradient, eyebrow (slug·N labs·XP), h1 module title, descripción `module.json:description`, CTA primario `[Empezar]` → primera lección incompleta (`getNextLesson` scoped). Añadir `src/lib/labs/heroVideos.ts` map 4 módulos → `{src,poster,alt}`.
 - **Files:** `src/app/(dashboard)/laboratorios/[module]/page.tsx`, `src/components/labs/landing/LabLandingHero.tsx`, `src/lib/labs/heroVideos.ts`, `public/videos/lab-hero-{ia,python,estadistica,ml}.mp4` + posters
 - **Acceptance:** Video `autoplay muted loop playsInline` con `poster` y fallback estático en reduce-motion; CTA resuelve correctamente (todo completo → "Repasar" a primera lección); breadcrumb y `InVitroShell` consistentes.
 - **Verification:** `npm run type-check && npm run build`; manual check video carga y CTA navega
 - **Route:** delegated (new route + hero + video map)
-- **Status:** ☐ pending
+- **Status:** ☑ done (commit 69dfb10)
 
 ### T5 — Video assets optimizados MP4 [ ]
 - **Description:** Generar/importar 4 videos hero vía pipeline `anyim` (`npm run anim:generate -- --prompt`) y optimizar con ffmpeg (`h264 crf23 faststart 1920w`). Si `anymotion` no disponible, usar stock científico libre + overlay. Actualizar `heroVideos.ts` con duraciones y posters.
