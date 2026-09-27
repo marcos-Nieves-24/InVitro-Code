@@ -1,8 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { Gem, Flame, ArrowRight } from "lucide-react";
-import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { TypingText } from "@/components/ui/TypingText";
 
 interface LevelInfo {
@@ -19,12 +17,12 @@ interface LabHeroProps {
 }
 
 /**
- * LabHero — video 4K + consola + HUD footer.
- * T2 hero-lab-4k-console: video bg, console TypingText, HUD preserved.
+ * LabHero — video 4K + consola + HUD footer (solo Nivel).
+ * T1 labs-hero-tweaks: sin XP bar, sin racha, sin CTA.
  */
 export function LabHero({
-  totalXp,
-  currentStreak,
+  totalXp: _totalXp,
+  currentStreak: _currentStreak,
   levelInfo,
   rankTitle: rank,
 }: LabHeroProps) {
@@ -34,17 +32,6 @@ export function LabHero({
     typeof window !== "undefined"
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : false;
-
-  const xpPercent =
-    levelInfo.nextLevelXp > 0
-      ? Math.round(
-          (levelInfo.progressToNext / (levelInfo.nextLevelXp - levelInfo.level * 100)) * 100,
-        )
-      : 0;
-
-  const scrollToHub = () => {
-    document.getElementById("hub")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -110,16 +97,10 @@ export function LabHero({
               className="mt-1 block text-sm text-white/80"
             />
           </div>
-          <SlideArrowButton
-            text="Explorar laboratorios"
-            primaryColor="var(--color-brand-400)"
-            onClick={scrollToHub}
-            className="mt-6"
-          />
         </div>
       </div>
 
-      {/* ── HUD footer ── */}
+      {/* ── HUD footer — solo Nivel + rank ── */}
       <div className="relative z-10 border-t border-[var(--color-hud-border)] bg-[var(--color-hud-bg)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center gap-4 px-6 py-3 md:gap-8 md:px-10">
           {/* Level */}
@@ -129,37 +110,6 @@ export function LabHero({
             </span>
             <span className="hidden text-[var(--color-hud-muted)] sm:inline">{rank}</span>
           </div>
-
-          {/* XP bar */}
-          <div className="flex flex-1 items-center gap-2">
-            <Gem className="h-4 w-4 text-[var(--color-comic-accent)]" fill="currentColor" />
-            <div className="h-2 flex-1 overflow-hidden rounded-full bg-[var(--color-hud-border)]">
-              <div
-                className="progress-bar-animated h-full rounded-full bg-gradient-to-r from-[var(--color-fog)] to-[var(--color-mint)]"
-                style={{ "--progress": `${xpPercent}%`, width: `${xpPercent}%` } as React.CSSProperties}
-              />
-            </div>
-            <span className="text-xs tabular-nums text-[var(--color-hud-muted)]">
-              {totalXp.toLocaleString("es")} XP
-            </span>
-          </div>
-
-          {/* Streak */}
-          <div className="flex items-center gap-1.5 rounded-full bg-[var(--color-hud-border)] px-3 py-1 text-xs font-bold text-[var(--color-hud-text)]">
-            <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
-            <span className="tabular-nums">
-              {currentStreak} día{currentStreak !== 1 ? "s" : ""}
-            </span>
-          </div>
-
-          {/* CTA */}
-          <button
-            onClick={scrollToHub}
-            className="flex items-center gap-1.5 rounded-full bg-[var(--color-comic-accent)] px-4 py-1.5 text-xs font-bold text-[var(--color-comic-bg)] transition-transform hover:scale-105"
-          >
-            Explorar laboratorios
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
         </div>
       </div>
     </section>
