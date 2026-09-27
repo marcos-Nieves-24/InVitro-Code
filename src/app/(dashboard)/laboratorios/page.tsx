@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { LabHeroLoader } from "@/components/labs/LabHero/LabHeroLoader";
-import { LabHub } from "@/components/labs/LabHub";
+import { ModuleExplorerGrid } from "@/components/labs/explorer/ModuleExplorerGrid";
 import type { LabModuleGroup } from "@/components/labs/LabHub";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
@@ -86,7 +86,7 @@ export default async function LaboratoriosPage() {
       />
 
       <div id="hub" className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
-        <LabHub modules={labModules} />
+        <ModuleExplorerGrid modules={labModules} />
       </div>
     </InVitroShell>
   );
