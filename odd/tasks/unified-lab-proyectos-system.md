@@ -28,22 +28,22 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 ## Tareas
 
 ### T0 — Assets
-- [ ] Copiar `banner.png`, `modulo-1..3.png`, `mdoulo-4.png→modulo-4.png`, `proyectos.png`, `proyecto-modulo-1..4.png` a `public/laboratorio/` y `public/proyectos/` (o `public/labs/` unificado). Verificar `next/image` y `imageRendering`. Commit.
+- [x] Copiar `banner.png`, `modulo-1..3.png`, `mdoulo-4.png→modulo-4.png`, `proyectos.png`, `proyecto-modulo-1..4.png` a `public/laboratorio/` y `public/proyectos/` (o `public/labs/` unificado). Verificar `next/image` y `imageRendering`. Commit. — fec6652 2026-09-28 (11 archivos, `ls -lh` verificado)
 
 ### T1 — Cards Landing híbrido
-- [ ] Crear `src/components/shared/ModuleCardContent.tsx` (chip accent 14%/30, LabCardArt 88, title, pills XP/labs, BiotechGrowthTube opcional, prop `compact`)
+- [x] Crear `src/components/shared/ModuleCardContent.tsx` (chip accent 14%/30, LabCardArt 88, title, pills XP/labs, BiotechGrowthTube opcional, prop `compact`) — fec6652
 - [ ] Refactor `ModuleExplorerCard` → wrapper delega a `ModuleCardContent`
 - [ ] Refactor `OrbitalModules` interior → `ModuleCardContent compact`, ajustar `CARD_WIDTH 280→320`, `RING_RADIUS 340→360`, `extentHalf`, `PERSPECTIVE`, `fitScale`
 - [ ] Mobile/reduced-motion grid también usa compartido. Verificar visual.
 
 ### T2 — Hero template unificado
-- [ ] Crear `src/components/shared/HeroWithConsole.tsx` (grid lg:2, bg fill + overlay #111439/60, copy + consola, `mediaFallback` opt-in video)
-- [ ] Crear `src/lib/labs/heroImages.ts` (hub banner, 4 módulos lab, hub proyectos, 4 módulos proyecto). Deprecar `heroVideos.ts` detrás de flag.
+- [x] Crear `src/components/shared/HeroWithConsole.tsx` (grid lg:2, bg fill + overlay #111439/60, copy + consola, `mediaFallback` opt-in video) — fec6652
+- [x] Crear `src/lib/labs/heroImages.ts` (hub banner, 4 módulos lab, hub proyectos, 4 módulos proyecto). Deprecar `heroVideos.ts` detrás de flag. — fec6652
 - [ ] Migrar `LabHero.tsx` (hub) y `LabLandingHero.tsx` (módulo) a `HeroWithConsole`
 - [ ] Migrar `laboratorios/page.tsx` y `laboratorios/[module]/page.tsx` props
 
 ### T3 — Consolas variantes
-- [ ] Extraer `TerminalChrome` de `InteractiveTerminal.tsx:213`
+- [x] Extraer `TerminalChrome` de `InteractiveTerminal.tsx:213` → `src/components/shared/TerminalChrome.tsx` — fec6652
 - [ ] Crear `src/components/labs/consoles/{Hub,Intro,Python,Stats,Ml}Console.tsx` con mismo chrome, payloads distintos (dendrograma, Hola IA, pandas, histograma motion, scatter). Respetar `prefers-reduced-motion`.
 
 ### T4 — Botón único
@@ -61,8 +61,8 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 - [ ] Texto vía `module.json` field `progressHint` / fallback global en lib
 
 ### T7 — Dashboard "Misión Actual" guiado + module.json
-- [ ] Extender `src/lib/content/modules.ts` `readModuleJson` para `description` (ya), `shortDescription`/`missionBlurb`, `expHint`, `growthHint`
-- [ ] Actualizar `src/content/modules/*/module.json` (ia, python, estadistica, machine-learning) con `shortDescription`, `progressHint`, `growthHint` (no hardcodear en componente)
+- [x] Extender `src/lib/content/modules.ts` `readModuleJson` para `description` (ya), `shortDescription`/`missionBlurb`, `expHint`, `growthHint` + helpers `getModuleShortDescription`/`getModuleProgressHint`/`getModuleGrowthHint` — fec6652
+- [x] Actualizar `src/content/modules/*/module.json` (ia, python, estadistica, machine-learning) con `shortDescription`, `progressHint`, `growthHint` (no hardcodear en componente) — fec6652
 - [ ] `DashboardContainer.tsx:151` — bajo `moduleName` mostrar `shortDescription` line-clamp-2, y bajo barra módulo agregar guía planta: "La planta crece con cada módulo: {completed}/{total} → {overallProgress}% crecimiento in-vitro."
 - [ ] Verificar fallback si `module.json` no tiene nuevos campos
 
