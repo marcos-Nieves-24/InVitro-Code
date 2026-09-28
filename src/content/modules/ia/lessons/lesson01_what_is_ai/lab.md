@@ -1,12 +1,12 @@
 ```python
 # =========================================================================
-# LAB 1: Exploracion de features con Breast Cancer Wisconsin
+# LAB 1: Exploración de features con Breast Cancer Wisconsin
 # -------------------------------------------------------------------------
 # Aplicamos los conceptos de features y reconocimiento de patrones a un
-# dataset real de diagnostico medico. Cada figura termina con fig.show().
+# dataset real de diagnóstico médico. Cada figura termina con fig.show().
 # =========================================================================
-# PASO 1: Cargar el dataset y analizar la distribucion de clases.
-# Breast Cancer Wisconsin tiene 569 biopsias con 30 features numericas y
+# PASO 1: Cargar el dataset y analizar la distribución de clases.
+# Breast Cancer Wisconsin tiene 569 biopsias con 30 features numéricas y
 # una etiqueta binaria: maligno (0) o benigno (1).
 import numpy as np
 import pandas as pd
@@ -25,13 +25,13 @@ df_classes = pd.DataFrame({
 df_classes["porcentaje"] = (df_classes["cantidad"] / len(y) * 100).round(1)
 print(df_classes.to_string(index=False))
 fig = px.bar(df_classes, x="clase", y="cantidad", color="clase",
-             title="Distribucion de clases en Breast Cancer",
+             title="Distribución de clases en Breast Cancer",
              labels={"clase": "Clase", "cantidad": "Muestras"})
 fig.show()
-# PASO 2: Estadisticas de las features y exploracion con histogramas.
-# Comparar la distribucion de una feature entre clases revela si esa
+# PASO 2: Estadísticas de las features y exploración con histogramas.
+# Comparar la distribución de una feature entre clases revela si esa
 # feature ayuda a separar maligno de benigno.
-print("\n--- Estadisticas de las primeras 5 features ---")
+print("\n--- Estadísticas de las primeras 5 features ---")
 for i in range(5):
     col = X[:, i]
     print(f"{feature_names[i]}: media={col.mean():.2f}, std={col.std():.2f}, "
@@ -40,20 +40,20 @@ df_plot = pd.DataFrame(X[:, [0, 1]], columns=["mean_radius", "mean_texture"])
 df_plot["clase"] = data.target_names[y]
 fig = px.histogram(df_plot, x="mean_radius", color="clase", nbins=20,
                    barmode="overlay", opacity=0.6,
-                   title="Distribucion de mean radius por clase",
+                   title="Distribución de mean radius por clase",
                    labels={"mean_radius": "mean radius", "clase": "Clase"})
 fig.show()
 # PASO 3: Scatter 2D de dos features coloreado por clase.
-# Elegimos mean radius y mean texture: la separacion visible entre los
-# puntos revela que estas features son utiles para el clasificador.
+# Elegimos mean radius y mean texture: la separación visible entre los
+# puntos revela que estas features son útiles para el clasificador.
 print("\nGraficando las features mean radius y mean texture por clase.")
 fig = px.scatter(df_plot, x="mean_radius", y="mean_texture", color="clase",
                  title="Scatter 2D: mean radius vs mean texture",
                  labels={"mean_radius": "mean radius",
                          "mean_texture": "mean texture", "clase": "Clase"})
 fig.show()
-# PASO 4: Comparacion estadistica de features entre clases.
-# La diferencia relativa de medias identifica las features mas
+# PASO 4: Comparación estadística de features entre clases.
+# La diferencia relativa de medias identifica las features más
 # discriminativas; las 4 mejores se visualizan con box plots.
 mal_mean = X[y == 0].mean(axis=0)
 ben_mean = X[y == 1].mean(axis=0)
@@ -75,7 +75,7 @@ fig = px.box(df_melt, x="feature", y="valor", color="clase",
 fig.show()
 # PASO 5: Reporte final del laboratorio.
 print("\n--- REPORTE FINAL ---")
-print("Las features con mayor diferencia entre clases son las mas discriminativas.")
-print("Histogramas y box plots muestran clases con poca superposicion.")
-print("Esa separacion es la base de lo que aprende un clasificador.")
+print("Las features con mayor diferencia entre clases son las más discriminativas.")
+print("Histogramas y box plots muestran clases con poca superposición.")
+print("Esa separación es la base de lo que aprende un clasificador.")
 ```

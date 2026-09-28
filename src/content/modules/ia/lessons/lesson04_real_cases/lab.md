@@ -1,8 +1,8 @@
 ```python
 # =========================================================================
-# LAB 4: Casos reales - pipeline de clasificacion en diagnostico medico
+# LAB 4: Casos reales - pipeline de clasificación en diagnóstico médico
 # -------------------------------------------------------------------------
-# Comparamos dos modelos (regresion logistica y bosque aleatorio) sobre el
+# Comparamos dos modelos (regresión logística y bosque aleatorio) sobre el
 # dataset Breast Cancer Wisconsin y elegimos el mejor para el contexto.
 # =========================================================================
 
@@ -40,9 +40,9 @@ y_pred_rf = rf.predict(X_test)
 print(f"\nLogisticRegression train_acc: {accuracy_score(y_train, lr.predict(X_train)):.3f}")
 print(f"RandomForest train_acc:       {accuracy_score(y_train, rf.predict(X_train)):.3f}")
 
-# PASO 3: Metricas de evaluacion para cada modelo.
-# La matriz de confusion muestra los errores; el reporte resume precision,
-# recall y f1 por clase. En diagnostico, el recall evita falsos negativos.
+# PASO 3: Métricas de evaluación para cada modelo.
+# La matriz de confusión muestra los errores; el reporte resume precision,
+# recall y f1 por clase. En diagnóstico, el recall evita falsos negativos.
 print("\n--- LogisticRegression ---")
 print(confusion_matrix(y_test, y_pred_lr))
 print(classification_report(y_test, y_pred_lr, target_names=data.target_names))
@@ -51,7 +51,7 @@ print("\n--- RandomForest ---")
 print(confusion_matrix(y_test, y_pred_rf))
 print(classification_report(y_test, y_pred_rf, target_names=data.target_names))
 
-# PASO 4: Comparar metricas en un grafico de barras.
+# PASO 4: Comparar métricas en un gráfico de barras.
 # Construimos una tabla con accuracy, precision, recall y f1 por modelo.
 rows = []
 for nombre, y_pred in [("LogisticRegression", y_pred_lr),
@@ -66,14 +66,14 @@ for nombre, y_pred in [("LogisticRegression", y_pred_lr),
                      "valor": round(valor, 3)})
 
 df_metrics = pd.DataFrame(rows)
-print("\nTabla de metricas:")
+print("\nTabla de métricas:")
 print(df_metrics.pivot(index="metrica", columns="modelo",
                        values="valor").to_string())
 
 fig = px.bar(df_metrics, x="metrica", y="valor", color="modelo",
              barmode="group",
-             title="Comparacion: LogisticRegression vs RandomForest",
-             labels={"metrica": "Metrica", "valor": "Valor",
+             title="Comparación: LogisticRegression vs RandomForest",
+             labels={"metrica": "Métrica", "valor": "Valor",
                      "modelo": "Modelo"})
 fig.show()
 
@@ -83,6 +83,6 @@ best = max([("LogisticRegression", lr.score(X_test, y_test)),
             ("RandomForest", rf.score(X_test, y_test))], key=lambda t: t[1])
 print("\n--- RESUMEN ---")
 print(f"Mejor accuracy en test: {best[0]} ({best[1]:.3f})")
-print("En diagnostico conviene revisar recall y matriz de confusion.")
+print("En diagnóstico conviene revisar recall y matriz de confusión.")
 print("El pipeline completo es reutilizable para otros datasets.")
 ```

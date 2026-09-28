@@ -1,8 +1,8 @@
 ```python
 # =========================================================================
-# LAB 2: Como aprende la IA - entrenamiento, validacion y generalizacion
+# LAB 2: Cómo aprende la IA - entrenamiento, validación y generalización
 # -------------------------------------------------------------------------
-# Aplicamos la division train/test y medimos si un modelo generaliza o
+# Aplicamos la división train/test y medimos si un modelo generaliza o
 # memoriza comparando el accuracy de entrenamiento con el de prueba.
 # =========================================================================
 
@@ -28,12 +28,12 @@ df_iris["species"] = iris.target_names[iris.target]
 
 fig = px.scatter(df_iris, x="sepal length (cm)", y="petal length (cm)",
                  color="species",
-                 title="Dataset Iris: especies por sepalo y petalo",
-                 labels={"sepal length (cm)": "Largo sepalo (cm)",
-                         "petal length (cm)": "Largo petalo (cm)"})
+                 title="Dataset Iris: especies por sépalo y pétalo",
+                 labels={"sepal length (cm)": "Largo sépalo (cm)",
+                         "petal length (cm)": "Largo pétalo (cm)"})
 fig.show()
 
-# PASO 2: Division en entrenamiento y prueba (estratificada).
+# PASO 2: División en entrenamiento y prueba (estratificada).
 # El modelo solo ve datos de train; el accuracy en test mide si
 # generaliza a datos que nunca vio durante el entrenamiento.
 X_tr, X_te, y_tr, y_te = train_test_split(
@@ -44,7 +44,7 @@ Xb_tr, Xb_te, yb_tr, yb_te = train_test_split(
     bcw.data, bcw.target, test_size=0.3, random_state=42, stratify=bcw.target)
 print(f"BCW  -> Train: {Xb_tr.shape[0]}, Test: {Xb_te.shape[0]}")
 
-# PASO 3: Bucle de entrenamiento y evaluacion con LogisticRegression.
+# PASO 3: Bucle de entrenamiento y evaluación con LogisticRegression.
 # Entrenamos el mismo modelo sobre ambos datasets y comparamos el accuracy
 # de entrenamiento con el de prueba para detectar sobreajuste.
 results = []
@@ -59,8 +59,8 @@ for nombre, Xtr, Xte, ytr, yte in [
                     "test_acc": test_acc})
     print(f"\n{nombre}: train_acc={train_acc:.3f}, test_acc={test_acc:.3f}")
 
-# PASO 4: Comparar el accuracy en un grafico de barras.
-# Una brecha pequena entre train y test indica buena generalizacion.
+# PASO 4: Comparar el accuracy en un gráfico de barras.
+# Una brecha pequeña entre train y test indica buena generalización.
 print("\nResumen de accuracies por dataset y conjunto.")
 df_res = pd.DataFrame(results)
 fig = px.bar(df_res, x="dataset", y=["train_acc", "test_acc"],
@@ -73,6 +73,6 @@ fig.show()
 # PASO 5: Resumen del laboratorio.
 print("\n--- RESUMEN ---")
 print("El modelo se entrena solo con datos de train.")
-print("La brecha train-test pequena indica buena generalizacion.")
+print("La brecha train-test pequeña indica buena generalización.")
 print("Una brecha grande indica sobreajuste (memorizar, no aprender).")
 ```
