@@ -70,8 +70,8 @@ domain (types, pure logic) ← application (use-cases, ports/interfaces) ← inf
 - RLS: comparar `auth.jwt() ->> 'sub'` contra `TEXT id/user_id` — nunca `auth.uid()`. Validar en `supabase-migration.sql`.
 - Server mutations: usar `createAdminClient()` (service-role) + `auth()` de Clerk. Nunca anon key para writes.
 - Middleware: `src/proxy.ts` — rutas públicas van ahí (API→401, pages→redirect `/sign-in`).
-- Secrets: nunca hardcodear `CLERK_SECRET_KEY` / `SUPABASE_SERVICE_ROLE_KEY`. Validar con `security-review` y `security-reviewer` skills antes de merge.
-- RBAC: definir por función en `application`, reutilizar componente. Chequear con `agent-owasp-compliance` si tocás auth.
+- Secrets: nunca hardcodear `CLERK_SECRET_KEY` / `SUPABASE_SERVICE_ROLE_KEY` / `CLAUDE_API_KEY`. Validar con `security-review` y `security-reviewer` skills antes de merge. CI: `.github/workflows/security-review.yml` comenta PRs automáticamente (requiere `CLAUDE_API_KEY` en repo Secrets).
+- RBAC: definir por función en `application`, reutilizar componente. Chequear con `agent-owasp-compliance` (OWASP ASI Top 10) si tocás auth. Supply-chain: verificar skills/MCP con `agent-supply-chain` + `mcp-security-audit` antes de instalar plugins.
 
 ### 5. Frontend / MDX / Pyodide
 - Componente nuevo en MDX: exportar en `src/components/lesson/index.ts` Y mapear en `src/app/learn/[module]/[slug]/page.tsx` `components` map. Preservar `$...$` LaTeX (`remark-math`+`rehype-katex`).
@@ -79,9 +79,10 @@ domain (types, pure logic) ← application (use-cases, ports/interfaces) ← inf
 - Pyodide: singleton `src/lib/pyodide-worker.ts` ↔ `public/pyodide-worker.js` (`requestId` correlation). Labs requieren red (jsdelivr + micropip). Mantener ambos en sync.
 
 ### 6. Testing & verificación
-- `api-designer` / `security-reviewer` / `webapp-testing` / `chrome-devtools` + `playwright-expert` están instalados en `.opencode/skills/` (Fase 1: 86 skills).
+- `api-designer` / `security-reviewer` / `webapp-testing` / `chrome-devtools` + `playwright-expert` + `agent-owasp-compliance` / `mcp-security-audit` + `superpowers` (brainstorming→writing-plans→executing-plans→requesting-code-review) están instalados en `.opencode/skills/` (Fase 2: 104 project skills, 120+ totales).
 - Flujo: failing test primero cuando sea posible (`test-master` skill), luego código mínimo, luego ver verde. Si `strict_tdd: false`, igual correr `npm run type-check` + `npm run build` como gates.
 - `npm run lint` está roto por diseño (Next 16) — no agregar eslint.
+- Para features arquitectónicas: usar `superpowers:brainstorming` → `superpowers:writing-plans` → `superpowers:executing-plans` (bloquea sin ADR/plan firmado).
 
 ### 7. Cada cambio actualiza el harness
 - Si repetís el mismo error 2 veces, actualizá `AGENTS.md` (living doc).
