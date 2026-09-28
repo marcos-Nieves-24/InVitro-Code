@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
+/** @deprecated Use SlideArrowButton — primary variant unified */
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
@@ -31,6 +32,10 @@ type ButtonProps = {
   | ({ href?: undefined } & ComponentProps<"button">)
 );
 
+/**
+ * @deprecated Use SlideArrowButton — primary variant unified
+ * Primary delegates visually to SlideArrowButton; kept for backwards compat.
+ */
 export function Button({
   variant = "primary",
   size = "md",
@@ -38,6 +43,9 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
+  if (variant === "primary" && typeof window !== "undefined") {
+    console.warn("[deprecated] Button primary — use SlideArrowButton instead");
+  }
   const classes = `${baseClass} ${variantClass[variant]} ${sizeClass[size]} ${className}`;
 
   if ("href" in props && props.href) {

@@ -11,6 +11,9 @@ import {
   getNextLesson,
   getResumeHref,
   getModuleDisplayName,
+  getModuleShortDescription,
+  getModuleProgressHint,
+  getModuleGrowthHint,
 } from "@/lib/content/modules";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
@@ -115,22 +118,14 @@ export async function DashboardContainer() {
             <div className="relative p-2">
               <section className="scroll-mt-20">
                 <div className="grid gap-6 md:grid-cols-2">
-              <div className="glass-card rounded-xl p-4">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
-                  <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
-                    Ver roadmap
-                  </Link>
-                </div>
-                <div className="flex flex-col items-center gap-6 md:flex-row md:items-center">
-                  <BioreactorProgress
-                    exp={totalXp}
-                    expToNext={levelInfo.nextLevelXp}
-                    level={levelInfo.level}
-                    rank={rankTitle(levelInfo.level)}
-                    progressToNext={levelInfo.progressToNext}
-                    size="md"
-                  />
+              <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-center">
+                <div className="order-1">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
+                    <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
+                      Ver roadmap
+                    </Link>
+                  </div>
                   <div className="text-center md:text-left">
                     <p className="font-display text-lg font-bold">{rankTitle(levelInfo.level)}</p>
                     <p className="mt-1 text-sm text-storm">
@@ -145,6 +140,30 @@ export async function DashboardContainer() {
                       />
                     </div>
                   </div>
+                  <p className="mt-4 text-xs leading-relaxed text-storm max-w-[32ch]">
+                    {(() => {
+                      const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
+                      const idx = raw.indexOf("EXP");
+                      if (idx === -1) return raw;
+                      return (
+                        <>
+                          {raw.slice(0, idx)}
+                          <span className="font-bold text-mint">EXP</span>
+                          {raw.slice(idx + 3)}
+                        </>
+                      );
+                    })()}
+                  </p>
+                </div>
+                <div className="order-2 flex justify-center md:justify-end">
+                  <BioreactorProgress
+                    exp={totalXp}
+                    expToNext={levelInfo.nextLevelXp}
+                    level={levelInfo.level}
+                    rank={rankTitle(levelInfo.level)}
+                    progressToNext={levelInfo.progressToNext}
+                    size="xl"
+                  />
                 </div>
               </div>
 
@@ -159,6 +178,9 @@ export async function DashboardContainer() {
                       <div className="flex-1 min-w-0">
                         <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
                         <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
+                        <p className="mt-1 text-xs leading-relaxed text-slate line-clamp-2">
+                          {getModuleShortDescription(nextLesson.moduleSlug)}
+                        </p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
                         <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
@@ -178,6 +200,14 @@ export async function DashboardContainer() {
                         <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
                           <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
                         </div>
+                        <p className="mt-3 text-xs leading-relaxed text-storm">
+                          La planta crece con cada módulo:{" "}
+                          <span className="font-bold text-ink">
+                            {completedCount}/{totalLessons}
+                          </span>{" "}
+                          lecciones → <span className="font-bold">{overallProgress}%</span> crecimiento.{" "}
+                          {getModuleGrowthHint(nextLesson.moduleSlug)}
+                        </p>
                       </div>
                     )}
                     <div className="mb-2 flex items-center gap-1 text-mint">
@@ -188,6 +218,7 @@ export async function DashboardContainer() {
                       text="Continuar misión"
                       primaryColor="var(--color-brand-400)"
                       href={missionHref ?? "/learn"}
+                      size="md"
                       className="mt-auto w-full text-sm"
                     />
                   </>
