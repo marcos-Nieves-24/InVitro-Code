@@ -346,3 +346,52 @@ export function getNextLesson(completedKeys: Set<string>): NextLesson | null {
   }
   return null;
 }
+
+// ── Lab progress lifecycle (labs-lifecycle-persistence PR1) ──
+
+export type CompletionStatus = "not_started" | "in_progress" | "completed";
+
+export type LastPosition = {
+  activeTab?: "lab" | "quiz";
+  scrollY?: number;
+  codeSnapshot?: string;
+};
+
+export type LabProgressEntry = {
+  status: CompletionStatus;
+  last_position: LastPosition;
+  completion_date: string | null;
+  updated_at: string;
+};
+
+export type LabProgressMap = Map<string, LabProgressEntry>;
+
+/**
+ * Pure, deterministic, server-safe helper for smart resume (REQ-LC-06..09).
+ * Scan order is getLessonSlugs(moduleSlug).sort() (lessonNN_ prefix).
+ * - Caso 1: first in_progress in order
+ * - Caso 2: first not_started / missing in order
+ * - Caso 3: all completed or empty/no slugs → {target:null, case:3}
+ */
+export function getLabResumeTarget(
+  moduleSlug: string,
+  progressMap: LabProgressMap,
+): { target: { moduleSlug: string; lessonSlug: string } | null; case: 1 | 2 | 3 } {
+  const slugs = getLessonSlugs(moduleSlug).sort();
+  if (slugs.length === 0) return { target: null, case: 3 };
+
+  for (const slug of slugs) {
+    if (progressMap.get(slug)?.status === "in_progress") {
+      return { target: { moduleSlug, lessonSlug: slug }, case: 1 };
+    }
+  }
+
+  for (const slug of slugs) {
+    const entry = progressMap.get(slug);
+    if (!entry || entry.status === "not_started") {
+      return { target: { moduleSlug, lessonSlug: slug }, case: 2 };
+    }
+  }
+
+  return { target: null, case: 3 };
+}
