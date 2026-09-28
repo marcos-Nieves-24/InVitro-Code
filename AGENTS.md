@@ -7,7 +7,8 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 - `npm run dev` / `npm run build` / `npm run start` / `npm run type-check`
 - **Node requirement**: Next 16 needs Node >= 20.9. The machine default is Node 18 — use a newer Node (e.g. `nvm use`) before `npm install`/dev/build.
 - **`npm run lint` is broken by design**: Next 16 removed the `next lint` CLI and there is no eslint config in the repo. Do not "fix" this by adding one unless asked. The reliable static gate is `npm run type-check`; the real verification is `npm run build` (see `openspec/config.yaml` verify config).
-- Tests: `npm run test` runs vitest (4 files, unit only, `environment: node`). Coverage/e2e not configured — `strict_tdd: false`, so SDD flows don't require tests. `src/__tests__/requestId-descarte.test.mjs` is a vitest test (race-condition logic for ThresholdLab, Node-only).
+- Tests: `npm run test` runs vitest (6 files / 37 tests, all green, `environment: node`). `src/__tests__/requestId-descarte.test.mjs` is a real vitest test (race-condition logic for ThresholdLab, Node-only) and is matched by the `include` glob — it is NOT a manual artifact. Coverage/e2e not configured — `strict_tdd: false`, so SDD flows don't require tests.
+- **Vitest gotchas (4.1.10)**: `environmentMatchGlobs` was REMOVED in Vitest 4 — use `projects: [...]` for mixed environments. `environment: "jsdom"` and `coverage.provider: "v8"` are NOT satisfied transitively: vitest hard-fails with `ERR_MODULE_NOT_FOUND` / `MISSING DEPENDENCY` rather than auto-installing, so they need an explicit `jsdom` / `@vitest/coverage-v8` devDependency. No current test needs a DOM, so the default env stays `node` on purpose — do not flip it to jsdom "for future component tests" without the dep.
 
 ## Architecture
 
@@ -21,8 +22,8 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 
 - **Clerk is the ONLY auth provider. Supabase Auth is NOT used.** RLS compares `auth.jwt() ->> 'sub'` against TEXT columns `id`/`user_id` — never `auth.uid()`. See `supabase-migration.sql` header.
 - Server-side mutations use the service-role client `createAdminClient()` (`src/lib/supabase/admin.ts`) with `SUPABASE_SERVICE_ROLE_KEY` and derive the user from Clerk `auth()`. Never use the anon key for server writes.
-- `src/proxy.ts` is the Next.js middleware; add public routes there (API → 401, pages → redirect to `/sign-in`).
-- Schema is applied manually via `supabase-migration.sql` in the Supabase SQL editor. Tables: `profiles`, `progress`, `streaks`, `reflection_completions`, `achievements`, `user_achievements`. Gamification widgets subscribe via `supabase_realtime` publication — new tables used by realtime widgets must be added to it.
+- `src/middleware.ts` is the Next.js middleware (Clerk `clerkMiddleware`); add public routes there (API → 401, pages → redirect to `/sign-in`). Legacy `src/proxy.ts` does not exist.
+- Schema is applied manually via `supabase-migration.sql` in the Supabase SQL editor. Tables: `profiles`, `progress`, `streaks`, `reflection_completions`, `achievements`, `user_achievements`. **Realtime is currently OFF (`realtime: false` as of 2026-09-28)**: the migration adds every table to the `supabase_realtime` publication, but no code calls `supabase.channel(...).subscribe()` — gamification widgets are server-rendered per request. The publication membership is harmless and already idempotent, so it is left in place. If a widget ever needs live updates, it must open a `supabase.channel(...)` subscription in a `"use client"` component AND its table must be in the publication.
 - Required env (`.env.local.example`): Clerk `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `CLERK_SIGNING_SECRET`; Supabase `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
 
 ## In-browser Python (Pyodide)
@@ -69,7 +70,7 @@ domain (types, pure logic) ← application (use-cases, ports/interfaces) ← inf
 - Diseño REST/GraphQL: ver `api-design-principles` y `api-designer` skills. Versionado, paginación, error envelope consistente, OpenAPI primero.
 - RLS: comparar `auth.jwt() ->> 'sub'` contra `TEXT id/user_id` — nunca `auth.uid()`. Validar en `supabase-migration.sql`.
 - Server mutations: usar `createAdminClient()` (service-role) + `auth()` de Clerk. Nunca anon key para writes.
-- Middleware: `src/proxy.ts` — rutas públicas van ahí (API→401, pages→redirect `/sign-in`).
+- Middleware: `src/middleware.ts` (Clerk `clerkMiddleware`) — rutas públicas van ahí (API→401, pages→redirect `/sign-in`).
 - Secrets: nunca hardcodear `CLERK_SECRET_KEY` / `SUPABASE_SERVICE_ROLE_KEY` / `CLAUDE_API_KEY`. Validar con `security-review` y `security-reviewer` skills antes de merge. CI: `.github/workflows/security-review.yml` comenta PRs automáticamente (requiere `CLAUDE_API_KEY` en repo Secrets).
 - RBAC: definir por función en `application`, reutilizar componente. Chequear con `agent-owasp-compliance` (OWASP ASI Top 10) si tocás auth. Supply-chain: verificar skills/MCP con `agent-supply-chain` + `mcp-security-audit` antes de instalar plugins.
 

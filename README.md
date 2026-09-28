@@ -21,13 +21,16 @@ npm run dev        # servidor de desarrollo
 npm run build      # build de producción (ver nota abajo)
 npm run start      # servir el build
 npm run type-check # gate estático confiable
+npm run test       # vitest run (6 archivos, 37 tests, environment node)
+npm run test -- --coverage # reporte v8 (requiere @vitest/coverage-v8)
+gentle-ai skill-registry refresh # regenerar .atl/skill-registry.md si agregás skills en .opencode/skills
 ```
 
 > **Nota sobre `npm run lint`**: está roto por diseño (Next 16 eliminó el CLI `next lint` y el repo no tiene config de ESLint). No agregar una a menos que se pida. El gate estático es `npm run type-check`; la verificación real es `npm run build` (que Vercel corre en cada push).
 >
 > **Nota sobre `npm run build` local**: en máquinas con poca RAM el build de Turbopack puede morir por OOM (Killed). El deploy de Vercel corre el build en producción; localmente alcanza con `npm run type-check` + el dev server.
 
-No hay test runner configurado (`strict_tdd: false`). `src/__tests__/requestId-descarte.test.mjs` es un artefacto manual.
+El runner de tests es **Vitest** (`vitest ^4.1.10`, config en `vitest.config.mts`): `npm run test` corre 6 archivos / 37 tests en `environment: node` (cobertura v8 con `npm run test -- --coverage`, 90%+ statements). `src/__tests__/requestId-descarte.test.mjs` es un test de Vitest real (importa `describe/it/expect` de `vitest`) y está incluido en el `include` del config, no es un artefacto manual. `strict_tdd: false` sigue en pie: los flujos SDD no exigen tests, aunque la suite existente es usable como gate.
 
 ## Configuración (env)
 
@@ -68,7 +71,7 @@ src/content/modules/
 
 - **Clerk es el ÚNICO proveedor de auth.** Supabase Auth NO se usa. RLS compara `auth.jwt() ->> 'sub'` contra columnas TEXT `id`/`user_id` — nunca `auth.uid()`.
 - Escrituras del lado servidor usan el cliente service-role `createAdminClient()` (`src/lib/supabase/admin.ts`) con `SUPABASE_SERVICE_ROLE_KEY`.
-- `src/proxy.ts` es el middleware; las rutas públicas se agregan ahí (API → 401, páginas → redirect a `/sign-in`).
+- `src/middleware.ts` es el middleware (Clerk `clerkMiddleware`); las rutas públicas se agregan ahí (API → 401, páginas → redirect a `/sign-in`). Legacy `src/proxy.ts` no existe.
 - El schema se aplica manualmente vía `supabase-migration.sql` en el SQL editor de Supabase. Tablas: `profiles`, `progress`, `streaks`, `reflection_completions` (+ `achievements`, `user_achievements`). Los widgets de gamificación usan `supabase_realtime` — las tablas nuevas de widgets realtime deben agregarse a la publicación.
 
 ### Python en el navegador (Pyodide)

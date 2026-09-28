@@ -177,7 +177,8 @@ export function getLessons(moduleSlug: string): LessonNavItem[] {
       .map((e) => ({
         slug: e.name,
         title: getLessonTitle(moduleSlug, e.name) ?? formatLessonName(e.name),
-      }));
+      }))
+      .sort((a, b) => a.slug.localeCompare(b.slug));
   } catch {
     return [];
   }

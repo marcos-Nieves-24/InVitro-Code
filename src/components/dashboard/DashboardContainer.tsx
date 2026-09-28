@@ -17,17 +17,10 @@ import {
 } from "@/lib/content/modules";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
-import { BioreactorProgress } from "./BioreactorProgress";
+import { BioreactorProgress } from "@/components/gamification/BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
-import {
-  BarChart3,
-  CheckCircle2,
-  Cpu,
-  FlaskConical,
-  Gem,
-  Terminal,
-} from "lucide-react";
+import { CheckCircle2, Gem } from "lucide-react";
 
 const MODULE_FAVICON: Record<string, string> = {
   ia: "/labs/modules/ia.svg",
@@ -94,6 +87,10 @@ export async function DashboardContainer() {
   const currentModuleCompleted = nextLesson ? completedByModule.get(nextLesson.moduleSlug) ?? 0 : 0;
   const currentModuleTotal = currentModule?.totalLessons ?? 0;
   const currentModulePct = currentModuleTotal > 0 ? Math.round((currentModuleCompleted / currentModuleTotal) * 100) : 0;
+  // Single source for "progress toward the next level" in this view: the level
+  // bar, its progressbar semantics, and the bioreactor bubble layer all read
+  // this one value. `nextLevelXp` is always > 0, so the division is safe.
+  const levelProgressPct = Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100);
   const missionFavicon = nextLesson ? MODULE_FAVICON[nextLesson.moduleSlug] ?? "/labs/modules/ia.svg" : null;
   const gender = (profileRes.data as { gender?: string | null } | null)?.gender ?? null;
 
@@ -131,12 +128,17 @@ export async function DashboardContainer() {
                     <p className="mt-1 text-sm text-storm">
                       <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
                     </p>
-                    <div className="mx-auto mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised md:mx-0">
+                    <div
+                      className="mx-auto mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
+                      role="progressbar"
+                      aria-valuenow={Math.round(levelProgressPct)}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuetext={`${totalXp} de ${levelInfo.nextLevelXp} XP, Nivel ${levelInfo.level}`}
+                    >
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-fog to-mint"
-                        style={{
-                          width: `${Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100)}%`,
-                        }}
+                        style={{ width: `${levelProgressPct}%` }}
                       />
                     </div>
                   </div>
@@ -156,15 +158,16 @@ export async function DashboardContainer() {
                   </p>
                 </div>
                 <div className="order-2 flex justify-center md:justify-end">
-                  <BioreactorProgress
-                    exp={totalXp}
-                    expToNext={levelInfo.nextLevelXp}
-                    level={levelInfo.level}
-                    rank={rankTitle(levelInfo.level)}
-                    progressToNext={levelInfo.progressToNext}
-                    size="xl"
-                    hideMeta
-                  />
+                  {/* The canonical bioreactor is an absolutely-positioned bubble
+                      overlay, so it must be given a bounded, positioned parent.
+                      Without this box it would escape to the nearest positioned
+                      ancestor (the video card) and cover the whole panel. */}
+                  <div
+                    aria-hidden="true"
+                    className="relative h-48 w-40 overflow-hidden rounded-2xl bg-surface-raised/40"
+                  >
+                    <BioreactorProgress progressPercentage={levelProgressPct} />
+                  </div>
                 </div>
               </div>
 
@@ -233,8 +236,6 @@ export async function DashboardContainer() {
               </div>
             </div>
           </section>
-
-          <footer className="relative mt-8 p-8 text-center text-sm text-storm" aria-hidden="true" />
         </div>
       </div>
         </div>
