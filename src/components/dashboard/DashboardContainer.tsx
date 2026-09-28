@@ -168,27 +168,27 @@ export async function DashboardContainer() {
                 </div>
               </div>
 
-              <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-5">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
+              <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-4">
+                <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
-                    <div className="mb-4 flex gap-3">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-12 w-12 object-contain" /> : null}
+                    <div className="mb-2 flex gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
+                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-9 w-9 object-contain" /> : null}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-display text-lg font-semibold">{nextLesson.title}</h4>
-                        <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
-                        <p className="mt-1 text-xs leading-relaxed text-slate line-clamp-2">
+                        <h4 className="font-display text-[15px] font-semibold leading-tight">{nextLesson.title}</h4>
+                        <p className="text-xs text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
+                        <p className="mt-1 text-[11px] leading-relaxed text-slate line-clamp-2">
                           {getModuleShortDescription(nextLesson.moduleSlug)}
                         </p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
+                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={240} label="Crecimiento in vitro" />
                       </div>
                     </div>
-                    <div className="mb-3 flex justify-center sm:hidden">
-                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
+                    <div className="mb-2 flex justify-center sm:hidden">
+                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={240} label="Crecimiento in vitro" />
                     </div>
                     {nextLesson && currentModule && (
                       <div className="mb-3">
@@ -201,7 +201,7 @@ export async function DashboardContainer() {
                         <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
                           <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
                         </div>
-                        <p className="mt-3 text-xs leading-relaxed text-storm">
+                        <p className="mt-2 text-[11px] leading-relaxed text-storm">
                           La planta crece con cada módulo:{" "}
                           <span className="font-bold text-ink">
                             {completedCount}/{totalLessons}

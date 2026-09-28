@@ -1,55 +1,65 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { TerminalChrome } from "@/components/shared/TerminalChrome";
-import { DendrogramSVG } from "@/components/landing/DendrogramSVG";
 
 type CodeLine = { text: string; type: "code" | "comment" };
 
 const codeLines: CodeLine[] = [
-  { text: "# Analisis de clustering jerarquico", type: "comment" },
-  { text: "import pandas as pd", type: "code" },
-  { text: "import numpy as np", type: "code" },
-  { text: "from sklearn.preprocessing import StandardScaler", type: "code" },
-  { text: 'data = pd.read_csv("expresion_genica.csv")', type: "code" },
-  { text: "scaled = StandardScaler().fit_transform(data)", type: "code" },
-  { text: 'Z = linkage(scaled, method="ward")', type: "code" },
-  { text: 'print("Clustering completado: 8 genes agrupados")', type: "code" },
+  { text: "from Bio import SeqIO", type: "code" },
+  { text: "from Bio.SeqRecord import SeqRecord", type: "code" },
+  { text: 'record = SeqIO.read("ecoli.fasta", "fasta")', type: "code" },
+  { text: 'assembly = SeqRecord(seq="ATGCGTACG...")', type: "code" },
+  { text: 'print(f"Genoma {len(record.seq)} bp ensamblado")', type: "code" },
 ];
 
-const outputLines = [
-  ">>> Ejecutando analisis...",
-  ">>> Normalizando datos... OK",
-  ">>> Calculando linkage (Ward)... OK",
-  ">>> Clustering completado: 8 genes agrupados",
+const outputLine = "> 4.6 Mbp · 4300 CDS";
+
+const NUCLEOTIDES: { base: string; color: string }[] = [
+  { base: "A", color: "#22c55e" },
+  { base: "T", color: "#ef4444" },
+  { base: "G", color: "#eab308" },
+  { base: "C", color: "#3b82f6" },
+  { base: "A", color: "#22c55e" },
+  { base: "T", color: "#ef4444" },
+  { base: "G", color: "#eab308" },
+  { base: "C", color: "#3b82f6" },
+  { base: "A", color: "#22c55e" },
+  { base: "G", color: "#eab308" },
+  { base: "T", color: "#ef4444" },
+  { base: "C", color: "#3b82f6" },
+  { base: "A", color: "#22c55e" },
+  { base: "C", color: "#3b82f6" },
+  { base: "G", color: "#eab308" },
+  { base: "T", color: "#ef4444" },
+  { base: "A", color: "#22c55e" },
+  { base: "T", color: "#ef4444" },
+  { base: "C", color: "#3b82f6" },
+  { base: "G", color: "#eab308" },
 ];
 
 function Highlight({ line }: { line: string }) {
   if (line.startsWith("#")) return <span className="text-white/40">{line}</span>;
-  if (line.startsWith("import ") || line.startsWith("from "))
+  if (line.startsWith("from ") || line.startsWith("import "))
     return <span className="text-cyan-400">{line}</span>;
   return <span className="text-white/80">{line}</span>;
 }
 
 export function PythonConsole() {
   const shouldReduceMotion = useReducedMotion();
-  const [phase, setPhase] = useState<"typing" | "output" | "dendrogram">(
-    shouldReduceMotion ? "dendrogram" : "typing",
-  );
+  const [phase, setPhase] = useState<"typing" | "done">(shouldReduceMotion ? "done" : "typing");
   const [displayed, setDisplayed] = useState<string[]>(
     shouldReduceMotion ? codeLines.map((l) => l.text) : [],
   );
   const [current, setCurrent] = useState("");
-  const [output, setOutput] = useState<string[]>(
-    shouldReduceMotion ? outputLines : [],
-  );
+  const [showOutput, setShowOutput] = useState(shouldReduceMotion ?? false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // typing
   useEffect(() => {
     if (shouldReduceMotion) {
-      setPhase("dendrogram");
+      setPhase("done");
+      setShowOutput(true);
       return;
     }
     if (phase !== "typing") return;
@@ -59,50 +69,22 @@ export function PythonConsole() {
     const tick = () => {
       if (!active) return;
       if (lineIdx >= codeLines.length) {
-        setPhase("output");
+        setPhase("done");
+        setTimeout(() => setShowOutput(true), 300);
         return;
       }
       const line = codeLines[lineIdx];
-      if (line.text === "") {
-        setDisplayed((p) => [...p, ""]);
-        lineIdx++;
-        timeoutRef.current = setTimeout(tick, 50);
-        return;
-      }
       if (charIdx <= line.text.length) {
         setCurrent(line.text.slice(0, charIdx));
         charIdx++;
-        timeoutRef.current = setTimeout(tick, 22 + Math.random() * 18);
+        timeoutRef.current = setTimeout(tick, 18 + Math.random() * 14);
       } else {
         setDisplayed((p) => [...p, line.text]);
         setCurrent("");
         lineIdx++;
         charIdx = 0;
-        timeoutRef.current = setTimeout(tick, 120);
+        timeoutRef.current = setTimeout(tick, 100);
       }
-    };
-    tick();
-    return () => {
-      active = false;
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [phase, shouldReduceMotion]);
-
-  // output
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-    if (phase !== "output") return;
-    let idx = 0;
-    let active = true;
-    const tick = () => {
-      if (!active) return;
-      if (idx >= outputLines.length) {
-        setPhase("dendrogram");
-        return;
-      }
-      setOutput((p) => [...p, outputLines[idx]]);
-      idx++;
-      timeoutRef.current = setTimeout(tick, 380);
     };
     tick();
     return () => {
@@ -113,32 +95,59 @@ export function PythonConsole() {
 
   return (
     <TerminalChrome title="python invitro-code --lab python" className="flex flex-col">
-      <div className="flex h-[420px] flex-col overflow-y-auto">
-        {phase !== "dendrogram" ? (
-          <div className="flex flex-col gap-0.5 font-mono text-sm">
-            {displayed.map((line, i) => (
-              <div key={i} className="whitespace-pre">
-                {line === "" ? "\u00A0" : <Highlight line={line} />}
-              </div>
-            ))}
-            {phase === "typing" && current !== "" && (
-              <div className="whitespace-pre">
-                <Highlight line={current} />
-                <span className="animate-pulse text-green-400">█</span>
-              </div>
+      <div className="flex h-[420px] flex-col gap-3 overflow-hidden">
+        <div className="flex flex-col gap-0.5 font-mono text-sm">
+          {displayed.map((line, i) => (
+            <div key={i} className="whitespace-pre">
+              <Highlight line={line} />
+            </div>
+          ))}
+          {phase === "typing" && current !== "" && (
+            <div className="whitespace-pre">
+              <Highlight line={current} />
+              <span className="animate-pulse text-green-400">█</span>
+            </div>
+          )}
+          {showOutput && (
+            <div className="mt-1 font-mono text-sm text-green-400">{outputLine}</div>
+          )}
+        </div>
+
+        <div className="mt-1 rounded-lg bg-white/5 p-3">
+          <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-white/40">
+            A T G C · nucleótidos
+          </p>
+          <div className="flex gap-1">
+            {NUCLEOTIDES.map((n, i) =>
+              shouldReduceMotion ? (
+                <div
+                  key={i}
+                  className="h-6 flex-1 rounded-sm"
+                  style={{ backgroundColor: n.color }}
+                  title={n.base}
+                  aria-label={n.base}
+                />
+              ) : (
+                <motion.div
+                  key={i}
+                  className="h-6 flex-1 rounded-sm"
+                  style={{ backgroundColor: n.color }}
+                  title={n.base}
+                  aria-label={n.base}
+                  initial={{ scaleY: 0, opacity: 0 }}
+                  animate={showOutput ? { scaleY: 1, opacity: 1 } : { scaleY: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.03, ease: "easeOut" }}
+                />
+              ),
             )}
-            {phase === "output" &&
-              output.map((line, i) => (
-                <div key={i} className="whitespace-pre text-green-400">
-                  {line}
-                </div>
-              ))}
           </div>
-        ) : (
-          <div className="flex-1">
-            <DendrogramSVG active />
+          <div className="mt-1.5 flex justify-between font-mono text-[10px] text-white/30">
+            <span style={{ color: "#22c55e" }}>A</span>
+            <span style={{ color: "#ef4444" }}>T</span>
+            <span style={{ color: "#eab308" }}>G</span>
+            <span style={{ color: "#3b82f6" }}>C</span>
           </div>
-        )}
+        </div>
       </div>
     </TerminalChrome>
   );
