@@ -2,11 +2,11 @@
 # =========================================================================
 # LAB 14: Manipulacion de datos con Pandas
 # -------------------------------------------------------------------------
-# Practicamos la creacion de DataFrames, la exploracion de datos, el
-# filtrado, el groupby, la fusion (merge) y la aplicacion de funciones.
+# Practicamos la creación de DataFrames, la exploracion de datos, el
+# filtrado, el groupby, la fusion (merge) y la aplicación de funciones.
 # =========================================================================
 
-# PASO 1: Creacion de DataFrames.
+# PASO 1: Creación de DataFrames.
 # Pandas organiza datos tabulares en DataFrames (filas x columnas).
 import pandas as pd
 import numpy as np
@@ -40,7 +40,7 @@ df = pd.DataFrame({
 
 print("\nPrimeras 5 filas:")
 print(df.head())
-print("\nResumen estadistico:")
+print("\nResumen estadístico:")
 print(df.describe().round(2))
 
 # PASO 3: Filtrado y seleccion.
@@ -50,16 +50,16 @@ category_a = df[df["Category"] == "A"]
 high_value = df[(df["Value"] > 50) & (df["Score"] > 60)]
 
 print(f"\nPuntaje alto (>70): {len(high_score)} filas")
-print(f"Categoria A: {len(category_a)} filas")
+print(f"Categoría A: {len(category_a)} filas")
 print(f"Valor alto + puntaje alto: {len(high_value)} filas")
 
 # PASO 4: GroupBy.
-# Agrupamos por categoria y agregamos con funciones de estadistica.
+# Agrupamos por categoría y agregamos con funciones de estadística.
 grouped = df.groupby("Category")
-print("\nMedia por categoria:")
+print("\nMedia por categoría:")
 print(grouped[["Value", "Score"]].mean().round(2))
 
-print("\nAgregaciones multiples:")
+print("\nAgregaciones múltiples:")
 print(grouped.agg({
     "Value": ["mean", "std", "count"],
     "Score": ["min", "max"]
@@ -74,8 +74,8 @@ merged = pd.merge(left, right, on="ID", how="left")
 print("\nMerge izquierdo (left):")
 print(merged)
 
-# PASO 6: Aplicacion de funciones.
-# apply() aplica una funcion (o lambda) a cada valor de una columna.
+# PASO 6: Aplicación de funciones.
+# apply() aplica una función (o lambda) a cada valor de una columna.
 df["Value_Rounded"] = df["Value"].apply(lambda x: round(x, 1))
 df["Score_Group"] = df["Score"].apply(
     lambda x: "High" if x >= 70 else ("Medium" if x >= 40 else "Low")
@@ -83,16 +83,16 @@ df["Score_Group"] = df["Score"].apply(
 print("\nDatos transformados (primeras 10 filas):")
 print(df.head(10))
 
-# PASO 7: Visualizacion con Plotly (grafico de barras por categoria).
+# PASO 7: Visualización con Plotly (gráfico de barras por categoría).
 # Plotly se carga bajo demanda en Pyodide. Graficamos el valor medio de
-# cada categoria: el codigo termina con fig.show() para que la consola
-# de visualizacion capture la figura.
+# cada categoría: el código termina con fig.show() para que la consola
+# de visualización capture la figura.
 import plotly.express as px
 
 means = df.groupby("Category")["Value"].mean().reset_index()
 fig = px.bar(means, x="Category", y="Value", color="Category",
-             title="Valor medio por categoria",
-             labels={"Value": "Valor medio", "Category": "Categoria"})
+             title="Valor medio por categoría",
+             labels={"Value": "Valor medio", "Category": "Categoría"})
 fig.show()
 
 # PASO 8: Resumen del laboratorio.

@@ -6,9 +6,9 @@
 # la sentencia match de Python 3.10+ y los condicionales anidados.
 # =========================================================================
 
-# PASO 1: if/elif/else basico.
-# Clasificamos un numero como positivo, negativo o cero.
-# En el original se pedía con input(); aqui usamos un valor fijo:
+# PASO 1: if/elif/else básico.
+# Clasificamos un número como positivo, negativo o cero.
+# En el original se pedía con input(); aquí usamos un valor fijo:
 #   num = float(input("Enter a number: "))
 num = -3.5
 if num > 0:
@@ -29,8 +29,8 @@ for val in test_values:
     else:
         print(f"  Falsy:  {val!r}")
 
-# PASO 3: Expresion ternaria.
-# Una forma compacta de if/else en una sola linea.
+# PASO 3: Expresión ternaria.
+# Una forma compacta de if/else en una sola línea.
 age = 17
 can_vote = "Si" if age >= 18 else "No"
 print(f"\nPuede votar (ternario): {can_vote}")
@@ -43,7 +43,7 @@ else:
 print(f"Puede votar (if/else): {can_vote}")
 
 # PASO 4: Sentencia match (Python 3.10+).
-# Match permite comparar contra multiples patrones de forma legible.
+# Match permite comparar contra múltiples patrones de forma legible.
 def get_day_type(day):
     match day.lower():
         case "monday" | "tuesday" | "wednesday" | "thursday" | "friday":
@@ -59,7 +59,7 @@ print(f"match('Funday') -> {get_day_type('Funday')}")
 
 # PASO 5: Condicionales anidados.
 # Simulamos un sistema de login con condiciones dentro de condiciones.
-# En el original las credenciales se pedian con input(); aqui van fijas:
+# En el original las credenciales se pedian con input(); aquí van fijas:
 #   username = input("Username: ")
 #   password = input("Password: ")
 username = "admin"
@@ -77,7 +77,7 @@ else:
 
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")
-print("Clasificamos numeros con if/elif/else.")
+print("Clasificamos números con if/elif/else.")
 print("Reconocimos valores truthy/falsy.")
 print("Usamos ternarios, la sentencia match y condicionales anidados.")
 ```

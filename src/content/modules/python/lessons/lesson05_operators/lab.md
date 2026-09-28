@@ -9,7 +9,7 @@
 
 # PASO 1: Operadores aritmeticos.
 # Python distingue entre division real (/), division entera (//) y
-# modulo (%). Tambien soporta la potenciacion con **.
+# módulo (%). También soporta la potenciación con **.
 a, b = 20, 7
 print(f"a = {a}, b = {b}")
 print(f"a + b = {a + b}")
@@ -21,8 +21,8 @@ print(f"a % b = {a % b}       (resto de la division)")
 print(f"a ** b = {a ** b}     (potencia)")
 
 # PASO 2: Verificador de par o impar.
-# El operador modulo % devuelve 0 cuando el numero es divisible por 2.
-# En el original se pedía el numero con input(); aqui usamos un fijo:
+# El operador módulo % devuelve 0 cuando el número es divisible por 2.
+# En el original se pedía el número con input(); aquí usamos un fijo:
 #   num = int(input("Enter a number: "))
 num = 37
 if num % 2 == 0:
@@ -49,21 +49,21 @@ print(f"not True  = {not True}")
 print(f"not False = {not False}")
 
 # PASO 4: Operadores de asignacion.
-# Atajos que combinan una operacion con la asignacion.
+# Atajos que combinan una operación con la asignacion.
 x = 10
 print(f"\nInicial: x = {x}")
 x += 5
-print(f"Despues de x += 5: x = {x}")
+print(f"Después de x += 5: x = {x}")
 x *= 2
-print(f"Despues de x *= 2: x = {x}")
+print(f"Después de x *= 2: x = {x}")
 x -= 7
-print(f"Despues de x -= 7: x = {x}")
+print(f"Después de x -= 7: x = {x}")
 x //= 3
-print(f"Despues de x //= 3: x = {x}")
+print(f"Después de x //= 3: x = {x}")
 
 # PASO 5: Condicion compuesta (clima).
 # Combinamos comparaciones con and/not para tomar una decision.
-# En el original los valores se pedian con input(); aqui van fijos:
+# En el original los valores se pedian con input(); aquí van fijos:
 #   temperature = float(input("Enter temperature (C): "))
 #   humidity = float(input("Enter humidity (%): "))
 temperature = 33.0

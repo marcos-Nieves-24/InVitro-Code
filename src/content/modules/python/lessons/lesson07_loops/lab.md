@@ -6,14 +6,14 @@
 # anidados y la clausula else asociada a un bucle.
 # =========================================================================
 
-# PASO 1: Bucle for basico.
+# PASO 1: Bucle for básico.
 # Recorremos una lista e imprimimos un mensaje por cada elemento.
 fruits = ["apple", "banana", "cherry", "date"]
 for fruit in fruits:
     print(f"Me gusta {fruit}s")
 
-# PASO 2: Practica con range().
-# range(inicio, fin, paso) genera secuencias de numeros.
+# PASO 2: Práctica con range().
+# range(inicio, fin, paso) genera secuencias de números.
 print("\nPares del 2 al 20:")
 for i in range(2, 21, 2):
     print(i, end=" ")
@@ -36,13 +36,13 @@ print("Blast off!")
 # PASO 4: break y continue.
 # break corta el bucle por completo; continue salta a la siguiente
 # iteracion sin ejecutar el resto del cuerpo.
-print("\nPrimer numero divisible por 7 y por 3:")
+print("\nPrimer número divisible por 7 y por 3:")
 for i in range(1, 100):
     if i % 7 == 0 and i % 3 == 0:
         print(f"Encontrado: {i}")
         break
 
-print("Numeros del 1 al 20 que NO son multiplos de 3:")
+print("Números del 1 al 20 que NO son multiplos de 3:")
 for i in range(1, 20):
     if i % 3 == 0:
         continue
@@ -69,8 +69,8 @@ for num in numbers:
 else:
     print(f"\n{search_for} no encontrado")
 
-# PASO 7: Aplicacion biotecnologica con enumerate.
-# enumerate() entrega (indice, valor) en cada iteracion: ideal para
+# PASO 7: Aplicación biotecnologica con enumerate.
+# enumerate() entrega (índice, valor) en cada iteracion: ideal para
 # etiquetar posiciones de una secuencia.
 dna = "AGCTAG"
 print("\nPosiciones de una secuencia de ADN:")

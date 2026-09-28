@@ -1,14 +1,14 @@
 ```python
 # =========================================================================
-# LAB 11: Diccionarios en la practica
+# LAB 11: Diccionarios en la práctica
 # -------------------------------------------------------------------------
-# Practicamos la creacion, el acceso, la actualizacion de diccionarios,
-# los diccionarios por comprension, el conteo de palabras y los
+# Practicamos la creación, el acceso, la actualizacion de diccionarios,
+# los diccionarios por comprensión, el conteo de palabras y los
 # diccionarios anidados.
 # =========================================================================
 
-# PASO 1: Creacion y acceso a diccionarios.
-# Un diccionario asocia claves (keys) con valores (values). Aqui cada
+# PASO 1: Creación y acceso a diccionarios.
+# Un diccionario asocia claves (keys) con valores (values). Aquí cada
 # contacto es un diccionario anidado dentro de otro diccionario.
 contacts = {
     "Alice": {"phone": "555-0101", "email": "alice@example.com"},
@@ -28,7 +28,7 @@ print("\nTodos los contactos:")
 for name, info in contacts.items():
     print(f"  {name}: {info['phone']}, {info['email']}")
 
-# PASO 3: Diccionario por comprension.
+# PASO 3: Diccionario por comprensión.
 # Construimos un diccionario a partir de dos listas con zip() y luego lo
 # filtramos con un condicional.
 names = ["Alice", "Bob", "Charlie", "Diana"]
@@ -72,5 +72,5 @@ print(f"\nVentas totales por producto: {dict(product_totals)}")
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")
 print("Creamos, accedimos y actualizamos diccionarios (incluidos anidados).")
-print("Construimos diccionarios por comprension y contamos con get/defaultdict.")
+print("Construimos diccionarios por comprensión y contamos con get/defaultdict.")
 ```

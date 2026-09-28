@@ -3,11 +3,11 @@
 # LAB 3: Trabajando con variables
 # -------------------------------------------------------------------------
 # Practicamos asignacion de variables, convenciones de nombres, tipado
-# dinamico, entrada/salida basica, intercambio de variables y el calculo
+# dinámico, entrada/salida básica, intercambio de variables y el cálculo
 # de contenido GC de una secuencia de ADN.
 # =========================================================================
 
-# PASO 1: Asignacion basica de variables.
+# PASO 1: Asignacion básica de variables.
 # Elegimos nombres descriptivos en snake_case (convencion de Python).
 species = "Homo sapiens"        # texto (string)
 chromosome_count = 46           # entero (int)
@@ -16,9 +16,9 @@ print("Especie:", species)
 print("Cromosomas:", chromosome_count)
 print("Tamano del genoma (miles de millones de pb):", genome_size)
 
-# PASO 2: Tipado dinamico.
+# PASO 2: Tipado dinámico.
 # Una misma variable puede cambiar de tipo en cualquier momento: Python
-# infiere el tipo automaticamente segun el valor asignado.
+# infiere el tipo automáticamente según el valor asignado.
 value = 100
 print("\nvalue = 100 ->", type(value).__name__)
 value = 100.0
@@ -59,6 +59,6 @@ print(f"\n{sequence_id}: longitud={len(sequence)} pb, GC content = {gc_percent:.
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")
 print("Variables asignadas con nombres descriptivos en snake_case.")
-print("Tipado dinamico demostrado: la variable 'value' cambio de tipo 3 veces.")
+print("Tipado dinámico demostrado: la variable 'value' cambio de tipo 3 veces.")
 print("Contenido GC calculado con count() y operaciones aritmeticas.")
 ```

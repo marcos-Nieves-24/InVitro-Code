@@ -1,16 +1,16 @@
 ```python
 # =========================================================================
-# LAB 16: Visualizacion estadistica con Plotly
+# LAB 16: Visualización estadística con Plotly
 # -------------------------------------------------------------------------
-# El laboratorio original usaba bibliotecas de graficos estaticos; aqui
-# reescribimos las mismas visualizaciones estadisticas con Plotly sobre el
+# El laboratorio original usaba bibliotecas de gráficos estaticos; aquí
+# reescribimos las mismas visualizaciones estadísticas con Plotly sobre el
 # dataset "tips" (propinas de un restaurante), incluido en plotly.express:
 # px.data.tips(). Cada figura termina con fig.show() para la consola.
 # =========================================================================
 
 # PASO 1: Cargar el dataset "tips".
 # plotly.express trae datasets de ejemplo empaquetados. "tips" registra
-# el total de la cuenta, la propina, el dia, el sexo, etc. por cliente.
+# el total de la cuenta, la propina, el día, el sexo, etc. por cliente.
 import plotly.express as px
 import pandas as pd
 import numpy as np
@@ -22,10 +22,10 @@ print("\nDimensiones:", tips.shape)
 
 # PASO 2: Box plot.
 # El box plot resume la distribucion con cuartiles y valores atipicos.
-# Mostramos la cuenta total por dia, separada por sexo (color).
+# Mostramos la cuenta total por día, separada por sexo (color).
 fig = px.box(tips, x="day", y="total_bill", color="sex",
-             title="Distribucion de la cuenta por dia y sexo",
-             labels={"total_bill": "Total de la cuenta ($)", "day": "Dia"})
+             title="Distribucion de la cuenta por día y sexo",
+             labels={"total_bill": "Total de la cuenta ($)", "day": "Día"})
 fig.show()
 
 # PASO 3: Violin plot.
@@ -67,17 +67,17 @@ fig = px.imshow(corr, text_auto=True, color_continuous_scale="RdBu_r",
 fig.show()
 
 # PASO 6: Dispersion personalizada.
-# Grafico de total vs propina coloreado por momento del dia (time) y con
-# el tamano del marcador proporcional al numero de comensales (size).
+# Gráfico de total vs propina coloreado por momento del día (time) y con
+# el tamano del marcador proporcional al número de comensales (size).
 fig = px.scatter(tips, x="total_bill", y="tip", color="time", size="size",
-                 size_max=30, title="Analisis de propinas",
+                 size_max=30, title="Análisis de propinas",
                  labels={"total_bill": "Total de la cuenta ($)", "tip": "Propina ($)"})
 fig.update_layout(legend=dict(orientation="h", y=1.1))
 fig.show()
 
 # PASO 7: Resumen del laboratorio.
 print("\n--- Resumen ---")
-print("Box plot y violin para comparar distribuciones por dia y sexo.")
+print("Box plot y violin para comparar distribuciones por día y sexo.")
 print("Matriz de dispersion y mapa de calor de correlaciones.")
-print("Graficos interactivos de Plotly en lugar de Seaborn/Matplotlib.")
+print("Gráficos interactivos de Plotly en lugar de Seaborn/Matplotlib.")
 ```

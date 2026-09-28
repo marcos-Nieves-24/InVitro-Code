@@ -1,14 +1,14 @@
 ```python
 # =========================================================================
-# LAB 15: Visualizacion de datos con Plotly
+# LAB 15: Visualización de datos con Plotly
 # -------------------------------------------------------------------------
-# El laboratorio original usaba Matplotlib; aqui reescribimos los mismos
-# graficos con Plotly para que se muestren de forma INTERACTIVA en la
-# consola de visualizacion: lineas, dispersion, barras, histograma y un
+# El laboratorio original usaba Matplotlib; aquí reescribimos los mismos
+# gráficos con Plotly para que se muestren de forma INTERACTIVA en la
+# consola de visualización: líneas, dispersion, barras, histograma y un
 # panel de subplots 2x2. Cada figura termina con fig.show().
 # =========================================================================
 
-# PASO 1: Grafico de lineas (line plot).
+# PASO 1: Gráfico de líneas (line plot).
 # Graficamos dos ondas senoidales con un desfase. px.line recibe un
 # DataFrame, por eso construimos uno con pandas.
 import numpy as np
@@ -24,11 +24,11 @@ df_sine = pd.DataFrame({
 
 fig = px.line(df_sine, x="x", y=["sin(x)", "sin(x + pi/2)"],
               title="Ondas senoidales",
-              labels={"x": "x", "value": "y", "variable": "Funcion"})
+              labels={"x": "x", "value": "y", "variable": "Función"})
 fig.update_layout(legend=dict(orientation="h", y=1.1))
 fig.show()
 
-# PASO 2: Grafico de dispersion (scatter).
+# PASO 2: Gráfico de dispersion (scatter).
 # Datos con ruido alrededor de una recta y=2x. El color de cada punto
 # depende del valor de y (color_continuous_scale = viridis).
 np.random.seed(42)
@@ -42,20 +42,20 @@ fig = px.scatter(df_scatter, x="X", y="Y", color="Y",
                  labels={"X": "X", "Y": "Y"})
 fig.show()
 
-# PASO 3: Grafico de barras.
+# PASO 3: Gráfico de barras.
 # Barras con colores personalizados tomados de una escala continua.
 categories = ["A", "B", "C", "D", "E"]
 values = [23, 45, 12, 67, 34]
-df_bar = pd.DataFrame({"Categoria": categories, "Valor": values})
+df_bar = pd.DataFrame({"Categoría": categories, "Valor": values})
 
-fig = px.bar(df_bar, x="Categoria", y="Valor", color="Valor",
+fig = px.bar(df_bar, x="Categoría", y="Valor", color="Valor",
              color_continuous_scale="viridis",
-             title="Grafico de barras con colores personalizados",
-             labels={"Categoria": "Categoria", "Valor": "Valor"})
+             title="Gráfico de barras con colores personalizados",
+             labels={"Categoría": "Categoría", "Valor": "Valor"})
 fig.show()
 
 # PASO 4: Histograma.
-# px.histogram agrupa los datos en intervalos automaticamente y muestra
+# px.histogram agrupa los datos en intervalos automáticamente y muestra
 # la distribucion. Con histnorm="probability" normalizamos la altura.
 data = np.random.randn(1000)
 df_hist = pd.DataFrame({"Valor": data})
@@ -67,7 +67,7 @@ fig.show()
 
 # PASO 5: Panel de subplots 2x2.
 # make_subplots crea una cuadricula de paneles y add_trace ubica cada
-# grafico con los argumentos row y col. Aqui combinamos linea, barras,
+# gráfico con los argumentos row y col. Aquí combinamos línea, barras,
 # dispersion e histograma en una sola figura.
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
@@ -81,13 +81,13 @@ fig.add_trace(go.Scatter(x=np.random.randn(50), y=np.random.randn(50),
                          mode="markers", name="Dispersion"), row=2, col=1)
 fig.add_trace(go.Histogram(x=np.random.randn(500), nbinsx=20, name="Histograma"), row=2, col=2)
 
-fig.update_layout(title="Panel de graficos 2x2", height=600,
+fig.update_layout(title="Panel de gráficos 2x2", height=600,
                   showlegend=False)
 fig.show()
 
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")
-print("Creamos lineas, dispersion, barras e histogramas con Plotly.")
+print("Creamos líneas, dispersion, barras e histogramas con Plotly.")
 print("Todo es interactivo: puedes hacer zoom, pan y ver tooltips.")
-print("El panel 2x2 combina 4 graficos con make_subplots.")
+print("El panel 2x2 combina 4 gráficos con make_subplots.")
 ```

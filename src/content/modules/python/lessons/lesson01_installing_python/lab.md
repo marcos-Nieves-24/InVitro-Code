@@ -1,25 +1,25 @@
 ```python
 # =========================================================================
-# LAB 1: Configuracion de tu entorno de Python
+# LAB 1: Configuración de tu entorno de Python
 # -------------------------------------------------------------------------
 # En el laboratorio original instalabas Python, creabas un virtual
-# environment y verificabas la instalacion con un script. Aqui no puedes
+# environment y verificabas la instalación con un script. Aquí no puedes
 # ejecutar comandos de terminal, pero SI puedes verificar tu entorno real
 # de Python (el de Pyodide) y repasar cada concepto en los comentarios.
 # =========================================================================
 
-# PASO 1: Verificar la version de Python y la plataforma.
+# PASO 1: Verificar la versión de Python y la plataforma.
 # Los comandos originales de terminal se muestran como comentarios:
 #   python --version
-# En Python, sys.version guarda la informacion completa de la version.
+# En Python, sys.version guarda la información completa de la versión.
 import sys
 import platform
-print("Version de Python:", sys.version.split()[0])
+print("Versión de Python:", sys.version.split()[0])
 print("Plataforma:", platform.platform())
 print("Ruta del interprete:", sys.executable)
 
 # PASO 2: Repasar el concepto de virtual environment (venv).
-# En tu terminal real harías lo siguiente (aqui es solo teoria):
+# En tu terminal real harías lo siguiente (aquí es solo teoría):
 #   mkdir ml_project && cd ml_project
 #   python -m venv venv
 #   source venv/bin/activate      # macOS/Linux
@@ -31,10 +31,10 @@ print("Un venv aísla las dependencias de cada proyecto.")
 print("Se crea con: python -m venv venv")
 print("Se activa con: source venv/bin/activate (o venv\\Scripts\\activate en Windows)")
 
-# PASO 3: Verificar que los paquetes cientificos estan instalados.
+# PASO 3: Verificar que los paquetes científicos están instalados.
 # El comando original era: pip install numpy pandas matplotlib jupyter
 # En Pyodide estos paquetes ya vienen precargados. Comprobamos cada
-# import y mostramos su version con el atributo __version__.
+# import y mostramos su versión con el atributo __version__.
 print("\n--- Paquetes instalados ---")
 try:
     import numpy as np
@@ -54,14 +54,14 @@ try:
 except ImportError:
     print("Matplotlib: NO instalado")
 
-# PASO 4: Comprobar que los modulos estandar que usaremos existen.
-# sys y platform ya se importaron arriba. Tambien verificamos que el
-# modulo math (matematicas basicas) esta disponible sin instalar nada.
+# PASO 4: Comprobar que los módulos estándar que usaremos existen.
+# sys y platform ya se importaron arriba. También verificamos que el
+# módulo math (matemáticas básicas) está disponible sin instalar nada.
 import math
-print("\n--- Modulos de la biblioteca estandar ---")
-print(f"math.pi = {math.pi:.5f} (modulo estandar, sin instalar)")
+print("\n--- Módulos de la biblioteca estándar ---")
+print(f"math.pi = {math.pi:.5f} (módulo estándar, sin instalar)")
 
-# PASO 5: Repasar la gestion de dependencias con requirements.txt.
+# PASO 5: Repasar la gestión de dependencias con requirements.txt.
 # En tu terminal real guardarias el listado con:
 #   pip freeze > requirements.txt
 #   cat requirements.txt
@@ -80,7 +80,7 @@ except ImportError:
     print("\nBiopython: no disponible en este entorno. En tu terminal:")
     print("  pip install biopython")
 
-# PASO 7: Resumen final de la verificacion.
-print("\n--- Verificacion completa ---")
-print("Tu entorno de Python esta configurado y es funcional.")
+# PASO 7: Resumen final de la verificación.
+print("\n--- Verificación completa ---")
+print("Tu entorno de Python está configurado y es funcional.")
 ```

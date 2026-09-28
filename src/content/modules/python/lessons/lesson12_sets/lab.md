@@ -2,12 +2,12 @@
 # =========================================================================
 # LAB 12: Conjuntos y operaciones de conjuntos
 # -------------------------------------------------------------------------
-# Practicamos la creacion de conjuntos (sets), las operaciones de algebra
+# Practicamos la creación de conjuntos (sets), las operaciones de algebra
 # de conjuntos, la eliminacion de duplicados, la prueba de pertenencia y
 # las relaciones entre conjuntos.
 # =========================================================================
 
-# PASO 1: Creacion de conjuntos.
+# PASO 1: Creación de conjuntos.
 # Un conjunto es una coleccion SIN elementos duplicados y SIN orden.
 # Se crea con set() o con llaves {} (pero {} vacio es un diccionario).
 empty = set()
@@ -34,7 +34,7 @@ print(f"Diferencia (B - A): {b - a}")
 print(f"Diferencia simetrica (A ^ B): {a ^ b}")
 
 # PASO 3: Eliminacion de duplicados.
-# Uso practico: limpiar una lista de IDs de usuarios repetidos.
+# Uso práctico: limpiar una lista de IDs de usuarios repetidos.
 user_ids = [101, 102, 103, 101, 104, 105, 102, 106]
 unique_users = set(user_ids)
 print(f"\nOriginal: {user_ids}")
@@ -45,11 +45,11 @@ unique_list = sorted(unique_users)
 print(f"Unicos (ordenados): {unique_list}")
 
 # PASO 4: Prueba de pertenencia.
-# El operador in es MUY rapido en conjuntos (busqueda en O(1)).
+# El operador in es MUY rápido en conjuntos (busqueda en O(1)).
 valid_codes = {"A01", "B02", "C03", "D04", "E05"}
 
 test_codes = ["A01", "X99", "C03", "Z12"]
-print("\nValidacion de codigos:")
+print("\nValidacion de códigos:")
 for code in test_codes:
     if code in valid_codes:
         print(f"  {code}: VALIDO")
@@ -66,7 +66,7 @@ print(f"\nB es subconjunto de A: {b.issubset(a)}")
 print(f"A es superconjunto de B: {a.issuperset(b)}")
 print(f"A y C son disjuntos: {a.isdisjoint(c)}")
 
-# PASO 6: Aplicacion biotecnologica - genes compartidos.
+# PASO 6: Aplicación biotecnologica - genes compartidos.
 # Comparar dos conjuntos de genes expresados es tarea tipica en
 # transcriptomica: los genes comunes son los co-expresados.
 genes_cancer = {"TP53", "BRCA1", "EGFR", "MYC"}
