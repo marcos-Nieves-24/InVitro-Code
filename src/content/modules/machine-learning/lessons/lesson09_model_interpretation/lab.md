@@ -1,6 +1,6 @@
 ```python
 # =========================================================================
-# LAB 9: Interpretacion de modelos
+# LAB 9: Interpretación de modelos
 # -------------------------------------------------------------------------
 # Entrenamos un bosque aleatorio sobre cancer de mama y comparamos la
 # importancia por impureza con la importancia por permutacion. Cerramos
@@ -8,11 +8,11 @@
 # =========================================================================
 
 # PASO 1: Bosque aleatorio sobre cancer de mama.
-import numpy as np                         # Operaciones matematicas
+import numpy as np                         # Operaciones matemáticas
 from sklearn.datasets import load_breast_cancer  # Cargar datasets de ejemplo
-from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.model_selection import train_test_split  # División train/test y validación
 from sklearn.ensemble import RandomForestClassifier  # Ensembles (Random Forest, etc.)
-from sklearn.metrics import accuracy_score  # Metricas de evaluacion
+from sklearn.metrics import accuracy_score  # Métricas de evaluación
 
 cancer = load_breast_cancer()
 X_train, X_test, y_train, y_test = train_test_split(
@@ -37,7 +37,7 @@ for i in np.argsort(perm_mean)[::-1][:5]:
 
 # PASO 3: Comparacion entre impureza y permutacion.
 # La impureza favorece features con muchos valores; la permutacion no.
-import plotly.express as px                # Graficos interactivos
+import plotly.express as px                # Gráficos interactivos
 
 orden = np.argsort(perm_mean)[::-1][:10]
 fig = px.bar(x=cancer.feature_names[orden],
@@ -46,13 +46,13 @@ fig = px.bar(x=cancer.feature_names[orden],
              title="Importancia por impureza vs permutacion (top 10)")
 fig.add_bar(x=cancer.feature_names[orden], y=perm_mean[orden], name="Permutacion")
 fig.update_layout(barmode="group", xaxis_tickangle=-45)
-fig.show()                                 # Mostrar grafico interactivo
-print("PASO 3 - Ambas tecnicas coinciden en la feature principal.")
+fig.show()                                 # Mostrar gráfico interactivo
+print("PASO 3 - Ambas técnicas coinciden en la feature principal.")
 
 # PASO 4: Dependencia parcial de la feature mas importante.
 # Variamos la feature sobre su rango y vemos como cambia la probabilidad
 # predicha, manteniendo el resto de features fijas en su media.
-import plotly.graph_objects as go       # Graficos de bajo nivel
+import plotly.graph_objects as go       # Gráficos de bajo nivel
 
 mejor = orden[0]
 grid = np.linspace(X_test[:, mejor].min(), X_test[:, mejor].max(), 60)
@@ -65,6 +65,6 @@ fig = go.Figure(go.Scatter(x=grid, y=prob, mode="lines",
 fig.update_layout(title=f"PDP de {cancer.feature_names[mejor]}",
                   xaxis_title=cancer.feature_names[mejor],
                   yaxis_title="Probabilidad de maligno")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 print(f"PASO 4 - A mayor {cancer.feature_names[mejor]}, mayor riesgo predicho.")
 ```

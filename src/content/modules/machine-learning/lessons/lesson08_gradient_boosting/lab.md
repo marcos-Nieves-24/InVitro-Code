@@ -1,19 +1,19 @@
 ```python
 # =========================================================================
-# LAB 8: Gradient Boosting - regresion por etapas
+# LAB 8: Gradient Boosting - regresión por etapas
 # -------------------------------------------------------------------------
 # Entrenamos un GradientBoostingRegressor sobre diabetes, monitoreamos el
 # error de entrenamiento y prueba en cada etapa del boosting y comparamos
-# el resultado con una regresion lineal de referencia.
+# el resultado con una regresión lineal de referencia.
 # =========================================================================
 
-# PASO 1: Datos y modelo de referencia (regresion lineal).
+# PASO 1: Datos y modelo de referencia (regresión lineal).
 # La linea de base ayuda a medir la ganancia real del boosting.
-import numpy as np                         # Operaciones matematicas
+import numpy as np                         # Operaciones matemáticas
 from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
-from sklearn.model_selection import train_test_split  # Division train/test y validacion
-from sklearn.linear_model import LinearRegression  # Modelos de regresion
-from sklearn.metrics import mean_squared_error, r2_score  # Metricas de evaluacion
+from sklearn.model_selection import train_test_split  # División train/test y validación
+from sklearn.linear_model import LinearRegression  # Modelos de regresión
+from sklearn.metrics import mean_squared_error, r2_score  # Métricas de evaluación
 
 data = load_diabetes()
 X_train, X_test, y_train, y_test = train_test_split(
@@ -22,12 +22,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 lineal = LinearRegression()
 lineal.fit(X_train, y_train)
 pred_lineal = lineal.predict(X_test)
-print("PASO 1 - Regresion lineal de referencia")
+print("PASO 1 - Regresión lineal de referencia")
 print(f"MSE prueba: {mean_squared_error(y_test, pred_lineal):.2f}")
 print(f"R2 prueba: {r2_score(y_test, pred_lineal):.3f}")
 
 # PASO 2: Entrenamiento del GradientBoostingRegressor.
-# Cada arbol nuevo corrige los residuos del conjunto de etapas anteriores.
+# Cada árbol nuevo corrige los residuos del conjunto de etapas anteriores.
 from sklearn.ensemble import GradientBoostingRegressor  # Ensembles (Random Forest, etc.)
 
 gb = GradientBoostingRegressor(n_estimators=200, learning_rate=0.1,
@@ -38,7 +38,7 @@ print(f"MSE prueba: {mean_squared_error(y_test, gb.predict(X_test)):.2f}")
 print(f"R2 prueba: {r2_score(y_test, gb.predict(X_test)):.3f}")
 
 # PASO 3: Error por etapas con staged_predict.
-# Vemos como evoluciona el modelo con cada arbol que se agrega.
+# Vemos como evoluciona el modelo con cada árbol que se agrega.
 errores_train = []
 errores_test = []
 for p_train, p_test in zip(gb.staged_predict(X_train),
@@ -50,22 +50,22 @@ print("PASO 3 - Error de prueba en algunas etapas:")
 for n in [10, 50, 100, 150, 200]:
     print(f"  n_estimators={n}: MSE prueba {errores_test[n - 1]:.2f}")
 
-import plotly.express as px                # Graficos interactivos
+import plotly.express as px                # Gráficos interactivos
 
 fig = px.line(x=list(range(1, 201)), y=errores_test,
               labels={"x": "n_estimators", "y": "MSE"},
               title="Error por etapa del boosting")
 fig.add_scatter(x=list(range(1, 201)), y=errores_train, mode="lines",
                 name="Entrenamiento")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 4: Importancia de las features del boosting.
-# Las features mas usadas en los arboles reducen mas el error residual.
+# Las features mas usadas en los árboles reducen mas el error residual.
 importancias = gb.feature_importances_
 fig = px.bar(x=data.feature_names, y=importancias,
              labels={"x": "Feature", "y": "Importancia"},
              title="Importancia de features - GradientBoosting")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 print("PASO 4 - Feature mas importante:",
       data.feature_names[int(np.argmax(importancias))])
 ```

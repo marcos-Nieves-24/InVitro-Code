@@ -2,19 +2,19 @@
 # =========================================================================
 # LAB 5: Bosque aleatorio
 # -------------------------------------------------------------------------
-# Comparamos un arbol individual contra un bosque aleatorio, analizamos la
+# Comparamos un árbol individual contra un bosque aleatorio, analizamos la
 # importancia de las features y evaluamos un escenario desbalanceado donde
 # la exactitud es enganosa y conviene mirar el recall.
 # =========================================================================
 
 # PASO 1: Datos sinteticos con 6 features (2 redundantes).
 # Varias features son informativas y otras aportan ruido.
-import numpy as np                         # Operaciones matematicas
+import numpy as np                         # Operaciones matemáticas
 from sklearn.datasets import make_classification  # Cargar datasets de ejemplo
-from sklearn.model_selection import train_test_split  # Division train/test y validacion
-from sklearn.tree import DecisionTreeClassifier  # Arboles de decision
+from sklearn.model_selection import train_test_split  # División train/test y validación
+from sklearn.tree import DecisionTreeClassifier  # Árboles de decision
 from sklearn.ensemble import RandomForestClassifier  # Ensembles (Random Forest, etc.)
-from sklearn.metrics import accuracy_score, recall_score  # Metricas de evaluacion
+from sklearn.metrics import accuracy_score, recall_score  # Métricas de evaluación
 
 np.random.seed(42)                         # Fijar semilla para reproducibilidad
 X, y = make_classification(n_samples=800, n_features=6, n_informative=4,
@@ -22,25 +22,25 @@ X, y = make_classification(n_samples=800, n_features=6, n_informative=4,
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42)
 
-arbol = DecisionTreeClassifier(max_depth=5, random_state=42)
-arbol.fit(X_train, y_train)
+árbol = DecisionTreeClassifier(max_depth=5, random_state=42)
+árbol.fit(X_train, y_train)
 bosque = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
 bosque.fit(X_train, y_train)
-print("PASO 1 - Arbol individual vs bosque")
-print(f"Arbol  - exactitud prueba: {accuracy_score(y_test, arbol.predict(X_test)):.3f}")
+print("PASO 1 - Árbol individual vs bosque")
+print(f"Árbol  - exactitud prueba: {accuracy_score(y_test, árbol.predict(X_test)):.3f}")
 print(f"Bosque - exactitud prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
 
 # PASO 2: Importancia de features de ambos modelos.
-# El bosque promedia muchos arboles y estabiliza las importancias.
-import plotly.express as px                # Graficos interactivos
+# El bosque promedia muchos árboles y estabiliza las importancias.
+import plotly.express as px                # Gráficos interactivos
 
 nombres = [f"f{i}" for i in range(6)]
 fig = px.bar(x=nombres, y=bosque.feature_importances_,
              labels={"x": "Feature", "y": "Importancia"},
-             title="Importancia de features: arbol vs bosque")
-fig.add_bar(x=nombres, y=arbol.feature_importances_, name="Arbol")
+             title="Importancia de features: árbol vs bosque")
+fig.add_bar(x=nombres, y=árbol.feature_importances_, name="Árbol")
 fig.update_layout(barmode="group")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 print("PASO 2 - El bosque reparte mejor la importancia entre features utiles.")
 
 # PASO 3: Escenario desbalanceado.
@@ -57,18 +57,18 @@ print("PASO 3 - Datos desbalanceados")
 print(f"Exactitud: {accuracy_score(yi_te, pred_imb):.3f}")
 print(f"Recall clase minoritaria: {recall_score(yi_te, pred_imb):.3f}")
 
-# PASO 4: Efecto del numero de arboles.
+# PASO 4: Efecto del numero de árboles.
 # Tras cierto n, el bosque se estabiliza: rendimientos decrecientes.
-n_arboles = [10, 50, 100, 200, 400]
+n_árboles = [10, 50, 100, 200, 400]
 scores = []
-for n in n_arboles:
+for n in n_árboles:
     rf = RandomForestClassifier(n_estimators=n, random_state=42)
     rf.fit(X_train, y_train)
     scores.append(accuracy_score(y_test, rf.predict(X_test)))
 
-fig = px.line(x=n_arboles, y=scores,
+fig = px.line(x=n_árboles, y=scores,
               labels={"x": "n_estimators", "y": "Exactitud prueba"},
-              title="Exactitud segun numero de arboles")
-fig.show()                                 # Mostrar grafico interactivo
-print("PASO 4 - A partir de ~100 arboles la mejora es marginal.")
+              title="Exactitud según numero de árboles")
+fig.show()                                 # Mostrar gráfico interactivo
+print("PASO 4 - A partir de ~100 árboles la mejora es marginal.")
 ```

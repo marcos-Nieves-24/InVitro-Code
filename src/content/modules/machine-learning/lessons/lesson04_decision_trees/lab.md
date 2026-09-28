@@ -1,32 +1,32 @@
 ```python
 # =========================================================================
-# LAB 4: Arboles de decision
+# LAB 4: Árboles de decision
 # -------------------------------------------------------------------------
 # Entrenamos un DecisionTreeClassifier sobre iris, imprimimos su estructura
 # textual (nodos, umbrales, impurezas y hojas) y analizamos la importancia
 # de cada feature junto con el efecto de la profundidad.
 # =========================================================================
 
-# PASO 1: Datos y entrenamiento del arbol.
-# Limitamos la profundidad a 3 para obtener un arbol interpretable.
-import numpy as np                         # Operaciones matematicas
+# PASO 1: Datos y entrenamiento del árbol.
+# Limitamos la profundidad a 3 para obtener un árbol interpretable.
+import numpy as np                         # Operaciones matemáticas
 from sklearn.datasets import load_iris  # Cargar datasets de ejemplo
-from sklearn.tree import DecisionTreeClassifier  # Arboles de decision
-from sklearn.model_selection import train_test_split  # Division train/test y validacion
-from sklearn.metrics import accuracy_score  # Metricas de evaluacion
+from sklearn.tree import DecisionTreeClassifier  # Árboles de decision
+from sklearn.model_selection import train_test_split  # División train/test y validación
+from sklearn.metrics import accuracy_score  # Métricas de evaluación
 
 iris = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(
     iris.data, iris.target, test_size=0.3, random_state=42)
 
-arbol = DecisionTreeClassifier(max_depth=3, random_state=42)
-arbol.fit(X_train, y_train)
-y_pred = arbol.predict(X_test)
-print("PASO 1 - Arbol entrenado")
+árbol = DecisionTreeClassifier(max_depth=3, random_state=42)
+árbol.fit(X_train, y_train)
+y_pred = árbol.predict(X_test)
+print("PASO 1 - Árbol entrenado")
 print(f"Exactitud en prueba: {accuracy_score(y_test, y_pred):.3f}")
 
-# PASO 2: Estructura textual del arbol.
-# Recorremos el arbol en preorden imprimiendo feature, umbral y muestras.
+# PASO 2: Estructura textual del árbol.
+# Recorremos el árbol en preorden imprimiendo feature, umbral y muestras.
 def imprimir_nodo(clf, nombres, nodo=0, nivel=0):
     tree = clf.tree_
     muestras = tree.n_node_samples[nodo]
@@ -43,23 +43,23 @@ def imprimir_nodo(clf, nombres, nodo=0, nivel=0):
         imprimir_nodo(clf, nombres, tree.children_left[nodo], nivel + 1)
         imprimir_nodo(clf, nombres, tree.children_right[nodo], nivel + 1)
 
-print("PASO 2 - Estructura textual del arbol")
-imprimir_nodo(arbol, iris.feature_names)
+print("PASO 2 - Estructura textual del árbol")
+imprimir_nodo(árbol, iris.feature_names)
 
 # PASO 3: Importancia de las features.
-# Mide cuanta impureza reduce cada feature en las divisiones del arbol.
-import plotly.express as px                # Graficos interactivos
+# Mide cuanta impureza reduce cada feature en las divisiónes del árbol.
+import plotly.express as px                # Gráficos interactivos
 
-importancias = arbol.feature_importances_
+importancias = árbol.feature_importances_
 fig = px.bar(x=iris.feature_names, y=importancias,
              labels={"x": "Feature", "y": "Importancia"},
              title="Importancia de features - DecisionTreeClassifier")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 print("PASO 3 - Feature mas importante:",
       iris.feature_names[int(np.argmax(importancias))])
 
 # PASO 4: Profundidad y sobreajuste.
-# Un arbol profundo memoriza los datos y degrada su rendimiento en prueba.
+# Un árbol profundo memoriza los datos y degrada su rendimiento en prueba.
 from sklearn.datasets import load_breast_cancer  # Cargar datasets de ejemplo
 
 cancer = load_breast_cancer()
@@ -76,10 +76,10 @@ for p in profundidades:
 
 fig = px.line(x=profundidades, y=acc_test,
               labels={"x": "Profundidad", "y": "Exactitud"},
-              title="Exactitud segun profundidad")
+              title="Exactitud según profundidad")
 fig.add_scatter(x=profundidades, y=acc_train, mode="lines",
                 name="Entrenamiento")
-fig.show()                                 # Mostrar grafico interactivo
-print("PASO 4 - Profundidad optima en prueba:",
+fig.show()                                 # Mostrar gráfico interactivo
+print("PASO 4 - Profundidad óptima en prueba:",
       profundidades[int(np.argmax(acc_test))])
 ```

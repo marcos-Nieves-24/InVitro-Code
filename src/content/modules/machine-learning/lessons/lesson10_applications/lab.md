@@ -3,20 +3,20 @@
 # LAB 10: Pipeline de extremo a extremo
 # -------------------------------------------------------------------------
 # Construimos un pipeline completo (StandardScaler + LogisticRegression)
-# sobre cancer de mama: entrenamiento, metricas, matriz de confusion y un
+# sobre cancer de mama: entrenamiento, métricas, matriz de confusion y un
 # tablero final con make_subplots que resume el modelo.
 # =========================================================================
 
-# PASO 1: Pipeline con escalado y regresion logistica.
-# El escalado es clave para la logistica: sin el, las features con mayor
+# PASO 1: Pipeline con escalado y regresión logística.
+# El escalado es clave para la logística: sin el, las features con mayor
 # magnitud dominarian los coeficientes.
-import numpy as np                         # Operaciones matematicas
+import numpy as np                         # Operaciones matemáticas
 from sklearn.datasets import load_breast_cancer  # Cargar datasets de ejemplo
-from sklearn.model_selection import train_test_split  # Division train/test y validacion
+from sklearn.model_selection import train_test_split  # División train/test y validación
 from sklearn.pipeline import Pipeline  # Pipelines de ML
 from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
-from sklearn.linear_model import LogisticRegression  # Modelos de regresion
-from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score  # Metricas de evaluacion
+from sklearn.linear_model import LogisticRegression  # Modelos de regresión
+from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score  # Métricas de evaluación
 
 cancer = load_breast_cancer()
 X_train, X_test, y_train, y_test = train_test_split(
@@ -38,13 +38,13 @@ matriz = confusion_matrix(y_test, y_pred)
 print("PASO 2 - Matriz de confusion:")
 print(matriz)
 
-import plotly.express as px                # Graficos interactivos
+import plotly.express as px                # Gráficos interactivos
 
 fig = px.imshow(matriz, text_auto=True, color_continuous_scale="Blues",
-                labels={"x": "Prediccion", "y": "Real"},
+                labels={"x": "Predicción", "y": "Real"},
                 x=["Benigno", "Maligno"], y=["Benigno", "Maligno"],
                 title="Matriz de confusion")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 3: Importancia de features (coeficientes estandarizados).
 # Con datos escalados, el coeficiente indica la direccion y el peso de
@@ -58,14 +58,14 @@ for i in orden[:5]:
 
 fig = px.bar(x=cancer.feature_names[orden], y=coef[orden],
              labels={"x": "Feature", "y": "Coeficiente"},
-             title="Top 10 coeficientes de la regresion logistica")
+             title="Top 10 coeficientes de la regresión logística")
 fig.update_layout(xaxis_tickangle=-45)
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 4: Tablero final con make_subplots.
 # Combinamos la distribucion de probabilidades, la matriz de confusion y
 # los coeficientes en un unico panel de control del modelo.
-import plotly.graph_objects as go       # Graficos de bajo nivel
+import plotly.graph_objects as go       # Gráficos de bajo nivel
 from plotly.subplots import make_subplots
 
 prob = pipeline.predict_proba(X_test)[:, 1]
@@ -81,6 +81,6 @@ fig.add_trace(go.Bar(x=cancer.feature_names[orden[:5]],
                      y=coef[orden[:5]]), row=1, col=3)
 fig.update_layout(height=420, width=1000, showlegend=False,
                   title_text="Dashboard del pipeline - cancer de mama")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 print("PASO 4 - Tablero final generado con make_subplots.")
 ```
