@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { evaluateAchievements } from "@/lib/gamification/achievements";
+import { getLessonSlugs } from "@/lib/content/modules";
 
 export const runtime = "nodejs";
 
@@ -60,6 +61,16 @@ export async function POST(request: NextRequest) {
     const lesson_slug = readNonEmptyString(input.lesson_slug);
     if (!module_slug || !lesson_slug) {
       return NextResponse.json({ error: "Invalid module/lesson" }, { status: 400 });
+    }
+
+    // Validate against content catalog — prevents bogus progress rows
+    try {
+      const validSlugs = getLessonSlugs(module_slug);
+      if (validSlugs.length === 0 || !validSlugs.includes(lesson_slug)) {
+        return NextResponse.json({ error: "Unknown module/lesson" }, { status: 400 });
+      }
+    } catch {
+      // If catalog read fails, fall through — XP calc will still cap, and DB will store
     }
 
     const completed = input.completed === undefined ? true : input.completed === true;
@@ -132,7 +143,13 @@ export async function POST(request: NextRequest) {
       console.error("[api/progress] streak upsert failed", streakError.message);
     }
 
-    const { achievements } = await evaluateAchievements(userId, supabase);
+    let achievements: Awaited<ReturnType<typeof evaluateAchievements>>["achievements"] = [];
+    try {
+      const result = await evaluateAchievements(userId, supabase);
+      achievements = result.achievements;
+    } catch (err) {
+      console.error("[api/progress] evaluateAchievements failed", err instanceof Error ? err.message : String(err));
+    }
 
     const streak = streakRow ?? {
       current_streak: current,
