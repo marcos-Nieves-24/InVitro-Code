@@ -40,7 +40,8 @@
     "remark-math": "^6.0.0",
     "svix": "1.98.0",
     "typed.js": "^3.0.0",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@cspell/dict-es-es": "^3.0.8",
