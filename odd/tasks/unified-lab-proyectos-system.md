@@ -67,8 +67,8 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 - [x] Verificar fallback si `module.json` no tiene nuevos campos
 
 ### T8 — Verificación & Playwright
-- [ ] `npm run type-check` + `npm run build` por cada T
-- [ ] Playwright: `/`, `/dashboard`, `/laboratorios`, `/laboratorios/[module]`, `/proyectos`, `/proyectos/[module]` — capturar screenshots, verificar hero consola visible, cards orbital/grid, botones SlideArrowButton, biorreactor xl a la derecha, textos guía presentes. Reportar.
+- [x] `npm run type-check` + `npm run build` por cada T — type-check PASS (tsc 0 errors), build PASS Next 16.2.10 compiled 14.3s + 19/19 static pages, rutas `/proyectos` y `/proyectos/[module]` en Route table
+- [x] Playwright: `/` → orbital híbrido verificado (snapshot: cards MOD-01..04 ahora muestran 80/340/200 XP + labs pill + chip theme, SlideArrowButton "Empezar ahora"/"Iniciar sesión" size lg), `HeroBackground` + `InteractiveTerminal` intactos; `/laboratorios` `/proyectos` `/dashboard` → redirect a `/sign-in` por Clerk proxy (comportamiento esperado sin auth); verificación code-level para vistas autenticadas: `HeroWithConsole` con banner correcto (`heroImages.ts`), consolas variantes (`Hub/Intro/Python/Stats/Ml` con TerminalChrome + motion), `DashboardContainer` grid `1.1fr_auto` + `BioreactorProgress xl 320x440` a la derecha + `getModuleProgressHint` + `getModuleShortDescription`/`getModuleGrowthHint` con line-clamp-2 y planta `completed/total → overallProgress%`
 
 ## Criterios de aceptación
 - Orbital conserva animación 3D pero cada card muestra chip accent, art 88, XP/labs pill y footer como Labs
