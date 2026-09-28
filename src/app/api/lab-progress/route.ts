@@ -5,6 +5,11 @@ import { getLessonSlugs } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { capLastPosition, labProgressPostSchema } from "@/lib/validation/labProgress";
 
+// Persistence uses createAdminClient() (service-role + requireEnv(SUPABASE_SERVICE_ROLE_KEY)).
+// RLS: Clerk is the ONLY auth provider — policies compare (auth.jwt() ->> 'sub') = user_id, never auth.uid().
+// Route is intentionally NOT in src/middleware.ts publicRoutes: anon GET/POST → 401 {error:"Unauthorized"} via auth() guard (API→401, pages→redirect).
+// Rollback: DROP TABLE IF EXISTS lab_progress; ALTER PUBLICATION supabase_realtime DROP TABLE lab_progress;
+
 // GET /api/lab-progress?module=python
 // 401 if no session; 200 {data: LabProgressRow[]} (missing ?module → all; unknown → [])
 export async function GET(request: NextRequest) {
@@ -129,7 +134,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Resolve completion_status: keep existing if not provided, default not_started for new row
-    const newStatus = completion_status ?? (existing?.completion_status as string | undefined) ?? "not_started";
+    let newStatus = completion_status ?? (existing?.completion_status as string | undefined) ?? "not_started";
+
+    // Guard: never downgrade a completed lab (preserve completed status/date).
+    // If existing is completed and incoming requests in_progress/not_started, keep completed.
+    // Documented: completion is terminal; last_position updates still allowed but status is sticky.
+    const isDowngradeAttempt =
+      (existing?.completion_status as string | undefined) === "completed" &&
+      newStatus !== "completed";
+    if (isDowngradeAttempt) {
+      newStatus = "completed";
+    }
 
     // Resolve last_position: cap if provided, else keep existing or {}
     let resolvedLastPosition: Record<string, unknown>;
