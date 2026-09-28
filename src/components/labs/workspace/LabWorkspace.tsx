@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, type ReactNode } from "react";
+import { useState, useEffect, useCallback, useRef, type ReactNode } from "react";
 import Link from "next/link";
 import { Gem, FlaskConical, ClipboardCheck, MoreVertical } from "lucide-react";
 import { LabRunner } from "../LabRunner";
@@ -10,6 +10,8 @@ import { RCopyButton } from "../RCopyButton";
 import { OnboardingController } from "@/components/onboarding/OnboardingController";
 import PyodideRunner from "@/components/editor/PyodideRunner";
 import type { SerializableLabCardTheme } from "../LabCardTheme";
+import { LabCompletionBanner } from "./LabCompletionBanner";
+import type { CompletionStatus, LastPosition } from "@/lib/content/modules";
 
 type TabId = "lab" | "quiz";
 
@@ -28,6 +30,12 @@ interface LabWorkspaceProps {
   theme: SerializableLabCardTheme;
   totalXpForLesson: number;
   showOnboarding?: boolean;
+  // Labs lifecycle (PR3)
+  initialStatus?: CompletionStatus;
+  initialPosition?: LastPosition;
+  hasNextLab?: boolean;
+  nextLabHref?: string | null;
+  moduleHref?: string;
 }
 
 export function LabWorkspace({
@@ -43,22 +51,94 @@ export function LabWorkspace({
   theme,
   totalXpForLesson,
   showOnboarding = false,
+  initialStatus,
+  initialPosition,
+  hasNextLab,
+  nextLabHref,
+  moduleHref,
 }: LabWorkspaceProps) {
-  const [activeTab, setActiveTab] = useState<TabId>("lab");
+  const normalizedInitialTab: TabId =
+    initialPosition?.activeTab === "quiz" || initialPosition?.activeTab === "lab"
+      ? initialPosition.activeTab
+      : "lab";
+
+  const [activeTab, setActiveTab] = useState<TabId>(normalizedInitialTab);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [status, setStatus] = useState<CompletionStatus>(initialStatus ?? "not_started");
+  const [showBanner, setShowBanner] = useState(initialStatus === "completed");
+  const [completing, setCompleting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasPostedInProgressRef = useRef(false);
+
+  // Persist helper: POST to /api/lab-progress
+  const postProgress = useCallback(
+    async (payload: Record<string, unknown>) => {
+      try {
+        await fetch("/api/lab-progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            module_slug: moduleSlug,
+            lesson_slug: lessonSlug,
+            ...payload,
+          }),
+        });
+      } catch {
+        /* network — ignore, retry on next interaction */
+      }
+    },
+    [moduleSlug, lessonSlug],
+  );
+
+  // Debounced last_position persistence (800-1200ms, cancel on unmount)
+  const scheduleLastPositionPost = useCallback(
+    (tab: TabId) => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        void postProgress({ last_position: { activeTab: tab } });
+      }, 900);
+    },
+    [postProgress],
+  );
 
   useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  // Restore from localStorage if server did not provide activeTab
+  useEffect(() => {
+    if (initialPosition?.activeTab) return;
     try {
-      const stored = localStorage.getItem(
-        `${STORAGE_KEY}-${moduleSlug}-${lessonSlug}`,
-      );
+      const stored = localStorage.getItem(`${STORAGE_KEY}-${moduleSlug}-${lessonSlug}`);
       if (stored === "lab" || stored === "quiz") {
         setActiveTab(stored as TabId);
       }
     } catch {
       /* ignore */
     }
-  }, [moduleSlug, lessonSlug]);
+  }, [moduleSlug, lessonSlug, initialPosition?.activeTab]);
+
+  // Sync banner when initialStatus changes (e.g., after server fetch on reload)
+  useEffect(() => {
+    if (initialStatus === "completed") setShowBanner(true);
+    setStatus(initialStatus ?? "not_started");
+  }, [initialStatus]);
+
+  // First interaction → in_progress (REQ-LC-01)
+  useEffect(() => {
+    if (status === "completed") return;
+    if (hasPostedInProgressRef.current) return;
+    if (initialStatus === "completed" || initialStatus === "in_progress") return;
+    // Defer to avoid immediate double-post on hydration
+    hasPostedInProgressRef.current = true;
+    void postProgress({ completion_status: "in_progress", last_position: { activeTab } }).then(() => {
+      setStatus("in_progress");
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTabChange = useCallback(
     (tab: TabId) => {
@@ -68,8 +148,16 @@ export function LabWorkspace({
       } catch {
         /* ignore */
       }
+      // If still not_started, transition to in_progress eagerly
+      if (status !== "completed" && status !== "in_progress") {
+        void postProgress({ completion_status: "in_progress", last_position: { activeTab: tab } }).then(
+          () => setStatus("in_progress"),
+        );
+      } else {
+        scheduleLastPositionPost(tab);
+      }
     },
-    [moduleSlug, lessonSlug],
+    [moduleSlug, lessonSlug, status, postProgress, scheduleLastPositionPost],
   );
 
   const hasQuiz = quizRaw !== null;
@@ -77,6 +165,38 @@ export function LabWorkspace({
   useEffect(() => {
     if (activeTab === "quiz" && !hasQuiz) setActiveTab("lab");
   }, [activeTab, hasQuiz]);
+
+  const handleComplete = useCallback(async () => {
+    if (status === "completed") return;
+    setCompleting(true);
+    setErrorMsg(null);
+    try {
+      const res = await fetch("/api/lab-progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          module_slug: moduleSlug,
+          lesson_slug: lessonSlug,
+          completion_status: "completed",
+        }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? `Error ${res.status}`);
+      }
+      setStatus("completed");
+      setShowBanner(true);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Error al completar";
+      setErrorMsg(msg);
+    } finally {
+      setCompleting(false);
+    }
+  }, [moduleSlug, lessonSlug, status]);
+
+  const resolvedHasNextLab = hasNextLab ?? false;
+  const resolvedNextHref = nextLabHref ?? null;
+  const resolvedModuleHref = moduleHref ?? `/laboratorios/${moduleSlug}`;
 
   return (
     <div className="relative mx-auto w-full max-w-screen-2xl px-6 py-6">
@@ -125,17 +245,12 @@ export function LabWorkspace({
             ← Sala de laboratorios
           </Link>
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="truncate text-sm font-semibold text-ink md:text-base">
-              {lessonTitle}
-            </h3>
-            <span className="hidden text-xs text-muted-foreground md:inline">
-              · {moduleLabel}
-            </span>
+            <h3 className="truncate text-sm font-semibold text-ink md:text-base">{lessonTitle}</h3>
+            <span className="hidden text-xs text-muted-foreground md:inline">· {moduleLabel}</span>
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          {/* Theme accent dot */}
           <span
             className="hidden h-2 w-2 rounded-full md:inline-block"
             style={{ backgroundColor: theme.accent }}
@@ -148,11 +263,47 @@ export function LabWorkspace({
               color: theme.accent,
             }}
           >
-            <Gem className="h-3 w-3" />
-            +{totalXpForLesson} XP
+            <Gem className="h-3 w-3" />+{totalXpForLesson} XP
           </span>
         </div>
       </header>
+
+      {/* Completion banner (REQ-LC-02) — persists on reload when initialStatus completed */}
+      {showBanner && (
+        <div className="mb-6">
+          <LabCompletionBanner
+            hasNextLab={resolvedHasNextLab}
+            nextLabHref={resolvedNextHref}
+            moduleHref={resolvedModuleHref}
+          />
+        </div>
+      )}
+
+      {/* Error + CTA completar (visible when not completed) */}
+      {!showBanner && (
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={handleComplete}
+            disabled={completing || status === "completed"}
+            className="inline-flex items-center justify-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-mint/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
+          >
+            {completing ? "Completando…" : "Completar laboratorio"}
+          </button>
+          {errorMsg && (
+            <span role="alert" className="text-sm text-error">
+              {errorMsg}{" "}
+              <button
+                type="button"
+                onClick={handleComplete}
+                className="font-semibold underline hover:no-underline"
+              >
+                Reintentar
+              </button>
+            </span>
+          )}
+        </div>
+      )}
 
       {/* ── Tabs ── */}
       <div className="mb-6 flex items-center border-b border-surface-raised" role="tablist">
@@ -177,7 +328,6 @@ export function LabWorkspace({
       {/* ── Panels ── */}
       {activeTab === "lab" && (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Left: instructions — data-onboarding target */}
           <div
             data-onboarding="instructions"
             className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl border border-surface-raised bg-surface-card p-6"
@@ -185,7 +335,6 @@ export function LabWorkspace({
             <LabRunner content={labContent} rawFallback={labRawFallback} />
           </div>
 
-          {/* Right: editor */}
           <div className="flex flex-col gap-4">
             <div data-onboarding="editor">
               <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
@@ -194,9 +343,7 @@ export function LabWorkspace({
         </div>
       )}
 
-      {activeTab === "quiz" && hasQuiz && (
-        <QuizRunner raw={quizRaw} />
-      )}
+      {activeTab === "quiz" && hasQuiz && <QuizRunner raw={quizRaw} />}
 
       <OnboardingController
         enabled={!!showOnboarding}
