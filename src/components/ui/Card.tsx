@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
 
+type CardVariant = "default" | "glass";
+
 type CardProps = {
   children: ReactNode;
   className?: string;
   padding?: "sm" | "md" | "lg";
+  variant?: CardVariant;
 };
 
 const paddingClass = {
@@ -12,10 +15,22 @@ const paddingClass = {
   lg: "p-8",
 };
 
-export function Card({ children, className = "", padding = "md" }: CardProps) {
+const variantClass: Record<CardVariant, string> = {
+  default:
+    "rounded-card border border-surface-raised bg-surface-card shadow-md",
+  glass:
+    "rounded-card glass-card",
+};
+
+export function Card({
+  children,
+  className = "",
+  padding = "md",
+  variant = "default",
+}: CardProps) {
   return (
     <div
-      className={`rounded-card border border-surface-raised bg-surface-card shadow-md ${paddingClass[padding]} ${className}`}
+      className={`${variantClass[variant]} ${paddingClass[padding]} ${className}`}
     >
       {children}
     </div>

@@ -1,13 +1,25 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { motion, useReducedMotion } from "framer-motion";
 
 /**
  * App Router template — remounts on every navigation, giving each route a
- * 200ms page fade-in (DESIGN.md §1.5) and activating scroll-reveal observers.
+ * smooth page transition. Respects prefers-reduced-motion.
  */
 export default function Template({ children }: { children: ReactNode }) {
-  useScrollReveal();
-  return <div className="animate-fade-in">{children}</div>;
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: shouldReduceMotion ? 0 : 0.25,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
 }

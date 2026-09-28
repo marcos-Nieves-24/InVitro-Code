@@ -1,19 +1,18 @@
-import { SignUp } from "@clerk/nextjs";
-import { PageShell, SiteHeader } from "@/components/ui";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/sign-in");
+  }, [router]);
+
   return (
-    <PageShell width="marketing">
-      <SiteHeader showDashboard={false} showSignIn />
-      <div className="mt-10 flex justify-center pb-16">
-        <div className="rounded-card border border-surface-raised bg-surface-card p-6 shadow-sm">
-          <p className="eyebrow mb-4 text-center">Crear cuenta</p>
-          <h1 className="mb-6 text-center font-display text-xl font-semibold tracking-tight text-ink">
-            InVitro-Code
-          </h1>
-          <SignUp />
-        </div>
-      </div>
-    </PageShell>
+    <div className="flex min-h-screen items-center justify-center">
+      <p className="text-[#5A7A8A]">Redirigiendo...</p>
+    </div>
   );
 }

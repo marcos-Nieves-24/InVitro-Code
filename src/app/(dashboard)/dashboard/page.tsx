@@ -31,8 +31,6 @@ import {
   Check,
   FlaskConical,
   Gem,
-  Map,
-  Play,
   Terminal,
   Trophy,
   type LucideIcon,
@@ -175,44 +173,41 @@ export default async function DashboardPage() {
           {/* Central feed */}
           <div className="flex-grow space-y-8">
             {/* Hero banner */}
-            <section className="relative overflow-hidden rounded-2xl border border-surface-raised bg-surface-card shadow-sm">
-              <div className="flex items-center gap-8 p-10">
-                <div className="flex-1">
-                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-                    ¡Bienvenido de vuelta, {userName}!
+            <section className="relative min-h-[320px] rounded-2xl lg:min-h-[400px]">
+              {/* Background image — anime-style */}
+              <div className="absolute inset-0 z-0">
+                <img
+                  src="/dashboard/dashboard-fondo-anime.png"
+                  alt=""
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+
+              <div className="relative z-[2] flex items-center gap-8 p-10">
+                {/* Dark card with welcome message — matches dashboard-1.svg */}
+                <div className="rounded-3xl border border-[#044A68] bg-[#001329]/80 p-8 backdrop-blur-sm">
+                  <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                    ¡Bienvenido, investigador!
                   </h2>
-                  <p className="mb-8 mt-4 max-w-lg text-storm">
-                    Estás construyendo tu camino en InVitro-Code.
-                    Continúa tu investigación y descubre nuevas formas de
-                    aplicar la Inteligencia Artificial.
+                  <p className="mt-4 max-w-md text-lg text-white/80">
+                    Continua entrenando modelos y explorando la inteligencia
+                    artificial
                   </p>
-                  <div className="flex flex-wrap gap-4">
-                    <Link
-                      href={startHref}
-                      className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-                    >
-                      <Play className="h-4 w-4" fill="currentColor" />
-                      Continuar Misión
-                    </Link>
-                    <Link
-                      href="/niveles"
-                      className="glass-card flex items-center gap-2 rounded-xl border border-surface-raised px-8 py-4 font-bold text-ink transition-colors hover:bg-surface-card"
-                    >
-                      <Map className="h-4 w-4" />
-                      Explorar Mapa
-                    </Link>
-                  </div>
+                  <Link
+                    href={startHref}
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-mint px-6 py-3 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
+                  >
+                    Iniciar Lección
+                  </Link>
                 </div>
-                <div className="relative hidden h-64 w-64 shrink-0 overflow-hidden rounded-2xl border-4 border-surface-card bg-gradient-to-br from-mint to-fog shadow-2xl lg:block">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-ink">
-                    <Gem className="mb-2 h-14 w-14 opacity-80" fill="currentColor" />
-                    <span className="text-3xl font-black">
-                      {totalXp.toLocaleString("es")}
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-widest opacity-80">
-                      XP totales
-                    </span>
-                  </div>
+
+                {/* SVG scientist illustration — bleeds off right edge */}
+                <div className="hidden h-[420px] w-[400px] shrink-0 self-end overflow-visible lg:-mb-10 lg:-mr-10 lg:block">
+                  <img
+                    src="/dashboard/cientifica-1.svg"
+                    alt="Científica con hélice de ADN"
+                    className="h-full w-full object-contain object-bottom"
+                  />
                 </div>
               </div>
             </section>
