@@ -2,11 +2,18 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+/**
+ * AUTH DISABLED — set to false to re-enable authentication.
+ * When true, all routes are public and no session is required.
+ */
+const AUTH_DISABLED = false;
+
 const publicRoutes = [
   "/",
   "/sign-in",
   "/sign-up",
   "/sso-callback",
+  "/preview",
   "/api/webhooks/clerk",
   "/api/diagnose",
 ];
@@ -16,6 +23,9 @@ const adminRoutes = ["/admin", "/api/admin"];
 const authRoutes = ["/sign-in", "/sign-up"];
 
 export default clerkMiddleware(async (auth, req) => {
+  // Auth bypass — all routes public
+  if (AUTH_DISABLED) return;
+
   const { pathname } = req.nextUrl;
 
   // If user is already signed in and visits sign-in/sign-up, redirect to dashboard

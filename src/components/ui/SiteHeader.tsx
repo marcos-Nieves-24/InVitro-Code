@@ -9,7 +9,7 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({
-  startHref = "/learn",
+  startHref = "/dashboard",
   showDashboard = true,
   showSignIn = false,
   className = "",

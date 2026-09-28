@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Compass, FlaskConical, Landmark, ClipboardList, BarChart3, Trophy, Users, Settings, Home, ChevronDown } from "lucide-react";
 import Link from "next/link";
 

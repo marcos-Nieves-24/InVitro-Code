@@ -20,6 +20,9 @@ export default function SignInPage() {
       >
         <AuthForm mode="signin" onStatusChange={setStatus} />
         <SocialButtons />
+        {/* Mount point for Clerk's bot-protection widget (Turnstile). Without
+            it, `signIn.sso()` can hang forever waiting for a CAPTCHA token. */}
+        <div id="clerk-captcha" />
       </AuthCard>
     </AuthShell>
   );

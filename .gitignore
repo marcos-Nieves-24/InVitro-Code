@@ -59,6 +59,12 @@ __pycache__/
 assets/
 .ok5.py
 
+# Generated lab hero images (re-generate via scripts/generate-*.py — use LFS if you need to commit)
+public/images/spritecook/
+public/images/true-pixel/
+public/images/lab-hero-animated.*
+public/images/lab-hero-pixel*
+
 # Local editor config (contains API keys — never commit)
 opencode.json
 skills-lock.json

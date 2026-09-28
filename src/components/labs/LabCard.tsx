@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { CheckCircle2, BookOpen, GraduationCap, Lock } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import type { LessonFrontmatter } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { getLabCardTheme } from "./LabCardTheme";

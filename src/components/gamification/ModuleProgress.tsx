@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { CheckCircle2, Circle, BookOpen } from "lucide-react";
 import { BioreactorProgress } from "./BioreactorProgress";
 

@@ -54,7 +54,6 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
         const { error: finalizeError } = await signIn.finalize({
           navigate: ({ session, decorateUrl }) => {
             if (session?.currentTask) {
-              console.log("Session task:", session.currentTask);
               return;
             }
             const url = decorateUrl("/");
@@ -65,6 +64,21 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
           setError(finalizeError.message || "Error al iniciar sesión.");
           onStatusChange?.("error");
         }
+        return;
+      }
+
+      // Check if the account exists but was created with a different auth method (OAuth)
+      // This produces: "The verification strategy is not valid for this account"
+      if (
+        signInError &&
+        isClerkAPIResponseError(signInError) &&
+        (signInError.errors[0]?.code === "verification_strategy_not_found" ||
+          signInError.errors[0]?.message?.includes("verification strategy"))
+      ) {
+        onStatusChange?.("error");
+        setError(
+          "Esta cuenta fue creada con Google o GitHub. Usa los botones de abajo para iniciar sesión.",
+        );
         return;
       }
 
@@ -98,7 +112,6 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
           const { error: finalizeError } = await signUp.finalize({
             navigate: ({ session, decorateUrl }) => {
               if (session?.currentTask) {
-                console.log("Session task:", session.currentTask);
                 return;
               }
               const url = decorateUrl("/");
@@ -178,7 +191,6 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
         const { error: finalizeError } = await signUp.finalize({
           navigate: ({ session, decorateUrl }) => {
             if (session?.currentTask) {
-              console.log("Session task:", session.currentTask);
               return;
             }
             const url = decorateUrl("/");
@@ -295,6 +307,11 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
           {error}
         </div>
       )}
+
+      {/* Mount point for Clerk's bot-protection widget (Turnstile). The
+          instance has captcha enabled for sign-up, which this form triggers
+          when the email does not exist yet. */}
+      <div id="clerk-captcha" />
 
       {/* Submit button */}
       <button
