@@ -20,7 +20,7 @@ export function ModuleExplorerGrid({ modules }: ModuleExplorerGridProps) {
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-fog/20 text-mint">
           <FlaskConical className="h-7 w-7" />
         </div>
-        <p className="text-sm font-bold text-ink">No hay modulos disponibles</p>
+        <p className="text-sm font-bold text-ink">No hay módulos disponibles</p>
         <p className="text-xs text-storm">
           Agrega contenido en <code>src/content/modules/</code> para empezar.
         </p>

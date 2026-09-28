@@ -37,7 +37,7 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
       if (data.success) {
         setStatus("done");
         setMessage(
-           `Leccion completada! +${data.xpEarned} XP | Racha: ${data.streak.current_streak} dias`,
+           `Lección completada! +${data.xpEarned} XP | Racha: ${data.streak.current_streak} días`,
         );
       } else {
         setStatus("error");

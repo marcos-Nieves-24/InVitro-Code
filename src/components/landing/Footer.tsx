@@ -34,7 +34,7 @@ export function Footer() {
               <p className="font-display text-lg font-bold text-white">
                 InVitro-Code
               </p>
-              <p className="text-xs text-storm">Biotecnologia + IA</p>
+              <p className="text-xs text-storm">Biotecnología + IA</p>
             </div>
           </div>
 

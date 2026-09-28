@@ -142,28 +142,28 @@ const AXIS_X = 70;
 const AXIS_TITLE_X = 14;
 
 const missionText =
-  "Cerrar la distancia entre lo que pide la biotecnologia de ahora y lo que se ensena en el aula.";
+  "Cerrar la distancia entre lo que pide la biotecnología de ahora y lo que se enseña en el aula.";
 
 const visionText =
-  "Volverse la plataforma de referencia en espanol para ensenar ciencia de datos aplicada a las ciencias de la vida en America Latina.";
+  "Volverse la plataforma de referencia en español para enseñar ciencia de datos aplicada a las ciencias de la vida en América Latina.";
 
 const pilares = [
   {
     icon: FlaskConical,
     label: "Aprendizaje Activo",
-    desc: "Terminales interactivas, labs en vivo y desafios de codigo que consolidan el conocimiento con practica real.",
+    desc: "Terminales interactivas, labs en vivo y desafíos de código que consolidan el conocimiento con práctica real.",
     x: LEAF_POSITIONS[0],
   },
   {
     icon: Users,
     label: "Comunidad",
-    desc: "Conecta con otros estudiantes, comparte logros y aprende en colaboracion con biotecnologos.",
+    desc: "Conecta con otros estudiantes, comparte logros y aprende en colaboración con biotecnólogos.",
     x: LEAF_POSITIONS[1],
   },
   {
     icon: Globe,
     label: "Accesibilidad",
-    desc: "Contenido gratuito, multiplataforma y disenado para todos los niveles de experiencia tecnica.",
+    desc: "Contenido gratuito, multiplataforma y diseñado para todos los niveles de experiencia técnica.",
     x: LEAF_POSITIONS[2],
   },
 ];
@@ -221,7 +221,7 @@ export function MissionDendrogram() {
         <div data-reveal className="reveal mb-14 text-center">
           <p className="eyebrow text-storm">Nuestra Identidad</p>
           <h2 className="mt-3 mb-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            Mision, Vision y Pilares
+            Misión, Visión y Pilares
           </h2>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate">
             Un arbol de clustering jerarquico que organiza los valores y objetivos
@@ -354,7 +354,7 @@ export function MissionDendrogram() {
               />
             </g>
 
-            {/* Mision node */}
+            {/* Misión node */}
             <g
               style={{
                 opacity: active ? 1 : 0,
@@ -380,11 +380,11 @@ export function MissionDendrogram() {
                 fontWeight="600"
                 fill="#111439"
               >
-                Mision
+                Misión
               </text>
             </g>
 
-            {/* Vision node */}
+            {/* Visión node */}
             <g
               style={{
                 opacity: active ? 1 : 0,
@@ -410,7 +410,7 @@ export function MissionDendrogram() {
                 fontWeight="600"
                 fill="#111439"
               >
-                Vision
+                Visión
               </text>
             </g>
 
@@ -431,7 +431,7 @@ export function MissionDendrogram() {
               Pilares
             </text>
 
-            {/* Cluster bracket — Mision group */}
+            {/* Cluster bracket — Misión group */}
             <rect
               x={LEAF_POSITIONS[0] - CARD_W / 2 - 8}
               y={CARDS_Y - 8}
@@ -448,7 +448,7 @@ export function MissionDendrogram() {
               }}
             />
 
-            {/* Cluster bracket — Vision */}
+            {/* Cluster bracket — Visión */}
             <rect
               x={VISION_X - CARD_W / 2 - 8}
               y={CARDS_Y - 8}
@@ -580,7 +580,7 @@ export function MissionDendrogram() {
               );
             })}
 
-            {/* Vision leaf card */}
+            {/* Visión leaf card */}
             <g
               style={{
                 opacity: active ? 1 : 0,
@@ -663,19 +663,19 @@ export function MissionDendrogram() {
         <div className="flex flex-col gap-4 lg:hidden">
           <div data-reveal className="reveal">
             <div className="rounded-2xl bg-ink p-5 text-center">
-              <p className="eyebrow text-mint mb-1">Raiz</p>
+              <p className="eyebrow text-mint mb-1">Raíz</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-negativo.svg" alt="InVitro-Code" className="mx-auto h-8 w-8" />
             </div>
           </div>
 
-          {/* Mobile Mision card */}
+          {/* Mobile Misión card */}
           <div data-reveal className="reveal" style={{ transitionDelay: "100ms" }}>
             <div className="rounded-2xl border-l-4 border-mint bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Target size={18} className="text-storm" />
                 <h3 className="font-display text-lg font-bold text-ink">
-                  Mision
+                  Misión
                 </h3>
               </div>
               <p className="text-sm leading-relaxed text-slate">
@@ -684,13 +684,13 @@ export function MissionDendrogram() {
             </div>
           </div>
 
-          {/* Mobile Vision card */}
+          {/* Mobile Visión card */}
           <div data-reveal className="reveal" style={{ transitionDelay: "180ms" }}>
             <div className="rounded-2xl border-l-4 border-fog bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Eye size={18} className="text-storm" />
                 <h3 className="font-display text-lg font-bold text-ink">
-                  Vision
+                  Visión
                 </h3>
               </div>
               <p className="text-sm leading-relaxed text-slate">

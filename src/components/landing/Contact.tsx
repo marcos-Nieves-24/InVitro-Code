@@ -14,7 +14,7 @@ export function Contact() {
               Contacto
             </h2>
             <p className="text-lg leading-relaxed text-slate max-w-2xl mx-auto">
-              Tienes preguntas, ideas o quieres colaborar? Escribenos.
+              ¿Tienes preguntas, ideas o quieres colaborar? Escríbenos.
             </p>
           </div>
         </Reveal>
@@ -36,7 +36,7 @@ export function Contact() {
 
               <div className="flex items-center gap-3 text-slate">
                 <MapPin size={20} className="text-fog" />
-                <span>Medellin, Colombia</span>
+                <span>Medellín, Colombia</span>
               </div>
             </div>
           </div>

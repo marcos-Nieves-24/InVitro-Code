@@ -25,13 +25,13 @@ export function Team() {
       <div className="mx-auto max-w-[1280px]">
         <Reveal>
           <div className="mb-16 text-center">
-            <p className="eyebrow text-storm">Quienes somos</p>
+            <p className="eyebrow text-storm">Quiénes somos</p>
             <h2 className="font-display text-3xl font-bold tracking-tight text-ink mt-3 mb-4 md:text-4xl">
               Equipo
             </h2>
             <p className="text-lg leading-relaxed text-slate max-w-2xl mx-auto">
-              Detras de InVitro-Code hay personas que combinan biotecnologia y
-              tecnologia para transformar la educacion.
+              Detrás de InVitro-Code hay personas que combinan biotecnología y
+              tecnología para transformar la educación.
             </p>
           </div>
         </Reveal>
@@ -49,18 +49,18 @@ export function Team() {
                   Marcos Javier Nieves Alvarez
                 </h3>
                 <p className="text-sm text-storm mb-4">
-                  Fundador y Lider de Desarrollo
+                  Fundador y Líder de Desarrollo
                 </p>
 
                 <div className="mb-4 flex flex-col gap-2">
                   <div className="flex items-center gap-2 text-sm text-slate">
                     <GraduationCap size={16} className="text-fog" />
-                    <span>Pregrado en Biotecnologia</span>
+                    <span>Pregrado en Biotecnología</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate">
                     <Brain size={16} className="text-fog" />
                     <span>
-                      Enfocado en creacion de modelos de Machine Learning
+                      Enfocado en creación de modelos de Machine Learning
                     </span>
                   </div>
                 </div>

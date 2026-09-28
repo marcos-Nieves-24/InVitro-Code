@@ -27,7 +27,7 @@ export function LabHero(_props: LabHeroProps) {
       backgroundSrc={getLabHeroImage("hub")}
       eyebrow="Sala de laboratorios"
       title="Laboratorios"
-      description="Completa ejercicios interactivos y domina los conceptos de biotecnologia con IA."
+      description="Completa ejercicios interactivos y domina los conceptos de biotecnología con IA."
       console={<HubConsole />}
     />
   );

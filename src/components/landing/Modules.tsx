@@ -14,7 +14,7 @@ export function Modules() {
               Expediciones del curso
             </h2>
             <p className="text-lg leading-relaxed text-white/70 max-w-2xl mx-auto">
-              Cada modulo es una expedicion guiada que combina teoria, practica
+              Cada módulo es una expedición guiada que combina teoría, práctica
               en terminal y laboratorios interactivos.
             </p>
           </div>

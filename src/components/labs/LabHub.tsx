@@ -53,7 +53,7 @@ export function LabHub({ modules }: LabHubProps) {
           <FlaskConical className="h-7 w-7" />
         </div>
         <p className="text-sm font-bold text-ink">
-          No hay modulos disponibles
+          No hay módulos disponibles
         </p>
         <p className="text-xs text-storm">
           Agrega contenido en <code>src/content/modules/</code> para empezar.

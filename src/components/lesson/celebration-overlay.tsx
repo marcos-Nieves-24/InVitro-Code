@@ -76,14 +76,14 @@ export function CelebrationOverlay({
         </div>
 
         <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink">
-          Leccion completada
+          Lección completada
         </h2>
         <p className="mb-6 text-sm text-storm">{lessonTitle}</p>
 
         <div className="mb-6 text-left">
           <MascotMessage mood="celebrating">
-            Buen trabajo. Cada concepto que aprendes es un paso mas para entender
-            como la IA transforma la biotecnologia.
+            Buen trabajo. Cada concepto que aprendes es un paso más para entender
+            cómo la IA transforma la biotecnología.
           </MascotMessage>
         </div>
 
@@ -109,7 +109,7 @@ export function CelebrationOverlay({
             onClick={onClose}
             className="mt-4 text-xs text-gray-400 underline hover:text-storm"
           >
-            Seguir viendo esta leccion
+            Seguir viendo esta lección
           </button>
         )}
       </div>

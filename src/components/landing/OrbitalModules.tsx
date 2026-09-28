@@ -15,26 +15,26 @@ interface ModuleData {
 const modules: ModuleData[] = [
   {
     slug: "MOD-01",
-    title: "Introduccion a la IA",
+    title: "Introducción a la IA",
     lessons: 4,
     description:
-      "Fundamentos de inteligencia artificial aplicados a biotecnologia.",
+      "Fundamentos de inteligencia artificial aplicados a biotecnología.",
     iconSrc: "/favicon-modulo-1-sin-fondo.svg",
   },
   {
     slug: "MOD-02",
-    title: "Python para Biotecnologia",
+    title: "Python para Biotecnología",
     lessons: 17,
     description:
-      "Programacion en Python aplicada al analisis de datos biologicos.",
+      "Programación en Python aplicada al análisis de datos biológicos.",
     iconSrc: "/favicon-modulo-2-sin-fondo.svg",
   },
   {
     slug: "MOD-03",
-    title: "Estadistica y Probabilidad",
+    title: "Estadística y Probabilidad",
     lessons: 10,
     description:
-      "Fundamentos estadisticos para el analisis de datos en investigacion biomedica.",
+      "Fundamentos estadísticos para el análisis de datos en investigación biomédica.",
     iconSrc: "/favicon-modulo-3-sin-fondo.svg",
   },
   {
@@ -170,7 +170,7 @@ export function OrbitalModules() {
   if (reducedMotion || radius === 0) {
     return (
       <ul
-        aria-label="Modulos del curso"
+        aria-label="Módulos del curso"
         className="grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {modules.map((mod) => {
@@ -217,7 +217,7 @@ export function OrbitalModules() {
       }}
     >
       <ul
-        aria-label="Modulos del curso"
+        aria-label="Módulos del curso"
         className="absolute left-1/2 top-1/2"
         style={{
           transformStyle: "preserve-3d",

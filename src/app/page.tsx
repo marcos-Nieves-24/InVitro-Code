@@ -32,12 +32,12 @@ export default function Home() {
               <h1 className="font-display text-4xl font-bold tracking-tight text-white md:text-6xl">
                 Aprende{" "}
                 <span className="text-mint">IA y Machine Learning</span> con
-                Python para Biotecnologia
+                Python para Biotecnología
               </h1>
               <p className="max-w-md text-lg leading-relaxed text-white/70">
-                Un curso para biotecnologos que quieren entender datos, modelos
+                Un curso para biotecnólogos que quieren entender datos, modelos
                 y decisiones desde el pregrado. Terminales interactivas, labs en
-                vivo y desafios de codigo real.
+                vivo y desafíos de código real.
               </p>
               <div className="flex flex-wrap gap-4">
                 <SlideArrowButton href="/sign-up" text="Empezar ahora" size="lg" />

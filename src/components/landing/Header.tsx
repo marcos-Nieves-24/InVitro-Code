@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Mision", href: "#mision" },
-  { label: "Modulos", href: "#modulos" },
+  { label: "Misión", href: "#mision" },
+  { label: "Módulos", href: "#modulos" },
   { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -59,7 +59,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="/sign-up"
+            href="/dashboard"
             className="rounded-[10px] bg-mint px-5 py-2.5 text-sm font-medium text-ink transition-all hover:shadow-glow"
           >
             Comenzar

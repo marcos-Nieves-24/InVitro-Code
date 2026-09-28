@@ -9,7 +9,7 @@ Estilo visual: **Laboratorio Digital** — limpio, técnico, con identidad propi
 
 ### 1.1 Paleta de Colores
 
-Colores proporcionados por el usuario. Tonos fríos,技术, con contraste suficiente.
+Colores proporcionados por el usuario. Tonos fríos, técnicos, con contraste suficiente.
 
 | Token               | Hex       | Uso                                                  |
 | ------------------- | --------- | ---------------------------------------------------- |
