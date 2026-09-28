@@ -83,5 +83,10 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 - Branch: `odd/unified-lab-proyectos-system` (a crear desde `odd/lab-journey-redesign`)
 - Commits work-unit por T, RDD assess por commit
 
+## Fix v5 — 2026-09-28 — db98107
+- [x] Bug proyectos serializable (CRITICAL, build blocker): `ModuleCardContent` `theme: LabCardTheme` → `SerializableLabCardTheme` + `LabCardArt` prop union `LabCardTheme | SerializableLabCardTheme` con fallback icon; `proyectos/page.tsx` `toSerializableTheme(getLabCardTheme(...))` — `npm run type-check` PASS
+- [x] Modules fondo oscuro + Tu Progreso duplica: `Modules.tsx` `bg-surface-card` → `bg-[#111439]` + header `text-white/60` / `text-white` / `text-white/70`; `BioreactorProgress` prop `hideMeta` envuelve `Nivel/level/rank` y `EXP/%`; `DashboardContainer` `items-center` → `items-start pt-2` + `self-start` + `hideMeta` en `size xl` + `mt-4→mt-3`
+- Commit: `db98107 fix(proyectos): make theme serializable and apply dark modules bg with dashboard declutter`
+
 ## Próximo paso
-T0 assets → T1 cards → T2 hero → T3 consolas → T4 botones → T5 proyectos → T6/T7 dashboard → T8 playwright
+T0 assets → T1 cards → T2 hero → T3 consolas → T4 botones → T5 proyectos → T6/T7 dashboard → T8 playwright → Fix v5 aplicado
