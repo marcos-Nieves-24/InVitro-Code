@@ -118,8 +118,8 @@ export async function DashboardContainer() {
             <div className="relative p-2">
               <section className="scroll-mt-20">
                 <div className="grid gap-6 md:grid-cols-2">
-              <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-center">
-                <div className="order-1">
+              <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-start pt-2">
+                <div className="order-1 self-start">
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
                     <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
@@ -140,7 +140,7 @@ export async function DashboardContainer() {
                       />
                     </div>
                   </div>
-                  <p className="mt-4 text-xs leading-relaxed text-storm max-w-[32ch]">
+                  <p className="mt-3 text-xs leading-relaxed text-storm max-w-[32ch]">
                     {(() => {
                       const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
                       const idx = raw.indexOf("EXP");
@@ -163,6 +163,7 @@ export async function DashboardContainer() {
                     rank={rankTitle(levelInfo.level)}
                     progressToNext={levelInfo.progressToNext}
                     size="xl"
+                    hideMeta
                   />
                 </div>
               </div>

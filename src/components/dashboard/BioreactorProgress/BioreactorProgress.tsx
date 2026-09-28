@@ -16,6 +16,7 @@ export interface BioreactorProgressProps {
   size?: BioreactorSize;
   state?: BioreactorState;
   className?: string;
+  hideMeta?: boolean;
   onLevelUpComplete?: () => void;
 }
 
@@ -35,6 +36,7 @@ export function BioreactorProgress({
   size = "md",
   state,
   className,
+  hideMeta = false,
 }: BioreactorProgressProps) {
   const expSafe = Number.isFinite(expToNext) && expToNext > 0 ? expToNext : 1;
   const raw = Number.isFinite(progressToNext) ? progressToNext : 0;
@@ -68,22 +70,24 @@ export function BioreactorProgress({
         {/* Bubbles now rendered inside BioreactorSvg clipped liquid for correct tank containment */}
       </motion.div>
 
-      <div className="mt-3 flex flex-col items-center">
-        <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-storm">
-          <FlaskConical className="h-3 w-3" /> Nivel
-        </span>
-        <span className="font-display text-4xl font-black text-ink leading-none">{level}</span>
-        <span className="text-xs font-bold text-storm">{rank}</span>
-        {derivedState === "levelUp" && !shouldReduce && (
-          <motion.span
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-2 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-ink"
-          >
-            ¡Subiste de nivel!
-          </motion.span>
-        )}
-      </div>
+      {!hideMeta && (
+        <div className="mt-3 flex flex-col items-center">
+          <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-storm">
+            <FlaskConical className="h-3 w-3" /> Nivel
+          </span>
+          <span className="font-display text-4xl font-black text-ink leading-none">{level}</span>
+          <span className="text-xs font-bold text-storm">{rank}</span>
+          {derivedState === "levelUp" && !shouldReduce && (
+            <motion.span
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold text-ink"
+            >
+              ¡Subiste de nivel!
+            </motion.span>
+          )}
+        </div>
+      )}
 
       {/* Semántica progressbar para AT */}
       <div
@@ -101,10 +105,14 @@ export function BioreactorProgress({
         </span>
       )}
 
-      <p className="mt-2 font-mono text-[11px] font-bold tracking-[0.06em] text-storm">
-        <span className="font-bold text-mint">{exp.toLocaleString("es")}</span> / {expToNext.toLocaleString("es")} EXP
-      </p>
-      <p className="text-xs font-medium text-storm">{Math.round(percent)}% al siguiente nivel</p>
+      {!hideMeta && (
+        <>
+          <p className="mt-2 font-mono text-[11px] font-bold tracking-[0.06em] text-storm">
+            <span className="font-bold text-mint">{exp.toLocaleString("es")}</span> / {expToNext.toLocaleString("es")} EXP
+          </p>
+          <p className="text-xs font-medium text-storm">{Math.round(percent)}% al siguiente nivel</p>
+        </>
+      )}
     </div>
   );
 }

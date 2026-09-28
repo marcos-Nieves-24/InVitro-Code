@@ -1,12 +1,12 @@
 "use client";
 
 import { Zap, FlaskConical } from "lucide-react";
-import type { LabCardTheme } from "@/components/labs/LabCardTheme";
+import type { SerializableLabCardTheme } from "@/components/labs/LabCardTheme";
 import { LabCardArt } from "@/components/labs/LabCardArt";
 import { BiotechGrowthTube } from "@/components/dashboard/BiotechGrowthTube";
 
 export interface ModuleCardContentProps {
-  theme: LabCardTheme;
+  theme: SerializableLabCardTheme;
   title: string;
   description?: string;
   lessonsCount: number;
