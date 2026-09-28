@@ -83,10 +83,18 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 - Branch: `odd/unified-lab-proyectos-system` (a crear desde `odd/lab-journey-redesign`)
 - Commits work-unit por T, RDD assess por commit
 
-## Fix v5 — 2026-09-28 — db98107
+## Fix v5 — 2026-09-28 — db98107 + 7869804 (batch 2)
 - [x] Bug proyectos serializable (CRITICAL, build blocker): `ModuleCardContent` `theme: LabCardTheme` → `SerializableLabCardTheme` + `LabCardArt` prop union `LabCardTheme | SerializableLabCardTheme` con fallback icon; `proyectos/page.tsx` `toSerializableTheme(getLabCardTheme(...))` — `npm run type-check` PASS
 - [x] Modules fondo oscuro + Tu Progreso duplica: `Modules.tsx` `bg-surface-card` → `bg-[#111439]` + header `text-white/60` / `text-white` / `text-white/70`; `BioreactorProgress` prop `hideMeta` envuelve `Nivel/level/rank` y `EXP/%`; `DashboardContainer` `items-center` → `items-start pt-2` + `self-start` + `hideMeta` en `size xl` + `mt-4→mt-3`
 - Commit: `db98107 fix(proyectos): make theme serializable and apply dark modules bg with dashboard declutter`
+- [x] Misión Actual whitespace (T2 batch2): `DashboardContainer.tsx:171` `p-5→p-4`, `mb-4→mb-2` header + flex, `h-16 w-16→h-12 w-12` icon + `h-12→h-9 w-9` img, `text-lg→text-[15px] leading-tight` title, `text-sm→text-xs` module, `text-xs→text-[11px]` shortDescription line-clamp-2 preserved, `size 320→240` both BiotechGrowthTube, `mb-3→mb-2` mobile tube, `mt-3→mt-2 text-xs→text-[11px]` plant guide, progress `mb-3` outer preserved + inner `mb-1` compact, SlideArrowButton `size md w-full` preserved
+- [x] HubConsole ADN (T3): `HubConsole.tsx` replace DendrogramSVG with DNA double helix — two Q-curve sinusoidal paths `M32,0 Q52,10...` + rungs every 20px, `motion.path pathLength 0→1 1.1s` + floating `translateY`, `useReducedMotion` static fallback, `h-[420px] flex flex-col gap-3`
+- [x] IntroConsole chat LLM (T3): `IntroConsole.tsx` title `llm invitro-code --chat`, TypingText `> Hola, explorador` + bubbles 2 exchanges `¿Qué es la IA en biotech?` white/90 → mint assistant `¡Vamos! Comprimiremos un FASTA...`, typing dots, CTA `Escribe 'explorar' para comenzar →`, motion fade, `useReducedMotion`
+- [x] PythonConsole Biopython (T3): `PythonConsole.tsx` Biopython assembly `from Bio import SeqIO` `SeqRecord` `ecoli.fasta` `ATGCGTACG...` output `> 4.6 Mbp · 4300 CDS`, colored nucleotide bars A green T red G yellow C blue mini bar with `motion.scaleY`, `h-[420px] flex flex-col gap-3`
+- [x] StatsConsole Gauss (T3): `StatsConsole.tsx` perfect Gaussian bell `viewBox 0 0 320 180` path `M20,160 C60,20 260,20 300,160` `motion.path pathLength 1.2s` fill gradient mint→cyan 0.2 stroke 2.5, vertical dashed μ line, labels μ σ, header `import scipy.stats as st` `st.norm.pdf(x, μ=0, σ=1)`
+- [x] MlConsole axes fix (T3): `MlConsole.tsx` `viewBox 0 0 320 180` grid gap 20, axes `x y=160 20→300` `y x=20 20→160` white/15, ticks 0/0.5/1, `motion.circle` scatter, boundary `M20,140 Q160,80 300,30` to borders, `useReducedMotion`
+- Commit: `7869804 feat(labs): refine dashboard whitespace and rebuild hero consoles (ADN, chat LLM, Biopython, Gauss, ML axes)` — `npm run type-check` PASS, `npm run build` PASS 19/19 static pages
+- Verificación batch2: `npm run type-check` tsc 0 errors; `npm run build` Next 16.2.10 compiled 18.3s + TypeScript 11.9s, 19/19 static pages incl. `/proyectos` `/proyectos/[module]`
 
 ## Próximo paso
 T0 assets → T1 cards → T2 hero → T3 consolas → T4 botones → T5 proyectos → T6/T7 dashboard → T8 playwright → Fix v5 aplicado
