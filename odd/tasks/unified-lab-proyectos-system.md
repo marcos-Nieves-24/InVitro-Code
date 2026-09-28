@@ -32,19 +32,19 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 
 ### T1 — Cards Landing híbrido
 - [x] Crear `src/components/shared/ModuleCardContent.tsx` (chip accent 14%/30, LabCardArt 88, title, pills XP/labs, BiotechGrowthTube opcional, prop `compact`) — fec6652
-- [ ] Refactor `ModuleExplorerCard` → wrapper delega a `ModuleCardContent`
-- [ ] Refactor `OrbitalModules` interior → `ModuleCardContent compact`, ajustar `CARD_WIDTH 280→320`, `RING_RADIUS 340→360`, `extentHalf`, `PERSPECTIVE`, `fitScale`
-- [ ] Mobile/reduced-motion grid también usa compartido. Verificar visual.
+- [x] Refactor `ModuleExplorerCard` → wrapper delega a `ModuleCardContent`
+- [x] Refactor `OrbitalModules` interior → `ModuleCardContent compact`, ajustar `CARD_WIDTH 280→320`, `RING_RADIUS 340→360`, `extentHalf`, `PERSPECTIVE`, `fitScale`
+- [x] Mobile/reduced-motion grid también usa compartido. Verificar visual.
 
 ### T2 — Hero template unificado
 - [x] Crear `src/components/shared/HeroWithConsole.tsx` (grid lg:2, bg fill + overlay #111439/60, copy + consola, `mediaFallback` opt-in video) — fec6652
 - [x] Crear `src/lib/labs/heroImages.ts` (hub banner, 4 módulos lab, hub proyectos, 4 módulos proyecto). Deprecar `heroVideos.ts` detrás de flag. — fec6652
-- [ ] Migrar `LabHero.tsx` (hub) y `LabLandingHero.tsx` (módulo) a `HeroWithConsole`
-- [ ] Migrar `laboratorios/page.tsx` y `laboratorios/[module]/page.tsx` props
+- [x] Migrar `LabHero.tsx` (hub) y `LabLandingHero.tsx` (módulo) a `HeroWithConsole`
+- [x] Migrar `laboratorios/page.tsx` y `laboratorios/[module]/page.tsx` props (video → heroImages + console switch)
 
 ### T3 — Consolas variantes
 - [x] Extraer `TerminalChrome` de `InteractiveTerminal.tsx:213` → `src/components/shared/TerminalChrome.tsx` — fec6652
-- [ ] Crear `src/components/labs/consoles/{Hub,Intro,Python,Stats,Ml}Console.tsx` con mismo chrome, payloads distintos (dendrograma, Hola IA, pandas, histograma motion, scatter). Respetar `prefers-reduced-motion`.
+- [x] Crear `src/components/labs/consoles/{Hub,Intro,Python,Stats,Ml}Console.tsx` con mismo chrome, payloads distintos (dendrograma, Hola IA, pandas, histograma motion, scatter). Respetar `prefers-reduced-motion`.
 
 ### T4 — Botón único
 - [ ] Extender `SlideArrowButton.tsx:13` con `variant primary|secondary` y `size sm|md|lg`

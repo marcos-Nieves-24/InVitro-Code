@@ -11,7 +11,6 @@ import {
   getLessonSlugs,
 } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
-import { getHeroVideo } from "@/lib/labs/heroVideos";
 import { LabLandingHero } from "@/components/labs/landing/LabLandingHero";
 
 interface Props {
@@ -93,8 +92,6 @@ export default async function LabModuleLandingPage({ params }: Props) {
   const ctaHref = ctaSlug ? `/laboratorios/${modSlug}/${ctaSlug}` : "/laboratorios";
   const ctaLabel = allCompleted ? "Repasar" : "Empezar";
 
-  const video = getHeroVideo(modSlug);
-
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
       <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
@@ -110,7 +107,6 @@ export default async function LabModuleLandingPage({ params }: Props) {
           title={moduleName}
           description={description}
           eyebrow={eyebrow}
-          video={video}
           ctaHref={ctaHref}
           ctaLabel={ctaLabel}
         />

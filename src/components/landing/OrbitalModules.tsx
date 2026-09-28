@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import {
-  ArrowRight,
-} from "lucide-react";
+import { getLabCardTheme } from "@/components/labs/LabCardTheme";
+import { ModuleCardContent } from "@/components/shared/ModuleCardContent";
 
 interface ModuleData {
   slug: string;
@@ -48,18 +47,20 @@ const modules: ModuleData[] = [
   },
 ];
 
+const slugToThemeKey: Record<string, string> = {
+  "MOD-01": "ia",
+  "MOD-02": "python",
+  "MOD-03": "estadistica",
+  "MOD-04": "machine-learning",
+};
+
 const ROTATION_SPEED = 15; // degrees per second
 const CARD_COUNT = modules.length;
 const ANGLE_PER_CARD = 360 / CARD_COUNT;
 
-const CARD_WIDTH = 280;
-// A longer perspective distance reduces the magnification of the front card
-// (which is what made it overlap its neighbours and clip their text).
+const CARD_WIDTH = 320;
 const PERSPECTIVE = 1600;
-// Ring radius large enough that the perspective-magnified front card never
-// overlaps the card at 90°: solve radius >= (CARD_WIDTH/2) * (1 + P/(P - radius)).
-// At P=1600, CARD_WIDTH=280 the bound is ~305px; 340 leaves margin.
-const RING_RADIUS = 340;
+const RING_RADIUS = 360;
 // Angular fade: fully opaque within ±FADE_START of the front, fully hidden past
 // ±FADE_END. For a 4-card ring at RING_RADIUS/PERSPECTIVE, a card starts being
 // occluded by the front card at ~105°, so the fade completes just before that.
@@ -173,31 +174,26 @@ export function OrbitalModules() {
         className="grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {modules.map((mod) => {
+          const theme = getLabCardTheme(slugToThemeKey[mod.slug] ?? mod.slug);
+          const xp = mod.lessons * 20;
           return (
             <li key={mod.slug}>
               <a
                 href="/sign-in"
-                className="card-hover flex h-full flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
+                className="group flex h-full flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md transition-[transform,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                  <img src={mod.iconSrc} alt="" className="h-12 w-12" />
-                </div>
-                <p className="eyebrow text-storm mb-2">{mod.slug}</p>
-                <h3 className="font-display text-lg font-bold text-ink mb-2">
-                  {mod.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-slate mb-4 flex-1">
-                  {mod.description}
-                </p>
-                <div className="flex items-center justify-between border-t border-surface-raised pt-4">
-                  <span className="font-mono text-xs text-storm">
-                    {mod.lessons} lecciones
-                  </span>
-                  <span className="flex items-center gap-1 text-sm font-medium text-ink">
-                    Explorar
-                    <ArrowRight size={16} />
-                  </span>
-                </div>
+                <ModuleCardContent
+                  theme={theme}
+                  title={mod.title}
+                  description={mod.description}
+                  lessonsCount={mod.lessons}
+                  xpReward={xp}
+                  labCount={mod.lessons}
+                  completed={0}
+                  total={mod.lessons}
+                  compact={false}
+                  slugLabel={mod.slug}
+                />
               </a>
             </li>
           );
@@ -279,7 +275,7 @@ export function OrbitalModules() {
               >
                 <a
                   href="/sign-in"
-                  className="block rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md transition-[transform,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
+                  className="group block rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md transition-[transform,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
                   style={{
                     transform: isHovered
                       ? "scale(1.05) translateZ(30px)"
@@ -289,31 +285,24 @@ export function OrbitalModules() {
                       : undefined,
                   }}
                 >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-surface">
-                  <img src={mod.iconSrc} alt="" className="h-12 w-12" />
-                </div>
-                <p className="eyebrow text-storm mb-2">{mod.slug}</p>
-                <h3 className="font-display text-lg font-bold text-ink mb-2">
-                  {mod.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-slate mb-4">
-                  {mod.description}
-                </p>
-                {isHovered && (
-                    <p className="text-xs leading-relaxed text-storm mb-4">
-                      {mod.lessons} lecciones interactivas con labs y desafios de
-                      codigo.
-                    </p>
-                  )}
-                  <div className="flex items-center justify-between border-t border-surface-raised pt-4">
-                    <span className="font-mono text-xs text-storm">
-                      {mod.lessons} lecciones
-                    </span>
-                    <span className="flex items-center gap-1 text-sm font-medium text-ink">
-                      Explorar
-                      <ArrowRight size={16} />
-                    </span>
-                  </div>
+                  {(() => {
+                    const theme = getLabCardTheme(slugToThemeKey[mod.slug] ?? mod.slug);
+                    const xp = mod.lessons * 20;
+                    return (
+                      <ModuleCardContent
+                        theme={theme}
+                        title={mod.title}
+                        description={mod.description}
+                        lessonsCount={mod.lessons}
+                        xpReward={xp}
+                        labCount={mod.lessons}
+                        completed={0}
+                        total={mod.lessons}
+                        compact
+                        slugLabel={mod.slug}
+                      />
+                    );
+                  })()}
                 </a>
               </div>
             </li>
