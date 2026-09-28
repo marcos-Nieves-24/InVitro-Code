@@ -265,3 +265,61 @@ BEGIN
     ALTER TABLE profiles ADD COLUMN gender TEXT CHECK (gender IN ('f','m','x'));
   END IF;
 END $$;
+
+-- ──────────────────────────────────────────────────────────
+-- 13. Lab progress — lifecycle persistence (labs-lifecycle-persistence PR1)
+-- Additive, idempotent. Clerk is the ONLY auth provider (see header).
+-- ──────────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS lab_progress (
+  user_id           TEXT        NOT NULL,
+  module_slug       TEXT        NOT NULL,
+  lesson_slug       TEXT        NOT NULL,
+  completion_status TEXT        NOT NULL CHECK (completion_status IN ('not_started','in_progress','completed')),
+  completion_date   TIMESTAMPTZ,
+  last_position     JSONB       NOT NULL DEFAULT '{}'::jsonb,
+  updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user_id, module_slug, lesson_slug)
+);
+
+ALTER TABLE lab_progress ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "users can read own lab_progress" ON lab_progress;
+CREATE POLICY "users can read own lab_progress"
+  ON lab_progress FOR SELECT
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can insert own lab_progress" ON lab_progress;
+CREATE POLICY "users can insert own lab_progress"
+  ON lab_progress FOR INSERT
+  WITH CHECK ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can update own lab_progress" ON lab_progress;
+CREATE POLICY "users can update own lab_progress"
+  ON lab_progress FOR UPDATE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+CREATE OR REPLACE FUNCTION set_lab_progress_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trg_lab_progress_updated_at ON lab_progress;
+CREATE TRIGGER trg_lab_progress_updated_at
+  BEFORE INSERT OR UPDATE ON lab_progress
+  FOR EACH ROW EXECUTE FUNCTION set_lab_progress_updated_at();
+
+CREATE INDEX IF NOT EXISTS idx_lab_progress_user_module ON lab_progress(user_id, module_slug);
+CREATE INDEX IF NOT EXISTS idx_lab_progress_user_status ON lab_progress(user_id, completion_status);
+
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables
+    WHERE pubname = 'supabase_realtime' AND tablename = 'lab_progress'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE lab_progress;
+  END IF;
+END $$;
