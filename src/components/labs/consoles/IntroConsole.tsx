@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { TerminalChrome } from "@/components/shared/TerminalChrome";
 import { TypingText } from "@/components/ui/TypingText";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 type Bubble = { role: "user" | "assistant"; text: string };
 
@@ -124,16 +125,20 @@ export function IntroConsole() {
 
         {showCta &&
           (shouldReduceMotion ? (
-            <p className="font-mono text-xs text-white/50">Escribe &apos;explorar&apos; para comenzar →</p>
+            <div className="flex items-center gap-3">
+              <p className="font-mono text-xs text-white/50">Da click en Empezar</p>
+              <SlideArrowButton size="sm" text="Empezar" href="#mision" />
+            </div>
           ) : (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="font-mono text-xs text-white/50"
+              className="flex items-center gap-3"
             >
-              Escribe &apos;explorar&apos; para comenzar →
-            </motion.p>
+              <p className="font-mono text-xs text-white/50">Da click en Empezar</p>
+              <SlideArrowButton size="sm" text="Empezar" href="#mision" />
+            </motion.div>
           ))}
       </div>
     </TerminalChrome>

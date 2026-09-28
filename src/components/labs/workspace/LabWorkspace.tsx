@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import Link from "next/link";
-import { Gem, FlaskConical, ClipboardCheck } from "lucide-react";
+import { Gem, FlaskConical, ClipboardCheck, MoreVertical } from "lucide-react";
 import { LabRunner } from "../LabRunner";
 import { QuizRunner } from "../QuizRunner";
 import { NotebookActions } from "../NotebookActions";
@@ -45,6 +45,7 @@ export function LabWorkspace({
   showOnboarding = false,
 }: LabWorkspaceProps) {
   const [activeTab, setActiveTab] = useState<TabId>("lab");
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -78,7 +79,39 @@ export function LabWorkspace({
   }, [activeTab, hasQuiz]);
 
   return (
-    <div className="mx-auto w-full max-w-screen-2xl px-6 py-6">
+    <div className="relative mx-auto w-full max-w-screen-2xl px-6 py-6">
+      {/* ── Top-right Recursos / Entrega — absolute top-4 right-6 ── */}
+      <div className="absolute top-4 right-6 z-20 hidden items-center gap-2 sm:flex">
+        <RCopyButton mod={moduleSlug} lesson={lessonSlug} hasRScript={hasRScript} />
+        <NotebookActions mod={moduleSlug} lesson={lessonSlug} hasNotebook={hasNotebook} />
+      </div>
+      {/* Mobile: dropdown with MoreVertical trigger */}
+      <div className="absolute top-4 right-6 z-20 sm:hidden">
+        <button
+          type="button"
+          aria-label="Recursos y entrega"
+          aria-expanded={isResourcesOpen}
+          onClick={() => setIsResourcesOpen((v) => !v)}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-surface-raised bg-surface-card text-storm shadow-sm transition-colors hover:bg-surface-raised"
+        >
+          <MoreVertical className="h-5 w-5" />
+        </button>
+        {isResourcesOpen && (
+          <div className="absolute right-0 mt-2 w-64 rounded-xl border border-surface-raised bg-surface-card p-4 shadow-xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">Recursos y entrega</p>
+            <div className="flex flex-col gap-3">
+              {(hasNotebook || hasRScript) ? (
+                <>
+                  <RCopyButton mod={moduleSlug} lesson={lessonSlug} hasRScript={hasRScript} />
+                  <NotebookActions mod={moduleSlug} lesson={lessonSlug} hasNotebook={hasNotebook} />
+                </>
+              ) : (
+                <p className="text-sm text-storm">Ejecuta tu código y valida los resultados en el panel superior.</p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
       {/* ── Minimal lab header ── */}
       <header
         className="mb-6 flex items-center gap-4 rounded-xl border border-surface-raised bg-surface-card px-5 py-4"
@@ -152,39 +185,10 @@ export function LabWorkspace({
             <LabRunner content={labContent} rawFallback={labRawFallback} />
           </div>
 
-          {/* Right: editor + results stack */}
+          {/* Right: editor */}
           <div className="flex flex-col gap-4">
             <div data-onboarding="editor">
               <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
-            </div>
-
-            <div
-              data-onboarding="results"
-              className="rounded-xl border border-surface-raised bg-surface-card p-4"
-            >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
-                Recursos y entrega
-              </p>
-              <div className="flex flex-col gap-3">
-                {(hasNotebook || hasRScript) ? (
-                  <div className="flex flex-wrap items-center gap-3">
-                    <RCopyButton
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasRScript={hasRScript}
-                    />
-                    <NotebookActions
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasNotebook={hasNotebook}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-sm text-storm">
-                    Ejecuta tu código y valida los resultados en el panel superior.
-                  </p>
-                )}
-              </div>
             </div>
           </div>
         </div>

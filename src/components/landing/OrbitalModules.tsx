@@ -58,9 +58,9 @@ const ROTATION_SPEED = 15; // degrees per second
 const CARD_COUNT = modules.length;
 const ANGLE_PER_CARD = 360 / CARD_COUNT;
 
-const CARD_WIDTH = 320;
-const PERSPECTIVE = 1600;
-const RING_RADIUS = 360;
+const CARD_WIDTH = 380;
+const PERSPECTIVE = 1800;
+const RING_RADIUS = 420;
 // Angular fade: fully opaque within ±FADE_START of the front, fully hidden past
 // ±FADE_END. For a 4-card ring at RING_RADIUS/PERSPECTIVE, a card starts being
 // occluded by the front card at ~105°, so the fade completes just before that.
@@ -180,7 +180,7 @@ export function OrbitalModules() {
             <li key={mod.slug}>
               <a
                 href="/sign-in"
-                className="group flex h-full flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md transition-[transform,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
+                className="group flex h-full min-h-[340px] flex-col rounded-2xl border border-surface-raised bg-surface-card p-8 shadow-md transition-[transform,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
               >
                 <ModuleCardContent
                   theme={theme}
@@ -211,7 +211,7 @@ export function OrbitalModules() {
         // projection exactly proportional, so the look is preserved while the
         // whole ring shrinks to fit the container.
         perspective: `${PERSPECTIVE * fitScale}px`,
-        height: "460px",
+        height: "580px",
         overflowX: "clip",
         overflowY: "visible",
       }}
@@ -275,7 +275,7 @@ export function OrbitalModules() {
               >
                 <a
                   href="/sign-in"
-                  className="group block rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md transition-[transform,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
+                  className="group block rounded-2xl border border-surface-raised bg-surface-card p-8 shadow-md transition-[transform,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
                   style={{
                     transform: isHovered
                       ? "scale(1.05) translateZ(30px)"

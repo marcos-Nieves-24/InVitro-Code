@@ -37,14 +37,14 @@ export function ModuleCardContent({
   const showProgress = !compact && typeof completed === "number" && typeof total === "number";
   const effectiveXp = xpReward ?? 0;
   const effectiveLabs = labCount ?? lessonsCount;
-  const artSize = compact ? 48 : 88;
+  const artSize = compact ? 64 : 110;
 
   return (
     <>
       {/* Top row: chip + art */}
       <div className="flex items-start justify-between gap-3">
         <span
-          className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide"
+          className="inline-flex items-center rounded-full border px-2.5 py-1 text-[13px] font-semibold tracking-wide"
           style={{
             backgroundColor: `${theme.accent}14`,
             borderColor: `${theme.accent}30`,
@@ -59,12 +59,12 @@ export function ModuleCardContent({
       </div>
 
       {/* Title */}
-      <h3 className="font-display mt-4 text-xl font-bold leading-tight text-ink transition-colors duration-[250ms] group-hover:text-mint">
+      <h3 className="font-display mt-4 text-[26px] leading-[30px] font-bold text-ink transition-colors duration-[250ms] group-hover:text-mint">
         {title}
       </h3>
 
       {description ? (
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate">{description}</p>
+        <p className="mt-2 line-clamp-2 text-[18px] leading-relaxed text-slate">{description}</p>
       ) : null}
 
       {/* Meta row */}

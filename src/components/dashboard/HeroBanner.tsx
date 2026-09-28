@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { getScientistVariant } from "@/lib/gamification/utils";
-import { ComicBubble } from "./ComicBubble";
 import { ScientistFigure } from "./ScientistFigure";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { TypingText } from "@/components/ui/TypingText";
