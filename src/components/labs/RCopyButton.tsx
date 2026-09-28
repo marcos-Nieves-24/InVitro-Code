@@ -1,19 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, ExternalLink, FileCode } from "lucide-react";
+import { FileCode } from "lucide-react";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 interface RCopyButtonProps {
   mod: string;
   lesson: string;
   hasRScript: boolean;
 }
-
-const actionClass =
-  "inline-flex items-center gap-2 rounded-btn bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:pointer-events-none disabled:opacity-50";
-
-const linkClass =
-  "inline-flex items-center gap-2 rounded-btn bg-slate-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600";
 
 export function RCopyButton({ mod, lesson, hasRScript }: RCopyButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -38,28 +33,20 @@ export function RCopyButton({ mod, lesson, hasRScript }: RCopyButtonProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <button onClick={handleCopy} type="button" className={actionClass}>
-        {copied ? (
-          <>
-            <Check className="h-4 w-4" />
-            Copiado
-          </>
-        ) : (
-          <>
-            <Copy className="h-4 w-4" />
-            Copiar código R
-          </>
-        )}
-      </button>
+      <SlideArrowButton
+        variant="primary"
+        primaryColor="#059669"
+        size="sm"
+        text={copied ? "Copiado" : "Copiar código R"}
+        onClick={handleCopy}
+      />
 
-      <button
+      <SlideArrowButton
+        variant="secondary"
+        size="sm"
+        text="Ejecutar en navegador"
         onClick={() => setShowModal(true)}
-        type="button"
-        className={linkClass}
-      >
-        <ExternalLink className="h-4 w-4" />
-        Ejecutar en navegador
-      </button>
+      />
 
       {error && <p className="text-xs text-red-600">{error}</p>}
 

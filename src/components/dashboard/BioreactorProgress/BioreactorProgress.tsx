@@ -5,7 +5,7 @@ import { FlaskConical } from "lucide-react";
 import { BioreactorVessel } from "./BioreactorVessel";
 import { useBioreactorMotion, type BioreactorState } from "./useBioreactorMotion";
 
-export type BioreactorSize = "sm" | "md" | "lg";
+export type BioreactorSize = "sm" | "md" | "lg" | "xl";
 
 export interface BioreactorProgressProps {
   exp: number;
@@ -23,6 +23,7 @@ const sizeMap: Record<BioreactorSize, string> = {
   sm: "w-[96px] h-[132px]",
   md: "w-[160px] h-[220px]",
   lg: "w-[220px] h-[300px]",
+  xl: "w-[320px] h-[440px]",
 };
 
 export function BioreactorProgress({

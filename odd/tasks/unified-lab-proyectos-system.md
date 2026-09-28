@@ -47,24 +47,24 @@ Landing y Labs divergieron: Orbital 3D vs grid, Hero con video vs pixel-art vs c
 - [x] Crear `src/components/labs/consoles/{Hub,Intro,Python,Stats,Ml}Console.tsx` con mismo chrome, payloads distintos (dendrograma, Hola IA, pandas, histograma motion, scatter). Respetar `prefers-reduced-motion`.
 
 ### T4 — Botón único
-- [ ] Extender `SlideArrowButton.tsx:13` con `variant primary|secondary` y `size sm|md|lg`
-- [ ] Marcar `Button.tsx:7` deprecated, delega `primary` a `SlideArrowButton`
-- [ ] Migrar `app/page.tsx:46` (2 CTAs), `LabLandingHero` CTA, `RCopyButton.tsx:12` (emerald/slate) y `DashboardContainer:187` ya usa SlideArrowButton (verificar). Tests visuales.
+- [x] Extender `SlideArrowButton.tsx:13` con `variant primary|secondary` y `size sm|md|lg`
+- [x] Marcar `Button.tsx:7` deprecated, delega `primary` a `SlideArrowButton`
+- [x] Migrar `app/page.tsx:46` (2 CTAs), `LabLandingHero` CTA, `RCopyButton.tsx:12` (emerald/slate) y `DashboardContainer:187` ya usa SlideArrowButton (verificar). Tests visuales.
 
 ### T5 — Proyectos replica Labs
-- [ ] Hub `/proyectos/page.tsx:49` → HeroWithConsole (`proyectos.png`) + grid `ModuleCardContent` (theme/tint/art/XP) reemplazando acordeón `ProjectHub`
-- [ ] Refactor `ProjectCard.tsx:47` → delega a `ModuleCardContent`
-- [ ] Crear `src/app/(dashboard)/proyectos/[module]/page.tsx` espejo de `laboratorios/[module]/page.tsx` con `proyecto-modulo-*.png` + consola
+- [x] Hub `/proyectos/page.tsx:49` → HeroWithConsole (`proyectos.png`) + grid `ModuleCardContent` (theme/tint/art/XP) reemplazando acordeón `ProjectHub`
+- [x] Refactor `ProjectCard.tsx:47` → delega a `ModuleCardContent`
+- [x] Crear `src/app/(dashboard)/proyectos/[module]/page.tsx` espejo de `laboratorios/[module]/page.tsx` con `proyecto-modulo-*.png` + consola
 
 ### T6 — Dashboard "Tu progreso" rediagramación
-- [ ] `DashboardContainer.tsx:118` — grid `md:grid-cols-[1.1fr_auto]`, copy izquierda + `BioreactorProgress size xl (w320 h440)` derecha (nuevo `size xl` en `BioreactorProgress.tsx:22`), `glass-card p-6`, texto EXP: "El tanque se llena con EXP: cada lección suma XP y eleva el líquido. Al llenarse, subís de nivel."
-- [ ] Texto vía `module.json` field `progressHint` / fallback global en lib
+- [x] `DashboardContainer.tsx:118` — grid `md:grid-cols-[1.1fr_auto]`, copy izquierda + `BioreactorProgress size xl (w320 h440)` derecha (nuevo `size xl` en `BioreactorProgress.tsx:22`), `glass-card p-6`, texto EXP: "El tanque se llena con EXP: cada lección suma XP y eleva el líquido. Al llenarse, subís de nivel."
+- [x] Texto vía `module.json` field `progressHint` / fallback global en lib
 
 ### T7 — Dashboard "Misión Actual" guiado + module.json
 - [x] Extender `src/lib/content/modules.ts` `readModuleJson` para `description` (ya), `shortDescription`/`missionBlurb`, `expHint`, `growthHint` + helpers `getModuleShortDescription`/`getModuleProgressHint`/`getModuleGrowthHint` — fec6652
 - [x] Actualizar `src/content/modules/*/module.json` (ia, python, estadistica, machine-learning) con `shortDescription`, `progressHint`, `growthHint` (no hardcodear en componente) — fec6652
-- [ ] `DashboardContainer.tsx:151` — bajo `moduleName` mostrar `shortDescription` line-clamp-2, y bajo barra módulo agregar guía planta: "La planta crece con cada módulo: {completed}/{total} → {overallProgress}% crecimiento in-vitro."
-- [ ] Verificar fallback si `module.json` no tiene nuevos campos
+- [x] `DashboardContainer.tsx:151` — bajo `moduleName` mostrar `shortDescription` line-clamp-2, y bajo barra módulo agregar guía planta: "La planta crece con cada módulo: {completed}/{total} → {overallProgress}% crecimiento in-vitro."
+- [x] Verificar fallback si `module.json` no tiene nuevos campos
 
 ### T8 — Verificación & Playwright
 - [ ] `npm run type-check` + `npm run build` por cada T
