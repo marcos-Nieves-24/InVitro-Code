@@ -5,7 +5,7 @@ import { InVitroShell } from "@/components/layout/InVitroShell";
 import { HeroWithConsole } from "@/components/shared/HeroWithConsole";
 import { HubConsole } from "@/components/labs/consoles/HubConsole";
 import { getProyectoHeroImage } from "@/lib/labs/heroImages";
-import { getLabCardTheme } from "@/components/labs/LabCardTheme";
+import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { ModuleCardContent } from "@/components/shared/ModuleCardContent";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -84,7 +84,7 @@ export default async function ProyectosPage() {
                 const labCount = lessonSlugs.length;
                 const xpReward = lessonSlugs.reduce((sum, slug) => sum + calcXpForLesson(mod.slug, slug), 0);
                 const completedCount = lessonSlugs.filter((s) => completedLessonKeys.has(`${mod.slug}/${s}`)).length;
-                const theme = getLabCardTheme(mod.slug);
+                const theme = toSerializableTheme(getLabCardTheme(mod.slug));
                 const title = getModuleDisplayName(mod.slug);
 
                 return (
