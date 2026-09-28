@@ -5,19 +5,24 @@ import { motion, useReducedMotion } from "motion/react";
 import { TerminalChrome } from "@/components/shared/TerminalChrome";
 import { TypingText } from "@/components/ui/TypingText";
 
+// Points mapped to 320x180 grid: x 20-300, y 20-160 (y inverted: smaller y = higher)
 const points: { x: number; y: number; c: number }[] = [
-  { x: 18, y: 72, c: 0 },
-  { x: 28, y: 68, c: 0 },
-  { x: 22, y: 55, c: 0 },
-  { x: 35, y: 62, c: 0 },
-  { x: 42, y: 58, c: 0 },
-  { x: 31, y: 44, c: 0 },
-  { x: 68, y: 28, c: 1 },
-  { x: 72, y: 38, c: 1 },
-  { x: 78, y: 22, c: 1 },
-  { x: 62, y: 45, c: 1 },
-  { x: 55, y: 35, c: 1 },
-  { x: 82, y: 42, c: 1 },
+  { x: 52, y: 122, c: 0 },
+  { x: 72, y: 118, c: 0 },
+  { x: 64, y: 100, c: 0 },
+  { x: 88, y: 108, c: 0 },
+  { x: 102, y: 102, c: 0 },
+  { x: 78, y: 84, c: 0 },
+  { x: 190, y: 58, c: 1 },
+  { x: 202, y: 72, c: 1 },
+  { x: 228, y: 42, c: 1 },
+  { x: 182, y: 86, c: 1 },
+  { x: 158, y: 68, c: 1 },
+  { x: 244, y: 76, c: 1 },
+  { x: 132, y: 92, c: 0 },
+  { x: 168, y: 62, c: 1 },
+  { x: 96, y: 130, c: 0 },
+  { x: 216, y: 52, c: 1 },
 ];
 
 export function MlConsole() {
@@ -29,9 +34,11 @@ export function MlConsole() {
       setShow(true);
       return;
     }
-    const t = setTimeout(() => setShow(true), 1300);
+    const t = setTimeout(() => setShow(true), 900);
     return () => clearTimeout(t);
   }, [shouldReduceMotion]);
+
+  const decisionPath = "M20,140 Q160,80 300,30";
 
   return (
     <TerminalChrome title="python invitro-code --lab ml" className="flex flex-col">
@@ -44,25 +51,58 @@ export function MlConsole() {
         <p className="font-mono text-xs text-white/50">rf.fit(X_train, y) · accuracy 0.91 · f1 0.89</p>
 
         <div className="flex-1 overflow-hidden rounded-lg bg-white/5 p-3">
-          <svg viewBox="0 0 100 100" className="h-full w-full" aria-label="Random Forest decision boundary">
-            {/* decision boundary line */}
+          <svg viewBox="0 0 320 180" className="h-full w-full" aria-label="Random Forest decision boundary">
+            {/* grid gap 20 */}
+            <g stroke="white" strokeWidth={0.25} opacity={0.07}>
+              {Array.from({ length: 15 }, (_, i) => {
+                const x = 20 + i * 20;
+                if (x > 300) return null;
+                return <line key={`vg-${x}`} x1={x} y1={20} x2={x} y2={160} />;
+              })}
+              {Array.from({ length: 8 }, (_, i) => {
+                const y = 20 + i * 20;
+                if (y > 160) return null;
+                return <line key={`hg-${y}`} x1={20} y1={y} x2={300} y2={y} />;
+              })}
+            </g>
+
+            {/* axes fixed to grid borders */}
+            <line x1={20} y1={160} x2={300} y2={160} stroke="white" strokeWidth={0.6} opacity={0.15} />
+            <line x1={20} y1={20} x2={20} y2={160} stroke="white" strokeWidth={0.6} opacity={0.15} />
+
+            {/* ticks 0, 0.5, 1 on x and y */}
+            <g fontFamily="monospace" fontSize={7} fill="white" opacity={0.35}>
+              <text x={20} y={172} textAnchor="middle">0</text>
+              <text x={160} y={172} textAnchor="middle">0.5</text>
+              <text x={300} y={172} textAnchor="middle">1</text>
+              <text x={12} y={164} textAnchor="end">0</text>
+              <text x={12} y={94} textAnchor="end">0.5</text>
+              <text x={12} y={24} textAnchor="end">1</text>
+            </g>
+            <g stroke="white" strokeWidth={0.4} opacity={0.2}>
+              <line x1={160} y1={158} x2={160} y2={162} />
+              <line x1={300} y1={158} x2={300} y2={162} />
+              <line x1={18} y1={90} x2={22} y2={90} />
+              <line x1={18} y1={20} x2={22} y2={20} />
+            </g>
+
+            {/* decision boundary touching borders */}
             {shouldReduceMotion ? (
-              <line x1={8} y1={88} x2={92} y2={12} stroke="#00b2b2" strokeWidth={0.8} opacity={0.6} strokeDasharray="3 3" />
+              <path d={decisionPath} fill="none" stroke="#00b2b2" strokeWidth={1} opacity={0.6} strokeDasharray="5 4" />
             ) : (
-              <motion.line
-                x1={8}
-                y1={88}
-                x2={92}
-                y2={12}
+              <motion.path
+                d={decisionPath}
+                fill="none"
                 stroke="#00b2b2"
-                strokeWidth={0.8}
+                strokeWidth={1}
                 opacity={0.6}
-                strokeDasharray="3 3"
+                strokeDasharray="5 4"
                 initial={{ pathLength: 0 }}
                 animate={show ? { pathLength: 1 } : { pathLength: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               />
             )}
+
             {/* points */}
             {points.map((p, i) =>
               shouldReduceMotion ? (
@@ -70,10 +110,10 @@ export function MlConsole() {
                   key={i}
                   cx={p.x}
                   cy={p.y}
-                  r={2.8}
+                  r={4}
                   fill={p.c === 0 ? "#00b2b2" : "#a0c0d0"}
                   stroke="#0a0a0a"
-                  strokeWidth={0.6}
+                  strokeWidth={0.7}
                   opacity={0.95}
                 />
               ) : (
@@ -81,19 +121,16 @@ export function MlConsole() {
                   key={i}
                   cx={p.x}
                   cy={p.y}
-                  r={2.8}
+                  r={4}
                   fill={p.c === 0 ? "#00b2b2" : "#a0c0d0"}
                   stroke="#0a0a0a"
-                  strokeWidth={0.6}
+                  strokeWidth={0.7}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={show ? { scale: 1, opacity: 0.95 } : { scale: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, delay: i * 0.06, ease: "easeOut" }}
+                  transition={{ duration: 0.28, delay: i * 0.05, ease: "easeOut" }}
                 />
               ),
             )}
-            {/* axes */}
-            <line x1={8} y1={92} x2={92} y2={92} stroke="white" strokeWidth={0.4} opacity={0.2} />
-            <line x1={8} y1={8} x2={8} y2={92} stroke="white" strokeWidth={0.4} opacity={0.2} />
           </svg>
         </div>
 
