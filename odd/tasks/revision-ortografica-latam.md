@@ -43,9 +43,9 @@ Plataforma educativa en español: errores ortográficos erosionan autoridad peda
 
 ### Fase 3 — Corrección por lotes (contenido + markdowns + comentarios)
 - [x] T3.1 Módulo `estadistica` (10 lessons × 4 md = 40 + notebooks comentarios) — commit ec25653
-- [ ] T3.2 Módulo `machine-learning` (10 lessons)
-- [ ] T3.3 Módulo `python` (17 lessons — lote más grande, dividir en 2 commits si >400 líneas)
-- [ ] T3.4 Módulo `ia` (4 lessons)
+- [x] T3.2 Módulo `machine-learning` (10 lessons × 4 md + notebooks = 20 archivos) — commit 5227d09
+- [x] T3.3 Módulo `python` (17 lessons — 18 archivos lab.md/assignment.md corregidos, 69 md totales escaneados) — commit 0f6c948
+- [x] T3.4 Módulo `ia` (4 lessons — 7 archivos corregidos: 4 lab.md + 2 notebook.ipynb + 1 lesson.md caption) — commit e152cb8
 - [ ] T3.5 Markdowns raíz + `module.json` + strings UI (`src/components`, `src/app`) + comentarios `src/**/*.ts,tsx`
 
 Cada T3.x: commit `fix(content): corrige ortografía <módulo> — diacríticas, puntuación, marcadores IA` con tests/docs en mismo commit. Registrar hash en este doc.
@@ -74,6 +74,9 @@ Cada T3.x: commit `fix(content): corrige ortografía <módulo> — diacríticas,
 ## Progreso
 - 2026-09-28: Feature document creado. Pendiente T0.1.
 - 2026-09-28: T3.1 completado — 34 archivos (lesson.md/lab.md/quiz.md/assignment.md ×10) corregidos, diacríticas (qué→que, por qué→porque, cómo→como, etc.), tildes (estadística, validación, gráfico, día, matemáticas) y `sólo→solo`. `grep -R " qué " src/content/modules/estadistica --include="*.md"` 132→20 (restantes solo interrogativos directos con ¿?). `npm run type-check` PASS. Commit ec25653.
+- 2026-09-28: T3.2 completado — 20 archivos (10 lab.md + 10 notebook.ipynb) corregidos, tildes (regresión, clasificación, predicción, evaluación, validación, interpretación, matemáticas, gráficos, división, logística, automático, explícitamente, diagnóstico, métricas, características, crítico, desafío). Lesson/quiz/assignment.md sin errores diacríticos. `grep -R " qué " src/content/modules/machine-learning --include="*.md"` 53 (solo interrogativos directos con ¿?). `grep -R "\\bregresion\\b"` 0, `grep -R "\\bmatematicas\\b"` 0. `npm run type-check` PASS. Commit 5227d09.
+- 2026-09-28: T3.3 completado — 18 archivos (17 lab.md + 1 assignment.md) corregidos, tildes (configuración, instalación, verificación, información, versión, módulos, matemáticas, gestión, código, estadística, gráfico, visualización, comprensión, creación, índices, métodos, números, operación, automático, explícitamente, después, también, según, pequeño, análisis, cálculo, además, dinámico, práctica, código, etc.) y `sólo→solo`, `qué otros→que otros`. Lesson/quiz.md ya limpios; notebooks sin errores diacríticos (función/estándar ya correctos). `grep -R " qué " src/content/modules/python --include="*.md" | wc -l` 39 (solo interrogativos directos con ¿?/qué hace). `grep -R "\\bfuncion\\b" src/content/modules/python --include="*.md"` 0. `npm run type-check` PASS. Commit 0f6c948 (210 líneas, <400 — single commit).
+- 2026-09-28: T3.4 completado — 7 archivos corregidos (4 lab.md + 2 notebook.ipynb + 1 lesson.md caption): tildes (Exploración, diagnóstico, médico, distribución, numéricas, Estadísticas, exploración, separación, útiles, Comparación, estadística, superposición, Cómo, validación, generalización, división, sépalo, pétalo, evaluación, gráfico, pequeña, biotecnología, análisis, proteínas, conexión, composición, aminoácidos, peptídico, cuántas, hidrofóbico, biología, sintéticas, regresión, logística, está, clasificación, diagnóstico, Métricas, confusión, señal, predicción), `mas→más`, typo `fivas→fijas`, `Biotecnologia→Biotecnología`. Lesson/quiz/assignment.md sin errores diacríticos. `grep -R " qué " src/content/modules/ia --include="*.md"` 41 (solo interrogativos directos con ¿?). `grep -R " mas " src/content/modules/ia --include="*.md"` 0. `npm run type-check` PASS. Commit e152cb8 (132 líneas, <400 — single commit).
 
 ## Próximo paso
 Ejecutar T0.1 (inventario) → T1.1 (taxonomía) → T2.1 → lotes T3.x en orden.
