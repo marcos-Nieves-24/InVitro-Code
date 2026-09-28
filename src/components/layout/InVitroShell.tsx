@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useEffect, type ReactNode } from "react";
-import { AppSidebar } from "./AppSidebar";
+import { useClerk } from "@clerk/nextjs";
+import { Flame, LogOut, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { SectionsDropdown } from "./SectionsDropdown";
 
 interface InVitroShellProps {
   children: ReactNode;
@@ -10,38 +13,24 @@ interface InVitroShellProps {
   userRole?: string | null;
   topBar?: ReactNode;
   theme?: string | null;
+  hud?: ReactNode;
+  currentStreak?: number;
 }
 
 export function InVitroShell({
   children,
   userName,
-  userMeta,
-  userRole,
   topBar,
   theme,
+  hud,
+  currentStreak,
 }: InVitroShellProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { signOut } = useClerk();
 
-  // Set --sidebar-offset on documentElement for ConsoleFrame overlay
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 768px)");
-    const update = () => {
-      document.documentElement.style.setProperty(
-        "--sidebar-offset",
-        mql.matches ? (collapsed ? "72px" : "280px") : "0px"
-      );
-    };
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
-  }, [collapsed]);
-
-  // Apply theme to html element
   useEffect(() => {
     if (!theme) return;
-
     document.documentElement.classList.remove("light", "dark");
-
     if (theme === "system") {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       document.documentElement.classList.add(prefersDark ? "dark" : "light");
@@ -50,24 +39,91 @@ export function InVitroShell({
     }
   }, [theme]);
 
+  const initials = userName
+    ?.split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w.charAt(0))
+    .join("")
+    .toUpperCase() ?? "?";
+
   return (
     <div className="min-h-screen bg-surface text-ink">
-      <AppSidebar
-        userName={userName}
-        userMeta={userMeta}
-        userRole={userRole}
-        collapsed={collapsed}
-        onToggle={() => setCollapsed(!collapsed)}
-      />
-      <main
-        id="main-content"
-        className={`flex-1 pt-14 pb-12 transition-[padding] duration-300 md:pt-0 ${
-          collapsed ? "md:pl-[72px]" : "md:pl-[280px]"
-        }`}
-      >
-        {topBar && (
-          <div className="sticky top-0 z-40">{topBar}</div>
+      <header className="sticky top-0 z-50 border-b border-surface-raised bg-surface/80 backdrop-blur-xl">
+        <div className="flex h-14 items-center justify-between px-4 md:px-8">
+          {/* Left: Logo + Sections dropdown */}
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 mr-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-negativo.svg" alt="InVitro-Code" className="h-8 w-8" />
+              <span className="font-display text-lg font-bold hidden sm:inline">InVitro-Code</span>
+            </Link>
+            <SectionsDropdown />
+          </div>
+
+          {/* Right: Streak + User info + Logout */}
+          <div className="flex items-center gap-3">
+            {currentStreak !== undefined && (
+              <div className="hidden sm:flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1 text-xs font-bold text-ink">
+                <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
+                {currentStreak} días
+              </div>
+            )}
+            <Link href="/perfil" className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-surface-raised">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
+                {initials}
+              </div>
+              <div className="hidden lg:block">
+                <p className="text-xs font-bold text-ink">{userName}</p>
+              </div>
+            </Link>
+            <button
+              onClick={() => signOut()}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-storm transition-colors hover:bg-red-500/10 hover:text-red-500"
+              title="Cerrar sesión"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-storm md:hidden"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="border-t border-surface-raised px-4 py-3 md:hidden">
+            {currentStreak !== undefined && (
+              <div className="mb-3 flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1.5 text-xs font-bold text-ink w-fit">
+                <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
+                {currentStreak} días de racha
+              </div>
+            )}
+            <nav className="flex flex-col gap-2">
+              <Link href="/" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Inicio</Link>
+              <Link href="/learn" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Expediciones</Link>
+              <Link href="/laboratorios" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Laboratorios</Link>
+              <Link href="/proyectos" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Proyectos</Link>
+              <Link href="/niveles" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Misiones</Link>
+              <Link href="/dashboard" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+              <Link href="/logros" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Logros</Link>
+              <Link href="/comunidad" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Comunidad</Link>
+              <Link href="/perfil" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Perfil</Link>
+              <Link href="/configuracion" className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-surface-raised" onClick={() => setMobileMenuOpen(false)}>Configuración</Link>
+            </nav>
+          </div>
         )}
+      </header>
+
+      {hud && (
+        <div className="hud-bar sticky top-14 z-40 border-b border-[var(--color-hud-border)] bg-[var(--color-hud-bg)] backdrop-blur-xl">
+          {hud}
+        </div>
+      )}
+
+      <main id="main-content" className="min-h-[calc(100vh-56px)]">
+        {topBar && <div className="sticky top-14 z-40">{topBar}</div>}
         {children}
       </main>
     </div>

@@ -1,13 +1,23 @@
 import { FlaskConical } from "lucide-react";
+import type { LabCardTheme } from "./LabCardTheme";
+
+interface LabHeaderProps {
+  title: string;
+  theme?: LabCardTheme;
+}
 
 /**
  * LabHeader — hero for the lab title extracted from `# Lab: <title>`.
  * Replaces the flat h1 with an eyebrow + title panel. `not-prose` keeps
  * the Tailwind typography plugin from restyling the inner elements.
+ * Optional `theme` adds a subtle tint background.
  */
-export function LabHeader({ title }: { title: string }) {
+export function LabHeader({ title, theme }: LabHeaderProps) {
   return (
-    <header className="not-prose mb-6 rounded-card border border-surface-container bg-surface-raised p-5 md:p-6">
+    <header
+      className="not-prose mb-6 rounded-card border border-surface-container bg-surface-raised p-5 md:p-6"
+      style={theme ? { backgroundColor: theme.tint } : undefined}
+    >
       <p className="eyebrow flex items-center gap-2">
         <FlaskConical className="h-3.5 w-3.5" />
         <span>Laboratorio</span>

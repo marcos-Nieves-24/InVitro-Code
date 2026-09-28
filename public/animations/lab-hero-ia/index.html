@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducción a la IA — Laboratorio</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+:root{--bg:#F4F6F8;--accent:#00B5C5;--accent-fog:#82A0AA;--text:#2A272A;--card:#FFFFFF;--muted:#677381}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Outfit',sans-serif}
+body{display:flex;align-items:center;justify-content:center;perspective:1200px}
+.stage{position:relative;width:1920px;height:1080px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);overflow:hidden}
+/* header */
+.header{position:absolute;top:48px;left:50%;transform:translateX(-50%);text-align:center;z-index:10}
+.badge{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(0,181,197,.12);border:1px solid rgba(0,181,197,.35);color:var(--accent);font-size:11px;letter-spacing:1.4px;font-weight:700;text-transform:uppercase}
+.header h1{font-size:46px;font-weight:800;color:var(--text);margin-top:14px;letter-spacing:-1px;line-height:1}
+.header p{font-size:16px;color:var(--muted);margin-top:8px;font-weight:400}
+/* petri row */
+.petri-row{display:flex;gap:56px;align-items:center;justify-content:center;margin-top:20px}
+.petri{position:relative;width:220px;height:220px;border-radius:50%;background:radial-gradient(ellipse at 30% 30%, #ffffff 0%, #eef4f6 55%, #dbe8eb 100%);border:2px solid rgba(0,181,197,.22);box-shadow:0 18px 40px rgba(42,39,42,.12), inset 0 2px 0 rgba(255,255,255,.9), 0 0 0 8px rgba(255,255,255,.6);overflow:hidden}
+.petri::after{content:"";position:absolute;inset:10px;border-radius:50%;border:1px solid rgba(0,181,197,.14);pointer-events:none}
+.petri-glow{position:absolute;inset:-22px;border-radius:50%;background:radial-gradient(circle, rgba(0,181,197,.28) 0%, transparent 62%);opacity:0;filter:blur(6px)}
+.dot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(0,181,197,.6), 0 2px 6px rgba(0,0,0,.12)}
+.dot.fog{background:var(--accent-fog)}
+/* progress tube */
+.progress-wrap{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);width:520px;height:18px;background:#FFFFFF;border:1px solid rgba(42,39,42,.12);border-radius:999px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);display:flex;align-items:center;padding:3px}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg, var(--accent) 0%, #45DCC6 100%);border-radius:999px;box-shadow:0 0 12px rgba(0,181,197,.45)}
+.progress-label{position:absolute;bottom:68px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:1.2px;font-weight:700;color:var(--muted);text-transform:uppercase}
+.bg-orb{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle, rgba(0,181,197,.10) 0%, transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="bg-orb"></div>
+  <div class="header">
+    <div class="badge">Módulo 01 — Laboratorio</div>
+    <h1>Introducción a la IA</h1>
+    <p>Datos dispersos que cobran orden</p>
+  </div>
+  <div class="petri-row" id="petriRow">
+    <div class="petri" id="petri0"><div class="petri-glow" id="glow0"></div></div>
+    <div class="petri" id="petri1"><div class="petri-glow" id="glow1"></div></div>
+    <div class="petri" id="petri2"><div class="petri-glow" id="glow2"></div></div>
+  </div>
+  <div class="progress-label">Progreso del experimento</div>
+  <div class="progress-wrap"><div class="progress-fill" id="pFill"></div></div>
+</div>
+<script>
+window.DURATION = 6;
+// create dots: 6 per petri, initial scattered then grid
+const petris = [document.getElementById('petri0'),document.getElementById('petri1'),document.getElementById('petri2')];
+const glows = [document.getElementById('glow0'),document.getElementById('glow1'),document.getElementById('glow2')];
+const pFill = document.getElementById('pFill');
+const dots=[];
+const gridPos=[
+  [{x:48,y:58},{x:92,y:42},{x:136,y:58},{x:48,y:102},{x:92,y:102},{x:136,y:102}],
+  [{x:58,y:68},{x:102,y:52},{x:146,y:68},{x:58,y:112},{x:102,y:128},{x:146,y:112}],
+  [{x:48,y:48},{x:88,y:68},{x:128,y:48},{x:48,y:98},{x:88,y:118},{x:128,y:98}]
+];
+const scatterPos=[
+  [{x:12,y:18},{x:188,y:22},{x:18,y:178},{x:172,y:162},{x:90,y:8},{x:102,y:188}],
+  [{x:6,y:92},{x:184,y:48},{x:28,y:152},{x:162,y:172},{x:72,y:18},{x:118,y:198}],
+  [{x:22,y:32},{x:168,y:12},{x:12,y:132},{x:182,y:148},{x:96,y:4},{x:44,y:188}]
+];
+petris.forEach((petri,pi)=>{
+  for(let i=0;i<6;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i%3===0?' fog':'');
+    d.id='dot-'+pi+'-'+i;
+    petri.appendChild(d);
+    dots.push({el:d, pi, i});
+  }
+});
+window.seek=function(t){
+  t=Math.max(0,Math.min(window.DURATION,t));
+  const p=Math.min(1,t/6);
+  // progress 0-100% over 6s ease
+  const prog = Math.min(1, t/3.2);
+  const eased = 1 - Math.pow(1-prog,3);
+  pFill.style.width=(eased*100)+'%';
+  // petri glow pulse 0-6s
+  glows.forEach((g,idx)=>{
+    const delay=idx*0.35;
+    const local=Math.max(0,Math.min(1,(t-delay)/2.2));
+    const glowE = local<0.6 ? local/0.6 : 1 - (local-0.6)/0.4*0.35;
+    g.style.opacity=(0.18+glowE*0.72).toFixed(3);
+    const sc=1+glowE*0.12;
+    g.style.transform='scale('+sc+')';
+  });
+  // dots: converge 0-2s scatter -> grid
+  dots.forEach(({el,pi,i})=>{
+    const s=scatterPos[pi][i];
+    const e=gridPos[pi][i];
+    const k=Math.min(1, t/2.0);
+    const ek=1 - Math.pow(1-k,3); // easeOutCubic
+    const x=s.x + (e.x - s.x)*ek;
+    const y=s.y + (e.y - s.y)*ek;
+    // small float after converge 2-6s
+    const floatAmp = t>2 ? Math.sin(t*2.2 + pi*1.1 + i)*2.2 : 0;
+    el.style.left=(x-7+floatAmp)+'px';
+    el.style.top=(y-7)+'px';
+    el.style.opacity=(0.55+ek*0.45).toFixed(2);
+    el.style.transform='scale('+(0.85+ek*0.2)+')';
+  });
+  // header subtle lift
+  const hdr=document.querySelector('.header');
+  if(hdr){ hdr.style.opacity=(0.0+Math.min(1,t/0.9)).toFixed(2); hdr.style.transform='translateX(-50%) translateY('+(12*(1-Math.min(1,t/0.9)))+'px)';}
+};
+let start=null;
+function loop(ts){ if(start===null) start=ts; window.seek(((ts-start)/1000)%window.DURATION); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+</script>
+<script src="/animations/bridge.js"></script>
+</body>
+</html>

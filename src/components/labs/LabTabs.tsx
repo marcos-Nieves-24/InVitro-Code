@@ -4,8 +4,6 @@ import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { FlaskConical, ClipboardCheck } from "lucide-react";
 import { LabRunner } from "./LabRunner";
 import { QuizRunner } from "./QuizRunner";
-import { NotebookActions } from "./NotebookActions";
-import { RCopyButton } from "./RCopyButton";
 
 type TabId = "lab" | "quiz";
 
@@ -93,12 +91,6 @@ export function LabTabs({
             id="quiz"
           />
         )}
-
-        {/* R script + Notebook actions, right-aligned (self-gated) */}
-        <div className="ml-auto flex items-center gap-3">
-          <RCopyButton mod={mod} lesson={lesson} hasRScript={hasRScript} />
-          <NotebookActions mod={mod} lesson={lesson} hasNotebook={hasNotebook} />
-        </div>
       </div>
 
       {/* Tab panels */}

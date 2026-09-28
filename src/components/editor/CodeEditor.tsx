@@ -79,6 +79,7 @@ export default function CodeEditor({
             </span>
           ) : null}
           <button
+            data-onboarding="run-button"
             onClick={() => onRun?.(value ?? defaultValue)}
             disabled={!isWorkerReady || isRunning}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-[12px] font-medium transition-all ${

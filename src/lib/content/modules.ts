@@ -32,13 +32,47 @@ function modulesRoot(): string {
   return path.join(process.cwd(), "src/content/modules");
 }
 
-function readModuleJson(slug: string): { name?: string; order?: number } {
+interface ModuleJsonMeta {
+  name?: string;
+  order?: number;
+  description?: string;
+  shortDescription?: string;
+  progressHint?: string;
+  growthHint?: string;
+}
+
+function readModuleJson(slug: string): ModuleJsonMeta {
   const metaPath = path.join(modulesRoot(), slug, "module.json");
   try {
-    return JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    return JSON.parse(fs.readFileSync(metaPath, "utf8")) as ModuleJsonMeta;
   } catch {
     return {};
   }
+}
+
+const FALLBACK_PROGRESS_HINT =
+  "El tanque se llena con EXP: cada lección completa eleva el nivel del biorreactor. Al llenarse, subís de rango.";
+const FALLBACK_GROWTH_HINT =
+  "La planta in-vitro crece hoja a hoja: cada módulo completado expande el follaje y el líquido nutriente.";
+
+export function getModuleShortDescription(slug: string): string {
+  const meta = readModuleJson(slug);
+  if (typeof meta.shortDescription === "string" && meta.shortDescription.length > 0)
+    return meta.shortDescription;
+  if (typeof meta.description === "string" && meta.description.length > 0) return meta.description;
+  return getModuleDisplayName(slug);
+}
+
+export function getModuleProgressHint(slug: string): string {
+  const meta = readModuleJson(slug);
+  if (typeof meta.progressHint === "string" && meta.progressHint.length > 0) return meta.progressHint;
+  return FALLBACK_PROGRESS_HINT;
+}
+
+export function getModuleGrowthHint(slug: string): string {
+  const meta = readModuleJson(slug);
+  if (typeof meta.growthHint === "string" && meta.growthHint.length > 0) return meta.growthHint;
+  return FALLBACK_GROWTH_HINT;
 }
 
 function titleCaseSlug(slug: string): string {
@@ -265,6 +299,7 @@ export interface LessonFrontmatter {
   title: string;
   difficulty?: string;
   prerequisites?: string;
+  estimatedDuration?: string;
 }
 
 /** Per-lesson frontmatter for hub cards (D13). Slug-derived title fallback. */
@@ -289,6 +324,7 @@ export function getLessonFrontmatter(
         formatLessonName(lessonSlug),
       difficulty: typeof data["Difficulty"] === "string" ? data["Difficulty"] : undefined,
       prerequisites: typeof data["Prerequisites"] === "string" ? data["Prerequisites"] : undefined,
+      estimatedDuration: typeof data["Estimated Duration"] === "string" ? data["Estimated Duration"] : undefined,
     };
   } catch {
     return null;
@@ -309,4 +345,53 @@ export function getNextLesson(completedKeys: Set<string>): NextLesson | null {
     }
   }
   return null;
+}
+
+// ── Lab progress lifecycle (labs-lifecycle-persistence PR1) ──
+
+export type CompletionStatus = "not_started" | "in_progress" | "completed";
+
+export type LastPosition = {
+  activeTab?: "lab" | "quiz";
+  scrollY?: number;
+  codeSnapshot?: string;
+};
+
+export type LabProgressEntry = {
+  status: CompletionStatus;
+  last_position: LastPosition;
+  completion_date: string | null;
+  updated_at: string;
+};
+
+export type LabProgressMap = Map<string, LabProgressEntry>;
+
+/**
+ * Pure, deterministic, server-safe helper for smart resume (REQ-LC-06..09).
+ * Scan order is getLessonSlugs(moduleSlug).sort() (lessonNN_ prefix).
+ * - Caso 1: first in_progress in order
+ * - Caso 2: first not_started / missing in order
+ * - Caso 3: all completed or empty/no slugs → {target:null, case:3}
+ */
+export function getLabResumeTarget(
+  moduleSlug: string,
+  progressMap: LabProgressMap,
+): { target: { moduleSlug: string; lessonSlug: string } | null; case: 1 | 2 | 3 } {
+  const slugs = getLessonSlugs(moduleSlug).sort();
+  if (slugs.length === 0) return { target: null, case: 3 };
+
+  for (const slug of slugs) {
+    if (progressMap.get(slug)?.status === "in_progress") {
+      return { target: { moduleSlug, lessonSlug: slug }, case: 1 };
+    }
+  }
+
+  for (const slug of slugs) {
+    const entry = progressMap.get(slug);
+    if (!entry || entry.status === "not_started") {
+      return { target: { moduleSlug, lessonSlug: slug }, case: 2 };
+    }
+  }
+
+  return { target: null, case: 3 };
 }

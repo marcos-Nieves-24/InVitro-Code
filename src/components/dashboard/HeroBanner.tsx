@@ -1,81 +1,304 @@
-// Server component — no "use client"
-import Image from "next/image";
-import Link from "next/link";
-import { Play, Map } from "lucide-react";
-import { DashboardHero3DWrapper } from "./DashboardHero3DWrapper";
+"use client";
 
-interface HeroBannerProps {
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
+import { getScientistVariant } from "@/lib/gamification/utils";
+import { ScientistFigure } from "./ScientistFigure";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
+import { TypingText } from "@/components/ui/TypingText";
+
+export interface HeroBannerProps {
   userName: string;
   startHref: string;
-  totalXp: number;
+  gender?: string | null;
+  levelInfo?: { level: number; nextLevelXp: number; progressToNext: number };
 }
 
-export function HeroBanner({ userName, startHref }: HeroBannerProps) {
+const BUBBLE_TEXT = "¿Listo para tu próxima misión?";
+
+function LegacyStatic({
+  userName: _userName,
+  startHref,
+  gender,
+}: HeroBannerProps) {
+  const variant = getScientistVariant(gender);
+  const scientistSrc =
+    variant === "m"
+      ? "/dashboard/cientifico-440x511.svg"
+      : "/dashboard/cientifica-1.svg";
+
   return (
-    <section className="relative flex min-h-[320px] rounded-2xl lg:min-h-[480px]">
-      {/* Layer 0: Background image — anime-style dashboard background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <section className="relative min-h-[400px] rounded-3xl lg:min-h-[480px]">
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
         <Image
           src="/dashboard/dashboard-fondo-anime.png"
           alt=""
           fill
           priority
-          sizes="100vw"
-          aria-hidden="true"
-          className="pointer-events-none object-cover object-center"
+          sizes="(max-width: 1024px) 100vw, 1280px"
+          className="object-cover object-center"
         />
       </div>
 
-      {/* Layer 1: Gradient overlay for text contrast — softer for anime bg */}
-      <div className="absolute inset-0 z-[1] overflow-hidden bg-gradient-to-r from-[#0b0e2a]/70 via-[#0b0e2a]/40 to-transparent" />
-
-      {/* Layer 2: Content.
-          The section is a flex container so this row stretches to the hero's full
-          height at every viewport. Without it the row stayed content-sized and
-          top-aligned, leaving a 40px dead band above the bottom edge wherever the
-          hero hit its min-height (~1920px wide) and the bust looked amputated. */}
-      <div className="relative z-[2] flex w-full items-center gap-8 p-10">
-        <div className="flex-1">
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            ¡Bienvenido de vuelta, {userName}!
-          </h2>
-          <p className="mb-8 mt-4 max-w-lg text-white/80">
-            Estás construyendo tu camino en InVitro-Code. Continúa tu
-            investigación y descubre nuevas formas de aplicar la Inteligencia
-            Artificial.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href={startHref}
-              className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-transform hover:scale-105"
-            >
-              <Play className="h-4 w-4" fill="currentColor" />
-              Continuar Misión
-            </Link>
-            <Link
-              href="/niveles"
-              className="glass-card flex items-center gap-2 rounded-xl border border-white/20 px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
-            >
-              <Map className="h-4 w-4" />
-              Explorar Mapa
-            </Link>
+      <div className="relative z-[2] flex items-end gap-0 p-8 pb-0 lg:p-12 lg:pb-0">
+        <div className="relative z-[1] w-[420px] shrink-0 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
+          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
+            <TypingText
+              text="> Bienvenido, investigador"
+              delay={28}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete={false}
+              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+              className="text-sm font-bold text-[var(--color-brand-300)]"
+            />
+            <TypingText
+              text="// sistema listo"
+              delay={22}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-2 block text-xs text-white/60"
+            />
+            <TypingText
+              text="Continua entrenando modelos y explorando la inteligencia artificial"
+              delay={18}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-1 block text-sm text-white/80"
+            />
           </div>
-        </div>
-
-        {/* Layer 3: 3D canvas — client boundary.
-            Anchored to the hero's real bottom-right edge: self-end + -mb-10 closes
-            the bust crop against the bottom, and -mr-10 pulls the canvas through the
-            right padding so the figure bleeds off the hero edge like the reference.
-            Without -mr-10 the canvas bled off only its own box, leaving a 40px band. */}
-        <div className="hidden h-[480px] w-96 shrink-0 self-end overflow-visible lg:-mb-6 lg:-mr-2 lg:block">
-          <DashboardHero3DWrapper />
+          <SlideArrowButton
+            text="Iniciar Lección"
+            primaryColor="var(--color-brand-400)"
+            href={startHref}
+            className="mt-6"
+          />
         </div>
       </div>
 
-      {/* Layer 4: Decorative chip */}
-      <div className="absolute right-6 top-6 z-[3] rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-        IA + Biotecnología = Mejor futuro
+      <div className="absolute bottom-2 right-10 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-14 lg:block">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={scientistSrc}
+          alt="Científica con hélice de ADN"
+          className="h-[480px] w-full object-contain object-bottom"
+        />
       </div>
+
+    </section>
+  );
+}
+
+export function HeroBanner(props: HeroBannerProps) {
+  if (process.env.NEXT_PUBLIC_HERO_FALLBACK === "true") {
+    return <LegacyStatic {...props} />;
+  }
+
+  return <HeroComic {...props} />;
+}
+
+function HeroComic({ startHref, gender }: HeroBannerProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const fondoRef = useRef<HTMLDivElement>(null);
+  const figureRef = useRef<HTMLDivElement>(null);
+  const bubbleRef = useRef<HTMLDivElement>(null);
+  const [typeActive, setTypeActive] = useState(() => !!shouldReduceMotion);
+  const [isHoverScientist, setIsHoverScientist] = useState(false);
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setTypeActive(true);
+    }
+  }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    let timeline: { kill: () => void } | null = null;
+    let mounted = true;
+
+    const run = async () => {
+      try {
+        const mod = await import("gsap");
+        const gsap = (mod as unknown as { gsap: typeof import("gsap").gsap }).gsap ?? (mod as unknown as { default: typeof import("gsap").gsap }).default ?? (mod as unknown as typeof import("gsap")).gsap;
+        if (!mounted) return;
+
+        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+        timeline = tl;
+
+        tl.addLabel("enter");
+        if (fondoRef.current) {
+          tl.to(
+            fondoRef.current,
+            { y: -8, duration: 0.6, ease: "power2.out" },
+            "enter"
+          );
+        }
+        if (figureRef.current) {
+          tl.fromTo(
+            figureRef.current,
+            { x: 40, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.6 },
+            "enter+=0.1"
+          );
+        }
+        tl.addLabel("bubblePop");
+        if (bubbleRef.current) {
+          tl.fromTo(
+            bubbleRef.current,
+            { scale: 0, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.45,
+              ease: "elastic.out(1, 0.5)",
+            },
+            "bubblePop"
+          );
+        }
+        tl.addLabel("type");
+        tl.call(
+          () => {
+            if (mounted) setTypeActive(true);
+          },
+          undefined,
+          "type"
+        );
+      } catch {
+        if (mounted) setTypeActive(true);
+        if (bubbleRef.current) {
+          bubbleRef.current.style.transform = "scale(1)";
+          bubbleRef.current.style.opacity = "1";
+        }
+        if (figureRef.current) {
+          figureRef.current.style.transform = "translateX(0)";
+          figureRef.current.style.opacity = "1";
+        }
+      }
+    };
+
+    run();
+
+    return () => {
+      mounted = false;
+      if (timeline) {
+        try {
+          timeline.kill();
+        } catch {
+          // ignore
+        }
+      }
+    };
+  }, [shouldReduceMotion]);
+
+  const bubbleInitialStyle = shouldReduceMotion
+    ? undefined
+    : { transform: "scale(0)", opacity: 0, transformOrigin: "bottom left" as const };
+
+  const figureInitialStyle = shouldReduceMotion
+    ? undefined
+    : { transform: "translateX(40px)", opacity: 0 };
+
+  return (
+    <section className="relative min-h-[400px] rounded-3xl lg:min-h-[480px]">
+      <div ref={fondoRef} className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
+        <Image
+          src="/dashboard/dashboard-fondo-anime.png"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 1280px"
+          className="object-cover object-center"
+        />
+      </div>
+
+      <div className="relative z-[2] flex items-end gap-0 p-8 pb-0 lg:p-12 lg:pb-0">
+        <div className="relative z-[1] flex w-[420px] shrink-0 flex-col gap-4 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
+          <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
+            <TypingText
+              text="> Bienvenido, investigador"
+              delay={28}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete={false}
+              cursor={<span className="text-[var(--color-brand-300)]">█</span>}
+              className="text-sm font-bold text-[var(--color-brand-300)]"
+            />
+            <TypingText
+              text="// sistema listo"
+              delay={22}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-2 block text-xs text-white/60"
+            />
+            <TypingText
+              text="Continua entrenando modelos y explorando la inteligencia artificial"
+              delay={18}
+              repeat={false}
+              smooth={false}
+              hideCursorOnComplete
+              className="mt-1 block text-sm text-white/80"
+            />
+          </div>
+          <SlideArrowButton
+            text="Iniciar Lección"
+            primaryColor="var(--color-brand-400)"
+            href={startHref}
+            className="w-fit"
+          />
+
+          {/* Static bubble removed — now appears on scientist hover (see figure hover bubble) */}
+        </div>
+      </div>
+
+      <div
+        ref={figureRef}
+        style={figureInitialStyle}
+        className="absolute bottom-2 right-10 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-14 lg:block"
+        onMouseEnter={() => setIsHoverScientist(true)}
+        onMouseLeave={() => setIsHoverScientist(false)}
+      >
+        <ScientistFigure
+          variant={getScientistVariant(gender)}
+          priority
+          alt="Científica con hélice de ADN"
+        />
+        {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
+        <motion.div
+          className="pointer-events-none absolute -left-[168px] top-[68px] hidden lg:block"
+          initial={{ scale: 0 }}
+          animate={
+            isHoverScientist
+              ? { scale: [0, 1.25, 1] }
+              : { scale: 0 }
+          }
+          transition={
+            isHoverScientist
+              ? { duration: 0.25, times: [0, 0.5, 1], ease: "easeOut" }
+              : { duration: 0.1, ease: "easeIn" }
+          }
+          style={{ transformOrigin: "100% 100%" }}
+          aria-hidden={!isHoverScientist}
+        >
+          <div className="relative rounded-[10px] bg-[#5a5a5a] px-4 py-3 text-center text-sm font-bold text-white shadow-lg">
+            {BUBBLE_TEXT}
+            <span
+              className="absolute -bottom-[10px] right-6 block h-0 w-0 border-[10px] border-solid border-transparent"
+              style={{
+                borderTopColor: "#5a5a5a",
+                borderRightColor: "#5a5a5a",
+                transform: "rotate(-10deg)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
+        </motion.div>
+      </div>
+
     </section>
   );
 }

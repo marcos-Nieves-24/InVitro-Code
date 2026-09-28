@@ -1,0 +1,113 @@
+# Feature: ui-revamp-bioreactor-dashboard
+
+## Objective
+Revamp dashboard/biota visuals: scientific palette, hero with scientist anchored bottom-0, coupled bioreactor physics (impeller-fluid + bubbles), TestTube grid cleanup, and micro-interactions (SlideArrowButton + TypingText).
+
+## Problem
+Current dashboard lacks scientific identity: generic palette, static bioreactor illustration, cluttered grid (Progreso/Logros/Proyecto), and no motion polish or hero anchoring.
+
+## Why
+Align UI with biotech lab aesthetic; improve hierarchy and engagement; add physics-driven feedback to reinforce learning context.
+
+## Scope
+- Palette & HeroBanner layout
+- BioreactorSvg + motion hook + preview
+- TestTube component + Dashboard grid restructure
+- SlideArrowButton + TypingText adaptation and integration
+- Out of scope: data model changes, auth, content/MDX, backend
+
+## Constraints
+- Tailwind v4 / globals.css is source of truth for palette (no hardcoded hex outside tokens)
+- Existing lesson rendering and MDX pipeline untouched
+- Standard Mode verification (no strict TDD)
+- Keep verified build: `npm run type-check` + `npm run build`
+
+## Tasks
+
+### T1 — Paleta + Hero científica [x]
+- **Description:** Map palette #22005A → #45DCC6 + #FFFFFF in globals.css (primitive → semantic tokens); adjust HeroBanner so scientist image is `absolute bottom-0` with correct z-index/containment.
+- **Files:** `src/app/globals.css`, `src/components/dashboard/HeroBanner.tsx` (or equivalent hero path)
+- **Acceptance:** Tokens resolve in both light/dark contexts; hero image pinned to bottom edge at all breakpoints; no overflow/clipping.
+- **Verification:** `npm run type-check && npm run build`
+- **Status:** ☑ done — palette brand scale + hero anchoring implemented; `type-check` PASS, `build` PASS (warn only)
+
+### T2 — Bioreactor física acoplada impeller-fluido + bubbles [x]
+- **Description:** Implement coupled physics: impeller rotation drives fluid surface/movement + bubble emission; hook `useBioreactorMotion` drives `BioreactorSvg.tsx`; provide preview harness.
+- **Files:** `src/components/dashboard/BioreactorProgress/BioreactorProgress.tsx`, `src/components/dashboard/BioreactorProgress/BioreactorSvg.tsx`, `src/components/dashboard/BioreactorProgress/useBioreactorMotion.ts`, `src/app/preview/bioreactor/page.tsx`
+- **Acceptance:** Impeller speed ∝ fluid displacement + bubble rate; animation is frame-stable, pausable, respects reduced-motion.
+- **Verification:** `npm run type-check && npm run build`
+- **Status:** ☑ done — coupled physics implemented: rpm=60+120*h*(1-slip) slip=exp(-4h) duration=60/rpm, slosh 8*h*(rpm/120) mirrored, squash 0.9-0.3h amplitude ∝ rpm/120, bubbles 4+round(h*4) duration 3.2-1.5h; motion.g rotate impeller, reduced-motion static fallback; `type-check` PASS, `build` PASS
+
+### T3 — TestTube component + Dashboard grid [x] — refined 2026-09-24: BiotechGrowthTube replaces TestTube
+- **Description:** Create `TestTube` component; update Dashboard grid: remove Progreso/Logros/Proyecto cards, place Misión Actual next to Tu progreso, TestTube anchored in corner. **Refinement (user request 2026-09-24):** Replace `TestTube` with `BiotechGrowthTube` (`exp`/`maxExp` API) — keep grid/breakpoints identical, map `exp=completedCount` / `maxExp=totalLessons` so `progress = exp/maxExp`.
+- **Files:** `src/components/dashboard/TestTube.tsx` (retained on disk), `src/components/dashboard/BiotechGrowthTube.tsx` (new), `src/components/dashboard/DashboardContainer.tsx`
+- **Acceptance:** Grid renders without removed cards; Misión Actual adjacent to Tu progreso; BiotechGrowthTube visible in corner on desktop (`hidden sm:flex`), stacked sensibly on mobile (`sm:hidden`); `exp/maxExp` progress correct; TestTube file retained (no delete).
+- **Verification:** `npm run type-check` must pass (CSS var cast as `CSSProperties`)
+- **Status:** ☑ done — `TestTube.tsx` (SVG tube lip+glass, `motion.rect` fill spring 180/15, clipPath `useId`, ticks 25/50/75, reduced-motion static, sizes sm/md/lg, brand tokens); `DashboardContainer.tsx` paired grid `md:grid-cols-2` (Tu progreso glass-card + Misión Actual glass-card), removed `ProgressSection`/`AchievementsSection`/Proyecto Actual+EMPTY, `overallProgress` from `modules` total/completed, TestTube `sm` flex-right on desktop + stacked `sm:hidden` on mobile, dead imports/vars purged; `type-check` PASS, `build` PASS — **2026-09-24 refinement:** created `BiotechGrowthTube.tsx` (props `exp`/`maxExp`/`size=160`/`label="Crecimiento in vitro"`, `clamp` + `useMemo` scene `progress=pct/fillY/fillH/ticks/bubbles`, inline style vars `--bg #061423` `--cyan #73f5ff` cast as `CSSProperties`, outer `320×420` viewBox SVG `320x420`, clipPath `bgt-clip`, gradients `bgt-fill`/`bgt-glass`, ticks 25/50/75, bubbles, `role=img` + `progressbar` a11y); updated `DashboardContainer.tsx` to `import { BiotechGrowthTube }` and replace both `TestTube` usages with `<BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={160} label="Crecimiento in vitro" />` (desktop `hidden sm:flex` + mobile `sm:hidden`), removed `TestTube` import; `TestTube.tsx` retained on disk; `type-check` PASS
+
+### T4 — SlideArrowButton + TypingText [x]
+- **Description:** Adapt provided snippets into `SlideArrowButton` and `TypingText`; integrate into HeroBanner and DashboardContainer with accessible labels and motion.
+- **Files:** `src/components/ui/SlideArrowButton.tsx`, `src/components/ui/TypingText.tsx`, `src/components/dashboard/HeroBanner.tsx`, `src/components/dashboard/DashboardContainer.tsx`
+- **Acceptance:** Buttons show slide arrow affordance + keyboard focus; TypingText animates with cursor, respects reduced-motion, no layout shift.
+- **Verification:** `npm run type-check && npm run build`
+- **Status:** ☑ done — `SlideArrowButton.tsx` (pill `rounded-full border-white bg-white p-2`, `group/slide` hover expands `w-11→w-full` bg `#00B5C5 var(--color-brand-400)`, `ArrowRight` 20px, `href` renders `next/link` else `button`, `focus-visible:outline` brand-400, `aria-label`); `TypingText.tsx` (`use client`, `cn` inline, `Blinker`/`SmoothEffect`/`NormalEffect`/`useTypingInterval`/`useTypingEndpoint`/`CursorWrapper`/`Type`/`TypingText`, delay 32/smooth jitter, `useReducedMotion` instant fallback, `repeat` loop 1.4s, `hideCursorOnComplete`, `sr-only` + `role=status aria-live`); `HeroBanner.tsx` replaced both `LegacyStatic` + `HeroComic` `Iniciar Lección` Links with `SlideArrowButton href={startHref} text="Iniciar Lección" primaryColor="#00B5C5"` and welcome `h2+p` with console `font-mono bg-black/80 border-white/10 p-4` + two `TypingText` (`> Bienvenido, investigador // sistema listo` delay28 cursor `█ #45DCC6` + `Continua entrenando...` delay18 hideCursor), preserved `ComicBubble` + GSAP `bubbleRef`/`figureRef` timeline; `DashboardContainer.tsx` replaced `Continuar misión` Link with `SlideArrowButton href={missionHref} text="Continuar misión" mt-auto w-full`; `type-check` PASS, `build` PASS
+
+### T5 — Integración, pulido y verificación final [x]
+- **Description:** Cross-task integration polish, responsive QA, a11y check, and final build/type gate.
+- **Files:** `odd/tasks/ui-revamp-bioreactor-dashboard.md`, touched UI files above
+- **Acceptance:** All T1–T4 acceptance met together; no visual regressions; `type-check` and `build` green.
+- **Verification:** `npm run type-check && npm run build`
+- **Status:** ☑ done — cross-check polish verified: no dead imports (`ProgressSection`/`AchievementsSection`/`XPBar`/`Play` fully removed, `totalXp` retained for BioreactorProgress/GamingHUD), `HeroBanner` scientist `absolute bottom-0 hidden lg:block` no overflow on small screens, `TestTube` `hidden sm:flex` desktop + `sm:hidden` stacked mobile no overlap, no dead `#modules`/`#progress` anchors (only `#stats` retained), `SlideArrowButton` `aria-label`+`focus-visible:outline brand-400` verified, `TypingText` `role=status aria-live=polite`+`sr-only` verified, no emojis; `type-check` PASS, `build` PASS, `vitest` 6 files / 33 tests PASS
+
+## Authorized Scope
+Dashboard/biota UI revamp only (palette, hero, bioreactor, dashboard grid, micro-interactions). No schema, auth, or content pipeline changes.
+
+## TDD Mode
+Standard Mode — `strict_tdd: false` per `sdd-init` / `openspec/config.yaml`. No RED requirement; ordinary functional checks (`type-check` + `build`) per task.
+
+## Delivery Strategy
+`ask-on-risk` (default). Forecast ~800 authored lines; if running count exceeds ~400, split via `stacked-to-main` or `feature-branch-chain` after user confirmation.
+
+## Forecast
+- **Authored lines:** ~800 (additions + deletions, generated excluded)
+- **Files:** 8–10 (globals.css, HeroBanner, BioreactorSvg, useBioreactorMotion, preview, TestTube, Dashboard grid/container, SlideArrowButton, TypingText)
+- **Work-unit commits:** 4–5 (one per T1–T4 + T5 polish)
+
+## Progress
+- 2026-09-24 — Feature document created; no source writes yet. All tasks ☐ unchecked.
+- 2026-09-24 — T1 completed: mapped scientific palette (#22005A → #45DCC6 + #FFFFFF) in `src/app/globals.css` via `--color-brand-*` + rewired semantics (`--color-comic-bg/border`, `--color-mint/fog/slate`); fixed HeroBanner anchoring (`absolute bottom-0 right-8 lg:right-12`, `items-end`, `pb-0`) in both `LegacyStatic` + `HeroComic`; figure removed from flex flow, responsive `hidden lg:block` preserved. Commit: `<pending — not committed per T1 instructions>` (branch `odd/ui-revamp-bioreactor-dashboard`).
+- 2026-09-24 — T2 completed: coupled bioreactor physics in `src/components/dashboard/BioreactorProgress/useBioreactorMotion.ts` (`getBioreactorPhysics`, `BioreactorPhysics` interface, slip/rpm/duration/slosh/squash/bubbles) and `src/components/dashboard/BioreactorProgress/BioreactorSvg.tsx` (motion.g impeller rotate duration=60/rpm, sloshGroup x=[-A,A] duration=2*duration, squash scaleY [1,squashMin,1] duration 0.9-0.3h, bubbles sliced 4+round(h*4) duration 3.2-1.5h delay 0-1.6, spring stiffness 180+40h, reduced-motion branches preserved, clipPath/a11y IDs intact); verified preview harness `src/app/preview/bioreactor/page.tsx` still works (slider 0-100).
+- 2026-09-24 — T3 completed: created `src/components/dashboard/TestTube.tsx` (SVG tube 48×96 viewBox, lip+glass `var(--color-slate)`, liquid `linearGradient brand-600→brand-400→brand-300` via `motion.rect` spring 180/15 mass 0.8, clipPath `useId` unique, ticks at 25/50/75 with opacity by progress, `size` sm/md/lg, `label` mono, reduced-motion static `rect`+no scale, `role=progressbar`); restructured `src/components/dashboard/DashboardContainer.tsx` to paired grid (removed `ProgressSection`/`AchievementsSection` imports+usages, deleted `#mission` Proyecto Actual card+EMPTY and `projectModule`/`recentAchievements` logic, moved Misión Actual card into Tu progreso `md:grid-cols-2`, computed `overallProgress` via `modules.reduce`+`completedLessonKeys.size`, placed `TestTube` right-flex `hidden sm:flex` desktop + `sm:hidden` stacked mobile, preserved `BioreactorProgress`/`HeroSection`/gamification, purged dead `EMPTY_STATES`/`evaluateAchievements`/`getLessonSlugs`/`ProjectIcon`.
+- 2026-09-24 — T4 completed: created `src/components/ui/SlideArrowButton.tsx` (pill, `group/slide`, `primaryColor="#00B5C5"` `var(--color-brand-400)`, `ArrowRight` 20px, `href`→`Link` else `button`, focus-visible) and `src/components/ui/TypingText.tsx` (`use client`, `cn`, `Blinker`/`SmoothEffect`/`NormalEffect`/`useTypingInterval`/`useTypingEndpoint`/`CursorWrapper`/`Type`, typing loop delay 32 + smooth jitter, reduced-motion instant, repeat 1.4s, hideCursorOnComplete, sr-only+a11y); integrated into `HeroBanner.tsx` (both `LegacyStatic`+`HeroComic` welcome replaced with console `bg-black/80` + two `TypingText` lines `> Bienvenido, investigador // sistema listo` + `Continua entrenando...`, `SlideArrowButton` for `Iniciar Lección`, preserved `ComicBubble` GSAP bubblePop) and `DashboardContainer.tsx` (`Continuar misión` → `SlideArrowButton href={missionHref}`); no emojis.
+- 2026-09-24 — T5 completed: integration polish + verification — cross-checked removals (no dead `ProgressSection`/`AchievementsSection`/`XPBar`/`Play` imports, `totalXp` retained for GamingHUD/BioreactorProgress), responsive QA (TestTube `hidden sm:flex` vs `sm:hidden` stacked no overlap, hero `absolute bottom-0 hidden lg:block` no overflow, dead `#modules`/`#progress` anchors already removed — only `#stats` remains), a11y (SlideArrowButton `aria-label` + focus-visible outline, TypingText `role=status aria-live=polite` + sr-only, cursor `aria-hidden`), style (no emojis unicode scan PASS); `type-check` PASS, `build` PASS (14.6s, 19/19 static pages), `vitest` 6 files 33 tests PASS.
+- 2026-09-24 — T3 refinement (user request): replaced `TestTube` with `BiotechGrowthTube` in `DashboardContainer.tsx` — `exp={completedCount}` / `maxExp={totalLessons}` (`progress = exp/maxExp` via `clamp`+`useMemo` scene), `size={160}` `label="Crecimiento in vitro"`, breakpoints `hidden sm:flex` / `sm:hidden` preserved, `--bg #061423` `--cyan #73f5ff` inline style (cast as `CSSProperties`), SVG `viewBox 0 0 320 420`; `TestTube.tsx` retained on disk; `type-check` PASS.
+
+## Verification Evidence
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T1
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully, warn only: `middleware` → `proxy` deprecation) — T1
+- Checked: `white` text on `var(--color-brand-950) #22005A` contrast ok; `glass-card`, `hud`, `hero-terminal`, `comic-bg/border` resolve via `var()`; no hardcoded hex outside `@theme`; scientist `absolute bottom-0` inside `relative` hero not clipped (`overflow-hidden` container contains absolute).
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T2 (BioreactorSvg + useBioreactorMotion physics, impeller/slosh/squash/bubbles, preserves clipPath vesselInnerClip, IDs standBase/impellerGroup/motor, a11y role=img/progressbar)
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully 13.5s, Generating static pages 19/19, warn only middleware→proxy) — T2, preview route `/preview/bioreactor` built, no regression in DashboardContainer/BioreactorProgress orchestrator
+- Checked: rpm 60→178 as h 0→1 (slip exp(-4h) low-fill slip, high-fill coupled), impellerDuration 1.0s→0.34s drives sloshAmplitude 0→11.9 and squashDuration 0.9→0.6s + squashMin ∝ rpm/120; bubbles visible 4→8, bubbleDuration 3.2→1.7s, delay spread 0-1.6; prefers-reduced-motion renders static ellipses/bubbles, no motion.g animate; liquidGrad still fog→mint via brand tokens.
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T3 (TestTube `useId` clipPath unique, motion.rect spring 180/15, brand tokens, DashboardContainer no dead imports/vars, overallProgress calc)
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully 13.9s, Generating static pages 19/19, warn only middleware→proxy) — T3, dashboard route built without ProgressSection/AchievementsSection/Proyecto Actual, no empty placeholders, no dead hrefs (`#mission`→removed, `#modules` links removed), grid `md:grid-cols-2` paired, TestTube sm visible corner desktop + stacked mobile, Bioreactor untouched
+- Checked: TestTube `progress` 0–100 clamp, fillH = h*76, ticks at 69.5/49/28.5 y with opacity by threshold, surface ellipse scaleX pulse 2.2s, reduced-motion branch static rect+ellipse no motion; Dashboard glass-card `overflow-hidden` prevents tube overflow, mobile `sm:hidden` vs desktop `hidden sm:flex` no overlap with text, flexible min-w-0 title truncation safe.
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T4 (SlideArrowButton `group/slide` pill, href→Link, default primaryColor #00B5C5, TypingText `useReducedMotion` fallback, cn inline, Blinker/SmoothEffect/NormalEffect/useTypingInterval/useTypingEndpoint/CursorWrapper/Type all exported, font-mono console style, sr-only+aria-live, no layout shift)
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully 13.9s, Generating static pages 19/19, warn only middleware→proxy) — T4, `/dashboard` route built with SlideArrowButton+TypingText, no Play/Link dead imports, `ComicBubble` GSAP timeline preserved (`bubbleRef`/`figureRef`/`fondoRef`), Continuar misión slide affordance, TypingText cursor `█ #45DCC6` respects reduced-motion, focus-visible outline brand-400
+- Checked: SlideArrowButton `rounded-full border-white bg-white p-2` pill, inner absolute `w-11→w-full` transition 200ms ease, text `left-4→-left-3` white on hover, `ArrowRight` 20px; HeroBanner console `bg-black/80 border-white/10 rounded-lg p-4` with two TypingText lines (28ms + 18ms, repeat false, smooth false, hideCursorOnComplete false/true), `font-mono text-[#45DCC6]` / `text-white/80`; DashboardContainer `SlideArrowButton w-full mt-auto` for Continuar misión; no emojis, no AI markers, a11y aria-label + sr-only preserved.
+- `npm run type-check` — PASS (tsc --noEmit, no errors) — T5 (no dead imports: ProgressSection/AchievementsSection/XPBar/Play cleaned, totalXp retained, HeroBanner only 8 imports)
+- `npm run build` — PASS (Next.js 16.2.10 Turbopack, Compiled successfully 14.6s in 9.7s TS, Generating static pages 19/19 in 452ms, warn only middleware→proxy) — T5, all routes including `/dashboard` + `/preview/bioreactor` green
+- `npm run test` — PASS (vitest v4.1.10, 6 Test Files passed, 33 Tests passed, Duration 660ms) — T5 report only, no blocking failures
+- Checked: responsive — TestTube `hidden sm:flex` (desktop right-flex pt-1) vs `sm:hidden` stacked center no overlap with glass-card `overflow-hidden p-6` padding; hero scientist `absolute bottom-0 right-8 lg:right-12 hidden lg:block h-[480px] w-[350px]` no overflow on <lg (hidden), no clipping on lg (overflow-visible inside overflow-hidden rounded-3xl section — contained); no dead `#modules`/`#progress` anchors, only `#stats` retained; SlideArrowButton `aria-label` + `focus-visible:outline-2 outline-[var(--color-brand-400)]`, TypingText `role=status aria-live=polite` + `sr-only` + cursor `aria-hidden`, unicode emoji scan 0 matches.
+
+## Next Step
+All tasks T1–T5 completed — feature ready for final commit/PR. No pending tasks.
+
+---
+*Locator: `odd/tasks/ui-revamp-bioreactor-dashboard.md` | Engram mirror: `odd/ui-revamp-bioreactor-dashboard/tasks`*
+
+## Archive 2026-09-24
+- Status: archived, all T1-T5 done, tube replaced by BiotechGrowthTube fondo transparente, 0% crecimiento negro, impeller horizontal scaleX, wave conectado, scientist hover, card shadows, scientist margin, welcome jump.
+- Commits: 322856b,3a1e7db,896bc8f,cc5e6d3,3d608e2,6b3eb4d,90b0756,a61c1ad,13a1e86,2a8bd17 + fix 1b
+- Verified: type-check PASS, build PASS, playwright full + hover PASS on :3000/dashboard
+- Engram: save attempted (binary 1.20.0, mcp handshake ok) — if not persisted, doc is source of truth.

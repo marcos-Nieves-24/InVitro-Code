@@ -1,7 +1,3 @@
-import Link from "next/link";
-import {
-  ArrowRight,
-} from "lucide-react";
 import { HeroBackground } from "@/components/landing/HeroBackground";
 import { InteractiveTerminal } from "@/components/landing/InteractiveTerminal";
 import { MissionDendrogram } from "@/components/landing/MissionDendrogram";
@@ -10,6 +6,7 @@ import { Team } from "@/components/landing/Team";
 import { Contact } from "@/components/landing/Contact";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 /**
  * Landing page — InVitro-Code interactive learning platform.
@@ -43,18 +40,8 @@ export default function Home() {
                 vivo y desafios de codigo real.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/sign-up"
-                  className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-all hover:scale-105 hover:shadow-glow"
-                >
-                  Empezar ahora <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/sign-in"
-                  className="flex items-center gap-2 rounded-xl bg-mint px-8 py-4 font-bold text-ink shadow-lg shadow-glow transition-all hover:scale-105 hover:shadow-glow"
-                >
-                  Iniciar sesion
-                </Link>
+                <SlideArrowButton href="/sign-up" text="Empezar ahora" size="lg" />
+                <SlideArrowButton href="/sign-in" text="Iniciar sesión" size="lg" />
               </div>
             </div>
 

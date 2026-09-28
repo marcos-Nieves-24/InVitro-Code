@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
-import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
-import { LabHub } from "@/components/labs/LabHub";
+import { LabHeroLoader } from "@/components/labs/LabHero/LabHeroLoader";
+import { ModuleExplorerGrid } from "@/components/labs/explorer/ModuleExplorerGrid";
 import type { LabModuleGroup } from "@/components/labs/LabHub";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
@@ -29,7 +29,7 @@ export default async function LaboratoriosPage() {
   const supabase = createAdminClient();
 
   // ── User state (same pattern as proyectos page) ──
-  const [profileRes, progressRes, streakRes] = await Promise.all([
+  const [profileRes, progressRes, streakRes, labProgressRes] = await Promise.all([
     supabase
       .from("profiles")
       .select("username, email, role, theme")
@@ -46,6 +46,11 @@ export default async function LaboratoriosPage() {
       .select("current_streak")
       .eq("user_id", userId)
       .maybeSingle(),
+    // Labs lifecycle: prefer lab_progress, fallback to progress per REQ-P-09
+    supabase
+      .from("lab_progress")
+      .select("module_slug, lesson_slug, completion_status")
+      .eq("user_id", userId),
   ]);
 
   const userName = getDisplayName(profileRes.data ?? {});
@@ -53,12 +58,27 @@ export default async function LaboratoriosPage() {
   const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);
 
-  const trail = `Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`;
-
   // ── Build completed lesson key set from real progress ──
   const completedLessonKeys = new Set(
     (progressRes.data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
   );
+
+  // Prefer lab_progress when rows exist
+  const labCompletedKeys = new Set<string>();
+  let hasLabProgress = false;
+  if (Array.isArray(labProgressRes.data) && labProgressRes.data.length > 0) {
+    hasLabProgress = true;
+    for (const row of labProgressRes.data as Array<{
+      module_slug: string;
+      lesson_slug: string;
+      completion_status: string;
+    }>) {
+      if (row.completion_status === "completed") {
+        labCompletedKeys.add(`${row.module_slug}/${row.lesson_slug}`);
+      }
+    }
+  }
+  const effectiveCompletedKeys = hasLabProgress ? labCompletedKeys : completedLessonKeys;
 
   // ── Build module groups for LabHub ──
   const modules = getModules();
@@ -69,7 +89,7 @@ export default async function LaboratoriosPage() {
     lessons: getLessonSlugs(mod.slug).map((lessonSlug) => ({
       slug: lessonSlug,
       frontmatter: getLessonFrontmatter(mod.slug, lessonSlug),
-      completed: completedLessonKeys.has(`${mod.slug}/${lessonSlug}`),
+      completed: effectiveCompletedKeys.has(`${mod.slug}/${lessonSlug}`),
     })),
   }));
 
@@ -79,25 +99,17 @@ export default async function LaboratoriosPage() {
       userMeta={`Nivel ${levelInfo.level} · ${rankTitle(levelInfo.level)}`}
       userRole={profileRes.data?.role}
       theme={profileRes.data?.theme}
+      currentStreak={currentStreak}
     >
-      <InVitroTopBar
+      <LabHeroLoader
         totalXp={totalXp}
         currentStreak={currentStreak}
-        trail={trail}
+        levelInfo={levelInfo}
+        rankTitle={rankTitle(levelInfo.level)}
       />
 
-      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
-        <div className="mb-8">
-          <h1 className="font-display text-3xl font-extrabold text-ink">
-            Laboratorios
-          </h1>
-          <p className="mt-1 text-sm text-storm">
-            Cada módulo tiene lecciones con laboratorios interactivos. Completa
-            los ejercicios para dominar los conceptos.
-          </p>
-        </div>
-
-        <LabHub modules={labModules} />
+      <div id="hub" className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
+        <ModuleExplorerGrid modules={labModules} />
       </div>
     </InVitroShell>
   );
