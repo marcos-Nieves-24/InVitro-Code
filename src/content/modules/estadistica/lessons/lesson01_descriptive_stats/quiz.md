@@ -39,7 +39,7 @@ d) Por debajo de la media menos el rango
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explica por qué se prefiere la mediana a la media para informar el ingreso familiar en un país con alta desigualdad de ingresos.
+**6.** Explica porque se prefiere la mediana a la media para informar el ingreso familiar en un país con alta desigualdad de ingresos.
 
 **7.** Una investigadora de biotecnología mide la concentración de proteína en 100 muestras. La media es 45 mg/dL con una desviación estándar de 3 mg/dL. Interpreta estos valores en lenguaje simple.
 

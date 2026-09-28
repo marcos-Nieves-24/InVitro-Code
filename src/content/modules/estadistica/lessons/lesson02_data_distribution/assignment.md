@@ -17,9 +17,9 @@
 4. Para las columnas `carat`, `depth` y `table`:
    - Crea una cuadrícula de 2×2 de histogramas
    - Informa las estadísticas de forma
-   - Identifica qué columnas son aproximadamente normales
+   - Identifica que columnas son aproximadamente normales
 5. Escribe un resumen (3-4 párrafos) que aborde:
-   - Por qué los precios de los diamantes están sesgados a la derecha
-   - Cómo ayuda la transformación logarítmica
-   - Qué features podrían necesitar transformación antes del modelado de machine learning
+   - Porque los precios de los diamantes están sesgados a la derecha
+   - como ayuda la transformación logarítmica
+   - que features podrían necesitar transformación antes del modelado de machine learning
 

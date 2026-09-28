@@ -8,13 +8,13 @@
 # =========================================================================
 
 # PASO 1: Generar datos sinteticos con make_blobs (400 puntos, 5 centros).
-import numpy as np                         # Operaciones matematicas
-import pandas as pd                        # DataFrames y manipulacion
-import plotly.express as px                # Graficos interactivos
+import numpy as np                         # Operaciones matemáticas
+import pandas as pd                        # DataFrames y manipulación
+import plotly.express as px                # Gráficos interactivos
 from sklearn.datasets import make_blobs, load_iris  # Cargar datasets de ejemplo
 from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
 from sklearn.cluster import KMeans  # Algoritmos de clustering
-from sklearn.metrics import silhouette_score  # Metricas de evaluacion
+from sklearn.metrics import silhouette_score  # Métricas de evaluación
 
 np.random.seed(42)                         # Fijar semilla para reproducibilidad
 X, y_true = make_blobs(n_samples=400, centers=5, cluster_std=1.2, random_state=42)
@@ -36,12 +36,12 @@ print("\nCurva del codo (inercia vs k):")
 fig = px.line(x=ks, y=inercia, markers=True,
               title="Curva del codo (inercia vs k)",
               labels={"x": "k", "y": "Inercia"})
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 fig = px.line(x=ks, y=sil, markers=True,
               title="Silhouette score vs k",
               labels={"x": "k", "y": "Silhouette"})
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 4: Aplicar K-Means con el k optimo y visualizar los clusters.
 print("\nGraficando los clusters finales con sus centroides:")
@@ -56,7 +56,7 @@ fig.add_scatter(x=modelo.cluster_centers_[:, 0],
                 y=modelo.cluster_centers_[:, 1],
                 mode="markers", marker=dict(size=14, symbol="x", color="black"),
                 name="Centroides")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 5: K-Means sobre iris estandarizado con k = 3.
 iris = load_iris()
@@ -76,7 +76,7 @@ print(tabla)
 
 # PASO 7: Visualizar los clusters de iris proyectados con PCA.
 print("\nClusters de iris en el plano PCA:")
-from sklearn.decomposition import PCA  # Reduccion de dimensionalidad (PCA)
+from sklearn.decomposition import PCA  # Reducción de dimensionalidad (PCA)
 
 pca = PCA(n_components=2)
 X_2d = pca.fit_transform(X_iris)
@@ -84,7 +84,7 @@ df_iris = pd.DataFrame({"PC1": X_2d[:, 0], "PC2": X_2d[:, 1],
                         "cluster": etiquetas_iris})
 fig = px.scatter(df_iris, x="PC1", y="PC2", color="cluster",
                  title="Clusters de iris proyectados con PCA")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 8: Resumen del laboratorio.
 print("\n--- Resumen ---")

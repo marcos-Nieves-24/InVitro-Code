@@ -39,7 +39,7 @@ d) La misma cantidad de valores atípicos que la normal
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explica por qué la transformación logarítmica de datos de expresión génica sesgados a la derecha los hace aproximadamente normales. ¿Cuál es el beneficio práctico?
+**6.** Explica porque la transformación logarítmica de datos de expresión génica sesgados a la derecha los hace aproximadamente normales. ¿Cuál es el beneficio práctico?
 
 **7.** Graficas un histograma y ves dos picos distintos. ¿Qué sugiere esto sobre los datos? ¿Qué deberías investigar a continuación?
 

@@ -1,19 +1,19 @@
 ```python
 # =========================================================================
-# LAB 7: Reduccion de dimensionalidad con PCA
+# LAB 7: Reducción de dimensionalidad con PCA
 # -------------------------------------------------------------------------
-# Aplicamos PCA al dataset iris: varianza explicada, proyeccion 2D y
-# analisis de las cargas de los componentes. Cada figura termina con
+# Aplicamos PCA al dataset iris: varianza explicada, proyección 2D y
+# análisis de las cargas de los componentes. Cada figura termina con
 # fig.show() para capturarla en la consola.
 # =========================================================================
 
 # PASO 1: Cargar iris y estandarizar los features.
-import numpy as np                         # Operaciones matematicas
-import pandas as pd                        # DataFrames y manipulacion
-import plotly.express as px                # Graficos interactivos
+import numpy as np                         # Operaciones matemáticas
+import pandas as pd                        # DataFrames y manipulación
+import plotly.express as px                # Gráficos interactivos
 from sklearn.datasets import load_iris  # Cargar datasets de ejemplo
 from sklearn.preprocessing import StandardScaler  # Preprocesamiento (escalado, etc.)
-from sklearn.decomposition import PCA  # Reduccion de dimensionalidad (PCA)
+from sklearn.decomposition import PCA  # Reducción de dimensionalidad (PCA)
 
 iris = load_iris()
 X = iris.data
@@ -42,17 +42,17 @@ fig = px.bar(x=componentes, y=pca.explained_variance_ratio_,
              title="Varianza explicada por cada componente")
 fig.add_scatter(x=componentes, y=np.cumsum(pca.explained_variance_ratio_),
                 mode="lines+markers", name="Acumulada")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
-# PASO 4: Proyeccion en 2D coloreada por especie.
+# PASO 4: Proyección en 2D coloreada por especie.
 print("\nProyeccion PCA 2D coloreada por especie:")
 df_pca = pd.DataFrame({"PC1": X_pca[:, 0], "PC2": X_pca[:, 1],
                        "especie": [nombres[i] for i in y]})
 fig = px.scatter(df_pca, x="PC1", y="PC2", color="especie",
-                 title="Proyeccion PCA 2D del dataset iris")
-fig.show()                                 # Mostrar grafico interactivo
+                 title="Proyección PCA 2D del dataset iris")
+fig.show()                                 # Mostrar gráfico interactivo
 
-# PASO 5: Analisis de cargas (contribucion de cada feature).
+# PASO 5: Análisis de cargas (contribucion de cada feature).
 cargas = pd.DataFrame(pca.components_.T,
                       index=features,
                       columns=[f"PC{i+1}" for i in range(4)])
@@ -62,10 +62,10 @@ print("\nFeature con mayor carga en PC1:", cargas["PC1"].abs().idxmax())
 
 fig = px.imshow(cargas, text_auto=".2f", color_continuous_scale="RdBu_r",
                 title="Heatmap de las cargas de los componentes")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 6: Resumen del laboratorio.
 print("\n--- Resumen ---")
 print("Los primeros 2 PCs explican la mayor parte de la varianza.")
-print("PC1 separa la especie setosa del resto; las cargas muestran que feature pesa mas.")
+print("PC1 separa la especie setosa del resto; las cargas muestran que feature pesa más.")
 ```

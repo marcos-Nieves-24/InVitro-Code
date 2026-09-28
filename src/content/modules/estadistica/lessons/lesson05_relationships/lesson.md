@@ -34,7 +34,7 @@ Ya sabes describir variables individuales. Ahora aprenderás a cuantificar relac
 <Section number={2} title="Covarianza: ¿se mueven juntas?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="definition">
-La covarianza mide cómo dos variables varían juntas:
+La covarianza mide como dos variables varían juntas:
 
 $$\text{Cov}(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$$
 </ConceptCard>
@@ -79,10 +79,10 @@ Donde $R(X)$ son los rangos (1°, 2°, 3°...).
 
 <ComparisonTable
   rows={[
-    { feature: "Qué mide", left: "Relación lineal", right: "Relación monótona (siempre creciente o decreciente)" },
+    { feature: "que mide", left: "Relación lineal", right: "Relación monótona (siempre creciente o decreciente)" },
     { feature: "Supuestos", left: "Normalidad, linealidad", right: "Ninguno (no paramétrico)" },
     { feature: "Outliers", left: "Muy sensible", right: "Robusto (usa rangos)" },
-    { feature: "Cuándo usar", left: "Datos normales, relación lineal", right: "Datos sesgados, relación no lineal, outliers" },
+    { feature: "cuando usar", left: "Datos normales, relación lineal", right: "Datos sesgados, relación no lineal, outliers" },
     { feature: "Ejemplo", left: "Peso vs altura", right: "Ingresos vs gastos (sesgados)" },
   ]}
 />
@@ -115,7 +115,7 @@ print("Sin relac: ", f"Pearson={pearsonr(x, y_none)[0]:.3f}", f"Spearman={spearm
   moduleSlug="estadistica"
   lessonSlug="lesson05_relationships"
   prompt="Para la relación cúbica (y = x³), Pearson da ~0.2 pero Spearman da ~0.95. ¿Por qué tanta diferencia? ¿Cuál es la correlación 'real'?"
-  answer="Ambos tienen razón en lo qué miden. Pearson mide relación LINEAL — cómo x³ no es lineal, da bajo. Spearman mide relación MONÓTONA — cómo x³ siempre crece cuándo x crece, da alto. No hay una correlación 'más real': depende de qué te interese. Para selección de features en ML, Spearman suele ser más útil por qué captura relaciones no lineales qué algoritmos cómo árboles de decisión pueden aprovechar."
+  answer="Ambos tienen razón en lo que miden. Pearson mide relación LINEAL — como x³ no es lineal, da bajo. Spearman mide relación MONÓTONA — como x³ siempre crece cuando x crece, da alto. No hay una correlación 'más real': depende de que te interese. Para selección de features en ML, Spearman suele ser más útil porque captura relaciones no lineales que algoritmos como árboles de decisión pueden aprovechar."
 />
 
 </Section>
@@ -137,7 +137,7 @@ plt.show()
 ```
 
 <ConceptCard variant="key-idea">
-La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma). Busca valores $|r| > 0.8$ fuera de la diagonal — indican multicolinealidad, qué degrada la estabilidad de modelos lineales.
+La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma). Busca valores $|r| > 0.8$ fuera de la diagonal — indican multicolinealidad, que degrada la estabilidad de modelos lineales.
 </ConceptCard>
 
 </Section>
@@ -152,7 +152,7 @@ La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma)
 </ConceptCard>
 
 <CalloutInfo>
-Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría ser al revés la causalidad? ¿Es sólo coincidencia? La correlación es una pista, no una conclusión.
+Siempre pregúntate: ¿hay una tercera variable que explique ambas? ¿Podría ser al revés la causalidad? ¿Es solo coincidencia? La correlación es una pista, no una conclusión.
 </CalloutInfo>
 
 </Section>
@@ -163,12 +163,12 @@ Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría s
   blockId="reflection-l05-causation"
   moduleSlug="estadistica"
   lessonSlug="lesson05_relationships"
-  prompt="Encontraste qué la cantidad de features usadas en un modelo correlaciona r=0.9 con el accuracy en training, pero r=−0.3 con el accuracy en test. ¿Qué está pasando?"
-  answer="Overfitting clásico. Más features permiten al modelo memorizar el training set (r=0.9 positivo), pero dañan la generalización (r=−0.3). La alta correlación positiva en training NO implica qué más features sean mejores. Es el ejemplo perfecto de por qué siempre evaluamos en test: la correlación training-test te cuenta historias diferentes."
+  prompt="Encontraste que la cantidad de features usadas en un modelo correlaciona r=0.9 con el accuracy en training, pero r=−0.3 con el accuracy en test. ¿Qué está pasando?"
+  answer="Overfitting clásico. Más features permiten al modelo memorizar el training set (r=0.9 positivo), pero dañan la generalización (r=−0.3). La alta correlación positiva en training NO implica que más features sean mejores. Es el ejemplo perfecto de porque siempre evaluamos en test: la correlación training-test te cuenta historias diferentes."
 />
 
 <AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué preferirías Spearman sobre Pearson para datos de ingresos?</strong> Los ingresos son extremadamente sesgados a la derecha (pocas personas ganan muchísimo). Pearson es sensible a esos outliers extremos, mientras qué Spearman usa rangos y les da a todos el mismo peso relativo. Spearman te da la correlación 'real' entre la posición relativa de las personas, no entre sus valores absolutos.</p>
+<p><strong>¿Por qué preferirías Spearman sobre Pearson para datos de ingresos?</strong> Los ingresos son extremadamente sesgados a la derecha (pocas personas ganan muchísimo). Pearson es sensible a esos outliers extremos, mientras que Spearman usa rangos y les da a todos el mismo peso relativo. Spearman te da la correlación 'real' entre la posición relativa de las personas, no entre sus valores absolutos.</p>
 </AnswerReveal>
 
 </Section>

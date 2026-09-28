@@ -36,5 +36,5 @@ cancer = load_breast_cancer()
    - Reconstruye los datos y calcula el MSE de reconstrucción
    - Discutí la pérdida de información
 
-7. **Informe**: Escribe un resumen que interprete qué revela PCA sobre el dataset de cáncer de mama
+7. **Informe**: Escribe un resumen que interprete que revela PCA sobre el dataset de cáncer de mama
 

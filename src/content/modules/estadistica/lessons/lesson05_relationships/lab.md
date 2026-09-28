@@ -3,15 +3,15 @@
 # LAB 5: Relaciones entre variables
 # -------------------------------------------------------------------------
 # Calculamos covarianza y correlaciones de Pearson y Spearman, aplicamos
-# una regresion OLS manual y analizamos el cuarteto de Anscombe (datos muy
-# distintos con la misma correlacion). Cada figura termina con fig.show().
+# una regresión OLS manual y analizamos el cuarteto de Anscombe (datos muy
+# distintos con la misma correlación). Cada figura termina con fig.show().
 # =========================================================================
 
-# PASO 1: Cuarteto de Anscombe embebido (4 series clasicas de 11 puntos).
-import numpy as np                         # Operaciones matematicas
-import pandas as pd                        # DataFrames y manipulacion
-import plotly.express as px                # Graficos interactivos
-from scipy.stats import pearsonr, spearmanr  # Funciones estadisticas
+# PASO 1: Cuarteto de Anscombe embebido (4 series clásicas de 11 puntos).
+import numpy as np                         # Operaciones matemáticas
+import pandas as pd                        # DataFrames y manipulación
+import plotly.express as px                # Gráficos interactivos
+from scipy.stats import pearsonr, spearmanr  # Funciones estadísticas
 
 x_ans = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5]
 anscombe = [
@@ -43,7 +43,7 @@ for i, (x, y) in enumerate(anscombe, start=1):
     x_linea = np.linspace(min(x), max(x), 50)
     fig.add_scatter(x=x_linea, y=pendiente * x_linea + intercepto,
                     mode="lines", name="OLS")
-    fig.show()                                 # Mostrar grafico interactivo
+    fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 4: Covarianza y correlaciones sobre el dataset de diabetes.
 from sklearn.datasets import load_diabetes  # Cargar datasets de ejemplo
@@ -61,15 +61,15 @@ for a in ["age", "bmi", "bp"]:
     r_s, _ = spearmanr(dfd[a], dfd["target"])
     print(f"  {a}-target: Pearson={r_p:.3f}, Spearman={r_s:.3f}")
 
-# PASO 6: Heatmap de la matriz de correlacion de Pearson.
-print("\nHeatmap de la matriz de correlacion de Pearson:")
+# PASO 6: Heatmap de la matriz de correlación de Pearson.
+print("\nHeatmap de la matriz de correlación de Pearson:")
 corr_pearson = dfd.select_dtypes(include=[np.number]).corr(method="pearson")
 fig = px.imshow(corr_pearson, text_auto=".2f", color_continuous_scale="RdBu_r",
-                title="Matriz de correlacion de Pearson (diabetes)")
-fig.show()                                 # Mostrar grafico interactivo
+                title="Matriz de correlación de Pearson (diabetes)")
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 7: Resumen del laboratorio.
 print("\n--- Resumen ---")
 print("Las 4 series de Anscombe tienen casi el mismo r, pero son muy distintas.")
-print("Pearson mide linealidad; Spearman mide monotonia; correlacion no es causalidad.")
+print("Pearson mide linealidad; Spearman mide monotonia; correlación no es causalidad.")
 ```

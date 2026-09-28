@@ -39,7 +39,7 @@ d) No se usa validación cruzada
 
 ## Respuesta corta (2 preguntas)
 
-**6.** Explica por qué es un error evaluar un modelo con los mismos datos con los que se entrenó.
+**6.** Explica porque es un error evaluar un modelo con los mismos datos con los que se entrenó.
 
 **7.** Un modelo de regresión tiene MAE = $5,000 y RMSE = $12,000 para la predicción de precios de casas. ¿Qué te dice la diferencia entre MAE y RMSE?
 

@@ -26,6 +26,6 @@
 
 4. **Demostración del TCL**: Escribe una simulación que demuestre el teorema central del límite:
    - Empieza con una distribución uniforme (claramente no normal)
-   - Muestra cómo la distribución de las medias muestrales se vuelve normal a medida que n aumenta de 2 a 5 a 30 a 100
+   - Muestra como la distribución de las medias muestrales se vuelve normal a medida que n aumenta de 2 a 5 a 30 a 100
    - Crea una cuadrícula de 2×2 que muestre esta evolución
 

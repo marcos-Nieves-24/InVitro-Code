@@ -26,7 +26,7 @@
 
    Crea una función `churn_probability(prior, sensitivity, specificity)` que devuelva la probabilidad posterior. Úsala para:
    - Calcular P(churn | churn predicho)
-   - Crear un gráfico que muestre cómo cambia la probabilidad posterior a medida que el prior varía de 0.01 a 0.50
+   - Crear un gráfico que muestre como cambia la probabilidad posterior a medida que el prior varía de 0.01 a 0.50
 
 4. **Escribe un informe breve** (1 página) que interprete estos resultados para una audiencia no técnica.
 

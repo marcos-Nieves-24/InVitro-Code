@@ -48,7 +48,7 @@ d) Que los datos se distribuyen normalmente
 **8.** Escribe código en Python que:
 - Cree dos arrays: x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] y y = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 - Calcule las correlaciones de Pearson y Spearman
-- Explique por qué difieren
+- Explique porque difieren
 
 ---
 
@@ -62,7 +62,7 @@ d) Que los datos se distribuyen normalmente
 
 6. Una relación lineal sigue una línea recta (Y = a + bX). Una relación monótona aumenta o disminuye de forma consistente pero no necesariamente en línea recta (por ejemplo, Y = X² para X > 0). El crecimiento cuadrático es monótono (para X > 0, a medida que X aumenta, Y aumenta) pero no lineal.
 
-7. La multicolinealidad infla la varianza de las estimaciones de los coeficientes, volviéndolos inestables e ininterpretables. Se vuelve difícil determinar qué feature está impulsando realmente la predicción.
+7. La multicolinealidad infla la varianza de las estimaciones de los coeficientes, volviéndolos inestables e ininterpretables. Se vuelve difícil determinar que feature está impulsando realmente la predicción.
 
 8. 
 ```python

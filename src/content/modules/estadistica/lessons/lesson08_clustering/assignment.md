@@ -17,7 +17,7 @@
 
 2. **Preprocesamiento**:
    - Estandariza todos los features
-   - Explica por qué la estandarización es necesaria
+   - Explica porque la estandarización es necesaria
 
 3. **Búsqueda del k óptimo**:
    - Prueba k de 2 a 10
@@ -37,5 +37,5 @@
 
 6. **Recomendaciones de negocio**:
    - Basándote en los perfiles de los segmentos, sugiere 3 estrategias de marketing
-   - Explica cómo cada estrategia apunta a segmentos específicos
+   - Explica como cada estrategia apunta a segmentos específicos
 

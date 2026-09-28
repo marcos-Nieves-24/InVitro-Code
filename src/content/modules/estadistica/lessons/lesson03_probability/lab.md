@@ -3,13 +3,13 @@
 # LAB 3: Fundamentos de probabilidad
 # -------------------------------------------------------------------------
 # Simulamos monedas, dados, el problema de Monty Hall y la ley de los
-# grandes numeros; verificamos Bayes y la binomial con numpy.
+# grandes números; verificamos Bayes y la binomial con numpy.
 # Cada figura termina con fig.show() para capturarla en la consola.
 # =========================================================================
 
 # PASO 1: Simulacion de lanzamientos de una moneda justa.
-import numpy as np                         # Operaciones matematicas
-import plotly.express as px                # Graficos interactivos
+import numpy as np                         # Operaciones matemáticas
+import plotly.express as px                # Gráficos interactivos
 
 np.random.seed(7)
 n = 100000
@@ -17,15 +17,15 @@ monedas = np.random.choice(["cara", "cruz"], size=n, p=[0.5, 0.5])
 freq_cara = np.mean(monedas == "cara")
 print(f"Frecuencia de cara en {n} lanzamientos: {freq_cara:.4f} (esperado 0.5)")
 
-# PASO 2: Ley de los grandes numeros.
+# PASO 2: Ley de los grandes números.
 # La frecuencia relativa converge a la probabilidad teorica (0.5) al crecer n.
 print("\nGraficando la convergencia de la frecuencia acumulada:")
 acumulado = np.cumsum(monedas == "cara") / np.arange(1, n + 1)
 fig = px.line(x=np.arange(1, n + 1), y=acumulado,
-              title="Ley de los grandes numeros: frecuencia de cara",
+              title="Ley de los grandes números: frecuencia de cara",
               labels={"x": "Lanzamientos", "y": "Frecuencia acumulada"})
 fig.add_hline(y=0.5, line_dash="dash", line_color="red")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 3: Variable aleatoria X = suma de dos dados.
 # PMF teorica: hay 36 combinaciones equiprobables (2..12).
@@ -46,7 +46,7 @@ print(f"Var(X) empirica: {suma_obs.var():.3f} (teorica: {35/6:.3f})")
 print("\nGraficando la PMF teorica vs la empirica:")
 fig = px.bar(x=sumas, y=pmf_teorica, title="PMF teorica de la suma de dos dados")
 fig.add_scatter(x=sumas, y=freq_obs, mode="markers+lines", name="Empirica")
-fig.show()                                 # Mostrar grafico interactivo
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 5: Simulacion de Monty Hall.
 # Cambiar de puerta gana en 2/3 de los casos; mantener solo en 1/3.
@@ -80,12 +80,12 @@ positivo = np.where(enfermos,
 print(f"\nP(positivo) = {np.mean(positivo):.4f}")
 print(f"P(enfermedad | positivo) = {np.mean(enfermos[positivo]):.4f}")
 
-# PASO 7: Distribucion binomial con numpy.
+# PASO 7: Distribución binomial con numpy.
 # 30 pacientes, probabilidad de exito 0.7: cuantos responden exactamente 20.
 exitos = np.random.binomial(30, 0.7, size=100000)
 print(f"\nP(X=20) empirica: {np.mean(exitos == 20):.4f}")
-fig = px.histogram(exitos, nbins=31, title="Distribucion binomial(n=30, p=0.7)")
-fig.show()                                 # Mostrar grafico interactivo
+fig = px.histogram(exitos, nbins=31, title="Distribución binomial(n=30, p=0.7)")
+fig.show()                                 # Mostrar gráfico interactivo
 
 # PASO 8: Resumen del laboratorio.
 print("\n--- Resumen ---")

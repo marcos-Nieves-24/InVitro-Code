@@ -23,7 +23,7 @@ b) 2.0
 c) 2.5
 d) 0.5
 
-**4. Según la regla 68-95-99.7, ¿aproximadamente qué porcentaje de los datos cae dentro de 2 desviaciones estándar de la media?**
+**4. Según la regla 68-95-99.7, ¿aproximadamente que porcentaje de los datos cae dentro de 2 desviaciones estándar de la media?**
 
 a) 68%
 b) 95%

@@ -30,7 +30,7 @@
 
 5. **Estructura del informe**:
    - Resumen ejecutivo (3-4 oraciones)
-   - Metodología (cómo se evaluaron los modelos)
+   - Metodología (como se evaluaron los modelos)
    - Resultados (tabla comparando todos los modelos)
    - Análisis del mejor modelo (gráficos e interpretaciones)
    - Conclusiones y recomendaciones

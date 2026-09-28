@@ -41,7 +41,7 @@ d) Abajo a la izquierda
 
 **6.** ¿Qué es el chartjunk? Da dos ejemplos.
 
-**7.** Explica por qué los gráficos 3D se desaconsejan generalmente en la visualización de datos.
+**7.** Explica porque los gráficos 3D se desaconsejan generalmente en la visualización de datos.
 
 ## Pregunta de código (1 pregunta)
 
