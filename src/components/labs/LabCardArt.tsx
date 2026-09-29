@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { LabCardTheme } from "./LabCardTheme";
+import type { LabCardTheme, SerializableLabCardTheme } from "./LabCardTheme";
 
 interface LabCardArtProps {
-  theme: LabCardTheme;
+  theme: LabCardTheme | SerializableLabCardTheme;
   size?: number;
 }
 
@@ -16,7 +16,8 @@ export function LabCardArt({ theme, size = 48 }: LabCardArtProps) {
   const [error, setError] = useState(false);
 
   if (error || !theme.art) {
-    const Icon = theme.icon;
+    const Icon = (theme as LabCardTheme).icon;
+    if (!Icon) return null;
     return (
       <Icon
         className="shrink-0"
