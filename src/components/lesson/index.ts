@@ -18,4 +18,3 @@ export { InteractiveTable } from "./interactive-table";
 export { PerceptronTrainer } from "./perceptron-trainer";
 export { KnnTrainer } from "./knn-trainer";
 export { RegressionTrainer } from "./regression-trainer";
-export { OverfittingTrainer } from "./overfitting-trainer";

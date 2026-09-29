@@ -25,7 +25,7 @@ En la lección anterior viste que las reglas fijas tienen límites. Ahora vamos 
 
 En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.
 
-Aquí entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
+Acá entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
 
 Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
 
@@ -49,7 +49,7 @@ Ejemplos de entrenamiento → Algoritmo → Modelo → Predicciones
 **Modelo**: es el resultado del aprendizaje. Una representación matemática de los patrones que el algoritmo encontró en los datos.
 </ConceptCard>
 
-Piénsalo así:
+Pensalo así:
 - Los **datos de entrenamiento** son como los ejercicios resueltos de un libro de texto
 - El **algoritmo** es como el estudiante que estudia
 - El **modelo** es el conocimiento que el estudiante adquirió
@@ -64,12 +64,6 @@ Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza
 <ConceptCard variant="key-idea">
 La **frontera de decisión** es la línea (o superficie) que separa diferentes clases en el espacio de características. Del lado azul, el modelo predice *Aspergillus*; del lado rojo, *Penicillium*.
 </ConceptCard>
-
-Cuando apilamos varias capas de perceptrones, obtenemos una **red neuronal**. Cada capa transforma las señales de la capa anterior, y así la red puede aprender fronteras mucho más complejas que una línea recta. La siguiente animación muestra cómo fluye la información en una red neuronal *feedforward*: los datos entran por la **capa de entrada**, se propagan por las **capas ocultas** y producen una predicción en la **capa de salida**.
-
-<LessonVideo src="/animations/neural-network-feedforward.mp4" caption="Red neuronal feedforward: la senal fluye de la capa de entrada a las capas ocultas y produce una prediccion en la capa de salida." />
-
-Observa el recorrido de los pulsos de datos: cada conexión tiene un **peso** que amplifica o atenúa la señal, igual que los pesos $w_1, w_2$ del perceptrón. Una red neuronal no es más que muchos perceptrones conectados en capas.
 
 </Section>
 
@@ -90,12 +84,12 @@ Observa el recorrido de los pulsos de datos: cada conexión tiene un **peso** qu
 - El perceptrón traza una **frontera de decisión** lineal para separar las clases
 - La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos
 
-**Prueba tú:**
-1. Ajusta la tasa de aprendizaje con el slider
-2. Presiona "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
-3. Usa "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
-4. Haz clic en un punto vacío del gráfico para predecir una muestra hipotética
-5. Fíjate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
+**Probá vos:**
+1. Ajustá la tasa de aprendizaje con el slider
+2. Presioná "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
+3. Usá "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
+4. Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética
+5. Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
 
 <ConceptCard variant="key-idea">
 El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cuando su predicción es incorrecta, moviendo la frontera de decisión en la dirección correcta.
@@ -143,16 +137,16 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
 
 **¿Cómo funciona KNN?**
 1. El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)
-2. Elige un valor de k con el slider — es la cantidad de vecinos que votan
-3. Haz clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
+2. Elegí un valor de k con el slider — es la cantidad de vecinos que votan
+3. Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
 4. Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo
 5. La zona sombreada muestra la **frontera de decisión**: de un lado KNN predice benigno, del otro maligno
 
-**Experimenta:**
-1. Pon k=1 y mueve el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
-2. Sube k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
-3. Mira la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
-4. Compara con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
+**Experimentá:**
+1. Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
+2. Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
+3. Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
+4. Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
 
 <ConceptCard variant="key-idea">
 KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perceptrón. Simplemente **recuerda** todos los datos y, para cada predicción nueva, consulta a los k vecinos más cercanos. La elección de k es un **hiperparámetro**: no lo aprende el algoritmo, lo elegimos nosotros.
@@ -196,11 +190,11 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 - El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta — con datos reales, siempre hay dispersión
 - Las líneas verticales (residuales) muestran la distancia de cada punto a la recta
 
-**Prueba:**
-1. Mueve los sliders de pendiente e intercepto para ajustar la recta manualmente
-2. Fíjate cómo el ECM y R² cambian en vivo al mover la recta
-3. Presiona "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
-4. Usa "Predecir" para estimar la textura a partir de un valor de radio
+**Probá:**
+1. Mové los sliders de pendiente e intercepto para ajustar la recta manualmente
+2. Fijate cómo el ECM y R² cambian en vivo al mover la recta
+3. Presioná "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
+4. Usá "Predecir" para estimar la textura a partir de un valor de radio
 
 </Section>
 
@@ -222,22 +216,24 @@ No toda relación es lineal; en biología muchas variables tienen relaciones com
 
 </Section>
 
-<Section number={11} title="Overfitting en acción" eyebrow="INTERACTIVA">
+<Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
+
+Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
 
 <ReflectionCheck
   blockId="reflection-l02-overfitting-predict"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿crees que funcionará igual de bien con datos nuevos?"
+  prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?"
   answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
 />
 
-<OverfittingTrainer />
+<InteractiveFrame src="/interactives/demo_06b_overfitting.html" height="800px" caption="simulación educativa sobre datos sintéticos" />
 
 **¿Qué muestra este demo?**
-- El panel izquierdo muestra **50 biopsias de entrenamiento** (submuestra fija) y las **172 de prueba** (conjunto completo), con una curva polinomial ajustada sobre el radio medio del núcleo para predecir si la biopsia es benigna o maligna
-- El panel derecho muestra el **Error Cuadrático Medio (ECM)** en escala logarítmica — a grados bajos el modelo es demasiado rígido (**subajuste**), a grados altos la curva memoriza cada punto y el error de prueba explota por varios órdenes de magnitud (**sobreajuste**)
-- Con datos reales el error de entrenamiento NUNCA llega a cero — el piso (~0.10) es la superposición natural entre clases: un polinomio del radio medio, por más complejo que sea, no puede separar perfectamente biopsias benignas de malignas
+- El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
+- El panel derecho muestra el **Error Cuadrático Medio (ECM)** para cada conjunto
+- La línea punteada gris es la **función real subyacente** — que el modelo nunca ve, igual que en la vida real
 
 </Section>
 
@@ -247,9 +243,7 @@ No toda relación es lineal; en biología muchas variables tienen relaciones com
 |---|---|---|
 | **1–2** (muy simple) | **Subajuste** (underfitting) | El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo. |
 | **3–6** (balanceado) | **Punto óptimo** | El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí. |
-| **8–15** (demasiado complejo) | **Sobreajuste** (overfitting) | El modelo memoriza cada punto de entrenamiento (error train en su piso (~0.10)), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto). |
-
-El grado 7 es transicional — su ECM de prueba sigue siendo óptimo (~0.098), pero es el último grado antes del colapso.
+| **8–15** (demasiado complejo) | **Sobreajuste** (overfitting) | El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto). |
 
 <ConceptCard variant="key-idea">
 El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
@@ -327,9 +321,9 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entiendes cómo aprenden las máquinas.
+Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entendés cómo aprenden las máquinas.
 </MascotMessage>
 
-Ahora que entiendes cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
 
 </Section>
