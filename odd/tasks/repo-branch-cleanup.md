@@ -81,3 +81,14 @@ Cualquier rama borrada: `git checkout -b restore/<rama> archive/<rama>/2026-09-2
   - Tag `archive/odd/unified-lab-proyectos-system/2026-09-29-merged` push OK, rama borrada local+remoto
 - **Rebase lab-journey**: intentado, 30 commits ya en main saltados, 78 restantes con 111 hunks — **preservado como DRAFT #45** para trabajo manual posterior (no auto-rebase)
 - **Estado final real**: main @ 625c226 (+2e07743 doc), 1 rama activa (lab-journey), 1 PR DRAFT, 52 tags archive +1 backup
+
+
+## Cierre Final — lab-journey merge (2026-09-29 03:30 UTC)
+
+- **Merge**: `odd/lab-journey-redesign` → `main` @ `a23e104` (78 commits, 20 files conflicted)
+  - Resolución: `ours` para dashboard/package (mantener #52), `theirs` para labs (LabCard, LabHero, LabWorkspace, landing)
+  - Fix post-merge: `LabCardArt` acepta `SerializableLabCardTheme` (07d6daf) — type-check PASS
+  - Verificación: type-check PASS, build Compiled 13.6s PASS
+  - Tag `archive/odd/lab-journey-redesign/2026-09-29-merged` push OK, rama borrada local+remoto, PR #45 DRAFT cerrado implícitamente
+- **Estado final real**: `main` @ `07d6daf`, **0 ramas activas** (solo main), 0 PRs abiertos, 53 tags archive+backup
+- **Recuperación**: todas las 42 ramas borradas taggeadas, `git checkout -b restore/X archive/X/2026-09-29*`
