@@ -46,6 +46,7 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 - 2026-09-29: T2 complete — restored module LabLandingHero with HeroWithConsole (8c76427). Expected intermediate type error in page.tsx pending T3.
 - 2026-09-29: T3 complete — restored module page with lab_progress ring, LabHistoryCard, getLabResumeTarget (4f2171a). type-check and build passed.
 - 2026-09-29: Fix LabHero visibility bugs — prefersReducedMotion opacity, Rive placeholder fallback to BioreactorProgress, SplitText safety (fix/labs-visibility).
+- 2026-09-29: Correction — user clarified BIORREACTOR GOES IN DASHBOARD ONLY. Reverted `src/components/labs/LabHero/LabHero.tsx` to `625c226` exactly (`HeroWithConsole backgroundSrc={getLabHeroImage("hub")}` + `HubConsole`, no `RiveBioreactor`/BUBBLES/HUD/motion). Dashboard `DashboardContainer.tsx` verified unchanged vs `d410182` (BioreactorProgress + BiotechGrowthTube + HeroSection/GamingHUD, font sizes and order preserved).
 
 ## Verification Evidence
 - npm run type-check: passed (0 errors) after T3 — T2 intermediate expected error resolved
@@ -54,9 +55,10 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 - T2 8c76427: LabLandingHero restored, HeroWithConsole + consoles verified
 - T3 4f2171a: module page restored, lab_progress + LabProgressRing + LabHistoryCard verified
 - Fix visibility (2026-09-29): hero opacity conditional on prefersReducedMotion, useLabHeroMotion sets opacity 1 on reduced-motion/failure, Rive placeholder fetch check + BioreactorProgress fallback, SplitText try/catch + gsap.context guard — type-check and build passed (21/21 pages)
+- Correction (2026-09-29): `git diff d410182..HEAD -- src/components/dashboard/` empty — DashboardContainer unchanged (BioreactorProgress in Tu Progreso, BiotechGrowthTube in Misión Actual, HeroSection → Tu Progreso/Misión Actual order preserved, text-lg/text-sm unchanged). `npm run type-check` and `npm run build` passed after LabHero revert to 625c226.
 
 ## Next Step
-- PR ready (single PR <400 lines, 4 work-unit commits). No change to LabLandingHero or module page.
+- PR ready (single PR <400 lines, 5 work-unit commits). LabHero now at 625c226 (HubConsole only), biorreactor dashboard-only as requested. LabLandingHero and module page untouched.
 
 ## Delivery Strategy
 - Single PR (forecast <400 lines). Work-unit commits per task.
