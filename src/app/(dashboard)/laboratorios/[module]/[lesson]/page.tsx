@@ -14,13 +14,7 @@ import { LabHeader, LabCallout, ReflectionPrompt } from "@/components/labs";
 import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
 import { MarkdownTable } from "@/components/lesson";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
-import {
-  getModuleDisplayName,
-  getLessonFrontmatter,
-  getLessonSlugs,
-  type CompletionStatus,
-  type LastPosition,
-} from "@/lib/content/modules";
+import { getModuleDisplayName, getLessonFrontmatter } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { LabWorkspace } from "@/components/labs/workspace/LabWorkspace";
 import type { ReactNode } from "react";
@@ -142,40 +136,6 @@ export default async function LabLessonPage({ params }: Props) {
   const theme = toSerializableTheme(getLabCardTheme(modSlug));
   const totalXpForLesson = calcXpForLesson(modSlug, lessonSlug);
 
-  // ── Labs lifecycle wiring (REQ-LC-01/02/06, REQ-P-06) ──
-  let initialStatus: CompletionStatus = "not_started";
-  let initialPosition: LastPosition = {};
-  let hasNextLab = false;
-  let nextLabHref: string | null = null;
-  const moduleHref = `/laboratorios/${modSlug}`;
-
-  try {
-    const lessonSlugs = getLessonSlugs(modSlug).sort();
-    const idx = lessonSlugs.indexOf(lessonSlug);
-    hasNextLab = idx >= 0 && idx < lessonSlugs.length - 1;
-    nextLabHref = hasNextLab ? `/laboratorios/${modSlug}/${lessonSlugs[idx + 1]}` : null;
-
-    const { data: row } = await supabase
-      .from("lab_progress")
-      .select("completion_status, last_position")
-      .eq("user_id", userId)
-      .eq("module_slug", modSlug)
-      .eq("lesson_slug", lessonSlug)
-      .maybeSingle();
-
-    if (row) {
-      const s = row.completion_status as CompletionStatus | undefined;
-      if (s === "not_started" || s === "in_progress" || s === "completed") {
-        initialStatus = s;
-      }
-      if (row.last_position && typeof row.last_position === "object" && !Array.isArray(row.last_position)) {
-        initialPosition = row.last_position as LastPosition;
-      }
-    }
-  } catch {
-    // Fallback to defaults when lab_progress not yet migrated / query fails
-  }
-
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
       <LabWorkspace
@@ -191,11 +151,6 @@ export default async function LabLessonPage({ params }: Props) {
         theme={theme}
         totalXpForLesson={totalXpForLesson}
         showOnboarding={showOnboarding}
-        initialStatus={initialStatus}
-        initialPosition={initialPosition}
-        hasNextLab={hasNextLab}
-        nextLabHref={nextLabHref}
-        moduleHref={moduleHref}
       />
     </InVitroShell>
   );

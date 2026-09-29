@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FlaskConical as FlaskConicalFallback } from "lucide-react";
-import type { LabCardTheme, SerializableLabCardTheme } from "./LabCardTheme";
+import type { LabCardTheme } from "./LabCardTheme";
 
 interface LabCardArtProps {
-  theme: LabCardTheme | SerializableLabCardTheme;
+  theme: LabCardTheme;
   size?: number;
 }
 
@@ -17,8 +16,7 @@ export function LabCardArt({ theme, size = 48 }: LabCardArtProps) {
   const [error, setError] = useState(false);
 
   if (error || !theme.art) {
-    const maybeIcon = (theme as LabCardTheme).icon;
-    const Icon = maybeIcon ?? FlaskConicalFallback;
+    const Icon = theme.icon;
     return (
       <Icon
         className="shrink-0"
