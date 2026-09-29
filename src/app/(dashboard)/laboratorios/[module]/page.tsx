@@ -186,7 +186,7 @@ export default async function LabModuleLandingPage({ params }: Props) {
         {/* Header: % progreso + ring (REQ-LC-04) */}
         <div className="mt-6 flex items-center gap-3">
           <LabProgressRing completed={completedCount} total={labCount} size={36} strokeWidth={3} />
-          <span className="text-sm font-semibold tabular-nums text-ink">{progressPct}% progreso</span>
+          <span className="text-sm font-semibold tabular-nums text-ink">{progressPct}% crecimiento</span>
           <span className="text-xs text-storm">
             {completedCount} de {labCount} completados
           </span>

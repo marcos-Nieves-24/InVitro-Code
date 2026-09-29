@@ -89,7 +89,7 @@ export function ModuleExplorerCard({
               {completed}/{total} completados
             </span>
             <span className="text-xs text-storm">
-              {total > 0 ? `${Math.round((completed / total) * 100)}%` : "0%"} progreso
+              {total > 0 ? `${Math.round((completed / total) * 100)}%` : "0%"} crecimiento
             </span>
           </div>
         </div>
