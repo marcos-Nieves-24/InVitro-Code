@@ -18,7 +18,7 @@ Congruencia visual y scan path consistente; acciones visibles sin scroll.
 
 ## Tasks
 ### T1 — Quiz CTAs arriba-derecha sticky [x]
-### T2 — Unificar Recursos posición fija [x]
+### T2 — Unificar Recursos posición fija [x] — Recursos (RCopyButton/NotebookActions) movidos a top-right tras Cuestionario, solo en Laboratorio tab (activeTab==="lab" && (hasNotebook||hasRScript)), card inferior eliminada
 ### T3 — Migrar a 2 primitivas [x]
 
 ## Verification

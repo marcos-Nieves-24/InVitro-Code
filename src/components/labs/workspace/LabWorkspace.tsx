@@ -125,23 +125,34 @@ export function LabWorkspace({
         </div>
       </header>
 
-      {/* ── Tabs ── */}
-      <div className="mb-6 flex items-center border-b border-surface-raised" role="tablist">
-        <TabButton
-          active={activeTab === "lab"}
-          onClick={() => handleTabChange("lab")}
-          icon={<FlaskConical className="h-4 w-4" />}
-          label="Laboratorio"
-          id="lab"
-        />
-        {hasQuiz && (
+      {/* ── Tabs + Recursos top-right (solo Laboratorio) ── */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-surface-raised mb-6">
+        <div className="flex gap-2" role="tablist">
           <TabButton
-            active={activeTab === "quiz"}
-            onClick={() => handleTabChange("quiz")}
-            icon={<ClipboardCheck className="h-4 w-4" />}
-            label="Cuestionario"
-            id="quiz"
+            active={activeTab === "lab"}
+            onClick={() => handleTabChange("lab")}
+            icon={<FlaskConical className="h-4 w-4" />}
+            label="Laboratorio"
+            id="lab"
           />
+          {hasQuiz && (
+            <TabButton
+              active={activeTab === "quiz"}
+              onClick={() => handleTabChange("quiz")}
+              icon={<ClipboardCheck className="h-4 w-4" />}
+              label="Cuestionario"
+              id="quiz"
+            />
+          )}
+        </div>
+        {activeTab === "lab" && (hasNotebook || hasRScript) && (
+          <div
+            data-onboarding="results"
+            className="flex flex-wrap items-center gap-2 pb-3 justify-end"
+          >
+            <RCopyButton mod={moduleSlug} lesson={lessonSlug} hasRScript={hasRScript} />
+            <NotebookActions mod={moduleSlug} lesson={lessonSlug} hasNotebook={hasNotebook} />
+          </div>
         )}
       </div>
 
@@ -171,36 +182,6 @@ export function LabWorkspace({
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Recursos y entrega — always full-width below instructions */}
-          <div
-            data-onboarding="results"
-            className="mt-6 rounded-xl border border-surface-raised bg-surface-card p-4"
-          >
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
-              Recursos y entrega
-            </p>
-            <div className="flex flex-col gap-3">
-              {hasNotebook || hasRScript ? (
-                <div className="flex flex-wrap items-center gap-3">
-                  <RCopyButton
-                    mod={moduleSlug}
-                    lesson={lessonSlug}
-                    hasRScript={hasRScript}
-                  />
-                  <NotebookActions
-                    mod={moduleSlug}
-                    lesson={lessonSlug}
-                    hasNotebook={hasNotebook}
-                  />
-                </div>
-              ) : (
-                <p className="text-sm text-storm">
-                  Ejecuta tu código y valida los resultados en el panel superior.
-                </p>
-              )}
-            </div>
           </div>
         </>
       )}
