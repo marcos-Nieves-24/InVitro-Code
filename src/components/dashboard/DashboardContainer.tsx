@@ -118,11 +118,11 @@ export async function DashboardContainer() {
               <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-center pt-2">
                 <div className="order-1 self-center">
                   <div className="mb-4 flex items-center">
-                    <h3 className="font-display text-4xl font-bold">Tu Progreso</h3>
+                    <h3 className="font-display text-2xl font-bold">Tu Progreso</h3>
                   </div>
                   <div className="text-center md:text-left">
-                    <p className="font-display text-4xl font-bold">{rankTitle(levelInfo.level)}</p>
-                    <p className="mt-1 text-[28px] text-storm">
+                    <p className="font-display text-2xl font-bold">{rankTitle(levelInfo.level)}</p>
+                    <p className="mt-1 text-lg text-storm">
                       <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
                     </p>
                     <div
@@ -139,7 +139,7 @@ export async function DashboardContainer() {
                       />
                     </div>
                   </div>
-                  <p className="mt-3 text-2xl leading-relaxed text-storm max-w-[32ch]">
+                  <p className="mt-3 text-base leading-relaxed text-storm max-w-[32ch]">
                     {(() => {
                       const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
                       const idx = raw.indexOf("EXP");
@@ -154,7 +154,7 @@ export async function DashboardContainer() {
                     })()}
                   </p>
                   <div className="mt-4 text-center md:text-left">
-                    <Link href="/niveles" className="text-lg font-bold text-mint hover:underline">
+                    <Link href="/niveles" className="text-sm font-bold text-mint hover:underline">
                       Ver roadmap
                     </Link>
                   </div>
@@ -175,7 +175,7 @@ export async function DashboardContainer() {
               </div>
 
               <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-6">
-                <h3 className="mb-2 text-2xl font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
+                <h3 className="mb-2 text-lg font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
                     <div className="mb-2 flex gap-3">
@@ -183,9 +183,9 @@ export async function DashboardContainer() {
                         {missionFavicon ? <img src={missionFavicon} alt="" className="h-12 w-12 object-contain" /> : null}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-display text-3xl font-semibold leading-tight">{nextLesson.title}</h4>
-                        <p className="text-lg text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
-                        <p className="mt-1 text-[22px] leading-relaxed text-slate line-clamp-2">
+                        <h4 className="font-display text-xl font-semibold leading-tight">{nextLesson.title}</h4>
+                        <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-slate line-clamp-2">
                           {getModuleShortDescription(nextLesson.moduleSlug)}
                         </p>
                       </div>
@@ -198,7 +198,7 @@ export async function DashboardContainer() {
                     </div>
                     {nextLesson && currentModule && (
                       <div className="mb-3">
-                        <div className="mb-1 flex items-center justify-between text-lg">
+                        <div className="mb-1 flex items-center justify-between text-sm">
                           <span className="font-medium text-storm">{currentModule.name}</span>
                           <span className="font-bold text-ink">
                             {currentModuleCompleted}/{currentModuleTotal} · {currentModulePct}%
@@ -207,7 +207,7 @@ export async function DashboardContainer() {
                         <div className="h-4 w-full overflow-hidden rounded-full bg-surface-raised">
                           <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
                         </div>
-                        <p className="mt-2 text-[17px] leading-relaxed text-storm">
+                        <p className="mt-2 text-xs leading-relaxed text-storm">
                           La planta crece con cada módulo:{" "}
                           <span className="font-bold text-ink">
                             {completedCount}/{totalLessons}
@@ -218,15 +218,15 @@ export async function DashboardContainer() {
                       </div>
                     )}
                     <div className="mb-2 flex items-center gap-1 text-mint">
-                      <Gem className="h-6 w-6" fill="currentColor" />
-                      <span className="text-[28px] font-bold">+{nextLesson.xp} XP</span>
+                      <Gem className="h-5 w-5" fill="currentColor" />
+                      <span className="text-base font-bold">+{nextLesson.xp} XP</span>
                     </div>
                     <SlideArrowButton
                       text="Continuar misión"
                       primaryColor="var(--color-brand-400)"
                       href={missionHref ?? "/learn"}
                       size="lg"
-                      className="mt-auto w-full text-2xl"
+                      className="mt-auto w-full text-base"
                     />
                   </>
                 ) : (

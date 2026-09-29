@@ -32,5 +32,11 @@ User requested via Playwright-verified dashboard.
 - 2026-09-29: Created
 - 2026-09-29: T1-T3 done in c2ecd44 — type-check + build pass
 
+## T4 — Typography downscale 2x -> balanced 1.3-1.5x
+- Tu Progreso h3 4xl->2xl; Rank 4xl->2xl; XP [28px]->lg; desc 2xl->base; roadmap lg->sm
+- Mision Actual h3 2xl->lg; h4 3xl->xl; label lg->sm; desc [22px]->sm; progress lg->sm; hint [17px]->xs
+- Gem h-6->h-5, XP [28px]->base, Button 2xl->base; kept max-w-[20rem], h-4, vessel md, items-center
+
 ## Verification
 - type-check, build, Playwright dashboard desktop/mobile + preview 0 errors
+- 2026-09-29 T4: type-check + build pass on odd/lab-heroes-restore
