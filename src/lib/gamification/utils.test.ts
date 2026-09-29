@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { calcXpForLesson, calcLevel, rankTitle } from "./utils";
+import {
+  calcXpForLesson,
+  calcLevel,
+  rankTitle,
+  rankNameForXp,
+  rankIndexForXp,
+  RANK_THRESHOLDS,
+} from "./utils";
 
 describe("calcXpForLesson", () => {
   it("returns base XP for standard modules", () => {
@@ -34,13 +41,47 @@ describe("calcLevel", () => {
 });
 
 describe("rankTitle", () => {
-  it("maps levels to Spanish ranks", () => {
+  it("maps levels to ranks at the canonical XP boundaries", () => {
+    // XP ladder is 0/200/500/1000/2000/3500 with 100 XP per level,
+    // so the level boundaries are 0/2/5/10/20/35.
     expect(rankTitle(0)).toBe("Novato");
     expect(rankTitle(1)).toBe("Novato");
     expect(rankTitle(2)).toBe("Analista");
+    expect(rankTitle(4)).toBe("Analista");
     expect(rankTitle(5)).toBe("Investigador Jr.");
-    expect(rankTitle(8)).toBe("Investigador");
-    expect(rankTitle(12)).toBe("Especialista");
-    expect(rankTitle(20)).toBe("ML Engineer");
+    expect(rankTitle(9)).toBe("Investigador Jr.");
+    expect(rankTitle(10)).toBe("Investigador");
+    expect(rankTitle(19)).toBe("Investigador");
+    expect(rankTitle(20)).toBe("Especialista");
+    expect(rankTitle(34)).toBe("Especialista");
+    expect(rankTitle(35)).toBe("ML Engineer");
+  });
+
+  it("agrees with the XP-based lookup the /niveles roadmap uses", () => {
+    for (const xp of [0, 99, 100, 199, 200, 499, 500, 999, 1000, 1999, 2000, 3499, 3500, 99999]) {
+      expect(rankTitle(calcLevel(xp).level)).toBe(rankNameForXp(xp));
+    }
+  });
+
+  it("falls back to the first rank for invalid input", () => {
+    expect(rankTitle(-5)).toBe("Novato");
+    expect(rankTitle(Number.NaN)).toBe("Novato");
+    expect(rankNameForXp(Number.NaN)).toBe("Novato");
+  });
+});
+
+describe("rankIndexForXp", () => {
+  it("picks the highest threshold the XP total satisfies", () => {
+    expect(rankIndexForXp(0)).toBe(0);
+    expect(rankIndexForXp(199)).toBe(0);
+    expect(rankIndexForXp(200)).toBe(1);
+    expect(rankIndexForXp(500)).toBe(2);
+    expect(rankIndexForXp(1000)).toBe(3);
+    expect(rankIndexForXp(2000)).toBe(4);
+    expect(rankIndexForXp(3500)).toBe(5);
+  });
+
+  it("clamps to the last rank for XP beyond the ladder", () => {
+    expect(rankIndexForXp(10_000)).toBe(RANK_THRESHOLDS.length - 1);
   });
 });

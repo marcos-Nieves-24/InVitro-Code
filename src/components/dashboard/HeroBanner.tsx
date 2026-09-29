@@ -114,6 +114,13 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
     }
   }, [shouldReduceMotion]);
 
+  // This hero intentionally runs two animation runtimes, each for one job:
+  //   - gsap: the one-shot enter timeline (background parallax, figure slide-in,
+  //     bubble pop, then the typewriter start). Loaded dynamically so the chunk
+  //     stays out of the initial bundle and can degrade gracefully when offline.
+  //   - motion/react: the hover speech-bubble scale on the scientist figure, which
+  //     is a state-driven keyframe sequence rather than part of the enter timeline.
+  // This split is deliberate; do not collapse the two into a single runtime.
   useEffect(() => {
     if (shouldReduceMotion) return;
 

@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { calcLevel } from "@/lib/gamification/utils";
+import { calcLevel, rankIndexForXp, RANK_THRESHOLDS } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import {
   Sprout,
@@ -28,31 +28,31 @@ interface Rank {
   skills: string[];
 }
 
-const RANKS: Rank[] = [
-  {
-    name: "Novato",
-    xp: 0,
+/**
+ * Presentation-only content, keyed by the canonical rank name.
+ *
+ * Thresholds and names are NOT declared here: they come from
+ * `RANK_THRESHOLDS` in `@/lib/gamification/utils`, which is also what
+ * `rankTitle` resolves against. One ladder, so this roadmap and the rank
+ * badge rendered elsewhere in the app cannot drift apart.
+ */
+const RANK_CONTENT: Record<string, Omit<Rank, "name" | "xp">> = {
+  Novato: {
     description: "Comienza tu viaje en los datos.",
     icon: Sprout,
     skills: ["Python básico", "Terminal", "Variables y tipos"],
   },
-  {
-    name: "Analista",
-    xp: 200,
+  Analista: {
     description: "Explora y entiende patrones.",
     icon: Search,
     skills: ["Pandas", "Visualización", "Estadística descriptiva"],
   },
-  {
-    name: "Investigador Jr.",
-    xp: 500,
+  "Investigador Jr.": {
     description: "Estadística y herramientas avanzadas.",
     icon: FlaskConical,
     skills: ["Matplotlib", "Seaborn", "Probabilidad"],
   },
-  {
-    name: "Investigador",
-    xp: 1000,
+  Investigador: {
     description: "Machine Learning y modelos predictivos reales.",
     icon: Brain,
     skills: [
@@ -63,21 +63,23 @@ const RANKS: Rank[] = [
       "Métricas de Evaluación",
     ],
   },
-  {
-    name: "Especialista",
-    xp: 2000,
+  Especialista: {
     description: "Optimización y algoritmos avanzados.",
     icon: Layers,
     skills: ["Gradient Boosting", "Cross-validation", "Feature Engineering"],
   },
-  {
-    name: "ML Engineer",
-    xp: 3500,
+  "ML Engineer": {
     description: "Sistemas inteligentes escalables.",
     icon: Server,
     skills: ["MLOps", "Despliegue", "Sistemas escalables"],
   },
-];
+};
+
+const RANKS: Rank[] = RANK_THRESHOLDS.map((rank) => ({
+  name: rank.name,
+  xp: rank.xp,
+  ...RANK_CONTENT[rank.name],
+}));
 
 export default async function NivelesPage() {
   const { userId } = await auth();
@@ -108,10 +110,7 @@ export default async function NivelesPage() {
 
   const levelInfo = calcLevel(totalXp);
 
-  let currentRankIndex = 0;
-  for (let i = 0; i < RANKS.length; i++) {
-    if (totalXp >= RANKS[i].xp) currentRankIndex = i;
-  }
+  const currentRankIndex = rankIndexForXp(totalXp);
 
   const currentRank = RANKS[currentRankIndex];
   const nextRank = RANKS[currentRankIndex + 1];

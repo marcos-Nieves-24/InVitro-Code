@@ -22,12 +22,23 @@ CREATE TABLE IF NOT EXISTS profiles (
   role TEXT DEFAULT 'user',
   avatar_url TEXT,
   bio TEXT,
-  theme TEXT DEFAULT 'system',
+  theme TEXT DEFAULT 'system' CHECK (theme IN ('light','dark','system')),
   notification_prefs JSONB DEFAULT '{"email": true, "streak": true}'::jsonb,
   is_banned BOOLEAN DEFAULT false,
   last_active_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Enforce theme CHECK for tables created before this migration (idempotent)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.table_constraints
+    WHERE table_name = 'profiles' AND constraint_name = 'profiles_theme_check'
+  ) THEN
+    ALTER TABLE profiles ADD CONSTRAINT profiles_theme_check CHECK (theme IN ('light','dark','system'));
+  END IF;
+END $$;
 
 -- Admin check function
 CREATE OR REPLACE FUNCTION is_admin(user_id TEXT)
@@ -127,13 +138,37 @@ CREATE POLICY "users can insert own reflections"
   ON reflection_completions FOR INSERT
   WITH CHECK ((auth.jwt() ->> 'sub') = user_id);
 
--- 5. Realtime: expose tables to the realtime publication
-ALTER PUBLICATION supabase_realtime ADD TABLE profiles;
-ALTER PUBLICATION supabase_realtime ADD TABLE progress;
-ALTER PUBLICATION supabase_realtime ADD TABLE streaks;
-ALTER PUBLICATION supabase_realtime ADD TABLE reflection_completions;
-ALTER PUBLICATION supabase_realtime ADD TABLE achievements;
-ALTER PUBLICATION supabase_realtime ADD TABLE user_achievements;
+-- 5. Realtime: expose tables to the realtime publication (idempotent per table)
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'profiles') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE profiles;
+  END IF;
+END $$;
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'progress') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE progress;
+  END IF;
+END $$;
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'streaks') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE streaks;
+  END IF;
+END $$;
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'reflection_completions') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE reflection_completions;
+  END IF;
+END $$;
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'achievements') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE achievements;
+  END IF;
+END $$;
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname = 'supabase_realtime' AND tablename = 'user_achievements') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE user_achievements;
+  END IF;
+END $$;
 
 -- 6. Achievements catalog (real-data-replace-mocks, REQ-ACH-01)
 CREATE TABLE IF NOT EXISTS achievements (

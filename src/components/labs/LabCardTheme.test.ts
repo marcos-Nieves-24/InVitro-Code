@@ -8,6 +8,10 @@ describe("getLabCardTheme", () => {
     expect(theme.accent).toBe("#0F161F");
   });
 
+  // Accents are paired by visual parity, not unique per module: `ia`/`python`
+  // share the dark "AI ink" and `estadistica`/`machine-learning` share the dark
+  // "ML graphite". Set deliberately in d8d8079 (see odd/tasks/labs-hero-tweaks.md)
+  // to stop the mint/fog accents from clashing with the dark pair.
   it("returns accent #0F161F for python slug", () => {
     const theme = getLabCardTheme("python");
     expect(theme.accent).toBe("#0F161F");
