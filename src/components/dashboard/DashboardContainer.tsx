@@ -17,7 +17,7 @@ import {
 } from "@/lib/content/modules";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
-import { BioreactorProgress } from "@/components/gamification/BioreactorProgress";
+import { BioreactorProgress } from "./BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { CheckCircle2, Gem } from "lucide-react";
@@ -158,16 +158,17 @@ export async function DashboardContainer() {
                   </p>
                 </div>
                 <div className="order-2 flex justify-center md:justify-end">
-                  {/* The canonical bioreactor is an absolutely-positioned bubble
-                      overlay, so it must be given a bounded, positioned parent.
-                      Without this box it would escape to the nearest positioned
-                      ancestor (the video card) and cover the whole panel. */}
-                  <div
-                    aria-hidden="true"
-                    className="relative h-48 w-40 overflow-hidden rounded-2xl bg-surface-raised/40"
-                  >
-                    <BioreactorProgress progressPercentage={levelProgressPct} />
-                  </div>
+                  {/* True bioreactor (b36670f): horizontal Rushton impeller,
+                      clipped tank bubbles, waves — restored per 9bcd678. */}
+                  <BioreactorProgress
+                    exp={totalXp}
+                    expToNext={levelInfo.nextLevelXp}
+                    level={levelInfo.level}
+                    rank={rankTitle(levelInfo.level)}
+                    progressToNext={levelInfo.progressToNext}
+                    size="xl"
+                    hideMeta
+                  />
                 </div>
               </div>
 
