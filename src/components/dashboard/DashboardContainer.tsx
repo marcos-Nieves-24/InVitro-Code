@@ -110,25 +110,25 @@ export async function DashboardContainer() {
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
 
           {/* Tu Progreso + Misión Actual — video circuit a la destra */}
-          <div className="relative overflow-hidden rounded-2xl min-h-0 h-auto">
+          <div className="relative overflow-hidden rounded-2xl">
             <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover rounded-2xl">
               <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
             </video>
             <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
-            <div className="relative">
+            <div className="relative p-2">
               <section className="scroll-mt-20">
-                <div className="grid gap-3 md:grid-cols-2">
-              <div className="glass-card rounded-xl px-6 pt-5 pb-3 grid gap-3 md:grid-cols-[1.1fr_auto] items-start min-h-0 h-auto">
+                <div className="grid gap-6 md:grid-cols-2">
+              <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-start pt-2">
                 <div className="order-1 self-start">
-                  <div className="mb-2 flex items-center justify-between">
-                    <h3 className="font-display text-[32px] leading-[36px] font-bold">Tu Progreso</h3>
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="font-display text-lg font-bold">Tu Progreso</h3>
                     <Link href="/niveles" className="text-xs font-bold text-mint hover:underline">
                       Ver roadmap
                     </Link>
                   </div>
                   <div className="text-center md:text-left">
-                    <p className="font-display text-[28px] leading-[32px] font-bold">{rankTitle(levelInfo.level)}</p>
-                    <p className="mt-1 text-[18px] leading-[24px] text-storm">
+                    <p className="font-display text-lg font-bold">{rankTitle(levelInfo.level)}</p>
+                    <p className="mt-1 text-sm text-storm">
                       <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
                     </p>
                     <div className="mx-auto mt-3 h-2 w-full max-w-[10rem] overflow-hidden rounded-full bg-surface-raised md:mx-0">
@@ -140,7 +140,7 @@ export async function DashboardContainer() {
                       />
                     </div>
                   </div>
-                  <p className="mt-3 text-[15px] leading-relaxed text-storm max-w-[32ch]">
+                  <p className="mt-3 text-xs leading-relaxed text-storm max-w-[32ch]">
                     {(() => {
                       const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
                       const idx = raw.indexOf("EXP");
@@ -168,18 +168,18 @@ export async function DashboardContainer() {
                 </div>
               </div>
 
-              <div className="glass-card relative flex min-h-0 h-auto flex-col justify-between self-stretch overflow-hidden rounded-xl p-4">
+              <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-4">
                 <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
-                    <div className="mb-2 flex gap-3 flex-1">
+                    <div className="mb-2 flex gap-3">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
                         {missionFavicon ? <img src={missionFavicon} alt="" className="h-9 w-9 object-contain" /> : null}
                       </div>
-                      <div className="flex-1 min-w-0 flex flex-col justify-center">
-                        <h4 className="font-display text-[28px] leading-[32px] font-semibold">{nextLesson.title}</h4>
-                        <p className="text-[18px] leading-[24px] text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
-                        <p className="mt-1 text-[16px] leading-relaxed text-slate line-clamp-2">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-display text-[15px] font-semibold leading-tight">{nextLesson.title}</h4>
+                        <p className="text-xs text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
+                        <p className="mt-1 text-[11px] leading-relaxed text-slate line-clamp-2">
                           {getModuleShortDescription(nextLesson.moduleSlug)}
                         </p>
                       </div>
@@ -191,8 +191,8 @@ export async function DashboardContainer() {
                       <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={240} label="Crecimiento in vitro" />
                     </div>
                     {nextLesson && currentModule && (
-                      <div className="mb-3 flex-1">
-                        <div className="mb-1 flex items-center justify-between text-[16px]">
+                      <div className="mb-3">
+                        <div className="mb-1 flex items-center justify-between text-xs">
                           <span className="font-medium text-storm">{currentModule.name}</span>
                           <span className="font-bold text-ink">
                             {currentModuleCompleted}/{currentModuleTotal} · {currentModulePct}%
@@ -201,7 +201,7 @@ export async function DashboardContainer() {
                         <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
                           <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
                         </div>
-                        <p className="mt-2 text-[16px] leading-relaxed text-storm">
+                        <p className="mt-2 text-[11px] leading-relaxed text-storm">
                           La planta crece con cada módulo:{" "}
                           <span className="font-bold text-ink">
                             {completedCount}/{totalLessons}
@@ -213,7 +213,7 @@ export async function DashboardContainer() {
                     )}
                     <div className="mb-2 flex items-center gap-1 text-mint">
                       <Gem className="h-4 w-4" fill="currentColor" />
-                      <span className="text-[18px] font-bold">+{nextLesson.xp} XP</span>
+                      <span className="text-sm font-bold">+{nextLesson.xp} XP</span>
                     </div>
                     <SlideArrowButton
                       text="Continuar misión"
@@ -234,7 +234,7 @@ export async function DashboardContainer() {
             </div>
           </section>
 
-          <footer className="hidden" aria-hidden="true" />
+          <footer className="relative mt-8 p-8 text-center text-sm text-storm" aria-hidden="true" />
         </div>
       </div>
         </div>
