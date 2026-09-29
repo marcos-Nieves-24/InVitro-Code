@@ -59,16 +59,16 @@ export default async function ProyectosPage() {
 
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
-      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
-        <HeroWithConsole
-          backgroundSrc={getProyectoHeroImage("hub")}
-          eyebrow="Proyectos guiados"
-          title="Proyectos"
-          description="Cada módulo incluye proyectos guiados con consolas interactivas. Abre el notebook en Colab o descárgalo para trabajar en tu entorno."
-          cta={{ href: "/proyectos/ia", label: "Explorar proyectos" }}
-          console={<HubConsole />}
-        />
+      <HeroWithConsole
+        backgroundSrc={getProyectoHeroImage("hub")}
+        eyebrow="Proyectos guiados"
+        title="Proyectos"
+        description="Cada módulo incluye proyectos guiados con consolas interactivas. Abre el notebook en Colab o descárgalo para trabajar en tu entorno."
+        cta={{ href: "/proyectos/ia", label: "Explorar proyectos" }}
+        console={<HubConsole />}
+      />
 
+      <div className="mx-auto w-full max-w-screen-2xl px-6 py-8 md:px-10">
         <div id="hub" className="mt-8">
           {sorted.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
