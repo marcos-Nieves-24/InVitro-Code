@@ -10,6 +10,7 @@ export { ReflectionCheck } from "./reflection-check";
 export { ConceptCard } from "./concept-card";
 export { MascotMessage } from "./mascot-message";
 export { ComparisonTable } from "./comparison-table";
+export { MarkdownTable } from "./markdown-table";
 export { CodeBlock } from "./code-block";
 export { DiagnosticTrainer } from "./diagnostic-trainer";
 export { ConidiaSortGame } from "./conidia-sort-game";
