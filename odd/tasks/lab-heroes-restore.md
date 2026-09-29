@@ -45,6 +45,7 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 - 2026-09-29: T1 complete — restored hub LabHero with RiveBioreactor and HUD (c5b4a4b).
 - 2026-09-29: T2 complete — restored module LabLandingHero with HeroWithConsole (8c76427). Expected intermediate type error in page.tsx pending T3.
 - 2026-09-29: T3 complete — restored module page with lab_progress ring, LabHistoryCard, getLabResumeTarget (4f2171a). type-check and build passed.
+- 2026-09-29: Fix LabHero visibility bugs — prefersReducedMotion opacity, Rive placeholder fallback to BioreactorProgress, SplitText safety (fix/labs-visibility).
 
 ## Verification Evidence
 - npm run type-check: passed (0 errors) after T3 — T2 intermediate expected error resolved
@@ -52,9 +53,10 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 - T1 c5b4a4b: hub LabHero restored, BUBBLES + HUD verified
 - T2 8c76427: LabLandingHero restored, HeroWithConsole + consoles verified
 - T3 4f2171a: module page restored, lab_progress + LabProgressRing + LabHistoryCard verified
+- Fix visibility (2026-09-29): hero opacity conditional on prefersReducedMotion, useLabHeroMotion sets opacity 1 on reduced-motion/failure, Rive placeholder fetch check + BioreactorProgress fallback, SplitText try/catch + gsap.context guard — type-check and build passed (21/21 pages)
 
 ## Next Step
-- PR ready (single PR <400 lines, 3 work-unit commits). No dashboard BioreactorProgress changes.
+- PR ready (single PR <400 lines, 4 work-unit commits). No change to LabLandingHero or module page.
 
 ## Delivery Strategy
 - Single PR (forecast <400 lines). Work-unit commits per task.

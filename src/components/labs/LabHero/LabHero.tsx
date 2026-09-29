@@ -76,7 +76,7 @@ export function LabHero({
     <section
       ref={heroRef}
       className="relative overflow-hidden bg-[var(--color-comic-bg)] bg-dot-grid"
-      style={{ opacity: 0 }}
+      style={{ opacity: prefersReducedMotion ? 1 : 0 }}
     >
       {/* ── Bubble layer ── */}
       <div ref={bubblesRef} className="bubble-layer absolute inset-0 z-0">
