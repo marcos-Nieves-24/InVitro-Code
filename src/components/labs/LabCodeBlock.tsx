@@ -6,9 +6,19 @@ import { CodeBlock } from "@/components/lesson";
 
 // REQ-LABRUN-04: Lazy-load PyodideRunner with ssr: false so the page
 // paints before Pyodide initialises. One worker per code block (MVP).
+// Skeleton matches server/client HTML to avoid hydration mismatch
+// (server Suspense fallback={null} vs client PyodideRunner div mismatch).
 const PyodideRunner = dynamic(
   () => import("@/components/editor/PyodideRunner"),
-  { ssr: false },
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="my-6 h-[400px] animate-pulse rounded-xl border bg-[#0a0a0a]"
+        aria-hidden="true"
+      />
+    ),
+  },
 );
 
 interface LabCodeBlockProps {
