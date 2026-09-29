@@ -195,17 +195,8 @@ export default async function LabModuleLandingPage({ params }: Props) {
           )}
         </div>
 
-        {/* Smart resume CTA area (REQ-LC-06..08) */}
-        {showSingleCTA ? (
-          <div className="mt-4">
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center justify-center rounded-full bg-mint px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-mint/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
-            >
-              {ctaLabel}
-            </Link>
-          </div>
-        ) : labCount > 0 && completedCount === labCount ? (
+        {/* Smart resume CTA area — hero is single CTA source; only allCompleted message here */}
+        {labCount > 0 && completedCount === labCount ? (
           <div className="mt-4 rounded-xl border border-success-green/20 bg-success-green/[0.06] px-4 py-3">
             <p className="text-sm font-semibold text-success-green">¡Completaste todos los laboratorios!</p>
             <p className="mt-1 text-xs text-storm">Elige un laboratorio para repasar.</p>

@@ -22,7 +22,7 @@ Claridad semántica y paridad labs/proyectos; reducir duplicación DRY.
 
 ## Tasks
 - [x] T1 — % crecimiento + borrar texto tubo
-- [ ] T2 — Eliminar Empezar duplicado
+- [x] T2 — Eliminar Empezar duplicado
 - [ ] T3 — Desduplicar consola
 
 ## Constraints
@@ -36,3 +36,4 @@ Claridad semántica y paridad labs/proyectos; reducir duplicación DRY.
 ## Progress
 - 2026-09-29: feature creada
 - 2026-09-29: T1 done — % crecimiento unified, tube text removed, type-check green
+- 2026-09-29: T2 done — standalone Empezar and IntroConsole CTA removed, type-check green
