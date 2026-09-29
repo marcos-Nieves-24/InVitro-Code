@@ -71,3 +71,13 @@ Cualquier rama borrada: `git checkout -b restore/<rama> archive/<rama>/2026-09-2
 2. Luego rebase `odd/lab-journey` sobre nuevo main
 3. DashboardHero3D @ts-nocheck → decidir instalar three deps o eliminar componente
 
+
+
+## Resolución Final — unified-lab merge (2026-09-29 03:00 UTC)
+
+- **Merge**: `odd/unified-lab-proyectos-system` → `main` @ 625c226 (7 files, 18 hunks)
+  - Resolución: `git checkout --ours` para dashboard (mantener #52), nuevos archivos AchievementsSection, ProgressSection, TestTube preservados
+  - Verificación: type-check PASS, build PASS
+  - Tag `archive/odd/unified-lab-proyectos-system/2026-09-29-merged` push OK, rama borrada local+remoto
+- **Rebase lab-journey**: intentado, 30 commits ya en main saltados, 78 restantes con 111 hunks — **preservado como DRAFT #45** para trabajo manual posterior (no auto-rebase)
+- **Estado final real**: main @ 625c226 (+2e07743 doc), 1 rama activa (lab-journey), 1 PR DRAFT, 52 tags archive +1 backup
