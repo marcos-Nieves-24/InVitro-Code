@@ -114,9 +114,9 @@ export async function DashboardContainer() {
             <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
             <div className="relative p-2">
               <section className="scroll-mt-20">
-                <div className="grid gap-6 md:grid-cols-2">
-              <div className="glass-card rounded-xl p-6 grid gap-6 md:grid-cols-[1.1fr_auto] items-center pt-2">
-                <div className="order-1 self-center">
+                <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
+              <div className="glass-card flex h-full flex-col rounded-xl p-6 md:grid md:grid-cols-[1.1fr_auto] md:items-start">
+                <div className="order-1">
                   <div className="mb-4 flex items-center">
                     <h3 className="font-display text-2xl font-bold">Tu Progreso</h3>
                   </div>
@@ -126,7 +126,7 @@ export async function DashboardContainer() {
                       <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
                     </p>
                     <div
-                      className="mx-auto mt-3 h-4 w-full max-w-[20rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
+                      className="mx-auto mt-3 h-4 w-full max-w-[14rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
                       role="progressbar"
                       aria-valuenow={Math.round(levelProgressPct)}
                       aria-valuemin={0}
@@ -139,7 +139,7 @@ export async function DashboardContainer() {
                       />
                     </div>
                   </div>
-                  <p className="mt-3 text-base leading-relaxed text-storm max-w-[32ch]">
+                  <p className="mt-3 text-base leading-relaxed text-storm max-w-[24ch]">
                     {(() => {
                       const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
                       const idx = raw.indexOf("EXP");
@@ -174,7 +174,7 @@ export async function DashboardContainer() {
                 </div>
               </div>
 
-              <div className="glass-card relative flex min-h-0 flex-col self-start overflow-hidden rounded-xl p-6">
+              <div className="glass-card relative flex h-full min-h-0 flex-col overflow-hidden rounded-xl p-6">
                 <h3 className="mb-2 text-lg font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
