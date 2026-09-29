@@ -30,7 +30,7 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 **Acceptance:** Hub shows RiveBioreactor on right, BUBBLES layer, HUD with level/rank, XP bar, streak, CTA scrolls to #hub. Props are used. Reduced-motion fallback works.
 **Checks:** `npm run type-check`, visual /laboratorios
 
-### T2 — Restore module LabLandingHero with HeroWithConsole + consoles [pending]
+### T2 — Restore module LabLandingHero with HeroWithConsole + consoles [x]
 **Authorized scope:** `src/components/labs/landing/LabLandingHero.tsx`
 **Acceptance:** Uses `HeroWithConsole backgroundSrc={getLabHeroImage(moduleSlug)}` + `ConsoleForModule` (Intro/Python/Stats/Ml/Hub). Matches proyectos/[module] pattern.
 **Checks:** `npm run type-check`, visual per module
@@ -43,6 +43,7 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 ## Progress
 - 2026-09-29: Feature created, branch odd/lab-heroes-restore to be created. 0/3 tasks complete.
 - 2026-09-29: T1 complete — restored hub LabHero with RiveBioreactor and HUD (c5b4a4b).
+- 2026-09-29: T2 complete — restored module LabLandingHero with HeroWithConsole (8c76427). Expected intermediate type error in page.tsx pending T3.
 
 ## Verification Evidence
 - TBD
