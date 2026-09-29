@@ -62,3 +62,18 @@ User explicitly requested restoration. Maintains educational parity labs ↔ pro
 
 ## Delivery Strategy
 - Single PR (forecast <400 lines). Work-unit commits per task.
+
+### T4 — Restore dashboard true bioreactor [x]
+**Authorized scope:** `src/components/dashboard/DashboardContainer.tsx`
+**Acceptance:** Tu Progreso slot renders the b36670f vessel (horizontal Rushton, clipped bubbles, waves) at size xl with hideMeta; import from `./BioreactorProgress` (dashboard); slot/order/font sizes unchanged.
+**Checks:** type-check PASS, build PASS
+**Commit:** 917efa2
+
+### T5 — Remove dead purple LabLessonHero [x]
+**Authorized scope:** `src/components/labs/LabLessonHero.tsx` (deleted), `src/components/labs/index.ts`
+**Acceptance:** Purple (`--color-comic-bg` #22005A) + Rive-bubble lesson hero eliminated; barrel export removed; zero references remain.
+**Checks:** type-check PASS, build PASS, grep 0 refs
+**Commit:** d7888d5
+
+## Known failures (pre-existing on main d410182)
+- `src/components/labs/LabCardTheme.test.ts`: 2 tests fail (accent #82A0AA vs #2A272A) — fails identically with main's file content; NOT caused by this branch.
