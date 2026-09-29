@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FileCode } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 interface RCopyButtonProps {
@@ -100,13 +101,14 @@ export function RCopyButton({ mod, lesson, hasRScript }: RCopyButtonProps) {
                 </p>
               </div>
             </div>
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => setShowModal(false)}
-              type="button"
-              className="mt-6 w-full rounded-btn bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200"
+              className="mt-6 w-full"
             >
               Cerrar
-            </button>
+            </Button>
           </div>
         </div>
       )}

@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Download, ExternalLink, Loader2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 interface NotebookActionsProps {
   mod: string;
@@ -12,12 +14,6 @@ interface NotebookActionsProps {
 /** Base URL for the Colab "open from GitHub" flow (public repo). */
 const COLAB_BASE =
   "https://colab.research.google.com/github/marcos-Nieves-24/InVitro-Code/blob/main";
-
-const downloadClass =
-  "inline-flex items-center gap-2 rounded-btn bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:pointer-events-none disabled:opacity-50";
-
-const colabClass =
-  "inline-flex items-center gap-2 rounded-btn bg-slate-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600";
 
 /**
  * REQ-NB-01/02/03/04: Shared notebook actions — Download (GET
@@ -72,34 +68,26 @@ export function NotebookActions({
   return (
     <div className="flex flex-col items-start gap-2">
       <div className="flex flex-wrap items-center gap-2">
-        <button
+        <SlideArrowButton
+          variant="primary"
+          primaryColor="#059669"
+          size="sm"
+          text={loading ? "Descargando..." : "Descargar notebook"}
           onClick={handleDownload}
           disabled={loading}
-          type="button"
-          className={downloadClass}
-        >
-          {loading ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Descargando...
-            </>
-          ) : (
-            <>
-              <Download className="h-4 w-4" />
-              Descargar notebook
-            </>
-          )}
-        </button>
+          aria-busy={loading}
+        />
 
-        <a
+        <Button
+          variant="secondary"
+          size="sm"
           href={colabHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={colabClass}
         >
           <ExternalLink className="h-4 w-4" />
           Abrir en Colab
-        </a>
+        </Button>
       </div>
       {error && <p className="text-xs text-red-600">{error}</p>}
     </div>

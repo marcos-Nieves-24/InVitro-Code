@@ -147,89 +147,62 @@ export function LabWorkspace({
 
       {/* ── Panels ── */}
       {activeTab === "lab" && (
-        <div
-          className={
-            shouldShowFallbackRunner
-              ? "grid grid-cols-1 gap-6 lg:grid-cols-2"
-              : "grid grid-cols-1 gap-6"
-          }
-        >
-          {/* Left: instructions — data-onboarding target */}
+        <>
           <div
-            data-onboarding="instructions"
-            className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl border border-surface-raised bg-surface-card p-6"
+            className={
+              shouldShowFallbackRunner
+                ? "grid grid-cols-1 gap-6 lg:grid-cols-2"
+                : "grid grid-cols-1 gap-6"
+            }
           >
-            <LabRunner content={labContent} rawFallback={labRawFallback} />
-          </div>
+            {/* Left: instructions — data-onboarding target */}
+            <div
+              data-onboarding="instructions"
+              className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl border border-surface-raised bg-surface-card p-6"
+            >
+              <LabRunner content={labContent} rawFallback={labRawFallback} />
+            </div>
 
-          {shouldShowFallbackRunner ? (
-            /* Right: editor + results stack — fallback only when lesson has no python block */
-            <div className="flex flex-col gap-4">
-              <div data-onboarding="editor">
-                <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
-              </div>
-
-              <div
-                data-onboarding="results"
-                className="rounded-xl border border-surface-raised bg-surface-card p-4"
-              >
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
-                  Recursos y entrega
-                </p>
-                <div className="flex flex-col gap-3">
-                  {(hasNotebook || hasRScript) ? (
-                    <div className="flex flex-wrap items-center gap-3">
-                      <RCopyButton
-                        mod={moduleSlug}
-                        lesson={lessonSlug}
-                        hasRScript={hasRScript}
-                      />
-                      <NotebookActions
-                        mod={moduleSlug}
-                        lesson={lessonSlug}
-                        hasNotebook={hasNotebook}
-                      />
-                    </div>
-                  ) : (
-                    <p className="text-sm text-storm">
-                      Ejecuta tu código y valida los resultados en el panel superior.
-                    </p>
-                  )}
+            {shouldShowFallbackRunner && (
+              /* Right: editor — fallback only when lesson has no python block */
+              <div className="flex flex-col gap-4">
+                <div data-onboarding="editor">
+                  <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
                 </div>
               </div>
+            )}
+          </div>
+
+          {/* Recursos y entrega — always full-width below instructions */}
+          <div
+            data-onboarding="results"
+            className="mt-6 rounded-xl border border-surface-raised bg-surface-card p-4"
+          >
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
+              Recursos y entrega
+            </p>
+            <div className="flex flex-col gap-3">
+              {hasNotebook || hasRScript ? (
+                <div className="flex flex-wrap items-center gap-3">
+                  <RCopyButton
+                    mod={moduleSlug}
+                    lesson={lessonSlug}
+                    hasRScript={hasRScript}
+                  />
+                  <NotebookActions
+                    mod={moduleSlug}
+                    lesson={lessonSlug}
+                    hasNotebook={hasNotebook}
+                  />
+                </div>
+              ) : (
+                <p className="text-sm text-storm">
+                  Ejecuta tu código y valida los resultados en el panel superior.
+                </p>
+              )}
             </div>
-          ) : (
-            /* Single runner is inside LabRunner via LabCodeBlock; keep resources below full-width instructions */
-            <div
-              data-onboarding="results"
-              className="rounded-xl border border-surface-raised bg-surface-card p-4"
-            >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
-                Recursos y entrega
-              </p>
-              <div className="flex flex-col gap-3">
-                {(hasNotebook || hasRScript) ? (
-                  <div className="flex flex-wrap items-center gap-3">
-                    <RCopyButton
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasRScript={hasRScript}
-                    />
-                    <NotebookActions
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasNotebook={hasNotebook}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-sm text-storm">
-                    Ejecuta tu código y valida los resultados en el panel superior.
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        </>
       )}
 
       {activeTab === "quiz" && hasQuiz && (
