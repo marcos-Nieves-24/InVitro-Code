@@ -183,8 +183,8 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
                 <motion.circle
                   key={b.id}
                   cx={b.cx}
-                  cy={272}
                   r={b.r}
+                  initial={{ cy: 272, opacity: 0, x: 0 }}
                   fill="var(--color-surface-card)"
                   fillOpacity="0.92"
                   stroke="var(--color-bubble-highlight)"
