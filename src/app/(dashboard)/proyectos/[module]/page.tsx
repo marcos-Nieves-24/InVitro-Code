@@ -10,11 +10,7 @@ import { getModuleDisplayName, getLessonSlugs } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { HeroWithConsole } from "@/components/shared/HeroWithConsole";
 import { getProyectoHeroImage } from "@/lib/labs/heroImages";
-import { HubConsole } from "@/components/labs/consoles/HubConsole";
-import { IntroConsole } from "@/components/labs/consoles/IntroConsole";
-import { PythonConsole } from "@/components/labs/consoles/PythonConsole";
-import { StatsConsole } from "@/components/labs/consoles/StatsConsole";
-import { MlConsole } from "@/components/labs/consoles/MlConsole";
+import { getConsoleForModule } from "@/lib/labs/consoleForModule";
 
 interface Props {
   params: Promise<{ module: string }>;
@@ -32,21 +28,6 @@ function getModuleDescription(slug: string): string | null {
     // fallback below
   }
   return null;
-}
-
-function ConsoleForModule({ slug }: { slug: string }) {
-  switch (slug) {
-    case "ia":
-      return <IntroConsole />;
-    case "python":
-      return <PythonConsole />;
-    case "estadistica":
-      return <StatsConsole />;
-    case "machine-learning":
-      return <MlConsole />;
-    default:
-      return <HubConsole />;
-  }
 }
 
 export default async function ProyectoModulePage({ params }: Props) {
@@ -126,7 +107,7 @@ export default async function ProyectoModulePage({ params }: Props) {
           title={moduleName}
           description={description}
           cta={{ href: ctaHref, label: ctaLabel }}
-          console={<ConsoleForModule slug={modSlug} />}
+          console={getConsoleForModule(modSlug)}
         />
 
         {lessonSlugs.length > 0 && (
