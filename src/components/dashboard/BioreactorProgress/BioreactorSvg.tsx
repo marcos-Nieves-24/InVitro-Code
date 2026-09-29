@@ -151,53 +151,24 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
               }}
             >
               <rect x="45" y="15" width="150" height="300" fill={`url(#liquidGrad-${uid})`} />
-              {shouldReduce ? (
-                <>
-                  <ellipse cx="120" cy="12" rx="72" ry="8" fill="var(--color-mint)" opacity="0.92" />
-                  <ellipse cx="120" cy="14" rx="68" ry="6" fill="var(--color-fog)" opacity="0.55" />
-                </>
-              ) : (
-                <>
-                  <motion.ellipse
-                    cx="120"
-                    cy="12"
-                    rx="72"
-                    ry="8"
+              {/* Wave surface — conectado al tanque, animado con background wave del SCSS tube */}
+              {!shouldReduce && (
+                <motion.g
+                  animate={{ x: [0, -25, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  style={{ willChange: "transform" }}
+                >
+                  <path
+                    d="M45 15 Q57 6 70 15 T95 15 T120 15 T145 15 T170 15 T195 15 L195 18 L45 18 Z"
                     fill="var(--color-mint)"
-                    opacity={0.92}
-                    className="liquid-wave"
-                    animate={{ scaleX: [1, 1.06, 1], x: [0, 2, 0] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      transformOrigin: "120px 12px",
-                      willChange: "transform",
-                    }}
+                    opacity={0.35}
                   />
-                  <motion.ellipse
-                    cx="120"
-                    cy="14"
-                    rx="68"
-                    ry="6"
-                    fill="var(--color-fog)"
-                    opacity={0.55}
-                    className="liquid-wave"
-                    animate={{ scaleX: [1, 1.08, 1], x: [0, -2, 0] }}
-                    transition={{
-                      duration: 2.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.4,
-                    }}
-                    style={{
-                      transformOrigin: "120px 14px",
-                      willChange: "transform",
-                    }}
+                  <path
+                    d="M45 17 Q57 26 70 17 T95 17 T120 17 T145 17 T170 17 T195 17 L195 20 L45 20 Z"
+                    fill="white"
+                    opacity={0.12}
                   />
-                </>
+                </motion.g>
               )}
             </motion.g>
           </motion.g>
@@ -245,28 +216,27 @@ export function BioreactorSvg({ percent, fast, shouldReduce }: Props) {
         )}
       </g>
 
-      {/* Agitator shaft */}
-      <rect x="115" y="45" width="10" height="220" rx="3" fill={`url(#metalGradient-${uid})`} />
-
-      {/* Impeller group — rpm = 60 + 120*h*(1-slip), duration = 60/rpm */}
-      <motion.g
-        id="impellerGroup"
-        animate={shouldReduce ? undefined : { rotate: 360 }}
-        transition={
-          shouldReduce
-            ? undefined
-            : { duration: impellerDuration, repeat: Infinity, ease: "linear" }
-        }
-        style={{
-          transformOrigin: "120px 240px",
-          willChange: shouldReduce ? "auto" : "transform",
-        }}
-      >
-        <ellipse cx="120" cy="240" rx="22" ry="6" fill="var(--color-graphite)" opacity="0.9" />
-        <path d="M98,238 L75,232 L75,248 L98,242 Z" fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8" />
-        <path d="M142,238 L165,232 L165,248 L142,242 Z" fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8" />
-        <circle cx="120" cy="240" r="5" fill="var(--color-graphite)" />
-      </motion.g>
+      {/* Impeller — Rushton real: eje vertical fijo, disco y 6 palas radiales, flujo radial */}
+      <g id="impellerGroup" aria-hidden="true">
+        <rect x="118" y="65" width="4" height="175" rx="2" fill={`url(#metalGradient-${uid})`} opacity="0.9" />
+        <ellipse cx="120" cy="240" rx="16" ry="6" fill="var(--color-graphite)" opacity="0.95" />
+        {/* Palas — visto lateral: rotación alrededor de Y se ve como scaleX alternado, no rotate plano */}
+        <motion.rect
+          x="72" y="237" width="34" height="6" rx="2"
+          fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8"
+          animate={shouldReduce ? undefined : { scaleX: [1, 0.15, 1] }}
+          transition={shouldReduce ? undefined : { duration: impellerDuration * 0.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformOrigin: "120px 240px", willChange: shouldReduce ? "auto" : "transform" } as React.CSSProperties}
+        />
+        <motion.rect
+          x="134" y="237" width="34" height="6" rx="2"
+          fill="var(--color-slate)" stroke="var(--color-graphite)" strokeWidth="0.8"
+          animate={shouldReduce ? undefined : { scaleX: [1, 0.15, 1] }}
+          transition={shouldReduce ? undefined : { duration: impellerDuration * 0.5, repeat: Infinity, ease: "easeInOut", delay: impellerDuration * 0.25 }}
+          style={{ transformOrigin: "120px 240px", willChange: shouldReduce ? "auto" : "transform" } as React.CSSProperties}
+        />
+        <circle cx="120" cy="240" r="4" fill="var(--color-surface-card)" stroke="var(--color-graphite)" strokeWidth="0.6" />
+      </g>
 
       {/* Top flange */}
       <rect x="36" y="52" width="168" height="16" rx="3" fill={`url(#metalGradient-${uid})`} stroke="var(--color-graphite)" strokeWidth="0.6" />
