@@ -11,6 +11,7 @@ import { calcXpForLesson } from "@/lib/gamification/utils";
 import { HeroWithConsole } from "@/components/shared/HeroWithConsole";
 import { getProyectoHeroImage } from "@/lib/labs/heroImages";
 import { getConsoleForModule } from "@/lib/labs/consoleForModule";
+import { LabProgressRing } from "@/components/labs/LabProgressRing";
 
 interface Props {
   params: Promise<{ module: string }>;
@@ -86,8 +87,11 @@ export default async function ProyectoModulePage({ params }: Props) {
     }
   }
   const allCompleted = labCount > 0 && completedCount === labCount;
+  const progressPct = labCount === 0 ? 0 : Math.round((completedCount / labCount) * 100);
   const ctaHref = ctaSlug ? `/proyectos/${modSlug}/${ctaSlug}` : "/proyectos";
   const ctaLabel = allCompleted ? "Repasar" : "Empezar";
+  const showSingleCTA = !allCompleted;
+  const isRepasar = allCompleted;
 
   const bg = getProyectoHeroImage(modSlug);
 
@@ -106,9 +110,25 @@ export default async function ProyectoModulePage({ params }: Props) {
           eyebrow={eyebrow}
           title={moduleName}
           description={description}
-          cta={{ href: ctaHref, label: ctaLabel }}
+          cta={showSingleCTA ? { href: ctaHref, label: ctaLabel } : undefined}
           console={getConsoleForModule(modSlug)}
         />
+
+        {/* Header: % progreso + ring (paridad labs) */}
+        <div className="mt-6 flex items-center gap-3">
+          <LabProgressRing completed={completedCount} total={labCount} size={36} strokeWidth={3} />
+          <span className="text-sm font-semibold tabular-nums text-ink">{progressPct}% crecimiento</span>
+          <span className="text-xs text-storm">
+            {completedCount} de {labCount} proyectos completados
+          </span>
+        </div>
+
+        {allCompleted && labCount > 0 ? (
+          <div className="mt-4 rounded-xl border border-success-green/20 bg-success-green/[0.06] px-4 py-3">
+            <p className="text-sm font-semibold text-success-green">¡Completaste todos los proyectos!</p>
+            <p className="mt-1 text-xs text-storm">Elige un proyecto para repasar.</p>
+          </div>
+        ) : null}
 
         {lessonSlugs.length > 0 && (
           <div className="mt-8">
@@ -122,13 +142,18 @@ export default async function ProyectoModulePage({ params }: Props) {
                     <Link
                       href={href}
                       className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                        isCompleted
-                          ? "bg-mint/20 text-ink border border-mint/30"
-                          : "bg-surface-raised text-storm border border-surface-raised hover:bg-surface-raised/80"
+                        isRepasar
+                          ? "border border-mint/30 bg-mint/10 text-mint"
+                          : isCompleted
+                            ? "bg-mint/20 text-ink border border-mint/30"
+                            : "bg-surface-raised text-storm border border-surface-raised hover:bg-surface-raised/80"
                       }`}
                     >
                       {slug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ")}
                     </Link>
+                    {isRepasar && (
+                      <span className="sr-only"> — Repasar</span>
+                    )}
                   </li>
                 );
               })}
