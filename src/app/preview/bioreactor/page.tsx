@@ -1,17 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BioreactorProgress } from "@/components/gamification/BioreactorProgress";
+import { BioreactorProgress } from "@/components/dashboard/BioreactorProgress";
 
 export default function PreviewBioreactor() {
-  const [xp, setXp] = useState(340);
+  const [exp, setExp] = useState(340);
+  const expToNext = 400;
+  const level = 4;
+  const rank = "Investigador Jr.";
+  const progressToNext = exp;
+
   const [playing, setPlaying] = useState(true);
-  const progressPercentage = Math.min(100, (xp / 400) * 100);
+  const percent = Math.min(100, (progressToNext / expToNext) * 100);
 
   useEffect(() => {
     if (!playing) return;
     const id = setInterval(() => {
-      setXp((e) => (e >= 400 ? 0 : e + 18));
+      setExp((e) => (e >= 400 ? 40 : e + 18));
     }, 900);
     return () => clearInterval(id);
   }, [playing]);
@@ -21,17 +26,20 @@ export default function PreviewBioreactor() {
       <div className="mx-auto max-w-5xl">
         <h1 className="font-display text-2xl font-bold">Preview — BioreactorProgress</h1>
         <p className="mt-1 text-sm text-storm">
-          Canonical DOM bubble layer · pool 12–16 · {Math.round(progressPercentage)}% ·{" "}
-          {playing ? "animando" : "pausado"}
+          Vessel 160×220 md · fill fog→mint · burbujeo continuo · {Math.round(percent)}% · {playing ? "animando" : "pausado"}
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-8">
           <div className="glass-card flex flex-col items-center gap-4 rounded-2xl p-8 md:flex-row md:gap-10">
-            {/* The layer is absolutely positioned, so every host must be
-                `relative` with a real size — that is the whole contract. */}
-            <div className="relative h-48 w-40 overflow-hidden rounded-2xl bg-surface-raised/40">
-              <BioreactorProgress progressPercentage={progressPercentage} />
-            </div>
+            <BioreactorProgress
+              exp={exp}
+              expToNext={expToNext}
+              level={exp >= 400 ? 5 : level}
+              rank={exp >= 400 ? "Investigador" : rank}
+              progressToNext={progressToNext}
+              size="md"
+              state={exp >= 400 ? "levelUp" : percent > 80 ? "filling" : "idle"}
+            />
             <div className="text-center md:text-left">
               <p className="text-xs font-bold uppercase tracking-wider text-storm">Demo controls</p>
               <div className="mt-3 flex items-center gap-2">
@@ -45,34 +53,24 @@ export default function PreviewBioreactor() {
                   type="range"
                   min={0}
                   max={400}
-                  value={xp}
-                  onChange={(e) => setXp(Number(e.target.value))}
+                  value={exp}
+                  onChange={(e) => setExp(Number(e.target.value))}
                   className="w-40 accent-mint"
                 />
-                <span className="font-mono text-sm font-bold text-mint">{xp} / 400</span>
+                <span className="font-mono text-sm font-bold text-mint">{exp} EXP</span>
               </div>
-              <p className="mt-2 text-xs text-storm">
-                Arrastra el slider o deja el loop 0→400 para ver cómo crece la densidad de burbujas.
-              </p>
+              <p className="mt-2 text-xs text-storm">Arrastra el slider o deja el loop 40→400 para ver idle → filling → levelUp.</p>
             </div>
           </div>
 
-          <div className="flex w-full flex-col gap-4">
+          <div className="flex gap-4">
             <div className="glass-card rounded-xl p-4">
-              <p className="mb-2 text-xs font-bold text-storm">Barra (como XPBar / ModuleProgress)</p>
-              <div className="relative h-3 w-full overflow-hidden rounded-full bg-surface-raised">
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-fog to-mint"
-                  style={{ width: `${progressPercentage}%` }}
-                />
-                <BioreactorProgress progressPercentage={progressPercentage} />
-              </div>
+              <p className="mb-2 text-center text-xs font-bold text-storm">sm 96×132</p>
+              <BioreactorProgress exp={120} expToNext={400} level={2} rank="Aprendiz" progressToNext={120} size="sm" />
             </div>
             <div className="glass-card rounded-xl p-4">
-              <p className="mb-2 text-xs font-bold text-storm">Panel ancho</p>
-              <div className="relative h-24 w-full overflow-hidden rounded-xl bg-surface-raised/40">
-                <BioreactorProgress progressPercentage={100} />
-              </div>
+              <p className="mb-2 text-center text-xs font-bold text-storm">lg 220×300</p>
+              <BioreactorProgress exp={340} expToNext={400} level={4} rank="Investigador Jr." progressToNext={340} size="lg" />
             </div>
           </div>
         </div>
