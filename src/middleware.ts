@@ -46,7 +46,8 @@ export default clerkMiddleware(async (auth, req) => {
         );
       }
       const signInUrl = new URL("/sign-in", req.url);
-      signInUrl.searchParams.set("redirect_url", pathname);
+      const redirectTarget = req.nextUrl.pathname + req.nextUrl.search;
+      signInUrl.searchParams.set("redirect_url", redirectTarget);
       return NextResponse.redirect(signInUrl);
     }
 

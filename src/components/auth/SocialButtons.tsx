@@ -1,6 +1,7 @@
 "use client";
 
 import { useSignIn } from "@clerk/nextjs";
+import { useSearchParams } from "next/navigation";
 
 interface SocialButtonsProps {
   disabled?: boolean;
@@ -12,15 +13,23 @@ interface SocialButtonsProps {
  */
 export function SocialButtons({ disabled }: SocialButtonsProps) {
   const { signIn, fetchStatus } = useSignIn();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect_url");
+  const safeRedirect = redirectUrl && redirectUrl.startsWith("/") ? redirectUrl : null;
   const isLoaded = fetchStatus !== "idle" || !!signIn;
 
   const handleOAuth = async (strategy: "oauth_google" | "oauth_github") => {
     if (!isLoaded || !signIn) return;
 
+    const redirectUrlValue = safeRedirect || "/";
+    const redirectCallbackUrl = safeRedirect
+      ? `/sso-callback?redirect_url=${encodeURIComponent(safeRedirect)}`
+      : "/sso-callback";
+
     const { error } = await signIn.sso({
       strategy,
-      redirectUrl: "/",
-      redirectCallbackUrl: "/sso-callback",
+      redirectUrl: redirectUrlValue,
+      redirectCallbackUrl,
     });
 
     if (error) {

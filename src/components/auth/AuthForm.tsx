@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { type AuthStatus } from "./LiquidWave";
 
 export type AuthMode = "signin" | "signup";
@@ -22,6 +22,9 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
   const [verificationCode, setVerificationCode] = useState("");
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect_url");
+  const safeRedirect = redirectUrl && redirectUrl.startsWith("/") ? redirectUrl : null;
   const { signIn, fetchStatus: signInFetchStatus } = useSignIn();
   const { signUp, fetchStatus: signUpFetchStatus } = useSignUp();
 
@@ -57,7 +60,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               console.log("Session task:", session.currentTask);
               return;
             }
-            const url = decorateUrl("/");
+            const url = decorateUrl(safeRedirect || "/");
             window.location.href = url;
           },
         });
@@ -101,7 +104,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
                 console.log("Session task:", session.currentTask);
                 return;
               }
-              const url = decorateUrl("/");
+              const url = decorateUrl(safeRedirect || "/");
               window.location.href = url;
             },
           });
@@ -181,7 +184,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               console.log("Session task:", session.currentTask);
               return;
             }
-            const url = decorateUrl("/");
+            const url = decorateUrl(safeRedirect || "/");
             window.location.href = url;
           },
         });

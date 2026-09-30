@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { notFound, redirect } from "next/navigation";
 import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -70,6 +71,7 @@ function getNextLessonHref(
 
 interface Props {
   params: Promise<{ module: string; slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 function renderHeader(data: Record<string, unknown>) {
@@ -115,7 +117,22 @@ function renderHeader(data: Record<string, unknown>) {
   );
 }
 
-export default async function LessonPage({ params }: Props) {
+export default async function LessonPage({ params, searchParams }: Props) {
+  const { userId } = await auth();
+  if (!userId) {
+    const { module, slug } = await params;
+    const sp = searchParams ? await searchParams : undefined;
+    const qs = sp
+      ? new URLSearchParams(
+          Object.entries(sp).flatMap(([k, v]) =>
+            v == null ? [] : Array.isArray(v) ? v.map((e) => [k, e]) : [[k, v as string]],
+          ),
+        ).toString()
+      : "";
+    const fullPath = `/learn/${module}/${slug}${qs ? `?${qs}` : ""}`;
+    redirect(`/sign-in?redirect_url=${encodeURIComponent(fullPath)}`);
+  }
+
   const { module, slug } = await params;
   const filePath = path.join(
     process.cwd(),

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { getModules } from "@/lib/content/modules";
 import { ArrowRight, Compass } from "lucide-react";
 
@@ -9,7 +11,25 @@ const MODULE_FAVICON: Record<string, string> = {
   "machine-learning": "/favicon-modulo-4.png",
 };
 
-export default function LearnIndexPage() {
+export default async function LearnIndexPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { userId } = await auth();
+  if (!userId) {
+    const sp = searchParams ? await searchParams : undefined;
+    const qs = sp
+      ? new URLSearchParams(
+          Object.entries(sp).flatMap(([k, v]) =>
+            v == null ? [] : Array.isArray(v) ? v.map((e) => [k, e]) : [[k, v as string]],
+          ),
+        ).toString()
+      : "";
+    const fullPath = `/learn${qs ? `?${qs}` : ""}`;
+    redirect(`/sign-in?redirect_url=${encodeURIComponent(fullPath)}`);
+  }
+
   const modules = getModules();
 
   return (
