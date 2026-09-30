@@ -9,7 +9,6 @@ interface ModuleData {
   title: string;
   lessons: number;
   description: string;
-  iconSrc: string;
 }
 
 const modules: ModuleData[] = [
@@ -19,7 +18,6 @@ const modules: ModuleData[] = [
     lessons: 4,
     description:
       "Fundamentos de inteligencia artificial aplicados a biotecnologia.",
-    iconSrc: "/favicon-modulo-1-sin-fondo.svg",
   },
   {
     slug: "MOD-02",
@@ -27,7 +25,6 @@ const modules: ModuleData[] = [
     lessons: 17,
     description:
       "Programacion en Python aplicada al analisis de datos biologicos.",
-    iconSrc: "/favicon-modulo-2-sin-fondo.svg",
   },
   {
     slug: "MOD-03",
@@ -35,7 +32,6 @@ const modules: ModuleData[] = [
     lessons: 10,
     description:
       "Fundamentos estadisticos para el analisis de datos en investigacion biomedica.",
-    iconSrc: "/favicon-modulo-3-sin-fondo.svg",
   },
   {
     slug: "MOD-04",
@@ -43,7 +39,6 @@ const modules: ModuleData[] = [
     lessons: 10,
     description:
       "Algoritmos de aprendizaje automatico para aplicaciones biotecnologicas.",
-    iconSrc: "/favicon-modulo-4-sin-fondo.svg",
   },
 ];
 
