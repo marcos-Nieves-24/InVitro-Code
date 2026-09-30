@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { TerminalChrome } from "@/components/shared/TerminalChrome";
 import { TypingText } from "@/components/ui/TypingText";
-import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 
 type Bubble = { role: "user" | "assistant"; text: string };
 
@@ -35,12 +34,10 @@ export function IntroConsole() {
   const shouldReduceMotion = useReducedMotion();
   const [visible, setVisible] = useState(shouldReduceMotion ? bubbles.length : 0);
   const [showDots, setShowDots] = useState(false);
-  const [showCta, setShowCta] = useState(shouldReduceMotion ?? false);
 
   useEffect(() => {
     if (shouldReduceMotion) {
       setVisible(bubbles.length);
-      setShowCta(true);
       return;
     }
     let idx = 0;
@@ -64,8 +61,6 @@ export function IntroConsole() {
           idx++;
           setTimeout(tick, 650);
         }
-      } else {
-        setShowCta(true);
       }
     };
     const t = setTimeout(tick, 1100);
@@ -122,24 +117,6 @@ export function IntroConsole() {
             </div>
           )}
         </div>
-
-        {showCta &&
-          (shouldReduceMotion ? (
-            <div className="flex items-center gap-3">
-              <p className="font-mono text-xs text-white/50">Da click en Empezar</p>
-              <SlideArrowButton size="sm" text="Empezar" href="#mision" />
-            </div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="flex items-center gap-3"
-            >
-              <p className="font-mono text-xs text-white/50">Da click en Empezar</p>
-              <SlideArrowButton size="sm" text="Empezar" href="#mision" />
-            </motion.div>
-          ))}
       </div>
     </TerminalChrome>
   );

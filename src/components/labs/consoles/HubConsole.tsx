@@ -28,7 +28,7 @@ export function HubConsole() {
   const rungs = [15, 35, 55, 75, 95, 115, 135, 155, 175];
 
   return (
-    <TerminalChrome title="python invitro-code --lab hub" className="flex flex-col">
+    <TerminalChrome title="" className="flex flex-col">
       <div className="flex h-[420px] flex-col gap-3 overflow-hidden">
         <TypingText
           text="> Secuenciando ADN..."

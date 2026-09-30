@@ -55,8 +55,12 @@ export function AssignmentViewer({
 
   return (
     <div className="space-y-6">
-      {/* REQ-ASGN-03: Notebook actions (hidden when notebook absent) */}
-      <NotebookActions mod={mod} lesson={lesson} hasNotebook={hasNotebook} />
+      {/* REQ-ASGN-03: Notebook actions top-right (hidden when notebook absent) — paridad labs */}
+      {hasNotebook && (
+        <div className="flex justify-end">
+          <NotebookActions mod={mod} lesson={lesson} hasNotebook={hasNotebook} />
+        </div>
+      )}
 
       {/* REQ-ASGN-01: Compiled MDX (pre: LabCodeBlock consoles) */}
       <div className={labProseClass}>

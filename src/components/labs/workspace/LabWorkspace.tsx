@@ -28,6 +28,7 @@ interface LabWorkspaceProps {
   theme: SerializableLabCardTheme;
   totalXpForLesson: number;
   showOnboarding?: boolean;
+  hasExecutableBlock?: boolean;
 }
 
 export function LabWorkspace({
@@ -43,6 +44,7 @@ export function LabWorkspace({
   theme,
   totalXpForLesson,
   showOnboarding = false,
+  hasExecutableBlock = false,
 }: LabWorkspaceProps) {
   const [activeTab, setActiveTab] = useState<TabId>("lab");
 
@@ -72,6 +74,8 @@ export function LabWorkspace({
   );
 
   const hasQuiz = quizRaw !== null;
+  // Fallback editor only when lesson has no python block or compilation failed
+  const shouldShowFallbackRunner = labRawFallback !== null || !hasExecutableBlock;
 
   useEffect(() => {
     if (activeTab === "quiz" && !hasQuiz) setActiveTab("lab");
@@ -121,73 +125,65 @@ export function LabWorkspace({
         </div>
       </header>
 
-      {/* ── Tabs ── */}
-      <div className="mb-6 flex items-center border-b border-surface-raised" role="tablist">
-        <TabButton
-          active={activeTab === "lab"}
-          onClick={() => handleTabChange("lab")}
-          icon={<FlaskConical className="h-4 w-4" />}
-          label="Laboratorio"
-          id="lab"
-        />
-        {hasQuiz && (
+      {/* ── Tabs + Recursos top-right (solo Laboratorio) ── */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-surface-raised mb-6">
+        <div className="flex gap-2" role="tablist">
           <TabButton
-            active={activeTab === "quiz"}
-            onClick={() => handleTabChange("quiz")}
-            icon={<ClipboardCheck className="h-4 w-4" />}
-            label="Cuestionario"
-            id="quiz"
+            active={activeTab === "lab"}
+            onClick={() => handleTabChange("lab")}
+            icon={<FlaskConical className="h-4 w-4" />}
+            label="Laboratorio"
+            id="lab"
           />
+          {hasQuiz && (
+            <TabButton
+              active={activeTab === "quiz"}
+              onClick={() => handleTabChange("quiz")}
+              icon={<ClipboardCheck className="h-4 w-4" />}
+              label="Cuestionario"
+              id="quiz"
+            />
+          )}
+        </div>
+        {activeTab === "lab" && (hasNotebook || hasRScript) && (
+          <div
+            data-onboarding="results"
+            className="flex flex-wrap items-center gap-2 pb-3 justify-end"
+          >
+            <RCopyButton mod={moduleSlug} lesson={lessonSlug} hasRScript={hasRScript} />
+            <NotebookActions mod={moduleSlug} lesson={lessonSlug} hasNotebook={hasNotebook} />
+          </div>
         )}
       </div>
 
       {/* ── Panels ── */}
       {activeTab === "lab" && (
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Left: instructions — data-onboarding target */}
+        <>
           <div
-            data-onboarding="instructions"
-            className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl border border-surface-raised bg-surface-card p-6"
+            className={
+              shouldShowFallbackRunner
+                ? "grid grid-cols-1 gap-6 lg:grid-cols-2"
+                : "grid grid-cols-1 gap-6"
+            }
           >
-            <LabRunner content={labContent} rawFallback={labRawFallback} />
-          </div>
-
-          {/* Right: editor + results stack */}
-          <div className="flex flex-col gap-4">
-            <div data-onboarding="editor">
-              <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
-            </div>
-
+            {/* Left: instructions — data-onboarding target */}
             <div
-              data-onboarding="results"
-              className="rounded-xl border border-surface-raised bg-surface-card p-4"
+              data-onboarding="instructions"
+              className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl border border-surface-raised bg-surface-card p-6"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-storm">
-                Recursos y entrega
-              </p>
-              <div className="flex flex-col gap-3">
-                {(hasNotebook || hasRScript) ? (
-                  <div className="flex flex-wrap items-center gap-3">
-                    <RCopyButton
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasRScript={hasRScript}
-                    />
-                    <NotebookActions
-                      mod={moduleSlug}
-                      lesson={lessonSlug}
-                      hasNotebook={hasNotebook}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-sm text-storm">
-                    Ejecuta tu código y valida los resultados en el panel superior.
-                  </p>
-                )}
-              </div>
+              <LabRunner content={labContent} rawFallback={labRawFallback} />
             </div>
+
+            {shouldShowFallbackRunner && (
+              /* Right: editor — fallback only when lesson has no python block */
+              <div className="flex flex-col gap-4">
+                <div data-onboarding="editor">
+                  <PyodideRunner defaultValue="# Experimenta aquí...&#10;print('Hola Mundo!')" />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        </>
       )}
 
       {activeTab === "quiz" && hasQuiz && (

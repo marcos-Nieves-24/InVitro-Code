@@ -50,7 +50,7 @@ export function ModuleExplorerCard({
         {/* Top row: chip + art */}
         <div className="flex items-start justify-between gap-3">
           <span
-            className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide"
+            className="inline-flex w-fit whitespace-nowrap shrink-0 max-w-none items-center rounded-full border px-2.5 py-0.5 text-[10px] font-medium tracking-wide"
             style={{
               backgroundColor: `${theme.accent}14`,
               borderColor: `${theme.accent}30`,
@@ -89,7 +89,7 @@ export function ModuleExplorerCard({
               {completed}/{total} completados
             </span>
             <span className="text-xs text-storm">
-              {total > 0 ? `${Math.round((completed / total) * 100)}%` : "0%"} progreso
+              {total > 0 ? `${Math.round((completed / total) * 100)}%` : "0%"} crecimiento
             </span>
           </div>
         </div>

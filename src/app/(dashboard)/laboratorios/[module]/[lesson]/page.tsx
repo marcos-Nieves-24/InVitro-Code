@@ -135,6 +135,8 @@ export default async function LabLessonPage({ params }: Props) {
     lessonSlug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
   const theme = toSerializableTheme(getLabCardTheme(modSlug));
   const totalXpForLesson = calcXpForLesson(modSlug, lessonSlug);
+  // Detect python fence to decide whether to show fallback editor
+  const hasExecutableBlock = /```python/.test(labRaw);
 
   return (
     <InVitroShell userName={userName} userRole={profileRes.data?.role} theme={profileRes.data?.theme}>
@@ -151,6 +153,7 @@ export default async function LabLessonPage({ params }: Props) {
         theme={theme}
         totalXpForLesson={totalXpForLesson}
         showOnboarding={showOnboarding}
+        hasExecutableBlock={hasExecutableBlock}
       />
     </InVitroShell>
   );

@@ -1,14 +1,25 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
 import { CodeBlock } from "@/components/lesson";
 
 // REQ-LABRUN-04: Lazy-load PyodideRunner with ssr: false so the page
 // paints before Pyodide initialises. One worker per code block (MVP).
+// Skeleton matches server/client HTML to avoid hydration mismatch
+// (server Suspense fallback={null} vs client PyodideRunner div mismatch).
 const PyodideRunner = dynamic(
   () => import("@/components/editor/PyodideRunner"),
-  { ssr: false },
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="my-6 h-[400px] animate-pulse rounded-xl border bg-[#0a0a0a]"
+        aria-hidden="true"
+      />
+    ),
+  },
 );
 
 interface LabCodeBlockProps {
@@ -91,11 +102,26 @@ function extractLanguageId(children: React.ReactNode): string {
  * terminal CodeBlock.
  */
 export function LabCodeBlock({ children, className }: LabCodeBlockProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Server and initial client render the same skeleton to avoid hydration
+  // mismatch (RSC serialization makes children shape diverge for language
+  // detection). After mount we can safely branch to PyodideRunner vs CodeBlock.
+  if (!mounted) {
+    return (
+      <div
+        className="my-6 h-[400px] animate-pulse rounded-xl border bg-[#0a0a0a]"
+        aria-hidden="true"
+        suppressHydrationWarning
+      />
+    );
+  }
+
   const langId =
     extractLanguageId(children) ||
     (className ?? "").replace("language-", "").toLowerCase();
 
-  // REQ-LABRUN-02: Python fences become executable PyodideRunner instances
   if (langId === "python") {
     const code = extractCodeText(children);
     return (
@@ -107,8 +133,5 @@ export function LabCodeBlock({ children, className }: LabCodeBlockProps) {
     );
   }
 
-  // REQ-LABRUN-06: Everything else (bash, shell, …) renders with the
-  // animated terminal CodeBlock already used in lessons (title bar,
-  // typing animation, simulated output, copy button).
   return <CodeBlock className={className}>{children}</CodeBlock>;
 }

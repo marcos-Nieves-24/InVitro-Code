@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { CheckCircle2, XCircle, Eye, EyeOff, AlertTriangle } from "lucide-react";
 import { parseQuiz, type QuizQuestion, type QuizResult } from "@/lib/labs/quiz-parser";
+import { Button } from "@/components/ui/Button";
 
 interface QuizRunnerProps {
   raw: string;
@@ -98,6 +99,32 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
   // ── Structured quiz ──
   return (
     <div className="space-y-8">
+      {/* Sticky top-right CTAs */}
+      <div className="sticky top-0 z-10 flex flex-wrap justify-end gap-3 border-b border-gray-200 bg-surface-card/95 py-3 backdrop-blur">
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={handleSubmit}
+          disabled={submitted || result.questions.length === 0}
+        >
+          {submitted ? "Revisado" : "Verificar respuestas"}
+        </Button>
+
+        <Button variant="secondary" size="sm" onClick={handleToggleAnswers}>
+          {showAnswers ? (
+            <>
+              <EyeOff className="h-4 w-4" />
+              Ocultar respuestas
+            </>
+          ) : (
+            <>
+              <Eye className="h-4 w-4" />
+              Ver respuestas
+            </>
+          )}
+        </Button>
+      </div>
+
       {/* Score display */}
       {submitted && mcqTotal > 0 && (
         <div
@@ -255,35 +282,6 @@ export function QuizRunner({ raw }: QuizRunnerProps) {
         );
       })}
 
-      {/* Action buttons */}
-      <div className="flex flex-wrap items-center gap-3 border-t border-gray-200 pt-4">
-        <button
-          onClick={handleSubmit}
-          disabled={submitted || result.questions.length === 0}
-          type="button"
-          className="inline-flex items-center gap-2 rounded-btn bg-mint px-4 py-2 text-sm font-medium text-graphite shadow-sm shadow-glow transition-colors hover:bg-fog focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:pointer-events-none disabled:opacity-50"
-        >
-          {submitted ? "Revisado" : "Verificar respuestas"}
-        </button>
-
-        <button
-          onClick={handleToggleAnswers}
-          type="button"
-          className="inline-flex items-center gap-2 rounded-btn border border-gray-200 bg-surface-card px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
-        >
-          {showAnswers ? (
-            <>
-              <EyeOff className="h-4 w-4" />
-              Ocultar respuestas
-            </>
-          ) : (
-            <>
-              <Eye className="h-4 w-4" />
-              Ver respuestas
-            </>
-          )}
-        </button>
-      </div>
     </div>
   );
 }

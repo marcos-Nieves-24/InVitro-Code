@@ -12,6 +12,5 @@ export { LabProgressRing } from "./LabProgressRing";
 export { LabStreakPill } from "./LabStreakPill";
 export { LabHeader } from "./LabHeader";
 export { LabCallout } from "./LabCallout";
-export { LabLessonHero } from "./LabLessonHero";
 export { LabXpToast } from "./LabXpToast";
 export { ReflectionPrompt } from "./ReflectionPrompt";

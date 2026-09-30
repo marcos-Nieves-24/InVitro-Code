@@ -98,7 +98,7 @@ export function LabCard({
 
       {/* Module chip — themed accent */}
       <span
-        className="w-fit rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide"
+        className="w-fit whitespace-nowrap shrink-0 max-w-none rounded-full border px-2.5 py-0.5 text-[10px] font-medium tracking-wide"
         style={{
           borderColor: `${theme.accent}33`,
           backgroundColor: `${theme.accent}0D`,
