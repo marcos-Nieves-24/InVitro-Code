@@ -75,6 +75,7 @@ export function OrbitalModules() {
   }, []);
 
   const len = modules.length;
+  const trackOffset = isMobile ? 0 : activeIndex % 2 === 0 ? 0 : -8;
   const prev = useCallback(() => {
     setActiveIndex((i) => (i - 1 + len) % len);
   }, [len]);
@@ -111,16 +112,20 @@ export function OrbitalModules() {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      {/* Viewport — 4 visibles con peek lateral 16px; sin translate, orden rotado */}
-      <div className="overflow-hidden px-4 md:px-6">
+      {/* Viewport — 4 visibles con peek lateral 16px; micro-slide translate para efecto carrusel premium */}
+      <div className="overflow-visible px-4 pb-10 md:overflow-hidden md:px-6">
         <ul
           key={isMobile ? `m-${activeIndex}` : `d-${activeIndex}`}
           aria-label="Modulos del curso"
-          className="flex gap-5 justify-center"
+          className="flex gap-5"
           style={
             reducedMotion
               ? undefined
-              : { transition: "opacity 200ms ease-out" }
+              : {
+                  transform: `translateX(${trackOffset}px)`,
+                  transition:
+                    "transform 380ms cubic-bezier(0.16,1,0.3,1), opacity 200ms ease-out",
+                }
           }
         >
           {ordered.map((mod) => {

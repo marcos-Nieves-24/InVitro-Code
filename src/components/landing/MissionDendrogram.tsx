@@ -208,8 +208,8 @@ export function MissionDendrogram() {
       className="bg-surface px-6 py-24"
     >
       <div className="mx-auto max-w-[1280px]">
-        {/* Title */}
-        <div data-reveal className="reveal mb-14 text-center">
+        {/* Title — sin reveal para evitar opacity 0 sin observer (ver LM-07) */}
+        <div className="mb-14 text-center">
           <p className="eyebrow text-storm">Nuestra Identidad</p>
           <h2 className="mt-3 mb-4 font-display text-3xl font-bold tracking-tight text-[#101B3D] md:text-[42px]">
             Donde la biotecnología encuentra la IA
@@ -586,9 +586,9 @@ export function MissionDendrogram() {
           </svg>
         </div>
 
-        {/* Mobile: stacked cards */}
+        {/* Mobile: stacked cards — sin reveal (evita opacity 0 sin observer) */}
         <div className="flex flex-col gap-4 lg:hidden">
-          <div data-reveal className="reveal">
+          <div>
             <div className="rounded-2xl bg-ink p-5 text-center">
               <p className="eyebrow text-mint mb-1">Raiz</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -597,7 +597,7 @@ export function MissionDendrogram() {
           </div>
 
           {/* Mobile Mision card */}
-          <div data-reveal className="reveal" style={{ transitionDelay: "100ms" }}>
+          <div style={{ transitionDelay: "100ms" }}>
             <div className="rounded-2xl border-l-4 border-mint bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Target size={18} className="text-storm" />
@@ -612,7 +612,7 @@ export function MissionDendrogram() {
           </div>
 
           {/* Mobile Vision card */}
-          <div data-reveal className="reveal" style={{ transitionDelay: "180ms" }}>
+          <div style={{ transitionDelay: "180ms" }}>
             <div className="rounded-2xl border-l-4 border-fog bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Eye size={18} className="text-storm" />
@@ -630,8 +630,6 @@ export function MissionDendrogram() {
           {pilares.map((pilar, i) => (
             <div
               key={pilar.label}
-              data-reveal
-              className="reveal"
               style={{ transitionDelay: `${280 + i * 90}ms` }}
             >
               <div className="rounded-2xl border border-surface-raised bg-surface-card p-5">

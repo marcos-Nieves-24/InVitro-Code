@@ -46,9 +46,9 @@ export function ModuleCardContent({
         <span
           className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide"
           style={{
-            backgroundColor: `${theme.accent}14`,
-            borderColor: `${theme.accent}30`,
-            color: theme.accent,
+            backgroundColor: "#00B5C514",
+            borderColor: "#00B5C540",
+            color: "#00B5C5",
           }}
         >
           {slugLabel ?? theme.label}
