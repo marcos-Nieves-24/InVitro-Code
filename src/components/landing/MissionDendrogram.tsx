@@ -492,7 +492,7 @@ export function MissionDendrogram() {
                     stroke="#E2E8F0"
                     strokeWidth={1}
                   />
-                  {/* Description — justified */}
+                  {/* Description — justified suavizado (sin inter-word para evitar ríos) */}
                   <foreignObject
                     x={pilar.x - CARD_W / 2 + 14}
                     y={CARDS_Y + 52}
@@ -507,7 +507,6 @@ export function MissionDendrogram() {
                         lineHeight: 1.6,
                         margin: 0,
                         textAlign: "justify",
-                        textJustify: "inter-word",
                         hyphens: "auto",
                       }}
                     >
@@ -577,7 +576,6 @@ export function MissionDendrogram() {
                     lineHeight: 1.6,
                     margin: 0,
                     textAlign: "justify",
-                    textJustify: "inter-word",
                     hyphens: "auto",
                   }}
                 >

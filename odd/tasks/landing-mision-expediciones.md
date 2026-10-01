@@ -21,10 +21,12 @@
 - [x] **LM-03 Carrusel rewrite (sobreescribir)** — Reescribir `OrbitalModules.tsx` eliminando `ROTATION_SPEED/PERSPECTIVE/RING_RADIUS/FADE/ rAF /preserve-3d/billboard` y todo 3D; implementar estado `activeIndex` (init 3 = MOD-04), track `flex gap-5` con `translateX`, cards `320px rounded-[18px] border-[#DCEAE8] bg-white`, activa `scale 1.04 min-h 320 acento border-l #0AAE9A shadow 0_16_40`, secundarias `opacity-60 saturate 0.92`, flechas circulares `h-9 w-9 bg-white border #DCEAE8 text #0AAE9A`, dots `bg #0AAE9A` activo, responsive 4/2-3/1 sin overflow, `prefers-reduced-motion`.
 - [x] **LM-04 Pills + icon pulido** — En `ModuleCardContent.tsx` ajustar chip `11px`, art `56`, pills XP/Labs `bg #F0F9F7 border #DCEAE8 text #47769A text-xs` con icon `text #0AAE9A` y círculo `bg #DDF5EF`.
 - [x] **LM-05 Verificación** — `npm run type-check`, `npm run build`, smoke visual (glass, justify, 4 visibles con activa, flechas/dots).
+- [x] **LM-06 Playwright polish (post-review 2026-10-01)** — Playwright `npm run dev` evidenció: Expediciones muestra 1 sola card (Machine Learning) centrada en vez de 4 visibles `[parcial][ACTIVA][sec][parcial]`; translate `offset=active*340` deja off-screen a vecinas. Misión Rects con justify inter-word genera gaps exagerados y "Accesibilidad" se percibe cortado por ancho. Ajustar: (a) carrusel a ventana rotada circular para lograr 4 visibles sin huecos, viewport con peek lateral 16px, (b) justify suavizado con `hyphens:auto` sin `inter-word` y ancho texto `CARD_W-28`, (c) verificar glass y header centrado a 1280.
 
 ## Progreso
 - 2026-10-01: feature doc creado, branch `odd/lab-heroes-restore` activo.
 - 2026-10-01: LM-01..LM-04 implementados con sobreescritura directa sin código muerto; `CARD_H 215` sin overflow verificado.
+- 2026-10-01: Playwright dev review (http://localhost:3000) — Expediciones 1-card bug confirmado, Misión justify gaps; creado LM-06.
 
 ## Evidencia
 - `4f8c910` feat(landing): mission header + pilares justified without icons + glass — `MissionDendrogram.tsx`
@@ -32,6 +34,7 @@
 - `5f2be31` feat(landing): rewrite carrusel expediciones a editorial con activa destacada — `OrbitalModules.tsx`
 - `c4bbb88` feat(landing): pills expediciones con acento teal y art 56px — `ModuleCardContent.tsx`
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
+- Playwright screenshots 2026-10-01T20:40-41: Hero ok, Misión dendrograma ok con header nuevo, Expediciones viewport solo 1 card (bug LM-06).
 
 ## Siguiente paso
-- Done. Queda merge a main vía PR cuando se decida.
+- Ejecutar LM-06 y reverificar con Playwright + type-check/build.

@@ -56,6 +56,7 @@ const GAP = 20;
 export function OrbitalModules() {
   const [activeIndex, setActiveIndex] = useState(3);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -63,6 +64,14 @@ export function OrbitalModules() {
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   const len = modules.length;
@@ -86,14 +95,13 @@ export function OrbitalModules() {
     [prev, next],
   );
 
-  // Translate so active card is second visible on desktop (partial left cut)
-  // On small screens translate is 0-based offset; overflow-hidden clips laterals.
-  // Use a small left padding (16px) to show partial previous card when active>0.
-  const offset = activeIndex * (CARD_W + GAP);
-  // For desktop 4-visible illusion: keep active near left third (16px pad)
-  const translateStyle = reducedMotion
-    ? undefined
-    : { transform: `translateX(calc(-${offset}px + 16px))` };
+  // Ventana rotada circular: activa queda segunda visible en desktop 4-visibles
+  // active=3 => ordered indices [2,3,0,1] => [MOD-03, MOD-04, MOD-01, MOD-02]
+  const ordered = isMobile
+    ? [modules[activeIndex]!]
+    : ([0, 1, 2, 3] as const)
+        .map((k) => (activeIndex - 1 + k + len) % len)
+        .map((i) => modules[i]!);
 
   return (
     <div
@@ -103,22 +111,20 @@ export function OrbitalModules() {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      {/* Viewport */}
+      {/* Viewport — 4 visibles con peek lateral 16px; sin translate, orden rotado */}
       <div className="overflow-hidden px-4 md:px-6">
         <ul
+          key={isMobile ? `m-${activeIndex}` : `d-${activeIndex}`}
           aria-label="Modulos del curso"
-          className="flex gap-5"
+          className="flex gap-5 justify-center"
           style={
             reducedMotion
               ? undefined
-              : {
-                  ...translateStyle,
-                  transition: "transform 350ms cubic-bezier(0.16,1,0.3,1)",
-                }
+              : { transition: "opacity 200ms ease-out" }
           }
         >
-          {modules.map((mod, i) => {
-            const isActive = i === activeIndex;
+          {ordered.map((mod) => {
+            const isActive = mod.slug === modules[activeIndex]!.slug;
             const theme = getLabCardTheme(slugToThemeKey[mod.slug] ?? mod.slug);
             const xp = mod.lessons * 20;
 
