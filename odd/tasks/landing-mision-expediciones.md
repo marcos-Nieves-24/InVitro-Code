@@ -27,14 +27,16 @@
 - 2026-10-01: feature doc creado, branch `odd/lab-heroes-restore` activo.
 - 2026-10-01: LM-01..LM-04 implementados con sobreescritura directa sin código muerto; `CARD_H 215` sin overflow verificado.
 - 2026-10-01: Playwright dev review (http://localhost:3000) — Expediciones 1-card bug confirmado, Misión justify gaps; creado LM-06.
+- 2026-10-01: LM-06 ejecutado — carrusel ventana rotada 4 visibles + justify suavizado; `npm run type-check: passed`.
 
 ## Evidencia
 - `4f8c910` feat(landing): mission header + pilares justified without icons + glass — `MissionDendrogram.tsx`
 - `53a7ee9` feat(landing): expediciones header editorial + fondo claro con decoracion ambiental — `Modules.tsx`
 - `5f2be31` feat(landing): rewrite carrusel expediciones a editorial con activa destacada — `OrbitalModules.tsx`
 - `c4bbb88` feat(landing): pills expediciones con acento teal y art 56px — `ModuleCardContent.tsx`
+- `79c234e` fix(landing): expediciones 4 visibles y mision justify polish — ventana rotada circular + hyphens sin inter-word (LM-06)
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
 - Playwright screenshots 2026-10-01T20:40-41: Hero ok, Misión dendrograma ok con header nuevo, Expediciones viewport solo 1 card (bug LM-06).
 
 ## Siguiente paso
-- Ejecutar LM-06 y reverificar con Playwright + type-check/build.
+- Reverificar con Playwright `npm run dev` (desktop 4 visibles + mobile 1 activa) y `npm run build` final antes de merge a main.
