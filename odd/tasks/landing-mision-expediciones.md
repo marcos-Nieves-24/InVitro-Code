@@ -22,12 +22,14 @@
 - [x] **LM-04 Pills + icon pulido** — En `ModuleCardContent.tsx` ajustar chip `11px`, art `56`, pills XP/Labs `bg #F0F9F7 border #DCEAE8 text #47769A text-xs` con icon `text #0AAE9A` y círculo `bg #DDF5EF`.
 - [x] **LM-05 Verificación** — `npm run type-check`, `npm run build`, smoke visual (glass, justify, 4 visibles con activa, flechas/dots).
 - [x] **LM-06 Playwright polish (post-review 2026-10-01)** — Playwright `npm run dev` evidenció: Expediciones muestra 1 sola card (Machine Learning) centrada en vez de 4 visibles `[parcial][ACTIVA][sec][parcial]`; translate `offset=active*340` deja off-screen a vecinas. Misión Rects con justify inter-word genera gaps exagerados y "Accesibilidad" se percibe cortado por ancho. Ajustar: (a) carrusel a ventana rotada circular para lograr 4 visibles sin huecos, viewport con peek lateral 16px, (b) justify suavizado con `hyphens:auto` sin `inter-word` y ancho texto `CARD_W-28`, (c) verificar glass y header centrado a 1280.
+- [x] **LM-07 Borde, carrusel premium + MOD #00B5C5 (2026-10-01)** — Playwright 20:45 evidencia 4 visibles pero: (a) borde inferior de cards toca el Div (sombra recortada por `overflow-hidden` sin `pb`), (b) carrusel actual es `justify-center` sin slide — falta efecto translate suave comparado con referencia, (c) chip MOD-x usa `theme.accent` oscuro, debe ser `#00B5C5`. Verificar además que Misión header `Donde la biotecnología...` quede visible (ya agregado en 212-220 pero usuario reporta no verlo — confirmar render). **Fix:** viewport `overflow-visible md:overflow-hidden pb-10` para aire 16px bajo cards + `ul` micro-slide `translateX(trackOffset)` `380ms cubic-bezier(0.16,1,0.3,1)` + chip MOD fijo `#00B5C5` + Misión header sin `reveal` oculto.
 
 ## Progreso
 - 2026-10-01: feature doc creado, branch `odd/lab-heroes-restore` activo.
 - 2026-10-01: LM-01..LM-04 implementados con sobreescritura directa sin código muerto; `CARD_H 215` sin overflow verificado.
 - 2026-10-01: Playwright dev review (http://localhost:3000) — Expediciones 1-card bug confirmado, Misión justify gaps; creado LM-06.
-- 2026-10-01: LM-06 ejecutado — carrusel ventana rotada 4 visibles + justify suavizado; `npm run type-check: passed`.
+- 2026-10-01: LM-06 ejecutado — carrusel ventana rotada 4 visibles + justify suavizado; `npm run type-check: passed`; Playwright 20:45 confirma 4 visibles pero borde tocando y MOD color pendiente (LM-07).
+- 2026-10-01: LM-07 ejecutado — borde pb-10 + micro-slide translateX + MOD #00B5C5 + Misión header visible; `npm run type-check: passed` · `npm run build: passed`.
 
 ## Evidencia
 - `4f8c910` feat(landing): mission header + pilares justified without icons + glass — `MissionDendrogram.tsx`
@@ -35,8 +37,9 @@
 - `5f2be31` feat(landing): rewrite carrusel expediciones a editorial con activa destacada — `OrbitalModules.tsx`
 - `c4bbb88` feat(landing): pills expediciones con acento teal y art 56px — `ModuleCardContent.tsx`
 - `79c234e` fix(landing): expediciones 4 visibles y mision justify polish — ventana rotada circular + hyphens sin inter-word (LM-06)
+- `e4c9e2d` fix(landing): lm-07 borde carrusel y MOD #00B5C5 — viewport pb-10 + micro-slide + chip #00B5C5 + header sin reveal (LM-07)
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
-- Playwright screenshots 2026-10-01T20:40-41: Hero ok, Misión dendrograma ok con header nuevo, Expediciones viewport solo 1 card (bug LM-06).
+- Playwright screenshots 2026-10-01T20:40-45: Hero ok, Misión dendrograma ok con header nuevo (212-220), Expediciones 4 visibles con borde inferior al ras (bug LM-07).
 
 ## Siguiente paso
-- Reverificar con Playwright `npm run dev` (desktop 4 visibles + mobile 1 activa) y `npm run build` final antes de merge a main.
+- Verificación Playwright LM-07 (viewport pb-10 + translate + MOD #00B5C5 visibles) y cierre ODD si todo ok.
