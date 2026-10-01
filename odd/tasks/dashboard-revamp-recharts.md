@@ -32,11 +32,11 @@ Pedido explícito 4 cambios: 1) tamaño tanque/tubo, 2) aprovechar div 100% y al
 Usuario autorizó explícitamente los 4 cambios + Recharts. Branch feature desde main, work-unit commits.
 
 ## Acceptance Criteria
-- [ ] Copy muestra "Completa lecciones para llenar el tanque y subir de rango." (sin split EXP)
-- [ ] Bioreactor visible ~30% más grande (lg 220x300), tubo 300 desktop / 220 mobile
-- [ ] Cards Tu Progreso y Misión Actual misma altura, ocupan 100% grid, min-h 360px
-- [ ] 3 gráficas renderizan con datos reales (8 semanas area, donut módulos, bar 30 días), sin duplicar /logros
-- [ ] type-check + build pass, responsive md/lg verifica
+- [x] Copy muestra "Completa lecciones para llenar el tanque y subir de rango." (sin split EXP)
+- [x] Bioreactor visible ~30% más grande (lg 220x300), tubo 300 desktop / 220 mobile
+- [x] Cards Tu Progreso y Misión Actual misma altura, ocupan 100% grid, min-h 360px
+- [x] 3 gráficas renderizan con datos reales (8 semanas area, donut módulos, bar 30 días), sin duplicar /logros
+- [x] type-check + build pass, responsive md/lg verifica
 
 ## Tasks
 ### T1 — Copy + layout 100% alineado [x] — 677a564
@@ -47,17 +47,17 @@ Usuario autorizó explícitamente los 4 cambios + Recharts. Branch feature desde
 - `BioreactorVessel.tsx:13` hardcode `h-[220px] w-[160px]` → `h-full w-full`, `BioreactorProgress.tsx:60` gobierna tamaño, `DashboardContainer.tsx:171 size="md"`→`lg`, `BiotechGrowthTube` props `240`→`300`/`220`.
 - Route: delegated (same writer batch T1+T2) | Files: 3 | Commit: 677a564
 
-### T3 — Helpers actividad + dep Recharts [ ]
+### T3 — Helpers actividad + dep Recharts [x] — bf71f51
 - `npm i recharts` (verificar react@19 compat), crear `src/lib/gamification/activity.ts` con `getProgressTimeline` (8 sem), `getDailyActivity` (30 días), `getModuleCompletion` helpers, patrón `try/catch → empty` como `achievements.ts`.
-- Route: delegated | Files: 2
+- Route: delegated | Files: 2 | Commit: bf71f51
 
-### T4 — ProgressCharts 3 widgets Recharts [ ]
+### T4 — ProgressCharts 3 widgets Recharts [x] — bf71f51
 - Crear `src/components/dashboard/ProgressCharts.tsx` con `ProgressTimelineArea`, `ModulesDonut`, `DailyActivityBars`, `ResponsiveContainer h={220}`, gradientes, tooltips custom, `isAnimationActive={!shouldReduce}`, a11y labels. Importar `useReducedMotion`.
-- Route: delegated | Files: 1
+- Route: delegated | Files: 1 | Commit: bf71f51
 
-### T5 — Integrar en DashboardContainer + verificación [ ]
+### T5 — Integrar en DashboardContainer + verificación [x] — bf71f51
 - Importar helpers y `ProgressCharts` en `DashboardContainer.tsx:240`, pasar `timeline/modules/daily/overallProgress`, verificar `type-check` + `build` + tests, captura responsive.
-- Route: delegated | Files: 1
+- Route: delegated | Files: 1 | Commit: bf71f51
 
 ## Progress
 - 2026-10-01: Creado, forecast ~350 líneas, single-pr. Pendiente T1-T5.
@@ -74,7 +74,7 @@ Usuario autorizó explícitamente los 4 cambios + Recharts. Branch feature desde
 - 2026-10-02 fix(content) progressHint: `npm run type-check` pass (tsc --noEmit, 0 errors). `npm run build` pass (Next 16.2.10 Turbopack, compiled successfully, 21/21 static pages). `npm run test` pass (92 tests, 11 files). Files: 4× `src/content/modules/{ia,python,estadistica,machine-learning}/module.json` (`progressHint` → "Completa lecciones para llenar el tanque y subir de rango." alineado con fallback `src/lib/content/modules.ts:53`). Grep confirma 0 restos "El tanque se llena con EXP", 5 ocurrencias frase aprobada (4 JSON + 1 fallback). Tu Progreso ahora sí muestra fallback correcto. No toca Misión Actual ("Completa el módulo para que tu planta crezca") ni layout.
 
 ## Next Step
-- Ejecutar T3-T5 (helpers actividad + Recharts + integración).
+- Single PR a main — `feat/dashboard-revamp-recharts` listo para review (forecast <400 líneas sin lock).
 
 ## Delivery
 - Forecast authored changed lines: ~350 (additions+deletions, excl. package-lock), single PR bajo 400. Strategy: single-pr.
