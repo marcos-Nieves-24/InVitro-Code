@@ -43,7 +43,7 @@
 - `e4c9e2d` fix(landing): lm-07 borde carrusel y MOD #00B5C5 — viewport pb-10 + micro-slide + chip #00B5C5 + header sin reveal (LM-07)
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
 - Playwright screenshots 2026-10-01T20:40-45: Hero ok, Misión dendrograma ok con header nuevo (212-220), Expediciones 4 visibles con borde inferior al ras (bug LM-07).
-- `460b664` fix(landing): lm-08 tipografia +1-2px y carrusel 2x full width — `MissionDendrogram.tsx` h1/h2/h3 + `Modules.tsx` 1360 + `OrbitalModules.tsx` 332/16 flechas 2x dots 2-3x (LM-08)
+- `cc12b1d` fix(landing): lm-08 tipografia +1-2px y carrusel 2x full width — `MissionDendrogram.tsx` h1/h2/h3 + `Modules.tsx` 1360 + `OrbitalModules.tsx` 332/16 flechas 2x dots 2-3x (LM-08)
 
 ## Siguiente paso
 - Verificación visual desktop ≥1024 y mobile (tipografía + carrusel 1360 sin recorte, flechas por fuera, dots full width).
