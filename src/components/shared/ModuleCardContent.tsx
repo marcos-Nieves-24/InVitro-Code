@@ -37,18 +37,18 @@ export function ModuleCardContent({
   const showProgress = !compact && typeof completed === "number" && typeof total === "number";
   const effectiveXp = xpReward ?? 0;
   const effectiveLabs = labCount ?? lessonsCount;
-  const artSize = compact ? 64 : 110;
+  const artSize = compact ? 56 : 110;
 
   return (
     <>
       {/* Top row: chip + art */}
       <div className="flex items-start justify-between gap-3">
         <span
-          className="inline-flex items-center rounded-full border px-2.5 py-1 text-[13px] font-semibold tracking-wide"
+          className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide"
           style={{
-            backgroundColor: `${theme.accent}14`,
-            borderColor: `${theme.accent}30`,
-            color: theme.accent,
+            backgroundColor: "#00B5C514",
+            borderColor: "#00B5C540",
+            color: "#00B5C5",
           }}
         >
           {slugLabel ?? theme.label}
@@ -68,20 +68,20 @@ export function ModuleCardContent({
       ) : null}
 
       {/* Meta row */}
-      <div className="mt-3 flex items-center gap-3 font-mono text-sm text-storm">
+      <div className="mt-3 flex items-center gap-3 font-mono text-xs text-[#47769A]">
         {effectiveXp > 0 ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-surface-raised px-2 py-0.5">
-            <Zap className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1 rounded-full border border-[#DCEAE8] bg-[#F0F9F7] px-2 py-0.5">
+            <Zap className="h-3.5 w-3.5 shrink-0 text-[#0AAE9A]" aria-hidden="true" />
             {effectiveXp} XP
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1 rounded-full bg-surface-raised px-2 py-0.5">
-            <Zap className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1 rounded-full border border-[#DCEAE8] bg-[#F0F9F7] px-2 py-0.5">
+            <Zap className="h-3.5 w-3.5 shrink-0 text-[#0AAE9A]" aria-hidden="true" />
             {lessonsCount} lecciones
           </span>
         )}
-        <span className="inline-flex items-center gap-1 rounded-full bg-surface-raised px-2 py-0.5">
-          <FlaskConical className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+        <span className="inline-flex items-center gap-1 rounded-full border border-[#DCEAE8] bg-[#F0F9F7] px-2 py-0.5">
+          <FlaskConical className="h-3.5 w-3.5 shrink-0 text-[#0AAE9A]" aria-hidden="true" />
           {effectiveLabs} labs
         </span>
       </div>
