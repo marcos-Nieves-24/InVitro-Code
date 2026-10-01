@@ -50,8 +50,7 @@ function readModuleJson(slug: string): ModuleJsonMeta {
   }
 }
 
-const FALLBACK_PROGRESS_HINT =
-  "El tanque se llena con EXP: cada lección completa eleva el nivel del biorreactor. Al llenarse, subís de rango.";
+const FALLBACK_PROGRESS_HINT = "Completa lecciones para llenar el tanque y subir de rango.";
 const FALLBACK_GROWTH_HINT =
   "La planta in-vitro crece hoja a hoja: cada módulo completado expande el follaje y el líquido nutriente.";
 

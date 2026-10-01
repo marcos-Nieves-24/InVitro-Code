@@ -102,7 +102,7 @@ export async function DashboardContainer() {
       theme={profileRes.data?.theme}
       hud={<GamingHUD totalXp={totalXp} levelInfo={levelInfo} streak={streakData} />}
     >
-      <div className="px-6 py-8 md:px-10">
+      <div className="mx-auto w-full max-w-[1440px] px-6 py-8 md:px-10">
         <div className="space-y-12">
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
 
@@ -112,69 +112,58 @@ export async function DashboardContainer() {
               <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
             </video>
             <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
-            <div className="relative p-2">
+            <div className="relative p-0">
               <section className="scroll-mt-20">
-                <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
-              <div className="glass-card flex h-full flex-col rounded-xl p-6 md:grid md:grid-cols-[1.1fr_auto] md:items-start">
-                <div className="order-1">
-                  <div className="mb-4 flex items-center">
-                    <h3 className="font-display text-2xl font-bold">Tu Progreso</h3>
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="font-display text-2xl font-bold">{rankTitle(levelInfo.level)}</p>
-                    <p className="mt-1 text-lg text-storm">
-                      <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
-                    </p>
-                    <div
-                      className="mx-auto mt-3 h-4 w-full max-w-[14rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
-                      role="progressbar"
-                      aria-valuenow={Math.round(levelProgressPct)}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-valuetext={`${totalXp} de ${levelInfo.nextLevelXp} XP, Nivel ${levelInfo.level}`}
-                    >
+                <div className="grid gap-6 md:grid-cols-2 items-stretch">
+              <div className="glass-card flex h-full min-h-[360px] flex-col p-6 md:p-8">
+                <div className="flex flex-row items-center justify-between gap-6">
+                  <div>
+                    <div className="mb-4 flex items-center">
+                      <h3 className="font-display text-2xl font-bold">Tu Progreso</h3>
+                    </div>
+                    <div className="text-center md:text-left">
+                      <p className="font-display text-2xl font-bold">{rankTitle(levelInfo.level)}</p>
+                      <p className="mt-1 text-lg text-storm">
+                        <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
+                      </p>
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-fog to-mint"
-                        style={{ width: `${levelProgressPct}%` }}
-                      />
+                        className="mx-auto mt-3 h-4 w-full max-w-[14rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
+                        role="progressbar"
+                        aria-valuenow={Math.round(levelProgressPct)}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuetext={`${totalXp} de ${levelInfo.nextLevelXp} XP, Nivel ${levelInfo.level}`}
+                      >
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-fog to-mint"
+                          style={{ width: `${levelProgressPct}%` }}
+                        />
+                      </div>
+                    </div>
+                    <p className="mt-3 max-w-[28ch] text-base leading-relaxed text-storm">{getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia")}</p>
+                    <div className="mt-4 text-center md:text-left">
+                      <Link href="/niveles" className="text-sm font-bold text-mint hover:underline">
+                        Ver roadmap
+                      </Link>
                     </div>
                   </div>
-                  <p className="mt-3 text-base leading-relaxed text-storm max-w-[24ch]">
-                    {(() => {
-                      const raw = getModuleProgressHint(nextLesson?.moduleSlug ?? modules[0]?.slug ?? "ia");
-                      const idx = raw.indexOf("EXP");
-                      if (idx === -1) return raw;
-                      return (
-                        <>
-                          {raw.slice(0, idx)}
-                          <span className="font-bold text-mint">EXP</span>
-                          {raw.slice(idx + 3)}
-                        </>
-                      );
-                    })()}
-                  </p>
-                  <div className="mt-4 text-center md:text-left">
-                    <Link href="/niveles" className="text-sm font-bold text-mint hover:underline">
-                      Ver roadmap
-                    </Link>
+                  <div className="flex shrink-0 items-center justify-center">
+                    {/* True bioreactor (b36670f): horizontal Rushton impeller,
+                        clipped tank bubbles, waves — restored per 9bcd678. */}
+                    <BioreactorProgress
+                      exp={totalXp}
+                      expToNext={levelInfo.nextLevelXp}
+                      level={levelInfo.level}
+                      rank={rankTitle(levelInfo.level)}
+                      progressToNext={levelInfo.progressToNext}
+                      size="lg"
+                      hideMeta
+                    />
                   </div>
-                </div>
-                <div className="order-2 flex items-center justify-center md:justify-end">
-                  {/* True bioreactor (b36670f): horizontal Rushton impeller,
-                      clipped tank bubbles, waves — restored per 9bcd678. */}
-                  <BioreactorProgress
-                    exp={totalXp}
-                    expToNext={levelInfo.nextLevelXp}
-                    level={levelInfo.level}
-                    rank={rankTitle(levelInfo.level)}
-                    progressToNext={levelInfo.progressToNext}
-                    size="md"
-                    hideMeta
-                  />
                 </div>
               </div>
 
-              <div className="glass-card relative flex h-full min-h-0 flex-col overflow-hidden rounded-xl p-6">
+              <div className="glass-card flex h-full min-h-[360px] flex-col p-6 md:p-8">
                 <h3 className="mb-2 text-lg font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
@@ -190,11 +179,11 @@ export async function DashboardContainer() {
                         </p>
                       </div>
                       <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={240} label="Crecimiento in vitro" />
+                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={300} label="Crecimiento in vitro" />
                       </div>
                     </div>
                     <div className="mb-2 flex justify-center sm:hidden">
-                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={240} label="Crecimiento in vitro" />
+                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={220} label="Crecimiento in vitro" />
                     </div>
                     {nextLesson && currentModule && (
                       <div className="mb-3">
