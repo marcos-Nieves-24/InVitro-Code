@@ -46,7 +46,7 @@
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
 - Playwright screenshots 2026-10-01T20:40-45: Hero ok, Misión dendrograma ok con header nuevo (212-220), Expediciones 4 visibles con borde inferior al ras (bug LM-07).
 - `cc12b1d` fix(landing): lm-08 tipografia +1-2px y carrusel 2x full width — `MissionDendrogram.tsx` h1/h2/h3 + `Modules.tsx` 1360 + `OrbitalModules.tsx` 332/16 flechas 2x dots 2-3x (LM-08)
-- `1ad1364` fix(landing): lm-09 flechas fuera gutter 96 centradas — `OrbitalModules.tsx:115` px-20 md:px-24 + `173-189` left-4 md:left-6 right-4 md:right-6 top-1/2 z-10 + `Modules.tsx:48` px-2 md:px-4 (LM-09)
+- `872af19` fix(landing): lm-09 flechas fuera gutter 96 centradas — `OrbitalModules.tsx:115` px-20 md:px-24 + `173-189` left-4 md:left-6 right-4 md:right-6 top-1/2 z-10 + `Modules.tsx:48` px-2 md:px-4 (LM-09)
 
 ## Siguiente paso
 - Verificación visual desktop ≥1024 y mobile (tipografía + carrusel 1360 sin recorte, flechas por fuera, dots full width).
