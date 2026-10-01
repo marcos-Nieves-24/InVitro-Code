@@ -50,8 +50,8 @@ const slugToThemeKey: Record<string, string> = {
   "MOD-04": "machine-learning",
 };
 
-const CARD_W = 320;
-const GAP = 20;
+const CARD_W = 332;
+const GAP = 16;
 
 export function OrbitalModules() {
   const [activeIndex, setActiveIndex] = useState(3);
@@ -106,18 +106,18 @@ export function OrbitalModules() {
 
   return (
     <div
-      className="relative mx-auto max-w-[1280px]"
+      className="relative mx-auto max-w-[1360px]"
       role="region"
       aria-label="Carrusel de expediciones"
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      {/* Viewport — 4 visibles con peek lateral 16px; micro-slide translate para efecto carrusel premium */}
-      <div className="overflow-visible px-4 pb-10 md:overflow-hidden md:px-6">
+      {/* Viewport — 4 visibles con peek 8px por lado; pb-10 para sombra sin recorte; micro-slide premium */}
+      <div className="overflow-visible px-2 pb-10 md:overflow-hidden md:px-[8px]">
         <ul
           key={isMobile ? `m-${activeIndex}` : `d-${activeIndex}`}
           aria-label="Modulos del curso"
-          className="flex gap-5"
+          className="flex gap-4"
           style={
             reducedMotion
               ? undefined
@@ -136,7 +136,7 @@ export function OrbitalModules() {
             return (
               <li
                 key={mod.slug}
-                className="list-none shrink-0 min-w-[320px] w-[320px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)]"
+                className="list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)]"
               >
                 <a
                   href="/sign-in"
@@ -175,26 +175,26 @@ export function OrbitalModules() {
         </ul>
       </div>
 
-      {/* Arrows */}
+      {/* Arrows — 2x por fuera, full width, fiel a imagen */}
       <button
         type="button"
         aria-label="Anterior"
         onClick={prev}
-        className="absolute top-1/2 left-2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#DCEAE8] bg-white text-[#0AAE9A] shadow-sm hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] max-md:h-8 max-md:w-8"
+        className="absolute top-[45%] left-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:left-[-8px] md:h-12 md:w-12 lg:h-14 lg:w-14"
       >
-        <ChevronLeft size={18} aria-hidden="true" />
+        <ChevronLeft size={22} aria-hidden="true" />
       </button>
       <button
         type="button"
         aria-label="Siguiente"
         onClick={next}
-        className="absolute top-1/2 right-2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#DCEAE8] bg-white text-[#0AAE9A] shadow-sm hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] max-md:h-8 max-md:w-8"
+        className="absolute top-[45%] right-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:right-[-8px] md:h-12 md:w-12 lg:h-14 lg:w-14"
       >
-        <ChevronRight size={18} aria-hidden="true" />
+        <ChevronRight size={22} aria-hidden="true" />
       </button>
 
-      {/* Dots */}
-      <div className="mt-8 flex justify-center gap-2">
+      {/* Dots — 2-3x, full width */}
+      <div className="mt-8 flex justify-center gap-3 md:mt-10 md:gap-4">
         {modules.map((mod, i) => {
           const isActive = i === activeIndex;
           return (
@@ -206,8 +206,8 @@ export function OrbitalModules() {
               onClick={() => setActiveIndex(i)}
               className={
                 isActive
-                  ? "h-2 w-2 rounded-full bg-[#0AAE9A] transition-colors"
-                  : "h-1.5 w-1.5 rounded-full border border-[#DCEAE8] bg-[#DDF5EF] transition-colors hover:bg-[#DCEAE8]"
+                  ? "h-3 w-3 rounded-full bg-[#0AAE9A] transition-colors md:h-3.5 md:w-3.5"
+                  : "h-2.5 w-2.5 rounded-full border border-[#DCEAE8] bg-[#DDF5EF] transition-colors hover:bg-[#DCEAE8]"
               }
             />
           );

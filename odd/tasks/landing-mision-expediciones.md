@@ -23,6 +23,7 @@
 - [x] **LM-05 Verificación** — `npm run type-check`, `npm run build`, smoke visual (glass, justify, 4 visibles con activa, flechas/dots).
 - [x] **LM-06 Playwright polish (post-review 2026-10-01)** — Playwright `npm run dev` evidenció: Expediciones muestra 1 sola card (Machine Learning) centrada en vez de 4 visibles `[parcial][ACTIVA][sec][parcial]`; translate `offset=active*340` deja off-screen a vecinas. Misión Rects con justify inter-word genera gaps exagerados y "Accesibilidad" se percibe cortado por ancho. Ajustar: (a) carrusel a ventana rotada circular para lograr 4 visibles sin huecos, viewport con peek lateral 16px, (b) justify suavizado con `hyphens:auto` sin `inter-word` y ancho texto `CARD_W-28`, (c) verificar glass y header centrado a 1280.
 - [x] **LM-07 Borde, carrusel premium + MOD #00B5C5 (2026-10-01)** — Playwright 20:45 evidencia 4 visibles pero: (a) borde inferior de cards toca el Div (sombra recortada por `overflow-hidden` sin `pb`), (b) carrusel actual es `justify-center` sin slide — falta efecto translate suave comparado con referencia, (c) chip MOD-x usa `theme.accent` oscuro, debe ser `#00B5C5`. Verificar además que Misión header `Donde la biotecnología...` quede visible (ya agregado en 212-220 pero usuario reporta no verlo — confirmar render). **Fix:** viewport `overflow-visible md:overflow-hidden pb-10` para aire 16px bajo cards + `ul` micro-slide `translateX(trackOffset)` `380ms cubic-bezier(0.16,1,0.3,1)` + chip MOD fijo `#00B5C5` + Misión header sin `reveal` oculto.
+- [x] **LM-08 Tipografía +1-2px + carrusel 2x botones/dots full width (2026-10-01)** — Usuario: olvida diagramación, solo +1-2px fuente; carrusel botones laterales 2x por fuera y dots 2-3x aprovechando todo el ancho (fiel a imagen). **Fix:** `MissionDendrogram.tsx:212-220` h1 `text-[12px] md:text-[13px] font-mono tracking-[0.22em] text-[#00B5C5]`, h2 `text-[34px] md:text-[44px]`, h3 `text-[18px] md:text-[19px]`; `Modules.tsx` inner `max-w-[1360px] px-2 md:px-6`; `OrbitalModules.tsx` `CARD_W 332 GAP 16` (4*332+3*16=1376 llena 1360 con peek), viewport `px-2 md:px-[8px] gap-4 pb-10`, flechas `h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 left-2 md:left-[-8px] right-2 md:right-[-8px] top-[45%] border-[#E2E8F0] shadow-[0_8px_24px_rgba(16,27,61,0.10)] Chevron 22px`, dots `h-3 w-3 md:h-3.5 md:w-3.5 / h-2.5 w-2.5 mt-8 md:mt-10 gap-3 md:gap-4`; sin código muerto, sin tocar glass/SVG/chip #00B5C5.
 
 ## Progreso
 - 2026-10-01: feature doc creado, branch `odd/lab-heroes-restore` activo.
@@ -30,6 +31,8 @@
 - 2026-10-01: Playwright dev review (http://localhost:3000) — Expediciones 1-card bug confirmado, Misión justify gaps; creado LM-06.
 - 2026-10-01: LM-06 ejecutado — carrusel ventana rotada 4 visibles + justify suavizado; `npm run type-check: passed`; Playwright 20:45 confirma 4 visibles pero borde tocando y MOD color pendiente (LM-07).
 - 2026-10-01: LM-07 ejecutado — borde pb-10 + micro-slide translateX + MOD #00B5C5 + Misión header visible; `npm run type-check: passed` · `npm run build: passed`.
+- 2026-10-01: Usuario confirmó +1-2px tipografía y carrusel 2x/dots 2-3x full width (LM-08 pendiente).
+- 2026-10-01: LM-08 ejecutado — tipografía +1-2px (h1 12→13, h2 32/42→34/44, h3 17→18/19) + carrusel full width 1360 (332/16) + flechas 2x por fuera (-8px) 48-56px + dots 2-3x; `npm run type-check: passed` · `npm run build: passed`.
 
 ## Evidencia
 - `4f8c910` feat(landing): mission header + pilares justified without icons + glass — `MissionDendrogram.tsx`
@@ -40,6 +43,8 @@
 - `e4c9e2d` fix(landing): lm-07 borde carrusel y MOD #00B5C5 — viewport pb-10 + micro-slide + chip #00B5C5 + header sin reveal (LM-07)
 - Verificación: `npm run type-check: passed` · `npm run build: passed (Next 16.2.10 Turbopack, 21/21 static)`
 - Playwright screenshots 2026-10-01T20:40-45: Hero ok, Misión dendrograma ok con header nuevo (212-220), Expediciones 4 visibles con borde inferior al ras (bug LM-07).
+- `460b664` fix(landing): lm-08 tipografia +1-2px y carrusel 2x full width — `MissionDendrogram.tsx` h1/h2/h3 + `Modules.tsx` 1360 + `OrbitalModules.tsx` 332/16 flechas 2x dots 2-3x (LM-08)
 
 ## Siguiente paso
-- Verificación Playwright LM-07 (viewport pb-10 + translate + MOD #00B5C5 visibles) y cierre ODD si todo ok.
+- Verificación visual desktop ≥1024 y mobile (tipografía + carrusel 1360 sin recorte, flechas por fuera, dots full width).
+- Cierre ODD o siguiente feature según roadmap.
