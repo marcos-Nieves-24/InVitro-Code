@@ -112,8 +112,8 @@ export function OrbitalModules() {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      {/* Viewport — 4 visibles con peek 8px por lado; pb-10 para sombra sin recorte; micro-slide premium */}
-      <div className="overflow-visible px-2 pb-10 md:overflow-hidden md:px-[8px]">
+      {/* Viewport — gutter 80/96 para flechas fuera sin solape; pb-12 aire sombra (offset 24 + botón 56 + aire 16 = 96) */}
+      <div className="relative overflow-hidden px-20 pb-12 md:px-24">
         <ul
           key={isMobile ? `m-${activeIndex}` : `d-${activeIndex}`}
           aria-label="Modulos del curso"
@@ -175,12 +175,12 @@ export function OrbitalModules() {
         </ul>
       </div>
 
-      {/* Arrows — 2x por fuera, full width, fiel a imagen */}
+      {/* Arrows — fuera sin solape: gutter 96 da 16px libres entre botón 56 y card; top-1/2 centrado vertical */}
       <button
         type="button"
         aria-label="Anterior"
         onClick={prev}
-        className="absolute top-[45%] left-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:left-[-8px] md:h-12 md:w-12 lg:h-14 lg:w-14"
+        className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:left-6 md:h-14 md:w-14 lg:h-14 lg:w-14"
       >
         <ChevronLeft size={22} aria-hidden="true" />
       </button>
@@ -188,7 +188,7 @@ export function OrbitalModules() {
         type="button"
         aria-label="Siguiente"
         onClick={next}
-        className="absolute top-[45%] right-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:right-[-8px] md:h-12 md:w-12 lg:h-14 lg:w-14"
+        className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:right-6 md:h-14 md:w-14 lg:h-14 lg:w-14"
       >
         <ChevronRight size={22} aria-hidden="true" />
       </button>
