@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  FlaskConical,
-  Users,
-  Globe,
-  Target,
-  Eye,
-} from "lucide-react";
+import { Target, Eye } from "lucide-react";
 
 /*
   Dendrogram layout — top-down, orthogonal segments.
@@ -149,19 +143,16 @@ const visionText =
 
 const pilares = [
   {
-    icon: FlaskConical,
     label: "Aprendizaje Activo",
     desc: "Terminales interactivas, labs en vivo y desafios de codigo que consolidan el conocimiento con practica real.",
     x: LEAF_POSITIONS[0],
   },
   {
-    icon: Users,
     label: "Comunidad",
     desc: "Conecta con otros estudiantes, comparte logros y aprende en colaboracion con biotecnologos.",
     x: LEAF_POSITIONS[1],
   },
   {
-    icon: Globe,
     label: "Accesibilidad",
     desc: "Contenido gratuito, multiplataforma y disenado para todos los niveles de experiencia tecnica.",
     x: LEAF_POSITIONS[2],
@@ -217,20 +208,22 @@ export function MissionDendrogram() {
       className="bg-surface px-6 py-24"
     >
       <div className="mx-auto max-w-[1280px]">
-        {/* Title */}
-        <div data-reveal className="reveal mb-14 text-center">
-          <p className="eyebrow text-storm">Nuestra Identidad</p>
-          <h2 className="mt-3 mb-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            Mision, Vision y Pilares
+        {/* Title — sin reveal para evitar opacity 0 sin observer (ver LM-07) */}
+        <div className="mx-auto mb-14 max-w-2xl text-center">
+          <h1 className="font-mono text-[12px] font-semibold tracking-[0.22em] text-[#00B5C5] uppercase md:text-[13px]">
+            Nuestra Identidad
+          </h1>
+          <h2 className="mt-3 mb-4 font-display text-[34px] font-bold tracking-tight text-[#101B3D] md:text-[44px]">
+            Donde la biotecnología encuentra la IA
           </h2>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate">
-            Un arbol de clustering jerarquico que organiza los valores y objetivos
-            de InVitro-Code desde la raiz hasta cada pilar de la plataforma.
-          </p>
+          <h3 className="mx-auto max-w-2xl text-[18px] leading-relaxed font-normal text-[#668094] md:text-[19px]">
+            Construimos el puente entre las ciencias de la vida y la inteligencia
+            artificial.
+          </h3>
         </div>
 
         {/* Desktop SVG dendrogram */}
-        <div className="hidden overflow-hidden rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-md lg:block">
+        <div className="hidden overflow-hidden rounded-2xl border border-white/40 bg-white/65 p-6 shadow-md backdrop-blur-xl backdrop-saturate-150 lg:block">
           <svg
             viewBox={`0 0 ${SVG_W} ${SVG_H}`}
             className="h-auto w-full"
@@ -340,7 +333,7 @@ export function MissionDendrogram() {
                 cx={ROOT_X}
                 cy={ROOT_Y}
                 r={32}
-                fill="#111439"
+                fill="#FFFF"
                 stroke="#00b2b2"
                 strokeWidth={2.5}
                 filter="url(#glow)"
@@ -414,23 +407,6 @@ export function MissionDendrogram() {
               </text>
             </g>
 
-            {/* Group label */}
-            <text
-              x={(LEAF_POSITIONS[0] + LEAF_POSITIONS[2]) / 2}
-              y={DOTS_Y - 38}
-              textAnchor="middle"
-              fontSize="20"
-              fontFamily="Space Grotesk, sans-serif"
-              fontWeight="700"
-              fill="#111439"
-              style={{
-                opacity: active ? 1 : 0,
-                transition: `opacity 0.4s ease-out ${nodeDelay(4)}ms`,
-              }}
-            >
-              Pilares
-            </text>
-
             {/* Cluster bracket — Mision group */}
             <rect
               x={LEAF_POSITIONS[0] - CARD_W / 2 - 8}
@@ -467,7 +443,6 @@ export function MissionDendrogram() {
 
             {/* Pilar leaf cards */}
             {pilares.map((pilar) => {
-              const Icon = pilar.icon;
               const cardDelay = nodeDelay(4 + pilares.indexOf(pilar));
               return (
                 <g
@@ -498,79 +473,43 @@ export function MissionDendrogram() {
                     stroke="#E2E8F0"
                     strokeWidth={1.2}
                   />
-                  {/* Icon */}
-                  <circle
-                    cx={pilar.x - CARD_W / 2 + 32}
-                    cy={CARDS_Y + 32}
-                    r={20}
-                    fill="#ffffff"
-                  />
-                  <foreignObject
-                    x={pilar.x - CARD_W / 2 + 12}
-                    y={CARDS_Y + 12}
-                    width={40}
-                    height={40}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    >
-                      <Icon size={22} color="#00b2b2" />
-                    </div>
-                  </foreignObject>
-                  {/* Title */}
+                  {/* Title — centered */}
                   <text
-                    x={pilar.x - CARD_W / 2 + 60}
-                    y={CARDS_Y + 34}
-                    textAnchor="start"
-                    fontSize="20"
+                    x={pilar.x}
+                    y={CARDS_Y + 28}
+                    textAnchor="middle"
+                    fontSize="17"
                     fontFamily="Space Grotesk, sans-serif"
-                    fontWeight="600"
+                    fontWeight="700"
                     fill="#111439"
                   >
-                    {pilar.label.split(" ")[0]}
+                    {pilar.label}
                   </text>
-                  {pilar.label.split(" ").length > 1 && (
-                    <text
-                      x={pilar.x - CARD_W / 2 + 60}
-                      y={CARDS_Y + 58}
-                      textAnchor="start"
-                      fontSize="20"
-                      fontFamily="Space Grotesk, sans-serif"
-                      fontWeight="600"
-                      fill="#111439"
-                    >
-                      {pilar.label.split(" ").slice(1).join(" ")}
-                    </text>
-                  )}
                   {/* Divider */}
                   <line
                     x1={pilar.x - CARD_W / 2 + 16}
-                    y1={CARDS_Y + 74}
+                    y1={CARDS_Y + 42}
                     x2={pilar.x + CARD_W / 2 - 16}
-                    y2={CARDS_Y + 74}
+                    y2={CARDS_Y + 42}
                     stroke="#E2E8F0"
                     strokeWidth={1}
                   />
-                  {/* Description */}
+                  {/* Description — justified suavizado (sin inter-word para evitar ríos) */}
                   <foreignObject
-                    x={pilar.x - CARD_W / 2 + 16}
-                    y={CARDS_Y + 82}
-                    width={CARD_W - 32}
-                    height={CARD_H - 94}
+                    x={pilar.x - CARD_W / 2 + 14}
+                    y={CARDS_Y + 52}
+                    width={CARD_W - 28}
+                    height={CARD_H - 62}
                   >
                     <p
                       style={{
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "15px",
+                        fontSize: "14px",
                         color: "#3A4A5C",
-                        lineHeight: 1.5,
+                        lineHeight: 1.6,
                         margin: 0,
+                        textAlign: "justify",
+                        hyphens: "auto",
                       }}
                     >
                       {pilar.desc}
@@ -605,51 +544,41 @@ export function MissionDendrogram() {
                 stroke="#E2E8F0"
                 strokeWidth={1.2}
               />
-              <circle
-                cx={VISION_X - CARD_W / 2 + 32}
-                cy={CARDS_Y + 32}
-                r={20}
-                fill="#ffffff"
-              />
-              <foreignObject
-                x={VISION_X - CARD_W / 2 + 12}
-                y={CARDS_Y + 12}
-                width={40}
-                height={40}
+              {/* Title — centered */}
+              <text
+                x={VISION_X}
+                y={CARDS_Y + 28}
+                textAnchor="middle"
+                fontSize="17"
+                fontFamily="Space Grotesk, sans-serif"
+                fontWeight="700"
+                fill="#111439"
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
-                  <Eye size={22} color="#5A7A8A" />
-                </div>
-              </foreignObject>
+                Vision
+              </text>
               <line
                 x1={VISION_X - CARD_W / 2 + 16}
-                y1={CARDS_Y + 74}
+                y1={CARDS_Y + 42}
                 x2={VISION_X + CARD_W / 2 - 16}
-                y2={CARDS_Y + 74}
+                y2={CARDS_Y + 42}
                 stroke="#E2E8F0"
                 strokeWidth={1}
               />
               <foreignObject
-                x={VISION_X - CARD_W / 2 + 16}
-                y={CARDS_Y + 82}
-                width={CARD_W - 32}
-                height={CARD_H - 94}
+                x={VISION_X - CARD_W / 2 + 14}
+                y={CARDS_Y + 52}
+                width={CARD_W - 28}
+                height={CARD_H - 62}
               >
                 <p
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
+                    fontSize: "14px",
                     color: "#3A4A5C",
-                    lineHeight: 1.5,
+                    lineHeight: 1.6,
                     margin: 0,
+                    textAlign: "justify",
+                    hyphens: "auto",
                   }}
                 >
                   {visionText}
@@ -659,9 +588,9 @@ export function MissionDendrogram() {
           </svg>
         </div>
 
-        {/* Mobile: stacked cards */}
+        {/* Mobile: stacked cards — sin reveal (evita opacity 0 sin observer) */}
         <div className="flex flex-col gap-4 lg:hidden">
-          <div data-reveal className="reveal">
+          <div>
             <div className="rounded-2xl bg-ink p-5 text-center">
               <p className="eyebrow text-mint mb-1">Raiz</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -670,7 +599,7 @@ export function MissionDendrogram() {
           </div>
 
           {/* Mobile Mision card */}
-          <div data-reveal className="reveal" style={{ transitionDelay: "100ms" }}>
+          <div style={{ transitionDelay: "100ms" }}>
             <div className="rounded-2xl border-l-4 border-mint bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Target size={18} className="text-storm" />
@@ -685,7 +614,7 @@ export function MissionDendrogram() {
           </div>
 
           {/* Mobile Vision card */}
-          <div data-reveal className="reveal" style={{ transitionDelay: "180ms" }}>
+          <div style={{ transitionDelay: "180ms" }}>
             <div className="rounded-2xl border-l-4 border-fog bg-surface-card p-5">
               <div className="mb-2 flex items-center gap-3">
                 <Eye size={18} className="text-storm" />
@@ -700,31 +629,21 @@ export function MissionDendrogram() {
           </div>
 
           {/* Mobile Pilar cards */}
-          {pilares.map((pilar, i) => {
-            const Icon = pilar.icon;
-            return (
-              <div
-                key={pilar.label}
-                data-reveal
-                className="reveal"
-                style={{ transitionDelay: `${280 + i * 90}ms` }}
-              >
-                <div className="rounded-2xl border border-surface-raised bg-surface-card p-5">
-                  <div className="mb-2 flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-surface">
-                      <Icon size={18} className="text-mint" />
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-ink">
-                      {pilar.label}
-                    </h3>
-                  </div>
-                  <p className="text-sm leading-relaxed text-slate">
-                    {pilar.desc}
-                  </p>
-                </div>
+          {pilares.map((pilar, i) => (
+            <div
+              key={pilar.label}
+              style={{ transitionDelay: `${280 + i * 90}ms` }}
+            >
+              <div className="rounded-2xl border border-surface-raised bg-surface-card p-5">
+                <h3 className="font-display mb-2 text-lg font-bold text-ink">
+                  {pilar.label}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate">
+                  {pilar.desc}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
