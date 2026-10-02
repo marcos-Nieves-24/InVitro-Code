@@ -2,7 +2,7 @@
   "name": "Machine Learning",
   "description": "Algoritmos de aprendizaje automático para aplicaciones biotecnológicas",
   "shortDescription": "Entrena y evalúa modelos predictivos con datos biomédicos",
-  "progressHint": "El tanque se llena con EXP: cada lección completa eleva el nivel del biorreactor. Al llenarse, subís de rango.",
+  "progressHint": "Completa lecciones para llenar el tanque y subir de rango.",
   "growthHint": "La planta in-vitro crece hoja a hoja: cada módulo completado expande el follaje y el líquido nutriente.",
   "order": 4
 }

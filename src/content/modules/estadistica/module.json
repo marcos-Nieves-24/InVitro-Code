@@ -2,7 +2,7 @@
   "name": "Estadística y Probabilidad",
   "description": "Fundamentos estadísticos para el análisis de datos en investigación biomédica",
   "shortDescription": "Estadística aplicada para diseñar experimentos y validar hallazgos",
-  "progressHint": "El tanque se llena con EXP: cada lección completa eleva el nivel del biorreactor. Al llenarse, subís de rango.",
+  "progressHint": "Completa lecciones para llenar el tanque y subir de rango.",
   "growthHint": "La planta in-vitro crece hoja a hoja: cada módulo completado expande el follaje y el líquido nutriente.",
   "order": 3
 }
