@@ -7,7 +7,7 @@ export function Modules() {
   return (
     <section
       id="modulos"
-      className="relative overflow-x-hidden overflow-y-visible bg-[#F8FBFA] px-6 py-24"
+      className="relative overflow-hidden bg-[#F8FBFA] px-6 py-24"
     >
       {/* Ambient decoration — borders only, pointer-events none */}
       <div
