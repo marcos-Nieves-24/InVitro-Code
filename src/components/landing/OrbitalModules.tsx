@@ -117,7 +117,7 @@ export function OrbitalModules() {
           <ChevronLeft size={22} aria-hidden="true" />
         </button>
 
-        <div className="scroll-hide flex-1 overflow-x-auto overflow-y-hidden pb-12" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        <div className="scroll-hide flex-1 overflow-hidden pb-12" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
           <motion.ul
             aria-label="Modulos del curso"
             className="flex gap-4 touch-pan-y"
