@@ -37,9 +37,9 @@ Paridad labs/proyectos comprometida, accesibilidad rota (headings), y métricas 
 - **Verify:** `npm run test` (92 tests + nuevos de streak si agrega) + `npm run type-check` + `npm run build`. Manual: completar un lab vía `lab_progress` y chequear `streaks.last_active_date` y que `getDailyActivity`/`getProgressTimeline` agreguen xp_earned real.
 - **Scope:** `src/lib/gamification/streak.ts`, `src/app/api/lab-progress/route.ts`, `src/app/api/progress/route.ts`
 
-### T3 — Jerarquía semántica por proyecto (assignment.md shift) [done]
-- **Do:** En `proyectos/[module]/[lesson]/page.tsx:20-25` agregar rehype plugin `rehypeDemoteH1` (h1→h2, h2→h3, h3→h4) al `mdxConfig.rehypePlugins` para que `AssignmentViewer` nunca rinda h1 interno. Mantener page `h1` único (línea 117). No editar los 41 `.md`.
-- **Verify:** `npm run type-check` + `npm run build` + Playwright: inspeccionar DOM de 2 proyectos (python/ia) — solo 1 `h1`, luego `h2` Objetivos/Instrucciones, luego `h3` subsecciones. Axe heading-order sin violaciones.
+### T3 — Jerarquía semántica por proyecto (assignment.md shift) [done → updated to strip]
+- **Do:** En `proyectos/[module]/[lesson]/page.tsx:20-25` reemplazar `rehypeDemoteH1` por `rehypeStripFirstH1` que elimina el primer `h1` cuyo texto inicia con `Assignment` (saca "Assignment 9: Interpretación de modelos" duplicado). Mantener page `h1` único (línea 136) y `## Objetivos` como `h2`. No editar los 41 `.md`.
+- **Verify:** `npm run type-check` + `npm run build` + inspección DOM en `/proyectos/machine-learning/lesson09_model_interpretation` — 1×h1 (Interpretación de Modelos), 0×h1 Assignment duplicado, h2 primero = Objetivos.
 - **Scope:** `src/app/(dashboard)/proyectos/[module]/[lesson]/page.tsx`
 
 ### T4 — EXP de cards no mock / representa contenido total [done]
@@ -67,6 +67,7 @@ Paridad labs/proyectos comprometida, accesibilidad rota (headings), y métricas 
 - 2026-10-02: T2 (streak) — creado `src/lib/gamification/streak.ts` con `utcDay/computeStreak/advanceStreak`, wiring en `progress/route.ts` y `lab-progress/route.ts`. `type-check` y `test` (92/92) OK. Commit pendiente.
 - 2026-10-02: T1 — restore `proyectos/[module]/page.tsx` desde `327adcb` (254 líneas, LabHistoryCard grid, lab_progress + progressMap + getLabResumeTarget smart CTA). Paridad labs restaurada.
 - 2026-10-02: T3 — `rehypeDemoteH1` (h1→h2, h2→h3, h3→h4) en `proyectos/[module]/[lesson]/page.tsx` para único h1 por proyecto. `type-check` OK.
+- 2026-10-02: UPDATE T3 — `rehypeStripFirstH1` elimina duplicado `Assignment 9: Interpretación de modelos` y deja solo h1 de página (getLessonTitle). Header `Inicio` fix y scrollbar oculto también en este batch.
 - 2026-10-02: T4/T5 — EXP verificada no mock: ia 4→100 XP, python 17→425 XP, estadistica 10→250 XP, ml 10→300 XP (sum calcXpForLesson). Backend wiring auditado: `DashboardContainer` + `activity.ts` + `user.ts` filtran por `user_id` + `completed_at NOT NULL`; `proyectos` ahora también usa `lab_progress eq module_slug`.
 - 2026-10-02: T6 — Gates: `type-check` 0 errors, `test` 92/92, `build` 21/21 pages OK. Structural checks: page h1 único + demote, LabHistoryCard grid, advanceStreak wiring.
 
