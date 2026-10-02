@@ -118,16 +118,9 @@ export async function DashboardContainer() {
         <div className="space-y-12">
           <HeroSection userName={userName} startHref={startHref} gender={gender} />
 
-          {/* Tu Progreso + Misión Actual — video circuit a la destra */}
-          <div className="relative overflow-hidden rounded-2xl">
-            <video autoPlay muted loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover rounded-2xl">
-              <source src="/videos/circuit-growth-animation.mp4" type="video/mp4" />
-            </video>
-            <div aria-hidden="true" className="absolute inset-0 bg-white/10 dark:bg-black/10" />
-            <div className="relative p-0">
-              <section className="scroll-mt-20">
-                <div className="grid gap-6 md:grid-cols-2 items-stretch">
-              <div className="glass-card flex h-full min-h-[360px] flex-col p-6 md:p-8">
+          <section className="scroll-mt-20">
+            <div className="grid gap-6 md:grid-cols-2 items-stretch">
+              <div className="glass-card flex h-full min-h-0 flex-col p-5 md:p-6">
                 <div className="flex flex-row items-center justify-between gap-6">
                   <div>
                     <div className="mb-4 flex items-center">
@@ -139,7 +132,7 @@ export async function DashboardContainer() {
                         <span className="font-bold text-mint">{totalXp}</span> / {levelInfo.nextLevelXp} XP
                       </p>
                       <div
-                        className="mx-auto mt-3 h-4 w-full max-w-[14rem] overflow-hidden rounded-full bg-surface-raised md:mx-0"
+                        className="mx-auto mt-3 h-4 w-full overflow-hidden rounded-full bg-surface-raised md:mx-0"
                         role="progressbar"
                         aria-valuenow={Math.round(levelProgressPct)}
                         aria-valuemin={0}
@@ -175,27 +168,25 @@ export async function DashboardContainer() {
                 </div>
               </div>
 
-              <div className="glass-card flex h-full min-h-[360px] flex-col p-6 md:p-8">
+              <div className="glass-card flex h-full min-h-0 flex-col p-5 md:p-6">
                 <h3 className="mb-2 text-lg font-bold uppercase tracking-wider text-storm">Misión Actual</h3>
                 {nextLesson ? (
                   <>
                     <div className="mb-2 flex gap-3">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
-                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-12 w-12 object-contain" /> : null}
+                      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-mint/30 text-mint">
+                        {missionFavicon ? <img src={missionFavicon} alt="" className="h-14 w-14 object-contain" /> : null}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-display text-xl font-semibold leading-tight">{nextLesson.title}</h4>
+                      <div className="flex-1 min-w-0 w-full">
+                        <h4 className="font-display text-2xl md:text-[26px] font-semibold leading-tight">{nextLesson.title}</h4>
                         <p className="text-sm text-storm">{getModuleDisplayName(nextLesson.moduleSlug)}</p>
-                        <p className="mt-1 text-sm leading-relaxed text-slate line-clamp-2">
-                          {getModuleShortDescription(nextLesson.moduleSlug)}
-                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-storm w-full">Completa el módulo para que tu planta crezca</p>
                       </div>
-                      <div className="hidden shrink-0 items-start pt-1 sm:flex">
-                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={300} label="Crecimiento in vitro" />
+                      <div className="hidden shrink-0 items-start sm:flex">
+                        <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={320} label="Crecimiento in vitro" />
                       </div>
                     </div>
                     <div className="mb-2 flex justify-center sm:hidden">
-                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={220} label="Crecimiento in vitro" />
+                      <BiotechGrowthTube exp={completedCount} maxExp={totalLessons} size={260} label="Crecimiento in vitro" />
                     </div>
                     {nextLesson && currentModule && (
                       <div className="mb-3">
@@ -208,14 +199,6 @@ export async function DashboardContainer() {
                         <div className="h-4 w-full overflow-hidden rounded-full bg-surface-raised">
                           <div className="h-full rounded-full bg-gradient-to-r from-fog to-mint" style={{ width: `${currentModulePct}%` }} />
                         </div>
-                        <p className="mt-2 text-xs leading-relaxed text-storm">
-                          La planta crece con cada módulo:{" "}
-                          <span className="font-bold text-ink">
-                            {completedCount}/{totalLessons}
-                          </span>{" "}
-                          lecciones → <span className="font-bold">{overallProgress}%</span> crecimiento.{" "}
-                          {getModuleGrowthHint(nextLesson.moduleSlug)}
-                        </p>
                       </div>
                     )}
                     <div className="mb-2 flex items-center gap-1 text-mint">
@@ -238,12 +221,11 @@ export async function DashboardContainer() {
                   />
                 )}
               </div>
-
+            </div>
+            <div className="mt-6">
               <ProgressCharts timeline={timeline} modules={modulesData} daily={daily} overallProgress={overallProgress} />
             </div>
           </section>
-        </div>
-      </div>
         </div>
       </div>
     </InVitroShell>

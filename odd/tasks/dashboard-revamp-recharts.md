@@ -32,11 +32,15 @@ Pedido explícito 4 cambios: 1) tamaño tanque/tubo, 2) aprovechar div 100% y al
 Usuario autorizó explícitamente los 4 cambios + Recharts. Branch feature desde main, work-unit commits.
 
 ## Acceptance Criteria
-- [x] Copy muestra "Completa lecciones para llenar el tanque y subir de rango." (sin split EXP)
+- [x] Copy Tu Progreso "Completa lecciones para llenar el tanque y subir de rango." intacto (no tocar)
 - [x] Bioreactor visible ~30% más grande (lg 220x300), tubo 300 desktop / 220 mobile
-- [x] Cards Tu Progreso y Misión Actual misma altura, ocupan 100% grid, min-h 360px
+- [x] Cards Tu Progreso y Misión Actual misma altura, ocupan 100% grid, min-h 360px (luego reducido proporcional)
 - [x] 3 gráficas renderizan con datos reales (8 semanas area, donut módulos, bar 30 días), sin duplicar /logros
 - [x] type-check + build pass, responsive md/lg verifica
+- [x] T6 Gráfica dinámica 1 card con tabs Ritmo/Expediciones/Constancia, sin video fondo, h-[260px]
+- [x] Misión Actual ocupa 100% ancho interno (favicon 20, tubo 320/260, título 2xl, sin line-clamp)
+- [x] Descripción Misión Actual = "Completa el módulo para que tu planta crezca" (con tildes) intacta
+- [x] Reducción proporcional min-h-0 h-auto p-5/p-6 sin desalinear items-stretch
 
 ## Tasks
 ### T1 — Copy + layout 100% alineado [x] — 677a564
@@ -58,6 +62,14 @@ Usuario autorizó explícitamente los 4 cambios + Recharts. Branch feature desde
 ### T5 — Integrar en DashboardContainer + verificación [x] — bf71f51
 - Importar helpers y `ProgressCharts` en `DashboardContainer.tsx:240`, pasar `timeline/modules/daily/overallProgress`, verificar `type-check` + `build` + tests, captura responsive.
 - Route: delegated | Files: 1 | Commit: bf71f51
+
+### T6 — Gráfica dinámica con tabs + eliminar video fondo [x] — db73514
+- Eliminar video circuit `DashboardContainer.tsx:122-126` y overlay, refactorizar `ProgressCharts.tsx` a 1 card `min-h-[380px]` con `useState<"ritmo"|"expediciones"|"constancia">`, `role="tablist"` 3 botones pill (activo bg-mint), `ResponsiveContainer h-[260px]` condicional, `isAnimationActive={!shouldReduce}`, tooltips custom. Preservar 3 datasets sin duplicar. Validar no video en DOM via Playwright snapshot.
+- Route: delegated | Files: 2 | Commit: db73514
+
+### T7 — Misión Actual full-width + descripción con tildes + reducción proporcional [x] — db73514
+- `DashboardContainer.tsx:130` Tu Progreso `min-h-[360px] p-6 md:p-8` → `min-h-0 h-auto p-5 md:p-6`, barra `max-w-[14rem]` → `w-full`. `DashboardContainer.tsx:178` Misión Actual `min-h-[360px] p-6 md:p-8` → `min-h-0 h-auto p-5 md:p-6`, favicon `h-16 w-16` → `h-20 w-20` img `h-12` → `h-14`, título `text-xl` → `text-2xl md:text-[26px]`, quitar `line-clamp-2`, tubo `300/220` → `320/260`. Descripción -> "Completa el módulo para que tu planta crezca" (con tildes, literal). Mantener `grid md:grid-cols-2 items-stretch` para alturas iguales. No tocar descripción Tu Progreso.
+- Route: delegated (same batch T6) | Files: 1 | Commit: db73514
 
 ## Progress
 - 2026-10-01: Creado, forecast ~350 líneas, single-pr. Pendiente T1-T5.
