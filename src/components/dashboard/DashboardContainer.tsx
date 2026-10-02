@@ -17,9 +17,11 @@ import {
 } from "@/lib/content/modules";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
+import { getDailyActivity, getProgressTimeline } from "@/lib/gamification/activity";
 import { BioreactorProgress } from "./BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
+import { ProgressCharts } from "./ProgressCharts";
 import { CheckCircle2, Gem } from "lucide-react";
 
 const MODULE_FAVICON: Record<string, string> = {
@@ -93,6 +95,16 @@ export async function DashboardContainer() {
   const levelProgressPct = Math.min(100, (levelInfo.progressToNext / levelInfo.nextLevelXp) * 100);
   const missionFavicon = nextLesson ? MODULE_FAVICON[nextLesson.moduleSlug] ?? "/labs/modules/ia.svg" : null;
   const gender = (profileRes.data as { gender?: string | null } | null)?.gender ?? null;
+
+  const [timeline, daily] = await Promise.all([
+    getProgressTimeline(userId, supabase),
+    getDailyActivity(userId, supabase),
+  ]);
+
+  const modulesData = modules.map((m) => {
+    const completed = completedByModule.get(m.slug) ?? 0;
+    return { name: m.name, completed, total: m.totalLessons, value: completed };
+  });
 
   return (
     <InVitroShell
@@ -226,6 +238,8 @@ export async function DashboardContainer() {
                   />
                 )}
               </div>
+
+              <ProgressCharts timeline={timeline} modules={modulesData} daily={daily} overallProgress={overallProgress} />
             </div>
           </section>
         </div>
