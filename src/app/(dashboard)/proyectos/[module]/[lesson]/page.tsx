@@ -15,12 +15,31 @@ import { AssignmentViewer, LabCodeBlock, LabHeader, LabCallout, ReflectionPrompt
 import { MarkdownTable } from "@/components/lesson";
 import { getLessonTitle } from "@/lib/content/modules";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
+import { visit } from "unist-util-visit";
 import type { ReactNode } from "react";
+
+/**
+ * Demote headings inside assignment.md so the page keeps a single h1.
+ * h1 → h2, h2 → h3, h3 → h4 (h4+ stays). Keeps h1→h2→h3 order for a11y.
+ */
+function rehypeDemoteH1() {
+  return (tree: unknown) => {
+    visit(
+      tree as never,
+      (n: unknown) => typeof (n as { tagName?: string }).tagName === "string",
+      (node: unknown) => {
+        const el = node as { tagName: string };
+        const map: Record<string, string> = { h1: "h2", h2: "h3", h3: "h4" };
+        if (map[el.tagName]) el.tagName = map[el.tagName];
+      },
+    );
+  };
+}
 
 const mdxConfig = {
   mdxOptions: {
     remarkPlugins: [remarkMath, remarkGfm],
-    rehypePlugins: [rehypeKatex, rehypeLabSections],
+    rehypePlugins: [rehypeKatex, rehypeDemoteH1, rehypeLabSections],
   },
 };
 
