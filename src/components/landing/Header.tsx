@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "Inicio", href: "#inicio" },
+  { label: "Inicio", href: "/" },
   { label: "Mision", href: "#mision" },
   { label: "Modulos", href: "#modulos" },
   { label: "Equipo", href: "#equipo" },
@@ -28,7 +28,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4">
-        <a href="#inicio" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo-negativo.svg"

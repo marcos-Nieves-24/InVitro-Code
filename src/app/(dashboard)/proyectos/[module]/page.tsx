@@ -6,12 +6,21 @@ import path from "path";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getDisplayName } from "@/lib/gamification/user";
-import { getModuleDisplayName, getLessonSlugs } from "@/lib/content/modules";
+import {
+  getModuleDisplayName,
+  getLessonSlugs,
+  getLessonFrontmatter,
+  getLabResumeTarget,
+  type CompletionStatus,
+  type LabProgressMap,
+  type LabProgressEntry,
+} from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { HeroWithConsole } from "@/components/shared/HeroWithConsole";
 import { getProyectoHeroImage } from "@/lib/labs/heroImages";
 import { getConsoleForModule } from "@/lib/labs/consoleForModule";
 import { LabProgressRing } from "@/components/labs/LabProgressRing";
+import { LabHistoryCard } from "@/components/labs/LabHistoryCard";
 
 interface Props {
   params: Promise<{ module: string }>;
@@ -46,7 +55,7 @@ export default async function ProyectoModulePage({ params }: Props) {
 
   const supabase = createAdminClient();
 
-  const [profileRes, progressRes] = await Promise.all([
+  const [profileRes, progressRes, labProgressRes] = await Promise.all([
     supabase.from("profiles").select("username, email, role, theme").eq("id", userId).maybeSingle(),
     supabase
       .from("progress")
@@ -54,6 +63,11 @@ export default async function ProyectoModulePage({ params }: Props) {
       .eq("user_id", userId)
       .eq("completed", true)
       .not("completed_at", "is", null),
+    supabase
+      .from("lab_progress")
+      .select("lesson_slug, completion_status, completion_date, last_position, updated_at")
+      .eq("user_id", userId)
+      .eq("module_slug", modSlug),
   ]);
 
   const userName = getDisplayName(profileRes.data ?? {});
@@ -63,13 +77,46 @@ export default async function ProyectoModulePage({ params }: Props) {
   const lessonSlugs = getLessonSlugs(modSlug);
   const labCount = lessonSlugs.length;
 
-  const completedLessonKeys = new Set(
+  // Build progressMap from lab_progress when available, fallback to progress
+  const progressMap: LabProgressMap = new Map();
+  const hasLabProgressRows =
+    Array.isArray(labProgressRes.data) && labProgressRes.data.length > 0;
+
+  if (hasLabProgressRows) {
+    for (const row of labProgressRes.data as Array<{
+      lesson_slug: string;
+      completion_status: string;
+      completion_date: string | null;
+      last_position: unknown;
+      updated_at: string;
+    }>) {
+      const status = row.completion_status as CompletionStatus;
+      if (status !== "not_started" && status !== "in_progress" && status !== "completed") continue;
+      progressMap.set(row.lesson_slug, {
+        status,
+        completion_date: row.completion_date,
+        updated_at: row.updated_at,
+        last_position: (row.last_position as Record<string, unknown>) ?? {},
+      } as LabProgressEntry);
+    }
+  }
+
+  // Fallback counters from legacy progress when lab_progress empty
+  const completedLessonKeysFallback = new Set(
     (progressRes.data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
   );
 
-  let completedCount = 0;
-  for (const slug of lessonSlugs) {
-    if (completedLessonKeys.has(`${modSlug}/${slug}`)) completedCount += 1;
+  let completedCount: number;
+  if (hasLabProgressRows) {
+    completedCount = 0;
+    for (const slug of lessonSlugs) {
+      if (progressMap.get(slug)?.status === "completed") completedCount += 1;
+    }
+  } else {
+    completedCount = 0;
+    for (const slug of lessonSlugs) {
+      if (completedLessonKeysFallback.has(`${modSlug}/${slug}`)) completedCount += 1;
+    }
   }
 
   let xpTotal = 0;
@@ -77,21 +124,44 @@ export default async function ProyectoModulePage({ params }: Props) {
     xpTotal += calcXpForLesson(modSlug, slug);
   }
 
+  const progressPct = labCount === 0 ? 0 : Math.round((completedCount / labCount) * 100);
+
   const eyebrow = `${moduleName} · ${labCount} proyectos · ${xpTotal} XP`;
 
-  let ctaSlug = lessonSlugs[0] ?? "";
-  for (const slug of lessonSlugs) {
-    if (!completedLessonKeys.has(`${modSlug}/${slug}`)) {
-      ctaSlug = slug;
-      break;
+  // Smart resume CTA (paridad con laboratorios)
+  const resume = getLabResumeTarget(modSlug, progressMap);
+  const allCompleted = labCount > 0 && completedCount === labCount;
+
+  let ctaHref: string;
+  let ctaLabel: string;
+  let showSingleCTA: boolean;
+
+  if (hasLabProgressRows) {
+    if (resume.case === 3 || resume.target === null) {
+      showSingleCTA = false;
+      ctaHref = "/proyectos";
+      ctaLabel = "Repasar";
+    } else {
+      showSingleCTA = true;
+      ctaHref = `/proyectos/${resume.target.moduleSlug}/${resume.target.lessonSlug}`;
+      ctaLabel = resume.case === 1 ? "Continuar" : "Empezar";
+    }
+  } else {
+    // Legacy behavior: first incomplete else Repasar
+    let legacySlug = lessonSlugs[0] ?? "";
+    for (const slug of lessonSlugs) {
+      if (!completedLessonKeysFallback.has(`${modSlug}/${slug}`)) {
+        legacySlug = slug;
+        break;
+      }
+    }
+    ctaHref = legacySlug ? `/proyectos/${modSlug}/${legacySlug}` : "/proyectos";
+    ctaLabel = allCompleted ? "Repasar" : "Empezar";
+    showSingleCTA = !allCompleted;
+    if (allCompleted) {
+      showSingleCTA = false;
     }
   }
-  const allCompleted = labCount > 0 && completedCount === labCount;
-  const progressPct = labCount === 0 ? 0 : Math.round((completedCount / labCount) * 100);
-  const ctaHref = ctaSlug ? `/proyectos/${modSlug}/${ctaSlug}` : "/proyectos";
-  const ctaLabel = allCompleted ? "Repasar" : "Empezar";
-  const showSingleCTA = !allCompleted;
-  const isRepasar = allCompleted;
 
   const bg = getProyectoHeroImage(modSlug);
 
@@ -130,39 +200,52 @@ export default async function ProyectoModulePage({ params }: Props) {
           </div>
         ) : null}
 
-        {lessonSlugs.length > 0 && (
+        {/* History grid (paridad labs) */}
+        {lessonSlugs.length > 0 ? (
           <div className="mt-8">
             <h2 className="font-display text-lg font-semibold text-ink">Proyectos incluidos</h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {lessonSlugs.slice(0, 6).map((slug) => {
-                const isCompleted = completedLessonKeys.has(`${modSlug}/${slug}`);
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {lessonSlugs.map((slug) => {
+                const fm = getLessonFrontmatter(modSlug, slug);
+                const title = fm?.title ?? slug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ");
+                const entry = progressMap.get(slug);
+                let status: CompletionStatus;
+                let completionDate: string | null = null;
+                let updatedAt: string | null = null;
+                if (entry) {
+                  status = entry.status;
+                  completionDate = entry.completion_date;
+                  updatedAt = entry.updated_at;
+                } else if (
+                  completedLessonKeysFallback.has(`${modSlug}/${slug}`) &&
+                  !hasLabProgressRows
+                ) {
+                  status = "completed";
+                  updatedAt = null;
+                } else {
+                  status = "not_started";
+                }
                 const href = `/proyectos/${modSlug}/${slug}`;
+                const isRepasar = !showSingleCTA && labCount > 0 && completedCount === labCount;
                 return (
-                  <li key={slug}>
-                    <Link
-                      href={href}
-                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                        isRepasar
-                          ? "border border-mint/30 bg-mint/10 text-mint"
-                          : isCompleted
-                            ? "bg-mint/20 text-ink border border-mint/30"
-                            : "bg-surface-raised text-storm border border-surface-raised hover:bg-surface-raised/80"
-                      }`}
-                    >
-                      {slug.replace(/^lesson\d+_/, "").replace(/[-_]/g, " ")}
-                    </Link>
-                    {isRepasar && (
-                      <span className="sr-only"> — Repasar</span>
-                    )}
-                  </li>
+                  <LabHistoryCard
+                    key={slug}
+                    moduleSlug={modSlug}
+                    lessonSlug={slug}
+                    title={title}
+                    status={status}
+                    completionDate={completionDate}
+                    updatedAt={updatedAt}
+                    href={href}
+                    isRepasar={isRepasar}
+                  />
                 );
               })}
-              {lessonSlugs.length > 6 && (
-                <li className="inline-flex items-center px-2 py-1 text-xs text-storm">
-                  +{lessonSlugs.length - 6} más
-                </li>
-              )}
-            </ul>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-8 rounded-xl border border-dashed border-surface-raised p-8 text-center">
+            <p className="text-sm text-storm">Este módulo aún no tiene proyectos.</p>
           </div>
         )}
       </div>

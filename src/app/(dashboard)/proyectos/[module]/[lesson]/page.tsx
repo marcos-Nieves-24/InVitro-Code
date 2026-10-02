@@ -15,12 +15,59 @@ import { AssignmentViewer, LabCodeBlock, LabHeader, LabCallout, ReflectionPrompt
 import { MarkdownTable } from "@/components/lesson";
 import { getLessonTitle } from "@/lib/content/modules";
 import rehypeLabSections from "@/lib/mdx/rehype-lab-sections";
+import { visit } from "unist-util-visit";
 import type { ReactNode } from "react";
+
+/**
+ * Strip the first h1 that starts with "Assignment" so the page keeps a single h1
+ * (page title). Keeps h1→h2→h3 order and removes duplicate "Assignment 9: ..." text.
+ */
+function rehypeStripFirstH1() {
+  return (tree: unknown) => {
+    const root = tree as { children?: unknown[] };
+    if (!root.children || !Array.isArray(root.children)) return;
+    let removed = false;
+    // Also handle via visit for nested structures produced by remark
+    visit(
+      tree as never,
+      (n: unknown) => {
+        const el = n as { tagName?: string };
+        return !removed && el.tagName === "h1";
+      },
+      (node: unknown, index?: number, parent?: { children: unknown[] }) => {
+        if (removed) return;
+        const el = node as { tagName: string; children?: Array<{ value?: string; children?: unknown[] }> };
+        // Extract text content
+        let text = "";
+        const collect = (c: unknown) => {
+          if (!c || typeof c !== "object") return;
+          const o = c as { value?: string; children?: unknown[]; type?: string };
+          if (typeof o.value === "string") text += o.value;
+          if (Array.isArray(o.children)) o.children.forEach(collect);
+        };
+        if (Array.isArray(el.children)) el.children.forEach(collect);
+        if (/^\s*Assignment/i.test(text)) {
+          if (parent && typeof index === "number") {
+            parent.children.splice(index, 1);
+            removed = true;
+          } else if (root.children && typeof index === "number") {
+            root.children.splice(index, 1);
+            removed = true;
+          }
+        } else {
+          // Non-Assignment h1 would be unexpected — still demote to h2 to keep single h1 invariant
+          el.tagName = "h2";
+          removed = true;
+        }
+      },
+    );
+  };
+}
 
 const mdxConfig = {
   mdxOptions: {
     remarkPlugins: [remarkMath, remarkGfm],
-    rehypePlugins: [rehypeKatex, rehypeLabSections],
+    rehypePlugins: [rehypeKatex, rehypeStripFirstH1, rehypeLabSections],
   },
 };
 

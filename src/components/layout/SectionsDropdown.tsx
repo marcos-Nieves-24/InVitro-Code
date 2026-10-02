@@ -15,7 +15,7 @@ interface Section {
 }
 
 const SECTIONS: Section[] = [
-  { id: "hero", title: "Inicio", description: "Bienvenida y progreso rápido", href: "#hero", icon: Home, category: "Principal" },
+  { id: "hero", title: "Inicio", description: "Bienvenida y progreso rápido", href: "/", icon: Home, category: "Principal" },
   { id: "learn", title: "Expediciones", description: "Explorar cursos y lecciones", href: "/learn", icon: Compass, category: "Aprender" },
   { id: "labs", title: "Laboratorios", description: "Ejecutar código en entornos interactivos", href: "/laboratorios", icon: FlaskConical, category: "Aprender" },
   { id: "projects", title: "Proyectos", description: "Aplicar conocimientos en proyectos reales", href: "/proyectos", icon: Landmark, category: "Aprender" },

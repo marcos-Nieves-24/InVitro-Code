@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getLessonSlugs } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { capLastPosition, labProgressPostSchema } from "@/lib/validation/labProgress";
+import { advanceStreak } from "@/lib/gamification/streak";
 
 // Persistence uses createAdminClient() (service-role + requireEnv(SUPABASE_SERVICE_ROLE_KEY)).
 // RLS: Clerk is the ONLY auth provider — policies compare (auth.jwt() ->> 'sub') = user_id, never auth.uid().
@@ -191,7 +192,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: upsertError.message }, { status: 500 });
     }
 
-    // Dual-write to progress on completed — best-effort, non-blocking
+    // Dual-write to progress + streak on completed — best-effort, non-blocking
     if (newStatus === "completed") {
       try {
         const xp = calcXpForLesson(module_slug, lesson_slug);
@@ -208,6 +209,13 @@ export async function POST(request: NextRequest) {
         );
         if (progressError) {
           console.error("[lab-progress] dual-write progress failed", progressError.message);
+        } else {
+          // Streak advance shared with /api/progress — keeps constancia/ritmo in sync across both flows
+          try {
+            await advanceStreak(userId, supabase, true);
+          } catch (e) {
+            console.error("[lab-progress] streak advance failed", e);
+          }
         }
       } catch (e) {
         console.error("[lab-progress] dual-write progress exception", e);

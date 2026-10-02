@@ -4,15 +4,9 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { evaluateAchievements } from "@/lib/gamification/achievements";
 import { getLessonSlugs } from "@/lib/content/modules";
+import { advanceStreak } from "@/lib/gamification/streak";
 
 export const runtime = "nodejs";
-
-/** UTC calendar day as YYYY-MM-DD. Streaks are day-granular, so UTC avoids DST drift. */
-function utcDay(offsetDays = 0): string {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() + offsetDays);
-  return d.toISOString().slice(0, 10);
-}
 
 function readNonEmptyString(value: unknown): string | null {
   return typeof value === "string" && value.trim().length > 0 ? value.trim() : null;
@@ -102,46 +96,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: progressError.message }, { status: 500 });
     }
 
-    // Streak: only a completion counts as activity, and a replay on the same
-    // day leaves current_streak untouched.
-    const today = utcDay();
-    const yesterday = utcDay(-1);
-    const { data: existing } = await supabase
-      .from("streaks")
-      .select("current_streak, longest_streak, last_active_date")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    const previousStreak = existing?.current_streak ?? 0;
-    const lastActive = existing?.last_active_date ?? null;
-
-    let current = previousStreak;
-    if (completed) {
-      if (lastActive === today) current = Math.max(previousStreak, 1);
-      else if (lastActive === yesterday) current = previousStreak + 1;
-      else current = 1;
-    }
-    const longest = Math.max(existing?.longest_streak ?? 0, current);
-    const activeDate = completed ? today : lastActive;
-
-    const { data: streakRow, error: streakError } = await supabase
-      .from("streaks")
-      .upsert(
-        {
-          user_id: userId,
-          current_streak: current,
-          longest_streak: longest,
-          last_active_date: activeDate,
-        },
-        { onConflict: "user_id" },
-      )
-      .select("current_streak, longest_streak, last_active_date")
-      .single();
-
-    if (streakError) {
-      // Progress is already persisted; a streak failure must not fail the request.
-      console.error("[api/progress] streak upsert failed", streakError.message);
-    }
+    // Streak: shared helper (also used by lab-progress). Only completions count.
+    const streakRow = await advanceStreak(userId, supabase, completed);
 
     let achievements: Awaited<ReturnType<typeof evaluateAchievements>>["achievements"] = [];
     try {
@@ -152,9 +108,9 @@ export async function POST(request: NextRequest) {
     }
 
     const streak = streakRow ?? {
-      current_streak: current,
-      longest_streak: longest,
-      last_active_date: activeDate,
+      current_streak: 0,
+      longest_streak: 0,
+      last_active_date: null,
     };
 
     return NextResponse.json({ progress, streak, achievements }, { status: 200 });
