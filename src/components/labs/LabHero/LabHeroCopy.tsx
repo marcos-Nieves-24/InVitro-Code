@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Typed from "typed.js";
+import { useEffect, useState } from "react";
+import { TypingText } from "@/components/ui/TypingText";
 
 const PHRASES = [
   "Python potencia el análisis de datos biotecnológicos, del laboratorio al código.",
@@ -19,36 +19,35 @@ interface LabHeroCopyProps {
 
 /**
  * Rotating typed phrases about lab projects.
- * Uses typed.js — must be client-only.
+ * MIT-owned typing animation via TypingText.
  */
 export function LabHeroCopy({ className }: LabHeroCopyProps) {
-  const elRef = useRef<HTMLSpanElement>(null);
-  const typedRef = useRef<Typed | null>(null);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    if (!elRef.current) return;
+    const text = PHRASES[current];
+    const typeMs = text.length * 38;
+    const backMs = text.length * 22;
+    const totalMs = typeMs + 1400 + backMs;
 
-    typedRef.current = new Typed(elRef.current, {
-      strings: PHRASES,
-      typeSpeed: 38,
-      backSpeed: 22,
-      backDelay: 1400,
-      loop: true,
-      showCursor: true,
-      cursorChar: "|",
-    });
+    const id = setTimeout(() => {
+      setCurrent((i) => (i + 1) % PHRASES.length);
+    }, totalMs);
 
-    return () => {
-      typedRef.current?.destroy();
-    };
-  }, []);
+    return () => clearTimeout(id);
+  }, [current]);
 
   return (
     <p
       className={`font-mono text-sm md:text-base text-[var(--color-comic-accent)] ${className ?? ""}`}
       aria-live="polite"
     >
-      <span ref={elRef} />
+      <TypingText
+        key={current}
+        text={PHRASES[current]}
+        delay={38}
+        cursor="|"
+      />
     </p>
   );
 }

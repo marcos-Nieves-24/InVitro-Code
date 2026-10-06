@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { validateAvatar } from "@/lib/profile/validateAvatar";
 import { getDisplayName } from "@/lib/gamification/user";
 import { ProfileCard } from "@/components/profile/ProfileCard";
 import { ProfileForm } from "@/components/profile/ProfileForm";
@@ -49,14 +50,33 @@ export default async function ProfilePage() {
                 "use server";
                 const { userId: uid } = await auth();
                 if (!uid) return;
+                const { ext } = await validateAvatar(file);
                 const admin = createAdminClient();
-                const fileExt = file.name.split(".").pop();
-                const fileName = `${uid}-${Date.now()}.${fileExt}`;
+                // Best-effort: remove previous avatar to avoid orphaned objects
+                try {
+                  const { data: existing } = await admin
+                    .from("profiles")
+                    .select("avatar_url")
+                    .eq("id", uid)
+                    .maybeSingle();
+                  const oldUrl: string | null | undefined = existing?.avatar_url;
+                  if (oldUrl && oldUrl.includes("/avatars/")) {
+                    const oldPath = oldUrl.split("/avatars/")[1]?.split("?")[0];
+                    if (oldPath) {
+                      await admin.storage.from("avatars").remove([oldPath]);
+                    }
+                  }
+                } catch {
+                  // best-effort — do not block upload if cleanup fails
+                }
+                const fileName = `${uid}-${Date.now()}.${ext}`;
                 const filePath = `avatars/${fileName}`;
                 const { error: uploadError } = await admin.storage
                   .from("avatars")
+                  // TODO: migrar a signed URL / RLS privado en F11
                   .upload(filePath, file, { upsert: true });
                 if (uploadError) throw new Error(uploadError.message);
+                // SECURITY: bucket público — migrar a createSignedUrl(3600) + RLS en siguiente iteración
                 const { data: urlData } = admin.storage.from("avatars").getPublicUrl(filePath);
                 await admin.from("profiles").update({ avatar_url: urlData.publicUrl }).eq("id", uid);
               }}

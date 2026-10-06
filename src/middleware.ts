@@ -57,19 +57,41 @@ export default clerkMiddleware(async (auth, req) => {
     );
 
     if (isAdminRoute && session.userId) {
-      const supabase = createAdminClient();
-      const { data } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", session.userId)
-        .maybeSingle();
+      // Lec1: cache en Clerk JWT, Lec2: DB fallback
+      const claims = session.sessionClaims as
+        | Record<string, unknown>
+        | undefined;
+      const publicMeta = (claims?.publicMetadata ??
+        (claims as Record<string, unknown> | undefined)?.public_metadata) as
+        | Record<string, unknown>
+        | undefined;
+      const meta = claims?.metadata as Record<string, unknown> | undefined;
+      const cachedRole = (publicMeta?.role ?? meta?.role) as
+        | string
+        | undefined;
 
-      if (data?.role !== "admin") {
-        // Non-admin trying to access admin route
-        if (pathname.startsWith("/api/")) {
-          return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      if (cachedRole) {
+        if (cachedRole !== "admin") {
+          if (pathname.startsWith("/api/")) {
+            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+          }
+          return NextResponse.redirect(new URL("/dashboard", req.url));
         }
-        return NextResponse.redirect(new URL("/dashboard", req.url));
+      } else {
+        const supabase = createAdminClient();
+        const { data } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", session.userId)
+          .maybeSingle();
+
+        if (data?.role !== "admin") {
+          // Non-admin trying to access admin route
+          if (pathname.startsWith("/api/")) {
+            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+          }
+          return NextResponse.redirect(new URL("/dashboard", req.url));
+        }
       }
     }
   }

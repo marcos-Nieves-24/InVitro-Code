@@ -231,26 +231,27 @@ Aunque gratuito, el usuario es consumidor y el Responsable es proveedor digital;
 
 ## 4. Retención y eliminación — estado normativo
 
-> Si no hay política, marcar **GAP** conforme al encargo. La retención debe definirse antes de `politica-privacidad.md` y registrarse en RNBD (Decreto 1074 Título 3).
+> Norma de Retención v1 — 2026-10-06 — Definida y registrable en RNBD (Decreto 1074 Título 3).
 
 | Tabla / Bucket | Retención definida en `supabase-migration.sql` | Estado | Eliminación implementada | Estado |
 |----------------|-----------------------------------------------|--------|--------------------------|--------|
-| `profiles` | Parcial: `pending_since` purga automática 24h vía `/api/cron/purge-pending` (Vercel Cron diario `0 3 * * *`, Hobby: 1/día ±59min — efectivo 24-48h, PENDING_TTL_HOURS=24 `src/domain/consent.ts:33`); resto `created_at`/`last_active_at` sin TTL global (`migration.sql:29`/`migration.sql:28`) | **Parcial** | `DELETE` titular (`migration.sql:482-485`); `user.deleted` (`webhooks/clerk/route.ts:105-126`) + `DELETE /api/account` + cron `/api/cron/purge-pending` diario con cascada `lab_progress→progress→reflection_completions→streaks→user_achievements→consent_logs→storage avatars→profiles` + Clerk best-effort | **Mitigado** |
-| `progress` | No. `completed_at` (`migration.sql:72`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:76-91` solo SELECT/INSERT/UPDATE), sin `DELETE /api/progress` | **GAP** |
-| `lab_progress` | No. `updated_at` con trigger `NOW()` (`migration.sql:337-348`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:320-335`), sin `DELETE /api/lab-progress` | **GAP** |
-| `streaks` | No. `last_active_date` (`migration.sql:99`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:102-118`) | **GAP** |
-| `reflection_completions` | No | **GAP** | Sin `DELETE` RLS (`migration.sql:129-139` solo SELECT/INSERT) | **GAP** |
-| `user_achievements` | No. `unlocked_at DEFAULT NOW()` (`migration.sql:197`) | **GAP** | Sin `DELETE` RLS (`migration.sql:201-212` solo SELECT/INSERT) | **GAP** |
-| `avatars` (Storage) | No. `upsert:true` acumula sin purga (`avatar/route.ts:41`) | **GAP** | Sin `storage.remove()` en ningún flujo | **GAP** |
-| `localStorage`/`sessionStorage` (F-08) | No TTL programado | Navegador del titular | Limpieza manual por el titular | Conforme |
+| `profiles` | Vida cuenta activa + 6 meses tras supresión art. 8 (15 días hábiles + bloqueo) + 24 meses inactividad (`last_active_at` `migration.sql:28` / `created_at` `migration.sql:29`) → anonimizar con aviso previo si `notification_prefs.email=true` + `pending_since` purga automática 24h vía `/api/cron/purge-pending` (Vercel Cron `0 3 * * *`, PENDING_TTL_HOURS=24 `src/domain/consent.ts:33`, efectivo 24-48h Hobby) | **DEFINIDA v1** | `DELETE` titular (`migration.sql:482-485`) + `user.deleted` (`webhooks/clerk/route.ts:105-126`) + `DELETE /api/account` + cron `/api/cron/purge-pending` con cascada `lab_progress→progress→reflection_completions→streaks→user_achievements→consent_logs→storage avatars→profiles` + Clerk best-effort + `storage.remove()` best-effort C-G04 | **DEFINIDA v1** |
+| `progress` | Vida cuenta (coherente con `profiles`); `completed_at` (`migration.sql:72`) | **DEFINIDA v1** | DELETE titular (`migration.sql:482-485` cascada) | **DEFINIDA v1** |
+| `lab_progress` | `completion_status/date` vida cuenta; `last_position.codeSnapshot` (`migration.sql:315`) 60 días sin `updated_at` (`migration.sql:337`) o al `completed` → `{}` | **DEFINIDA v1** | DELETE titular cascada + purga `codeSnapshot` cron | **DEFINIDA v1** |
+| `streaks` | Vida cuenta; `last_active_date` (`migration.sql:99`) | **DEFINIDA v1** | DELETE titular cascada | **DEFINIDA v1** |
+| `reflection_completions` | Vida cuenta | **DEFINIDA v1** | DELETE titular cascada | **DEFINIDA v1** |
+| `user_achievements` | Vida cuenta; `unlocked_at DEFAULT NOW()` (`migration.sql:197`) | **DEFINIDA v1** | DELETE titular cascada | **DEFINIDA v1** |
+| `avatars` (Storage) | Vida cuenta; `remove(oldPath)` al reemplazar (C-G04 `validateAvatar` 02fb756) + purga huérfanos en supresión | **DEFINIDA v1** | `storage.remove()` best-effort C-G04 + cascada supresión | **DEFINIDA v1** |
+| `localStorage`/`sessionStorage` (F-08) | Navegador hasta limpieza | Conforme | Limpieza manual titular | Conforme |
+| `logs infra` (Vercel/Supabase/Clerk) | Según Encargado: Vercel 30d-1año, Supabase PITR 7d/30d Pro, Clerk según DPA | **DEFINIDA v1** | — | **DEFINIDA v1** |
 
-**Recomendación de retención (a validar jurídicamente y registrar en RNBD):**
+**Norma vigente v1 — 2026-10-06 — Registrable en RNBD (Decreto 1074 Título 3):**
 
 - Cuenta activa: retención mientras la cuenta esté activa.
-- Supresión solicitada (art. 8): borrado en cascada en ≤15 días hábiles (término reclamo) + bloqueo intermedio.
-- Inactividad prolongada: anonimizar o suprimir tras 24 meses sin `last_active_at` (`profiles.last_active_at` `migration.sql:28`) con aviso previo por `notification_prefs.email` si está en `true`.
-- `last_position.codeSnapshot`: purgar a `{}` tras 30-90 días sin actividad o al `completed`, aunque la cuenta siga activa (minimización).
-- Logs infra (Vercel/Clerk/Supabase): según políticas de Encargados; documentar plazo en `providers-audit.md`.
+- Supresión solicitada (art. 8): borrado en cascada en ≤15 días hábiles (término reclamo) + bloqueo intermedio; conservación 6 meses tras supresión para trazabilidad de reclamaciones.
+- Inactividad prolongada: anonimizar o suprimir tras 24 meses sin `last_active_at` (`profiles.last_active_at` `migration.sql:28` / `created_at` `migration.sql:29`) con aviso previo por `notification_prefs.email` si está en `true`.
+- `last_position.codeSnapshot` (`migration.sql:315`): purgar a `{}` tras 60 días sin `updated_at` (`migration.sql:337`) o al `completed`, aunque la cuenta siga activa (minimización art. 4 Ley 1581) — coherente con `progress.completed_at` (`migration.sql:72`).
+- Logs infra (Vercel/Clerk/Supabase): según políticas de Encargados; documentado en `providers-audit.md` y `security-audit.md` §backups.
 
 ---
 

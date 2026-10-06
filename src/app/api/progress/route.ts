@@ -5,6 +5,7 @@ import { calcXpForLesson } from "@/lib/gamification/utils";
 import { evaluateAchievements } from "@/lib/gamification/achievements";
 import { getLessonSlugs } from "@/lib/content/modules";
 import { advanceStreak } from "@/lib/gamification/streak";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -37,6 +38,11 @@ export async function POST(request: NextRequest) {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const rl = checkRateLimit(`progress:${userId}`, 100, 15 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ error: "Too Many Requests" }, { status: 429, headers: { "Retry-After": String(rl.retryAfter) } });
     }
 
     let body: unknown;
