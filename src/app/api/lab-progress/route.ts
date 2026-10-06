@@ -5,6 +5,7 @@ import { getLessonSlugs } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { capLastPosition, labProgressPostSchema } from "@/lib/validation/labProgress";
 import { advanceStreak } from "@/lib/gamification/streak";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // Persistence uses createAdminClient() (service-role + requireEnv(SUPABASE_SERVICE_ROLE_KEY)).
 // RLS: Clerk is the ONLY auth provider — policies compare (auth.jwt() ->> 'sub') = user_id, never auth.uid().
@@ -54,6 +55,11 @@ export async function POST(request: NextRequest) {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const rl = checkRateLimit(`lab-progress:${userId}`, 100, 15 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ error: "Too Many Requests" }, { status: 429, headers: { "Retry-After": String(rl.retryAfter) } });
     }
 
     let body: unknown;
@@ -120,6 +126,16 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = createAdminClient();
+
+    // Consent gate art.9 — pending blocks lab writes (POST only, not GET)
+    const { data: consentProfile } = await supabase
+      .from("profiles")
+      .select("consent_status")
+      .eq("id", userId)
+      .maybeSingle();
+    if ((consentProfile as { consent_status?: string | null } | null)?.consent_status === "pending") {
+      return NextResponse.json({ error: "Consent pending art.9" }, { status: 403 });
+    }
 
     // Fetch existing row to preserve completion_date idempotency and merge state
     const { data: existing, error: fetchError } = await supabase

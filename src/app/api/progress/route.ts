@@ -5,6 +5,7 @@ import { calcXpForLesson } from "@/lib/gamification/utils";
 import { evaluateAchievements } from "@/lib/gamification/achievements";
 import { getLessonSlugs } from "@/lib/content/modules";
 import { advanceStreak } from "@/lib/gamification/streak";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -39,6 +40,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const rl = checkRateLimit(`progress:${userId}`, 100, 15 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ error: "Too Many Requests" }, { status: 429, headers: { "Retry-After": String(rl.retryAfter) } });
+    }
+
     let body: unknown;
     try {
       body = await request.json();
@@ -70,6 +76,16 @@ export async function POST(request: NextRequest) {
     const completed = input.completed === undefined ? true : input.completed === true;
 
     const supabase = createAdminClient();
+
+    // Consent gate art.9 — pending blocks progress writes (POST only)
+    const { data: consentProfile } = await supabase
+      .from("profiles")
+      .select("consent_status")
+      .eq("id", userId)
+      .maybeSingle();
+    if ((consentProfile as { consent_status?: string | null } | null)?.consent_status === "pending") {
+      return NextResponse.json({ error: "Consent pending art.9" }, { status: 403 });
+    }
 
     // XP is server-authoritative: a client may request less, never more.
     const serverXp = calcXpForLesson(module_slug, lesson_slug);
