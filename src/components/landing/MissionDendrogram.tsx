@@ -210,9 +210,9 @@ export function MissionDendrogram() {
       <div className="mx-auto max-w-[1280px]">
         {/* Title — sin reveal para evitar opacity 0 sin observer (ver LM-07) */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <h1 className="font-mono text-[12px] font-semibold tracking-[0.22em] text-[#00B5C5] uppercase md:text-[13px]">
+          <p className="font-mono text-[12px] font-semibold tracking-[0.22em] text-[#00B5C5] uppercase md:text-[13px]">
             Nuestra Identidad
-          </h1>
+          </p>
           <h2 className="mt-3 mb-4 font-display text-[34px] font-bold tracking-tight text-[#101B3D] md:text-[44px]">
             Donde la biotecnología encuentra la IA
           </h2>
