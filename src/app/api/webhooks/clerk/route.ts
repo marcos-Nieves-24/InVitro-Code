@@ -2,6 +2,8 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireEnv } from "@/lib/env";
+import { createConsentRepository } from "@/lib/supabase/consent";
+import { ConsentPurpose, CURRENT_POLICY_VERSION } from "@/domain/consent";
 
 function getAdmin() {
   return createAdminClient();
@@ -52,29 +54,52 @@ export async function POST(req: Request) {
     const gender = parseGender(public_metadata?.gender);
     const admin = getAdmin();
 
+    // Hybrid consent gate (Ley 1581 art.9/art.6/art.26 + Ley 527)
+    const repo = createConsentRepository();
+    const hasBase = await repo.hasValidConsent(id, ConsentPurpose.TRANSFER_EEUU);
+    const hasGender = await repo.hasGenderConsent(id);
+
+    // Strict for sensitive gender=x: requires explicit gender consent
+    if (gender === "x" && !hasGender) {
+      if (!hasBase) {
+        return new Response("Base consent required art.9/26", { status: 403 });
+      }
+      return new Response("Explicit gender consent required art.6", { status: 403 });
+    }
+
+    // Pending 24h for base consent (COMP-07 purges)
+    if (!hasBase) {
+      const pendingPayload: Record<string, unknown> = {
+        id,
+        email,
+        username: first_name ?? email.split("@")[0],
+        role: "user",
+        // Never persist gender=x without explicit consent
+        ...(gender === "x" ? { gender: null } : gender ? { gender } : {}),
+        consent_status: "pending",
+        pending_since: new Date().toISOString(),
+        consent_version: null,
+      };
+      await admin.from("profiles").upsert(pendingPayload, { onConflict: "id" });
+      return new Response("OK pending_consent", { status: 200 });
+    }
+
+    // hasBase true → verified
+    const verifiedPayload: Record<string, unknown> = {
+      id,
+      email,
+      username: first_name ?? email.split("@")[0],
+      role: "user",
+      consent_status: "verified",
+      consent_version: CURRENT_POLICY_VERSION,
+      pending_since: null,
+    };
+    // Only include gender when present and valid; preserve existing value on update without gender
     if (gender) {
-      await admin.from("profiles").upsert(
-        {
-          id,
-          email,
-          username: first_name ?? email.split("@")[0],
-          role: "user",
-          gender,
-        },
-        { onConflict: "id" },
-      );
-    } else if (evt.type === "user.created") {
-      await admin.from("profiles").upsert(
-        {
-          id,
-          email,
-          username: first_name ?? email.split("@")[0],
-          role: "user",
-        },
-        { onConflict: "id" },
-      );
+      verifiedPayload.gender = gender;
     }
     // user.updated without valid gender → preserve existing Supabase value (no NULL overwrite)
+    await admin.from("profiles").upsert(verifiedPayload, { onConflict: "id" });
   }
 
   return new Response("OK", { status: 200 });
