@@ -10,6 +10,11 @@ const publicRoutes = [
   "/api/webhooks/clerk",
   "/api/diagnose",
   "/api/cron/purge-pending",
+  "/aviso",
+  "/privacidad",
+  "/cookies",
+  "/terminos",
+  "/ia",
 ];
 
 const adminRoutes = ["/admin", "/api/admin"];

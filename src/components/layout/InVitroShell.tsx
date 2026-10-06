@@ -86,6 +86,9 @@ export function InVitroShell({
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-storm md:hidden"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
+              aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -93,7 +96,7 @@ export function InVitroShell({
         </div>
 
         {mobileMenuOpen && (
-          <div className="border-t border-surface-raised px-4 py-3 md:hidden">
+          <div id="mobile-nav" className="border-t border-surface-raised px-4 py-3 md:hidden">
             {currentStreak !== undefined && (
               <div className="mb-3 flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1.5 text-xs font-bold text-ink w-fit">
                 <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />

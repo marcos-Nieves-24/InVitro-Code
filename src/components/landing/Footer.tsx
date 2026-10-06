@@ -70,6 +70,19 @@ export function Footer() {
             InVitro-Code v0.1.0
           </p>
         </div>
+
+        <nav aria-label="Legal" className="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs">
+          <a href="/aviso" className="font-medium text-white/60 transition-colors hover:text-mint">Aviso Legal</a>
+          <span className="text-white/20">·</span>
+          <a href="/privacidad" className="font-medium text-white/60 transition-colors hover:text-mint">Privacidad</a>
+          <span className="text-white/20">·</span>
+          <a href="/cookies" className="font-medium text-white/60 transition-colors hover:text-mint">Cookies</a>
+          <span className="text-white/20">·</span>
+          <a href="/terminos" className="font-medium text-white/60 transition-colors hover:text-mint">Términos</a>
+          <span className="text-white/20">·</span>
+          <a href="/ia" className="font-medium text-white/60 transition-colors hover:text-mint">Transparencia IA</a>
+        </nav>
+        <p className="mt-3 text-center font-mono text-[11px] text-white/40">NIT 700329113-7 · Corregimiento Altavista, Medellín · invitro.code@gmail.com · Protocolo LGL-2026-10-06-v1</p>
       </div>
     </footer>
   );

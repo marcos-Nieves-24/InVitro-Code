@@ -64,11 +64,16 @@ export function ReflectionCheck({
         {prompt}
       </p>
 
+      <label htmlFor={`reflection-${blockId}`} className="sr-only">
+        Respuesta a: {prompt}
+      </label>
       <textarea
+        id={`reflection-${blockId}`}
         value={userAnswer}
         onChange={(e) => setUserAnswer(e.target.value)}
         disabled={revealed}
         rows={3}
+        aria-label={`Respuesta a: ${prompt}`}
         className="block w-full resize-none rounded-btn border border-gray-300 bg-surface-card px-3 py-2 text-sm text-gray-700 placeholder-gray-400 transition-colors focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/20 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-storm"
         placeholder="Escribe tu respuesta aquí..."
       />

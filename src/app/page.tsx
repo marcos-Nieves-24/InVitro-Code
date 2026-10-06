@@ -26,7 +26,7 @@ export default function Home() {
           <div className="relative z-10 mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             {/* Left: copy — light tokens over dark hero */}
             <div className="flex flex-col gap-6">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                 Aprendizaje Interactivo
               </p>
               <h1 className="font-display text-4xl font-bold tracking-tight text-white md:text-6xl">
@@ -34,7 +34,7 @@ export default function Home() {
                 <span className="text-mint">IA y Machine Learning</span> con
                 Python para Biotecnologia
               </h1>
-              <p className="max-w-md text-lg leading-relaxed text-white/70">
+              <p className="max-w-md text-lg leading-relaxed text-white/80">
                 Un curso para biotecnologos que quieren entender datos, modelos
                 y decisiones desde el pregrado. Terminales interactivas, labs en
                 vivo y desafios de codigo real.

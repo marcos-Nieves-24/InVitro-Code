@@ -236,7 +236,7 @@ export function InteractiveTerminal() {
       </div>
 
       {/* Terminal body — code OR dendrogram */}
-      <div ref={scrollRef} className="relative h-[460px] overflow-y-auto p-5 font-mono text-sm text-white/80">
+      <div ref={scrollRef} className="relative min-h-[460px] overflow-y-auto p-5 font-mono text-sm text-white/80">
         {/* Code output (typing + output phases) */}
         <div
           className={`transition-opacity duration-300 ${
