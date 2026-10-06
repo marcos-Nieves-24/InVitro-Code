@@ -18,11 +18,23 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
     bio: bio || "",
     gender: (gender === "f" || gender === "m" || gender === "x" ? gender : null) as GenderOption,
   });
+  const [acceptGenderX, setAcceptGenderX] = useState(false);
+  const [genderError, setGenderError] = useState<string | null>(null);
+  const [generalError, setGeneralError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setGeneralError(null);
+
+    if (formData.gender === "x" && !acceptGenderX) {
+      setGenderError(
+        "Debes autorizar expresamente el tratamiento de tu identidad de género no binaria (dato sensible art.6) para guardar esta opción.",
+      );
+      return;
+    }
+    setGenderError(null);
     setSaving(true);
     setSaved(false);
 
@@ -30,6 +42,9 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
       await onSave(formData);
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Error al guardar el perfil";
+      setGeneralError(message);
     } finally {
       setSaving(false);
     }
@@ -89,12 +104,14 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
           id="gender"
           aria-describedby="gender-help"
           value={formData.gender ?? ""}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              gender: (e.target.value === "" ? null : e.target.value) as GenderOption,
-            }))
-          }
+          onChange={(e) => {
+            const next = (e.target.value === "" ? null : e.target.value) as GenderOption;
+            setFormData((prev) => ({ ...prev, gender: next }));
+            if (next !== "x") {
+              setGenderError(null);
+              setAcceptGenderX(false);
+            }
+          }}
           className="w-full rounded-btn border border-surface-raised bg-surface-card px-4 py-2 text-sm text-ink transition-colors focus:border-mint focus:outline-none focus:ring-1 focus:ring-mint focus-visible:ring-2 focus-visible:ring-mint"
         >
           <option value="">Prefiero no decirlo</option>
@@ -103,6 +120,39 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
           <option value="x">No binaria</option>
         </select>
       </div>
+
+      {formData.gender === "x" && (
+        <div className="rounded-btn border border-surface-raised bg-surface px-4 py-3">
+          <div className="flex items-start gap-2">
+            <input
+              id="acceptGenderX"
+              type="checkbox"
+              checked={acceptGenderX}
+              onChange={(e) => {
+                setAcceptGenderX(e.target.checked);
+                if (e.target.checked) setGenderError(null);
+              }}
+              className="mt-0.5 h-4 w-4 rounded border-surface-raised text-mint focus:ring-mint"
+            />
+            <label htmlFor="acceptGenderX" className="text-sm leading-snug text-ink">
+              Autorizo expresamente el tratamiento de mi identidad de género no binaria (dato sensible art.6). Es
+              facultativo y no condiciona el servicio.
+            </label>
+          </div>
+          <p className="mt-2 text-xs text-storm">Podés dejarlo en &apos;Prefiero no decirlo&apos;.</p>
+          {genderError && (
+            <p role="alert" className="mt-2 text-sm text-red-600">
+              {genderError}
+            </p>
+          )}
+        </div>
+      )}
+
+      {generalError && (
+        <p role="alert" className="text-sm text-red-600">
+          {generalError}
+        </p>
+      )}
 
       <button
         type="submit"

@@ -6,6 +6,7 @@ import { getDisplayName } from "@/lib/gamification/user";
 import { ProfileCard } from "@/components/profile/ProfileCard";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { AvatarUpload } from "@/components/profile/AvatarUpload";
+import { createConsentRepository } from "@/lib/supabase/consent";
 
 export default async function ProfilePage() {
   const { userId } = await auth();
@@ -80,6 +81,14 @@ export default async function ProfilePage() {
                   data.gender !== null && (allowed as readonly string[]).includes(data.gender)
                     ? data.gender
                     : null;
+                if (gender === "x") {
+                  const hasConsent = await createConsentRepository().hasGenderConsent(uid);
+                  if (!hasConsent) {
+                    throw new Error(
+                      "Autorización requerida art.6: debes autorizar expresamente el tratamiento de tu identidad de género no binaria (dato sensible) antes de guardar esta opción. Marca la casilla correspondiente.",
+                    );
+                  }
+                }
                 const { revalidatePath } = await import("next/cache");
                 await admin
                   .from("profiles")

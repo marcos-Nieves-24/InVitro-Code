@@ -121,6 +121,16 @@ export async function POST(request: NextRequest) {
 
     const supabase = createAdminClient();
 
+    // Consent gate art.9 — pending blocks lab writes (POST only, not GET)
+    const { data: consentProfile } = await supabase
+      .from("profiles")
+      .select("consent_status")
+      .eq("id", userId)
+      .maybeSingle();
+    if ((consentProfile as { consent_status?: string | null } | null)?.consent_status === "pending") {
+      return NextResponse.json({ error: "Consent pending art.9" }, { status: 403 });
+    }
+
     // Fetch existing row to preserve completion_date idempotency and merge state
     const { data: existing, error: fetchError } = await supabase
       .from("lab_progress")
