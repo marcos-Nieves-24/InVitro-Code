@@ -1,18 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { AuthShell } from "@/components/auth/AuthShell";
+import { AuthCard } from "@/components/auth/AuthCard";
+import { AuthForm } from "@/components/auth/AuthForm";
+import { SocialButtons } from "@/components/auth/SocialButtons";
+import { type AuthStatus } from "@/components/auth/LiquidWave";
 
 export default function SignUpPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/sign-in");
-  }, [router]);
+  const [status, setStatus] = useState<AuthStatus>("idle");
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <p className="text-[#5A7A8A]">Redirigiendo...</p>
-    </div>
+    <AuthShell variant="sign-up">
+      <AuthCard
+        status={status}
+        mode="signup"
+        title="Crear cuenta"
+        subtitle="Únete a InVitro-Code"
+      >
+        <AuthForm mode="signup" onStatusChange={setStatus} />
+        <SocialButtons />
+      </AuthCard>
+    </AuthShell>
   );
 }

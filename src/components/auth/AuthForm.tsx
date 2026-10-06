@@ -5,12 +5,46 @@ import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
 import { useRouter } from "next/navigation";
 import { type AuthStatus } from "./LiquidWave";
+import { CURRENT_POLICY_VERSION } from "@/domain/consent";
 
 export type AuthMode = "signin" | "signup";
 
 interface AuthFormProps {
   mode: AuthMode;
   onStatusChange?: (status: AuthStatus) => void;
+}
+
+function getConsentText(version: string): string {
+  return `Acepto la Política de Privacidad (${version}), finalidades F-01 a F-07 y transferencia internacional a EE.UU. (Clerk/Supabase/Vercel) art.26`;
+}
+
+async function sha256(text: string): Promise<string> {
+  try {
+    if (
+      typeof crypto !== "undefined" &&
+      crypto.subtle &&
+      typeof crypto.subtle.digest === "function"
+    ) {
+      const data = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+  } catch {
+    // fall through to fallback
+  }
+  if (typeof btoa !== "undefined") {
+    try {
+      return btoa(text).slice(0, 64);
+    } catch {
+      // ignore
+    }
+  }
+  let h = 0;
+  for (let i = 0; i < text.length; i++) {
+    h = (h * 31 + text.charCodeAt(i)) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0");
 }
 
 export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
@@ -20,6 +54,8 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [acceptBase, setAcceptBase] = useState(false);
+  const [acceptGenderX, setAcceptGenderX] = useState(false);
 
   const router = useRouter();
   const { signIn, fetchStatus: signInFetchStatus } = useSignIn();
@@ -33,6 +69,12 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     e.preventDefault();
 
     if (!isLoaded || isSubmitting) return;
+
+    if (mode === "signup" && !acceptBase) {
+      setError("Debés aceptar la Política para crear cuenta");
+      onStatusChange?.("error");
+      return;
+    }
 
     setIsSubmitting(true);
     setError(null);
@@ -74,6 +116,13 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
         isClerkAPIResponseError(signInError) &&
         signInError.errors[0]?.code === "form_identifier_not_found"
       ) {
+        // Guard: block sign-up creation if consent not given
+        if (mode === "signup" && !acceptBase) {
+          setError("Debés aceptar la Política para crear cuenta");
+          onStatusChange?.("error");
+          return;
+        }
+
         // User doesn't exist — attempt sign-up using Core 3 API
         if (!signUp) {
           throw new Error("Sign-up not initialized");
@@ -91,6 +140,23 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               "No se pudo crear la cuenta. Intenta de nuevo.",
           );
           return;
+        }
+
+        // Best-effort consent record — do not abort registration on failure
+        try {
+          const texto = getConsentText(CURRENT_POLICY_VERSION);
+          const acceptedTextHash = await sha256(texto);
+          await fetch("/api/consent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              policyVersion: CURRENT_POLICY_VERSION,
+              acceptedTextHash,
+              purposes: ["F-01", "transfer:EEUU"],
+            }),
+          });
+        } catch {
+          // best-effort: pending will be handled by webhook
         }
 
         // Sign-up complete — finalize the session
@@ -256,6 +322,60 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
             disabled={isSubmitting}
             className="w-full px-4 py-3 rounded-lg border border-[#E2E8F0] bg-white text-[#111439] placeholder-[#5A7A8A] focus:outline-none focus:ring-2 focus:ring-[#00b2b2] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           />
+        </div>
+      )}
+
+      {/* Consent checkbox — only for signup (Ley 1581 art.9 + art.26, Ley 527 conservable) */}
+      {mode === "signup" && !showVerification && (
+        <div className="space-y-2">
+          <div className="flex items-start gap-3">
+            <input
+              id="acceptPrivacy"
+              type="checkbox"
+              checked={acceptBase}
+              onChange={(e) => setAcceptBase(e.target.checked)}
+              required
+              aria-required="true"
+              disabled={isSubmitting}
+              className="mt-1 h-4 w-4 shrink-0 rounded border-[#E2E8F0] text-[#00b2b2] focus:ring-2 focus:ring-[#00b2b2] focus:ring-offset-0"
+            />
+            <label
+              htmlFor="acceptPrivacy"
+              className="text-sm leading-snug text-[#111439]"
+            >
+              Acepto la{" "}
+              <a
+                href="/politica-privacidad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#00b2b2] underline underline-offset-2 hover:text-[#009f9f]"
+              >
+                Política de Privacidad
+              </a>{" "}
+              ({CURRENT_POLICY_VERSION}), finalidades F-01 a F-07 y
+              transferencia internacional a EE.UU. (Clerk/Supabase/Vercel)
+              art.26 y{" "}
+              <a
+                href="/aviso-legal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#00b2b2] underline underline-offset-2 hover:text-[#009f9f]"
+              >
+                Aviso Legal
+              </a>
+              .
+            </label>
+          </div>
+          <p className="ml-7 text-xs leading-relaxed text-[#5A7A8A]">
+            Podés revocar en{" "}
+            <a
+              href="mailto:invitro.code@gmail.com"
+              className="underline underline-offset-2 hover:text-[#111439]"
+            >
+              invitro.code@gmail.com
+            </a>{" "}
+            (art.8) — ver derechos en la política.
+          </p>
         </div>
       )}
 
