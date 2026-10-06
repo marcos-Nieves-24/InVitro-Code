@@ -218,11 +218,11 @@ Aunque gratuito, el usuario es consumidor y el Responsable es proveedor digital;
 
 | Flujo | Base principal | Refuerzo | Transferencia |
 |-------|---------------|----------|---------------|
-| F-01 Registro/Login | **Art. 9** | — | **Art. 26** EE. UU. (Clerk, Supabase) |
-| F-02 Perfil (`username`, `bio`, `gender`) | **Art. 9** | **Art. 6** para `gender=x` (explícita, facultativa, no condicionada) | **Art. 26** |
-| F-03 Avatar | **Art. 9** | — (imagen = dato personal común) | **Art. 26** (Storage Supabase) |
-| F-04 Preferencias | **Art. 9** funcional | — | **Art. 26** |
-| F-05/06/07 Progreso y gamificación | **Art. 9** | — | **Art. 26** |
+| F-01 Registro/Login | **Art. 9** + `consent_logs(policy_version, hash, purposes)` conservable (Ley 527) | — | **Art. 26** EE. UU. (Clerk, Supabase) |
+| F-02 Perfil (`username`, `bio`, `gender`) | **Art. 9** + `consent_logs(policy_version, hash, purposes)` conservable (Ley 527) | **Art. 6** para `gender=x` (explícita, facultativa, no condicionada) | **Art. 26** |
+| F-03 Avatar | **Art. 9** + `consent_logs(policy_version, hash, purposes)` conservable (Ley 527) | — (imagen = dato personal común) | **Art. 26** (Storage Supabase) |
+| F-04 Preferencias | **Art. 9** funcional + `consent_logs(policy_version, hash, purposes)` conservable (Ley 527) | — | **Art. 26** |
+| F-05/06/07 Progreso y gamificación | **Art. 9** + `consent_logs(policy_version, hash, purposes)` conservable (Ley 527) | — | **Art. 26** |
 | F-08 LocalStorage | **Art. 9** funcional (técnico en terminal) | Informado en `politica-cookies.md` | No hay transferencia |
 | F-09 Pyodide | **No es tratamiento server-side** (local) | — | No hay datos personales al CDN |
 | Contacto `mailto:` | Voluntad del titular al enviar email (art. 9 implícito en el envío) | — | Depende del proveedor de correo del titular |

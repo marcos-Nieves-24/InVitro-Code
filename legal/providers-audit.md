@@ -315,6 +315,8 @@ Titular (+18, LATAM, ES)
 - **Autorización:** **no existe** autorización con mención expresa de transferencia a EE. UU. ni autorización explícita para `gender=x`.
 - **Conclusión art. 26:** la transferencia internacional actual **carece de los tres pilares simultáneamente**, por lo que el tratamiento en EE. UU. (Clerk, Supabase, Vercel) está **sin base habilitante completa** y debe **bloquearse o regularizarse antes de Fase 11** (`politica-privacidad.md`).
 
+> **Actualización COMP-08 — cierre brecha PROV-02 (2026-10-06-v1):** DPAs aceptados/versionados **2026-10-06-v1**, ver `legal/dpa-register.md` para evidencia. El registro versiona por Encargado la aceptación del DPA estándar, la fecha, los subencargados vigentes y el receipt hash conservable (Ley 527). URLs oficiales preservadas: Clerk `https://clerk.com/legal/dpa` y `https://clerk.com/legal/subprocessors`, Supabase `https://supabase.com/legal/dpa` y `https://supabase.com/legal/subprocessors`, Vercel `https://vercel.com/legal/dpa` y `https://vercel.com/legal/sub-processors`. Estado actual: **pendiente firma — usar DPA estándar de cada proveedor, conservar PDF/receipt en `legal/receipts/`** (template listo en `dpa-register.md` §1 y §3). Al aceptar, actualizar `dpa-register.md` con hash y reflejar subencargados vigentes en `politica-privacidad.md` § Encargados. Vercel Cron queda cubierto como Encargado de purga dentro del DPA de Vercel; jsDelivr/PyPI no requieren DPA (terceros técnicos sin datos personales, ver `dpa-register.md` §2).
+
 ---
 
 ## 4. Hallazgos GAPs — Priorizados
