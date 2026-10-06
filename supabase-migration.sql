@@ -358,3 +358,86 @@ DO $$ BEGIN
     ALTER PUBLICATION supabase_realtime ADD TABLE lab_progress;
   END IF;
 END $$;
+
+-- ──────────────────────────────────────────────────────────
+-- 14. Consent logs + retention base (compliance-hibrido-consent-supresion COMP-01)
+-- Ley 1581 art.9/art.6/art.26 + Ley 527 — hybrid model foundation.
+-- Clerk is the ONLY auth provider (see header): RLS uses auth.jwt() ->> 'sub'.
+-- Idempotent: IF NOT EXISTS / DO blocks, same pattern as §12 gender column.
+-- Retention notes (see §4 legal/data-inventory.md):
+--   - Consent evidence (consent_logs): retain while account active + 6 months
+--     after suppression (art.8). After that, purge or anonymize. Register in RNBD.
+--   - profiles.consent_status/consent_version/pending_since: lifecycle of
+--     authorization (verified|pending|blocked). pending purged after 24h (COMP-07).
+--   - lab_progress.last_position.codeSnapshot: purge to '{}' after 30-90 days
+--     without activity or on completed (minimization, §4 recommendation).
+--   - Storage avatars/* and all user tables: cascade on user.deleted (COMP-06).
+-- ──────────────────────────────────────────────────────────
+
+-- 14a. Profiles — consent lifecycle columns (idempotent per column)
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'profiles' AND column_name = 'consent_status'
+  ) THEN
+    ALTER TABLE profiles ADD COLUMN consent_status TEXT
+      CHECK (consent_status IN ('verified','pending','blocked'))
+      DEFAULT 'pending';
+  END IF;
+END $$;
+
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'profiles' AND column_name = 'consent_version'
+  ) THEN
+    ALTER TABLE profiles ADD COLUMN consent_version TEXT;
+  END IF;
+END $$;
+
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'profiles' AND column_name = 'pending_since'
+  ) THEN
+    ALTER TABLE profiles ADD COLUMN pending_since TIMESTAMPTZ;
+  END IF;
+END $$;
+
+-- 14b. Consent evidence table (Ley 527 conservable: timestamp + ip/ua + hash + version)
+CREATE TABLE IF NOT EXISTS consent_logs (
+  id                  UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id             TEXT        NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  policy_version      TEXT        NOT NULL,
+  accepted_text_hash  TEXT        NOT NULL,
+  purposes            TEXT[]      NOT NULL,
+  ip                  INET,
+  user_agent          TEXT,
+  created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 14c. Indexes for consent verification queries
+CREATE INDEX IF NOT EXISTS idx_consent_user ON consent_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_consent_policy ON consent_logs(policy_version);
+
+-- 14d. RLS — Clerk JWT only (see header). Service-role (createAdminClient) bypasses RLS,
+-- so admin insert needs no policy; kept as comment for audit clarity.
+ALTER TABLE consent_logs ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "users can read own consent_logs" ON consent_logs;
+CREATE POLICY "users can read own consent_logs"
+  ON consent_logs FOR SELECT
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+-- Admin insert via service-role (SUPABASE_SERVICE_ROLE_KEY) bypasses RLS — no policy needed.
+-- Users can read own consent status via existing profiles SELECT policy
+-- "users can read own profile" (USING auth.jwt() ->> 'sub' = id) — no new policy.
+
+-- 14e. Retention documentation (SQL comments, auditable in catalog)
+COMMENT ON TABLE consent_logs IS 'Ley 1581 art.9/art.26 + Ley 527: conservable consent evidence (policy_version, accepted_text_hash, purposes, ip, user_agent, created_at). Retain while account active + 6 months after suppression; purge thereafter. See legal/data-inventory.md §4.';
+COMMENT ON COLUMN consent_logs.policy_version IS 'Version of politica-privacidad.md accepted (e.g. 2026-10-06-v1).';
+COMMENT ON COLUMN consent_logs.accepted_text_hash IS 'SHA-256 hash of the accepted policy text for integrity (Ley 527).';
+COMMENT ON COLUMN consent_logs.purposes IS 'Purposes covered by this consent (e.g. {F-01,F-02,F-03,F-04,F-05,F-06,F-07,transferencia-EEUU,sensible-gender-x}).';
+COMMENT ON COLUMN profiles.consent_status IS 'Hybrid consent lifecycle: verified (full access), pending (24h grace, limited), blocked (sensitive or expired). Default pending.';
+COMMENT ON COLUMN profiles.consent_version IS 'Policy version associated with consent_status (mirrors consent_logs.policy_version).';
+COMMENT ON COLUMN profiles.pending_since IS 'When pending started; purge if pending_since < NOW() - 24h (COMP-07). codeSnapshot retention: 30-90d after last activity (see legal/data-inventory.md §4).';
