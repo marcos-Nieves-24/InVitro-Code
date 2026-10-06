@@ -15,7 +15,7 @@ interface AuthFormProps {
 }
 
 function getConsentText(version: string): string {
-  return `Acepto la Política de Privacidad (${version}), finalidades F-01 a F-07 y transferencia internacional a EE.UU. (Clerk/Supabase/Vercel) art.26`;
+  return `He leído y acepto la Política de Privacidad (${version}) y el Aviso Legal, y autorizo de forma previa, expresa e informada el tratamiento de mis datos personales y su transferencia internacional a EE. UU. (Clerk, Supabase, Vercel) conforme a los arts. 9 y 26 de la Ley 1581 de 2012`;
 }
 
 async function sha256(text: string): Promise<string> {
@@ -71,7 +71,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
     if (!isLoaded || isSubmitting) return;
 
     if (mode === "signup" && !acceptBase) {
-      setError("Debés aceptar la Política para crear cuenta");
+      setError("Debés aceptar la Política de Privacidad y el Aviso Legal para crear tu cuenta.");
       onStatusChange?.("error");
       return;
     }
@@ -118,7 +118,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       ) {
         // Guard: block sign-up creation if consent not given
         if (mode === "signup" && !acceptBase) {
-          setError("Debés aceptar la Política para crear cuenta");
+          setError("Debés aceptar la Política de Privacidad y el Aviso Legal para crear tu cuenta.");
           onStatusChange?.("error");
           return;
         }
@@ -343,7 +343,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               htmlFor="acceptPrivacy"
               className="text-sm leading-snug text-[#111439]"
             >
-              Acepto la{" "}
+              He leído y acepto la{" "}
               <a
                 href="/politica-privacidad"
                 target="_blank"
@@ -352,9 +352,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               >
                 Política de Privacidad
               </a>{" "}
-              ({CURRENT_POLICY_VERSION}), finalidades F-01 a F-07 y
-              transferencia internacional a EE.UU. (Clerk/Supabase/Vercel)
-              art.26 y{" "}
+              y el{" "}
               <a
                 href="/aviso-legal"
                 target="_blank"
@@ -363,18 +361,22 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               >
                 Aviso Legal
               </a>
-              .
+              , y autorizo el tratamiento de mis datos personales y su
+              transferencia internacional a EE. UU. (Clerk, Supabase, Vercel)
+              conforme a la Ley 1581 de 2012.
             </label>
           </div>
           <p className="ml-7 text-xs leading-relaxed text-[#5A7A8A]">
-            Podés revocar en{" "}
+            Autorización previa, expresa e informada (arts. 9 y 26). Podés
+            ejercer tus derechos de consulta, reclamo, supresión y revocatoria
+            en{" "}
             <a
               href="mailto:invitro.code@gmail.com"
               className="underline underline-offset-2 hover:text-[#111439]"
             >
               invitro.code@gmail.com
             </a>{" "}
-            (art.8) — ver derechos en la política.
+            · Versión {CURRENT_POLICY_VERSION}.
           </p>
         </div>
       )}

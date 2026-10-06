@@ -85,7 +85,7 @@ export default async function ProfilePage() {
                   const hasConsent = await createConsentRepository().hasGenderConsent(uid);
                   if (!hasConsent) {
                     throw new Error(
-                      "Autorización requerida art.6: debes autorizar expresamente el tratamiento de tu identidad de género no binaria (dato sensible) antes de guardar esta opción. Marca la casilla correspondiente.",
+                      "Para guardar 'No binaria' necesitás autorizar de forma expresa el tratamiento de este dato sensible (art. 6, Ley 1581 de 2012). Esta autorización es facultativa y no condiciona el acceso al servicio. Marcá la casilla correspondiente o seleccioná 'Prefiero no decirlo'.",
                     );
                   }
                 }

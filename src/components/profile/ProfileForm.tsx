@@ -30,7 +30,7 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
 
     if (formData.gender === "x" && !acceptGenderX) {
       setGenderError(
-        "Debes autorizar expresamente el tratamiento de tu identidad de género no binaria (dato sensible art.6) para guardar esta opción.",
+        "Para guardar 'No binaria' necesitás autorizar de forma expresa el tratamiento de este dato sensible (art. 6, Ley 1581). Esta autorización es facultativa y no condiciona el acceso al servicio. Si preferís no compartirlo, seleccioná 'Prefiero no decirlo'.",
       );
       return;
     }
@@ -135,11 +135,13 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
               className="mt-0.5 h-4 w-4 rounded border-surface-raised text-mint focus:ring-mint"
             />
             <label htmlFor="acceptGenderX" className="text-sm leading-snug text-ink">
-              Autorizo expresamente el tratamiento de mi identidad de género no binaria (dato sensible art.6). Es
-              facultativo y no condiciona el servicio.
+              Autorizo de forma expresa el tratamiento de mi identidad de género no binaria (dato sensible, art. 6 Ley 1581).
+              Esta autorización es facultativa y no condiciona el acceso al servicio.
             </label>
           </div>
-          <p className="mt-2 text-xs text-storm">Podés dejarlo en &apos;Prefiero no decirlo&apos;.</p>
+          <p className="mt-2 text-xs leading-relaxed text-storm">
+            Si preferís no compartir esta información, podés mantener &apos;Prefiero no decirlo&apos; sin afectar tu cuenta.
+          </p>
           {genderError && (
             <p role="alert" className="mt-2 text-sm text-red-600">
               {genderError}

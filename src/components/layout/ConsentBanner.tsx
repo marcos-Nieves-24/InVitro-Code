@@ -23,9 +23,12 @@ export async function ConsentBanner() {
       className="border-b border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900"
     >
       <p className="mx-auto flex max-w-6xl flex-wrap items-center gap-2">
-        <span>Tu cuenta está en estado pendiente — completá tu autorización art.9 para activar progreso y laboratorios. Tenés 24h.</span>
+        <span>
+          Tu cuenta está pendiente de autorización. Completá tu autorización para activar tu progreso y laboratorios (Ley 1581, arts. 9 y
+          26).
+        </span>
         <Link href="/perfil" className="font-medium underline hover:text-amber-700">
-          Ir a perfil
+          Completar autorización
         </Link>
       </p>
     </div>
