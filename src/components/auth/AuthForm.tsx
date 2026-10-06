@@ -15,7 +15,7 @@ interface AuthFormProps {
 }
 
 function getConsentText(version: string): string {
-  return `He leído y acepto la Política de Privacidad (${version}) y el Aviso Legal, y autorizo de forma previa, expresa e informada el tratamiento de mis datos personales y su transferencia internacional a EE. UU. (Clerk, Supabase, Vercel) conforme a los arts. 9 y 26 de la Ley 1581 de 2012`;
+  return `Acepto la Política de Privacidad y autorizo el tratamiento de mis datos personales para las finalidades descritas (F-01 a F-07). Entiendo que algunos datos podrán ser procesados por proveedores tecnológicos ubicados en Estados Unidos (Clerk, Supabase y Vercel), conforme a la normativa vigente. Asimismo, confirmo que he leído y acepto el Aviso Legal (${version}). Puedes retirar tu consentimiento en cualquier momento escribiendo a invitro.code@gmail.com. Consulta tus derechos y más información en nuestra Política de Privacidad.`;
 }
 
 async function sha256(text: string): Promise<string> {
@@ -343,7 +343,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               htmlFor="acceptPrivacy"
               className="text-sm leading-snug text-[#111439]"
             >
-              He leído y acepto la{" "}
+              Acepto la{" "}
               <a
                 href="/politica-privacidad"
                 target="_blank"
@@ -352,7 +352,11 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               >
                 Política de Privacidad
               </a>{" "}
-              y el{" "}
+              y autorizo el tratamiento de mis datos personales para las
+              finalidades descritas (F-01 a F-07). Entiendo que algunos datos
+              podrán ser procesados por proveedores tecnológicos ubicados en
+              Estados Unidos (Clerk, Supabase y Vercel), conforme a la
+              normativa vigente. Asimismo, confirmo que he leído y acepto el{" "}
               <a
                 href="/aviso-legal"
                 target="_blank"
@@ -361,22 +365,28 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               >
                 Aviso Legal
               </a>
-              , y autorizo el tratamiento de mis datos personales y su
-              transferencia internacional a EE. UU. (Clerk, Supabase, Vercel)
-              conforme a la Ley 1581 de 2012.
+              .
             </label>
           </div>
           <p className="ml-7 text-xs leading-relaxed text-[#5A7A8A]">
-            Autorización previa, expresa e informada (arts. 9 y 26). Podés
-            ejercer tus derechos de consulta, reclamo, supresión y revocatoria
-            en{" "}
+            Puedes retirar tu consentimiento en cualquier momento escribiendo
+            a{" "}
             <a
               href="mailto:invitro.code@gmail.com"
               className="underline underline-offset-2 hover:text-[#111439]"
             >
               invitro.code@gmail.com
-            </a>{" "}
-            · Versión {CURRENT_POLICY_VERSION}.
+            </a>
+            . Consulta tus derechos y más información en nuestra{" "}
+            <a
+              href="/politica-privacidad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-[#111439]"
+            >
+              Política de Privacidad
+            </a>
+            .
           </p>
         </div>
       )}
