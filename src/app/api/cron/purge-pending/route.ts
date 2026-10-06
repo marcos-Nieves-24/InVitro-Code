@@ -71,7 +71,7 @@ export async function GET(req: Request) {
 
   if (error) {
     console.error("[cron:purge-pending] query failed", error.message);
-    return NextResponse.json({ error: "Query failed" }, { status: 500 });
+    return NextResponse.json({ error: "Query failed", details: error.message }, { status: 500 });
   }
 
   const ids: string[] = (data ?? []).map((r: { id: string }) => r.id);
