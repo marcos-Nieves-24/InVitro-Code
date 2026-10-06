@@ -15,7 +15,7 @@ interface AuthFormProps {
 }
 
 function getConsentText(version: string): string {
-  return `Acepto la Política de Privacidad y autorizo el tratamiento de mis datos personales para las finalidades descritas (F-01 a F-07). Entiendo que algunos datos podrán ser procesados por proveedores tecnológicos ubicados en Estados Unidos (Clerk, Supabase y Vercel), conforme a la normativa vigente. Asimismo, confirmo que he leído y acepto el Aviso Legal (${version}). Puedes retirar tu consentimiento en cualquier momento escribiendo a invitro.code@gmail.com. Consulta tus derechos y más información en nuestra Política de Privacidad.`;
+  return `Acepto la Política de Privacidad y autorizo el tratamiento de mis datos personales para las finalidades descritas. Entiendo que algunos datos podrán ser procesados por proveedores tecnológicos ubicados en Estados Unidos (Clerk, Supabase y Vercel), conforme a la normativa vigente. Asimismo, confirmo que he leído y acepto el Aviso Legal (${version}). Puedes retirar tu consentimiento en cualquier momento escribiendo a invitro.code@gmail.com. Consulta tus derechos y más información en nuestra Política de Privacidad. Fuente: Ley 1581 de 2012, arts. 9 y 26 y Ley 527 de 1999 (mensaje de datos conservable).`;
 }
 
 async function sha256(text: string): Promise<string> {
@@ -341,7 +341,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
             />
             <label
               htmlFor="acceptPrivacy"
-              className="text-sm leading-snug text-[#111439]"
+              className="text-sm leading-snug text-justify text-[#111439]"
             >
               Acepto la{" "}
               <a
@@ -353,10 +353,10 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
                 Política de Privacidad
               </a>{" "}
               y autorizo el tratamiento de mis datos personales para las
-              finalidades descritas (F-01 a F-07). Entiendo que algunos datos
-              podrán ser procesados por proveedores tecnológicos ubicados en
-              Estados Unidos (Clerk, Supabase y Vercel), conforme a la
-              normativa vigente. Asimismo, confirmo que he leído y acepto el{" "}
+              finalidades descritas. Entiendo que algunos datos podrán ser
+              procesados por proveedores tecnológicos ubicados en Estados
+              Unidos (Clerk, Supabase y Vercel), conforme a la normativa
+              vigente. Asimismo, confirmo que he leído y acepto el{" "}
               <a
                 href="/aviso-legal"
                 target="_blank"
@@ -368,7 +368,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
               .
             </label>
           </div>
-          <p className="ml-7 text-xs leading-relaxed text-[#5A7A8A]">
+          <p className="ml-7 text-justify text-xs leading-relaxed text-[#5A7A8A]">
             Puedes retirar tu consentimiento en cualquier momento escribiendo
             a{" "}
             <a
@@ -386,7 +386,8 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
             >
               Política de Privacidad
             </a>
-            .
+            .<br />
+            <span className="text-[11px]">Fuente: Ley 1581 de 2012, arts. 9 y 26 y Ley 527 de 1999.</span>
           </p>
         </div>
       )}
