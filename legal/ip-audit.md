@@ -37,7 +37,7 @@
 |---|---|---|---|
 | **Permisivas (MIT/ISC/MPL-2.0)** | 25 de 28 prod deps | MIT (21), ISC (1: `lucide-react`), MPL-2.0 (1: `next-mdx-remote`), MIT (4: `next`, `react`, `react-dom`, `react-is` y otros) — ver §3 | Sí, con atribución (MIT/ISC) y notice; MPL-2.0 con disclosure de cambios |
 | **Copyleft fuerte** | **1** | `typed.js@3.0.0` — **GPL-3.0** (`package-lock.json: node_modules/typed.js license=GPL-3.0`, `node_modules/typed.js/LICENSE.txt:1-12`) | Sí, pero **obliga a licenciar la obra distribuida bajo GPL-3.0** y a entregar código fuente — conflicto potencial con `LICENSE:1 MIT` del repo |
-| **Propietaria / Standard** | **1** | `gsap@3.15.0` — **Standard 'no charge' license: https://gsap.com/standard-license** (`package-lock.json`, `node_modules/gsap/package.json: license=Standard …`) | Sí en contexto gratuito/no-venta directa de la librería, pero **no es OSI-approved**; redistribución bajo MIT es inexacta; requiere lectura de cláusula GreenSock (prohibida reventa como plantilla, etc.) |
+| **Propietaria / Standard** | **1** | `gsap@3.15.0` — **Standard Free (GreenSock)** — https://gsap.com/standard-license/ (`package-lock.json`, `node_modules/gsap/package.json: license=Standard …`) | Sí (gratuito, sin revender fuente) — **no es MIT pero es conforme** para InVitro-Code gratuito que no revende el código fuente ni ofrece editor basado en GSAP; no es OSI-approved |
 | **OFL (tipografías)** | 3 familias | **SIL Open Font License** (Google Fonts vía `next/font/google`) | Sí, sin atribución obligatoria en producto final, pero con restricción de venta aislada |
 | **Cerradas / sin licencia local** | ~12 imágenes/MP4 + Rive placeholder | Sin archivo LICENSE dedicado; C2PA indica origen IA pero no licencia explícita | **No verificado — gap** |
 
@@ -60,6 +60,8 @@
 | **BAJO** | `@tailwindcss/typography` y utilitarios Tailwind MIT sin NOTICE agregado. | MIT |
 
 > **Conclusión ejecutiva:** El proyecto es mayoritariamente libre-permisivo y compatible con el modelo **gratuito +18 en Colombia**, pero arrastra **dos incompatibilidades de licencia (GPL-3.0 + Standard) y un bloque de activos IA/gráficos sin trazabilidad**. Con las correcciones de §7 (sustituir o aislar `typed.js`, añadir excepción GSAP a LICENSE, publicar avisos IA y licencias de medios) el riesgo residual pasa a BAJO.
+>
+> **Nota GSAP:** `gsap@3.15.0` no es MIT — se distribuye bajo **GreenSock Standard Free License** (https://gsap.com/standard-license/). Su uso es **conforme** para InVitro-Code (gratuito, sin reventa del código fuente de GSAP ni oferta de editor basado en GSAP), pero no es OSI-approved y requiere excepción explícita en `LICENSE` (§7 G-C2).
 
 ---
 
@@ -159,7 +161,7 @@
 | 6 | `@supabase/supabase-js` | 2.110.7 | MIT | Sí | Sí | `package.json:24` |
 | 7 | `@tailwindcss/typography` | 0.5.20 | MIT | Sí | Sí | `package.json:25` |
 | 8 | `gray-matter` | 4.0.3 | MIT | Sí | Sí | `package.json:26` |
-| 9 | `gsap` | 3.15.0 | **Standard 'no charge' https://gsap.com/standard-license** | Condicionado (no OSI) | **Requiere lectura ToS GreenSock** | `package.json:27` |
+| 9 | `gsap` | 3.15.0 | **Standard Free (GreenSock)** | Sí (gratuito, sin revender fuente) | No requerida | `package.json:27` + https://gsap.com/standard-license/ |
 | 10 | `lucide-react` | 1.25.0 | **ISC** | Sí | Sí | `package.json:28` |
 | 11 | `motion` (framer-motion) | 13.4.3 | MIT | Sí | Sí | `package.json:29` |
 | 12 | `next` | 16.2.10 | MIT | Sí | Sí | `package.json:30` |

@@ -92,3 +92,13 @@ src/content/modules/
 - `next.config.ts` allowlist de imágenes: `img.clerk.com`, `vercel.com`.
 - `.vercel_trigger_deploy_*` son disparadores de redeploy — no tocarlos.
 - `.atl/skill-registry.md` es auto-generado por `gentle-ai skill-registry refresh` — no editarlo a mano (el `.atl/.skill-registry.cache.json` está gitignored).
+
+## Créditos IA offline
+
+> Assets generados offline con IA, **no son LLM en runtime**. Se listan aquí por transparencia; el detalle legal completo irá en `legal/politica-ia.md` (Fase 9).
+
+- **Recraft AI** — 8 favicons/logos con manifest C2PA (`public/favicon.svg:1` y `public/favicon-modulo-*-sin-fondo.svg`, derivados en `public/labs/modules/*.svg`) — `digitalSourceType: compositeWithTrainedAlgorithmicMedia`, `Created by Recraft AI`.
+- **Anymotion mimo-v2.5** — 12 animaciones HTML (`public/animations/*/project.json:5` con `model: mimo-v2.5` + `public/animations/*/index.html`) documentadas en `scripts/animations.json`.
+- **Spritecook** — ~40 sprites pixel-art (`assets/pixel-art/lab-palette.json:1` y `public/images/spritecook/*`, `assets/pixel-art/lab-hero/*`) paletizados localmente (Floyd-Steinberg).
+
+Estos assets son estáticos/prerenderizados; no implican inferencia en el navegador ni cesión de datos a terceros en runtime. Para trazabilidad, prompts y ToS se archivarán en `legal/politica-ia.md` y anexos de provenance.
