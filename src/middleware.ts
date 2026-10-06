@@ -9,6 +9,7 @@ const publicRoutes = [
   "/sso-callback",
   "/api/webhooks/clerk",
   "/api/diagnose",
+  "/api/cron/purge-pending",
 ];
 
 const adminRoutes = ["/admin", "/api/admin"];
