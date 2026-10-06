@@ -235,7 +235,7 @@ Aunque gratuito, el usuario es consumidor y el Responsable es proveedor digital;
 
 | Tabla / Bucket | Retención definida en `supabase-migration.sql` | Estado | Eliminación implementada | Estado |
 |----------------|-----------------------------------------------|--------|--------------------------|--------|
-| `profiles` | No. Solo `created_at TIMESTAMPTZ DEFAULT NOW()` (`migration.sql:29`) + `last_active_at` (`migration.sql:28`) sin TTL | **GAP** | RLS `SELECT/UPDATE` para titular (`migration.sql:52-62`); sin `DELETE` para titular, sin `DELETE CASCADE` en FKs hijas, sin handler `user.deleted` (`webhooks/clerk/route.ts:49`) | **GAP** |
+| `profiles` | Parcial: `pending_since` purga automática 24h vía `/api/cron/purge-pending` (Vercel Cron hourly) — `PENDING_TTL_HOURS=24` (`src/domain/consent.ts:33`); resto `created_at`/`last_active_at` sin TTL global (`migration.sql:29`/`migration.sql:28`) | **Parcial** | `DELETE` titular (`migration.sql:482-485`); `user.deleted` (`webhooks/clerk/route.ts:105-126`) + `DELETE /api/account` + cron `/api/cron/purge-pending` con cascada `lab_progress→progress→reflection_completions→streaks→user_achievements→consent_logs→storage avatars→profiles` + Clerk best-effort | **Mitigado** |
 | `progress` | No. `completed_at` (`migration.sql:72`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:76-91` solo SELECT/INSERT/UPDATE), sin `DELETE /api/progress` | **GAP** |
 | `lab_progress` | No. `updated_at` con trigger `NOW()` (`migration.sql:337-348`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:320-335`), sin `DELETE /api/lab-progress` | **GAP** |
 | `streaks` | No. `last_active_date` (`migration.sql:99`) sin TTL | **GAP** | Sin `DELETE` RLS (`migration.sql:102-118`) | **GAP** |

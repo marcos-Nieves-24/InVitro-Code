@@ -441,3 +441,45 @@ COMMENT ON COLUMN consent_logs.purposes IS 'Purposes covered by this consent (e.
 COMMENT ON COLUMN profiles.consent_status IS 'Hybrid consent lifecycle: verified (full access), pending (24h grace, limited), blocked (sensitive or expired). Default pending.';
 COMMENT ON COLUMN profiles.consent_version IS 'Policy version associated with consent_status (mirrors consent_logs.policy_version).';
 COMMENT ON COLUMN profiles.pending_since IS 'When pending started; purge if pending_since < NOW() - 24h (COMP-07). codeSnapshot retention: 30-90d after last activity (see legal/data-inventory.md §4).';
+
+-- ──────────────────────────────────────────────────────────
+-- 15. RLS DELETE idempotent — self-suppression (COMP-06)
+-- Ley 1581 art.8 — data subject can delete own rows.
+-- Idempotent DROP IF EXISTS + CREATE, same pattern as §14.
+-- Clerk JWT only (auth.jwt() ->> ''sub'' TEXT, see header).
+-- ──────────────────────────────────────────────────────────
+
+DROP POLICY IF EXISTS "users can delete own progress" ON progress;
+CREATE POLICY "users can delete own progress"
+  ON progress FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own lab_progress" ON lab_progress;
+CREATE POLICY "users can delete own lab_progress"
+  ON lab_progress FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own reflection_completions" ON reflection_completions;
+CREATE POLICY "users can delete own reflection_completions"
+  ON reflection_completions FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own streaks" ON streaks;
+CREATE POLICY "users can delete own streaks"
+  ON streaks FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own user_achievements" ON user_achievements;
+CREATE POLICY "users can delete own user_achievements"
+  ON user_achievements FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own consent_logs" ON consent_logs;
+CREATE POLICY "users can delete own consent_logs"
+  ON consent_logs FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = user_id);
+
+DROP POLICY IF EXISTS "users can delete own profile" ON profiles;
+CREATE POLICY "users can delete own profile"
+  ON profiles FOR DELETE
+  USING ((auth.jwt() ->> 'sub') = id);

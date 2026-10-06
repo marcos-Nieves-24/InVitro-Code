@@ -102,5 +102,28 @@ export async function POST(req: Request) {
     await admin.from("profiles").upsert(verifiedPayload, { onConflict: "id" });
   }
 
+  if (evt.type === "user.deleted") {
+    const id = (evt.data as { id: string }).id;
+    if (!id) {
+      return new Response("Missing user id", { status: 400 });
+    }
+    const admin = getAdmin();
+    // Best-effort sequential cascade, log without aborting (Ley 1581 art.8)
+    await admin.from("lab_progress").delete().eq("user_id", id);
+    await admin.from("progress").delete().eq("user_id", id);
+    await admin.from("reflection_completions").delete().eq("user_id", id);
+    await admin.from("streaks").delete().eq("user_id", id);
+    await admin.from("user_achievements").delete().eq("user_id", id);
+    await admin.from("consent_logs").delete().eq("user_id", id);
+    // Storage cleanup: avatars bucket (best-effort)
+    const { data: files } = await admin.storage.from("avatars").list("", { search: id });
+    if (files?.length) {
+      await admin.storage.from("avatars").remove(files.map((f) => f.name));
+    }
+    await admin.from("profiles").delete().eq("id", id);
+    console.log(`[webhook:user.deleted] purged ${id}`);
+    return new Response("OK deleted", { status: 200 });
+  }
+
   return new Response("OK", { status: 200 });
 }
