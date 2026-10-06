@@ -116,6 +116,8 @@ Inventario exhaustivo de `src/app/api/**` (6 handlers + 2 test files):
 | **Índices** | `idx_progress_user_comp` (`migration.sql:235`), `idx_reflection_user_comp` (`migration.sql:236`), `idx_lab_progress_user_module/status` (`migration.sql:350-351`), funciones `get_leaderboard` / `get_leaderboard_rank` (`migration.sql:239-270`). |
 | **Seed** | 17 achievements (`migration.sql:214-232`), 4 módulos (`migration.sql:284-289`). |
 | **Cliente administrador** | `src/lib/supabase/admin.ts:4-8` `createAdminClient() { return createClient(requireEnv("NEXT_PUBLIC_SUPABASE_URL"), requireEnv("SUPABASE_SERVICE_ROLE_KEY")) }` — service-role bypass RLS, solo servidor. Anon key no se usa para writes (Fase 1). |
+| **Backups PITR 7d/30d** | Supabase Cloud PITR — Free 7 días, Pro 30 días; RPO minutos, RTO minutos-horas (Supabase Docs). `supabase-migration.sql:1` cabecera schema versionada como fuente. Ver `legal/security-audit.md` §Backups y retención logs — PITR + `legal/retention-policy.md` §1. |
+| **Logs infra según Encargado** | Vercel Hobby 30d / Pro 1 año (funciones/logs), Clerk según DPA `providers-audit.md P-01`, Supabase logs según plan. Sin `vercel.json` en HEAD c325b44 — cron futuro `pg_cron` o `vercel.json` `purge-pending` 0 * * * * documentado en `retention-policy.md` §3 sin implementar. |
 
 ### 2.4. Storage
 

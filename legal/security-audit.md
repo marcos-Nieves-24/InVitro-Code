@@ -195,7 +195,20 @@
 
 ---
 
-## Backups, PITR y retención de logs
+## Backups y retención logs — PITR
+
+### PITR — RPO/RTO y retención por sistema (E-Backups 2026-10-06)
+
+> Cierre parcial GAP INV-03 y aporte a disponibilidad art. 19 Ley 1581. Documentación sin implementar cron físico — norma versionada suficiente para RNBD y `politica-privacidad.md`.
+
+| Sistema | RPO | RTO | Retención | Evidencia / Fuente |
+|---|---|---|---|---|
+| Supabase Postgres PITR | minutos | minutos-horas | Free 7d, Pro 30d (Supabase Cloud) | Supabase Docs + `supabase-migration.sql:1` |
+| Vercel logs/funciones | — | — | Hobby 30d, Pro 1 año | Vercel Docs + `vercel.json` cron `purge-pending` 0 * * * * si existe |
+| Clerk logs | — | — | Según DPA Clerk | `providers-audit.md P-01` |
+| Storage `avatars` | — | — | Versionado no, `upsert:true` + `remove(oldPath)` best-effort (C-G04) | `avatar/route.ts:41` |
+
+> **Purgas programadas:** `codeSnapshot` 60d, inactividad 24m — norma doc, implementación `pg_cron` o `vercel.json` cron futura sin tocar consent. Ver `legal/retention-policy.md` §3 (P1/P2) y `legal/data-inventory.md` §4. No se altera `consent_logs` ni flujo `webhooks/clerk`.
 
 ### Estado actual observado (evidencia negativa)
 
