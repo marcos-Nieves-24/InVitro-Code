@@ -2,7 +2,7 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
-import { Flame, LogOut, Menu, X } from "lucide-react";
+import { Flame, LogOut, Menu, Search, X } from "lucide-react";
 import Link from "next/link";
 import { SectionsDropdown } from "./SectionsDropdown";
 
@@ -60,8 +60,18 @@ export function InVitroShell({
             <SectionsDropdown />
           </div>
 
-          {/* Right: Streak + User info + Logout */}
+          {/* Right: Search + Streak + User info + Logout */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+              className="hidden sm:flex items-center gap-2 rounded-full border border-surface-raised bg-surface px-3 py-1.5 text-xs font-medium text-storm hover:bg-surface-raised hover:text-ink transition-colors"
+              aria-label="Buscar (⌘K)"
+              title="Buscar (⌘K)"
+            >
+              <Search className="h-3.5 w-3.5" />
+              <span className="hidden lg:inline">Buscar</span>
+              <kbd className="hidden lg:inline rounded bg-surface-raised px-1 py-0.5 text-[10px]">⌘K</kbd>
+            </button>
             {currentStreak !== undefined && (
               <div className="hidden sm:flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1 text-xs font-bold text-ink">
                 <Flame className="h-3.5 w-3.5 text-[var(--color-error)]" />
