@@ -23,7 +23,7 @@ class RouteBackend(str, Enum):
 ROUTE_FLAGS: dict[str, RouteBackend] = {
     # Already migrated to FastAPI
     "profile": RouteBackend.FASTAPI,
-    "progress": RouteBackend.FASTAPI,
+    "progress": RouteBackend.NEXTJS,
     "achievements": RouteBackend.FASTAPI,
     "leaderboard": RouteBackend.FASTAPI,
     "admin": RouteBackend.FASTAPI,

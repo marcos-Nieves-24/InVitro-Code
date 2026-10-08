@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useApiClient } from "@/hooks/useApiClient";
 
 interface Props {
   module: string;
@@ -13,7 +12,6 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
     "idle" | "loading" | "done" | "error"
   >("idle");
   const [message, setMessage] = useState("");
-  const { apiClient } = useApiClient();
 
   const handleComplete = async () => {
     if (status !== "idle") return;
@@ -21,28 +19,38 @@ export default function CompleteLessonButton({ module, lesson }: Props) {
     setStatus("loading");
 
     try {
-      const data = await apiClient<{
-        success: boolean;
-        xpEarned: number;
-        streak: { current_streak: number };
-        error?: string;
-      }>("/api/v1/progress", {
+      const res = await fetch("/api/progress", {
         method: "POST",
-        body: JSON.stringify({
-          moduleSlug: module,
-          lessonSlug: lesson,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ module_slug: module, lesson_slug: lesson }),
       });
-
-      if (data.success) {
-        setStatus("done");
-        setMessage(
-           `Leccion completada! +${data.xpEarned} XP | Racha: ${data.streak.current_streak} dias`,
-        );
-      } else {
-        setStatus("error");
-        setMessage(data.error ?? "Error al guardar progreso");
+      const data = (await res.json()) as {
+        progress?: unknown;
+        streak?: { current_streak: number };
+        achievements?: unknown[];
+        error?: string;
+        xp_earned?: number;
+        xpEarned?: number;
+      };
+      if (!res.ok) {
+        if (res.status === 401) {
+          window.location.href = "/sign-in";
+          throw new Error(data.error ?? `HTTP ${res.status}`);
+        }
+        if (res.status === 403 && (data.error ?? "").includes("Consent pending")) {
+          setStatus("error");
+          setMessage("Completa tu consentimiento en perfil");
+          return;
+        }
+        throw new Error(data.error ?? `HTTP ${res.status}`);
       }
+      const xp = (data as unknown as { xp_earned?: number; xpEarned?: number }).xp_earned ?? (data as unknown as { xpEarned?: number }).xpEarned ?? 0;
+      // xp may also live inside progress (Next.js response shape)
+      const progressXp = (data.progress as { xp_earned?: number } | undefined)?.xp_earned;
+      const resolvedXp = progressXp ?? xp;
+      const streakVal = data.streak?.current_streak ?? 0;
+      setStatus("done");
+      setMessage(`Leccion completada! +${resolvedXp} XP | Racha: ${streakVal} dias`);
     } catch {
       setStatus("error");
       setMessage("Error de conexión — intenta de nuevo");
