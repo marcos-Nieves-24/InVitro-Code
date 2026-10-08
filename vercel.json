@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/purge-pending",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/recharge-freezes",
+      "schedule": "0 0 * * 1"
     }
   ]
 }
