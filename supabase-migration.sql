@@ -499,3 +499,20 @@ CREATE INDEX IF NOT EXISTS idx_streaks_freeze_recharge ON streaks(freezes_availa
 -- ──────────────────────────────────────────────────────────
 DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='profiles' AND column_name='daily_goal_xp') THEN ALTER TABLE profiles ADD COLUMN daily_goal_xp INT NOT NULL DEFAULT 50 CHECK (daily_goal_xp >= 10 AND daily_goal_xp <= 500); END IF; END $$;
 DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='profiles' AND column_name='last_nudge_at') THEN ALTER TABLE profiles ADD COLUMN last_nudge_at TIMESTAMPTZ; END IF; END $$;
+
+-- ──────────────────────────────────────────────────────────
+-- 18. Bookmarks — retención búsqueda + guardados (retencion-busqueda-bookmarks PR-3)
+-- Idempotent: CREATE IF NOT EXISTS + IF NOT EXISTS checks, consistent with prior sections.
+-- ──────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS bookmarks (
+  user_id TEXT NOT NULL,
+  module_slug TEXT NOT NULL,
+  lesson_slug TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user_id, module_slug, lesson_slug)
+);
+ALTER TABLE bookmarks ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "users can manage own bookmarks" ON bookmarks;
+CREATE POLICY "users can manage own bookmarks" ON bookmarks FOR ALL USING ((auth.jwt() ->> 'sub') = user_id) WITH CHECK ((auth.jwt() ->> 'sub') = user_id);
+CREATE INDEX IF NOT EXISTS idx_bookmarks_user ON bookmarks(user_id);
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname='supabase_realtime' AND tablename='bookmarks') THEN ALTER PUBLICATION supabase_realtime ADD TABLE bookmarks; END IF; END $$;
