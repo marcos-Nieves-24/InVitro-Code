@@ -54,13 +54,18 @@ export async function DashboardContainer() {
       .not("completed_at", "is", null),
     supabase
       .from("streaks")
-      .select("current_streak, longest_streak")
+      .select("current_streak, longest_streak, freezes_available, last_freeze_used")
       .eq("user_id", userId)
       .maybeSingle(),
   ]);
 
   const userName = getDisplayName(profileRes.data ?? {});
-  const streakData = streakRes.data ?? { current_streak: 0, longest_streak: 0 };
+  const streakData = (streakRes.data as {
+    current_streak: number;
+    longest_streak: number;
+    freezes_available?: number;
+    last_freeze_used?: string | null;
+  } | null) ?? { current_streak: 0, longest_streak: 0, freezes_available: 1, last_freeze_used: null };
 
   const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);

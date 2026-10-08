@@ -1,3 +1,5 @@
+import { StreakFreezeBadge } from "@/components/gamification/StreakFreezeBadge";
+
 interface LabStreakPillProps {
   icon: React.ReactNode;
   value: string | number;
@@ -28,5 +30,22 @@ export function LabStreakPill({
       {label && <span className="sr-only">{label}</span>}
       <span aria-hidden="true">{value}</span>
     </span>
+  );
+}
+
+/** Freeze variant for lab headers — compact shield badge. */
+export function LabFreezePill({
+  freezesAvailable,
+  lastFreezeUsed,
+}: {
+  freezesAvailable: 0 | 1;
+  lastFreezeUsed?: string | null;
+}) {
+  return (
+    <StreakFreezeBadge
+      freezesAvailable={freezesAvailable}
+      lastFreezeUsed={lastFreezeUsed}
+      compact
+    />
   );
 }
