@@ -22,6 +22,7 @@ import { BioreactorProgress } from "./BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { ProgressCharts } from "./ProgressCharts";
+import { DailyGoalRing } from "@/components/gamification/DailyGoalRing";
 import { CheckCircle2, Gem } from "lucide-react";
 
 const MODULE_FAVICON: Record<string, string> = {
@@ -43,7 +44,7 @@ export async function DashboardContainer() {
   const [profileRes, progressRes, streakRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("username, email, role, theme, gender")
+      .select("username, email, role, theme, gender, daily_goal_xp")
       .eq("id", userId)
       .maybeSingle(),
     supabase
@@ -110,6 +111,9 @@ export async function DashboardContainer() {
     const completed = completedByModule.get(m.slug) ?? 0;
     return { name: m.name, completed, total: m.totalLessons, value: completed };
   });
+
+  const dailyGoalXp = (profileRes.data as { daily_goal_xp?: number | null } | null)?.daily_goal_xp ?? 50;
+  const todayXp = daily[daily.length - 1]?.xp ?? 0;
 
   return (
     <InVitroShell
@@ -226,6 +230,9 @@ export async function DashboardContainer() {
                   />
                 )}
               </div>
+            </div>
+            <div className="mt-6">
+              <DailyGoalRing todayXp={todayXp} goal={dailyGoalXp} />
             </div>
             <div className="mt-6">
               <ProgressCharts timeline={timeline} modules={modulesData} daily={daily} overallProgress={overallProgress} />
