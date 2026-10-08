@@ -10,6 +10,7 @@ export const DAILY_GOAL_STEP = 10;
  * Coerce unknown to number, clamp MIN..MAX, snap to STEP (round), fallback DEFAULT if NaN.
  */
 export function clampDailyGoal(n: unknown): number {
+  if (n === null || n === undefined) return DAILY_GOAL_DEFAULT;
   let num: number;
   if (typeof n === "number") {
     num = n;
