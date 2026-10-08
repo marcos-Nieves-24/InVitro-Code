@@ -483,3 +483,11 @@ DROP POLICY IF EXISTS "users can delete own profile" ON profiles;
 CREATE POLICY "users can delete own profile"
   ON profiles FOR DELETE
   USING ((auth.jwt() ->> 'sub') = id);
+
+-- ──────────────────────────────────────────────────────────
+-- 16. Streak freeze automático — retención D1/D7 (retencion-freeze-automatico)
+-- Idempotent: DO blocks + IF NOT EXISTS, consistent with prior sections.
+-- ──────────────────────────────────────────────────────────
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='streaks' AND column_name='freezes_available') THEN ALTER TABLE streaks ADD COLUMN freezes_available INT NOT NULL DEFAULT 1 CHECK (freezes_available IN (0,1)); END IF; END $$;
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='streaks' AND column_name='last_freeze_used') THEN ALTER TABLE streaks ADD COLUMN last_freeze_used DATE; END IF; END $$;
+CREATE INDEX IF NOT EXISTS idx_streaks_freeze_recharge ON streaks(freezes_available);
