@@ -1,9 +1,16 @@
-"use client";
-
 import { Reveal } from "@/components/Reveal";
 import { OrbitalModules } from "./OrbitalModules";
+import { getModules, getModuleShortDescription } from "@/lib/content/modules";
 
 export function Modules() {
+  const raw = getModules();
+  const modules = raw.map((m) => ({
+    slug: m.slug,
+    title: m.title,
+    lessons: m.lessonCount,
+    description: getModuleShortDescription(m.slug),
+  }));
+
   return (
     <section
       id="modulos"
@@ -60,7 +67,7 @@ export function Modules() {
             </p>
           </div>
         </Reveal>
-        <OrbitalModules />
+        <OrbitalModules modules={modules} />
       </div>
     </section>
   );

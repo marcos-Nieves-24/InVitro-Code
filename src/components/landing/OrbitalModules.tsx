@@ -6,58 +6,26 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getLabCardTheme } from "@/components/labs/LabCardTheme";
 import { ModuleCardContent } from "@/components/shared/ModuleCardContent";
 
-interface ModuleData {
+export interface ModuleData {
   slug: string;
   title: string;
   lessons: number;
   description: string;
 }
 
-const modules: ModuleData[] = [
-  {
-    slug: "MOD-01",
-    title: "Introduccion a la IA",
-    lessons: 4,
-    description:
-      "Fundamentos de inteligencia artificial aplicados a biotecnologia.",
-  },
-  {
-    slug: "MOD-02",
-    title: "Python para Biotecnologia",
-    lessons: 17,
-    description:
-      "Programacion en Python aplicada al analisis de datos biologicos.",
-  },
-  {
-    slug: "MOD-03",
-    title: "Estadistica y Probabilidad",
-    lessons: 10,
-    description:
-      "Fundamentos estadisticos para el analisis de datos en investigacion biomedica.",
-  },
-  {
-    slug: "MOD-04",
-    title: "Machine Learning",
-    lessons: 10,
-    description:
-      "Algoritmos de aprendizaje automatico para aplicaciones biotecnologicas.",
-  },
-];
-
-const slugToThemeKey: Record<string, string> = {
-  "MOD-01": "ia",
-  "MOD-02": "python",
-  "MOD-03": "estadistica",
-  "MOD-04": "machine-learning",
-};
-
 const CARD_W = 332;
 const GAP = 16;
 
-export function OrbitalModules() {
-  const [activeIndex, setActiveIndex] = useState(3);
+export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
+  const len = modules.length;
+  const [activeIndex, setActiveIndex] = useState(() => (len ? len - 1 : 0));
   const shouldReduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (len === 0) return;
+    setActiveIndex((prev) => (prev >= len ? len - 1 : prev));
+  }, [len]);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -67,7 +35,14 @@ export function OrbitalModules() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  const len = modules.length;
+  if (len === 0) {
+    return (
+      <div className="mx-auto max-w-[1360px] py-12 text-center text-storm">
+        <p className="text-sm">No hay expediciones disponibles.</p>
+      </div>
+    );
+  }
+
   const trackOffset = isMobile ? 0 : activeIndex % 2 === 0 ? 0 : -8;
   const maxOffset = (len - 1) * (CARD_W + GAP);
   const prev = useCallback(() => {
@@ -90,13 +65,14 @@ export function OrbitalModules() {
     [prev, next],
   );
 
-  // Ventana rotada circular: activa queda segunda visible en desktop 4-visibles
-  // active=3 => ordered indices [2,3,0,1] => [MOD-03, MOD-04, MOD-01, MOD-02]
+  // Ventana rotada circular dinámica: activa queda segunda visible en desktop
+  // con ventana de hasta 4 visibles (se adapta a len < 4)
+  const visibleCount = Math.min(4, len);
   const ordered = isMobile
     ? [modules[activeIndex]!]
-    : ([0, 1, 2, 3] as const)
-        .map((k) => (activeIndex - 1 + k + len) % len)
-        .map((i) => modules[i]!);
+    : Array.from({ length: visibleCount }, (_, k) => (activeIndex - 1 + k + len) % len).map(
+        (i) => modules[i]!,
+      );
 
   return (
     <div
@@ -147,7 +123,7 @@ export function OrbitalModules() {
           >
             {ordered.map((mod) => {
               const isActive = mod.slug === modules[activeIndex]!.slug;
-              const theme = getLabCardTheme(slugToThemeKey[mod.slug] ?? mod.slug);
+              const theme = getLabCardTheme(mod.slug);
               const xp = mod.lessons * 20;
 
               return (

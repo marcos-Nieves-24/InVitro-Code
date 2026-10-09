@@ -96,7 +96,7 @@ export function CommandPalette() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="command-palette-overlay"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-black/50 pt-[20vh] backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         >
           <motion.div
@@ -104,7 +104,7 @@ export function CommandPalette() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="command-palette"
+            className="w-full max-w-[640px] overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-surface-raised)] bg-[var(--color-surface-card)] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.25)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b border-surface-raised px-4">
@@ -116,14 +116,14 @@ export function CommandPalette() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="command-palette-input"
+                className="w-full bg-transparent px-6 py-4 text-base text-[var(--color-ink)] placeholder:text-[var(--color-storm)] outline-none"
               />
               <kbd className="hidden rounded-md border border-surface-raised bg-surface px-2 py-1 text-xs text-storm md:inline">
                 ESC
               </kbd>
             </div>
 
-            <div className="command-palette-list">
+            <div className="max-h-[320px] overflow-y-auto p-2">
               {filtered.length === 0 ? (
                 <div className="p-6 text-center text-storm">
                   <p className="font-medium">Sin resultados</p>
@@ -136,9 +136,7 @@ export function CommandPalette() {
                     <Link
                       key={item.id}
                       href={item.href}
-                      className={`command-palette-item ${
-                        index === activeIndex ? "active" : ""
-                      }`}
+                      className={`flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] px-4 py-3 transition-colors hover:bg-[var(--color-surface-raised)] ${index === activeIndex ? "bg-[rgba(0,178,178,0.1)] text-[var(--color-mint)]" : ""}`}
                       onClick={() => setIsOpen(false)}
                     >
                       <Icon className="h-5 w-5 shrink-0" />

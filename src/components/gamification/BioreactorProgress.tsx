@@ -1,3 +1,6 @@
+// CANONICAL: vessel (src/components/dashboard/BioreactorProgress/BioreactorProgress.tsx) is canonical —
+// this simple bubble-layer variant is kept for ModuleProgress linear integration.
+// Do not delete without migrating ModuleProgress variant prop to vessel re-export.
 "use client";
 
 import { useEffect, useRef } from "react";
