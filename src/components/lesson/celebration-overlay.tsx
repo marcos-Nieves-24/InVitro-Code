@@ -7,6 +7,8 @@ interface CelebrationOverlayProps {
   lessonTitle: string;
   nextLessonHref?: string;
   onClose?: () => void;
+  xp?: number | null;
+  streak?: number | null;
 }
 
 /** Generate deterministic confetti pieces for CSS animation */
@@ -49,6 +51,8 @@ export function CelebrationOverlay({
   lessonTitle,
   nextLessonHref,
   onClose,
+  xp,
+  streak,
 }: CelebrationOverlayProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/50">
@@ -78,7 +82,14 @@ export function CelebrationOverlay({
         <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink">
           Leccion completada
         </h2>
-        <p className="mb-6 text-sm text-storm">{lessonTitle}</p>
+        <p className="mb-2 text-sm text-storm">{lessonTitle}</p>
+        {(xp !== null && xp !== undefined) || (streak !== null && streak !== undefined) ? (
+          <p className="mb-4 text-sm font-semibold text-green-700">
+            {xp !== null && xp !== undefined ? `+${xp} XP` : ""}
+            {xp !== null && xp !== undefined && streak !== null && streak !== undefined ? " · " : ""}
+            {streak !== null && streak !== undefined ? `Racha: ${streak} días` : ""}
+          </p>
+        ) : null}
 
         <div className="mb-6 text-left">
           <MascotMessage mood="celebrating">
