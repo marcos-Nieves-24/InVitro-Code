@@ -1,66 +1,43 @@
-import Link from "next/link";
-import { getModules } from "@/lib/content/modules";
-import { ArrowRight, Compass } from "lucide-react";
-
-const MODULE_FAVICON: Record<string, string> = {
-  ia: "/favicon-modulo-1-sin-fondo.svg",
-  python: "/favicon-modulo-2-sin-fondo.svg",
-  estadistica: "/favicon-modulo-3-sin-fondo.svg",
-  "machine-learning": "/favicon-modulo-4-sin-fondo.svg",
-};
+import { Compass } from "lucide-react";
+import { getModules, getModuleShortDescription, getLessonSlugs } from "@/lib/content/modules";
+import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
+import { calcXpForLesson } from "@/lib/gamification/utils";
+import { buildModuleCardModel } from "@/domain/module-card";
+import { ModuleGrid } from "@/components/modules/ModuleGrid";
 
 export default function LearnIndexPage() {
   const modules = getModules();
+
+  const items = modules.map((mod) => {
+    const slugs = getLessonSlugs(mod.slug);
+    const xpReward = slugs.reduce((sum, ls) => sum + calcXpForLesson(mod.slug, ls), 0);
+    const theme = toSerializableTheme(getLabCardTheme(mod.slug));
+    const model = buildModuleCardModel({
+      slug: mod.slug,
+      title: mod.title,
+      description: getModuleShortDescription(mod.slug),
+      lessonCount: mod.lessonCount,
+      labCount: mod.lessonCount,
+      xpReward,
+      completed: null,
+      total: null,
+    });
+    const href = mod.firstLesson ? `/learn/${mod.slug}/${mod.firstLesson}` : `/learn/${mod.slug}`;
+    return { model, href, theme };
+  });
 
   return (
     <div className="px-6 py-8 md:px-10">
       <div className="mb-10 flex items-start justify-between">
         <div>
-          <p className="mb-1 text-sm font-bold uppercase tracking-widest text-mint">
-            Expediciones
-          </p>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink">
-            Elige tu Expedición
-          </h2>
-          <p className="mt-1 text-storm">
-            Cada módulo es una expedición hacia el dominio de la Inteligencia
-            Artificial.
-          </p>
+          <p className="mb-1 text-sm font-bold uppercase tracking-widest text-mint">Expediciones</p>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink">Elige tu Expedición</h2>
+          <p className="mt-1 text-storm">Cada módulo es una expedición hacia el dominio de la Inteligencia Artificial.</p>
         </div>
         <Compass className="hidden h-10 w-10 text-mint md:block" />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {modules.map((mod) => (
-          <Link
-            key={mod.slug}
-            href={
-              mod.firstLesson
-                ? `/learn/${mod.slug}/${mod.firstLesson}`
-                : `/learn/${mod.slug}`
-            }
-            className="glass-card group flex h-full flex-col rounded-2xl p-6 transition-all hover:border-mint/50"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-fog/20">
-              <img
-                src={MODULE_FAVICON[mod.slug] || "/favicon-modulo-1-sin-fondo.svg"}
-                alt=""
-                className="h-8 w-8"
-              />
-            </div>
-            <p className="eyebrow mb-1 text-[10px]">{mod.slug}</p>
-            <h3 className="font-display text-lg font-semibold text-ink">
-              {mod.title}
-            </h3>
-            <p className="mt-1 text-sm text-storm">
-              {mod.lessonCount} lecciones
-            </p>
-            <span className="mt-4 flex items-center gap-1 text-sm font-bold text-mint">
-              Explorar <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </span>
-          </Link>
-        ))}
-      </div>
+      <ModuleGrid items={items} variant="grid" />
     </div>
   );
 }
