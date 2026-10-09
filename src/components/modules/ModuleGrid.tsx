@@ -15,6 +15,7 @@ export interface ModuleGridItem {
 export interface ModuleGridProps {
   items: ModuleGridItem[];
   variant?: "grid" | "compact";
+  columns?: 3 | 4;
 }
 
 const containerVariants = {
@@ -29,7 +30,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.28, ease: "easeOut" as const } },
 };
 
-export function ModuleGrid({ items, variant = "grid" }: ModuleGridProps) {
+export function ModuleGrid({ items, variant = "grid", columns }: ModuleGridProps) {
   if (items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-surface-raised bg-surface-card px-6 py-16 text-center">
@@ -40,10 +41,9 @@ export function ModuleGrid({ items, variant = "grid" }: ModuleGridProps) {
     );
   }
 
-  const gridClass =
-    variant === "compact"
-      ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-      : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
+  const effectiveColumns = columns ?? (variant === "compact" ? 4 : 3);
+  const lgCols = effectiveColumns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
+  const gridClass = `grid grid-cols-1 gap-6 sm:grid-cols-2 ${lgCols}`;
 
   if (variant === "compact") {
     return (

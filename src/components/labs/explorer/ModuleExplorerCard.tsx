@@ -1,3 +1,4 @@
+// @deprecated — replaced by ModuleCard, remove in Phase5
 "use client";
 
 import Link from "next/link";

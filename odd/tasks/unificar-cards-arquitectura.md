@@ -18,7 +18,13 @@ Unificar ModuleCard y LessonCard bajo arquitectura limpia: domain puro (cero dep
   - [x] `src/app/learn/page.tsx` — elimina MODULE_FAVICON/glass-card, usa getModules+getLessonSlugs+calcXpForLesson(sum real)+toSerializableTheme+buildModuleCardModel+ModuleGrid, header Expediciones preservado
   - [x] `type-check` PASS, `build` PASS (29 rutas), `test` 174/174 PASS
   - Commit: `feat(cards): CardPrimitives + ModuleCard + migrar /learn`
-- [ ] FASE 3 — UI unificada (migrar LabCard/ModuleExplorerGrid a domain + LessonCard)
+- [x] FASE 3 — Migrar /laboratorios (ModuleExplorerGrid)
+  - [x] `src/components/modules/ModuleGrid.tsx` — añade `columns?: 3|4` (effectiveColumns, lg:grid-cols-4 vs 3, sm:2 preservado)
+  - [x] `src/components/labs/explorer/ModuleExplorerGrid.tsx` — elimina ModuleExplorerCard + motion propio, pasa a server component, usa ModuleGrid+buildModuleCardModel+getLabCardTheme+toSerializableTheme+calcXpForLesson+getModuleShortDescription, 4-col grid (lg:grid-cols-4) con ProgressFooter via variant grid
+  - [x] `src/components/labs/explorer/ModuleExplorerCard.tsx` — marca `@deprecated — replaced by ModuleCard, remove in Phase5`
+  - [x] `type-check` PASS, `build` PASS (29 rutas), `test` 174/174 PASS
+  - Commit: `refactor(labs): ModuleExplorerGrid usa ModuleCard canónico`
+- [ ] FASE 4 — UI unificada (migrar LabCard/LessonCard)
 
 ## Decisión clave
 **Domain puro sin theme ni xp calculation.** `buildModuleCardModel` y `buildLessonCardModel` reciben `xpReward`/`xp` como param (caller calcula via `calcXpForLesson`). Theme (`LabCardTheme`) se resuelve en presentation — evita import presentation en domain (violación dependency direction). `total` default = `lessonCount`, `labCount` default = `lessonCount`, `progressPct` solo si `completed!=null && total>0`.
@@ -35,3 +41,9 @@ Unificar ModuleCard y LessonCard bajo arquitectura limpia: domain puro (cero dep
 - `npm run build` → PASS (29 rutas)
 - `npm run test` → 174/174 PASS
 - Manual: /learn cards con LabCardArt SVG, chip accent, XpBadge/LabBadge, sin favicon hardcodeado
+
+## Verificación FASE 3
+- `npm run type-check` → PASS
+- `npm run build` → PASS (29 rutas)
+- `npm run test` → 174/174 PASS
+- Manual: /laboratorios grid 4-col con cards canónicas, progreso coherente con /learn XP (BiotechGrowthTube + % crecimiento)
