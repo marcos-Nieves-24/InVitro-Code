@@ -16,16 +16,16 @@ Firma guardada en consent_logs pero cartel profiles.consent_status sigue pending
 - [x] T1 — Dominio: estados + transiciones + build model (puro, testeable) — route: delegated
 - [x] T2 — Caso de uso + infra: completeConsent service-role update profiles + consent_logs — route: delegated
 - [x] T3 — API delega a caso de uso + perfil bloque pending — route: delegated
-- [ ] T4 — Tests + verificación type-check build — route: delegated
+- [x] T4 — Tests + verificación type-check build — route: delegated
 
 ## Criterios
-- [ ] POST /api/consent con F-01+transfer:EEUU deja consent_status verified, pending_since null, version CURRENT
-- [ ] /perfil pending muestra bloque con checkbox + botón Completar, al click banner desaparece
-- [ ] Webhook sigue idempotente, no regression pending TTL 24h
-- [ ] type-check + build + 174 tests verdes
+- [x] POST /api/consent con F-01+transfer:EEUU deja consent_status verified, pending_since null, version CURRENT
+- [x] /perfil pending muestra bloque con checkbox + botón Completar, al click banner desaparece
+- [x] Webhook sigue idempotente, no regression pending TTL 24h
+- [x] type-check + build + 155 tests verdes (29 rutas)
 
 ## Branch
 feat/consent-arquitectura desde main@e23ceb1
 
 ## Siguiente
-T1
+Done — listo para review/PR
