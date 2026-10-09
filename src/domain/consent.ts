@@ -35,6 +35,49 @@ export const PENDING_TTL_HOURS = 24;
 // Sensitive purpose that requires explicit separate consent (art.6)
 export const GENDER_SENSITIVE_PURPOSE = ConsentPurpose.GENDER_X;
 
+// ── Consent trámite state machine (pending → verified, blocked terminal) ──
+export type ConsentStatus = "pending" | "verified" | "blocked";
+
+export interface ConsentState {
+  status: ConsentStatus;
+  version: string | null;
+  pendingSince: string | null;
+}
+
+/**
+ * Pure factory for ConsentState. No side effects, no I/O.
+ */
+export function buildConsentState(
+  status: ConsentStatus,
+  version: string | null,
+  pendingSince: string | null,
+): ConsentState {
+  return { status, version, pendingSince };
+}
+
+/**
+ * Whether the consent trámite can be completed.
+ * Only pending can transition to verified via ventanilla única.
+ */
+export function canCompleteConsent(status: ConsentStatus): boolean {
+  return status === "pending";
+}
+
+/**
+ * Next state after a successful ventanilla única completion.
+ * Pure transition: pending → verified with current policy version.
+ * pendingSince argument is accepted for symmetry/traceability but always nulled.
+ */
+export function nextConsentStateAfterComplete(
+  _pendingSince: string | null,
+): ConsentState {
+  return {
+    status: "verified",
+    version: CURRENT_POLICY_VERSION,
+    pendingSince: null,
+  };
+}
+
 /**
  * Checks whether a consent record covers a given purpose.
  * Pure helper — no side effects, no I/O.
