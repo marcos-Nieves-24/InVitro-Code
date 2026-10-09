@@ -1,15 +1,23 @@
 import { Reveal } from "@/components/Reveal";
 import { OrbitalModules } from "./OrbitalModules";
-import { getModules, getModuleShortDescription } from "@/lib/content/modules";
+import { getModules, getModuleShortDescription, getLessonSlugs } from "@/lib/content/modules";
+import { calcXpForLesson } from "@/lib/gamification/utils";
 
 export function Modules() {
   const raw = getModules();
-  const modules = raw.map((m) => ({
-    slug: m.slug,
-    title: m.title,
-    lessons: m.lessonCount,
-    description: getModuleShortDescription(m.slug),
-  }));
+  const modules = raw.map((m) => {
+    const slugs = getLessonSlugs(m.slug);
+    const xpReward = slugs.reduce((sum, ls) => sum + calcXpForLesson(m.slug, ls), 0);
+    const href = m.firstLesson ? `/learn/${m.slug}/${m.firstLesson}` : `/learn/${m.slug}`;
+    return {
+      slug: m.slug,
+      title: m.title,
+      lessons: m.lessonCount,
+      description: getModuleShortDescription(m.slug),
+      xpReward,
+      href,
+    };
+  });
 
   return (
     <section

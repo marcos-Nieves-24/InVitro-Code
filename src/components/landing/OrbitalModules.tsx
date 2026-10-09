@@ -11,6 +11,8 @@ export interface ModuleData {
   title: string;
   lessons: number;
   description: string;
+  xpReward?: number;
+  href: string;
 }
 
 const CARD_W = 332;
@@ -124,7 +126,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
             {ordered.map((mod) => {
               const isActive = mod.slug === modules[activeIndex]!.slug;
               const theme = getLabCardTheme(mod.slug);
-              const xp = mod.lessons * 20;
+              const xp = mod.xpReward ?? mod.lessons * 20;
 
               return (
                 <li
@@ -132,7 +134,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
                   className="list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)]"
                 >
                   <a
-                    href="/sign-in"
+                    href={mod.href}
                     aria-label={`${mod.title} — ${mod.slug}`}
                     className={[
                       "group flex flex-col rounded-[18px] border bg-white p-6 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] focus-visible:ring-offset-2",
