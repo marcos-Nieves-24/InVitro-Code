@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { ConsentPurpose } from "@/domain/consent";
-import { createConsentRepository } from "@/lib/supabase/consent";
+import { completeConsent } from "@/application/use-cases/completeConsent";
 
 export const runtime = "nodejs";
 
@@ -61,19 +61,20 @@ export async function POST(req: NextRequest) {
   const userAgent = req.headers.get("user-agent") ?? null;
 
   try {
-    const repo = createConsentRepository();
-    const record = await repo.save({
+    const record = await completeConsent({
       userId,
       policyVersion,
       acceptedTextHash,
       purposes,
-      ...(ip ? { ip } : {}),
-      ...(userAgent ? { userAgent } : {}),
+      ip,
+      userAgent,
     });
 
     return NextResponse.json({ ok: true, consentId: record.id }, { status: 201 });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to save consent";
-    return NextResponse.json({ error: message }, { status: 500 });
+    // Validation errors (missing F-01 / transfer:EEUU) are 400, otherwise 500
+    const status = message.includes("purposes must include") ? 400 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

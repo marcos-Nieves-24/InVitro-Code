@@ -7,6 +7,7 @@ import { getDisplayName } from "@/lib/gamification/user";
 import { ProfileCard } from "@/components/profile/ProfileCard";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { AvatarUpload } from "@/components/profile/AvatarUpload";
+import { ConsentPendingCard } from "@/components/consent/ConsentPendingCard";
 import { createConsentRepository } from "@/lib/supabase/consent";
 
 export default async function ProfilePage() {
@@ -32,6 +33,10 @@ export default async function ProfilePage() {
           <h1 className="font-display text-3xl font-bold text-ink">
             Mi Perfil
           </h1>
+
+          {profile?.consent_status === "pending" && (
+            <ConsentPendingCard pendingSince={profile?.pending_since ?? null} />
+          )}
 
           <ProfileCard
             username={profile?.username}
