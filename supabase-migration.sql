@@ -483,3 +483,36 @@ DROP POLICY IF EXISTS "users can delete own profile" ON profiles;
 CREATE POLICY "users can delete own profile"
   ON profiles FOR DELETE
   USING ((auth.jwt() ->> 'sub') = id);
+
+-- ──────────────────────────────────────────────────────────
+-- 16. Streak freeze automático — retención D1/D7 (retencion-freeze-automatico)
+-- Idempotent: DO blocks + IF NOT EXISTS, consistent with prior sections.
+-- ──────────────────────────────────────────────────────────
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='streaks' AND column_name='freezes_available') THEN ALTER TABLE streaks ADD COLUMN freezes_available INT NOT NULL DEFAULT 1 CHECK (freezes_available IN (0,1)); END IF; END $$;
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='streaks' AND column_name='last_freeze_used') THEN ALTER TABLE streaks ADD COLUMN last_freeze_used DATE; END IF; END $$;
+CREATE INDEX IF NOT EXISTS idx_streaks_freeze_recharge ON streaks(freezes_available);
+
+-- ──────────────────────────────────────────────────────────
+-- 17. Meta diaria + nudge (retencion-meta-diaria PR-2)
+-- Idempotent: DO blocks + IF NOT EXISTS. CHECK 10..500 permite futuro max 500,
+-- UI slider limita 10..200 step 10 (DAILY_GOAL_MAX).
+-- ──────────────────────────────────────────────────────────
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='profiles' AND column_name='daily_goal_xp') THEN ALTER TABLE profiles ADD COLUMN daily_goal_xp INT NOT NULL DEFAULT 50 CHECK (daily_goal_xp >= 10 AND daily_goal_xp <= 500); END IF; END $$;
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='profiles' AND column_name='last_nudge_at') THEN ALTER TABLE profiles ADD COLUMN last_nudge_at TIMESTAMPTZ; END IF; END $$;
+
+-- ──────────────────────────────────────────────────────────
+-- 18. Bookmarks — retención búsqueda + guardados (retencion-busqueda-bookmarks PR-3)
+-- Idempotent: CREATE IF NOT EXISTS + IF NOT EXISTS checks, consistent with prior sections.
+-- ──────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS bookmarks (
+  user_id TEXT NOT NULL,
+  module_slug TEXT NOT NULL,
+  lesson_slug TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user_id, module_slug, lesson_slug)
+);
+ALTER TABLE bookmarks ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "users can manage own bookmarks" ON bookmarks;
+CREATE POLICY "users can manage own bookmarks" ON bookmarks FOR ALL USING ((auth.jwt() ->> 'sub') = user_id) WITH CHECK ((auth.jwt() ->> 'sub') = user_id);
+CREATE INDEX IF NOT EXISTS idx_bookmarks_user ON bookmarks(user_id);
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname='supabase_realtime' AND tablename='bookmarks') THEN ALTER PUBLICATION supabase_realtime ADD TABLE bookmarks; END IF; END $$;

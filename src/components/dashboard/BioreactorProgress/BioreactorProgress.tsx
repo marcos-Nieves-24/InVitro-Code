@@ -1,3 +1,5 @@
+// CANONICAL: vessel is canonical Bioreactor implementation — simple bubble variant lives in
+// src/components/gamification/BioreactorProgress.tsx for ModuleProgress linear mode.
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";

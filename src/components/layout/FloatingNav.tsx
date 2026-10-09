@@ -57,16 +57,14 @@ export function FloatingNav() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="floating-nav"
+          className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-white/10 px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-[20px] transition-all hover:bg-white/15"
           aria-label="Navegación de secciones"
         >
           {SECTIONS.map((section) => (
             <a
               key={section.id}
               href={`#${section.id}`}
-              className={`floating-nav-item ${
-                activeSection === section.id ? "active" : ""
-              }`}
+              className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-all hover:bg-white/10 hover:text-white ${activeSection === section.id ? "bg-[var(--color-mint)] font-semibold text-[var(--color-ink)]" : "text-white/70"}`}
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById(section.id)?.scrollIntoView({

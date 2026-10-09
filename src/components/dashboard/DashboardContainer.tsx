@@ -22,6 +22,7 @@ import { BioreactorProgress } from "./BioreactorProgress";
 import { BiotechGrowthTube } from "./BiotechGrowthTube";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { ProgressCharts } from "./ProgressCharts";
+import { DailyGoalRing } from "@/components/gamification/DailyGoalRing";
 import { CheckCircle2, Gem } from "lucide-react";
 
 const MODULE_FAVICON: Record<string, string> = {
@@ -43,7 +44,7 @@ export async function DashboardContainer() {
   const [profileRes, progressRes, streakRes] = await Promise.all([
     supabase
       .from("profiles")
-      .select("username, email, role, theme, gender")
+      .select("username, email, role, theme, gender, daily_goal_xp")
       .eq("id", userId)
       .maybeSingle(),
     supabase
@@ -54,13 +55,18 @@ export async function DashboardContainer() {
       .not("completed_at", "is", null),
     supabase
       .from("streaks")
-      .select("current_streak, longest_streak")
+      .select("current_streak, longest_streak, freezes_available, last_freeze_used")
       .eq("user_id", userId)
       .maybeSingle(),
   ]);
 
   const userName = getDisplayName(profileRes.data ?? {});
-  const streakData = streakRes.data ?? { current_streak: 0, longest_streak: 0 };
+  const streakData = (streakRes.data as {
+    current_streak: number;
+    longest_streak: number;
+    freezes_available?: number;
+    last_freeze_used?: string | null;
+  } | null) ?? { current_streak: 0, longest_streak: 0, freezes_available: 1, last_freeze_used: null };
 
   const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);
@@ -105,6 +111,9 @@ export async function DashboardContainer() {
     const completed = completedByModule.get(m.slug) ?? 0;
     return { name: m.name, completed, total: m.totalLessons, value: completed };
   });
+
+  const dailyGoalXp = (profileRes.data as { daily_goal_xp?: number | null } | null)?.daily_goal_xp ?? 50;
+  const todayXp = daily[daily.length - 1]?.xp ?? 0;
 
   return (
     <InVitroShell
@@ -221,6 +230,9 @@ export async function DashboardContainer() {
                   />
                 )}
               </div>
+            </div>
+            <div className="mt-6">
+              <DailyGoalRing todayXp={todayXp} goal={dailyGoalXp} />
             </div>
             <div className="mt-6">
               <ProgressCharts timeline={timeline} modules={modulesData} daily={daily} overallProgress={overallProgress} />

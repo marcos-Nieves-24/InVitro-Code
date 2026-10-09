@@ -1,12 +1,12 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Flame, Gem } from "lucide-react";
+import { Flame, Gem, ShieldCheck, ShieldOff } from "lucide-react";
 
 export interface GamingHUDProps {
   totalXp: number;
   levelInfo: { level: number; nextLevelXp: number; progressToNext: number };
-  streak: { current_streak: number; longest_streak: number } | null;
+  streak: { current_streak: number; longest_streak: number; freezes_available?: number; last_freeze_used?: string | null } | null;
 }
 
 export function GamingHUD({ totalXp, levelInfo, streak }: GamingHUDProps) {
@@ -111,6 +111,33 @@ export function GamingHUD({ totalXp, levelInfo, streak }: GamingHUDProps) {
           {totalXp.toLocaleString("es")} XP
         </span>
       </motion.div>
+
+      {/* Freeze — escudo */}
+      {typeof streak?.freezes_available === "number" && (
+        <motion.div
+          {...hoverProps}
+          className="flex items-center gap-1.5"
+          aria-label={
+            streak.freezes_available === 1
+              ? "Protección de racha activa"
+              : "Protección usada — recarga lunes"
+          }
+          title={
+            streak.freezes_available === 1
+              ? "Protección activa — cubre 1 día de ausencia"
+              : "Protección usada — recarga lunes 00:00 UTC"
+          }
+        >
+          {streak.freezes_available === 1 ? (
+            <ShieldCheck className="h-4 w-4 text-mint" aria-hidden="true" />
+          ) : (
+            <ShieldOff className="h-4 w-4 text-storm/60" aria-hidden="true" />
+          )}
+          <span className="hidden text-xs font-semibold text-[var(--color-hud-text)] sm:inline">
+            {streak.freezes_available === 1 ? "Protección" : "Sin protección"}
+          </span>
+        </motion.div>
+      )}
     </div>
   );
 }

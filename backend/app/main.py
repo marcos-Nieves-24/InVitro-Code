@@ -56,11 +56,14 @@ async def health_check() -> dict[str, str]:
 
 
 # Register routers
-from app.routers import profile, progress, achievements, leaderboard, admin
+from app.feature_flags import is_migrated
+from app.routers import achievements, admin, leaderboard, profile, progress
 from app.ws import router as ws_router
 
 app.include_router(profile.router)
-app.include_router(progress.router)
+# SINGLE-WRITER: Next.js is canonical, FastAPI progress disabled — see docs/adr/003
+if is_migrated("progress"):
+    app.include_router(progress.router)
 app.include_router(achievements.router)
 app.include_router(leaderboard.router)
 app.include_router(admin.router)
