@@ -4,7 +4,8 @@ import { useEffect, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getLabCardTheme } from "@/components/labs/LabCardTheme";
-import { ModuleCardContent } from "@/components/shared/ModuleCardContent";
+import { ModuleCard } from "@/components/modules/ModuleCard";
+import { buildModuleCardModel } from "@/domain/module-card";
 
 export interface ModuleData {
   slug: string;
@@ -127,43 +128,36 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
               const isActive = mod.slug === modules[activeIndex]!.slug;
               const theme = getLabCardTheme(mod.slug);
               const xp = mod.xpReward ?? mod.lessons * 20;
+              const model = buildModuleCardModel({
+                slug: mod.slug,
+                title: mod.title,
+                description: mod.description,
+                lessonCount: mod.lessons,
+                labCount: mod.lessons,
+                xpReward: xp,
+                completed: null,
+                total: null,
+              });
 
               return (
                 <li
                   key={mod.slug}
-                  className="list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)]"
+                  className={[
+                    "list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)] transition-all duration-300",
+                    isActive
+                      ? "scale-[1.03] opacity-100"
+                      : "opacity-60 saturate-[0.92] scale-[0.98]",
+                  ].join(" ")}
+                  style={
+                    shouldReduceMotion
+                      ? undefined
+                      : {
+                          transition:
+                            "transform 300ms cubic-bezier(0.16,1,0.3,1), opacity 300ms, filter 300ms",
+                        }
+                  }
                 >
-                  <a
-                    href={mod.href}
-                    aria-label={`${mod.title} — ${mod.slug}`}
-                    className={[
-                      "group flex flex-col rounded-[18px] border bg-white p-6 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] focus-visible:ring-offset-2",
-                      isActive
-                        ? "min-h-[320px] border-[#DCEAE8] border-l-[3px] border-l-[#0AAE9A] shadow-[0_16px_40px_rgba(16,27,61,0.10)] scale-[1.03]"
-                        : "min-h-[280px] border-[#DCEAE8] opacity-60 saturate-[0.92] shadow-[0_8px_24px_rgba(16,27,61,0.06)]",
-                    ].join(" ")}
-                    style={
-                      shouldReduceMotion
-                        ? undefined
-                        : {
-                            transition:
-                              "transform 300ms cubic-bezier(0.16,1,0.3,1), opacity 300ms, box-shadow 300ms, filter 300ms",
-                          }
-                    }
-                  >
-                    <ModuleCardContent
-                      theme={theme}
-                      title={mod.title}
-                      description={mod.description}
-                      lessonsCount={mod.lessons}
-                      xpReward={xp}
-                      labCount={mod.lessons}
-                      completed={0}
-                      total={mod.lessons}
-                      compact
-                      slugLabel={mod.slug}
-                    />
-                  </a>
+                  <ModuleCard model={model} href={mod.href} theme={theme} variant="compact" />
                 </li>
               );
             })}

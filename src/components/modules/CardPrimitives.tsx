@@ -8,7 +8,7 @@ import { BiotechGrowthTube } from "@/components/dashboard/BiotechGrowthTube";
 import type { ReactNode } from "react";
 
 // ── CardShell ──
-// motion hover + --card-accent var, border, shadow (inspired by ModuleExplorerCard)
+// motion hover + --card-accent var, border, shadow
 export function CardShell({
   accent,
   tint,
