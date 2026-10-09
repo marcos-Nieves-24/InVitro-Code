@@ -200,11 +200,19 @@ export default async function LessonPage({ params }: Props) {
             slides={slides.map((s) => s.content)}
             nextLessonHref={nextLessonHref}
             lessonTitle={data["Lesson Title"] as string}
+            moduleSlug={module}
+            lessonSlug={slug}
           />
         </div>
       ) : (
-        <div className={`flex-1 overflow-y-auto ${lessonProseClass}`}>
-          <MDXRemote source={bodyContent} components={components} options={mdxConfig} />
+        <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${lessonProseClass}`}>
+          <LessonCarousel
+            slides={[<MDXRemote key="fallback" source={bodyContent} components={components} options={mdxConfig} />]}
+            nextLessonHref={nextLessonHref}
+            lessonTitle={data["Lesson Title"] as string}
+            moduleSlug={module}
+            lessonSlug={slug}
+          />
         </div>
       )}    </LessonLayout>
   );
