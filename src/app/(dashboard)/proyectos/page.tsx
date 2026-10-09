@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
@@ -7,14 +6,15 @@ import { HubConsole } from "@/components/labs/consoles/HubConsole";
 import { getProyectoHeroImage } from "@/lib/labs/heroImages";
 import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
 import { calcXpForLesson } from "@/lib/gamification/utils";
-import { ModuleCardContent } from "@/components/shared/ModuleCardContent";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getDisplayName } from "@/lib/gamification/user";
+import { buildModuleCardModel } from "@/domain/module-card";
+import { ModuleGrid, type ModuleGridItem } from "@/components/modules/ModuleGrid";
 import {
   getModules,
   getLessonSlugs,
-  getLessonFrontmatter,
   getModuleDisplayName,
+  getModuleShortDescription,
   getModuleOrder,
 } from "@/lib/content/modules";
 
@@ -78,41 +78,30 @@ export default async function ProyectosPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {sorted.map((mod) => {
+            (() => {
+              const items: ModuleGridItem[] = sorted.map((mod) => {
                 const lessonSlugs = getLessonSlugs(mod.slug);
                 const labCount = lessonSlugs.length;
                 const xpReward = lessonSlugs.reduce((sum, slug) => sum + calcXpForLesson(mod.slug, slug), 0);
                 const completedCount = lessonSlugs.filter((s) => completedLessonKeys.has(`${mod.slug}/${s}`)).length;
-                const theme = toSerializableTheme(getLabCardTheme(mod.slug));
                 const title = getModuleDisplayName(mod.slug);
-
-                return (
-                  <Link
-                    key={mod.slug}
-                    href={`/proyectos/${mod.slug}`}
-                    className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2"
-                    aria-label={`${title} — ${completedCount} de ${labCount} completados`}
-                  >
-                    <div
-                      className="relative flex min-h-[220px] flex-col rounded-2xl border border-surface-raised bg-surface-card p-6 transition-colors duration-[250ms] ease-out hover:shadow-lg md:p-7"
-                      style={{ ["--card-accent" as string]: theme.accent } as React.CSSProperties}
-                    >
-                      <ModuleCardContent
-                        theme={theme}
-                        title={title}
-                        lessonsCount={labCount}
-                        xpReward={xpReward}
-                        labCount={labCount}
-                        completed={completedCount}
-                        total={labCount}
-                        compact={false}
-                      />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+                const description = getModuleShortDescription(mod.slug);
+                const theme = toSerializableTheme(getLabCardTheme(mod.slug));
+                const model = buildModuleCardModel({
+                  slug: mod.slug,
+                  title,
+                  description,
+                  lessonCount: labCount,
+                  labCount,
+                  xpReward,
+                  completed: completedCount,
+                  total: labCount,
+                });
+                const href = `/proyectos/${mod.slug}`;
+                return { model, href, theme };
+              });
+              return <ModuleGrid items={items} variant="grid" columns={4} />;
+            })()
           )}
         </div>
       </div>

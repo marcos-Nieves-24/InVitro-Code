@@ -1,10 +1,9 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import { FlaskConical } from "lucide-react";
-import { ModuleExplorerCard } from "./ModuleExplorerCard";
-import { getLabCardTheme } from "../LabCardTheme";
+import { ModuleGrid, type ModuleGridItem } from "@/components/modules/ModuleGrid";
+import { buildModuleCardModel } from "@/domain/module-card";
+import { getLabCardTheme, toSerializableTheme } from "../LabCardTheme";
 import { calcXpForLesson } from "@/lib/gamification/utils";
+import { getModuleShortDescription } from "@/lib/content/modules";
 import type { LabModuleGroup } from "../LabHub";
 
 interface ModuleExplorerGridProps {
@@ -12,8 +11,6 @@ interface ModuleExplorerGridProps {
 }
 
 export function ModuleExplorerGrid({ modules }: ModuleExplorerGridProps) {
-  const shouldReduce = useReducedMotion();
-
   if (modules.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
@@ -30,39 +27,27 @@ export function ModuleExplorerGrid({ modules }: ModuleExplorerGridProps) {
 
   const sorted = [...modules].sort((a, b) => a.order - b.order);
 
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {sorted.map((mod, idx) => {
-        const labCount = mod.lessons.length;
-        const completedCount = mod.lessons.filter((l) => l.completed).length;
-        const xpReward = mod.lessons.reduce(
-          (sum, l) => sum + calcXpForLesson(mod.slug, l.slug),
-          0,
-        );
-        const theme = getLabCardTheme(mod.slug);
+  const items: ModuleGridItem[] = sorted.map((mod) => {
+    const labCount = mod.lessons.length;
+    const completedCount = mod.lessons.filter((l) => l.completed).length;
+    const xpReward = mod.lessons.reduce((sum, l) => sum + calcXpForLesson(mod.slug, l.slug), 0);
+    const title = mod.name;
+    const description = getModuleShortDescription(mod.slug);
+    const theme = toSerializableTheme(getLabCardTheme(mod.slug));
+    const model = buildModuleCardModel({
+      slug: mod.slug,
+      title,
+      description,
+      lessonCount: labCount,
+      labCount,
+      xpReward,
+      completed: completedCount,
+      total: labCount,
+    });
+    const href = `/laboratorios/${mod.slug}`;
 
-        const motionProps = shouldReduce
-          ? {}
-          : {
-              initial: { opacity: 0, y: 8 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.25, delay: idx * 0.05, ease: "easeOut" as const },
-            };
+    return { model, href, theme };
+  });
 
-        return (
-          <motion.div key={mod.slug} {...motionProps}>
-            <ModuleExplorerCard
-              moduleSlug={mod.slug}
-              title={mod.name}
-              xpReward={xpReward}
-              labCount={labCount}
-              completed={completedCount}
-              total={labCount}
-              theme={theme}
-            />
-          </motion.div>
-        );
-      })}
-    </div>
-  );
+  return <ModuleGrid items={items} variant="grid" columns={4} />;
 }

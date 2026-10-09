@@ -54,6 +54,8 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [verificationMode, setVerificationMode] = useState<"signIn" | "signUp" | null>(null);
+  const [resendMessage, setResendMessage] = useState<string | null>(null);
   const [acceptBase, setAcceptBase] = useState(false);
   const [acceptGenderX, setAcceptGenderX] = useState(false);
 
@@ -107,6 +109,29 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
           setError(finalizeError.message || "Error al iniciar sesión.");
           onStatusChange?.("error");
         }
+        return;
+      }
+
+      // Device trust / second factor required after password verification
+      if (
+        !signInError &&
+        (signIn.status === "needs_client_trust" || signIn.status === "needs_second_factor")
+      ) {
+        const { error: mfaError } = await (signIn as unknown as { mfa: { sendEmailCode: () => Promise<{ error: unknown }> } }).mfa.sendEmailCode();
+        if (mfaError) {
+          const msg = (mfaError as { message?: string })?.message || "No pudimos enviar el código de verificación. Reintentá con «Reenviar código».";
+          setError(msg);
+          onStatusChange?.("error");
+          // Allow retry via resend button
+          setShowVerification(true);
+          setVerificationMode("signIn");
+          setResendMessage(null);
+          return;
+        }
+        setShowVerification(true);
+        setVerificationMode("signIn");
+        setResendMessage(null);
+        onStatusChange?.("idle");
         return;
       }
 
@@ -180,8 +205,19 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
 
         // Email verification required — send code first
         if (signUp.status === "missing_requirements") {
-          await signUp.verifications.sendEmailCode();
+          const { error: sendCodeError } = await signUp.verifications.sendEmailCode();
+          if (sendCodeError) {
+            const msg = (sendCodeError as { message?: string })?.message || "No pudimos enviar el código de verificación. Reintentá con «Reenviar código».";
+            setError(msg);
+            onStatusChange?.("error");
+            setShowVerification(true);
+            setVerificationMode("signUp");
+            setResendMessage(null);
+            return;
+          }
           setShowVerification(true);
+          setVerificationMode("signUp");
+          setResendMessage(null);
           onStatusChange?.("idle");
           return;
         }
@@ -220,13 +256,39 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
   const handleVerification = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!signUp || isSubmitting) return;
+    if (isSubmitting) return;
 
     setIsSubmitting(true);
     setError(null);
+    setResendMessage(null);
     onStatusChange?.("loading");
 
     try {
+      if (verificationMode === "signIn") {
+        if (!signIn) throw new Error("Sign-in not initialized");
+        const { error: verifyError } = await (signIn as unknown as { mfa: { verifyEmailCode: (p: { code: string }) => Promise<{ error: unknown }> } }).mfa.verifyEmailCode({ code: verificationCode });
+        if (verifyError) {
+          onStatusChange?.("error");
+          setError((verifyError as { message?: string })?.message || "Código inválido. Intenta de nuevo.");
+          return;
+        }
+        if ((signIn as unknown as { status: string }).status === "complete") {
+          const { error: finalizeError } = await signIn.finalize({
+            navigate: ({ session, decorateUrl }) => {
+              if ((session as unknown as { currentTask?: unknown })?.currentTask) return;
+              const url = decorateUrl("/");
+              window.location.href = url;
+            },
+          });
+          if (finalizeError) {
+            setError((finalizeError as { message?: string })?.message || "Error al verificar.");
+            onStatusChange?.("error");
+          }
+        }
+        return;
+      }
+
+      if (!signUp) throw new Error("Sign-up not initialized");
       const { error: verifyError } = await signUp.verifications.verifyEmailCode({
         code: verificationCode,
       });
@@ -234,7 +296,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       if (verifyError) {
         onStatusChange?.("error");
         setError(
-          verifyError.message ||
+          (verifyError as { message?: string })?.message ||
             "Código inválido. Intenta de nuevo.",
         );
         return;
@@ -252,7 +314,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
           },
         });
         if (finalizeError) {
-          setError(finalizeError.message || "Error al verificar.");
+          setError((finalizeError as { message?: string })?.message || "Error al verificar.");
           onStatusChange?.("error");
         }
       }
@@ -271,6 +333,43 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
       } else {
         setError("Ocurrió un error. Intenta de nuevo.");
       }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleResendCode = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setError(null);
+    setResendMessage(null);
+    onStatusChange?.("loading");
+    try {
+      if (verificationMode === "signIn") {
+        if (!signIn) throw new Error("Sign-in not initialized");
+        const { error } = await (signIn as unknown as { mfa: { sendEmailCode: () => Promise<{ error: unknown }> } }).mfa.sendEmailCode();
+        if (error) {
+          setError((error as { message?: string })?.message || "No pudimos reenviar el código. Intenta de nuevo.");
+          onStatusChange?.("error");
+        } else {
+          setResendMessage("Código reenviado. Revisa tu correo y spam.");
+          onStatusChange?.("idle");
+        }
+      } else {
+        if (!signUp) throw new Error("Sign-up not initialized");
+        const { error } = await signUp.verifications.sendEmailCode();
+        if (error) {
+          setError((error as { message?: string })?.message || "No pudimos reenviar el código. Intenta de nuevo.");
+          onStatusChange?.("error");
+        } else {
+          setResendMessage("Código reenviado. Revisa tu correo y spam.");
+          onStatusChange?.("idle");
+        }
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Error al reenviar el código.";
+      setError(msg);
+      onStatusChange?.("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -318,7 +417,7 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             required
-            autoComplete="new-password"
+            autoComplete={mode === "signin" ? "current-password" : "new-password"}
             disabled={isSubmitting}
             className="w-full px-4 py-3 rounded-lg border border-[#E2E8F0] bg-white text-[#111439] placeholder-[#5A7A8A] focus:outline-none focus:ring-2 focus:ring-[#00b2b2] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           />
@@ -416,6 +515,18 @@ export function AuthForm({ mode, onStatusChange }: AuthFormProps) {
             disabled={isSubmitting}
             className="w-full px-4 py-3 rounded-lg border border-[#E2E8F0] bg-white text-[#111439] placeholder-[#5A7A8A] focus:outline-none focus:ring-2 focus:ring-[#00b2b2] focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           />
+          <div className="mt-2 flex items-center justify-between">
+            <p className="text-xs text-[#5A7A8A]">¿No llegó? Revisa spam.</p>
+            <button
+              type="button"
+              onClick={handleResendCode}
+              disabled={isSubmitting}
+              className="text-sm font-semibold text-[#00b2b2] hover:text-[#009f9f] disabled:opacity-50"
+            >
+              Reenviar código
+            </button>
+          </div>
+          {resendMessage && <p className="mt-2 text-sm text-green-600">{resendMessage}</p>}
         </div>
       )}
 
