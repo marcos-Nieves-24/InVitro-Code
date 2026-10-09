@@ -14,7 +14,7 @@ Firma guardada en consent_logs pero cartel profiles.consent_status sigue pending
 
 ## Tasks
 - [x] T1 — Dominio: estados + transiciones + build model (puro, testeable) — route: delegated
-- [ ] T2 — Caso de uso + infra: completeConsent service-role update profiles + consent_logs — route: delegated
+- [x] T2 — Caso de uso + infra: completeConsent service-role update profiles + consent_logs — route: delegated
 - [ ] T3 — API delega a caso de uso + perfil bloque pending — route: delegated
 - [ ] T4 — Tests + verificación type-check build — route: delegated
 
