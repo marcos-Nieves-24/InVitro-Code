@@ -197,7 +197,9 @@ export default async function LessonPage({ params }: Props) {
       {slides.length > 0 ? (
         <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${lessonProseClass}`}>
           <LessonCarousel
-            slides={slides.map((s) => s.content)}
+            slides={slides.map((s, i) => (
+              <div key={`slide-${i}`}>{s.content}</div>
+            ))}
             nextLessonHref={nextLessonHref}
             lessonTitle={data["Lesson Title"] as string}
             moduleSlug={module}
