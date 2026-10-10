@@ -156,6 +156,10 @@ export function RevealSequence({
     });
   }, [effectiveBlocked, total]);
 
+  const goPrev = useCallback(() => {
+    setRevealedCount((c) => Math.max(initialRevealed, c - 1));
+  }, [initialRevealed]);
+
   // Fire onComplete once when completion is reached
   const prevCompleteRef = useRef(false);
   useEffect(() => {
@@ -173,7 +177,7 @@ export function RevealSequence({
     (e: MouseEvent<HTMLDivElement>) => {
       const target = e.target as HTMLElement;
       // Don't advance when interacting with form/native interactive elements,
-      // except the explicit continue button (data-reveal-continue).
+      // except the explicit continue/back buttons.
       const interactiveAncestor = target.closest(
         "button,input,textarea,select,iframe,a,[data-no-advance]"
       );
@@ -182,13 +186,30 @@ export function RevealSequence({
           target.closest("[data-reveal-continue]") != null ||
           interactiveAncestor.closest("[data-reveal-continue]") != null ||
           interactiveAncestor.matches("[data-reveal-continue]");
-        if (!isContinue) return;
+        const isBack =
+          target.closest("[data-reveal-back]") != null ||
+          interactiveAncestor.closest("[data-reveal-back]") != null ||
+          interactiveAncestor.matches("[data-reveal-back]");
+        if (!isContinue && !isBack) return;
+        // Back button is handled by its own onClick; don't advance here
+        if (isBack) return;
       }
       if (!hasMore) return;
       if (effectiveBlocked) return;
       advance();
     },
     [hasMore, effectiveBlocked, advance]
+  );
+
+  const handleContainerKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "ArrowLeft" && revealedCount > initialRevealed) {
+        e.preventDefault();
+        e.stopPropagation();
+        goPrev();
+      }
+    },
+    [revealedCount, initialRevealed, goPrev]
   );
 
   // Context value — stable identity
@@ -240,18 +261,24 @@ export function RevealSequence({
         aria-live="polite"
         aria-label="Contenido progresivo"
         onClick={handleContainerClick}
+        onKeyDown={handleContainerKeyDown}
+        data-reveal-has-more={hasMore ? "true" : "false"}
         className="flex flex-col gap-4"
       >
-        {allChildren.slice(0, revealedCount).map((child, index) => (
-          <div
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            aria-hidden={false}
-            className="reveal is-visible motion-safe:animate-[reveal-up_400ms_ease-out] motion-reduce:animate-none"
-          >
-            {child}
-          </div>
-        ))}
+        {allChildren.slice(0, revealedCount).map((child, index) => {
+          const stableKey =
+            (child as unknown as { key?: string | number | null })?.key ??
+            `reveal-${index}`;
+          return (
+            <div
+              key={stableKey}
+              aria-hidden={false}
+              className="reveal is-visible motion-safe:animate-[reveal-up_400ms_ease-out] motion-reduce:animate-none"
+            >
+              {child}
+            </div>
+          );
+        })}
 
         {/* Hidden slice not rendered — keeps DOM minimal; a11y aria-hidden implied by absence */}
 
@@ -268,18 +295,34 @@ export function RevealSequence({
               </p>
             ) : (
               <>
-                <button
-                  type="button"
-                  data-reveal-continue
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    advance();
-                  }}
-                  aria-label="Mostrar siguiente contenido"
-                  className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 py-2 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
-                >
-                  Continuar <span aria-hidden="true">→</span>
-                </button>
+                <div className="flex items-center gap-3">
+                  {revealedCount > initialRevealed && (
+                    <button
+                      type="button"
+                      data-reveal-back
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goPrev();
+                      }}
+                      aria-label="Mostrar contenido anterior"
+                      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 py-2 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                    >
+                      <span aria-hidden="true">←</span> Atrás
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    data-reveal-continue
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      advance();
+                    }}
+                    aria-label="Mostrar siguiente contenido"
+                    className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 py-2 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                  >
+                    Continuar <span aria-hidden="true">→</span>
+                  </button>
+                </div>
                 <span
                   aria-hidden="true"
                   className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
@@ -288,6 +331,21 @@ export function RevealSequence({
                 </span>
               </>
             )}
+          </div>
+        ) : revealedCount > initialRevealed ? (
+          <div className="flex flex-col items-center gap-2 pt-2">
+            <button
+              type="button"
+              data-reveal-back
+              onClick={(e) => {
+                e.stopPropagation();
+                goPrev();
+              }}
+              aria-label="Mostrar contenido anterior"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 py-2 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+            >
+              <span aria-hidden="true">←</span> Atrás
+            </button>
           </div>
         ) : null}
 

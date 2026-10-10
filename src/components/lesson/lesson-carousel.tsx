@@ -25,6 +25,7 @@ export function LessonCarousel({
   const total = slides.length;
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -42,6 +43,39 @@ export function LessonCarousel({
     slideAreaRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [current]);
 
+  // Detect whether current slide has incomplete RevealSequence (data-reveal-has-more="true")
+  useEffect(() => {
+    const check = () => {
+      const hasIncomplete =
+        slideAreaRef.current?.querySelector('[data-reveal-has-more="true"]') != null;
+      setIsRevealIncomplete(hasIncomplete);
+    };
+    // Initial check after render
+    const raf = requestAnimationFrame(check);
+    const t = setTimeout(check, 60);
+    const node = slideAreaRef.current;
+    if (!node) {
+      return () => {
+        cancelAnimationFrame(raf);
+        clearTimeout(t);
+      };
+    }
+    const obs = new MutationObserver(check);
+    obs.observe(node, {
+      attributes: true,
+      subtree: true,
+      childList: true,
+      attributeFilter: ["data-reveal-has-more"],
+    });
+    // Also observe childList + subtree without filter for newly mounted RevealSequences
+    // (attributeFilter already covers data-reveal-has-more; childList catches DOM additions)
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
+      obs.disconnect();
+    };
+  }, [current]);
+
   // Reduced-motion: disable smooth scroll via CSS preference
   // JS scrollTo respects smooth; CSS handles transition animation elsewhere.
 
@@ -51,6 +85,7 @@ export function LessonCarousel({
   };
 
   // Click-anywhere on slide background advances (not on interactive children)
+  // Block inter-slide advance while RevealSequence hasMore (deduplicate Continua / Siguiente)
   const handleSlideClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const target = e.target as HTMLElement;
@@ -62,14 +97,15 @@ export function LessonCarousel({
       ) {
         return;
       }
+      if (isRevealIncomplete) return;
       if (!isLast) {
         goNext();
       }
     },
-    [isLast, goNext],
+    [isLast, goNext, isRevealIncomplete],
   );
 
-  // Keyboard navigation: Space/Enter/Right -> next, Left -> prev, Home/End -> first/last, Esc -> noop
+  // Keyboard navigation: Space/Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const active = document.activeElement as HTMLElement | null;
@@ -86,8 +122,17 @@ export function LessonCarousel({
         }
       }
 
+      // When RevealSequence is incomplete, inter-slide advance via keyboard is blocked
+      // (intra-slide Continuar/Atrás handle their own keys). Let ArrowLeft fall through to intra-slide handler when possible
+      const revealIncomplete = isRevealIncomplete;
+
       switch (e.key) {
         case "ArrowRight":
+          if (revealIncomplete) {
+            // Block inter-slide advance while intra-slide steps remain; allow RevealSequence to handle its own advance via click
+            e.preventDefault();
+            break;
+          }
           e.preventDefault();
           if (!isLast) goNext();
           else {
@@ -100,11 +145,24 @@ export function LessonCarousel({
           // Do not intercept when focus is on a native button (it already handles click)
           if (active?.tagName === "BUTTON" && e.key === "Enter") return;
           if (active?.tagName === "BUTTON" && e.key === " ") return;
+          if (revealIncomplete) {
+            // Block inter-slide Space/Enter while reveal incomplete — RevealSequence handles its own Continuar
+            // Only block if the active element is inside the slide area; otherwise allow shell navigation? We block broadly to deduplicate.
+            e.preventDefault();
+            break;
+          }
           e.preventDefault();
           if (!isLast) goNext();
           break;
         case "ArrowLeft":
+          // If reveal is incomplete and focus is inside RevealSequence, let its ArrowLeft handler goPrev intra-slide first.
+          // We detect by checking if active element is inside a [data-reveal-has-more] container and reveal count > initial; but simplest:
+          // if there's an incomplete reveal and the slide could go back intra-slide, don't do inter-slide goPrev here — let RevealSequence handle it.
+          // The RevealSequence onKeyDown stops propagation when it handles ArrowLeft, so this handler won't fire in that case.
+          // Otherwise, fall through to inter-slide prev.
           e.preventDefault();
+          // If intra-slide back is possible, the RevealSequence's keydown would have already handled it and stopped propagation.
+          // So here we do inter-slide prev as fallback.
           goPrev();
           break;
         case "Home":
@@ -125,19 +183,19 @@ export function LessonCarousel({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isLast, goNext, goPrev, total]);
+  }, [isLast, goNext, goPrev, total, isRevealIncomplete]);
 
   if (total === 0) return null;
 
   return (
     <>
-      {/* Fullscreen shell — fixed overlay, always fullscreen, no Fullscreen API required */}
+      {/* Fullscreen shell — respects sidebar offset via --sidebar-offset (256px or 0px on desktop, 0 on mobile) */}
       <div
         role="region"
         aria-label="Presentación de la lección"
         aria-roledescription="carousel"
         aria-live="polite"
-        className="fixed inset-0 z-40 flex flex-col overflow-hidden bg-surface"
+        className="fixed inset-y-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
         {/* Top progress bar */}
         <div className="shrink-0 border-b border-outline-variant bg-surface-card px-4 py-3 md:px-6">
@@ -200,7 +258,7 @@ export function LessonCarousel({
             <div className="hidden items-center gap-1.5 sm:flex">
               {Array.from({ length: total }, (_, i) => (
                 <span
-                  key={i}
+                  key={`dot-${i}`}
                   className={`h-1.5 rounded-full transition-all duration-200 motion-reduce:transition-none ${
                     i === current
                       ? "w-6 bg-brand-500"
@@ -221,8 +279,14 @@ export function LessonCarousel({
               size="sm"
               className="bg-teal-600 shadow-teal-600/20 hover:bg-teal-700"
               onClick={handleFinish}
-              disabled={state === "loading"}
+              disabled={state === "loading" || isRevealIncomplete}
               aria-label="Finalizar lección"
+              aria-disabled={isRevealIncomplete || undefined}
+              title={
+                isRevealIncomplete
+                  ? "Completa el contenido para continuar"
+                  : undefined
+              }
             >
               {state === "loading" ? "Guardando progreso…" : "Finalizar"}
             </Button>
@@ -231,8 +295,15 @@ export function LessonCarousel({
               variant="secondary"
               size="sm"
               onClick={goNext}
+              disabled={isRevealIncomplete}
               aria-label="Siguiente diapositiva"
-              className="focus-ring"
+              aria-disabled={isRevealIncomplete || undefined}
+              title={
+                isRevealIncomplete
+                  ? "Completa el contenido para continuar"
+                  : undefined
+              }
+              className={`focus-ring ${isRevealIncomplete ? "opacity-50" : ""}`}
             >
               Siguiente →
             </Button>
