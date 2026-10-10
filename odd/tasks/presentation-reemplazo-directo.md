@@ -25,7 +25,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T1 — PresentationShell fullscreen (reemplazo directo LessonCarousel)** — Reescribir `src/components/lesson/lesson-carousel.tsx` como shell fullscreen `fixed inset-0` (fallback sin depender de Fullscreen API nativa), progress `LabProgress`, navegacion click-anywhere + teclado (Espacio/Enter/->, <-, ESC), manejo de `InteractiveFrame`/`DiagnosticTrainer` con zona continuar dedicada para no bloquear scroll. Route: delegated
 
-- [ ] **T2 — DialogueBox anime speech** — Nuevo `src/components/lesson/presentation/DialogueBox.tsx` evoluciona `MascotMessage.tsx` a speech box estilo visual novel (tail, avatar cientifico + Coni), typing opcional 35ms, respeta `prefers-reduced-motion`, props `speaker|mood|lines|onNext`. Estilos en `globals.css` reusando tokens `comic/bubble/hud`. Route: delegated
+- [x] **T2 — DialogueBox anime speech** — Nuevo `src/components/lesson/presentation/DialogueBox.tsx` evoluciona `MascotMessage.tsx` a speech box estilo visual novel (tail, avatar cientifico + Coni), typing opcional 35ms, respeta `prefers-reduced-motion`, props `speaker|mood|lines|onNext`. Estilos en `globals.css` reusando tokens `comic/bubble/hud`. Route: delegated
 
 - [ ] **T3 — RevealSequence click-to-reveal** — Nuevo `src/components/lesson/presentation/RevealSequence.tsx` wrapper que revela `children` 1 a 1 con click, animacion `reveal-up` + indicador pulso "Click para continuar", prop `blockOnQuiz` pausa hasta `onCorrect`, respeta reduced-motion. Route: delegated
 
@@ -60,7 +60,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 ## Progress
 - 2026-10-10: Feature doc creado, worktree `feat/presentation-reemplazo-directo` en `../invitro-code-worktrees/presentation-reemplazo-directo`
 - 2026-10-10: T1 completado — LessonCarousel reescrito como PresentationShell fullscreen `fixed inset-0`, click-anywhere con closest guard, teclado Space/Enter/→/←/Home/End, ESC noop, progress LabProgress, footer Anterior/Siguiente, CelebrationOverlay intacto, a11y role region + reduced-motion — commit dc2e0d2
+- 2026-10-10: T2 completado — DialogueBox visual novel con ScientistAvatar (bata, gafas, ponytail 44px) + ConiAvatar, bubble 16px con tail 45deg, typing 35ms respeta prefers-reduced-motion, lines multi-step + children fallback, click/selección guard + Enter/Space, a11y region aria-live polite, tokens bubble/glow — commit 12aa8e8
 
 ## Next Step
-- Ejecutar T2 DialogueBox delegated writer en worktree
+- Ejecutar T3 RevealSequence delegated writer en worktree
 
