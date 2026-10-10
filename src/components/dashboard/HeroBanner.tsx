@@ -183,47 +183,52 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
         </div>
       </div>
 
-      <div
-        ref={figureRef}
-        style={figureInitialStyle}
-        className="absolute bottom-0 right-[4%] z-[2] hidden aspect-[440/511] w-[clamp(280px,28vw,380px)] overflow-visible lg:right-[6%] lg:block"
-        onMouseEnter={() => setIsHoverScientist(true)}
-        onMouseLeave={() => setIsHoverScientist(false)}
-      >
-        <ScientistFigure
-          variant={getScientistVariant(gender)}
-          priority
-        />
-        {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
-        <motion.div
-          className="pointer-events-none absolute -left-[168px] top-[68px] hidden lg:block"
-          initial={{ scale: 0 }}
-          animate={
-            isHoverScientist
-              ? { scale: [0, 1.25, 1] }
-              : { scale: 0 }
-          }
-          transition={
-            isHoverScientist
-              ? { duration: 0.25, times: [0, 0.5, 1], ease: "easeOut" }
-              : { duration: 0.1, ease: "easeIn" }
-          }
-          style={{ transformOrigin: "100% 100%" }}
-          aria-hidden={!isHoverScientist}
+      {/* Clip layer: the figure is clipped to the hero's rounded boundary so it
+          connects with the hero edge instead of escaping past the corner curve.
+          pointer-events-none on the layer, auto on the figure so hover survives. */}
+      <div className="pointer-events-none absolute inset-0 z-[2] hidden overflow-hidden rounded-3xl lg:block">
+        <div
+          ref={figureRef}
+          style={figureInitialStyle}
+          className="pointer-events-auto absolute bottom-0 right-[4%] aspect-[440/511] w-[clamp(280px,28vw,380px)] lg:right-[6%]"
+          onMouseEnter={() => setIsHoverScientist(true)}
+          onMouseLeave={() => setIsHoverScientist(false)}
         >
-          <div className="relative rounded-[10px] bg-[#5a5a5a] px-4 py-3 text-center text-sm font-bold text-white shadow-lg">
-            {BUBBLE_TEXT}
-            <span
-              className="absolute -bottom-[10px] right-6 block h-0 w-0 border-[10px] border-solid border-transparent"
-              style={{
-                borderTopColor: "#5a5a5a",
-                borderRightColor: "#5a5a5a",
-                transform: "rotate(-10deg)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
-        </motion.div>
+          <ScientistFigure
+            variant={getScientistVariant(gender)}
+            priority
+          />
+          {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
+          <motion.div
+            className="pointer-events-none absolute -left-[168px] top-[68px] hidden lg:block"
+            initial={{ scale: 0 }}
+            animate={
+              isHoverScientist
+                ? { scale: [0, 1.25, 1] }
+                : { scale: 0 }
+            }
+            transition={
+              isHoverScientist
+                ? { duration: 0.25, times: [0, 0.5, 1], ease: "easeOut" }
+                : { duration: 0.1, ease: "easeIn" }
+            }
+            style={{ transformOrigin: "100% 100%" }}
+            aria-hidden={!isHoverScientist}
+          >
+            <div className="relative rounded-[10px] bg-[#5a5a5a] px-4 py-3 text-center text-sm font-bold text-white shadow-lg">
+              {BUBBLE_TEXT}
+              <span
+                className="absolute -bottom-[10px] right-6 block h-0 w-0 border-[10px] border-solid border-transparent"
+                style={{
+                  borderTopColor: "#5a5a5a",
+                  borderRightColor: "#5a5a5a",
+                  transform: "rotate(-10deg)",
+                }}
+                aria-hidden="true"
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
     </section>
