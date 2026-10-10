@@ -18,7 +18,6 @@ const publicRoutes = [
   "/cookies",
   "/terminos",
   "/ia",
-  "/preview/cards",
   "/preview/lesson",
 ];
 

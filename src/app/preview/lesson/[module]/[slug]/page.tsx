@@ -1,8 +1,8 @@
 // Preview público de una lección — MISMO componente de producción.
 //
-// Se apoya en el precedente de `/preview/cards`: una ruta de preview que
-// renderiza los componentes reales sin auth, para poder revisar el diseño
-// visualmente (Playwright, capturas) sin depender de una sesión de Clerk.
+// Ruta de preview pública: renderiza los componentes reales sin auth, para
+// poder revisar el diseño visualmente (Playwright, capturas) sin depender de
+// una sesión de Clerk.
 //
 // Se reutiliza `LessonPage` directamente en vez de duplicar el pipeline de
 // split de `<Section>` + compileMDX: la lección no usa Clerk, cookies ni
