@@ -77,6 +77,21 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
   answer="Ajusta dos pesos (w₁, w₂) y un sesgo (b). La recta se define como w₁·x₁ + w₂·x₂ + b = 0. De un lado predice una clase, del otro la otra. El perceptrón solo corrige los pesos cuando se equivoca."
 />
 
+<ChoiceQuestion
+  question="¿Qué ajusta el perceptrón para trazar la frontera que separa dos clases?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-perceptron-1"
+  allowContinueOnIncorrect
+  explanation="La recta se define como w₁·x₁ + w₂·x₂ + b = 0. El perceptrón aprende corrigiendo w₁, w₂ y b solo cuando se equivoca."
+  options={[
+    { id: "a", label: "Dos pesos (w₁, w₂) y un sesgo (b) que definen la recta", correct: true, feedback: "¡Correcto! Esos tres números determinan la posición y orientación de la frontera." },
+    { id: "b", label: "El número de datos de entrenamiento", correct: false, feedback: "El tamaño del dataset no se aprende; son los parámetros de la frontera los que se ajustan." },
+    { id: "c", label: "Los colores que usa el gráfico para pintar cada clase", correct: false, feedback: "Los colores son visualización; el aprendizaje es matemático, no estético." },
+    { id: "d", label: "La velocidad del procesador de la computadora", correct: false, feedback: "El hardware no forma parte de los parámetros del modelo." },
+  ]}
+/>
+
 <PerceptronTrainer />
 
 **¿Qué está pasando?**
@@ -133,6 +148,21 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
   answer="La frontera se vuelve más suave y menos sensible al ruido, pero puede perder detalles finos en zonas donde las clases cambian rápidamente. k grande reduce varianza pero aumenta sesgo: el modelo se vuelve más estable pero puede subestimar patrones locales."
 />
 
+<ChoiceQuestion
+  question="Si k=1 usamos el vecino más cercano y si subimos a k=15, ¿qué crees que pasa con la frontera de KNN?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-knn-1"
+  allowContinueOnIncorrect
+  explanation="k grande suaviza la frontera y la hace menos sensible al ruido, pero puede ignorar patrones locales. Es un balance sesgo-varianza."
+  options={[
+    { id: "a", label: "La frontera se vuelve más suave y menos sensible al ruido", correct: true, feedback: "¡Exacto! k grande promedia más vecinos y diluye el efecto de datos atípicos." },
+    { id: "b", label: "El accuracy de prueba siempre mejora, sin importar cuánto suba k", correct: false, feedback: "No: k demasiado grande pierde detalle local y puede empeorar." },
+    { id: "c", label: "El modelo empieza a trazar una línea recta como el perceptrón", correct: false, feedback: "KNN no aprende rectas; su frontera siempre depende de la votación local." },
+    { id: "d", label: "La frontera se vuelve más rugosa y sobreajustada", correct: false, feedback: "Al revés: la rugosidad es de k pequeño. k grande suaviza." },
+  ]}
+/>
+
 <KnnTrainer />
 
 **¿Cómo funciona KNN?**
@@ -164,6 +194,21 @@ KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perce
   answer="Es clasificación porque predecimos una categoría discreta (especie A o B), no un valor continuo. Con k=1, una medición mal tomada (dato ruidoso) clasifica incorrectamente el punto porque el vecino más cercano es espurio. Con k=20, el ruido se promedia entre varios vecinos y el efecto se diluye."
 />
 
+<ChoiceQuestion
+  question="Clasificar un patógeno por similitud con aislamientos previos, ¿es clasificación o regresión? ¿Qué riesgo tiene k=1 con datos ruidosos?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-clasif-1"
+  allowContinueOnIncorrect
+  explanation="Es clasificación (categoría discreta). k=1 es muy sensible al ruido: un dato mal medido decide la clase. k grande diluye el ruido."
+  options={[
+    { id: "a", label: "Es clasificación; k=1 puede fallar por un vecino ruidoso, k=20 diluye el ruido", correct: true, feedback: "¡Correcto! k controla el balance entre detalle local y robustez al ruido." },
+    { id: "b", label: "Es regresión; k no importa porque KNN siempre es regresión", correct: false, feedback: "Regresión predice números continuos; acá predecimos especie (categoría) → clasificación." },
+    { id: "c", label: "Es clasificación; k=1 siempre es más preciso que k=20", correct: false, feedback: "No siempre: k=1 sobreajusta. k grande generaliza mejor aunque pierda algo de detalle." },
+    { id: "d", label: "Son lo mismo, clasificación y regresión son sinónimos", correct: false, feedback: "No: clasificación = categorías discretas; regresión = valores continuos." },
+  ]}
+/>
+
 Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si queremos predecir un **valor numérico**? Por ejemplo: "dada una concentración de fármaco antifúngico, ¿qué diámetro de halo de inhibición esperamos?"
 
 <ConceptCard variant="definition">
@@ -180,6 +225,21 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
   lessonSlug="lesson02_how_ai_learns"
   prompt="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media del tejido?"
   answer="No con gran precisión. El radio medio y la textura media tienen una relación débil (R² ≈ 0.10) — son datos reales ruidosos. La regresión lineal nos da la mejor recta posible, pero la predicción tiene mucho error porque la textura depende de muchos más factores que solo el tamaño del núcleo."
+/>
+
+<ChoiceQuestion
+  question="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-regresion-1"
+  allowContinueOnIncorrect
+  explanation="No con gran precisión: R²≈0,10. La textura depende de muchos factores más; la recta es la mejor aproximación lineal, pero siempre tiene dispersión."
+  options={[
+    { id: "a", label: "Sí, con precisión casi perfecta porque la relación es fuerte", correct: false, feedback: "No: es una relación débil, los puntos están muy dispersos alrededor de la recta." },
+    { id: "b", label: "No, la relación es débil (R²≈0,10); la textura depende de más factores que el radio", correct: true, feedback: "¡Exacto! Datos reales son ruidosos; la regresión da la mejor recta, no una predicción perfecta." },
+    { id: "c", label: "Sí, moviendo los sliders de pendiente se logra R²=1", correct: false, feedback: "Ninguna recta puede pasar por todos los puntos con datos ruidosos reales." },
+    { id: "d", label: "No, porque regresión solo funciona con clasificación", correct: false, feedback: "Regresión predice valores continuos como la textura; es diferente a clasificar." },
+  ]}
 />
 
 <RegressionTrainer />
@@ -226,6 +286,21 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
   lessonSlug="lesson02_how_ai_learns"
   prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?"
   answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
+/>
+
+<ChoiceQuestion
+  question="Un modelo con error cero en entrenamiento, ¿generalizará bien a datos nuevos?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-overfitting-1"
+  allowContinueOnIncorrect
+  explanation="Error cero en entrenamiento suele indicar que el modelo memorizó ruido, no el patrón general. Falla con datos nuevos."
+  options={[
+    { id: "a", label: "Sí, error cero garantiza rendimiento perfecto en datos nuevos", correct: false, feedback: "No: el modelo probablemente memorizó el ruido de entrenamiento y fallará en datos nuevos." },
+    { id: "b", label: "No, es señal de sobreajuste: memorizó los datos y no generaliza", correct: true, feedback: "¡Correcto! Como un estudiante que memoriza el examen anterior sin entender los conceptos." },
+    { id: "c", label: "Solo si el dataset es muy grande", correct: false, feedback: "Incluso con dataset grande, memorizar es sobreajuste; lo clave es generalizar, no recordar." },
+    { id: "d", label: "Sí, porque entreno y prueba son siempre idénticos", correct: false, feedback: "Entreno y prueba son distintas muestras de la población; lo importante es rendir en datos no vistos." },
+  ]}
 />
 
 <InteractiveFrame src="/interactives/demo_06b_overfitting.html" height="800px" caption="simulación educativa sobre datos sintéticos" />
@@ -278,37 +353,83 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 <Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-1. **¿Qué es una frontera de decisión?**
-   - a) El límite ético de lo que la IA puede decidir
-   - b) La línea (o superficie) que separa diferentes clases en el espacio de características
-   - c) El momento en que el algoritmo deja de aprender
-   - d) La máxima precisión que puede alcanzar un modelo
+<RevealSequence blockOnQuiz>
 
-2. **En KNN, ¿qué significa que k sea muy grande (ej. k=20)?**
-   - a) El modelo clasifica más rápido
-   - b) La frontera se vuelve más suave, pero puede perder patrones locales
-   - c) El modelo necesita más memoria
-   - d) El accuracy siempre mejora
+<div>Cinco preguntas para verificar los conceptos clave. Responde cada una para continuar.</div>
 
-3. **¿Cuál es la diferencia entre clasificación y regresión?**
-   - a) Clasificación es más precisa que regresión
-   - b) Clasificación predice categorías discretas; regresión predice valores continuos
-   - c) No hay diferencia, son sinónimos
-   - d) Regresión solo funciona con datos biológicos
+<ChoiceQuestion
+  question="¿Qué es una frontera de decisión?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-check-1"
+  explanation="En 2D es una línea; en 3D un plano; en más dimensiones, un hiperplano que separa clases."
+  options={[
+    { id: "a", label: "El límite ético de lo que la IA puede decidir", correct: false, feedback: "Esa es una frontera ética, no la técnica de ML." },
+    { id: "b", label: "La línea (o superficie) que separa diferentes clases en el espacio de features", correct: true, feedback: "¡Exacto! Del lado azul predice una clase, del otro la otra." },
+    { id: "c", label: "El momento en que el algoritmo deja de aprender", correct: false, feedback: "El aprendizaje termina por criterio de convergencia, no es la frontera." },
+    { id: "d", label: "La máxima precisión que puede alcanzar un modelo", correct: false, feedback: "La precisión es una métrica; la frontera es el límite geométrico entre clases." },
+  ]}
+/>
 
-4. **¿Qué diferencia al subajuste (underfitting) del sobreajuste (overfitting)?**
-   - a) En subajuste ambos errores son altos; en sobreajuste el error train es bajo pero el test es alto
-   - b) En subajuste el error train es bajo; en sobreajuste ambos errores son altos
-   - c) Son lo mismo visto desde distintos ángulos
-   - d) El subajuste solo ocurre con KNN, el sobreajuste solo con regresión
+<ChoiceQuestion
+  question="En KNN, ¿qué significa que k sea muy grande (ej. k=20)?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-check-2"
+  explanation="k grande reduce varianza y ruido, pero puede perder patrones locales; es un hiperparámetro a elegir."
+  options={[
+    { id: "a", label: "El modelo clasifica más rápido siempre", correct: false, feedback: "k grande implica más vecinos a consultar; no es más rápido." },
+    { id: "b", label: "La frontera se vuelve más suave, pero puede perder patrones locales", correct: true, feedback: "¡Correcto! k controla el balance suavidad vs detalle." },
+    { id: "c", label: "El modelo necesita más memoria para entrenar", correct: false, feedback: "KNN almacena los mismos datos sin importar k; k solo afecta la votación." },
+    { id: "d", label: "El accuracy siempre mejora al aumentar k", correct: false, feedback: "No: existe un k óptimo. k demasiado grande subajusta." },
+  ]}
+/>
 
-5. **¿Por qué el overfitting es problemático?**
-   - a) Porque el modelo tarda mucho en entrenar
-   - b) Porque el modelo funciona bien en datos de entrenamiento pero mal en datos nuevos
-   - c) Porque usa demasiada memoria RAM
-   - d) Porque solo funciona con redes neuronales
+<ChoiceQuestion
+  question="¿Cuál es la diferencia entre clasificación y regresión?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-check-3"
+  explanation="Clasificación predice categorías discretas; regresión predice valores continuos."
+  options={[
+    { id: "a", label: "Clasificación es siempre más precisa que regresión", correct: false, feedback: "Precisión depende del problema y los datos, no del tipo de tarea." },
+    { id: "b", label: "Clasificación predice categorías discretas; regresión predice valores continuos", correct: true, feedback: "¡Exacto! Aspergillus/Penicillium es clasificación; predecir concentración es regresión." },
+    { id: "c", label: "No hay diferencia, son sinónimos", correct: false, feedback: "Son familias distintas de problemas con métricas diferentes." },
+    { id: "d", label: "Regresión solo funciona con datos biológicos", correct: false, feedback: "Regresión es general; funciona en cualquier dominio con variable continua." },
+  ]}
+/>
 
-<AnswerReveal summary="Ver respuestas">
+<ChoiceQuestion
+  question="¿Qué diferencia al subajuste (underfitting) del sobreajuste (overfitting)?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-check-4"
+  explanation="Subajuste: modelo demasiado simple (ambos errores altos). Sobreajuste: demasiado complejo (train bajo, test alto)."
+  options={[
+    { id: "a", label: "En subajuste ambos errores son altos; en sobreajuste train bajo pero test alto", correct: true, feedback: "¡Perfecto! Son los dos extremos del espectro de complejidad." },
+    { id: "b", label: "En subajuste train bajo; en sobreajuste ambos altos", correct: false, feedback: "Al revés: subajuste alto en ambos, sobreajuste bajo en train y alto en test." },
+    { id: "c", label: "Son lo mismo visto desde distintos ángulos", correct: false, feedback: "No: son diagnósticos opuestos con soluciones diferentes." },
+    { id: "d", label: "El subajuste solo ocurre con KNN, el sobreajuste solo con regresión", correct: false, feedback: "Ambos pueden ocurrir en cualquier algoritmo." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué el overfitting es problemático?"
+  moduleSlug="ia"
+  lessonSlug="lesson02_how_ai_learns"
+  blockId="choice-l02-check-5"
+  explanation="El modelo memoriza variaciones y ruido de entreno y falla en datos nuevos; la validación en test es la defensa."
+  options={[
+    { id: "a", label: "Porque el modelo tarda mucho en entrenar", correct: false, feedback: "El tiempo de entreno puede ser alto, pero el problema esencial es la mala generalización." },
+    { id: "b", label: "Porque funciona bien en entreno pero mal en datos nuevos", correct: true, feedback: "¡Correcto! Ese es el problema más común en ML." },
+    { id: "c", label: "Porque usa demasiada memoria RAM", correct: false, feedback: "El consumo de memoria no define el sobreajuste." },
+    { id: "d", label: "Porque solo ocurre con redes neuronales", correct: false, feedback: "Puede ocurrir en cualquier modelo demasiado complejo, no solo redes." },
+  ]}
+/>
+
+</RevealSequence>
+
+<AnswerReveal summary="Ver respuestas (resumen)">
 <p><strong>1.</strong> b) La frontera separa clases. En 2D es una línea; en 3D es un plano; en más dimensiones es un hiperplano.</p>
 <p><strong>2.</strong> b) k grande suaviza la frontera pero puede perder detalle local. Es un balance.</p>
 <p><strong>3.</strong> b) Clasificación → categorías (Aspergillus/Penicillium). Regresión → números continuos (concentración, peso, temperatura).</p>

@@ -62,6 +62,21 @@ Aquí entra AlphaFold.
   answer="Las hélices alfa se ven como 'tirabuzones' y las láminas beta como flechas planas. Las regiones desordenadas se ven como 'fideos' sin estructura fija. La estructura 3D es clave porque la función de una proteína depende de su forma."
 />
 
+<ChoiceQuestion
+  question="Al rotar la proteína en 3D, ¿cómo distingues hélices alfa de regiones desordenadas (loops)?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-visualizador-1"
+  allowContinueOnIncorrect
+  explanation="Las hélices alfa se ven como tirabuzones, las láminas beta como flechas planas y los loops como fideos sin estructura fija."
+  options={[
+    { id: "a", label: "Las hélices alfa se ven como tirabuzones; los loops como fideos desordenados", correct: true, feedback: "¡Exacto! La forma 3D refleja la función." },
+    { id: "b", label: "No hay diferencia visible, todo se ve igual al rotar", correct: false, feedback: "Sí hay diferencias: hélices y láminas tienen patrones visuales distintivos." },
+    { id: "c", label: "Las hélices alfa son las regiones que no aparecen en la visualización", correct: false, feedback: "Las hélices sí se visualizan, como cintas en tirabuzón." },
+    { id: "d", label: "Los loops son siempre hélices perfectas", correct: false, feedback: "Al revés: los loops son las zonas sin estructura regular." },
+  ]}
+/>
+
 <InteractiveFrame src="/interactives/demo_07_protein_viewer.html" height="700px" caption="visualización interactiva de datos reales del PDB" />
 
 **Explora el visualizador:**
@@ -83,6 +98,21 @@ Cada átomo en esa visualización tiene coordenadas (x, y, z) determinadas exper
   blockId="reflection-l03-alphafold-desafio"
   prompt="AlphaFold predice la posición de cada átomo en una proteína (coordenadas x, y, z). ¿Qué tipo de problema de ML es: clasificación o regresión? ¿Cómo se mide el error entre la estructura real y la predicha?"
   answer="Es regresión — predecimos valores continuos (coordenadas x, y, z para cada átomo). El error se mide con RMSD (Root Mean Square Deviation): es el ECM aplicado a coordenadas 3D, calculando la distancia entre átomos equivalentes en la estructura real y la predicha."
+/>
+
+<ChoiceQuestion
+  question="AlphaFold predice la posición (x, y, z) de cada átomo. ¿Es clasificación o regresión y cómo se mide el error?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-alphafold-desafio-1"
+  allowContinueOnIncorrect
+  explanation="Es regresión: coordenadas continuas. El error se mide con RMSD, que es el ECM en 3D: distancia promedio entre átomos equivalentes."
+  options={[
+    { id: "a", label: "Clasificación; se mide con accuracy", correct: false, feedback: "No: clasificar sería elegir una categoría. Acá predecimos números continuos." },
+    { id: "b", label: "Regresión; se mide con RMSD (ECM en 3D) entre átomos equivalentes", correct: true, feedback: "¡Correcto! RMSD < 1Å es excelente; >3Å es poco confiable." },
+    { id: "c", label: "Clasificación; se mide con RMSD como si fuera clasificación", correct: false, feedback: "RMSD es métrica de regresión, no de clasificación." },
+    { id: "d", label: "Regresión; se mide contando cuántos aminoácidos coinciden", correct: false, feedback: "Coincidencia binaria sería clasificación; acá importan las coordenadas exactas." },
+  ]}
 />
 
 <ConceptCard variant="definition">
@@ -115,6 +145,21 @@ La gran innovación de AlphaFold fue modelar el **plegamiento como un problema d
   blockId="reflection-l03-alphafold"
   prompt="AlphaFold predijo 200 millones de estructuras de proteínas (prácticamente todas las conocidas). ¿Qué problemas biotecnológicos se pueden resolver ahora que antes eran inviables por falta de estructuras? ¿Qué limitaciones tiene predecir una estructura que nunca fue resuelta experimentalmente?"
   answer="Aplicaciones: diseño de fármacos (docking molecular), ingeniería de enzimas, comprensión de enfermedades por malplegamiento (Alzheimer, Parkinson). Limitaciones: AlphaFold predice la estructura más probable, pero las proteínas son dinámicas y cambian de forma; no predice bien interacciones con otras moléculas ni estados transitorios."
+/>
+
+<ChoiceQuestion
+  question="AlphaFold predijo 200 millones de estructuras. ¿Qué aplicaciones desbloquea y cuál es su limitación principal?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-alphafold-1"
+  allowContinueOnIncorrect
+  explanation="Desbloquea docking, ingeniería de enzimas y estudio de malplegamiento. Limitación: predice la conformación más probable, pero las proteínas son dinámicas y no modela bien interacciones ni estados transitorios."
+  options={[
+    { id: "a", label: "Solo sirve para contar proteínas, sin aplicaciones reales", correct: false, feedback: "No: habilita diseño de fármacos, ingeniería de enzimas y estudio de enfermedades." },
+    { id: "b", label: "Permite docking e ingeniería de enzimas, pero falla en dinámicas e interacciones", correct: true, feedback: "¡Exacto! Es una foto estática de la conformación más probable, no la dinámica completa." },
+    { id: "c", label: "Reemplaza por completo los experimentos de laboratorio", correct: false, feedback: "No reemplaza validación experimental; la hace más enfocada." },
+    { id: "d", label: "Solo funciona si la proteína ya tiene estructura en el PDB", correct: false, feedback: "Justamente predice las que no tienen estructura experimental resuelta." },
+  ]}
 />
 
 </Section>
@@ -223,37 +268,83 @@ En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0
 
 <Section number={11} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-1. **¿Qué mide el RMSD en el contexto de AlphaFold?**
-   - a) La cantidad de proteínas predichas por segundo
-   - b) La distancia promedio entre la estructura predicha y la estructura real
-   - c) La velocidad de plegamiento de una proteína
-   - d) La cantidad de aminoácidos en la proteína
+<RevealSequence blockOnQuiz>
 
-2. **¿Por qué AlphaFold fue un avance tan significativo?**
-   - a) Porque fue el primer modelo de deep learning
-   - b) Porque resolvió el plegamiento de proteínas como un problema de aprendizaje a partir de datos, sin simulaciones físicas costosas
-   - c) Porque eliminó la necesidad de experimentos de laboratorio
-   - d) Porque predice secuencias de ADN
+<div>Cinco preguntas para consolidar esta lección. Responde correctamente cada una para avanzar.</div>
 
-3. **¿Cuál es la principal limitación del PDB como dataset para entrenar modelos como AlphaFold?**
-   - a) Es demasiado grande para descargarlo
-   - b) Solo ~200,000 estructuras resueltas vs. millones de proteínas conocidas
-   - c) Los datos están en formato incorrecto
-   - d) No contiene proteínas humanas
+<ChoiceQuestion
+  question="¿Qué mide el RMSD en el contexto de AlphaFold?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-check-1"
+  explanation="RMSD es el ECM en 3D: distancia promedio entre átomos equivalentes. RMSD < 1Å es excelente."
+  options={[
+    { id: "a", label: "La cantidad de proteínas predichas por segundo", correct: false, feedback: "Eso sería velocidad de inferencia, no RMSD." },
+    { id: "b", label: "La distancia promedio entre la estructura predicha y la estructura real", correct: true, feedback: "¡Correcto! Es la métrica clave para evaluar la predicción 3D." },
+    { id: "c", label: "La velocidad de plegamiento de una proteína", correct: false, feedback: "No mide tiempo, sino error geométrico." },
+    { id: "d", label: "La cantidad de aminoácidos en la proteína", correct: false, feedback: "Eso es longitud de secuencia, no calidad de la predicción." },
+  ]}
+/>
 
-4. **En un pipeline de ML, ¿cuál etapa consume más tiempo en proyectos biotecnológicos?**
-   - a) El entrenamiento del modelo
-   - b) La limpieza y preparación de datos
-   - c) El despliegue en producción
-   - d) La elección del algoritmo
+<ChoiceQuestion
+  question="¿Por qué AlphaFold fue un avance tan significativo?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-check-2"
+  explanation="Reformuló el plegamiento como aprendizaje a partir de 170k estructuras, sin simulaciones físicas costosas."
+  options={[
+    { id: "a", label: "Porque fue el primer modelo de deep learning", correct: false, feedback: "Hubo muchos antes; lo disruptivo fue el enfoque aplicado al plegamiento." },
+    { id: "b", label: "Porque resolvió el plegamiento como aprendizaje sin simulaciones físicas costosas", correct: true, feedback: "¡Exacto! Aprendió de datos experimentales del PDB." },
+    { id: "c", label: "Porque eliminó la necesidad de experimentos de laboratorio", correct: false, feedback: "Acelera, pero la validación experimental sigue siendo necesaria." },
+    { id: "d", label: "Porque predice secuencias de ADN", correct: false, feedback: "Predice estructuras 3D a partir de secuencia de aminoácidos, no ADN." },
+  ]}
+/>
 
-5. **¿Qué es un embedding de secuencia?**
-   - a) Una imagen de la proteína
-   - b) Una representación numérica de la secuencia de aminoácidos que el modelo puede procesar
-   - c) El archivo PDB de la proteína
-   - d) El nombre de la proteína
+<ChoiceQuestion
+  question="¿Cuál es la principal limitación del PDB como dataset para entrenar modelos como AlphaFold?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-check-3"
+  explanation="Solo ~200k estructuras resueltas vs millones de secuencias conocidas; por eso predecir las faltantes era tan valioso."
+  options={[
+    { id: "a", label: "Es demasiado grande para descargarlo", correct: false, feedback: "El tamaño es manejable; el problema es la cobertura." },
+    { id: "b", label: "Solo ~200.000 estructuras resueltas vs millones de proteínas conocidas", correct: true, feedback: "¡Correcto! Esa brecha hizo necesario AlphaFold." },
+    { id: "c", label: "Los datos están en formato incorrecto", correct: false, feedback: "El formato PDB es estándar; no es el problema." },
+    { id: "d", label: "No contiene proteínas humanas", correct: false, feedback: "Sí contiene miles de proteínas humanas, pero faltan muchas otras." },
+  ]}
+/>
 
-<AnswerReveal summary="Ver respuestas">
+<ChoiceQuestion
+  question="En un pipeline de ML, ¿cuál etapa consume más tiempo en proyectos biotecnológicos?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-check-4"
+  explanation="La limpieza y preparación de datos consume más del 60% del tiempo; además es donde aparecen errores silenciosos."
+  options={[
+    { id: "a", label: "El entrenamiento del modelo", correct: false, feedback: "El entreno es rápido comparado con conseguir y limpiar datos biológicos." },
+    { id: "b", label: "La limpieza y preparación de datos", correct: true, feedback: "¡Exacto! Control de calidad, normalización entre lotes y corrección de artefactos llevan la mayor parte." },
+    { id: "c", label: "El despliegue en producción", correct: false, feedback: "Desplegar es menor comparado con la preparación inicial." },
+    { id: "d", label: "La elección del algoritmo", correct: false, feedback: "Elegir algoritmo es rápido; lo costoso es tener datos limpios." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué es un embedding de secuencia?"
+  moduleSlug="ia"
+  lessonSlug="lesson03_ai_in_biotech"
+  blockId="choice-l03-check-5"
+  explanation="Convierte letras (aminoácidos) en vectores numéricos que el modelo puede procesar; es el paso inicial de AlphaFold."
+  options={[
+    { id: "a", label: "Una imagen de la proteína", correct: false, feedback: "No es visual; es una representación numérica." },
+    { id: "b", label: "Una representación numérica de la secuencia que el modelo puede procesar", correct: true, feedback: "¡Correcto! Transforma secuencia en números para el aprendizaje." },
+    { id: "c", label: "El archivo PDB de la proteína", correct: false, feedback: "El PDB almacena coordenadas, no es el embedding." },
+    { id: "d", label: "El nombre de la proteína", correct: false, feedback: "El nombre es texto, no un vector procesable por el modelo." },
+  ]}
+/>
+
+</RevealSequence>
+
+<AnswerReveal summary="Ver respuestas (resumen)">
 <p><strong>1.</strong> b) RMSD es el ECM en 3D — la distancia promedio entre átomos equivalentes. RMSD &lt; 1Å es excelente.</p>
 <p><strong>2.</strong> b) AlphaFold reformuló un problema de física como uno de aprendizaje. En lugar de simular fuerzas moleculares, aprendió de ~170,000 estructuras experimentales.</p>
 <p><strong>3.</strong> b) El PDB tiene ~200,000 estructuras, pero conocemos millones de proteínas por su secuencia. Esa diferencia es lo que hizo que AlphaFold fuera tan necesario.</p>

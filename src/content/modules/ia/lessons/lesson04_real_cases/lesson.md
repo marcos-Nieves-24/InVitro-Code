@@ -57,6 +57,21 @@ La vacuna mRNA necesita un **vehículo** para llevar el mensaje genético a las 
   answer="Un modelo de ML se entrena con datos de formulaciones previas (composición lipídica → eficiencia de transfección, estabilidad, toxicidad). Aprende la relación entre composición química y rendimiento. Luego predice qué formulaciones nuevas serían más efectivas, guiando los experimentos hacia las candidatas más prometedoras y evitando probar miles de combinaciones al azar."
 />
 
+<ChoiceQuestion
+  question="Diseñar la LNP óptima implica miles de formulaciones. ¿Cómo acelera la IA ese proceso?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-lnp-1"
+  allowContinueOnIncorrect
+  explanation="La IA entrena con formulaciones previas y predice las 50 más prometedoras, evitando probar 1.000 al azar y ahorrando meses."
+  options={[
+    { id: "a", label: "Probando todas las combinaciones al azar en el laboratorio sin usar datos", correct: false, feedback: "Eso es lo que hacía el método tradicional lento; la IA justamente evita eso." },
+    { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición → rendimiento y guía los experimentos." },
+    { id: "c", label: "Reemplazando por completo los experimentos de laboratorio", correct: false, feedback: "La IA no reemplaza el laboratorio; lo hace más inteligente y enfocado." },
+    { id: "d", label: "Eligiendo lípidos solo por su precio más barato", correct: false, feedback: "El costo no determina eficacia ni estabilidad; importan las propiedades químicas." },
+  ]}
+/>
+
 <ConceptCard variant="key-idea">
 La IA no reemplazó los experimentos de laboratorio. Los hizo **más inteligentes**: en lugar de probar 1,000 formulaciones al azar, los modelos predijeron cuáles 50 tenían más probabilidad de funcionar. Eso aceleró el desarrollo meses.
 </ConceptCard>
@@ -73,6 +88,21 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
   lessonSlug="lesson04_real_cases"
   prompt="Si tienes datos de interacciones molecular-detector (qué fármacos se unen a qué proteínas virales), ¿cómo modelas el problema: clasificación o regresión? ¿Qué métrica usarías para evaluar si un modelo así es confiable en un contexto clínico donde un falso negativo puede costar vidas?"
   answer="Es clasificación binaria (se une / no se une). La métrica clave es sensibilidad (recall): minimizar falsos negativos (fármacos que sí funcionan pero el modelo descartó). En un contexto clínico, también importa la especificidad para evitar falsos positivos que lleven a ensayos clínicos costosos e inútiles. Se necesita un balance cuidadoso."
+/>
+
+<ChoiceQuestion
+  question="Si tienes datos de qué fármacos se unen a qué proteínas virales, ¿cómo modelas el reposicionamiento y qué métrica priorizas?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-reposition-1"
+  allowContinueOnIncorrect
+  explanation="Es clasificación binaria (se une/no se une). En clínica priorizas sensibilidad/recall para no descartar fármacos útiles, balanceando con especificidad para no generar falsos positivos costosos."
+  options={[
+    { id: "a", label: "Regresión para predecir concentración; métrica principal R²", correct: false, feedback: "No es predecir número continuo, sino decidir si hay unión o no." },
+    { id: "b", label: "Clasificación binaria se une/no se une; priorizar sensibilidad para minimizar falsos negativos", correct: true, feedback: "¡Exacto! Un falso negativo descarta un fármaco que podría salvar vidas." },
+    { id: "c", label: "Clustering sin etiquetas; no hay métrica clínica", correct: false, feedback: "Tenemos etiquetas (se une/no), así que es supervisado, no clustering." },
+    { id: "d", label: "Clasificación pero priorizar accuracy sin distinguir errores", correct: false, feedback: "Accuracy solo oculta la diferencia entre falso positivo y falso negativo, crítica en clínica." },
+  ]}
 />
 
 <ConceptCard variant="definition">
@@ -105,6 +135,21 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
   lessonSlug="lesson04_real_cases"
   prompt="AlphaFold predice estructuras. ¿Cómo ayuda esto a diseñar un fármaco que se una a una proteína viral específica? ¿Qué limitaciones viste antes que podrían afectar un diseño de fármaco basado ENTERAMENTE en estructuras predichas?"
   answer="Con la estructura predicha de la proteína viral, se puede simular (docking) qué moléculas podrían unirse a ella — un paso clave en diseño de fármacos. Limitaciones: AlphaFold predice la estructura más estable, pero las proteínas son dinámicas y cambian de forma al unirse a otras moléculas. La predicción puede no reflejar el estado activo real de la proteína, llevando a falsos positivos en los screenings virtuales."
+/>
+
+<ChoiceQuestion
+  question="AlphaFold predice estructuras para docking de fármacos. ¿Qué limitación puede causar falsos positivos si te basas solo en la predicción?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-alphafold-1"
+  allowContinueOnIncorrect
+  explanation="AlphaFold da la conformación más probable, pero las proteínas son dinámicas y cambian al unirse. Validar experimentalmente sigue siendo obligatorio."
+  options={[
+    { id: "a", label: "Las proteínas son dinámicas; la predicción es estática y puede no reflejar el estado activo", correct: true, feedback: "¡Correcto! Por eso una predicción útil sigue necesitando confirmación experimental." },
+    { id: "b", label: "AlphaFold solo predice proteínas humanas, no virales", correct: false, feedback: "Predice cualquier secuencia, incluidas proteínas virales." },
+    { id: "c", label: "Las predicciones son siempre incorrectas por definición", correct: false, feedback: "No: CASP14 alcanzó 92.4 GDT, comparable a métodos experimentales en muchos casos." },
+    { id: "d", label: "El docking no se puede simular con computadoras", correct: false, feedback: "Sí se puede simular; justamente la estructura predicha permite el screening virtual." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
@@ -194,6 +239,21 @@ Esto lo hace distinto de AlphaFold:
   ]}
 />
 
+<ChoiceQuestion
+  question="¿En qué se diferencia Evo de AlphaFold?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-evo-1"
+  allowContinueOnIncorrect
+  explanation="AlphaFold predice coordenadas 3D a partir de aminoácidos. Evo es generativo sobre ADN completo (incluyendo no codificante) y puede diseñar secuencias novedosas."
+  options={[
+    { id: "a", label: "AlphaFold genera secuencias nuevas de ADN, Evo solo predice estructuras", correct: false, feedback: "Al revés: Evo genera, AlphaFold predice estructura." },
+    { id: "b", label: "AlphaFold predice estructura 3D de proteínas; Evo genera y comprende secuencias genómicas completas", correct: true, feedback: "¡Perfecto! Son complementarios: forma vs secuencia generativa." },
+    { id: "c", label: "No hay diferencia, son el mismo modelo con distinto nombre", correct: false, feedback: "Son arquitecturas y objetivos distintos, publicados por equipos diferentes." },
+    { id: "d", label: "Ambos requieren cristalografía de rayos X para cada predicción", correct: false, feedback: "No requieren experimento nuevo; aprenden de datos previos." },
+  ]}
+/>
+
 <ConceptCard variant="key-idea">
 Ambos modelos son herramientas poderosas, pero complementarias: AlphaFold resuelve el problema de <em>qué forma</em> tiene una proteína, mientras que Evo explora <em>qué secuencias</em> pueden producir funciones biológicas útiles.
 </ConceptCard>
@@ -247,37 +307,83 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 <Section number={11} title="Checkpoint final" eyebrow="EVALUACIÓN">
 
-1. **¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?**
-   - a) Diseñó la secuencia genética del virus
-   - b) Predijo qué formulaciones de nanopartículas lipídicas serían más efectivas
-   - c) Fabricó las vacunas en laboratorios autónomos
-   - d) Reemplazó los ensayos clínicos
+<RevealSequence blockOnQuiz>
 
-2. **¿Qué es el reposicionamiento de fármacos?**
-   - a) Mover fármacos de un laboratorio a otro
-   - b) Usar modelos de ML para predecir si fármacos existentes pueden tratar nuevas enfermedades
-   - c) Rediseñar la estructura química de un fármaco desde cero
-   - d) Almacenar fármacos en condiciones óptimas
+<div>Checkpoint final del módulo. Valida las ideas centrales antes de celebrar el fin del Módulo 1.</div>
 
-3. **¿Por qué una estructura predicha por AlphaFold no es suficiente para diseñar un fármaco?**
-   - a) Porque AlphaFold solo funciona con proteínas humanas
-   - b) Porque las proteínas son dinámicas y la predicción muestra un estado estático
-   - c) Porque las predicciones son siempre incorrectas
-   - d) Porque requiere demasiado poder computacional
+<ChoiceQuestion
+  question="¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-check-1"
+  explanation="Los modelos predijeron qué formulaciones de LNPs tenían más chance de funcionar, reduciendo meses de prueba al azar."
+  options={[
+    { id: "a", label: "Diseñó la secuencia genética del virus", correct: false, feedback: "La secuencia viral se obtuvo por secuenciación, no por diseño de IA." },
+    { id: "b", label: "Predijo qué formulaciones de nanopartículas lipídicas serían más efectivas", correct: true, feedback: "¡Correcto! Priorizó 50 candidatas prometedoras sobre 1.000 posibles." },
+    { id: "c", label: "Fabricó las vacunas en laboratorios autónomos sin humanos", correct: false, feedback: "Los laboratorios autónomos son tendencia futura, no lo usado en 2020." },
+    { id: "d", label: "Reemplazó por completo los ensayos clínicos", correct: false, feedback: "Los ensayos clínicos siguen siendo obligatorios; la IA no los reemplaza." },
+  ]}
+/>
 
-4. **¿Cuál es una limitación FUNDAMENTAL de la IA en biotecnología?**
-   - a) Es demasiado cara para usarla
-   - b) Los datos biológicos son escasos, caros, y el modelo no entiende mecanismos causales
-   - c) No hay suficientes científicos que sepan usarla
-   - d) Las computadoras no tienen la potencia necesaria
+<ChoiceQuestion
+  question="¿Qué es el reposicionamiento de fármacos?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-check-2"
+  explanation="Encontrar nuevos usos para fármacos aprobados usando ML predictivo; ahorra años porque ya pasaron pruebas de seguridad."
+  options={[
+    { id: "a", label: "Mover fármacos de un laboratorio a otro", correct: false, feedback: "No es logística; es predicción computacional de nuevas indicaciones." },
+    { id: "b", label: "Usar modelos de ML para predecir si fármacos existentes pueden tratar nuevas enfermedades", correct: true, feedback: "¡Exacto! Baricitinib y remdesivir son ejemplos reales." },
+    { id: "c", label: "Rediseñar la estructura química de un fármaco desde cero", correct: false, feedback: "Eso sería diseño de novo, no reposicionamiento." },
+    { id: "d", label: "Almacenar fármacos en condiciones óptimas", correct: false, feedback: "Eso es logística de almacenamiento, no ML." },
+  ]}
+/>
 
-5. **¿Cuál es la idea más importante de este módulo?**
-   - a) La IA reemplazará a los científicos
-   - b) Sin buenos datos y validación rigurosa, ningún modelo es confiable
-   - c) Solo las redes neuronales profundas son útiles
-   - d) La biotecnología no necesita IA
+<ChoiceQuestion
+  question="¿Por qué una estructura predicha por AlphaFold no es suficiente para diseñar un fármaco?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-check-3"
+  explanation="Es una foto estática de la conformación más probable; la proteína real es dinámica y puede adoptar otras conformaciones al unirse."
+  options={[
+    { id: "a", label: "Porque AlphaFold solo funciona con proteínas humanas", correct: false, feedback: "Funciona con cualquier secuencia, incluidas virales." },
+    { id: "b", label: "Porque las proteínas son dinámicas y la predicción muestra un estado estático", correct: true, feedback: "¡Correcto! Por eso el docking basado solo en predicción puede dar falsos positivos." },
+    { id: "c", label: "Porque las predicciones son siempre incorrectas", correct: false, feedback: "Muchas predicciones alcanzan 92.4 GDT, comparables a experimental." },
+    { id: "d", label: "Porque requiere demasiado poder computacional para docking", correct: false, feedback: "El docking es factible; el límite es la dinámica, no el cómputo." },
+  ]}
+/>
 
-<AnswerReveal summary="Ver respuestas">
+<ChoiceQuestion
+  question="¿Cuál es una limitación FUNDAMENTAL de la IA en biotecnología?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-check-4"
+  explanation="Datos escasos y caros, correlación sin causalidad, mala generalización entre laboratorios y cajas negras difíciles de interpretar."
+  options={[
+    { id: "a", label: "Es demasiado cara para usarla", correct: false, feedback: "El costo baja; el problema es la calidad y cantidad de datos biológicos." },
+    { id: "b", label: "Los datos biológicos son escasos, caros, y el modelo no entiende mecanismos causales", correct: true, feedback: "¡Exacto! La IA encuentra correlaciones, no explica mecanismos biológicos." },
+    { id: "c", label: "No hay suficientes científicos que sepan usarla", correct: false, feedback: "La brecha de formación existe, pero no es la limitación fundamental técnica." },
+    { id: "d", label: "Las computadoras no tienen la potencia necesaria", correct: false, feedback: "El cómputo es mayormente suficiente; los datos siguen siendo el cuello de botella." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuál es la idea más importante de este módulo?"
+  moduleSlug="ia"
+  lessonSlug="lesson04_real_cases"
+  blockId="choice-l04-check-5"
+  explanation="Sin buenos datos, features relevantes, modelo adecuado y validación rigurosa, ningún modelo es confiable. No hay atajos."
+  options={[
+    { id: "a", label: "La IA reemplazará a los científicos", correct: false, feedback: "La IA aumenta la capacidad del científico, no la reemplaza." },
+    { id: "b", label: "Sin buenos datos y validación rigurosa, ningún modelo es confiable", correct: true, feedback: "¡Ese es el hilo conductor del módulo!" },
+    { id: "c", label: "Solo las redes neuronales profundas son útiles", correct: false, feedback: "Algoritmos simples como perceptrón y KNN ya son útiles y didácticos." },
+    { id: "d", label: "La biotecnología no necesita IA", correct: false, feedback: "Al contrario: es uno de los campos con mayor impacto potencial de la IA." },
+  ]}
+/>
+
+</RevealSequence>
+
+<AnswerReveal summary="Ver respuestas (resumen)">
 <p><strong>1.</strong> b) La IA predijo formulaciones de LNPs más efectivas, reduciendo meses de experimentación.</p>
 <p><strong>2.</strong> b) Reposicionamiento = encontrar nuevos usos para fármacos existentes usando ML predictivo.</p>
 <p><strong>3.</strong> b) Las proteínas son dinámicas; una estructura predicha es una foto fija de la conformación más probable. Las interacciones reales pueden requerir conformaciones diferentes.</p>

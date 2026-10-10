@@ -113,7 +113,26 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={5} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
+<Section number={5} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
+
+<ChoiceQuestion
+  question="¿Qué es una feature en el contexto de IA?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-features-1"
+  allowContinueOnIncorrect
+  explanation="Una feature es una propiedad medible (como área, textura o intensidad) que convertimos en número para que el algoritmo pueda aprender patrones."
+  options={[
+    { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "El hardware no define la feature; hablamos de propiedades medibles de la muestra, no del equipo." },
+    { id: "b", label: "Una propiedad medible de los datos que usamos para clasificar", correct: true, feedback: "¡Exacto! Área, circularidad, textura e intensidad son ejemplos de features." },
+    { id: "c", label: "Un tipo de algoritmo de aprendizaje automático", correct: false, feedback: "No: los algoritmos usan features, pero no son la feature en sí." },
+    { id: "d", label: "Un error que comete el modelo al predecir", correct: false, feedback: "Eso sería un error de predicción, no una feature." },
+  ]}
+/>
+
+</Section>
+
+<Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
 Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las conidias, pero con datos médicos reales. El dataset Breast Cancer Wisconsin contiene 569 casos reales de biopsias — cada uno con 30 features numéricas extraídas de imágenes de núcleos celulares.
 
@@ -125,13 +144,28 @@ Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las 
   answer="No, porque los rangos de área se superponen entre especies. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes. Necesitamos múltiples características para clasificar correctamente."
 />
 
+<ChoiceQuestion
+  question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-area-1"
+  allowContinueOnIncorrect
+  explanation="Los rangos de área se superponen entre especies. Una sola feature rara vez separa bien; combinar varias (área + textura + circularidad) mejora la clasificación."
+  options={[
+    { id: "a", label: "Sí, el área por sí sola separa perfectamente ambas especies", correct: false, feedback: "No: hay superposición. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes." },
+    { id: "b", label: "No, los rangos se superponen; necesitamos múltiples features", correct: true, feedback: "¡Correcto! Una sola dimensión no alcanza. El espacio de features multidimensional separa mejor." },
+    { id: "c", label: "Solo si el microscopio está perfectamente calibrado", correct: false, feedback: "La calibración ayuda, pero no elimina la variabilidad biológica natural." },
+    { id: "d", label: "Sí, porque Penicillium siempre es más grande", correct: false, feedback: "Falso: hay conidias pequeñas de Aspergillus y grandes de Penicillium. No es determinista." },
+  ]}
+/>
+
 <DiagnosticTrainer />
 
 Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el menú desplegable. Nota cómo algunas combinaciones separan mejor tumores benignos de malignos que otras.
 
 </Section>
 
-<Section number={6} title="Dos features > una" eyebrow="CONCEPTO">
+<Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
 
 **¿Qué observamos en la simulación?**
 
@@ -145,7 +179,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={7} title="Tú como clasificador" eyebrow="INTERACTIVA">
+<Section number={8} title="Tú como clasificador" eyebrow="INTERACTIVA">
 
 Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.
 
@@ -163,7 +197,7 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 
 </Section>
 
-<Section number={8} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+<Section number={9} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
 
 **¿Qué aprendemos de la simulación?**
 
@@ -177,7 +211,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={9} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
+<Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
@@ -189,13 +223,28 @@ Antes de que existiera el machine learning, se usaban **sistemas basados en regl
   answer="No. Por más que ajustemos los umbrales, siempre hay conidias que quedan mal clasificadas. La naturaleza tiene variabilidad que las reglas fijas no pueden capturar. Algunas conidias de Aspergillus son más alargadas de lo normal, y algunas de Penicillium son más redondeadas."
 />
 
+<ChoiceQuestion
+  question="Si creamos reglas manuales del tipo 'área > X y textura > Y', ¿podemos clasificar todas las conidias correctamente?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-reglas-1"
+  allowContinueOnIncorrect
+  explanation="Por más que ajustes los umbrales, siempre hay conidias atípicas. La variabilidad biológica no se captura con reglas fijas; por eso usamos ML."
+  options={[
+    { id: "a", label: "Sí, basta con ajustar bien los umbrales para llegar al 100%", correct: false, feedback: "No: probarás que siempre quedan puntos mal clasificados por superposición natural." },
+    { id: "b", label: "No, la variabilidad natural deja excepciones que ninguna regla simple captura", correct: true, feedback: "¡Exacto! Necesitarías cientos de reglas y aún así fallarías. El ML aprende la frontera flexible." },
+    { id: "c", label: "Solo si usamos una única regla en lugar de dos", correct: false, feedback: "Una regla es aún más limitada que dos; empeora la separación." },
+    { id: "d", label: "Sí, porque las conidias de cada especie son idénticas entre sí", correct: false, feedback: "Falso: hay variabilidad intra-especie considerable." },
+  ]}
+/>
+
 <ThresholdLab />
 
 Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas afecta la precisión. Por más que ajustes, siempre hay puntos que se clasifican mal.
 
 </Section>
 
-<Section number={10} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+<Section number={11} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
 **La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
@@ -208,7 +257,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={11} title="Resumen" eyebrow="CIERRE">
+<Section number={12} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -220,27 +269,57 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={12} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
-1. **¿Qué es una "feature" en el contexto de IA?**
-   - a) Una característica del hardware de la computadora
-   - b) Una propiedad medible de los datos que usamos para clasificar
-   - c) Un tipo de algoritmo de aprendizaje
-   - d) Un error en el modelo
+<RevealSequence blockOnQuiz>
 
-2. **¿Por qué los sistemas basados en reglas fijas no son ideales para clasificar conidias?**
-   - a) Porque las reglas son muy lentas de ejecutar
-   - b) Porque la naturaleza tiene variabilidad natural que las reglas no capturan
-   - c) Porque las computadoras no entienden reglas
-   - d) Porque las conidias cambian de forma constantemente
+<div>Antes de cerrar, pon a prueba lo que viste. Responde correctamente cada pregunta para avanzar.</div>
 
-3. **¿Qué significa que una máquina "aprenda"?**
-   - a) Que entiende el significado de lo que clasifica
-   - b) Que encuentra patrones estadísticos en los datos sin ser programada explícitamente
-   - c) Que puede tener conversaciones como un humano
-   - d) Que reemplaza completamente al científico
+<ChoiceQuestion
+  question="¿Qué es una 'feature' en el contexto de IA?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-check-1"
+  explanation="Las features son los números que la IA usa para aprender; elegir buenas features es el primer paso del pipeline."
+  options={[
+    { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "No: el hardware es el equipo físico. La feature es una propiedad medible del dato." },
+    { id: "b", label: "Una propiedad medible de los datos que usamos para clasificar", correct: true, feedback: "¡Correcto! Por ejemplo, área y textura de la conidia." },
+    { id: "c", label: "Un tipo de algoritmo de aprendizaje", correct: false, feedback: "El algoritmo usa features, no es la feature." },
+    { id: "d", label: "Un error en el modelo", correct: false, feedback: "Eso es un error de predicción, distinto a una feature." },
+  ]}
+/>
 
-<AnswerReveal summary="Ver respuestas">
+<ChoiceQuestion
+  question="¿Por qué los sistemas basados en reglas fijas no son ideales para clasificar conidias?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-check-2"
+  explanation="La naturaleza tiene variabilidad; cualquier umbral fijo deja excepciones. El ML aprende fronteras flexibles."
+  options={[
+    { id: "a", label: "Porque las reglas son muy lentas de ejecutar", correct: false, feedback: "La velocidad no es el problema central; es la falta de flexibilidad." },
+    { id: "b", label: "Porque la naturaleza tiene variabilidad que las reglas no capturan", correct: true, feedback: "¡Exacto! Siempre hay casos atípicos que rompen la regla." },
+    { id: "c", label: "Porque las computadoras no entienden reglas", correct: false, feedback: "Las computadoras ejecutan reglas perfectamente; el problema es que no alcanzan." },
+    { id: "d", label: "Porque las conidias cambian de forma constantemente", correct: false, feedback: "Cambian entre individuos, no de forma dinámica constante, pero esa variabilidad ya rompe reglas fijas." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué significa que una máquina 'aprenda'?"
+  moduleSlug="ia"
+  lessonSlug="lesson01_what_is_ai"
+  blockId="choice-l01-check-3"
+  explanation="Aprender es encontrar patrones estadísticos en los datos sin ser programada explícitamente para cada caso."
+  options={[
+    { id: "a", label: "Que entiende el significado de lo que clasifica", correct: false, feedback: "No hay conciencia ni comprensión real; solo correlaciones estadísticas." },
+    { id: "b", label: "Que encuentra patrones estadísticos en los datos sin ser programada explícitamente", correct: true, feedback: "¡Correcto! Esa es la definición de machine learning." },
+    { id: "c", label: "Que puede tener conversaciones como un humano", correct: false, feedback: "Conversar es otra capacidad (PLN); aprender en este contexto es clasificar por patrones." },
+    { id: "d", label: "Que reemplaza completamente al científico", correct: false, feedback: "La IA asiste y acelera, pero no reemplaza el criterio del científico." },
+  ]}
+/>
+
+</RevealSequence>
+
+<AnswerReveal summary="Ver respuestas (resumen)">
 <p><strong>1.</strong> b) Una propiedad medible de los datos. Las features son los números que la IA usa para aprender.</p>
 <p><strong>2.</strong> b) La variabilidad natural hace que las reglas fijas siempre tengan excepciones. El ML se adapta a esa variabilidad.</p>
 <p><strong>3.</strong> b) La IA no "entiende" como nosotros. Encuentra correlaciones estadísticas en los datos. Es poderoso... pero limitado.</p>
@@ -248,7 +327,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={13} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
