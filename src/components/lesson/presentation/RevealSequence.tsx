@@ -87,6 +87,8 @@ export function RevealSequence({
 
   const [revealedCount, setRevealedCount] = useState(initialRevealed);
   const [isQuizBlocked, setIsQuizBlocked] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
 
   // Keep revealedCount in sync if total shrinks (e.g. conditional children) –
   // never exceed total, never drop below 0.
@@ -98,6 +100,38 @@ export function RevealSequence({
   useEffect(() => {
     if (!blockOnQuiz) setIsQuizBlocked(false);
   }, [blockOnQuiz]);
+
+  const dismissHint = useCallback(() => {
+    setShowHint(false);
+    try {
+      localStorage.setItem("reveal-hint-dismissed", "true");
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("reveal-hint-dismissed") !== "true") {
+        setShowHint(true);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    if (!showHint) return;
+    const timer = setTimeout(() => dismissHint(), 5000);
+    return () => clearTimeout(timer);
+  }, [showHint, dismissHint]);
+
+  const handleMouseMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const leftThreshold = rect.left + rect.width * 0.3;
+    const rightThreshold = rect.left + rect.width * 0.7;
+    if (e.clientX < leftThreshold) setHoverSide("left");
+    else if (e.clientX > rightThreshold) setHoverSide("right");
+    else setHoverSide(null);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => setHoverSide(null), []);
 
   // Auto-detection fallback: if blockOnQuiz is true, scan visible slice for
   // [data-quiz-blocked="true"]. This covers ChoiceQuestion implementations that
@@ -158,15 +192,17 @@ export function RevealSequence({
 
   const advance = useCallback(() => {
     if (effectiveBlocked) return;
+    if (showHint) dismissHint();
     setRevealedCount((c) => {
       const next = Math.min(c + 1, total);
       return next;
     });
-  }, [effectiveBlocked, total]);
+  }, [effectiveBlocked, total, showHint, dismissHint]);
 
   const goPrev = useCallback(() => {
+    if (showHint) dismissHint();
     setRevealedCount((c) => Math.max(initialRevealed, c - 1));
-  }, [initialRevealed]);
+  }, [initialRevealed, showHint, dismissHint]);
 
   // Fire onComplete once when completion is reached
   const prevCompleteRef = useRef(false);
@@ -183,6 +219,7 @@ export function RevealSequence({
 
   const handleContainerClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
+      if (showHint) dismissHint();
       const target = e.target as HTMLElement;
       // Don't advance when interacting with form/native interactive elements,
       // except the explicit continue/back buttons.
@@ -215,7 +252,7 @@ export function RevealSequence({
       if (effectiveBlocked) return;
       advance();
     },
-    [hasMore, effectiveBlocked, advance, goPrev, revealedCount, initialRevealed]
+    [hasMore, effectiveBlocked, advance, goPrev, revealedCount, initialRevealed, showHint, dismissHint]
   );
 
   const handleContainerKeyDown = useCallback(
@@ -282,7 +319,7 @@ export function RevealSequence({
 
   const containerClass = isAppear
     ? "grid min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 lg:p-8 relative overflow-x-hidden"
-    : "flex w-full flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-x-hidden";
+    : "flex w-full flex-col gap-4 p-4 md:p-6 lg:p-8 relative overflow-x-hidden";
 
   if (total === 0) return null;
 
@@ -294,11 +331,30 @@ export function RevealSequence({
         aria-live="polite"
         aria-label="Contenido progresivo"
         onClick={handleContainerClick}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         onKeyDown={handleContainerKeyDown}
         data-reveal-has-more={hasMore ? "true" : "false"}
         data-reveal-mode={mode}
         className={containerClass}
       >
+        {/* Ghost arrow hints on hover — faint left/right indicators */}
+        {hoverSide === "left" && revealedCount > initialRevealed && (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 select-none text-3xl font-bold text-storm opacity-20"
+          >
+            ←
+          </span>
+        )}
+        {hoverSide === "right" && hasMore && !effectiveBlocked && (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-3xl font-bold text-storm opacity-20"
+          >
+            →
+          </span>
+        )}
         {isAppear && showHistory
           ? // Grid overlay: all children share same cell, only current is visible (for showHistory=true)
             renderChildren.map((child, index) => {
@@ -359,6 +415,29 @@ export function RevealSequence({
         {/* Controls / indicator area */}
         {hasMore ? (
           <div className="flex flex-col items-center gap-2 pt-2">
+            {total > 1 && (
+              <span className="font-mono text-[10px] tracking-widest text-storm">
+                Paso {revealedCount} de {total}
+              </span>
+            )}
+            {showHint && revealedCount === initialRevealed && (
+              <div
+                role="status"
+                className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-brand-200 bg-white/90 px-4 py-2 text-xs font-medium text-storm shadow-sm backdrop-blur"
+              >
+                <span>Tip: click a la derecha → Continuar, a la izquierda ← Atrás (o usa flechas)</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dismissHint();
+                  }}
+                  className="rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+                >
+                  Entendido
+                </button>
+              </div>
+            )}
             {effectiveBlocked ? (
               <p
                 role="status"
@@ -408,6 +487,11 @@ export function RevealSequence({
           </div>
         ) : revealedCount > initialRevealed ? (
           <div className="flex flex-col items-center gap-2 pt-2">
+            {total > 1 && (
+              <span className="font-mono text-[10px] tracking-widest text-storm">
+                Paso {revealedCount} de {total}
+              </span>
+            )}
             <button
               type="button"
               data-reveal-back
@@ -420,6 +504,12 @@ export function RevealSequence({
             >
               <span aria-hidden="true">←</span> Atrás
             </button>
+          </div>
+        ) : total > 1 ? (
+          <div className="flex flex-col items-center gap-2 pt-2">
+            <span className="font-mono text-[10px] tracking-widest text-storm">
+              Paso {revealedCount} de {total}
+            </span>
           </div>
         ) : null}
 
