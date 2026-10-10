@@ -33,12 +33,12 @@ export function ScientistFigure({
   const displaySrc = hasError ? "/dashboard/cientifica-1.svg" : src;
 
   return (
-    <div className={`h-full w-full overflow-visible ${className ?? ""}`}>
+    <div className={`h-auto w-full overflow-visible ${className ?? ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={displaySrc}
         alt={alt}
-        className="h-full w-full object-contain object-bottom"
+        className="h-auto w-full object-contain object-bottom"
         loading={priority ? "eager" : "lazy"}
         onError={() => setHasError(true)}
       />

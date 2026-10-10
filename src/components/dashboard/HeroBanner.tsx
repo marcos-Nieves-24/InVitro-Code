@@ -186,7 +186,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
       <div
         ref={figureRef}
         style={figureInitialStyle}
-        className="absolute bottom-2 right-10 z-[2] hidden h-[480px] w-[350px] overflow-visible lg:right-14 lg:block"
+        className="absolute bottom-0 right-[4%] z-[2] hidden aspect-[440/511] w-[clamp(280px,28vw,380px)] overflow-visible lg:right-[6%] lg:block"
         onMouseEnter={() => setIsHoverScientist(true)}
         onMouseLeave={() => setIsHoverScientist(false)}
       >
