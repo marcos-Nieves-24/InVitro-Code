@@ -19,7 +19,7 @@ export function ScientistFigure({
   const resolved = getScientistVariant(variant);
   const initialSrc =
     resolved === "m"
-      ? "/dashboard/cientifico-440x511.svg"
+      ? "/dashboard/cientifico-1.svg"
       : "/dashboard/cientifica-1.svg";
 
   // Single source: alt derives from the variant actually rendered, so the
