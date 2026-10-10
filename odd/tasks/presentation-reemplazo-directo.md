@@ -59,7 +59,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 ## Progress
 - 2026-10-10: Feature doc creado, worktree `feat/presentation-reemplazo-directo` en `../invitro-code-worktrees/presentation-reemplazo-directo`
-- 2026-10-10: T1 completado — LessonCarousel reescrito como PresentationShell fullscreen `fixed inset-0`, click-anywhere con closest guard, teclado Space/Enter/→/←/Home/End, ESC noop, progress LabProgress, footer Anterior/Siguiente, CelebrationOverlay intacto, a11y role region + reduced-motion — commit 5ebb9f1
+- 2026-10-10: T1 completado — LessonCarousel reescrito como PresentationShell fullscreen `fixed inset-0`, click-anywhere con closest guard, teclado Space/Enter/→/←/Home/End, ESC noop, progress LabProgress, footer Anterior/Siguiente, CelebrationOverlay intacto, a11y role region + reduced-motion — commit dc2e0d2
 
 ## Next Step
 - Ejecutar T2 DialogueBox delegated writer en worktree
