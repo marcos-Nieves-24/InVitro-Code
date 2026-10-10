@@ -12,7 +12,7 @@ export interface ScientistFigureProps {
 
 export function ScientistFigure({
   variant,
-  alt = "Científica con hélice de ADN",
+  alt,
   className,
   priority = false,
 }: ScientistFigureProps) {
@@ -21,6 +21,10 @@ export function ScientistFigure({
     resolved === "m"
       ? "/dashboard/cientifico-440x511.svg"
       : "/dashboard/cientifica-1.svg";
+
+  // Single source: alt derives from the variant actually rendered, so the
+  // male scientist never announces itself as "Científica".
+  const resolvedAlt = alt ?? (resolved === "m" ? "Científico con hélice de ADN" : "Científica con hélice de ADN");
 
   const [src, setSrc] = useState(initialSrc);
   const [hasError, setHasError] = useState(false);
@@ -37,7 +41,7 @@ export function ScientistFigure({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={displaySrc}
-        alt={alt}
+        alt={resolvedAlt}
         className="h-auto w-full object-contain object-bottom"
         loading={priority ? "eager" : "lazy"}
         onError={() => setHasError(true)}

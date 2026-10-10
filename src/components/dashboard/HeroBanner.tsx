@@ -193,7 +193,6 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
         <ScientistFigure
           variant={getScientistVariant(gender)}
           priority
-          alt="Científica con hélice de ADN"
         />
         {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
         <motion.div
