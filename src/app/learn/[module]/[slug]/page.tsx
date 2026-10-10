@@ -27,6 +27,10 @@ import {
   KnnTrainer,
   PerceptronTrainer,
   RegressionTrainer,
+  DialogueBox,
+  RevealSequence,
+  ChoiceQuestion,
+  QuizButton,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
@@ -153,6 +157,10 @@ export default async function LessonPage({ params }: Props) {
     KnnTrainer,
     PerceptronTrainer,
     RegressionTrainer,
+    DialogueBox,
+    RevealSequence,
+    ChoiceQuestion,
+    QuizButton,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

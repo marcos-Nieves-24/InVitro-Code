@@ -19,39 +19,63 @@ Datasets Used: module01_ai_cell_features.csv
 
 <Section number={1} title="El microscopio y la conidia" eyebrow="INICIO">
 
-<MascotMessage>
+<RevealSequence>
+
+<DialogueBox speaker="Dra. Coni" variant="scientist" mood="neutral" typing={false}>
 Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
-</MascotMessage>
+</DialogueBox>
 
+<p>
 Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
+</p>
 
+<p>
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por ti, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
+</p>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Qué es la Inteligencia Artificial?" eyebrow="CONCEPTO">
 
+<RevealSequence>
+
 <ConceptCard variant="definition">
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
 </ConceptCard>
 
+<p>
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
+</p>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="IA no piensa" eyebrow="CONCEPTO">
 
+<RevealSequence>
+
 <ConceptCard variant="key-idea">
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
 
-Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
+<RevealSequence>
 
+<p>
+Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
+</p>
+
+<p>
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
+</p>
 
 <ComparisonTable
   leftLabel="Aspergillus"
@@ -64,24 +88,36 @@ Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
   ]}
 />
 
+<p>
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
+</p>
 
 <ConceptCard variant="definition">
 En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
 </ConceptCard>
 
+<p>
 Para nuestras conidias, las features podrían ser:
+</p>
 
 - **Área** (µm²): qué tan grande es la conidia
 - **Circularidad** (0-1): qué tan redonda es (1 = círculo perfecto)
 - **Textura** (índice): qué tan rugosa es la superficie
 - **Intensidad** (0-255): qué tan clara u oscura es al microscopio
 
+<p>
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.
+</p>
 
 <ConceptCard variant="key-idea">
 La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
 </ConceptCard>
+
+<p className="text-xs text-storm">
+💡 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
+</p>
+
+</RevealSequence>
 
 </Section>
 

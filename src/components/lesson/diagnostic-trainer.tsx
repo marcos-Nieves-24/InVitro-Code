@@ -37,10 +37,10 @@ interface DiagnosticTrainerProps {
 const FEATURE_KEYS = ["mean_radius", "mean_texture", "mean_area", "mean_smoothness"];
 
 const FEATURE_DISPLAY_NAMES: Record<string, string> = {
-  "mean_radius": "mean radius",
-  "mean_texture": "mean texture",
-  "mean_area": "mean area",
-  "mean_smoothness": "mean smoothness",
+  "mean_radius": "radio medio",
+  "mean_texture": "textura media",
+  "mean_area": "área media",
+  "mean_smoothness": "suavidad media",
 };
 
 const DATA_URL = "/data/diagnostic-trainer.json";

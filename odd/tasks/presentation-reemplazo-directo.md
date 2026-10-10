@@ -31,7 +31,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T4 — ChoiceQuestion sistema respuestas preestablecidas** — Nuevos `src/components/lesson/presentation/ChoiceQuestion.tsx` + `QuizButton.tsx` + `src/domain/slide.ts` tipos `QuizOption`. Hover sutil (no spoil), click lock revela correcto (verde CheckCircle2) / incorrecto (rojo AlertCircle) + feedback + explanation, integra `useApiClient` -> `/api/v1/progress/reflection` igual que `ReflectionCheck.tsx:36-44`, a11y `role=radiogroup`. Route: delegated
 
-- [ ] **T5 — Integracion + migracion contenido L1 + estilos** — Exportar en `src/components/lesson/index.ts`, mapear en `page.tsx:138-161` `components` map (mantener compatibilidad `MascotMessage`/`ReflectionCheck`/`AnswerReveal`), extender `globals.css` con `.dialogue-tail` etc., migrar `src/content/modules/ia/lessons/lesson01_what_is_ai/lesson.md` secciones 1-4 a nuevo formato + glosario hover + traducir `FEATURE_DISPLAY_NAMES` a espanol. Route: delegated
+- [x] **T5 — Integracion + migracion contenido L1 + estilos** — Exportar en `src/components/lesson/index.ts` (DialogueBox, RevealSequence/useRevealQuizBlock, ChoiceQuestion, QuizButton), mapear en `page.tsx:138-161` components map manteniendo compat MascotMessage/ReflectionCheck/AnswerReveal, globals.css ya contenia .dialogue-tail/reveal-up (no cambios), migrar lesson.md S1-4 a RevealSequence+DialogueBox+glosario, traducir FEATURE_DISPLAY_NAMES a español (radio/textura/área/suavidad media) — type-check + build OK. Route: delegated
 
 - [ ] **T6 — Verificacion + docs** — `npm run type-check`, `npm run build`, test manual fullscreen/keyboard/mobile/coarse-pointer, a11y check, actualizar `odd/tasks` evidencias y commits. Route: inline
 
@@ -63,7 +63,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: T2 completado — DialogueBox visual novel con ScientistAvatar (bata, gafas, ponytail 44px) + ConiAvatar, bubble 16px con tail 45deg, typing 35ms respeta prefers-reduced-motion, lines multi-step + children fallback, click/selección guard + Enter/Space, a11y region aria-live polite, tokens bubble/glow — commit 12aa8e8
 - 2026-10-10: T3 completado — RevealSequence click-to-reveal `Children.toArray` + `revealedCount` (startRevealed ?? 1), context `RevealQuizContext`/`useRevealQuizBlock` para T4, prop `blocked` + auto `[data-quiz-blocked]` scan + `blockOnQuiz`, `onComplete`, indicador pulso + botón Continuar con `data-reveal-continue`, animación `reveal is-visible` motion-safe, click guard `closest` con excepción continue, a11y region polite — type-check OK
 - 2026-10-10: T4 completado — `src/domain/slide.ts` tipos puros `QuizOption`/`QuizQuestion`/`SlideKind`, `QuizButton` hover sutil sin spoil (`hover:border-mint/30` + lift) + estados revealed correct/incorrect con CheckCircle2/AlertCircle, `ChoiceQuestion` single con `useApiClient` -> `/api/v1/progress/reflection` fire-and-forget, `useRevealQuizBlock` + `data-quiz-blocked` fallback, retry tras incorrecto, feedback box verde/amber border-l-4, a11y radiogroup — commit aa4b641
+- 2026-10-10: T5 completado — index.ts exports DialogueBox/RevealSequence/ChoiceQuestion/QuizButton, page.tsx map añade 4 componentes manteniendo compat, globals.css sin cambios (dialogue-tail/reveal-up ya presentes, reduced-motion OK), lesson.md S1 DialogueBox+RevealSequence 3 bloques, S2/S3/S4 RevealSequence, S4 glosario p-xs features/vector, DiagnosticTrainer FEATURE_DISPLAY_NAMES → español — type-check OK, build OK (30/30 static, 83s compile)
 
 ## Next Step
-- Ejecutar T4 ChoiceQuestion delegated writer en worktree
+- Ejecutar T6 Verificacion + docs (manual fullscreen/keyboard/mobile, a11y)
 
