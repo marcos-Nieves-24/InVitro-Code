@@ -84,8 +84,8 @@ export function LessonCarousel({
     if (r.ok) setShowCelebration(true);
   };
 
-  // Click-anywhere on slide background advances (not on interactive children)
-  // Block inter-slide advance while RevealSequence hasMore (deduplicate Continua / Siguiente)
+  // Click zones: left half -> Atrás, right half -> Continuar (inter-slide)
+  // Right zone blocked while RevealSequence hasMore (deduplicates RevealSequence Continuar / footer Continuar)
   const handleSlideClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const target = e.target as HTMLElement;
@@ -97,12 +97,19 @@ export function LessonCarousel({
       ) {
         return;
       }
+      const rect = slideAreaRef.current?.getBoundingClientRect();
+      const midX = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+      const x = e.clientX;
+      if (x < midX) {
+        goPrev();
+        return;
+      }
       if (isRevealIncomplete) return;
       if (!isLast) {
         goNext();
       }
     },
-    [isLast, goNext, isRevealIncomplete],
+    [isLast, goNext, goPrev, isRevealIncomplete],
   );
 
   // Keyboard navigation: Space/Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop
@@ -197,19 +204,19 @@ export function LessonCarousel({
         aria-live="polite"
         className="fixed inset-y-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
-        {/* Top progress bar */}
-        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-4 py-3 md:px-6">
+        {/* Top progress bar — compact */}
+        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-2">
           <LabProgress total={total} current={current} />
           <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-widest text-storm">
             {lessonTitle ? `${lessonTitle} — ` : ""}Diapositiva {current + 1} de {total}
           </p>
         </div>
 
-        {/* Slide area — click background to advance; interactive children are excluded via closest check */}
+        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar */}
         <div
           ref={slideAreaRef}
           onClick={handleSlideClick}
-          className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8"
+          className="flex-1 overflow-y-auto overflow-x-hidden p-0"
           // Provide hint for coarse pointers
           role="group"
           aria-label={`Diapositiva ${current + 1} de ${total}`}
@@ -217,7 +224,7 @@ export function LessonCarousel({
           tabIndex={0}
         >
           <div
-            className="mx-auto w-full max-w-3xl motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+            className="w-full h-full min-h-[calc(100vh-96px)] flex flex-col motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
             key={current}
           >
             {slides[current]}
@@ -225,7 +232,7 @@ export function LessonCarousel({
 
           {/* Consent / error states rendered inside scroll area so they stay visible */}
           {state === "consent" && (
-            <div className="mx-auto mt-6 max-w-3xl">
+            <div className="mx-auto mt-6 w-full max-w-3xl">
               <p className="mb-2 text-sm font-medium text-amber-800">
                 Completá tu autorización para guardar tu progreso.
               </p>
@@ -234,14 +241,14 @@ export function LessonCarousel({
           )}
 
           {state === "error" && error && (
-            <p role="alert" className="mx-auto mt-4 max-w-3xl text-sm text-error">
+            <p role="alert" className="mx-auto mt-4 w-full max-w-3xl text-sm text-error">
               {error}
             </p>
           )}
         </div>
 
-        {/* Footer — Anterior / Siguiente + indicadores */}
-        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-4 py-3 md:px-6">
+        {/* Footer — Atrás / Continuar + indicadores (compact) */}
+        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-3 py-2">
           <Button
             variant="ghost"
             size="sm"
@@ -250,7 +257,7 @@ export function LessonCarousel({
             aria-label="Diapositiva anterior"
             className="focus-ring"
           >
-            ← Anterior
+            ← Atrás
           </Button>
 
           {/* Indicadores centrales: dots + contador */}
@@ -305,7 +312,7 @@ export function LessonCarousel({
               }
               className={`focus-ring ${isRevealIncomplete ? "opacity-50" : ""}`}
             >
-              Siguiente →
+              Continuar →
             </Button>
           )}
         </div>

@@ -27,15 +27,15 @@ export function Section({
         {title}
       </h2>
 
-      {/* Optional description */}
+      {/* Optional description — full bleed */}
       {description && (
-        <p className="mt-2 max-w-[640px] text-sm leading-relaxed text-gray-500">
+        <p className="mt-2 w-full text-sm leading-relaxed text-gray-500">
           {description}
         </p>
       )}
 
-      {/* Content */}
-      <div className="mt-6">{children}</div>
+      {/* Content — full bleed */}
+      <div className="mt-4 w-full">{children}</div>
     </section>
   );
 }

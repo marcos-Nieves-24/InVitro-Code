@@ -199,14 +199,23 @@ export function RevealSequence({
           interactiveAncestor.closest("[data-reveal-back]") != null ||
           interactiveAncestor.matches("[data-reveal-back]");
         if (!isContinue && !isBack) return;
-        // Back button is handled by its own onClick; don't advance here
+        // Back / Continue buttons handle their own onClick with stopPropagation
         if (isBack) return;
+        // Continue button click is handled by its own onClick; avoid double advance via container
+        if (isContinue) return;
+      }
+      const rect = e.currentTarget.getBoundingClientRect();
+      const midX = rect.left + rect.width / 2;
+      const x = e.clientX;
+      if (x < midX) {
+        if (revealedCount > initialRevealed) goPrev();
+        return;
       }
       if (!hasMore) return;
       if (effectiveBlocked) return;
       advance();
     },
-    [hasMore, effectiveBlocked, advance]
+    [hasMore, effectiveBlocked, advance, goPrev, revealedCount, initialRevealed]
   );
 
   const handleContainerKeyDown = useCallback(
@@ -272,8 +281,8 @@ export function RevealSequence({
   }, [allChildren, revealedCount, isAppear, showHistory]);
 
   const containerClass = isAppear
-    ? "grid min-h-[50vh] place-items-center gap-4 relative"
-    : "flex flex-col gap-4";
+    ? "grid min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 lg:p-8 relative overflow-x-hidden"
+    : "flex w-full flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-x-hidden";
 
   if (total === 0) return null;
 
