@@ -45,6 +45,10 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 </p>
 
+<div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
+  🧠 ↔ 🤖 — IA vs inteligencia natural — placeholder visual
+</div>
+
 </RevealSequence>
 
 </Section>
@@ -57,17 +61,25 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
 
+<div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
+  🧬 → 🔢 — Cerebro vs matriz de números — placeholder
+</div>
+
 </RevealSequence>
 
 </Section>
 
-<Section number={4} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
+<Section number={4} title="Features: el idioma de la máquina (parte 1)" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
+
+<p className="text-xs text-storm">
+💡 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
+</p>
 
 <ComparisonTable
   leftLabel="Aspergillus"
@@ -88,6 +100,14 @@ Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computad
 En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
 </ConceptCard>
 
+</RevealSequence>
+
+</Section>
+
+<Section number={5} title="Features en números" eyebrow="CONCEPTO">
+
+<RevealSequence>
+
 <p>
 Para nuestras conidias, las features podrían ser:
 </p>
@@ -104,10 +124,6 @@ Cada conidia se convierte en un **vector de números**. Eso es lo que la IA pued
 <ConceptCard variant="key-idea">
 La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
 </ConceptCard>
-
-<p className="text-xs text-storm">
-💡 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
-</p>
 
 </RevealSequence>
 
@@ -134,7 +150,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 <Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
-Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las conidias, pero con datos médicos reales. El dataset Breast Cancer Wisconsin contiene 569 casos reales de biopsias — cada uno con 30 features numéricas extraídas de imágenes de núcleos celulares.
+¡Mismo concepto, otro ejemplo clínico real! Las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales — cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que nuestras conidias. Si entiendes conidias, ya entiendes biopsias.
 
 <ChoiceQuestion
   question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
