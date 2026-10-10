@@ -353,14 +353,6 @@ En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0
 
 </RevealSequence>
 
-<AnswerReveal summary="Ver respuestas (resumen)">
-<p><strong>1.</strong> b) RMSD es el ECM en 3D — la distancia promedio entre átomos equivalentes. RMSD &lt; 1Å es excelente.</p>
-<p><strong>2.</strong> b) AlphaFold reformuló un problema de física como uno de aprendizaje. En lugar de simular fuerzas moleculares, aprendió de ~170,000 estructuras experimentales.</p>
-<p><strong>3.</strong> b) El PDB tiene ~200,000 estructuras, pero conocemos millones de proteínas por su secuencia. Esa diferencia es lo que hizo que AlphaFold fuera tan necesario.</p>
-<p><strong>4.</strong> b) La limpieza de datos consume >60% del tiempo en proyectos reales de ML. En biotecnología, esto incluye control de calidad, normalización entre lotes, y corrección de artefactos experimentales.</p>
-<p><strong>5.</strong> b) Un embedding transforma datos no numéricos (secuencias de letras: aminoácidos) en vectores numéricos que el modelo puede procesar. Es el paso inicial en casi todos los modelos de ML modernos.</p>
-</AnswerReveal>
-
 </Section>
 
 <Section number={12} title="Para la próxima lección" eyebrow="CIERRE">

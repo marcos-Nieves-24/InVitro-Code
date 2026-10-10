@@ -10,6 +10,7 @@ export interface ChoiceQuestionProps {
   question: string;
   options: QuizOption[];
   explanation?: string;
+  hint?: string;
   blockId?: string;
   moduleSlug?: string;
   lessonSlug?: string;
@@ -22,6 +23,7 @@ export function ChoiceQuestion({
   question,
   options,
   explanation,
+  hint,
   blockId,
   moduleSlug,
   lessonSlug,
@@ -36,6 +38,7 @@ export function ChoiceQuestion({
   const [revealed, setRevealed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [attemptCount, setAttemptCount] = useState(0);
 
   const { apiClient } = useApiClient();
   const quizBlock = useRevealQuizBlock();
@@ -46,6 +49,19 @@ export function ChoiceQuestion({
   );
 
   const isCorrect = selectedOption?.correct ?? false;
+
+  // Derived hint text: explicit hint prop or first sentence of explanation
+  const hintText = useMemo(() => {
+    if (hint) return hint;
+    if (explanation) {
+      const first = explanation.split(".")[0].trim();
+      return first ? `${first}.` : explanation;
+    }
+    return null;
+  }, [hint, explanation]);
+
+  const showHint = attemptCount >= 1 && !isCorrect && revealed && hintText !== null;
+  const showHoverHint = attemptCount >= 1 && !isCorrect && revealed;
 
   // Block RevealSequence until answered correctly (unless allowContinueOnIncorrect)
   const blocked = useMemo(() => {
@@ -83,6 +99,10 @@ export function ChoiceQuestion({
       // Reveal on first selection; keep revealed for retries
       if (!revealed) setRevealed(true);
       setError(null);
+
+      if (!nextIsCorrect) {
+        setAttemptCount((prev) => prev + 1);
+      }
 
       // Fire progress persistence (fire-and-forget, don't block UI feedback)
       if (blockId && moduleSlug && lessonSlug) {
@@ -155,6 +175,7 @@ export function ChoiceQuestion({
             revealed={revealed}
             onSelect={handleSelect}
             disabled={submitting}
+            showHoverHint={showHoverHint}
           />
         ))}
       </div>
@@ -197,6 +218,16 @@ export function ChoiceQuestion({
               Probá otra opción para continuar.
             </p>
           )}
+        </div>
+      )}
+
+      {showHint && (
+        <div
+          className="mt-2 rounded-lg border border-blue-200 bg-blue-50 p-3 text-xs leading-relaxed text-blue-900"
+          role="note"
+          aria-live="polite"
+        >
+          💡 Pista: {hintText}
         </div>
       )}
     </div>

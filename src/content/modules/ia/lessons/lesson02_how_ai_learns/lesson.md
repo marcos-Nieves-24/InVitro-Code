@@ -410,14 +410,6 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 </RevealSequence>
 
-<AnswerReveal summary="Ver respuestas (resumen)">
-<p><strong>1.</strong> b) La frontera separa clases. En 2D es una línea; en 3D es un plano; en más dimensiones es un hiperplano.</p>
-<p><strong>2.</strong> b) k grande suaviza la frontera pero puede perder detalle local. Es un balance.</p>
-<p><strong>3.</strong> b) Clasificación → categorías (Aspergillus/Penicillium). Regresión → números continuos (concentración, peso, temperatura).</p>
-<p><strong>4.</strong> a) Subajuste: el modelo es demasiado simple (ambos errores altos). Sobreajuste: el modelo es demasiado complejo (train bajo, test alto). Son los dos extremos del espectro de complejidad.</p>
-<p><strong>5.</strong> b) El modelo memoriza los datos de entrenamiento y no generaliza. Es el problema más común en ML.</p>
-</AnswerReveal>
-
 </Section>
 
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">

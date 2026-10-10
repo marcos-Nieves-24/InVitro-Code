@@ -380,14 +380,6 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 </RevealSequence>
 
-<AnswerReveal summary="Ver respuestas (resumen)">
-<p><strong>1.</strong> b) La IA predijo formulaciones de LNPs más efectivas, reduciendo meses de experimentación.</p>
-<p><strong>2.</strong> b) Reposicionamiento = encontrar nuevos usos para fármacos existentes usando ML predictivo.</p>
-<p><strong>3.</strong> b) Las proteínas son dinámicas; una estructura predicha es una foto fija de la conformación más probable. Las interacciones reales pueden requerir conformaciones diferentes.</p>
-<p><strong>4.</strong> b) Datos escasos + falta de causalidad + generalización limitada. La IA encuentra correlaciones, no mecanismos biológicos.</p>
-<p><strong>5.</strong> b) El hilo conductor de todo el módulo: datos de calidad + features relevantes + modelo adecuado + validación rigurosa. No hay shortcuts.</p>
-</AnswerReveal>
-
 </Section>
 
 <Section number={12} title="Fin del Módulo 1" eyebrow="COMPLETADO">

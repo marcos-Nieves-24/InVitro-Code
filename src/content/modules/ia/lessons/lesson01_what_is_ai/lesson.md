@@ -326,12 +326,6 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </RevealSequence>
 
-<AnswerReveal summary="Ver respuestas (resumen)">
-<p><strong>1.</strong> b) Una propiedad medible de los datos. Las features son los números que la IA usa para aprender.</p>
-<p><strong>2.</strong> b) La variabilidad natural hace que las reglas fijas siempre tengan excepciones. El ML se adapta a esa variabilidad.</p>
-<p><strong>3.</strong> b) La IA no "entiende" como nosotros. Encuentra correlaciones estadísticas en los datos. Es poderoso... pero limitado.</p>
-</AnswerReveal>
-
 </Section>
 
 <Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
