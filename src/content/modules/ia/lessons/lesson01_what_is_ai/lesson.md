@@ -25,13 +25,9 @@ Datasets Used: module01_ai_cell_features.csv
 Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
 </DialogueBox>
 
-<p>
 Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
-</p>
 
-<p>
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por ti, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
-</p>
 
 </RevealSequence>
 
@@ -69,13 +65,9 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 <RevealSequence>
 
-<p>
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
-</p>
 
-<p>
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
-</p>
 
 <ComparisonTable
   leftLabel="Aspergillus"
