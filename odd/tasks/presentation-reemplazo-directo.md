@@ -27,7 +27,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T2 — DialogueBox anime speech** — Nuevo `src/components/lesson/presentation/DialogueBox.tsx` evoluciona `MascotMessage.tsx` a speech box estilo visual novel (tail, avatar cientifico + Coni), typing opcional 35ms, respeta `prefers-reduced-motion`, props `speaker|mood|lines|onNext`. Estilos en `globals.css` reusando tokens `comic/bubble/hud`. Route: delegated
 
-- [ ] **T3 — RevealSequence click-to-reveal** — Nuevo `src/components/lesson/presentation/RevealSequence.tsx` wrapper que revela `children` 1 a 1 con click, animacion `reveal-up` + indicador pulso "Click para continuar", prop `blockOnQuiz` pausa hasta `onCorrect`, respeta reduced-motion. Route: delegated
+- [x] **T3 — RevealSequence click-to-reveal** — Nuevo `src/components/lesson/presentation/RevealSequence.tsx` wrapper que revela `children` 1 a 1 con click (`Children.toArray` + `revealedCount`), animacion `reveal-up` 400ms + indicador pulso "Click para continuar"/"Continuar →", bloqueo quiz via context `useRevealQuizBlock` + prop `blocked` + auto-detección `[data-quiz-blocked]`, click guard `closest(button,input,textarea,select,iframe,a,[data-no-advance])` con excepción `data-reveal-continue`, a11y `role="region" aria-live="polite"` + `aria-hidden`, respeta `prefers-reduced-motion`. Route: delegated
 
 - [ ] **T4 — ChoiceQuestion sistema respuestas preestablecidas** — Nuevos `src/components/lesson/presentation/ChoiceQuestion.tsx` + `QuizButton.tsx` + `src/domain/slide.ts` tipos `QuizOption`. Hover sutil (no spoil), click lock revela correcto (verde CheckCircle2) / incorrecto (rojo AlertCircle) + feedback + explanation, integra `useApiClient` -> `/api/v1/progress/reflection` igual que `ReflectionCheck.tsx:36-44`, a11y `role=radiogroup`. Route: delegated
 
@@ -61,7 +61,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: Feature doc creado, worktree `feat/presentation-reemplazo-directo` en `../invitro-code-worktrees/presentation-reemplazo-directo`
 - 2026-10-10: T1 completado — LessonCarousel reescrito como PresentationShell fullscreen `fixed inset-0`, click-anywhere con closest guard, teclado Space/Enter/→/←/Home/End, ESC noop, progress LabProgress, footer Anterior/Siguiente, CelebrationOverlay intacto, a11y role region + reduced-motion — commit dc2e0d2
 - 2026-10-10: T2 completado — DialogueBox visual novel con ScientistAvatar (bata, gafas, ponytail 44px) + ConiAvatar, bubble 16px con tail 45deg, typing 35ms respeta prefers-reduced-motion, lines multi-step + children fallback, click/selección guard + Enter/Space, a11y region aria-live polite, tokens bubble/glow — commit 12aa8e8
+- 2026-10-10: T3 completado — RevealSequence click-to-reveal `Children.toArray` + `revealedCount` (startRevealed ?? 1), context `RevealQuizContext`/`useRevealQuizBlock` para T4, prop `blocked` + auto `[data-quiz-blocked]` scan + `blockOnQuiz`, `onComplete`, indicador pulso + botón Continuar con `data-reveal-continue`, animación `reveal is-visible` motion-safe, click guard `closest` con excepción continue, a11y region polite — type-check OK
 
 ## Next Step
-- Ejecutar T3 RevealSequence delegated writer en worktree
+- Ejecutar T4 ChoiceQuestion delegated writer en worktree
 
