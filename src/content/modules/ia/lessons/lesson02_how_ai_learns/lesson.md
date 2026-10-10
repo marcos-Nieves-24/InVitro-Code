@@ -69,14 +69,6 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 
 <Section number={4} title="Perceptrón en acción" eyebrow="INTERACTIVA">
 
-<ReflectionCheck
-  blockId="reflection-l02-perceptron"
-  moduleSlug="ia"
-  lessonSlug="lesson02_how_ai_learns"
-  prompt="Antes de empezar: ¿qué parámetros ajusta un algoritmo para trazar una línea que separe dos clases?"
-  answer="Ajusta dos pesos (w₁, w₂) y un sesgo (b). La recta se define como w₁·x₁ + w₂·x₂ + b = 0. De un lado predice una clase, del otro la otra. El perceptrón solo corrige los pesos cuando se equivoca."
-/>
-
 <ChoiceQuestion
   question="¿Qué ajusta el perceptrón para trazar la frontera que separa dos clases?"
   moduleSlug="ia"
@@ -114,12 +106,19 @@ El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cua
 
 <Section number={5} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
 
-<ReflectionCheck
-  blockId="reflection-l02-frontera"
+<ChoiceQuestion
+  question="¿Qué pasa si las clases no son separables linealmente y por qué el accuracy no llega al 100%?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="¿Qué pasa si las clases no son separables linealmente? ¿Cómo cambiaría la frontera? ¿Por qué el accuracy no llega al 100% aunque ajustemos bien la línea?"
-  answer="La frontera no sería una línea recta sino una curva (o superficie más compleja). El accuracy no llega al 100% porque siempre hay solapamiento natural entre clases — conidias atípicas, ruido de medición, variabilidad biológica. Ninguna línea recta puede separar perfectamente poblaciones que se mezclan."
+  blockId="choice-l02-frontera-1"
+  allowContinueOnIncorrect
+  explanation="Si no hay separación lineal, la frontera debe ser curva. El accuracy no llega al 100% por solapamiento natural: conidias atípicas, ruido y variabilidad biológica."
+  options={[
+    { id: "a", label: "La frontera seguiría siendo recta y el accuracy llegaría al 100% ajustando bien", correct: false, feedback: "No: ninguna recta separa poblaciones que se mezclan." },
+    { id: "b", label: "La frontera sería curva y ninguna recta separa perfectamente por solapamiento natural", correct: true, feedback: "¡Exacto! Necesitas modelos más flexibles cuando las clases se mezclan." },
+    { id: "c", label: "Hay que eliminar todos los datos atípicos para que sea lineal", correct: false, feedback: "Eliminar atípicos esconde el problema; la variabilidad es real." },
+    { id: "d", label: "El accuracy siempre llega al 100% si aumentas los datos", correct: false, feedback: "Más datos no eliminan el solapamiento inherente entre clases." },
+  ]}
 />
 
 <ConceptCard variant="warning">
@@ -139,14 +138,6 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
 </Section>
 
 <Section number={7} title="KNN en acción" eyebrow="INTERACTIVA">
-
-<ReflectionCheck
-  blockId="reflection-l02-knn"
-  moduleSlug="ia"
-  lessonSlug="lesson02_how_ai_learns"
-  prompt="Si k=1 clasificamos según el vecino más cercano. ¿Qué crees que pasa si aumentamos k a 15?"
-  answer="La frontera se vuelve más suave y menos sensible al ruido, pero puede perder detalles finos en zonas donde las clases cambian rápidamente. k grande reduce varianza pero aumenta sesgo: el modelo se vuelve más estable pero puede subestimar patrones locales."
-/>
 
 <ChoiceQuestion
   question="Si k=1 usamos el vecino más cercano y si subimos a k=15, ¿qué crees que pasa con la frontera de KNN?"
@@ -186,14 +177,6 @@ KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perce
 
 <Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
 
-<ReflectionCheck
-  blockId="reflection-l02-clasif-reg"
-  moduleSlug="ia"
-  lessonSlug="lesson02_how_ai_learns"
-  prompt="En un laboratorio de microbiología, clasificar un patógeno por su similitud con aislamientos previos documentados — ¿es clasificación o regresión? Si k=1 clasificamos según el único vecino más cercano, ¿qué riesgo hay con datos ruidosos? ¿Y si k=20?"
-  answer="Es clasificación porque predecimos una categoría discreta (especie A o B), no un valor continuo. Con k=1, una medición mal tomada (dato ruidoso) clasifica incorrectamente el punto porque el vecino más cercano es espurio. Con k=20, el ruido se promedia entre varios vecinos y el efecto se diluye."
-/>
-
 <ChoiceQuestion
   question="Clasificar un patógeno por similitud con aislamientos previos, ¿es clasificación o regresión? ¿Qué riesgo tiene k=1 con datos ruidosos?"
   moduleSlug="ia"
@@ -218,14 +201,6 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 </Section>
 
 <Section number={9} title="Regresión lineal en acción" eyebrow="INTERACTIVA">
-
-<ReflectionCheck
-  blockId="reflection-l02-regresion"
-  moduleSlug="ia"
-  lessonSlug="lesson02_how_ai_learns"
-  prompt="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media del tejido?"
-  answer="No con gran precisión. El radio medio y la textura media tienen una relación débil (R² ≈ 0.10) — son datos reales ruidosos. La regresión lineal nos da la mejor recta posible, pero la predicción tiene mucho error porque la textura depende de muchos más factores que solo el tamaño del núcleo."
-/>
 
 <ChoiceQuestion
   question="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media?"
@@ -260,12 +235,19 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 <Section number={10} title="ECM y límites de la regresión" eyebrow="CONCEPTO">
 
-<ReflectionCheck
-  blockId="reflection-l02-ecm"
+<ChoiceQuestion
+  question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radio→textura es tan bajo (≈0,10)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="¿Por qué elevamos al cuadrado los errores (ECM) en lugar de sumar las diferencias directamente? ¿Por qué el R² de nuestra regresión radio→textura es tan bajo (≈0.10)?"
-  answer="Elevar al cuadrado penaliza más los errores grandes y evita que errores positivos y negativos se cancelen entre sí. El R² es bajo porque la textura de un tumor depende de muchos factores (no solo el tamaño del núcleo) — son datos reales, ruidosos. La regresión nos da la mejor aproximación lineal posible, pero no puede capturar toda la complejidad."
+  blockId="choice-l02-ecm-1"
+  allowContinueOnIncorrect
+  explanation="Cuadrar penaliza errores grandes y evita cancelación. R² bajo porque la textura depende de muchos factores, no solo del radio: datos reales son ruidosos."
+  options={[
+    { id: "a", label: "Para que el gráfico se vea más bonito", correct: false, feedback: "No es estética: es matemática para evitar cancelación y penalizar errores grandes." },
+    { id: "b", label: "Cuadrar evita cancelación y penaliza errores grandes; R² bajo porque faltan factores", correct: true, feedback: "¡Exacto! La regresión da la mejor recta, pero no explica toda la variabilidad." },
+    { id: "c", label: "Porque sin cuadrado el ECM siempre es cero", correct: false, feedback: "Sin cuadrado puede cancelarse, pero no es cero; es engañoso." },
+    { id: "d", label: "R² bajo significa que el modelo está mal programado", correct: false, feedback: "R² bajo refleja complejidad biológica, no un bug." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
@@ -279,14 +261,6 @@ No toda relación es lineal; en biología muchas variables tienen relaciones com
 <Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
 
 Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
-
-<ReflectionCheck
-  blockId="reflection-l02-overfitting-predict"
-  moduleSlug="ia"
-  lessonSlug="lesson02_how_ai_learns"
-  prompt="Si un modelo tiene error CERO en los datos de entrenamiento, ¿creés que funcionará igual de bien con datos nuevos?"
-  answer="No. Error cero en entrenamiento es señal de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generalizará a datos nuevos. Es como un estudiante que memoriza las respuestas del examen anterior pero no entiende los conceptos."
-/>
 
 <ChoiceQuestion
   question="Un modelo con error cero en entrenamiento, ¿generalizará bien a datos nuevos?"
@@ -341,12 +315,19 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 <Section number={14} title="Overfitting: reflexión final" eyebrow="CONCEPTO">
 
-<ReflectionCheck
-  blockId="reflection-l02-overfitting"
+<ChoiceQuestion
+  question="Un modelo con 99% en entreno y 60% en test — ¿qué es y cuál preferirías para diagnosticar una infección?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  prompt="Un modelo con 99% de accuracy en entrenamiento pero 60% en datos nuevos — ¿es subajuste o sobreajuste? ¿Qué harías para mejorarlo? Entre un modelo simple con 80% de accuracy que funciona consistentemente y uno complejo con 99% en train pero 70% en test, ¿cuál preferirías para diagnosticar una infección?"
-  answer="Es sobreajuste. Soluciones: simplificar el modelo (reducir complejidad), aumentar datos de entrenamiento, aplicar regularización. Para diagnosticar una infección prefiero el modelo simple y consistente (80%) — es más confiable porque generaliza mejor; un falso negativo por sobreajuste podría tener consecuencias graves."
+  blockId="choice-l02-overfitting-final-1"
+  allowContinueOnIncorrect
+  explanation="Es sobreajuste. Soluciones: simplificar, más datos, regularización. Para diagnóstico, preferir el simple consistente (80%) que generaliza; el sobreajustado arriesga falsos negativos."
+  options={[
+    { id: "a", label: "Es subajuste; prefiero el complejo con 99% en train", correct: false, feedback: "No: 99% train / 60% test es sobreajuste clásico, no subajuste." },
+    { id: "b", label: "Es sobreajuste; prefiero el simple 80% consistente que generaliza mejor", correct: true, feedback: "¡Correcto! Consistencia y generalización valen más que memorizar." },
+    { id: "c", label: "Es sobreajuste pero no se puede mejorar", correct: false, feedback: "Sí se puede: simplificar, más datos o regularización." },
+    { id: "d", label: "Ambos modelos son equivalentes, da igual cuál usar", correct: false, feedback: "No: el que generaliza es más seguro en clínica." },
+  ]}
 />
 
 </Section>

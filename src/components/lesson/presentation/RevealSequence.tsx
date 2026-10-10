@@ -45,6 +45,8 @@ export function useRevealQuizBlock(): RevealQuizContextValue | null {
 // Props
 // ---------------------------------------------------------------------------
 
+export type RevealMode = "stack" | "appear";
+
 export interface RevealSequenceProps {
   children: ReactNode;
   /** When true, appearance of [data-quiz-blocked="true"] in the visible slice blocks advancement. */
@@ -54,6 +56,10 @@ export interface RevealSequenceProps {
   onComplete?: () => void;
   /** Number of children visible on mount. Defaults to 1 (first step visible). */
   startRevealed?: number;
+  /** Presentation mode: "appear" (single centered overlay, default) or "stack" (vertical stacking). */
+  mode?: RevealMode;
+  /** When mode="appear", keep faint history of previous steps. Default false (only current visible). */
+  showHistory?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -66,6 +72,8 @@ export function RevealSequence({
   blocked: blockedProp = false,
   onComplete,
   startRevealed,
+  mode = "appear",
+  showHistory = false,
 }: RevealSequenceProps) {
   const allChildren = useMemo(() => Children.toArray(children), [children]);
   const total = allChildren.length;
@@ -251,6 +259,22 @@ export function RevealSequence({
     }
   }, [blockOnQuiz, reactTreeBlocked, revealedCount]);
 
+  const isAppear = mode === "appear";
+
+  // Appear mode: show only current step centered (no vertical push).
+  // Stack mode: show all revealed steps stacked vertically.
+  const renderChildren = useMemo(() => {
+    if (!isAppear) return allChildren.slice(0, revealedCount);
+    if (showHistory) return allChildren.slice(0, revealedCount);
+    if (revealedCount === 0) return [];
+    const current = allChildren[revealedCount - 1];
+    return current ? [current] : [];
+  }, [allChildren, revealedCount, isAppear, showHistory]);
+
+  const containerClass = isAppear
+    ? "grid min-h-[50vh] place-items-center gap-4 relative"
+    : "flex flex-col gap-4";
+
   if (total === 0) return null;
 
   return (
@@ -263,22 +287,63 @@ export function RevealSequence({
         onClick={handleContainerClick}
         onKeyDown={handleContainerKeyDown}
         data-reveal-has-more={hasMore ? "true" : "false"}
-        className="flex flex-col gap-4"
+        data-reveal-mode={mode}
+        className={containerClass}
       >
-        {allChildren.slice(0, revealedCount).map((child, index) => {
-          const stableKey =
-            (child as unknown as { key?: string | number | null })?.key ??
-            `reveal-${index}`;
-          return (
-            <div
-              key={stableKey}
-              aria-hidden={false}
-              className="reveal is-visible motion-safe:animate-[reveal-up_400ms_ease-out] motion-reduce:animate-none"
-            >
-              {child}
-            </div>
-          );
-        })}
+        {isAppear && showHistory
+          ? // Grid overlay: all children share same cell, only current is visible (for showHistory=true)
+            renderChildren.map((child, index) => {
+              const isCurrent = index === renderChildren.length - 1;
+              const stableKey =
+                (child as unknown as { key?: string | number | null })?.key ??
+                `reveal-${index}`;
+              return (
+                <div
+                  key={stableKey}
+                  aria-hidden={!isCurrent}
+                  className={
+                    isCurrent
+                      ? "col-start-1 row-start-1 w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+                      : "col-start-1 row-start-1 w-full pointer-events-none opacity-30 hidden"
+                  }
+                  style={{ gridArea: "1 / 1" }}
+                >
+                  {child}
+                </div>
+              );
+            })
+          : isAppear
+            ? // Default appear: single centered current child
+              renderChildren.map((child) => {
+                const absoluteIndex = revealedCount - 1;
+                const stableKey =
+                  (child as unknown as { key?: string | number | null })?.key ??
+                  `reveal-${absoluteIndex}`;
+                return (
+                  <div
+                    key={stableKey}
+                    aria-hidden={false}
+                    className="w-full max-w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+                  >
+                    {child}
+                  </div>
+                );
+              })
+            : // Stack mode: vertical list
+              (renderChildren as ReactNode[]).map((child, index) => {
+                const stableKey =
+                  (child as unknown as { key?: string | number | null })?.key ??
+                  `reveal-${index}`;
+                return (
+                  <div
+                    key={stableKey}
+                    aria-hidden={false}
+                    className="reveal is-visible motion-safe:animate-[reveal-up_400ms_ease-out] motion-reduce:animate-none"
+                  >
+                    {child}
+                  </div>
+                );
+              })}
 
         {/* Hidden slice not rendered — keeps DOM minimal; a11y aria-hidden implied by absence */}
 

@@ -136,14 +136,6 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 Ahora vamos a aplicar los mismos conceptos de área y textura que vimos con las conidias, pero con datos médicos reales. El dataset Breast Cancer Wisconsin contiene 569 casos reales de biopsias — cada uno con 30 features numéricas extraídas de imágenes de núcleos celulares.
 
-<ReflectionCheck
-  blockId="reflection-l01-features"
-  moduleSlug="ia"
-  lessonSlug="lesson01_what_is_ai"
-  prompt="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
-  answer="No, porque los rangos de área se superponen entre especies. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes. Necesitamos múltiples características para clasificar correctamente."
-/>
-
 <ChoiceQuestion
   question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
   moduleSlug="ia"
@@ -183,12 +175,19 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.
 
-<ReflectionCheck
-  blockId="reflection-l01-patrones"
+<ChoiceQuestion
+  question="¿Crees que un ojo humano entrenado clasifica mejor que un algoritmo simple?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  prompt="¿Crees que un ojo humano entrenado puede clasificar mejor que un algoritmo simple?"
-  answer="Depende del problema. En patrones visuales claros, un humano entrenado puede ser muy preciso. Pero los humanos nos cansamos, somos inconsistentes y no podemos procesar miles de conidias por segundo. La IA es consistente, scalable y no se cansa."
+  blockId="choice-l01-patrones-1"
+  allowContinueOnIncorrect
+  explanation="Depende del problema: el humano es preciso en patrones visuales claros pero se cansa y es inconsistente. La IA es consistente, escalable y procesa miles de conidias por segundo."
+  options={[
+    { id: "a", label: "Sí, el humano siempre gana a cualquier algoritmo", correct: false, feedback: "No siempre: el humano se cansa y no escala a miles de muestras." },
+    { id: "b", label: "Depende: humano preciso pero inconsistente; IA consistente y escalable", correct: true, feedback: "¡Exacto! El humano aporta intuición; la IA, consistencia y escala." },
+    { id: "c", label: "El algoritmo siempre es peor que el humano", correct: false, feedback: "No: en volumen y consistencia, la IA supera al humano." },
+    { id: "d", label: "Ninguno puede clasificar conidias correctamente", correct: false, feedback: "Ambos pueden, con enfoques y límites distintos." },
+  ]}
 />
 
 <ConidiaSortGame />
@@ -214,14 +213,6 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 <Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
-
-<ReflectionCheck
-  blockId="reflection-l01-reglas"
-  moduleSlug="ia"
-  lessonSlug="lesson01_what_is_ai"
-  prompt="Si creamos reglas manuales (área > X y textura > Y), ¿podemos clasificar todas las conidias correctamente?"
-  answer="No. Por más que ajustemos los umbrales, siempre hay conidias que quedan mal clasificadas. La naturaleza tiene variabilidad que las reglas fijas no pueden capturar. Algunas conidias de Aspergillus son más alargadas de lo normal, y algunas de Penicillium son más redondeadas."
-/>
 
 <ChoiceQuestion
   question="Si creamos reglas manuales del tipo 'área > X y textura > Y', ¿podemos clasificar todas las conidias correctamente?"

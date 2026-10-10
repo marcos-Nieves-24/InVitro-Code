@@ -49,14 +49,6 @@ Pero el mRNA es frágil y no entra fácilmente a las células. Aquí es donde la
 
 La vacuna mRNA necesita un **vehículo** para llevar el mensaje genético a las células: las nanopartículas lipídicas (LNPs). Son burbujas microscópicas de grasa que encapsulan el mRNA.
 
-<ReflectionCheck
-  blockId="reflection-l04-lnp"
-  moduleSlug="ia"
-  lessonSlug="lesson04_real_cases"
-  prompt="Diseñar la combinación óptima de lípidos para una LNP implica probar miles de formulaciones. Cada una varía en estabilidad, captura celular, inmunogenicidad. ¿Cómo puede la IA acelerar este proceso en lugar de probar cada una en el laboratorio?"
-  answer="Un modelo de ML se entrena con datos de formulaciones previas (composición lipídica → eficiencia de transfección, estabilidad, toxicidad). Aprende la relación entre composición química y rendimiento. Luego predice qué formulaciones nuevas serían más efectivas, guiando los experimentos hacia las candidatas más prometedoras y evitando probar miles de combinaciones al azar."
-/>
-
 <ChoiceQuestion
   question="Diseñar la LNP óptima implica miles de formulaciones. ¿Cómo acelera la IA ese proceso?"
   moduleSlug="ia"
@@ -81,14 +73,6 @@ La IA no reemplazó los experimentos de laboratorio. Los hizo **más inteligente
 <Section number={4} title="Reposicionamiento de fármacos" eyebrow="CONCEPTO">
 
 Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug repositioning): encontrar fármacos existentes que pudieran tratar el COVID-19.
-
-<ReflectionCheck
-  blockId="reflection-l04-reposicionamiento"
-  moduleSlug="ia"
-  lessonSlug="lesson04_real_cases"
-  prompt="Si tienes datos de interacciones molecular-detector (qué fármacos se unen a qué proteínas virales), ¿cómo modelas el problema: clasificación o regresión? ¿Qué métrica usarías para evaluar si un modelo así es confiable en un contexto clínico donde un falso negativo puede costar vidas?"
-  answer="Es clasificación binaria (se une / no se une). La métrica clave es sensibilidad (recall): minimizar falsos negativos (fármacos que sí funcionan pero el modelo descartó). En un contexto clínico, también importa la especificidad para evitar falsos positivos que lleven a ensayos clínicos costosos e inútiles. Se necesita un balance cuidadoso."
-/>
 
 <ChoiceQuestion
   question="Si tienes datos de qué fármacos se unen a qué proteínas virales, ¿cómo modelas el reposicionamiento y qué métrica priorizas?"
@@ -117,25 +101,24 @@ Otro uso de la IA durante la pandemia fue el **reposicionamiento** (drug reposit
 <strong>Rentosertib (INS018_055):</strong> Insilico Medicine descubrió este candidato usando modelos generativos de IA en solo <strong>18 meses</strong> desde la identificación del objetivo hasta el candidato preclínico (PCC). El proceso tradicional suele llevar de 4 a 6 años, lo que muestra cuánto puede acelerar la IA el descubrimiento de fármacos.
 </CalloutInfo>
 
-<ReflectionCheck
-  blockId="reflection-l04-rentosertib-transition"
+<ChoiceQuestion
+  question="¿Por qué es revolucionario descubrir un fármaco en 18 meses y qué validaciones siguen siendo obligatorias?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  prompt="¿Por qué un fármaco descubierto en 18 meses es revolucionario para la industria biotecnológica? ¿Qué tipo de validaciones experimentales siguen siendo necesarias antes de usarlo en humanos?"
-  answer="Acortar el tiempo de descubrimiento reduce costos y acelera el acceso a terapias potenciales. Sin embargo, la IA no reemplaza los ensayos de seguridad, eficacia, toxicología y las fases clínicas: solo validan en laboratorio y en pacientes si el compuesto es realmente seguro y efectivo."
+  blockId="choice-l04-rentosertib-1"
+  allowContinueOnIncorrect
+  explanation="Ahorra años y costos vs 4-6 años tradicionales, pero no reemplaza toxicología, seguridad y fases clínicas en humanos."
+  options={[
+    { id: "a", label: "Porque reemplaza todos los ensayos y ya se puede usar en humanos", correct: false, feedback: "No: sigue requiriendo validación clínica completa." },
+    { id: "b", label: "Acelera el acceso pero siguen siendo obligatorias toxicología y fases clínicas", correct: true, feedback: "¡Exacto! IA acelera, validación confirma." },
+    { id: "c", label: "No es revolucionario, siempre se descubren fármacos en 18 meses", correct: false, feedback: "Tradicional lleva 4-6 años; 18 meses es un salto enorme." },
+    { id: "d", label: "Solo importa el costo, no la seguridad", correct: false, feedback: "Seguridad y eficacia son prioritarias, no solo el costo." },
+  ]}
 />
 
 </Section>
 
 <Section number={5} title="AlphaFold en la práctica" eyebrow="CONCEPTO">
-
-<ReflectionCheck
-  blockId="reflection-l04-alphafold-practica"
-  moduleSlug="ia"
-  lessonSlug="lesson04_real_cases"
-  prompt="AlphaFold predice estructuras. ¿Cómo ayuda esto a diseñar un fármaco que se una a una proteína viral específica? ¿Qué limitaciones viste antes que podrían afectar un diseño de fármaco basado ENTERAMENTE en estructuras predichas?"
-  answer="Con la estructura predicha de la proteína viral, se puede simular (docking) qué moléculas podrían unirse a ella — un paso clave en diseño de fármacos. Limitaciones: AlphaFold predice la estructura más estable, pero las proteínas son dinámicas y cambian de forma al unirse a otras moléculas. La predicción puede no reflejar el estado activo real de la proteína, llevando a falsos positivos en los screenings virtuales."
-/>
 
 <ChoiceQuestion
   question="AlphaFold predice estructuras para docking de fármacos. ¿Qué limitación puede causar falsos positivos si te basas solo en la predicción?"
@@ -171,12 +154,19 @@ DeepMind se asoció con Isomorphic Labs para llevar AlphaFold a la industria far
 - **Resistencia antimicrobiana**: predecir cómo mutan las proteínas bacterianas para volverse resistentes a antibióticos
 - **Enfermedades raras**: cuando una mutación genética cambia la forma de una proteína, AlphaFold puede predecir el efecto y ayudar a diseñar terapias
 
-<ReflectionCheck
-  blockId="reflection-l04-industria"
+<ChoiceQuestion
+  question="AlphaFold democratizó estructuras 3D: ¿qué oportunidades y riesgos crea para labs con menos recursos?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  prompt="AlphaFold democratizó el acceso a estructuras de proteínas: ahora cualquier laboratorio del mundo puede obtener una predicción sin necesidad de costosos equipos de rayos X o criomicroscopía. ¿Qué oportunidades crea esto para países con menos recursos? ¿Qué riesgos hay si un laboratorio confía ciegamente en una estructura predicha sin validación experimental?"
-  answer="Oportunidad: laboratorios de recursos limitados pueden hacer investigación estructural y diseño de fármacos que antes eran inviables. Riesgo: tomar decisiones críticas (como seleccionar una diana farmacológica) basadas en una predicción incorrecta, desperdiciando años de investigación. La validación experimental sigue siendo necesaria, pero ahora se puede priorizar mejor."
+  blockId="choice-l04-industria-1"
+  allowContinueOnIncorrect
+  explanation="Oportunidad: investigación que antes requería equipamiento costoso ahora es accesible. Riesgo: confiar ciegamente sin validación y seleccionar una diana incorrecta, desperdiciando años."
+  options={[
+    { id: "a", label: "Solo Risiken: no sirve para nada en países con menos recursos", correct: false, feedback: "Al revés: abre puertas, pero exige criterio." },
+    { id: "b", label: "Amplía acceso pero exige validar; confiar ciegamente puede desperdiciar años en una diana errónea", correct: true, feedback: "¡Exacto! Democratiza, pero no elimina la validación." },
+    { id: "c", label: "Elimina la necesidad de validar experimentalmente", correct: false, feedback: "No: prioriza mejor la validación, no la elimina." },
+    { id: "d", label: "Solo beneficia a laboratorios con criomicroscopía", correct: false, feedback: "Beneficia justamente a quienes no tienen esos equipos." },
+  ]}
 />
 
 </Section>
@@ -262,12 +252,19 @@ Ambos modelos son herramientas poderosas, pero complementarias: AlphaFold resuel
 
 <Section number={9} title="Limitaciones de la IA en biotecnología" eyebrow="CRÍTICO">
 
-<ReflectionCheck
-  blockId="reflection-l04-limites"
+<ChoiceQuestion
+  question="Si un modelo predice con 95% que un fármaco funciona, ¿lo usarías directo en pacientes?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  prompt="Si un modelo de IA predice con 95% de confianza que un fármaco funciona contra un virus, ¿lo usarías directamente en pacientes? ¿Qué podría estar ocultando ese 5% de incertidumbre?"
-  answer="No. Un 95% de confianza en el modelo no es un 95% de probabilidad de que funcione en humanos. El modelo puede tener sesgos: datos de entrenamiento limitados, condiciones de laboratorio que no reflejan la fisiología real, efectos secundarios imprevistos. La incertidumbre real incluye cosas que el modelo no modeló (interacciones metabólicas, variabilidad genética, efectos a largo plazo) — y eso no está en el 5%. La validación clínica en fases sigue siendo obligatoria."
+  blockId="choice-l04-limites-1"
+  allowContinueOnIncorrect
+  explanation="No: 95% del modelo no es probabilidad clínica. Puede esconder sesgos, falta de fisiología real y efectos no modelados. Validación clínica en fases es obligatoria."
+  options={[
+    { id: "a", label: "Sí, 95% del modelo equivale a 95% de éxito en humanos", correct: false, feedback: "No: esa confianza no incluye lo que el modelo no modeló (metabolismo, genética)." },
+    { id: "b", label: "No, faltan sesgos, fisiología real y efectos no modelados; requiere validación clínica", correct: true, feedback: "¡Correcto! La incertidumbre real está fuera del 5% reportado." },
+    { id: "c", label: "Sí, si es barato aunque no esté validado", correct: false, feedback: "Costo no sustituye seguridad clínica." },
+    { id: "d", label: "No, pero basta con repetir el mismo modelo", correct: false, feedback: "Repetir el mismo sesgo no corrige la validación faltante." },
+  ]}
 />
 
 <ConceptCard variant="warning">
