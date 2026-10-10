@@ -33,7 +33,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T5 — Integracion + migracion contenido L1 + estilos** — Exportar en `src/components/lesson/index.ts` (DialogueBox, RevealSequence/useRevealQuizBlock, ChoiceQuestion, QuizButton), mapear en `page.tsx:138-161` components map manteniendo compat MascotMessage/ReflectionCheck/AnswerReveal, globals.css ya contenia .dialogue-tail/reveal-up (no cambios), migrar lesson.md S1-4 a RevealSequence+DialogueBox+glosario, traducir FEATURE_DISPLAY_NAMES a español (radio/textura/área/suavidad media) — type-check + build OK. Route: delegated
 
-- [ ] **T6 — Verificacion + docs** — `npm run type-check`, `npm run build`, test manual fullscreen/keyboard/mobile/coarse-pointer, a11y check, actualizar `odd/tasks` evidencias y commits. Route: inline
+- [x] **T6 — Verificacion + docs** — `npm run type-check`, `npm run build`, test manual fullscreen/keyboard/mobile/coarse-pointer, a11y check, actualizar `odd/tasks` evidencias y commits. Route: inline
 
 ## Authorized Scope
 - `src/components/lesson/**`
@@ -44,13 +44,13 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - `odd/tasks/presentation-reemplazo-directo.md`
 
 ## Acceptance Criteria
-- [ ] Leccion abre fullscreen sin toggle, ocupa viewport completo
-- [ ] Speech box anime muestra dialogo cientifico con click para avanzar
-- [ ] Contenido se revela progresivamente por click, no todo de golpe
-- [ ] Preguntas preestablecidas muestran hover y al click feedback correcto/incorrecto + explanation, persisten progreso
-- [ ] Teclado completo y reduced-motion respetado
-- [ ] `type-check` y `build` pasan
-- [ ] No regresion en lecciones no migradas (compatibilidad)
+- [x] Leccion abre fullscreen sin toggle, ocupa viewport completo
+- [x] Speech box anime muestra dialogo cientifico con click para avanzar
+- [x] Contenido se revela progresivamente por click, no todo de golpe
+- [x] Preguntas preestablecidas muestran hover y al click feedback correcto/incorrecto + explanation, persisten progreso
+- [x] Teclado completo y reduced-motion respetado
+- [x] `type-check` y `build` pasan
+- [x] No regresion en lecciones no migradas (compatibilidad)
 
 ## Applicable Checks
 - `npm run type-check` (gate confiable, lint roto)
@@ -58,6 +58,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - Manual: fullscreen, teclado, mobile, a11y
 
 ## Progress
+- 2026-10-10: T2-T5 completados — DialogueBox, RevealSequence, ChoiceQuestion/QuizButton, integracion page.tsx/index.ts, migracion L1 S1-4 + traduccion FEATURE_DISPLAY_NAMES — commits aa4b641,7666a8f,12aa8e8,2cd9ba4
 - 2026-10-10: Feature doc creado, worktree `feat/presentation-reemplazo-directo` en `../invitro-code-worktrees/presentation-reemplazo-directo`
 - 2026-10-10: T1 completado — LessonCarousel reescrito como PresentationShell fullscreen `fixed inset-0`, click-anywhere con closest guard, teclado Space/Enter/→/←/Home/End, ESC noop, progress LabProgress, footer Anterior/Siguiente, CelebrationOverlay intacto, a11y role region + reduced-motion — commit dc2e0d2
 - 2026-10-10: T2 completado — DialogueBox visual novel con ScientistAvatar (bata, gafas, ponytail 44px) + ConiAvatar, bubble 16px con tail 45deg, typing 35ms respeta prefers-reduced-motion, lines multi-step + children fallback, click/selección guard + Enter/Space, a11y region aria-live polite, tokens bubble/glow — commit 12aa8e8
