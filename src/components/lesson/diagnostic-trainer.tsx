@@ -205,7 +205,7 @@ export function DiagnosticTrainer({
     if (!currentTest) return [];
 
     return currentTest.features.map((value, index) => {
-      const key = FEATURE_KEYS[index];
+      const key = FEATURE_KEYS[index]; // FEATURE_KEYS provides stable key
       return {
         label: FEATURE_DISPLAY_NAMES[key],
         value: value,
@@ -351,7 +351,7 @@ export function DiagnosticTrainer({
           className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-surface-card text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
         >
           {FEATURE_KEYS.map((key, idx) => (
-            <option key={idx} value={idx}>
+            <option key={key} value={idx}>
               {FEATURE_DISPLAY_NAMES[key]}
             </option>
           ))}
@@ -365,7 +365,7 @@ export function DiagnosticTrainer({
           className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-surface-card text-gray-800 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
         >
           {FEATURE_KEYS.map((key, idx) => (
-            <option key={idx} value={idx}>
+            <option key={key} value={idx}>
               {FEATURE_DISPLAY_NAMES[key]}
             </option>
           ))}
@@ -440,8 +440,8 @@ export function DiagnosticTrainer({
               <div className="bg-surface-card rounded-lg border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Características del Caso</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {getFeatureDisplayItems().map((feature, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-4">
+                  {getFeatureDisplayItems().map((feature) => (
+                    <div key={feature.label} className="bg-gray-50 rounded-lg p-4">
                       <div className="text-sm font-medium text-gray-700 mb-1">
                         {feature.label}
                       </div>
