@@ -269,7 +269,7 @@ export function DialogueBox({
           </p>
 
           {/* Content */}
-          <div className="text-sm leading-relaxed text-gray-700 md:text-[15px]">
+          <div className="text-[15px] leading-relaxed text-gray-700 md:text-base">
             {hasLines ? (
               <p className="m-0">
                 {displayedText}

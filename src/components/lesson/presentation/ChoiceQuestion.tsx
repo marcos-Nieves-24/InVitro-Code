@@ -158,7 +158,7 @@ export function ChoiceQuestion({
       data-quiz-blocked={blocked ? "true" : "false"}
       className="my-3 rounded-card border border-gray-200 bg-surface-card p-4 shadow-sm"
     >
-      <p className="mb-3 text-sm font-semibold leading-relaxed text-ink">
+      <p className="mb-3 text-[15px] font-semibold leading-relaxed text-ink md:text-base">
         {question}
       </p>
 

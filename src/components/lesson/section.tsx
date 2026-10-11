@@ -14,7 +14,7 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section className="border-b border-gray-200 py-4 last:border-b-0 md:py-6">
+    <section className="border-b border-gray-200 py-3 last:border-b-0 md:py-4 lg:py-5">
       {/* Eyebrow */}
       <div className="eyebrow mb-1.5 flex items-center gap-2">
         <span>{String(number).padStart(2, "0")}</span>
@@ -23,7 +23,7 @@ export function Section({
       </div>
 
       {/* Title in display font */}
-      <h2 className="font-display text-2xl leading-tight font-semibold tracking-tight text-gray-900 lg:text-3xl">
+      <h2 className="font-display text-xl leading-[1.15] font-semibold tracking-tight text-gray-900 md:text-2xl lg:text-[28px]">
         {title}
       </h2>
 

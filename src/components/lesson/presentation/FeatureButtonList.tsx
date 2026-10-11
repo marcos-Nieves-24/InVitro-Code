@@ -19,7 +19,7 @@ export function FeatureButtonList({ features }: FeatureButtonListProps) {
               type="button"
               onClick={() => setExpanded(isExpanded ? null : f.id)}
               aria-expanded={isExpanded}
-              className="flex w-full items-center justify-between rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-left text-sm font-medium text-brand-800 transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+              className="flex w-full items-center justify-between rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-left text-[15px] font-medium text-brand-800 transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
             >
               <span>{f.label}</span>
               <span
@@ -30,7 +30,7 @@ export function FeatureButtonList({ features }: FeatureButtonListProps) {
               </span>
             </button>
             {isExpanded && (
-              <div className="mt-1 rounded-lg bg-gray-50 px-4 py-2 text-sm leading-relaxed text-gray-700">
+              <div className="mt-1 rounded-lg bg-gray-50 px-4 py-2 text-[15px] leading-relaxed text-gray-700">
                 {f.detail}
               </div>
             )}
