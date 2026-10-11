@@ -19,11 +19,11 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
   return (
     <figure className="my-5">
       <AnymotionStage title="Cerebro vs matriz de numeros">
-        <div className="flex h-full w-full items-center justify-center gap-6 bg-[#0a0a0a] p-6 sm:gap-10">
+        <div className="flex h-full w-full items-center justify-center gap-8 bg-gradient-to-br from-[#0a0a0a] to-[#141414] p-8 sm:gap-12">
           {/* Left: biological */}
-          <div className="flex flex-col items-center gap-2 animate-pulse">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-mint/40 bg-mint/10 sm:h-20 sm:w-20">
-              <Dna className="h-8 w-8 text-mint sm:h-10 sm:w-10" aria-hidden />
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full border border-mint/40 bg-mint/10 transition-transform hover:scale-[1.02] sm:h-24 sm:w-24">
+              <Dna className="h-10 w-10 text-mint sm:h-12 sm:w-12" aria-hidden />
             </div>
             <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-white sm:text-xs">
               Imagen
@@ -35,7 +35,7 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
 
           {/* Center arrow */}
           <div className="flex flex-col items-center gap-1">
-            <div className="h-0.5 w-10 bg-gradient-to-r from-mint to-brand-500 sm:w-12" style={{ animation: "draw-line 1s ease-out both" }} />
+            <div className="h-0.5 w-14 bg-gradient-to-r from-mint to-brand-500 sm:w-20" style={{ animation: "draw-line 1s ease-out both" }} />
             <span className="font-mono text-[9px] tracking-widest text-white/50">convierte</span>
             <div className="h-2 w-2 rotate-45 border-r-2 border-t-2 border-brand-400" style={{ animation: "fade-in 0.6s 0.9s both" }} aria-hidden />
           </div>
@@ -47,9 +47,9 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
                 {MATRIX.flat().map((val, i) => (
                   <div
                     key={i}
-                    className="flex h-7 w-9 items-center justify-center rounded bg-brand-500/15 font-mono text-[11px] font-semibold text-brand-300 sm:h-8 sm:w-10 sm:text-xs"
+                    className="flex h-8 w-10 items-center justify-center rounded bg-brand-500/15 font-mono text-[11px] font-semibold text-brand-300 sm:h-9 sm:w-12 sm:text-xs"
                     style={{
-                      animation: `matrix-cell 2.4s ease-in-out ${i * 0.12}s infinite`,
+                      animation: `matrix-cell 1.8s ease-in-out ${i * 0.12}s both`,
                     }}
                   >
                     {val}
@@ -70,7 +70,7 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
         </div>
       </AnymotionStage>
       {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
-      <style>{`@keyframes draw-line { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } } @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } } @keyframes matrix-cell { 0%, 100% { opacity: 0.7; background-color: rgba(0,181,197,0.12); } 50% { opacity: 1; background-color: rgba(69,220,198,0.28); } }`}</style>
+      <style>{`@keyframes draw-line { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } } @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } } @keyframes matrix-cell { 0% { opacity: 0.7; background-color: rgba(0,181,197,0.12); } 50% { opacity: 1; background-color: rgba(69,220,198,0.28); } 100% { opacity: 0.85; background-color: rgba(0,181,197,0.16); } } @media (prefers-reduced-motion: reduce) { div[style*="matrix-cell"], div[style*="draw-line"], div[style*="fade-in"] { animation: none !important; } }`}</style>
     </figure>
   );
 }

@@ -71,11 +71,11 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
-Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
-
-<p className="text-xs text-storm">
+<div className="rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-gray-700">
 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
-</p>
+</div>
+
+Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
 <ComparisonTable
   leftLabel="Aspergillus"
