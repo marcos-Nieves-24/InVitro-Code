@@ -23,3 +23,4 @@ export { DialogueBox } from "./presentation/DialogueBox";
 export { RevealSequence, useRevealQuizBlock } from "./presentation/RevealSequence";
 export { ChoiceQuestion } from "./presentation/ChoiceQuestion";
 export { QuizButton } from "./presentation/QuizButton";
+export { FeatureButtonList } from "./presentation/FeatureButtonList";

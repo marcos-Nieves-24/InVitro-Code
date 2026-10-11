@@ -46,7 +46,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 </p>
 
 <div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
-  🧠 ↔ 🤖 — IA vs inteligencia natural — placeholder visual
+  IA vs inteligencia natural — visual
 </div>
 
 </RevealSequence>
@@ -62,7 +62,7 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 </ConceptCard>
 
 <div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
-  🧬 → 🔢 — Cerebro vs matriz de números — placeholder
+  Cerebro vs matriz de numeros — visual
 </div>
 
 </RevealSequence>
@@ -78,7 +78,7 @@ Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
 <p className="text-xs text-storm">
-💡 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
+<strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
 </p>
 
 <ComparisonTable
@@ -112,10 +112,14 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
 Para nuestras conidias, las features podrían ser:
 </p>
 
-- **Área** (µm²): qué tan grande es la conidia
-- **Circularidad** (0-1): qué tan redonda es (1 = círculo perfecto)
-- **Textura** (índice): qué tan rugosa es la superficie
-- **Intensidad** (0-255): qué tan clara u oscura es al microscopio
+<FeatureButtonList
+  features={[
+    { id: "area", label: "Área (µm²)", detail: "Qué tan grande es la conidia" },
+    { id: "circularidad", label: "Circularidad (0-1)", detail: "Qué tan redonda es (1 = círculo perfecto)" },
+    { id: "textura", label: "Textura (índice)", detail: "Qué tan rugosa es la superficie" },
+    { id: "intensidad", label: "Intensidad (0-255)", detail: "Qué tan clara u oscura es al microscopio" },
+  ]}
+/>
 
 <p>
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.

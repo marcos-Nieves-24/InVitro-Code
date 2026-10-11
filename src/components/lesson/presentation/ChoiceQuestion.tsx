@@ -227,7 +227,7 @@ export function ChoiceQuestion({
           role="note"
           aria-live="polite"
         >
-          💡 Pista: {hintText}
+          Pista: {hintText}
         </div>
       )}
     </div>

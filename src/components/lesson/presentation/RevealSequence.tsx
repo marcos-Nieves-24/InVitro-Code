@@ -318,8 +318,8 @@ export function RevealSequence({
   }, [allChildren, revealedCount, isAppear, showHistory]);
 
   const containerClass = isAppear
-    ? "grid min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 lg:p-8 relative overflow-x-hidden"
-    : "flex w-full flex-col gap-4 p-4 md:p-6 lg:p-8 relative overflow-x-hidden";
+    ? "grid min-h-[calc(100vh-140px)] w-full place-items-center gap-3 p-3 md:p-5 lg:p-6 relative overflow-x-hidden"
+    : "flex w-full flex-col gap-3 p-3 md:p-5 relative overflow-x-hidden";
 
   if (total === 0) return null;
 

@@ -32,6 +32,7 @@ import {
   RevealSequence,
   ChoiceQuestion,
   QuizButton,
+  FeatureButtonList,
 } from "@/components/lesson";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
@@ -162,6 +163,7 @@ export default async function LessonPage({ params }: Props) {
     RevealSequence,
     ChoiceQuestion,
     QuizButton,
+    FeatureButtonList,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

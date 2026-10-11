@@ -205,7 +205,7 @@ export function LessonCarousel({
         className="fixed inset-y-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
         {/* Top progress bar — compact */}
-        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-2">
+        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1.5">
           <LabProgress total={total} current={current} />
           <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-widest text-storm">
             {lessonTitle ? `${lessonTitle} — ` : ""}Diapositiva {current + 1} de {total}
@@ -224,7 +224,7 @@ export function LessonCarousel({
           tabIndex={0}
         >
           <div
-            className="w-full h-full min-h-[calc(100vh-96px)] flex flex-col motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+            className="w-full h-full min-h-[calc(100vh-88px)] flex flex-col motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
             key={current}
           >
             {slides[current]}
@@ -248,7 +248,7 @@ export function LessonCarousel({
         </div>
 
         {/* Footer — Atrás / Continuar + indicadores (compact) */}
-        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-3 py-2">
+        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-3 py-1.5">
           <Button
             variant="ghost"
             size="sm"

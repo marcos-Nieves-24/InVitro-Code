@@ -28,7 +28,7 @@ export function ConceptCard({
       <p className="mb-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
         {variantLabels[variant]}
       </p>
-      <div className="text-sm leading-relaxed text-gray-800 [&_strong]:text-gray-900">
+      <div className="text-sm leading-relaxed text-gray-800 lg:text-[15px] [&_strong]:text-gray-900">
         {children}
       </div>
     </div>
