@@ -36,6 +36,8 @@ import {
 } from "@/components/lesson";
 import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
 import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
+import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
+import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -168,6 +170,8 @@ export default async function LessonPage({ params }: Props) {
     FeatureButtonList,
     BrainVsChip: BrainVsChipPlayer,
     MatrixAnim: MatrixPlayer,
+    ConidiaToVector: ConidiaToVectorPlayer,
+    FeatureSpace2D: FeatureSpace2DPlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

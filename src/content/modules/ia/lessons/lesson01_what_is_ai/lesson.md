@@ -101,6 +101,8 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
   ]}
 />
 
+<ConidiaToVector caption="De imagen a numeros: asi habla la maquina" />
+
 <p>
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.
 </p>
@@ -159,15 +161,21 @@ Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el
 
 <Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
 
+<RevealSequence showHistory>
+
 **¿Qué observamos en la simulación?**
 
 - Si usamos solo una característica, hay superposición entre especies
 - Con dos o más características, la separación mejora
 - El "espacio de características" (feature space) es donde la IA trabaja
 
+<FeatureSpace2D caption="Una dimension no alcanza; dos separan" />
+
 <ConceptCard variant="key-idea">
 Cada característica que agregamos es una nueva dimensión que ayuda a separar las clases. Pero tampoco sirve agregar cien features al azar — el arte está en elegir las correctas.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 

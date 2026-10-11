@@ -26,3 +26,5 @@ export { QuizButton } from "./presentation/QuizButton";
 export { FeatureButtonList } from "./presentation/FeatureButtonList";
 export { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
 export { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
+export { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
+export { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
