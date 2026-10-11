@@ -45,8 +45,6 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 </p>
 
-<BrainVsChip caption="Comparacion visual: inteligencia humana vs artificial" />
-
 </RevealSequence>
 
 </Section>
@@ -59,15 +57,13 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
 
-<MatrixAnim caption="La IA convierte imagenes en matrices de numeros" />
-
 </RevealSequence>
 
 </Section>
 
 <Section number={4} title="Features: el idioma de la máquina (parte 1)" eyebrow="CONCEPTO">
 
-<RevealSequence>
+<RevealSequence showHistory>
 
 Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
@@ -95,18 +91,6 @@ Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computad
 <ConceptCard variant="definition">
 En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
 </ConceptCard>
-
-</RevealSequence>
-
-</Section>
-
-<Section number={5} title="Features en números" eyebrow="CONCEPTO">
-
-<RevealSequence>
-
-<p>
-Para nuestras conidias, las features podrían ser:
-</p>
 
 <FeatureButtonList
   features={[
