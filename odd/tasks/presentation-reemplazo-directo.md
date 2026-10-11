@@ -57,6 +57,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T17 — FeatureButtonList para conidias** — Nuevo `src/components/lesson/presentation/FeatureButtonList.tsx` client `useState` expandible `role=list` grid gap-2 botones `border-brand-200 bg-brand-50 hover:bg-brand-100` + detalle `bg-gray-50`, export `src/components/lesson/index.ts`, map `page.tsx` FeatureButtonList, lesson01 S5 reemplaza bullet list por `<FeatureButtonList features=[4]>` con Área/Circularidad/Textura/Intensidad — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS). Route: delegated writer Batch 1
 
+- [x] **T18 — Anymotion S2/S3 BrainVsChip y Matrix** — Nuevos `src/components/anymotion/animations/BrainVsChipPlayer.tsx` (Brain vs Cpu con AnymotionStage, pulse + draw-line, captions) y `MatrixPlayer.tsx` (Dna vs matriz 3x3 con highlight `matrix-cell` infinito), export `src/components/anymotion/animations/index.ts` + `src/components/lesson/index.ts`, map `page.tsx` `BrainVsChip`/`MatrixAnim`, lesson01 S2 `<BrainVsChip caption="Comparacion visual: inteligencia humana vs artificial" />` y S3 `<MatrixAnim caption="La IA convierte imagenes en matrices de numeros" />` reemplazan placeholders `border-dashed`, sin emojis, sin iframe, commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS). Route: delegated writer Batch 2
+
 ## Authorized Scope
 - `src/components/lesson/**`
 - `src/domain/slide.ts` (nuevo)
@@ -99,6 +101,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: T13 completado — Fix 2+4: S4 split en (parte 1 con glosario antes de tabla + definición) y S4b "Features en números" (lista + vector + key-idea), fotos placeholder S2 (IA vs natural) y S3 (cerebro vs matriz), puente S6 conidias→BCW "¡Mismo concepto, otro ejemplo..." — type-check OK, build OK (30/30 static, 18.0s + 13.7s TS)
 - 2026-10-10: T14 completado — Fix 3 post-error hint + elimina AnswerReveal duplicado: ChoiceQuestion hint box + hover preview tras fallo, AnswerReveal checkpoints módulo 1 removidos (4 archivos) — type-check OK, build OK (30/30 static, 18.1s + 12.0s TS)
 - 2026-10-10: Batch 1 completado — T15 tipografía/blanco + T16 sin emojis (grep 0) + T17 FeatureButtonList conidias — commits e333200 — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS)
+- 2026-10-10: Batch 2 T18 completado — BrainVsChip y Matrix AnymotionStage sin iframe, S2/S3 placeholders reemplazados — commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS)
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
