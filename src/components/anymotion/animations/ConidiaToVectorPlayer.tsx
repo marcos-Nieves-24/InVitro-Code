@@ -1,6 +1,7 @@
 "use client";
 
 import { AnymotionStage } from "../AnymotionStage";
+import { AnymotionControls } from "../AnymotionControls";
 import { useAnymotionTimeline } from "../hooks/useAnymotionTimeline";
 
 interface ConidiaToVectorPlayerProps {
@@ -22,8 +23,8 @@ function eased(p: number, start: number, dur: number): number {
 }
 
 export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVectorPlayerProps) {
-  const { progress } = useAnymotionTimeline({ duration: 2.5, autoPlay });
-  const p = progress;
+  const timeline = useAnymotionTimeline({ duration: 2.5, autoPlay });
+  const p = timeline.progress;
 
   // Sequential opacities
   const areaO = eased(p, 0.0, 0.3);
@@ -205,6 +206,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
           </g>
         </svg>
       </AnymotionStage>
+      <AnymotionControls timeline={timeline} label="Conidia a vector" />
       {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
     </figure>
   );

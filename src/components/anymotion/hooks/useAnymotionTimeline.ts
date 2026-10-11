@@ -29,6 +29,40 @@ export interface AnymotionTimeline {
   reset: () => void;
 }
 
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function readReducedMotion(): boolean {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return false;
+  }
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+/**
+ * Tracks the user's `prefers-reduced-motion: reduce` setting.
+ *
+ * Reads the current value synchronously for the first render and subscribes to
+ * the media query, so a later OS-level change is reflected live without a
+ * remount. Falls back to `false` during SSR, where there is no `window`.
+ */
+function usePrefersReducedMotion(): boolean {
+  const [prefers, setPrefers] = useState<boolean>(readReducedMotion);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return;
+    }
+    const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+    const update = () => setPrefers(mediaQuery.matches);
+    // Resync in case the value changed between the initial render and mount.
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
+  return prefers;
+}
+
 /**
  * Deterministic timeline engine for Anymotion animations.
  *
@@ -41,11 +75,15 @@ export function useAnymotionTimeline({
   duration,
   autoPlay = false,
 }: AnymotionTimelineOptions): AnymotionTimeline {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  // When the user prefers reduced motion, never auto-play: the timeline rests
+  // at t=0 so the component renders its first keyframe statically.
+  const startPlaying = autoPlay && !prefersReducedMotion;
   const [time, setTime] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [isPlaying, setIsPlaying] = useState(startPlaying);
 
   const durationRef = useRef(duration);
-  const playingRef = useRef(autoPlay);
+  const playingRef = useRef(startPlaying);
   const timeRef = useRef(0);
   const lastFrameRef = useRef<number>(0);
   const rafRef = useRef<number | null>(null);
@@ -111,6 +149,18 @@ export function useAnymotionTimeline({
     pause();
     seek(0);
   }, [pause, seek]);
+
+  // Kick off playback on mount only when autoPlay is requested and motion is
+  // allowed. Reduced-motion users stay on the first keyframe (see startPlaying).
+  // The teardown re-arms the guarded play()/pause() pair across React Strict
+  // Mode's mount/unmount/remount cycle.
+  useEffect(() => {
+    if (!startPlaying) return;
+    play();
+    return () => pause();
+    // Mount-only: the auto-play decision is frozen at first render on purpose.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     return () => {

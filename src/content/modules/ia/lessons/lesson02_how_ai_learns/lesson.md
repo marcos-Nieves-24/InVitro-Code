@@ -277,7 +277,7 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
   ]}
 />
 
-<InteractiveFrame src="/interactives/demo_06b_overfitting.html" height="800px" caption="simulación educativa sobre datos sintéticos" />
+<Overfitting caption="Ajuste polinomial: arrastra el grado y mira cómo el error de validación se separa del de entrenamiento" />
 
 **¿Qué muestra este demo?**
 - El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial

@@ -38,6 +38,7 @@ import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChip
 import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
+import { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -172,6 +173,7 @@ export default async function LessonPage({ params }: Props) {
     MatrixAnim: MatrixPlayer,
     ConidiaToVector: ConidiaToVectorPlayer,
     FeatureSpace2D: FeatureSpace2DPlayer,
+    Overfitting: OverfittingPlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

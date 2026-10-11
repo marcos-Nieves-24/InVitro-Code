@@ -1,6 +1,7 @@
 "use client";
 
 import { AnymotionStage } from "../AnymotionStage";
+import { AnymotionControls } from "../AnymotionControls";
 import { useAnymotionTimeline } from "../hooks/useAnymotionTimeline";
 
 interface FeatureSpace2DPlayerProps {
@@ -40,8 +41,8 @@ const AXIS_Y0 = 80;
 const AXIS_Y1 = 360;
 
 export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2DPlayerProps) {
-  const { progress } = useAnymotionTimeline({ duration: 2, autoPlay });
-  const p = progress;
+  const timeline = useAnymotionTimeline({ duration: 2, autoPlay });
+  const p = timeline.progress;
 
   // Phases:
   // 0 - 0.4 : 1D axis only
@@ -182,6 +183,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           </g>
         </svg>
       </AnymotionStage>
+      <AnymotionControls timeline={timeline} label="Espacio de features 1D a 2D" />
       {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
     </figure>
   );
