@@ -224,7 +224,7 @@ export function LessonCarousel({
           tabIndex={0}
         >
           <div
-            className="w-full min-h-[calc(100vh-88px)] flex flex-col motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+            className="w-full flex-1 flex flex-col justify-center motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
             key={current}
           >
             {slides[current]}

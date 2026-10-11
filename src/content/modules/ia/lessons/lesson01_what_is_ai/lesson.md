@@ -19,13 +19,17 @@ Datasets Used: module01_ai_cell_features.csv
 
 <Section number={1} title="El microscopio y la conidia" eyebrow="INICIO">
 
-<RevealSequence>
+<RevealSequence showHistory>
+
+<div>
 
 <DialogueBox speaker="Dra. Coni" variant="scientist" mood="neutral" typing={false}>
 Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
 </DialogueBox>
 
 Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
+
+</div>
 
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por ti, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
 

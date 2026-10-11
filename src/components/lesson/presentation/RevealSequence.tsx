@@ -318,7 +318,11 @@ export function RevealSequence({
   }, [allChildren, revealedCount, isAppear, showHistory]);
 
   const containerClass = isAppear
-    ? "grid min-h-[min(56vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
+    ? showHistory
+      ? "flex min-h-[min(45vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)] w-full flex-col items-center justify-center gap-4 p-4 md:p-6 relative overflow-x-visible"
+      : total <= 3
+        ? "grid min-h-[40vh] md:min-h-[45vh] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
+        : "grid min-h-[min(45vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
     : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
 
   if (total === 0) return null;
@@ -356,7 +360,7 @@ export function RevealSequence({
           </span>
         )}
         {isAppear && showHistory
-          ? // Grid overlay: all children share same cell, only current is visible (for showHistory=true)
+          ? // Stack with faint history: previous steps stay visible, current animates in
             renderChildren.map((child, index) => {
               const isCurrent = index === renderChildren.length - 1;
               const stableKey =
@@ -368,10 +372,9 @@ export function RevealSequence({
                   aria-hidden={!isCurrent}
                   className={
                     isCurrent
-                      ? "col-start-1 row-start-1 w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
-                      : "col-start-1 row-start-1 w-full pointer-events-none opacity-30 hidden"
+                      ? "w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+                      : "w-full opacity-60"
                   }
-                  style={{ gridArea: "1 / 1" }}
                 >
                   {child}
                 </div>

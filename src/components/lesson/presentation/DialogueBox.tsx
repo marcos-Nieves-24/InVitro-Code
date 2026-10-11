@@ -257,7 +257,7 @@ export function DialogueBox({
 
         {/* Bubble */}
         <div
-          className="relative rounded-[16px] border bg-surface-card px-4 py-3 shadow-md md:px-5 md:py-4"
+          className="relative rounded-[16px] border bg-surface-card px-5 py-4 shadow-md md:px-6 md:py-5"
           style={{
             borderColor: "var(--color-outline-variant, #e8ecf0)",
             boxShadow: "0 4px 16px var(--color-bubble-glow, rgba(163,207,205,0.35)), 0 1px 3px rgba(0,0,0,0.08)",
@@ -269,7 +269,7 @@ export function DialogueBox({
           </p>
 
           {/* Content */}
-          <div className="text-[15px] leading-relaxed text-gray-700 md:text-base">
+          <div className="text-base leading-relaxed text-gray-700 md:text-lg">
             {hasLines ? (
               <p className="m-0">
                 {displayedText}
