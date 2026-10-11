@@ -61,6 +61,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T19 — Fix P0 visual: doble min-h/padding, tabla clip, tipografía** — A. RevealSequence appear `min-h-[min(56vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)]` + stack `overflow-x-visible`, lesson-carousel inner `w-full min-h-[calc(100vh-88px)]` (remove `h-full`) evita 50-60px blanco extra; B. section `py-3 md:py-4 lg:py-5` + RevealSequence `p-4 md:p-6 gap-4` reduce 48px vertical fijo; C. RevealSequence `overflow-x-hidden→visible` + ComparisonTable `w-full min-w-0` permite scroll sin clip; D. h2 `text-xl md:text-2xl lg:text-[28px] leading-[1.15]` + bodies `text-[15px] lg:text-base / md:text-base` para h2 30→28 y body 14→15/16; commit 768005b — type-check OK, build OK (30/30 static). Route: delegated writer P0
 
+- [x] **T20 — Fix P1 visual: animaciones pro + FeatureButtonList + glosario visible** — A. `AnymotionStage.tsx` `border-gray-200→border-white/10 shadow-lg` elimina halo claro sobre bg #0a0a0a; `BrainVsChipPlayer.tsx` `gap-6→gap-8 sm:gap-12`, circles `h-16→h-20 sm:h-20→h-24`, icons `h-8→h-10 sm:h-10→h-12`, lines `w-10→w-14 sm:w-14→w-20`, `p-6→p-8`, `bg-[#0a0a0a]→bg-gradient-to-br from-[#0a0a0a] to-[#141414]`, remove `animate-pulse infinite` + `pulse 2s infinite` (solo `draw-line 1s` + `fade-in`), hover:scale-[1.02]; `MatrixPlayer.tsx` similar + cells `h-7→h-8 w-9→w-10 sm:h-8→h-9 sm:w-10→w-12`, `matrix-cell 2.4s infinite→1.8s both` + `prefers-reduced-motion` kill; B. `FeatureButtonList.tsx` alineado a `QuizButton`: base `rounded-btn border-gray-200 bg-surface-card text-graphite hover:border-brand-200 hover:bg-brand-50/50`, expanded `border-brand-200 bg-brand-50 text-brand-800`, indicator `h-6 w-6 rounded-full border bg-white group-hover:border-brand-200 / expanded bg-brand-500 text-white`, panel `accordion-panel` `mt-2 rounded-card border-gray-200 bg-surface-card px-4 py-3 shadow-sm` con `id/aria-controls/role region/aria-hidden/data-open`; C. `lesson.md` S4 glosario `p text-xs text-storm` + emoji → `div rounded-lg border-blue-200 bg-blue-50 p-3 text-sm text-gray-700` sin emoji, movido a 2º hijo RevealSequence antes de "Las conidias..."; commit 98e9db1 — type-check OK, build OK (30/30 static, 13.7s + 10.6s TS). Route: delegated writer P1
+
 ## Authorized Scope
 - `src/components/lesson/**`
 - `src/domain/slide.ts` (nuevo)
@@ -105,6 +107,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: Batch 1 completado — T15 tipografía/blanco + T16 sin emojis (grep 0) + T17 FeatureButtonList conidias — commits e333200 — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS)
 - 2026-10-10: Batch 2 T18 completado — BrainVsChip y Matrix AnymotionStage sin iframe, S2/S3 placeholders reemplazados — commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS)
 - 2026-10-10: T19 P0 visual fixes completado — doble min-h/padding, tabla clip, tipografía h2/body — commit 768005b — type-check OK, build OK (30/30 static)
+- 2026-10-10: T20 P1 visual fixes completado — animaciones pro sin pulse halo, FeatureButtonList alineado a QuizButton, glosario visible — commit 98e9db1 — type-check OK, build OK (30/30 static, 13.7s compile + 10.6s TS)
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
