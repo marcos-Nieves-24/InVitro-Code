@@ -59,6 +59,8 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T18 — Anymotion S2/S3 BrainVsChip y Matrix** — Nuevos `src/components/anymotion/animations/BrainVsChipPlayer.tsx` (Brain vs Cpu con AnymotionStage, pulse + draw-line, captions) y `MatrixPlayer.tsx` (Dna vs matriz 3x3 con highlight `matrix-cell` infinito), export `src/components/anymotion/animations/index.ts` + `src/components/lesson/index.ts`, map `page.tsx` `BrainVsChip`/`MatrixAnim`, lesson01 S2 `<BrainVsChip caption="Comparacion visual: inteligencia humana vs artificial" />` y S3 `<MatrixAnim caption="La IA convierte imagenes en matrices de numeros" />` reemplazan placeholders `border-dashed`, sin emojis, sin iframe, commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS). Route: delegated writer Batch 2
 
+- [x] **T19 — Fix P0 visual: doble min-h/padding, tabla clip, tipografía** — A. RevealSequence appear `min-h-[min(56vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)]` + stack `overflow-x-visible`, lesson-carousel inner `w-full min-h-[calc(100vh-88px)]` (remove `h-full`) evita 50-60px blanco extra; B. section `py-3 md:py-4 lg:py-5` + RevealSequence `p-4 md:p-6 gap-4` reduce 48px vertical fijo; C. RevealSequence `overflow-x-hidden→visible` + ComparisonTable `w-full min-w-0` permite scroll sin clip; D. h2 `text-xl md:text-2xl lg:text-[28px] leading-[1.15]` + bodies `text-[15px] lg:text-base / md:text-base` para h2 30→28 y body 14→15/16; commit 768005b — type-check OK, build OK (30/30 static). Route: delegated writer P0
+
 ## Authorized Scope
 - `src/components/lesson/**`
 - `src/domain/slide.ts` (nuevo)
@@ -102,6 +104,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: T14 completado — Fix 3 post-error hint + elimina AnswerReveal duplicado: ChoiceQuestion hint box + hover preview tras fallo, AnswerReveal checkpoints módulo 1 removidos (4 archivos) — type-check OK, build OK (30/30 static, 18.1s + 12.0s TS)
 - 2026-10-10: Batch 1 completado — T15 tipografía/blanco + T16 sin emojis (grep 0) + T17 FeatureButtonList conidias — commits e333200 — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS)
 - 2026-10-10: Batch 2 T18 completado — BrainVsChip y Matrix AnymotionStage sin iframe, S2/S3 placeholders reemplazados — commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS)
+- 2026-10-10: T19 P0 visual fixes completado — doble min-h/padding, tabla clip, tipografía h2/body — commit 768005b — type-check OK, build OK (30/30 static)
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
