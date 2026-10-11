@@ -109,6 +109,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: T19 P0 visual fixes completado — doble min-h/padding, tabla clip, tipografía h2/body — commit 768005b — type-check OK, build OK (30/30 static)
 - 2026-10-10: T20 P1 visual fixes completado — animaciones pro sin pulse halo, FeatureButtonList alineado a QuizButton, glosario visible — commit 98e9db1 — type-check OK, build OK (30/30 static, 13.7s compile + 10.6s TS)
 - 2026-10-10: T1+T2 presentation-reemplazo-directo direct fix — une S4 tabla con FeatureButtonList en mismo slide (RevealSequence showHistory 7 steps) y limpia S2 BrainVsChip + S3 MatrixAnim placeholders no aportan, elimina S5 "Features en números" — commit c55eb0c — type-check OK, build OK (30/30 static, 13.6s compile + 10.2s TS), grep Features en números 0, BrainVsChip|MatrixAnim 0, FeatureButtonList 1
+- 2026-10-10: T3 anymotion ConidiaToVector + FeatureSpace2D — nuevos ConidiaToVectorPlayer.tsx (2.5s sequential area/circ/text/intens, vector [12.3,0.87,42,128]) y FeatureSpace2DPlayer.tsx (2s 1D overlap → 2D frontier + legenda), export animations/index.ts + lesson/index.ts, map page.tsx ConidiaToVector/FeatureSpace2D, S4 RevealSequence inserta ConidiaToVector tras FeatureButtonList, S7 envuelto en RevealSequence con FeatureSpace2D tras bullets — commit ba1e1bd — type-check OK, build OK (30/30 static)
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
