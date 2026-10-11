@@ -108,6 +108,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: Batch 2 T18 completado — BrainVsChip y Matrix AnymotionStage sin iframe, S2/S3 placeholders reemplazados — commit 3e082b5 — type-check OK, build OK (30/30 static, 14.1s + 10.2s TS)
 - 2026-10-10: T19 P0 visual fixes completado — doble min-h/padding, tabla clip, tipografía h2/body — commit 768005b — type-check OK, build OK (30/30 static)
 - 2026-10-10: T20 P1 visual fixes completado — animaciones pro sin pulse halo, FeatureButtonList alineado a QuizButton, glosario visible — commit 98e9db1 — type-check OK, build OK (30/30 static, 13.7s compile + 10.6s TS)
+- 2026-10-10: T1+T2 presentation-reemplazo-directo direct fix — une S4 tabla con FeatureButtonList en mismo slide (RevealSequence showHistory 7 steps) y limpia S2 BrainVsChip + S3 MatrixAnim placeholders no aportan, elimina S5 "Features en números" — commit c55eb0c — type-check OK, build OK (30/30 static, 13.6s compile + 10.2s TS), grep Features en números 0, BrainVsChip|MatrixAnim 0, FeatureButtonList 1
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
