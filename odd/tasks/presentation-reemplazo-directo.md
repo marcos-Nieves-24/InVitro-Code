@@ -51,6 +51,12 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 
 - [x] **T14 — Fix 3: post-error hint + elimina AnswerReveal duplicado checkpoints** — `ChoiceQuestion.tsx` agrega `hint?: string` + `attemptCount` (incrementa en cada selección incorrecta) + `hintText` derivado `hint || explanation.split('.')[0]+'.'` + hint box `💡 Pista:` `border-blue-200 bg-blue-50` visible cuando `attemptCount>=1 && !isCorrect && revealed`, + `showHoverHint` pasado a `QuizButton` cuando `attemptCount>=1 && !isCorrect && revealed`; `QuizButton.tsx` nuevo prop `showHoverHint?: boolean` altera hover: pre-reveal correct `hover:border-green-300 hover:bg-green-50/50` incorrect `hover:border-red-200 hover:bg-red-50/30`, revealed no-seleccionado correct `border-gray-200 hover:border-green-300 hover:bg-green-50/50` (hover-only sin spoil permanente) e incorrect `hover:border-red-200 hover:bg-red-50/30`; elimina `AnswerReveal` duplicado en checkpoints de las 4 lecciones (lesson01 S13 3 Q, lesson02 S15 5 Q, lesson03 S11 5 Q, lesson04 S11 5 Q) — grep AnswerReveal módulo ia checkpoints 0 (otros módulos intactos), type-check OK, build OK (30/30 static, 18.1s + 12.0s TS). Route: delegated writer
 
+- [x] **T15 — Ajusta tipografía/blanco** — `section.tsx` h2 `text-2xl lg:text-3xl leading-tight`, eyebrow `mb-1.5`, description `mt-1.5 text-sm lg:text-[15px]`, content `mt-3`; `RevealSequence.tsx` appear `min-h-[calc(100vh-140px)] gap-3 p-3 md:p-5 lg:p-6` stack `gap-3 p-3 md:p-5`; `lesson-carousel.tsx` progress/footer `px-3 py-1.5` inner `min-h-[calc(100vh-88px)]`; `concept-card.tsx` `text-sm lg:text-[15px]` — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS). Route: delegated writer Batch 1
+
+- [x] **T16 — Elimina emojis** — lesson01 S2 `IA vs inteligencia natural — visual`, S3 `Cerebro vs matriz de numeros — visual`, S4 glosario sin emoji, `ChoiceQuestion.tsx` `Pista:` sin emoji, `grep -r` 0 en src/content src/components — type-check OK, build OK. Route: delegated writer Batch 1
+
+- [x] **T17 — FeatureButtonList para conidias** — Nuevo `src/components/lesson/presentation/FeatureButtonList.tsx` client `useState` expandible `role=list` grid gap-2 botones `border-brand-200 bg-brand-50 hover:bg-brand-100` + detalle `bg-gray-50`, export `src/components/lesson/index.ts`, map `page.tsx` FeatureButtonList, lesson01 S5 reemplaza bullet list por `<FeatureButtonList features=[4]>` con Área/Circularidad/Textura/Intensidad — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS). Route: delegated writer Batch 1
+
 ## Authorized Scope
 - `src/components/lesson/**`
 - `src/domain/slide.ts` (nuevo)
@@ -92,6 +98,7 @@ Mejorar retencion y comprension en publico cero-IA mediante revelado progresivo,
 - 2026-10-10: T12 completado — hint ghost arrows + tip dismissible + progreso visible: ghost `onMouseMove` 30%/70% opacity-20, tip `reveal-hint-dismissed` localStorage once + auto 5s + click dismiss, progreso `Paso x de y` visible cuando total>1 — type-check OK, build OK (30/30 static, 26.0s + 15.8s TS)
 - 2026-10-10: T13 completado — Fix 2+4: S4 split en (parte 1 con glosario antes de tabla + definición) y S4b "Features en números" (lista + vector + key-idea), fotos placeholder S2 (IA vs natural) y S3 (cerebro vs matriz), puente S6 conidias→BCW "¡Mismo concepto, otro ejemplo..." — type-check OK, build OK (30/30 static, 18.0s + 13.7s TS)
 - 2026-10-10: T14 completado — Fix 3 post-error hint + elimina AnswerReveal duplicado: ChoiceQuestion hint box + hover preview tras fallo, AnswerReveal checkpoints módulo 1 removidos (4 archivos) — type-check OK, build OK (30/30 static, 18.1s + 12.0s TS)
+- 2026-10-10: Batch 1 completado — T15 tipografía/blanco + T16 sin emojis (grep 0) + T17 FeatureButtonList conidias — commits e333200 — type-check OK, build OK (30/30 static, 14.0s + 10.5s TS)
 
 ## Next Step
 - Verificación final manual fullscreen/keyboard/mobile/coarse-pointer + a11y ya validado en build; pendiente merge a main
