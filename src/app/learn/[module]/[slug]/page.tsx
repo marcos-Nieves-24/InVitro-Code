@@ -34,6 +34,8 @@ import {
   QuizButton,
   FeatureButtonList,
 } from "@/components/lesson";
+import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
+import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -164,6 +166,8 @@ export default async function LessonPage({ params }: Props) {
     ChoiceQuestion,
     QuizButton,
     FeatureButtonList,
+    BrainVsChip: BrainVsChipPlayer,
+    MatrixAnim: MatrixPlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

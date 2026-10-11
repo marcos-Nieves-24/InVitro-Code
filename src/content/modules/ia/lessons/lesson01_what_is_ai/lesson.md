@@ -45,9 +45,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 </p>
 
-<div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
-  IA vs inteligencia natural — visual
-</div>
+<BrainVsChip caption="Comparacion visual: inteligencia humana vs artificial" />
 
 </RevealSequence>
 
@@ -61,9 +59,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
 
-<div className="mx-auto mt-4 flex h-32 w-full max-w-md items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 text-center text-sm text-storm">
-  Cerebro vs matriz de numeros — visual
-</div>
+<MatrixAnim caption="La IA convierte imagenes en matrices de numeros" />
 
 </RevealSequence>
 

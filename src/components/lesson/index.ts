@@ -24,3 +24,5 @@ export { RevealSequence, useRevealQuizBlock } from "./presentation/RevealSequenc
 export { ChoiceQuestion } from "./presentation/ChoiceQuestion";
 export { QuizButton } from "./presentation/QuizButton";
 export { FeatureButtonList } from "./presentation/FeatureButtonList";
+export { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
+export { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
