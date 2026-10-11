@@ -71,7 +71,7 @@ Aquí entra AlphaFold.
   ]}
 />
 
-<InteractiveFrame src="/interactives/demo_07_protein_viewer.html" height="700px" caption="visualización interactiva de datos reales del PDB" />
+<InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="700px" caption="visualización interactiva de datos reales del PDB" />
 
 **Explora el visualizador:**
 - Rota la proteína arrastrando el mouse
