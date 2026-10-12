@@ -23,7 +23,14 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const len = modules.length;
   const [activeIndex, setActiveIndex] = useState(() => (len ? len - 1 : 0));
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  // Default to mobile so SSR/first paint renders exactly one card: the 4-card
+  // window (desktop) only appears after the client matches the wide-query.
+  // Rendering 4 cards in the SSR HTML makes the track ~1096px wide at a 390px
+  // viewport (each card w-full of the shrunk ul), and the harness measures at
+  // DOMContentLoaded — before hydration collapses it — flagging ul/viewport
+  // scrollWidth as a fixed-width risk. One card keeps the track <= viewport at
+  // every pre-hydration instant.
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     if (len === 0) return;

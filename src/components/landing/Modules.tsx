@@ -31,7 +31,7 @@ export function Modules() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <div className="absolute -top-24 -left-24 h-[380px] w-[380px] rounded-full bg-[#DDF5EF]/60 blur-3xl" />
-        <div className="absolute -right-32 -bottom-32 h-[480px] w-[480px] rounded-full bg-[#DDF5EF]/45 blur-3xl" />
+        <div className="absolute -right-32 -bottom-32 h-[480px] w-[480px] rounded-full bg-[#DDF5EF]/45 blur-3xl max-md:right-0 max-md:bottom-0 max-md:h-[220px] max-md:w-[220px]" />
         <svg
           className="absolute top-10 right-[12%] h-[220px] w-[220px] opacity-50"
           viewBox="0 0 220 220"

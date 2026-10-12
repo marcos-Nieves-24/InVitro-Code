@@ -56,9 +56,9 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
 </ConceptCard>
 
-<p>
+<div>
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
-</p>
+</div>
 
 </RevealSequence>
 
@@ -76,7 +76,7 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 </Section>
 
-<Section number={4} title="Features: el idioma de la máquina (parte 1)" eyebrow="CONCEPTO">
+<Section number={4} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -99,13 +99,21 @@ Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
   ]}
 />
 
-<p>
+<div>
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
-</p>
+</div>
 
 <ConceptCard variant="definition">
 En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
 </ConceptCard>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={5} title="Features medibles de la conidia" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <FeatureButtonList
   features={[
@@ -118,9 +126,9 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
 
 <ConidiaToVector caption="De imagen a numeros: asi habla la maquina" />
 
-<p>
+<div>
 Cada conidia se convierte en un **vector de números**. Eso es lo que la IA puede procesar.
-</p>
+</div>
 
 <ConceptCard variant="key-idea">
 La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es una pista que ayuda a clasificar.
@@ -130,7 +138,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={5} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
+<Section number={6} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
 
 <ChoiceQuestion
   question="¿Qué es una feature en el contexto de IA?"
@@ -149,7 +157,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
+<Section number={7} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
 ¡Mismo concepto, otro ejemplo clínico real! Las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales — cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que nuestras conidias. Si entiendes conidias, ya entiendes biopsias.
 
@@ -174,7 +182,7 @@ Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el
 
 </Section>
 
-<Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
+<Section number={8} title="Dos features > una" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -194,7 +202,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={8} title="Tú como clasificador" eyebrow="INTERACTIVA">
+<Section number={9} title="Tú como clasificador" eyebrow="INTERACTIVA">
 
 Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.
 
@@ -219,7 +227,7 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 
 </Section>
 
-<Section number={9} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+<Section number={10} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
 
 **¿Qué aprendemos de la simulación?**
 
@@ -233,7 +241,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
+<Section number={11} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
@@ -258,7 +266,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={11} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+<Section number={12} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
 **La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
@@ -271,7 +279,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={12} title="Resumen" eyebrow="CIERRE">
+<Section number={13} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -283,7 +291,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={14} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
@@ -335,7 +343,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
