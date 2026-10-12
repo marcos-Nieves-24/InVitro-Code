@@ -2,6 +2,7 @@ import { Reveal } from "@/components/Reveal";
 import { OrbitalModules } from "./OrbitalModules";
 import { getModules, getModuleShortDescription, getLessonSlugs } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
+import { buildModuleCardModel } from "@/domain/module-card";
 
 export function Modules() {
   const raw = getModules();
@@ -9,14 +10,18 @@ export function Modules() {
     const slugs = getLessonSlugs(m.slug);
     const xpReward = slugs.reduce((sum, ls) => sum + calcXpForLesson(m.slug, ls), 0);
     const href = m.firstLesson ? `/learn/${m.slug}/${m.firstLesson}` : `/learn/${m.slug}`;
-    return {
+    const model = buildModuleCardModel({
       slug: m.slug,
       title: m.title,
-      lessons: m.lessonCount,
       description: getModuleShortDescription(m.slug),
+      lessonCount: m.lessonCount,
+      labCount: slugs.length,
       xpReward,
-      href,
-    };
+      completed: null,
+      total: null,
+    });
+    // OrbitalModules' ModuleData expects `lessons`; map from the canonical model.
+    return { ...model, lessons: model.lessonCount, href };
   });
 
   return (

@@ -83,3 +83,15 @@ El pipeline usa `remark-math` + `rehype-katex`. **Preservar `$...$` (inline) y `
 - [ ] Componentes nuevos exportados en `index.ts` Y mapeados en `page.tsx`.
 - [ ] `$...$` intacto; sin `<Section>` con `title="Resumen"` salvo que se quiera ocultar.
 - [ ] `npm run type-check` verde.
+
+## Section composition contract (MOV2) — no prosa corrida
+
+Una `<Section>` es **composición de presentation primitives**, no prosa corrida (expediciones-visual-learning-plan:65).
+
+**Primitives válidos:** `DialogueBox`, `RevealSequence`, `ChoiceQuestion`, `AnymotionStage` (`BrainVsChip`, `MatrixAnim`, etc.), `ConceptCard`, `ThresholdLab`, `KnnTrainer`, `LabOfflineNotice`, `ComparisonTable`, etc.
+
+**Regla:** Si hay prosa, debe estar envuelta en `RevealSequence` (para steps) o `DialogueBox` (para diálogo), no suelta entre primitives. Prosa suelta causa `p > p` hydration y V-01 stage overflow.
+
+**Presupuesto visual:** `AnymotionStage` — `max-h-[calc(100vh-22rem)] max-w-[calc((100vh-22rem)*16/9)]` (16:9, respeta footer + header). Ver `src/components/anymotion/AnymotionStage.tsx:22-27` docstring.
+
+**Section props:** `number: number`, `title: string`, `eyebrow: string`, `description?: string` (string, no ReactNode), `children: ReactNode` (aquí van los primitives).
