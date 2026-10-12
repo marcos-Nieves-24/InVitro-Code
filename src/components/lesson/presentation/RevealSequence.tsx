@@ -42,6 +42,39 @@ export function useRevealQuizBlock(): RevealQuizContextValue | null {
 }
 
 // ---------------------------------------------------------------------------
+// Single owner of the forward advance
+// ---------------------------------------------------------------------------
+
+/**
+ * Registry of mounted reveal sequences. The lesson carousel queries it on every
+ * forward trigger (footer button, click zone, keyboard) so exactly one owner
+ * decides what "forward" means: while a reveal still has steps, it consumes the
+ * advance; once it is complete, the slide changes.
+ *
+ * Without this, the footer "Continuar" and the reveal "Continuar" both write
+ * the forward direction, and navigation oscillates between two slides.
+ */
+const revealAdvanceOwners = new Map<string, () => boolean>();
+
+export function registerRevealAdvance(id: string, owner: () => boolean): () => void {
+  revealAdvanceOwners.set(id, owner);
+  return () => {
+    revealAdvanceOwners.delete(id);
+  };
+}
+
+/**
+ * Offer a forward advance to the mounted reveal sequences.
+ * Returns true when a reveal consumed it (i.e. the slide must NOT change).
+ */
+export function consumeRevealAdvance(): boolean {
+  for (const owner of revealAdvanceOwners.values()) {
+    if (owner()) return true;
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
 
@@ -198,6 +231,25 @@ export function RevealSequence({
       return next;
     });
   }, [effectiveBlocked, total, showHint, dismissHint]);
+
+  // Single owner of the forward advance.
+  //
+  // Both the footer "Continuar" and the reveal "Continuar" sit on the same
+  // forward direction, so they must not write the slide state independently:
+  // when the reveal still has steps, IT consumes the advance; only when it is
+  // complete does the slide change. The carousel calls this on every forward
+  // trigger instead of advancing the slide itself.
+  //
+  // NOTE: `advance` must be declared above `handleAdvance` — referencing it in
+  // the dependency array before its `const` initialization throws a TDZ
+  // ReferenceError on every render and crashes the whole lesson page.
+  const handleAdvance = useCallback(() => {
+    if (hasMore && !effectiveBlocked) {
+      advance();
+      return true;
+    }
+    return false;
+  }, [hasMore, effectiveBlocked, advance]);
 
   const goPrev = useCallback(() => {
     if (showHint) dismissHint();
@@ -415,9 +467,10 @@ export function RevealSequence({
 
         {/* Hidden slice not rendered — keeps DOM minimal; a11y aria-hidden implied by absence */}
 
-        {/* Controls / indicator area */}
+        {/* Controls / indicator area — sticky to the bottom of the scroll region so
+            the Atrás / Continuar buttons always clear the presentation footer. */}
         {hasMore ? (
-          <div className="flex flex-col items-center gap-2 pt-2">
+          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
               <span className="font-mono text-[10px] tracking-widest text-storm">
                 Paso {revealedCount} de {total}
@@ -435,7 +488,7 @@ export function RevealSequence({
                     e.stopPropagation();
                     dismissHint();
                   }}
-                  className="rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+                  className="min-h-11 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
                 >
                   Entendido
                 </button>
@@ -461,7 +514,7 @@ export function RevealSequence({
                         goPrev();
                       }}
                       aria-label="Mostrar contenido anterior"
-                      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 py-2 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
                     >
                       <span aria-hidden="true">←</span> Atrás
                     </button>
@@ -474,7 +527,7 @@ export function RevealSequence({
                       advance();
                     }}
                     aria-label="Mostrar siguiente contenido"
-                    className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 py-2 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
                   >
                     Continuar <span aria-hidden="true">→</span>
                   </button>
@@ -489,7 +542,7 @@ export function RevealSequence({
             )}
           </div>
         ) : revealedCount > initialRevealed ? (
-          <div className="flex flex-col items-center gap-2 pt-2">
+          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
               <span className="font-mono text-[10px] tracking-widest text-storm">
                 Paso {revealedCount} de {total}
@@ -503,13 +556,13 @@ export function RevealSequence({
                 goPrev();
               }}
               aria-label="Mostrar contenido anterior"
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 py-2 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
             >
               <span aria-hidden="true">←</span> Atrás
             </button>
           </div>
         ) : total > 1 ? (
-          <div className="flex flex-col items-center gap-2 pt-2">
+          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             <span className="font-mono text-[10px] tracking-widest text-storm">
               Paso {revealedCount} de {total}
             </span>
