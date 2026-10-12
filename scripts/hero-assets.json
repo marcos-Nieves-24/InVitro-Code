@@ -1,0 +1,65 @@
+{
+  "_doc": "Framing contract for SVG assets served from public/. Every SVG in public/ that declares a viewBox MUST have an entry here, and its declared viewBox/width/height must match this manifest (tolerance: 0.5 user units for viewBox, exact for width/height). scripts/check-hero-assets.mjs enforces this at prebuild; scripts/normalize-hero-assets.mjs (requires playwright, dev-only) measures real bounds and proposes curated values. SVGs without a declared viewBox are outside the contract. Keys are paths relative to public/ using POSIX separators. width/height are null when the SVG does not declare them.",
+  "assets": {
+    "dashboard/cientifica-1.svg": {
+      "viewBox": "1.9 0 440 511",
+      "width": 440,
+      "height": 511,
+      "note": "Healthy: declared viewBox wraps the content (content x 44.5, y 1.3, 354.8 x 509.7 user units)."
+    },
+    "dashboard/cientifico-1.svg": {
+      "viewBox": "51.1 -21 917 1065",
+      "width": 440,
+      "height": 511,
+      "note": "Curated: original viewBox 128.6 69.52 762.01 884.97 cut ~70 user units off the top (the head). Content is 673.6 x 1024 anchored at (172.8, 0). Final frame: 917 x 1065 window centered on the content with 21 user units of padding, matching the 440 x 511 canvas shared by cientifica-1 and cientifico-x so all three scientist figures share one aspect ratio. Side padding instead of cropping legs: nothing of the drawing is lost."
+    },
+    "dashboard/cientifico-x.svg": {
+      "viewBox": "0 0 440 511",
+      "width": 440,
+      "height": 511,
+      "note": "Healthy: declared viewBox wraps the content (content x 44.5, y 1.3, 354.8 x 509.7 user units)."
+    },
+    "favicon.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": 1254,
+      "height": 1254,
+      "note": "Healthy: declared viewBox wraps the content (content x 236.8, y 188.4, 780.4 x 856.3 user units)."
+    },
+    "labs/modules/estadistica.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": null,
+      "height": null,
+      "note": "Healthy: viewBox only, no width/height declared (scales via CSS). Content x 197.1, y 277.5, 895.5 x 765.4 user units."
+    },
+    "labs/modules/ia.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": null,
+      "height": null,
+      "note": "Healthy: viewBox only, no width/height declared (scales via CSS). Content x 289.4, y 272.2, 659.4 x 709.4 user units."
+    },
+    "labs/modules/ml.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": null,
+      "height": null,
+      "note": "Healthy: viewBox only, no width/height declared (scales via CSS). Content x 178.1, y 183.5, 927.7 x 916 user units."
+    },
+    "labs/modules/python.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": null,
+      "height": null,
+      "note": "Healthy: viewBox only, no width/height declared (scales via CSS). Content x 127.9, y 273.2, 1024.5 x 764.5 user units."
+    },
+    "logo-negativo.svg": {
+      "viewBox": "0 0 1024 1024",
+      "width": 1254,
+      "height": 1254,
+      "note": "Healthy: declared viewBox wraps the content (content x 193.4, y 153.9, 639 x 701.3 user units)."
+    },
+    "logo.svg": {
+      "viewBox": "0 0 1254 1254",
+      "width": 1254,
+      "height": 1254,
+      "note": "Healthy: declared viewBox wraps the content (content x 1, y 1, 1254 x 1254 user units)."
+    }
+  }
+}
