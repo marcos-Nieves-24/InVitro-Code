@@ -205,30 +205,52 @@ export function DialogueBox({
 
   const handleContainerClick = useCallback(
     (e: React.MouseEvent) => {
-      if (!onNext) return;
       // Don't advance when user is selecting text
       const sel = window.getSelection();
       if (sel && sel.toString().length > 0) return;
       // Don't double-fire when clicking the explicit Continue button
       const target = e.target as HTMLElement;
       if (target.closest("[data-dialogue-continue]")) return;
+      // Lines in play, not the last one: the bubble consumes the click so the
+      // parent RevealSequence does not advance on the same event (double-advance).
+      if (hasLines && !isLastLine) {
+        e.stopPropagation();
+        handleAdvance();
+        return;
+      }
+      // Last line: the bubble does nothing further, the click bubbles up and
+      // the parent RevealSequence advances the step.
+      if (hasLines) return;
+      // No-line fallback (children): unchanged behaviour, requires onNext.
+      if (!onNext) return;
       handleAdvance();
     },
-    [onNext, handleAdvance],
+    [onNext, handleAdvance, hasLines, isLastLine],
   );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (!onNext) return;
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
+        // Keyboard mirrors the pointer rule: while lines remain, the bubble
+        // consumes the keypress and advances its own line only.
+        if (hasLines && !isLastLine) {
+          e.stopPropagation();
+          handleAdvance();
+          return;
+        }
+        // Last line: let the parent advance, the bubble does nothing further.
+        if (hasLines) return;
+        if (!onNext) return;
         handleAdvance();
       }
     },
-    [onNext, handleAdvance],
+    [onNext, handleAdvance, hasLines, isLastLine],
   );
 
-  const canInteract = Boolean(onNext);
+  // Interactive when a consumer passes onNext, or when lines drive the bubble
+  // on its own (lines are serializable in MDX, onNext is not).
+  const canInteract = Boolean(onNext) || hasLines;
 
   return (
     <div

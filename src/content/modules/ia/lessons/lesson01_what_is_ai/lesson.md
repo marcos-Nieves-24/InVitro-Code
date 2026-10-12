@@ -23,9 +23,20 @@ Datasets Used: module01_ai_cell_features.csv
 
 <div>
 
-<DialogueBox speaker="Dra. Coni" variant="scientist" mood="neutral" typing={false}>
-Bienvenido al laboratorio. Hoy vamos a entender qué es la inteligencia artificial y cómo puede ayudar a clasificar microorganismos.
-</DialogueBox>
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  typing={true}
+  lines={[
+    "Bienvenido al laboratorio.",
+    "Hoy vamos a entender qué es la inteligencia artificial.",
+    "Y cómo puede ayudar a clasificar microorganismos.",
+    "Trabajaremos con un ejemplo muy concreto.",
+    "Vas a ver que la máquina aprende de los datos, no de reglas mágicas.",
+    "Empecemos.",
+  ]}
+/>
 
 Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 

@@ -33,6 +33,7 @@ import {
   ChoiceQuestion,
   QuizButton,
   FeatureButtonList,
+  LessonVideo,
 } from "@/components/lesson";
 import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
 import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
@@ -169,6 +170,7 @@ export default async function LessonPage({ params }: Props) {
     ChoiceQuestion,
     QuizButton,
     FeatureButtonList,
+    LessonVideo,
     BrainVsChip: BrainVsChipPlayer,
     MatrixAnim: MatrixPlayer,
     ConidiaToVector: ConidiaToVectorPlayer,

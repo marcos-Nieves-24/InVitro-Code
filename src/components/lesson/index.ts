@@ -29,3 +29,4 @@ export { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 export { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 export { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 export { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
+export { LessonVideo } from "./lesson-video";
