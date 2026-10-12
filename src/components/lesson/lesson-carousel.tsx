@@ -6,6 +6,7 @@ import { CelebrationOverlay } from "./celebration-overlay";
 import { Button } from "@/components/ui";
 import { ConsentPendingCard } from "@/components/consent/ConsentPendingCard";
 import { useLessonCompletion } from "@/hooks/useLessonCompletion";
+import { consumeRevealAdvance } from "./presentation/RevealSequence";
 
 interface LessonCarouselProps {
   slides: React.ReactNode[];
@@ -30,7 +31,13 @@ export function LessonCarousel({
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
 
+  // Single owner of the forward advance: while the current slide has a
+  // RevealSequence with steps remaining, IT consumes the advance; only when it is
+  // complete does the slide change. Every forward trigger (footer button, click
+  // zone on the right half, ArrowRight/Space/Enter) funnels through here, so the
+  // footer and the reveal never both write the forward direction.
   const goNext = useCallback(() => {
+    if (consumeRevealAdvance()) return;
     setCurrent((c) => Math.min(c + 1, total - 1));
   }, [total]);
 
@@ -60,13 +67,15 @@ export function LessonCarousel({
         clearTimeout(t);
       };
     }
-    const obs = new MutationObserver(check);
-    obs.observe(node, {
-      attributes: true,
-      subtree: true,
-      childList: true,
-      attributeFilter: ["data-reveal-has-more"],
-    });
+  // Observe also the reveal's blocked flag so "Completa el contenido para
+  // continuar" stays accurate while the reveal still has steps.
+  const obs = new MutationObserver(check);
+  obs.observe(node, {
+    attributes: true,
+    subtree: true,
+    childList: true,
+    attributeFilter: ["data-reveal-has-more", "data-reveal-blocked"],
+  });
     // Also observe childList + subtree without filter for newly mounted RevealSequences
     // (attributeFilter already covers data-reveal-has-more; childList catches DOM additions)
     return () => {
@@ -84,8 +93,9 @@ export function LessonCarousel({
     if (r.ok) setShowCelebration(true);
   };
 
-  // Click zones: left half -> Atrás, right half -> Continuar (inter-slide)
-  // Right zone blocked while RevealSequence hasMore (deduplicates RevealSequence Continuar / footer Continuar)
+  // Click zones: left half -> Atrás, right half -> Continuar.
+  // Both zones call the same single-owner goNext/goPrev, so a coordinate click and
+  // the footer/RevealSequence buttons can never double-advance the same direction.
   const handleSlideClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const target = e.target as HTMLElement;
@@ -104,12 +114,12 @@ export function LessonCarousel({
         goPrev();
         return;
       }
-      if (isRevealIncomplete) return;
+      // Right zone: goNext delegates to the reveal owner when it still has steps.
       if (!isLast) {
         goNext();
       }
     },
-    [isLast, goNext, goPrev, isRevealIncomplete],
+    [isLast, goNext, goPrev],
   );
 
   // Keyboard navigation: Space/Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop
@@ -129,17 +139,11 @@ export function LessonCarousel({
         }
       }
 
-      // When RevealSequence is incomplete, inter-slide advance via keyboard is blocked
-      // (intra-slide Continuar/Atrás handle their own keys). Let ArrowLeft fall through to intra-slide handler when possible
-      const revealIncomplete = isRevealIncomplete;
-
+      // All forward keys below funnel through goNext, which delegates to the
+      // single reveal owner while it still has steps and only changes the slide
+      // once the reveal is complete.
       switch (e.key) {
         case "ArrowRight":
-          if (revealIncomplete) {
-            // Block inter-slide advance while intra-slide steps remain; allow RevealSequence to handle its own advance via click
-            e.preventDefault();
-            break;
-          }
           e.preventDefault();
           if (!isLast) goNext();
           else {
@@ -152,24 +156,13 @@ export function LessonCarousel({
           // Do not intercept when focus is on a native button (it already handles click)
           if (active?.tagName === "BUTTON" && e.key === "Enter") return;
           if (active?.tagName === "BUTTON" && e.key === " ") return;
-          if (revealIncomplete) {
-            // Block inter-slide Space/Enter while reveal incomplete — RevealSequence handles its own Continuar
-            // Only block if the active element is inside the slide area; otherwise allow shell navigation? We block broadly to deduplicate.
-            e.preventDefault();
-            break;
-          }
           e.preventDefault();
           if (!isLast) goNext();
           break;
         case "ArrowLeft":
-          // If reveal is incomplete and focus is inside RevealSequence, let its ArrowLeft handler goPrev intra-slide first.
-          // We detect by checking if active element is inside a [data-reveal-has-more] container and reveal count > initial; but simplest:
-          // if there's an incomplete reveal and the slide could go back intra-slide, don't do inter-slide goPrev here — let RevealSequence handle it.
-          // The RevealSequence onKeyDown stops propagation when it handles ArrowLeft, so this handler won't fire in that case.
-          // Otherwise, fall through to inter-slide prev.
+          // Intra-slide back is handled by RevealSequence's own keydown, which
+          // stops propagation, so this fallback only runs for inter-slide back.
           e.preventDefault();
-          // If intra-slide back is possible, the RevealSequence's keydown would have already handled it and stopped propagation.
-          // So here we do inter-slide prev as fallback.
           goPrev();
           break;
         case "Home":
@@ -190,7 +183,7 @@ export function LessonCarousel({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isLast, goNext, goPrev, total, isRevealIncomplete]);
+  }, [isLast, goNext, goPrev, total]);
 
   if (total === 0) return null;
 
@@ -202,7 +195,7 @@ export function LessonCarousel({
         aria-label="Presentación de la lección"
         aria-roledescription="carousel"
         aria-live="polite"
-        className="fixed inset-y-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
+        className="fixed inset-y-0 left-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
         {/* Top progress bar — compact */}
         <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1.5">
@@ -302,7 +295,6 @@ export function LessonCarousel({
               variant="secondary"
               size="sm"
               onClick={goNext}
-              disabled={isRevealIncomplete}
               aria-label="Siguiente diapositiva"
               aria-disabled={isRevealIncomplete || undefined}
               title={

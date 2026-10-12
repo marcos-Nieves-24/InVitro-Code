@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -172,6 +173,17 @@ export function RevealSequence({
   // We use a ref + effect that inspects DOM after render.
   const [domBlocked, setDomBlocked] = useState(false);
 
+  // Element rendered for the currently revealed step, used to keep it in view.
+  const revealedStepRef = useRef<HTMLDivElement>(null);
+
+  function prefersReducedMotion(): boolean {
+    return (
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
   // We expose a callback ref on the visible container and re-evaluate when
   // revealedCount changes.
   const visibleChildren = useMemo(
@@ -256,6 +268,17 @@ export function RevealSequence({
     setRevealedCount((c) => Math.max(initialRevealed, c - 1));
   }, [initialRevealed, showHint, dismissHint]);
 
+  // Register this sequence as the single owner of the forward advance. The id is
+  // per-instance so several sequences can coexist without clobbering each other;
+  // the registry is consulted by the lesson carousel on every forward trigger.
+  const advanceOwnerId = useId();
+  const handleAdvanceRef = useRef(handleAdvance);
+  handleAdvanceRef.current = handleAdvance;
+
+  useEffect(() => {
+    return registerRevealAdvance(advanceOwnerId, () => handleAdvanceRef.current());
+  }, [advanceOwnerId]);
+
   // Fire onComplete once when completion is reached
   const prevCompleteRef = useRef(false);
   useEffect(() => {
@@ -317,6 +340,35 @@ export function RevealSequence({
     },
     [revealedCount, initialRevealed, goPrev]
   );
+
+  // Keep the revealed step inside the slide's visible band.
+  //
+  // The presentation shell gives the slide area a fixed band between the header
+  // and the footer, and content can be taller than that band. Without this, a
+  // step revealed low in a tall slide (an animation stage after a glossary and a
+  // table) renders below the fold and stays unreachable. Scrolling the step into
+  // view — rather than resizing it — preserves the content and the 16:9 stage
+  // silhouette, and it is the only place that knows which step just appeared.
+  const needsScrollIntoView = revealedCount > 0 && hasMore;
+  useEffect(() => {
+    if (!needsScrollIntoView) return;
+    const node = revealedStepRef.current;
+    if (!node) return;
+    const raf = requestAnimationFrame(() => {
+      const rect = node.getBoundingClientRect();
+      const visibleBottom = window.innerHeight;
+      const visibleTop = rect.height > window.innerHeight ? 0 : rect.top;
+      // Only act when the step is actually cut off; otherwise a harmless nudge
+      // would move content the user is already reading.
+      if (rect.top < 0 || rect.bottom > visibleBottom) {
+        node.scrollIntoView({
+          block: rect.height > window.innerHeight ? "start" : "center",
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
+        });
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [needsScrollIntoView, revealedCount]);
 
   // Context value — stable identity
   const contextValue = useMemo<RevealQuizContextValue>(
@@ -391,6 +443,7 @@ export function RevealSequence({
         onMouseLeave={handleMouseLeave}
         onKeyDown={handleContainerKeyDown}
         data-reveal-has-more={hasMore ? "true" : "false"}
+        data-reveal-blocked={effectiveBlocked ? "true" : "false"}
         data-reveal-mode={mode}
         className={containerClass}
       >
@@ -422,6 +475,7 @@ export function RevealSequence({
                 <div
                   key={stableKey}
                   aria-hidden={!isCurrent}
+                  ref={isCurrent ? revealedStepRef : undefined}
                   className={
                     isCurrent
                       ? "w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
@@ -443,6 +497,7 @@ export function RevealSequence({
                   <div
                     key={stableKey}
                     aria-hidden={false}
+                    ref={absoluteIndex === 0 ? revealedStepRef : undefined}
                     className="w-full max-w-full reveal is-visible motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
                   >
                     {child}
@@ -458,6 +513,7 @@ export function RevealSequence({
                   <div
                     key={stableKey}
                     aria-hidden={false}
+                    ref={index === 0 ? revealedStepRef : undefined}
                     className="reveal is-visible motion-safe:animate-[reveal-up_400ms_ease-out] motion-reduce:animate-none"
                   >
                     {child}

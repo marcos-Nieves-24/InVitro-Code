@@ -19,6 +19,7 @@ const publicRoutes = [
   "/terminos",
   "/ia",
   "/preview/cards",
+  "/preview/lesson",
 ];
 
 const adminRoutes = ["/admin", "/api/admin"];

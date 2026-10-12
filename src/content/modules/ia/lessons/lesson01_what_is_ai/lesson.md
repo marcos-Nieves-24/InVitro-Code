@@ -103,17 +103,17 @@ Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
 </div>
 
-<ConceptCard variant="definition">
-En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
-</ConceptCard>
-
 </RevealSequence>
 
 </Section>
 
-<Section number={5} title="Features medibles de la conidia" eyebrow="CONCEPTO">
+<Section number={5} title="De la imagen a los números" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
+
+<ConceptCard variant="definition">
+En IA, llamamos **features** (características o atributos) a las propiedades medibles de los datos que usamos para hacer predicciones.
+</ConceptCard>
 
 <FeatureButtonList
   features={[
@@ -123,6 +123,14 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
     { id: "intensidad", label: "Intensidad (0-255)", detail: "Qué tan clara u oscura es al microscopio" },
   ]}
 />
+
+</RevealSequence>
+
+</Section>
+
+<Section number={6} title="Cada conidia es un vector" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <ConidiaToVector caption="De imagen a numeros: asi habla la maquina" />
 
@@ -138,7 +146,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={6} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
+<Section number={7} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
 
 <ChoiceQuestion
   question="¿Qué es una feature en el contexto de IA?"
@@ -157,7 +165,7 @@ La IA no "ve" imágenes como nosotros. Ve matrices de números. Cada número es 
 
 </Section>
 
-<Section number={7} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
+<Section number={8} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
 ¡Mismo concepto, otro ejemplo clínico real! Las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales — cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que nuestras conidias. Si entiendes conidias, ya entiendes biopsias.
 
@@ -182,7 +190,7 @@ Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el
 
 </Section>
 
-<Section number={8} title="Dos features > una" eyebrow="CONCEPTO">
+<Section number={9} title="Dos features > una" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -202,7 +210,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={9} title="Tú como clasificador" eyebrow="INTERACTIVA">
+<Section number={10} title="Tú como clasificador" eyebrow="INTERACTIVA">
 
 Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.
 
@@ -227,7 +235,7 @@ Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Tu t
 
 </Section>
 
-<Section number={10} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+<Section number={11} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
 
 **¿Qué aprendemos de la simulación?**
 
@@ -241,7 +249,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={11} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
+<Section number={12} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 Antes de que existiera el machine learning, se usaban **sistemas basados en reglas**. Veamos por qué no son suficientes.
 
@@ -266,7 +274,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={12} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+<Section number={13} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
 
 <ConceptCard variant="warning">
 **La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
@@ -279,7 +287,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={13} title="Resumen" eyebrow="CIERRE">
+<Section number={14} title="Resumen" eyebrow="CIERRE">
 
 | Concepto | Idea clave |
 |---|---|
@@ -291,7 +299,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={14} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
@@ -343,7 +351,7 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
 Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
