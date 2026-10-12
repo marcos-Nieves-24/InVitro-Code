@@ -1,0 +1,23 @@
+project: invitro-code
+version: 1.0
+tokens: ./design.tokens.json
+aesthetic: biotech-lab
+aesthetic_notes: >
+  Wet-lab instruments and microscopy: cool teal/cyan signal lights over a warm
+  paper substrate. Precision over decoration — quiet chrome, one vivid cyan
+  accent, monospace for data and labels. Aligns with the existing brand ramp
+  (--color-brand-600 #0063AE primary, --color-brand-500 #008DBF accent).
+palette_intent: teal/cyan lab signals + warm neutrals
+components_context: src/app/globals.css (@theme block, Tailwind v4 tokens)
+
+guides:
+  - id: design-harness-audit
+    description: Evidence-based visual QA loop — screenshot + measure, then diff against this token contract (Fase 3).
+    command: "npx @design-harness/cli audit --url http://localhost:3000 --out runs/demo"
+    status: planned
+
+principles:
+  - Verify contrast (WCAG AA) before shipping text or interactive states.
+  - One vivid accent; keep everything around it quiet and disciplined.
+  - Respect prefers-reduced-motion; animate transform/opacity only.
+  - Never rely on color alone — pair state color with an icon or label.

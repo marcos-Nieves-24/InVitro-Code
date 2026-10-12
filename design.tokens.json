@@ -1,0 +1,87 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "project": "invitro-code",
+  "version": "1.0.0",
+  "aesthetic": "biotech-lab",
+  "color": {
+    "bg": {
+      "value": "#FBF8F5",
+      "role": "Base canvas — warm off-white paper beneath everything",
+      "contrastRatio": "16.45:1 vs #1A1A1A text (AAA)"
+    },
+    "surface": {
+      "value": "#FFFFFF",
+      "role": "Cards, panels, raised containers",
+      "contrastRatio": "17.40:1 vs #1A1A1A text (AAA)"
+    },
+    "primary": {
+      "value": "#0063AE",
+      "role": "Primary actions, links, brand blue (from --color-brand-600)",
+      "contrastRatio": "6.18:1 on #FFFFFF (AA/AAA); white #FFFFFF on this = 6.18:1"
+    },
+    "accent": {
+      "value": "#008DBF",
+      "role": "Vivid lab cyan for graphics, large text, focus rings (from --color-brand-500)",
+      "contrastRatio": "3.78:1 on #FFFFFF (AA large/graphics only); #1A1A1A text on this = 4.61:1"
+    },
+    "success": {
+      "value": "#047857",
+      "role": "Pass, correct, completed states",
+      "contrastRatio": "5.48:1 on #FFFFFF (AA/AAA)"
+    },
+    "warning": {
+      "value": "#B45309",
+      "role": "Cautions, non-blocking alerts",
+      "contrastRatio": "5.02:1 on #FFFFFF (AA)"
+    },
+    "error": {
+      "value": "#BA1A1A",
+      "role": "Errors, destructive actions (from --color-error)",
+      "contrastRatio": "6.46:1 on #FFFFFF (AA/AAA)"
+    },
+    "text": {
+      "value": "#1A1A1A",
+      "role": "Primary body text",
+      "contrastRatio": "16.45:1 on #FBF8F5 (AAA)"
+    },
+    "muted": {
+      "value": "#5B6770",
+      "role": "Secondary text, captions, labels",
+      "contrastRatio": "5.48:1 on #FBF8F5 (AA)"
+    },
+    "border": {
+      "value": "#CBD5DC",
+      "role": "Hairline dividers and card edges (decorative separation only)",
+      "contrastRatio": "1.41:1 on #FBF8F5 (decorative — never the sole indicator of a control boundary)"
+    }
+  },
+  "type": {
+    "scale": {
+      "xs": { "value": "0.75rem", "lineHeight": "1rem", "px": "12px" },
+      "sm": { "value": "0.875rem", "lineHeight": "1.25rem", "px": "14px" },
+      "base": { "value": "1rem", "lineHeight": "1.5rem", "px": "16px" },
+      "lg": { "value": "1.125rem", "lineHeight": "1.75rem", "px": "18px" },
+      "xl": { "value": "1.5rem", "lineHeight": "2rem", "px": "24px" },
+      "2xl": { "value": "2rem", "lineHeight": "2.5rem", "px": "32px" }
+    },
+    "families": {
+      "display": "font-display (headings)",
+      "body": "sans (body)",
+      "mono": "font-mono (code, eyebrows, data)"
+    }
+  },
+  "spacing": {
+    "1": { "value": "0.25rem", "px": "4px" },
+    "2": { "value": "0.5rem", "px": "8px" },
+    "3": { "value": "0.75rem", "px": "12px" },
+    "4": { "value": "1rem", "px": "16px" },
+    "6": { "value": "1.5rem", "px": "24px" },
+    "8": { "value": "2rem", "px": "32px" }
+  },
+  "radius": {
+    "sm": { "value": "0.25rem", "px": "4px" },
+    "md": { "value": "0.5rem", "px": "8px" },
+    "lg": { "value": "0.75rem", "px": "12px" },
+    "full": { "value": "9999px", "px": "9999px" }
+  }
+}

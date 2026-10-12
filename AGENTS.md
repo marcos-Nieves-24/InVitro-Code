@@ -41,6 +41,14 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 - `next.config.ts` image allowlist: `img.clerk.com`, `vercel.com`.
 - `.vercel_trigger_deploy_*` files are commit-stamped redeploy triggers — leave them alone.
 
+## Harness Skills (Fase 1)
+
+- `react-best-practices` — React/Next 16 perf (waterfalls, bundle, server/client)
+- `vercel-optimize` — Vercel cost/perf audit (metrics → routes → ranked report)
+- `mdx-lesson-authoring` — lesson.md contract (`<Section>`, Resumen, component map, LaTeX)
+- `pyodide-lab-contract` — Pyodide worker singleton (`requestId`, lazy deps, tabs)
+- `frontend-design` / `web-design-guidelines` — visual direction + UI/UX review
+
 ## Anti-Vibe Guardrails — Fase 1 (2026-09-28)
 
 > Previene los 7 errores de vibecoding (InfoWorld) y el drift Apiiro 2025 (+322% privilege escalation). Si cambiás un patrón, actualizá esta sección.
