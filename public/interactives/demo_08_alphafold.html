@@ -175,7 +175,7 @@ const layoutSE = {
   showlegend:true, legend:{orientation:'h',y:-0.15}
 };
 
-Plotly.newReact('plot-superposicion', trazasSE, layoutSE, {responsive:true});
+Plotly.newPlot('plot-superposicion', trazasSE, layoutSE, {responsive:true});
 
 document.getElementById('reset-cam').addEventListener('click',function(){
   Plotly.relayout('plot-superposicion',{'scene.camera.eye':{x:1.2,y:1.2,z:1.2}});
@@ -212,7 +212,7 @@ const caspLayout = {
   }]
 };
 
-Plotly.newReact('plot-casp', caspData, caspLayout, {responsive:true});
+Plotly.newPlot('plot-casp', caspData, caspLayout, {responsive:true});
 
 function mostrarFB(id, correcta) {
   const mcqDiv = document.getElementById(id).parentElement;

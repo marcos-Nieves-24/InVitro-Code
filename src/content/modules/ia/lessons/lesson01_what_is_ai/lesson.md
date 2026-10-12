@@ -88,9 +88,10 @@ Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo.
 
 Las conidias de *Aspergillus* y *Penicillium* tienen diferencias sutiles:
 
-<ComparisonTable
+<SpeciesCompare
   leftLabel="Aspergillus"
   rightLabel="Penicillium"
+  caption="Cada atributo se resalta sobre las dos conidias a la vez"
   rows={[
     { feature: "Forma", left: "Más redondeada", right: "Más alargada" },
     { feature: "Textura superficial", left: "Rugosa (verrugosa)", right: "Más lisa" },
@@ -287,15 +288,31 @@ Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas af
 
 </Section>
 
-<Section number={14} title="Resumen" eyebrow="CIERRE">
+<Section number={14} title="Conceptos clave" eyebrow="CIERRE">
 
-| Concepto | Idea clave |
-|---|---|
-| Inteligencia Artificial | Máquinas que realizan tareas que requieren inteligencia humana |
-| Features (características) | Propiedades medibles de los datos que usamos para clasificar |
-| Espacio de características | El "universo" multidimensional donde la IA busca patrones |
-| Reglas fijas | Funcionan para problemas simples, fallan en la complejidad del mundo real |
-| Aprendizaje automático | La máquina encuentra patrones por sí misma a partir de ejemplos |
+<RevealSequence>
+
+<ConceptCard variant="definition">
+**Inteligencia Artificial** — Máquinas que realizan tareas que requieren inteligencia humana
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Features (características)** — Propiedades medibles de los datos que usamos para clasificar
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Espacio de características** — El "universo" multidimensional donde la IA busca patrones
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Reglas fijas** — Funcionan para problemas simples, fallan en la complejidad del mundo real
+</ConceptCard>
+
+<ConceptCard variant="definition">
+**Aprendizaje automático** — La máquina encuentra patrones por sí misma a partir de ejemplos
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 

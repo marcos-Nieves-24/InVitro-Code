@@ -190,7 +190,7 @@ const barLayout = {
   }]
 };
 
-Plotly.newReact('plot-barras', barData, barLayout, {responsive:true});
+Plotly.newPlot('plot-barras', barData, barLayout, {responsive:true});
 
 function mostrarFB(id, correcta) {
   const mcqDiv = document.getElementById(id).parentElement;

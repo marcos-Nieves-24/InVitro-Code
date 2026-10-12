@@ -218,16 +218,73 @@ Esto lo hace distinto de AlphaFold:
   caption="Comparación de capacidades: AlphaFold predice estructuras, Evo entiende y genera ADN."
 />
 
-<ComparisonTable
-  leftLabel="AlphaFold"
-  rightLabel="Evo"
-  rows={[
-    { feature: "Tipo de dato", left: "Proteínas (secuencias de aminoácidos)", right: "Genomas completos (ADN)" },
-    { feature: "Tarea principal", left: "Predicción estructural", right: "Modelado y diseño de secuencias" },
-    { feature: "Salida", left: "Coordenadas 3D de la proteína", right: "Secuencias, variantes y proteínas diseñadas" },
-    { feature: "Relación con métodos tradicionales", left: "Reduce la necesidad de cristalografía de rayos X", right: "Amplía la ingeniería genética más allá de lo experimental" }
-  ]}
-/>
+<RevealSequence>
+
+<div className="w-full max-w-2xl overflow-hidden rounded-lg border border-gray-200">
+  <p className="m-0 border-b border-gray-200 bg-gray-50 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+    {"Tipo de dato"}
+  </p>
+  <div className="grid gap-4 p-4 sm:grid-cols-2">
+    <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"AlphaFold"}</p>
+      <p className="m-0 text-gray-700">{"Proteínas (secuencias de aminoácidos)"}</p>
+    </div>
+    <div className="rounded-lg border border-teal-200 bg-teal-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"Evo"}</p>
+      <p className="m-0 text-gray-700">{"Genomas completos (ADN)"}</p>
+    </div>
+  </div>
+</div>
+
+<div className="w-full max-w-2xl overflow-hidden rounded-lg border border-gray-200">
+  <p className="m-0 border-b border-gray-200 bg-gray-50 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+    {"Tarea principal"}
+  </p>
+  <div className="grid gap-4 p-4 sm:grid-cols-2">
+    <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"AlphaFold"}</p>
+      <p className="m-0 text-gray-700">{"Predicción estructural"}</p>
+    </div>
+    <div className="rounded-lg border border-teal-200 bg-teal-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"Evo"}</p>
+      <p className="m-0 text-gray-700">{"Modelado y diseño de secuencias"}</p>
+    </div>
+  </div>
+</div>
+
+<div className="w-full max-w-2xl overflow-hidden rounded-lg border border-gray-200">
+  <p className="m-0 border-b border-gray-200 bg-gray-50 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+    {"Salida"}
+  </p>
+  <div className="grid gap-4 p-4 sm:grid-cols-2">
+    <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"AlphaFold"}</p>
+      <p className="m-0 text-gray-700">{"Coordenadas 3D de la proteína"}</p>
+    </div>
+    <div className="rounded-lg border border-teal-200 bg-teal-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"Evo"}</p>
+      <p className="m-0 text-gray-700">{"Secuencias, variantes y proteínas diseñadas"}</p>
+    </div>
+  </div>
+</div>
+
+<div className="w-full max-w-2xl overflow-hidden rounded-lg border border-gray-200">
+  <p className="m-0 border-b border-gray-200 bg-gray-50 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+    {"Relación con métodos tradicionales"}
+  </p>
+  <div className="grid gap-4 p-4 sm:grid-cols-2">
+    <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"AlphaFold"}</p>
+      <p className="m-0 text-gray-700">{"Reduce la necesidad de cristalografía de rayos X"}</p>
+    </div>
+    <div className="rounded-lg border border-teal-200 bg-teal-50 p-3">
+      <p className="m-0 font-semibold text-gray-900">{"Evo"}</p>
+      <p className="m-0 text-gray-700">{"Amplía la ingeniería genética más allá de lo experimental"}</p>
+    </div>
+  </div>
+</div>
+
+</RevealSequence>
 
 <ChoiceQuestion
   question="¿En qué se diferencia Evo de AlphaFold?"
@@ -286,12 +343,25 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 
 **Hoja de ruta completa del Módulo 1:**
 
-| Lección | Lo que aprendiste |
-|---|---|
-| **1** | Las máquinas ven el mundo con features; las reglas fijas tienen límites |
-| **2** | Cómo aprenden: frontera de decisión, KNN, regresión, y el peligro del overfitting |
-| **3** | AlphaFold, PDB, visualización 3D, y el pipeline completo de ML en biotecnología |
-| **4** | Vacunas mRNA, reposicionamiento, el laboratorio del futuro, y las limitaciones de la IA |
+<RevealSequence>
+
+<ConceptCard variant="key-idea">
+**Lección 1** — Las máquinas ven el mundo con features; las reglas fijas tienen límites
+</ConceptCard>
+
+<ConceptCard variant="key-idea">
+**Lección 2** — Cómo aprenden: frontera de decisión, KNN, regresión, y el peligro del overfitting
+</ConceptCard>
+
+<ConceptCard variant="key-idea">
+**Lección 3** — AlphaFold, PDB, visualización 3D, y el pipeline completo de ML en biotecnología
+</ConceptCard>
+
+<ConceptCard variant="key-idea">
+**Lección 4** — Vacunas mRNA, reposicionamiento, el laboratorio del futuro, y las limitaciones de la IA
+</ConceptCard>
+
+</RevealSequence>
 
 **Las ideas centrales para llevar:**
 1. Los **features** son la materia prima — sin buenos datos, ningún algoritmo funciona
