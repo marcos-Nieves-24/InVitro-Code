@@ -33,6 +33,13 @@ Interactive learning platform (Duolingo-style) for biotech students to learn AI/
 - Worker protocol: post `{type:"init"|"runPython", code?, context?, requestId}` → receive `{type:"ready"|"result", output?, error?, requestId}`. Keep `public/pyodide-worker.js` and `src/lib/pyodide-worker.ts` in sync when changing it.
 - `/api/certify` is an MVP stub that always returns `certified: true` — the E2B sandbox integration point is marked in the file.
 
+## Contrato de encuadre de assets
+
+- Every SVG under `public/` that declares a `viewBox` must be curated in `scripts/hero-assets.json` (viewBox/width/height canónicos). That manifest is the versioned source of truth; SVGs without a declared `viewBox` are out of the contract.
+- `npm run assets:check` (`scripts/check-hero-assets.mjs`) runs on `prebuild` and fails the build when a declared `viewBox`/`width`/`height` differs from the manifest (>0.5 user units of tolerance on the viewBox) or when an SVG with a `viewBox` is not curated. Zero dependencies (node builtins only) and testable against fixtures with `--public-dir`/`--manifest`.
+- `npm run assets:normalize` (`scripts/normalize-hero-assets.mjs`, requires `playwright` as a dev dependency) measures each SVG in a browser (`getBBox`), proposes the bounding envelope + 2% padding with `width`/`height` derived from the declared width, and only writes with `--write`. By default it touches only uncurated assets; `--force` re-measures curated ones. CSS masks nothing: a curated `viewBox` wrapping the content is the contract, not an aesthetic re-frame.
+- The gate compares attributes, it never measures bounds — a healthy contract does not prove the frame fits the drawing (that is `cientifico-1.svg`'s old bug: `viewBox="128.6 69.52 762.01 884.97"` over content of `673.6×1024` at `(172.8, 0)` cut the head off while every other check stayed green).
+
 ## Workflow artifacts
 
 - `openspec/` holds SDD change artifacts (proposal/spec/design/tasks). `openspec/config.yaml` codifies conventions: Spanish content, RFC 2119 keywords in specs, MDX component patterns in design. Reconcile new code with active changes there.
