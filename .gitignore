@@ -51,6 +51,7 @@ __pycache__/
 .agents/
 .codegraph/
 .stitch-screens/
+audit-visual/
 
 # Local editor config (contains API keys — never commit)
 opencode.json

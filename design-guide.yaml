@@ -23,6 +23,11 @@ guides:
       to regenerate marker-owned AGENTS.md guidance and design.tokens.json. Never run
       it unattended: it writes to AGENTS.md. Diff and keep only marker-owned changes.
 
+  - id: lesson-preview-audit
+    description: Lesson preview visual QA — same deterministic contract but over /preview/lesson without auth (other agent's preview)
+    command: "npx @design-harness/cli audit --url http://localhost:3000/preview/lesson/ia/lesson01_what_is_ai --out runs/lesson"
+    status: active
+
 principles:
   - Verify contrast (WCAG AA) before shipping text or interactive states.
   - One vivid accent; keep everything around it quiet and disciplined.
