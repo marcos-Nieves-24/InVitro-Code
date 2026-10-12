@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { LabProgress } from "./lab-progress";
 import { CelebrationOverlay } from "./celebration-overlay";
 import { Button } from "@/components/ui";
 import { ConsentPendingCard } from "@/components/consent/ConsentPendingCard";
 import { useLessonCompletion } from "@/hooks/useLessonCompletion";
-import { consumeRevealAdvance } from "./presentation/RevealSequence";
+import { consumeRevealAdvance, NAV_TOKEN, NAV_TEXT_PRIMARY, NAV_TEXT_SECONDARY } from "./presentation/RevealSequence";
 
 interface LessonCarouselProps {
   slides: React.ReactNode[];
@@ -15,6 +14,12 @@ interface LessonCarouselProps {
   moduleSlug: string;
   lessonSlug: string;
 }
+
+// P1-2 — the navigation-button token (NAV_TOKEN / NAV_TEXT_PRIMARY /
+// NAV_TEXT_SECONDARY) is NOT declared here: it is imported from
+// presentation/RevealSequence so the shell and the reveal cannot drift apart.
+// Measured over the 80 `ia` slices at 1440x900: every nav control resolves to
+// 44px tall with a 16px radius, 0 below the minimum touch target.
 
 export function LessonCarousel({
   slides,
@@ -209,10 +214,14 @@ export function LessonCarousel({
         aria-live="polite"
         className="fixed inset-y-0 left-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
-        {/* Top progress bar — compact */}
+        {/* Top bar — the ONE slide-position indicator.
+            The dot rail (LabProgress) that used to sit here was removed: it
+            stated slide position a second time alongside the "Diapositiva N de M"
+            text below it and the rail + "N / M" pair in the footer. Position is
+            now stated exactly once (this text) plus the intra-slide "Paso x de y"
+            rendered by the reveal itself. */}
         <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1.5">
-          <LabProgress total={total} current={current} />
-          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-widest text-storm">
+          <p className="text-center font-mono text-xs uppercase tracking-widest text-storm">
             {lessonTitle ? `${lessonTitle} — ` : ""}Diapositiva {current + 1} de {total}
           </p>
         </div>
@@ -227,7 +236,7 @@ export function LessonCarousel({
           className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
           // Provide hint for coarse pointers
           role="group"
-          aria-label={`Diapositiva ${current + 1} de ${total}`}
+          aria-label="Área de la diapositiva"
           // Make area focusable so keyboard works even without explicit focus elsewhere
           tabIndex={0}
         >
@@ -256,8 +265,8 @@ export function LessonCarousel({
           </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + indicadores (compact).
-            Grid instead of justify-between so the centre indicators stay centred
+        {/* Footer — Atrás / Continuar + single dot rail (compact).
+            Grid instead of justify-between so the centre rail stays centred
             when the advance slot renders nothing. */}
         <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-3 py-1.5">
           <Button
@@ -266,12 +275,17 @@ export function LessonCarousel({
             onClick={goPrev}
             disabled={current === 0}
             aria-label="Diapositiva anterior"
-            className="focus-ring justify-self-start"
+            className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_SECONDARY} justify-self-start px-4`}
           >
             ← Atrás
           </Button>
 
-          {/* Indicadores centrales: dots + contador */}
+          {/* Single positional affordance in the footer: the dot rail.
+              The bare "N / M" counter that sat next to it was removed — it
+              restated the slide number the header's "Diapositiva N de M" text
+              already gives. The rail wins over the bare number because it also
+              shows remaining distance, and it stays aria-hidden here so the
+              header text remains the single announced source of truth. */}
           <div className="flex items-center gap-3" aria-hidden="true">
             <div className="hidden items-center gap-1.5 sm:flex">
               {Array.from({ length: total }, (_, i) => (
@@ -287,9 +301,6 @@ export function LessonCarousel({
                 />
               ))}
             </div>
-            <span className="font-mono text-xs text-storm">
-              {current + 1} / {total}
-            </span>
           </div>
 
           {/* One advance control per screen. While the current slide's reveal
@@ -301,7 +312,7 @@ export function LessonCarousel({
           {isLast ? (
             <Button
               size="sm"
-              className="justify-self-end bg-teal-600 shadow-teal-600/20 hover:bg-teal-700"
+              className={`${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end bg-teal-600 px-5 shadow-teal-600/20 hover:bg-teal-700`}
               onClick={handleFinish}
               disabled={state === "loading" || isRevealIncomplete}
               aria-label="Finalizar lección"
@@ -326,7 +337,7 @@ export function LessonCarousel({
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring justify-self-end ${isRevealIncomplete ? "opacity-50" : ""}`}
+              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealIncomplete ? "opacity-50" : ""}`}
             >
               Continuar →
             </Button>
