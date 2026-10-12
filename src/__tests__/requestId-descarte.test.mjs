@@ -7,12 +7,10 @@
  * No requiere React/DOM/Next — Node.js puro.
  */
 
-let passed = 0;
-let failed = 0;
+import { test } from "vitest";
 
 function assert(condition, msg) {
-  if (condition) { passed++; console.log(`  ✅ ${msg}`); }
-  else { failed++; console.error(`  ❌ ${msg}`); }
+  if (!condition) throw new Error(msg);
 }
 
 // ── Helper que recrea EXACTAMENTE la lógica de ThresholdLab ──────
@@ -69,9 +67,7 @@ class SliderHandler {
 // ══════════════════════════════════════════════════════════════════
 // TEST 1: Baseline — slider lento, sin race condition
 // ══════════════════════════════════════════════════════════════════
-console.log('\n─── Test 1: Slider sin race, respuesta en orden ───');
-
-async function test1() {
+test("Test 1: Slider sin race, respuesta en orden", async () => {
   const h = new SliderHandler();
 
   // Un solo cambio, sin superposición
@@ -83,14 +79,12 @@ async function test1() {
   assert(h.acceptedValues.length === 1, `1 respuesta aceptada: ${h.acceptedValues.length}`);
   assert(h.acceptedValues[0]?.threshold === 10, `threshold=10: ${h.acceptedValues[0]?.threshold}`);
   assert(h.discardLog.length === 0, `0 descartes: ${h.discardLog.length}`);
-}
+});
 
 // ══════════════════════════════════════════════════════════════════
 // TEST 2: Slider rápido — request vieja cancelada por debounce
 // ══════════════════════════════════════════════════════════════════
-console.log('\n─── Test 2: Slider rápido (request vieja cancelada por debounce) ───');
-
-async function test2() {
+test("Test 2: Slider rápido (request vieja cancelada por debounce)", async () => {
   const h = new SliderHandler();
 
   // Dos cambios rápidos: el timeout del primero se cancela por el debounce
@@ -108,15 +102,12 @@ async function test2() {
 
   // request 1 y 2 fueron canceladas por debounce (nunca llegaron a ejecutarse)
   // Si alguna llegó a ejecutarse, fue descartada por requestId
-  console.log(`  ℹ️  Descartados: ${h.discardLog.length} (0-2 esperado, depende del timing del debounce)`);
-}
+});
 
 // ══════════════════════════════════════════════════════════════════
 // TEST 3: Respuestas FUERA DE ORDEN — la más vieja llega después
 // ══════════════════════════════════════════════════════════════════
-console.log('\n─── Test 3: Respuestas FUERA DE ORDEN (stale outranks fresh) ───');
-
-async function test3() {
+test("Test 3: Respuestas FUERA DE ORDEN (stale outranks fresh)", async () => {
   const h = new SliderHandler();
 
   // Enviamos 3 requests SIN debounce (ejecutan directo) pero con
@@ -142,14 +133,12 @@ async function test3() {
   // Verificar que request 2 (threshold=20) también fue descartada
   const discarded2 = h.discardLog.find(d => d.threshold === 20);
   assert(discarded2 !== undefined, `Request threshold=20 fue descartada: ${discarded2 ? 'sí' : 'no'}`);
-}
+});
 
 // ══════════════════════════════════════════════════════════════════
 // TEST 4: El caso peor — 5 requests rápidas, solo la última sobrevive
 // ══════════════════════════════════════════════════════════════════
-console.log('\n─── Test 4: Arrastre rápido 5 veces, solo última sobrevive ───');
-
-async function test4() {
+test("Test 4: Arrastre rápido 5 veces, solo última sobrevive", async () => {
   const h = new SliderHandler();
 
   // Simula 5 cambios rápidos de slider (como arrastrar de un extremo a otro)
@@ -164,14 +153,12 @@ async function test4() {
   assert(h.acceptedValues.length === 1, `Solo 1 respuesta aceptada: ${h.acceptedValues.length}`);
   assert(h.acceptedValues[0]?.threshold === 18, `threshold=18: ${h.acceptedValues[0]?.threshold}`);
   // Las requests 1-4 fueron canceladas por debounce y/o descartadas por requestId
-}
+});
 
 // ══════════════════════════════════════════════════════════════════
 // TEST 5: El fix corrige el bug original (comparar contra 0)
 // ══════════════════════════════════════════════════════════════════
-console.log('\n─── Test 5: Verifica que el fix no descarta la primera respuesta ───');
-
-async function test5() {
+test("Test 5: Verifica que el fix no descarta la primera respuesta", async () => {
   const h = new SliderHandler();
 
   // Una sola request con respuesta normal
@@ -184,20 +171,4 @@ async function test5() {
   assert(discardFirst === undefined, `Request 1 NO descartada (el fix funciona): ${discardFirst ? 'descartada' : 'OK'}`);
   assert(h.acceptedValues.length === 1, `1 respuesta aceptada: ${h.acceptedValues.length}`);
   assert(h.acceptedValues[0]?.threshold === 15, `threshold=15: ${h.acceptedValues[0]?.threshold}`);
-}
-
-// ── Runner ───────────────────────────────────────────────────────
-async function main() {
-  await test1();
-  await test2();
-  await test3();
-  await test4();
-  await test5();
-
-  console.log('\n═══════════════════════════════════════════');
-  console.log(`Total: ${passed} passed, ${failed} failed`);
-  console.log('═══════════════════════════════════════════');
-  process.exit(failed > 0 ? 1 : 0);
-}
-
-main();
+});
