@@ -103,6 +103,13 @@ domain (types, pure logic) ← application (use-cases, ports/interfaces) ← inf
 - **Execute** (`executing-plans` + `subagent-driven-development`): orchestrator fino + workers, `max_threads=4`, verificación por task, work-unit commits.
 - Features arquitectónicas bloquean sin plan firmado. Pequeños fixes van directo.
 
+## QA Loop — Design Harness (Fase 3)
+
+- **Audit:** `npm run dev` en una terminal, luego `npm run design:audit` → `runs/demo/{audit.json,report.md,screenshots/}`
+- **Check:** `npm run design:check` compara `design-guide.yaml` + `design.tokens.json` sin escribir
+- **Compile:** `npm run design:compile` deriva `AGENTS.md` guidance + `design.tokens.json` (revisar diff antes de commit)
+- Determinístico: issues son medidos, no juzgados por LLM. `audit.json` + `report.md` son el contrato.
+
 ---
 
 <!-- gentle-ai:managed -->

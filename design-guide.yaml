@@ -14,7 +14,14 @@ guides:
   - id: design-harness-audit
     description: Evidence-based visual QA loop — screenshot + measure, then diff against this token contract (Fase 3).
     command: "npx @design-harness/cli audit --url http://localhost:3000 --out runs/demo"
-    status: planned
+    status: active
+    # `guide compile` is marker-owned: it derives AGENTS.md guidance (inside its own
+    # markers) and design.tokens.json. It must NOT overwrite hand-written AGENTS.md
+    # sections. Review the diff manually before committing any compiled output.
+    compile_notes: >
+      Run `npx @design-harness/cli guide compile --guide ./design-guide.yaml --target .`
+      to regenerate marker-owned AGENTS.md guidance and design.tokens.json. Never run
+      it unattended: it writes to AGENTS.md. Diff and keep only marker-owned changes.
 
 principles:
   - Verify contrast (WCAG AA) before shipping text or interactive states.
