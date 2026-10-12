@@ -411,6 +411,25 @@ export function RevealSequence({
 
   const isAppear = mode === "appear";
 
+  // Appear mode fits its own content.
+  //
+  // The container used to be sized against the VIEWPORT
+  // (`min-h-[min(45vh,calc(100vh-180px))]`). A short step then sat centred in
+  // that cage and pushed the next block hundreds of pixels below: the measured
+  // worst case was a 968px void between two content blocks, and 694px of empty
+  // stage underneath. The vertical anchoring now lives in the carousel, which
+  // centres the whole slide inside the stage band (see lesson-carousel.tsx), so
+  // the reveal only has to lay out its own children without a fake height.
+  //
+  // The bottom padding is dropped while the controls bar is rendered: that bar
+  // already carries `pb-3`, and the extra padding only deepens the empty space
+  // measured under the last content block.
+  const containerClass = isAppear
+    ? showHistory
+      ? "flex w-full flex-col items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
+      : "grid w-full place-items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
+    : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
+
   // Appear mode: show only current step centered (no vertical push).
   // Stack mode: show all revealed steps stacked vertically.
   const renderChildren = useMemo(() => {
@@ -420,14 +439,6 @@ export function RevealSequence({
     const current = allChildren[revealedCount - 1];
     return current ? [current] : [];
   }, [allChildren, revealedCount, isAppear, showHistory]);
-
-  const containerClass = isAppear
-    ? showHistory
-      ? "flex min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full flex-col items-center justify-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-      : total <= 3
-        ? "grid min-h-[40vh] md:min-h-[45vh] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-        : "grid min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-    : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
 
   if (total === 0) return null;
 
@@ -528,9 +539,9 @@ export function RevealSequence({
         {hasMore ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
-              <span className="font-mono text-[10px] tracking-widest text-storm">
+              <p className="font-mono text-[10px] tracking-widest text-storm">
                 Paso {revealedCount} de {total}
-              </span>
+              </p>
             )}
             {showHint && revealedCount === initialRevealed && (
               <div
@@ -588,21 +599,21 @@ export function RevealSequence({
                     Continuar <span aria-hidden="true">→</span>
                   </button>
                 </div>
-                <span
+                <p
                   aria-hidden="true"
                   className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
                 >
                   ▸ Click para continuar
-                </span>
+                </p>
               </>
             )}
           </div>
         ) : revealedCount > initialRevealed ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
-              <span className="font-mono text-[10px] tracking-widest text-storm">
+              <p className="font-mono text-[10px] tracking-widest text-storm">
                 Paso {revealedCount} de {total}
-              </span>
+              </p>
             )}
             <button
               type="button"
@@ -619,9 +630,9 @@ export function RevealSequence({
           </div>
         ) : total > 1 ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
-            <span className="font-mono text-[10px] tracking-widest text-storm">
+            <p className="font-mono text-[10px] tracking-widest text-storm">
               Paso {revealedCount} de {total}
-            </span>
+            </p>
           </div>
         ) : null}
 

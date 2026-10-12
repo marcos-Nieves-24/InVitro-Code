@@ -27,6 +27,10 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
+  // True while the current slide's RevealSequence still has unblocked steps.
+  // While it is true the reveal owns the visible advance control and the footer
+  // renders none, so a screen never shows two "Continuar" buttons.
+  const [revealOwnsAdvance, setRevealOwnsAdvance] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -53,9 +57,17 @@ export function LessonCarousel({
   // Detect whether current slide has incomplete RevealSequence (data-reveal-has-more="true")
   useEffect(() => {
     const check = () => {
-      const hasIncomplete =
-        slideAreaRef.current?.querySelector('[data-reveal-has-more="true"]') != null;
-      setIsRevealIncomplete(hasIncomplete);
+      const root = slideAreaRef.current;
+      const hasIncompleteReveal =
+        root?.querySelector('[data-reveal-has-more="true"]') != null;
+      // A blocked reveal (quiz not answered yet) renders no advance button of its
+      // own — it renders "Responde correctamente para continuar" — so the footer
+      // keeps its (disabled) control in that state and only steps aside while the
+      // reveal can actually advance.
+      const isRevealBlocked =
+        root?.querySelector('[data-reveal-blocked="true"]') != null;
+      setIsRevealIncomplete(hasIncompleteReveal);
+      setRevealOwnsAdvance(hasIncompleteReveal && !isRevealBlocked);
     };
     // Initial check after render
     const raf = requestAnimationFrame(check);
@@ -205,11 +217,14 @@ export function LessonCarousel({
           </p>
         </div>
 
-        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar */}
+        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar.
+            Flex column so the inner wrapper owns the whole stage band and can
+            centre the slide inside it: a short slide used to hang from the top of
+            the band and dump every pixel of void at the bottom (measured 694px). */}
         <div
           ref={slideAreaRef}
           onClick={handleSlideClick}
-          className="flex-1 overflow-y-auto overflow-x-hidden p-0"
+          className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
           // Provide hint for coarse pointers
           role="group"
           aria-label={`Diapositiva ${current + 1} de ${total}`}
@@ -217,38 +232,41 @@ export function LessonCarousel({
           tabIndex={0}
         >
           <div
-            className="w-full flex-1 flex flex-col justify-center motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+            className="flex w-full flex-1 flex-col justify-center motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
             key={current}
           >
             {slides[current]}
-          </div>
 
-          {/* Consent / error states rendered inside scroll area so they stay visible */}
-          {state === "consent" && (
-            <div className="mx-auto mt-6 w-full max-w-3xl">
-              <p className="mb-2 text-sm font-medium text-amber-800">
-                Completá tu autorización para guardar tu progreso.
+            {/* Consent / error states live in the same flex column so they stay
+                visible right under the centred slide. */}
+            {state === "consent" && (
+              <div className="mx-auto mt-6 w-full max-w-3xl shrink-0">
+                <p className="mb-2 text-sm font-medium text-amber-800">
+                  Completá tu autorización para guardar tu progreso.
+                </p>
+                <ConsentPendingCard />
+              </div>
+            )}
+
+            {state === "error" && error && (
+              <p role="alert" className="mx-auto mt-4 w-full max-w-3xl shrink-0 text-sm text-error">
+                {error}
               </p>
-              <ConsentPendingCard />
-            </div>
-          )}
-
-          {state === "error" && error && (
-            <p role="alert" className="mx-auto mt-4 w-full max-w-3xl text-sm text-error">
-              {error}
-            </p>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + indicadores (compact) */}
-        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-3 py-1.5">
+        {/* Footer — Atrás / Continuar + indicadores (compact).
+            Grid instead of justify-between so the centre indicators stay centred
+            when the advance slot renders nothing. */}
+        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-3 py-1.5">
           <Button
             variant="ghost"
             size="sm"
             onClick={goPrev}
             disabled={current === 0}
             aria-label="Diapositiva anterior"
-            className="focus-ring"
+            className="focus-ring justify-self-start"
           >
             ← Atrás
           </Button>
@@ -274,10 +292,16 @@ export function LessonCarousel({
             </span>
           </div>
 
+          {/* One advance control per screen. While the current slide's reveal
+              still has unblocked steps, IT renders the "Continuar" next to the
+              step it advances and this slot renders nothing — no hidden-but-
+              focusable duplicate left in the DOM. When the reveal is blocked by a
+              quiz it renders no advance button, so the footer keeps its own
+              (disabled) control there. */}
           {isLast ? (
             <Button
               size="sm"
-              className="bg-teal-600 shadow-teal-600/20 hover:bg-teal-700"
+              className="justify-self-end bg-teal-600 shadow-teal-600/20 hover:bg-teal-700"
               onClick={handleFinish}
               disabled={state === "loading" || isRevealIncomplete}
               aria-label="Finalizar lección"
@@ -290,7 +314,7 @@ export function LessonCarousel({
             >
               {state === "loading" ? "Guardando progreso…" : "Finalizar"}
             </Button>
-          ) : (
+          ) : revealOwnsAdvance ? null : (
             <Button
               variant="secondary"
               size="sm"
@@ -302,7 +326,7 @@ export function LessonCarousel({
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring ${isRevealIncomplete ? "opacity-50" : ""}`}
+              className={`focus-ring justify-self-end ${isRevealIncomplete ? "opacity-50" : ""}`}
             >
               Continuar →
             </Button>
