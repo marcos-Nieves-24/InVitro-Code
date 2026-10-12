@@ -30,3 +30,4 @@ export { ConidiaToVectorPlayer } from "@/components/anymotion/animations/Conidia
 export { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 export { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 export { LessonVideo } from "./lesson-video";
+export { LabOfflineNotice } from "./LabOfflineNotice";
