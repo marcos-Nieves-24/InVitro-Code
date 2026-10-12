@@ -35,9 +35,11 @@ export function ModuleCard({ model, href, variant = "grid", theme }: ModuleCardP
           {model.title}
         </h3>
 
-        {/* Description */}
+        {/* Description — text-graphite, not text-storm: on the tinted card
+            background text-storm measured 4.29:1 (2.14:1 under the old
+            container opacity), below the 4.5:1 minimum. */}
         {model.description ? (
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-storm">{model.description}</p>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-graphite">{model.description}</p>
         ) : null}
 
         {/* Meta row */}
