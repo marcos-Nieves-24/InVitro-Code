@@ -423,10 +423,10 @@ export function RevealSequence({
 
   const containerClass = isAppear
     ? showHistory
-      ? "flex min-h-[min(45vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)] w-full flex-col items-center justify-center gap-4 p-4 md:p-6 relative overflow-x-visible"
+      ? "flex min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full flex-col items-center justify-center gap-4 p-4 md:p-6 relative overflow-x-visible"
       : total <= 3
         ? "grid min-h-[40vh] md:min-h-[45vh] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-        : "grid min-h-[min(45vh,calc(100vh-180px))] md:min-h-[calc(100vh-160px)] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
+        : "grid min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
     : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
 
   if (total === 0) return null;
