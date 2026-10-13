@@ -23,7 +23,14 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const len = modules.length;
   const [activeIndex, setActiveIndex] = useState(() => (len ? len - 1 : 0));
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  // Default to mobile so SSR/first paint renders exactly one card: the 4-card
+  // window (desktop) only appears after the client matches the wide-query.
+  // Rendering 4 cards in the SSR HTML makes the track ~1096px wide at a 390px
+  // viewport (each card w-full of the shrunk ul), and the harness measures at
+  // DOMContentLoaded — before hydration collapses it — flagging ul/viewport
+  // scrollWidth as a fixed-width risk. One card keeps the track <= viewport at
+  // every pre-hydration instant.
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     if (len === 0) return;
@@ -86,12 +93,12 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
       onKeyDown={onKeyDown}
     >
       {/* Flex row fuera: botones hermanos del viewport, no hijos absolute. flex items-center los centra verticalmente al alto de la card (320px) sin calcular top. gap-3 (12px) aire botón-card. overflow-hidden solo en viewport central, no en outer, para no recortar botones. */}
-      <div className="relative mx-auto flex max-w-[1360px] items-center gap-3 md:gap-4">
+      <div className="relative mx-auto flex max-w-[1360px] items-center gap-2 md:gap-4">
         <button
           type="button"
           aria-label="Anterior"
           onClick={prev}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
         >
           <ChevronLeft size={22} aria-hidden="true" />
         </button>
@@ -143,10 +150,10 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
                 <li
                   key={mod.slug}
                   className={[
-                    "list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-[calc(100%-32px)] max-md:w-[calc(100%-32px)] transition-all duration-300",
+                    "list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-0 max-md:w-full transition-all duration-300",
                     isActive
-                      ? "scale-[1.03] opacity-100"
-                      : "opacity-60 saturate-[0.92] scale-[0.98]",
+                      ? "md:scale-[1.03] opacity-100"
+                      : "opacity-60 saturate-[0.92] md:scale-[0.98]",
                   ].join(" ")}
                   style={
                     shouldReduceMotion
@@ -168,14 +175,16 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
           type="button"
           aria-label="Siguiente"
           onClick={next}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
         >
           <ChevronRight size={22} aria-hidden="true" />
         </button>
       </div>
 
-      {/* Dots — debajo del flex row (mt-8), full width */}
-      <div className="mt-8 flex justify-center gap-3 md:mt-10 md:gap-4">
+      {/* Dots — debajo del flex row (mt-8), full width.
+          The button carries a 24x24 hit area (WCAG 2.2 target-size minimum);
+          the dot itself stays visually small inside a centered flex box. */}
+      <div className="mt-8 flex justify-center gap-2 md:mt-10 md:gap-3">
         {modules.map((mod, i) => {
           const isActive = i === activeIndex;
           return (
@@ -185,12 +194,17 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
               aria-label={`Ir a ${mod.slug}`}
               aria-current={isActive ? "true" : undefined}
               onClick={() => setActiveIndex(i)}
-              className={
-                isActive
-                  ? "h-3 w-3 rounded-full bg-[#0AAE9A] transition-colors md:h-3.5 md:w-3.5"
-                  : "h-2.5 w-2.5 rounded-full border border-[#DCEAE8] bg-[#DDF5EF] transition-colors hover:bg-[#DCEAE8]"
-              }
-            />
+              className="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] focus-visible:ring-offset-2"
+            >
+              <span
+                aria-hidden="true"
+                className={
+                  isActive
+                    ? "h-3 w-3 rounded-full bg-[#0AAE9A] transition-colors md:h-3.5 md:w-3.5"
+                    : "h-2.5 w-2.5 rounded-full border border-[#DCEAE8] bg-[#DDF5EF] transition-colors"
+                }
+              />
+            </button>
           );
         })}
       </div>

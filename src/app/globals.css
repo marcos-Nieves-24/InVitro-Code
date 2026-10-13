@@ -788,3 +788,25 @@ body {
 .skip-to-content:focus {
   top: 0;
 }
+
+/* ─── DialogueBox — visual novel speech ─────────────────── */
+.dialogue-tail {
+  /* Tail square rotated 45deg — border matches bubble */
+  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes dialogue-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes dialogue-continue-pulse {
+  0%, 100% { opacity: 1; transform: translateX(0); }
+  50% { opacity: 0.65; transform: translateX(2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialogue-tail {
+    box-shadow: none;
+  }
+}

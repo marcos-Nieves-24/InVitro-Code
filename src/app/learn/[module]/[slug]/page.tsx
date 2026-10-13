@@ -1,3 +1,4 @@
+import * as React from "react";
 import { notFound } from "next/navigation";
 import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
@@ -27,7 +28,19 @@ import {
   KnnTrainer,
   PerceptronTrainer,
   RegressionTrainer,
+  DialogueBox,
+  RevealSequence,
+  ChoiceQuestion,
+  QuizButton,
+  FeatureButtonList,
+  LessonVideo,
+  LabOfflineNotice,
 } from "@/components/lesson";
+import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
+import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
+import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
+import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
+import { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -90,8 +103,8 @@ function renderHeader(data: Record<string, unknown>) {
             Objetivos de aprendizaje
           </p>
           <ul className="space-y-0.5">
-            {objectives.map((obj: string, i: number) => (
-              <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
+            {objectives.map((obj: string) => (
+              <li key={obj} className="flex items-start gap-2 text-xs text-gray-600">
                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
                 {obj}
               </li>
@@ -153,6 +166,18 @@ export default async function LessonPage({ params }: Props) {
     KnnTrainer,
     PerceptronTrainer,
     RegressionTrainer,
+    DialogueBox,
+    RevealSequence,
+    ChoiceQuestion,
+    QuizButton,
+    FeatureButtonList,
+    LessonVideo,
+    LabOfflineNotice,
+    BrainVsChip: BrainVsChipPlayer,
+    MatrixAnim: MatrixPlayer,
+    ConidiaToVector: ConidiaToVectorPlayer,
+    FeatureSpace2D: FeatureSpace2DPlayer,
+    Overfitting: OverfittingPlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),
@@ -197,7 +222,7 @@ export default async function LessonPage({ params }: Props) {
       {slides.length > 0 ? (
         <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${lessonProseClass}`}>
           <LessonCarousel
-            slides={slides.map((s) => s.content)}
+            slides={slides.map((s, i) => (<React.Fragment key={i}>{s.content}</React.Fragment>))}
             nextLessonHref={nextLessonHref}
             lessonTitle={data["Lesson Title"] as string}
             moduleSlug={module}

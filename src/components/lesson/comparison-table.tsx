@@ -18,7 +18,7 @@ export function ComparisonTable({
   featureLabel = "Característica",
 }: ComparisonTableProps) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200">
+    <div className="w-full min-w-0 overflow-x-auto rounded-lg border border-gray-200">
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="border-b border-gray-200 bg-gray-50">
@@ -36,7 +36,7 @@ export function ComparisonTable({
         <tbody>
           {rows.map((row, i) => (
             <tr
-              key={i}
+              key={row.feature}
               className={i % 2 === 0 ? "bg-surface-card" : "bg-gray-50/50"}
             >
               <td className="px-4 py-3 font-medium text-gray-900">

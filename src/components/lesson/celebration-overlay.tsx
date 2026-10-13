@@ -30,7 +30,7 @@ function ConfettiDrops() {
 
     return (
       <div
-        key={i}
+        key={`confetti-${i}`}
         className="absolute animate-confetti-fall rounded-sm opacity-70"
         style={{
           left,

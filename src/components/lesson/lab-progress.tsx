@@ -7,7 +7,7 @@ export function LabProgress({ total, current }: LabProgressProps) {
   return (
     <div className="mb-0 flex items-center justify-center gap-0">
       {Array.from({ length: total }, (_, i) => (
-        <div key={i} className="flex items-center">
+        <div key={`well-${i}`} className="flex items-center">
           {/* well (circle) */}
           <div
             className={`flex h-3 w-3 items-center justify-center rounded-full transition-all duration-300 ${

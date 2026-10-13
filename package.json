@@ -2,6 +2,10 @@
   "name": "invitro-code",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,7 +20,10 @@
     "anim:convert": "node scripts/anyim.mjs convert --slug",
     "anim:list": "node scripts/anyim.mjs list",
     "anim:verify": "node scripts/anyim.mjs verify",
-    "anymotion:patch": "bash scripts/anymotion-patch.sh"
+    "anymotion:patch": "bash scripts/anymotion-patch.sh",
+    "design:audit": "npx @design-harness/cli@latest audit --url http://localhost:3000 --out runs/demo",
+    "design:check": "npx @design-harness/cli@latest guide check --guide ./design-guide.yaml --target . --max-tokens 2000",
+    "design:compile": "npx @design-harness/cli@latest guide compile --guide ./design-guide.yaml --target ."
   },
   "dependencies": {
     "@clerk/nextjs": "7.5.20",
