@@ -8,10 +8,10 @@
       "note": "Healthy: declared viewBox wraps the content (content x 44.5, y 1.3, 354.8 x 509.7 user units)."
     },
     "dashboard/cientifico-1.svg": {
-      "viewBox": "152.3 -21 714.6 1065",
+      "viewBox": "51.1 -21 917 1065",
       "width": 440,
-      "height": 656,
-      "note": "Curated: original viewBox 128.6 69.52 762.01 884.97 cut ~70 user units off the top (the head). Content is 673.6 x 1024 anchored at (172.8, 0). Curated as the bounding envelope plus 2% padding on each side: the vertical padding and the derived height ratio (440 * 1065 / 714.6 = 656) are an initial curation, not a measurement. Aesthetic re-framing stays a human decision."
+      "height": 511,
+      "note": "Curated: original viewBox 128.6 69.52 762.01 884.97 cut ~70 user units off the top (the head). Content is 673.6 x 1024 anchored at (172.8, 0). Final frame: 917 x 1065 window centered on the content with 21 user units of padding, matching the 440 x 511 canvas shared by cientifica-1 and cientifico-x so all three scientist figures share one aspect ratio. Side padding instead of cropping legs: nothing of the drawing is lost."
     },
     "dashboard/cientifico-x.svg": {
       "viewBox": "0 0 440 511",
