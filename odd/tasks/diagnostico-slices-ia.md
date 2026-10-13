@@ -12,13 +12,15 @@
 
 ## Resumen
 
-| Problema | Slices afectados | Peor caso | Estado tras P0 |
+| Problema | Slices afectados | Peor caso | Estado |
 |---|---|---|---|
-| A · Exceso de espacio en blanco | **CORREGIDO — ver nota** | 968px (falso positivo) | — |
-| B · Jerarquía tipográfica débil | 80 / 80 | 11px usado en **46** bloques | pendiente |
-| C · Navegación duplicada (botón) | **80 / 80 → 1 botón/slice** | 2 botones iguales | **resuelto** |
-| D · Jerarquía de botones inconsistente | 80 / 80 | 3 alturas y 3 radios | pendiente |
-| E · Distribución vertical desequilibrada | **56 / 80 → 0 / 80** | 694px → 555px | **resuelto** |
+| A · Exceso de espacio en blanco | **CORREGIDO — ver nota** | 968px (falso positivo) | medido: **0** huecos reales >160px |
+| B · Jerarquía tipográfica débil | 80 / 80 | 11px usado en **46** bloques | **pendiente** |
+| C · Navegación duplicada (botón) | 80 / 80 → 1 botón/slice | 2 botones iguales | **resuelto** (`fcc2bd2`) |
+| C · Navegación duplicada (posición) | 4 indicadores → 3 elementos / 2 hechos | 43 slices con 4 | **resuelto en lo esencial** (`8c7078a`) |
+| D · Jerarquía de botones inconsistente | 80 / 80 | 3 alturas y 3 radios | **resuelto** (`8c7078a`) |
+| E · Distribución vertical desequilibrada | 56 / 80 → 0 / 80 | 694px → 555px | **resuelto** (`fcc2bd2`) |
+| — · iframe recortado en `lesson03` | 2 pantallas | el visor no entra entero | pendiente (P2-1) |
 
 **Ninguno es un problema de gusto.** Los cinco son medibles y repetibles.
 
@@ -33,11 +35,29 @@
 > blanco **no existía como tal**: lo que existía era el defecto E, que sí era real y ya está corregido.
 >
 > Esto corrige también el conteo de "avances duplicados": mi detector contaba "Mostrar contenido" —que es el
-> botón de **atrás** del `RevealSequence**— como un segundo avance. No lo era. Los controles de avance por
+> botón de **atrás** del `RevealSequence`— como un segundo avance. No lo era. Los controles de avance por
 > pantalla están en **1**.
 >
 > **Lo que queda real y abierto:** 2 pantallas de `lesson03` con el iframe recortado por el borde inferior
-> (P2-1), y los hallazgos B y D, que no se tocaron.
+> (P2-1), y el hallazgo B, que no se tocó.
+
+---
+
+## Método de medición (corregido)
+
+Medir "espacio vacío" por `innerText` o contando solo elementos sin hijos produce **huecos fantasma de
+cientos de píxeles**. Las reglas que hay que respetar:
+
+1. Incluir en el cálculo los `iframe`, `button`, `ul`/`ol` y cualquier hoja con hijos. Un contenedor con
+   iframe NO es un hueco.
+2. Detectar indicadores de posición **por nodo DOM real** (bounding box + `visibility` + `opacity`), no por
+   regex sobre `innerText`.
+3. Distinguir botón de **atrás** ("Mostrar contenido anterior") de botón de **avance**. "Mostrar contenido"
+   cuenta como retroceso.
+4. Un `N / M` que viva dentro del área de slides es contenido de una animación, no el contador del shell
+   (`OverfittingPlayer` muestra "2 / 12" = paso 2 de la animación).
+
+Script de referencia: `/tmp/opencode/audit-expediciones/verify-p1.js` (domina los 4 módulos).
 
 ---
 
