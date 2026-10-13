@@ -6,7 +6,7 @@
 // width the SVG already declares. Dry-run by default; --write applies to both
 // the manifest (scripts/hero-assets.json) and the SVG opening tag.
 //
-// Requires playwright (dev-only). The build gate -- scripts/check-hero-assets.mjs
+// Requires playwright-core (dev-only). The build gate -- scripts/check-hero-assets.mjs
 // -- never needs it: it only compares declared attributes.
 //
 // Safety: only SVGs missing from the manifest (or every SVG with --force) are
@@ -30,11 +30,11 @@ Usage: node scripts/normalize-hero-assets.mjs [options]
   --write             apply the proposal (default is a dry-run print)
   --help              show this message
 
-Requires playwright (dev-only). Install with: npm i -D playwright
+Requires playwright-core (dev-only). Install with: npm i -D playwright-core
 The build gate (scripts/check-hero-assets.mjs) does not need playwright.`;
 
 const PLAYWRIGHT_HINT =
-  "instalar con npm i -D playwright (dev-only, el gate no lo necesita)";
+  "instalar con npm i -D playwright-core (dev-only, el gate no lo necesita) - playwright-core no descarga browsers en el postinstall, usa el cache local";
 
 function parseArgs(argv) {
   const options = {
@@ -193,12 +193,16 @@ async function main() {
 
   let chromium;
   try {
-    ({ chromium } = await import("playwright"));
+    ({ chromium } = await import("playwright-core"));
   } catch {
-    process.stderr.write(
-      `normalize-hero-assets: playwright no esta instalado, ${PLAYWRIGHT_HINT}\n`
-    );
-    return 1;
+    try {
+      ({ chromium } = await import("playwright"));
+    } catch {
+      process.stderr.write(
+        `normalize-hero-assets: playwright no esta instalado, ${PLAYWRIGHT_HINT}\n`
+      );
+      return 1;
+    }
   }
 
   let manifest;
