@@ -21,7 +21,7 @@ const GAP = 16;
 
 export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const len = modules.length;
-  const [activeIndex, setActiveIndex] = useState(() => (len ? len - 1 : 0));
+  const [activeIndex, setActiveIndex] = useState(() => 0);
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   // Derivar cuántas tarjetas caben en el carrusel a partir del ancho útil real,
@@ -176,7 +176,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
                     "list-none shrink-0 min-w-[332px] w-[332px] max-md:min-w-0 max-md:w-full transition-all duration-300",
                     isActive
                       ? "md:scale-[1.03] opacity-100"
-                      : "opacity-60 saturate-[0.92] md:scale-[0.98]",
+                      : "saturate-[0.92] md:scale-[0.98]"
                   ].join(" ")}
                   style={
                     shouldReduceMotion
@@ -214,7 +214,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
             <button
               key={mod.slug}
               type="button"
-              aria-label={`Ir a ${mod.slug}`}
+              aria-label={`Ir a ${mod.title}`}
               aria-current={isActive ? "true" : undefined}
               onClick={() => setActiveIndex(i)}
               className="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] focus-visible:ring-offset-2"
@@ -223,8 +223,8 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
                 aria-hidden="true"
                 className={
                   isActive
-                    ? "h-3 w-3 rounded-full bg-[#0AAE9A] transition-colors md:h-3.5 md:w-3.5"
-                    : "h-2.5 w-2.5 rounded-full border border-[#DCEAE8] bg-[#DDF5EF] transition-colors"
+                    ? "h-3 w-3 rounded-full bg-[#008DBF] transition-colors md:h-3.5 md:w-3.5"
+                    : "h-2.5 w-2.5 rounded-full border border-[#004E8A] bg-[#0063AE] transition-colors"
                 }
               />
             </button>

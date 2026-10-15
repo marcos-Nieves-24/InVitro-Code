@@ -37,7 +37,7 @@ export function ModuleCard({ model, href, variant = "grid", theme }: ModuleCardP
 
         {/* Description */}
         {model.description ? (
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-storm">{model.description}</p>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate">{model.description}</p>
         ) : null}
 
         {/* Meta row */}
