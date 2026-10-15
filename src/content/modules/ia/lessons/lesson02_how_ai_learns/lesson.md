@@ -1,4 +1,3 @@
----
 Module: 1
 Lesson Number: 2
 Lesson Title: ¿Cómo aprende la IA?
@@ -19,55 +18,96 @@ Datasets Used: module01_ai_cell_features.csv
 
 <Section number={1} title="De reglas fijas a aprendizaje" eyebrow="INICIO">
 
-<MascotMessage>
-En la lección anterior viste que las reglas fijas tienen límites. Ahora vamos a ver cómo las máquinas realmente aprenden.
-</MascotMessage>
+<RevealSequence showHistory>
 
-En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  typing={true}
+  lines={[
+    "¡Hola de nuevo en el laboratorio!",
+    "En la lección anterior vimos que las reglas manuales tienen un límite infranqueable.",
+    "La variabilidad biológica de las conidias desborda cualquier conjunto de reglas 'if/else'.",
+    "Hoy vamos a descubrir cómo una máquina aprende directamente a partir de datos empíricos.",
+    "Exploraremos tres algoritmos esenciales: Perceptrón, KNN y Regresión Lineal.",
+    "Y conoceremos a nuestro mayor adversario en bioinformática: el sobreajuste.",
+  ]}
+/>
 
-Acá entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
+<div>
+En lugar de que un investigador programe manualmente cada condición, en el **aprendizaje automático** (machine learning) le mostramos ejemplos a la máquina para que ella misma descubra los patrones subyacentes.
+</div>
 
-Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
+<ConceptCard variant="key-idea">
+Aprender de los datos no es memorizar respuestas: es descubrir la estructura matemática que vincula las características medidas (features) con la realidad biológica.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Aprendizaje supervisado" eyebrow="CONCEPTO">
 
-El tipo de aprendizaje que vamos a ver se llama **aprendizaje supervisado**. Funciona así:
+<RevealSequence showHistory>
 
-1. Tenemos un conjunto de **ejemplos etiquetados** (conidias con su especie)
-2. Cada ejemplo tiene **features** (área, circularidad, textura...)
-3. El algoritmo busca patrones que relacionen las features con la etiqueta
-4. Una vez que "aprendió", puede predecir la etiqueta de nuevas conidias no vistas
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "Todo comienza con ejemplos ya etiquetados por especialistas.",
+    "A este paradigma lo denominamos 'aprendizaje supervisado'.",
+    "Cada muestra viene acompañada de su diagnóstico comprobado.",
+  ]}
+/>
 
-```
-Ejemplos de entrenamiento → Algoritmo → Modelo → Predicciones
-     (conidias + especie)                           (nuevas conidias)
-```
+<div>
+El flujo de trabajo supervisado sigue cuatro momentos clave:
+
+1. **Ejemplos de entrenamiento etiquetados**: Conidias identificadas mediante cultivo microbiológico como *Aspergillus* o *Penicillium*.
+2. **Features numéricas**: Propiedades cuantificables de cada espora (área, circularidad, rugosidad).
+3. **Optimización del algoritmo**: El algoritmo busca las relaciones matemáticas entre las features y la etiqueta.
+4. **Generalización**: El modelo aplica esos patrones aprendidos para clasificar muestras nuevas nunca antes analizadas.
+</div>
 
 <ConceptCard variant="definition">
-**Modelo**: es el resultado del aprendizaje. Una representación matemática de los patrones que el algoritmo encontró en los datos.
+**Modelo**: Es el resultado del proceso de aprendizaje. Una representación matemática (pesos, ecuaciones o geometrías) de las regularidades que el algoritmo encontró en los datos.
 </ConceptCard>
 
-Pensalo así:
-- Los **datos de entrenamiento** son como los ejercicios resueltos de un libro de texto
-- El **algoritmo** es como el estudiante que estudia
-- El **modelo** es el conocimiento que el estudiante adquirió
-- Las **predicciones** son los ejercicios nuevos que el estudiante resuelve usando ese conocimiento
+<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<strong>La analogía del estudiante de laboratorio:</strong>
+<br />
+• Los <strong>datos de entrenamiento</strong> son los protocolos y ejercicios resueltos de una guía práctica.
+<br />
+• El <strong>algoritmo</strong> es el estudiante procesando y deduciendo principios.
+<br />
+• El <strong>modelo</strong> es el conocimiento consolidado en su memoria.
+<br />
+• Las <strong>predicciones</strong> son los diagnósticos de nuevas muestras que el estudiante resuelve con ese conocimiento.
+</div>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={3} title="Frontera de decisión lineal" eyebrow="CONCEPTO">
+<Section number={3} title="Frontera de decisión y el Perceptrón" eyebrow="CONCEPTO">
 
-Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza una línea recta para separar dos clases.
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  lines={[
+    "Empecemos por el algoritmo de clasificación lineal más clásico: el perceptrón.",
+    "Su meta es trazar una recta que divida limpiamente dos poblaciones en el plano de features.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-La **frontera de decisión** es la línea (o superficie) que separa diferentes clases en el espacio de características. Del lado azul, el modelo predice *Aspergillus*; del lado rojo, *Penicillium*.
+La **frontera de decisión** es la línea (o hiperplano) que separa diferentes clases en el espacio de características. De un lado predice una clase (ej. *Aspergillus* o benigno); del otro, la clase contraria (ej. *Penicillium* o maligno).
 </ConceptCard>
-
-</Section>
-
-<Section number={4} title="Perceptrón en acción" eyebrow="INTERACTIVA">
 
 <ChoiceQuestion
   question="¿Qué ajusta el perceptrón para trazar la frontera que separa dos clases?"
@@ -84,27 +124,31 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
   ]}
 />
 
+<div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3 text-xs text-gray-700">
+<strong>Próximo paso en el laboratorio interactivo:</strong> En la siguiente pantalla vas a controlar un perceptrón entrenando con biopsias reales de tejido mamario (Wisconsin Breast Cancer). Observa cómo ajusta sus pesos únicamente tras cometer un error.
+</div>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={4} title="Laboratorio: Perceptrón en acción" eyebrow="ENTRENADOR">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Objetivo:</strong> Ajusta la tasa de aprendizaje con el slider y presiona <em>Entrenar</em> o <em>Paso</em> para observar cómo el perceptrón ajusta los pesos de la recta ante cada equivocación. Haz clic en el plano para predecir una muestra nueva.
+</div>
+
 <PerceptronTrainer />
-
-**¿Qué está pasando?**
-- Cada punto es una biopsia real de mama (círculo = benigno, triángulo = maligno)
-- El perceptrón traza una **frontera de decisión** lineal para separar las clases
-- La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos
-
-**Probá vos:**
-1. Ajustá la tasa de aprendizaje con el slider
-2. Presioná "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
-3. Usá "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
-4. Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética
-5. Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
-
-<ConceptCard variant="key-idea">
-El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cuando su predicción es incorrecta, moviendo la frontera de decisión en la dirección correcta.
-</ConceptCard>
 
 </Section>
 
 <Section number={5} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<ConceptCard variant="key-idea">
+El perceptrón aprende **corrigiendo sus errores**: solo actualiza sus pesos cuando clasifica mal una muestra, desplazando y rotando la frontera de decisión hacia la orientación correcta.
+</ConceptCard>
 
 <ChoiceQuestion
   question="¿Qué pasa si las clases no son separables linealmente y por qué el accuracy no llega al 100%?"
@@ -122,22 +166,31 @@ El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cua
 />
 
 <ConceptCard variant="warning">
-No todos los problemas se pueden resolver con una línea recta. Cuando las clases se mezclan, necesitamos algoritmos más flexibles.
+No todos los problemas de la naturaleza se pueden segmentar con una línea recta. Cuando las poblaciones celulares se solapan en sus características, requerimos algoritmos no lineales capaces de trazar fronteras flexibles.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="KNN: clasificar por cercanía" eyebrow="CONCEPTO">
 
-Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea como el perceptrón, KNN clasifica según los vecinos más cercanos. No aprende parámetros: simplemente recuerda los datos y consulta a los vecinos cuando llega un caso nuevo.
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "¿Y si en vez de calcular una fórmula rígida simplemente consultamos a los vecinos más próximos?",
+    "Ese es el principio de KNN (K-Nearest Neighbors).",
+    "KNN no calcula coeficientes en una fase de entrenamiento: memoriza los datos y consulta el vecindario cuando llega un caso nuevo.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
-**KNN (K-Nearest Neighbors)**: el algoritmo mira los k puntos más cercanos al punto nuevo, cuenta cuántos son de cada clase, y asigna la clase mayoritaria.
+**KNN (K-Nearest Neighbors)**: Al recibir una muestra desconocida, el algoritmo calcula la distancia a todos los puntos registrados, identifica los **k** vecinos más cercanos y le adjudica la clase mayoritaria entre ellos.
 </ConceptCard>
-
-</Section>
-
-<Section number={7} title="KNN en acción" eyebrow="INTERACTIVA">
 
 <ChoiceQuestion
   question="Si k=1 usamos el vecino más cercano y si subimos a k=15, ¿qué crees que pasa con la frontera de KNN?"
@@ -154,28 +207,44 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
   ]}
 />
 
+<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<strong>En el laboratorio interactivo:</strong> Vas a poder variar <em>k</em> desde 1 hasta 15 sobre 569 biopsias reales y hacer clic en cualquier sector del gráfico para clasificar una muestra hipotética.
+</div>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={7} title="Laboratorio: KNN en acción" eyebrow="ENTRENADOR">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Objetivo:</strong> Modifica el valor de <em>k</em> con el slider y haz clic en el plano para posicionar un punto de prueba. Observa la votación de los vecinos más cercanos, la frontera sombreada y la curva de accuracy vs <em>k</em>.
+</div>
+
 <KnnTrainer />
-
-**¿Cómo funciona KNN?**
-1. El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)
-2. Elegí un valor de k con el slider — es la cantidad de vecinos que votan
-3. Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
-4. Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo
-5. La zona sombreada muestra la **frontera de decisión**: de un lado KNN predice benigno, del otro maligno
-
-**Experimentá:**
-1. Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
-2. Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
-3. Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
-4. Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
-
-<ConceptCard variant="key-idea">
-KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perceptrón. Simplemente **recuerda** todos los datos y, para cada predicción nueva, consulta a los k vecinos más cercanos. La elección de k es un **hiperparámetro**: no lo aprende el algoritmo, lo elegimos nosotros.
-</ConceptCard>
 
 </Section>
 
 <Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  lines={[
+    "Hasta aquí hemos clasificado en categorías discretas: Aspergillus o Penicillium, benigno o maligno.",
+    "Pero en biotecnología a menudo necesitamos predecir una cantidad continua.",
+    "Por ejemplo: ¿qué halo de inhibición en milímetros generará una dosis de antifúngico?",
+  ]}
+/>
+
+<ConceptCard variant="definition">
+• **Clasificación**: Predice etiquetas discretas y cualitativas (ej. especie fúngica, estado infectado/sano).
+<br />
+• **Regresión**: Predice magnitudes numéricas continuas (ej. concentración molar, diámetro en mm, temperatura óptima).
+</ConceptCard>
 
 <ChoiceQuestion
   question="Clasificar un patógeno por similitud con aislamientos previos, ¿es clasificación o regresión? ¿Qué riesgo tiene k=1 con datos ruidosos?"
@@ -192,16 +261,6 @@ KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perce
   ]}
 />
 
-Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si queremos predecir un **valor numérico**? Por ejemplo: "dada una concentración de fármaco antifúngico, ¿qué diámetro de halo de inhibición esperamos?"
-
-<ConceptCard variant="definition">
-**Clasificación** predice categorías discretas (Aspergillus/Penicillium). **Regresión** predice valores continuos (concentración, peso, temperatura).
-</ConceptCard>
-
-</Section>
-
-<Section number={9} title="Regresión lineal en acción" eyebrow="INTERACTIVA">
-
 <ChoiceQuestion
   question="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media?"
   moduleSlug="ia"
@@ -217,23 +276,27 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
   ]}
 />
 
-<RegressionTrainer />
-
-**¿Qué muestra?**
-- Cada punto es una biopsia real del dataset BCW: radio medio del núcleo vs. textura media del tejido
-- La recta es el **modelo de regresión lineal**: la mejor línea que pasa entre los 569 puntos
-- El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta — con datos reales, siempre hay dispersión
-- Las líneas verticales (residuales) muestran la distancia de cada punto a la recta
-
-**Probá:**
-1. Mové los sliders de pendiente e intercepto para ajustar la recta manualmente
-2. Fijate cómo el ECM y R² cambian en vivo al mover la recta
-3. Presioná "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
-4. Usá "Predecir" para estimar la textura a partir de un valor de radio
+</RevealSequence>
 
 </Section>
 
-<Section number={10} title="ECM y límites de la regresión" eyebrow="CONCEPTO">
+<Section number={9} title="Laboratorio: Regresión lineal" eyebrow="ENTRENADOR">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Objetivo:</strong> Ajusta la pendiente y el intercepto con los sliders para minimizar la distancia a los 569 puntos reales del dataset de biopsias. Pulsa <em>Calcular mejor recta</em> para obtener la solución por mínimos cuadrados.
+</div>
+
+<RegressionTrainer />
+
+</Section>
+
+<Section number={10} title="Mínimos cuadrados y dispersión biológica" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<ConceptCard variant="key-idea">
+La regresión lineal encuentra la relación óptima entre una variable independiente (radio medio) y una dependiente (textura media). La mejor recta minimiza el **Error Cuadrático Medio (ECM)** mediante el método de **mínimos cuadrados**.
+</ConceptCard>
 
 <ChoiceQuestion
   question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radio→textura es tan bajo (≈0,10)?"
@@ -250,17 +313,28 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
   ]}
 />
 
-<ConceptCard variant="key-idea">
-La regresión lineal encuentra la relación lineal entre una variable independiente (radio medio) y una dependiente (textura media). La "mejor recta" minimiza el ECM — esto se llama **mínimos cuadrados**. Con datos reales, el R² rara vez es perfecto, y eso está bien: nos dice cuánta información aporta nuestra variable.
-</ConceptCard>
+<div>
+En biología experimental, un coeficiente $R^2$ modesto no implica un fallo del modelo: refleja que los sistemas biológicos son intrínsecamente multifactoriales y poseen dispersión natural.
+</div>
 
-No toda relación es lineal; en biología muchas variables tienen relaciones complejas que una sola recta no puede capturar. Un R² bajo no significa que el modelo esté mal — significa que el problema es difícil, como casi siempre en datos reales.
+</RevealSequence>
 
 </Section>
 
-<Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
+<Section number={11} title="El peligro del sobreajuste (overfitting)" eyebrow="CONCEPTO">
 
-Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "Si un estudiante memoriza de memoria las preguntas exactas de un examen modelo, obtendrá un 100.",
+    "Pero si en la prueba real cambiamos levemente los valores, reprobará estrepitosamente.",
+    "En machine learning a este error crítico lo llamamos sobreajuste o overfitting.",
+  ]}
+/>
 
 <ChoiceQuestion
   question="Un modelo con error cero en entrenamiento, ¿generalizará bien a datos nuevos?"
@@ -277,61 +351,58 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
   ]}
 />
 
-<Overfitting caption="Ajuste polinomial: arrastra el grado y mira cómo el error de validación se separa del de entrenamiento" />
-
-**¿Qué muestra este demo?**
-- El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
-- El panel derecho muestra el **Error Cuadrático Medio (ECM)** para cada conjunto
-- La línea punteada gris es la **función real subyacente** — que el modelo nunca ve, igual que en la vida real
-
-</Section>
-
-<Section number={12} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
-
-<Overfitting caption="Sube el grado y observa cómo cambia el régimen: subajuste, punto óptimo, sobreajuste" />
-
-<RevealSequence>
-
-<div>
-
-**1–2 (muy simple)** — **Subajuste** (underfitting). El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo.
-
-</div>
-
-<div>
-
-**3–6 (balanceado)** — **Punto óptimo**. El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí.
-
-</div>
-
-<div>
-
-**8–15 (demasiado complejo)** — **Sobreajuste** (overfitting). El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto).
-
-</div>
+<ConceptCard variant="warning">
+El objetivo del aprendizaje automático no es conseguir un error nulo memorizando los datos ya observados, sino maximizar la exactitud ante datos **nuevos y no vistos**.
+</ConceptCard>
 
 </RevealSequence>
 
-<ConceptCard variant="key-idea">
-El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
-</ConceptCard>
+</Section>
+
+<Section number={12} title="Laboratorio: Grados de ajuste polinomial" eyebrow="INTERACTIVA">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Explora:</strong> Arrastra el grado del polinomio y observa la brecha creciente entre el error en los datos de entrenamiento (azul) y el error en las muestras de validación (rojo).
+</div>
+
+<Overfitting caption="Ajuste polinomial: arrastra el grado y mira cómo el error de validación se separa del de entrenamiento" />
 
 </Section>
 
-<Section number={13} title="Analogía biotecnológica" eyebrow="CONCEPTO">
+<Section number={13} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<div className="rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs text-gray-800">
+<strong>1. Subajuste (Underfitting, Grados 1–2):</strong>
+El modelo es excesivamente rígido e incapaz de capturar la curva biológica. Tanto el error de entrenamiento como el de prueba son elevados.
+</div>
+
+<div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-xs text-gray-800">
+<strong>2. Punto óptimo (Grados 3–6):</strong>
+El modelo modela la tendencia estructural general sin copiar las perturbaciones aleatorias. Ambos errores se mantienen bajos y parejos.
+</div>
+
+<div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3 text-xs text-gray-800">
+<strong>3. Sobreajuste (Overfitting, Grados 8–15):</strong>
+El polinomio se retuerce para tocar cada punto azul de entrenamiento ($ECM \approx 0$), pero al evaluar datos nuevos de prueba, el error se dispara a valores desastrosos.
+</div>
+
+<ConceptCard variant="key-idea">
+El equilibrio entre sesgo y varianza es el principio rector del machine learning: ni modelos ciegos a la señal, ni modelos esclavizados por el ruido.
+</ConceptCard>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={14} title="Analogía de laboratorio y defensas" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <ConceptCard variant="warning">
-Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu termociclador, con tus reactivos, en tu mesada del laboratorio — pero falla cuando otro laboratorio lo replica. Memorizaste las condiciones específicas de tu entorno (temperatura exacta del termociclador, marca de la polimerasa, humedad ambiental) en lugar de aprender el principio biológico general. El modelo, como el protocolo, necesita generalizar, no memorizar.
+Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en tu termociclador personal, con tus reactivos y tu pipeta: memorizó las particularidades de tu mesada y colapsa cuando otro laboratorio intenta replicarlo.
 </ConceptCard>
-
-**La solución**:
-- **Train/test split**: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.
-- **Validación cruzada**: probar el modelo en múltiples particiones de los datos
-- **Modelos más simples**: a veces menos es más (navaja de Occam)
-
-</Section>
-
-<Section number={14} title="Overfitting: reflexión final" eyebrow="CONCEPTO">
 
 <ChoiceQuestion
   question="Un modelo con 99% en entreno y 60% en test — ¿qué es y cuál preferirías para diagnosticar una infección?"
@@ -348,13 +419,25 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
   ]}
 />
 
+<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<strong>Tres salvaguardas metodológicas en bioinformática:</strong>
+<br />
+1. <strong>División Train/Test:</strong> Separar rigurosamente los datos antes de entrenar; nunca evaluar con el material de estudio.
+<br />
+2. <strong>Validación cruzada (Cross-validation):</strong> Iterar múltiples particiones para asegurar estabilidad frente a distintas réplicas biológicas.
+<br />
+3. <strong>Principio de parsimonia:</strong> Entre dos modelos con similar rendimiento, preferir siempre el más simple.
+</div>
+
+</RevealSequence>
+
 </Section>
 
 <Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
-<div>Cinco preguntas para verificar los conceptos clave. Responde cada una para continuar.</div>
+<div>Cinco preguntas para consolidar los fundamentos de aprendizaje de la IA. Responde correctamente cada una para avanzar.</div>
 
 <ChoiceQuestion
   question="¿Qué es una frontera de decisión?"
@@ -433,9 +516,9 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entendés cómo aprenden las máquinas.
+¡Tres algoritmos dominados, el dilema del sobreajuste clarificado y las salvaguardas metodológicas listas! Ya entiendes los engranajes del aprendizaje automático.
 </MascotMessage>
 
-Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+En la Lección 3 trasladaremos estos principios a aplicaciones biotecnológicas de vanguardia: cómo **AlphaFold** revolucionó la predicción estructural de proteínas en 3D a partir del PDB, cómo interpretar matrices de confusión en diagnóstico y cómo se estructura un pipeline de machine learning completo en un laboratorio real.
 
 </Section>

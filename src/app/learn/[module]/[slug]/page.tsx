@@ -151,6 +151,7 @@ export default async function LessonPage({ params }: Props) {
   const certifyEnabled = process.env.FEATURE_FLAG_CERTIFY === "true";
 
   const components = {
+    Badge,
     Section,
     CalloutInfo,
     CalloutCheck,

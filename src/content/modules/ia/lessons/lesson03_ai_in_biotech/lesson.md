@@ -19,42 +19,79 @@ Datasets Used: PDB (Protein Data Bank), AF2, "module01_predict_effect.parquet"
 
 <Section number={1} title="De la teoría a la práctica" eyebrow="INICIO">
 
-<MascotMessage>
-Viste cómo aprenden los algoritmos. Ahora veamos qué pasa cuando aplicamos ML a problemas reales de biotecnología.
-</MascotMessage>
+<RevealSequence showHistory>
 
-En la Lección 2 entendiste los fundamentos: frontera de decisión, KNN, regresión, y el problema del overfitting. Ahora vamos al laboratorio — literalmente.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  typing={true}
+  lines={[
+    "¡Te damos la bienvenida a la mesa de trabajo de biotecnología computacional!",
+    "En la lección anterior exploramos la teoría: fronteras de decisión, KNN, regresión y el fantasma del sobreajuste.",
+    "Ahora vamos a aplicar estas herramientas a problemas biológicos reales y de frontera.",
+    "Analizaremos cómo AlphaFold resolvió el enigma del plegamiento de proteínas.",
+    "Aprenderemos a navegar estructuras tridimensionales del Protein Data Bank (PDB).",
+    "Y construiremos un pipeline completo de machine learning para el diagnóstico fúngico.",
+  ]}
+/>
 
-La biotecnología moderna genera datos masivos: secuencias genómicas, imágenes de microscopía, estructuras de proteínas, perfiles de expresión génica. El machine learning es la herramienta que permite encontrar patrones donde el ojo humano no llega.
-
-Vamos a explorar tres aplicaciones concretas:
-1. **Visualización 3D de moléculas** — cómo representar y analizar proteínas en el espacio
-2. **AlphaFold** — el modelo que revolucionó la biología estructural
-3. **Pipeline completo de ML** — desde los datos biológicos hasta la predicción
-
-</Section>
-
-<Section number={2} title="Proteínas en 3D" eyebrow="CONCEPTO">
-
-Las proteínas no son solo secuencias lineales de aminoácidos. Su **estructura tridimensional** determina su función.
-
-<ConceptCard variant="definition">
-La **estructura terciaria** de una proteína es su forma tridimensional final, determinada por cómo se pliega la cadena de aminoácidos. Esta forma dicta con qué moléculas puede interactuar y, por lo tanto, qué función biológica cumple.
-</ConceptCard>
-
-Hasta hace poco, determinar la estructura 3D de una proteína requería meses de trabajo experimental (cristalografía de rayos X, criomicroscopía electrónica). El **Protein Data Bank (PDB)** es el repositorio global que almacena estas estructuras determinadas experimentalmente.
+<div>
+La biotecnología moderna genera cantidades astronómicas de datos: secuencias masivas de ADN, micrografías electrónicas de alta resolución y mapas conformacionales. El aprendizaje automático es el microscopio digital que nos permite descifrar patrones que escapan a la vista humana.
+</div>
 
 <ConceptCard variant="key-idea">
-El PDB es como una biblioteca de planos arquitectónicos de proteínas. Cada entrada describe la posición de cada átomo en el espacio tridimensional, con coordenadas (x, y, z) para miles de átomos por proteína.
+En biotecnología computacional, la computación no reemplaza al ensayo de laboratorio: convierte meses de ensayo y error empírico en predicciones enfocadas y verificables.
 </ConceptCard>
 
-Pero hay un problema enorme: secuenciar una proteína es barato y rápido. Determinar su estructura experimentalmente es caro y lento. De millones de proteínas conocidas, solo ~200,000 tienen estructura resuelta.
-
-Aquí entra AlphaFold.
+</RevealSequence>
 
 </Section>
 
-<Section number={3} title="Visualizador 3D: interactive" eyebrow="INTERACTIVA">
+<Section number={2} title="Proteínas en 3D: La forma determina la función" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "Una proteína no es solo una cadena alfabética de aminoácidos.",
+    "Para cumplir su función enzimática, estructural o de señalización, la cadena debe plegarse en el espacio 3D.",
+    "Su arquitectura tridimensional exacta determina qué bolsillos activos interactúan con otras moléculas.",
+  ]}
+/>
+
+<ConceptCard variant="definition">
+La **estructura terciaria** de una proteína es su conformación espacial final, estabilizada por puentes disulfuro, interacciones electrostáticas y enlaces de hidrógeno. Esta geometría tridimensional define su función catalítica y sus blancos farmacológicos.
+</ConceptCard>
+
+<div>
+Tradicionalmente, resolver la estructura 3D exigía meses o años de cristalografía de rayos X o criomicroscopía electrónica. El **Protein Data Bank (PDB)** es el archivo global que custodia estas estructuras validadas experimentalmente.
+</div>
+
+<ConceptCard variant="warning">
+El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es hoy rápido y económico, resolver una sola estructura experimentalmente puede costar decenas de miles de dólares. De cientos de millones de proteínas conocidas, solo ~200.000 poseen estructura resuelta en el PDB.
+</ConceptCard>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={3} title="Laboratorio: Exploración molecular 3D" eyebrow="INTERACTIVA">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Explora:</strong> Rota la molécula arrastrando con el cursor. Alterna entre vistas de cintas (ribbon) y esferas para reconocer hélices alfa, láminas beta y loops desordenados.
+</div>
+
+<InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="480px" caption="Visualización interactiva de coordenadas reales del Protein Data Bank (PDB)" />
+
+</Section>
+
+<Section number={4} title="De coordenadas 3D a regresión espacial" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <ChoiceQuestion
   question="Al rotar la proteína en 3D, ¿cómo distingues hélices alfa de regiones desordenadas (loops)?"
@@ -71,22 +108,27 @@ Aquí entra AlphaFold.
   ]}
 />
 
-<InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="700px" caption="visualización interactiva de datos reales del PDB" />
-
-**Explora el visualizador:**
-- Rota la proteína arrastrando el mouse
-- Cambia entre modos de visualización (cintas, esferas, líneas)
-- Observa las diferentes regiones: hélices alfa, láminas beta, loops
-
 <ConceptCard variant="key-idea">
-Cada átomo en esa visualización tiene coordenadas (x, y, z) determinadas experimentalmente. Para el modelo de ML, predecir estas coordenadas es un problema de regresión — como el de la Lección 2, pero en 3D y con miles de puntos.
+Cada átomo en el visualizador posee coordenadas continuas $(x, y, z)$ en ángstroms ($10^{-10}\text{ m}$). Para un sistema de inteligencia artificial, predecir la posición tridimensional de miles de átomos interconectados es un monumental problema de **regresión continua**.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={4} title="AlphaFold: el desafío" eyebrow="CONCEPTO">
+<Section number={5} title="AlphaFold: El hito de los 50 años" eyebrow="CONCEPTO">
 
-**AlphaFold** (DeepMind, 2021) resolvió un problema que la biología estructural tenía hace 50 años: predecir la estructura 3D de una proteína solo a partir de su secuencia de aminoácidos.
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  lines={[
+    "Durante 50 años, deducir la estructura 3D a partir exclusivamente de la secuencia lineal de aminoácidos fue considerado casi imposible.",
+    "En 2020 y 2021, AlphaFold 2 (DeepMind) resolvió este reto histórico.",
+  ]}
+/>
 
 <ChoiceQuestion
   question="AlphaFold predice la posición (x, y, z) de cada átomo. ¿Es clasificación o regresión y cómo se mide el error?"
@@ -104,30 +146,57 @@ Cada átomo en esa visualización tiene coordenadas (x, y, z) determinadas exper
 />
 
 <ConceptCard variant="definition">
-El **RMSD (Root Mean Square Deviation)** mide la distancia promedio entre los átomos de la estructura predicha y los de la estructura real. RMSD < 1Å (ángstrom, 10⁻¹⁰ m) se considera excelente. RMSD > 3Å indica una predicción poco confiable.
+El **RMSD (Root Mean Square Deviation)** mide la distancia cuadrática media entre los átomos de la estructura predicha y los de la estructura experimental de referencia. Un RMSD inferior a $1\text{ Å}$ denota precisión a nivel atómico.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={5} title="AlphaFold: cómo funciona" eyebrow="CONCEPTO">
+<Section number={6} title="AlphaFold: La arquitectura por dentro" eyebrow="CONCEPTO">
 
-¿Cómo lo logró AlphaFold? No es un solo modelo, sino un sistema que combina múltiples ideas de ML:
+<RevealSequence showHistory>
 
-**Paso 1 — Embedding de secuencia**: la secuencia de aminoácidos se convierte en un vector numérico (embedding), transformando letras en números que el modelo puede procesar.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "AlphaFold no simula las fuerzas físicas newtonianas átomo por átomo; eso tomaría siglos de supercómputo.",
+    "En su lugar, reformuló el plegamiento como un problema de aprendizaje estadístico profundo sobre 170.000 estructuras del PDB.",
+  ]}
+/>
 
-**Paso 2 — Evolución simulada**: AlphaFold busca secuencias similares en bases de datos y genera un "perfil evolutivo". Las regiones que cambian poco entre especies suelen ser importantes para la estructura.
-
-**Paso 3 — Atención espacial**: usando transformers (la misma arquitectura de GPT), el modelo aprende qué pares de aminoácidos están cerca en el espacio 3D aunque estén lejos en la secuencia lineal. Una proteína lineal de 100 aminoácidos puede tener su aminoácido #1 y #99 cerca físicamente porque se pliega.
-
-**Paso 4 — Refinamiento iterativo**: el modelo predice la estructura, calcula la energía, y refina la predicción en múltiples ciclos.
+<div className="grid gap-2.5 sm:grid-cols-2 my-2 text-xs">
+  <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3">
+    <strong className="text-blue-900 block mb-1">1. Embedding de secuencia</strong>
+    Convierte las letras de los 20 aminoácidos estándar en vectores multidimensionales densos que capturan propiedades físico-químicas.
+  </div>
+  <div className="rounded-lg border border-teal-200 bg-teal-50/70 p-3">
+    <strong className="text-teal-900 block mb-1">2. Perfiles evolutivos (MSA)</strong>
+    Compara miles de secuencias homólogas en distintas especies. Las mutaciones correlacionadas revelan qué aminoácidos deben tocarse en 3D para mantener la estabilidad.
+  </div>
+  <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-3">
+    <strong className="text-indigo-900 block mb-1">3. Atención espacial (Transformers)</strong>
+    Calcula simultáneamente las interacciones espaciales entre pares de residuos, reconociendo que el aminoácido #5 y el #180 pueden estar en contacto directo al plegarse.
+  </div>
+  <div className="rounded-lg border border-emerald-200 bg-emerald-50/70 p-3">
+    <strong className="text-emerald-900 block mb-1">4. Refinamiento iterativo</strong>
+    Proyecta las rotaciones del esqueleto polipeptídico y ajusta ángulos diédricos en múltiples ciclos hasta minimizar las tensiones estéricas.
+  </div>
+</div>
 
 <ConceptCard variant="key-idea">
-La gran innovación de AlphaFold fue modelar el **plegamiento como un problema de aprendizaje**, no de física. En lugar de simular las fuerzas físicas (impracticable para proteínas grandes), aprendió de 170,000 estructuras resueltas experimentalmente en el PDB.
+La gran innovación fue tratar el plegamiento como **reconocimiento de patrones evolutivos y geométricos**, logrando en segundos lo que la física clásica no podía simular en años.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={6} title="AlphaFold: impacto y limitaciones" eyebrow="CONCEPTO">
+<Section number={7} title="AlphaFold: Impacto y limitaciones" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <ChoiceQuestion
   question="AlphaFold predijo 200 millones de estructuras. ¿Qué aplicaciones desbloquea y cuál es su limitación principal?"
@@ -144,23 +213,51 @@ La gran innovación de AlphaFold fue modelar el **plegamiento como un problema d
   ]}
 />
 
-</Section>
-
-<Section number={7} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
-
-Un **pipeline de ML** es el flujo de trabajo completo, desde los datos brutos hasta el modelo en producción. En biotecnología tiene particularidades:
-
-<ConceptCard variant="definition">
-Un **pipeline de machine learning** es una secuencia de etapas que transforma datos brutos en predicciones útiles: recolección, limpieza, feature engineering, entrenamiento, evaluación, despliegue.
+<ConceptCard variant="warning">
+Las proteínas no son monumentos de piedra: oscilan, respiran conformacionalmente y adoptan estados alostéricos al interactuar con fármacos o sustratos. Una predicción estática es un mapa valiosísimo, pero no sustituye la cinética biológica real.
 </ConceptCard>
 
-Cada etapa del pipeline tiene desafíos específicos:
+</RevealSequence>
+
+</Section>
+
+<Section number={8} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="neutral"
+  lines={[
+    "Modelar proteínas o clasificar esporas fúngicas exige mucho más que elegir un algoritmo.",
+    "Exige un pipeline de extremo a extremo: desde la preparación de la muestra biológica hasta la monitorización del modelo en clínica.",
+  ]}
+/>
+
+<ConceptCard variant="definition">
+Un **pipeline de machine learning** es la cadena secuencial estandarizada que transforma datos biológicos crudos en predicciones operativas: recolección, limpieza, extracción de features, entrenamiento, evaluación y despliegue.
+</ConceptCard>
 
 <PipelineStages caption="El token recorre las seis etapas en orden: cada una transforma la salida de la anterior" />
 
+</RevealSequence>
+
 </Section>
 
-<Section number={8} title="Pipeline ML: interactive" eyebrow="INTERACTIVA">
+<Section number={9} title="Laboratorio: Simulación de pipeline" eyebrow="INTERACTIVA">
+
+<div className="mb-2 text-xs text-gray-500">
+<strong>Explora:</strong> Modifica los parámetros de entrada y observa cómo las decisiones de calibración y preprocesamiento repercuten en el rendimiento final del modelo.
+</div>
+
+<InteractiveFrame src="/interactives/demo_10_pipeline.html" height="480px" caption="Simulación educativa: etapas de un pipeline de bioinformática" />
+
+</Section>
+
+<Section number={10} title="Calibración y prevención de contaminación" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
 
 <ChoiceQuestion
   question="En un pipeline de conidias, ¿qué etapa consume más tiempo y cuál genera más errores silenciosos?"
@@ -176,22 +273,6 @@ Cada etapa del pipeline tiene desafíos específicos:
     { id: "d", label: "Ninguna etapa tiene errores silenciosos", correct: false, feedback: "Sí existen: errores que parecen correctos localmente pero arruinan la generalización." },
   ]}
 />
-
-<InteractiveFrame src="/interactives/demo_10_pipeline.html" height="700px" caption="simulación educativa (basada en pipeline típico de bioinformática)" />
-
-**¿Qué muestra exactamente?**
-- Cada etapa del pipeline es un paso que transforma datos biológicos en un modelo
-- Puedes simular el efecto de diferentes parámetros en cada etapa
-- Las barras de error muestran dónde se introducen imprecisiones
-
-**Prueba:**
-1. Recorre cada etapa del pipeline haciendo clic
-2. Cambia parámetros como tamaño de muestra, calidad de imagen, o método de clustering
-3. Observa cómo las decisiones tempranas afectan el resultado final
-
-</Section>
-
-<Section number={9} title="Pipeline real: conidias y Antifúngicos" eyebrow="CONCEPTO">
 
 <ChoiceQuestion
   question="Con datos de 3 laboratorios con distintos microscopios, ¿dónde entrenas y pruebas para evitar sobreajuste al equipamiento?"
@@ -209,47 +290,108 @@ Cada etapa del pipeline tiene desafíos específicos:
 />
 
 <ConceptCard variant="warning">
-El mayor error en ML biotecnológico es la **contaminación de datos**: cuando información del "futuro" (o de otro laboratorio) se filtra al entrenamiento. Siempre separar train/test por experimento, no al azar.
+El error más común en bioinformática es el **data leakage** (fuga de datos): si mezclas aleatoriamente micrografías del mismo cultivo en entrenamiento y prueba, el modelo reconocerá la óptica del microscopio en lugar de la morfología del patógeno.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={10} title="Matriz de confusión" eyebrow="CONCEPTO">
+<Section number={11} title="Matriz de confusión: Anatomía de los 4 cuadrantes" eyebrow="CONCEPTO">
 
-Cuando un clasificador predice, no solo importa cuántas acertó: importa **qué tipo de errores comete**. La matriz de confusión desagrega los aciertos y errores por clase.
+<RevealSequence showHistory>
 
-<ConceptCard variant="definition">
-En una clasificación binaria:
-- **Verdadero Positivo (TP)**: el modelo predijo positivo y realmente era positivo.
-- **Falso Positivo (FP)**: el modelo predijo positivo, pero era negativo.
-- **Falso Negativo (FN)**: el modelo predijo negativo, pero era positivo.
-- **Verdadero Negativo (TN)**: el modelo predijo negativo y realmente era negativo.
-</ConceptCard>
-
-Imagina un clasificador de conidias que etiqueta como positiva a *Aspergillus*. De 100 conidias analizadas, obtuvimos estos resultados:
-
-<InteractiveTable
-  headers={["", "Predicho Aspergillus", "Predicho Penicillium"]}
-  rows={[
-    ["Real Aspergillus", "35 (TP)", "10 (FN)"],
-    ["Real Penicillium", "5 (FP)", "50 (TN)"],
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  mood="thinking"
+  lines={[
+    "Imagina que tu modelo anuncia con orgullo un 85% de exactitud (accuracy).",
+    "En un laboratorio de diagnóstico, ese número global no dice nada: no sabemos qué clase de errores cometió.",
+    "¿Generó falsas alarmas tolerables? ¿O dejó escapar a pacientes con infecciones fúngicas invasivas?",
+    "La matriz de confusión desagrega con total transparencia los aciertos y las fallas.",
   ]}
-  caption="Resultados de un clasificador de conidias (n=100)"
 />
 
-<ConceptCard variant="definition">
-La **precisión** mide qué tan confiables son las predicciones positivas: precision = TP / (TP + FP).
+<div>
+Evaluamos <strong>100 conidias</strong> analizadas por el clasificador, donde la etiqueta positiva es *Aspergillus* (patógeno de alto riesgo clínico) y la negativa es *Penicillium*:
+</div>
+
+<div className="my-3 grid grid-cols-2 gap-3 max-w-xl mx-auto">
+  <div className="rounded-xl border-2 border-emerald-500/50 bg-emerald-50/90 p-3.5 shadow-xs">
+    <div className="flex items-center justify-between mb-1">
+      <span className="font-mono text-xs font-bold text-emerald-800 uppercase tracking-wider">Verdadero Positivo (TP)</span>
+      <span className="text-2xl font-extrabold text-emerald-700">35</span>
+    </div>
+    <div className="text-xs text-emerald-950 font-medium leading-relaxed">
+      Real: <em>Aspergillus</em> | Predicción: <em>Aspergillus</em>
+    </div>
+    <span className="inline-block mt-1 text-[11px] text-emerald-700 font-semibold">Diagnóstico certero del patógeno</span>
+  </div>
+
+  <div className="rounded-xl border-2 border-rose-500/60 bg-rose-50/90 p-3.5 shadow-xs">
+    <div className="flex items-center justify-between mb-1">
+      <span className="font-mono text-xs font-bold text-rose-800 uppercase tracking-wider">Falso Negativo (FN)</span>
+      <span className="text-2xl font-extrabold text-rose-700">10</span>
+    </div>
+    <div className="text-xs text-rose-950 font-medium leading-relaxed">
+      Real: <em>Aspergillus</em> | Predicción: <em>Penicillium</em>
+    </div>
+    <span className="inline-block mt-1 text-[11px] text-rose-700 font-bold">Peligro clínico: paciente infectado no tratado</span>
+  </div>
+
+  <div className="rounded-xl border-2 border-amber-500/50 bg-amber-50/90 p-3.5 shadow-xs">
+    <div className="flex items-center justify-between mb-1">
+      <span className="font-mono text-xs font-bold text-amber-800 uppercase tracking-wider">Falso Positivo (FP)</span>
+      <span className="text-2xl font-extrabold text-amber-700">5</span>
+    </div>
+    <div className="text-xs text-amber-950 font-medium leading-relaxed">
+      Real: <em>Penicillium</em> | Predicción: <em>Aspergillus</em>
+    </div>
+    <span className="inline-block mt-1 text-[11px] text-amber-700 font-semibold">Falsa alarma: medicación preventiva innecesaria</span>
+  </div>
+
+  <div className="rounded-xl border-2 border-blue-500/40 bg-blue-50/90 p-3.5 shadow-xs">
+    <div className="flex items-center justify-between mb-1">
+      <span className="font-mono text-xs font-bold text-blue-800 uppercase tracking-wider">Verdadero Negativo (TN)</span>
+      <span className="text-2xl font-extrabold text-blue-700">50</span>
+    </div>
+    <div className="text-xs text-blue-950 font-medium leading-relaxed">
+      Real: <em>Penicillium</em> | Predicción: <em>Penicillium</em>
+    </div>
+    <span className="inline-block mt-1 text-[11px] text-blue-700 font-semibold">Descarte correcto de patogenicidad</span>
+  </div>
+</div>
+
+<ConceptCard variant="key-idea">
+Total aciertos: $35 + 50 = 85$ conidias correctas de 100 ($85\%$ accuracy). Sin embargo, los **10 falsos negativos** representan un riesgo clínico inaceptable en pacientes inmunodeprimidos.
 </ConceptCard>
 
-<ConceptCard variant="definition">
-El **recall** (o sensibilidad) mide qué proporción de los positivos reales detectamos: recall = TP / (TP + FN).
-</ConceptCard>
+</RevealSequence>
 
-<ConceptCard variant="definition">
-El **F1-score** es la media armónica entre precisión y recall: F1 = 2 * (precision * recall) / (precision + recall).
-</ConceptCard>
+</Section>
 
-En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0.824.
+<Section number={12} title="Métricas clínicas: Precisión, Recall y F1" eyebrow="CONCEPTO">
+
+<RevealSequence showHistory>
+
+<div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3.5 text-xs text-gray-800">
+<strong className="text-teal-900 block mb-1">1. Precisión (Precision): Confiabilidad de las alertas</strong>
+$$\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{35}{35 + 5} = \frac{35}{40} = 0.875\ (87.5\%)$$
+<em>De cada 100 conidias que el clasificador declaró como Aspergillus, 87.5 realmente lo eran y 12.5 fueron falsas alarmas.</em>
+</div>
+
+<div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3.5 text-xs text-gray-800">
+<strong className="text-rose-900 block mb-1">2. Recall o Sensibilidad: Capacidad de detección</strong>
+$$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{35}{35 + 10} = \frac{35}{45} \approx 0.778\ (77.8\%)$$
+<em>De los 45 casos reales de Aspergillus existentes en la muestra, el modelo capturó el 77.8%; un 22.2% de infecciones escapó al radar.</em>
+</div>
+
+<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3.5 text-xs text-gray-800">
+<strong className="text-blue-900 block mb-1">3. F1-Score: Media armónica de balance</strong>
+$$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}} = 2 \times \frac{0.875 \times 0.778}{0.875 + 0.778} \approx 0.824\ (82.4\%)$$
+<em>La media armónica penaliza drásticamente los desbalances extremos entre falsos positivos y falsos negativos.</em>
+</div>
 
 <ChoiceQuestion
   question="¿Por qué la matriz de confusión es más útil que solo el porcentaje de aciertos?"
@@ -266,13 +408,15 @@ En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
-<Section number={11} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
-<div>Cinco preguntas para consolidar esta lección. Responde correctamente cada una para avanzar.</div>
+<div>Cinco preguntas para consolidar los aprendizajes de IA en biotecnología. Responde correctamente cada una para avanzar.</div>
 
 <ChoiceQuestion
   question="¿Qué mide el RMSD en el contexto de AlphaFold?"
@@ -348,12 +492,12 @@ En el ejemplo: precisión = 35 / 40 = 0.875, recall = 35 / 45 = 0.778 y F1 ≈ 0
 
 </Section>
 
-<Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-AlphaFold, PDB, pipelines de ML — ya ves cómo la IA está transformando la biotecnología, un experimento a la vez.
+¡Estructuras 3D conquistadas, pipelines dominados y matrices de confusión interpretadas con rigor clínico! Estás a las puertas de los casos del mundo real.
 </MascotMessage>
 
-En la Lección 4 vamos a ver casos reales de aplicación: desde el reposicionamiento de fármacos hasta cómo modelos de IA ayudaron a desarrollar la vacuna del COVID-19. Todo lo que viste hasta ahora confluye en aplicaciones concretas que ya están cambiando la ciencia.
+En la última lección del módulo exploraremos aplicaciones reales que impactaron al planeta: cómo la IA aceleró la formulación de nanopartículas para la vacuna del COVID-19, el reposicionamiento exprés de moléculas terapéuticas y los nuevos modelos fundacionales de ADN como **Evo**.
 
 </Section>
