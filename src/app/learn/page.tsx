@@ -1,5 +1,5 @@
 import { Compass } from "lucide-react";
-import { getModules, getModuleShortDescription, getLessonSlugs } from "@/lib/content/modules";
+import { getModules, getModuleShortDescription, getLessonSlugs, hasLab } from "@/lib/content/modules";
 import { getLabCardTheme, toSerializableTheme } from "@/components/labs/LabCardTheme";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { buildModuleCardModel } from "@/domain/module-card";
@@ -12,12 +12,15 @@ export default function LearnIndexPage() {
     const slugs = getLessonSlugs(mod.slug);
     const xpReward = slugs.reduce((sum, ls) => sum + calcXpForLesson(mod.slug, ls), 0);
     const theme = toSerializableTheme(getLabCardTheme(mod.slug));
+    // Real lab count (lab.md per lesson): the badge reads "N labs", so the
+    // number must be labs, not the lesson count it used to receive.
+    const labCount = slugs.filter((s) => hasLab(mod.slug, s)).length;
     const model = buildModuleCardModel({
       slug: mod.slug,
       title: mod.title,
       description: getModuleShortDescription(mod.slug),
       lessonCount: mod.lessonCount,
-      labCount: mod.lessonCount,
+      labCount,
       xpReward,
       completed: null,
       total: null,
@@ -31,7 +34,8 @@ export default function LearnIndexPage() {
       <div className="mb-10 flex items-start justify-between">
         <div>
           <p className="mb-1 text-sm font-bold uppercase tracking-widest text-mint">Expediciones</p>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink">Elige tu Expedición</h2>
+          {/* Exactly one h1 on this route (it used to open with an h2 and had no h1 at all). */}
+          <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink">Elige tu Expedición</h1>
           <p className="mt-1 text-storm">Cada módulo es una expedición hacia el dominio de la Inteligencia Artificial.</p>
         </div>
         <Compass className="hidden h-10 w-10 text-mint md:block" />

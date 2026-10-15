@@ -156,14 +156,7 @@ Un **pipeline de machine learning** es una secuencia de etapas que transforma da
 
 Cada etapa del pipeline tiene desafíos específicos:
 
-| Etapa | En biotecnología |
-|---|---|
-| **Datos** | Secuencias, imágenes microscopía, PDB, datos ómicos |
-| **Limpieza** | Lotes de laboratorio, errores de medición, bias de equipos |
-| **Features** | Fingerprints moleculares, perfiles evolutivos, descriptores de forma |
-| **Modelo** | AlphaFold, CNN para imágenes, modelos de predicción de interacciones |
-| **Validación** | RMSD, sensibilidad/especificidad, validación cruzada por laboratorio |
-| **Interpretación** | SHAP para entender qué features importan |
+<PipelineStages caption="El token recorre las seis etapas en orden: cada una transforma la salida de la anterior" />
 
 </Section>
 
@@ -184,7 +177,7 @@ Cada etapa del pipeline tiene desafíos específicos:
   ]}
 />
 
-<InteractiveFrame src="/interactives/demo_10_pipeline_ml.html" height="700px" caption="simulación educativa (basada en pipeline típico de bioinformática)" />
+<InteractiveFrame src="/interactives/demo_10_pipeline.html" height="700px" caption="simulación educativa (basada en pipeline típico de bioinformática)" />
 
 **¿Qué muestra exactamente?**
 - Cada etapa del pipeline es un paso que transforma datos biológicos en un modelo

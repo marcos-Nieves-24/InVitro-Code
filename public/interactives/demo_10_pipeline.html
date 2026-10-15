@@ -192,7 +192,7 @@ function mostrarSplit() {
     marker:{color:['#1f77b4','#d62728']},
     hovertemplate:'%{x}: %{y} muestras<extra></extra>'
   }];
-  Plotly.newReact('plot-split', data, {
+  Plotly.newPlot('plot-split', data, {
     title:{text:'Distribuci&oacute;n Train/Test (70/30)', font:{size:13}},
     yaxis:{title:'Cantidad de muestras'},
     margin:{l:50,r:20,t:40,b:50},
@@ -295,7 +295,7 @@ function mostrarKNN() {
     name:'Frontera', hoverinfo:'skip'
   };
   
-  Plotly.newReact('plot-knn', [frontierTrace, trainWTTrace, trainMUTTrace, testWTTrace, testMUTTrace], {
+  Plotly.newPlot('plot-knn', [frontierTrace, trainWTTrace, trainMUTTrace, testWTTrace, testMUTTrace], {
     title:{text:'KNN: Frontera de decisi&oacute;n (&Aacute;rea vs. Circularidad) &mdash; C&iacute;rculos=Train, Diamantes=Test', font:{size:12}},
     xaxis:{title:'&Aacute;rea (&micro;m&sup2;)', range:[8,22]},
     yaxis:{title:'Circularidad', range:[0.55,0.95]},
@@ -334,7 +334,7 @@ function mostrarEvaluacion() {
     showscale:false
   }];
   
-  Plotly.newReact('plot-mc', matrixData, {
+  Plotly.newPlot('plot-mc', matrixData, {
     title:{text:'Matriz de Confusi&oacute;n', font:{size:13}},
     xaxis:{title:'Clase Predicha', side:'bottom'},
     yaxis:{title:'Clase Real', autorange:'reversed'},

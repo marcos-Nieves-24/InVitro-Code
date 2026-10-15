@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { OrbitalModules } from "./OrbitalModules";
-import { getModules, getModuleShortDescription, getLessonSlugs } from "@/lib/content/modules";
+import { getModules, getModuleShortDescription, getLessonSlugs, hasLab } from "@/lib/content/modules";
 import { calcXpForLesson } from "@/lib/gamification/utils";
 import { buildModuleCardModel } from "@/domain/module-card";
 
@@ -10,12 +10,15 @@ export function Modules() {
     const slugs = getLessonSlugs(m.slug);
     const xpReward = slugs.reduce((sum, ls) => sum + calcXpForLesson(m.slug, ls), 0);
     const href = m.firstLesson ? `/learn/${m.slug}/${m.firstLesson}` : `/learn/${m.slug}`;
+    // Real lab count (lab.md per lesson), not the lesson count: the badge says
+    // "N labs", so the number must be labs, not lessons.
+    const labCount = slugs.filter((s) => hasLab(m.slug, s)).length;
     const model = buildModuleCardModel({
       slug: m.slug,
       title: m.title,
       description: getModuleShortDescription(m.slug),
       lessonCount: m.lessonCount,
-      labCount: slugs.length,
+      labCount,
       xpReward,
       completed: null,
       total: null,
@@ -72,7 +75,7 @@ export function Modules() {
             <h2 className="font-display mt-3 mb-4 text-[32px] font-bold tracking-tight text-[#101B3D] md:text-[48px]">
               Expediciones del curso
             </h2>
-            <p className="mx-auto max-w-[680px] text-[17px] leading-relaxed text-[#668094]">
+            <p className="mx-auto max-w-[680px] text-[17px] leading-relaxed text-storm">
               Cada módulo es una expedición guiada que combina teoría, práctica
               en terminal y laboratorios interactivos.
             </p>

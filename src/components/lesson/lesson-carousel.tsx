@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { LabProgress } from "./lab-progress";
 import { CelebrationOverlay } from "./celebration-overlay";
 import { Button } from "@/components/ui";
 import { ConsentPendingCard } from "@/components/consent/ConsentPendingCard";
 import { useLessonCompletion } from "@/hooks/useLessonCompletion";
-import { consumeRevealAdvance } from "./presentation/RevealSequence";
+import { consumeRevealAdvance, NAV_TOKEN, NAV_TEXT_PRIMARY, NAV_TEXT_SECONDARY } from "./presentation/RevealSequence";
 
 interface LessonCarouselProps {
   slides: React.ReactNode[];
@@ -15,6 +14,12 @@ interface LessonCarouselProps {
   moduleSlug: string;
   lessonSlug: string;
 }
+
+// P1-2 — the navigation-button token (NAV_TOKEN / NAV_TEXT_PRIMARY /
+// NAV_TEXT_SECONDARY) is NOT declared here: it is imported from
+// presentation/RevealSequence so the shell and the reveal cannot drift apart.
+// Measured over the 80 `ia` slices at 1440x900: every nav control resolves to
+// 44px tall with a 16px radius, 0 below the minimum touch target.
 
 export function LessonCarousel({
   slides,
@@ -27,6 +32,10 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
+  // True while the current slide's RevealSequence still has unblocked steps.
+  // While it is true the reveal owns the visible advance control and the footer
+  // renders none, so a screen never shows two "Continuar" buttons.
+  const [revealOwnsAdvance, setRevealOwnsAdvance] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -53,9 +62,17 @@ export function LessonCarousel({
   // Detect whether current slide has incomplete RevealSequence (data-reveal-has-more="true")
   useEffect(() => {
     const check = () => {
-      const hasIncomplete =
-        slideAreaRef.current?.querySelector('[data-reveal-has-more="true"]') != null;
-      setIsRevealIncomplete(hasIncomplete);
+      const root = slideAreaRef.current;
+      const hasIncompleteReveal =
+        root?.querySelector('[data-reveal-has-more="true"]') != null;
+      // A blocked reveal (quiz not answered yet) renders no advance button of its
+      // own — it renders "Responde correctamente para continuar" — so the footer
+      // keeps its (disabled) control in that state and only steps aside while the
+      // reveal can actually advance.
+      const isRevealBlocked =
+        root?.querySelector('[data-reveal-blocked="true"]') != null;
+      setIsRevealIncomplete(hasIncompleteReveal);
+      setRevealOwnsAdvance(hasIncompleteReveal && !isRevealBlocked);
     };
     // Initial check after render
     const raf = requestAnimationFrame(check);
@@ -197,63 +214,78 @@ export function LessonCarousel({
         aria-live="polite"
         className="fixed inset-y-0 left-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
-        {/* Top progress bar — compact */}
+        {/* Top bar — the ONE slide-position indicator.
+            The dot rail (LabProgress) that used to sit here was removed: it
+            stated slide position a second time alongside the "Diapositiva N de M"
+            text below it and the rail + "N / M" pair in the footer. Position is
+            now stated exactly once (this text) plus the intra-slide "Paso x de y"
+            rendered by the reveal itself. */}
         <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1.5">
-          <LabProgress total={total} current={current} />
-          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-widest text-storm">
+          <p className="text-center font-mono text-xs uppercase tracking-widest text-storm">
             {lessonTitle ? `${lessonTitle} — ` : ""}Diapositiva {current + 1} de {total}
           </p>
         </div>
 
-        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar */}
+        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar.
+            Flex column so the inner wrapper owns the whole stage band and can
+            centre the slide inside it: a short slide used to hang from the top of
+            the band and dump every pixel of void at the bottom (measured 694px). */}
         <div
           ref={slideAreaRef}
           onClick={handleSlideClick}
-          className="flex-1 overflow-y-auto overflow-x-hidden p-0"
+          className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
           // Provide hint for coarse pointers
           role="group"
-          aria-label={`Diapositiva ${current + 1} de ${total}`}
+          aria-label="Área de la diapositiva"
           // Make area focusable so keyboard works even without explicit focus elsewhere
           tabIndex={0}
         >
           <div
-            className="w-full flex-1 flex flex-col justify-center motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
+            className="flex w-full flex-1 flex-col justify-center motion-safe:animate-[reveal-up_250ms_ease-out] motion-reduce:animate-none"
             key={current}
           >
             {slides[current]}
-          </div>
 
-          {/* Consent / error states rendered inside scroll area so they stay visible */}
-          {state === "consent" && (
-            <div className="mx-auto mt-6 w-full max-w-3xl">
-              <p className="mb-2 text-sm font-medium text-amber-800">
-                Completá tu autorización para guardar tu progreso.
+            {/* Consent / error states live in the same flex column so they stay
+                visible right under the centred slide. */}
+            {state === "consent" && (
+              <div className="mx-auto mt-6 w-full max-w-3xl shrink-0">
+                <p className="mb-2 text-sm font-medium text-amber-800">
+                  Completá tu autorización para guardar tu progreso.
+                </p>
+                <ConsentPendingCard />
+              </div>
+            )}
+
+            {state === "error" && error && (
+              <p role="alert" className="mx-auto mt-4 w-full max-w-3xl shrink-0 text-sm text-error">
+                {error}
               </p>
-              <ConsentPendingCard />
-            </div>
-          )}
-
-          {state === "error" && error && (
-            <p role="alert" className="mx-auto mt-4 w-full max-w-3xl text-sm text-error">
-              {error}
-            </p>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + indicadores (compact) */}
-        <div className="flex shrink-0 items-center justify-between border-t border-outline-variant bg-surface-card px-3 py-1.5">
+        {/* Footer — Atrás / Continuar + single dot rail (compact).
+            Grid instead of justify-between so the centre rail stays centred
+            when the advance slot renders nothing. */}
+        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-3 py-1.5">
           <Button
             variant="ghost"
             size="sm"
             onClick={goPrev}
             disabled={current === 0}
             aria-label="Diapositiva anterior"
-            className="focus-ring"
+            className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_SECONDARY} justify-self-start px-4`}
           >
             ← Atrás
           </Button>
 
-          {/* Indicadores centrales: dots + contador */}
+          {/* Single positional affordance in the footer: the dot rail.
+              The bare "N / M" counter that sat next to it was removed — it
+              restated the slide number the header's "Diapositiva N de M" text
+              already gives. The rail wins over the bare number because it also
+              shows remaining distance, and it stays aria-hidden here so the
+              header text remains the single announced source of truth. */}
           <div className="flex items-center gap-3" aria-hidden="true">
             <div className="hidden items-center gap-1.5 sm:flex">
               {Array.from({ length: total }, (_, i) => (
@@ -269,15 +301,18 @@ export function LessonCarousel({
                 />
               ))}
             </div>
-            <span className="font-mono text-xs text-storm">
-              {current + 1} / {total}
-            </span>
           </div>
 
+          {/* One advance control per screen. While the current slide's reveal
+              still has unblocked steps, IT renders the "Continuar" next to the
+              step it advances and this slot renders nothing — no hidden-but-
+              focusable duplicate left in the DOM. When the reveal is blocked by a
+              quiz it renders no advance button, so the footer keeps its own
+              (disabled) control there. */}
           {isLast ? (
             <Button
               size="sm"
-              className="bg-teal-600 shadow-teal-600/20 hover:bg-teal-700"
+              className={`${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end bg-teal-600 px-5 shadow-teal-600/20 hover:bg-teal-700`}
               onClick={handleFinish}
               disabled={state === "loading" || isRevealIncomplete}
               aria-label="Finalizar lección"
@@ -290,7 +325,7 @@ export function LessonCarousel({
             >
               {state === "loading" ? "Guardando progreso…" : "Finalizar"}
             </Button>
-          ) : (
+          ) : revealOwnsAdvance ? null : (
             <Button
               variant="secondary"
               size="sm"
@@ -302,7 +337,7 @@ export function LessonCarousel({
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring ${isRevealIncomplete ? "opacity-50" : ""}`}
+              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealIncomplete ? "opacity-50" : ""}`}
             >
               Continuar →
             </Button>

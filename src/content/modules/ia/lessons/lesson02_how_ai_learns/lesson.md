@@ -288,11 +288,29 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
 
 <Section number={12} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
 
-| Grado | Diagnóstico | ¿Qué pasa? |
-|---|---|---|
-| **1–2** (muy simple) | **Subajuste** (underfitting) | El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo. |
-| **3–6** (balanceado) | **Punto óptimo** | El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí. |
-| **8–15** (demasiado complejo) | **Sobreajuste** (overfitting) | El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto). |
+<Overfitting caption="Sube el grado y observa cómo cambia el régimen: subajuste, punto óptimo, sobreajuste" />
+
+<RevealSequence>
+
+<div>
+
+**1–2 (muy simple)** — **Subajuste** (underfitting). El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo.
+
+</div>
+
+<div>
+
+**3–6 (balanceado)** — **Punto óptimo**. El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí.
+
+</div>
+
+<div>
+
+**8–15 (demasiado complejo)** — **Sobreajuste** (overfitting). El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto).
+
+</div>
+
+</RevealSequence>
 
 <ConceptCard variant="key-idea">
 El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
