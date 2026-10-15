@@ -7,9 +7,9 @@
     "npm": ">=10"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H ${BIND_HOST:-localhost}",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H ${BIND_HOST:-localhost}",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "assets:check": "node scripts/check-hero-assets.mjs",
