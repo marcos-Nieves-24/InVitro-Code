@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getLabCardTheme } from "@/components/labs/LabCardTheme";
@@ -23,6 +23,10 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const len = modules.length;
   const [activeIndex, setActiveIndex] = useState(() => (len ? len - 1 : 0));
   const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Derivar cuántas tarjetas caben en el carrusel a partir del ancho útil real,
+  // en vez de fijar 4 siempre.
+  const [visibleCount, setVisibleCount] = useState(1);
   // Default to mobile so SSR/first paint renders exactly one card: the 4-card
   // window (desktop) only appears after the client matches the wide-query.
   // Rendering 4 cards in the SSR HTML makes the track ~1096px wide at a 390px
@@ -45,21 +49,26 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  if (len === 0) {
-    return (
-      <div className="mx-auto max-w-[1360px] py-12 text-center text-storm">
-        <p className="text-sm">No hay expediciones disponibles.</p>
-      </div>
-    );
-  }
+  // Medir el ancho útil real del carrusel y recalcular el número de tarjetas.
+  useEffect(() => {
+    const track = containerRef.current;
+    if (!track) return;
+    const update = () => {
+      const available = track.clientWidth;
+      const count = Math.max(1, Math.floor((available + GAP) / (CARD_W + GAP)));
+      setVisibleCount(Math.min(len, count));
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, [len]);
 
-  const trackOffset = isMobile ? 0 : activeIndex % 2 === 0 ? 0 : -8;
-  const maxOffset = (len - 1) * (CARD_W + GAP);
   const prev = useCallback(() => {
-    setActiveIndex((i) => (i - 1 + len) % len);
+    setActiveIndex((i) => (len ? (i - 1 + len) % len : 0));
   }, [len]);
   const next = useCallback(() => {
-    setActiveIndex((i) => (i + 1) % len);
+    setActiveIndex((i) => (len ? (i + 1) % len : 0));
   }, [len]);
 
   const onKeyDown = useCallback(
@@ -75,9 +84,19 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
     [prev, next],
   );
 
-  // Ventana rotada circular dinámica: activa queda segunda visible en desktop
-  // con ventana de hasta 4 visibles (se adapta a len < 4)
-  const visibleCount = Math.min(4, len);
+  if (len === 0) {
+    return (
+      <div className="mx-auto max-w-[1360px] py-12 text-center text-storm">
+        <p className="text-sm">No hay expediciones disponibles.</p>
+      </div>
+    );
+  }
+
+  const trackOffset = isMobile ? 0 : activeIndex % 2 === 0 ? 0 : -8;
+  const maxOffset = len ? (len - 1) * (CARD_W + GAP) : 0;
+
+  // Ventana rotada circular dinámica: activa queda segunda visible en desktop,
+  // con el número de visibles derivado del ancho disponible.
   const ordered = isMobile
     ? [modules[activeIndex]!]
     : Array.from({ length: visibleCount }, (_, k) => (activeIndex - 1 + k + len) % len).map(
@@ -98,12 +117,16 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
           type="button"
           aria-label="Anterior"
           onClick={prev}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
+          className="absolute top-1/2 left-2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:static md:left-auto md:top-auto md:z-auto md:h-14 md:w-14 md:translate-y-0"
         >
           <ChevronLeft size={22} aria-hidden="true" />
         </button>
 
-        <div className="scroll-hide flex-1 overflow-hidden pb-12" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        <div
+          ref={containerRef}
+          className="scroll-hide flex-1 min-w-0 overflow-hidden pb-12"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           <motion.ul
             aria-label="Modulos del curso"
             className="flex gap-4 touch-pan-y"
@@ -175,7 +198,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
           type="button"
           aria-label="Siguiente"
           onClick={next}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:h-14 md:w-14"
+          className="absolute top-1/2 right-2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#0AAE9A] shadow-[0_8px_24px_rgba(16,27,61,0.10)] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] md:static md:right-auto md:top-auto md:z-auto md:h-14 md:w-14 md:translate-y-0"
         >
           <ChevronRight size={22} aria-hidden="true" />
         </button>
