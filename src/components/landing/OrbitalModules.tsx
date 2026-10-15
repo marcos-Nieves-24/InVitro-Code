@@ -208,15 +208,18 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
           The button carries a 24x24 hit area (WCAG 2.2 target-size minimum);
           the dot itself stays visually small inside a centered flex box. */}
       <div className="mt-8 flex justify-center gap-2 md:mt-10 md:gap-3">
-        {modules.map((mod, i) => {
-          const isActive = i === activeIndex;
+        {ordered.map((mod) => {
+          const index = modules.findIndex((item) => item.slug === mod.slug);
+          const isActive = index === activeIndex;
           return (
             <button
               key={mod.slug}
               type="button"
               aria-label={`Ir a ${mod.title}`}
               aria-current={isActive ? "true" : undefined}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => {
+                if (index >= 0) setActiveIndex(index);
+              }}
               className="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0AAE9A] focus-visible:ring-offset-2"
             >
               <span

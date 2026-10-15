@@ -31,7 +31,7 @@ export default function LearnIndexPage() {
       <div className="mb-10 flex items-start justify-between">
         <div>
           <p className="mb-1 text-sm font-bold uppercase tracking-widest text-mint">Expediciones</p>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink">Elige tu Expedición</h2>
+          <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink">Elige tu Expedición</h1>
           <p className="mt-1 text-storm">Cada módulo es una expedición hacia el dominio de la Inteligencia Artificial.</p>
         </div>
         <Compass className="hidden h-10 w-10 text-mint md:block" />
