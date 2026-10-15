@@ -35,4 +35,5 @@
 
 ## Commits
 
-- (pendiente de commit) feat: saneamiento post-análisis (T1–T5)
+- 44b150a `chore(hygiene): remove unused plotly dep; add check script; de-public preview/lesson; prune extraneous; tidy public/`
+- 16f4602 `chore(deps): npm audit fix (non-force) — reduce transitive vulns (no majors)`
