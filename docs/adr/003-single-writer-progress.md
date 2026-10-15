@@ -38,3 +38,8 @@ Contras:
 
 - `npm run type-check` PASS
 - `npm run build` PASS (28 rutas)
+
+## Actualización 2026-10-15 (bloque saneamiento)
+
+- `reflection_completions` también entra en single-writer canonical Next.js por la ruta `POST /api/progress/reflection` (upsert por `user_id,block_id`; service-role, consent pendiente bloquea) y los 5 componentes que llamaban a FastAPI (`apiClient`)
+  se normalizan a `fetch("/api/progress/reflection")`. El endpoint FastAPI de progress sigue deshabilitado y reflection queda deprecado en ese writer.
