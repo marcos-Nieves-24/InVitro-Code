@@ -37,3 +37,15 @@
 
 - 44b150a `chore(hygiene): remove unused plotly dep; add check script; de-public preview/lesson; prune extraneous; tidy public/`
 - 16f4602 `chore(deps): npm audit fix (non-force) — reduce transitive vulns (no majors)`
+
+## Supabase hardening (block B)
+
+- [x] T9 — Migration `invitro_security_hardening` aplicada via MCP (read-write temporal).
+  - `ALTER FUNCTION ... SET search_path` en `get_leaderboard`, `get_leaderboard_rank`, `is_admin`, `set_lab_progress_updated_at`.
+  - `CREATE INDEX IF NOT EXISTS idx_user_achievements_achievement_id`.
+  - 30 RLS policies envueltas con `(SELECT auth.jwt() ...)`.
+  - `REVOKE UPDATE` sobre columnas sensibles (`profiles`, `progress`, `streaks`).
+- Post-check advisors:
+  - security: **0 findings** (clear).
+  - performance: remains `unused_index` (INFO, 5) y `multiple_permissive_policies` (WARN, 20). No crítico a la semántica; `rls_initplan` eliminado.
+- `apply_migration` success auditable en Supabase.
