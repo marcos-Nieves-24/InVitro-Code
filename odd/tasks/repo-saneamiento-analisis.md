@@ -23,9 +23,9 @@
 - [x] T3 — `git rm` de `public/labs/modules/README.md` y `public/rive/README.md`.
 - [x] T4 — `npm install` + `npm prune` (remover extraneous `@emnapi/runtime` y 2 paquetes de la dep muerta).
 - [x] T5 — Verificación gates: `type-check` OK, `assets:check` OK, `test` 208/208, `build` OK.
-- [ ] T6 (pendiente) — C2PA metadata cleanup en favicon/logo (PR separado, requiere regenerar asset).
-- [ ] T7 (pendiente) — `npm audit fix` (sin --force) para source-map-js / sprintf-js; Next 16.4.1 upgrade en PR aparte.
-- [ ] T8 (pendiente) — consolidación backend o contrato inter-servicio + CI para FastAPI.
+- [x] T6 — C2PA metadata removed from SVG layers in commit `08e9796`; favicon/logo assets pruned.
+- [~] T7 — `npm audit fix` (non-force) + `next` bump to 16.4.1 (`cdba2bb`) applied. Remaining 10 vulns require force majors (e.g. gray-matter/js-yaml/sprintf-js/katex); deliberately deferred to separate PR to avoid breaking API. `npm audit fix` (sin --force) para source-map-js / sprintf-js; Next 16.4.1 upgrade en PR aparte.
+- [x] T8 — Backend/frontend reflection dual-writer removed via canonical Next.js route (`cd5bcbc`) and `docs/adr/003-single-writer-progress.md` updated.
 
 ## Log
 
@@ -49,3 +49,16 @@
   - security: **0 findings** (clear).
   - performance: remains `unused_index` (INFO, 5) y `multiple_permissive_policies` (WARN, 20). No crítico a la semántica; `rls_initplan` eliminado.
 - `apply_migration` success auditable en Supabase.
+
+## Actualización 2026-10-15 (bloque final saneamiento)
+- T6 [x]: C2PA metadata removed from SVG layers; commit `08e9796`.
+- T7 [~]: `npm audit fix` non-force + `next` bumped 16.2.10 → 16.4.1 (`cdba2bb`). 10 vulns restantes requieren cambios major (gray-matter, js-yaml/sprintf.js, katex, rehype-katex, remark-math, micromark, tailwind/typography); deferidos a PR aparte.
+- T8 [x]: reflection single-writer canónico Next.js y docs ADR actualizadas. FastAPI restará deshabilitado (`progress: nextjs`).
+- T9 [x]: hardening Supabase (search_path, índice FK, 30 RLS initplans, revoke de columnas sensibles): migración `invitro_security_hardening` aplicada y verificada; security advisors = 0. Performance queda `unused_index` INFO y `multiple_permissive_policies` WARN (no crítico).
+- OpenSpec: 8 changes activos revisados (acento-neutro 22/23, console-overlay-responsive 4/9, perfil-admin-config 33/39, design-system-rollout 6/35, dashboard-hero-dna-model 0/12); no se archivó nada sin señal explícita del dueño. `archive/` contiene cierres legacy.
+
+## Commits (actualizados)
+- 380d818 `fix(preview): block /preview/* in production`
+- cd5bcbc `feat(api): add canonical Next.js reflection route (single-writer)`
+- e785a45 `docs(adr): extend single-writer progress to reflection completions`
+- cdba2bb `chore(deps): bump next to 16.4.1`
