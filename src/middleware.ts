@@ -27,6 +27,14 @@ const authRoutes = ["/sign-in", "/sign-up"];
 export default clerkMiddleware(async (auth, req) => {
   const { pathname } = req.nextUrl;
 
+  // Preview routes (dev/demo only) are never reachable in production.
+  if (
+    pathname.startsWith("/preview/") &&
+    process.env.NODE_ENV === "production"
+  ) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
   // If user is already signed in and visits sign-in/sign-up, redirect to dashboard
   const isAuthRoute = authRoutes.some(
     (route) => pathname === route || pathname.startsWith(route + "/"),
