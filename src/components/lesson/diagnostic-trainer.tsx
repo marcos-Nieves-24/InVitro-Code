@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { Flame, BarChart3 } from "lucide-react";
-import { useApiClient } from "@/hooks/useApiClient";
 
 // Plotly MUST be loaded only on the client — it accesses browser globals (self) at import time
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false }) as React.ComponentType<any>;
@@ -69,8 +68,6 @@ export function DiagnosticTrainer({
 
   // Abort controller ref for fetch cancellation on unmount
   const abortRef = useRef<AbortController | null>(null);
-
-  const { apiClient } = useApiClient();
 
   // Fetch pre-computed dataset on mount
   useEffect(() => {
@@ -178,14 +175,14 @@ export function DiagnosticTrainer({
 
   const handleContinueProgress = async () => {
     try {
-      await apiClient("/api/v1/progress/reflection", {
+      const response = await fetch("/api/progress/reflection", {
         method: "POST",
-        body: JSON.stringify({
-          moduleSlug,
-          lessonSlug,
-          blockId: "interactive-l01-features",
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ blockId: "interactive-l01-features" }),
       });
+      if (!response.ok) {
+        throw new Error(await response.text().catch(() => response.statusText));
+      }
     } catch (err) {
       console.error("Error al registrar progreso en reflexión:", err);
     }

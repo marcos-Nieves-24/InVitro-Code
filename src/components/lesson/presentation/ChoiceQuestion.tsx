@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useApiClient } from "@/hooks/useApiClient";
 import type { QuizOption } from "@/domain/slide";
 import { useRevealQuizBlock } from "./RevealSequence";
 import { QuizButton } from "./QuizButton";
@@ -40,7 +39,6 @@ export function ChoiceQuestion({
   const [error, setError] = useState<string | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
 
-  const { apiClient } = useApiClient();
   const quizBlock = useRevealQuizBlock();
 
   const selectedOption: QuizOption | undefined = useMemo(
@@ -108,30 +106,29 @@ export function ChoiceQuestion({
       if (blockId && moduleSlug && lessonSlug) {
         // Don't await blocking; handle async with catch
         setSubmitting(true);
-        void apiClient<{ success: boolean; error?: string }>(
-          "/api/v1/progress/reflection",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              moduleSlug,
-              lessonSlug,
-              blockId,
-            }),
-          },
-        )
-          .then((data) => {
-            if (!data.success) {
-              throw new Error(data.error ?? "Error al guardar progreso");
+        void (async () => {
+          try {
+            const response = await fetch("/api/progress/reflection", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ blockId }),
+            });
+            const data = (await response.json().catch(() => null)) as
+              | { success?: boolean; error?: string }
+              | null;
+            if (!response.ok || !data?.success) {
+              throw new Error(data?.error ?? "Error al guardar progreso");
             }
-          })
-          .catch((err: unknown) => {
+          } catch (err: unknown) {
             setError(
               err instanceof Error
                 ? err.message
                 : "Error de conexión — intenta de nuevo",
             );
-          })
-          .finally(() => setSubmitting(false));
+          } finally {
+            setSubmitting(false);
+          }
+        })();
       }
 
       if (nextIsCorrect) {
@@ -146,7 +143,6 @@ export function ChoiceQuestion({
       blockId,
       moduleSlug,
       lessonSlug,
-      apiClient,
       onCorrect,
     ],
   );
