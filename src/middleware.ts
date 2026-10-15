@@ -18,6 +18,7 @@ const publicRoutes = [
   "/cookies",
   "/terminos",
   "/ia",
+  "/preview",
 ];
 
 const adminRoutes = ["/admin", "/api/admin"];
