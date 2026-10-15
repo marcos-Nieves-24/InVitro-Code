@@ -64,11 +64,6 @@ skills-lock.json
 # clerk configuration (can include secrets)
 /.clerk/
 
-# Docker (local only)
-Dockerfile.nextjs
-.dockerignore
-docker-compose*.yml
-
 # Untracked SDD artifacts (local only)
 openspec/changes/archive/
 openspec/changes/fix-oauth-middleware/
