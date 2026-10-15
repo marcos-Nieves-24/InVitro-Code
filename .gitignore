@@ -49,6 +49,7 @@ __pycache__/
 # Local AI runtime state
 .atl/
 .agents/
+.opencode/
 .codegraph/
 .stitch-screens/
 audit-visual/
@@ -62,11 +63,6 @@ skills-lock.json
 
 # clerk configuration (can include secrets)
 /.clerk/
-
-# Docker (local only)
-Dockerfile.nextjs
-.dockerignore
-docker-compose*.yml
 
 # Untracked SDD artifacts (local only)
 openspec/changes/archive/

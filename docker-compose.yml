@@ -1,0 +1,59 @@
+# ──────────────────────────────────────────────────────────
+# docker-compose.yml — Desarrollo local con hot-reload
+# ──────────────────────────────────────────────────────────
+#
+# Uso:
+#   docker compose up          # Ejecutar con hot-reload
+#   docker compose down        # Detener
+#   docker compose build       # Reconstruir imagen
+#
+# Acceso: http://localhost:3000
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.nextjs
+      target: deps
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.local
+    environment:
+      - NEXT_TELEMETRY_DISABLED=1
+      - CI=1
+    command: npm run dev
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - internal
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env.local
+    environment:
+      - ENVIRONMENT=development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - internal
+    # No exposed ports — internal only
+
+networks:
+  internal:
+    driver: bridge
