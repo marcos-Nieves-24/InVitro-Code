@@ -41,6 +41,8 @@ import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 import { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
+import { PipelineStagesPlayer } from "@/components/anymotion/animations/PipelineStagesPlayer";
+import { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -178,6 +180,8 @@ export default async function LessonPage({ params }: Props) {
     ConidiaToVector: ConidiaToVectorPlayer,
     FeatureSpace2D: FeatureSpace2DPlayer,
     Overfitting: OverfittingPlayer,
+    PipelineStages: PipelineStagesPlayer,
+    SpeciesCompare: SpeciesComparePlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

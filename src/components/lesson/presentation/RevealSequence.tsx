@@ -81,6 +81,26 @@ export function consumeRevealAdvance(): boolean {
 
 export type RevealMode = "stack" | "appear";
 
+// P1-2 — ONE navigation-button token, exported so the presentation shell in
+// lesson-carousel.tsx imports it instead of redeclaring its own copy (a second
+// copy is a drift bug waiting to happen). 44px clears the minimum touch target;
+// rounded-lg resolves to --radius-lg (16px). It is `min-h-` rather than `h-`
+// because the reveal controls wrap to two lines on narrow viewports and must not
+// clip their label; measured at 1440x900 every nav control resolves to 44px.
+// Primary (forward) and secondary (back) are told apart by weight/fill, never by
+// a different size: before this token the shell had three heights (32/34/44) and
+// three radii (pill / 10px / 16px) for the same role.
+export const NAV_TOKEN = "min-h-11 rounded-lg!";
+export const NAV_TEXT_PRIMARY = "text-sm font-semibold";
+export const NAV_TEXT_SECONDARY = "text-sm font-medium";
+
+// P1-1 — the intra-slide indicator is a DIFFERENT fact from the slide counter
+// (position within the slide, not which slide), so it stays — but it is
+// deliberately rendered quieter: 10px, no uppercase, no letter-spacing, and a
+// lighter weight than the 12px uppercase "Diapositiva N de M" in the shell
+// header, so the eye reads slide position first and step position second.
+const STEP_LABEL = "font-mono text-[10px] font-normal tracking-tight text-storm/80";
+
 export interface RevealSequenceProps {
   children: ReactNode;
   /** When true, appearance of [data-quiz-blocked="true"] in the visible slice blocks advancement. */
@@ -411,6 +431,25 @@ export function RevealSequence({
 
   const isAppear = mode === "appear";
 
+  // Appear mode fits its own content.
+  //
+  // The container used to be sized against the VIEWPORT
+  // (`min-h-[min(45vh,calc(100vh-180px))]`). A short step then sat centred in
+  // that cage and pushed the next block hundreds of pixels below: the measured
+  // worst case was a 968px void between two content blocks, and 694px of empty
+  // stage underneath. The vertical anchoring now lives in the carousel, which
+  // centres the whole slide inside the stage band (see lesson-carousel.tsx), so
+  // the reveal only has to lay out its own children without a fake height.
+  //
+  // The bottom padding is dropped while the controls bar is rendered: that bar
+  // already carries `pb-3`, and the extra padding only deepens the empty space
+  // measured under the last content block.
+  const containerClass = isAppear
+    ? showHistory
+      ? "flex w-full flex-col items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
+      : "grid w-full place-items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
+    : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
+
   // Appear mode: show only current step centered (no vertical push).
   // Stack mode: show all revealed steps stacked vertically.
   const renderChildren = useMemo(() => {
@@ -420,14 +459,6 @@ export function RevealSequence({
     const current = allChildren[revealedCount - 1];
     return current ? [current] : [];
   }, [allChildren, revealedCount, isAppear, showHistory]);
-
-  const containerClass = isAppear
-    ? showHistory
-      ? "flex min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full flex-col items-center justify-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-      : total <= 3
-        ? "grid min-h-[40vh] md:min-h-[45vh] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-        : "grid min-h-[min(45vh,calc(100vh-180px))] md:min-h-[min(50vh,calc(100vh-240px))] w-full place-items-center gap-4 p-4 md:p-6 relative overflow-x-visible"
-    : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
 
   if (total === 0) return null;
 
@@ -528,9 +559,9 @@ export function RevealSequence({
         {hasMore ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
-              <span className="font-mono text-[10px] tracking-widest text-storm">
+              <p className={STEP_LABEL}>
                 Paso {revealedCount} de {total}
-              </span>
+              </p>
             )}
             {showHint && revealedCount === initialRevealed && (
               <div
@@ -544,7 +575,7 @@ export function RevealSequence({
                     e.stopPropagation();
                     dismissHint();
                   }}
-                  className="min-h-11 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+                  className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_SECONDARY} bg-brand-500 px-4 text-white transition hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2`}
                 >
                   Entendido
                 </button>
@@ -570,7 +601,7 @@ export function RevealSequence({
                         goPrev();
                       }}
                       aria-label="Mostrar contenido anterior"
-                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                      className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_SECONDARY} border border-gray-200 bg-surface-card px-5 text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
                     >
                       <span aria-hidden="true">←</span> Atrás
                     </button>
@@ -583,26 +614,26 @@ export function RevealSequence({
                       advance();
                     }}
                     aria-label="Mostrar siguiente contenido"
-                    className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+                    className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_PRIMARY} border border-brand-200 bg-brand-50 px-5 text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
                   >
                     Continuar <span aria-hidden="true">→</span>
                   </button>
                 </div>
-                <span
+                <p
                   aria-hidden="true"
                   className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
                 >
                   ▸ Click para continuar
-                </span>
+                </p>
               </>
             )}
           </div>
         ) : revealedCount > initialRevealed ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
-              <span className="font-mono text-[10px] tracking-widest text-storm">
+              <p className={STEP_LABEL}>
                 Paso {revealedCount} de {total}
-              </span>
+              </p>
             )}
             <button
               type="button"
@@ -612,16 +643,16 @@ export function RevealSequence({
                 goPrev();
               }}
               aria-label="Mostrar contenido anterior"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-surface-card px-5 text-sm font-semibold text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none"
+              className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_SECONDARY} border border-gray-200 bg-surface-card px-5 text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
             >
               <span aria-hidden="true">←</span> Atrás
             </button>
           </div>
         ) : total > 1 ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
-            <span className="font-mono text-[10px] tracking-widest text-storm">
+            <p className={STEP_LABEL}>
               Paso {revealedCount} de {total}
-            </span>
+            </p>
           </div>
         ) : null}
 

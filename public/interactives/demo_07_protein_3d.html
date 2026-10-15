@@ -176,7 +176,7 @@ function cargarProteina(pdbId) {
     legend: {orientation: 'h', y: 1.02, x: 0.5, xanchor: 'center'}
   };
 
-  Plotly.newReact('plot', trazas, layout, {responsive: true, displayModeBar: true, modeBarButtonsToRemove: ['toImage']});
+  Plotly.newPlot('plot', trazas, layout, {responsive: true, displayModeBar: true, modeBarButtonsToRemove: ['toImage']});
 
   if (rotacionActiva) {
     if (intervaloRotacion) clearInterval(intervaloRotacion);

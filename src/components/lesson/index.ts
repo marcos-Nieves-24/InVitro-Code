@@ -29,5 +29,7 @@ export { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 export { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 export { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 export { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
+export { PipelineStagesPlayer } from "@/components/anymotion/animations/PipelineStagesPlayer";
+export { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
 export { LessonVideo } from "./lesson-video";
 export { LabOfflineNotice } from "./LabOfflineNotice";

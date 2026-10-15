@@ -62,13 +62,32 @@ export function rankNameForXp(totalXp: number): string {
   return RANK_THRESHOLDS[rankIndexForXp(totalXp)].name;
 }
 
-export type ScientistVariant = 'f' | 'm' | 'x';
+/**
+ * Scientist figure variants. `'none'` means the user has not chosen a figure
+ * yet, and the hero must render nothing rather than guess.
+ */
+export type ScientistVariant = 'f' | 'm' | 'x' | 'none';
 
+/**
+ * Resolves the scientist figure variant from the user's stored gender.
+ *
+ * The figure only appears for an explicit choice. An unset, empty, or
+ * unrecognised value resolves to `'none'`, which renders no figure: the
+ * previous silent fallback to `'f'` meant every user who never opened
+ * /perfil was shown the female scientist without ever choosing it.
+ *
+ * `'x'` still resolves to `'f'` — not as a fallback but as a documented
+ * placeholder, because the non-binary artwork does not exist yet
+ * (`public/dashboard/cientifico-x.svg` is a byte-level duplicate of the
+ * female figure). Revisit when that art lands.
+ *
+ * Idempotent: a value that is already a variant resolves to itself.
+ */
 export function getScientistVariant(gender: string | null | undefined): ScientistVariant {
   if (gender === 'm') return 'm';
-  if (gender === 'x') return 'f';
   if (gender === 'f') return 'f';
-  return 'f';
+  if (gender === 'x') return 'f'; // placeholder until the non-binary asset exists
+  return 'none';
 }
 
 /**
