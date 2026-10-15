@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AlertCircle, CheckCircle2, Target, TrendingUp } from "lucide-react";
-import { useApiClient } from "@/hooks/useApiClient";
 
 interface Metrics {
   accuracy: number;
@@ -68,8 +67,6 @@ export function ThresholdLab({
   const [prevBestAccuracy, setPrevBestAccuracy] = useState<number>(0);
 
   const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { apiClient } = useApiClient();
-
   // Fetch pre-computed dataset on mount
   useEffect(() => {
     setFetchLoading(true);
@@ -130,14 +127,17 @@ export function ThresholdLab({
   const handleComplete = async () => {
     if (!hasCompleted) {
       try {
-        await apiClient("/api/v1/progress/reflection", {
+        const response = await fetch("/api/progress/reflection", {
           method: "POST",
-          body: JSON.stringify({
-            moduleSlug,
-            lessonSlug,
-            blockId,
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ blockId }),
         });
+        const data = (await response.json().catch(() => null)) as
+          | { success?: boolean; error?: string }
+          | null;
+        if (!response.ok || !data?.success) {
+          throw new Error(data?.error ?? "Error al guardar progreso");
+        }
         setHasCompleted(true);
       } catch (error) {
         console.error("Error completing lab:", error);

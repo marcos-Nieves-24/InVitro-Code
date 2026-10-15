@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { Flame } from "lucide-react";
-import { useApiClient } from "@/hooks/useApiClient";
 
 interface ConidiaPattern {
   id: number;
@@ -41,8 +40,6 @@ export function ConidiaSortGame({
   const [gameOver, setGameOver] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [posted, setPosted] = useState(false);
-  const { apiClient } = useApiClient();
-
   const current = PATTERNS[currentIndex];
   const isLast = currentIndex >= PATTERNS.length - 1;
 
@@ -64,19 +61,23 @@ export function ConidiaSortGame({
   useEffect(() => {
     if (!gameOver || posted || submitting) return;
     setSubmitting(true);
-    apiClient("/api/v1/progress/reflection", {
-      method: "POST",
-      body: JSON.stringify({
-        moduleSlug,
-        lessonSlug,
-        blockId,
-      }),
-    })
-      .then(() => setPosted(true))
-      .catch(() => {
+    void (async () => {
+      try {
+        const response = await fetch("/api/progress/reflection", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ blockId }),
+        });
+        if (response.ok) {
+          const data = (await response.json().catch(() => null)) as { success?: boolean } | null;
+          if (data?.success) setPosted(true);
+        }
+      } catch {
         // Silent fail — XP is nice-to-have
-      })
-      .finally(() => setSubmitting(false));
+      } finally {
+        setSubmitting(false);
+      }
+    })();
   }, [gameOver, posted, submitting]);
 
   const handleChoice = useCallback(
