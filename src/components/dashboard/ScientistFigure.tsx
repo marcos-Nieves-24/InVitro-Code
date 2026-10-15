@@ -10,6 +10,16 @@ export interface ScientistFigureProps {
   priority?: boolean;
 }
 
+const FIGURE_SRC = {
+  m: "/dashboard/cientifico-1.svg",
+  f: "/dashboard/cientifica-1.svg",
+} as const;
+
+const FIGURE_ALT = {
+  m: "Científico con hélice de ADN",
+  f: "Científica con hélice de ADN",
+} as const;
+
 export function ScientistFigure({
   variant,
   alt,
@@ -17,34 +27,36 @@ export function ScientistFigure({
   priority = false,
 }: ScientistFigureProps) {
   const resolved = getScientistVariant(variant);
-  const initialSrc =
-    resolved === "m"
-      ? "/dashboard/cientifico-1.svg"
-      : "/dashboard/cientifica-1.svg";
+  const hasFigure = resolved === "m" || resolved === "f";
+  const initialSrc = hasFigure ? FIGURE_SRC[resolved] : "";
 
   // Single source: alt derives from the variant actually rendered, so the
   // male scientist never announces itself as "Científica".
-  const resolvedAlt = alt ?? (resolved === "m" ? "Científico con hélice de ADN" : "Científica con hélice de ADN");
+  const resolvedAlt = hasFigure ? (alt ?? FIGURE_ALT[resolved]) : undefined;
 
   const [src, setSrc] = useState(initialSrc);
-  const [hasError, setHasError] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    setHasError(false);
+    setFailed(false);
     setSrc(initialSrc);
   }, [initialSrc]);
 
-  const displaySrc = hasError ? "/dashboard/cientifica-1.svg" : src;
+  // Render nothing when the user has not chosen a figure, or when the chosen
+  // asset fails to load. Substituting a different variant's figure would show
+  // the user a scientist they never picked, which is the exact failure this
+  // component used to produce for every unset profile.
+  if (!hasFigure || failed) return null;
 
   return (
     <div className={`h-auto w-full overflow-visible ${className ?? ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={displaySrc}
+        src={src}
         alt={resolvedAlt}
         className="h-auto w-full object-contain object-bottom"
         loading={priority ? "eager" : "lazy"}
-        onError={() => setHasError(true)}
+        onError={() => setFailed(true)}
       />
     </div>
   );

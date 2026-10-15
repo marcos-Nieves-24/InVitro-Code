@@ -130,6 +130,9 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
     ? undefined
     : { transform: "translateX(40px)", opacity: 0 };
 
+  const scientistVariant = getScientistVariant(gender);
+  const hasScientist = scientistVariant !== "none";
+
   return (
     <section className="relative min-h-[400px] rounded-3xl lg:min-h-[480px]">
       <div ref={fondoRef} className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
@@ -187,17 +190,18 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
           connects with the hero edge instead of escaping past the corner curve.
           pointer-events-none on the layer, auto on the figure so hover survives. */}
       <div className="pointer-events-none absolute inset-0 z-[2] hidden overflow-hidden rounded-3xl lg:block">
-        <div
-          ref={figureRef}
-          style={figureInitialStyle}
-          className="pointer-events-auto absolute bottom-0 right-[4%] aspect-[440/511] w-[clamp(280px,28vw,380px)] lg:right-[6%]"
-          onMouseEnter={() => setIsHoverScientist(true)}
-          onMouseLeave={() => setIsHoverScientist(false)}
-        >
-          <ScientistFigure
-            variant={getScientistVariant(gender)}
-            priority
-          />
+        {/* Render only when the user actually chose a figure. Without this
+            guard the absolute box stays behind as an empty 380x441 slot with
+            live hover handlers pointing at a bubble with nothing behind it. */}
+        {hasScientist && (
+          <div
+            ref={figureRef}
+            style={figureInitialStyle}
+            className="pointer-events-auto absolute bottom-0 right-[4%] aspect-[440/511] w-[clamp(280px,28vw,380px)] lg:right-[6%]"
+            onMouseEnter={() => setIsHoverScientist(true)}
+            onMouseLeave={() => setIsHoverScientist(false)}
+          >
+            <ScientistFigure variant={scientistVariant} priority />
           {/* Hover speech bubble — connected to scientist, bouncy expand/shrink */}
           <motion.div
             className="pointer-events-none absolute -left-[168px] top-[68px] hidden lg:block"
@@ -227,8 +231,9 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
                 aria-hidden="true"
               />
             </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
+        )}
       </div>
 
     </section>
