@@ -183,12 +183,19 @@ plt.legend()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l03-metrics-tradeoff"
+<ChoiceQuestion
+  question="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
   moduleSlug="machine-learning"
   lessonSlug="lesson03_classification"
-  prompt="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
-  answer="Alto recall. En diagnóstico médico, un falso negativo (decir que no hay cáncer cuando sí lo hay) puede ser fatal. Prefiero detectar todos los casos posibles aunque algunos resulten ser falsas alarmas (falsos positivos) que se pueden descartar con más estudios. En cambio, en un sistema de recomendación de contenido, preferirías alta precisión para no recomendar cosas irrelevantes."
+  blockId="reflection-l03-metrics-tradeoff"
+  allowContinueOnIncorrect
+  explanation="Alto recall: en diagnóstico médico, un falso negativo (cáncer no detectado) puede ser fatal. Se prefieren falsas alarmas descartables con más estudios. En recomendación de contenido, en cambio, conviene alta precisión."
+  options={[
+    { id: "a", label: "Alto recall, para no dejar sin detectar casos reales", correct: true, feedback: "¡Correcto! Los falsos negativos son los costosos en medicina." },
+    { id: "b", label: "Alta precisión, para evitar falsas alarmas", correct: false, feedback: "Falso: optimizar precisión dispararía los falsos negativos." },
+    { id: "c", label: "Da igual: ambas métricas siempre coinciden", correct: false, feedback: "Falso: precisión y recall suelen tensionarse en el umbral." },
+    { id: "d", label: "Máxima accuracy global por encima de las otras", correct: false, feedback: "Falso: el contexto dictate qué error es más costoso." },
+  ]}
 />
 
 </Section>
@@ -278,12 +285,19 @@ La regresión logística convierte una combinación lineal en una probabilidad m
 
 <Section number={12} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l03-accuracy-trap"
+<ChoiceQuestion
+  question="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
   moduleSlug="machine-learning"
   lessonSlug="lesson03_classification"
-  prompt="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
-  answer="No. Tiene 95% de accuracy pero 0% de recall para spam — no detecta ningún spam. En datasets desbalanceados, accuracy es engañosa. Necesitas mirar precisión y recall por clase. Este modelo es inútil: es equivalente a no tener filtro de spam."
+  blockId="reflection-l03-accuracy-trap"
+  allowContinueOnIncorrect
+  explanation="No: 95% de accuracy pero 0% de recall para spam, no detecta ningún spam. En datasets desbalanceados la accuracy engaña; conviene mirar precisión y recall por clase, o promedio macro F1."
+  options={[
+    { id: "a", label: "No: 0% recall de spam hace inútil al modelo", correct: true, feedback: "¡Correcto! 95% accuracy engaña en datasets desbalanceados." },
+    { id: "b", label: "Sí: 95% de accuracy ya es excelente", correct: false, feedback: "Falso: no detecta ningún spam, equivale a no tener filtro." },
+    { id: "c", label: "Sí: la accuracy global alcanza para elegir modelo", correct: false, feedback: "Falso: con desbalance hay que mirar métricas por clase." },
+    { id: "d", label: "Cualquier modelo supera a no tener filtro", correct: false, feedback: "Falso: este modelo es literalmente no tener filtro." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">

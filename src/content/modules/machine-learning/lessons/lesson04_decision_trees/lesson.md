@@ -91,12 +91,19 @@ Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan 
   ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l04-depth-overfit"
+<ChoiceQuestion
+  question="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglas?"
   moduleSlug="machine-learning"
   lessonSlug="lesson04_decision_trees"
-  prompt="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglas?"
-  answer="Sobreajuste clásico: el árbol creció hasta memorizar cada muestra. Tres estrategias: (1) limitar max_depth con validación cruzada para encontrar el punto óptimo, (2) aumentar min_samples_split para forzar hojas con más muestras, (3) usar ccp_alpha para poda por costo-complejidad que elimina ramas con poca ganancia."
+  blockId="reflection-l04-depth-overfit"
+  allowContinueOnIncorrect
+  explanation="Sobreajuste clásico: el árbol creció hasta memorizar cada muestra. Estrategias: (1) limitar max_depth con CV, (2) aumentar min_samples_split, (3) poda por costo-complejidad (ccp_alpha)."
+  options={[
+    { id: "a", label: "Sobreajuste: limitar max_depth, subir min_samples_split y podar (ccp_alpha)", correct: true, feedback: "¡Correcto! Es la receta clásica para árboles sobreajustados." },
+    { id: "b", label: "Subajuste: conviene profundizar más el árbol", correct: false, feedback: "Falso: train 100% indica que ya es demasiado profundo." },
+    { id: "c", label: "Es ruido en los datos: conviene eliminar features", correct: false, feedback: "Falso: la causa es la complejidad del árbol, no las features." },
+    { id: "d", label: "Con más profundidad mejora la generalización", correct: false, feedback: "Falso: más profundidad empeora el gap train/test." },
+  ]}
 />
 
 </Section>

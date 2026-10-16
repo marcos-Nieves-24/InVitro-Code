@@ -187,24 +187,38 @@ print(f"% de genes con faltantes: {(expression.isnull().any().sum() / n_genes) *
 expression_filled = expression.fillna(expression.median())
 ```
 
-<ReflectionCheck
-  blockId="reflection-l06-gene-missing"
+<ChoiceQuestion
+  question="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  prompt="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
-  answer="Seguro: cuándo los valores faltantes son MCAR (Missing Completely At Random), cómo errores aleatorios de medición. La mediana es representativa de la distribución subyacente. Peligroso: cuándo son MNAR (Missing Not At Random). Ejemplo: genes con expresión extremadamente baja o alta qué el secuenciador no puede medir. Imputar con la mediana enmascara los casos más interesantes (expresión anormal = posible cáncer). Ahí necesitas un indicador de 'estaba faltante' o un modelo específico."
+  blockId="reflection-l06-gene-missing"
+  allowContinueOnIncorrect
+  explanation="Seguro cuándo MCAR (errores aleatorios): mediana representa la distribución. Peligroso cuándo MNAR: genes con expresión extrema no medible; imputar enmascara casos anormales (posible cáncer)."
+  options={[
+    { id: "a", label: "Seguro si MCAR (errores aleatorios, mediana representativa); peligroso si MNAR, p. ej. genes de expresión extrema no medibles", correct: true, feedback: "¡Exacto! El patrón de faltantes (MCAR vs MNAR) decide, no la robustez." },
+    { id: "b", label: "Siempre seguro: la mediana es robusta a outliers, por lo que no importa el patrón de faltantes", correct: false, feedback: "La robustez no arregla MNAR; imputar enmascara precisamente los casos anómalos informativos." },
+    { id: "c", label: "Siempre peligroso: conviene eliminar toda fila con valores faltantes", correct: false, feedback: "Con muchos faltantes imputar puede ser razonable si MCAR; eliminar filas pierde información." },
+    { id: "d", label: "Seguro siempre que los datos sean normales; MCAR/MNAR no importa", correct: false, feedback: "La normalidad no decide; lo que importa es el patrón de faltantes (MCAR vs MNAR)." },
+  ]}
 />
 
 </Section>
 
 <Section number={8} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l06-eda-flow"
+<ChoiceQuestion
+  question="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  prompt="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
-  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué solo puedes verificar con EDA. Si modelas primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitas transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
+  blockId="reflection-l06-eda-flow"
+  allowContinueOnIncorrect
+  explanation="Los modelos asumen normalidad, no multicolinealidad y sin outliers extremos, verificables sólo con EDA; modelar primero da métricas falsamente optimistas, transformaciones inadvertidas y features redundantes."
+  options={[
+    { id: "a", label: "Porque los modelos asumen normalidad, no multicolinealidad y sin outliers extremos, verificables sólo con EDA", correct: true, feedback: "¡Exacto! EDA primero, modelo después." },
+    { id: "b", label: "EDA después del modelo también funciona; los modelos detectan solos los problemas", correct: false, feedback: "Los modelos asumen propiedades que deben verificarse antes; no detectan multicolinealidad ni outliers por sí solos." },
+    { id: "c", label: "EDA es solo visualización estética y no cambia las métricas del modelo", correct: false, feedback: "EDA detecta problemas que sesgan métricas; ignorarla puede inflar la performance aparente." },
+    { id: "d", label: "Modelar primero y luego EDA permite un EDA más dirigido por el modelo", correct: false, feedback: "El orden propuesto viola el flujo; los supuestos deben validarse con los datos antes de entrenar." },
+  ]}
 />
 
 </Section>

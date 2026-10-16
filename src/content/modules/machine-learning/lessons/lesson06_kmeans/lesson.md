@@ -169,12 +169,19 @@ K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamen
 
 <Section number={8} title="Ejercicios" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l06-elbow-vs-silhouette"
+<ChoiceQuestion
+  question="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál eliges y por qué?"
   moduleSlug="machine-learning"
   lessonSlug="lesson06_kmeans"
-  prompt="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál eliges y por qué?"
-  answer="Depende del contexto. Si el objetivo es exploratorio (descubrir estructura), elegiría K=5 porque la silueta más alta indica clústeres mejor definidos. Si el objetivo es comunicación (explicar los grupos a stakeholders), K=3 puede ser preferible por simplicidad aunque la calidad sea menor. En la práctica, inspecciona ambos: a veces K=5 revela un grupo pequeño pero biológicamente relevante que K=3 esconde."
+  blockId="reflection-l06-elbow-vs-silhouette"
+  allowContinueOnIncorrect
+  explanation="Depende del contexto: K=5 si buscás clústeres mejor definidos (silueta más alta) y exploración; K=3 si el objetivo es comunicación/simplicidad para stakeholders. Inspeccioná ambos: K=5 puede revelar un grupo pequeño pero relevante que K=3 esconde."
+  options={[
+    { id: "a", label: "Depende: K=5 para clústeres definidos, K=3 para simples de comunicar", correct: true, feedback: "¡Correcto! El contexto dictate la elección." },
+    { id: "b", label: "Siempre elegir K=5 porque la silueta es más alta", correct: false, feedback: "Falso: simplicidad puede primar en comunicación." },
+    { id: "c", label: "Siempre elegir K=3 porque el codo es canónico", correct: false, feedback: "Falso: el codo no es suficiente solo." },
+    { id: "d", label: "Elegir el menor K siempre para evitar overfitting", correct: false, feedback: "Falso: K menor puede esconder grupos relevantes." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">

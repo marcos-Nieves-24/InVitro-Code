@@ -155,12 +155,19 @@ print(f"Moda: {mode}")
 Ejecuta este código en tu notebook. ¿Están cerca la media y la mediana? Cuándo son similares, es una buena señal de qué los datos son simétricos. Si difieren mucho, hay sesgo.
 </CalloutInfo>
 
-<ReflectionCheck
-  blockId="reflection-l01-mean-median-scores"
+<ChoiceQuestion
+  question="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
-  answer="Que la distribución es aproximadamente simétrica — no hay valores extremos qué desplacen la media. En una distribución simétrica, media ≈ mediana. Si fueran muy diferentes, sabríamos qué hay sesgo o outliers."
+  blockId="reflection-l01-mean-median-scores"
+  allowContinueOnIncorrect
+  explanation="La distribución es aproximadamente simétrica: no hay valores extremos que desplacen la media; en una distribución simétrica media ≈ mediana. Si difiriesen mucho, indicaría sesgo u outliers."
+  options={[
+    { id: "a", label: "La distribución es aproximadamente simétrica, sin extremos que sesguen la media", correct: true, feedback: "Correcto: media ≈ mediana indica simetría sin outliers influyentes." },
+    { id: "b", label: "Hay asimetría positiva con outliers altos", correct: false, feedback: "Falso: la asimetría positiva elevaría la media por encima de la mediana." },
+    { id: "c", label: "Los datos son perfectamente uniformes", correct: false, feedback: "No necesariamente: media y mediana casi iguales no implican uniformidad exacta." },
+    { id: "d", label: "No se puede concluir nada sin conocer la moda", correct: false, feedback: "La moda complementa, pero media y mediana ya revelan simetría." },
+  ]}
 />
 
 </Section>
@@ -240,12 +247,19 @@ print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} m
 
 **¿Qué observamos?** El paciente 20 tuvo una reducción de 45 mm — mucho mayor qué el resto.
 
-<ReflectionCheck
-  blockId="reflection-l01-tumor-outlier"
+<ChoiceQuestion
+  question="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
-  answer="Reportaría la mediana (13 mm). El valor 45 mm es un outlier qué infla la media artificialmente. La mediana de 13 mm representa mejor la experiencia típica del paciente. Podría complementar con el IQR (4 mm) para indicar qué el 50% central de pacientes tuvo reducciones entre 11 y 15 mm."
+  blockId="reflection-l01-tumor-outlier"
+  allowContinueOnIncorrect
+  explanation="Reporta la mediana (13 mm): el valor 45 mm es un outlier que infla la media a 14.5 mm. La mediana refleja la experiencia típica; complementa con IQR (4 mm), cuyo 50% central estuvo entre 11 y 15 mm."
+  options={[
+    { id: "a", label: "La mediana (13 mm), porque el 45 mm es outlier que infla la media", correct: true, feedback: "Correcto: la mediana es robusta al outlier y representa la experiencia típica." },
+    { id: "b", label: "La media (14.5 mm), porque usa toda la información disponible", correct: false, feedback: "La usa, pero el outlier de 45 mm la distorsiona artificialmente." },
+    { id: "c", label: "La media, porque al ser mayor da un panorama más favorable", correct: false, feedback: "Mayor por el outlier no significa mejor representación típica." },
+    { id: "d", label: "Solo el IQR (4 mm), sin reportar centro", correct: false, feedback: "El IQR mide dispersión; falta una medida de centro como la mediana." },
+  ]}
 />
 
 </Section>
@@ -323,12 +337,19 @@ plt.tight_layout()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l01-dau"
+<ChoiceQuestion
+  question="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
-  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un solo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  blockId="reflection-l01-dau"
+  allowContinueOnIncorrect
+  explanation="La mediana es robusta a días atípicos (picos virales, caídas del servidor) y refleja un día típico; el promedio puede inflarse por un día excepcional. Monitorear ambas detecta anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  options={[
+    { id: "a", label: "La mediana refleja un día típico y, comparada con la media, revela picos puntuales", correct: true, feedback: "Correcto: mediana robusta a atípicos; divergencias detectan anomalías." },
+    { id: "b", label: "La mediana reemplaza totalmente al promedio", correct: false, feedback: "No: conviene monitorear ambas para detectar anomalías." },
+    { id: "c", label: "La mediana es más barata de calcular", correct: false, feedback: "El costo de cálculo no es el motivo; lo es la robustez." },
+    { id: "d", label: "La mediana siempre es mayor que la media en DAU", correct: false, feedback: "No hay orden garantizado; depende del sesgo." },
+  ]}
 />
 
 </Section>

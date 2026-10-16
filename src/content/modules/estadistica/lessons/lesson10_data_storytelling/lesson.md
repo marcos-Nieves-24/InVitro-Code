@@ -79,12 +79,19 @@ Errores clásicos de visualización: ejes truncados que exageran las diferencias
 - Etiquetas claras: titulos qué son conclusiones, no descripciones
 </CalloutInfo>
 
-<ReflectionCheck
-  blockId="reflection-l10-dashboard"
+<ChoiceQuestion
+  question="Un dashboard tiene 12 graficos y ocupa 3 pantallas de scroll. Cuál es el problema y cómo lo arreglarias?"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  prompt="Un dashboard tiene 12 graficos y ocupa 3 pantallas de scroll. Cuál es el problema y cómo lo arreglarias?"
-  answer="Nadie mira 12 graficos. La atencion es el recurso más escaso. Solucion: (1) elige los 3 KPIs qué realmente importan, (2) ponlos en la primera pantalla sin scroll, (3) los otros 9 graficos muévelos a una pagina secundaria. La regla: si el CEO no puede entender el dashboard en 10 segundos, fallaste."
+  blockId="reflection-l10-dashboard"
+  allowContinueOnIncorrect
+  explanation="La atención es escasa: elige los 3 KPIs clave para la primera pantalla sin scroll y mueve los otros 9 a una página secundaria; la prueba es que el CEO lo entienda en 10 segundos."
+  options={[
+    { id: "a", label: "Más gráficos aportan más información, así que 12 es mejor que 3", correct: false, feedback: "Nadie analiza 12 gráficos; la sobrecarga reduce la atención." },
+    { id: "b", label: "Elegir los 3 KPIs clave en la primera pantalla sin scroll y mover los otros 9 a una página secundaria", correct: true, feedback: "¡Exacto! La jerarquía visual prioriza la decisión." },
+    { id: "c", label: "El scroll de 3 pantallas es aceptable porque todos leen todos los gráficos", correct: false, feedback: "Si necesita scroll, la decisión clave no está a la vista." },
+    { id: "d", label: "Los gráficos secundarios deben ocupar la primera pantalla y los KPIs ir abajo", correct: false, feedback: "La visualización principal debe estar arriba a la izquierda, no enterrada." },
+  ]}
 />
 
 </Section>
@@ -127,12 +134,19 @@ Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son
 
 <Section number={7} title="Checkpoint final del modulo" eyebrow="EVALUACION">
 
-<ReflectionCheck
-  blockId="reflection-l10-storytelling"
+<ChoiceQuestion
+  question="Tu modelo de ML predice que el 85 % de los pacientes responde a un tratamiento. El director médico te pregunta si deben usarlo en el hospital. ¿Qué le respondes?"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  prompt="Tu modelo de ML predice que el 85 % de los pacientes responde a un tratamiento. El director médico te pregunta si deben usarlo en el hospital. ¿Qué le respondes?"
-  answer="No le digas solo '85 % de exactitud'. Dile: 'De cada 100 pacientes, el modelo identifica correctamente a 85. Pero de los 15 en los que se equivoca, algunos son pacientes que sí responderían y el modelo dijo que no (pierden la oportunidad de tratarse). Otros son pacientes que no responderían, pero el modelo dijo que sí (recibirán un tratamiento sin beneficio y con efectos secundarios). ¿Cuál error es más grave para el hospital?' Esto convierte una métrica abstracta en un dilema clínico que el director puede evaluar."
+  blockId="reflection-l10-storytelling"
+  allowContinueOnIncorrect
+  explanation="Del 85 % de aciertos, los 15 errores se dividen en falsos negativos (pacientes que perderían tratamiento) y falsos positivos (tratamiento sin beneficio + efectos secundarios); la respuesta debe convertir la métrica en un dilema clínico."
+  options={[
+    { id: "a", label: "Reportar solo el 85 % de exactitud y recomendar usarlo tal cual", correct: false, feedback: "Una métrica abstracta no comunica a quién se le niega o se le da tratamiento inútil." },
+    { id: "b", label: "Traducir a 85 correctos y 15 errores, separando falsos negativos y falsos positivos para que el director compare su gravedad", correct: true, feedback: "¡Exacto! Ese dilema clínico es lo que un decisor necesita." },
+    { id: "c", label: "Descartar el modelo porque no alcanza el 100 % de exactitud", correct: false, feedback: "Ningún modelo clínico es perfecto; la decisión depende del costo de cada error." },
+    { id: "d", label: "Implementarlo automáticamente sin discutir los errores con el director", correct: false, feedback: "Desplegar sin evaluar los tipos de error puede dañar pacientes." },
+  ]}
 />
 
 <AnswerReveal summary="Ver respuesta">

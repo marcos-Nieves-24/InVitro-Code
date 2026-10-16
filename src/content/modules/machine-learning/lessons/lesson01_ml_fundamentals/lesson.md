@@ -154,12 +154,19 @@ La división train/test es la herramienta más básica para medir generalizació
   ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l01-overfit-underfit"
+<ChoiceQuestion
+  question="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
-  answer="Es un caso claro de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Tres cosas que probaría: (1) simplificar el modelo (reducir complejidad), (2) agregar más datos de entrenamiento si es posible, (3) aplicar regularización para penalizar la complejidad excesiva."
+  blockId="reflection-l01-overfit-underfit"
+  allowContinueOnIncorrect
+  explanation="Es sobreajuste (train 99% vs test 65%): el modelo memorizó entrenamiento y no generaliza. Probar: (1) simplificar (reducir complejidad), (2) más datos de entrenamiento, (3) regularización."
+  options={[
+    { id: "a", label: "Hay sobreajuste: simplificar el modelo, agregar datos y regularizar", correct: true, feedback: "¡Correcto! El gap train/test revela sobreajuste, no generalización." },
+    { id: "b", label: "Hay subajuste: conviene aumentar la complejidad", correct: false, feedback: "Falso: train 99% descarta subajuste; el problema es generalización." },
+    { id: "c", label: "El 99% de train garantiza buen modelo; sólo recalcular la métrica", correct: false, feedback: "Falso: accuracy de train alta no implica buen rendimiento en datos nuevos." },
+    { id: "d", label: "Falta más entrenamiento con los mismos datos para mejorar test", correct: false, feedback: "Falso: más épocas empeoran la memorización del ruido." },
+  ]}
 />
 
 </Section>
@@ -310,12 +317,19 @@ Una empresa SaaS quiere predecir qué usuarios cancelarán su suscripción el pr
 
 El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días Y abrieron >3 tickets de soporte = 85% probabilidad de abandono"*. Con esta información, el equipo de customer success interviene **antes** de que cancelen.
 
-<ReflectionCheck
-  blockId="reflection-l01-saas-churn"
+<ChoiceQuestion
+  question="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
-  answer="Porque predecir antes permite actuar: puedes enviar un descuento, una sesión de onboarding personalizada, o contactar al usuario para resolver sus problemas. Si solo registras quién abandonó, ya es tarde — ese cliente se fue. La predicción temprana convierte un problema reactivo en uno proactivo."
+  blockId="reflection-l01-saas-churn"
+  allowContinueOnIncorrect
+  explanation="Predecir antes permite actuar (descuento, onboarding personalizado, contacto), convirtiendo un problema reactivo en proactivo. Si sólo registras quién abandonó, ya es tarde, ese cliente se fue."
+  options={[
+    { id: "a", label: "Porque permite actuar a tiempo y convertirlo en proactivo", correct: true, feedback: "¡Correcto! La predicción temprana habilita intervención real." },
+    { id: "b", label: "Porque registrar quién abandonó alcanza para el reporting", correct: false, feedback: "Falso: eso ya no permite recuperar al cliente." },
+    { id: "c", label: "Porque esperar al abandono evita contactos innecesarios", correct: false, feedback: "Falso: perder al cliente cuesta más que contactarlo antes." },
+    { id: "d", label: "La predicción sólo sirve para reportes históricos", correct: false, feedback: "Falso: su valor está en habilitar acciones preventivas." },
+  ]}
 />
 
 </Section>
@@ -378,20 +392,34 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
 
 <Section number={16} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l01-trad-vs-ml"
+<ChoiceQuestion
+  question="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
-  answer="En programación tradicional escribo reglas explícitas (if temperatura > 38: alerta_fiebre()). En ML le doy ejemplos etiquetados al algoritmo y él descubre las reglas. Usaría programación tradicional para problemas con reglas claras y estables (cálculo de impuestos, validación de formularios). Usaría ML cuando las reglas son difíciles de expresar (reconocimiento de imágenes, predicción de abandono de clientes, diagnóstico médico)."
+  blockId="reflection-l01-trad-vs-ml"
+  allowContinueOnIncorrect
+  explanation="Programación tradicional = escribo reglas explícitas; ML = le doy ejemplos etiquetados y aprende las reglas. Tradicional para reglas claras y estables; ML para reglas difíciles de expresar (imágenes, abandono, diagnóstico)."
+  options={[
+    { id: "a", label: "Trad = reglas explícitas para problemas claros; ML aprende reglas de ejemplos para problemas difíciles", correct: true, feedback: "¡Correcto! Esa es la diferencia clave entre enfoques." },
+    { id: "b", label: "ML reemplaza por completo la programación tradicional", correct: false, feedback: "Falso: son complementarias, no sustitutivas." },
+    { id: "c", label: "La programación tradicional es siempre menos precisa", correct: false, feedback: "Falso: con reglas claras es exacta y predecible." },
+    { id: "d", label: "Todo problema se resuelve mejor con ML por su automatización", correct: false, feedback: "Falso: ML brilla donde las reglas son difíciles de expresar." },
+  ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l01-overfit-diagnosis"
+<ChoiceQuestion
+  question="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
-  answer="Es sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Soluciones: (1) Simplificar el modelo — reducir complejidad, menos features, regularización. (2) Conseguir más datos de entrenamiento si es posible. (3) Usar validación cruzada para detectar el sobreajuste más temprano y parar el entrenamiento antes (early stopping)."
+  blockId="reflection-l01-overfit-diagnosis"
+  allowContinueOnIncorrect
+  explanation="Es sobreajuste (train 99%, test 65%): memorizó entrenamiento y no generaliza. Soluciones: (1) simplificar el modelo (menos complejidad/features, regularización), (2) más datos de entrenamiento, (3) validación cruzada y early stopping."
+  options={[
+    { id: "a", label: "Sobreajuste: simplificar, más datos y validación cruzada/early stopping", correct: true, feedback: "¡Correcto! El gap 99/65 denota sobreajuste, no subajuste." },
+    { id: "b", label: "Subajuste: conviene aumentar complejidad y features", correct: false, feedback: "Falso: train 99% no es síntoma de modelo demasiado simple." },
+    { id: "c", label: "El 99% de train garantiza generalización; revisar sólo el dataset", correct: false, feedback: "Falso: la métrica que importa es la de prueba, no la de train." },
+    { id: "d", label: "Entrenar más épocas con los mismos datos resuelve el gap", correct: false, feedback: "Falso: más épocas profundizan la memorización del ruido." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">

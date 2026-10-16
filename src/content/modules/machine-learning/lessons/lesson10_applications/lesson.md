@@ -61,12 +61,19 @@ Una empresa SaaS tiene datos de 5000 clientes: frecuencia de uso, features utili
 - Random Forest para clasificar riesgo de abandono dentro de cada segmento
 - Interpretación con SHAP para entender qué distingue a cada segmento
 
-<ReflectionCheck
-  blockId="reflection-l10-metrics-business"
+<ChoiceQuestion
+  question="El modelo de abandono tiene 85% de accuracy. El CEO quiere saber: '¿cuánta plata nos ahorra esto?' ¿Cómo traducirías accuracy a impacto de negocio?"
   moduleSlug="machine-learning"
   lessonSlug="lesson10_applications"
-  prompt="El modelo de abandono tiene 85% de accuracy. El CEO quiere saber: '¿cuánta plata nos ahorra esto?' ¿Cómo traducirías accuracy a impacto de negocio?"
-  answer="Convierte las predicciones en acciones y las acciones en dinero. Ejemplo: si el modelo identifica 100 clientes en riesgo y contactas a 50, asumiendo que retienes al 40% de los contactados (20 clientes), y cada cliente vale $500/mes → ahorraste $10,000/mes. La accuracy es irrelevante para el CEO — lo que importa es: ¿cuántos abandonos previenes y cuánto vale cada uno?"
+  blockId="reflection-l10-metrics-business"
+  allowContinueOnIncorrect
+  explanation="Convertí predicciones en acciones y acciones en dinero: si el modelo identifica 100 en riesgo y contactás 50, retenés ~40% (20 clientes) × $500/mes = $10k/mes. La accuracy es irrelevante para el CEO; importa cuántos abandonos prevenís y cuánto vale cada uno."
+  options={[
+    { id: "a", label: "Contando abandonos prevenidos y su valor monetario", correct: true, feedback: "¡Correcto! La métrica clave para el CEO es impacto en dinero." },
+    { id: "b", label: "Reportando directamente el 85% de accuracy", correct: false, feedback: "Falso: al CEO no le importa accuracy, sino dinero salvado." },
+    { id: "c", label: "Maximizando la cantidad de predicciones correctas", correct: false, feedback: "Falso: optimizar accuracy no optimiza impacto." },
+    { id: "d", label: "Extrapolando accuracy a revenue futuro sin acción", correct: false, feedback: "Falso: hace falta traducir a acciones y a dinero." },
+  ]}
 />
 
 </Section>

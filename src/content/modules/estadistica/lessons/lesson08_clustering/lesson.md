@@ -124,12 +124,19 @@ plt.title('K-Means Clusters (PCA 2D)')
 plt.legend(); plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l08-kmeans-pca"
+<ChoiceQuestion
+  question="¿Por qué visualizamos clusters en 2D con PCA en vez de usar 2 features originales? ¿Qué podríamos perder?"
   moduleSlug="estadistica"
   lessonSlug="lesson08_clustering"
-  prompt="¿Por qué visualizamos clusters en 2D con PCA en vez de usar 2 features originales? ¿Qué podríamos perder?"
-  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un solo gráfico. Pero perdemos información: clusters qué se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
+  blockId="reflection-l08-kmeans-pca"
+  allowContinueOnIncorrect
+  explanation="PCA proyecta más de 3 features a 2D preservando la máxima varianza; puede ocultar solapamientos entre clusters en otras dimensiones, por eso se complementa con silhouette score y el perfil por cluster."
+  options={[
+    { id: "a", label: "Porque con más de 3 features no se grafica directo y PCA conserva máxima varianza, pero puede ocultar solapamientos; se complementa con silhouette y perfil por cluster", correct: true, feedback: "¡Exacto! La proyección resume la estructura, pero no reemplaza al análisis completo." },
+    { id: "b", label: "Porque PCA elimina por completo la pérdida de información al pasar a 2D", correct: false, feedback: "PCA reduce dimensionalidad: siempre hay alguna pérdida, aunque sea mínima." },
+    { id: "c", label: "Porque 2 features originales siempre separan mejor los clusters que PCA", correct: false, feedback: "Las features originales pueden no concentrar la varianza explicativa; PCA elige la dirección de máxima varianza." },
+    { id: "d", label: "Porque una visualización 2D reemplaza al silhouette score", correct: false, feedback: "La visualización es exploratoria; silhouette cuantifica la calidad de clustering." },
+  ]}
 />
 
 </Section>

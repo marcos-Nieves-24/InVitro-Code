@@ -132,12 +132,19 @@ plt.tight_layout()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l07-pca-genes"
+<ChoiceQuestion
+  question="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
   moduleSlug="estadistica"
   lessonSlug="lesson07_dimensionality_reduction"
-  prompt="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
-  answer="Es ambas. Ventaja: captura patrones multivariados qué ningún gen individual muestra (perfiles de expresión). Desventaja: pierdes interpretabilidad — PC1 = 0.3×genA + 0.1×genB − 0.5×genC... no es accionable para un biólogo qué quiere saber '¿qué gen causa esto?'. En la práctica, usamos PCA para visualización/clustering y luego volvemos a los genes originales para interpretación biológica."
+  blockId="reflection-l07-pca-genes"
+  allowContinueOnIncorrect
+  explanation="Es ambas: ventaja (captura patrones multivariados/perfiles de expresión), desventaja (pierde interpretabilidad; PC1 no es accionable por gen). Uso: PCA para visualizar/clustering y luego genes originales para interpretación."
+  options={[
+    { id: "a", label: "Es ambas: ventaja (patrones multivariados/perfiles de expresión) y desventaja (pierde interpretabilidad por gen)", correct: true, feedback: "¡Exacto! Por eso PCA se usa para visualizar/clustering y luego se vuelve a genes originales." },
+    { id: "b", label: "Sólo ventaja: las combinaciones son más interpretables que genes individuales", correct: false, feedback: "La combinación reduce interpretabilidad; un biólogo no puede actuar sobre un PC1 = 0.3genA − 0.5genC directamente." },
+    { id: "c", label: "Sólo desventaja: PCA no captura nada que un gen individual no muestre", correct: false, feedback: "PCA captura patrones de coexpresión multivariados que ningún gen individual revela." },
+    { id: "d", label: "Ni ventaja ni desventaja: en genómica siempre se debe usar t-SNE en vez de PCA", correct: false, feedback: "PCA sigue siendo útil para visualización/clustering; la elección depende del objetivo, no es t-SNE siempre." },
+  ]}
 />
 
 </Section>

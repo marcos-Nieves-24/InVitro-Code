@@ -60,12 +60,19 @@ El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calc
 La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top-3 en 100 árboles distintos, puedes confiar en que realmente importa.
 </CalloutCheck>
 
-<ReflectionCheck
-  blockId="reflection-l05-feature-importance"
+<ChoiceQuestion
+  question="Dos features tienen importancia similar según el RF. ¿Significa que son igualmente importantes para tu problema?"
   moduleSlug="machine-learning"
   lessonSlug="lesson05_random_forest"
-  prompt="Dos features tienen importancia similar según el RF. ¿Significa que son igualmente importantes para tu problema?"
-  answer="No necesariamente. Si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Para saberlo, elimina una y reentrena: si la otra captura toda la importancia, son redundantes. Además, la importancia mide utilidad predictiva, no causalidad."
+  blockId="reflection-l05-feature-importance"
+  allowContinueOnIncorrect
+  explanation="No necesariamente: si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Elimina una y reentrena para verificar. Además, importancia mide utilidad predictiva, no causalidad."
+  options={[
+    { id: "a", label: "No: correlación puede repartir importancia y nada parece dominante", correct: true, feedback: "¡Correcto! Hay que reentrenar sin una para confirmar redundancia." },
+    { id: "b", label: "Sí: importancia similar implica igual importancia real", correct: false, feedback: "Falso: la correlación puede diluir la importancia." },
+    { id: "c", label: "La importancia mide causalidad, no utilidad predictiva", correct: false, feedback: "Falso: mide utilidad predictiva, no causalidad." },
+    { id: "d", label: "Siempre normalizar importancias evita el efecto", correct: false, feedback: "Falso: normalizar no resuelve la redundancia por correlación." },
+  ]}
 />
 
 </Section>
@@ -187,12 +194,19 @@ El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria
 
 <Section number={9} title="Ejercicios" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l05-bagging-vs-single"
+<ChoiceQuestion
+  question="¿Por qué un Bosque Aleatorio con 500 árboles de profundidad 3 puede tener mejor rendimiento que un solo árbol de profundidad 15?"
   moduleSlug="machine-learning"
   lessonSlug="lesson05_random_forest"
-  prompt="¿Por qué un Bosque Aleatorio con 500 árboles de profundidad 3 puede tener mejor rendimiento que un solo árbol de profundidad 15?"
-  answer="Porque el RF reduce la varianza promediando. Un árbol profundo (15) tiene varianza altísima — memoriza ruido. En cambio, 500 árboles shallow (profundidad 3), cada uno con sesgo alto pero poca varianza, al promediarse producen predicciones estables que capturan la señal real sin perseguir el ruido. Es mejor tener 500 estudiantes mediocres que votan que un solo genio inestable."
+  blockId="reflection-l05-bagging-vs-single"
+  allowContinueOnIncorrect
+  explanation="Porque el RF reduce la varianza promediando. Un árbol profundo (15) tiene varianza alta y memoriza ruido; 500 árboles shallow (profundidad 3) promedian para quedarse con la señal real. Es mejor tener 500 estudiantes mediocres que votan que un solo genio inestable."
+  options={[
+    { id: "a", label: "Porque promediar 500 árboles shallow reduce la varianza", correct: true, feedback: "¡Correcto! Bagging estabiliza predicciones con baja varianza." },
+    { id: "b", label: "Porque 500 árboles son siempre más precisos que 1", correct: false, feedback: "Falso: depende de la varianza reducida, no de la cantidad." },
+    { id: "c", label: "Porque árboles profundos ajustan mejor pero generalizan peor", correct: false, feedback: "Falso: confunde ajuste con reducción de varianza por promediado." },
+    { id: "d", label: "La profundidad 15 basta para cualquier problema", correct: false, feedback: "Falso: profundidad alta memoriza ruido con varianza alta." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
