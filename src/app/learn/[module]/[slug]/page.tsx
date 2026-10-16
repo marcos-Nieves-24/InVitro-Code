@@ -49,6 +49,8 @@ import { PipelineStagesPlayer } from "@/components/anymotion/animations/Pipeline
 import { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
 import { SupervisedFlowPlayer } from "@/components/anymotion/animations/SupervisedFlowPlayer";
 import { ConfusionMatrixPlayer } from "@/components/anymotion/animations/ConfusionMatrixPlayer";
+import { RocBuilder } from "@/components/anymotion/animations/RocBuilder";
+import { TreeSplit } from "@/components/anymotion/animations/TreeSplit";
 import { ModelComparePlayer } from "@/components/anymotion/animations/ModelComparePlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
@@ -195,6 +197,8 @@ export default async function LessonPage({ params }: Props) {
     SpeciesCompare: SpeciesComparePlayer,
     SupervisedFlow: SupervisedFlowPlayer,
     ConfusionMatrixVisual: ConfusionMatrixPlayer,
+    RocBuilder: RocBuilder,
+    TreeSplit: TreeSplit,
     ModelCompare: ModelComparePlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
