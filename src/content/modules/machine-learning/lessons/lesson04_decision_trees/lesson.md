@@ -204,6 +204,8 @@ plt.show()
 Cada nodo muestra: la feature y threshold de división, la impureza de Gini, cuántas muestras llegaron, y la distribución de clases. Los colores indican la clase predominante — cuanto más intenso, más puro es el nodo.
 </CalloutInfo>
 
+<TreeSplit caption="Elegí la feature y el umbral vos mismo: mirá cómo la impureza de Gini baja en los dos hijos, y usá Dividir para hacer crecer el árbol." />
+
 </RevealSequence>
 
 </Section>

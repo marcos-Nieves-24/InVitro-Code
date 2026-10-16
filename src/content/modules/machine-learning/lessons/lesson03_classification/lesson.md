@@ -132,13 +132,7 @@ $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$
 <RevealSequence mode="appear">
 
 {/* candidate-player: comparison-matriz-confusion */}
-<ConceptCard variant="key-idea">
-**Matriz de confusión**
-- Real Positivo × Predicho Positivo → VP (Verdadero Positivo).
-- Real Positivo × Predicho Negativo → FN (Falso Negativo).
-- Real Negativo × Predicho Positivo → FP (Falso Positivo).
-- Real Negativo × Predicho Negativo → VN (Verdadero Negativo).
-</ConceptCard>
+<ConfusionMatrixVisual caption="Recorré las cuatro celdas y después cambiá de lente: precisión, recall y F1 leen la misma matriz desde perspectivas distintas." />
 
 De la matriz salen todas las métricas:
 
@@ -172,6 +166,8 @@ La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras var�
 
 **AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0 → clasificador perfecto. AUC = 0.5 → no mejor que tirar una moneda. AUC < 0.5 → estás haciendo todo al revés.
 </ConceptCard>
+
+<RocBuilder caption="Mové el umbral y seguí el punto sobre la curva: cada paso hacia la derecha gana recall (menos FN) y paga con falsos positivos." />
 
 <CalloutCheck>
 La curva ROC es independiente del umbral — te dice qué tan bien separa el modelo las clases sin importar dónde pongas la línea. Es la métrica preferida para comparar modelos de clasificación.
