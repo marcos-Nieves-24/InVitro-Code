@@ -42,10 +42,11 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "img-src 'self' data: https://img.clerk.com https://vercel.com",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
-              "connect-src 'self' https://*.supabase.co https://*.clerk.com https://cdn.jsdelivr.net https://files.pythonhosted.org",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.clerk.accounts.dev",
+              "connect-src 'self' https://*.supabase.co https://*.clerk.com https://*.clerk.accounts.dev https://cdn.jsdelivr.net https://files.pythonhosted.org",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self' data:",
+              "frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com",
               "worker-src 'self' blob:",
               "frame-ancestors 'none'",
             ].join("; "),
