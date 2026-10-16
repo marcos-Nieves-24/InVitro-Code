@@ -22,44 +22,99 @@ Quiz: quiz.md
 # Operadores
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Los operadores son las herramientas que te permiten computar, comparar y combinar valores. Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores. En biotecnología usas operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia. En SaaS los usas para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Los operadores son las herramientas que te permiten computar, comparar y combinar valores.",
+    "Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores.",
+    "En biotecnología usas operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia.",
+    "En SaaS los usas para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior aprendiste sobre los tipos de datos que pueden tener los valores. Ahora vas a aprender cómo realizar operaciones sobre esos valores. Los operadores se basan en tu comprensión de los tipos porque diferentes tipos soportan diferentes operadores. Esto te prepara para las próximas lecciones sobre funciones y flujo de control, donde los operadores se usan en condiciones y cómputos.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste sobre los tipos de datos que pueden tener los valores.",
+    "Ahora vas a aprender cómo realizar operaciones sobre esos valores.",
+    "Los operadores se basan en tu comprensión de los tipos porque diferentes tipos soportan diferentes operadores.",
+    "Esto te prepara para las próximas lecciones sobre funciones y flujo de control, donde los operadores se usan en condiciones y cómputos.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Operadores en Python" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### Operadores Aritméticos
 
 Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
-<InteractiveTable headers={["Operador", "Nombre", "Ejemplo", "Resultado"]} rows={[["`+`", "Suma", "`5 + 3`", "`8`"], ["`-`", "Resta", "`5 - 3`", "`2`"], ["`*`", "Multiplicación", "`5 * 3`", "`15`"], ["`/`", "División float", "`5 / 3`", "`1.666...`"], ["`//`", "División entera", "`5 // 3`", "`1`"], ["`%`", "Módulo (resto)", "`5 % 3`", "`2`"], ["`**`", "Exponenciación", "`5 ** 3`", "`125`"]]} searchable />
+<ConceptCard variant="key-idea">
+Operadores aritméticos:
+
+- `+` Suma — `5 + 3` → `8`
+- `-` Resta — `5 - 3` → `2`
+- `*` Multiplicación — `5 * 3` → `15`
+- `/` División float — `5 / 3` → `1.666...`
+- `//` División entera — `5 // 3` → `1`
+- `%` Módulo (resto) — `5 % 3` → `2`
+- `**` Exponenciación — `5 ** 3` → `125`
+</ConceptCard>
 
 ### Operadores de Comparación
 
 Los operadores de comparación comparan dos valores y devuelven un booleano.
 
-<InteractiveTable headers={["Operador", "Significado", "Ejemplo", "Resultado"]} rows={[["`==`", "Igual a", "`5 == 3`", "`False`"], ["`!=`", "Distinto de", "`5 != 3`", "`True`"], ["`<`", "Menor que", "`5 < 3`", "`False`"], ["`>`", "Mayor que", "`5 > 3`", "`True`"], ["`<=`", "Menor o igual", "`5 <= 5`", "`True`"], ["`>=`", "Mayor o igual", "`5 >= 3`", "`True`"]]} searchable />
+<ConceptCard variant="key-idea">
+Operadores de comparación:
+
+- `==` Igual a — `5 == 3` → `False`
+- `!=` Distinto de — `5 != 3` → `True`
+- `<` Menor que — `5 < 3` → `False`
+- `>` Mayor que — `5 > 3` → `True`
+- `<=` Menor o igual — `5 <= 5` → `True`
+- `>=` Mayor o igual — `5 >= 3` → `True`
+</ConceptCard>
 
 ### Operadores Lógicos
 
 Los operadores lógicos combinan expresiones booleanas.
 
-<InteractiveTable headers={["Operador", "Descripción", "Ejemplo", "Resultado"]} rows={[["`and`", "True si ambos son True", "`True and False`", "`False`"], ["`or`", "True si al menos uno es True", "`True or False`", "`True`"], ["`not`", "Invierte el booleano", "`not True`", "`False`"]]} searchable />
+<ConceptCard variant="key-idea">
+Operadores lógicos:
+
+- `and` — True si ambos son True — `True and False` → `False`
+- `or` — True si al menos uno es True — `True or False` → `True`
+- `not` — Invierte el booleano — `not True` → `False`
+</ConceptCard>
 
 ### Operadores de Asignación
 
 Los operadores de asignación actualizan variables con un cómputo.
 
-<InteractiveTable headers={["Operador", "Ejemplo", "Equivalente a"]} rows={[["`=`", "`x = 5`", "`x = 5`"], ["`+=`", "`x += 3`", "`x = x + 3`"], ["`-=`", "`x -= 3`", "`x = x - 3`"], ["`*=`", "`x *= 3`", "`x = x * 3`"], ["`/=`", "`x /= 3`", "`x = x / 3`"], ["`//=`", "`x //= 3`", "`x = x // 3`"], ["`%=`", "`x %= 3`", "`x = x % 3`"], ["`**=`", "`x **= 3`", "`x = x ** 3`"]]} searchable />
+<ConceptCard variant="key-idea">
+Operadores de asignación:
+
+- `=` — `x = 5` → `x = 5`
+- `+=` — `x += 3` → `x = x + 3`
+- `-=` — `x -= 3` → `x = x - 3`
+- `*=` — `x *= 3` → `x = x * 3`
+- `/=` — `x /= 3` → `x = x / 3`
+- `//=` — `x //= 3` → `x = x // 3`
+- `%=` — `x %= 3` → `x = x % 3`
+- `**=` — `x **= 3` → `x = x ** 3`
+</ConceptCard>
 
 ### Precedencia de Operadores
 
@@ -74,11 +129,12 @@ Python sigue la precedencia matemática estándar (PEMDAS):
 7. `not`
 8. `and`
 9. `or`
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Visualización de Precedencia" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Explicación Visual
 
 ```
@@ -91,11 +147,12 @@ Ejemplo:   5 + 3 * 2 ** 2
            = 5 + 12           (multiplicación después)
            = 17               (suma al final)
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 ```python
@@ -141,11 +198,12 @@ count -= 3   # count = 7
 count //= 2  # count = 3
 print(f"Final count: {count}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario**: Analizando datos de dosis-respuesta de fármacos.
@@ -170,11 +228,12 @@ print(f"Peso del paciente: {weight_kg} kg")
 print(f"Concentración después de {time_hours}h: {concentration:.3f} mg/kg")
 print(f"En rango terapéutico: {in_range}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo SaaS
 
 **Escenario**: Evaluando riesgo de churn de clientes.
@@ -197,11 +256,12 @@ print(f"Múltiples problemas: {multiple_issues}")
 print(f"Plan basic: {is_basic_tier}")
 print(f"Alto riesgo de churn: {high_churn_risk}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Usar `=` en lugar de `==` para comparar**: `if x = 5:` es asignación, no comparación
@@ -217,11 +277,12 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - Usa `==` con cuidado para comparar floats; usa `abs(a-b) < epsilon`
 - Aprovecha las comparaciones encadenadas de Python: `0 <= x <= 100`
 - Usa `not` con moderación — reformula las condiciones para que sean legibles
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Aritméticos: `+`, `-`, `*`, `/`, `//`, `%`, `**`
@@ -239,11 +300,12 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - **Precedencia**: Reglas que determinan el orden de evaluación
 - **Módulo**: Resto después de una división
 - **Evaluación de cortocircuito**: `and`/`or` dejan de evaluar cuando el resultado está determinado
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Ejercicios
 
 ### Nivel 1: Básico
@@ -271,5 +333,29 @@ Escribe un programa que:
 4. Calcule el presupuesto restante después de la compra
 5. Use al menos un operador de cada categoría (aritmético, comparación, lógico, asignación)
 6. Imprima un resumen formateado de todos los cálculos
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué devuelve la expresión 5 // 2 en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson05_operators"
+  blockId="choice-python-l05-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="// es división entera, por lo que 5 // 2 = 2."
+  options={[
+    { id: "a", label: "2.5", correct: false, feedback: "/ devuelve float; // es entera." },
+    { id: "b", label: "2", correct: true, feedback: "¡Correcto!" },
+    { id: "c", label: "2.0", correct: false, feedback: "// resulta en int aquí." },
+    { id: "d", label: "1", correct: false, feedback: "Es el resto de %." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>

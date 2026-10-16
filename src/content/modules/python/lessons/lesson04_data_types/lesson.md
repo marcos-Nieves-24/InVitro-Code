@@ -20,19 +20,38 @@ Quiz: quiz.md
 ---
 
 <Section number={1} title="Tipos de Datos" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Cada pieza de datos en Python tiene un tipo que determina qué operaciones son posibles. Sumar dos números es aritmética; sumar dos strings es concatenación. Entender los tipos es crucial porque los errores de tipo están entre los bugs más comunes en programas Python. En biotecnología necesitas distinguir entre conteos enteros (cantidad de células), mediciones float (ratios de expresión génica), strings (secuencias de ADN) y booleanos (mutación presente/ausente). En SaaS trabajas con conteos enteros de usuarios, ingresos float, nombres de clientes string y estado de suscripción booleano.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Cada pieza de datos en Python tiene un tipo que determina qué operaciones son posibles.",
+    "Sumar dos números es aritmética; sumar dos strings es concatenación.",
+    "Entender los tipos es crucial porque los errores de tipo están entre los bugs más comunes en programas Python.",
+    "En biotecnología necesitas distinguir entre conteos enteros (cantidad de células), mediciones float (ratios de expresión génica), strings (secuencias de ADN) y booleanos (mutación presente/ausente).",
+    "En SaaS trabajas con conteos enteros de usuarios, ingresos float, nombres de clientes string y estado de suscripción booleano.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior aprendiste a almacenar valores en variables. Ahora vas a entender los distintos tipos de valores que las variables pueden contener. Esto te prepara para la próxima lección sobre operadores, donde cada tipo de dato soporta diferentes operaciones.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste a almacenar valores en variables.",
+    "Ahora vas a entender los distintos tipos de valores que las variables pueden contener.",
+    "Esto te prepara para la próxima lección sobre operadores, donde cada tipo de dato soporta diferentes operaciones.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Los Cuatro Tipos de Datos Básicos" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### Los Cuatro Tipos de Datos Básicos
@@ -138,11 +157,12 @@ not_a_number = float('nan')
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 ```python
@@ -189,11 +209,12 @@ print(bool(None))   # False
 result = "The answer is " + 42     # TypeError: can only concatenate str
 result = "The answer is " + str(42)  # Correcto
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario**: Procesando datos de expresión génica de un experimento de microarreglos.
@@ -235,11 +256,12 @@ print(f"Active users: {active_users}")
 print(f"Annual revenue: ${annual_revenue:,.2f}")
 print(f"After discount: ${discounted_revenue:,.2f}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Concatenar strings con no-strings**: `"count: " + 5` lanza TypeError
@@ -255,11 +277,12 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 - Usa `//` para división entera, `/` para división float
 - Usa guiones bajos en números grandes: `1_000_000` en lugar de `1000000`
 - Ten en cuenta las limitaciones de precisión de coma flotante
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Python tiene cuatro tipos primitivos: int, float, str, bool
@@ -279,11 +302,12 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 - **Inmutable**: No se puede modificar después de su creación
 - **None**: Valor nulo de Python
 - **TypeError**: Excepción que se lanza al operar con tipos incompatibles
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Ejercicios
 
 ### Nivel 1: Básico
@@ -311,5 +335,29 @@ Escribe un programa que:
 4. Imprima un resumen: "[Nombre] tiene [edad] años, gana $[salario], estudiante: [True/False]"
 5. Calcule e imprima: "Salario después de aumento del 10%: $[monto]"
 6. Maneje los errores de conversión de tipos con elegancia
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué tipo de dato representa el valor 3.14 en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson04_data_types"
+  blockId="choice-python-l04-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="3.14 es un número con decimales, por lo que es de tipo float."
+  options={[
+    { id: "a", label: "int", correct: false, feedback: "int es para enteros sin decimales." },
+    { id: "b", label: "float", correct: true, feedback: "¡Correcto! Es un float." },
+    { id: "c", label: "str", correct: false, feedback: "str es para texto." },
+    { id: "d", label: "bool", correct: false, feedback: "bool es True/False." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
