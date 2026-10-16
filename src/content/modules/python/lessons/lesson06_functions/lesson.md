@@ -23,7 +23,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -37,7 +36,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -54,13 +52,10 @@ Quiz: quiz.md
 
 <Section number={2} title="Fundamentos de Funciones" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### ¿Qué es una Función?
 
 Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).
 
-### Definiendo y Llamando Funciones
 
 ```python
 def function_name(parameter1, parameter2):
@@ -69,7 +64,6 @@ def function_name(parameter1, parameter2):
     return result
 ```
 
-### Componentes de una Función
 
 1. **Palabra clave def**: Inicia la definición de la función
 2. **Nombre de la función**: Sigue las convenciones de nomenclatura (snake_case)
@@ -79,12 +73,10 @@ def function_name(parameter1, parameter2):
 6. **return**: Envía la salida de vuelta a quien llamó
 7. **Docstring**: String de documentación (opcional pero recomendado)
 
-### Parámetros vs Argumentos
 
 - **Parámetro**: Variable listada en la definición de la función
 - **Argumento**: Valor que se pasa a la función al llamarla
 
-### Tipos de Argumentos
 
 ```python
 # Argumentos posicionales (requeridos, en orden)
@@ -107,19 +99,16 @@ def sum_all(*args):
 sum_all(1, 2, 3, 4)  # 10
 ```
 
-### Valores de Retorno
 
 Las funciones pueden devolver:
 - Un solo valor: `return x`
 - Múltiples valores: `return x, y` (devuelve una tupla)
 - Nada: `return None` (o ninguna declaración return)
 
-### Ámbito (Scope)
 
 - **Ámbito local**: Las variables definidas dentro de una función solo son accesibles allí
 - **Ámbito global**: Las variables definidas fuera de cualquier función son accesibles en todas partes
 
-### Funciones Lambda
 
 Las funciones lambda son funciones anónimas de una sola expresión:
 
@@ -136,7 +125,6 @@ numbers = [1, 2, 3, 4]
 squared = list(map(lambda x: x ** 2, numbers))
 ```
 
-### Docstrings (PEP 257)
 
 ```python
 def calculate_bmi(weight, height):
@@ -163,9 +151,7 @@ def calculate_bmi(weight, height):
 
 <Section number={3} title="Ejercicios Interactivos" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejercicios interactivos
 
-### Ejercicio 1: Tu primera función
 
 Escribe una función `celsius_to_fahrenheit(c)` que convierta grados Celsius a Fahrenheit usando la fórmula: F = C * 9/5 + 32. Después llamala con 0, 37 y 100.
 
@@ -188,7 +174,6 @@ print(f"100°C = {celsius_to_fahrenheit(100)}°F")`}
   }}
 />
 
-### Ejercicio 2: Múltiples parámetros y return
 
 Escribe una función `bmi_category(weight, height)` que calcule el IMC y devuelva tanto el valor como la categoría.
 
@@ -217,7 +202,6 @@ print(f"BMI: {bmi:.1f}, Category: {cat}")`}
   }}
 />
 
-### Ejercicio 3: Parámetros con valor default
 
 <CodeEditor
   defaultValue={`def create_report(patient_name, age, blood_type="Unknown"):
@@ -235,7 +219,6 @@ print(create_report("Bob", 25))`}
   }}
 />
 
-### Ejercicio 4: Lambda functions
 
 Usa lambda para ordenar una lista, filtrar pares, y elevar al cuadrado.
 
@@ -262,7 +245,6 @@ print(f"Squares: {squares}")`}
   }}
 />
 
-### Ejercicio 5: Scope (ámbito de variables)
 
 <CodeEditor
   defaultValue={`x = "global"
@@ -295,7 +277,6 @@ print(f"After modification: {x}")`}
 
 <Section number={4} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario:** Un pipeline de bioinformática para análisis de secuencias de ADN.
 
@@ -331,7 +312,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 <Section number={5} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
 2. **Modificar variables globales dentro de funciones**: Usa la palabra clave `global` si es necesario, pero prefiere pasar parámetros
@@ -339,7 +319,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 4. **No devolver un valor**: Las funciones sin `return` devuelven `None`
 5. **Sombrear funciones incorporadas**: No nombres variables `list`, `str`, `print`
 
-## Buenas Prácticas
 
 - Las funciones deberían hacer una sola cosa bien (Principio de Responsabilidad Única)
 - Usa nombres descriptivos que indiquen lo que hace la función
@@ -353,7 +332,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Las funciones son bloques de código reutilizables definidos con `def`
 - Los parámetros reciben entradas; `return` envía salidas
@@ -362,7 +340,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - Las funciones lambda son funciones anónimas de una sola expresión
 - Los docstrings documentan el propósito y uso de la función
 
-## Términos Clave
 
 - **Función**: Bloque de código reutilizable con nombre
 - **Parámetro**: Variable en la definición de la función
@@ -378,7 +355,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 <Section number={7} title="Desafío de Código" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Desafío de Código
 
 Escribe una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluye un docstring y pruébala con diferentes secuencias.
 

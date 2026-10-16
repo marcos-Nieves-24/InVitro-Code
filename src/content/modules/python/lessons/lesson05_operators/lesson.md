@@ -23,7 +23,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -36,7 +35,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -54,9 +52,7 @@ Quiz: quiz.md
 
 <Section number={2} title="Operadores en Python" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### Operadores Aritméticos
 
 Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
@@ -72,7 +68,6 @@ Operadores aritméticos:
 - `**` Exponenciación — `5 ** 3` → `125`
 </ConceptCard>
 
-### Operadores de Comparación
 
 Los operadores de comparación comparan dos valores y devuelven un booleano.
 
@@ -87,7 +82,6 @@ Operadores de comparación:
 - `>=` Mayor o igual — `5 >= 3` → `True`
 </ConceptCard>
 
-### Operadores Lógicos
 
 Los operadores lógicos combinan expresiones booleanas.
 
@@ -99,7 +93,6 @@ Operadores lógicos:
 - `not` — Invierte el booleano — `not True` → `False`
 </ConceptCard>
 
-### Operadores de Asignación
 
 Los operadores de asignación actualizan variables con un cómputo.
 
@@ -116,7 +109,6 @@ Operadores de asignación:
 - `**=` — `x **= 3` → `x = x ** 3`
 </ConceptCard>
 
-### Precedencia de Operadores
 
 Python sigue la precedencia matemática estándar (PEMDAS):
 
@@ -135,7 +127,6 @@ Python sigue la precedencia matemática estándar (PEMDAS):
 
 <Section number={3} title="Visualización de Precedencia" eyebrow="CONCEPTO">
 <RevealSequence>
-## Explicación Visual
 
 ```
 Precedencia de Operadores (de mayor a menor)
@@ -153,7 +144,6 @@ Ejemplo:   5 + 3 * 2 ** 2
 
 <Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # Operadores aritméticos
@@ -204,7 +194,6 @@ print(f"Final count: {count}")
 
 <Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario**: Analizando datos de dosis-respuesta de fármacos.
 
@@ -234,7 +223,6 @@ print(f"En rango terapéutico: {in_range}")
 
 <Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo SaaS
 
 **Escenario**: Evaluando riesgo de churn de clientes.
 
@@ -262,7 +250,6 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 <Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Usar `=` en lugar de `==` para comparar**: `if x = 5:` es asignación, no comparación
 2. **División entera cuando se necesita float**: `5/2 = 2.5` (Python 3), pero `5//2 = 2`
@@ -270,7 +257,6 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 4. **Confundir precedencia de operadores**: `3 + 4 * 2 = 11`, no `14`
 5. **Módulo con números negativos**: `-5 % 3 = 1` (no -2)
 
-## Buenas Prácticas
 
 - Usa paréntesis para hacer explícita la precedencia
 - Usa `+=` y operadores similares para código más limpio
@@ -283,7 +269,6 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Aritméticos: `+`, `-`, `*`, `/`, `//`, `%`, `**`
 - Comparación: `==`, `!=`, `<`, `>`, `<=`, `>=` (devuelven bool)
@@ -292,7 +277,6 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 - Precedencia: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`
 - Usa paréntesis para mayor claridad
 
-## Términos Clave
 
 - **Operador**: Símbolo que realiza una operación sobre operandos
 - **Operando**: Valor sobre el que actúa un operador
@@ -306,25 +290,20 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Cuál es el resultado de `15 // 4` y `15 % 4`?
 2. ¿Cuál es el valor de `3 + 4 * 2 ** 3`?
 3. ¿A qué evalúa `not (True and False)`?
 
-### Nivel 2: Implementación
 
 4. Escribe código que verifique si un número es par (usa `%`) e imprima "par" o "impar".
 5. Escribe una calculadora de IMC: peso (kg) / altura² (m). Clasifica como bajo peso (< 18.5), normal (18.5-24.9), sobrepeso (25-29.9), obeso (≥ 30).
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `0.1 + 0.2 == 0.3` devuelve False? ¿Cómo compararías resultados de coma flotante de forma segura?
 7. Evaluación de cortocircuito: ¿Qué imprime `False and print("hola")`? ¿Por qué?
 
-## Desafío de Código
 
 Escribe un programa que:
 1. Pregunte la cantidad de muestras de ADN, el costo por muestra y el presupuesto disponible
