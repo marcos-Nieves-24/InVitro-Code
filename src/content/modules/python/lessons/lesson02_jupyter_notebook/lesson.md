@@ -20,19 +20,38 @@ Quiz: quiz.md
 ---
 
 <Section number={1} title="Jupyter Notebook" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Escribir código Python en una terminal es funcional pero no es ideal para análisis de datos. Jupyter Notebook proporciona un entorno interactivo basado en la web donde puedes combinar código, visualizaciones y texto explicativo en un solo documento. Es la herramienta estándar para científicos de datos en todo el mundo. En biotecnología, los notebooks de Jupyter se usan para documentar y compartir análisis de investigación. En SaaS, se usan para análisis exploratorio de datos y generación de reportes.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Escribir código Python en una terminal es funcional pero no es ideal para análisis de datos.",
+    "Jupyter Notebook proporciona un entorno interactivo basado en la web donde puedes combinar código, visualizaciones y texto explicativo en un solo documento.",
+    "Es la herramienta estándar para científicos de datos en todo el mundo.",
+    "En biotecnología, los notebooks de Jupyter se usan para documentar y compartir análisis de investigación.",
+    "En SaaS, se usan para análisis exploratorio de datos y generación de reportes.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior instalaste Python y verificaste que funciona. Ahora vas a aprender a usar Jupyter Notebook, el entorno donde vas a escribir la mayor parte de tu código Python en este curso. Las próximas lecciones sobre variables, tipos de datos y operadores se van a practicar todas dentro de Jupyter.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior instalaste Python y verificaste que funciona.",
+    "Ahora vas a aprender a usar Jupyter Notebook, el entorno donde vas a escribir la mayor parte de tu código Python en este curso.",
+    "Las próximas lecciones sobre variables, tipos de datos y operadores se van a practicar todas dentro de Jupyter.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Qué es Jupyter Notebook?" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### ¿Qué es Jupyter Notebook?
@@ -86,11 +105,12 @@ Cuando ejecutas una celda de código, el kernel ejecuta el código. Las variable
 │  └────────────────────────────────────────────────┘│
 └────────────────────────────────────────────────────┘
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Usando Jupyter Notebook" eyebrow="IMPLEMENTACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 ### Iniciando Jupyter
@@ -137,32 +157,31 @@ $$ E = mc^2 $$
 
 ### Atajos de Teclado
 
-<InteractiveTable
-  headers={["Atajo", "Acción"]}
-  rows={[
-    ["Shift+Enter", "Ejecutar celda y seleccionar siguiente"],
-    ["Ctrl+Enter", "Ejecutar celda y quedarse"],
-    ["Alt+Enter", "Ejecutar celda e insertar debajo"],
-    ["A", "Insertar celda arriba (modo comando)"],
-    ["B", "Insertar celda abajo (modo comando)"],
-    ["DD", "Eliminar celda (modo comando)"],
-    ["M", "Cambiar a celda markdown (modo comando)"],
-    ["Y", "Cambiar a celda de código (modo comando)"],
-    ["Ctrl+S", "Guardar notebook"],
-    ["Z", "Deshacer eliminación de celda"],
-  ]}
-  searchable
-/>
+<ConceptCard variant="key-idea">
+Atajos de teclado de Jupyter:
+
+- **Shift+Enter** — Ejecutar celda y seleccionar siguiente
+- **Ctrl+Enter** — Ejecutar celda y quedarse
+- **Alt+Enter** — Ejecutar celda e insertar debajo
+- **A** — Insertar celda arriba (modo comando)
+- **B** — Insertar celda abajo (modo comando)
+- **DD** — Eliminar celda (modo comando)
+- **M** — Cambiar a celda markdown (modo comando)
+- **Y** — Cambiar a celda de código (modo comando)
+- **Ctrl+S** — Guardar notebook
+- **Z** — Deshacer eliminación de celda
+</ConceptCard>
 
 ### Guardar y Exportar
 
 - **Guardar**: File → Save and Checkpoint (o Ctrl+S)
 - **Exportar**: File → Download as → HTML, PDF, Python script, etc.
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario**: Un investigador está analizando datos de expresión génica y quiere documentar los pasos del análisis.
@@ -190,11 +209,12 @@ La estructura del notebook:
 - **Celda 6 (Markdown)**: Recomendaciones
 
 El notebook se puede exportar a HTML y compartir con el equipo de producto.
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell → Run All) para ejecutar secuencialmente.
@@ -211,11 +231,12 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - Reinicia y ejecuta todo antes de compartir un notebook
 - Usa nombres de archivo significativos (ej: `analisis_expresion_genica.ipynb`)
 - Limpia las salidas antes de subir notebooks al control de versiones
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Jupyter Notebook es un entorno interactivo basado en web para análisis de datos
@@ -234,11 +255,12 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - **Modo edición**: Modo de borde verde para editar el contenido de la celda
 - **Dashboard**: Interfaz del explorador de archivos de Jupyter
 - **Shift+Enter**: Ejecutar celda actual y pasar a la siguiente
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Ejercicios
 
 ### Nivel 1: Básico
@@ -266,5 +288,29 @@ Crea un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
 4. Una celda de código que imprima cada elemento con un número
 5. Una celda markdown con una conclusión
 Exporta el notebook como HTML.
+</RevealSequence>
+
+</Section>
+
+<Section number={8} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué componente de Jupyter mantiene el estado entre ejecuciones de celdas?"
+  moduleSlug="python"
+  lessonSlug="lesson02_jupyter_notebook"
+  blockId="choice-python-l02-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="El kernel ejecuta el código y mantiene variables y funciones definidas entre celdas."
+  options={[
+    { id: "a", label: "El kernel", correct: true, feedback: "¡Correcto! El kernel mantiene el estado." },
+    { id: "b", label: "El navegador", correct: false, feedback: "El navegador solo muestra la interfaz." },
+    { id: "c", label: "La celda markdown", correct: false, feedback: "Las celdas markdown no ejecutan código." },
+    { id: "d", label: "El sistema de archivos", correct: false, feedback: "El disco no mantiene el estado en memoria." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>

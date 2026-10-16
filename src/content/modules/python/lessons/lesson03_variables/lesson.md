@@ -20,19 +20,39 @@ Quiz: quiz.md
 ---
 
 <Section number={1} title="Variables" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Las variables son los bloques fundamentales de cualquier programa. Te permiten almacenar, etiquetar y manipular datos. Sin variables, tendrías que hardcodear cada valor, haciendo que los programas sean inflexibles e ilegibles. En biotecnología, las variables almacenan secuencias de ADN, niveles de expresión génica, edades de pacientes y concentraciones de fármacos. En SaaS, las variables almacenan cantidades de usuarios, cifras de ingresos, tasas de churn y nombres de clientes. Dominar las variables es tu primer paso para escribir programas significativos en Python.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Las variables son los bloques fundamentales de cualquier programa.",
+    "Te permiten almacenar, etiquetar y manipular datos.",
+    "Sin variables, tendrías que hardcodear cada valor, haciendo que los programas sean inflexibles e ilegibles.",
+    "En biotecnología, las variables almacenan secuencias de ADN, niveles de expresión génica, edades de pacientes y concentraciones de fármacos.",
+    "En SaaS, las variables almacenan cantidades de usuarios, cifras de ingresos, tasas de churn y nombres de clientes.",
+    "Dominar las variables es tu primer paso para escribir programas significativos en Python.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook. Ahora vas a aprender cómo almacenar y gestionar datos usando variables. Esto te prepara directamente para la próxima lección sobre tipos de datos, donde vas a aprender sobre los distintos tipos de datos que pueden contener las variables.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook.",
+    "Ahora vas a aprender cómo almacenar y gestionar datos usando variables.",
+    "Esto te prepara directamente para la próxima lección sobre tipos de datos, donde vas a aprender sobre los distintos tipos de datos que pueden contener las variables.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Qué es una Variable?" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### ¿Qué es una Variable?
@@ -148,11 +168,12 @@ name = input("Enter your name: ")
 ```
 
 > **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 **Ejercicio 1:** Asigna una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
@@ -196,11 +217,12 @@ print(data, type(data))`}
     ]
   }}
 />
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario:** Calculando el contenido GC de una secuencia de ADN.
@@ -218,11 +240,12 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
     ]
   }}
 />
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Usar variables no definidas**: `print(x)` antes de `x = 5` lanza `NameError`
@@ -239,11 +262,12 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - Inicializa las variables antes de usarlas
 - Usa constantes para valores fijos (UPPER_SNAKE_CASE)
 - Una variable por propósito lógico
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Las variables almacenan valores en ubicaciones de memoria nombradas
@@ -262,11 +286,12 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - **snake_case**: Convención de nomenclatura que usa guiones bajos
 - **Inferencia de tipos**: Python deduce el tipo a partir del valor
 - **NameError**: Excepción que se lanza al usar una variable no definida
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Desafío de Código
 
 Escribe un programa que calcule el **GC content** de una secuencia de ADN más larga. Usa variables para cada paso.
@@ -293,5 +318,29 @@ dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
 />
 
 > **Pista:** Usa `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué es una variable en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="Una variable es una ubicación nombrada en memoria que almacena un valor."
+  options={[
+    { id: "a", label: "Una ubicación nombrada en memoria que almacena un valor", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "Una función integrada del sistema", correct: false, feedback: "No es una función." },
+    { id: "c", label: "Un archivo de configuración", correct: false, feedback: "No es un archivo." },
+    { id: "d", label: "Un tipo de bucle", correct: false, feedback: "No es un bucle." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>

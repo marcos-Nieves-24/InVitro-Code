@@ -22,19 +22,39 @@ Quiz: quiz.md
 # Condicionales
 
 <Section number={1} title="¿Por qué Condicionales?" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Los condicionales permiten que los programas tomen decisiones. Sin ellos, el código se ejecutaría de la misma manera siempre. Con condicionales, tu programa puede reaccionar de forma diferente según los valores de los datos, la entrada del usuario o los resultados calculados. En biotecnología, los condicionales determinan diagnósticos basados en resultados de laboratorio, clasifican mutaciones genéticas y disparan alertas por valores anormales. En SaaS, controlan niveles de acceso, calculan descuentos y segmentan clientes.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Los condicionales permiten que los programas tomen decisiones.",
+    "Sin ellos, el código se ejecutaría de la misma manera siempre.",
+    "Con condicionales, tu programa puede reaccionar de forma diferente según los valores de los datos, la entrada del usuario o los resultados calculados.",
+    "En biotecnología, los condicionales determinan diagnósticos basados en resultados de laboratorio, clasifican mutaciones genéticas y disparan alertas por valores anormales.",
+    "En SaaS, controlan niveles de acceso, calculan descuentos y segmentan clientes.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior aprendiste bucles (repetición). Ahora aprendes condicionales (toma de decisiones). Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales. Junto con funciones y operadores, ahora tienes todo lo necesario para escribir lógica de procesamiento de datos sofisticada.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste bucles (repetición).",
+    "Ahora aprendes condicionales (toma de decisiones).",
+    "Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales.",
+    "Junto con funciones y operadores, ahora tienes todo lo necesario para escribir lógica de procesamiento de datos sofisticada.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Sentencias if, elif y else" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### La Sentencia if
@@ -98,11 +118,12 @@ Flujo if/elif/else:
                 │   Fin     │
                 └───────────┘
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Truthy, Falsy y Condiciones Avanzadas" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ### Truthy y Falsy
 
 En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condición:
@@ -151,11 +172,12 @@ match value:
     case _:
         pass  # caso por defecto
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 ```python
@@ -321,11 +343,12 @@ def calculate_discount(customer_tier, annual_spend, years_active):
 discount = calculate_discount("professional", 25000, 4)
 print(f"Descuento: {discount:.0%}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
@@ -343,11 +366,12 @@ print(f"Descuento: {discount:.0%}")
 - Evita anidamiento profundo (máx. 3 niveles)
 - Usa cláusulas de guarda (returns tempranos) para reducir el anidamiento
 - Usa `in` para comparaciones múltiples: `if x in (1, 2, 3):`
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - `if` ejecuta código cuando una condición es True
@@ -367,11 +391,12 @@ print(f"Descuento: {discount:.0%}")
 - **Operador ternario**: Expresión condicional para if/else en línea
 - **Cláusula de guarda**: Return temprano para evitar anidamiento
 - **Sentencia match**: Pattern matching estructural de Python 3.10+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Ejercicios
 
 ### Nivel 1: Básico
@@ -399,5 +424,29 @@ Escribe un sistema de **puntaje crediticio** que:
 4. Aplique modificadores: si deuda > ingresos → -20 puntos; si pagos atrasados > 3 → -15 puntos; si antigüedad crediticia > 10 años → +10 puntos
 5. Use `match` para la asignación de calificación
 6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena → Aprobado, sino → Revisión Requerida)
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué bloque se ejecuta cuando la condición del if es False y hay un else?"
+  moduleSlug="python"
+  lessonSlug="lesson08_conditionals"
+  blockId="choice-python-l08-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="El bloque else (o elif correspondiente) se ejecuta si ningún if/elif fue True."
+  options={[
+    { id: "a", label: "El bloque else", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "Ningún bloque", correct: false, feedback: "El else cubre el caso contrario." },
+    { id: "c", label: "El bloque if", correct: false, feedback: "if se ejecuta cuando es True." },
+    { id: "d", label: "Se lanza un error", correct: false, feedback: "No se lanza error por estar en False." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>

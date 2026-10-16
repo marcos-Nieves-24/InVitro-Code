@@ -22,19 +22,39 @@ Quiz: quiz.md
 # Bucles
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Los bucles te permiten repetir operaciones de forma eficiente. En lugar de escribir el mismo código para cada elemento de un dataset, escribes un bucle que procesa todos los elementos automáticamente. En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes. En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características. Sin bucles, el análisis de datos a escala sería imposible.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Los bucles te permiten repetir operaciones de forma eficiente.",
+    "En lugar de escribir el mismo código para cada elemento de un dataset, escribes un bucle que procesa todos los elementos automáticamente.",
+    "En biotecnología, los bucles procesan miles de genes, secuencias de ADN o registros de pacientes.",
+    "En SaaS, iteran sobre transacciones de usuarios, entradas de logs y cálculos de características.",
+    "Sin bucles, el análisis de datos a escala sería imposible.",
+  ]}
+/>
 
 ## Panorama General
 
-En la lección anterior aprendiste funciones — bloques de código reutilizables. Los bucles agregan repetición a tu kit de herramientas. Combinados con condicionales (próxima lección), los bucles te permiten construir pipelines complejos de procesamiento de datos. Después de esta lección, vas a entender mejor las listas (Lección 9) porque los bucles son la forma principal de procesar elementos de una lista.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste funciones — bloques de código reutilizables.",
+    "Los bucles agregan repetición a tu kit de herramientas.",
+    "Combinados con condicionales (próxima lección), los bucles te permiten construir pipelines complejos de procesamiento de datos.",
+    "Después de esta lección, vas a entender mejor las listas (Lección 9) porque los bucles son la forma principal de procesar elementos de una lista.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Tipos de Bucles" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### El Bucle for
@@ -90,11 +110,12 @@ for x in range(5):
 else:
     print("Bucle completado sin break")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Visualización de Bucles" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Explicación Visual
 
 ```
@@ -120,11 +141,12 @@ Flujo del Bucle While:
                   │  Fin    │    condición
                   └─────────┘
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
-
+<RevealSequence>
 ## Implementación en Python
 
 ```python
@@ -175,11 +197,12 @@ for i in range(1, 4):
         print(f"{i} × {j} = {i * j:2d}", end="  ")
     print()
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario**: Procesando una lista de secuencias de ADN para encontrar aquellas con alto contenido GC.
@@ -213,11 +236,12 @@ for i, seq in enumerate(sequences):
 else:
     print(f"Objetivo {target} no encontrado")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo SaaS
 
 **Escenario**: Procesando datos mensuales de transacciones para análisis de churn.
@@ -241,11 +265,12 @@ for month in monthly_activity:
 print(f"\nTotal churned: {total_churned}")
 print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Bucles while infinitos**: Olvidarse de actualizar la variable de condición
@@ -270,11 +295,12 @@ for i, gene in enumerate(genes):
 for gene, expression in zip(genes, expressions):
     print(f"{gene}: {expression}")
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Los bucles `for` iteran sobre secuencias (listas, strings, ranges)
@@ -292,11 +318,12 @@ for gene, expression in zip(genes, expressions):
 - **Bucle infinito**: Bucle que nunca termina
 - **Bucle anidado**: Bucle dentro de otro bucle
 - **enumerate()**: Función incorporada que produce pares (índice, valor)
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Ejercicios
 
 ### Nivel 1: Básico
@@ -323,5 +350,29 @@ Escribe un programa que implemente la **Criba de Eratóstenes** para encontrar t
 3. Los índices que quedan True son números primos
 4. Usa bucles anidados y `break`/`continue` apropiadamente
 5. Imprime todos los primos encontrados
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué bucle se usa para iterar sobre una secuencia en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson07_loops"
+  blockId="choice-python-l07-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="El for pertenece a iterables; while se basa en una condición."
+  options={[
+    { id: "a", label: "for", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "while (siempre)", correct: false, feedback: "while se guía por condición." },
+    { id: "c", label: "loop", correct: false, feedback: "No existe como keyword." },
+    { id: "d", label: "repeat", correct: false, feedback: "No es keyword estándar." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
