@@ -357,6 +357,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 <div>Antes de cerrar, pon a prueba lo que viste. Responde correctamente cada pregunta para avanzar.</div>
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué es una 'feature' en el contexto de IA?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
@@ -371,6 +372,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Por qué los sistemas basados en reglas fijas no son ideales para clasificar conidias?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
@@ -385,6 +387,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué significa que una máquina 'aprenda'?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"

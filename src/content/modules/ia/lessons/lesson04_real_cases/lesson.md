@@ -354,6 +354,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 <div>Checkpoint final del módulo. Valida las ideas centrales antes de celebrar el fin del Módulo 1.</div>
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
@@ -368,6 +369,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué es el reposicionamiento de fármacos?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
@@ -382,6 +384,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Por qué una estructura predicha por AlphaFold no es suficiente para diseñar un fármaco?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
@@ -396,6 +399,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Cuál es una limitación FUNDAMENTAL de la IA en biotecnología?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
@@ -410,6 +414,7 @@ Cuatro lecciones para transformar una idea (¿cómo aprende la IA?) en un recorr
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Cuál es la idea más importante de este módulo?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"

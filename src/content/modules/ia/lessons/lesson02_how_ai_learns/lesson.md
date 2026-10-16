@@ -447,6 +447,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 <div>Cinco preguntas para verificar los conceptos clave. Responde cada una para continuar.</div>
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué es una frontera de decisión?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
@@ -461,6 +462,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="En KNN, ¿qué significa que k sea muy grande (ej. k=20)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
@@ -475,6 +477,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Cuál es la diferencia entre clasificación y regresión?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
@@ -489,6 +492,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué diferencia al subajuste (underfitting) del sobreajuste (overfitting)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
@@ -503,6 +507,7 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Por qué el overfitting es problemático?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
