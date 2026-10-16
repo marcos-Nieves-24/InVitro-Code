@@ -39,6 +39,8 @@ import {
   LabOfflineNotice,
 } from "@/components/lesson";
 import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
+import { GradientDescentPlayer } from "@/components/anymotion/animations/GradientDescentPlayer";
+import { KMeansPlayer } from "@/components/anymotion/animations/KMeansPlayer";
 import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
@@ -187,6 +189,8 @@ export default async function LessonPage({ params }: Props) {
     ConidiaToVector: ConidiaToVectorPlayer,
     FeatureSpace2D: FeatureSpace2DPlayer,
     Overfitting: OverfittingPlayer,
+    GradientDescent: GradientDescentPlayer,
+    KMeans: KMeansPlayer,
     PipelineStages: PipelineStagesPlayer,
     SpeciesCompare: SpeciesComparePlayer,
     SupervisedFlow: SupervisedFlowPlayer,

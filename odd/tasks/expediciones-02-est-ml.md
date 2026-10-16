@@ -32,3 +32,10 @@
 - [x] **AT1 — Tours est01,02,03** (media-mediana-IQR/Z, curtosis/skew, Bayes) | route: delegated (writer Beam) | status: done (2026-10-16): 2 tours (media/IQR, skew/curtosis) + Bayes 4 steps; type-check + MDX OK
 - [x] **AT2 — Tours est04,05,09** (Normal+PMFs, Pearson/Spearman+covarianza, R²/CV) | route: delegated (writer Beam) | status: done (2026-10-16): 4+3+2 tours, MDX OK
 - [x] **AT3 — Tours ML02,03,06** (regresión+gradiente+R², sigmoide+log-loss, inercia KMeans) | route: delegated (writer Beam) | status: done (2026-10-16): 3+2+1 tours, Bayes verificado en browser (1/4 → Verosimilitud), 0 errores
+
+## P2 — Players gráficos de algoritmos
+
+- [x] **P2.0 — Integración Overfitting→ML01 + ConfusionMatrix→ML03** | route: parent inline | verifica registro existente, inserta en la sección visual correspondiente | status: pendiente (dentro de B1)
+- [ ] **P2.B1 — GradientDescentPlayer + KMeansPlayer** | route: delegated (2 writers paralelos, superficies disjuntas) | superficie: `src/components/anymotion/animations/GradientDescentPlayer.tsx` + `.../KMeansPlayer.tsx` (registro e integración los hace el parent) | contrato: props `{caption: string}`, AnymotionStage 16:9, controles play/pause/scrub o stepper determinista, frame estático con reduced-motion, sin autoplay, caption | status: en curso (2 writers Beam)
+- [ ] **P2.B2 — RocBuilder + TreeSplit + integración ConfusionMatrix** | pendiente
+- [ ] **P2.B3 — BayesUpdate + DistributionShape** | pendiente

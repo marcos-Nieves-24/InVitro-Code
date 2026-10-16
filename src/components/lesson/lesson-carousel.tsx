@@ -132,6 +132,12 @@ export function LessonCarousel({
         if (e.key === " " || e.key === "Enter" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
           return;
         }
+        // Home/End belong to the focused control (range: jump to min/max; text:
+        // line start/end). Without this, seeking a slider with End teleports the
+        // learner to the last slide and loses their place mid-exercise.
+        if (e.key === "Home" || e.key === "End") {
+          return;
+        }
       }
 
       // All forward keys below funnel through goNext, which delegates to the
