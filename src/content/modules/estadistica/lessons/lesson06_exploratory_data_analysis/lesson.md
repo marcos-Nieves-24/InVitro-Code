@@ -23,15 +23,39 @@ Quiz: eda_quiz.md
 
 <Section number={1} title="La fase más importante del ML" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-El 80% del trabajo de un científico de datos es entender y limpiar los datos. Sólo el 20% es modelar. El Análisis Exploratorio de Datos (EDA) es dónde realmente conoces tus datos — y dónde se evitan los errores más costosos.
-</MascotMessage>
+<RevealSequence>
 
-EDA es el proceso de examinar datos antes de modelar: detectar patrones, valores faltantes, outliers, y relaciones entre variables. Un buen EDA puede ahorrarte semanas de debugging de modelos mal alimentados.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Llegan mil muestras de un ensayo clínico con datos faltantes y valores extraños.",
+    "Antes de modelar, hay que conocer cada columna y su calidad.",
+    "El Análisis Exploratorio de Datos (EDA) examina los datos antes del modelo.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-EDA no es un paso opcional. Es la diferencia entre un modelo que funciona en producción y uno que falla silenciosamente, porque los datos nunca se entendieron.
+El EDA revisa estructura, calidad, distribuciones y relaciones antes de modelar; evita que el modelo aprenda de datos sucios.
 </ConceptCard>
+
+<ChoiceQuestion
+  question="¿Qué harías primero al recibir un dataset nuevo de un hospital?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson06_exploratory_data_analysis"
+  blockId="choice-estadistica-l06-s1-1"
+  allowContinueOnIncorrect
+  explanation="Explorar los datos primero detecta faltantes, outliers y sesgos antes de entrenar cualquier modelo."
+  options={[
+    { id: "a", label: "Entrenar un modelo de inmediato", correct: false, feedback: "Riesgoso: no sabes si los datos son confiables." },
+    { id: "b", label: "Explorar los datos (EDA)", correct: true, feedback: "¡Bien! Conocer los datos antes de modelar evita errores costosos." },
+    { id: "c", label: "Borrar todos los outliers", correct: false, feedback: "Primero investiga por qué aparecen; pueden ser hallazgos." },
+    { id: "d", label: "Elegir el algoritmo final", correct: false, feedback: "La elección depende de lo que el EDA revele." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 

@@ -23,17 +23,39 @@ Quiz: quiz.md
 
 <Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
-<MascotMessage mood="celebrating">
-En este módulo comienzas a enseñarle a la computadora a descubrir patrones por sí misma. A diferencia de la programación tradicional, en la que escribes reglas explícitas, en el aprendizaje automático el modelo aprende las reglas a partir de los datos.
-</MascotMessage>
+<RevealSequence>
 
-Todos los días usas Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un patólogo mira al microscopio una muestra de un paciente: miles de células, ningún manual escrito.",
+    "¿Cómo decides cuáles son malignas sin una regla programada a mano?",
+    "El Aprendizaje Automático descubre esos patrones directamente desde los datos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-En la programación tradicional escribes **reglas explícitas**. En ML, la computadora **aprende las reglas** a partir de ejemplos. Es la diferencia entre darle una receta a alguien y mostrarle 1000 fotos de gatos hasta que pueda identificarlos solo.
+El ML aprende reglas a partir de ejemplos etiquetados, no de instrucciones explícitas; su objetivo es generalizar a casos nuevos.
 </ConceptCard>
 
-En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitas para cada algoritmo del curso.
+<ChoiceQuestion
+  question="Si le mostráramos mil fotos de lunares benignos y malignos al programa, ¿qué esperas que aprenda?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  blockId="choice-ml-l01-s1-1"
+  allowContinueOnIncorrect
+  explanation="El modelo no memoriza nombres: aprende patrones que distinguen las clases y luego generaliza a lunares nuevos."
+  options={[
+    { id: "a", label: "Patrones que distinguen malignos de benignos", correct: true, feedback: "¡Exacto! Eso es generalizar a partir de ejemplos." },
+    { id: "b", label: "Una lista fija de nombres de archivos", correct: false, feedback: "Eso no predice en casos nuevos." },
+    { id: "c", label: "La regla escrita por un médico", correct: false, feedback: "El ML no sigue reglas escritas; las aprende." },
+    { id: "d", label: "Nada útil", correct: false, feedback: "Con ejemplos etiquetados sí puede aprender." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 

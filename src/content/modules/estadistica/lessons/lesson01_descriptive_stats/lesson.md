@@ -23,15 +23,39 @@ Quiz: descriptive_statistics_quiz.md
 
 <Section number={1} title="El problema de los 10.000 genes" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-Bienvenido al Laboratorio de Datos. Hoy vamos a aprender cómo resumir miles de números en un puñado de medidas significativas. Es la primera herramienta de todo científico de datos.
-</MascotMessage>
+<RevealSequence>
 
-Imagina qué acabas de secuenciar 10.000 genes de una muestra de un paciente. Necesitas comunicar qué genes se expresan de forma consistente y cuáles varían drásticamente entre pacientes. Sin estadística descriptiva, tendrías qué leer 10.000 números uno por uno.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un paciente llega con una muestra y, bajo el microscopio, miles de genes se expresan a la vez.",
+    "¿Cómo comunicar esa avalancha de números sin leerlos uno por uno?",
+    "La estadística descriptiva condensa el conjunto entero en un puñado de medidas.",
+  ]}
+/>
 
-La estadística descriptiva condensa conjuntos de datos enteros en un puñado de números significativos, permitiendo a científicos y analistas entender los datos de un vistazo.
+<ConceptCard variant="key-idea">
+Resume un conjunto de datos completo en pocas medidas: centro (media, mediana) y variación (desviación estándar, IQR). Un puñado de números, la historia entera.
+</ConceptCard>
 
-En biotecnología, la estadística descriptiva ayuda a responder preguntas como: ¿Cuál es el nivel de expresión promedio de un gen en una población? ¿Qué tan variable es la respuesta a un fármaco? En SaaS, resume métricas de engagement cómo usuarios activos diarios o duración de sesiones.
+<ChoiceQuestion
+  question="Antes de calcular nada: si un gen se expresa mucho en unos pacientes y casi nada en otros, ¿qué importa más?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  blockId="choice-estadistica-l01-s1-1"
+  allowContinueOnIncorrect
+  explanation="Hay que reportar centro y variación juntos: la medida típica (mediana o media) más el rango de dispersión (IQR o desviación estándar)."
+  options={[
+    { id: "a", label: "Solo el valor típico", correct: false, feedback: "Insuficiente: no dice cuánto varían los datos entre pacientes." },
+    { id: "b", label: "Solo cuánto varían", correct: false, feedback: "Insuficiente: falta saber cuál es el valor esperado." },
+    { id: "c", label: "Ambos: valor típico + variación", correct: true, feedback: "¡Bien! Centro y dispersión juntos cuentan la historia real." },
+    { id: "d", label: "El máximo absoluto", correct: false, feedback: "El máximo es un extremo, no resume el conjunto." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
