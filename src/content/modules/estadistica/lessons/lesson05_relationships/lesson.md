@@ -67,6 +67,25 @@ La covarianza mide cómo dos variables varían juntas:
 $$\text{Cov}(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$$
 </ConceptCard>
 
+<EquationTour caption="Covarianza: qué mide cada término del movimiento conjunto.">
+  <EquationStep label="Desvío X">
+    $(x_i - \bar{x})$
+    Cuánto se aleja el valor de X de su media.
+  </EquationStep>
+  <EquationStep label="Desvío Y">
+    $(y_i - \bar{y})$
+    Cuánto se aleja el valor de Y de su media.
+  </EquationStep>
+  <EquationStep label="Producto">
+    $(x_i - \bar{x})(y_i - \bar{y})$
+    Positivo si ambos suben o ambos bajan juntos.
+  </EquationStep>
+  <EquationStep label="Promedio">
+    $\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})$
+    Promedio de los productos: signo y magnitud conjunta.
+  </EquationStep>
+</EquationTour>
+
 Cuando X está por encima de su media, ¿Y también? → **covarianza positiva**. ¿Y está por debajo? → **covarianza negativa**. ¿Sin patrón? → cercana a cero.
 
 <ConceptCard variant="warning">
@@ -96,6 +115,21 @@ Cuando X está por encima de su media, ¿Y también? → **covarianza positiva**
 El coeficiente de correlación de Pearson normaliza la covarianza a [-1, 1]:
 
 $$\rho_{X,Y} = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}$$
+
+<EquationTour caption="Pearson: covarianza normalizada a [-1, 1].">
+  <EquationStep label="Numerador">
+    $\text{Cov}(X, Y)$
+    Movimiento conjunto de X e Y.
+  </EquationStep>
+  <EquationStep label="Denominador">
+    $\sigma_X \sigma_Y$
+    Producto de dispersiones para hacerlo adimensional.
+  </EquationStep>
+  <EquationStep label="Cociente">
+    $\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}$
+    Resultado en [-1,1]: signo y fuerza lineal.
+  </EquationStep>
+</EquationTour>
 
 - $+1$: relación lineal positiva perfecta
 - $0$: sin relación lineal
@@ -131,6 +165,25 @@ Pearson mide relaciones LINEALES. Si la relación es curva pero monótona (siemp
 La correlación de Spearman usa rangos en lugar de valores originales:
 
 $$\rho_s = \frac{\text{Cov}(R(X), R(Y))}{\sigma_{R(X)} \sigma_{R(Y)}}$$
+
+<EquationTour caption="Spearman: Pearson aplicado a rangos, resistente a outliers.">
+  <EquationStep label="Rangos">
+    $R(X),\ R(Y)$
+    Reemplaza cada valor por su posición ordenada.
+  </EquationStep>
+  <EquationStep label="Covarianza">
+    $\text{Cov}(R(X), R(Y))$
+    Movimiento conjunto de los rangos, no de los valores originales.
+  </EquationStep>
+  <EquationStep label="Dispersión">
+    $\sigma_{R(X)} \sigma_{R(Y)}$
+    Normaliza por la dispersión de los rangos.
+  </EquationStep>
+  <EquationStep label="Coeficiente">
+    $\rho_s$
+    Resultado en [-1,1]: fuerza monotónica.
+  </EquationStep>
+</EquationTour>
 
 Donde $R(X)$ son los rangos (1°, 2°, 3°...).
 </ConceptCard>
