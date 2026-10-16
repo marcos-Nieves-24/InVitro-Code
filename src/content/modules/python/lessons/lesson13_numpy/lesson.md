@@ -22,7 +22,7 @@ Quiz: quiz.md
 
 # NumPy
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué NumPy?" eyebrow="INICIO">
 
 ## Motivación
 
