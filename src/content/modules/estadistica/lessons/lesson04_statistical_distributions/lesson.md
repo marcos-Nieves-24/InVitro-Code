@@ -22,15 +22,42 @@ Quiz: statistical_distributions_quiz.md
 
 <Section number={1} title="Las distribuciones con nombre y apellido" eyebrow="INICIO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un paciente llega y, bajo el microscopio, miles de genes se expresan a la vez.",
+    "En la Lección 3 aprendiste el lenguaje general de la probabilidad.",
+    "Ahora conocerás las distribuciones con nombre que más aparecen en machine learning: Bernoulli, Binomial, Poisson y Normal.",
+    "Cada una modela un tipo distinto de fenómeno, y elegirla bien define la calidad del modelo.",
+  ]}
+/>
+
 <MascotMessage mood="thinking">
 Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log-normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
 </MascotMessage>
 
-En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a conocer las distribuciones específicas qué aparecen con más frecuencia en machine learning: **Bernoulli, Binomial, Poisson y Normal**. Cada una modela un tipo distinto de fenómeno.
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Bernoulli: éxito o fracaso" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Imaginá un único ensayo: ¿el paciente responde o no?",
+    "La distribución Bernoulli modela exactamente ese resultado binario (1/0).",
+    "Es el bloque de construcción de la Binomial y de otras distribuciones discretas.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Distribución Bernoulli**: Modela un único resultado binario (éxito/fracaso, 1/0).
@@ -39,11 +66,31 @@ En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a 
 - Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
 </ConceptCard>
 
-Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
+<ConceptCard variant="key-idea">
+Intuición:
+- Un solo lanzamiento de moneda.
+- Cada paciente responde al tratamiento o no.
+- La Bernoulli es el bloque de construcción de distribuciones más complejas.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Binomial: contar éxitos" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Si Bernoulli es un ensayo, la Binomial cuenta éxitos en muchos.",
+    "Lanzar una moneda 10 veces y contar caras equivale a sumar 10 Bernoullis independientes.",
+    "De 100 pacientes tratados, ¿cuántos responden? Esa respuesta ya es Binomial.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Distribución Binomial**: Cantidad de éxitos en $n$ ensayos Bernoulli independientes.
@@ -52,11 +99,31 @@ Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento
 - Media: $E[X] = np$, Varianza: $\text{Var}(X) = np(1-p)$
 </ConceptCard>
 
-Intuición: Lanzar una moneda 10 veces y contar caras. De 100 pacientes tratados, ¿cuántos responden? La Binomial es una suma de $n$ Bernoullis independientes.
+<ConceptCard variant="key-idea">
+Intuición:
+- Lanzar una moneda 10 veces y contar caras.
+- De 100 pacientes tratados, ¿cuántos responden?
+- La Binomial es una suma de $n$ Bernoullis independientes.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Poisson: eventos en el tiempo" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Ahora cuento eventos en un intervalo fijo de tiempo o espacio.",
+    "Llegadas de clientes por hora, mutaciones por gen, llamadas al call center.",
+    "La Poisson asume que los eventos son independientes a tasa constante λ.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Distribución Poisson**: Cantidad de eventos qué ocurren en un intervalo fijo de tiempo o espacio.
@@ -69,11 +136,31 @@ Intuición: Lanzar una moneda 10 veces y contar caras. De 100 pacientes tratados
 Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitas un modelo más complejo.
 </ConceptCard>
 
-Ejemplos: mutaciones en una secuencia de ADN, llegadas de clientes por hora, llamadas a un call center por minuto.
+<ConceptCard variant="key-idea">
+Ejemplos:
+- Mutaciones en una secuencia de ADN.
+- Llegadas de clientes por hora.
+- Llamadas a un call center por minuto.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Normal: la reina de las distribuciones" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "La normal es la reina de las distribuciones y aparece por todas partes.",
+    "El Teorema Central del Límite lo explica: la suma de muchas variables independientes converge a una normal.",
+    "Incluso si tus datos no son normales, los promedios de muestras grandes sí lo son.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Distribución Normal (Gaussiana)**: La distribución más importante en estadística.
@@ -89,35 +176,51 @@ Ejemplos: mutaciones en una secuencia de ADN, llegadas de clientes por hora, lla
 El **Teorema Central del Límite** explica por qué la normal es ubicua: la suma de muchas variables independientes converge a una normal, sin importar la distribución original. Incluso si tus datos no son normales, los promedios de muestras grandes sí lo son.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Comparación visual de las cuatro" eyebrow="INTERACTIVA">
 
-<ComparisonTable
-  rows={[
-    { feature: "Tipo", left: "Discreta (0 o 1)", right: "Discreta (0 a n)" },
-    { feature: "Parámetros", left: "p", right: "n, p" },
-    { feature: "Media", left: "p", right: "np" },
-    { feature: "Varianza", left: "p(1-p)", right: "np(1-p)" },
-    { feature: "Ejemplo", left: "¿Responde al tratamiento?", right: "¿Cuántos de 50 responden?" },
-    { feature: "scipy.stats", left: "bernoulli(p)", right: "binom(n, p)" },
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Llegó el momento de ponerlas lado a lado.",
+    "Comparar tipo, parámetros, media, varianza y ejemplo típico evita elegir la distribución incorrecta en un caso real.",
+    "En pacientes y clientes, elegir mal cambia por completo la inferencia posterior.",
   ]}
 />
 
-<ComparisonTable
-  rows={[
-    { feature: "Tipo", left: "Discreta (0 a ∞)", right: "Continua (−∞ a ∞)" },
-    { feature: "Parámetros", left: "λ", right: "μ, σ²" },
-    { feature: "Media", left: "λ", right: "μ" },
-    { feature: "Varianza", left: "λ", right: "σ²" },
-    { feature: "Ejemplo", left: "Mutaciones por gen", right: "Altura de personas" },
-    { feature: "scipy.stats", left: "poisson(lam)", right: "norm(mu, sigma)" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+Comparativa rápida:
+- **Bernoulli** — discreta (0 o 1), parámetro $p$, media $p$, varianza $p(1-p)$, ejemplo: ¿responde al tratamiento? — `scipy.stats.bernoulli(p)`.
+- **Binomial** — discreta (0 a n), parámetros $n, p$, media $np$, varianza $np(1-p)$, ejemplo: ¿cuántos de 50 responden? — `scipy.stats.binom(n, p)`.
+- **Poisson** — discreta (0 a ∞), parámetro $\lambda$, media $\lambda$, varianza $\lambda$, ejemplo: mutaciones por gen — `scipy.stats.poisson(lam)`.
+- **Normal** — continua ($-\infty$ a $\infty$), parámetros $\mu, \sigma^2$, media $\mu$, varianza $\sigma^2$, ejemplo: altura de personas — `scipy.stats.norm(mu, sigma)`.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Manos a la obra con scipy.stats" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Ahora toca calcular, no solo memorizar.",
+    "Con scipy.stats pasamos de definiciones a PMF, CDF y rangos concretos.",
+    "Probá cada bloque en tu notebook y compará probabilidades.",
+  ]}
+/>
 
 ```python
 import numpy as np
@@ -146,9 +249,24 @@ print(f"P(40 < X < 60) = {norm.cdf(60) - norm.cdf(40):.3f}")
 **PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$ — siempre usa CDF para rangos.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Biotecnología: modelando eventos raros" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Las mutaciones en secuencias de ADN son el ejemplo clásico de eventos raros.",
+    "Si la tasa promedio es 2.5 mutaciones por gen, Poisson responde preguntas concretas.",
+    "Compará la probabilidad de un gen intacto versus uno muy dañado.",
+  ]}
+/>
 
 Las mutaciones en secuencias de ADN siguen Poisson. Si la tasa promedio es 2.5 mutaciones por gen:
 
@@ -174,9 +292,24 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="Checkpoint" eyebrow="EVALUACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Buen momento para verificar la elegibilidad de cada distribución.",
+    "No se trata de memorizar fórmulas, sino de emparejar escenario con modelo.",
+    "Resolvé las preguntas antes de seguir con los términos clave.",
+  ]}
+/>
 
 <ChoiceQuestion
   question="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
@@ -223,35 +356,63 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Términos clave" eyebrow="CIERRE">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["Bernoulli", "Un ensayo binario con probabilidad p de éxito"],
-    ["Binomial", "Cantidad de éxitos en n ensayos Bernoulli independientes"],
-    ["Poisson", "Cantidad de eventos en un intervalo fijo, tasa constante λ"],
-    ["Normal (Gaussiana)", "Distribución campana simétrica N(μ, σ²)"],
-    ["Puntaje Z", "Estandarización: $Z = (X - \\mu)/\\sigma \\sim N(0,1)$"],
-    ["PMF", "Probability Mass Function — para variables discretas"],
-    ["PDF", "Probability Density Function — para variables continuas"],
-    ["CDF", "Cumulative Distribution Function — $F(x) = P(X \\leq x)$"],
-    ["TCL", "Teorema Central del Límite: promedios convergen a normal"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Estos términos son la base del resto del módulo.",
+    "Guardalos como tu vocabulario de distribuciones.",
+    "Volveremos a ellos al elegir features y calcular Z-Scores.",
   ]}
-  searchable={true}
-  caption="Distribuciones estadísticas — referencia rápida"
 />
+
+<ConceptCard variant="key-idea">
+Términos clave:
+- **Bernoulli**: un ensayo binario con probabilidad $p$ de éxito.
+- **Binomial**: cantidad de éxitos en $n$ ensayos Bernoulli independientes.
+- **Poisson**: cantidad de eventos en un intervalo fijo, tasa constante $\lambda$.
+- **Normal (Gaussiana)**: distribución campana simétrica $N(\mu, \sigma^2)$.
+- **Puntaje Z**: estandarización: $Z = (X - \mu) / \sigma \sim N(0,1)$.
+- **PMF**: Probability Mass Function — para variables discretas.
+- **PDF**: Probability Density Function — para variables continuas.
+- **CDF**: Cumulative Distribution Function — $F(x) = P(X \leq x)$.
+- **TCL**: Teorema Central del Límite: promedios convergen a normal.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
 
+<RevealSequence mode="appear">
+
 <MascotMessage mood="celebrating">
 Cuatro distribuciones fundamentales cubiertas: Bernoulli, Binomial, Poisson y Normal. Con estas cuatro ya puedes modelar una enorme variedad de fenómenos reales.
 </MascotMessage>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En la Lección 5 estudiaremos cómo se relacionan las variables entre sí.",
+    "Covarianza, correlación de Pearson y Spearman, y matrices de correlación.",
+    "Porque en el mundo real nada ocurre en aislamiento: todo está conectado.",
+  ]}
+/>
+
 **En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento — todo está conectado.
+
+</RevealSequence>
 
 </Section>

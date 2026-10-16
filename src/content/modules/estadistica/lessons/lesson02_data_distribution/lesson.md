@@ -22,6 +22,7 @@ Quiz: data_distribution_quiz.md
 ---
 
 <Section number={1} title="Más allá de los números" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
 <MascotMessage mood="thinking">
 En la Lección 1 aprendiste a resumir datos con números. Pero dos datasets con idéntica media y desviación estándar pueden ser completamente diferentes. Hoy vamos a ver la forma de los datos.
@@ -31,9 +32,11 @@ Dos conjuntos de datos muy diferentes pueden tener medias y desviaciones estánd
 
 En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log-normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo qué afecta cómo calculamos promedios y detectamos anomalías.
 
+</RevealSequence>
 </Section>
 
 <Section number={2} title="¿Dónde estamos?" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 La Lección 1 enseñó resúmenes numéricos; esta lección enseña resúmenes visuales. Aprenderás a **ver** la forma de tus datos.
 
@@ -43,9 +46,11 @@ Entender la distribución de los datos es crítico antes de aplicar cualquier mo
 
 Esto te prepara para la Lección 3 (Probabilidad) y la Lección 4 (Distribuciones Estadísticas con nombre cómo la normal y binomial).
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Histogramas: la primera mirada" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 Un histograma particiona los datos en intervalos (bins) y cuenta cuántas observaciones caen en cada uno. El área de cada barra representa la proporción de datos en ese intervalo.
@@ -61,9 +66,11 @@ La cantidad de bins afecta drásticamente la interpretación:
 Muy pocos bins ocultan detalles importantes. Demasiados bins crean ruido qué parece estructura pero no lo es. Probar varios anchos es parte del análisis exploratorio.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="KDE: la curva suave" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 Una estimación de densidad por kernel (KDE) traza una versión suavizada del histograma colocando un "bache" (kernel) en cada punto de datos y sumándolos.
@@ -73,9 +80,11 @@ $$\hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right)$$
 
 El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$ chico → más detalle.
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Asimetría: la cola manda" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 La asimetría mide la falta de simetría de la distribución:
@@ -83,22 +92,22 @@ La asimetría mide la falta de simetría de la distribución:
 $$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$$
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Valor", left: "Asimetría = 0", right: "Distribución simétrica (ej. normal)" },
-    { feature: "Dirección", left: "Asimetría > 0", right: "Cola larga a la derecha → media > mediana" },
-    { feature: "Caso típico", left: "Asimetría < 0", right: "Cola larga a la izquierda → media < mediana" },
-    { feature: "Ejemplo", left: "Precios de casas (cola derecha)", right: "Notas de examen fácil (cola izquierda)" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+- **Valor**: Asimetría = 0 → Distribución simétrica (ej. normal)
+- **Dirección**: Asimetría > 0 → Cola larga a la derecha → media > mediana
+- **Caso típico**: Asimetría < 0 → Cola larga a la izquierda → media < mediana
+- **Ejemplo**: Precios de casas (cola derecha) → Notas de examen fácil (cola izquierda)
+</ConceptCard>
 
 <ConceptCard variant="key-idea">
 En una distribución con asimetría a la derecha, la media es mayor que la mediana, porque los valores extremos altos arrastran la media. Por eso, en estos casos conviene reportar también la mediana, que es más robusta a los valores atípicos.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Curtosis: ¿qué tan extremos son los extremos?" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 La curtosis mide el "peso de las colas" — qué tan probables son los valores extremos:
@@ -106,21 +115,21 @@ La curtosis mide el "peso de las colas" — qué tan probables son los valores e
 $$\text{Curtosis} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$$
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Curtosis = 0", left: "Mesocúrtica", right: "Similar a la distribución normal" },
-    { feature: "Curtosis > 0", left: "Leptocúrtica", right: "Colas pesadas → más outliers. Ej: retornos financieros" },
-    { feature: "Curtosis < 0", left: "Platicúrtica", right: "Colas livianas → menos outliers. Ej: distribución uniforme" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+- **Curtosis = 0**: Mesocúrtica → Similar a la distribución normal
+- **Curtosis > 0**: Leptocúrtica → Colas pesadas → más outliers. Ej: retornos financieros
+- **Curtosis < 0**: Platicúrtica → Colas livianas → menos outliers. Ej: distribución uniforme
+</ConceptCard>
 
 <CalloutInfo>
 Una curtosis alta significa qué los valores extremos son más probables qué en una normal. Esto importa para evaluación de riesgos y detección de outliers en genómica.
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Manos a la obra: tres distribuciones" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Visualicemos distribuciones simétricas, asimétricas a la derecha y a la izquierda:
 
@@ -150,9 +159,11 @@ print(f"Der. - Asimetría: {skew(right_skewed):.3f}, Curtosis: {kurtosis(right_s
 print(f"Izq. - Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_skewed):.3f}")
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Caso real: pingüinos" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Analicemos la masa corporal de pingüinos — ¿es simétrica?
 
@@ -188,9 +199,11 @@ print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={9} title="Biotecnología: expresión génica log-normal" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Los datos de expresión génica suelen seguir una distribución log-normal. Una transformación logarítmica los vuelve aproximadamente normales:
 
@@ -215,9 +228,11 @@ print(f"Asimetría con log: {skew(log_transformed):.3f}")
 Muchos algoritmos de ML (regresión lineal, PCA, clustering) funcionan mejor con datos aproximadamente normales. La transformación logarítmica es una herramienta estándar en bioinformática para normalizar datos de expresión génica.
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={10} title="SaaS: duración de sesiones" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Las duraciones de sesión en productos SaaS suelen seguir una distribución exponencial:
 
@@ -250,9 +265,11 @@ plt.show()
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={11} title="Errores comunes y mejores prácticas" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="warning">
 **Cuatro errores frecuentes:**
@@ -272,9 +289,11 @@ plt.show()
 - Aplica transformación logarítmica a datos con asimetría derecha para ML
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={12} title="Checkpoint" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
 <ChoiceQuestion
   question="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
@@ -321,28 +340,27 @@ plt.show()
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={13} title="Términos clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["Histograma", "Gráfico de barras de frecuencias de datos agrupados en bins"],
-    ["KDE", "Estimación suave de la densidad de probabilidad usando kernels"],
-    ["Asimetría", "Medida de la falta de simetría (0 = simétrico)"],
-    ["Curtosis", "Medida del peso de las colas (0 = similar a la normal)"],
-    ["Leptocúrtica", "Distribución con colas pesadas (más outliers de lo esperado)"],
-    ["Platicúrtica", "Distribución con colas livianas (menos outliers)"],
-    ["Multimodal", "Distribución con múltiples picos — sugiere subgrupos"],
-  ]}
-  searchable={true}
-  caption="Términos clave de distribución de datos"
-/>
+<ConceptCard variant="key-idea">
+- **Histograma**: Gráfico de barras de frecuencias de datos agrupados en bins
+- **KDE**: Estimación suave de la densidad de probabilidad usando kernels
+- **Asimetría**: Medida de la falta de simetría (0 = simétrico)
+- **Curtosis**: Medida del peso de las colas (0 = similar a la normal)
+- **Leptocúrtica**: Distribución con colas pesadas (más outliers de lo esperado)
+- **Platicúrtica**: Distribución con colas livianas (menos outliers)
+- **Multimodal**: Distribución con múltiples picos — sugiere subgrupos
+</ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
 <MascotMessage mood="celebrating">
 Ya sabes leer la forma de los datos. Esto es fundamental: sin entender la distribución, no es posible elegir el modelo correcto.
@@ -356,4 +374,5 @@ Ya sabes leer la forma de los datos. Esto es fundamental: sin entender la distri
 
 **En la Lección 3** vamos a formalizar todo esto con la teoría de probabilidad: axiomas, Bayes, y variables aleatorias. Porque hasta ahora describimos datos del pasado — la probabilidad nos permite razonar sobre el futuro.
 
+</RevealSequence>
 </Section>

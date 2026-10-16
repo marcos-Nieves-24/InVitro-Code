@@ -21,9 +21,11 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Regresión Lineal
+
 <Section number={1} title="Predecir números, no categorías" eyebrow="INICIO">
 
-<RevealSequence>
+<RevealSequence mode="appear">
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -61,6 +63,19 @@ La regresión lineal predice un valor numérico continuo modelando la salida com
 
 <Section number={2} title="La ecuación que lo explica todo" eyebrow="CONCEPTO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una regresión lineal es una suma ponderada de features.",
+    "Cada coeficiente dice cuánto cambia la salida por unidad de feature.",
+    "El residual es lo que el modelo no puede explicar.",
+  ]}
+/>
+
 **Regresión Lineal Simple** (una característica):
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
@@ -81,9 +96,24 @@ En forma matricial: $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\va
 $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Descenso por gradiente: la alternativa iterativa" eyebrow="MATEMÁTICA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Con miles de features, invertir (X^T X)^-1 es costosísimo.",
+    "El descenso por gradiente ofrece un camino iterativo.",
+    "Inicia, calcula gradiente, actualiza, y repite hasta converger.",
+  ]}
+/>
 
 Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es carísimo. El descenso por gradiente ofrece un camino iterativo:
 
@@ -96,17 +126,22 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
 $\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardas una eternidad. Si es muy grande, pasas de largo y nunca converges. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
 </CalloutInfo>
 
-### Supuestos del modelo
+<ConceptCard variant="definition">
+**Supuestos del modelo**
+- Linealidad: $y$ es aproximadamente lineal en $X$.
+- Independencia: las observaciones no dependen entre sí.
+- Homocedasticidad: varianza constante de los residuales.
+- Normalidad: residuales con distribución normal (para tests estadísticos).
+- Sin multicolinealidad: features no altamente correlacionadas entre sí.
+</ConceptCard>
 
-1. **Linealidad:** $y$ es aproximadamente lineal en $X$
-2. **Independencia:** Las observaciones no dependen entre sí
-3. **Homocedasticidad:** Varianza constante de los residuales
-4. **Normalidad:** Residuales con distribución normal (para tests estadísticos)
-5. **Sin multicolinealidad:** Features no altamente correlacionadas entre sí
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Las 3 métricas que necesitas saber" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 **MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
@@ -126,9 +161,13 @@ La ventaja: está en las mismas unidades que $y$. Si predices precios en dólare
 Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bueno como predecir siempre el promedio, R² < 0 es peor que el promedio.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualiza tu primera regresión" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -160,9 +199,13 @@ plt.show()
 La línea roja es lo que el modelo aprendió. Cada punto azul que se desvía de la línea es un residual — lo que el modelo no pudo explicar. El objetivo de OLS es hacer que esas desviaciones verticales sean lo más chicas posible, en promedio.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Tu primer modelo con datos reales" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -208,9 +251,13 @@ print(f"R²:   {r2_score(y_test, y_pred):.3f}")
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Caso California Housing" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 from sklearn.datasets import fetch_california_housing
@@ -239,9 +286,13 @@ print(coef_df)
 **Interpretación:** MedInc (ingreso mediano) domina los coeficientes. A mayor ingreso en la zona, mayor el precio de las viviendas. Esto tiene sentido económico y valida que el modelo está capturando relaciones reales, no ruido.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Biotecnología: solubilidad de proteínas" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
 
 ```python
 np.random.seed(42)
@@ -277,11 +328,24 @@ print(f"R²: {model_s.score(X_s, y_s):.3f}")
 La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="SaaS: forecasting de ingresos" eyebrow="APLICACIÓN">
 
-Una startup quiere pronosticar su MRR (Ingreso Recurrente Mensual) del próximo mes basándose en métricas del mes actual:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una startup quiere pronosticar su MRR del próximo mes.",
+    "Las features son métricas del mes actual de la empresa.",
+    "Interpretar coeficientes con sentido de negocio es clave.",
+  ]}
+/>
 
 ```python
 np.random.seed(42)
@@ -314,9 +378,13 @@ for col, coef in zip(X_r.columns, model_r.coef_):
     print(f"{col}: {coef:.2f}")
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Errores que te van a costar puntos" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Interpretar coeficientes como causales.** Que el coeficiente de "gasto en marketing" sea positivo no significa que gastar más cause más ingresos. Podría ser al revés: empresas con más ingresos gastan más en marketing.
@@ -330,9 +398,13 @@ for col, coef in zip(X_r.columns, model_r.coef_):
 5. **No escalar features al comparar coeficientes.** Si una feature va de 0 a 1 y otra de 0 a 100000, sus coeficientes no son comparables.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={11} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
+
+<RevealSequence mode="appear">
 
 <CalloutCheck>
 Visualiza siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
@@ -346,34 +418,38 @@ Compara contra una línea base simple (predecir siempre el promedio). Si tu mode
 Considera regularización (Ridge, Lasso) cuando tengas muchas features. La regresión lineal simple se descontrola con alta dimensionalidad.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={12} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicas, RMSE mide cuánto te equivocas en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "OLS", def: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE" },
-    { term: "Coeficiente", def: "Peso asignado a una feature. Cuánto cambia y por unidad de x" },
-    { term: "Intersección", def: "Predicción cuando todas las features son 0" },
-    { term: "Residual", def: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ" },
-    { term: "R²", def: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio" },
-    { term: "MSE", def: "Error cuadrático medio. Penaliza fuerte los errores grandes" },
-    { term: "RMSE", def: "Raíz del MSE. Mismas unidades que y — interpretable" },
-    { term: "Descenso por gradiente", def: "Optimización iterativa: ajusta β en dirección del gradiente negativo" },
-  ]}
-/>
+{/* candidate-player: interactive-table-glosario-regresion */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- OLS: Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE.
+- Coeficiente: peso asignado a una feature.
+- Intersección: predicción cuando todas las features son 0.
+- Residual: diferencia entre valor real y predicción: yᵢ − ŷᵢ.
+- R²: proporción de varianza explicada. 1 = perfecto, 0 = promedio.
+- MSE: error cuadrático medio. Penaliza fuerte los errores grandes.
+- RMSE: raíz del MSE. Mismas unidades que y — interpretable.
+- Descenso por gradiente: optimización iterativa ajustando β en dirección del gradiente negativo.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={13} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
+
+<RevealSequence mode="appear">
 
 <ChoiceQuestion
   question="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
@@ -442,5 +518,7 @@ print(f"R²: {r2:.4f}")
 `}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>
