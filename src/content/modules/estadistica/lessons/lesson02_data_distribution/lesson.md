@@ -177,6 +177,8 @@ print(f"Der. - Asimetría: {skew(right_skewed):.3f}, Curtosis: {kurtosis(right_s
 print(f"Izq. - Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_skewed):.3f}")
 ```
 
+<DistributionShape caption="Cambiá la forma y seguí la media, la mediana y la moda: con la cola a la derecha, la media se corre y deja de representar al sujeto típico." />
+
 </RevealSequence>
 </Section>
 

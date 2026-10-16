@@ -161,6 +161,8 @@ print(f"P(enfermedad | positivo) = {p_disease_given_pos:.3f}")
 print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
 ```
 
+<BayesUpdate caption="Recorrí los pasos con estos mismos números —prevalencia 1%, sensibilidad 95%, especificidad 90%— y después subí la prevalencia para ver cómo el positivo deja de ser engañoso." />
+
 <ChoiceQuestion
   question="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
   moduleSlug="estadistica"
