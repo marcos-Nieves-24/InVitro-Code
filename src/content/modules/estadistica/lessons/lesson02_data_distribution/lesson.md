@@ -86,11 +86,20 @@ El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$
 <Section number={5} title="Asimetría: la cola manda" eyebrow="CONCEPTO">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="definition">
-La asimetría mide la falta de simetría de la distribución:
-
-$$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$$
-</ConceptCard>
+<EquationTour caption="La asimetría estandariza cada dato y promedia cubos para medir la cola.">
+  <EquationStep label="Centrado y escalado">
+    $\frac{x_i - \bar{x}}{\sigma}$
+    Lleva cada dato a unidades de desviación estándar.
+  </EquationStep>
+  <EquationStep label="Cubo">
+    $\left(\frac{x_i - \bar{x}}{\sigma}\right)^3$
+    El cubo conserva el signo de la cola.
+  </EquationStep>
+  <EquationStep label="Promedio">
+    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$
+    Promedio de los cubos: signo y magnitud de la asimetría.
+  </EquationStep>
+</EquationTour>
 
 <ConceptCard variant="key-idea">
 - **Valor**: Asimetría = 0 → Distribución simétrica (ej. normal)
@@ -109,11 +118,20 @@ En una distribución con asimetría a la derecha, la media es mayor que la media
 <Section number={6} title="Curtosis: ¿qué tan extremos son los extremos?" eyebrow="CONCEPTO">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="definition">
-La curtosis mide el "peso de las colas" — qué tan probables son los valores extremos:
-
-$$\text{Curtosis} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$$
-</ConceptCard>
+<EquationTour caption="La curtosis eleva a la cuarta para hacer visibles las colas extremas.">
+  <EquationStep label="Centrado y escalado">
+    $\frac{x_i - \bar{x}}{\sigma}$
+    Estandariza cada dato.
+  </EquationStep>
+  <EquationStep label="Cuarta potencia">
+    $\left(\frac{x_i - \bar{x}}{\sigma}\right)^4$
+    Los extremos pesan mucho más que en la asimetría.
+  </EquationStep>
+  <EquationStep label="Promedio y ajuste">
+    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$
+    Resta 3 para que la normal tenga curtosis 0.
+  </EquationStep>
+</EquationTour>
 
 <ConceptCard variant="key-idea">
 - **Curtosis = 0**: Mesocúrtica → Similar a la distribución normal

@@ -80,10 +80,20 @@ La regresión lineal predice un valor numérico continuo modelando la salida com
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
 
-- $\beta_0$: intersección — valor de $y$ cuando $x = 0$
-- $\beta_1$: pendiente — cuánto cambia $y$ por cada unidad de $x$
-- $\varepsilon$: residual — lo que el modelo no puede explicar
-
+<EquationTour caption="Regresión lineal: qué aporta cada término a la predicción.">
+  <EquationStep label="Intersección">
+    $\beta_0$
+    Valor de $y$ cuando todas las features valen 0.
+  </EquationStep>
+  <EquationStep label="Pendiente">
+    $\beta_1 x$
+    Cambio en $y$ por cada unidad adicional de $x$.
+  </EquationStep>
+  <EquationStep label="Residual">
+    $\varepsilon$
+    Lo que el modelo no puede explicar con las features disponibles.
+  </EquationStep>
+</EquationTour>
 **Regresión Lineal Múltiple** ($p$ características):
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon$$
@@ -121,6 +131,25 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
 2. Calcula el gradiente del error respecto a $\boldsymbol{\beta}$
 3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
 4. Repite hasta converger
+
+<EquationTour caption="La regla de actualización: cómo cambia β en cada paso.">
+  <EquationStep label="β actual">
+    $\boldsymbol{\beta}$
+    Valor actual de los coeficientes.
+  </EquationStep>
+  <EquationStep label="Tasa α">
+    $\alpha$
+    Tamaño del paso; muy grande oscila, muy chico tarda.
+  </EquationStep>
+  <EquationStep label="Gradiente">
+    $\nabla \text{MSE}$
+    Dirección de mayor aumento del error; se resta para bajar.
+  </EquationStep>
+  <EquationStep label="Nuevo β">
+    $\boldsymbol{\beta} - \alpha \nabla \text{MSE}$
+    Coeficientes actualizados hacia el mínimo.
+  </EquationStep>
+</EquationTour>
 
 <CalloutInfo>
 $\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardas una eternidad. Si es muy grande, pasas de largo y nunca converges. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
@@ -160,6 +189,25 @@ La ventaja: está en las mismas unidades que $y$. Si predices precios en dólare
 
 Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bueno como predecir siempre el promedio, R² < 0 es peor que el promedio.
 </ConceptCard>
+
+<EquationTour caption="MSE penaliza el error; R² mide qué porción de la varianza captura el modelo.">
+  <EquationStep label="Error residual">
+    $y_i - \hat{y}_i$
+    Qué tanto se equivocó el modelo en un punto.
+  </EquationStep>
+  <EquationStep label="MSE">
+    $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
+    Promedio de errores al cuadrado: base que el modelo optimiza.
+  </EquationStep>
+  <EquationStep label="SS_res">
+    $\sum(y_i - \hat{y}_i)^2$
+    Error acumulado del modelo.
+  </EquationStep>
+  <EquationStep label="R²">
+    $1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$
+    Fracción de varianza explicada; 1 es perfecto, 0 equivale a la media.
+  </EquationStep>
+</EquationTour>
 
 </RevealSequence>
 

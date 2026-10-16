@@ -100,6 +100,25 @@ Evaluar en training es cómo corregirte tu propio examen con las respuestas adel
 **K-Fold Cross-Validation**: dividir los datos en k partes (folds). Entrenar k veces, cada vez usando k-1 folds para training y 1 fold distinto para validación. El resultado es el promedio de las k métricas.
 </ConceptCard>
 
+<EquationTour caption="Validación cruzada k-fold: cada fold rota como conjunto de validación.">
+  <EquationStep label="Particiones">
+    $k$
+    Número de folds en que se divide el dataset.
+  </EquationStep>
+  <EquationStep label="Entrenamiento">
+    $k-1$ folds
+    Datos usados para ajustar el modelo en cada vuelta.
+  </EquationStep>
+  <EquationStep label="Validación">
+    $1$ fold
+    Datos no vistos para medir el error real.
+  </EquationStep>
+  <EquationStep label="Promedio">
+    $\frac{1}{k}\sum_{i=1}^{k} m_i$
+    Promedio de las k métricas: estimado robusto del desempeño.
+  </EquationStep>
+</EquationTour>
+
 ```python
 from sklearn.model_selection import cross_val_score
 scores = cross_val_score(model, X, y, cv=5, scoring='r2')
@@ -139,6 +158,25 @@ La validación cruzada te da un intervalo de confianza sobre la performance real
 
 **R²** (Coeficiente de determinación): proporción de varianza explicada. 1.0 = perfecto, 0 = siempre predice la media, negativo = peor qué la media.
 </ConceptCard>
+
+<EquationTour caption="R²: cuánta varianza de y captura el modelo.">
+  <EquationStep label="Error residual">
+    $SS_{\text{res}} = \sum (y_i - \hat{y}_i)^2$
+    Suma de los errores al cuadrado del modelo.
+  </EquationStep>
+  <EquationStep label="Varianza total">
+    $SS_{\text{tot}} = \sum (y_i - \bar{y})^2$
+    Suma de los errores al cuadrado de la media.
+  </EquationStep>
+  <EquationStep label="Cociente">
+    $R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$
+    1 si no hay error residual; 0 si el modelo apenas iguala a la media.
+  </EquationStep>
+  <EquationStep label="Interpretación">
+    $R^2 \in (-\infty, 1]$
+    Valores negativos indican modelo peor que predecir la media.
+  </EquationStep>
+</EquationTour>
 
 <ConceptCard variant="key-idea">
 MAE vs RMSE:

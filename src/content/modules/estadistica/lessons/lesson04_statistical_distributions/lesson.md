@@ -66,6 +66,21 @@ Todo proceso generador de datos en la naturaleza sigue alguna distribución de p
 - Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
 </ConceptCard>
 
+<EquationTour caption="Bernoulli: un solo ensayo binario gobernado por p.">
+  <EquationStep label="Parámetro">
+    $p$
+    Probabilidad de éxito en el único ensayo.
+  </EquationStep>
+  <EquationStep label="PMF">
+    $P(X = 1) = p,\ P(X = 0) = 1 - p$
+    Toda la probabilidad se reparte entre éxito y fracaso.
+  </EquationStep>
+  <EquationStep label="Media y varianza">
+    $E[X] = p,\ \text{Var}(X) = p(1-p)$
+    El promedio es p; la dispersión es máxima cuando p=1/2.
+  </EquationStep>
+</EquationTour>
+
 <ConceptCard variant="key-idea">
 Intuición:
 - Un solo lanzamiento de moneda.
@@ -99,6 +114,25 @@ Intuición:
 - Media: $E[X] = np$, Varianza: $\text{Var}(X) = np(1-p)$
 </ConceptCard>
 
+<EquationTour caption="Binomial: n ensayos Bernoulli independientes con probabilidad p.">
+  <EquationStep label="Ensayos">
+    $n$
+    Cantidad total de ensayos independientes.
+  </EquationStep>
+  <EquationStep label="Éxitos">
+    $k$
+    Cantidad de éxitos observados (0 a n).
+  </EquationStep>
+  <EquationStep label="Probabilidad">
+    $p$
+    Probabilidad de éxito en cada ensayo.
+  </EquationStep>
+  <EquationStep label="PMF">
+    $\binom{n}{k} p^k (1-p)^{n-k}$
+    Combina cuántas formas con la probabilidad de cada una.
+  </EquationStep>
+</EquationTour>
+
 <ConceptCard variant="key-idea">
 Intuición:
 - Lanzar una moneda 10 veces y contar caras.
@@ -131,6 +165,25 @@ Intuición:
 - PMF: $P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}$
 - Media: $E[X] = \lambda$, Varianza: $\text{Var}(X) = \lambda$
 </ConceptCard>
+
+<EquationTour caption="Poisson: eventos por intervalo con tasa constante λ.">
+  <EquationStep label="Tasa">
+    $\lambda$
+    Promedio de eventos en el intervalo (tiempo o espacio).
+  </EquationStep>
+  <EquationStep label="Eventos">
+    $k$
+    Cantidad de eventos ocurridos.
+  </EquationStep>
+  <EquationStep label="PMF">
+    $\frac{e^{-\lambda} \lambda^k}{k!}$
+    Decaimiento exponencial por la tasa elevada y ajustada por factorial.
+  </EquationStep>
+  <EquationStep label="Media = varianza">
+    $E[X] = \lambda,\ \text{Var}(X) = \lambda$
+    La igualdad entre media y varianza es el sello de Poisson.
+  </EquationStep>
+</EquationTour>
 
 <ConceptCard variant="key-idea">
 Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitas un modelo más complejo.
@@ -167,6 +220,25 @@ Ejemplos:
 - Parámetros: $\mu$ (media), $\sigma^2$ (varianza)
 - PDF: $f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$
 </ConceptCard>
+
+<EquationTour caption="Normal: campana simétrica gobernada por μ y σ.">
+  <EquationStep label="Centro">
+    $\mu$
+    Media: ubica el centro de la campana.
+  </EquationStep>
+  <EquationStep label="Dispersión">
+    $\sigma$
+    Desviación estándar: ancho de la campana.
+  </EquationStep>
+  <EquationStep label="Normalización">
+    $\frac{1}{\sigma \sqrt{2\pi}}$
+    Asegura que el área total bajo la curva sea 1.
+  </EquationStep>
+  <EquationStep label="Exponente">
+    $\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$
+    Penaliza cuadráticamente la distancia a la media.
+  </EquationStep>
+</EquationTour>
 
 **Regla 68-95-99.7**: ~68% de los datos dentro de 1σ, ~95% dentro de 2σ, ~99.7% dentro de 3σ.
 

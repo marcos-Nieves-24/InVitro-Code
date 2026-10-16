@@ -84,6 +84,25 @@ El algoritmo minimiza la **inercia** (suma de distancias al cuadrado dentro de c
 
 $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
 
+<EquationTour caption="La inercia mide qué tan compactos son los clústeres y guía la elección de K.">
+  <EquationStep label="Clusters">
+    $\sum_{k=1}^{K}$
+    Suma sobre cada uno de los K clústeres.
+  </EquationStep>
+  <EquationStep label="Puntos">
+    $\sum_{i \in C_k}$
+    Suma de los puntos asignados al clúster k.
+  </EquationStep>
+  <EquationStep label="Distancia">
+    $\|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$
+    Distancia al cuadrado entre el punto y el centroide de su clúster.
+  </EquationStep>
+  <EquationStep label="Objetivo">
+    $\min\ \text{Inercia}$
+    Clústeres más compactos; el algoritmo la minimiza.
+  </EquationStep>
+</EquationTour>
+
 </RevealSequence>
 
 </Section>
