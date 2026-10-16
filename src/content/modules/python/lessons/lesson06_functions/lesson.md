@@ -22,19 +22,38 @@ Quiz: quiz.md
 # Funciones
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
-
+<RevealSequence>
 ## Motivación
 
-Las funciones son bloques de código reutilizables que resuelven una tarea específica. En lugar de escribir el mismo código varias veces, lo defines una vez en una función y la llamas cuando sea necesario. Esta es la base de la programación modular y mantenible. En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos. En SaaS, las funciones calculan métricas, filtran datos y generan reportes.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Las funciones son bloques de código reutilizables que resuelven una tarea específica.",
+    "En lugar de escribir el mismo código varias veces, lo defines una vez en una función y la llamas cuando sea necesario.",
+    "Esta es la base de la programación modular y mantenible.",
+    "En biotecnología, las funciones encapsulan análisis de secuencias de ADN, tests estadísticos y pasos de preprocesamiento de datos.",
+    "En SaaS, las funciones calculan métricas, filtran datos y generan reportes.",
+  ]}
+/>
 
 ## Panorama General
 
-En lecciones anteriores aprendiste variables, tipos de datos y operadores. Las funciones combinan estos elementos en unidades reutilizables. Las próximas lecciones sobre bucles y condicionales se van a usar dentro de funciones para crear lógica reutilizable poderosa.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En lecciones anteriores aprendiste variables, tipos de datos y operadores.",
+    "Las funciones combinan estos elementos en unidades reutilizables.",
+    "Las próximas lecciones sobre bucles y condicionales se van a usar dentro de funciones para crear lógica reutilizable poderosa.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Fundamentos de Funciones" eyebrow="CONCEPTO">
-
+<RevealSequence>
 ## Teoría
 
 ### ¿Qué es una Función?
@@ -138,11 +157,12 @@ def calculate_bmi(weight, height):
     """
     return weight / (height ** 2)
 ```
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Ejercicios Interactivos" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejercicios interactivos
 
 ### Ejercicio 1: Tu primera función
@@ -269,11 +289,12 @@ print(f"After modification: {x}")`}
     ]
   }}
 />
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
-
+<RevealSequence>
 ## Ejemplo de Biotecnología
 
 **Escenario:** Un pipeline de bioinformática para análisis de secuencias de ADN.
@@ -304,11 +325,12 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
     ]
   }}
 />
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
-
+<RevealSequence>
 ## Errores Comunes
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
@@ -325,11 +347,12 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - Mantén las funciones cortas (típicamente < 20-30 líneas)
 - Usa type hints para mejor legibilidad (Python 3.5+)
 - Prefiere devolver valores en lugar de imprimir dentro de las funciones
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
-
+<RevealSequence>
 ## Resumen
 
 - Las funciones son bloques de código reutilizables definidos con `def`
@@ -349,11 +372,12 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - **Lambda**: Función anónima en línea
 - **Docstring**: String de documentación para funciones
 - **DRY**: Principio Don't Repeat Yourself
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Desafío de Código" eyebrow="EVALUACIÓN">
-
+<RevealSequence>
 ## Desafío de Código
 
 Escribe una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluye un docstring y pruébala con diferentes secuencias.
@@ -379,5 +403,29 @@ print(f"GC: {gc_content('AAAAATTT'):.1f}%")`}
     ]
   }}
 />
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué palabra clave define una función en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson06_functions"
+  blockId="choice-python-l06-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="Se usa def seguido del nombre y parámetros."
+  options={[
+    { id: "a", label: "def", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "function", correct: false, feedback: "Esa palabra clave no es la de Python." },
+    { id: "c", label: "fun", correct: false, feedback: "No es válida en Python." },
+    { id: "d", label: "lambda (siempre)", correct: false, feedback: "lambda crea funciones anónimas, no def." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
