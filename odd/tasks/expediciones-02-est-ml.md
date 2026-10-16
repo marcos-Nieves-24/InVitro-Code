@@ -38,7 +38,7 @@
 - [x] **P2.0 — Integración Overfitting→ML01 + ConfusionMatrix→ML03** | route: parent inline | verifica registro existente, inserta en la sección visual correspondiente | status: OverfittingPlayer integrado en ML01 (seccion 9); ConfusionMatrix→ML03 sigue en B2
 - [x] **P2.B1 — GradientDescentPlayer + KMeansPlayer** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `af2a581` | verificado en browser | superficie: `src/components/anymotion/animations/GradientDescentPlayer.tsx` + `.../KMeansPlayer.tsx` (registro e integración los hace el parent) | contrato: props `{caption: string}`, AnymotionStage 16:9, controles play/pause/scrub o stepper determinista, frame estático con reduced-motion, sin autoplay, caption | status: en curso (2 writers Beam)
 - [x] **P2.B2 — RocBuilder + TreeSplit + integración ConfusionMatrix** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `bcc345f` | verificado en browser
-- [ ] **P2.B3 — BayesUpdate + DistributionShape** | pendiente
+- [x] **P2.B3 — BayesUpdate + DistributionShape** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `2fa75d2` | verificado en browser
 
 ### P2.B1 — cerrada en `af2a581` (verificacion browser, 1440x900)
 
@@ -98,3 +98,41 @@ B1 (649 lineas) + B2 (1034 lineas) = 1683 lineas autorales en la rama, muy por
 encima de las ~400 lineas que touted un PR revisable. Native sigue marcando
 `under_budget` (slice abierto), asi que la decision de encadenar PRs es del
 usuario, no minha.
+
+### P2.B3 — cerrada en `2fa75d2` (verificacion browser, 1440x900 y 390x844)
+
+- BayesUpdate (estadistica lesson03, seccion 6 "Bayes en accion"): puesto justo
+  antes del ChoiceQuestion de la paradoja de la tasa base, para manipular los
+  numeros antes de responder. Con prevalencia 5% / sensibilidad 90% /
+  especificidad 90% el posterior da 32.1%, que coincide con los 45/140 del
+  ejemplo. Arrastrando la prevalencia a 48% el posterior sube a 89.3%: el
+  mismo test, otra poblacion, otra conclusion. El stepper avanza 0->1->2->3->4
+  y queda en "Completado" deshabilitado. El panel de la trampa esta presente.
+- DistributionShape (estadistica lesson02, seccion 7 "Manos a la obra"): con la
+  cola a la derecha la media (5.939) se separa de la mediana (5.809), diferencia
+  0.129, coeficiente de asimetría 0.851 y badge "Asimetrica". Arrastrando la
+  fuerza de la cola a 0.96 el coeficiente sube a 0.952. La forma bimodal
+  reporta dos modas (1.60 y 8.39). El deslizador de asimetria se deshabilita en
+  la forma simetrica, que es el contrato correcto.
+- 0 errores de consola y 0 overflow horizontal en 1440x900 y 390x844. El stage
+  mide 360px de alto en desktop y 188px en movil, sin salirse.
+
+Nota de verificacion: la firma de busqueda del player tiene que ser su CONTROL
+(por ejemplo `input[aria-label="Prevalencia de la enfermedad"]`), no una frase
+de la leccion. Con una frase, la sonda corta en el `ChoiceQuestion` que menciona
+lo mismo y reporta que el player no esta. Passa lo mismo con el badge de
+DistributionShape: hay que buscar el `span` del badge, no el texto de la pagina,
+porque el boton de forma tambien dice "Simetrica".
+
+- Gates: `npm run type-check` verde; `npm run test` 223/223 verde.
+- Fallos de compilacion MDX en lesson02 (bloques 4 y 5) y lesson03 (bloques 1, 2
+  y 3): preexistentes, mismos indices que HEAD.
+- `gentle-ai review assess --base-ref d74a9c9 --committed-only`: `medium`,
+  `review_due: false` (`under_budget`).
+
+### P2 completo
+
+Los tres batches de players graficos estan entregados: B1 (GradientDescent,
+KMeans, Overfitting), B2 (RocBuilder, TreeSplit, ConfusionMatrix) y B3
+(BayesUpdate, DistributionShape). En total 6 players nuevos y 3 huerfanos
+integrados (Overfitting, ConfusionMatrix y los que venian sin barrel).
