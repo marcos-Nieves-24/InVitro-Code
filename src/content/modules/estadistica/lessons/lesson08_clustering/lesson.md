@@ -23,15 +23,45 @@ Quiz: clustering_quiz.md
 
 <Section number={1} title="Agrupar sin etiquetas" eyebrow="INICIO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Hasta ahora trabajamos con datos etiquetados, pero la mayoría del mundo real no los tiene.",
+    "Clustering agrupa puntos similares sin conocer las categorías de antemano.",
+    "En biotecnología agrupa pacientes por perfiles de expresión; en SaaS, segmenta usuarios.",
+    "K-Means es el algoritmo de aprendizaje no supervisado más popular porque es simple y rápido.",
+  ]}
+/>
+
 <MascotMessage mood="thinking">
 Hasta ahora trabajamos con datos etiquetados. Pero en el mundo real, la mayoría de los datos no tienen etiquetas. ¿Cómo encuentras grupos naturales? K-Means clustering: el algoritmo de aprendizaje no supervisado más popular.
 </MascotMessage>
 
 Clustering agrupa puntos similares sin conocer las categorías de antemano. En biotecnología, agrupa pacientes por perfiles de expresión génica. En SaaS, segmenta usuarios por comportamiento. En marketing, encuentra grupos de clientes con patrones de compra similares.
 
+</RevealSequence>
+
 </Section>
 
 <Section number={2} title="Cómo funciona K-Means" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "K-Means pone k imanes (centroides) en los datos y cada punto se adhiere al imán más cercano.",
+    "Luego cada imán se mueve al promedio de los puntos que atrajo.",
+    "Se repite hasta que nada cambia: los centroides convergen a los centros reales de grupo.",
+    "El algoritmo minimiza la inercia: distancia cuadrada intra-cluster.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Algoritmo K-Means**:
@@ -47,27 +77,58 @@ Clustering agrupa puntos similares sin conocer las categorías de antemano. En b
 K-Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a su centroide. Es cómo poner k "imanes" en los datos qué atraen a los puntos más cercanos, y luego mover los imanes al centro de los puntos qué atrajeron.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="¿Cuántos clusters? Elbow + Silhouette" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Qué mide", left: "Inercia (distancia intra-cluster)", right: "Cohesión + separación de clusters" },
-    { feature: "Rango", left: "Siempre decrece con k", right: "[-1, 1]; >0.5 = buen clustering" },
-    { feature: "Cómo elegir k", left: "Buscar el 'codo' dónde la mejora se aplana", right: "Elegir k con mayor silhouette score" },
-    { feature: "Ventaja", left: "Simple, intuitivo", right: "Considera tanto cohesión cómo separación" },
-    { feature: "Limitación", left: "No siempre hay un codo claro", right: "Costoso computacionalmente con muchos datos" },
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El método del codo mira la inercia: cada k adicional reduce la distancia intra-cluster.",
+    "La silueta mide cohesión y separación simultáneamente; mayor es mejor.",
+    "Usar ambos juntos te da confianza: si coinciden en k, esa es tu respuesta.",
+    "Si difieren, mirá los clusters proyectados con PCA antes de decidir.",
   ]}
 />
+
+<ConceptCard variant="key-idea">
+Método del codo vs Puntaje de silueta:
+- **Qué mide**: codo → inercia (distancia intra-cluster); silueta → cohesión + separación de clusters
+- **Rango**: codo siempre decrece con k; silueta va de [-1, 1], >0.5 = buen clustering
+- **Cómo elegir k**: codo busca el aplanamiento; silueta elige el k con mayor score
+- **Ventaja**: codo simple e intuitivo; silueta considera cohesión y separación
+- **Limitación**: codo sin codo claro; silueta costosa computacionalmente con muchos datos
+</ConceptCard>
 
 <CalloutInfo>
 Siempre usa **ambos métodos juntos**. Si el codo y la silueta coinciden en k, tienes alta confianza. Si difieren, explora visualmente los clusters con PCA para decidir.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="K-Means en código" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El código recorre varios k, calcula inercia y silueta para cada uno.",
+    "Los gráficos lado a lado hacen visible el codo y el máximo de silueta.",
+    "El mejor k se elige donde silueta es máxima, con el codo como confirmación.",
+    "Siempre estandarizar primero y fijar random_state para reproducibilidad.",
+  ]}
+/>
 
 ```python
 from sklearn.cluster import KMeans
@@ -102,9 +163,25 @@ best_k = K_range[np.argmax(silhouettes)]
 print(f"Mejor k según silueta: {best_k}")
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualizando clusters con PCA" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Cuando hay más de 3 features, PCA proyecta los clusters a 2D.",
+    "Los centroides rojos marcan los centros descubiertos por el algoritmo.",
+    "La proyección resume la estructura, pero puede ocultar solapamientos en otras dimensiones.",
+    "Por eso siempre complementamos con silueta y el perfil por cluster.",
+  ]}
+/>
 
 ```python
 from sklearn.decomposition import PCA
@@ -139,9 +216,25 @@ plt.legend(); plt.show()
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Biotecnología: subtipos de cáncer" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "K-Means puede descubrir subtipos de cáncer sin etiquetas previas.",
+    "Simulamos tres subtipos con perfiles de expresión diferenciados.",
+    "El silueta score evalúa la calidad del agrupamiento resultante.",
+    "En la práctica, este enfoque llevó al descubrimiento de subtipos moleculares.",
+  ]}
+/>
 
 K-Means puede descubrir subtipos de cáncer a partir de perfiles de expresión génica sin conocerlos de antemano:
 
@@ -162,9 +255,25 @@ print(f"Silhouette score: {silhouette_score(X_cancer, labels):.3f}")
 En la práctica, clustering de expresión génica ha llevado al descubrimiento de subtipos moleculares de cáncer (cómo los subtipos Luminal A/B, HER2, Basal en cáncer de mama) qué hoy guían decisiones terapéuticas.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Limitaciones de K-Means" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "K-Means asume clusters esféricos y de tamaño similar.",
+    "También necesitas especificar k por adelantado.",
+    "Es sensible a la inicialización, aunque K-Means++ lo mitiga.",
+    "Y siempre hay que estandarizar: la escala distorsiona las distancias.",
+  ]}
+/>
 
 <ConceptCard variant="warning">
 **K-Means asume:**
@@ -179,33 +288,63 @@ En la práctica, clustering de expresión génica ha llevado al descubrimiento d
 Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí necesitas DBSCAN o clustering jerárquico. Pero K-Means es rápido, simple, y sorprendentemente efectivo para la mayoría de casos.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Términos clave" eyebrow="CIERRE">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["K-Means", "Algoritmo qué agrupa puntos en k clusters alrededor de centroides"],
-    ["Centroide", "Punto central de un cluster (media de sus miembros)"],
-    ["Inercia", "Suma de distancias² intra-cluster — K-Means la minimiza"],
-    ["Método del Codo", "Técnica para elegir k: buscar aplanamiento de inercia"],
-    ["Silhouette Score", "Métrica de calidad: cohesión + separación [-1,1]"],
-    ["K-Means++", "Inicialización inteligente qué dispersa centroides iniciales"],
-    ["No Supervisado", "Aprendizaje sin etiquetas — el algoritmo descubre la estructura"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Cerramos la lección con el vocabulario esencial del clustering.",
+    "K-Means, centroide e inercia son el núcleo del algoritmo.",
+    "El codo y la silueta son las dos herramientas para elegir k.",
+    "El aprendizaje no supervisado descubre estructura sin etiquetas.",
   ]}
-  searchable={true}
-  caption="Términos clave de clustering"
 />
+
+<ConceptCard variant="key-idea">
+Términos clave:
+- **K-Means**: Algoritmo qué agrupa puntos en k clusters alrededor de centroides
+- **Centroide**: Punto central de un cluster (media de sus miembros)
+- **Inercia**: Suma de distancias² intra-cluster — K-Means la minimiza
+- **Método del Codo**: Técnica para elegir k: buscar aplanamiento de inercia
+- **Silhouette Score**: Métrica de calidad: cohesión + separación [-1,1]
+- **K-Means++**: Inicialización inteligente qué dispersa centroides iniciales
+- **No Supervisado**: Aprendizaje sin etiquetas — el algoritmo descubre la estructura
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Para la próxima lección" eyebrow="CIERRE">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Primer algoritmo no supervisado cubierto: simple pero poderoso.",
+    "PCA para visualizar y silueta para validar son tu toolkit de clustering.",
+    "La próxima lección cierra el módulo con evaluación de modelos.",
+    "Crear modelos es fácil; saber si son buenos es lo difícil.",
+  ]}
+/>
 
 <MascotMessage mood="celebrating">
 Primer algoritmo de ML no supervisado cubierto. K-Means es simple pero poderoso. Con PCA para visualizar y una métrica de silueta para validar, dispones de un toolkit completo de clustering.
 </MascotMessage>
 
 **En la Lección 9** cerramos el módulo con **Evaluación de Modelos**: train/test split, validación cruzada, y todas las métricas (MAE, MSE, RMSE, R²). Porque crear modelos es fácil — saber si son buenos es lo difícil.
+
+</RevealSequence>
 
 </Section>
