@@ -506,6 +506,48 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
 - Varianza: error por sensibilidad a fluctuaciones en los datos.
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "aprendizaje-supervisado", label: "Aprendizaje supervisado", detail: "Aprende de datos etiquetados para predecir etiquetas nuevas." },
+    { id: "aprendizaje-no-supervisado", label: "Aprendizaje no supervisado", detail: "Descubre estructura oculta sin etiquetas." },
+    { id: "caracteristica", label: "Característica (X)", detail: "Variable de entrada que el modelo usa para predecir." },
+    { id: "etiqueta", label: "Etiqueta (y)", detail: "Variable de salida que queremos predecir." },
+    { id: "generalizacion", label: "Generalización", detail: "Desempeño del modelo en datos que nunca vio." },
+    { id: "sobreajuste-subajuste", label: "Sobreajuste y subajuste", detail: "Memorizar ruido vs modelo demasiado simple." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-caracteristica", label: "Característica", detail: "Variable de entrada usada para la predicción." },
+    { id: "gloss-etiqueta", label: "Etiqueta", detail: "Variable de salida a predecir." },
+    { id: "gloss-entrenamiento", label: "Entrenamiento", detail: "Proceso de ajustar un modelo a los datos." },
+    { id: "gloss-prediccion", label: "Predicción", detail: "Salida del modelo con datos nuevos." },
+    { id: "gloss-generalizacion", label: "Generalización", detail: "Rendimiento en datos no vistos." },
+    { id: "gloss-sobreajuste", label: "Sobreajuste", detail: "El modelo memoriza ruido del entrenamiento." },
+    { id: "gloss-subajuste", label: "Subajuste", detail: "Modelo demasiado simple para el patrón." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="A medida que aumentas la complejidad de un modelo, ¿qué ocurre con el sesgo y la varianza?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  blockId="choice-ml-l01-resumen-1"
+  allowContinueOnIncorrect
+  explanation="La compensación sesgo-varianza dice que al aumentar la complejidad el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio para el problema."
+  options={[
+    { id: "a", label: "El sesgo baja y la varianza sube", correct: true, feedback: "¡Correcto! Esa es la compensación: menos sesgo, más varianza." },
+    { id: "b", label: "El sesgo sube y la varianza baja", correct: false, feedback: "Falso: es el efecto opuesto al aumentar la complejidad." },
+    { id: "c", label: "Ambos bajan a la vez", correct: false, feedback: "Falso: no se pueden reducir los dos simultáneamente aumentando complejidad." },
+    { id: "d", label: "Ambos suben a la vez", correct: false, feedback: "Falso: la complejidad reduce el sesgo a costa de aumentar la varianza." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Dominaste los fundamentos del aprendizaje automático. Ahora cualquier modelo es, para ti, un problema de generalización.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>

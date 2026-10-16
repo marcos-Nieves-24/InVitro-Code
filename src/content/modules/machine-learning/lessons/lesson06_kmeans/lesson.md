@@ -260,6 +260,48 @@ K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamen
 - **No supervisado:** aprendizaje sin etiquetas — solo características (X).
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "centroides", label: "Centroide", detail: "Punto central de un clúster, promedio de todos sus miembros." },
+    { id: "inercia", label: "Inercia", detail: "Suma de distancias al cuadrado dentro de cada clúster; menos es mejor." },
+    { id: "silueta", label: "Silueta", detail: "Puntaje de -1 a 1 que mide la calidad del agrupamiento." },
+    { id: "metodo-codo", label: "Método del codo", detail: "Gráfica de inercia vs K; el 'codo' sugiere el K óptimo." },
+    { id: "n-init", label: "n_init", detail: "Inicializaciones aleatorias; sklearn se queda con la mejor." },
+    { id: "no-supervisado", label: "No supervisado", detail: "Aprendizaje sin etiquetas: solo características (X)." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-clustering", label: "Clustering", detail: "Agrupar datos sin etiquetas por similitud." },
+    { id: "gloss-centroide", label: "Centroide", detail: "Centro (promedio) de un clúster." },
+    { id: "gloss-inercia", label: "Inercia", detail: "Suma de cuadrados intra-clúster." },
+    { id: "gloss-silueta", label: "Silueta", detail: "Métrica de calidad de agrupamiento (-1 a 1)." },
+    { id: "gloss-kmeans", label: "K-Means", detail: "Algoritmo que asigna puntos al centroide más cercano." },
+    { id: "gloss-euclidiana", label: "Distancia euclidiana", detail: "Distancia usada para asignar puntos a centroides." },
+    { id: "gloss-no-supervisado", label: "Aprendizaje no supervisado", detail: "Aprendizaje a partir de datos sin etiquetas." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué mide la inercia en K-Means?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson06_kmeans"
+  blockId="choice-ml-l06-resumen-1"
+  allowContinueOnIncorrect
+  explanation="La inercia es la suma de las distancias al cuadrado entre cada punto y el centroide de su clúster; cuanto menor, más compactos son los grupos."
+  options={[
+    { id: "a", label: "La suma de distancias al cuadrado dentro de cada clúster", correct: true, feedback: "¡Correcto! Menor inercia implica clústeres más compactos." },
+    { id: "b", label: "La distancia entre centroides", correct: false, feedback: "Eso mide separación entre centros, no la compactación interna." },
+    { id: "c", label: "El número de puntos asignados a cada clúster", correct: false, feedback: "Los tamaños de clúster no son la inercia." },
+    { id: "d", label: "La varianza total del dataset", correct: false, feedback: "La inercia es intra-clúster, no la varianza global." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Clustering dominado. Ya sabes descubrir grupos sin etiquetas y elegir K con el codo y la silueta.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>

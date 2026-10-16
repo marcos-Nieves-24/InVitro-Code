@@ -261,6 +261,48 @@ El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria
 - **max_features:** cuántas features considerar por split. Clave para diversidad.
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "bagging", label: "Bagging", detail: "Entrenar en muestras bootstrap y promediar o votar para reducir varianza." },
+    { id: "bootstrap", label: "Bootstrap", detail: "Muestreo con reemplazo que deja ~63% de los datos en cada árbol." },
+    { id: "oob", label: "OOB", detail: "Validación gratis con las muestras que quedaron fuera del bootstrap." },
+    { id: "n-estimators", label: "n_estimators", detail: "Cantidad de árboles del bosque; la mejora se estabiliza tras ~500." },
+    { id: "max-features", label: "max_features", detail: "Features candidatas por split: √p (clasificación) o p/3 (regresión)." },
+    { id: "feature-importance", label: "Importancia de features", detail: "Cuánto empeora el modelo al mezclar aleatoriamente una feature." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-ensemble", label: "Ensemble", detail: "Combinar varios modelos para superar a cualquiera individual." },
+    { id: "gloss-bagging", label: "Bagging", detail: "Bootstrap + agregación: reduce varianza promediando." },
+    { id: "gloss-bootstrap", label: "Bootstrap", detail: "Muestreo con reemplazo de tamaño n." },
+    { id: "gloss-oob", label: "OOB", detail: "Muestras no usadas en el bootstrap de cada árbol." },
+    { id: "gloss-n-estimators", label: "n_estimators", detail: "Número de árboles del ensemble." },
+    { id: "gloss-max-features", label: "max_features", detail: "Subconjunto aleatorio de features considerado por split." },
+    { id: "gloss-feature-importance", label: "Importancia de features", detail: "Medida de utilidad predictiva de una feature." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué porcentaje aproximado de los datos queda fuera del muestreo bootstrap en cada árbol de un Bosque Aleatorio?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson05_random_forest"
+  blockId="choice-ml-l05-resumen-1"
+  allowContinueOnIncorrect
+  explanation="El muestreo bootstrap con reemplazo deja fuera aproximadamente 1/e ≈ 37% de las muestras, que se usan como conjunto out-of-bag (OOB) para validar el árbol sin un split adicional."
+  options={[
+    { id: "a", label: "Aproximadamente el 37%", correct: true, feedback: "¡Correcto! Esas muestras out-of-bag sirven como validación gratuita." },
+    { id: "b", label: "Aproximadamente el 63%", correct: false, feedback: "Ese es el porcentaje que entra al bootstrap, no el que queda fuera." },
+    { id: "c", label: "Aproximadamente el 50%", correct: false, feedback: "El bootstrap no es un split 50/50; la fracción fuera es ~37%." },
+    { id: "d", label: "Aproximadamente el 10%", correct: false, feedback: "Demasiado bajo; el bootstrap retiene ~63% y deja fuera ~37%." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Bosque Aleatorio dominado. Ya puedes entrenar un ensemble robusto, validar con OOB y leer la importancia de cada feature.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>

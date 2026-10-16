@@ -351,6 +351,47 @@ Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpret
 - **Stump:** árbol de profundidad 1 — el clasificador más simple posible.
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "division-recursiva", label: "División recursiva", detail: "Parte los datos en ramas según una condición de una feature." },
+    { id: "gini", label: "Índice Gini", detail: "Probabilidad de clasificar mal un elemento al azar en un nodo." },
+    { id: "entropia", label: "Entropía", detail: "Medida de desorden; penaliza más la incertidumbre que Gini." },
+    { id: "ganancia-informacion", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
+    { id: "poda", label: "Poda", detail: "Limitar la profundidad para evitar sobreajuste." },
+    { id: "feature-importance", label: "Importancia de features", detail: "Qué features más reducen la impureza en el árbol." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-gini", label: "Gini", detail: "Probabilidad de clasificar mal un elemento al azar en un nodo." },
+    { id: "gloss-entropia", label: "Entropía", detail: "Medida de desorden; penaliza más la incertidumbre que Gini." },
+    { id: "gloss-ganancia", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
+    { id: "gloss-nodo-hoja", label: "Nodo hoja", detail: "Nodo terminal donde se emite la predicción." },
+    { id: "gloss-poda", label: "Poda", detail: "Limitar la profundidad para evitar sobreajuste." },
+    { id: "gloss-stump", label: "Stump", detail: "Árbol de profundidad 1 — el clasificador más simple posible." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué un árbol de decisión sin poda suele sobreajustar?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson04_decision_trees"
+  blockId="choice-ml-l04-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Sin poda el árbol sigue dividiendo hasta que cada hoja es pura, memorizando el ruido del entrenamiento. La poda (max_depth, min_samples_leaf) obliga a generalizar y reduce la varianza."
+  options={[
+    { id: "a", label: "Porque divide hasta hojas puras, memorizando ruido del entrenamiento", correct: true, feedback: "¡Correcto! Eso es sobreajuste por falta de poda." },
+    { id: "b", label: "Porque Gini siempre favorece árboles profundos", correct: false, feedback: "Falso: Gini mide impureza, no profundidad." },
+    { id: "c", label: "Porque la entropía deja de funcionar en árboles grandes", correct: false, feedback: "Falso: la entropía funciona igual; el problema es la complejidad." },
+    { id: "d", label: "Porque los árboles no pueden manejar no linealidades", correct: false, feedback: "Falso: los árboles manejan no linealidades de forma natural." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Los árboles de decisión ya no te intimidan. El próximo bloque son los ensembles y los bosques.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
