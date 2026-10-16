@@ -21,7 +21,7 @@ Quiz: quiz.md
 
 # Matplotlib
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Matplotlib?" eyebrow="INICIO">
 
 ## Motivación
 
