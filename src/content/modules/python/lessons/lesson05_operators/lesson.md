@@ -53,6 +53,16 @@ Quiz: quiz.md
 <Section number={2} title="Operadores en Python" eyebrow="CONCEPTO">
 <RevealSequence>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un operador no es sólo un símbolo: es una regla de evaluación que decide el resultado final.",
+    "En laboratorio, evaluar mal la precedencia cambia una concentración o una clasificación clínica.",
+    "Por eso conviene usar paréntesis antes que confiar en memoria de reglas.",
+  ]}
+/>
 
 Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
@@ -217,6 +227,22 @@ print(f"Peso del paciente: {weight_kg} kg")
 print(f"Concentración después de {time_hours}h: {concentration:.3f} mg/kg")
 print(f"En rango terapéutico: {in_range}")
 ```
+
+<ChoiceQuestion
+  question="En la expresión `dose_mg / weight_kg * (0.5) ** (time_hours / half_life_hours)`, ¿qué operador se evalúa primero?"
+  moduleSlug="python"
+  lessonSlug="lesson05_operators"
+  blockId="choice-python-l05-dens-1"
+  allowContinueOnIncorrect
+  explanation="La exponenciación tiene mayor precedencia que la división y la multiplicación."
+  options={[
+    { id: "a", label: "** (exponenciación)", correct: true, feedback: "¡Correcto! Los paréntesis ya fijan el divisor de tiempo, pero ** sigue teniendo prioridad sobre / y *." },
+    { id: "b", label: "/ (primera división)", correct: false, feedback: "La división queda para después de evaluar (0.5) ** (...)." },
+    { id: "c", label: "* (multiplicación)", correct: false, feedback: "La multiplicación se evalúa después de la potencia." },
+    { id: "d", label: "Se evalúan de izquierda a derecha todos", correct: false, feedback: "No: la precedencia define el orden, no sólo la asociatividad." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>

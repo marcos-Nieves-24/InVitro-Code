@@ -55,6 +55,18 @@ Quiz: quiz.md
 <RevealSequence>
 
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En una corrida ELISA, una sola concentración por encima del umbral basta para marcar la muestra como reactiva.",
+    "Un condicional mal calibrado (>, >=, !=) puede cambiar ese diagnóstico en silencio.",
+    "En el laboratorio el `if` no es sintaxis: es el filtro que decide si disparamos una alerta o liberamos un reporte.",
+    "Valida cada comparación contra datos reales antes de confiar en ella.",
+  ]}
+/>
+
 El condicional más simple ejecuta código solo cuando una condición es True:
 
 ```python
@@ -329,6 +341,22 @@ def calculate_discount(customer_tier, annual_spend, years_active):
 discount = calculate_discount("professional", 25000, 4)
 print(f"Descuento: {discount:.0%}")
 ```
+
+<ChoiceQuestion
+  question="En la cadena if/elif/else del IMC, si `bmi = 26.3`, ¿qué valor queda en `category`?"
+  moduleSlug="python"
+  lessonSlug="lesson08_conditionals"
+  blockId="choice-python-l08-dens-1"
+  allowContinueOnIncorrect
+  explanation="Se evalúan los elif en orden; el primero que se cumple (25 <= 26.3 < 30) asigna `Sobrepeso`."
+  options={[
+    { id: "a", label: "Sobrepeso", correct: true, feedback: "¡Correcto! 26.3 está en el rango 25–29.9." },
+    { id: "b", label: "Normal", correct: false, feedback: "Normal cubre < 25; 26.3 ya sale de ese rango." },
+    { id: "c", label: "Obeso", correct: false, feedback: "Obeso exige BMI >= 30." },
+    { id: "d", label: "Bajo peso", correct: false, feedback: "Bajo peso exige BMI < 18.5." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>

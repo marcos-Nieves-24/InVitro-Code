@@ -53,8 +53,19 @@ Quiz: quiz.md
 <Section number={2} title="Fundamentos de Funciones" eyebrow="CONCEPTO">
 <RevealSequence>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una clínica registra dosis por paciente: si copias el cálculo en cada hoja, un cambio de protocolo obliga a editar decenas de lugares.",
+    "Una función encapsula ese cálculo una sola vez y permite actualizarlo en un solo lugar — principio DRY aplicado al laboratorio.",
+    "Predice: si `compute_dose(weight, factor=2.0)` devuelve 140.0, ¿qué devuelve con factor=0.5? Y si la llamas sin `weight`, ¿qué falla?",
+    "El `return` es la respuesta que vuelve al llamador; sin él, la función entrega `None` aunque haga todo el trabajo.",
+  ]}
+/>
 
-Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).
+Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).">
 
 
 ```python
@@ -306,6 +317,21 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
     ]
   }}
 />
+<ChoiceQuestion
+  question="Tienes `def compute_dose(weight, factor=2.0): return weight * factor`. Predice `compute_dose(70)` y explica qué ocurre con `compute_dose()` sin argumentos."
+  moduleSlug="python"
+  lessonSlug="lesson06_functions"
+  blockId="choice-python-l06-dens-1"
+  allowContinueOnIncorrect
+  explanation="Los argumentos por defecto aplican sólo si el parámetro se omite; `weight` es obligatorio, por eso faltarle lanza TypeError."
+  options={[
+    { id: "a", label: "Devuelve 140.0; `compute_dose()` lanza TypeError por falta de `weight`.", correct: true, feedback: "¡Correcto! El default sólo suple `factor`; `weight` sigue siendo obligatorio." },
+    { id: "b", label: "Devuelve 140.0 y `compute_dose()` devuelve 0.0.", correct: false, feedback: "Sin `weight` no hay valor que multiplicar; Python no asigna 0 automáticamente." },
+    { id: "c", label: "Ambas llamadas devuelven 140.0.", correct: false, feedback: "El default no actúa sobre `weight`, así que la segunda llamada falla." },
+    { id: "d", label: "Devuelve None y no lanza error.", correct: false, feedback: "Sin `return` el resultado sería None, pero aquí sí hay return y falta argumento obligatorio." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>

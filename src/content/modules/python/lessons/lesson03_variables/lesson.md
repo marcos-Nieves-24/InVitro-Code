@@ -53,6 +53,19 @@ Quiz: quiz.md
 <RevealSequence>
 
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Piensa en una hoja clínica: registras la edad, la presión y el marcador del paciente en variables separadas, no en un texto mezclado.",
+    "Reasignar mal una variable es como cambiarle el diagnóstico a otra fila sin avisar.",
+    "Por eso las variables son etiquetas que guardan un solo valor y se reinterpretan si las reasignas.",
+  ]}
+/>
+
+
+
 Una **variable** es una ubicación nombrada en memoria que almacena un valor. Piénsala como una caja etiquetada donde puedes poner datos. La etiqueta es el nombre de la variable y el contenido es el valor.
 
 
@@ -158,6 +171,9 @@ name = input("Enter your name: ")
 ```
 
 > **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
+
+
+
 </RevealSequence>
 
 </Section>
@@ -228,6 +244,22 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
     ]
   }}
 />
+
+<ChoiceQuestion
+  question="Asignas `b = a` y luego haces `a = 99`. ¿Qué contiene `b`?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-dens-1"
+  allowContinueOnIncorrect
+  explanation="La asignación reenlaza `a` a un nuevo objeto; `b` sigue apuntando al valor original."
+  options={[
+    { id: "a", label: "El valor original de `a`", correct: true, feedback: "¡Correcto! Reasignar `a` no mueve el objeto referenciado por `b`." },
+    { id: "b", label: "99", correct: false, feedback: "Eso sería si `b` y `a` compartieran la misma referencia mutable; aquí no." },
+    { id: "c", label: "NameError", correct: false, feedback: "Ambas variables existen; el error no se lanza." },
+    { id: "d", label: "Un tipo desconocido", correct: false, feedback: "No cambia el tipo; sigue siendo el original." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
