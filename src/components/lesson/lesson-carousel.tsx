@@ -114,7 +114,10 @@ export function LessonCarousel({
   // The central stage has no click handler of its own, so the outer slide area
   // never advances on a prose/card/trainer click; only rails fire goNext/goPrev.
 
-  // Keyboard navigation: Space/Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop
+  // Keyboard navigation: Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop.
+  // Space is deliberately NOT a forward key: inside editors and quizzes it
+  // types/activates, and as a global advance it fires by accident. Enter and
+  // ArrowRight already cover keyboard advancement; native buttons keep working.
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const active = document.activeElement as HTMLElement | null;
@@ -142,12 +145,9 @@ export function LessonCarousel({
             // on last slide, ArrowRight does not auto-finish; user must press Finalizar
           }
           break;
-        case " ":
-        case "Spacebar":
         case "Enter":
           // Do not intercept when focus is on a native button (it already handles click)
           if (active?.tagName === "BUTTON" && e.key === "Enter") return;
-          if (active?.tagName === "BUTTON" && e.key === " ") return;
           e.preventDefault();
           if (!isLast) goNext();
           break;
