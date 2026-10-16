@@ -50,6 +50,8 @@ import { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesC
 import { SupervisedFlowPlayer } from "@/components/anymotion/animations/SupervisedFlowPlayer";
 import { ConfusionMatrixPlayer } from "@/components/anymotion/animations/ConfusionMatrixPlayer";
 import { RocBuilder } from "@/components/anymotion/animations/RocBuilder";
+import { BayesUpdate } from "@/components/anymotion/animations/BayesUpdate";
+import { DistributionShape } from "@/components/anymotion/animations/DistributionShape";
 import { TreeSplit } from "@/components/anymotion/animations/TreeSplit";
 import { ModelComparePlayer } from "@/components/anymotion/animations/ModelComparePlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
@@ -198,6 +200,8 @@ export default async function LessonPage({ params }: Props) {
     SupervisedFlow: SupervisedFlowPlayer,
     ConfusionMatrixVisual: ConfusionMatrixPlayer,
     RocBuilder: RocBuilder,
+    BayesUpdate: BayesUpdate,
+    DistributionShape: DistributionShape,
     TreeSplit: TreeSplit,
     ModelCompare: ModelComparePlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
