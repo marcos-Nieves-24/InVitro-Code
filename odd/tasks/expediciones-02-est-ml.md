@@ -29,6 +29,6 @@
 ## Animaciones explicativas (expedición ANI)
 
 - [x] **AT0 — Primitivo `<EquationTour>` + `<EquationStep>`** | route: parent inline | superficie: `src/components/lesson/presentation/EquationTour.tsx` (nuevo), barrel, mapa MDX | diseño: stepper por pasos con $...$ del pipeline (sin KaTeX en runtime, sin deps nuevas), caption obligatoria, dots + Atrás/Siguiente, sin autoplay (seguro reduced-motion) | status: done (type-check verde)
-- [ ] **AT1 — Tours est01,02,03** (media-mediana-IQR/Z, curtosis/skew, Bayes) | route: delegated (writer Beam) | status: done (2026-10-16): 2 tours (media/IQR, skew/curtosis) + Bayes 4 steps; type-check + MDX OK
+- [x] **AT1 — Tours est01,02,03** (media-mediana-IQR/Z, curtosis/skew, Bayes) | route: delegated (writer Beam) | status: done (2026-10-16): 2 tours (media/IQR, skew/curtosis) + Bayes 4 steps; type-check + MDX OK
 - [x] **AT2 — Tours est04,05,09** (Normal+PMFs, Pearson/Spearman+covarianza, R²/CV) | route: delegated (writer Beam) | status: done (2026-10-16): 4+3+2 tours, MDX OK
-- [x] **AT3 — Tours ML02,03,06** (regresión+gradiente+R², sigmoide+log-loss, inercia KMeans) | route: delegated (writer Beam) | status: en curso
+- [x] **AT3 — Tours ML02,03,06** (regresión+gradiente+R², sigmoide+log-loss, inercia KMeans) | route: delegated (writer Beam) | status: done (2026-10-16): 3+2+1 tours, Bayes verificado en browser (1/4 → Verosimilitud), 0 errores
