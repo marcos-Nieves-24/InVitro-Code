@@ -8,7 +8,6 @@ const publicRoutes = [
   "/sign-up",
   "/sso-callback",
   "/api/webhooks/clerk",
-  "/api/diagnose",
   // Vercel crons — public but validated via CRON_SECRET in handler
   "/api/cron/purge-pending",
   "/api/cron/recharge-freezes",
