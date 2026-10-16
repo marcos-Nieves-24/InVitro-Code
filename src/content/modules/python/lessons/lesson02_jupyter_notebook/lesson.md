@@ -52,6 +52,19 @@ Quiz: quiz.md
 <RevealSequence>
 
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un notebook es un laboratorio en el navegador: una celda lee el CSV de expresión génica, la siguiente filtra genes, y el kernel recuerda ambas salidas.",
+    "Si reinicias el kernel a mitad del análisis, todas las variables desaparecen y debes re-ejecutar de arriba abajo.",
+    "Por eso el orden de las celdas no es decorativo: es tu historia reproducible.",
+  ]}
+/>
+
+
+
 Jupyter Notebook es una aplicación web de código abierto que te permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo.
 
 **Componentes clave:**
@@ -161,6 +174,9 @@ Atajos de teclado de Jupyter:
 
 - **Guardar**: File → Save and Checkpoint (o Ctrl+S)
 - **Exportar**: File → Download as → HTML, PDF, Python script, etc.
+
+
+
 </RevealSequence>
 
 </Section>
@@ -192,6 +208,22 @@ La estructura del notebook:
 - **Celda 6 (Markdown)**: Recomendaciones
 
 El notebook se puede exportar a HTML y compartir con el equipo de producto.
+
+<ChoiceQuestion
+  question="Tu colaboradora recibe un notebook con salida visible, pero al ejecutar «Run All» obtiene NameError en celdas que antes funcionaban. ¿Cuál es la causa más probable?"
+  moduleSlug="python"
+  lessonSlug="lesson02_jupyter_notebook"
+  blockId="choice-python-l02-dens-1"
+  allowContinueOnIncorrect
+  explanation="El estado del kernel vive en memoria: si las celdas originales se ejecutaron fuera de orden, esa variable nunca existió en una ejecución limpia."
+  options={[
+    { id: "a", label: "Las celdas se ejecutaron fuera de orden en la sesión original", correct: true, feedback: "¡Correcto! El kernel guardó el estado de otra sesión, no el de Run All." },
+    { id: "b", label: "Jupyter borró el archivo por falta de Ctrl+S", correct: false, feedback: "Guardar conserva el documento, no el estado del kernel." },
+    { id: "c", label: "El navegador cacheó la página", correct: false, feedback: "El render no explica un NameError en el kernel." },
+    { id: "d", label: "localhost:8888 cambió de puerto", correct: false, feedback: "El puerto no afecta las variables en memoria." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>

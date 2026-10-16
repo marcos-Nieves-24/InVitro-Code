@@ -61,6 +61,22 @@ Una tupla es una secuencia ordenada e inmutable: ideal para registros fijos, coo
 
 <Section number={2} title="Creación, Inmutabilidad y Desempaquetado" eyebrow="CONCEPTO">
 
+<RevealSequence>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El laboratorio firma un registro de variante: gen, posición, alelo de referencia y alelo alternativo.",
+    "Ese registro no puede editarse en caliente: si cambia, el hash y la trazabilidad se rompen.",
+    "Las listas sirven para colectar; las tuplas, para certificar un dato que debe quedar fijo.",
+    "Elegir mal la estructura aquí significa pérdida silenciosa de integridad en un análisis downstream.",
+  ]}
+/>
+
+</RevealSequence>
+
 ## Teoría
 
 ### Creando Tuplas
@@ -253,6 +269,25 @@ for ts, uid, event_type, meta in events:
         product, amount = meta
         print(f"Compra: {uid} compró {product} por ${amount:.2f}")
 ```
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="Un registro de variante es `(cromosoma, posicion, base_ref, base_alt, calidad)`. ¿Qué estructura debes usar si otra parte del pipeline necesita usarlo como clave de diccionario y garantizar que no se modifique?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-dens-1"
+  allowContinueOnIncorrect
+  explanation="Las tuplas son inmutables y hashables (si sus elementos lo son), por eso sirven como clave; las listas no."
+  options={[
+    { id: "a", label: "Tupla", correct: true, feedback: "¡Correcto! Inmutable y hashable: ideal para claves." },
+    { id: "b", label: "Lista", correct: false, feedback: "Las listas son mutables y no hashables, no pueden ser clave." },
+    { id: "c", label: "Diccionario", correct: false, feedback: "Un dict es mutable y tampoco es hashable." },
+    { id: "d", label: "Set", correct: false, feedback: "Un set no mantiene orden posicional ni sirve como clave compuesta." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 

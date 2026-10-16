@@ -51,6 +51,16 @@ Quiz: quiz.md
 <Section number={2} title="Los Cuatro Tipos de Datos Básicos" eyebrow="CONCEPTO">
 <RevealSequence>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Piensa en una tabla de resultados de laboratorio: cada columna tiene un tipo y mezclarlos rompe el análisis.",
+    "Un ratio de expresión mal tipado como texto se concatena en lugar de sumarse.",
+    "Por eso Python etiqueta cada valor y te obliga a convertir cuando el sentido cambia.",
+  ]}
+/>
 
 Python tiene cuatro tipos de datos primitivos:
 
@@ -244,6 +254,22 @@ print(f"Active users: {active_users}")
 print(f"Annual revenue: ${annual_revenue:,.2f}")
 print(f"After discount: ${discounted_revenue:,.2f}")
 ```
+
+<ChoiceQuestion
+  question="¿Qué ocurre al pasar el texto 3.14 a int() en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson04_data_types"
+  blockId="choice-python-l04-dens-1"
+  allowContinueOnIncorrect
+  explanation="int() espera un literal entero en texto; 3.14 con punto no es válido."
+  options={[
+    { id: "a", label: "ValueError", correct: true, feedback: "¡Correcto! No parsea decimales desde texto." },
+    { id: "b", label: "3", correct: false, feedback: "Eso sería int(3.14) con un float, no con el string." },
+    { id: "c", label: "3.14", correct: false, feedback: "int() no devuelve float." },
+    { id: "d", label: "0", correct: false, feedback: "No trunca texto decimal." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
