@@ -173,12 +173,19 @@ print(f"Media: {penguins['body_mass_g'].mean():.0f} g")
 print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l02-penguins"
+<ChoiceQuestion
+  question="La masa corporal de los pingüinos muestra múltiples picos en el histograma. ¿Qué podría explicar esto biológicamente?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  prompt="La masa corporal de los pingüinos muestra múltiples picos en el histograma. ¿Qué podría explicar esto biológicamente?"
-  answer="Probablemente hay múltiples especies de pingüinos en el dataset (Adelie, Gentoo, Chinstrap), cada una con un rango de masa corporal diferente. Esto se llama multimodalidad — la distribución general es una mezcla de distribuciones por especie. Es una señal de qué necesitamos segmentar los datos por especie antes de analizar."
+  blockId="reflection-l02-penguins"
+  allowContinueOnIncorrect
+  explanation="Múltiples especies (Adelie, Gentoo, Chinstrap) con rangos de masa distintos generan multimodalidad: la distribución general es una mezcla por especie. Es señal para segmentar por especie antes de analizar."
+  options={[
+    { id: "a", label: "Varias especies con rangos de masa distintos (multimodalidad); conviene segmentar", correct: true, feedback: "Correcto: la mezcla de especies explica los múltiples picos." },
+    { id: "b", label: "Ruido de muestreo; con más datos habría un solo pico", correct: false, feedback: "Los picos persistentes por especie no desaparecen con más datos." },
+    { id: "c", label: "Una sola especie con variabilidad extrema", correct: false, feedback: "Una sola especie suele ser unimodal, no multimodal." },
+    { id: "d", label: "Bins mal elegidos generan picos artificiales", correct: false, feedback: "El ancho de bin suaviza, no crea multimodalidad entre especies." },
+  ]}
 />
 
 </Section>
@@ -228,12 +235,19 @@ plt.legend()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l02-session-skew"
+<ChoiceQuestion
+  question="La distribución de duraciones de sesión es asimétrica a la derecha. ¿Qué métrica reportarías al equipo de producto: media o mediana? ¿Por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  prompt="La distribución de duraciones de sesión es asimétrica a la derecha. ¿Qué métrica reportarías al equipo de producto: media o mediana? ¿Por qué?"
-  answer="Reportaría la mediana. Unas pocas sesiones extremadamente largas inflan la media. La mediana refleja mejor la duración 'típica' de una sesión. Además, con datos tan sesgados, el equipo debería segmentar por tipo de usuario — los power users y los usuarios casuales tienen distribuciones muy diferentes."
+  blockId="reflection-l02-session-skew"
+  allowContinueOnIncorrect
+  explanation="Reporta mediana: pocas sesiones extremadamente largas inflan la media. La mediana refleja la duración típica; además, segmenta por tipo de usuario (power vs casual), cuyas distribuciones difieren."
+  options={[
+    { id: "a", label: "La mediana, porque sesiones extremas inflan la media; además segmentar por tipo de usuario", correct: true, feedback: "Correcto: mediana robusta al sesgo; la segmentación revela patrones distintos." },
+    { id: "b", label: "La media, porque usa toda la información disponible", correct: false, feedback: "La usa, pero las sesiones extremadamente largas la inflan." },
+    { id: "c", label: "La media, porque al ser mayor parece mejor engagement", correct: false, feedback: "Mayor por outliers no refleja la experiencia típica." },
+    { id: "d", label: "La mediana, siempre menor y por eso más conservadora", correct: false, feedback: "La mediana no se elige por ser menor, sino por robustez al sesgo." },
+  ]}
 />
 
 </Section>
@@ -262,12 +276,19 @@ plt.show()
 
 <Section number={12} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l02-checkpoint"
+<ChoiceQuestion
+  question="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  prompt="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
-  answer="Es asimétrica a la derecha (cola a la derecha). En esta distribución, la media es mayor qué la mediana por qué las casas muy caras jalan la media hacia arriba. Para reportar un precio 'típico', usa la mediana. La media puede ser engañosa por qué está distorsionada por un puñado de mansiones."
+  blockId="reflection-l02-checkpoint"
+  allowContinueOnIncorrect
+  explanation="Asimétrica a la derecha: las casas muy caras jalan la media por encima de la mediana. Para un precio típico usa la mediana; la media se distorsiona por un puñado de mansiones."
+  options={[
+    { id: "a", label: "Asimétrica a la derecha: media > mediana (casas caras jalan la media); reporta mediana", correct: true, feedback: "Correcto: cola a la derecha implica media por encima de la mediana." },
+    { id: "b", label: "Simétrica: media = mediana", correct: false, feedback: "Una cola larga a la derecha rompe la simetría." },
+    { id: "c", label: "Asimétrica a la izquierda: media < mediana", correct: false, feedback: "Eso corresponde a cola a la izquierda, no a la derecha." },
+    { id: "d", label: "Media, porque al ser mayor refleja mejor el mercado", correct: false, feedback: "Mayor por mansiones no es precio típico; usa mediana." },
+  ]}
 />
 
 <AnswerReveal summary="Ver más respuestas">

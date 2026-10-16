@@ -193,12 +193,19 @@ print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.1f}")
 print(f"R²:   {r2_score(y_test, y_pred):.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l02-coefficients"
+<ChoiceQuestion
+  question="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
-  answer="No necesariamente. Los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, sus coeficientes no son comparables directamente. Para comparar importancia real hay que estandarizar las features primero (restar media, dividir por desvío)."
+  blockId="reflection-l02-coefficients"
+  allowContinueOnIncorrect
+  explanation="No necesariamente: los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, no son comparables. Hay que estandarizar (restar media, dividir por desvío) para comparar importancia real."
+  options={[
+    { id: "a", label: "No: hay que estandarizar las features antes de comparar", correct: true, feedback: "¡Correcto! La estandarización pone comparables las unidades." },
+    { id: "b", label: "Sí: un coeficiente 100× mayor implica 100× más importancia", correct: false, feedback: "Falso: sin escala, los coeficientes no son comparables." },
+    { id: "c", label: "Los coeficientes son pesos absolutos independientes de la escala", correct: false, feedback: "Falso: por construcción dependen de la unidad de cada feature." },
+    { id: "d", label: "Escalar sólo afecta R², no la comparabilidad", correct: false, feedback: "Falso: escalar es lo que vuelve comparables los coeficientes." },
+  ]}
 />
 
 </Section>
@@ -368,20 +375,34 @@ La regresión lineal modela el objetivo como suma ponderada de features. OLS enc
 
 <Section number={13} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l02-r2-values"
+<ChoiceQuestion
+  question="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
-  answer="R² = 1: el modelo explica el 100% de la varianza — predicciones perfectas (cuidado, puede ser sobreajuste). R² = 0: el modelo no es mejor que predecir siempre el promedio de y. R² = -0.5: el modelo es peor que el promedio — tus predicciones son contraproducentes. Posiblemente hay un error en el código o el modelo no es adecuado."
+  blockId="reflection-l02-r2-values"
+  allowContinueOnIncorrect
+  explanation="R²=1: explica 100% de varianza (posible sobreajuste); R²=0: no mejor que predecir siempre el promedio de y; R²=-0.5: peor que el promedio (error en código o modelo inadecuado)."
+  options={[
+    { id: "a", label: "R²=1 explicación total (cuidado sobreajuste); R²=0 igual que promedio; R²=-0.5 peor que promedio", correct: true, feedback: "¡Correcto! Cada valor tiene su lectura práctica." },
+    { id: "b", label: "R²=1 garantiza buen modelo sin advertencias", correct: false, feedback: "Falso: R²=1 puede ser sobreajuste, no calidad." },
+    { id: "c", label: "R²=0 significa que el modelo nunca entrenó", correct: false, feedback: "Falso: R²=0 equivale a predecir siempre el promedio." },
+    { id: "d", label: "R² negativo es un error irrecuperable de convergencia", correct: false, feedback: "Falso: indica peor que el promedio, posiblemente inadecuado." },
+  ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l02-feature-importance"
+<ChoiceQuestion
+  question="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
-  answer="No necesariamente. Tres explicaciones posibles: (1) Las features no están escaladas — si una feature va de 0 a 0.001, necesita un coeficiente enorme para tener impacto. (2) Hay multicolinealidad — dos features correlacionadas se reparten el peso y ambas parecen chicas. (3) Efectivamente son irrelevantes. Para saberlo, estandariza las features y usa regularización Lasso, que lleva coeficientes irrelevantes a cero."
+  blockId="reflection-l02-feature-importance"
+  allowContinueOnIncorrect
+  explanation="No necesariamente: por falta de escala, multicolinealidad (features correlacionadas reparten peso) o irrelevancia real. Para saberlo, estandarizar y usar Lasso, que lleva irrelevantes a cero."
+  options={[
+    { id: "a", label: "No necesariamente: falta de escala o multicolinealidad pueden disfrazar su aporte", correct: true, feedback: "¡Correcto! Hay que estandarizar y usar Lasso para confirmar." },
+    { id: "b", label: "Sí: coeficiente chico siempre implica feature irrelevante", correct: false, feedback: "Falso: escala y multicolinealidad pueden ocultar su aporte." },
+    { id: "c", label: "Los coeficientes grandes sólo indican outliers en los datos", correct: false, feedback: "Falso: coeficientes grandes suelen reflejar falta de escala." },
+    { id: "d", label: "Escalar las features no cambia la interpretación", correct: false, feedback: "Falso: estandarizar es justamente lo que vuelve comparables los coeficientes." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">

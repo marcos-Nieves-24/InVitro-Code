@@ -159,24 +159,38 @@ print(f"P(0 mutaciones) = {poi.pmf(0):.3f}")  # gen intacto
 print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 ```
 
-<ReflectionCheck
-  blockId="reflection-l04-poisson-genes"
+<ChoiceQuestion
+  question="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
-  answer="Poisson asume qué los eventos ocurren independientemente a una tasa constante λ. En genética, cada posición del ADN puede mutar independientemente, y la tasa es aproximadamente constante por región. Pero ojo: en regiones genómicas inestables (hotspots), la tasa no es constante y Poisson subestima la varianza — ahí necesitamos modelos más complejos cómo binomial negativa."
+  blockId="reflection-l04-poisson-genes"
+  allowContinueOnIncorrect
+  explanation="Poisson asume eventos independientes a tasa constante λ; en ADN cada posición muta independientemente con tasa ≈ constante por región. En hotspots (λ variable) subestima la varianza y se prefiere binomial negativa."
+  options={[
+    { id: "a", label: "Porque cada mutación es independiente a tasa constante λ por región; si la tasa varía (hotspots), Poisson subestima la varianza", correct: true, feedback: "¡Exacto! La constancia de λ por región es el supuesto clave; en hotspots falla." },
+    { id: "b", label: "Porque las mutaciones ocurren en clusters (hotspots) y Poisson los captura automáticamente", correct: false, feedback: "Al revés: hotspots rompen la tasa constante y Poisson subestima la varianza (→ binomial negativa)." },
+    { id: "c", label: "Porque en genética λ cambia por generación pero Poisson se adapta automáticamente", correct: false, feedback: "Poisson asume λ constante en el intervalo; no se adapta a tasas variables." },
+    { id: "d", label: "Porque media y varianza iguales son garantía en mutaciones, no supuesto", correct: false, feedback: "Media=varianza es supuesto, no garantía; sobredispersión señala que el supuesto falla." },
+  ]}
 />
 
 </Section>
 
 <Section number={9} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l04-choose-dist"
+<ChoiceQuestion
+  question="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
-  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verifica: si la varianza empírica es mucho mayor qué 5 (sobredispersión), considera binomial negativa. Si hay patrones temporales (hora pico), necesitas un Poisson no homogéneo con λ(t) variable."
+  blockId="reflection-l04-choose-dist"
+  allowContinueOnIncorrect
+  explanation="Poisson con λ=5: llegadas por unidad de tiempo son caso clásico Poisson. Verificar: si varianza empírica ≫ 5 (sobredispersión) → binomial negativa; si hay patrones temporales (hora pico) → Poisson no homogéneo λ(t)."
+  options={[
+    { id: "a", label: "Poisson con λ=5, porque son llegadas por unidad de tiempo; verificar sobredispersión (varianza ≫ 5) y patrones temporales", correct: true, feedback: "¡Exacto! Poisson clásico; con sobredispersión o peaks temporales se ajusta." },
+    { id: "b", label: "Normal N(μ=5, σ²=5), porque todo conteo converge a normal por el TCL", correct: false, feedback: "Llegadas por intervalo son caso Poisson discreto; Normal aproxima pero no modela el conteo real." },
+    { id: "c", label: "Binomial con n=60, p=1/12, porque son 60 segundos por minuto", correct: false, feedback: "Modelo de Bernoulli fijo innecesario; la llegada por intervalo es caso Poisson directo." },
+    { id: "d", label: "Bernoulli con p=5/60, porque cada segundo es éxito/fracaso de llegada", correct: false, feedback: "Bernoulli sirve para un evento único; para contar llegadas por intervalo se usa Poisson." },
+  ]}
 />
 
 <AnswerReveal summary="Ver respuestas">

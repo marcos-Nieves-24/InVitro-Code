@@ -142,12 +142,19 @@ cv_scores = cross_val_score(model, X, y, cv=5, scoring='r2')
 print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l09-interpret-r2"
+<ChoiceQuestion
+  question="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
   moduleSlug="estadistica"
   lessonSlug="lesson09_model_evaluation"
-  prompt="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
-  answer="Significa qué el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganas plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² solo no te dice nada sin contexto."
+  blockId="reflection-l09-interpret-r2"
+  allowContinueOnIncorrect
+  explanation="Explica el 60 % de la varianza de la variable objetivo; el juicio depende del campo (sociales vs física) y exige comparación con un baseline (predecir la media o un modelo más simple)."
+  options={[
+    { id: "a", label: "Es siempre excelente, sin importar la disciplina ni el baseline", correct: false, feedback: "No: en física 0.60 sería inaceptable; el contexto define el estándar." },
+    { id: "b", label: "Explica el 60 % de la varianza y solo tiene sentido comparándolo con un baseline según el contexto", correct: true, feedback: "¡Correcto! R² es relativo al campo y al modelo base." },
+    { id: "c", label: "Es inaceptable en cualquier ciencia o aplicación práctica", correct: false, feedback: "No: en ciencias sociales 0.60 puede ser excelente." },
+    { id: "d", label: "Un R² del 60 % garantiza rentabilidad si se usa para decidir", correct: false, feedback: "En finanzas depende de si ganas plata; la métrica sola no garantiza beneficio." },
+  ]}
 />
 
 </Section>

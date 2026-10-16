@@ -110,12 +110,19 @@ print("No lineal: ", f"Pearson={pearsonr(x, y_nonlinear)[0]:.3f}", f"Spearman={s
 print("Sin relac: ", f"Pearson={pearsonr(x, y_none)[0]:.3f}", f"Spearman={spearmanr(x, y_none)[0]:.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l05-pearson-spearman"
+<ChoiceQuestion
+  question="Para la relación cúbica (y = x³), Pearson da ~0.2 pero Spearman da ~0.95. ¿Por qué tanta diferencia? ¿Cuál es la correlación 'real'?"
   moduleSlug="estadistica"
   lessonSlug="lesson05_relationships"
-  prompt="Para la relación cúbica (y = x³), Pearson da ~0.2 pero Spearman da ~0.95. ¿Por qué tanta diferencia? ¿Cuál es la correlación 'real'?"
-  answer="Ambos tienen razón en lo qué miden. Pearson mide relación LINEAL — cómo x³ no es lineal, da bajo. Spearman mide relación MONÓTONA — cómo x³ siempre crece cuándo x crece, da alto. No hay una correlación 'más real': depende de qué te interese. Para selección de features en ML, Spearman suele ser más útil por qué captura relaciones no lineales qué algoritmos cómo árboles de decisión pueden aprovechar."
+  blockId="reflection-l05-pearson-spearman"
+  allowContinueOnIncorrect
+  explanation="Pearson mide relación lineal (x³ no es lineal → bajo ~0.2); Spearman mide relación monotónica (x³ siempre crece → alto ~0.95). No hay correlación 'más real': depende del objetivo; Spearman suele ayudar en selección de features para árboles."
+  options={[
+    { id: "a", label: "Pearson mide lineal (x³ no es lineal → ~0.2) y Spearman mide monotónica (x³ siempre crece → ~0.95); no hay 'más real', depende del objetivo", correct: true, feedback: "¡Exacto! Tipo de relación (lineal vs monotónica) explica la diferencia." },
+    { id: "b", label: "Spearman está mal: la verdadera correlación es el valor de Pearson (~0.2)", correct: false, feedback: "Pearson sólo mide linealidad; una monotónica fuerte puede dar Pearson bajo sin error de cálculo." },
+    { id: "c", label: "Pearson es el correcto porque toda correlación real es lineal por definición", correct: false, feedback: "Pearson cuantifica linealidad, pero no toda relación real se reduce a una recta." },
+    { id: "d", label: "El bajo Pearson indica outliers extremos en x³ que habría que eliminar", correct: false, feedback: "No hay outliers: la diferencia se explica por el tipo de relación, no por anomalías." },
+  ]}
 />
 
 </Section>
@@ -159,12 +166,19 @@ Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría s
 
 <Section number={8} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l05-causation"
+<ChoiceQuestion
+  question="Encontraste qué la cantidad de features usadas en un modelo correlaciona r=0.9 con el accuracy en training, pero r=−0.3 con el accuracy en test. ¿Qué está pasando?"
   moduleSlug="estadistica"
   lessonSlug="lesson05_relationships"
-  prompt="Encontraste qué la cantidad de features usadas en un modelo correlaciona r=0.9 con el accuracy en training, pero r=−0.3 con el accuracy en test. ¿Qué está pasando?"
-  answer="Overfitting clásico. Más features permiten al modelo memorizar el training set (r=0.9 positivo), pero dañan la generalización (r=−0.3). La alta correlación positiva en training NO implica qué más features sean mejores. Es el ejemplo perfecto de por qué siempre evaluamos en test: la correlación training-test te cuenta historias diferentes."
+  blockId="reflection-l05-causation"
+  allowContinueOnIncorrect
+  explanation="Overfitting: más features memorizan el training (r=0.9) pero dañan generalización (r=−0.3). Correlación alta en training NO implica mejor modelo; evaluar siempre en test."
+  options={[
+    { id: "a", label: "Overfitting: más features memorizan el training (r=0.9) pero dañan la generalización (r=−0.3)", correct: true, feedback: "¡Exacto! La correlación train–test cuenta historias distintas." },
+    { id: "b", label: "Las features adicionales mejoran el modelo; la caída en test es solo azar", correct: false, feedback: "La correlación negativa en test (r=−0.3) muestra pérdida sistemática de generalización, no azar." },
+    { id: "c", label: "Hay que eliminar todas las features; menos es siempre mejor", correct: false, feedback: "El problema es el overfitting, no la cantidad en sí; conviene selección/regularización, no eliminación ciega." },
+    { id: "d", label: "El test set está mal etiquetado y por eso la correlación sale negativa", correct: false, feedback: "No hay evidencia de etiquetas erróneas; el patrón r=0.9 train vs r=−0.3 test es firma típica de overfitting." },
+  ]}
 />
 
 <AnswerReveal summary="Ver respuestas">

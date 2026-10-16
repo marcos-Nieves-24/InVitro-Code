@@ -137,12 +137,19 @@ print(f"P(enfermedad | positivo) = {p_disease_given_pos:.3f}")
 print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l03-bayes-rare"
+<ChoiceQuestion
+  question="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  prompt="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
-  answer="No, el test no es malo: la enfermedad es rara. Con prevalencia del 1%, de 1000 personas solo 10 tienen la enfermedad. El test detecta ~9,5 de esas 10 (95% sensibilidad), pero también marca falsamente ~99 de las 990 sanas (falsos positivos del 10%). De ~108 tests positivos, solo ~9,5 son reales, es decir, ~8,8%. Esto se llama la paradoja de la tasa base: cuando la condición es rara, la mayoría de los positivos son falsos positivos."
+  blockId="reflection-l03-bayes-rare"
+  allowContinueOnIncorrect
+  explanation="No es malo: con prevalencia del 1%, de 1000 sólo 10 están enfermos; el test detecta ~9.5 y genera ~99 falsos positivos entre 990 sanos. De ~108 positivos sólo ~9.5 son reales (~8.8%). Paradoja de la tasa base: condición rara → la mayoría de los positivos son falsos."
+  options={[
+    { id: "a", label: "El test no es malo; la enfermedad es rara: los falsos positivos dominan los positivos", correct: true, feedback: "Correcto: baja prevalencia hace que falsos positivos superen a verdaderos positivos." },
+    { id: "b", label: "El test es malo por falta de especificidad (10% FP)", correct: false, feedback: "Especificidad ~90% es razonable; el cuello de botella es la prevalencia del 1%." },
+    { id: "c", label: "95% de sensibilidad es insuficiente", correct: false, feedback: "95% es alta; el problema es la baja prevalencia del 1%." },
+    { id: "d", label: "Un positivo implica ~95% de tener la enfermedad", correct: false, feedback: "Confunde P(positivo|enfermedad) con P(enfermedad|positivo): error de tasa base." },
+  ]}
 />
 
 </Section>
@@ -189,12 +196,19 @@ p_churn_given_pred = (p_pred_churn_given_churn * p_churn) / (
 print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l03-churn-bayes"
+<ChoiceQuestion
+  question="De los clientes marcados cómo 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  prompt="De los clientes marcados cómo 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
-  answer="Depende del costo de contactar vs el costo de perder un cliente. Si contactar es barato (email automático), conviene contactar a todos — rescatas al 80% de los qué iban a cancelar. Si contactar es caro (llamada de un account manager), quizás quieres un modelo más preciso. Es un trade-off clásico entre recall (detectar todos los qué cancelan) y precision (no molestar a los qué no van a cancelar)."
+  blockId="reflection-l03-churn-bayes"
+  allowContinueOnIncorrect
+  explanation="Depende del costo de contactar vs perder cliente: contacto barato (email) → contactar todos y rescatar ~80% de los que cancelarían; contacto caro → modelo más preciso. Trade-off entre recall (detectar canceladores) y precision (no molestar no-canceladores)."
+  options={[
+    { id: "a", label: "Depende del costo: si contactar es barato, sí (rescata ~80% de canceladores); trade-off recall vs precision", correct: true, feedback: "Correcto: el contacto barato justifica rescatar la mayoría de canceladores." },
+    { id: "b", label: "Contactar a todos siempre, sin importar el costo", correct: false, feedback: "Si contactar es caro (account manager), el beneficio puede no cubrir el costo." },
+    { id: "c", label: "No contactar hasta tener precisión perfecta", correct: false, feedback: "Esperar precisión perfecta deja escapar la mayoría de canceladores." },
+    { id: "d", label: "El 37% de precisión hace el modelo inútil", correct: false, feedback: "Con contacto barato, rescatar ~80% de canceladores ya justifica usarlo." },
+  ]}
 />
 
 </Section>
@@ -222,12 +236,19 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 
 <Section number={10} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l03-axioms"
+<ChoiceQuestion
+  question="¿Por qué el Axioma 2 de Kolmogorov (P(S) = 1) es necesario? ¿Qué pasaría si la probabilidad total no fuera 1?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  prompt="¿Por qué el Axioma 2 de Kolmogorov (P(S) = 1) es necesario? ¿Qué pasaría si la probabilidad total no fuera 1?"
-  answer="Si la probabilidad total no fuera 1, las probabilidades no serían interpretables cómo frecuencias o grados de creencia. El axioma garantiza qué 'algo tiene qué ocurrir'. Sin él, podríamos tener escenarios dónde ningún resultado posible ocurre, lo cuál es lógicamente inconsistente. Es el equivalente probabilístico de 'el todo es la suma de las partes'."
+  blockId="reflection-l03-axioms"
+  allowContinueOnIncorrect
+  explanation="P(S)=1 garantiza que 'algo ocurre' y que las probabilidades sean interpretables como frecuencias o grados de creencia. Sin él, ningún resultado podría ocurrir: inconsistencia lógica. Es 'el todo es la suma de las partes'."
+  options={[
+    { id: "a", label: "Garantiza que 'algo ocurre' y hace interpretables las probabilidades como frecuencias o grados de creencia", correct: true, feedback: "Correcto: sin probabilidad total 1, la interpretación frecuentista se rompe." },
+    { id: "b", label: "Es solo una convención de escala al 100%", correct: false, feedback: "No es solo escala: sin total 1, ninguna 'certeza' se representaría." },
+    { id: "c", label: "Se requiere para la independencia entre eventos", correct: false, feedback: "La independencia se define por producto de probabilidades, no por este axioma." },
+    { id: "d", label: "Podría fijarse en otra constante sin problema", correct: false, feedback: "Otra constante rompería la interpretación frecuentista y la consistencia lógica." },
+  ]}
 />
 
 <AnswerReveal summary="Ver respuestas adicionales">
