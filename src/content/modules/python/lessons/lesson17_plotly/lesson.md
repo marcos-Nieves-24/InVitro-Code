@@ -22,51 +22,75 @@ Quiz: quiz.md
 # Plotly
 
 <Section number={1} title="¿Por qué Plotly?" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Plotly genera gráficos web interactivos con zoom, hover, pan y animaciones por default.",
+    "Matplotlib y Seaborn no hacen eso sin trabajo extra.",
+    "En biotecnología: inspeccionar genes individuales con hover, rotar moléculas en 3D, dashboards interactivos.",
+    "En SaaS: la base de Dash para paneles ejecutivos dinámicos.",
+    "La progresión es Matplotlib → Seaborn → Plotly → Dash.",
+  ]}
+/>
 
+<ConceptCard variant="key-idea">
 Plotly es una librería de visualización interactiva que genera gráficos web con zoom, hover, pan y animaciones por defecto — algo que Matplotlib y Seaborn no pueden hacer sin trabajo extra. Mientras Matplotlib produce imágenes estáticas, Plotly renderiza figuras como HTML+JavaScript que el usuario puede explorar. En biotecnología, Plotly permite inspeccionar datos de expresión génica con hover que muestra genes individuales, rotar moléculas en 3D y construir dashboards interactivos. En SaaS, es la base de Dash para paneles ejecutivos dinámicos.
-
-## Panorama General
+</ConceptCard>
 
 En las lecciones anteriores aprendiste Matplotlib (control total, salida estática) y Seaborn (visualización estadística de alto nivel). Plotly agrega la tercera dimensión: **interactividad**. La progresión es: Matplotlib → Seaborn → Plotly → Dash (apps web). Plotly Express (`px`) es el punto de entrada recomendado para creación rápida, y Graph Objects (`go`) para control fino. Al final del módulo vas a combinar Plotly con Dash para construir aplicaciones web de datos.
 
+- Matplotlib: control total, salida estática
+- Seaborn: estadística de alto nivel
+- Plotly: interactividad web
+- Dash: aplicaciones web de datos
+
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Arquitectura de Plotly" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-## Teoría
-
-### ¿Qué es Plotly?
-
-Plotly genera figuras como estructuras de árbol serializadas a JSON que Plotly.js interpreta en el navegador. Tres capas:
-
-- **plotly.express (`px`)**: Alta abstracción, una llamada = figura completa
-- **plotly.graph_objects (`go`)**: Control medio, construyes traza por traza
-- **Plotly.js**: Renderizador JavaScript en el navegador
-
-### La Figura Plotly
-
-Toda figura es un objeto `go.Figure` con dos componentes principales:
-
-- **`data`**: Lista de `Trace` (Scatter, Bar, Heatmap, etc.)
-- **`layout`**: Configuración global (título, ejes, template, hovermode)
-
-### Plotly Express vs Graph Objects
-
-<InteractiveTable
-  headers={["Característica", "Plotly Express", "Graph Objects"]}
-  rows={[
-    ["Nivel", "Alto (1 llamada)", "Bajo (control total)"],
-    ["Código", "Mínimo", "Más código"],
-    ["Personalización", "Limitada a args", "Ilimitada"],
-    ["Subplots", "Difícil", "Fácil con make_subplots"],
-    ["Interactividad", "Incorporada", "Incorporada"],
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Plotly serializa figuras a JSON que Plotly.js interpreta en el navegador.",
+    "Usa px para velocidad y go para control fino.",
+    "Toda figura es go.Figure con data (trazas) y layout (configuración global).",
   ]}
-  searchable
 />
 
-### Tipos de Gráficos Clave en Plotly Express
+**¿Qué es Plotly?**
+
+<ConceptCard variant="definition">
+Plotly genera figuras como estructuras de árbol serializadas a JSON que Plotly.js interpreta en el navegador. Tres capas:
+- **plotly.express (`px`)**: alta abstracción, una llamada = figura completa
+- **plotly.graph_objects (`go`)**: control medio, construyes traza por traza
+- **Plotly.js**: renderizador JavaScript en el navegador
+</ConceptCard>
+
+**La figura Plotly**
+
+Toda figura es un objeto `go.Figure` con dos componentes principales:
+- **`data`**: lista de `Trace` (Scatter, Bar, Heatmap, etc.)
+- **`layout`**: configuración global (título, ejes, template, hovermode)
+
+**Plotly Express vs Graph Objects** (candidato a tabla → ConceptCard+bullets):
+
+<ConceptCard variant="key-idea">
+- **Nivel**: Plotly Express alto (1 llamada), Graph Objects bajo (control total)
+- **Código**: mínimo vs más código
+- **Personalización**: limitada a args vs ilimitada
+- **Subplots**: difícil vs fácil con make_subplots
+- **Interactividad**: incorporada en ambos
+</ConceptCard>
+
+**Tipos de gráficos clave en Plotly Express**
 
 ```python
 px.scatter(data_frame=df, x="col1", y="col2", color="category")
@@ -81,9 +105,9 @@ px.scatter_matrix(data_frame=df, dimensions=["col1", "col2", "col3"])
 px.imshow(matrix)
 ```
 
-### Visualización: Estructura de una Figura Plotly
+**Visualización: estructura de una figura Plotly** (candidato a player visual):
 
-```
+```text
 Estructura de una Figura Plotly
 
 ┌─────────────────────────────────────────┐
@@ -105,15 +129,26 @@ Estructura de una Figura Plotly
 └─────────────────────────────────────────┘
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Plotly Express en Acción" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Implementación en Python
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Plotly Express trabaja directamente con DataFrames de Pandas y datasets incorporados.",
+    "Una llamada produce una figura interactiva completa.",
+    "Prueba cada snippet y explora con hover y zoom.",
+  ]}
+/>
 
 Plotly Express trabaja directamente con DataFrames de Pandas y datasets incorporados.
 
-### Scatter Plot — Iris Dataset
+**Scatter plot — Iris dataset**
 
 ```python
 import plotly.express as px
@@ -125,7 +160,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
 fig.show()
 ```
 
-### Line Plot — Gapminder
+**Line plot — Gapminder**
 
 ```python
 df = px.data.gapminder()
@@ -134,7 +169,7 @@ fig = px.line(df[df.country == "Argentina"], x="year", y="gdpPercap",
 fig.show()
 ```
 
-### Bar Chart — Tips Dataset
+**Bar chart — Tips dataset**
 
 ```python
 df = px.data.tips()
@@ -143,7 +178,7 @@ fig = px.bar(df, x="day", y="total_bill", color="sex", barmode="group",
 fig.show()
 ```
 
-### Histogram y Box Plot
+**Histogram y box plot**
 
 ```python
 df = px.data.tips()
@@ -157,7 +192,7 @@ fig = px.box(df, x="day", y="total_bill", color="sex",
 fig.show()
 ```
 
-### Sunburst — Población Mundial
+**Sunburst — Población mundial**
 
 ```python
 df = px.data.gapminder().query("year == 2007")
@@ -166,7 +201,7 @@ fig = px.sunburst(df, path=["continent", "country"], values="pop",
 fig.show()
 ```
 
-### Scatter Matrix
+**Scatter matrix**
 
 ```python
 df = px.data.iris()
@@ -175,15 +210,28 @@ fig = px.scatter_matrix(df, dimensions=["sepal_length", "sepal_width",
 fig.show()
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Graph Objects y Personalización" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Graph Objects
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Con go.Figure aramas la figura traza por traza con control total sobre cada elemento.",
+    "Mixta px y go: px devuelve go.Figure, así que puedes usar update_layout/update_traces en ambas.",
+    "Magic underscore notation acorta el acceso a keys anidadas.",
+  ]}
+/>
+
+**Graph Objects**
 
 Con `go.Figure()` armas la figura traza por traza, con control total sobre cada elemento.
 
-### Construir desde Cero
+**Construir desde cero**
 
 ```python
 import plotly.graph_objects as go
@@ -200,7 +248,7 @@ fig.update_layout(title="Funciones Trigonométricas",
 fig.show()
 ```
 
-### Actualizar Trazas y Layout
+**Actualizar trazas y layout**
 
 ```python
 fig.update_traces(line=dict(width=3))
@@ -211,7 +259,7 @@ fig.update_layout(
 )
 ```
 
-### Magic Underscore Notation
+**Magic underscore notation**
 
 Plotly permite notación con guión bajo para acceder a keys anidadas:
 
@@ -222,7 +270,7 @@ fig.update_layout(title=dict(text="Mi Título", font=dict(size=20)))
 fig.update_layout(title_text="Mi Título", title_font_size=20)
 ```
 
-### Heatmap con Graph Objects
+**Heatmap con Graph Objects**
 
 ```python
 import pandas as pd
@@ -237,11 +285,24 @@ fig.update_layout(title="Matriz de Correlación - Iris", width=500, height=500)
 fig.show()
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Subplots y Dashboards" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Subplots con make_subplots
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "make_subplots crea una grilla de subplots para armar dashboards multi-panel.",
+    "Agrega trazas a celdas específicas con row/col.",
+    "Ideal para reportes EDA con varios gráficos en una sola figura.",
+  ]}
+/>
+
+**Subplots con make_subplots**
 
 `make_subplots` crea una grilla de subplots donde puedes agregar trazas a celdas específicas.
 
@@ -269,13 +330,26 @@ fig.update_layout(height=600, width=900, title_text="Dashboard Iris",
 fig.show()
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Interactividad y Exportación" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Interactividad
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Personaliza tooltips con hovertemplate para mostrar datos relevantes.",
+    "Agrega dropdowns con updatemenus y sliders con rangeslider.",
+    "Exporta a HTML para compartir o PNG/SVG con kaleido.",
+  ]}
+/>
 
-### Hover Templates
+**Interactividad**
+
+**Hover templates**
 
 Personaliza el tooltip que aparece al pasar el mouse:
 
@@ -286,7 +360,7 @@ fig.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Ancho: %{x}<br>Largo
 fig.show()
 ```
 
-### Dropdown Menu
+**Dropdown menu**
 
 Agrega un menú desplegable para cambiar entre métricas:
 
@@ -303,7 +377,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Range Slider
+**Range slider**
 
 Agrega un slider para navegar rangos en el eje X:
 
@@ -311,7 +385,7 @@ Agrega un slider para navegar rangos en el eje X:
 fig.update_layout(xaxis=dict(rangeslider=dict(visible=True), type="linear"))
 ```
 
-## Exportación
+**Exportación**
 
 ```python
 fig.write_html("grafico.html")       # HTML interactivo (recomendado)
@@ -320,13 +394,26 @@ fig.write_image("grafico.svg")       # SVG vectorial
 # Instalar kaleido: pip install kaleido
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+<RevealSequence mode="appear">
 
-## Ejemplo de Biotecnología — Volcano Plot
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Volcano plot para expresión génica diferencial y dashboard SaaS de métricas.",
+    "Plotly permite hover sobre cada gen para inspeccionar valores.",
+    "Dash Bio extiende Plotly con componentes bioinformáticos.",
+  ]}
+/>
 
-**Escenario**: Visualizar resultados de un experimento de expresión génica diferencial.
+**Ejemplo de biotecnología — Volcano plot**
+
+**Escenario**: visualizar resultados de un experimento de expresión génica diferencial.
 
 ```python
 import numpy as np
@@ -338,7 +425,6 @@ n_genes = 500
 genes = [f"GENE_{i}" for i in range(n_genes)]
 log2fc = np.random.randn(n_genes) * 1.5
 pvalues = np.random.uniform(0, 1, n_genes)
-# Add some significant hits
 log2fc[:30] = np.random.randn(30) * 0.5 + 3
 pvalues[:30] = np.random.uniform(0, 0.001, 30)
 neg_log10_p = -np.log10(pvalues)
@@ -357,7 +443,7 @@ fig.add_vline(x=-1.5, line_dash="dash", line_color="grey")
 fig.show()
 ```
 
-## Ejemplo SaaS — Dashboard de Métricas
+**Ejemplo SaaS — Dashboard de métricas**
 
 ```python
 months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
@@ -375,23 +461,36 @@ fig.update_layout(legend_title="Métrica",
 fig.show()
 ```
 
-## Siguiente Paso: Dash Bio
+**Siguiente paso: Dash Bio**
 
 Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, NeedlePlot, OncoPrint, VolcanoPlot, Molecule3DViewer, SequenceViewer. Permite construir dashboards interactivos para visualización genómica sin escribir JavaScript.
 
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+<RevealSequence mode="appear">
 
-## Errores Comunes
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los errores típicos de Plotly son de entorno (kaleido) y de volumen de datos en el navegador.",
+    "Empieza con px y migra a go cuando necesites control fino.",
+    "Configura hovermode temprano para mejorar la experiencia.",
+  ]}
+/>
 
-1. **No instalar kaleido**: `fig.write_image()` falla si no instalaste `pip install kaleido`
-2. **Olvidar `fig.show()`**: En scripts, la figura no se renderiza sin `fig.show()`
-3. **Mezclar px y go sin entender el flujo**: `px` devuelve `go.Figure` — puedes usar `.update_layout()` y `.update_traces()` en figuras de Express
-4. **Muchos datos sin downsampling**: Plotly renderiza en el navegador; más de ~100k puntos puede colgar el browser. Usa `sample()` o agregación
-5. **No configurar hovermode**: El valor default no siempre es el más útil; usa `hovermode="x unified"` para series temporales
+**Errores comunes**
 
-## Buenas Prácticas
+- **No instalar kaleido**: `fig.write_image()` falla sin `pip install kaleido`
+- **Olvidar `fig.show()`**: en scripts la figura no se renderiza sin `fig.show()`
+- **Mezclar px y go sin entender el flujo**: `px` devuelve `go.Figure` — puedes usar `.update_layout()` y `.update_traces()` en figuras de Express
+- **Muchos datos sin downsampling**: Plotly renderiza en el navegador; más de ~100k puntos puede colgar el browser. Usa `sample()` o agregación
+- **No configurar hovermode**: el valor por defecto no siempre es el más útil; usa `hovermode="x unified"` para series temporales
+
+**Buenas prácticas**
 
 - Empieza con `px` y migra a `go` cuando necesitas control fino
 - Usa templates incorporados: `"plotly_white"`, `"plotly_dark"`, `"seaborn"`, `"ggplot2"`
@@ -400,11 +499,22 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
 - Usa `fig.update_layout(margin=dict(...))` para controlar bordes
 - Para presentaciones, exporta a SVG con `write_image("fig.svg")`
 
+</RevealSequence>
 </Section>
 
 <Section number={9} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-## Resumen
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Plotly Express para velocidad, Graph Objects para control fino.",
+    "fig.show() renderiza; write_html() exporta standalone.",
+    "Hover, zoom y dropdowns son la razón de ser de Plotly.",
+  ]}
+/>
 
 - Plotly Express (`px`) para creación rápida de gráficos interactivos
 - Graph Objects (`go`) para control total traza por traza
@@ -415,45 +525,46 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
 - Menús desplegables (`updatemenus`) y sliders (`rangeslider`) para interactividad
 - Kaleido necesario para exportar a PNG/SVG
 
-## Términos Clave
+**Términos clave**
 
-- **Trace**: Una capa visual en la figura (Scatter, Bar, Heatmap, etc.)
-- **Layout**: Configuración global de la figura (título, ejes, template)
-- **Figure**: Objeto contenedor con data + layout
+- **Trace**: una capa visual en la figura (Scatter, Bar, Heatmap, etc.)
+- **Layout**: configuración global de la figura (título, ejes, template)
+- **Figure**: objeto contenedor con data + layout
 - **Plotly Express**: API de alto nivel para creación rápida
 - **Graph Objects**: API de bajo nivel para control fino
-- **Kaleido**: Motor de renderizado estático para exportar imágenes
-- **Dash**: Framework para apps web basado en Plotly
-- **updatemenu**: Menú desplegable interactivo
-- **rangeslider**: Slider para navegar rangos en el eje X
-- **hovertemplate**: Plantilla para personalizar tooltips
+- **Kaleido**: motor de renderizado estático para exportar imágenes
+- **Dash**: framework para apps web basado en Plotly
+- **updatemenu**: menú desplegable interactivo
+- **rangeslider**: slider para navegar rangos en el eje X
+- **hovertemplate**: plantilla para personalizar tooltips
 
+</RevealSequence>
 </Section>
 
 <Section number={10} title="Evaluación" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
-## Ejercicios
+**Ejercicios**
 
-### Nivel 1: Básico
+**Nivel 1: Básico**
 
 1. ¿Qué tipo de objeto devuelve una función de Plotly Express como `px.scatter()`?
 2. ¿Cómo agregas una segunda traza a una figura existente de Graph Objects?
 3. ¿Cuál es la diferencia entre `fig.show()` y `fig.write_html()`?
 
-### Nivel 2: Implementación
+**Nivel 2: Implementación**
 
 4. Usando `px.data.tips()`, crea un scatter plot de `total_bill` vs `tip` coloreado por `time` y con tamaño según `size`.
 5. Construye una figura con `go.Figure()` que contenga dos trazas: un scatter y una línea, con template "plotly_dark".
 
-### Nivel 3: Pensamiento Crítico
+**Nivel 3: Pensamiento Crítico**
 
 6. ¿Cuándo conviene usar Plotly Express y cuándo Graph Objects? ¿Qué tradeoffs existen?
-7. ¿Por qué es importante la interactividad en visualización de datos biotecnológicos? Dónde agregarías hover, zoom y dropdowns en un volcano plot?
+7. ¿Por qué es importante la interactividad en visualización de datos biotecnológicos? ¿Dónde agregarías hover, zoom y dropdowns en un volcano plot?
 
-## Desafío de Código
+**Desafío de código**
 
 Crea un **scatter 3D interactivo** usando `px.scatter_3d()` del dataset iris:
-
 1. Usa `px.data.iris()` como fuente de datos
 2. Ejes: `sepal_length` (x), `sepal_width` (y), `petal_length` (z)
 3. Color por `species`
@@ -461,4 +572,41 @@ Crea un **scatter 3D interactivo** usando `px.scatter_3d()` del dataset iris:
 5. Agrega hover_data mostrando todas las columnas
 6. Exporta la figura a `iris_3d.html`
 
+</RevealSequence>
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="¿Qué tipo de objeto devuelve una función de Plotly Express como px.scatter()?"
+  moduleSlug="python"
+  lessonSlug="lesson17_plotly"
+  blockId="choice-python-l17-tema-1"
+  allowContinueOnIncorrect
+  explanation="Plotly Express devuelve un objeto go.Figure, por eso puedes llamar update_layout y update_traces."
+  options={[
+    { id: "a", label: "Un objeto go.Figure", correct: true, feedback: "¡Correcto! px devuelve una Figure estándar." },
+    { id: "b", label: "Un DataFrame de Pandas", correct: false, feedback: "No: no devuelve datos tabulares." },
+    { id: "c", label: "Una imagen PNG", correct: false, feedback: "No renderiza hasta fig.show()." },
+    { id: "d", label: "Un dict de Python crudo", correct: false, feedback: "La Figure encapsula el dict; no lo devuelve directo." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuál es la diferencia entre fig.show() y fig.write_html()?"
+  moduleSlug="python"
+  lessonSlug="lesson17_plotly"
+  blockId="choice-python-l17-tema-2"
+  allowContinueOnIncorrect
+  explanation="show() renderiza la figura en el entorno actual; write_html() exporta un archivo HTML standalone compartible."
+  options={[
+    { id: "a", label: "show() renderiza; write_html() exporta archivo standalone", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "Ambos hacen lo mismo", correct: false, feedback: "No: uno muestra, el otro persiste." },
+    { id: "c", label: "write_html() solo guarda PNG", correct: false, feedback: "HTML, no PNG." },
+    { id: "d", label: "show() genera un archivo", correct: false, feedback: "show() no persiste a disco." },
+  ]}
+/>
+
+</RevealSequence>
 </Section>

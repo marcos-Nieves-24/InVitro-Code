@@ -22,24 +22,51 @@ Quiz: quiz.md
 # Conjuntos
 
 <Section number={1} title="¿Por qué Sets?" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Las listas ordenan, las tuplas congelan, los diccionarios asocian — pero ninguna de ellas responde '¿este elemento está aquí?' de forma instantánea.",
+    "Los conjuntos existen para dos tareas: eliminar duplicados y prueba de pertenencia rápida.",
+    "En biotecnología aparecen al comparar genes únicos entre experimentos, variantes comunes entre pacientes y secuencias duplicadas.",
+    "En SaaS sirven para contar usuarios únicos, features comunes entre planes y filtrar eventos duplicados en logs.",
+    "Y como plus, traen las operaciones matemáticas de conjuntos: unión, intersección, diferencia y diferencia simétrica.",
+  ]}
+/>
 
-Los conjuntos son colecciones sin orden de elementos únicos. Se destacan en dos tareas: eliminar duplicados y prueba de pertenencia rápida. En biotecnología, los conjuntos ayudan a encontrar genes únicos entre experimentos, identificar variantes comunes entre pacientes y eliminar secuencias duplicadas. En SaaS, los conjuntos rastrean usuarios únicos, encuentran características comunes entre planes y filtran duplicados en logs de eventos.
+<ConceptCard variant="key-idea">
+Los conjuntos son colecciones **sin orden**, de elementos **únicos** y **hashables**, optimizadas para unicidad y para preguntas del tipo "¿está este elemento?".
+</ConceptCard>
 
-## Panorama General
+- En lecciones anteriores aprendiste listas (ordenadas, mutables), tuplas (ordenadas, inmutables) y diccionarios (clave-valor).
+- Los conjuntos comparten la implementación basada en hash con los diccionarios, pero almacenan solo claves.
+- Entender los conjuntos completa tu conocimiento de las estructuras de datos principales de Python.
 
-En lecciones anteriores aprendiste listas (ordenadas, mutables), tuplas (ordenadas, inmutables) y diccionarios (clave-valor). Los conjuntos son otro tipo fundamental de colección, optimizados para unicidad y operaciones matemáticas de conjuntos. Comparten la implementación basada en hash con los diccionarios pero almacenan solo claves. Entender los conjuntos completa tu conocimiento de las estructuras de datos principales de Python.
-
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Teoría de Conjuntos" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-## Teoría
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un conjunto responde '¿está?' en tiempo constante O(1) gracias a su tabla hash interna.",
+    "Ese truco de la tabla hash es la misma idea que el diccionario sin valores.",
+    "Volvamos a los sets en Python: cómo se crean, qué propiedades tienen y qué operaciones traen.",
+  ]}
+/>
 
-### Creando Conjuntos
+<ConceptCard variant="definition">
+Set: colección sin orden de elementos únicos y hashables, creada con `{a, b}` o `set(iterable)`; el vacío se escribe `set()`.
+</ConceptCard>
 
-Los conjuntos se crean con llaves `{}` o `set()`:
+Los conjuntos se crean con llaves o con `set()`. Nota: `{}` crea un diccionario vacío.
 
 ```python
 empty = set()           # Nota: {} crea un dict vacío
@@ -48,14 +75,14 @@ numbers = set([1, 2, 3, 2, 1])  # {1, 2, 3} — duplicados eliminados
 string_set = set("hello")  # {'h', 'e', 'l', 'o'}
 ```
 
-### Propiedades de los Conjuntos
+Propiedades de los conjuntos:
 
-- **Sin orden**: Los elementos no tienen posición/índice
-- **Únicos**: No hay elementos duplicados
-- **Mutables**: Se pueden agregar/eliminar elementos
-- **Solo elementos hashables**: Los elementos deben ser inmutables (como las claves de dict)
+- **Sin orden**: los elementos no tienen posición ni índice.
+- **Únicos**: no hay elementos duplicados.
+- **Mutables**: se pueden agregar o eliminar elementos.
+- **Solo elementos hashables**: los elementos deben ser inmutables (como las claves de dict).
 
-### Operaciones de Conjuntos
+Operaciones de conjuntos:
 
 ```python
 a = {1, 2, 3, 4, 5}
@@ -68,7 +95,7 @@ b - a          # Diferencia: {6, 7, 8}
 a ^ b          # Diferencia simétrica: {1, 2, 3, 6, 7, 8}
 ```
 
-### Métodos de Conjuntos
+Métodos de conjuntos:
 
 ```python
 s = {1, 2, 3}
@@ -89,18 +116,14 @@ s.issuperset(other)    # s ⊇ other?
 s.isdisjoint(other)    # s ∩ other = ∅?
 ```
 
-### Frozenset
-
-Una versión inmutable de set — se puede usar como clave de diccionario:
+Frozenset: versión inmutable de set, usable como clave de diccionario:
 
 ```python
 fs = frozenset([1, 2, 3])
 # fs.add(4)  # AttributeError: 'frozenset' object has no attribute 'add'
 ```
 
-### Prueba de Pertenencia
-
-Los conjuntos son mucho más rápidos que las listas para verificaciones con `in`:
+Prueba de pertenencia: los conjuntos son mucho más rápidos que las listas para `in`:
 
 ```python
 # O(1) para set vs O(n) para lista
@@ -108,9 +131,9 @@ if item in my_set:  # Rápido
     pass
 ```
 
-## Explicación Visual
+Diagrama de Venn (ASCII, candidato a player visual):
 
-```
+```python
 Operaciones de Conjuntos (Diagrama de Venn)
 
     Set A          Set B
@@ -132,11 +155,26 @@ Operaciones de Conjuntos (Diagrama de Venn)
   └────────┘           └────────────────┘
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Implementación en Python
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Crear conjuntos, operar sobre ellos y medir la velocidad de la pertenencia: los tres movimientos clave.",
+    "Observa el ejemplo de rendimiento: el mismo `in` sobre lista y sobre set con un millón de elementos.",
+    "La diferencia de tiempo es la razón por la que conviene mover consultas repetidas a un set.",
+  ]}
+/>
+
+<ConceptCard variant="key-idea">
+Primero datos únicos, luego operaciones, luego la pregunta "¿está?" — esa es la receta típica de sets en código real.
+</ConceptCard>
 
 ```python
 # Creando conjuntos
@@ -190,13 +228,24 @@ print(f"Pertenencia en conjunto: {set_time:.4f}s")
 print(f"El conjunto es {list_time/set_time:.0f}x más rápido!")
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+<RevealSequence mode="appear">
 
-## Ejemplo de Biotecnología
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Dos escenarios: comparar conjuntos de genes entre experimentos y analizar adopción de features en SaaS.",
+    "En ambos, la traza mental es la misma: unión para 'todo', intersección para 'comunes', diferencia para 'exclusivos'.",
+    "Intenta predecir el resultado antes de ejecutar el código.",
+  ]}
+/>
 
-**Escenario**: Comparando conjuntos de genes entre diferentes experimentos.
+**Escenario biotecnología** — comparando conjuntos de genes entre diferentes experimentos:
 
 ```python
 # Conjuntos de genes de diferentes experimentos
@@ -220,9 +269,7 @@ unique_to_1 = experiment_1 - experiment_2 - experiment_3
 print(f"Únicos del experimento 1: {unique_to_1}")
 ```
 
-## Ejemplo SaaS
-
-**Escenario**: Analizando adopción de funcionalidades por usuarios.
+**Escenario SaaS** — analizando adopción de funcionalidades por usuarios:
 
 ```python
 # Funcionalidades usadas por diferentes segmentos de clientes
@@ -247,79 +294,149 @@ print(f"Faltan en basic: {missing_from_basic}")
 print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}")
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+<RevealSequence mode="appear">
 
-## Errores Comunes
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los errores con sets son silenciosos porque `{}` parece inocente pero crea un dict.",
+    "Otros clásicos: asumir orden, meter mutables, modificar mientras iteras.",
+    "La buena noticia: son fáciles de evitar si sabes qué preguntar antes de escribir.",
+  ]}
+/>
 
-1. **Usar `{}` para conjunto vacío**: Crea un dict vacío, no un conjunto. Usa `set()`
-2. **Asumir orden en conjuntos**: Los conjuntos no tienen orden — no confíes en el orden de los elementos
-3. **Agregar elementos mutables**: No se pueden agregar listas o dicts a un conjunto
-4. **Modificar un conjunto mientras se itera**: Mismo problema que con listas
-5. **Confundir `add` y `update`**: `add` agrega un elemento; `update` agrega elementos de un iterable
+Erros comunes:
 
-## Buenas Prácticas
+- **Usar `{}` para conjunto vacío**: crea un dict vacío, no un conjunto — usa `set()`.
+- **Asumir orden en conjuntos**: no tienen orden, no confíes en el orden de los elementos.
+- **Agregar elementos mutables**: no se pueden agregar listas o dicts a un conjunto.
+- **Modificar un conjunto mientras se itera**: mismo problema que con listas.
+- **Confundir `add` y `update`**: `add` agrega un elemento; `update` agrega elementos de un iterable.
 
-- Usa conjuntos para prueba de pertenencia rápida (`in` es O(1))
-- Usa conjuntos para eliminar duplicados de secuencias
-- Usa operaciones de conjuntos (unión, intersección, diferencia) para análisis
-- Usa `frozenset` cuando necesites un conjunto inmutable y hashable (ej. como clave de dict)
-- Prefiere `discard` sobre `remove` cuando no estés seguro de que el elemento exista
+Buenas prácticas:
 
+- Usa conjuntos para prueba de pertenencia rápida (`in` es O(1)).
+- Usa conjuntos para eliminar duplicados de secuencias.
+- Usa operaciones de conjuntos (unión, intersección, diferencia) para análisis.
+- Usa `frozenset` cuando necesites un conjunto inmutable y hashable (por ejemplo, como clave de dict).
+- Prefiere `discard` sobre `remove` cuando no estés seguro de que el elemento exista.
+
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-## Resumen
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los sets completan tu caja de herramientas de colecciones de Python.",
+    "Sin orden, únicos, hashables, O(1) para '¿está?', más unión, intersección y diferencia.",
+    "A partir de aquí, la pregunta no es '¿qué colección uso?' sino '¿qué pregunta le hago a los datos?'.",
+  ]}
+/>
 
-- Los conjuntos son colecciones sin orden de elementos únicos y hashables
-- Se crean con `{1, 2, 3}` o `set([1, 2, 3])`; conjunto vacío con `set()`
-- Operaciones: unión (`|`), intersección (`&`), diferencia (`-`), diferencia simétrica (`^`)
-- Métodos: add, remove, discard, pop, clear
-- Frozenset es inmutable y hashable
-- La prueba de pertenencia es O(1) — mucho más rápida que en listas
+- Los conjuntos son colecciones sin orden de elementos únicos y hashables.
+- Se crean con `{1, 2, 3}` o `set([1, 2, 3])`; conjunto vacío con `set()`.
+- Operaciones: unión (`|`), intersección (`&`), diferencia (`-`), diferencia simétrica (`^`).
+- Métodos: add, remove, discard, pop, clear.
+- Frozenset es inmutable y hashable.
+- La prueba de pertenencia es O(1) — mucho más rápida que en listas.
 
-## Términos Clave
+Términos clave:
 
-- **Conjunto**: Colección sin orden de elementos únicos
-- **Frozenset**: Versión inmutable de un conjunto
-- **Unión**: Todos los elementos de ambos conjuntos
-- **Intersección**: Elementos comunes a ambos conjuntos
-- **Diferencia**: Elementos en un conjunto pero no en el otro
-- **Diferencia simétrica**: Elementos en exactamente uno de los conjuntos
-- **Hashable**: Se puede usar como elemento de un conjunto (tipos inmutables)
-- **Prueba de pertenencia**: Verificar si un elemento está en un conjunto (O(1))
+- **Conjunto**: colección sin orden de elementos únicos.
+- **Frozenset**: versión inmutable de un conjunto.
+- **Unión**: todos los elementos de ambos conjuntos.
+- **Intersección**: elementos comunes a ambos conjuntos.
+- **Diferencia**: elementos en un conjunto pero no en el otro.
+- **Diferencia simétrica**: elementos en exactamente uno de los conjuntos.
+- **Hashable**: se puede usar como elemento de un conjunto (tipos inmutables).
+- **Prueba de pertenencia**: verificar si un elemento está en un conjunto (O(1)).
 
+</RevealSequence>
 </Section>
 
-<Section number={7} title="Evaluación" eyebrow="EVALUACIÓN">
+<Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
-## Ejercicios
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Hora de practicar: ejercicios y un desafío de código.",
+    "Recuerda que un set vacío se escribe `set()` y que el orden no importa.",
+  ]}
+/>
 
-### Nivel 1: Básico
+Nivel 1 — Básico:
 
 1. ¿Cómo creas un conjunto vacío?
 2. ¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?
 3. ¿Cuál es la diferencia entre `add()` y `update()` para conjuntos?
 
-### Nivel 2: Implementación
+Nivel 2 — Implementación:
 
 4. Escribe una función `unique_words(texto)` que devuelva un conjunto de palabras únicas en un string.
-5. Dadas dos listas (ej. usuarios que vieron una página y usuarios que compraron), encuentra los usuarios que vieron pero no compraron.
+5. Dadas dos listas (por ejemplo, usuarios que vieron una página y usuarios que compraron), encuentra los usuarios que vieron pero no compraron.
 
-### Nivel 3: Pensamiento Crítico
+Nivel 3 — Pensamiento Crítico:
 
 6. ¿Por qué la prueba de pertenencia es O(1) para conjuntos pero O(n) para listas? ¿Cómo es la implementación subyacente?
 7. ¿Cómo encontrarías elementos que aparecen en al menos k de n conjuntos sin usar Counter?
 
-## Desafío de Código
+Desafío de Código — similitud de Jaccard:
 
-Escribe un programa que implemente un calculador de **similitud de Jaccard**:
-1. Similitud de Jaccard = |A ∩ B| / |A ∪ B| (tamaño de intersección / tamaño de unión)
-2. Escribe `jaccard_similarity(conjunto1, conjunto2)` que devuelva un valor entre 0 y 1
-3. Dada una lista de conjuntos de genes (cada uno un conjunto de nombres de genes), encuentra el par con la mayor similitud de Jaccard
-4. También encuentra el par con la menor similitud de Jaccard
-5. Prueba con al menos 5 conjuntos de genes de diferentes tamaños
+1. Similitud de Jaccard = |A ∩ B| / |A ∪ B| (tamaño de intersección / tamaño de unión).
+2. Escribe `jaccard_similarity(conjunto1, conjunto2)` que devuelva un valor entre 0 y 1.
+3. Dada una lista de conjuntos de genes (cada uno un conjunto de nombres de genes), encuentra el par con la mayor similitud de Jaccard.
+4. También encuentra el par con la menor similitud de Jaccard.
+5. Prueba con al menos 5 conjuntos de genes de diferentes tamaños.
 
+</RevealSequence>
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?"
+  moduleSlug="python"
+  lessonSlug="lesson12_sets"
+  blockId="choice-python-l12-conjuntos-1"
+  allowContinueOnIncorrect
+  explanation="Los conjuntos eliminan duplicados y el orden no importa, por lo que el resultado es {1, 2, 3}."
+  options={[
+    { id: "a", label: "{1, 2, 3}", correct: true, feedback: "¡Correcto! Los duplicados se eliminan." },
+    { id: "b", label: "[1, 2, 2, 3, 1, 3]", correct: false, feedback: "Eso sería la lista original, no un set." },
+    { id: "c", label: "{1, 1, 2, 2, 3, 3}", correct: false, feedback: "Los sets no conservan duplicados." },
+    { id: "d", label: "Error de tipo", correct: false, feedback: "No lanza error; set acepta cualquier iterable." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué construye la expresión `{}` en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson12_sets"
+  blockId="choice-python-l12-operaciones-2"
+  allowContinueOnIncorrect
+  explanation="Los literales vacíos con llaves crean un diccionario; para un set vacío usa `set()`."
+  options={[
+    { id: "a", label: "Un dict vacío", correct: true, feedback: "¡Correcto! {} es un dict, no un set." },
+    { id: "b", label: "Un set vacío", correct: false, feedback: "Para un set vacío se usa set()." },
+    { id: "c", label: "Un error de sintaxis", correct: false, feedback: "La expresión es válida y crea un dict." },
+    { id: "d", label: "Un frozenset vacío", correct: false, feedback: "frozenset() requiere llamada explícita." },
+  ]}
+/>
+
+</RevealSequence>
 </Section>
