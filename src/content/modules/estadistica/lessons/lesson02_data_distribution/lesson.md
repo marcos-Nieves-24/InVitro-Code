@@ -93,7 +93,7 @@ $$\text{Asimetría} = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sig
 />
 
 <ConceptCard variant="key-idea">
-En una distribución con asimetría a la derecha, la media es mayor qué la mediana por qué los valores extremos altos jalan la media. ¡Siempre reporta la mediana en estos casos!
+En una distribución con asimetría a la derecha, la media es mayor que la mediana, porque los valores extremos altos arrastran la media. Por eso, en estos casos conviene reportar también la mediana, que es más robusta a los valores atípicos.
 </ConceptCard>
 
 </Section>
@@ -299,7 +299,7 @@ plt.show()
 <Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Ya sabes ver la forma de los datos! Esto es fundamental: si no entiendes la distribución, no puedes elegir el modelo correcto.
+Ya sabes leer la forma de los datos. Esto es fundamental: sin entender la distribución, no es posible elegir el modelo correcto.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

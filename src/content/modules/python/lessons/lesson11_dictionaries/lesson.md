@@ -131,7 +131,7 @@ Clave      Función Hash    Bucket
 │"grade"│→ │ hash()   │ → │ Índice│ → "A"
 └──────┘   └──────────┘   └───────┘
 
-La búsqueda por clave es O(1) — ¡muy rápida!
+La búsqueda por clave es O(1): muy rápida.
 ```
 
 </Section>

@@ -43,6 +43,9 @@ import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureS
 import { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 import { PipelineStagesPlayer } from "@/components/anymotion/animations/PipelineStagesPlayer";
 import { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
+import { SupervisedFlowPlayer } from "@/components/anymotion/animations/SupervisedFlowPlayer";
+import { ConfusionMatrixPlayer } from "@/components/anymotion/animations/ConfusionMatrixPlayer";
+import { ModelComparePlayer } from "@/components/anymotion/animations/ModelComparePlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -96,7 +99,7 @@ function renderHeader(data: Record<string, unknown>) {
         <span className="h-px w-3 bg-gray-300" />
         <span>Lección {data["Lesson Number"] as string}</span>
       </p>
-      <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-gray-900">
+      <h1 className="mt-1 font-display text-3xl font-semibold tracking-tight text-gray-900">
         {data["Lesson Title"] as string}
       </h1>
       {objectives.length > 0 && (
@@ -182,6 +185,9 @@ export default async function LessonPage({ params }: Props) {
     Overfitting: OverfittingPlayer,
     PipelineStages: PipelineStagesPlayer,
     SpeciesCompare: SpeciesComparePlayer,
+    SupervisedFlow: SupervisedFlowPlayer,
+    ConfusionMatrixVisual: ConfusionMatrixPlayer,
+    ModelCompare: ModelComparePlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

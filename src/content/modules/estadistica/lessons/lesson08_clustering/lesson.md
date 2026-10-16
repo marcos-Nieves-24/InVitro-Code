@@ -129,7 +129,7 @@ plt.legend(); plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson08_clustering"
   prompt="¿Por qué visualizamos clusters en 2D con PCA en vez de usar 2 features originales? ¿Qué podríamos perder?"
-  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un sólo gráfico. Pero perdemos información: clusters qué se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
+  answer="Porque con >3 features no podemos graficar directamente. PCA proyecta a 2D preservando la máxima varianza, mostrando la estructura de clusters en un solo gráfico. Pero perdemos información: clusters qué se ven separados en 2D PCA podrían solaparse en otras dimensiones. Por eso siempre complementamos con silhouette score y el perfil de cada cluster (media de cada feature por cluster)."
 />
 
 </Section>
@@ -196,7 +196,7 @@ Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí 
 <Section number={9} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Primer algoritmo de ML no supervisado dominado! K-Means es simple pero poderoso. Con PCA para visualizar y silhouette para validar, tienes un toolkit completo de clustering.
+Primer algoritmo de ML no supervisado cubierto. K-Means es simple pero poderoso. Con PCA para visualizar y una métrica de silueta para validar, dispones de un toolkit completo de clustering.
 </MascotMessage>
 
 **En la Lección 9** cerramos el módulo con **Evaluación de Modelos**: train/test split, validación cruzada, y todas las métricas (MAE, MSE, RMSE, R²). Porque crear modelos es fácil — saber si son buenos es lo difícil.

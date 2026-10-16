@@ -16,12 +16,13 @@ export function InteractiveFrame({
           src={src}
           width="100%"
           height={height}
-          className="block"
+          style={{ height, maxHeight: "min(52vh, 480px)" }}
+          className="block w-full"
           title={caption ?? src}
         />
       </div>
       {caption && (
-        <p className="mt-1.5 text-xs leading-relaxed text-gray-500 font-mono">
+        <p className="mt-1.5 text-center font-mono text-xs leading-relaxed text-storm">
           {caption}
         </p>
       )}

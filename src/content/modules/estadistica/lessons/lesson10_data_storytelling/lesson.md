@@ -21,16 +21,16 @@ Assignment: data_storytelling_assignment.md
 Quiz: data_storytelling_quiz.md
 ---
 
-<Section number={1} title="El análisis qué nadie lee" eyebrow="INICIO">
+<Section number={1} title="El análisis que nadie lee" eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Hiciste el EDA, corriste PCA, evaluaste tu modelo con validacion cruzada... y ahora que? Si no puedes comunicar tus resultados, es cómo si no hubieras hecho nada. La narracion de datos convierte análisis en accion.
+Realizaste el EDA, corriste PCA, evaluaste tu modelo con validación cruzada... y ahora, ¿qué? Si no puedes comunicar tus resultados, es como si no hubieras hecho nada. La narración de datos convierte el análisis en acción.
 </MascotMessage>
 
-El mejor análisis del mundo es inútil si no convence a quién toma decisiones. Un médico necesita entender por qué tu modelo recomienda un tratamiento. Un CEO necesita ver el ROI, no el RMSE. La narracion de datos es el puente entre el análisis tecnico y la decision humana.
+El mejor análisis del mundo resulta inútil si no convence a quien toma las decisiones. Un médico necesita entender por qué el modelo recomienda un tratamiento. Un director ejecutivo necesita ver el retorno sobre la inversión, no el error cuadrático medio. La narración de datos es el puente entre el análisis técnico y la decisión humana.
 
 <ConceptCard variant="key-idea">
-Datos sin historia son numeros. Datos con historia son evidencia. Datos con historia y contexto son persuasion.
+Los datos, en sí mismos, no producen decisiones. Quien decide necesita contexto, comparación y una explicación de por qué el hallazgo importa. La narración de datos aporta ese contexto.
 </ConceptCard>
 
 </Section>
@@ -40,12 +40,12 @@ Datos sin historia son numeros. Datos con historia son evidencia. Datos con hist
 <ConceptCard variant="definition">
 Toda historia de datos efectiva sigue una estructura:
 
-1. **Contexto**: Por qué esto importa? Qué problema resolvemos?
-2. **Conflicto**: Qué muestran los datos qué es sorprendente o contraintuitivo?
-3. **Resolucion**: Qué accion recomendamos basada en la evidencia?
+1. **Contexto**: ¿Por qué importa este análisis? ¿Qué problema resolvemos?
+2. **Conflicto**: ¿Qué muestran los datos que resulta inesperado o contrario a la intuición?
+3. **Resolución**: ¿Qué acción recomendamos a partir de la evidencia?
 </ConceptCard>
 
-Ejemplo biotecnologico: "Este nuevo fármaco reduce tumores en el 60% de pacientes (contexto), PERO descubrimos qué sólo funciona en pacientes con la mutacion BRCA1 (conflicto/sorpresa). Recomendamos test genetico antes de recetar (resolucion)."
+Ejemplo biotecnológico: "Este nuevo fármaco reduce tumores en el 60 % de los pacientes (contexto), pero descubrimos que solo es eficaz en pacientes con la mutación BRCA1 (conflicto o sorpresa). Se recomienda un test genético previo a la prescripción (resolución)."
 
 </Section>
 
@@ -63,7 +63,7 @@ Ejemplo biotecnologico: "Este nuevo fármaco reduce tumores en el 60% de pacient
 />
 
 <ConceptCard variant="warning">
-Errores clasicos de visualizacion: ejes truncados qué exageran diferencias, 3D innecesario qué distorsiona, demasiados colores, graficos de torta para más de 3 categorias, falta de etiquetas y titulos.
+Errores clásicos de visualización: ejes truncados que exageran las diferencias, uso innecesario de 3D que distorsiona las magnitudes, exceso de color, gráficos de torta para más de tres categorías y falta de etiquetas y títulos.
 </ConceptCard>
 
 </Section>
@@ -89,15 +89,15 @@ Errores clasicos de visualizacion: ejes truncados qué exageran diferencias, 3D 
 
 </Section>
 
-<Section number={5} title="Comunicando a no-tecnicos" eyebrow="INTERACTIVA">
+<Section number={5} title="Comunicando a audiencias no técnicas" eyebrow="INTERACTIVA">
 
 <InteractiveTable
-  headers={["Decis esto...", "Mejor deci esto...", "Por que"]}
+  headers={["Dices esto...", "Es mejor decir...", "Por qué"]}
   rows={[
-    ["El RMSE fue 3.4 con R2 de 0.72", "El modelo predice el precio con un error tipico de $3,400 y captura el 72% de la variacion", "Unidades y contexto humano"],
-    ["Realizamos PCA con 3 componentes explicando 85% de varianza", "Redujimos 50 variables a 3 dimensiones principales sin perder casi informacion", "Analogia visual intuitiva"],
-    ["El p-valor fue 0.03, rechazamos H0", "Hay sólo 3% de probabilidad de qué este resultado sea casualidad", "Traducir significancia estadistica a lenguaje comun"],
-    ["K-Means con k=4, silhouette 0.65", "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos", "Resultado accionable, no parametro tecnico"],
+    ["El RMSE fue 3.4 con R² de 0.72", "El modelo predice el precio con un error típico de $3,400 y captura el 72 % de la variación", "Unidades y contexto humano"],
+    ["Realizamos PCA con 3 componentes que explican el 85 % de la varianza", "Redujimos 50 variables a 3 dimensiones principales sin perder casi información", "Analogía visual intuitiva"],
+    ["El p-valor fue 0.03, rechazamos H₀", "Hay solo un 3 % de probabilidad de que este resultado sea casualidad", "Traducir la significancia estadística a lenguaje común"],
+    ["K-Means con k=4, silueta 0.65", "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos", "Resultado accionable, no parámetro técnico"],
   ]}
   searchable={true}
   caption="Traduciendo estadistica a decisiones"
@@ -120,7 +120,7 @@ fig.show()
 ```
 
 <CalloutInfo>
-Plotly genera graficos interactivos: zoom, hover con datos, seleccion. Son ideales para dashboards y reportes dónde el usuario explora los datos. Mucho más efectivo qué imagenes estaticas.
+Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son ideales para dashboards y reportes en los que el usuario explora los datos. Resultan mucho más efectivos que las imágenes estáticas.
 </CalloutInfo>
 
 </Section>
@@ -131,8 +131,8 @@ Plotly genera graficos interactivos: zoom, hover con datos, seleccion. Son ideal
   blockId="reflection-l10-storytelling"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  prompt="Tu modelo de ML predice qué pacientes responderan a un tratamiento con 85% de accuracy. El director médico te pregunta si deberian usarlo en el hospital. Qué le decis?"
-  answer="No le digas '85% accuracy'. Dile: 'De cada 100 pacientes, el modelo identifica correctamente a 85. Pero de los 15 qué se equivoca, algunos son pacientes qué SI responderian y el modelo dijo qué no (pierden la oportunidad de tratarse). Otros son pacientes qué NO responderian pero el modelo dijo qué si (reciben un tratamiento inútil con efectos secundarios). Qué error es más grave para el hospital?' Esto convierte una metrica abstracta en un dilema médico real qué el director puede evaluar."
+  prompt="Tu modelo de ML predice que el 85 % de los pacientes responde a un tratamiento. El director médico te pregunta si deben usarlo en el hospital. ¿Qué le respondes?"
+  answer="No le digas solo '85 % de exactitud'. Dile: 'De cada 100 pacientes, el modelo identifica correctamente a 85. Pero de los 15 en los que se equivoca, algunos son pacientes que sí responderían y el modelo dijo que no (pierden la oportunidad de tratarse). Otros son pacientes que no responderían, pero el modelo dijo que sí (recibirán un tratamiento sin beneficio y con efectos secundarios). ¿Cuál error es más grave para el hospital?' Esto convierte una métrica abstracta en un dilema clínico que el director puede evaluar."
 />
 
 <AnswerReveal summary="Ver respuesta">
@@ -144,7 +144,7 @@ Plotly genera graficos interactivos: zoom, hover con datos, seleccion. Son ideal
 <Section number={8} title="Terminos clave" eyebrow="CIERRE">
 
 <InteractiveTable
-  headers={["Termino", "Definicion"]}
+  headers={["Término", "Definición"]}
   rows={[
     ["Narracion de Datos", "Comunicar hallazgos con contexto, narrativa y visualizaciones"],
     ["Arco Narrativo", "Estructura: contexto, conflicto, resolucion"],
@@ -162,21 +162,21 @@ Plotly genera graficos interactivos: zoom, hover con datos, seleccion. Son ideal
 <Section number={9} title="Cerrando el modulo" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-Felicidades! Completaste el Modulo 3 de Estadistica y Probabilidad. De descriptive stats a data storytelling, construiste la base estadistica qué todo científico de datos necesita. Ahora estas listo para Machine Learning.
+Felicitaciones por completar el Módulo 3 de Estadística y Probabilidad. De estadística descriptiva a narración de datos, construiste la base estadística que todo científico de datos necesita. Ahora estás preparado para Machine Learning.
 </MascotMessage>
 
-**Que aprendiste en este modulo:**
-- Estadistica descriptiva: resumir datos con numeros
+**Qué aprendiste en este módulo:**
+- Estadística descriptiva: resumir datos con números
 - Distribuciones: ver la forma de los datos
 - Probabilidad: razonar bajo incertidumbre con Bayes
-- Distribuciones estadisticas: Bernoulli, Binomial, Poisson, Normal
-- Relaciones: Pearson, Spearman, correlacion vs causalidad
+- Distribuciones estadísticas: Bernoulli, Binomial, Poisson, Normal
+- Relaciones: Pearson, Spearman, correlación vs. causalidad
 - EDA: el flujo de trabajo del científico de datos
-- PCA: reducir dimensionalidad sin perder informacion
+- PCA: reducir dimensionalidad sin perder información
 - Clustering: encontrar grupos naturales con K-Means
-- Evaluacion: medir qué tan bueno es tu modelo
-- Storytelling: comunicar resultados para generar accion
+- Evaluación: medir qué tan bueno es el modelo
+- Narración de datos: comunicar resultados para generar acción
 
-En el **Modulo 4 (Machine Learning)** vas a aplicar todo esto para construir modelos predictivos reales.
+En el **Módulo 4 (Machine Learning)** aplicarás todo esto para construir modelos predictivos reales.
 
 </Section>

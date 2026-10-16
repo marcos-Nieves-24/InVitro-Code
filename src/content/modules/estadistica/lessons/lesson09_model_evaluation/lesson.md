@@ -24,7 +24,7 @@ Quiz: model_evaluation_quiz.md
 <Section number={1} title="Crear modelos es fácil. Evaluarlos, no." eyebrow="INICIO">
 
 <MascotMessage mood="thinking">
-Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o sólo memorizó los datos de entrenamiento. La evaluación de modelos es dónde separamos la magia de la ilusión.
+Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o solo memorizó los datos de entrenamiento. La evaluación de modelos es dónde separamos la magia de la ilusión.
 </MascotMessage>
 
 En las lecciones anteriores construiste intuición estadística. Ahora la vas a aplicar para responder la pregunta más importante en ML: **¿este modelo es bueno?** No en training — en datos qué nunca vio. Eso se llama **generalización**.
@@ -147,7 +147,7 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
   moduleSlug="estadistica"
   lessonSlug="lesson09_model_evaluation"
   prompt="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
-  answer="Significa qué el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganas plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² sólo no te dice nada sin contexto."
+  answer="Significa qué el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganas plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² solo no te dice nada sin contexto."
 />
 
 </Section>
@@ -184,7 +184,7 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 <Section number={9} title="Para la última lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Sabes evaluar modelos! Train/test split, validación cruzada, MAE, RMSE, R² — tienes el toolkit completo para separar modelos buenos de malos. Esto es lo qué hace un científico de datos senior.
+Ya sabes evaluar modelos. Train/test split, validación cruzada, MAE, RMSE y R²: tienes el toolkit completo para separar modelos buenos de malos. Esto es lo que distingue a un científico de datos senior.
 </MascotMessage>
 
 **En la Lección 10** cerramos el módulo con **Narración de Datos**: cómo comunicar tus hallazgos. Porque de nada sirve el mejor análisis si no puedes explicarlo. Vas a aprender a contar historias con datos qué convenzan a cualquier audiencia.

@@ -152,7 +152,7 @@ La diagonal siempre es 1 (una variable correlaciona perfectamente consigo misma)
 </ConceptCard>
 
 <CalloutInfo>
-Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría ser al revés la causalidad? ¿Es sólo coincidencia? La correlación es una pista, no una conclusión.
+Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría ser al revés la causalidad? ¿Es solo coincidencia? La correlación es una pista, no una conclusión.
 </CalloutInfo>
 
 </Section>
@@ -194,7 +194,7 @@ Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría s
 <Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Correlación ≠ causalidad! Recuerda eso a fuego. Ahora tienes las herramientas para explorar relaciones entre variables — una habilidad fundamental para el análisis exploratorio de datos.
+Correlación no implica causalidad. Esta distinción debe guiar todo el análisis exploratorio. Ya tienes las herramientas para explorar relaciones entre variables, una habilidad esencial para el análisis exploratorio de datos.
 </MascotMessage>
 
 **En la Lección 6** vamos a juntar TODO lo aprendido hasta ahora en un Análisis Exploratorio de Datos (EDA) completo: valores faltantes, outliers, visualizaciones, y exploración de features. Vas a aplicar estadística descriptiva, distribuciones y correlaciones en un flujo de trabajo real de científico de datos.

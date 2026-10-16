@@ -150,7 +150,7 @@ Las medidas de dispersión indican qué tan dispersos están los datos. No basta
 
 $$\text{Rango} = \max(x) - \min(x)$$
 
-Es muy sensible a valores atípicos: un sólo valor extremo duplica el rango.
+Es muy sensible a valores atípicos: un solo valor extremo duplica el rango.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -246,7 +246,7 @@ print(f"Outliers detectados: {outliers}")
 ```
 
 <ConceptCard variant="warning">
-Un outlier NO siempre es un error. Puede ser un error de medición, un caso excepcional... ¡o el descubrimiento más importante de tu dataset! Nunca elimines outliers sin investigar su causa.
+Un outlier no siempre es un error. Puede serlo, pero también puede ser un caso excepcional, incluso el descubrimiento más importante del dataset. Nunca elimines valores atípicos sin investigar su causa.
 </ConceptCard>
 
 </Section>
@@ -280,7 +280,7 @@ TP53 es conocido cómo "el guardián del genoma". Una expresión anormalmente ba
 
 <Section number={11} title="Ejemplo SaaS: usuarios activos diarios" eyebrow="INTERACTIVA">
 
-La estadística descriptiva no es sólo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
+La estadística descriptiva no es solo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
 
 ```python
 np.random.seed(42)
@@ -304,7 +304,7 @@ plt.show()
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
   prompt="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
-  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un sólo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un solo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
 />
 
 </Section>
@@ -372,7 +372,7 @@ Pon a prueba lo qué aprendiste:
 <Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Excelente trabajo! Ya tienes las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, IQR, outliers — son el pan de cada día de un científico de datos.
+Excelente trabajo: ya tienes las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, rango intercuartílico y valores atípicos son el pan de cada día de un científico de datos.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

@@ -45,7 +45,8 @@ export async function POST(request: NextRequest) {
     }
 
     const input = body as Record<string, unknown>;
-    const block_id = readNonEmptyString(input.block_id);
+    const block_id =
+      readNonEmptyString(input.block_id) ?? readNonEmptyString(input.blockId);
     if (!block_id) {
       return NextResponse.json(
         { error: "Invalid or missing block_id" },

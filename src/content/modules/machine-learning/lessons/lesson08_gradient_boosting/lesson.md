@@ -65,7 +65,7 @@ El **learning rate** (típicamente 0.01–0.1) es el hiperparámetro más import
 
 **learning_rate:** Cuánto aporta cada árbol (0.01–0.3). Valores bajos necesitan más árboles pero generalizan mejor. Es la perilla fina del modelo.
 
-**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3–5 (¡mucho menor que en Random Forest!). Árboles shallow = aprendices débiles, que es justo lo que quieres.
+**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3–5, mucho menor que en un Random Forest.. Árboles shallow = aprendices débiles, que es justo lo que quieres.
 </ConceptCard>
 
 <CalloutCheck>

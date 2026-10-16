@@ -329,7 +329,7 @@ export function OverfittingPlayer({ caption, autoPlay = false }: OverfittingPlay
             type="button"
             onClick={() => setDegreeClamped(degree - 1)}
             disabled={degree <= MIN_DEGREE}
-            className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint disabled:opacity-40"
+            className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint disabled:opacity-40"
             aria-label="Reducir grado del polinomio"
           >
             −
@@ -344,7 +344,7 @@ export function OverfittingPlayer({ caption, autoPlay = false }: OverfittingPlay
             type="button"
             onClick={() => setDegreeClamped(degree + 1)}
             disabled={degree >= MAX_DEGREE}
-            className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint disabled:opacity-40"
+            className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint disabled:opacity-40"
             aria-label="Aumentar grado del polinomio"
           >
             +
@@ -361,12 +361,12 @@ export function OverfittingPlayer({ caption, autoPlay = false }: OverfittingPlay
           className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-gray-200 accent-mint"
           aria-label="Grado del polinomio"
         />
-        <span className={`font-mono text-[11px] ${tone}`} aria-live="polite">
+        <span className={`font-mono text-xs ${tone}`} aria-live="polite">
           {diagnosis}
         </span>
       </div>
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>}
     </figure>
   );
 }

@@ -39,7 +39,7 @@ En la Lección 3 aprendiste el lenguaje general de la probabilidad. Ahora vas a 
 - Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
 </ConceptCard>
 
-Intuición: Un sólo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
+Intuición: Un solo lanzamiento de moneda. Cada paciente responde al tratamiento o no. La Bernoulli es el bloque de construcción de distribuciones más complejas.
 
 </Section>
 
@@ -210,7 +210,7 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 <Section number={11} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Cuatro distribuciones fundamentales dominadas! Bernoulli, Binomial, Poisson, Normal — con estas cuatro ya puedes modelar una enorme variedad de fenómenos reales.
+Cuatro distribuciones fundamentales cubiertas: Bernoulli, Binomial, Poisson y Normal. Con estas cuatro ya puedes modelar una enorme variedad de fenómenos reales.
 </MascotMessage>
 
 **En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento — todo está conectado.

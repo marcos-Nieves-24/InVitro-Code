@@ -24,7 +24,7 @@ Quiz: quiz.md
 <Section number={1} title="Todo junto: del dato a la decisión" eyebrow="INICIO">
 
 <MascotMessage mood="celebrating">
-¡Llegaste a la lección final! Nueve algoritmos después, es hora de integrar todo en pipelines reales. Esto es lo que hace un ML Engineer en producción: tomar datos crudos, preprocesarlos, seleccionar el modelo correcto, y comunicar resultados.
+Has llegado a la lección final. Nueve algoritmos después, es momento de integrarlos en pipelines reales. Esto es lo que hace un ML Engineer en producción: toma datos crudos, los preprocesa, selecciona el modelo correcto y comunica los resultados.
 </MascotMessage>
 
 No aprendiste algoritmos en el vacío — aprendiste herramientas. Esta lección te muestra cómo combinarlas en flujos de trabajo reales que resuelven problemas de negocio y de ciencia.
