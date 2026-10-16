@@ -249,7 +249,10 @@ export function DialogueBox({
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
+      // Enter advances dialogue lines; Space is left alone so it never
+      // triggers advancement by accident (it types in editors and activates
+      // focused controls natively).
+      if (e.key === "Enter") {
         e.preventDefault();
         // Keyboard mirrors the pointer rule: while lines remain, the bubble
         // consumes the keypress and advances its own line only.

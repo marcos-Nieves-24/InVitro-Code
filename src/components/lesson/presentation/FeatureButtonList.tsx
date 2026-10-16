@@ -11,11 +11,16 @@ export function FeatureButtonList({ features }: FeatureButtonListProps) {
 
   return (
     <div role="list" className="grid gap-2">
-      {features.map((f) => {
+      {features.map((f, i) => {
         const isExpanded = expanded === f.id;
         const panelId = `feature-panel-${f.id}`;
         return (
-          <div key={f.id} role="listitem">
+          <div
+            key={f.id}
+            role="listitem"
+            className="motion-safe:animate-[reveal-up_220ms_ease-out_backwards] motion-reduce:animate-none"
+            style={{ animationDelay: `${Math.min(i, 8) * 70}ms` }}
+          >
             <button
               type="button"
               onClick={() => setExpanded(isExpanded ? null : f.id)}

@@ -21,21 +21,49 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Clasificación
+
 <Section number={1} title="Predecir categorías, no números" eyebrow="INICIO">
+
+<RevealSequence mode="appear">
 
 <MascotMessage mood="celebrating">
 ¿Spam o no spam? ¿Cáncer o benigno? ¿Se va a dar de baja o se queda? La clasificación es el tipo de ML más usado en el mundo real. Hoy aprendes a separar el sí del no con matemática.
 </MascotMessage>
 
-La regresión lineal predice números. Pero muchos problemas del mundo real requieren predecir **categorías**. La clasificación binaria — dos clases posibles — es el punto de partida. Biotecnología: diagnóstico de enfermedades. SaaS: predicción de abandono. Finanzas: detección de fraude. Todo es clasificación.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "¿Cáncer o benigno? La clasificación es el ML más usado en el mundo real.",
+    "Regresión lineal predice números; muchos problemas piden categorías.",
+    "La regresión logística separa el sí del no con matemática.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 La regresión logística toma una combinación lineal de features, la pasa por una función sigmoide, y produce una probabilidad entre 0 y 1. Con un umbral (típicamente 0.5), decides la clase.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={2} title="La sigmoide: de números a probabilidades" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "La regresión logística primero calcula una combinación lineal z.",
+    "Luego la sigmoide comprime z a una probabilidad entre 0 y 1.",
+    "La frontera de decisión es el hiperplano donde p̂ = 0.5.",
+  ]}
+/>
 
 La regresión logística calcula primero una combinación lineal:
 
@@ -44,6 +72,25 @@ $$z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$$
 Luego aplica la **función sigmoide** para convertir $z$ en una probabilidad:
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+
+<EquationTour caption="La sigmoide convierte cualquier real en una probabilidad acotada entre 0 y 1.">
+  <EquationStep label="Combinación z">
+    $z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
+    Combinación lineal de features; puede valer cualquier real.
+  </EquationStep>
+  <EquationStep label="Sigmoide">
+    $\sigma(z) = \frac{1}{1 + e^{-z}}$
+    Comprime $(-\infty, +\infty)$ al rango $(0, 1)$.
+  </EquationStep>
+  <EquationStep label="Probabilidad">
+    $\hat{p} = \sigma(z)$
+    Probabilidad de pertenecer a la clase 1.
+  </EquationStep>
+  <EquationStep label="Frontera">
+    $z = 0 \iff \hat{p} = 0.5$
+    Donde cambia la decisión de clase.
+  </EquationStep>
+</EquationTour>
 
 <CalloutInfo>
 La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$ → probabilidad cercana a 1. Valores muy negativos → probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
@@ -57,17 +104,35 @@ La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. V
 $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$$
 </ConceptCard>
 
+<EquationTour caption="Log Loss: cada parte penaliza el error según la clase real y la confianza predicha.">
+  <EquationStep label="Clase positiva">
+    $y_i\log(\hat{p}_i)$
+    Si el real es 1, castiga cuando la probabilidad predicha es baja.
+  </EquationStep>
+  <EquationStep label="Clase negativa">
+    $(1-y_i)\log(1-\hat{p}_i)$
+    Si el real es 0, castiga cuando la probabilidad predicha es alta.
+  </EquationStep>
+  <EquationStep label="Suma y signo">
+    $y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)$
+    Sólo uno de los términos activa por cada ejemplo.
+  </EquationStep>
+  <EquationStep label="Promedio">
+    $L = -\frac{1}{n}\sum_{i=1}^{n}[\cdots]$
+    Promedio con signo negativo para que minimizar sea equivalente a maximizar la verosimilitud.
+  </EquationStep>
+</EquationTour>
+
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="La matriz de confusión: tu mejor amiga" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "", left: "Predicho Positivo", right: "Predicho Negativo" },
-    { feature: "Real Positivo", left: "VP (Verdadero Positivo)", right: "FN (Falso Negativo)" },
-    { feature: "Real Negativo", left: "FP (Falso Positivo)", right: "VN (Verdadero Negativo)" },
-  ]}
-/>
+<RevealSequence mode="appear">
+
+{/* candidate-player: comparison-matriz-confusion */}
+<ConfusionMatrixVisual caption="Recorré las cuatro celdas y después cambiá de lente: precisión, recall y F1 leen la misma matriz desde perspectivas distintas." />
 
 De la matriz salen todas las métricas:
 
@@ -81,16 +146,20 @@ De la matriz salen todas las métricas:
 **F1:** $2 \times \frac{P \times R}{P + R}$ — media armónica de precisión y recall. El equilibrio cuando ambas importan.
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Priorizas Precisión cuando", left: "El costo de un falso positivo es alto. Ej: enviar una notificación push molesta a un usuario que no iba a abandonar." },
-    { feature: "Priorizas Recall cuando", left: "El costo de un falso negativo es alto. Ej: no detectar un tumor maligno porque pensaste que era benigno." },
-  ]}
-/>
+{/* candidate-player: comparison-precision-vs-recall */}
+<ConceptCard variant="key-idea">
+**Precisión vs Recall: cuándo priorizar**
+- Priorizas precisión cuando el costo del falso positivo es alto (notificación push molesta a quien no iba a abandonar).
+- Priorizas recall cuando el costo del falso negativo es alto (no detectar un tumor maligno).
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Curva ROC: más allá de un solo número" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras varías el umbral de decisión de 0 a 1. Cada punto de la curva es un umbral diferente.
@@ -98,13 +167,19 @@ La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras var�
 **AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0 → clasificador perfecto. AUC = 0.5 → no mejor que tirar una moneda. AUC < 0.5 → estás haciendo todo al revés.
 </ConceptCard>
 
+<RocBuilder caption="Mové el umbral y seguí el punto sobre la curva: cada paso hacia la derecha gana recall (menos FN) y paga con falsos positivos." />
+
 <CalloutCheck>
 La curva ROC es independiente del umbral — te dice qué tan bien separa el modelo las clases sin importar dónde pongas la línea. Es la métrica preferida para comparar modelos de clasificación.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualiza la frontera de decisión" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -137,9 +212,13 @@ plt.show()
 La línea negra es la frontera de decisión ($\hat{p} = 0.5$). A la izquierda, el modelo predice clase 0 (azul). A la derecha, clase 1 (rojo). Los colores degradados muestran la confianza: cuanto más intenso, más seguro está el modelo.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Clasificación con datos reales: cáncer de mama" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -183,19 +262,39 @@ plt.legend()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l03-metrics-tradeoff"
+<ChoiceQuestion
+  question="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
   moduleSlug="machine-learning"
   lessonSlug="lesson03_classification"
-  prompt="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
-  answer="Alto recall. En diagnóstico médico, un falso negativo (decir que no hay cáncer cuando sí lo hay) puede ser fatal. Prefiero detectar todos los casos posibles aunque algunos resulten ser falsas alarmas (falsos positivos) que se pueden descartar con más estudios. En cambio, en un sistema de recomendación de contenido, preferirías alta precisión para no recomendar cosas irrelevantes."
+  blockId="reflection-l03-metrics-tradeoff"
+  allowContinueOnIncorrect
+  explanation="Alto recall: en diagnóstico médico, un falso negativo (cáncer no detectado) puede ser fatal. Se prefieren falsas alarmas descartables con más estudios. En recomendación de contenido, en cambio, conviene alta precisión."
+  options={[
+    { id: "a", label: "Alto recall, para no dejar sin detectar casos reales", correct: true, feedback: "¡Correcto! Los falsos negativos son los costosos en medicina." },
+    { id: "b", label: "Alta precisión, para evitar falsas alarmas", correct: false, feedback: "Falso: optimizar precisión dispararía los falsos negativos." },
+    { id: "c", label: "Da igual: ambas métricas siempre coinciden", correct: false, feedback: "Falso: precisión y recall suelen tensionarse en el umbral." },
+    { id: "d", label: "Máxima accuracy global por encima de las otras", correct: false, feedback: "Falso: el contexto dictate qué error es más costoso." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Biotecnología: respuesta a fármacos" eyebrow="APLICACIÓN">
 
-Una farmacéutica entrena un clasificador para predecir si un paciente responderá a una inmunoterapia basándose en 50 biomarcadores sanguíneos:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una farmacéutica entrena un clasificador para predecir respuesta a inmunoterapia.",
+    "Las features son niveles de 50 proteínas en sangre.",
+    "La prioridad es alto recall: no dejar sin tratamiento a un respondedor.",
+  ]}
+/>
 
 - **Features:** niveles de 50 proteínas en sangre
 - **Etiqueta:** respondedor (1) o no respondedor (0)
@@ -205,11 +304,24 @@ Una farmacéutica entrena un clasificador para predecir si un paciente responder
 En medicina personalizada, la clasificación permite evitar tratamientos costosos e invasivos en pacientes que no se beneficiarían. Un modelo con AUC > 0.85 se considera clínicamente útil.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="SaaS: predicción de abandono" eyebrow="APLICACIÓN">
 
-Un clasificador predice qué usuarios cancelarán su suscripción:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un clasificador predice qué usuarios cancelarán su suscripción.",
+    "Las features son comportamientos de uso del producto.",
+    "La prioridad es alta precisión: no molestar con descuentos a no abandonadores.",
+  ]}
+/>
 
 - **Features:** días desde último login, tickets de soporte, uso de features premium, tipo de plan
 - **Etiqueta:** abandonó (1) o se quedó (0)
@@ -219,9 +331,13 @@ Un clasificador predice qué usuarios cancelarán su suscripción:
 El mismo algoritmo, métricas distintas según el contexto. En salud priorizas recall (no dejar escapar ningún caso). En negocio priorizas precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta — la estrategia cambia según el problema.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="Errores comunes" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Usar accuracy con clases desbalanceadas.** Si el 95% de tus muestras son negativas, un modelo que siempre predice "negativo" tiene 95% de accuracy. Es un mal modelo, pero la métrica no te lo dice.
@@ -233,9 +349,13 @@ El mismo algoritmo, métricas distintas según el contexto. En salud priorizas r
 4. **Confiar en AUC sin ver la curva.** Dos curvas ROC pueden tener el mismo AUC pero comportarse muy distinto en diferentes regiones.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
+
+<RevealSequence mode="appear">
 
 <CalloutCheck>
 Siempre mira la matriz de confusión, no solo un número. Accuracy = 0.92 suena bien hasta que ves que todos los falsos negativos son casos de cáncer.
@@ -249,41 +369,95 @@ Ajusta el umbral de decisión según el costo de cada tipo de error. No tiene po
 Con clases desbalanceadas, usa `class_weight='balanced'` en scikit-learn para que el modelo preste atención a la clase minoritaria.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={11} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 La regresión logística convierte una combinación lineal en una probabilidad mediante la sigmoide. La matriz de confusión es la base de precisión, recall y F1. La curva ROC con AUC es la métrica estándar para comparar clasificadores. Elige tu métrica según el costo de equivocarte en cada dirección.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "Sigmoide", def: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)" },
-    { term: "VP (TP)", def: "Positivo real clasificado como positivo" },
-    { term: "FP", def: "Negativo real clasificado como positivo — falsa alarma" },
-    { term: "FN", def: "Positivo real clasificado como negativo — omisión" },
-    { term: "Precisión", def: "VP/(VP+FP) — pureza de las predicciones positivas" },
-    { term: "Recall", def: "VP/(VP+FN) — cobertura de los positivos reales" },
-    { term: "F1", def: "Media armónica de precisión y recall: 2PR/(P+R)" },
-    { term: "AUC", def: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio" },
+{/* candidate-player: interactive-table-glosario-clasificacion */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- Sigmoide: función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ).
+- VP (TP): positivo real clasificado como positivo.
+- FP: negativo real clasificado como positivo — falsa alarma.
+- FN: positivo real clasificado como negativo — omisión.
+- Precisión: VP/(VP+FP) — pureza de las predicciones positivas.
+- Recall: VP/(VP+FN) — cobertura de los positivos reales.
+- F1: media armónica de precisión y recall: 2PR/(P+R).
+- AUC: área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "regresion-logistica", label: "Regresión logística", detail: "Convierte una combinación lineal en probabilidad con la sigmoide." },
+    { id: "sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real al intervalo (0,1)." },
+    { id: "matriz-confusion", label: "Matriz de confusión", detail: "Tabla de VP, VN, FP y FN." },
+    { id: "precision-recall", label: "Precisión y recall", detail: "Pureza de positivos predichos vs cobertura de positivos reales." },
+    { id: "f1", label: "F1-score", detail: "Media armónica de precisión y recall." },
+    { id: "auc-roc", label: "AUC-ROC", detail: "Área bajo la curva ROC para comparar clasificadores." },
   ]}
 />
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)." },
+    { id: "gloss-vp", label: "VP (TP)", detail: "Positivo real clasificado como positivo." },
+    { id: "gloss-fp", label: "FP", detail: "Negativo real clasificado como positivo — falsa alarma." },
+    { id: "gloss-fn", label: "FN", detail: "Positivo real clasificado como negativo — omisión." },
+    { id: "gloss-precision", label: "Precisión", detail: "VP/(VP+FP) — pureza de las predicciones positivas." },
+    { id: "gloss-recall", label: "Recall", detail: "VP/(VP+FN) — cobertura de los positivos reales." },
+    { id: "gloss-f1", label: "F1", detail: "Media armónica de precisión y recall: 2PR/(P+R)." },
+    { id: "gloss-auc", label: "AUC", detail: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="En un problema donde un falso negativo es muy costoso, como no detectar una enfermedad, ¿qué métrica conviene priorizar?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson03_classification"
+  blockId="choice-ml-l03-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Un falso negativo (omisión) es muy costoso cuando se trata de enfermedad. El recall mide la cobertura de los positivos reales, por lo que priorizarlo reduce las omisiones. La precisión, en cambio, cuida las falsas alarmas."
+  options={[
+    { id: "a", label: "Recall, para capturar la mayor cantidad de positivos reales", correct: true, feedback: "¡Correcto! Priorizar recall reduce los falsos negativos." },
+    { id: "b", label: "Precisión, para evitar falsas alarmas", correct: false, feedback: "Falso: eso cuida los falsos positivos, no las omisiones." },
+    { id: "c", label: "Accuracy, porque resume todo en un solo número", correct: false, feedback: "Falso: accuracy engaña en datasets desbalanceados." },
+    { id: "d", label: "AUC, porque es independiente del umbral", correct: false, feedback: "Falso: AUC compara modelos, no prioriza por costo de omisión." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Ya lees una matriz de confusión como un mapa de costos. El siguiente paso son los árboles y los ensembles.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={12} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l03-accuracy-trap"
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
   moduleSlug="machine-learning"
   lessonSlug="lesson03_classification"
-  prompt="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
-  answer="No. Tiene 95% de accuracy pero 0% de recall para spam — no detecta ningún spam. En datasets desbalanceados, accuracy es engañosa. Necesitas mirar precisión y recall por clase. Este modelo es inútil: es equivalente a no tener filtro de spam."
+  blockId="reflection-l03-accuracy-trap"
+  allowContinueOnIncorrect
+  explanation="No: 95% de accuracy pero 0% de recall para spam, no detecta ningún spam. En datasets desbalanceados la accuracy engaña; conviene mirar precisión y recall por clase, o promedio macro F1."
+  options={[
+    { id: "a", label: "No: 0% recall de spam hace inútil al modelo", correct: true, feedback: "¡Correcto! 95% accuracy engaña en datasets desbalanceados." },
+    { id: "b", label: "Sí: 95% de accuracy ya es excelente", correct: false, feedback: "Falso: no detecta ningún spam, equivale a no tener filtro." },
+    { id: "c", label: "Sí: la accuracy global alcanza para elegir modelo", correct: false, feedback: "Falso: con desbalance hay que mirar métricas por clase." },
+    { id: "d", label: "Cualquier modelo supera a no tener filtro", correct: false, feedback: "Falso: este modelo es literalmente no tener filtro." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
@@ -323,5 +497,7 @@ preds = (sigmoid(X_b @ np.r_[intercept, coefs]) >= 0.5).astype(int)
 print(f"Accuracy: {np.mean(preds == y):.3f}")`}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>

@@ -21,30 +21,79 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Regresión Lineal
+
 <Section number={1} title="Predecir números, no categorías" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-Tu primer algoritmo de ML real. La regresión lineal es el más simple, el más interpretable, y la base sobre la que se construyen redes neuronales enteras. Dominarla es obligatorio.
-</MascotMessage>
+<RevealSequence mode="appear">
 
-Una empresa biotecnológica quiere predecir la solubilidad de fármacos a partir de propiedades moleculares. Una SaaS quiere pronosticar ingresos del próximo mes. Ambos son problemas de **regresión** — predecir un número continuo.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un clínico quiere estimar la solubilidad de un fármaco a partir de su peso molecular.",
+    "No es clasificar: es predecir un valor numérico continuo.",
+    "La regresión lineal ajusta una línea (suma ponderada) a esos datos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-La regresión lineal modela la relación entre características de entrada y un valor numérico de salida como una **suma ponderada**. Cada característica aporta según su peso (coeficiente), y el modelo aprende esos pesos a partir de los datos.
+La regresión lineal predice un valor numérico continuo modelando la salida como suma ponderada de las características.
 </ConceptCard>
+
+<ChoiceQuestion
+  question="Si quieres predecir la presión arterial (un número) a partir de edad y peso, ¿qué tipo de problema es?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  blockId="choice-ml-l02-s1-1"
+  allowContinueOnIncorrect
+  explanation="Predecir un valor continuo (presión arterial) a partir de features es regresión."
+  options={[
+    { id: "a", label: "Clasificación", correct: false, feedback: "La clasificación predice categorías, no números." },
+    { id: "b", label: "Regresión", correct: true, feedback: "¡Correcto! Es predecir un valor continuo." },
+    { id: "c", label: "Clustering", correct: false, feedback: "El clustering agrupa datos sin etiquetas, no predice un número." },
+    { id: "d", label: "Reducción de dimensión", correct: false, feedback: "Resume features, no predice una variable objetivo." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="La ecuación que lo explica todo" eyebrow="CONCEPTO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una regresión lineal es una suma ponderada de features.",
+    "Cada coeficiente dice cuánto cambia la salida por unidad de feature.",
+    "El residual es lo que el modelo no puede explicar.",
+  ]}
+/>
+
 **Regresión Lineal Simple** (una característica):
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
 
-- $\beta_0$: intersección — valor de $y$ cuando $x = 0$
-- $\beta_1$: pendiente — cuánto cambia $y$ por cada unidad de $x$
-- $\varepsilon$: residual — lo que el modelo no puede explicar
-
+<EquationTour caption="Regresión lineal: qué aporta cada término a la predicción.">
+  <EquationStep label="Intersección">
+    $\beta_0$
+    Valor de $y$ cuando todas las features valen 0.
+  </EquationStep>
+  <EquationStep label="Pendiente">
+    $\beta_1 x$
+    Cambio en $y$ por cada unidad adicional de $x$.
+  </EquationStep>
+  <EquationStep label="Residual">
+    $\varepsilon$
+    Lo que el modelo no puede explicar con las features disponibles.
+  </EquationStep>
+</EquationTour>
 **Regresión Lineal Múltiple** ($p$ características):
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon$$
@@ -57,9 +106,24 @@ En forma matricial: $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\va
 $$\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$$
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Descenso por gradiente: la alternativa iterativa" eyebrow="MATEMÁTICA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Con miles de features, invertir (X^T X)^-1 es costosísimo.",
+    "El descenso por gradiente ofrece un camino iterativo.",
+    "Inicia, calcula gradiente, actualiza, y repite hasta converger.",
+  ]}
+/>
 
 Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es carísimo. El descenso por gradiente ofrece un camino iterativo:
 
@@ -68,21 +132,49 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
 3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
 4. Repite hasta converger
 
+<GradientDescent caption="Mueve la tasa de aprendizaje: con α chica converge paso a paso; con α grande, diverge. Probá distintos puntos de inicio." />
+
+<GradientDescent caption="Mueve la tasa de aprendizaje: con α chica converge paso a paso; con α grande, diverge. Probá distintos puntos de inicio." />
+
+<EquationTour caption="La regla de actualización: cómo cambia β en cada paso.">
+  <EquationStep label="β actual">
+    $\boldsymbol{\beta}$
+    Valor actual de los coeficientes.
+  </EquationStep>
+  <EquationStep label="Tasa α">
+    $\alpha$
+    Tamaño del paso; muy grande oscila, muy chico tarda.
+  </EquationStep>
+  <EquationStep label="Gradiente">
+    $\nabla \text{MSE}$
+    Dirección de mayor aumento del error; se resta para bajar.
+  </EquationStep>
+  <EquationStep label="Nuevo β">
+    $\boldsymbol{\beta} - \alpha \nabla \text{MSE}$
+    Coeficientes actualizados hacia el mínimo.
+  </EquationStep>
+</EquationTour>
+
 <CalloutInfo>
 $\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardas una eternidad. Si es muy grande, pasas de largo y nunca converges. En la práctica se prueba con valores como 0.1, 0.01, 0.001.
 </CalloutInfo>
 
-### Supuestos del modelo
+<ConceptCard variant="definition">
+**Supuestos del modelo**
+- Linealidad: $y$ es aproximadamente lineal en $X$.
+- Independencia: las observaciones no dependen entre sí.
+- Homocedasticidad: varianza constante de los residuales.
+- Normalidad: residuales con distribución normal (para tests estadísticos).
+- Sin multicolinealidad: features no altamente correlacionadas entre sí.
+</ConceptCard>
 
-1. **Linealidad:** $y$ es aproximadamente lineal en $X$
-2. **Independencia:** Las observaciones no dependen entre sí
-3. **Homocedasticidad:** Varianza constante de los residuales
-4. **Normalidad:** Residuales con distribución normal (para tests estadísticos)
-5. **Sin multicolinealidad:** Features no altamente correlacionadas entre sí
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Las 3 métricas que necesitas saber" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 **MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
@@ -102,9 +194,32 @@ La ventaja: está en las mismas unidades que $y$. Si predices precios en dólare
 Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bueno como predecir siempre el promedio, R² < 0 es peor que el promedio.
 </ConceptCard>
 
+<EquationTour caption="MSE penaliza el error; R² mide qué porción de la varianza captura el modelo.">
+  <EquationStep label="Error residual">
+    $y_i - \hat{y}_i$
+    Qué tanto se equivocó el modelo en un punto.
+  </EquationStep>
+  <EquationStep label="MSE">
+    $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
+    Promedio de errores al cuadrado: base que el modelo optimiza.
+  </EquationStep>
+  <EquationStep label="SS_res">
+    $\sum(y_i - \hat{y}_i)^2$
+    Error acumulado del modelo.
+  </EquationStep>
+  <EquationStep label="R²">
+    $1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$
+    Fracción de varianza explicada; 1 es perfecto, 0 equivale a la media.
+  </EquationStep>
+</EquationTour>
+
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualiza tu primera regresión" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -136,9 +251,13 @@ plt.show()
 La línea roja es lo que el modelo aprendió. Cada punto azul que se desvía de la línea es un residual — lo que el modelo no pudo explicar. El objetivo de OLS es hacer que esas desviaciones verticales sean lo más chicas posible, en promedio.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Tu primer modelo con datos reales" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -169,17 +288,28 @@ print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.1f}")
 print(f"R²:   {r2_score(y_test, y_pred):.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l02-coefficients"
+<ChoiceQuestion
+  question="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
-  answer="No necesariamente. Los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, sus coeficientes no son comparables directamente. Para comparar importancia real hay que estandarizar las features primero (restar media, dividir por desvío)."
+  blockId="reflection-l02-coefficients"
+  allowContinueOnIncorrect
+  explanation="No necesariamente: los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, no son comparables. Hay que estandarizar (restar media, dividir por desvío) para comparar importancia real."
+  options={[
+    { id: "a", label: "No: hay que estandarizar las features antes de comparar", correct: true, feedback: "¡Correcto! La estandarización pone comparables las unidades." },
+    { id: "b", label: "Sí: un coeficiente 100× mayor implica 100× más importancia", correct: false, feedback: "Falso: sin escala, los coeficientes no son comparables." },
+    { id: "c", label: "Los coeficientes son pesos absolutos independientes de la escala", correct: false, feedback: "Falso: por construcción dependen de la unidad de cada feature." },
+    { id: "d", label: "Escalar sólo afecta R², no la comparabilidad", correct: false, feedback: "Falso: escalar es lo que vuelve comparables los coeficientes." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Caso California Housing" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 from sklearn.datasets import fetch_california_housing
@@ -208,9 +338,13 @@ print(coef_df)
 **Interpretación:** MedInc (ingreso mediano) domina los coeficientes. A mayor ingreso en la zona, mayor el precio de las viviendas. Esto tiene sentido económico y valida que el modelo está capturando relaciones reales, no ruido.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Biotecnología: solubilidad de proteínas" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
 
 ```python
 np.random.seed(42)
@@ -246,11 +380,24 @@ print(f"R²: {model_s.score(X_s, y_s):.3f}")
 La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="SaaS: forecasting de ingresos" eyebrow="APLICACIÓN">
 
-Una startup quiere pronosticar su MRR (Ingreso Recurrente Mensual) del próximo mes basándose en métricas del mes actual:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una startup quiere pronosticar su MRR del próximo mes.",
+    "Las features son métricas del mes actual de la empresa.",
+    "Interpretar coeficientes con sentido de negocio es clave.",
+  ]}
+/>
 
 ```python
 np.random.seed(42)
@@ -283,9 +430,13 @@ for col, coef in zip(X_r.columns, model_r.coef_):
     print(f"{col}: {coef:.2f}")
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Errores que te van a costar puntos" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Interpretar coeficientes como causales.** Que el coeficiente de "gasto en marketing" sea positivo no significa que gastar más cause más ingresos. Podría ser al revés: empresas con más ingresos gastan más en marketing.
@@ -299,9 +450,13 @@ for col, coef in zip(X_r.columns, model_r.coef_):
 5. **No escalar features al comparar coeficientes.** Si una feature va de 0 a 1 y otra de 0 a 100000, sus coeficientes no son comparables.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={11} title="Buenas prácticas" eyebrow="BUENAS PRÁCTICAS">
+
+<RevealSequence mode="appear">
 
 <CalloutCheck>
 Visualiza siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
@@ -315,49 +470,109 @@ Compara contra una línea base simple (predecir siempre el promedio). Si tu mode
 Considera regularización (Ridge, Lasso) cuando tengas muchas features. La regresión lineal simple se descontrola con alta dimensionalidad.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={12} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicas, RMSE mide cuánto te equivocas en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "OLS", def: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE" },
-    { term: "Coeficiente", def: "Peso asignado a una feature. Cuánto cambia y por unidad de x" },
-    { term: "Intersección", def: "Predicción cuando todas las features son 0" },
-    { term: "Residual", def: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ" },
-    { term: "R²", def: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio" },
-    { term: "MSE", def: "Error cuadrático medio. Penaliza fuerte los errores grandes" },
-    { term: "RMSE", def: "Raíz del MSE. Mismas unidades que y — interpretable" },
-    { term: "Descenso por gradiente", def: "Optimización iterativa: ajusta β en dirección del gradiente negativo" },
+{/* candidate-player: interactive-table-glosario-regresion */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- OLS: Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE.
+- Coeficiente: peso asignado a una feature.
+- Intersección: predicción cuando todas las features son 0.
+- Residual: diferencia entre valor real y predicción: yᵢ − ŷᵢ.
+- R²: proporción de varianza explicada. 1 = perfecto, 0 = promedio.
+- MSE: error cuadrático medio. Penaliza fuerte los errores grandes.
+- RMSE: raíz del MSE. Mismas unidades que y — interpretable.
+- Descenso por gradiente: optimización iterativa ajustando β en dirección del gradiente negativo.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "modelo-lineal", label: "Modelo lineal", detail: "Predicción como suma ponderada de features más intersección." },
+    { id: "ols", label: "OLS", detail: "Solución cerrada que minimiza el error cuadrático medio." },
+    { id: "coeficiente", label: "Coeficiente", detail: "Peso asignado a cada feature." },
+    { id: "r2", label: "R²", detail: "Proporción de varianza explicada por el modelo." },
+    { id: "rmse", label: "RMSE", detail: "Raíz del error cuadrático medio, en unidades de y." },
+    { id: "descenso-gradiente", label: "Descenso por gradiente", detail: "Optimización iterativa cuando la solución cerrada es inviable." },
   ]}
 />
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-ols", label: "OLS", detail: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE." },
+    { id: "gloss-coeficiente", label: "Coeficiente", detail: "Peso asignado a una feature." },
+    { id: "gloss-interseccion", label: "Intersección", detail: "Predicción cuando todas las features son 0." },
+    { id: "gloss-residual", label: "Residual", detail: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ." },
+    { id: "gloss-r2", label: "R²", detail: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio." },
+    { id: "gloss-mse", label: "MSE", detail: "Error cuadrático medio. Penaliza fuerte los errores grandes." },
+    { id: "gloss-rmse", label: "RMSE", detail: "Raíz del MSE. Mismas unidades que y — interpretable." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué mide el R² en una regresión lineal?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  blockId="choice-ml-l02-resumen-1"
+  allowContinueOnIncorrect
+  explanation="R² mide la proporción de varianza de la variable objetivo que el modelo logra explicar. Un valor de 1 indica ajuste perfecto, 0 equivale a predecir siempre el promedio, y valores negativos indican peor que el promedio."
+  options={[
+    { id: "a", label: "La proporción de varianza de y explicada por el modelo", correct: true, feedback: "¡Correcto! Esa es la lectura de R²." },
+    { id: "b", label: "El error promedio en unidades de y", correct: false, feedback: "Falso: eso lo mide el RMSE, no el R²." },
+    { id: "c", label: "La pendiente de la recta de regresión", correct: false, feedback: "Falso: la pendiente es un coeficiente, no R²." },
+    { id: "d", label: "La cantidad de features relevantes", correct: false, feedback: "Falso: R² no cuenta features, mide varianza explicada." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+La regresión lineal ya no tiene secretos para ti. El siguiente paso son los árboles y las no linealidades.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={13} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l02-r2-values"
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
-  answer="R² = 1: el modelo explica el 100% de la varianza — predicciones perfectas (cuidado, puede ser sobreajuste). R² = 0: el modelo no es mejor que predecir siempre el promedio de y. R² = -0.5: el modelo es peor que el promedio — tus predicciones son contraproducentes. Posiblemente hay un error en el código o el modelo no es adecuado."
+  blockId="reflection-l02-r2-values"
+  allowContinueOnIncorrect
+  explanation="R²=1: explica 100% de varianza (posible sobreajuste); R²=0: no mejor que predecir siempre el promedio de y; R²=-0.5: peor que el promedio (error en código o modelo inadecuado)."
+  options={[
+    { id: "a", label: "R²=1 explicación total (cuidado sobreajuste); R²=0 igual que promedio; R²=-0.5 peor que promedio", correct: true, feedback: "¡Correcto! Cada valor tiene su lectura práctica." },
+    { id: "b", label: "R²=1 garantiza buen modelo sin advertencias", correct: false, feedback: "Falso: R²=1 puede ser sobreajuste, no calidad." },
+    { id: "c", label: "R²=0 significa que el modelo nunca entrenó", correct: false, feedback: "Falso: R²=0 equivale a predecir siempre el promedio." },
+    { id: "d", label: "R² negativo es un error irrecuperable de convergencia", correct: false, feedback: "Falso: indica peor que el promedio, posiblemente inadecuado." },
+  ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l02-feature-importance"
+<ChoiceQuestion
+  question="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
   moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  prompt="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
-  answer="No necesariamente. Tres explicaciones posibles: (1) Las features no están escaladas — si una feature va de 0 a 0.001, necesita un coeficiente enorme para tener impacto. (2) Hay multicolinealidad — dos features correlacionadas se reparten el peso y ambas parecen chicas. (3) Efectivamente son irrelevantes. Para saberlo, estandariza las features y usa regularización Lasso, que lleva coeficientes irrelevantes a cero."
+  blockId="reflection-l02-feature-importance"
+  allowContinueOnIncorrect
+  explanation="No necesariamente: por falta de escala, multicolinealidad (features correlacionadas reparten peso) o irrelevancia real. Para saberlo, estandarizar y usar Lasso, que lleva irrelevantes a cero."
+  options={[
+    { id: "a", label: "No necesariamente: falta de escala o multicolinealidad pueden disfrazar su aporte", correct: true, feedback: "¡Correcto! Hay que estandarizar y usar Lasso para confirmar." },
+    { id: "b", label: "Sí: coeficiente chico siempre implica feature irrelevante", correct: false, feedback: "Falso: escala y multicolinealidad pueden ocultar su aporte." },
+    { id: "c", label: "Los coeficientes grandes sólo indican outliers en los datos", correct: false, feedback: "Falso: coeficientes grandes suelen reflejar falta de escala." },
+    { id: "d", label: "Escalar las features no cambia la interpretación", correct: false, feedback: "Falso: estandarizar es justamente lo que vuelve comparables los coeficientes." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
@@ -397,5 +612,7 @@ print(f"R²: {r2:.4f}")
 `}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>

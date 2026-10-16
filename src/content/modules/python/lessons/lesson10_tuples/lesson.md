@@ -23,17 +23,59 @@ Quiz: quiz.md
 
 <Section number={1} title="¿Por qué Tuplas?" eyebrow="INICIO">
 
-## Motivación
+<RevealSequence>
 
-Las tuplas suelen llamarse "listas inmutables" — almacenan colecciones ordenadas como las listas pero no se pueden modificar después de creadas. Esta inmutabilidad las hace útiles para datos fijos que no deberían modificarse, como registros de base de datos, coordenadas y valores de retorno de funciones. En biotecnología, las tuplas representan pares (gen, expresión), registros (id_paciente, diagnóstico) y tripletes de codones de ADN. En SaaS, almacenan entradas de log (id_usuario, timestamp, evento).
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El laboratorio guarda un registro por muestra: (gen, posición, cambio de base).",
+    "Ese registro no debería cambiar nunca: es una muestra inmutable.",
+    "En Python, una tupla agrupa datos fijos y los protege de cambios accidentales.",
+  ]}
+/>
 
-## Panorama General
+<ConceptCard variant="key-idea">
+Una tupla es una secuencia ordenada e inmutable: ideal para registros fijos, coordenadas y valores de retorno múltiples.
+</ConceptCard>
 
-En la lección anterior aprendiste listas — colecciones ordenadas y mutables. Las tuplas son ordenadas pero inmutables. Entender la diferencia entre estructuras de datos mutables e inmutables es crucial para escribir código correcto y eficiente. Esta lección te prepara para los diccionarios (próxima lección), donde las tuplas se usan como claves (las listas no pueden ser claves de diccionarios).
+<ChoiceQuestion
+  question="¿Qué elegirías para guardar la posición de un gen sin que nadie la altere?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-s1-1"
+  allowContinueOnIncorrect
+  explanation="La tupla es inmutable; una lista podría modificarse por accidente."
+  options={[
+    { id: "a", label: "tuple", correct: true, feedback: "¡Correcto! La tupla protege el dato de cambios." },
+    { id: "b", label: "list", correct: false, feedback: "Las listas se pueden modificar, arriesgando el registro." },
+    { id: "c", label: "dict", correct: false, feedback: "Es útil para pares clave-valor, no para un registro ordenado fijo." },
+    { id: "d", label: "set", correct: false, feedback: "Los sets no mantienen orden ni protegen por posición." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Creación, Inmutabilidad y Desempaquetado" eyebrow="CONCEPTO">
+
+<RevealSequence>
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El laboratorio firma un registro de variante: gen, posición, alelo de referencia y alelo alternativo.",
+    "Ese registro no puede editarse en caliente: si cambia, el hash y la trazabilidad se rompen.",
+    "Las listas sirven para colectar; las tuplas, para certificar un dato que debe quedar fijo.",
+    "Elegir mal la estructura aquí significa pérdida silenciosa de integridad en un análisis downstream.",
+  ]}
+/>
+
+</RevealSequence>
 
 ## Teoría
 
@@ -95,17 +137,9 @@ t.index(2)    # 1 (primera ocurrencia)
 
 ### Comparación Tupla vs Lista
 
-<InteractiveTable
-  headers={["Característica", "Tupla", "Lista"]}
-  rows={[
-    ["Sintaxis", "`()`", "`[]`"],
-    ["Mutable", "No", "Sí"],
-    ["Hashable", "Sí (si los elementos son hashables)", "No"],
-    ["Caso de uso", "Datos fijos", "Datos variables"],
-    ["Métodos", "count(), index()", "Muchos métodos"],
-  ]}
-  searchable
-/>
+<ConceptCard variant="key-idea">
+Tupla o lista, elegí por inmutabilidad: datos fijos y claves → tupla `()`; datos que cambian → lista `[]`. Las tuplas son hashables (sirven de clave); las listas no.
+</ConceptCard>
 
 ### Explicación Visual
 
@@ -228,11 +262,30 @@ for ts, uid, event_type, meta in events:
         print(f"Compra: {uid} compró {product} por ${amount:.2f}")
 ```
 
+<RevealSequence>
+
+<ChoiceQuestion
+  question="Un registro de variante es `(cromosoma, posicion, base_ref, base_alt, calidad)`. ¿Qué estructura debes usar si otra parte del pipeline necesita usarlo como clave de diccionario y garantizar que no se modifique?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-dens-1"
+  allowContinueOnIncorrect
+  explanation="Las tuplas son inmutables y hashables (si sus elementos lo son), por eso sirven como clave; las listas no."
+  options={[
+    { id: "a", label: "Tupla", correct: true, feedback: "¡Correcto! Inmutable y hashable: ideal para claves." },
+    { id: "b", label: "Lista", correct: false, feedback: "Las listas son mutables y no hashables, no pueden ser clave." },
+    { id: "c", label: "Diccionario", correct: false, feedback: "Un dict es mutable y tampoco es hashable." },
+    { id: "d", label: "Set", correct: false, feedback: "Un set no mantiene orden posicional ni sirve como clave compuesta." },
+  ]}
+/>
+
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 
-## Errores Comunes
+<RevealSequence>
 
 1. **Olvidar la coma en tuplas de un elemento**: `(5)` es un int, `(5,)` es una tupla
 2. **Intentar modificar una tupla**: Lanza TypeError
@@ -240,34 +293,53 @@ for ts, uid, event_type, meta in events:
 4. **Desajuste en desempaquetado**: La cantidad de variables debe coincidir con el largo de la tupla
 5. **Usar elementos mutables en una tupla**: Una tupla con una lista adentro no es realmente inmutable
 
-## Buenas Prácticas
-
 - Usa tuplas para datos fijos y estructurados (como registros de base de datos)
 - Usa tuplas para múltiples valores de retorno de funciones
 - Usa desempaquetado de tuplas para código más limpio
 - Usa tuplas como claves de diccionarios cuando necesites claves compuestas
 - Prefiere tuplas sobre listas para datos que no deberían cambiar
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
-## Resumen
+<RevealSequence>
 
-- Las tuplas son secuencias ordenadas e inmutables creadas con `()`
-- Las tuplas de un solo elemento requieren una coma al final: `(42,)`
-- El desempaquetado asigna elementos a múltiples variables
-- Las tuplas son hashables y se pueden usar como claves de diccionarios
-- Las tuplas protegen los datos de modificaciones accidentales
-- Usa tuplas para registros fijos y múltiples valores de retorno
+<ConceptCard variant="key-idea">
+Las tuplas son secuencias ordenadas e **inmutables**: el contenedor ideal para registros fijos y valores de retorno múltiples. Una tupla de un solo elemento lleva coma: `(42,)`.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "tupla", label: "Tupla", detail: "Secuencia ordenada inmutable creada con (). Protege los datos de modificaciones accidentales." },
+    { id: "inmutable", label: "Inmutable", detail: "No se puede cambiar después de creada — a diferencia de las listas." },
+    { id: "desempaquetado", label: "Desempaquetado", detail: "Asigna elementos de una tupla a múltiples variables de una vez." },
+    { id: "hashable", label: "Hashable", detail: "Se puede usar como clave de diccionario (tupla sí, lista no)." },
+    { id: "empaquetado", label: "Empaquetado", detail: "Crea una tupla a partir de múltiples valores." },
+  ]}
+/>
 
-- **Tupla**: Secuencia ordenada inmutable
-- **Inmutable**: No se puede cambiar después de creada
-- **Desempaquetado**: Asignar elementos de una tupla a múltiples variables
-- **Hashable**: Se puede usar como clave de diccionario (tupla sí, lista no)
-- **Empaquetado**: Crear una tupla a partir de múltiples valores
+<ChoiceQuestion
+  question="¿Qué devuelve esta función: return (gen, posicion)?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Devuelve una tupla con dos valores: el patrón clásico de retorno múltiple."
+  options={[
+    { id: "a", label: "Una tupla con dos valores", correct: true, feedback: "¡Exacto! Empaquetado + retorno múltiple." },
+    { id: "b", label: "Una lista", correct: false, feedback: "Los paréntesis () crean tupla, no lista." },
+    { id: "c", label: "Un error", correct: false, feedback: "Es válido: Python empaqueta los valores automáticamente." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Tuplas dominadas! Ya distinguís mutable de inmutable — la base de diccionarios, la próxima lección.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 

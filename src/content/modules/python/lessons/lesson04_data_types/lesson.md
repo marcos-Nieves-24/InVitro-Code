@@ -21,7 +21,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Tipos de Datos" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -35,7 +34,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -52,9 +50,17 @@ Quiz: quiz.md
 
 <Section number={2} title="Los Cuatro Tipos de Datos Básicos" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### Los Cuatro Tipos de Datos Básicos
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Piensa en una tabla de resultados de laboratorio: cada columna tiene un tipo y mezclarlos rompe el análisis.",
+    "Un ratio de expresión mal tipado como texto se concatena en lugar de sumarse.",
+    "Por eso Python etiqueta cada valor y te obliga a convertir cuando el sentido cambia.",
+  ]}
+/>
 
 Python tiene cuatro tipos de datos primitivos:
 
@@ -75,7 +81,6 @@ Python tiene cuatro tipos de datos primitivos:
    - Solo dos valores: `True` y `False`
    - Internamente, `True` = 1 y `False` = 0
 
-### Verificación de Tipos con type()
 
 ```python
 x = 42
@@ -91,7 +96,6 @@ w = True
 print(type(w))       # <class 'bool'>
 ```
 
-### Conversión de Tipos (Casting)
 
 Puedes convertir explícitamente entre tipos:
 
@@ -116,7 +120,6 @@ bool("")             # False (string vacío)
 bool("hello")        # True (string no vacío)
 ```
 
-### Tipos Mutables vs Inmutables
 
 - **Inmutables**: int, float, bool, str — no se pueden modificar después de creados
 - **Mutables**: list, dict, set — se pueden modificar (se ven en lecciones posteriores)
@@ -126,7 +129,6 @@ name = "BRCA1"
 name[0] = "A"  # TypeError: 'str' object does not support item assignment
 ```
 
-### Valores Especiales
 
 - **None**: Representa la ausencia de un valor
 - **inf**: Infinito (float)
@@ -138,7 +140,6 @@ infinity = float('inf')
 not_a_number = float('nan')
 ```
 
-## Explicación Visual
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -163,7 +164,6 @@ not_a_number = float('nan')
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # Demostrando los cuatro tipos
@@ -215,7 +215,6 @@ result = "The answer is " + str(42)  # Correcto
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario**: Procesando datos de expresión génica de un experimento de microarreglos.
 
@@ -237,7 +236,6 @@ if isinstance(expression_ratio, float):
     print("Valid expression ratio type")
 ```
 
-## Ejemplo SaaS
 
 **Escenario**: Procesando datos de suscripción de clientes.
 
@@ -256,13 +254,28 @@ print(f"Active users: {active_users}")
 print(f"Annual revenue: ${annual_revenue:,.2f}")
 print(f"After discount: ${discounted_revenue:,.2f}")
 ```
+
+<ChoiceQuestion
+  question="¿Qué ocurre al pasar el texto 3.14 a int() en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson04_data_types"
+  blockId="choice-python-l04-dens-1"
+  allowContinueOnIncorrect
+  explanation="int() espera un literal entero en texto; 3.14 con punto no es válido."
+  options={[
+    { id: "a", label: "ValueError", correct: true, feedback: "¡Correcto! No parsea decimales desde texto." },
+    { id: "b", label: "3", correct: false, feedback: "Eso sería int(3.14) con un float, no con el string." },
+    { id: "c", label: "3.14", correct: false, feedback: "int() no devuelve float." },
+    { id: "d", label: "0", correct: false, feedback: "No trunca texto decimal." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Concatenar strings con no-strings**: `"count: " + 5` lanza TypeError
 2. **Perder precisión con float**: `0.1 + 0.2 != 0.3` exactamente (aritmética de coma flotante)
@@ -270,7 +283,6 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 4. **Confundir `=` y `==`**: Asignación vs comparación de igualdad
 5. **Olvidar que `input()` devuelve un string**: Siempre convierte la entrada numérica
 
-## Buenas Prácticas
 
 - Usa `isinstance()` para verificar tipos en lugar de `type() ==`
 - Convierte tipos explícitamente en lugar de confiar en la conversión implícita
@@ -282,51 +294,77 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
-## Resumen
 
-- Python tiene cuatro tipos primitivos: int, float, str, bool
-- Usa `type()` para verificar el tipo de un valor
-- La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`
-- Los strings son inmutables — no se pueden modificar en su lugar
-- `None` representa la ausencia de un valor
-- Los errores de tipo son comunes y generalmente involucran mezclar strings con números
+<ConceptCard variant="key-idea">
+Python tiene cuatro tipos primitivos —int, float, str, bool— más `None`; el tipo define qué operaciones tienen sentido y cómo se almacena el valor.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "cuatro-tipos", label: "Cuatro primitivos", detail: "Python tiene cuatro tipos primitivos: int, float, str, bool." },
+    { id: "type", label: "type()", detail: "Usa `type()` para verificar el tipo de un valor." },
+    { id: "conversion", label: "Conversión de tipos", detail: "La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`." },
+    { id: "strings-inmutables", label: "Strings inmutables", detail: "Los strings son inmutables — no se pueden modificar en su lugar." },
+    { id: "none", label: "None", detail: "`None` representa la ausencia de un valor." },
+    { id: "errores-tipo", label: "Errores de tipo", detail: "Los errores de tipo son comunes y generalmente involucran mezclar strings con números." },
+  ]}
+/>
 
-- **int**: Tipo entero para números enteros
-- **float**: Tipo de coma flotante para números decimales
-- **str**: Tipo string para texto
-- **bool**: Tipo booleano para valores True/False
-- **Conversión de tipos**: Cambiar un valor de un tipo a otro
-- **Inmutable**: No se puede modificar después de su creación
-- **None**: Valor nulo de Python
-- **TypeError**: Excepción que se lanza al operar con tipos incompatibles
+<FeatureButtonList
+  features={[
+    { id: "int", label: "int", detail: "Tipo entero para números enteros." },
+    { id: "float", label: "float", detail: "Tipo de coma flotante para números decimales." },
+    { id: "str", label: "str", detail: "Tipo string para texto." },
+    { id: "bool", label: "bool", detail: "Tipo booleano para valores True/False." },
+    { id: "conversion-term", label: "Conversión de tipos", detail: "Cambiar un valor de un tipo a otro." },
+    { id: "inmutable-term", label: "Inmutable", detail: "No se puede modificar después de su creación." },
+    { id: "none-term", label: "None", detail: "Valor nulo de Python." },
+    { id: "typeerror", label: "TypeError", detail: "Excepción que se lanza al operar con tipos incompatibles." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué tipo de dato representa el valor 3.14 en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson04_data_types"
+  blockId="choice-python-l04-resumen-1"
+  allowContinueOnIncorrect
+  explanation="3.14 es un número con decimales, por lo que es de tipo float."
+  options={[
+    { id: "a", label: "int", correct: false, feedback: "int es para enteros sin decimales." },
+    { id: "b", label: "float", correct: true, feedback: "¡Correcto! Es un float." },
+    { id: "c", label: "str", correct: false, feedback: "str es para texto." },
+    { id: "d", label: "bool", correct: false, feedback: "bool es True/False." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Tipos dominados! Saber qué tipo guarda un valor prepara el terreno para compararlos con operadores.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
 
+
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Qué tipo devuelve `type(3.0)`?
 2. ¿Cuál es el resultado de `int(7.9)` y por qué?
 3. ¿Qué valores se convierten a `False` cuando se pasan a `bool()`?
 
-### Nivel 2: Implementación
 
 4. Escribe una función que reciba un string como "3.14" y devuelva tanto la parte float como la entera.
 5. Pregúntale al usuario dos números, súmalos e imprime el resultado. Maneja la conversión de tipos correctamente.
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `0.1 + 0.2` no es igual a `0.3` en aritmética de coma flotante? ¿Cómo compararías números de coma flotante de forma segura?
 7. ¿Cuándo usarías explícitamente `bool()` en lugar de confiar en valores truthy/falsy?
 
-## Desafío de Código
 
 Escribe un programa que:
 1. Pregunte el nombre del usuario (string), edad (int) y salario (float)

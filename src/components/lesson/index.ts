@@ -20,6 +20,7 @@ export { PerceptronTrainer } from "./perceptron-trainer";
 export { KnnTrainer } from "./knn-trainer";
 export { RegressionTrainer } from "./regression-trainer";
 export { DialogueBox } from "./presentation/DialogueBox";
+export { EquationTour, EquationStep } from "./presentation/EquationTour";
 export { RevealSequence, useRevealQuizBlock } from "./presentation/RevealSequence";
 export { ChoiceQuestion } from "./presentation/ChoiceQuestion";
 export { QuizButton } from "./presentation/QuizButton";

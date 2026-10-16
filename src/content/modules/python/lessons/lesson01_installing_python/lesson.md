@@ -498,29 +498,48 @@ pip install -r requirements.txt
 <RevealSequence>
 
 <ConceptCard variant="key-idea">
-Conceptos clave:
-
-- **Python**: lenguaje interpretado de alto nivel, esencial para ciencia de datos
-- **Instalación**: descarga desde python.org y verifica con `python --version`
-- **pip**: instala paquetes desde PyPI
-- **Entorno virtual**: aísla las dependencias de cada proyecto
-- **requirements.txt**: lista exacta de dependencias para reproducibilidad
+Tener Python funcionando, con pip y un entorno virtual es la base de todo lo demás: Jupyter, NumPy, Pandas y scikit-learn están a un `pip install` de distancia.
 </ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "python", label: "Python", detail: "Lenguaje interpretado de alto nivel, esencial para ciencia de datos." },
+    { id: "instalacion", label: "Instalación", detail: "Descarga desde python.org y verifica con `python --version`." },
+    { id: "pip", label: "pip", detail: "Instala paquetes desde PyPI." },
+    { id: "entorno-virtual", label: "Entorno virtual", detail: "Aísla las dependencias de cada proyecto." },
+    { id: "requirements", label: "requirements.txt", detail: "Lista exacta de dependencias para reproducibilidad." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "interprete", label: "Intérprete", detail: "Programa que ejecuta código Python línea por línea." },
+    { id: "pip-instalador", label: "pip", detail: "Instalador de paquetes de Python." },
+    { id: "pypi", label: "PyPI", detail: "Python Package Index — repositorio oficial de paquetes." },
+    { id: "entorno-virtual-aislado", label: "Entorno virtual", detail: "Entorno Python aislado para un proyecto específico." },
+    { id: "path", label: "PATH", detail: "Variable del sistema que le dice al SO dónde encontrar ejecutables." },
+    { id: "repl", label: "REPL", detail: "Read-Eval-Print Loop — shell interactiva de Python." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué archivo captura las dependencias exactas de un proyecto para poder reproducirlo?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-resumen-1"
+  allowContinueOnIncorrect
+  explanation="requirements.txt lista los paquetes con sus versiones exactas para reinstalarlos iguales."
+  options={[
+    { id: "a", label: "requirements.txt", correct: true, feedback: "¡Exacto! Se genera con pip freeze y se reinstala con pip install -r." },
+    { id: "b", label: "setup.py", correct: false, feedback: "setup.py describe el paquete mismo, no las dependencias del proyecto." },
+    { id: "c", label: "README.md", correct: false, feedback: "El README documenta el proyecto, no las versiones exactas." },
+    { id: "d", label: ".gitignore", correct: false, feedback: "Ignora archivos en git, no registra dependencias." },
+  ]}
+/>
 
 <MascotMessage mood="celebrating">
-Todo esto es la base. Una vez que tienes Python funcionando, todo lo demás — Jupyter, NumPy, Pandas, scikit-learn — está a un `pip install` de distancia.
+¡Python listo! Ahora Jupyter convierte ese intérprete en un cuaderno interactivo.
 </MascotMessage>
-
-<ConceptCard variant="key-idea">
-Términos clave:
-
-- **Intérprete**: programa que ejecuta código Python línea por línea
-- **pip**: instalador de paquetes de Python
-- **PyPI**: Python Package Index — repositorio oficial de paquetes
-- **Entorno virtual**: entorno Python aislado para un proyecto específico
-- **PATH**: variable del sistema que le dice al SO dónde encontrar ejecutables
-- **REPL**: Read-Eval-Print Loop — shell interactiva de Python
-</ConceptCard>
 
 </RevealSequence>
 
@@ -540,21 +559,110 @@ Términos clave:
   ]}
 />
 
-<AnswerReveal summary="Ver respuestas">
-**1.** `python --version` (o `python3 --version` en macOS/Linux).
+<ChoiceQuestion
+  question="¿Qué comando verifica la versión de Python instalada?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-1"
+  allowContinueOnIncorrect
+  explanation="Usá python --version (o python3 --version en macOS/Linux)."
+  options={[
+    { id: "a", label: "python --version (o python3 --version en macOS/Linux)", correct: true, feedback: "¡Correcto! Es la forma estándar." },
+    { id: "b", label: "pip --version", correct: false, feedback: "Ese verifica la versión de pip, no de Python." },
+    { id: "c", label: "which python", correct: false, feedback: "Muestra la ruta del ejecutable, no la versión." },
+    { id: "d", label: "python -V sólo en Windows", correct: false, feedback: "python --version funciona en todos los sistemas operativos." },
+  ]}
+/>
 
-**2.** Aislar las dependencias de un proyecto para que no interfieran con otros proyectos ni con el Python del sistema.
+<ChoiceQuestion
+  question="¿Cuál es el propósito de un entorno virtual (venv)?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-2"
+  allowContinueOnIncorrect
+  explanation="Aislar las dependencias de un proyecto para que no interfieran con otros proyectos ni con el Python del sistema."
+  options={[
+    { id: "a", label: "Aislar las dependencias de un proyecto del Python del sistema y de otros proyectos", correct: true, feedback: "¡Exacto! Cada proyecto tiene su propio conjunto de paquetes." },
+    { id: "b", label: "Acelerar la ejecución del código Python", correct: false, feedback: "El venv no cambia la velocidad de ejecución." },
+    { id: "c", label: "Ocultar el código fuente del proyecto", correct: false, feedback: "El venv no tiene nada que ver con ocultar código." },
+    { id: "d", label: "Permitir usar varias versiones de Python sin instalarlas", correct: false, feedback: "Para eso necesitás instalar cada intérprete; el venv usa el que tengas." },
+  ]}
+/>
 
-**3.** Lista todos los paquetes instalados con sus versiones exactas. Se usa para generar un `requirements.txt`.
+<ChoiceQuestion
+  question="¿Qué hace pip freeze?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-3"
+  allowContinueOnIncorrect
+  explanation="Lista todos los paquetes instalados con sus versiones exactas; se usa para generar un requirements.txt."
+  options={[
+    { id: "a", label: "Lista todos los paquetes instalados con sus versiones exactas", correct: true, feedback: "¡Exacto! La salida se redirige a requirements.txt." },
+    { id: "b", label: "Congela el intérprete para que no ejecute código", correct: false, feedback: "pip freeze no congela la ejecución, registra paquetes." },
+    { id: "c", label: "Elimina los paquetes no utilizados del entorno", correct: false, feedback: "Para eso existe pip uninstall; freeze solo lista." },
+    { id: "d", label: "Actualiza pip a la última versión disponible", correct: false, feedback: "Eso se hace con pip install --upgrade pip, no con freeze." },
+  ]}
+/>
 
-**4.** Los comandos: `python -m venv venv` → `source venv/bin/activate` (o `venv\Scripts\activate` en Windows) → `pip install numpy` → `python -c "import numpy; print(numpy.__version__)"`.
+<ChoiceQuestion
+  question="¿Qué comandos crean un entorno virtual e instalan NumPy verificando la instalación?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-4"
+  allowContinueOnIncorrect
+  explanation="python -m venv venv, luego activar (source venv/bin/activate o venv\Scripts\activate en Windows), pip install numpy y python -c 'import numpy; print(numpy.__version__)'."
+  options={[
+    { id: "a", label: "python -m venv venv → activar → pip install numpy → python -c 'import numpy; print(numpy.__version__)'", correct: true, feedback: "¡Exacto! Es la secuencia estándar." },
+    { id: "b", label: "pip install venv && venv create", correct: false, feedback: "venv es un módulo de Python, no un paquete de pip." },
+    { id: "c", label: "conda create -n venv numpy sin activar el entorno", correct: false, feedback: "Con conda hay que activar el entorno antes de instalar/usar." },
+    { id: "d", label: "python -m pip install venv numpy en un solo paso", correct: false, feedback: "venv no se instala por pip y la creación del entorno es un paso aparte." },
+  ]}
+/>
 
-**5.** Ejecuta `pip freeze > requirements.txt` después de instalar pandas y matplotlib.
+<ChoiceQuestion
+  question="¿Cómo genero un archivo requirements.txt a partir de un entorno virtual?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-5"
+  allowContinueOnIncorrect
+  explanation="Ejecutá pip freeze > requirements.txt después de instalar pandas y matplotlib (u otras dependencias)."
+  options={[
+    { id: "a", label: "pip freeze > requirements.txt (tras instalar las dependencias)", correct: true, feedback: "¡Exacto! Captura versiones exactas para reproducir el entorno." },
+    { id: "b", label: "pip list > requirements.txt", correct: false, feedback: "pip list no incluye el formato compatible con pip install -r." },
+    { id: "c", label: "pip save requirements.txt", correct: false, feedback: "Ese comando no existe en pip." },
+    { id: "d", label: "echo $PIP_PACKAGES > requirements.txt", correct: false, feedback: "No hay variable estándar PIP_PACKAGES; pip freeze es la vía correcta." },
+  ]}
+/>
 
-**6.** La distribución oficial es más liviana y te da control total. Anaconda viene con muchos paquetes preinstalados, ideal para alguien que quiere empezar rápido sin pensar en dependencias, pero ocupa mucho espacio.
+<ChoiceQuestion
+  question="¿Cuándo conviene la distribución oficial de Python vs Anaconda?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-6"
+  allowContinueOnIncorrect
+  explanation="La distribución oficial es más liviana y da control total; Anaconda trae muchos paquetes preinstalados, ideal para empezar rápido, pero ocupa mucho espacio."
+  options={[
+    { id: "a", label: "Oficial: liviana y control total; Anaconda: muchos paquetes preinstalados (ocupa mucho espacio)", correct: true, feedback: "¡Exacto! Elegís según si querés control o comodidad inicial." },
+    { id: "b", label: "Anaconda siempre, porque es la distribución oficial", correct: false, feedback: "Anaconda es de una empresa privada; la oficial es la de python.org." },
+    { id: "c", label: "La distribución oficial no sirve para data science", correct: false, feedback: "Sirve perfectamente: sólo instalás lo que necesitás." },
+    { id: "d", label: "Son idénticas, sólo cambia el instalador", correct: false, feedback: "Difieren en tamaño y en los paquetes incluidos por defecto." },
+  ]}
+/>
 
-**7.** `sudo pip install` instala paquetes globalmente como root, lo que puede corromper paquetes del sistema. Alternativas: usar entornos virtuales o `pip install --user`.
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Por qué es mala práctica usar sudo pip install?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-rev-7"
+  allowContinueOnIncorrect
+  explanation="sudo pip install instala paquetes globalmente como root y puede corromper paquetes del sistema. Alternativas: entornos virtuales o pip install --user."
+  options={[
+    { id: "a", label: "Instala globalmente como root y puede corromper paquetes del sistema (usar venv o pip install --user)", correct: true, feedback: "¡Exacto! Los entornos virtuales evitan ese riesgo." },
+    { id: "b", label: "Porque sudo bloquea el acceso a internet", correct: false, feedback: "sudo no bloquea internet; el problema es el alcance de la instalación." },
+    { id: "c", label: "Porque pip no acepta el comando sudo", correct: false, feedback: "pip sí acepta sudo; justamente por eso es peligroso." },
+    { id: "d", label: "Porque instala versiones antiguas por defecto", correct: false, feedback: "sudo no determina la versión; el problema es la instalación global como root." },
+  ]}
+/>
 
 <DialogueBox
   speaker="Dra. Coni"

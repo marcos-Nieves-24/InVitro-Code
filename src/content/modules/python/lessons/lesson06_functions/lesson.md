@@ -21,9 +21,8 @@ Quiz: quiz.md
 
 # Funciones
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Funciones?" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -37,7 +36,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -54,13 +52,21 @@ Quiz: quiz.md
 
 <Section number={2} title="Fundamentos de Funciones" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### ¿Qué es una Función?
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una clínica registra dosis por paciente: si copias el cálculo en cada hoja, un cambio de protocolo obliga a editar decenas de lugares.",
+    "Una función encapsula ese cálculo una sola vez y permite actualizarlo en un solo lugar — principio DRY aplicado al laboratorio.",
+    "Predice: si `compute_dose(weight, factor=2.0)` devuelve 140.0, ¿qué devuelve con factor=0.5? Y si la llamas sin `weight`, ¿qué falla?",
+    "El `return` es la respuesta que vuelve al llamador; sin él, la función entrega `None` aunque haga todo el trabajo.",
+  ]}
+/>
 
-Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).
+Una función es un bloque de código con nombre que recibe entradas (parámetros), realiza un cómputo y devuelve una salida. Las funciones promueven el principio DRY (Don't Repeat Yourself).">
 
-### Definiendo y Llamando Funciones
 
 ```python
 def function_name(parameter1, parameter2):
@@ -69,7 +75,6 @@ def function_name(parameter1, parameter2):
     return result
 ```
 
-### Componentes de una Función
 
 1. **Palabra clave def**: Inicia la definición de la función
 2. **Nombre de la función**: Sigue las convenciones de nomenclatura (snake_case)
@@ -79,12 +84,10 @@ def function_name(parameter1, parameter2):
 6. **return**: Envía la salida de vuelta a quien llamó
 7. **Docstring**: String de documentación (opcional pero recomendado)
 
-### Parámetros vs Argumentos
 
 - **Parámetro**: Variable listada en la definición de la función
 - **Argumento**: Valor que se pasa a la función al llamarla
 
-### Tipos de Argumentos
 
 ```python
 # Argumentos posicionales (requeridos, en orden)
@@ -107,19 +110,16 @@ def sum_all(*args):
 sum_all(1, 2, 3, 4)  # 10
 ```
 
-### Valores de Retorno
 
 Las funciones pueden devolver:
 - Un solo valor: `return x`
 - Múltiples valores: `return x, y` (devuelve una tupla)
 - Nada: `return None` (o ninguna declaración return)
 
-### Ámbito (Scope)
 
 - **Ámbito local**: Las variables definidas dentro de una función solo son accesibles allí
 - **Ámbito global**: Las variables definidas fuera de cualquier función son accesibles en todas partes
 
-### Funciones Lambda
 
 Las funciones lambda son funciones anónimas de una sola expresión:
 
@@ -136,7 +136,6 @@ numbers = [1, 2, 3, 4]
 squared = list(map(lambda x: x ** 2, numbers))
 ```
 
-### Docstrings (PEP 257)
 
 ```python
 def calculate_bmi(weight, height):
@@ -163,9 +162,7 @@ def calculate_bmi(weight, height):
 
 <Section number={3} title="Ejercicios Interactivos" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejercicios interactivos
 
-### Ejercicio 1: Tu primera función
 
 Escribe una función `celsius_to_fahrenheit(c)` que convierta grados Celsius a Fahrenheit usando la fórmula: F = C * 9/5 + 32. Después llamala con 0, 37 y 100.
 
@@ -188,7 +185,6 @@ print(f"100°C = {celsius_to_fahrenheit(100)}°F")`}
   }}
 />
 
-### Ejercicio 2: Múltiples parámetros y return
 
 Escribe una función `bmi_category(weight, height)` que calcule el IMC y devuelva tanto el valor como la categoría.
 
@@ -217,7 +213,6 @@ print(f"BMI: {bmi:.1f}, Category: {cat}")`}
   }}
 />
 
-### Ejercicio 3: Parámetros con valor default
 
 <CodeEditor
   defaultValue={`def create_report(patient_name, age, blood_type="Unknown"):
@@ -235,7 +230,6 @@ print(create_report("Bob", 25))`}
   }}
 />
 
-### Ejercicio 4: Lambda functions
 
 Usa lambda para ordenar una lista, filtrar pares, y elevar al cuadrado.
 
@@ -262,7 +256,6 @@ print(f"Squares: {squares}")`}
   }}
 />
 
-### Ejercicio 5: Scope (ámbito de variables)
 
 <CodeEditor
   defaultValue={`x = "global"
@@ -295,7 +288,6 @@ print(f"After modification: {x}")`}
 
 <Section number={4} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario:** Un pipeline de bioinformática para análisis de secuencias de ADN.
 
@@ -325,13 +317,27 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
     ]
   }}
 />
+<ChoiceQuestion
+  question="Tienes `def compute_dose(weight, factor=2.0): return weight * factor`. Predice `compute_dose(70)` y explica qué ocurre con `compute_dose()` sin argumentos."
+  moduleSlug="python"
+  lessonSlug="lesson06_functions"
+  blockId="choice-python-l06-dens-1"
+  allowContinueOnIncorrect
+  explanation="Los argumentos por defecto aplican sólo si el parámetro se omite; `weight` es obligatorio, por eso faltarle lanza TypeError."
+  options={[
+    { id: "a", label: "Devuelve 140.0; `compute_dose()` lanza TypeError por falta de `weight`.", correct: true, feedback: "¡Correcto! El default sólo suple `factor`; `weight` sigue siendo obligatorio." },
+    { id: "b", label: "Devuelve 140.0 y `compute_dose()` devuelve 0.0.", correct: false, feedback: "Sin `weight` no hay valor que multiplicar; Python no asigna 0 automáticamente." },
+    { id: "c", label: "Ambas llamadas devuelven 140.0.", correct: false, feedback: "El default no actúa sobre `weight`, así que la segunda llamada falla." },
+    { id: "d", label: "Devuelve None y no lanza error.", correct: false, feedback: "Sin `return` el resultado sería None, pero aquí sí hay return y falta argumento obligatorio." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
 2. **Modificar variables globales dentro de funciones**: Usa la palabra clave `global` si es necesario, pero prefiere pasar parámetros
@@ -339,7 +345,6 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 4. **No devolver un valor**: Las funciones sin `return` devuelven `None`
 5. **Sombrear funciones incorporadas**: No nombres variables `list`, `str`, `print`
 
-## Buenas Prácticas
 
 - Las funciones deberían hacer una sola cosa bien (Principio de Responsabilidad Única)
 - Usa nombres descriptivos que indiquen lo que hace la función
@@ -352,33 +357,63 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
-## Resumen
 
-- Las funciones son bloques de código reutilizables definidos con `def`
-- Los parámetros reciben entradas; `return` envía salidas
-- Python soporta argumentos posicionales, de palabra clave, con valor por defecto y de longitud variable
-- Las variables dentro de funciones son locales; las variables fuera son globales
-- Las funciones lambda son funciones anónimas de una sola expresión
-- Los docstrings documentan el propósito y uso de la función
+<ConceptCard variant="key-idea">
+Una función empaqueta lógica reutilizable: define parámetros, computa y devuelve un valor; el ámbito local mantiene el estado separado del resto del programa.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "bloque", label: "Bloque reutilizable", detail: "Las funciones son bloques de código reutilizables definidos con `def`." },
+    { id: "parametros", label: "Parámetros", detail: "Los parámetros reciben entradas; `return` envía salidas." },
+    { id: "argumentos", label: "Tipos de argumentos", detail: "Python soporta argumentos posicionales, de palabra clave, con valor por defecto y de longitud variable." },
+    { id: "ambito", label: "Ámbito local/global", detail: "Las variables dentro de funciones son locales; las variables fuera son globales." },
+    { id: "lambda", label: "Lambda", detail: "Las funciones lambda son funciones anónimas de una sola expresión." },
+    { id: "docstring", label: "Docstring", detail: "Los docstrings documentan el propósito y uso de la función." },
+  ]}
+/>
 
-- **Función**: Bloque de código reutilizable con nombre
-- **Parámetro**: Variable en la definición de la función
-- **Argumento**: Valor pasado al llamar una función
-- **Valor de retorno**: Salida enviada de vuelta a quien llamó
-- **Ámbito**: Región donde una variable es accesible
-- **Lambda**: Función anónima en línea
-- **Docstring**: String de documentación para funciones
-- **DRY**: Principio Don't Repeat Yourself
+<FeatureButtonList
+  features={[
+    { id: "funcion", label: "Función", detail: "Bloque de código reutilizable con nombre." },
+    { id: "parametro", label: "Parámetro", detail: "Variable en la definición de la función." },
+    { id: "argumento", label: "Argumento", detail: "Valor pasado al llamar una función." },
+    { id: "retorno", label: "Valor de retorno", detail: "Salida enviada de vuelta a quien llamó." },
+    { id: "ambito-term", label: "Ámbito", detail: "Región donde una variable es accesible." },
+    { id: "lambda-term", label: "Lambda", detail: "Función anónima en línea." },
+    { id: "docstring-term", label: "Docstring", detail: "String de documentación para funciones." },
+    { id: "dry", label: "DRY", detail: "Principio Don't Repeat Yourself." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué devuelve una función que no tiene sentencia `return`?"
+  moduleSlug="python"
+  lessonSlug="lesson06_functions"
+  blockId="choice-python-l06-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Sin `return` explícito, Python devuelve `None` al finalizar la función."
+  options={[
+    { id: "a", label: "None", correct: true, feedback: "¡Exacto! El retorno por defecto es None." },
+    { id: "b", label: "0", correct: false, feedback: "Python no devuelve 0 por defecto." },
+    { id: "c", label: "Un string vacío", correct: false, feedback: "No se genera ningún string." },
+    { id: "d", label: "Lanza una excepción", correct: false, feedback: "No hay error; simplemente retorna None." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Funciones dominadas! Encapsular lógica abre la puerta a estructuras de datos más ricas, la próxima lección.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
 
+
 <Section number={7} title="Desafío de Código" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Desafío de Código
 
 Escribe una función `gc_content(sequence)` que calcule el porcentaje de GC de una secuencia de ADN. Incluye un docstring y pruébala con diferentes secuencias.
 

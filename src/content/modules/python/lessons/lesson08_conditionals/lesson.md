@@ -23,7 +23,6 @@ Quiz: quiz.md
 
 <Section number={1} title="¿Por qué Condicionales?" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -37,7 +36,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -55,9 +53,19 @@ Quiz: quiz.md
 
 <Section number={2} title="Sentencias if, elif y else" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### La Sentencia if
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En una corrida ELISA, una sola concentración por encima del umbral basta para marcar la muestra como reactiva.",
+    "Un condicional mal calibrado (>, >=, !=) puede cambiar ese diagnóstico en silencio.",
+    "En el laboratorio el `if` no es sintaxis: es el filtro que decide si disparamos una alerta o liberamos un reporte.",
+    "Valida cada comparación contra datos reales antes de confiar en ella.",
+  ]}
+/>
 
 El condicional más simple ejecuta código solo cuando una condición es True:
 
@@ -66,7 +74,6 @@ if condition:
     pass  # código a ejecutar si la condición es True
 ```
 
-### if/else
 
 ```python
 if condition:
@@ -75,7 +82,6 @@ else:
     pass  # código si False
 ```
 
-### if/elif/else
 
 Encadena múltiples condiciones:
 
@@ -90,7 +96,6 @@ else:
     pass  # todas las condiciones son False
 ```
 
-### Explicación Visual
 
 ```
 Flujo if/elif/else:
@@ -124,7 +129,6 @@ Flujo if/elif/else:
 
 <Section number={3} title="Truthy, Falsy y Condiciones Avanzadas" eyebrow="CONCEPTO">
 <RevealSequence>
-### Truthy y Falsy
 
 En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condición:
 
@@ -137,7 +141,6 @@ En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condi
 
 **Todo lo demás es truthy.**
 
-### Condicionales Anidados
 
 Condicionales dentro de condicionales:
 
@@ -151,7 +154,6 @@ else:
     pass  # condition1 False
 ```
 
-### Ternario (Expresión Condicional)
 
 Condicional en una línea:
 
@@ -159,7 +161,6 @@ Condicional en una línea:
 value = true_value if condition else false_value
 ```
 
-### Sentencia Match (Python 3.10+)
 
 Pattern matching estructural (similar a switch/case):
 
@@ -178,7 +179,6 @@ match value:
 
 <Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # if básico
@@ -246,7 +246,6 @@ def describe_mutation(mutation_type):
 print(describe_mutation("missense"))
 ```
 
-## Ejemplo de Biotecnología
 
 **Escenario**: Sistema de apoyo a decisiones clínicas para diagnóstico de pacientes.
 
@@ -301,7 +300,6 @@ print(f"Glucosa: {glu}")
 print(f"Emergencia: {emergency}")
 ```
 
-## Ejemplo SaaS
 
 **Escenario**: Asignación de nivel de cliente y cálculo de descuento.
 
@@ -343,13 +341,28 @@ def calculate_discount(customer_tier, annual_spend, years_active):
 discount = calculate_discount("professional", 25000, 4)
 print(f"Descuento: {discount:.0%}")
 ```
+
+<ChoiceQuestion
+  question="En la cadena if/elif/else del IMC, si `bmi = 26.3`, ¿qué valor queda en `category`?"
+  moduleSlug="python"
+  lessonSlug="lesson08_conditionals"
+  blockId="choice-python-l08-dens-1"
+  allowContinueOnIncorrect
+  explanation="Se evalúan los elif en orden; el primero que se cumple (25 <= 26.3 < 30) asigna `Sobrepeso`."
+  options={[
+    { id: "a", label: "Sobrepeso", correct: true, feedback: "¡Correcto! 26.3 está en el rango 25–29.9." },
+    { id: "b", label: "Normal", correct: false, feedback: "Normal cubre < 25; 26.3 ya sale de ese rango." },
+    { id: "c", label: "Obeso", correct: false, feedback: "Obeso exige BMI >= 30." },
+    { id: "d", label: "Bajo peso", correct: false, feedback: "Bajo peso exige BMI < 18.5." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
 2. **Olvidar los dos puntos**: `if x > 5` sin `:` lanza SyntaxError
@@ -358,7 +371,6 @@ print(f"Descuento: {discount:.0%}")
 5. **Verificar booleanos con `== True`**: Es redundante — usa `if condition:`
 6. **Anidamiento profundo**: Más de 3 niveles de anidamiento sugiere refactorización
 
-## Buenas Prácticas
 
 - Usa `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
 - Mantén las condiciones simples — extrae lógica compleja a variables booleanas
@@ -372,50 +384,73 @@ print(f"Descuento: {discount:.0%}")
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
-- `if` ejecuta código cuando una condición es True
-- `elif` verifica condiciones adicionales
-- `else` maneja el caso por defecto
-- Los valores son truthy (True) o falsy (False, None, 0, secuencias vacías)
-- Ternario: `x if condition else y`
-- Sentencia match (3.10+) para pattern matching
-- Evita anidamiento profundo; usa cláusulas de guarda
+<ConceptCard variant="key-idea">
+Un condicional elige el camino del programa según una expresión booleana: `if`/`elif`/`else`, valores truthy/falsy, el operador ternario y `match` (3.10+) permiten decidir sin anidar en exceso.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "if", label: "if", detail: "Ejecuta código cuando una condición es True." },
+    { id: "elif", label: "elif", detail: "Verifica condiciones adicionales." },
+    { id: "else", label: "else", detail: "Maneja el caso por defecto." },
+    { id: "truthy-falsy", label: "truthy / falsy", detail: "Los valores se clasifican como truthy o falsy (False, None, 0, secuencias vacías)." },
+    { id: "ternario", label: "Ternario", detail: "`x if condition else y`." },
+    { id: "match", label: "match", detail: "Sentencia `match` (3.10+) para pattern matching." },
+    { id: "guarda", label: "Cláusula de guarda", detail: "Return temprano para evitar anidamiento." },
+  ]}
+/>
 
-- **Condicional**: Sentencia que ejecuta código basada en una condición
-- **Expresión booleana**: Expresión que evalúa a True o False
-- **Truthy**: Valor que evalúa a True en un contexto booleano
-- **Falsy**: Valor que evalúa a False en un contexto booleano
-- **Operador ternario**: Expresión condicional para if/else en línea
-- **Cláusula de guarda**: Return temprano para evitar anidamiento
-- **Sentencia match**: Pattern matching estructural de Python 3.10+
+<FeatureButtonList
+  features={[
+    { id: "condicional", label: "Condicional", detail: "Sentencia que ejecuta código basada en una condición." },
+    { id: "exp-bool", label: "Expresión booleana", detail: "Expresión que evalúa a True o False." },
+    { id: "truthy", label: "Truthy", detail: "Valor que evalúa a True en un contexto booleano." },
+    { id: "falsy", label: "Falsy", detail: "Valor que evalúa a False en un contexto booleano." },
+    { id: "op-ternario", label: "Operador ternario", detail: "Expresión condicional para if/else en línea." },
+    { id: "clausula-guarda", label: "Cláusula de guarda", detail: "Return temprano para evitar anidamiento." },
+    { id: "sent-match", label: "Sentencia match", detail: "Pattern matching estructural de Python 3.10+." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué imprime: if 0: print('sí') else: print('no')?"
+  moduleSlug="python"
+  lessonSlug="lesson08_conditionals"
+  blockId="choice-python-l08-resumen-1"
+  allowContinueOnIncorrect
+  explanation="0 es falsy, así que se ejecuta la rama else e imprime 'no'."
+  options={[
+    { id: "a", label: "no", correct: true, feedback: "¡Exacto! 0 es falsy, por lo que se ejecuta else." },
+    { id: "b", label: "sí", correct: false, feedback: "0 es falsy, no truthy." },
+    { id: "c", label: "ninguna salida", correct: false, feedback: "La rama else sí imprime 'no'." },
+    { id: "d", label: "Error de sintaxis", correct: false, feedback: "El código es válido." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Condicionales dominadas! Ahora decidís en cada paso — las listas del próximo bloque guardan los datos que vas a filtrar.
+</MascotMessage>
+
 </RevealSequence>
-
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Cuál es la salida de `if 0: print("sí") else: print("no")`?
 2. ¿Cuál es la diferencia entre `=` y `==`?
 3. ¿Qué valores se consideran falsy en Python?
 
-### Nivel 2: Implementación
 
 4. Escribe una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
 5. Escribe una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `if x == True:` se considera mal estilo? ¿Cuál es la alternativa pitónica?
 7. Compara y contrasta las cadenas if/elif/else con las sentencias match. ¿Cuándo usarías cada una?
 
-## Desafío de Código
 
 Escribe un sistema de **puntaje crediticio** que:
 1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados
