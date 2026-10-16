@@ -54,6 +54,17 @@ Quiz: quiz.md
 <Section number={2} title="Tipos de Bucles" eyebrow="CONCEPTO">
 <RevealSequence>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un laboratorio recibe 800 resultados de PCR cada mañana; procesarlos uno por uno en una hoja de cálculo es inviable.",
+    "Un bucle `for` recorre toda la lista de muestras y aplica el mismo análisis a cada elemento sin repetir código.",
+    "Predice: si recorres `range(2, 8, 2)`, ¿cuáles son los tres valores y por qué el último es 6?",
+    "Ojo con el `while` sin actualización de condición: se convierte en un bucle infinito que bloquea el pipeline clínico.",
+  ]}
+/>
 
 El bucle `for` itera sobre una secuencia (string, lista, tupla, etc.):
 
@@ -224,6 +235,22 @@ for i, seq in enumerate(sequences):
 else:
     print(f"Objetivo {target} no encontrado")
 ```
+
+<ChoiceQuestion
+  question="Tienes una lista de genes y recorres con `for gene in genes: if gene.startswith('BRCA'): process(gene); continue; log_skipped(gene)`. ¿Cuándo se ejecuta `log_skipped`?"
+  moduleSlug="python"
+  lessonSlug="lesson07_loops"
+  blockId="choice-python-l07-dens-1"
+  allowContinueOnIncorrect
+  explanation="`continue` salta el resto de la iteración actual, así que `log_skipped` se ejecuta sólo cuando la condición del `if` es falsa."
+  options={[
+    { id: "a", label: "Sólo cuando el gen NO inicia con `BRCA`.", correct: true, feedback: "¡Correcto! `continue` evita ejecutar `log_skipped` en los BRCA." },
+    { id: "b", label: "En cada iteración, sin excepción.", correct: false, feedback: "Si el gene es BRCA, `continue` salta `log_skipped`." },
+    { id: "c", label: "Sólo para el primer gen de la lista.", correct: false, feedback: "No hay dependencia de la posición, sino del prefijo." },
+    { id: "d", label: "`log_skipped` nunca se ejecuta.", correct: false, feedback: "Sí se ejecuta para los genes que no son BRCA." },
+  ]}
+/>
+
 </RevealSequence>
 
 </Section>
