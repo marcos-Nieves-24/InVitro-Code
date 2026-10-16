@@ -438,25 +438,54 @@ Buenas prácticas:
   ]}
 />
 
-- NumPy provee el ndarray: rápido, eficiente en memoria, multidimensional.
-- Crea arrays con `np.array()`, `np.zeros()`, `np.ones()`, `np.arange()`, etc.
-- Indexación y slicing similares a listas, pero con capacidades multidimensionales.
-- Las funciones universales (ufuncs) operan elemento a elemento a velocidad C.
-- Broadcasting permite operaciones sobre arrays de diferentes formas.
-- Álgebra lineal: `@`, `np.linalg.inv`, `np.linalg.eig`.
-- Siempre prefiere operaciones vectorizadas sobre bucles de Python.
+<ConceptCard variant="key-idea">
+NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete que combina `ndarray` multidimensional, broadcasting, ufuncs y álgebra lineal con rendimiento cercano a C.
+</ConceptCard>
 
-Términos clave:
+<FeatureButtonList
+  features={[
+    { id: "ndarray", label: "ndarray", detail: "Array multidimensional rápido y eficiente en memoria: la estructura central de NumPy." },
+    { id: "creacion", label: "Creación", detail: "Crea arrays con np.array(), np.zeros(), np.ones(), np.arange(), etc." },
+    { id: "indexacion", label: "Indexación", detail: "Slicing similar a listas, pero con capacidades multidimensionales." },
+    { id: "ufuncs", label: "Ufuncs", detail: "Funciones universales que operan elemento a elemento a velocidad C." },
+    { id: "broadcasting", label: "Broadcasting", detail: "Reglas para operar sobre arrays con diferentes formas." },
+    { id: "algebra-lineal", label: "Álgebra lineal", detail: "Operador @ y np.linalg.inv, np.linalg.eig para matrices." },
+    { id: "vectorizacion", label: "Vectorización", detail: "Preferir operaciones vectorizadas sobre bucles de Python." },
+  ]}
+/>
 
-- **ndarray**: objeto array multidimensional de NumPy.
-- **Shape**: tupla de las dimensiones del array.
-- **Eje**: dimensión de un array (0=filas, 1=columnas).
-- **Vectorización**: usar operaciones de arrays en lugar de bucles.
-- **Broadcasting**: reglas para operar sobre arrays con diferentes formas.
-- **Función universal (ufunc)**: función elemento a elemento sobre arrays.
-- **Dtype**: tipo de dato de los elementos del array.
-- **Vista**: acceso alternativo a los mismos datos (sin copia).
-- **Fancy indexing**: indexación con arrays booleanos o listas de enteros.
+<FeatureButtonList
+  features={[
+    { id: "ndarray-g", label: "ndarray", detail: "Objeto array multidimensional de NumPy." },
+    { id: "shape", label: "Shape", detail: "Tupla de las dimensiones del array." },
+    { id: "eje", label: "Eje", detail: "Dimensión de un array (0=filas, 1=columnas)." },
+    { id: "vectorizacion-g", label: "Vectorización", detail: "Usar operaciones de arrays en lugar de bucles." },
+    { id: "broadcasting-g", label: "Broadcasting", detail: "Reglas para operar sobre arrays con diferentes formas." },
+    { id: "ufunc", label: "Función universal (ufunc)", detail: "Función elemento a elemento sobre arrays." },
+    { id: "dtype", label: "Dtype", detail: "Tipo de dato de los elementos del array." },
+    { id: "vista", label: "Vista", detail: "Acceso alternativo a los mismos datos (sin copia)." },
+    { id: "fancy-indexing", label: "Fancy indexing", detail: "Indexación con arrays booleanos o listas de enteros." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué devuelve np.array([10, 20, 30]).shape?"
+  moduleSlug="python"
+  lessonSlug="lesson13_numpy"
+  blockId="choice-python-l13-resumen-1"
+  allowContinueOnIncorrect
+  explanation="`.shape` devuelve la tupla de dimensiones: un array de 3 elementos tiene forma (3,)."
+  options={[
+    { id: "a", label: "(3,)", correct: true, feedback: "¡Exacto! Es una tupla con un solo elemento (la coma es obligatoria)." },
+    { id: "b", label: "3", correct: false, feedback: "Eso sería len(array); shape devuelve una tupla." },
+    { id: "c", label: "(1, 3)", correct: false, feedback: "Esa forma corresponde a una matriz 1×3, no a un vector 1D." },
+    { id: "d", label: "3.0", correct: false, feedback: "shape no es un número flotante ni un escalar." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡NumPy dominado! Los arrays son la base de Pandas y scikit-learn — la próxima lección los envuelve en DataFrames.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

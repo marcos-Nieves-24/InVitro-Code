@@ -314,22 +314,52 @@ for gene, expression in zip(genes, expressions):
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
 
-- Los bucles `for` iteran sobre secuencias (listas, strings, ranges)
-- Los bucles `while` se repiten mientras una condición sea True
-- `range(start, stop, step)` genera secuencias numéricas
-- `break` sale del bucle; `continue` salta a la siguiente iteración
-- Los bucles anidados manejan datos multidimensionales
-- Los bucles pueden tener cláusulas `else` que se ejecutan al completarse normalmente
+<ConceptCard variant="key-idea">
+Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas, strings) y `while` repite mientras su condición sea True; `break`, `continue` y la cláusula `else` afinan el flujo sin perder legibilidad.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "for", label: "for", detail: "Itera sobre secuencias (listas, strings, ranges)." },
+    { id: "while", label: "while", detail: "Se repite mientras una condición sea True." },
+    { id: "range", label: "range", detail: "`range(start, stop, step)` genera secuencias numéricas." },
+    { id: "break-continue", label: "break / continue", detail: "`break` sale del bucle; `continue` salta a la siguiente iteración." },
+    { id: "anidados", label: "Bucles anidados", detail: "Manejan datos multidimensionales." },
+    { id: "else", label: "Cláusula else", detail: "Se ejecuta si el bucle termina sin `break`." },
+  ]}
+/>
 
-- **Iteración**: Una ejecución del cuerpo del bucle
-- **Iterable**: Objeto sobre el que se puede iterar (lista, str, range, etc.)
-- **Variable de bucle**: Variable que toma cada valor de la secuencia
-- **Bucle infinito**: Bucle que nunca termina
-- **Bucle anidado**: Bucle dentro de otro bucle
-- **enumerate()**: Función incorporada que produce pares (índice, valor)
+<FeatureButtonList
+  features={[
+    { id: "iteracion", label: "Iteración", detail: "Una ejecución del cuerpo del bucle." },
+    { id: "iterable", label: "Iterable", detail: "Objeto sobre el que se puede iterar (lista, str, range, etc.)." },
+    { id: "var-bucle", label: "Variable de bucle", detail: "Variable que toma cada valor de la secuencia." },
+    { id: "bucle-infinito", label: "Bucle infinito", detail: "Bucle que nunca termina." },
+    { id: "bucle-anidado", label: "Bucle anidado", detail: "Bucle dentro de otro bucle." },
+    { id: "enumerate", label: "enumerate()", detail: "Función incorporada que produce pares (índice, valor)." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué imprime este código: for i in range(2, 8, 2): print(i)?"
+  moduleSlug="python"
+  lessonSlug="lesson07_loops"
+  blockId="choice-python-l07-resumen-1"
+  allowContinueOnIncorrect
+  explanation="range(2, 8, 2) genera 2, 4, 6 (el límite superior 8 se excluye)."
+  options={[
+    { id: "a", label: "2, 4, 6", correct: true, feedback: "¡Exacto! start=2, stop=8, step=2; 8 se excluye." },
+    { id: "b", label: "2, 4, 6, 8", correct: false, feedback: "El valor final (8) no se incluye: stop es exclusivo." },
+    { id: "c", label: "0, 2, 4, 6", correct: false, feedback: "start es 2, no 0." },
+    { id: "d", label: "2, 3, 4, 5, 6, 7", correct: false, feedback: "step es 2, no 1." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Bucles dominados! Ya podés recorrer, filtrar y acumular — las condicionales del próximo bloque deciden qué hacer en cada vuelta.
+</MascotMessage>
+
 </RevealSequence>
-
 </Section>
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">

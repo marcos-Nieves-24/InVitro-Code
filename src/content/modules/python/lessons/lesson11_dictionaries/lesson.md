@@ -352,34 +352,52 @@ Buenas prácticas:
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<DialogueBox
-  speaker="Dra. Coni"
-  variant="scientist"
-  typing={true}
-  lines={[
-    "Resumimos: diccionario, clave, valor, métodos, comprehension, O(1).",
-    "Si puedes mapear genes a expresión y contar bases, ya dominas el patrón.",
+<ConceptCard variant="key-idea">
+Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con seguridad usando `get()`, recorré con `items()` y generá con comprehensions; `defaultdict` y `Counter` cubren conteos y claves faltantes.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "diccionario", label: "Diccionario", detail: "Almacena pares clave-valor usando `{}`." },
+    { id: "acceso", label: "Acceso", detail: "`d[clave]` es inseguro; `d.get(clave)` es seguro." },
+    { id: "claves", label: "Claves", detail: "Deben ser inmutables y hashables (strings, números, tuplas)." },
+    { id: "metodos", label: "Métodos", detail: "`keys()`, `values()`, `items()`, `get()`, `update()`, `pop()`." },
+    { id: "comprehension", label: "Dictionary comprehension", detail: "`{k: v for k, v in iterable}`." },
+    { id: "o1", label: "Búsqueda O(1)", detail: "Los diccionarios tienen búsqueda muy rápida." },
+    { id: "especializados", label: "Especializados", detail: "Usa `defaultdict` y `Counter` para necesidades especializadas." },
   ]}
 />
 
-- Los diccionarios almacenan pares clave-valor usando `{}`.
-- Accede a valores con `d[clave]` (inseguro) o `d.get(clave)` (seguro).
-- Las claves deben ser inmutables y hashables (strings, números, tuplas).
-- Métodos: `keys()`, `values()`, `items()`, `get()`, `update()`, `pop()`.
-- Dictionary comprehensions: `{k: v for k, v in iterable}`.
-- Los diccionarios tienen búsqueda O(1) — muy rápida.
-- Usa `defaultdict` y `Counter` para necesidades especializadas.
+<FeatureButtonList
+  features={[
+    { id: "gloss-diccionario", label: "Diccionario", detail: "Mapeo de claves a valores (sin orden, ordenado por inserción en 3.7+)." },
+    { id: "gloss-clave", label: "Clave", detail: "Identificador inmutable usado para búsqueda." },
+    { id: "gloss-valor", label: "Valor", detail: "Dato asociado a una clave." },
+    { id: "gloss-hash", label: "Tabla hash", detail: "Estructura de datos subyacente de los diccionarios." },
+    { id: "gloss-keyerror", label: "KeyError", detail: "Excepción al acceder a una clave inexistente." },
+    { id: "gloss-defaultdict", label: "defaultdict", detail: "Diccionario que provee valores por defecto para claves faltantes." },
+    { id: "gloss-counter", label: "Counter", detail: "Subclase de diccionario para contar objetos hashables." },
+  ]}
+/>
 
-<ConceptCard variant="definition">
-Términos clave:
-- **Diccionario**: Mapeo de claves a valores (sin orden, pero ordenado por inserción en 3.7+).
-- **Clave**: Identificador inmutable usado para búsqueda.
-- **Valor**: Dato asociado a una clave.
-- **Tabla hash**: Estructura de datos subyacente de los diccionarios.
-- **KeyError**: Excepción al acceder a una clave inexistente.
-- **defaultdict**: Diccionario que provee valores por defecto para claves faltantes.
-- **Counter**: Subclase de diccionario para contar objetos hashables.
-</ConceptCard>
+<ChoiceQuestion
+  question="¿Qué devuelve {'a': 1}.get('b', 0)?"
+  moduleSlug="python"
+  lessonSlug="lesson11_dictionaries"
+  blockId="choice-python-l11-resumen-1"
+  allowContinueOnIncorrect
+  explanation="get() devuelve el valor por defecto 0 cuando la clave no existe, sin lanzar KeyError."
+  options={[
+    { id: "a", label: "0", correct: true, feedback: "¡Exacto! 'b' no existe, así que devuelve 0." },
+    { id: "b", label: "KeyError", correct: false, feedback: "get() no lanza excepción; devuelve el default." },
+    { id: "c", label: "None", correct: false, feedback: "Sería None solo si no pasás default." },
+    { id: "d", label: "'b'", correct: false, feedback: "get() devuelve el valor asociado, no la clave." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Diccionarios dominados! Ya mapeás claves a valores — los sets del próximo bloque completan las colecciones.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

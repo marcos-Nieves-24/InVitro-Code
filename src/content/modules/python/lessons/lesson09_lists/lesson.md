@@ -358,33 +358,51 @@ Buenas prácticas:
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<DialogueBox
-  speaker="Dra. Coni"
-  variant="scientist"
-  typing={true}
-  lines={[
-    "Resumimos: lista, índice, slice, métodos, comprehension.",
-    "Si puedes explicar cada uno con un ejemplo, dominas este bloque.",
+<ConceptCard variant="key-idea">
+Una lista es una secuencia ordenada y mutable: indexás desde 0, recortás con slices, modificás con métodos y la generás con comprehensions; copias independientes evitan efectos secundarios.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "lista", label: "Lista", detail: "Colección ordenada y mutable creada con `[]`." },
+    { id: "indice", label: "Índice", detail: "Posición desde 0; índices negativos desde el final." },
+    { id: "slicing", label: "Slicing", detail: "`[inicio:fin:paso]` crea sublistas." },
+    { id: "metodos", label: "Métodos", detail: "`append`, `insert`, `remove`, `pop`, `sort`, `reverse`." },
+    { id: "comprehension", label: "List comprehension", detail: "`[expr for item in iterable if condition]`." },
+    { id: "tipos-mixtos", label: "Tipos mixtos", detail: "Puede contener tipos mixtos y listas anidadas." },
   ]}
 />
 
-- Las listas son colecciones ordenadas y mutables creadas con `[]`.
-- Indexación: desde 0, índices negativos desde el final.
-- Slicing: `[inicio:fin:paso]` crea sublistas.
-- Métodos: `append`, `insert`, `remove`, `pop`, `sort`, `reverse`.
-- List comprehensions: `[expr for item in iterable if condition]`.
-- Las listas pueden contener tipos mixtos y listas anidadas.
+<FeatureButtonList
+  features={[
+    { id: "gloss-lista", label: "Lista", detail: "Colección ordenada y mutable." },
+    { id: "gloss-indice", label: "Índice", detail: "Posición numérica de un elemento (desde 0)." },
+    { id: "gloss-slice", label: "Slice", detail: "Subconjunto de una lista." },
+    { id: "gloss-mutabilidad", label: "Mutabilidad", detail: "Capacidad de cambiar después de creada." },
+    { id: "gloss-comprehension", label: "List comprehension", detail: "Sintaxis concisa para crear listas." },
+    { id: "gloss-anidada", label: "Lista anidada", detail: "Lista que contiene listas (multidimensional)." },
+    { id: "gloss-copia", label: "Copia superficial", detail: "Nueva referencia al mismo objeto." },
+  ]}
+/>
 
-<ConceptCard variant="definition">
-Términos clave:
-- **Lista**: Colección ordenada y mutable.
-- **Índice**: Posición numérica de un elemento (desde 0).
-- **Slice**: Subconjunto de una lista.
-- **Mutabilidad**: Capacidad de cambiar después de creada.
-- **List comprehension**: Sintaxis concisa para crear listas.
-- **Lista anidada**: Lista que contiene listas (multidimensional).
-- **Copia superficial**: Nueva referencia al mismo objeto.
-</ConceptCard>
+<ChoiceQuestion
+  question="¿Qué devuelve [1, 2, 3][1:]?"
+  moduleSlug="python"
+  lessonSlug="lesson09_lists"
+  blockId="choice-python-l09-resumen-1"
+  allowContinueOnIncorrect
+  explanation="El slice omite el inicio (arranca en índice 1) y llega al final: [2, 3]."
+  options={[
+    { id: "a", label: "[2, 3]", correct: true, feedback: "¡Exacto! índices 1 y 2 hasta el final." },
+    { id: "b", label: "[1, 2]", correct: false, feedback: "Eso sería [:2], no [1:]." },
+    { id: "c", label: "[2]", correct: false, feedback: "Falta el resto del slice hasta el final." },
+    { id: "d", label: "Error", correct: false, feedback: "El slice es válido aunque el inicio se omita." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Listas dominadas! Ya gestionás colecciones mutables — las tuplas del próximo bloque son su versión inmutable.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

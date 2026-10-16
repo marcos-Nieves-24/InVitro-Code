@@ -498,29 +498,48 @@ pip install -r requirements.txt
 <RevealSequence>
 
 <ConceptCard variant="key-idea">
-Conceptos clave:
-
-- **Python**: lenguaje interpretado de alto nivel, esencial para ciencia de datos
-- **Instalación**: descarga desde python.org y verifica con `python --version`
-- **pip**: instala paquetes desde PyPI
-- **Entorno virtual**: aísla las dependencias de cada proyecto
-- **requirements.txt**: lista exacta de dependencias para reproducibilidad
+Tener Python funcionando, con pip y un entorno virtual es la base de todo lo demás: Jupyter, NumPy, Pandas y scikit-learn están a un `pip install` de distancia.
 </ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "python", label: "Python", detail: "Lenguaje interpretado de alto nivel, esencial para ciencia de datos." },
+    { id: "instalacion", label: "Instalación", detail: "Descarga desde python.org y verifica con `python --version`." },
+    { id: "pip", label: "pip", detail: "Instala paquetes desde PyPI." },
+    { id: "entorno-virtual", label: "Entorno virtual", detail: "Aísla las dependencias de cada proyecto." },
+    { id: "requirements", label: "requirements.txt", detail: "Lista exacta de dependencias para reproducibilidad." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "interprete", label: "Intérprete", detail: "Programa que ejecuta código Python línea por línea." },
+    { id: "pip-instalador", label: "pip", detail: "Instalador de paquetes de Python." },
+    { id: "pypi", label: "PyPI", detail: "Python Package Index — repositorio oficial de paquetes." },
+    { id: "entorno-virtual-aislado", label: "Entorno virtual", detail: "Entorno Python aislado para un proyecto específico." },
+    { id: "path", label: "PATH", detail: "Variable del sistema que le dice al SO dónde encontrar ejecutables." },
+    { id: "repl", label: "REPL", detail: "Read-Eval-Print Loop — shell interactiva de Python." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué archivo captura las dependencias exactas de un proyecto para poder reproducirlo?"
+  moduleSlug="python"
+  lessonSlug="lesson01_installing_python"
+  blockId="choice-python-l01-resumen-1"
+  allowContinueOnIncorrect
+  explanation="requirements.txt lista los paquetes con sus versiones exactas para reinstalarlos iguales."
+  options={[
+    { id: "a", label: "requirements.txt", correct: true, feedback: "¡Exacto! Se genera con pip freeze y se reinstala con pip install -r." },
+    { id: "b", label: "setup.py", correct: false, feedback: "setup.py describe el paquete mismo, no las dependencias del proyecto." },
+    { id: "c", label: "README.md", correct: false, feedback: "El README documenta el proyecto, no las versiones exactas." },
+    { id: "d", label: ".gitignore", correct: false, feedback: "Ignora archivos en git, no registra dependencias." },
+  ]}
+/>
 
 <MascotMessage mood="celebrating">
-Todo esto es la base. Una vez que tienes Python funcionando, todo lo demás — Jupyter, NumPy, Pandas, scikit-learn — está a un `pip install` de distancia.
+¡Python listo! Ahora Jupyter convierte ese intérprete en un cuaderno interactivo.
 </MascotMessage>
-
-<ConceptCard variant="key-idea">
-Términos clave:
-
-- **Intérprete**: programa que ejecuta código Python línea por línea
-- **pip**: instalador de paquetes de Python
-- **PyPI**: Python Package Index — repositorio oficial de paquetes
-- **Entorno virtual**: entorno Python aislado para un proyecto específico
-- **PATH**: variable del sistema que le dice al SO dónde encontrar ejecutables
-- **REPL**: Read-Eval-Print Loop — shell interactiva de Python
-</ConceptCard>
 
 </RevealSequence>
 

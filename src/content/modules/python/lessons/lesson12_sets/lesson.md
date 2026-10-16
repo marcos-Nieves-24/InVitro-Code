@@ -333,34 +333,52 @@ Buenas prácticas:
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<DialogueBox
-  speaker="Dra. Coni"
-  variant="scientist"
-  typing={true}
-  lines={[
-    "Los sets completan tu caja de herramientas de colecciones de Python.",
-    "Sin orden, únicos, hashables, O(1) para '¿está?', más unión, intersección y diferencia.",
-    "A partir de aquí, la pregunta no es '¿qué colección uso?' sino '¿qué pregunta le hago a los datos?'.",
+<ConceptCard variant="key-idea">
+Un set es una colección sin orden de elementos únicos y hashables con pertenencia O(1); sus operaciones (unión, intersección, diferencia) comparan conjuntos y `frozenset` permite usarlos como claves.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "conjunto", label: "Conjunto", detail: "Colección sin orden de elementos únicos y hashables." },
+    { id: "creacion", label: "Creación", detail: "Se crea con `{1, 2, 3}` o `set([1, 2, 3])`; conjunto vacío con `set()`." },
+    { id: "operaciones", label: "Operaciones", detail: "Unión (`|`), intersección (`&`), diferencia (`-`), diferencia simétrica (`^`)." },
+    { id: "metodos", label: "Métodos", detail: "add, remove, discard, pop, clear." },
+    { id: "frozenset", label: "frozenset", detail: "Versión inmutable y hashable." },
+    { id: "pertenencia", label: "Pertenencia O(1)", detail: "Mucho más rápida que en listas." },
   ]}
 />
 
-- Los conjuntos son colecciones sin orden de elementos únicos y hashables.
-- Se crean con `{1, 2, 3}` o `set([1, 2, 3])`; conjunto vacío con `set()`.
-- Operaciones: unión (`|`), intersección (`&`), diferencia (`-`), diferencia simétrica (`^`).
-- Métodos: add, remove, discard, pop, clear.
-- Frozenset es inmutable y hashable.
-- La prueba de pertenencia es O(1) — mucho más rápida que en listas.
+<FeatureButtonList
+  features={[
+    { id: "gloss-conjunto", label: "Conjunto", detail: "Colección sin orden de elementos únicos." },
+    { id: "gloss-frozenset", label: "Frozenset", detail: "Versión inmutable de un conjunto." },
+    { id: "gloss-union", label: "Unión", detail: "Todos los elementos de ambos conjuntos." },
+    { id: "gloss-interseccion", label: "Intersección", detail: "Elementos comunes a ambos conjuntos." },
+    { id: "gloss-diferencia", label: "Diferencia", detail: "Elementos en un conjunto pero no en el otro." },
+    { id: "gloss-simetrica", label: "Diferencia simétrica", detail: "Elementos en exactamente uno de los conjuntos." },
+    { id: "gloss-hashable", label: "Hashable", detail: "Se puede usar como elemento (tipos inmutables)." },
+    { id: "gloss-prueba", label: "Prueba de pertenencia", detail: "Verificar si un elemento está (O(1))." },
+  ]}
+/>
 
-Términos clave:
+<ChoiceQuestion
+  question="¿Qué operación devuelve todos los elementos presentes en A o en B?"
+  moduleSlug="python"
+  lessonSlug="lesson12_sets"
+  blockId="choice-python-l12-resumen-1"
+  allowContinueOnIncorrect
+  explanation="La unión (`|` o `union()`) reúne todos los elementos de ambos conjuntos."
+  options={[
+    { id: "a", label: "Unión (|)", correct: true, feedback: "¡Exacto! A | B incluye todo lo de A y B." },
+    { id: "b", label: "Intersección (&)", correct: false, feedback: "Esa da sólo los elementos comunes." },
+    { id: "c", label: "Diferencia (-)", correct: false, feedback: "Esa da los de A que no están en B." },
+    { id: "d", label: "Diferencia simétrica (^)", correct: false, feedback: "Esa da los que están en uno u otro, pero no en ambos." },
+  ]}
+/>
 
-- **Conjunto**: colección sin orden de elementos únicos.
-- **Frozenset**: versión inmutable de un conjunto.
-- **Unión**: todos los elementos de ambos conjuntos.
-- **Intersección**: elementos comunes a ambos conjuntos.
-- **Diferencia**: elementos en un conjunto pero no en el otro.
-- **Diferencia simétrica**: elementos en exactamente uno de los conjuntos.
-- **Hashable**: se puede usar como elemento de un conjunto (tipos inmutables).
-- **Prueba de pertenencia**: verificar si un elemento está en un conjunto (O(1)).
+<MascotMessage mood="celebrating">
+¡Sets dominados! Ya comparás colecciones sin orden — NumPy del próximo bloque lleva estas ideas a arreglos numéricos.
+</MascotMessage>
 
 </RevealSequence>
 </Section>
