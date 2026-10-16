@@ -292,7 +292,57 @@ Si tus clusters no son esféricos (ej. forma de medialuna), K-Means falla. Ahí 
 
 </Section>
 
-<Section number={8} title="Términos clave" eyebrow="CIERRE">
+<Section number={8} title="Checkpoint" eyebrow="EVALUACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Antes de seguir, asegurate de entender dos decisiones: cuántos clusters y cuándo K-Means no sirve.",
+    "El codo y la silueta miden cosas distintas, por eso conviene cruzarlos.",
+    "Y K-Means asume clusters esféricos: si tus grupos tienen forma de medialuna, los parte.",
+    "Reconocer ese límite es lo que separa a quien usa la herramienta de quien la entiende.",
+  ]}
+/>
+
+<ChoiceQuestion
+  question="El método del codo marca k=2 y el puntaje de silueta marca k=5. ¿Qué hacés?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson08_clustering"
+  blockId="choice-estadistica-l08-rev-1"
+  allowContinueOnIncorrect
+  explanation="El codo mira la inercia, que siempre decrece, así que tiende a marcar pocos clusters. La silueta premia la separación, y con muchos grupos pequeños también da scores altos. Cuando discrepan no hay respuesta automática: hay que proyectar los clusters con PCA y mirarlos."
+  options={[
+    { id: "a", label: "Proyectar los clusters con PCA y mirarlos: con k=5 la silueta probablemente está fragmentando grupos reales", correct: true, feedback: "Exacto. Ninguno de los dos métodos gana por defecto; la decisión se toma mirando la estructura." },
+    { id: "b", label: "Quedarse con k=2 porque el codo es más simple de calcular", correct: false, feedback: "Que sea más barato de calcular no lo hace más correcto: el codo marca el aplanamiento, no la calidad del agrupamiento." },
+    { id: "c", label: "Quedarse con k=5 porque la silueta siempre gana", correct: false, feedback: "La silueta también engaña: con muchos clusters tiny, la separación parece alta aunque los grupos sean fragmentos de uno real." },
+    { id: "d", label: "Promediar los dos valores y redondear a k=3", correct: false, feedback: "El número de clusters no se promedia: es una decisión estructural sobre los datos." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="Tus datos forman dos grupos con forma de medialuna, bien separados entre sí. ¿Qué hace K-Means?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson08_clustering"
+  blockId="choice-estadistica-l08-rev-2"
+  allowContinueOnIncorrect
+  explanation="K-Means asigna cada punto al centroide más cercano y minimiza la inercia dentro de grupos esféricos. Una medialuna no es esférica: el algoritmo termina partiéndola en trozos, y los centroides caen en la zona vacía entre las dos medias lunas. Para esas formas hacen falta DBSCAN o clustering jerárquico."
+  options={[
+    { id: "a", label: "Parte cada medialuna en trozos, porque asume clusters esféricos; para esas formas hay que usar DBSCAN o jerárquico", correct: true, feedback: "Correcto. Reconocer el supuesto esférico es la clave: el fallo no es del código sino del modelo." },
+    { id: "b", label: "Los separa perfectamente, porque minimizar la inercia siempre encuentra la estructura real", correct: false, feedback: "Minimizar la inercia es correcto solo dentro de la familia esférica. Fuera de ella, el óptimo es un óptimo equivocado." },
+    { id: "c", label: "Hay que subir k hasta que cada medialuna quede en un solo cluster", correct: false, feedback: "Subir k parte más, no menos: nunca reconstruye una medialuna que ya está partida." },
+    { id: "d", label: "Estandarizar las variables lo arregla", correct: false, feedback: "Estandarizar es obligatorio, pero no cambia la forma de los datos: el problema es geométrico, no de escala." },
+  ]}
+/>
+
+</RevealSequence>
+
+</Section>
+
+<Section number={9} title="Términos clave" eyebrow="CIERRE">
 
 <RevealSequence mode="appear">
 
@@ -323,7 +373,7 @@ Términos clave:
 
 </Section>
 
-<Section number={9} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
 <RevealSequence mode="appear">
 
