@@ -37,7 +37,7 @@
 
 - [x] **P2.0 — Integración Overfitting→ML01 + ConfusionMatrix→ML03** | route: parent inline | verifica registro existente, inserta en la sección visual correspondiente | status: OverfittingPlayer integrado en ML01 (seccion 9); ConfusionMatrix→ML03 sigue en B2
 - [x] **P2.B1 — GradientDescentPlayer + KMeansPlayer** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `af2a581` | verificado en browser | superficie: `src/components/anymotion/animations/GradientDescentPlayer.tsx` + `.../KMeansPlayer.tsx` (registro e integración los hace el parent) | contrato: props `{caption: string}`, AnymotionStage 16:9, controles play/pause/scrub o stepper determinista, frame estático con reduced-motion, sin autoplay, caption | status: en curso (2 writers Beam)
-- [ ] **P2.B2 — RocBuilder + TreeSplit + integración ConfusionMatrix** | pendiente
+- [x] **P2.B2 — RocBuilder + TreeSplit + integración ConfusionMatrix** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `bcc345f` | verificado en browser
 - [ ] **P2.B3 — BayesUpdate + DistributionShape** | pendiente
 
 ### P2.B1 — cerrada en `af2a581` (verificacion browser, 1440x900)
@@ -65,3 +65,36 @@ sin foco `End`/`Home` siguen yendo a la ultima/primera escena.
   FALLO del log son fixtures que crea y borra la propia suite, no una regresion.
 - `gentle-ai review assess --base-ref 86db811 --committed-only`: `medium`,
   `review_due: false` (`under_budget`).
+
+### P2.B2 — cerrada en `bcc345f` (verificacion browser, 1440x900 y 390x844)
+
+- RocBuilder (ML03 seccion 4 "Curva ROC"): muestra fija de 100 conidias. En umbral
+  0.50 -> TP 31 / FP 19 / FN 14 / TN 36, TPR 0.689 (= 31/45) y FPR 0.345 (= 19/55),
+  AUC 0.784. Arrastre real de mouse: 0.5 -> 0.91 -> 1.00 sin que la escena se mueva.
+  Boton "Mejor umbral (Youden J)" fija 0.41. La curva y el AUC no cambian con el
+  umbral (es lo correcto: AUC resume la curva entera).
+- ConfusionMatrixPlayer (ML03 seccion 3): los cuatro lentes cambian el contenido
+  (Matriz -> Recall -> F1 con formula). Reemplaza la ConceptCard estatica de la
+  matriz, que quedo redundante.
+- TreeSplit (ML04 seccion 5 "Visualiza tu primer arbol"): Gini padre 0.500 con
+  hijos 0.000 / 0.000 (n=30 / n=30) en el punto medio, marcado "Mejor division".
+  Arrastrando a 0.85 el readout pasa a 0.500 / 0.000 y marca que NO es la mejor.
+  "Dividir" hace crecer el arbol (se leen tres nodos) y "Reiniciar" vuelve a la raiz.
+- 0 errores de consola y 0 overflow horizontal en ambos viewports.
+
+Nota de verificacion: setear `input.value` + dispatch de eventos desde
+`page.evaluate` NO dispara `onChange` de React y produce falsos negativos. Para
+probar sliders hay que usar arrastre real de mouse o teclado sobre el control
+focalizado. Ademas, `End`/`Home`/flechas sobre un control focalizado ya no saltan
+de escena gracias al fix del carrusel de B1.
+
+- Gates: `npm run type-check` verde; `npm run test` 223/223 verde.
+- `gentle-ai review assess --base-ref d2794e3 --committed-only`: `medium`,
+  `review_due: false` (`under_budget`).
+
+### Deuda de entrega acumulada
+
+B1 (649 lineas) + B2 (1034 lineas) = 1683 lineas autorales en la rama, muy por
+encima de las ~400 lineas que touted un PR revisable. Native sigue marcando
+`under_budget` (slice abierto), asi que la decision de encadenar PRs es del
+usuario, no minha.
