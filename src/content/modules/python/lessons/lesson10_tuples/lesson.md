@@ -23,13 +23,39 @@ Quiz: quiz.md
 
 <Section number={1} title="¿Por qué Tuplas?" eyebrow="INICIO">
 
-## Motivación
+<RevealSequence>
 
-Las tuplas suelen llamarse "listas inmutables" — almacenan colecciones ordenadas como las listas pero no se pueden modificar después de creadas. Esta inmutabilidad las hace útiles para datos fijos que no deberían modificarse, como registros de base de datos, coordenadas y valores de retorno de funciones. En biotecnología, las tuplas representan pares (gen, expresión), registros (id_paciente, diagnóstico) y tripletes de codones de ADN. En SaaS, almacenan entradas de log (id_usuario, timestamp, evento).
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El laboratorio guarda un registro por muestra: (gen, posición, cambio de base).",
+    "Ese registro no debería cambiar nunca: es una muestra inmutable.",
+    "En Python, una tupla agrupa datos fijos y los protege de cambios accidentales.",
+  ]}
+/>
 
-## Panorama General
+<ConceptCard variant="key-idea">
+Una tupla es una secuencia ordenada e inmutable: ideal para registros fijos, coordenadas y valores de retorno múltiples.
+</ConceptCard>
 
-En la lección anterior aprendiste listas — colecciones ordenadas y mutables. Las tuplas son ordenadas pero inmutables. Entender la diferencia entre estructuras de datos mutables e inmutables es crucial para escribir código correcto y eficiente. Esta lección te prepara para los diccionarios (próxima lección), donde las tuplas se usan como claves (las listas no pueden ser claves de diccionarios).
+<ChoiceQuestion
+  question="¿Qué elegirías para guardar la posición de un gen sin que nadie la altere?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-s1-1"
+  allowContinueOnIncorrect
+  explanation="La tupla es inmutable; una lista podría modificarse por accidente."
+  options={[
+    { id: "a", label: "tuple", correct: true, feedback: "¡Correcto! La tupla protege el dato de cambios." },
+    { id: "b", label: "list", correct: false, feedback: "Las listas se pueden modificar, arriesgando el registro." },
+    { id: "c", label: "dict", correct: false, feedback: "Es útil para pares clave-valor, no para un registro ordenado fijo." },
+    { id: "d", label: "set", correct: false, feedback: "Los sets no mantienen orden ni protegen por posición." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 

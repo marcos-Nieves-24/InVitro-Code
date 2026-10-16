@@ -23,15 +23,39 @@ Quiz: quiz.md
 
 <Section number={1} title="Predecir números, no categorías" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-Tu primer algoritmo de ML real. La regresión lineal es el más simple, el más interpretable, y la base sobre la que se construyen redes neuronales enteras. Dominarla es obligatorio.
-</MascotMessage>
+<RevealSequence>
 
-Una empresa biotecnológica quiere predecir la solubilidad de fármacos a partir de propiedades moleculares. Una SaaS quiere pronosticar ingresos del próximo mes. Ambos son problemas de **regresión** — predecir un número continuo.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un clínico quiere estimar la solubilidad de un fármaco a partir de su peso molecular.",
+    "No es clasificar: es predecir un valor numérico continuo.",
+    "La regresión lineal ajusta una línea (suma ponderada) a esos datos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-La regresión lineal modela la relación entre características de entrada y un valor numérico de salida como una **suma ponderada**. Cada característica aporta según su peso (coeficiente), y el modelo aprende esos pesos a partir de los datos.
+La regresión lineal predice un valor numérico continuo modelando la salida como suma ponderada de las características.
 </ConceptCard>
+
+<ChoiceQuestion
+  question="Si quieres predecir la presión arterial (un número) a partir de edad y peso, ¿qué tipo de problema es?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  blockId="choice-ml-l02-s1-1"
+  allowContinueOnIncorrect
+  explanation="Predecir un valor continuo (presión arterial) a partir de features es regresión."
+  options={[
+    { id: "a", label: "Clasificación", correct: false, feedback: "La clasificación predice categorías, no números." },
+    { id: "b", label: "Regresión", correct: true, feedback: "¡Correcto! Es predecir un valor continuo." },
+    { id: "c", label: "Clustering", correct: false, feedback: "El clustering agrupa datos sin etiquetas, no predice un número." },
+    { id: "d", label: "Reducción de dimensión", correct: false, feedback: "Resume features, no predice una variable objetivo." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
