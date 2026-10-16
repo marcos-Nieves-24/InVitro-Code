@@ -35,7 +35,33 @@
 
 ## P2 — Players gráficos de algoritmos
 
-- [x] **P2.0 — Integración Overfitting→ML01 + ConfusionMatrix→ML03** | route: parent inline | verifica registro existente, inserta en la sección visual correspondiente | status: pendiente (dentro de B1)
-- [ ] **P2.B1 — GradientDescentPlayer + KMeansPlayer** | route: delegated (2 writers paralelos, superficies disjuntas) | superficie: `src/components/anymotion/animations/GradientDescentPlayer.tsx` + `.../KMeansPlayer.tsx` (registro e integración los hace el parent) | contrato: props `{caption: string}`, AnymotionStage 16:9, controles play/pause/scrub o stepper determinista, frame estático con reduced-motion, sin autoplay, caption | status: en curso (2 writers Beam)
+- [x] **P2.0 — Integración Overfitting→ML01 + ConfusionMatrix→ML03** | route: parent inline | verifica registro existente, inserta en la sección visual correspondiente | status: OverfittingPlayer integrado en ML01 (seccion 9); ConfusionMatrix→ML03 sigue en B2
+- [x] **P2.B1 — GradientDescentPlayer + KMeansPlayer** | route: delegated (2 writers paralelos) + parent inline (registro/integracion) | commit `af2a581` | verificado en browser | superficie: `src/components/anymotion/animations/GradientDescentPlayer.tsx` + `.../KMeansPlayer.tsx` (registro e integración los hace el parent) | contrato: props `{caption: string}`, AnymotionStage 16:9, controles play/pause/scrub o stepper determinista, frame estático con reduced-motion, sin autoplay, caption | status: en curso (2 writers Beam)
 - [ ] **P2.B2 — RocBuilder + TreeSplit + integración ConfusionMatrix** | pendiente
 - [ ] **P2.B3 — BayesUpdate + DistributionShape** | pendiente
+
+### P2.B1 — cerrada en `af2a581` (verificacion browser, 1440x900)
+
+- GradientDescentPlayer en ML02: trayectoria determinista de 40 pasos, lectura
+  viva, divergencia real con lr=1.2 ("Diverchio: baja la tasa") y convergencia
+  completa (Paso 40/40) con lr=0.01. Sin autoplay.
+- KMeansPlayer en ML06: selector de dataset (blobs/anillos), K=2/3/4, boton
+  Paso alterna Asignar -> Actualizar y sube el contador de iteracion; cambio de K
+  y de dataset reinician. Determinista.
+- OverfittingPlayer (preistente, huerfano) integrado en ML01 seccion 9: 2 sliders
+  + 3 svg, operativo.
+- 0 errores de consola, 0 overflow horizontal (scrollW 1440 = clientW 1440).
+
+### Bug encontrado y corregido: Home/End robados por el carrusel
+
+El guard `isTypingTarget` de `lesson-carousel.tsx` bloqueaba Espacio/Enter/flechas
+pero NO `Home`/`End`. Con un slider de la escena focalizado (comportamiento natural
+al tocarlo), `End` saltaba a la ultima escena: el alumno dejaba
+"Descenso por gradiente" y aterrizaba en "Ejercicios y desafio". Se agregan
+`Home`/`End` al guard. Verificado: con el slider focalizado la escena ya no cambia;
+sin foco `End`/`Home` siguen yendo a la ultima/primera escena.
+
+- Gates: `npm run type-check` verde; `npm run test` 223/223 verde. Los `assets:check`
+  FALLO del log son fixtures que crea y borra la propia suite, no una regresion.
+- `gentle-ai review assess --base-ref 86db811 --committed-only`: `medium`,
+  `review_due: false` (`under_budget`).
