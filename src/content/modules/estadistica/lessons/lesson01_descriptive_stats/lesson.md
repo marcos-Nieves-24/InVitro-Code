@@ -155,12 +155,19 @@ print(f"Moda: {mode}")
 Ejecuta este código en tu notebook. ¿Están cerca la media y la mediana? Cuándo son similares, es una buena señal de qué los datos son simétricos. Si difieren mucho, hay sesgo.
 </CalloutInfo>
 
-<ReflectionCheck
-  blockId="reflection-l01-mean-median-scores"
+<ChoiceQuestion
+  question="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="En este conjunto de puntajes, la media (84.53) y la mediana (84.50) son casi idénticas. ¿Qué nos dice esto sobre la distribución de los puntajes?"
-  answer="Que la distribución es aproximadamente simétrica — no hay valores extremos qué desplacen la media. En una distribución simétrica, media ≈ mediana. Si fueran muy diferentes, sabríamos qué hay sesgo o outliers."
+  blockId="reflection-l01-mean-median-scores"
+  allowContinueOnIncorrect
+  explanation="La distribución es aproximadamente simétrica: no hay valores extremos que desplacen la media; en una distribución simétrica media ≈ mediana. Si difiriesen mucho, indicaría sesgo u outliers."
+  options={[
+    { id: "a", label: "La distribución es aproximadamente simétrica, sin extremos que sesguen la media", correct: true, feedback: "Correcto: media ≈ mediana indica simetría sin outliers influyentes." },
+    { id: "b", label: "Hay asimetría positiva con outliers altos", correct: false, feedback: "Falso: la asimetría positiva elevaría la media por encima de la mediana." },
+    { id: "c", label: "Los datos son perfectamente uniformes", correct: false, feedback: "No necesariamente: media y mediana casi iguales no implican uniformidad exacta." },
+    { id: "d", label: "No se puede concluir nada sin conocer la moda", correct: false, feedback: "La moda complementa, pero media y mediana ya revelan simetría." },
+  ]}
 />
 
 </Section>
@@ -240,12 +247,19 @@ print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} m
 
 **¿Qué observamos?** El paciente 20 tuvo una reducción de 45 mm — mucho mayor qué el resto.
 
-<ReflectionCheck
-  blockId="reflection-l01-tumor-outlier"
+<ChoiceQuestion
+  question="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="La media de reducción tumoral es 14.5 mm pero la mediana es 13 mm. ¿Cuál reportarías al equipo médico y por qué?"
-  answer="Reportaría la mediana (13 mm). El valor 45 mm es un outlier qué infla la media artificialmente. La mediana de 13 mm representa mejor la experiencia típica del paciente. Podría complementar con el IQR (4 mm) para indicar qué el 50% central de pacientes tuvo reducciones entre 11 y 15 mm."
+  blockId="reflection-l01-tumor-outlier"
+  allowContinueOnIncorrect
+  explanation="Reporta la mediana (13 mm): el valor 45 mm es un outlier que infla la media a 14.5 mm. La mediana refleja la experiencia típica; complementa con IQR (4 mm), cuyo 50% central estuvo entre 11 y 15 mm."
+  options={[
+    { id: "a", label: "La mediana (13 mm), porque el 45 mm es outlier que infla la media", correct: true, feedback: "Correcto: la mediana es robusta al outlier y representa la experiencia típica." },
+    { id: "b", label: "La media (14.5 mm), porque usa toda la información disponible", correct: false, feedback: "La usa, pero el outlier de 45 mm la distorsiona artificialmente." },
+    { id: "c", label: "La media, porque al ser mayor da un panorama más favorable", correct: false, feedback: "Mayor por el outlier no significa mejor representación típica." },
+    { id: "d", label: "Solo el IQR (4 mm), sin reportar centro", correct: false, feedback: "El IQR mide dispersión; falta una medida de centro como la mediana." },
+  ]}
 />
 
 </Section>
@@ -323,12 +337,19 @@ plt.tight_layout()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l01-dau"
+<ChoiceQuestion
+  question="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
   moduleSlug="estadistica"
   lessonSlug="lesson01_descriptive_stats"
-  prompt="¿Por qué una empresa SaaS monitorearía la mediana de DAU además del promedio?"
-  answer="Porque la mediana es robusta a días atípicos (ej. un pico por una campaña viral o una caída por una caída del servidor). El promedio puede estar inflado por un solo día excepcional. La mediana refleja mejor un 'día típico'. Monitorear ambas permite detectar anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  blockId="reflection-l01-dau"
+  allowContinueOnIncorrect
+  explanation="La mediana es robusta a días atípicos (picos virales, caídas del servidor) y refleja un día típico; el promedio puede inflarse por un día excepcional. Monitorear ambas detecta anomalías: si la media se dispara pero la mediana no, hubo un pico puntual."
+  options={[
+    { id: "a", label: "La mediana refleja un día típico y, comparada con la media, revela picos puntuales", correct: true, feedback: "Correcto: mediana robusta a atípicos; divergencias detectan anomalías." },
+    { id: "b", label: "La mediana reemplaza totalmente al promedio", correct: false, feedback: "No: conviene monitorear ambas para detectar anomalías." },
+    { id: "c", label: "La mediana es más barata de calcular", correct: false, feedback: "El costo de cálculo no es el motivo; lo es la robustez." },
+    { id: "d", label: "La mediana siempre es mayor que la media en DAU", correct: false, feedback: "No hay orden garantizado; depende del sesgo." },
+  ]}
 />
 
 </Section>
@@ -363,13 +384,50 @@ Pon a prueba lo qué aprendiste:
 2. **¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué se reporta más la segunda?**
 3. **Una farmacéutica reporta efectividad media del 85%, pero el 40% de pacientes no respondió. ¿Cómo es posible?**
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>1.</strong> La mediana (8). La media es 23 — está totalmente distorsionada por el valor 100. La mediana ignora el outlier y refleja el valor típico. La moda es 8 (aparece dos veces).</p>
+<ChoiceQuestion
+  question="Un conjunto de datos tiene valores [5, 7, 8, 8, 10, 100]. ¿Qué medida representa mejor el centro?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  blockId="choice-estadistica-l01-rev-1"
+  allowContinueOnIncorrect
+  explanation="La mediana (8) ignora el outlier 100 y refleja el valor típico, mientras la media (23) queda totalmente distorsionada; la moda también es 8 (aparece dos veces)."
+  options={[
+    { id: "a", label: "La media (23), porque promedia todos los valores", correct: false, feedback: "La media se va con el outlier 100 y no refleja el valor típico." },
+    { id: "b", label: "La mediana (8), que ignora el extremo 100", correct: true, feedback: "¡Correcto! La mediana refleja el centro real." },
+    { id: "c", label: "La moda (8) únicamente", correct: false, feedback: "Aquí coincide, pero en general la moda no garantiza representar el centro mejor que la mediana." },
+    { id: "d", label: "El rango (95), porque resume la dispersión", correct: false, feedback: "El rango mide dispersión, no el centro." },
+  ]}
+/>
 
-<p><strong>2.</strong> La varianza mide dispersión en unidades al cuadrado (difícil de interpretar: "la varianza es 25 puntos²"). La desviación estándar es la raíz cuadrada, devolviéndonos a las unidades originales ("la desviación estándar es 5 puntos"). Por eso se reporta más: es directamente interpretable.</p>
+<ChoiceQuestion
+  question="¿Cuál es la diferencia entre varianza y desviación estándar? ¿Por qué se reporta más la segunda?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  blockId="choice-estadistica-l01-rev-2"
+  allowContinueOnIncorrect
+  explanation="La varianza mide dispersión en unidades al cuadrado (difícil de interpretar); la desviación estándar es su raíz cuadrada y vuelve a las unidades originales, por eso se reporta más."
+  options={[
+    { id: "a", label: "La varianza es más fácil de interpretar porque está en unidades originales", correct: false, feedback: "Al revés: la varianza vive en unidades al cuadrado." },
+    { id: "b", label: "La desviación estándar es la raíz cuadrada de la varianza, en unidades originales", correct: true, feedback: "¡Correcto! Por eso es directamente interpretable." },
+    { id: "c", label: "Son equivalentes; se reporta la varianza porque usa todos los datos", correct: false, feedback: "No son equivalentes: se reporta la desviación estándar por legibilidad." },
+    { id: "d", label: "La desviación estándar es siempre mayor que la varianza", correct: false, feedback: "La comparación depende de la escala; el punto es la unidad, no el tamaño." },
+  ]}
+/>
 
-<p><strong>3.</strong> La media puede ser engañosa cuándo hay variabilidad extrema. Si el 60% de pacientes tuvo 100% de efectividad y el 40% tuvo 0%, la media es 60%... no 85%. Para llegar a 85% con 40% en cero, el 60% restante tendría qué tener ~142% de efectividad (imposible). Algo no cierra — probablemente están reportando la media de los respondedores nada más, excluyendo a los no respondedores. Mejores estadísticos: reportar la mediana y el porcentaje de respondedores por separado.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="Una farmacéutica reporta efectividad media del 85%, pero el 40% de pacientes no respondió. ¿Cómo es posible?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson01_descriptive_stats"
+  blockId="choice-estadistica-l01-rev-3"
+  allowContinueOnIncorrect
+  explanation="La media puede ser engañosa con variabilidad extrema: si el 60% tuvo 100% efectividad y el 40% 0%, la media sería 60%, no 85%. Para llegar a 85% con 40% en cero haría falta ~142% en el resto (imposible). Probablemente reportan la media de respondedores excluyendo no respondedores; mejor: mediana + porcentaje de respondedores."
+  options={[
+    { id: "a", label: "Probablemente la media se calcula solo sobre los respondedores", correct: true, feedback: "¡Correcto! Excluir no respondedores infla artificialmente la media." },
+    { id: "b", label: "La media es 85% porque el 60% respondió al 100% y el resto al 0%", correct: false, feedback: "Esa mezcla daría una media de 60%, no de 85%." },
+    { id: "c", label: "La mediana es 85% porque la mitad respondió al 100%", correct: false, feedback: "La mediana no explicaría un promedio del 85% con 40% sin respuesta." },
+    { id: "d", label: "Es válido: la varianza baja evita que los ceros afecten la media", correct: false, feedback: "Con 40% en cero la media no puede ignorarlos; el supuesto falla." },
+  ]}
+/>
 
 </Section>
 

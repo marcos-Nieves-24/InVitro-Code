@@ -110,12 +110,19 @@ plt.title('¿Cuántos componentes necesito?')
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l07-pca-components"
+<ChoiceQuestion
+  question="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo haces?"
   moduleSlug="machine-learning"
   lessonSlug="lesson07_pca"
-  prompt="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo haces?"
-  answer="PCA es sensible a la escala. Si una feature va de 0 a 1000 y otra de 0 a 1, la primera domina la matriz de covarianza y el primer componente principal será básicamente esa feature. Estandarizar (restar media, dividir por desvío) pone todas las features en igualdad de condiciones y deja que PCA descubra las verdaderas direcciones de varianza."
+  blockId="reflection-l07-pca-components"
+  allowContinueOnIncorrect
+  explanation="PCA es sensible a la escala: la feature de mayor rango domina la matriz de covarianza y el primer componente sería básicamente esa feature. Estandarizar (restar media, dividir por desvío) pone todas en igualdad y deja que PCA descubra las verdaderas direcciones de varianza."
+  options={[
+    { id: "a", label: "PCA es sensible a escala; sin estandarizar una feature domina la covarianza", correct: true, feedback: "¡Correcto! Estandarizar pone las features en igualdad." },
+    { id: "b", label: "Estandarizar es opcional porque PCA es invariante a la escala", correct: false, feedback: "Falso: PCA magnifica diferencias de escala." },
+    { id: "c", label: "PCA sólo depende del número de componentes", correct: false, feedback: "Falso: también depende de las unidades originales." },
+    { id: "d", label: "La estandarización empeora la varianza capturada", correct: false, feedback: "Falso: evita que una feature domine artificialmente." },
+  ]}
 />
 
 </Section>

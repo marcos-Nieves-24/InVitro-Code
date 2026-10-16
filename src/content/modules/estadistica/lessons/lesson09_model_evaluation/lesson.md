@@ -142,22 +142,54 @@ cv_scores = cross_val_score(model, X, y, cv=5, scoring='r2')
 print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 ```
 
-<ReflectionCheck
-  blockId="reflection-l09-interpret-r2"
+<ChoiceQuestion
+  question="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
   moduleSlug="estadistica"
   lessonSlug="lesson09_model_evaluation"
-  prompt="R² = 0.60 en el test set. ¿Es bueno o malo? ¿Qué significa exactamente?"
-  answer="Significa qué el modelo explica el 60% de la varianza de la variable objetivo. No es ni bueno ni malo en abstracto — depende del contexto. En ciencias sociales, R²=0.60 puede ser excelente. En física, sería inaceptable. En finanzas, depende de si ganas plata con ese 60%. Lo importante es comparar con un baseline: ¿cuál es el R² de predecir siempre la media? ¿Y de un modelo más simple? R² solo no te dice nada sin contexto."
+  blockId="reflection-l09-interpret-r2"
+  allowContinueOnIncorrect
+  explanation="Explica el 60 % de la varianza de la variable objetivo; el juicio depende del campo (sociales vs física) y exige comparación con un baseline (predecir la media o un modelo más simple)."
+  options={[
+    { id: "a", label: "Es siempre excelente, sin importar la disciplina ni el baseline", correct: false, feedback: "No: en física 0.60 sería inaceptable; el contexto define el estándar." },
+    { id: "b", label: "Explica el 60 % de la varianza y solo tiene sentido comparándolo con un baseline según el contexto", correct: true, feedback: "¡Correcto! R² es relativo al campo y al modelo base." },
+    { id: "c", label: "Es inaceptable en cualquier ciencia o aplicación práctica", correct: false, feedback: "No: en ciencias sociales 0.60 puede ser excelente." },
+    { id: "d", label: "Un R² del 60 % garantiza rentabilidad si se usa para decidir", correct: false, feedback: "En finanzas depende de si ganas plata; la métrica sola no garantiza beneficio." },
+  ]}
 />
 
 </Section>
 
 <Section number={7} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué no evaluamos en el training set?</strong> Porque el modelo ya "vio" esos datos — los puede memorizar. Accuracy en training mide memoria, no aprendizaje. Sólo el test set (datos no vistos) mide generalización, qué es lo qué realmente nos importa en producción.</p>
-<p><strong>¿MAE o RMSE? ¿Cuándo elegir cuál?</strong> MAE si todos los errores son igualmente costosos (ej. predecir temperatura). RMSE si los errores grandes son particularmente graves y quieres penalizarlos más (ej. predecir dosis de medicamento — un error de 10× puede matar).</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Por qué no evaluamos en el training set?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson09_model_evaluation"
+  blockId="choice-estadistica-l09-rev-1"
+  allowContinueOnIncorrect
+  explanation="El modelo ya vio esos datos y puede memorizarlos: el accuracy en training mide memoria, no aprendizaje. Sólo el test set (datos no vistos) mide la generalización que importa en producción."
+  options={[
+    { id: "a", label: "Porque el modelo ya vio esos datos (puede memorizarlos) y sólo el test set mide generalización", correct: true, feedback: "¡Exacto! El test set es el único que estima desempeño en producción." },
+    { id: "b", label: "Porque el training set es siempre demasiado pequeño para evaluar", correct: false, feedback: "El tamaño no es la razón; el problema es que el modelo ya memorizó esos datos." },
+    { id: "c", label: "Porque scikit-learn no permite evaluar sobre el training set", correct: false, feedback: "Sí permite, pero el resultado no refleja generalización." },
+    { id: "d", label: "Porque las etiquetas del training set siempre tienen errores", correct: false, feedback: "No necesariamente; el problema es memorización, no calidad de etiquetas." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿MAE o RMSE? ¿Cuándo elegir cuál?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson09_model_evaluation"
+  blockId="choice-estadistica-l09-rev-2"
+  allowContinueOnIncorrect
+  explanation="MAE si todos los errores son igualmente costosos (ej. predecir temperatura); RMSE si los errores grandes son particularmente graves y querés penalizarlos más (ej. dosis de medicamento)."
+  options={[
+    { id: "a", label: "MAE si todos los errores costan igual; RMSE si los errores grandes son graves (penalización cuadrática)", correct: true, feedback: "¡Exacto! RMSE castiga más los errores grandes por el cuadrado." },
+    { id: "b", label: "Siempre RMSE porque es la métrica más precisa", correct: false, feedback: "RMSE amplifica outliers; si todos los errores valen igual, MAE es más honesta." },
+    { id: "c", label: "Siempre MAE porque es más robusta", correct: false, feedback: "Si un error grande es crítico (dosis), conviene RMSE para castigarlo." },
+    { id: "d", label: "Elegir por el tamaño del dataset: MAE para datos grandes", correct: false, feedback: "La elección depende del costo de cada error, no del tamaño del dataset." },
+  ]}
+/>
 
 </Section>
 

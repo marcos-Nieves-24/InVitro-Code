@@ -159,30 +159,69 @@ print(f"P(0 mutaciones) = {poi.pmf(0):.3f}")  # gen intacto
 print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 ```
 
-<ReflectionCheck
-  blockId="reflection-l04-poisson-genes"
+<ChoiceQuestion
+  question="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
-  answer="Poisson asume qué los eventos ocurren independientemente a una tasa constante λ. En genética, cada posición del ADN puede mutar independientemente, y la tasa es aproximadamente constante por región. Pero ojo: en regiones genómicas inestables (hotspots), la tasa no es constante y Poisson subestima la varianza — ahí necesitamos modelos más complejos cómo binomial negativa."
+  blockId="reflection-l04-poisson-genes"
+  allowContinueOnIncorrect
+  explanation="Poisson asume eventos independientes a tasa constante λ; en ADN cada posición muta independientemente con tasa ≈ constante por región. En hotspots (λ variable) subestima la varianza y se prefiere binomial negativa."
+  options={[
+    { id: "a", label: "Porque cada mutación es independiente a tasa constante λ por región; si la tasa varía (hotspots), Poisson subestima la varianza", correct: true, feedback: "¡Exacto! La constancia de λ por región es el supuesto clave; en hotspots falla." },
+    { id: "b", label: "Porque las mutaciones ocurren en clusters (hotspots) y Poisson los captura automáticamente", correct: false, feedback: "Al revés: hotspots rompen la tasa constante y Poisson subestima la varianza (→ binomial negativa)." },
+    { id: "c", label: "Porque en genética λ cambia por generación pero Poisson se adapta automáticamente", correct: false, feedback: "Poisson asume λ constante en el intervalo; no se adapta a tasas variables." },
+    { id: "d", label: "Porque media y varianza iguales son garantía en mutaciones, no supuesto", correct: false, feedback: "Media=varianza es supuesto, no garantía; sobredispersión señala que el supuesto falla." },
+  ]}
 />
 
 </Section>
 
 <Section number={9} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l04-choose-dist"
+<ChoiceQuestion
+  question="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  prompt="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
-  answer="Poisson con λ=5. La cantidad de llegadas por unidad de tiempo es el caso de uso clásico de Poisson. Pero siempre verifica: si la varianza empírica es mucho mayor qué 5 (sobredispersión), considera binomial negativa. Si hay patrones temporales (hora pico), necesitas un Poisson no homogéneo con λ(t) variable."
+  blockId="reflection-l04-choose-dist"
+  allowContinueOnIncorrect
+  explanation="Poisson con λ=5: llegadas por unidad de tiempo son caso clásico Poisson. Verificar: si varianza empírica ≫ 5 (sobredispersión) → binomial negativa; si hay patrones temporales (hora pico) → Poisson no homogéneo λ(t)."
+  options={[
+    { id: "a", label: "Poisson con λ=5, porque son llegadas por unidad de tiempo; verificar sobredispersión (varianza ≫ 5) y patrones temporales", correct: true, feedback: "¡Exacto! Poisson clásico; con sobredispersión o peaks temporales se ajusta." },
+    { id: "b", label: "Normal N(μ=5, σ²=5), porque todo conteo converge a normal por el TCL", correct: false, feedback: "Llegadas por intervalo son caso Poisson discreto; Normal aproxima pero no modela el conteo real." },
+    { id: "c", label: "Binomial con n=60, p=1/12, porque son 60 segundos por minuto", correct: false, feedback: "Modelo de Bernoulli fijo innecesario; la llegada por intervalo es caso Poisson directo." },
+    { id: "d", label: "Bernoulli con p=5/60, porque cada segundo es éxito/fracaso de llegada", correct: false, feedback: "Bernoulli sirve para un evento único; para contar llegadas por intervalo se usa Poisson." },
+  ]}
 />
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Cuándo usarías Bernoulli vs Binomial?</strong> Bernoulli para UN evento (¿este paciente responde?). Binomial para contar éxitos en n eventos (de 50 pacientes, ¿cuántos responden?). La Binomial es la suma de n Bernoullis.</p>
-<p><strong>¿Qué hace el puntaje Z?</strong> $Z = (X - \mu) / \sigma$ transforma cualquier normal a N(0,1). Un Z=2 significa "a 2 desviaciones estándar de la media". Permite comparar valores de distintas distribuciones.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Cuándo usarías Bernoulli vs Binomial?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  blockId="choice-estadistica-l04-rev-1"
+  allowContinueOnIncorrect
+  explanation="Bernoulli modela UN evento (¿este paciente responde?); Binomial cuenta éxitos en n eventos (de 50 pacientes, ¿cuántos responden?) y es la suma de n Bernoullis."
+  options={[
+    { id: "a", label: "Bernoulli para un evento y Binomial para contar éxitos en n eventos", correct: true, feedback: "¡Correcto! La Binomial suma n Bernoullis." },
+    { id: "b", label: "Bernoulli cuenta éxitos en n ensayos y Binomial modela uno", correct: false, feedback: "Los roles están invertidos." },
+    { id: "c", label: "Son idénticas cuando n=1, por eso no hay diferencia práctica", correct: false, feedback: "Bernoulli es el caso n=1 de la Binomial, pero el uso se distingue por pregunta." },
+    { id: "d", label: "Bernoulli se usa para contar y Binomial para probabilidad individual", correct: false, feedback: "Es al revés: Bernoulli es individual, Binomial es conteo." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué hace el puntaje Z? ($Z = (X - \mu) / \sigma$)"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  blockId="choice-estadistica-l04-rev-2"
+  allowContinueOnIncorrect
+  explanation="$Z = (X - \mu) / \sigma$ estandariza cualquier normal a N(0,1); un Z=2 indica 2 desviaciones estándar de la media y permite comparar valores de distintas distribuciones."
+  options={[
+    { id: "a", label: "Estandariza cualquier normal a N(0,1): Z=2 significa a 2 desviaciones estándar de la media", correct: true, feedback: "¡Correcto! Facilita comparar valores de distintas distribuciones." },
+    { id: "b", label: "Traslada la media a cero pero deja la varianza original", correct: false, feedback: "También divide por sigma: la varianza resultante es 1." },
+    { id: "c", label: "Iguala la varianza a cero y ajusta solo la media", correct: false, feedback: "La varianza resultante es 1, no 0." },
+    { id: "d", label: "Convierte datos categóricos a valores numéricos", correct: false, feedback: "El puntaje Z es para variables numéricas continuas, no categóricas." },
+  ]}
+/>
 
 </Section>
 
