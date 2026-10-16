@@ -141,8 +141,8 @@ print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
   blockId="reflection-l03-bayes-rare"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  prompt="El test tiene 95% de sensibilidad, pero un resultado positivo sólo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
-  answer="No, el test no es malo — ¡la enfermedad es rara! Con prevalencia del 1%, de 1000 personas sólo 10 tienen la enfermedad. El test detecta ~9.5 de esas 10 (95% sensibilidad), pero también marca falsamente ~99 de las 990 sanas (10% falsos positivos). De ~108 tests positivos, sólo ~9.5 son reales → ~8.8%. Esto se llama la paradoja de la tasa base: cuándo la condición es rara, la mayoría de los positivos son falsos positivos."
+  prompt="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
+  answer="No, el test no es malo: la enfermedad es rara. Con prevalencia del 1%, de 1000 personas solo 10 tienen la enfermedad. El test detecta ~9,5 de esas 10 (95% sensibilidad), pero también marca falsamente ~99 de las 990 sanas (falsos positivos del 10%). De ~108 tests positivos, solo ~9,5 son reales, es decir, ~8,8%. Esto se llama la paradoja de la tasa base: cuando la condición es rara, la mayoría de los positivos son falsos positivos."
 />
 
 </Section>
@@ -167,7 +167,7 @@ print(f"P(patogénica | detectada) = {p_pathogenic_given_detect:.3f}")
 ```
 
 <CalloutInfo>
-Incluso con 95% de precisión, una variante marcada cómo patogénica tiene sólo ~4.5% de probabilidad de serlo realmente. Esto explica por qué los genetistas siempre validan con estudios funcionales antes de diagnosticar.
+Incluso con 95% de precisión, una variante marcada cómo patogénica tiene solo ~4.5% de probabilidad de serlo realmente. Esto explica por qué los genetistas siempre validan con estudios funcionales antes de diagnosticar.
 </CalloutInfo>
 
 </Section>
@@ -193,7 +193,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   blockId="reflection-l03-churn-bayes"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  prompt="De los clientes marcados cómo 'en riesgo de cancelar', sólo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
+  prompt="De los clientes marcados cómo 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
   answer="Depende del costo de contactar vs el costo de perder un cliente. Si contactar es barato (email automático), conviene contactar a todos — rescatas al 80% de los qué iban a cancelar. Si contactar es caro (llamada de un account manager), quizás quieres un modelo más preciso. Es un trade-off clásico entre recall (detectar todos los qué cancelan) y precision (no molestar a los qué no van a cancelar)."
 />
 
@@ -206,7 +206,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 
 1. **Confundir $P(A|B)$ con $P(B|A)$** — la falacia del fiscal. Son cosas completamente diferentes.
 2. **Ignorar la tasa base** — Bayes muestra qué eventos raros siguen siendo raros incluso con evidencia positiva.
-3. **Asumir independencia sin verificar** — multiplicar probabilidades sólo funciona si los eventos son independientes.
+3. **Asumir independencia sin verificar** — multiplicar probabilidades solo funciona si los eventos son independientes.
 4. **Malinterpretar el valor p** — un valor p NO es la probabilidad de qué la hipótesis nula sea verdadera.
 </ConceptCard>
 
@@ -260,7 +260,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 <Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡Bayes es poderoso! Acabas de aprender la herramienta matemática más importante para razonar bajo incertidumbre. Todo el machine learning moderno — desde clasificadores naive Bayes hasta redes neuronales bayesianas — se construye sobre estas ideas.
+Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el machine learning moderno —desde clasificadores naive Bayes hasta redes neuronales bayesianas— se construye sobre estas ideas.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**

@@ -24,7 +24,7 @@ Quiz: quiz.md
 <Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
 <MascotMessage mood="celebrating">
-¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: aquí dejas de decirle a la computadora qué hacer y empiezas a enseñarle a descubrir patrones por sí misma.
+En este módulo comienzas a enseñarle a la computadora a descubrir patrones por sí misma. A diferencia de la programación tradicional, en la que escribes reglas explícitas, en el aprendizaje automático el modelo aprende las reglas a partir de los datos.
 </MascotMessage>
 
 Todos los días usas Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:

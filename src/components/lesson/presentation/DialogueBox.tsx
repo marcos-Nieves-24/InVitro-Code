@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { registerRevealAdvance } from "./RevealSequence";
 
 // ---------------------------------------------------------------------------
 // Avatars — 40x40 SVG, evolution of ConiAvatar from mascot-message.tsx
@@ -150,15 +151,29 @@ export function DialogueBox({
   const isLastLine = hasLines ? lineIndex === (lines as string[]).length - 1 : true;
   const hasChildrenFallback = !hasLines && children !== undefined;
 
-  // Reset typing when line changes
+  // Clamp lineIndex to a valid slot whenever lines shrinks at runtime so the
+  // counter never shows a slot beyond the available line range (e.g. "16 / 6").
+  const totalLines = hasLines ? (lines as string[]).length : 0;
+  useEffect(() => {
+    if (!hasLines || totalLines === 0) return;
+    setLineIndex((prev) => (prev >= totalLines ? totalLines - 1 : prev < 0 ? 0 : prev));
+  }, [hasLines, totalLines]);
+
+  // Reset typing when the active line changes or while typing is disabled.
   useEffect(() => {
     setTypedLen(0);
   }, [lineIndex, activeText]);
 
-  // Also reset lineIndex if lines identity changes externally
+  // Only reset to the first line when the lines identity actually changed AND
+  // we haven't started a manual progression; honour a re-mounted/untouched block.
+  const linesSigRef = useRef<string>("");
   useEffect(() => {
+    const sig = hasLines ? JSON.stringify(lines) : "";
+    if (sig === "" || sig === linesSigRef.current) return;
+    linesSigRef.current = sig;
     setLineIndex(0);
-  }, [lines]);
+    setTypedLen(0);
+  }, [hasLines, lines]);
 
   // Typing effect
   const shouldAnimateTyping = typing && !prefersReduced && activeText !== null;
@@ -174,10 +189,11 @@ export function DialogueBox({
     return () => window.clearTimeout(id);
   }, [shouldAnimateTyping, activeText, typedLen, typingSpeed]);
 
+  // Clamp displayed text to the valid range of the active line.
   const displayedText =
     activeText !== null
       ? shouldAnimateTyping
-        ? activeText.slice(0, typedLen)
+        ? activeText.slice(0, Math.min(typedLen, activeText.length))
         : activeText
       : null;
 
@@ -187,11 +203,6 @@ export function DialogueBox({
   const showContinueResolved = showContinue ?? Boolean(onNext);
 
   const handleAdvance = useCallback(() => {
-    if (isTypingInProgress) {
-      // Complete typing instantly on click
-      if (activeText !== null) setTypedLen(activeText.length);
-      return;
-    }
     if (hasLines) {
       if (!isLastLine) {
         setLineIndex((i) => i + 1);
@@ -201,7 +212,15 @@ export function DialogueBox({
     } else {
       onNext?.();
     }
-  }, [isTypingInProgress, activeText, hasLines, isLastLine, onNext]);
+  }, [hasLines, isLastLine, onNext]);
+
+  useEffect(() => {
+    if (!hasLines || isLastLine) return;
+    return registerRevealAdvance(() => {
+      handleAdvance();
+      return true;
+    });
+  }, [hasLines, isLastLine, handleAdvance]);
 
   const handleContainerClick = useCallback(
     (e: React.MouseEvent) => {
@@ -261,7 +280,7 @@ export function DialogueBox({
       tabIndex={canInteract ? 0 : undefined}
       onClick={canInteract ? handleContainerClick : undefined}
       onKeyDown={canInteract ? handleKeyDown : undefined}
-      className={`relative flex w-full items-start gap-3 md:gap-4 ${canInteract ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface" : ""}`}
+      className={`relative flex w-full items-start gap-3 md:gap-3.5 ${canInteract ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface" : ""}`}
     >
       {/* Avatar */}
       <div className="shrink-0 pt-1">
@@ -279,20 +298,20 @@ export function DialogueBox({
 
         {/* Bubble */}
         <div
-          className="relative rounded-[16px] border bg-surface-card px-5 py-4 shadow-md md:px-6 md:py-5"
+          className="relative rounded-[14px] border bg-surface-card px-4 py-3 shadow-md md:px-5 md:py-4"
           style={{
             borderColor: "var(--color-outline-variant, #e8ecf0)",
             boxShadow: "0 4px 16px var(--color-bubble-glow, rgba(163,207,205,0.35)), 0 1px 3px rgba(0,0,0,0.08)",
           }}
         >
           {/* Speaker label */}
-          <p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-brand-600">
+          <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
             {resolvedSpeaker}
           </p>
 
           {/* Content */}
           <div className="text-base leading-relaxed text-gray-700 md:text-lg">
-            {hasLines ? (
+            {hasLines && displayedText !== null && displayedText.length > 0 ? (
               <p className="m-0">
                 {displayedText}
                 {isTypingInProgress && (
@@ -303,45 +322,48 @@ export function DialogueBox({
                   />
                 )}
               </p>
-            ) : hasChildrenFallback ? (
+            ) : !hasLines && hasChildrenFallback ? (
               <div>{children}</div>
             ) : null}
           </div>
 
           {/* Progress + continue */}
-          <div className="mt-2 flex items-center justify-between gap-2">
-            {hasLines && (lines as string[]).length > 1 ? (
-              <span className="font-mono text-[10px] tracking-wide text-storm">
-                {lineIndex + 1} / {(lines as string[]).length}
+          <div className="mt-1.5 flex items-center justify-between gap-2">
+            {hasLines && (lines as string[]).length > 1 && !isLastLine ? (
+              <span className="font-mono text-xs tracking-wide text-storm">
+                {Math.min(lineIndex + 1, (lines as string[]).length)} / {(lines as string[]).length}
               </span>
             ) : (
               <span />
             )}
 
-            {showContinueResolved && onNext && (
-              <>
-                {isLastLine || !hasLines ? (
-                  <button
-                    type="button"
-                    data-dialogue-continue
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAdvance();
-                    }}
-                    className="inline-flex items-center gap-1 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
-                  >
-                    Continuar <span aria-hidden="true">→</span>
-                  </button>
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
-                  >
-                    <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
-                  </span>
-                )}
-              </>
-            )}
+            {hasLines && !isLastLine ? (
+              <span
+                aria-hidden="true"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
+              >
+                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
+              </span>
+            ) : hasLines && isLastLine && !(showContinueResolved && onNext) ? (
+              <span
+                aria-hidden="true"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
+              >
+                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar al siguiente paso
+              </span>
+            ) : showContinueResolved && onNext ? (
+              <button
+                type="button"
+                data-dialogue-continue
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAdvance();
+                }}
+                className="inline-flex items-center gap-1 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              >
+                Continuar <span aria-hidden="true">→</span>
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

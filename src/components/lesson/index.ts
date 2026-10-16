@@ -31,5 +31,8 @@ export { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureS
 export { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 export { PipelineStagesPlayer } from "@/components/anymotion/animations/PipelineStagesPlayer";
 export { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
+export { SupervisedFlowPlayer } from "@/components/anymotion/animations/SupervisedFlowPlayer";
+export { ConfusionMatrixPlayer } from "@/components/anymotion/animations/ConfusionMatrixPlayer";
+export { ModelComparePlayer } from "@/components/anymotion/animations/ModelComparePlayer";
 export { LessonVideo } from "./lesson-video";
 export { LabOfflineNotice } from "./LabOfflineNotice";

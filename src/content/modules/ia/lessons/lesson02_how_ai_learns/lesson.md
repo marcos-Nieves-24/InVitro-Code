@@ -19,55 +19,68 @@ Datasets Used: module01_ai_cell_features.csv
 
 <Section number={1} title="De reglas fijas a aprendizaje" eyebrow="INICIO">
 
+<RevealSequence>
+
+<div className="space-y-3">
 <MascotMessage>
 En la lección anterior viste que las reglas fijas tienen límites. Ahora vamos a ver cómo las máquinas realmente aprenden.
 </MascotMessage>
+<p className="m-0 text-base text-gray-700">En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.</p>
+</div>
 
-En la Lección 1 vimos que las reglas fijas no son suficientes para clasificar conidias. Hay demasiada variabilidad natural, demasiadas excepciones. Necesitamos algo que se adapte a los datos, no al revés.
-
+<ConceptCard variant="key-idea">
 Acá entra el **aprendizaje automático** (machine learning). En lugar de que un humano programe cada regla, le mostramos ejemplos a la máquina y ella *descubre* las reglas por sí misma.
 
-Pero... ¿cómo funciona ese "descubrimiento"? ¿Qué pasa adentro del algoritmo cuando "aprende"? Vamos a verlo con tres algoritmos fundamentales: frontera de decisión, KNN y regresión lineal. Después vamos a explorar un problema clave: el sobreajuste.
+Vamos a verlo con tres algoritmos fundamentales: **frontera de decisión**, **KNN** y **regresión lineal**, y exploraremos un desafío clave: el **sobreajuste**.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Aprendizaje supervisado" eyebrow="CONCEPTO">
 
-El tipo de aprendizaje que vamos a ver se llama **aprendizaje supervisado**. Funciona así:
+<RevealSequence>
 
-1. Tenemos un conjunto de **ejemplos etiquetados** (conidias con su especie)
-2. Cada ejemplo tiene **features** (área, circularidad, textura...)
-3. El algoritmo busca patrones que relacionen las features con la etiqueta
-4. Una vez que "aprendió", puede predecir la etiqueta de nuevas conidias no vistas
+<SupervisedFlow caption="Flujo del aprendizaje supervisado: de los ejemplos etiquetados a la predicción" />
 
-```
-Ejemplos de entrenamiento → Algoritmo → Modelo → Predicciones
-     (conidias + especie)                           (nuevas conidias)
-```
-
+<div className="space-y-3">
 <ConceptCard variant="definition">
 **Modelo**: es el resultado del aprendizaje. Una representación matemática de los patrones que el algoritmo encontró en los datos.
 </ConceptCard>
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<p className="m-0 mb-2 font-semibold text-gray-900">Pensalo así:</p>
+<ul className="m-0 list-disc space-y-1 pl-5">
+<li>Los <strong>datos de entrenamiento</strong> son como los ejercicios resueltos de un libro de texto</li>
+<li>El <strong>algoritmo</strong> es como el estudiante que estudia</li>
+<li>El <strong>modelo</strong> es el conocimiento que el estudiante adquirió</li>
+<li>Las <strong>predicciones</strong> son los ejercicios nuevos que el estudiante resuelve usando ese conocimiento</li>
+</ul>
+</div>
+</div>
 
-Pensalo así:
-- Los **datos de entrenamiento** son como los ejercicios resueltos de un libro de texto
-- El **algoritmo** es como el estudiante que estudia
-- El **modelo** es el conocimiento que el estudiante adquirió
-- Las **predicciones** son los ejercicios nuevos que el estudiante resuelve usando ese conocimiento
+</RevealSequence>
 
 </Section>
 
 <Section number={3} title="Frontera de decisión lineal" eyebrow="CONCEPTO">
 
-Empecemos con el algoritmo más simple: el **perceptrón**. Un perceptrón traza una línea recta para separar dos clases.
+<RevealSequence>
 
+<div className="space-y-3">
+<p className="m-0 text-base text-gray-700">Empecemos con el algoritmo más simple: el <strong>perceptrón</strong>. Un perceptrón traza una línea recta para separar dos clases.</p>
 <ConceptCard variant="key-idea">
 La **frontera de decisión** es la línea (o superficie) que separa diferentes clases en el espacio de características. Del lado azul, el modelo predice *Aspergillus*; del lado rojo, *Penicillium*.
 </ConceptCard>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Perceptrón en acción" eyebrow="INTERACTIVA">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="¿Qué ajusta el perceptrón para trazar la frontera que separa dos clases?"
@@ -86,25 +99,39 @@ La **frontera de decisión** es la línea (o superficie) que separa diferentes c
 
 <PerceptronTrainer />
 
-**¿Qué está pasando?**
-- Cada punto es una biopsia real de mama (círculo = benigno, triángulo = maligno)
-- El perceptrón traza una **frontera de decisión** lineal para separar las clases
-- La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos
-
-**Probá vos:**
-1. Ajustá la tasa de aprendizaje con el slider
-2. Presioná "Paso" para entrenar una muestra a la vez y ver cómo se actualizan los pesos
-3. Usá "Entrenar" para ver el aprendizaje automáticamente y "Pausar" para frenarlo
-4. Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética
-5. Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos
-
+<div className="space-y-3">
+<div className="grid gap-3 sm:grid-cols-2">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">¿Qué está pasando?</p>
+<ul className="m-0 list-disc space-y-1 pl-4">
+<li>Cada punto es una biopsia real de mama (círculo = benigno, triángulo = maligno)</li>
+<li>El perceptrón traza una <strong>frontera de decisión</strong> lineal para separar las clases</li>
+<li>La tasa de aprendizaje controla qué tan grande es cada ajuste de pesos</li>
+</ul>
+</div>
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">Probá vos:</p>
+<ol className="m-0 list-decimal space-y-1 pl-4">
+<li>Ajustá la tasa de aprendizaje con el slider</li>
+<li>Presioná &quot;Paso&quot; para entrenar una muestra a la vez y ver cómo se actualizan los pesos</li>
+<li>Usa &quot;Entrenar&quot; para ver el aprendizaje automáticamente y &quot;Pausar&quot; para frenarlo</li>
+<li>Hacé clic en un punto vacío del gráfico para predecir una muestra hipotética</li>
+<li>Fijate en la bitácora cuándo el modelo acierta y cuándo corrige sus pesos</li>
+</ol>
+</div>
+</div>
 <ConceptCard variant="key-idea">
 El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cuando su predicción es incorrecta, moviendo la frontera de decisión en la dirección correcta.
 </ConceptCard>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="¿Qué pasa si las clases no son separables linealmente y por qué el accuracy no llega al 100%?"
@@ -125,19 +152,28 @@ El perceptrón aprende **corrigiendo sus errores**: solo actualiza los pesos cua
 No todos los problemas se pueden resolver con una línea recta. Cuando las clases se mezclan, necesitamos algoritmos más flexibles.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="KNN: clasificar por cercanía" eyebrow="CONCEPTO">
 
-Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea como el perceptrón, KNN clasifica según los vecinos más cercanos. No aprende parámetros: simplemente recuerda los datos y consulta a los vecinos cuando llega un caso nuevo.
+<RevealSequence>
 
+<div className="space-y-3">
+<p className="m-0 text-base text-gray-700">Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea como el perceptrón, KNN clasifica según los vecinos más cercanos. No aprende parámetros: simplemente recuerda los datos y consulta a los vecinos cuando llega un caso nuevo.</p>
 <ConceptCard variant="definition">
 **KNN (K-Nearest Neighbors)**: el algoritmo mira los k puntos más cercanos al punto nuevo, cuenta cuántos son de cada clase, y asigna la clase mayoritaria.
 </ConceptCard>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="KNN en acción" eyebrow="INTERACTIVA">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="Si k=1 usamos el vecino más cercano y si subimos a k=15, ¿qué crees que pasa con la frontera de KNN?"
@@ -156,26 +192,40 @@ Ahora veamos un enfoque completamente diferente: en lugar de trazar una línea c
 
 <KnnTrainer />
 
-**¿Cómo funciona KNN?**
-1. El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)
-2. Elegí un valor de k con el slider — es la cantidad de vecinos que votan
-3. Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo
-4. Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo
-5. La zona sombreada muestra la **frontera de decisión**: de un lado KNN predice benigno, del otro maligno
-
-**Experimentá:**
-1. Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?
-2. Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?
-3. Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?
-4. Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?
-
+<div className="space-y-3">
+<div className="grid gap-3 sm:grid-cols-2">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">¿Cómo funciona KNN?</p>
+<ol className="m-0 list-decimal space-y-1 pl-4">
+<li>El gráfico muestra 569 biopsias reales de mama (círculo = benigno, triángulo = maligno)</li>
+<li>Elegí un valor de k con el slider — es la cantidad de vecinos que votan</li>
+<li>Hacé clic en cualquier parte del gráfico para posicionar un punto de prueba nuevo</li>
+<li>Los k vecinos más cercanos se resaltan y votan la clase del punto nuevo</li>
+<li>La zona sombreada muestra la <strong>frontera de decisión</strong></li>
+</ol>
+</div>
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">Experimentá:</p>
+<ol className="m-0 list-decimal space-y-1 pl-4">
+<li>Poné k=1 y mové el punto de prueba — ¿cómo es la frontera? ¿Y el accuracy de prueba?</li>
+<li>Subí k a 15 — ¿cómo cambia la frontera? ¿El accuracy de entreno y prueba se acercan?</li>
+<li>Mirá la curva de accuracy vs k: ¿dónde está el mejor k para este dataset?</li>
+<li>Compará con el perceptrón de la sección anterior: ¿qué algoritmo tiene mejor accuracy?</li>
+</ol>
+</div>
+</div>
 <ConceptCard variant="key-idea">
 KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perceptrón. Simplemente **recuerda** todos los datos y, para cada predicción nueva, consulta a los k vecinos más cercanos. La elección de k es un **hiperparámetro**: no lo aprende el algoritmo, lo elegimos nosotros.
 </ConceptCard>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="Clasificar un patógeno por similitud con aislamientos previos, ¿es clasificación o regresión? ¿Qué riesgo tiene k=1 con datos ruidosos?"
@@ -192,15 +242,20 @@ KNN no "entrena" en el sentido tradicional: no aprende parámetros como el perce
   ]}
 />
 
-Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si queremos predecir un **valor numérico**? Por ejemplo: "dada una concentración de fármaco antifúngico, ¿qué diámetro de halo de inhibición esperamos?"
-
+<div className="space-y-3">
+<p className="m-0 text-base text-gray-700">Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si queremos predecir un <strong>valor numérico</strong>? Por ejemplo: &quot;dada una concentración de fármaco antifúngico, ¿qué diámetro de halo de inhibición esperamos?&quot;</p>
 <ConceptCard variant="definition">
 **Clasificación** predice categorías discretas (Aspergillus/Penicillium). **Regresión** predice valores continuos (concentración, peso, temperatura).
 </ConceptCard>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Regresión lineal en acción" eyebrow="INTERACTIVA">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media?"
@@ -219,21 +274,34 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
 
 <RegressionTrainer />
 
-**¿Qué muestra?**
-- Cada punto es una biopsia real del dataset BCW: radio medio del núcleo vs. textura media del tejido
-- La recta es el **modelo de regresión lineal**: la mejor línea que pasa entre los 569 puntos
-- El **Error Cuadrático Medio (ECM)** mide qué tan lejos están los puntos de la recta — con datos reales, siempre hay dispersión
-- Las líneas verticales (residuales) muestran la distancia de cada punto a la recta
+<div className="grid gap-3 sm:grid-cols-2">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">¿Qué muestra?</p>
+<ul className="m-0 list-disc space-y-1 pl-4">
+<li>Cada punto es una biopsia real del dataset BCW: radio medio del núcleo vs. textura media del tejido</li>
+<li>La recta es el <strong>modelo de regresión lineal</strong>: la mejor línea que pasa entre los 569 puntos</li>
+<li>El <strong>Error Cuadrático Medio (ECM)</strong> mide qué tan lejos están los puntos de la recta</li>
+<li>Las líneas verticales (residuales) muestran la distancia de cada punto a la recta</li>
+</ul>
+</div>
+<div className="rounded-lg border border-gray-200 bg-surface-card p-3.5 text-xs text-gray-700">
+<p className="m-0 mb-1.5 font-semibold text-gray-900">Probá:</p>
+<ol className="m-0 list-decimal space-y-1 pl-4">
+<li>Mové los sliders de pendiente e intercepto para ajustar la recta manualmente</li>
+<li>Fijate cómo el ECM y R² cambian en vivo al mover la recta</li>
+<li>Presioná &quot;Calcular mejor recta&quot; para ver la solución óptima por mínimos cuadrados</li>
+<li>Usa &quot;Predecir&quot; para estimar la textura a partir de un valor de radio</li>
+</ol>
+</div>
+</div>
 
-**Probá:**
-1. Mové los sliders de pendiente e intercepto para ajustar la recta manualmente
-2. Fijate cómo el ECM y R² cambian en vivo al mover la recta
-3. Presioná "Calcular mejor recta" para ver la solución óptima por mínimos cuadrados
-4. Usá "Predecir" para estimar la textura a partir de un valor de radio
+</RevealSequence>
 
 </Section>
 
 <Section number={10} title="ECM y límites de la regresión" eyebrow="CONCEPTO">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radio→textura es tan bajo (≈0,10)?"
@@ -250,18 +318,23 @@ Hasta ahora clasificamos conidias en dos categorías. Pero ¿qué pasa si querem
   ]}
 />
 
+<div className="space-y-3">
 <ConceptCard variant="key-idea">
 La regresión lineal encuentra la relación lineal entre una variable independiente (radio medio) y una dependiente (textura media). La "mejor recta" minimiza el ECM — esto se llama **mínimos cuadrados**. Con datos reales, el R² rara vez es perfecto, y eso está bien: nos dice cuánta información aporta nuestra variable.
 </ConceptCard>
+<p className="m-0 text-sm text-gray-700">No toda relación es lineal; en biología muchas variables tienen relaciones complejas que una sola recta no puede capturar. Un R² bajo no significa que el modelo esté mal — significa que el problema es difícil, como casi siempre en datos reales.</p>
+</div>
 
-No toda relación es lineal; en biología muchas variables tienen relaciones complejas que una sola recta no puede capturar. Un R² bajo no significa que el modelo esté mal — significa que el problema es difícil, como casi siempre en datos reales.
+</RevealSequence>
 
 </Section>
 
 <Section number={11} title="Overfitting: interactive" eyebrow="INTERACTIVA">
 
-Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.
+<RevealSequence>
 
+<div className="space-y-3">
+<p className="m-0 text-sm text-gray-700">Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de generalizar.</p>
 <ChoiceQuestion
   question="Un modelo con error cero en entrenamiento, ¿generalizará bien a datos nuevos?"
   moduleSlug="ia"
@@ -276,62 +349,77 @@ Vamos a ver en vivo cómo la complejidad de un modelo afecta su capacidad de gen
     { id: "d", label: "Sí, porque entreno y prueba son siempre idénticos", correct: false, feedback: "Entreno y prueba son distintas muestras de la población; lo importante es rendir en datos no vistos." },
   ]}
 />
+</div>
 
 <Overfitting caption="Ajuste polinomial: arrastra el grado y mira cómo el error de validación se separa del de entrenamiento" />
 
-**¿Qué muestra este demo?**
-- El panel izquierdo muestra puntos de **entrenamiento** (azul) y **prueba** (rojo), con la curva de ajuste polinomial
-- El panel derecho muestra el **Error Cuadrático Medio (ECM)** para cada conjunto
-- La línea punteada gris es la **función real subyacente** — que el modelo nunca ve, igual que en la vida real
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<p className="m-0 mb-2 font-semibold text-gray-900">¿Qué muestra este demo?</p>
+<ul className="m-0 list-disc space-y-1 pl-5">
+<li>El panel izquierdo muestra puntos de <strong>entrenamiento</strong> (azul) y <strong>prueba</strong> (rojo), con la curva de ajuste polinomial</li>
+<li>El panel derecho muestra el <strong>Error Cuadrático Medio (ECM)</strong> para cada conjunto</li>
+<li>La línea punteada gris es la <strong>función real subyacente</strong> — que el modelo nunca ve, igual que en la vida real</li>
+</ul>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={12} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
 
-<Overfitting caption="Sube el grado y observa cómo cambia el régimen: subajuste, punto óptimo, sobreajuste" />
-
 <RevealSequence>
 
-<div>
-
-**1–2 (muy simple)** — **Subajuste** (underfitting). El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado *poco* expresivo.
-
+<div className="grid gap-3 sm:grid-cols-3">
+<div className="rounded-lg border border-amber-200 bg-amber-50/70 p-3.5 text-sm text-gray-800">
+<p className="m-0 mb-1 font-mono text-xs font-semibold text-amber-800">Grado 1–2 (muy simple)</p>
+<p className="m-0 font-semibold text-gray-900">Subajuste (underfitting)</p>
+<p className="mt-1 mb-0 text-xs text-gray-700">El modelo no captura la tendencia. Ambos errores (train y test) son altos. El modelo es demasiado poco expresivo.</p>
 </div>
-
-<div>
-
-**3–6 (balanceado)** — **Punto óptimo**. El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí.
-
+<div className="rounded-lg border border-teal-200 bg-teal-50/70 p-3.5 text-sm text-gray-800">
+<p className="m-0 mb-1 font-mono text-xs font-semibold text-teal-800">Grado 3–6 (balanceado)</p>
+<p className="m-0 font-semibold text-gray-900">Punto óptimo</p>
+<p className="mt-1 mb-0 text-xs text-gray-700">El modelo captura la tendencia general sin memorizar el ruido. Ambos errores son bajos y cercanos entre sí.</p>
 </div>
-
-<div>
-
-**8–15 (demasiado complejo)** — **Sobreajuste** (overfitting). El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser muy sensible al ruido, falla con datos nuevos (error test alto).
-
+<div className="rounded-lg border border-rose-200 bg-rose-50/70 p-3.5 text-sm text-gray-800">
+<p className="m-0 mb-1 font-mono text-xs font-semibold text-rose-800">Grado 8–15 (complejo)</p>
+<p className="m-0 font-semibold text-gray-900">Sobreajuste (overfitting)</p>
+<p className="mt-1 mb-0 text-xs text-gray-700">El modelo memoriza cada punto de entrenamiento (error train ~0), pero al ser sensible al ruido falla con datos nuevos (error test alto).</p>
 </div>
-
-</RevealSequence>
+</div>
 
 <ConceptCard variant="key-idea">
 El objetivo no es minimizar el error de entrenamiento. Es minimizar el error en datos **nuevos y no vistos**. El punto óptimo está en el equilibrio entre subajuste y sobreajuste.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={13} title="Analogía biotecnológica" eyebrow="CONCEPTO">
+
+<RevealSequence>
 
 <ConceptCard variant="warning">
 Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu termociclador, con tus reactivos, en tu mesada del laboratorio — pero falla cuando otro laboratorio lo replica. Memorizaste las condiciones específicas de tu entorno (temperatura exacta del termociclador, marca de la polimerasa, humedad ambiental) en lugar de aprender el principio biológico general. El modelo, como el protocolo, necesita generalizar, no memorizar.
 </ConceptCard>
 
-**La solución**:
-- **Train/test split**: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.
-- **Validación cruzada**: probar el modelo en múltiples particiones de los datos
-- **Modelos más simples**: a veces menos es más (navaja de Occam)
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<p className="m-0 mb-2 font-semibold text-gray-900">La solución:</p>
+<ul className="m-0 list-disc space-y-1.5 pl-5">
+<li><strong>Train/test split</strong>: separar los datos en entrenamiento y prueba. El modelo solo ve los de entrenamiento. Probamos en los de prueba.</li>
+<li><strong>Validación cruzada</strong>: probar el modelo en múltiples particiones de los datos</li>
+<li><strong>Modelos más simples</strong>: a veces menos es más (navaja de Occam)</li>
+</ul>
+</div>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={14} title="Overfitting: reflexión final" eyebrow="CONCEPTO">
+
+<RevealSequence>
 
 <ChoiceQuestion
   question="Un modelo con 99% en entreno y 60% en test — ¿qué es y cuál preferirías para diagnosticar una infección?"
@@ -347,6 +435,8 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
     { id: "d", label: "Ambos modelos son equivalentes, da igual cuál usar", correct: false, feedback: "No: el que generaliza es más seguro en clínica." },
   ]}
 />
+
+</RevealSequence>
 
 </Section>
 
@@ -432,10 +522,16 @@ Un modelo sobreajustado es como un protocolo de PCR que funciona solo en tu term
 
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
 
+<RevealSequence>
+
 <MascotMessage mood="celebrating">
-Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entendés cómo aprenden las máquinas.
+Tres algoritmos, un problema fundamental (overfitting) y las herramientas para resolverlo. Ya entiendes cómo aprenden las máquinas.
 </MascotMessage>
 
-Ahora que entendés cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+<ConceptCard variant="key-idea">
+Ahora que entiendes cómo aprenden los algoritmos, en la Lección 3 vamos a ver aplicaciones concretas en biotecnología: AlphaFold para predicción de estructuras de proteínas, cómo se visualizan moléculas en 3D con datos de PDB, y el pipeline completo de un proyecto de ML aplicado a la microbiología.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>

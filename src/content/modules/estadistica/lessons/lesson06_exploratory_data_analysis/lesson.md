@@ -30,7 +30,7 @@ El 80% del trabajo de un científico de datos es entender y limpiar los datos. S
 EDA es el proceso de examinar datos antes de modelar: detectar patrones, valores faltantes, outliers, y relaciones entre variables. Un buen EDA puede ahorrarte semanas de debugging de modelos mal alimentados.
 
 <ConceptCard variant="key-idea">
-EDA no es un paso opcional. Es la diferencia entre un modelo qué funciona en producción y uno qué falla silenciosamente con datos qué nunca entendiste.
+EDA no es un paso opcional. Es la diferencia entre un modelo que funciona en producción y uno que falla silenciosamente, porque los datos nunca se entendieron.
 </ConceptCard>
 
 </Section>
@@ -180,7 +180,7 @@ expression_filled = expression.fillna(expression.median())
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
   prompt="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
-  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué sólo puedes verificar con EDA. Si modelas primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitas transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
+  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué solo puedes verificar con EDA. Si modelas primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitas transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
 />
 
 </Section>
@@ -208,7 +208,7 @@ expression_filled = expression.fillna(expression.median())
 <Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
 <MascotMessage mood="celebrating">
-¡EDA dominado! Ahora tienes el superpoder de entender cualquier dataset antes de tocarlo. Esto te diferencia del 90% de los principiantes qué corren `.fit()` sin mirar los datos.
+EDA completado. Ahora tienes el hábito de comprender cualquier dataset antes de modelarlo. Esto te diferencia del principiante que ejecuta `.fit()` sin revisar los datos.
 </MascotMessage>
 
 **En la Lección 7** vamos a entrar en una de las técnicas más elegantes del ML: **PCA (Análisis de Componentes Principales)**. ¿Cómo reducir 100 dimensiones a 2 sin perder la información importante? Te va a volar la cabeza.

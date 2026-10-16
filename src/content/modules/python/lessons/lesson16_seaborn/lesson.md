@@ -287,7 +287,7 @@ plt.show()
 1. **Olvidar importar matplotlib**: Seaborn necesita `plt.show()` para mostrar gráficos
 2. **Sobrescribir los estilos de Seaborn**: Configurar estilos de Matplotlib después de importar seaborn puede causar conflictos
 3. **Usar Seaborn para todo**: Algunos gráficos (como líneas con muchas series) son mejores con Matplotlib puro
-4. **Ignorar los parámetros `hue` y `style`**: Estos hacen poderoso a Seaborn — ¡úsalos!
+4. **Ignorar los parámetros `hue` y `style`**: estos parámetros son los que potencian a Seaborn, por lo que conviene utilizarlos.
 5. **No usar DataFrames de Pandas**: Seaborn funciona mejor con DataFrames; usar arrays crudos pierde funcionalidad
 
 ## Buenas Prácticas

@@ -556,7 +556,7 @@ export function SpeciesComparePlayer({
               type="button"
               onClick={() => setFeature(row.feature)}
               aria-pressed={active}
-              className={`min-h-9 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
+              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
                 active
                   ? "border-mint bg-mint/20 text-mint"
                   : "border-white/20 bg-white/5 text-storm hover:border-mint/60 hover:text-mint"
@@ -584,7 +584,7 @@ export function SpeciesComparePlayer({
         </span>
       </div>
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>}
     </figure>
   );
 }
