@@ -21,38 +21,82 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Bosque Aleatorio
+
 <Section number={1} title="100 médicos piensan mejor que uno" eyebrow="INICIO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un árbol solo es inestable y sobreajusta.",
+    "Si entrenas 100 árboles con variaciones aleatorias y los pones a votar, el resultado es robusto.",
+    "Esto es un ensemble: combinar modelos débiles para crear uno fuerte.",
+    "Es el caballo de batalla del ML supervisado.",
+  ]}
+/>
 
 <MascotMessage mood="celebrating">
 El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La razón? Funciona bien casi siempre, sin requerir mucho ajuste. Es el "caballo de batalla" del ML supervisado.
 </MascotMessage>
 
-Un árbol de decisión solo es inestable y sobreajusta. Pero si entrenas 100 árboles con variaciones aleatorias de los datos y los pones a votar, el resultado es sorprendentemente robusto. Esto es un **ensemble**: combinar modelos débiles para crear uno fuerte.
-
 <ConceptCard variant="key-idea">
 **Bagging (Bootstrap Aggregating):** Tomas muchas muestras bootstrap de tus datos, entrenas un árbol en cada una, y promedias (regresión) o haces votación mayoritaria (clasificación). La magia: cada árbol tiene varianza alta, pero el promedio de B árboles reduce la varianza ~B veces sin aumentar el sesgo.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Dos fuentes de aleatoriedad" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Aleatoriedad 1", left: "Cada árbol se entrena con una muestra bootstrap diferente (~63% de los datos, con reemplazo)" },
-    { feature: "Aleatoriedad 2", left: "En cada división del árbol, solo se considera un subconjunto aleatorio de features (√p para clasificación, p/3 para regresión)" },
-    { feature: "¿Por qué dos?", left: "Si solo usáramos bootstrap, los árboles todavía estarían correlacionados (las features más fuertes dominarían). La segunda aleatoriedad fuerza diversidad real." },
-    { feature: "Resultado", left: "Árboles descorrelacionados que cometen errores en distintas direcciones → el promedio es mucho mejor que cualquiera individual." },
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El bosque mezcla dos fuentes de azar para descorrelacionar árboles.",
+    "Bootstrap cambia los datos; la selección aleatoria de features cambia las preguntas.",
+    "Así los árboles cometen errores en direcciones distintas.",
   ]}
 />
+
+{/* candidate-player: comparison-fuentes-aleatoriedad */}
+<ConceptCard variant="key-idea">
+**Dos fuentes de aleatoriedad**
+- Aleatoriedad 1: cada árbol se entrena con una muestra bootstrap diferente (~63% de los datos, con reemplazo).
+- Aleatoriedad 2: en cada división del árbol, solo se considera un subconjunto aleatorio de features (√p para clasificación, p/3 para regresión).
+- ¿Por qué dos?: si solo usáramos bootstrap, los árboles todavía estarían correlacionados (las features más fuertes dominarían). La segunda aleatoriedad fuerza diversidad real.
+- Resultado: árboles descorrelacionados que cometen errores en distintas direcciones → el promedio es mucho mejor que cualquiera individual.
+</ConceptCard>
 
 <ConceptCard variant="definition">
 **OOB (Out-of-Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out-of-bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtienes una estimación de rendimiento sin necesidad de dividir train/test.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Importancia de características: el superpoder del RF" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El bosque no solo predice: te dice qué features importan.",
+    "Consistencia en cientos de árboles da confianza a la importancia.",
+    "Cuidado con features correlacionadas: la importancia se reparte.",
+  ]}
+/>
 
 El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclas aleatoriamente cada feature:
 
@@ -75,9 +119,13 @@ La importancia por permutación del RF es más confiable que la importancia de u
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Tu primer Bosque Aleatorio" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -109,9 +157,13 @@ print(importance)
 Ni siquiera necesitas un conjunto de validación separado: el OOB score te da una estimación honesta del rendimiento. Si OOB ≈ test accuracy, sabes que no hay fuga de datos y el modelo generaliza bien.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="RF vs Árbol individual" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -140,9 +192,24 @@ print(tree_imp.sort_values('forest', ascending=False).head(10))
 El RF casi siempre supera al árbol individual. La diferencia es más notable cuando hay mucho ruido en los datos. Si el RF no mejora significativamente al árbol, probablemente tus datos son muy simples o tienes pocas features.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Biotecnología: genómica y biomarcadores" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En descubrimiento de fármacos tienes miles de genes y cientos de pacientes.",
+    "El bosque maneja p >> n y selecciona features automáticamente.",
+    "Un RF no asume linealidad: captura interacciones entre genes.",
+  ]}
+/>
 
 En descubrimiento de fármacos, tienes datos de expresión de miles de genes pero solo cientos de pacientes. El RF brilla en este escenario:
 
@@ -154,9 +221,13 @@ En descubrimiento de fármacos, tienes datos de expresión de miles de genes per
 En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para identificar variantes genéticas asociadas a enfermedades sin asumir linealidad. Un modelo lineal te dice "el gen A aumenta el riesgo en 20%". Un RF te dice "el gen A importa, pero su efecto depende de los genes B y C".
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Errores comunes" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Pocos árboles.** Con n_estimators=10 dejas mucha varianza sin reducir. Empieza con 100 y sube si tienes recursos. Después de ~500 árboles, la mejora marginal es mínima.
@@ -168,31 +239,35 @@ En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para
 4. **Ignorar max_features.** El default (sqrt(p)) suele funcionar, pero en datasets con muchas features ruidosas, reducirlo fuerza más diversidad.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria de features. Reduce la varianza drásticamente sin aumentar el sesgo. El OOB da validación gratis. La feature importance es confiable. Es el algoritmo "default" para problemas tabulares supervisados.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "Ensemble", def: "Combinar múltiples modelos para superar a cualquiera individual" },
-    { term: "Bagging", def: "Bootstrap + agregación: entrenar en muestras bootstrap y promediar" },
-    { term: "OOB", def: "Estimación de rendimiento con datos no usados en el bootstrap" },
-    { term: "n_estimators", def: "Cantidad de árboles. Más = mejor (hasta cierto punto)" },
-    { term: "max_features", def: "Cuántas features considerar por split. Clave para diversidad" },
-  ]}
-/>
+{/* candidate-player: interactive-table-glosario-random-forest */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- **Ensemble:** combinar múltiples modelos para superar a cualquiera individual.
+- **Bagging:** bootstrap + agregación: entrenar en muestras bootstrap y promediar.
+- **OOB:** estimación de rendimiento con datos no usados en el bootstrap.
+- **n_estimators:** cantidad de árboles. Más = mejor (hasta cierto punto).
+- **max_features:** cuántas features considerar por split. Clave para diversidad.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<RevealSequence mode="appear">
 
 <ChoiceQuestion
   question="¿Por qué un Bosque Aleatorio con 500 árboles de profundidad 3 puede tener mejor rendimiento que un solo árbol de profundidad 15?"
@@ -246,5 +321,7 @@ for i in range(1, len(oob_scores)):
     print(f"{n_trees[i-1]} → {n_trees[i]}: mejora = {improvement:.5f}")`}
   height="380px"
 />
+
+</RevealSequence>
 
 </Section>
