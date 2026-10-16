@@ -193,10 +193,35 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   ]}
 />
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Cuándo usarías Bernoulli vs Binomial?</strong> Bernoulli para UN evento (¿este paciente responde?). Binomial para contar éxitos en n eventos (de 50 pacientes, ¿cuántos responden?). La Binomial es la suma de n Bernoullis.</p>
-<p><strong>¿Qué hace el puntaje Z?</strong> $Z = (X - \mu) / \sigma$ transforma cualquier normal a N(0,1). Un Z=2 significa "a 2 desviaciones estándar de la media". Permite comparar valores de distintas distribuciones.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Cuándo usarías Bernoulli vs Binomial?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  blockId="choice-estadistica-l04-rev-1"
+  allowContinueOnIncorrect
+  explanation="Bernoulli modela UN evento (¿este paciente responde?); Binomial cuenta éxitos en n eventos (de 50 pacientes, ¿cuántos responden?) y es la suma de n Bernoullis."
+  options={[
+    { id: "a", label: "Bernoulli para un evento y Binomial para contar éxitos en n eventos", correct: true, feedback: "¡Correcto! La Binomial suma n Bernoullis." },
+    { id: "b", label: "Bernoulli cuenta éxitos en n ensayos y Binomial modela uno", correct: false, feedback: "Los roles están invertidos." },
+    { id: "c", label: "Son idénticas cuando n=1, por eso no hay diferencia práctica", correct: false, feedback: "Bernoulli es el caso n=1 de la Binomial, pero el uso se distingue por pregunta." },
+    { id: "d", label: "Bernoulli se usa para contar y Binomial para probabilidad individual", correct: false, feedback: "Es al revés: Bernoulli es individual, Binomial es conteo." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué hace el puntaje Z? ($Z = (X - \mu) / \sigma$)"
+  moduleSlug="estadistica"
+  lessonSlug="lesson04_statistical_distributions"
+  blockId="choice-estadistica-l04-rev-2"
+  allowContinueOnIncorrect
+  explanation="$Z = (X - \mu) / \sigma$ estandariza cualquier normal a N(0,1); un Z=2 indica 2 desviaciones estándar de la media y permite comparar valores de distintas distribuciones."
+  options={[
+    { id: "a", label: "Estandariza cualquier normal a N(0,1): Z=2 significa a 2 desviaciones estándar de la media", correct: true, feedback: "¡Correcto! Facilita comparar valores de distintas distribuciones." },
+    { id: "b", label: "Traslada la media a cero pero deja la varianza original", correct: false, feedback: "También divide por sigma: la varianza resultante es 1." },
+    { id: "c", label: "Iguala la varianza a cero y ajusta solo la media", correct: false, feedback: "La varianza resultante es 1, no 0." },
+    { id: "d", label: "Convierte datos categóricos a valores numéricos", correct: false, feedback: "El puntaje Z es para variables numéricas continuas, no categóricas." },
+  ]}
+/>
 
 </Section>
 

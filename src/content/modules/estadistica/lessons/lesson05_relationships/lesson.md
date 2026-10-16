@@ -181,9 +181,20 @@ Siempre pregúntate: ¿hay una tercera variable qué explique ambas? ¿Podría s
   ]}
 />
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué preferirías Spearman sobre Pearson para datos de ingresos?</strong> Los ingresos son extremadamente sesgados a la derecha (pocas personas ganan muchísimo). Pearson es sensible a esos outliers extremos, mientras qué Spearman usa rangos y les da a todos el mismo peso relativo. Spearman te da la correlación 'real' entre la posición relativa de las personas, no entre sus valores absolutos.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Por qué preferirías Spearman sobre Pearson para datos de ingresos?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson05_relationships"
+  blockId="choice-estadistica-l05-rev-1"
+  allowContinueOnIncorrect
+  explanation="Los ingresos son extremadamente sesgados a la derecha (pocas personas ganan muchísimo): Pearson es sensible a esos outliers extremos, mientras Spearman usa rangos y les da a todos el mismo peso relativo."
+  options={[
+    { id: "a", label: "Porque Spearman usa rangos y resiste los outliers extremos de ingresos", correct: true, feedback: "¡Correcto! Pearson se dispara con las colas largas de ingresos." },
+    { id: "b", label: "Porque Pearson solo sirve para distribuciones discretas", correct: false, feedback: "Pearson sirve para relaciones lineales; el problema es su sensibilidad a outliers." },
+    { id: "c", label: "Porque Spearman mide solo relaciones lineales, mejor para ingresos", correct: false, feedback: "Spearman mide relaciones monótonas, no solo lineales." },
+    { id: "d", label: "Porque Pearson usa rangos y por eso es robusto a outliers", correct: false, feedback: "Es al revés: Spearman usa rangos, Pearson valores absolutos." },
+  ]}
+/>
 
 </Section>
 
