@@ -1,0 +1,21 @@
+Supabase DPA — Receipt de referencia (CSR, no descargable por curl)
+====================================================================
+URL: https://supabase.com/legal/dpa
+URL alternativa (mismo contenido): https://supabase.com/legal/customer-resources/data-processing-addendum
+Fecha de captura: 2026-10-16
+Método: Verificación manual en navegador (la página es CSR/Next.js, curl devuelve shell vacío)
+
+Contenido verificado vía webfetch el 2026-10-16:
+- Título: "Data Processing Addendum" — Version 1 — August 1, 2026
+- Primer párrafo: "This Data Processing Addendum (the "DPA") supplements and forms
+  part of the Supabase Terms of Service available at https://supabase.com/terms"
+- Es un DPA por referencia (incorporated by reference), sin botón de aceptación.
+  Al usar Supabase bajo sus Terms, el DPA ya aplica automáticamente.
+
+Instrucciones para actualizar:
+1. Abrir https://supabase.com/legal/dpa en el navegador
+2. Ctrl+P → Guardar como PDF → legal/receipts/supabase-dpa-YYYY-MM-DD-vN.pdf
+3. Correr: node scripts/verify-receipts.mjs
+
+Nota: Este .txt es el receipt temporal. Reemplazar por el PDF/HTML real
+cuando se genere manualmente. El hash de este .txt NO es el hash del DPA.
