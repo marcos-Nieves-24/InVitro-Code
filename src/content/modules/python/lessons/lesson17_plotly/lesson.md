@@ -516,27 +516,56 @@ Dash Bio extiende Plotly con componentes bioinformáticos: AlignmentChart, Needl
   ]}
 />
 
-- Plotly Express (`px`) para creación rápida de gráficos interactivos
-- Graph Objects (`go`) para control total traza por traza
-- `fig.show()` renderiza en el navegador o en Jupyter
-- `fig.write_html()` exporta a archivo HTML standalone
-- `make_subplots()` para dashboards multi-panel
-- `update_layout()` y `update_traces()` para personalizar cualquier figura
-- Menús desplegables (`updatemenus`) y sliders (`rangeslider`) para interactividad
-- Kaleido necesario para exportar a PNG/SVG
+<ConceptCard variant="key-idea">
+Plotly combina interactividad (hover, zoom, dropdowns) con dos APIs: Express para crear rápido y Graph Objects para control fino traza por traza.
+</ConceptCard>
 
-**Términos clave**
+<FeatureButtonList
+  features={[
+    { id: "plotly-express", label: "Plotly Express", detail: "px para creación rápida de gráficos interactivos." },
+    { id: "graph-objects", label: "Graph Objects", detail: "go para control total traza por traza." },
+    { id: "fig-show", label: "fig.show()", detail: "Renderiza en el navegador o en Jupyter." },
+    { id: "fig-write-html", label: "fig.write_html()", detail: "Exporta a archivo HTML standalone." },
+    { id: "make-subplots", label: "make_subplots()", detail: "Dashboards multi-panel." },
+    { id: "update-layout-traces", label: "update_layout/update_traces", detail: "Personalizan cualquier figura." },
+    { id: "menus-sliders", label: "Menús y sliders", detail: "updatemenus y rangeslider para interactividad." },
+    { id: "kaleido", label: "Kaleido", detail: "Necesario para exportar a PNG/SVG." },
+  ]}
+/>
 
-- **Trace**: una capa visual en la figura (Scatter, Bar, Heatmap, etc.)
-- **Layout**: configuración global de la figura (título, ejes, template)
-- **Figure**: objeto contenedor con data + layout
-- **Plotly Express**: API de alto nivel para creación rápida
-- **Graph Objects**: API de bajo nivel para control fino
-- **Kaleido**: motor de renderizado estático para exportar imágenes
-- **Dash**: framework para apps web basado en Plotly
-- **updatemenu**: menú desplegable interactivo
-- **rangeslider**: slider para navegar rangos en el eje X
-- **hovertemplate**: plantilla para personalizar tooltips
+<FeatureButtonList
+  features={[
+    { id: "trace", label: "Trace", detail: "Una capa visual en la figura (Scatter, Bar, Heatmap, etc.)." },
+    { id: "layout", label: "Layout", detail: "Configuración global de la figura (título, ejes, template)." },
+    { id: "figure", label: "Figure", detail: "Objeto contenedor con data + layout." },
+    { id: "plotly-express-g", label: "Plotly Express", detail: "API de alto nivel para creación rápida." },
+    { id: "graph-objects-g", label: "Graph Objects", detail: "API de bajo nivel para control fino." },
+    { id: "kaleido-g", label: "Kaleido", detail: "Motor de renderizado estático para exportar imágenes." },
+    { id: "dash", label: "Dash", detail: "Framework para apps web basado en Plotly." },
+    { id: "updatemenu", label: "updatemenu", detail: "Menú desplegable interactivo." },
+    { id: "rangeslider", label: "rangeslider", detail: "Slider para navegar rangos en el eje X." },
+    { id: "hovertemplate", label: "hovertemplate", detail: "Plantilla para personalizar tooltips." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué motor necesita Plotly para exportar figuras a PNG o SVG?"
+  moduleSlug="python"
+  lessonSlug="lesson17_plotly"
+  blockId="choice-python-l17-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Kaleido es el motor de renderizado estático que permite escribir imágenes desde una Figure."
+  options={[
+    { id: "a", label: "Kaleido", correct: true, feedback: "¡Exacto! Sin Kaleido no se pueden exportar imágenes estáticas." },
+    { id: "b", label: "Matplotlib", correct: false, feedback: "Plotly no usa Matplotlib para exportar." },
+    { id: "c", label: "Dash", correct: false, feedback: "Dash es para apps web, no para render estático." },
+    { id: "d", label: "Pillow", correct: false, feedback: "Pillow no es el motor de Plotly." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Plotly completo! El bloque de visualización quedó listo: llevá estos gráficos interactivos a los módulos de Estadística y Machine Learning.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

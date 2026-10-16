@@ -378,23 +378,52 @@ plt.show()
   ]}
 />
 
-- Seaborn provee visualizaciones estadísticas de alto nivel
-- Gráficos clave: scatterplot, boxplot, violinplot, pairplot, heatmap
-- Integración nativa con Pandas — funciona directamente con DataFrames
-- Temas profesionales y paletas de colores predeterminados
-- Agregación estadística incorporada (intervalos de confianza, etc.)
-- Fácilmente personalizable con funciones de Matplotlib
+<ConceptCard variant="key-idea">
+Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel con defaults inteligentes, agregación incorporada y trabajo directo sobre DataFrames.
+</ConceptCard>
 
-**Términos clave**
+<FeatureButtonList
+  features={[
+    { id: "visualizaciones", label: "Visualizaciones", detail: "Provee visualizaciones estadísticas de alto nivel." },
+    { id: "graficos-clave", label: "Gráficos clave", detail: "scatterplot, boxplot, violinplot, pairplot y heatmap." },
+    { id: "integracion-pandas", label: "Integración Pandas", detail: "Integración nativa con Pandas — funciona directamente con DataFrames." },
+    { id: "temas", label: "Temas y paletas", detail: "Temas profesionales y paletas de colores predeterminados." },
+    { id: "agregacion", label: "Agregación estadística", detail: "Incorporada (intervalos de confianza, etc.)." },
+    { id: "personalizacion", label: "Personalización", detail: "Fácilmente personalizable con funciones de Matplotlib." },
+  ]}
+/>
 
-- **Seaborn**: librería de visualización estadística de datos
-- **Hue**: variable categórica codificada por color
-- **Pairplot**: matriz de gráficos de dispersión para todos los pares de variables
-- **Heatmap**: matriz de valores codificada por color
-- **Box plot**: resumen estadístico de distribución (cuartiles, outliers)
-- **Violin plot**: box plot + estimación de densidad kernel
-- **Facet**: subgráfico basado en valores de variables
-- **Paleta**: esquema de colores para datos categóricos o continuos
+<FeatureButtonList
+  features={[
+    { id: "seaborn", label: "Seaborn", detail: "Librería de visualización estadística de datos." },
+    { id: "hue", label: "Hue", detail: "Variable categórica codificada por color." },
+    { id: "pairplot", label: "Pairplot", detail: "Matriz de gráficos de dispersión para todos los pares de variables." },
+    { id: "heatmap", label: "Heatmap", detail: "Matriz de valores codificada por color." },
+    { id: "box-plot", label: "Box plot", detail: "Resumen estadístico de distribución (cuartiles, outliers)." },
+    { id: "violin-plot", label: "Violin plot", detail: "Box plot + estimación de densidad kernel." },
+    { id: "facet", label: "Facet", detail: "Subgráfico basado en valores de variables." },
+    { id: "paleta", label: "Paleta", detail: "Esquema de colores para datos categóricos o continuos." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué codifica el parámetro `hue` en un gráfico de Seaborn?"
+  moduleSlug="python"
+  lessonSlug="lesson16_seaborn"
+  blockId="choice-python-l16-resumen-1"
+  allowContinueOnIncorrect
+  explanation="`hue` asigna un color distinto a cada categoría de una variable, útil para comparar grupos."
+  options={[
+    { id: "a", label: "Una variable categórica por color", correct: true, feedback: "¡Exacto! hue separa grupos con colores." },
+    { id: "b", label: "El tamaño de los marcadores", correct: false, feedback: "El tamaño lo controla `size`, no hue." },
+    { id: "c", label: "El estilo de línea", correct: false, feedback: "El estilo lo controla `style`." },
+    { id: "d", label: "El eje vertical (y)", correct: false, feedback: "El eje y lo determina la variable y, no hue." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡EDA visual dominada! Plotly añade interactividad a estos gráficos — la próxima lección.
+</MascotMessage>
 
 </RevealSequence>
 </Section>
