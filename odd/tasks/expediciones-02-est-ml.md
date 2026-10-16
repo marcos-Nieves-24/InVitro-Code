@@ -17,9 +17,9 @@
 - [x] **E2 — est04,05,06** | S1-S4 | route: delegated (writer Beam) | evidencia: 11,10,10 Sec==Rev, 0 tablas, type-check verde | status: done
 - [x] **E3 — est07,08,09,10** | S1-S4 | route: delegated (writer Beam) | evidencia: 8,9,9,9 Sec==Rev, 0 tablas, type-check verde | status: done
 - [x] **E4 — ML01,02,03** | S1-S4 | route: delegated (writer Beam) | evidencia: 16,13,12 Sec==Rev, 0 tablas, type-check verde | status: done
-- [ ] **E5 — ML04,05,06** | S1-S4 | route: delegated (writer Beam) | status: pending (wave 2)
-- [ ] **E6 — ML07,08,09,10** | S1-S4 | route: delegated (writer Beam) | status: pending (wave 2)
-- [ ] **E7 — Verificación + commit final** | S5 | route: parent | status: pending
+- [x] **E5 — ML04,05,06** | S1-S4 | route: delegated (writer Beam) | evidencia: Sec==Rev (11,9,8), 0 tablas, quizzes preservados, type-check verde | status: done
+- [x] **E6 — ML07,08,09,10** | S1-S4 | route: delegated (writer Beam) | evidencia: Sec==Rev (7,7,6,6), 0 tablas, ML08/09 con quiz nuevo (e2-1), type-check verde | status: done
+- [x] **E7 — Verificación + commit final** | S5 | route: parent | evidencia: Sec==Rev en las 20, 0 tablas/sueltos, quizzes ok (ML08/09 con quiz nuevo), type-check verde, assess `passive` wave1+wave2 | status: done (2026-10-16)
 
 ## Log
 

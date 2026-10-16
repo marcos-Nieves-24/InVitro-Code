@@ -21,7 +21,23 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Clustering K-Means
+
 <Section number={1} title="Descubrir grupos sin etiquetas" eyebrow="INICIO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Hasta ahora siempre tenías etiquetas: sabías qué era maligno y qué benigno.",
+    "Pero si no tienes etiquetas, los datos igual guardan estructura.",
+    "K-Means encuentra grupos sin una respuesta correcta conocida.",
+    "Es pura exploración, sin supervisión.",
+  ]}
+/>
 
 <MascotMessage mood="thinking">
 Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tienes etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
@@ -33,9 +49,24 @@ Hasta aquí todo fue **aprendizaje supervisado**: tenías features (X) y etiquet
 K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, rápido, y sorprendentemente efectivo para segmentación de clientes, descubrimiento de subtipos de enfermedades, y compresión de imágenes.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={2} title="El algoritmo en 4 pasos" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "No supervisado significa solo features, sin etiquetas.",
+    "K-Means asigna puntos al centroide más cercano y actualiza centros.",
+    "Repite hasta que los centroides se estabilizan.",
+  ]}
+/>
 
 1. **Elige K:** ¿Cuántos grupos quieres encontrar?
 2. **Inicializa:** Pon K centroides en posiciones aleatorias
@@ -53,16 +84,31 @@ El algoritmo minimiza la **inercia** (suma de distancias al cuadrado dentro de c
 
 $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="¿Cuántos clústeres? El problema de elegir K" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Método del codo", left: "Graficas inercia vs K. Donde la curva hace \"codo\" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro." },
-    { feature: "Puntaje de silueta", left: "Mide qué tan similar es cada punto a su propio clúster vs. el clúster más cercano. Varía de -1 a 1. Más alto = mejor separación. Más objetivo que el codo." },
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Elegir K es el arte del clustering.",
+    "El codo muestra la inercia y la silueta mide la separación.",
+    "Si la silueta es menor a 0.25, puede que no haya clusters reales.",
   ]}
 />
+
+{/* candidate-player: comparison-codo-vs-silueta */}
+<ConceptCard variant="key-idea">
+**Método del codo vs puntaje de silueta**
+- Método del codo: graficas inercia vs K. Donde la curva hace "codo" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro.
+- Puntaje de silueta: mide qué tan similar es cada punto a su propio clúster vs. el clúster más cercano. Varía de -1 a 1. Más alto = mejor separación. Más objetivo que el codo.
+</ConceptCard>
 
 $$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
 
@@ -73,9 +119,13 @@ $$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
 Regla práctica: prueba K desde 2 hasta ~10, calcula silueta para cada uno, y elige el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen — tus datos no tienen estructura de grupos.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Visualiza K-Means en acción" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
 
 ```python
 import numpy as np
@@ -103,9 +153,13 @@ plt.show()
 Las X rojas son los centroides. Con K=2, el algoritmo fuerza 2 grupos donde hay 4. Con K=6, divide grupos naturales innecesariamente. K=4 captura la estructura real. El arte está en elegir el K correcto.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="El método del codo en código" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 from sklearn.metrics import silhouette_score
@@ -131,9 +185,24 @@ ax2.set_title('Puntaje de Silueta')
 plt.tight_layout(); plt.show()
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Aplicaciones" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En biotecnología, agrupa perfiles genéticos para descubrir subtipos.",
+    "En SaaS, segmenta usuarios por comportamiento para campañas.",
+    "No necesitas etiquetas: tu ventaja es la exploración barata de datos crudos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 **Biotecnología:** Agrupa pacientes por perfiles de expresión génica para descubrir subtipos de cáncer que responden distinto a tratamientos.
@@ -147,27 +216,34 @@ plt.tight_layout(); plt.show()
 La gran ventaja del no supervisado: no necesitas datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K-Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamente. El método del codo y la silueta ayudan a elegir K. Es el algoritmo de clustering más usado por su simplicidad y velocidad. No necesita etiquetas — descubre estructura por sí mismo.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[{ key: "term", label: "Término" }, { key: "def", label: "Definición" }]}
-  rows={[
-    { term: "Centroide", def: "Punto central de un clúster — promedio de todos sus miembros" },
-    { term: "Inercia", def: "Suma de distancias al cuadrado dentro de cada clúster. Menos = mejor" },
-    { term: "Silueta", def: "Puntaje de -1 a 1 que mide calidad de agrupamiento" },
-    { term: "No supervisado", def: "Aprendizaje sin etiquetas — solo características (X)" },
-  ]}
-/>
+{/* candidate-player: interactive-table-glosario-kmeans */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- **Centroide:** punto central de un clúster — promedio de todos sus miembros.
+- **Inercia:** suma de distancias al cuadrado dentro de cada clúster. Menos = mejor.
+- **Silueta:** puntaje de -1 a 1 que mide calidad de agrupamiento.
+- **No supervisado:** aprendizaje sin etiquetas — solo características (X).
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<RevealSequence mode="appear">
 
 <ChoiceQuestion
   question="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál eliges y por qué?"
@@ -217,5 +293,7 @@ print(f"\\nMejor K según silueta: {best_k} (silueta={max(silhouettes):.3f})")
 `}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>

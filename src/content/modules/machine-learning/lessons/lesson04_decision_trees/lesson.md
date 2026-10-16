@@ -21,23 +21,50 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Árboles de Decisión
+
 <Section number={1} title="El algoritmo que piensa como un médico" eyebrow="INICIO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un patólogo mira una muestra y hace preguntas sí/no hasta diagnosticar.",
+    "¿El tumor mide más de 2 cm? ¿Los ganglios están comprometidos?",
+    "El árbol de decisión automatiza esas preguntas y aprende el orden.",
+    "Es el algoritmo más intuitivo del ML y puedes dibujarlo para explicarlo.",
+  ]}
+/>
 
 <MascotMessage mood="thinking">
 Los árboles de decisión son el algoritmo más intuitivo del ML. Hacen exactamente lo que harías tú: una serie de preguntas de sí/no hasta llegar a una conclusión. Y lo mejor: puedes dibujar el resultado y explicárselo a cualquiera.
 </MascotMessage>
 
-Un médico diagnostica pacientes así: "¿El tumor mide más de 2 cm? Sí → ¿Los ganglios están comprometidos? No → ¿Edad > 50? Sí → Alto riesgo." Un árbol de decisión automatiza exactamente este proceso, aprendiendo de los datos qué preguntas hacer y en qué orden.
-
 <ConceptCard variant="key-idea">
 A diferencia de la regresión logística (fronteras lineales), los árboles crean **fronteras en forma de escalera** alineadas a los ejes. Esto los hace naturales para datos donde las relaciones no son lineales y los thresholds importan más que las pendientes.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="Anatomía de un árbol" eyebrow="CONCEPTO">
 
-Un árbol de decisión tiene cuatro partes:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Como un diagnóstico clínico: primero la pregunta más informativa, luego las demás.",
+    "El nodo raíz abre el camino y las hojas emiten la predicción.",
+    "Un árbol de profundidad 1 se llama stump y es tu línea base mínima.",
+  ]}
+/>
 
 - **Nodo raíz:** La primera pregunta — la feature más informativa del dataset
 - **Nodos internos:** Preguntas basadas en thresholds de features
@@ -50,9 +77,24 @@ El proceso de predicción es simple: una muestra entra por la raíz, sigue las r
 Un árbol con profundidad 1 se llama **stump** (tocón). Hace una sola pregunta. Es el modelo más simple posible y sirve como excelente línea base. Si tu Random Forest con 100 árboles no le gana a un stump, algo anda muy mal.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="¿Cómo decide el árbol dónde dividir?" eyebrow="MATEMÁTICA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En cada nodo se evalúan todas las features y todos los thresholds.",
+    "Se elige la división que maximiza la ganancia de información.",
+    "Gini y Entropía miden la impureza de un nodo.",
+  ]}
+/>
 
 En cada nodo, el algoritmo evalúa todas las features y todos los thresholds posibles, y elige la división que maximiza la **ganancia de información**.
 
@@ -76,20 +118,35 @@ $$\text{IG} = \text{Impureza}_{\text{padre}} - \sum_{j} \frac{n_j}{n} \text{Impu
 En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es más rápido computacionalmente y es el default de scikit-learn. Usa Entropía solo si tienes razones teóricas para preferirla.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Podar para no sobreajustar" eyebrow="CONCEPTO">
 
-Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan los datos de entrenamiento. La **poda** es el mecanismo para controlar esto:
+<RevealSequence mode="appear">
 
-<ComparisonTable
-  rows={[
-    { feature: "Cuándo", left: "Durante el crecimiento del árbol", right: "Después de que el árbol creció completo" },
-    { feature: "Cómo", left: "Parámetros: max_depth, min_samples_split, min_samples_leaf", right: "Eliminar ramas que no mejoran la validación" },
-    { feature: "Ventaja", left: "Más rápido, menos cómputo", right: "Puede encontrar interacciones sutiles que la pre-poda perdería" },
-    { feature: "En sklearn", left: "max_depth=5, min_samples_leaf=10", right: "ccp_alpha (Cost Complexity Pruning)" },
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un árbol sin límite memoriza cada paciente y sobreajusta.",
+    "La poda controla la profundidad para que generalice.",
+    "Pre-poda pone barreras antes de crecer; post-poda recorta ramas inútiles.",
   ]}
 />
+
+Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan los datos de entrenamiento. La **poda** es el mecanismo para controlar esto:
+
+{/* candidate-player: comparison-poda-pre-vs-post */}
+<ConceptCard variant="key-idea">
+**Pre-poda vs post-poda**
+- Cuándo: pre-poda durante el crecimiento del árbol; post-poda después de que el árbol creció completo.
+- Cómo: pre-poda con parámetros `max_depth`, `min_samples_split`, `min_samples_leaf`; post-poda eliminando ramas que no mejoran la validación.
+- Ventaja: pre-poda más rápido y menos cómputo; post-poda puede encontrar interacciones sutiles que la pre-poda perdería.
+- En sklearn: pre-poda `max_depth=5`, `min_samples_leaf=10`; post-poda `ccp_alpha` (Cost Complexity Pruning).
+</ConceptCard>
 
 <ChoiceQuestion
   question="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglas?"
@@ -106,9 +163,24 @@ Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan 
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualiza tu primer árbol" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Verás cómo el árbol parte el espacio de features en regiones.",
+    "Cada nodo muestra Gini, muestras y distribución de clases.",
+    "Los colores indican la clase predominante del nodo.",
+  ]}
+/>
 
 ```python
 import numpy as np
@@ -132,9 +204,13 @@ plt.show()
 Cada nodo muestra: la feature y threshold de división, la impureza de Gini, cuántas muestras llegaron, y la distribución de clases. Los colores indican la clase predominante — cuanto más intenso, más puro es el nodo.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Comparando profundidades" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 ```python
 import pandas as pd
@@ -160,11 +236,24 @@ for depth in [1, 3, 5, 10, None]:
 El mejor árbol no es el más profundo — es el que tiene el menor gap entre train y test. Cuando la precisión de entrenamiento sigue subiendo pero la de prueba se estanca (o empeora), ya estás sobreajustando.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Biotecnología: estratificación de pacientes" eyebrow="APLICACIÓN">
 
-Un hospital identifica pacientes de alto riesgo para un ensayo clínico:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un hospital identifica pacientes de alto riesgo para un ensayo clínico.",
+    "El árbol prioriza biomarcadores y edad para estratificar riesgo.",
+    "Al final te dice qué features importaron más.",
+  ]}
+/>
 
 ```python
 np.random.seed(42)
@@ -189,9 +278,13 @@ print(f"Importancias: {dict(zip(bio_data.columns[:-1], tree.feature_importances_
 La ventaja del árbol en medicina: es **explicable**. Puedes mostrarle al médico el diagrama y decirle "el modelo decidió alto riesgo porque biomarker_1 > 0.5 Y edad > 60". Con una red neuronal, no podrías.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="SaaS: scoring de leads" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
 
 ```python
 np.random.seed(42)
@@ -211,9 +304,13 @@ tree.fit(lead_data.drop('converted', axis=1), lead_data['converted'])
 print(f"Importancias: {dict(zip(lead_data.columns[:-1], tree.feature_importances_))}")
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="Errores y buenas prácticas" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Sin límite de profundidad.** El árbol crece hasta pureza total y sobreajusta catastróficamente. Siempre pon max_depth.
@@ -229,32 +326,36 @@ print(f"Importancias: {dict(zip(lead_data.columns[:-1], tree.feature_importances
 Limita profundidad con validación cruzada. Visualiza el árbol para comunicar resultados. Usa feature importance para selección de variables. Compara siempre contra un stump.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpretables, manejan no-linealidades naturalmente, pero tienden al sobreajuste. La poda (max_depth, min_samples_leaf) es obligatoria. La feature importance es uno de sus outputs más valiosos.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "Gini", def: "Probabilidad de clasificar mal un elemento al azar en un nodo" },
-    { term: "Entropía", def: "Medida de desorden; penaliza más la incertidumbre que Gini" },
-    { term: "Ganancia de información", def: "Reducción de impureza tras una división" },
-    { term: "Nodo hoja", def: "Nodo terminal donde se emite la predicción" },
-    { term: "Poda", def: "Limitar la profundidad para evitar sobreajuste" },
-    { term: "Stump", def: "Árbol de profundidad 1 — el clasificador más simple posible" },
-  ]}
-/>
+{/* candidate-player: interactive-table-glosario-decision-trees */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- **Gini:** probabilidad de clasificar mal un elemento al azar en un nodo.
+- **Entropía:** medida de desorden; penaliza más la incertidumbre que Gini.
+- **Ganancia de información:** reducción de impureza tras una división.
+- **Nodo hoja:** nodo terminal donde se emite la predicción.
+- **Poda:** limitar la profundidad para evitar sobreajuste.
+- **Stump:** árbol de profundidad 1 — el clasificador más simple posible.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={11} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 **Desafío:** Encuentra la profundidad óptima para un árbol de decisión.
@@ -287,8 +388,11 @@ X_tr, X_val, y_tr, y_val = train_test_split(X, y, test_size=0.2, random_state=42
 
 best_depth, scores = tree_depth_tuner(X_tr, X_val, y_tr, y_val, [1,2,3,5,7,10,15])
 print()
-print(f"Mejor profundidad: {best_depth}")`}
+print(f"Mejor profundidad: {best_depth}")
+`}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>

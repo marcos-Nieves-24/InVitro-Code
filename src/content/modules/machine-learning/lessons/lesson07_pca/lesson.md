@@ -22,25 +22,55 @@ Quiz: quiz.md
 
 <Section number={1} title="Cuando tienes demasiadas dimensiones" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-¿Mil features pero solo puedes graficar en 2D? PCA comprime la información en pocas dimensiones preservando lo más importante. Es la navaja suiza del preprocesamiento.
-</MascotMessage>
+<RevealSequence mode="appear">
 
-En genómica tienes 20,000 genes pero solo 100 pacientes. En SaaS tienes cientos de métricas de comportamiento. Visualizar, modelar y entender datos de alta dimensionalidad es difícil. **PCA (Principal Component Analysis)** resuelve esto: encuentra las direcciones de máxima varianza en tus datos y proyecta todo a un espacio más chico.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Mil features y solo puedes graficar en 2D: PCA comprime sin perder lo esencial.",
+    "Primero el hook: un patólogo frente a 20,000 genes y 100 pacientes no mira todo.",
+    "PCA encuentra las direcciones de máxima varianza y proyecta a un espacio chico.",
+  ]}
+/>
 
+<ConceptCard variant="key-idea">
+**Biotecnología — alta dimensionalidad:** genómica con 20,000 genes y 100 pacientes; SaaS con cientos de métricas. Visualizar, modelar y entender datos de alta dimensionalidad es difícil.
+</ConceptCard>
+
+{/* candidate-player: mascot-mil-features-2d */}
 <ConceptCard variant="key-idea">
 PCA no selecciona features — crea **nuevas features** (componentes principales) que son combinaciones lineales de las originales. El primer componente captura la dirección de mayor varianza, el segundo la siguiente (ortogonal al primero), y así.
 </ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Cómo funciona?" eyebrow="CONCEPTO">
 
-1. **Estandariza los datos** (media 0, varianza 1 por feature)
-2. **Calcula la matriz de covarianza** entre features
-3. **Encuentra valores y vectores propios** de la matriz de covarianza
-4. **Ordena los vectores propios** por valor propio (mayor → más varianza explicada)
-5. **Proyecta** los datos al subespacio de los primeros K vectores propios
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los valores propios miden cuánta varianza captura cada componente.",
+    "El flujo es lineal: estandariza, covarianza, valores/vectores propios, luego proyecta.",
+    "Dividir cada valor propio por la suma total da el porcentaje de varianza explicada.",
+  ]}
+/>
+
+<ConceptCard variant="key-idea">
+**Pasos del algoritmo PCA**
+- Estandariza los datos (media 0, varianza 1 por feature)
+- Calcula la matriz de covarianza entre features
+- Encuentra valores y vectores propios de la matriz de covarianza
+- Ordena los vectores propios por valor propio (mayor → más varianza explicada)
+- Proyecta los datos al subespacio de los primeros K vectores propios
+</ConceptCard>
 
 <CalloutInfo>
 Los **valores propios** miden cuánta varianza captura cada componente. La suma de todos los valores propios es la varianza total. Dividir cada valor propio por la suma total te da el porcentaje de varianza explicada por ese componente.
@@ -50,9 +80,24 @@ Los **valores propios** miden cuánta varianza captura cada componente. La suma 
 **Varianza explicada acumulada:** Qué porcentaje de la información original retienes con K componentes. Si los primeros 3 componentes explican el 95% de la varianza, puedes reducir tus datos de 100 dimensiones a 3 perdiendo solo el 5% de la información.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="PCA en acción: de 4D a 2D" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Siempre estandariza antes de aplicar PCA; luego observa la varianza explicada.",
+    "Con 2 componentes capturas más del 95% de la varianza del Iris dataset.",
+    "Pasaste de 4 dimensiones a 2 graficables y las especies siguen separables.",
+  ]}
+/>
 
 ```python
 import numpy as np
@@ -91,9 +136,24 @@ plt.show()
 Con solo 2 componentes capturas >95% de la varianza del Iris dataset. Pasaste de 4 dimensiones (sépalos y pétalos) a 2 que puedes graficar, y las especies siguen siendo separables. Eso es PCA en una frase: **comprimir sin perder lo esencial**.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="¿Cuántos componentes necesitas?" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "La varianza explicada acumulada te indica cuántos componentes retener.",
+    "Traza la curva y corta con un umbral como 95%.",
+    "Sensibilidad a escala: estandarizar pone las features en igualdad.",
+  ]}
+/>
 
 ```python
 # Varianza explicada acumulada
@@ -125,9 +185,24 @@ plt.show()
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Aplicaciones" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Genómica: 20,000 genes a ~50 componentes que capturan el 90% de la varianza.",
+    "SaaS: cientos de métricas proyectadas a 2D revelan clústeres de usuarios.",
+    "Preprocesamiento: PCA elimina ruido y redundancia antes de K-Means u otros modelos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 **Biotecnología — Genómica:** Reduces 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
@@ -137,27 +212,56 @@ plt.show()
 **Preprocesamiento:** Antes de aplicar K-Means o cualquier modelo, PCA elimina ruido y features redundantes, acelerando el entrenamiento y mejorando la generalización.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "PCA reduce dimensionalidad creando nuevas features ordenadas por varianza.",
+    "Estandarizar es obligatorio y la varianza acumulada te dice cuántos componentes retener.",
+    "Usalo para visualización, compresión y preprocesamiento.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 PCA reduce dimensionalidad creando nuevas features (componentes principales) que son combinaciones lineales de las originales, ordenadas por varianza explicada. Estandarizar es obligatorio. La varianza explicada acumulada te dice cuántos componentes retener. Esencial para visualización, compresión y preprocesamiento.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[{ key: "term", label: "Término" }, { key: "def", label: "Definición" }]}
-  rows={[
-    { term: "Componente principal", def: "Nueva feature = combinación lineal de las originales, ortogonal a las demás" },
-    { term: "Valor propio", def: "Cantidad de varianza capturada por un componente" },
-    { term: "Varianza explicada", def: "Porcentaje de la varianza total que captura un componente" },
-    { term: "Varianza acumulada", def: "Suma de varianzas explicadas por los primeros K componentes" },
-  ]}
-/>
+{/* candidate-player: interactive-table-glosario-pca */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- Componente principal: nueva feature = combinación lineal de las originales, ortogonal a las demás
+- Valor propio: cantidad de varianza capturada por un componente
+- Varianza explicada: porcentaje de la varianza total que captura un componente
+- Varianza acumulada: suma de varianzas explicadas por los primeros K componentes
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Ejercicios" eyebrow="EJERCICIOS">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Desafío: aplica PCA a breast cancer y compara rendimiento con features originales.",
+    "Compararás features originales vs PCA en tiempo y accuracy.",
+    "El código te muestra cómo contar componentes para 95% de varianza.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 **Desafío:** Aplica PCA a breast cancer y compara rendimiento con features originales.
@@ -193,5 +297,7 @@ for name, X_data in [("Original", X), ("PCA", PCA(n_components=n_components).fit
 `}
   height="380px"
 />
+
+</RevealSequence>
 
 </Section>
