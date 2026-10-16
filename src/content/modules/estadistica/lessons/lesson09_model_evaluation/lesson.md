@@ -161,10 +161,35 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 
 <Section number={7} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué no evaluamos en el training set?</strong> Porque el modelo ya "vio" esos datos — los puede memorizar. Accuracy en training mide memoria, no aprendizaje. Sólo el test set (datos no vistos) mide generalización, qué es lo qué realmente nos importa en producción.</p>
-<p><strong>¿MAE o RMSE? ¿Cuándo elegir cuál?</strong> MAE si todos los errores son igualmente costosos (ej. predecir temperatura). RMSE si los errores grandes son particularmente graves y quieres penalizarlos más (ej. predecir dosis de medicamento — un error de 10× puede matar).</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Por qué no evaluamos en el training set?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson09_model_evaluation"
+  blockId="choice-estadistica-l09-rev-1"
+  allowContinueOnIncorrect
+  explanation="El modelo ya vio esos datos y puede memorizarlos: el accuracy en training mide memoria, no aprendizaje. Sólo el test set (datos no vistos) mide la generalización que importa en producción."
+  options={[
+    { id: "a", label: "Porque el modelo ya vio esos datos (puede memorizarlos) y sólo el test set mide generalización", correct: true, feedback: "¡Exacto! El test set es el único que estima desempeño en producción." },
+    { id: "b", label: "Porque el training set es siempre demasiado pequeño para evaluar", correct: false, feedback: "El tamaño no es la razón; el problema es que el modelo ya memorizó esos datos." },
+    { id: "c", label: "Porque scikit-learn no permite evaluar sobre el training set", correct: false, feedback: "Sí permite, pero el resultado no refleja generalización." },
+    { id: "d", label: "Porque las etiquetas del training set siempre tienen errores", correct: false, feedback: "No necesariamente; el problema es memorización, no calidad de etiquetas." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿MAE o RMSE? ¿Cuándo elegir cuál?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson09_model_evaluation"
+  blockId="choice-estadistica-l09-rev-2"
+  allowContinueOnIncorrect
+  explanation="MAE si todos los errores son igualmente costosos (ej. predecir temperatura); RMSE si los errores grandes son particularmente graves y querés penalizarlos más (ej. dosis de medicamento)."
+  options={[
+    { id: "a", label: "MAE si todos los errores costan igual; RMSE si los errores grandes son graves (penalización cuadrática)", correct: true, feedback: "¡Exacto! RMSE castiga más los errores grandes por el cuadrado." },
+    { id: "b", label: "Siempre RMSE porque es la métrica más precisa", correct: false, feedback: "RMSE amplifica outliers; si todos los errores valen igual, MAE es más honesta." },
+    { id: "c", label: "Siempre MAE porque es más robusta", correct: false, feedback: "Si un error grande es crítico (dosis), conviene RMSE para castigarlo." },
+    { id: "d", label: "Elegir por el tamaño del dataset: MAE para datos grandes", correct: false, feedback: "La elección depende del costo de cada error, no del tamaño del dataset." },
+  ]}
+/>
 
 </Section>
 

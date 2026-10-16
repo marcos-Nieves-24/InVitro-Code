@@ -151,10 +151,35 @@ plt.show()
 
 <Section number={6} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué estandarizar antes de PCA?</strong> PCA se basa en la varianza. Si una variable está en metros (0–2) y otra en dólares (0–100000), la segunda domina completamente el primer componente solo por su escala, y no porque sea más importante. Estandarizar (μ=0, σ=1) pone todas las variables en igualdad de condiciones.</p>
-<p><strong>¿Cuándo NO usarías PCA?</strong> Cuándo necesitas interpretabilidad (cada feature debe ser explicable), cuándo las relaciones son no lineales (PCA asume linealidad), o cuándo tus features ya son independientes y pocas.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Por qué estandarizar antes de PCA?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson07_dimensionality_reduction"
+  blockId="choice-estadistica-l07-rev-1"
+  allowContinueOnIncorrect
+  explanation="PCA se basa en la varianza: si una variable está en metros (0–2) y otra en dólares (0–100000), la segunda domina el primer componente sólo por escala. Estandarizar (μ=0, σ=1) pone todas en igualdad de condiciones."
+  options={[
+    { id: "a", label: "Para que ninguna variable domine el componente principal por su escala distinta", correct: true, feedback: "¡Exacto! Así el PCA captura patrones reales, no diferencias de unidades." },
+    { id: "b", label: "Porque PCA matemáticamente requiere medias cero pero no varianza unitaria", correct: false, feedback: "Centrar sólo no basta; sin escalar, la variable de mayor magnitud sigue dominando." },
+    { id: "c", label: "Porque los autovectores sólo se calculan sobre datos enteros", correct: false, feedback: "Los autovectores se calculan sobre la matriz de covarianza; el tipo de dato no es el problema, la escala sí." },
+    { id: "d", label: "Para aumentar la varianza explicada del primer componente", correct: false, feedback: "Estandarizar no busca maximizar varianza explicada, sino evitar que una variable la acapare por escala." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuándo NO usarías PCA?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson07_dimensionality_reduction"
+  blockId="choice-estadistica-l07-rev-2"
+  allowContinueOnIncorrect
+  explanation="No conviene cuando necesitás interpretabilidad por feature (las combinaciones de genes no son accionables), cuando las relaciones son no lineales (PCA es lineal) o cuando ya tenés pocos features independientes."
+  options={[
+    { id: "a", label: "Cuando necesitás interpretabilidad por feature individual, relaciones no lineales o pocos features ya independientes", correct: true, feedback: "¡Exacto! En esos casos PCA pierde más de lo que aporta." },
+    { id: "b", label: "Nunca: PCA siempre reduce dimensionalidad sin perder información útil", correct: false, feedback: "PCA siempre descarta algo; perder interpretabilidad es real." },
+    { id: "c", label: "Sólo cuando el dataset tiene menos de 10 muestras", correct: false, feedback: "El tamaño de muestra no es el criterio; la linealidad e interpretabilidad sí." },
+    { id: "d", label: "Sólo con variables binarias (0/1)", correct: false, feedback: "PCA incluso soporta variables continuas; el problema es escala/no-linealidad, no la cardinalidad." },
+  ]}
+/>
 
 </Section>
 

@@ -251,10 +251,35 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   ]}
 />
 
-<AnswerReveal summary="Ver respuestas adicionales">
-<p><strong>Se lanza un dado justo. ¿P(sacar 3)? ¿P(número par)?</strong> P(3) = 1/6 (un resultado de seis igualmente probables). P(par) = 3/6 = 1/2 (tres resultados pares: 2, 4, 6).</p>
-<p><strong>¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?</strong> Porque un clasificador qué dice "95% confianza" está dando P(clase | features), no P(features | clase). Sin entender la diferencia, puedes sobreestimar peligrosamente la precisión del modelo, especialmente con clases desbalanceadas.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="Se lanza un dado justo. ¿Cuáles son P(sacar 3) y P(número par)?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson03_probability"
+  blockId="choice-estadistica-l03-rev-1"
+  allowContinueOnIncorrect
+  explanation="P(3) = 1/6 (un resultado favorable entre seis igualmente probables); P(par) = 3/6 = 1/2 (tres resultados pares: 2, 4, 6)."
+  options={[
+    { id: "a", label: "P(3) = 1/6 y P(par) = 1/2", correct: true, feedback: "¡Correcto! Un resultado para el 3 y tres resultados pares." },
+    { id: "b", label: "P(3) = 1/3 y P(par) = 1/6", correct: false, feedback: "1/3 contaría dos caras, no el 3; 1/6 subestima los tres resultados pares." },
+    { id: "c", label: "P(3) = 1/2 y P(par) = 1/6", correct: false, feedback: "1/2 sobreestima el resultado único del 3." },
+    { id: "d", label: "P(3) = 1/6 y P(par) = 1/3", correct: false, feedback: "El número par tiene 3 resultados (2,4,6), por eso es 1/2, no 1/3." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson03_probability"
+  blockId="choice-estadistica-l03-rev-2"
+  allowContinueOnIncorrect
+  explanation="Un clasificador con '95% confianza' entrega P(clase | features), no P(features | clase); confundirlas sobreestima la precisión, sobre todo con clases desbalanceadas."
+  options={[
+    { id: "a", label: "Porque 95% de confianza es P(clase | features), no P(features | clase)", correct: true, feedback: "¡Correcto! Confundirlas sobreestima la precisión del modelo." },
+    { id: "b", label: "Porque la probabilidad condicional garantiza precisión del 100%", correct: false, feedback: "La probabilidad cuantifica, no elimina la incertidumbre." },
+    { id: "c", label: "Porque P(features | clase) es lo mismo que P(clase | features)", correct: false, feedback: "Son direcciones distintas: causa vs evidencia." },
+    { id: "d", label: "Porque el puntaje debe multiplicarse por el tamaño del dataset", correct: false, feedback: "El tamaño del dataset no corrige la confusión de dirección." },
+  ]}
+/>
 
 </Section>
 

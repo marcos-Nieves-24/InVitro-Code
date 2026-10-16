@@ -291,10 +291,35 @@ plt.show()
   ]}
 />
 
-<AnswerReveal summary="Ver más respuestas">
-<p><strong>¿Qué valor de curtosis esperarías para una distribución normal?</strong> Curtosis = 0 (usando curtosis en exceso, qué resta 3). La distribución normal es el punto de referencia: ni colas pesadas ni livianas.</p>
-<p><strong>¿Por qué una empresa SaaS preferiría la mediana sobre la media para reportar LTV?</strong> Porque el Lifetime Value suele tener cola derecha — unos pocos clientes enterprise con LTV enorme inflan la media. La mediana refleja mejor el valor de un cliente 'típico'.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="¿Qué valor de curtosis esperarías para una distribución normal?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson02_data_distribution"
+  blockId="choice-estadistica-l02-rev-1"
+  allowContinueOnIncorrect
+  explanation="Curtosis en exceso = 0 (restando 3); la distribución normal es el punto de referencia: ni colas pesadas ni colas livianas."
+  options={[
+    { id: "a", label: "0 (curtosis en exceso), la normal es la referencia sin colas pesadas ni livianas", correct: true, feedback: "¡Correcto! La normal no tiene colas extra ni colas planas." },
+    { id: "b", label: "3, porque esa es la curtosis absoluta de cualquier distribución", correct: false, feedback: "3 es el valor absoluto de la normal; la curtosis en exceso resta 3, por eso da 0." },
+    { id: "c", label: "> 0, porque la normal tiene colas pesadas", correct: false, feedback: "Colas pesadas (>0) corresponderían a leptocúrtica, no a la normal." },
+    { id: "d", label: "< 0, porque la normal es la más plana de las distribuciones", correct: false, feedback: "Colas livianas (<0) corresponderían a platicúrtica; la normal es la referencia." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué una empresa SaaS preferiría la mediana sobre la media para reportar LTV?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson02_data_distribution"
+  blockId="choice-estadistica-l02-rev-2"
+  allowContinueOnIncorrect
+  explanation="El Lifetime Value suele tener cola derecha: unos pocos clientes enterprise con LTV enorme inflan la media; la mediana refleja mejor el valor de un cliente típico."
+  options={[
+    { id: "a", label: "Porque la mediana refleja el valor de un cliente típico y no se infla por pocos enterprise", correct: true, feedback: "¡Correcto! La mediana resiste la cola derecha del LTV." },
+    { id: "b", label: "Porque la media siempre es más precisa en datos financieros", correct: false, feedback: "La media se infla con la cola derecha; por eso subestima lo 'típico'." },
+    { id: "c", label: "Porque la mediana aumenta con clientes enterprise y por eso es mejor", correct: false, feedback: "La mediana no aumenta con extremos; eso precisamente es su ventaja." },
+    { id: "d", label: "Porque la mediana es más sensible a outliers que la media", correct: false, feedback: "Al revés: la mediana resiste outliers; la media es la sensible." },
+  ]}
+/>
 
 </Section>
 

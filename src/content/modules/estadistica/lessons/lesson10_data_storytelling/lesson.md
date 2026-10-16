@@ -149,9 +149,20 @@ Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son
   ]}
 />
 
-<AnswerReveal summary="Ver respuesta">
-<p>Gráfico de torta o de barras para mostrar participacion de mercado de 5 competidores? Barras, siempre. Las tortas son dificiles de comparar (el ojo humano es malo comparando angulos). Con barras ordenadas de mayor a menor, en 2 segundos entendes quién lidera y por cuanto.</p>
-</AnswerReveal>
+<ChoiceQuestion
+  question="Gráfico de torta o de barras para mostrar participación de mercado de 5 competidores?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson10_data_storytelling"
+  blockId="choice-estadistica-l10-rev-1"
+  allowContinueOnIncorrect
+  explanation="Barras, siempre: las tortas son difíciles de comparar (el ojo humano es malo comparando ángulos). Con barras ordenadas de mayor a menor, en 2 segundos entendés quién lidera y por cuánto."
+  options={[
+    { id: "a", label: "Barras ordenadas de mayor a menor: son más fáciles de comparar que una torta", correct: true, feedback: "¡Exacto! El ojo compara longitudes, no ángulos." },
+    { id: "b", label: "Torta, porque muestra proporciones mejor que cualquier otro gráfico", correct: false, feedback: "Las tortas dificultan comparar ángulos; mejor barras." },
+    { id: "c", label: "Torta si son 5 categorías o menos; barras sólo para más", correct: false, feedback: "La cantidad de categorías no cambia que las barras sean más legibles." },
+    { id: "d", label: "Barras sólo si hay más de 10 competidores", correct: false, feedback: "Barras ayudan incluso con pocas categorías; no es un umbral rígido." },
+  ]}
+/>
 
 </Section>
 
