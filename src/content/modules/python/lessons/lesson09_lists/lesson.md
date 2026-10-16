@@ -22,22 +22,49 @@ Quiz: quiz.md
 # Listas
 
 <Section number={1} title="¿Por qué Listas?" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Las listas son la estructura de datos más versátil de Python.",
+    "Almacenan colecciones de elementos en un orden específico y se pueden modificar después de creadas.",
+    "En ciencia de datos, las listas están en todas partes: vectores de características, nombres de muestras, salidas de predicciones y cómputos intermedios.",
+    "En biotecnología, las listas contienen nombres de genes, valores de expresión, IDs de pacientes y fragmentos de secuencias.",
+    "Dominar las listas es tu primer paso para trabajar con datasets reales.",
+  ]}
+/>
 
-Las listas son la estructura de datos más versátil de Python. Almacenan colecciones de elementos en un orden específico y se pueden modificar después de creadas. En ciencia de datos, las listas están en todas partes: vectores de características, nombres de muestras, salidas de predicciones y cómputos intermedios. En biotecnología, las listas contienen nombres de genes, valores de expresión, IDs de pacientes y fragmentos de secuencias. En SaaS, almacenan IDs de usuarios, registros de transacciones y valores de métricas.
+<ConceptCard variant="key-idea">
+Las listas son colecciones ordenadas y **mutables**: puedes cambiar, agregar o quitar elementos después de crearlas.
+</ConceptCard>
 
-## Panorama General
+- En lecciones anteriores aprendiste variables (valores individuales), operadores, funciones, bucles y condicionales.
+- Las listas introducen el concepto de **colecciones** — almacenar múltiples valores en una sola estructura.
+- Este es tu primer paso para trabajar con datasets; tuplas, diccionarios y conjuntos se basan en los mismos conceptos con características distintas.
 
-En lecciones anteriores aprendiste variables (valores individuales), operadores, funciones, bucles y condicionales. Las listas introducen el concepto de **colecciones** — almacenar múltiples valores en una sola estructura. Este es tu primer paso para trabajar con datasets. Las próximas lecciones sobre tuplas, diccionarios y conjuntos se basan en los mismos conceptos con diferentes características.
-
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Creación, Indexación y Slicing" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-## Teoría
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "¿Cómo accedes al tercer gen de una lista de genes?",
+    "No lo buscas por nombre todavía (eso es diccionario); primero lo ubicas por posición.",
+    "En Python las posiciones empiezan en 0, el famoso 'off-by-one' que todo programador sufre una vez.",
+  ]}
+/>
 
-### Creando Listas
+<ConceptCard variant="definition">
+Indexación desde 0 y slicing con `[inicio:fin:paso]`, donde `fin` es exclusivo.
+</ConceptCard>
 
 Las listas se crean con corchetes `[]`:
 
@@ -48,18 +75,14 @@ mixed = [1, "hello", 3.14, True]
 nested = [[1, 2], [3, 4], [5, 6]]
 ```
 
-### Indexación
-
 Accede a los elementos por posición (indexación desde 0):
 
 ```python
 fruits = ["apple", "banana", "cherry", "date"]
 fruits[0]    # "apple" (primero)
 fruits[-1]   # "date" (último)
-fruits[-2]   # "cherry" (penúltimo)
+fruits[-2]    # "cherry" (penúltimo)
 ```
-
-### Slicing
 
 Extrae sublistas con `[inicio:fin:paso]`:
 
@@ -72,9 +95,9 @@ numbers[::2]     # [0, 2, 4, 6, 8]
 numbers[::-1]    # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 ```
 
-### Explicación Visual
+Referencia visual de índices:
 
-```
+```python
 Indexación de Listas (desde 0):
 
 Índice:   0      1      2      3      4
@@ -89,27 +112,38 @@ Slicing [inicio:fin]:
   [2:]  → "c", "d", "e"
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Métodos y List Comprehensions" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-### Métodos de Listas
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Las listas no son solo contenedores pasivos.",
+    "Tienen métodos para mutarlas in place: append, insert, remove, pop, sort, reverse.",
+    "Y las list comprehensions te dejan construir listas en una línea, casi como una fórmula matemática.",
+  ]}
+/>
+
+Métodos de listas:
 
 ```python
 fruits = ["apple", "banana"]
 fruits.append("cherry")     # ["apple", "banana", "cherry"]
 fruits.insert(1, "blueberry")  # ["apple", "blueberry", "banana", "cherry"]
-fruits.remove("banana")     # Elimina la primera ocurrencia
-popped = fruits.pop()       # Elimina y devuelve el último elemento
-fruits.sort()               # Ordena in-place
-fruits.reverse()            # Invierte in-place
+fruits.remove("banana")    # Elimina la primera ocurrencia
+popped = fruits.pop()      # Elimina y devuelve el último elemento
+fruits.sort()              # Ordena in-place
+fruits.reverse()           # Invierte in-place
 index = fruits.index("apple")  # Encuentra el índice de un elemento
 count = fruits.count("apple")  # Cuenta ocurrencias
 ```
 
-### List Comprehension
-
-Forma concisa de crear listas:
+List comprehension (forma concisa de crear listas):
 
 ```python
 # Básico
@@ -122,16 +156,14 @@ evens = [x for x in range(20) if x % 2 == 0]
 matrix = [[i * j for j in range(3)] for i in range(3)]
 ```
 
-### Mutabilidad
-
 Las listas son **mutables** — puedes cambiar elementos:
 
 ```python
 fruits = ["apple", "banana", "cherry"]
-fruits[1] = "blueberry"     # ["apple", "blueberry", "cherry"]
+fruits[1] = "blueberry"    # ["apple", "blueberry", "cherry"]
 ```
 
-### Operaciones Comunes
+Operaciones comunes:
 
 ```python
 len(list)        # Cantidad de elementos
@@ -143,11 +175,28 @@ max(list)        # Máximo
 sum(list)        # Suma (listas numéricas)
 ```
 
+<ConceptCard variant="warning">
+No confundir `append` (agrega un elemento) con `extend` (agrega elementos de un iterable). Tampoco modificar una lista mientras la iteras.
+</ConceptCard>
+
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
+<RevealSequence mode="appear">
 
-## Implementación en Python
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Teoría lista: ahora a los datos.",
+    "Veamos genes, expresión génica y series de transacciones.",
+    "Las list comprehensions brillan cuando filtras y transformas datos en un solo paso.",
+  ]}
+/>
+
+Creando y accediendo a listas:
 
 ```python
 # Creando y accediendo a listas
@@ -168,6 +217,8 @@ for gene in genes:
 print()
 ```
 
+Ejemplos de list comprehension:
+
 ```python
 # Ejemplos de list comprehension
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -184,6 +235,8 @@ print(f"Pares: {evens}")
 labels = ["par" if n % 2 == 0 else "impar" for n in numbers]
 print(f"Etiquetas: {labels}")
 ```
+
+Listas anidadas (matriz):
 
 ```python
 # Listas anidadas (matriz)
@@ -205,9 +258,7 @@ transpose = [[row[i] for row in matrix] for i in range(3)]
 print(f"Transpuesta: {transpose}")
 ```
 
-## Ejemplo de Biotecnología
-
-**Escenario**: Procesando datos de expresión génica con listas.
+Ejemplo de biotecnología — expresión génica:
 
 ```python
 # Datos de expresión génica (fold changes)
@@ -238,9 +289,7 @@ significant = [
 print(f"Significativos (comprehension): {significant}")
 ```
 
-## Ejemplo SaaS
-
-**Escenario**: Procesando datos de transacciones de clientes.
+Ejemplo SaaS — transacciones:
 
 ```python
 # Valores de transacciones mensuales
@@ -267,80 +316,148 @@ print(f"Transacciones de alto valor (> prom.): {high_value}")
 print(f"Tasas de crecimiento: {[f'{g:.1f}%' for g in growth_rates]}")
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+<RevealSequence mode="appear">
 
-## Errores Comunes
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Las listas son poderosas, pero tienen trampas.",
+    "La más cara: modificar la lista mientras iteras y corromper el índice.",
+    "La segunda: creer que `lista2 = lista1` copia; no, ambas apuntan al mismo objeto.",
+  ]}
+/>
 
-1. **Índice fuera de rango**: Acceder a un índice ≥ len(lista) lanza IndexError
-2. **Confundir append y extend**: `append` agrega un elemento; `extend` agrega elementos de un iterable
-3. **Modificar la lista mientras se itera**: Crea bugs sutiles. Itera sobre una copia: `for x in lista[:]:`
-4. **Confusión con copia superficial**: `lista2 = lista1` no copia; referencian al mismo objeto. Usa `lista2 = lista1.copy()` o `lista2 = lista1[:]`
-5. **Error de off-by-one en slicing**: `lista[a:b]` incluye a, excluye b
+<ConceptCard variant="warning">
+Errores comunes:
+- Índice fuera de rango: acceder a un índice ≥ `len(lista)` lanza `IndexError`.
+- Confundir `append` y `extend`: `append` agrega un elemento; `extend` agrega elementos de un iterable.
+- Modificar la lista mientras se itera: crea bugs sutiles. Itera sobre una copia: `for x in lista[:]:`.
+- Confusión con copia superficial: `lista2 = lista1` no copia; usan el mismo objeto. Usa `lista2 = lista1.copy()` o `lista2 = lista1[:]`.
+- Error off-by-one en slicing: `lista[a:b]` incluye `a`, excluye `b`.
+</ConceptCard>
 
-## Buenas Prácticas
+<ConceptCard variant="key-idea">
+Buenas prácticas:
+- Usa list comprehensions para transformaciones simples.
+- Usa `enumerate()` cuando necesites índice y valor.
+- Usa `zip()` para iterar sobre múltiples listas en paralelo.
+- Prefiere `in` para pruebas de pertenencia sobre bucles manuales.
+- Usa `copy()` o `[:]` para crear copias independientes.
+- Evita modificar listas mientras iteras.
+</ConceptCard>
 
-- Usa list comprehensions para transformaciones simples
-- Usa `enumerate()` cuando necesites índice y valor
-- Usa `zip()` para iterar sobre múltiples listas en paralelo
-- Prefiere `in` para pruebas de pertenencia sobre bucles manuales
-- Usa `copy()` o `[:]` para crear copias independientes
-- Evita modificar listas mientras iteras
-
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-## Resumen
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Resumimos: lista, índice, slice, métodos, comprehension.",
+    "Si puedes explicar cada uno con un ejemplo, dominas este bloque.",
+  ]}
+/>
 
-- Las listas son colecciones ordenadas y mutables creadas con `[]`
-- Indexación: desde 0, índices negativos desde el final
-- Slicing: `[inicio:fin:paso]` crea sublistas
-- Métodos: append, insert, remove, pop, sort, reverse
-- List comprehensions: `[expr for item in iterable if condition]`
-- Las listas pueden contener tipos mixtos y listas anidadas
+- Las listas son colecciones ordenadas y mutables creadas con `[]`.
+- Indexación: desde 0, índices negativos desde el final.
+- Slicing: `[inicio:fin:paso]` crea sublistas.
+- Métodos: `append`, `insert`, `remove`, `pop`, `sort`, `reverse`.
+- List comprehensions: `[expr for item in iterable if condition]`.
+- Las listas pueden contener tipos mixtos y listas anidadas.
 
-## Términos Clave
+<ConceptCard variant="definition">
+Términos clave:
+- **Lista**: Colección ordenada y mutable.
+- **Índice**: Posición numérica de un elemento (desde 0).
+- **Slice**: Subconjunto de una lista.
+- **Mutabilidad**: Capacidad de cambiar después de creada.
+- **List comprehension**: Sintaxis concisa para crear listas.
+- **Lista anidada**: Lista que contiene listas (multidimensional).
+- **Copia superficial**: Nueva referencia al mismo objeto.
+</ConceptCard>
 
-- **Lista**: Colección ordenada y mutable
-- **Índice**: Posición numérica de un elemento (desde 0)
-- **Slice**: Subconjunto de una lista
-- **Mutabilidad**: Capacidad de cambiar después de creada
-- **List comprehension**: Sintaxis concisa para crear listas
-- **Lista anidada**: Lista que contiene listas (multidimensional)
-- **Copia superficial**: Nueva referencia al mismo objeto
-
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
-## Ejercicios
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Hora de practicar: ejercicios y un desafío de código.",
+    "Lee cada pregunta antes de responder; muchas apuntan al detalle de 'fin exclusivo'.",
+  ]}
+/>
 
-### Nivel 1: Básico
-
+Nivel 1 — Básico:
 1. ¿Cuál es el resultado de `[1, 2, 3][::-1]`?
 2. ¿Cuál es la diferencia entre `append()` y `extend()`?
 3. ¿Qué devuelve `len([1, [2, 3], 4])`?
 
-### Nivel 2: Implementación
-
+Nivel 2 — Implementación:
 4. Escribe una función `remove_duplicates(items)` que devuelva una nueva lista sin duplicados, preservando el orden.
 5. Usa un list comprehension para crear una lista de todos los cuadrados pares (cuadrados de números pares) del 1 al 20.
 
-### Nivel 3: Pensamiento Crítico
-
-6. Compara la complejidad temporal de las operaciones con listas: indexación, append, insert, remove, in. ¿Por qué `in` en una lista es lento para listas grandes?
+Nivel 3 — Pensamiento Crítico:
+6. Compara la complejidad temporal de las operaciones con listas: indexación, `append`, `insert`, `remove`, `in`. ¿Por qué `in` en una lista es lento para listas grandes?
 7. ¿Cuándo elegirías una lista sobre una tupla, y viceversa? ¿Cuáles son los trade-offs?
 
-## Desafío de Código
+Desafío de Código — promedio móvil con ventana:
+1. Dada una lista de números y un tamaño de ventana `k`.
+2. Calcula el promedio de cada `k` elementos consecutivos.
+3. Devuelve una lista de estos promedios.
+4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)` → `[2.0, 3.0, 4.0]`.
+5. Usa list comprehension y slicing.
+6. Maneja casos borde: lista vacía, `k > len(lista)`, `k = 1`.
 
-Escribe un programa que implemente un calculador de **promedio móvil con ventana**:
-1. Dada una lista de números y un tamaño de ventana k
-2. Calcula el promedio de cada k elementos consecutivos
-3. Devuelve una lista de estos promedios
-4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)` → `[2.0, 3.0, 4.0]`
-5. Usa list comprehension y slicing
-6. Maneja casos borde: lista vacía, k > len(lista), k = 1
+</RevealSequence>
+</Section>
 
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="¿Cuál es el resultado de `[1, 2, 3][::-1]`?"
+  moduleSlug="python"
+  lessonSlug="lesson09_lists"
+  blockId="choice-python-l09-listas-1"
+  allowContinueOnIncorrect
+  explanation="El slicing `[::-1]` invierte la secuencia, produciendo `[3, 2, 1]`."
+  options={[
+    { id: "a", label: "[3, 2, 1]", correct: true, feedback: "¡Correcto! El paso -1 recorre la lista en reversa." },
+    { id: "b", label: "[1, 2, 3]", correct: false, feedback: "No, eso sería sin invertir." },
+    { id: "c", label: "[2, 3]", correct: false, feedback: "Eso sería un slice con índice de inicio." },
+    { id: "d", label: "Error de índice", correct: false, feedback: "No lanza error: el slicing es tolerante a rangos fuera de límite." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuál es la diferencia entre `append` y `extend` en una lista?"
+  moduleSlug="python"
+  lessonSlug="lesson09_lists"
+  blockId="choice-python-l09-listas-2"
+  allowContinueOnIncorrect
+  explanation="`append` agrega un único elemento; `extend` agrega cada elemento de un iterable."
+  options={[
+    { id: "a", label: "`append` agrega un elemento; `extend` agrega los elementos de un iterable", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "No hay diferencia; son alias", correct: false, feedback: "Son métodos distintos." },
+    { id: "c", label: "`append` es más rápido siempre", correct: false, feedback: "No es la diferencia conceptual." },
+    { id: "d", label: "`extend` solo acepta listas", correct: false, feedback: "`extend` acepta cualquier iterable." },
+  ]}
+/>
+
+</RevealSequence>
 </Section>
