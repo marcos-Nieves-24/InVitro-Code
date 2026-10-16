@@ -137,17 +137,9 @@ t.index(2)    # 1 (primera ocurrencia)
 
 ### Comparación Tupla vs Lista
 
-<InteractiveTable
-  headers={["Característica", "Tupla", "Lista"]}
-  rows={[
-    ["Sintaxis", "`()`", "`[]`"],
-    ["Mutable", "No", "Sí"],
-    ["Hashable", "Sí (si los elementos son hashables)", "No"],
-    ["Caso de uso", "Datos fijos", "Datos variables"],
-    ["Métodos", "count(), index()", "Muchos métodos"],
-  ]}
-  searchable
-/>
+<ConceptCard variant="key-idea">
+Tupla o lista, elegí por inmutabilidad: datos fijos y claves → tupla `()`; datos que cambian → lista `[]`. Las tuplas son hashables (sirven de clave); las listas no.
+</ConceptCard>
 
 ### Explicación Visual
 
@@ -293,7 +285,7 @@ for ts, uid, event_type, meta in events:
 
 <Section number={4} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 
-## Errores Comunes
+<RevealSequence>
 
 1. **Olvidar la coma en tuplas de un elemento**: `(5)` es un int, `(5,)` es una tupla
 2. **Intentar modificar una tupla**: Lanza TypeError
@@ -301,13 +293,13 @@ for ts, uid, event_type, meta in events:
 4. **Desajuste en desempaquetado**: La cantidad de variables debe coincidir con el largo de la tupla
 5. **Usar elementos mutables en una tupla**: Una tupla con una lista adentro no es realmente inmutable
 
-## Buenas Prácticas
-
 - Usa tuplas para datos fijos y estructurados (como registros de base de datos)
 - Usa tuplas para múltiples valores de retorno de funciones
 - Usa desempaquetado de tuplas para código más limpio
 - Usa tuplas como claves de diccionarios cuando necesites claves compuestas
 - Prefiere tuplas sobre listas para datos que no deberían cambiar
+
+</RevealSequence>
 
 </Section>
 

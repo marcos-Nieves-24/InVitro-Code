@@ -324,6 +324,7 @@ En una clasificación binaria:
 <div>Cinco preguntas para consolidar esta lección. Responde correctamente cada una para avanzar.</div>
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué mide el RMSD en el contexto de AlphaFold?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
@@ -338,6 +339,7 @@ En una clasificación binaria:
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Por qué AlphaFold fue un avance tan significativo?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
@@ -352,6 +354,7 @@ En una clasificación binaria:
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Cuál es la principal limitación del PDB como dataset para entrenar modelos como AlphaFold?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
@@ -366,6 +369,7 @@ En una clasificación binaria:
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="En un pipeline de ML, ¿cuál etapa consume más tiempo en proyectos biotecnológicos?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
@@ -380,6 +384,7 @@ En una clasificación binaria:
 />
 
 <ChoiceQuestion
+  allowContinueOnIncorrect
   question="¿Qué es un embedding de secuencia?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
