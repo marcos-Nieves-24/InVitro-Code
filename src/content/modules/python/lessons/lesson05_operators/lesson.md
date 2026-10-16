@@ -21,7 +21,7 @@ Quiz: quiz.md
 
 # Operadores
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Operadores?" eyebrow="INICIO">
 <RevealSequence>
 
 <DialogueBox
@@ -268,25 +268,55 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 </Section>
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
 
-- Aritméticos: `+`, `-`, `*`, `/`, `//`, `%`, `**`
-- Comparación: `==`, `!=`, `<`, `>`, `<=`, `>=` (devuelven bool)
-- Lógicos: `and`, `or`, `not`
-- Asignación: `=`, `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `**=`
-- Precedencia: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`
-- Usa paréntesis para mayor claridad
+<ConceptCard variant="key-idea">
+Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`. Ante la duda, paréntesis.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "aritmeticos", label: "Aritméticos", detail: "+, -, *, / (float), // (entera), %, ** (potencia). Ojo: 5/2 = 2.5 pero 5//2 = 2." },
+    { id: "comparacion", label: "Comparación", detail: "==, !=, <, >, <=, >=. Devuelven bool. Python permite encadenar: a < b < c." },
+    { id: "logicos", label: "Lógicos", detail: "and, or, not. Con cortocircuito: and/or dejan de evaluar cuando el resultado ya está determinado." },
+    { id: "asignacion", label: "Asignación", detail: "=, +=, -=, *=, /=, //=, %=, **=. x += 1 suma 1 a x sin repetirla." },
+  ]}
+/>
 
-- **Operador**: Símbolo que realiza una operación sobre operandos
-- **Operando**: Valor sobre el que actúa un operador
-- **Expresión**: Combinación de operadores y operandos que se evalúa a un valor
-- **Precedencia**: Reglas que determinan el orden de evaluación
-- **Módulo**: Resto después de una división
-- **Evaluación de cortocircuito**: `and`/`or` dejan de evaluar cuando el resultado está determinado
+<FeatureButtonList
+  features={[
+    { id: "operador", label: "Operador", detail: "Símbolo que realiza una operación sobre operandos." },
+    { id: "operando", label: "Operando", detail: "Valor sobre el que actúa un operador." },
+    { id: "expresion", label: "Expresión", detail: "Combinación de operadores y operandos que se evalúa a un valor." },
+    { id: "precedencia", label: "Precedencia", detail: "Reglas que determinan el orden de evaluación." },
+    { id: "modulo", label: "Módulo", detail: "Resto después de una división: -5 % 3 = 1." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué devuelve 7 // 2 * 3 en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson05_operators"
+  blockId="choice-python-l05-resumen-1"
+  allowContinueOnIncorrect
+  explanation="// y * tienen la misma precedencia y se evalúan de izquierda a derecha: (7 // 2) * 3 = 3 * 3 = 9."
+  options={[
+    { id: "a", label: "9", correct: true, feedback: "¡Exacto! Primero 7 // 2 = 3, luego 3 * 3 = 9." },
+    { id: "b", label: "10.5", correct: false, feedback: "Eso daría 7 / 2 * 3 con división float. Acá es // entera." },
+    { id: "c", label: "3", correct: false, feedback: "Ese es solo el primer paso (7 // 2). Falta * 3." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Operadores dominados! Con esto ya podés calcular, comparar y decidir — las funciones los van a empaquetar.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
+
+
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>

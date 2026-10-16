@@ -21,7 +21,7 @@ Quiz: quiz.md
 
 # Conjuntos
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Sets?" eyebrow="INICIO">
 
 ## Motivación
 

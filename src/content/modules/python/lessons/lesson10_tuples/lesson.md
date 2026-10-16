@@ -278,22 +278,41 @@ for ts, uid, event_type, meta in events:
 
 <Section number={5} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
-## Resumen
+<RevealSequence>
 
-- Las tuplas son secuencias ordenadas e inmutables creadas con `()`
-- Las tuplas de un solo elemento requieren una coma al final: `(42,)`
-- El desempaquetado asigna elementos a múltiples variables
-- Las tuplas son hashables y se pueden usar como claves de diccionarios
-- Las tuplas protegen los datos de modificaciones accidentales
-- Usa tuplas para registros fijos y múltiples valores de retorno
+<ConceptCard variant="key-idea">
+Las tuplas son secuencias ordenadas e **inmutables**: el contenedor ideal para registros fijos y valores de retorno múltiples. Una tupla de un solo elemento lleva coma: `(42,)`.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "tupla", label: "Tupla", detail: "Secuencia ordenada inmutable creada con (). Protege los datos de modificaciones accidentales." },
+    { id: "inmutable", label: "Inmutable", detail: "No se puede cambiar después de creada — a diferencia de las listas." },
+    { id: "desempaquetado", label: "Desempaquetado", detail: "Asigna elementos de una tupla a múltiples variables de una vez." },
+    { id: "hashable", label: "Hashable", detail: "Se puede usar como clave de diccionario (tupla sí, lista no)." },
+    { id: "empaquetado", label: "Empaquetado", detail: "Crea una tupla a partir de múltiples valores." },
+  ]}
+/>
 
-- **Tupla**: Secuencia ordenada inmutable
-- **Inmutable**: No se puede cambiar después de creada
-- **Desempaquetado**: Asignar elementos de una tupla a múltiples variables
-- **Hashable**: Se puede usar como clave de diccionario (tupla sí, lista no)
-- **Empaquetado**: Crear una tupla a partir de múltiples valores
+<ChoiceQuestion
+  question="¿Qué devuelve esta función: return (gen, posicion)?"
+  moduleSlug="python"
+  lessonSlug="lesson10_tuples"
+  blockId="choice-python-l10-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Devuelve una tupla con dos valores: el patrón clásico de retorno múltiple."
+  options={[
+    { id: "a", label: "Una tupla con dos valores", correct: true, feedback: "¡Exacto! Empaquetado + retorno múltiple." },
+    { id: "b", label: "Una lista", correct: false, feedback: "Los paréntesis () crean tupla, no lista." },
+    { id: "c", label: "Un error", correct: false, feedback: "Es válido: Python empaqueta los valores automáticamente." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Tuplas dominadas! Ya distinguís mutable de inmutable — la base de diccionarios, la próxima lección.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 

@@ -21,7 +21,7 @@ Quiz: quiz.md
 
 # Seaborn
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Seaborn?" eyebrow="INICIO">
 
 ## Motivación
 
