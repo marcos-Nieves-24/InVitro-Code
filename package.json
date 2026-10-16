@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "assets:check": "node scripts/check-hero-assets.mjs",
+    "receipts:verify": "node scripts/verify-receipts.mjs",
     "check": "npm run type-check && npm run test && npm run assets:check && npm run build",
     "assets:normalize": "node scripts/normalize-hero-assets.mjs",
     "prebuild": "node scripts/check-hero-assets.mjs",

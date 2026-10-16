@@ -17,6 +17,7 @@
 | 8 | [`REGISTRO_RIESGOS.md`](./REGISTRO_RIESGOS.md) | 8 riesgos abiertos (4 medios/4 bajos) + 4 IA latentes + 7 históricos resueltos | `legal/security-audit.md` C-01..C-12 |
 | 9 | [`PLAN_REMEDIACION.md`](./PLAN_REMEDIACION.md) | 5 fases, acciones, cronograma, verificación | `REGISTRO_RIESGOS.md` R-01..R-08 |
 | 10 | [`PREGUNTAS_PENDIENTES.md`](./PREGUNTAS_PENDIENTES.md) | 16 preguntas para titular/abogado (J/T/P/I) | Todos los anteriores |
+| 11 | [`RNBD_DOSSIER.md`](./RNBD_DOSSIER.md) | **Dossier RNBD listo para copiar al portal SIC** (8 bases con todos los campos) | `retention-policy.md` + `data-inventory.md` + `dpa-register.md` |
 
 ## Documentación previa (`legal/`)
 
@@ -37,6 +38,12 @@ src/app/(legal)/*/page.tsx      ← 5 páginas publicadas (/privacidad, /cookies
 | Cron `purge-snapshots` 60 d (`0 2 * * *`) + handler | `vercel.json:20` + `src/app/api/cron/purge-snapshots/route.ts` | R-03 (Medio, parcial) |
 
 Verificación: `npm run type-check` ✅ · `npm run test` 223/223 ✅ · `npm run build` ✅
+
+## Infra RNBD/DPAs (2026-10-16)
+
+- **Dossier:** `RNBD_DOSSIER.md` — 8 bases listas para `https://rnbd.sic.gov.co` (§2.1..§2.8 con Finalidad/Datos/Medidas/Encargados/Transferencia/Retención)
+- **DPAs:** `legal/dpa-register.md` v1 2026-10-16 + `legal/receipts/README.md` + `scripts/verify-receipts.mjs` (`npm run receipts:verify`)
+- **Flujo:** aceptar 3 DPAs → `sha256sum legal/receipts/*.pdf` → inscribir 8 bases → guardar `rnbd-radicado-*.pdf` → anotar radicado
 
 ## Cómo mantener
 
