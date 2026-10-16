@@ -24,7 +24,7 @@ La retención de cada base respeta el principio de temporalidad: conservar solo 
 
 ## 2. RNBD — Bases a registrar
 
-Registrar ante la SIC cada base con finalidad, Encargados y medidas (Decreto 1074, Título 3):
+Registrar ante la SIC cada base con finalidad, Encargados y medidas (Decreto 1074, Título 3). **Dossier listo:** `docs/compliance/RNBD_DOSSIER.md §2.1..§2.8` (copiar al portal `https://rnbd.sic.gov.co`):
 
 - [ ] **Base `profiles`** — Finalidad: autenticación, perfil, preferencias y control de cuenta. Encargados: Clerk Inc. (EE. UU., IdP), Supabase/AWS (EE. UU., BD). Medidas: RLS `auth.jwt()->>sub`, TLS, `service_role` solo server. Retención: §1. Canal derechos: `invitro.code@gmail.com` (10/15 días hábiles).
 - [ ] **Base `progress`** — Finalidad: avance pedagógico y gamificación. Encargado: Supabase. Retención: vida cuenta.
@@ -34,7 +34,7 @@ Registrar ante la SIC cada base con finalidad, Encargados y medidas (Decreto 107
 - [ ] **Base `user_achievements`** — Finalidad: logros y XP. Encargado: Supabase. Retención: vida cuenta.
 - [ ] **Bucket `avatars` (Storage)** — Finalidad: imagen de perfil. Encargado: Supabase Storage. Medida: `validateAvatar` + `remove(oldPath)`. Retención: vida cuenta.
 
-Encargados transversales: Clerk (auth), Supabase (BD/Storage), Vercel (hosting/logs). DPA vigentes a referenciar en `providers-audit.md`. Titular del registro: persona natural Colombia — contacto `invitro.code@gmail.com`.
+Encargados transversales: Clerk (auth), Supabase (BD/Storage), Vercel (hosting/logs). DPA vigentes a referenciar en `providers-audit.md` y `legal/dpa-register.md`. Titular: persona natural Colombia — contacto `invitro.code@gmail.com`. Receipts: `legal/receipts/` + `scripts/verify-receipts.mjs`.
 
 ## 3. Purgas programadas
 
