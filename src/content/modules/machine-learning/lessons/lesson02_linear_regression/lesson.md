@@ -495,6 +495,48 @@ La regresión lineal modela el objetivo como suma ponderada de features. OLS enc
 - Descenso por gradiente: optimización iterativa ajustando β en dirección del gradiente negativo.
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "modelo-lineal", label: "Modelo lineal", detail: "Predicción como suma ponderada de features más intersección." },
+    { id: "ols", label: "OLS", detail: "Solución cerrada que minimiza el error cuadrático medio." },
+    { id: "coeficiente", label: "Coeficiente", detail: "Peso asignado a cada feature." },
+    { id: "r2", label: "R²", detail: "Proporción de varianza explicada por el modelo." },
+    { id: "rmse", label: "RMSE", detail: "Raíz del error cuadrático medio, en unidades de y." },
+    { id: "descenso-gradiente", label: "Descenso por gradiente", detail: "Optimización iterativa cuando la solución cerrada es inviable." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-ols", label: "OLS", detail: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE." },
+    { id: "gloss-coeficiente", label: "Coeficiente", detail: "Peso asignado a una feature." },
+    { id: "gloss-interseccion", label: "Intersección", detail: "Predicción cuando todas las features son 0." },
+    { id: "gloss-residual", label: "Residual", detail: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ." },
+    { id: "gloss-r2", label: "R²", detail: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio." },
+    { id: "gloss-mse", label: "MSE", detail: "Error cuadrático medio. Penaliza fuerte los errores grandes." },
+    { id: "gloss-rmse", label: "RMSE", detail: "Raíz del MSE. Mismas unidades que y — interpretable." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué mide el R² en una regresión lineal?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson02_linear_regression"
+  blockId="choice-ml-l02-resumen-1"
+  allowContinueOnIncorrect
+  explanation="R² mide la proporción de varianza de la variable objetivo que el modelo logra explicar. Un valor de 1 indica ajuste perfecto, 0 equivale a predecir siempre el promedio, y valores negativos indican peor que el promedio."
+  options={[
+    { id: "a", label: "La proporción de varianza de y explicada por el modelo", correct: true, feedback: "¡Correcto! Esa es la lectura de R²." },
+    { id: "b", label: "El error promedio en unidades de y", correct: false, feedback: "Falso: eso lo mide el RMSE, no el R²." },
+    { id: "c", label: "La pendiente de la recta de regresión", correct: false, feedback: "Falso: la pendiente es un coeficiente, no R²." },
+    { id: "d", label: "La cantidad de features relevantes", correct: false, feedback: "Falso: R² no cuenta features, mide varianza explicada." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+La regresión lineal ya no tiene secretos para ti. El siguiente paso son los árboles y las no linealidades.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>

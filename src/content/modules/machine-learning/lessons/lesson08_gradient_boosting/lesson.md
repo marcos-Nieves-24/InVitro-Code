@@ -215,7 +215,7 @@ plt.show()
 
 </Section>
 
-<Section number={6} title="Resumen" eyebrow="RESUMEN">
+<Section number={6} title="Resumen y glosario" eyebrow="RESUMEN">
 
 <RevealSequence mode="appear">
 
@@ -233,6 +233,48 @@ plt.show()
 <ConceptCard variant="key-idea">
 Gradient Boosting entrena árboles secuencialmente, cada uno corrigiendo los errores del anterior. Learning rate bajo + early stopping es la receta para la mejor generalización. XGBoost/LightGBM son las implementaciones de producción. Es el algoritmo dominante en datos tabulares.
 </ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "boosting", label: "Boosting", detail: "Entrenar árboles en serie, cada uno corrigiendo los errores del anterior." },
+    { id: "learning-rate", label: "Learning rate", detail: "Peso de cada árbol; típicamente entre 0.01 y 0.1." },
+    { id: "residuales", label: "Residuales", detail: "Errores del ensemble actual que el siguiente árbol predice." },
+    { id: "early-stopping", label: "Early stopping", detail: "Parar cuando la validación deja de mejorar." },
+    { id: "max-depth", label: "max_depth", detail: "Profundidad shallow (3–5) para aprendices débiles." },
+    { id: "xgboost-lightgbm", label: "XGBoost / LightGBM", detail: "Implementaciones optimizadas para producción." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-boosting", label: "Boosting", detail: "Ensemble secuencial que corrige errores." },
+    { id: "gloss-learning-rate", label: "Learning rate", detail: "Tasa de aprendizaje del boosting." },
+    { id: "gloss-residual", label: "Residual", detail: "Diferencia entre valor real y predicción actual." },
+    { id: "gloss-early-stopping", label: "Early stopping", detail: "Criterio de parada anticipada." },
+    { id: "gloss-aditivo", label: "Modelo aditivo", detail: "Modelo que suma contribuciones de árboles." },
+    { id: "gloss-xgboost", label: "XGBoost", detail: "Implementación optimizada con regularización." },
+    { id: "gloss-lightgbm", label: "LightGBM", detail: "Boosting basado en histogramas, rápido y eficiente." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="En Gradient Boosting, ¿qué predice cada nuevo árbol?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson08_gradient_boosting"
+  blockId="choice-ml-l08-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Cada árbol nuevo no predice la variable objetivo directamente: predice los residuales (errores) del ensemble actual, y su aporte se suma ponderado por el learning rate."
+  options={[
+    { id: "a", label: "Los residuales (errores) del ensemble actual", correct: true, feedback: "¡Correcto! El boosting corrige errores en serie." },
+    { id: "b", label: "La variable objetivo original directamente", correct: false, feedback: "Eso sería un modelo independiente, no boosting." },
+    { id: "c", label: "El promedio de las predicciones anteriores", correct: false, feedback: "El promedio es la predicción inicial, no lo que predice cada árbol." },
+    { id: "d", label: "Las features más importantes", correct: false, feedback: "Las features se usan como entrada, no como objetivo del árbol." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Gradient Boosting dominado. Ya puedes entrenar modelos que aprenden de sus errores y controlar la generalización con el learning rate.
+</MascotMessage>
 
 </RevealSequence>
 

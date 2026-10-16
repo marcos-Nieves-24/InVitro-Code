@@ -244,6 +244,48 @@ PCA reduce dimensionalidad creando nuevas features (componentes principales) que
 - Varianza acumulada: suma de varianzas explicadas por los primeros K componentes
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "componente-principal", label: "Componente principal", detail: "Nueva feature = combinación lineal de las originales, ordenada por varianza." },
+    { id: "valor-propio", label: "Valor propio", detail: "Cantidad de varianza capturada por un componente." },
+    { id: "varianza-explicada", label: "Varianza explicada", detail: "Porcentaje de la varianza total que captura un componente." },
+    { id: "varianza-acumulada", label: "Varianza acumulada", detail: "Suma de varianzas explicadas por los primeros K componentes." },
+    { id: "estandarizacion", label: "Estandarización", detail: "Restar la media y dividir por el desvío antes de PCA." },
+    { id: "reduccion-dimensionalidad", label: "Reducción de dimensionalidad", detail: "Comprimir features preservando la varianza." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-pca", label: "PCA", detail: "Análisis de Componentes Principales." },
+    { id: "gloss-componente-principal", label: "Componente principal", detail: "Nueva feature ortogonal ordenada por varianza." },
+    { id: "gloss-valor-propio", label: "Valor propio", detail: "Medida de varianza capturada." },
+    { id: "gloss-varianza-explicada", label: "Varianza explicada", detail: "Porcentaje de varianza por componente." },
+    { id: "gloss-covarianza", label: "Covarianza", detail: "Matriz de covarianzas entre features." },
+    { id: "gloss-ortogonalidad", label: "Ortogonalidad", detail: "Componentes perpendiculares entre sí." },
+    { id: "gloss-compresion", label: "Compresión", detail: "Reducir dimensiones perdiendo poca información." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué es obligatorio estandarizar los datos antes de aplicar PCA?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson07_pca"
+  blockId="choice-ml-l07-resumen-1"
+  allowContinueOnIncorrect
+  explanation="PCA es sensible a la escala: la feature de mayor rango domina la matriz de covarianza y el primer componente sería básicamente esa feature. Estandarizar pone todas las features en igualdad."
+  options={[
+    { id: "a", label: "Porque PCA es sensible a la escala y una feature de mayor rango dominaría la covarianza", correct: true, feedback: "¡Correcto! Estandarizar pone las features en igualdad." },
+    { id: "b", label: "Porque PCA solo funciona con datos normalizados entre 0 y 1", correct: false, feedback: "PCA no requiere rango [0,1], requiere igualdad de escala." },
+    { id: "c", label: "Porque la estandarización aumenta la varianza total", correct: false, feedback: "La estandarización no aumenta la varianza total, la iguala entre features." },
+    { id: "d", label: "Porque sin estandarizar los componentes no son ortogonales", correct: false, feedback: "La ortogonalidad se mantiene; el problema es el dominio de una feature." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+PCA dominado. Ya puedes comprimir datos de alta dimensionalidad sin perder lo esencial.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>

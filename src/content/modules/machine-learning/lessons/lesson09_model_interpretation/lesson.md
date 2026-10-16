@@ -162,7 +162,7 @@ En medicina: "Este paciente fue clasificado como alto riesgo porque tiene biomar
 
 </Section>
 
-<Section number={5} title="Resumen" eyebrow="RESUMEN">
+<Section number={5} title="Resumen y glosario" eyebrow="RESUMEN">
 
 <RevealSequence mode="appear">
 
@@ -180,6 +180,48 @@ En medicina: "Este paciente fue clasificado como alto riesgo porque tiene biomar
 <ConceptCard variant="key-idea">
 La importancia por permutación es más confiable que la de impureza. Los PDP muestran el efecto marginal de cada feature. SHAP explica predicciones individuales con fundamentos de teoría de juegos. En aplicaciones de alto riesgo (medicina, finanzas, justicia), interpretar el modelo no es opcional.
 </ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "impureza", label: "Importancia por impureza", detail: "Usa la reducción de Gini o entropía que aporta cada división del árbol." },
+    { id: "permutacion", label: "Importancia por permutación", detail: "Mide cuánto cae el desempeño al barajar esa feature." },
+    { id: "pdp", label: "Partial Dependence Plot", detail: "Efecto marginal de una feature sobre la predicción, promediando el resto." },
+    { id: "ice", label: "Ice plots", detail: "PDP por instancia: una curva por muestra, para ver heterogeneidad." },
+    { id: "shap", label: "SHAP", detail: "Descompone cada predicción en contribuciones de cada feature." },
+    { id: "local-global", label: "Local vs global", detail: "SHAP explica una predicción; la importancia global explica el modelo entero." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-impureza", label: "Importancia por impureza", detail: "Métrica de árboles de decisión basada en Gini o entropía." },
+    { id: "gloss-permutacion", label: "Importancia por permutación", detail: "Variación del desempeño al permutar una variable." },
+    { id: "gloss-pdp", label: "PDP", detail: "Curva del efecto marginal promedio de una feature." },
+    { id: "gloss-ice", label: "Ice plot", detail: "PDP individualizado por instancia." },
+    { id: "gloss-shap", label: "Valor SHAP", detail: "Contribución de una feature a una predicción concreta." },
+    { id: "gloss-local", label: "Explicación local", detail: "Razonamiento de una sola predicción." },
+    { id: "gloss-global", label: "Explicación global", detail: "Comportamiento agregado del modelo." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="Un árbol tiene 2000 observaciones y 40 features. La importancia por impureza marca 'id_de_paciente' como la feature más importante. ¿Qué está pasando?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson09_model_interpretation"
+  blockId="choice-ml-l09-resumen-1"
+  allowContinueOnIncorrect
+  explanation="La importancia por impureza premia las features con muchos valores distintos, porque cada una puede partir el nodo en grupos casi puros. Un id único por paciente parte el árbol perfectamente y no aporta nada. La importancia por permutación no sufre ese sesgo: al barajar el id, el desempeño no cae."
+  options={[
+    { id: "a", label: "Es un artefacto de la impureza: premia features con muchos valores distintos, que pueden partir el árbol aunque no informen", correct: true, feedback: "Correcto: el id único parte el árbol de forma perfecta y la impureza lo premia, aunque no tenga valor predictivo real." },
+    { id: "b", label: "El id de paciente sí es la feature más relevante para predecir el resultado", correct: false, feedback: "Un identificador no predice nada: memoriza. Es sobreajuste, no señal." },
+    { id: "c", label: "Hay que recalcular el árbol con menos features", correct: false, feedback: "El problema no es la cantidad de features sino el criterio con el que se mide la importancia." },
+    { id: "d", label: "SHAP también marcaría el id como la feature más importante", correct: false, feedback: "SHAP también Suffriría el sesgo: parte de la importancia por impureza en árboles." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Interpretación dominada. Ahora podés abrir un modelo y decir qué feature pesa y por qué, no solo qué predice.
+</MascotMessage>
 
 </RevealSequence>
 

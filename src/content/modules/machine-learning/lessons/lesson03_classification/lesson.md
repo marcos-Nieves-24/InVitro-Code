@@ -394,6 +394,49 @@ La regresión logística convierte una combinación lineal en una probabilidad m
 - AUC: área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio.
 </ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "regresion-logistica", label: "Regresión logística", detail: "Convierte una combinación lineal en probabilidad con la sigmoide." },
+    { id: "sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real al intervalo (0,1)." },
+    { id: "matriz-confusion", label: "Matriz de confusión", detail: "Tabla de VP, VN, FP y FN." },
+    { id: "precision-recall", label: "Precisión y recall", detail: "Pureza de positivos predichos vs cobertura de positivos reales." },
+    { id: "f1", label: "F1-score", detail: "Media armónica de precisión y recall." },
+    { id: "auc-roc", label: "AUC-ROC", detail: "Área bajo la curva ROC para comparar clasificadores." },
+  ]}
+/>
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)." },
+    { id: "gloss-vp", label: "VP (TP)", detail: "Positivo real clasificado como positivo." },
+    { id: "gloss-fp", label: "FP", detail: "Negativo real clasificado como positivo — falsa alarma." },
+    { id: "gloss-fn", label: "FN", detail: "Positivo real clasificado como negativo — omisión." },
+    { id: "gloss-precision", label: "Precisión", detail: "VP/(VP+FP) — pureza de las predicciones positivas." },
+    { id: "gloss-recall", label: "Recall", detail: "VP/(VP+FN) — cobertura de los positivos reales." },
+    { id: "gloss-f1", label: "F1", detail: "Media armónica de precisión y recall: 2PR/(P+R)." },
+    { id: "gloss-auc", label: "AUC", detail: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="En un problema donde un falso negativo es muy costoso, como no detectar una enfermedad, ¿qué métrica conviene priorizar?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson03_classification"
+  blockId="choice-ml-l03-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Un falso negativo (omisión) es muy costoso cuando se trata de enfermedad. El recall mide la cobertura de los positivos reales, por lo que priorizarlo reduce las omisiones. La precisión, en cambio, cuida las falsas alarmas."
+  options={[
+    { id: "a", label: "Recall, para capturar la mayor cantidad de positivos reales", correct: true, feedback: "¡Correcto! Priorizar recall reduce los falsos negativos." },
+    { id: "b", label: "Precisión, para evitar falsas alarmas", correct: false, feedback: "Falso: eso cuida los falsos positivos, no las omisiones." },
+    { id: "c", label: "Accuracy, porque resume todo en un solo número", correct: false, feedback: "Falso: accuracy engaña en datasets desbalanceados." },
+    { id: "d", label: "AUC, porque es independiente del umbral", correct: false, feedback: "Falso: AUC compara modelos, no prioriza por costo de omisión." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Ya lees una matriz de confusión como un mapa de costos. El siguiente paso son los árboles y los ensembles.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
