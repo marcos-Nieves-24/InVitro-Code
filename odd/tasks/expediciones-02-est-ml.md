@@ -25,3 +25,10 @@
 
 - **L1 (2026-10-16):** "Expediciones 02 (est+ML)" — decisión del usuario ante la brecha T5 (est 107 secciones/2 reveals, ML 95/2, 19 tablas): nueva expedición en vez de cerrar.
 - **Evidencia base:** T5 gates verdes (type-check, 223 tests, assets, build); python 149/149 + IA 56/56 canónicos; 0 ReflectionCheck/AnswerReveal en el repo.
+
+## Animaciones explicativas (expedición ANI)
+
+- [x] **AT0 — Primitivo `<EquationTour>` + `<EquationStep>`** | route: parent inline | superficie: `src/components/lesson/presentation/EquationTour.tsx` (nuevo), barrel, mapa MDX | diseño: stepper por pasos con $...$ del pipeline (sin KaTeX en runtime, sin deps nuevas), caption obligatoria, dots + Atrás/Siguiente, sin autoplay (seguro reduced-motion) | status: done (type-check verde)
+- [ ] **AT1 — Tours est01,02,03** (media-mediana-IQR/Z, curtosis/skew, Bayes) | route: delegated (writer Beam) | status: en curso
+- [ ] **AT2 — Tours est04,05,09** (Normal+PMFs, Pearson/Spearman+covarianza, R²/CV) | route: delegated (writer Beam) | status: en curso
+- [ ] **AT3 — Tours ML02,03,06** (regresión+gradiente+R², sigmoide+log-loss, inercia KMeans) | route: delegated (writer Beam) | status: en curso
