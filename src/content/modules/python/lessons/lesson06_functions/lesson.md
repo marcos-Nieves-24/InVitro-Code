@@ -357,27 +357,60 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
 
-- Las funciones son bloques de código reutilizables definidos con `def`
-- Los parámetros reciben entradas; `return` envía salidas
-- Python soporta argumentos posicionales, de palabra clave, con valor por defecto y de longitud variable
-- Las variables dentro de funciones son locales; las variables fuera son globales
-- Las funciones lambda son funciones anónimas de una sola expresión
-- Los docstrings documentan el propósito y uso de la función
+<ConceptCard variant="key-idea">
+Una función empaqueta lógica reutilizable: define parámetros, computa y devuelve un valor; el ámbito local mantiene el estado separado del resto del programa.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "bloque", label: "Bloque reutilizable", detail: "Las funciones son bloques de código reutilizables definidos con `def`." },
+    { id: "parametros", label: "Parámetros", detail: "Los parámetros reciben entradas; `return` envía salidas." },
+    { id: "argumentos", label: "Tipos de argumentos", detail: "Python soporta argumentos posicionales, de palabra clave, con valor por defecto y de longitud variable." },
+    { id: "ambito", label: "Ámbito local/global", detail: "Las variables dentro de funciones son locales; las variables fuera son globales." },
+    { id: "lambda", label: "Lambda", detail: "Las funciones lambda son funciones anónimas de una sola expresión." },
+    { id: "docstring", label: "Docstring", detail: "Los docstrings documentan el propósito y uso de la función." },
+  ]}
+/>
 
-- **Función**: Bloque de código reutilizable con nombre
-- **Parámetro**: Variable en la definición de la función
-- **Argumento**: Valor pasado al llamar una función
-- **Valor de retorno**: Salida enviada de vuelta a quien llamó
-- **Ámbito**: Región donde una variable es accesible
-- **Lambda**: Función anónima en línea
-- **Docstring**: String de documentación para funciones
-- **DRY**: Principio Don't Repeat Yourself
+<FeatureButtonList
+  features={[
+    { id: "funcion", label: "Función", detail: "Bloque de código reutilizable con nombre." },
+    { id: "parametro", label: "Parámetro", detail: "Variable en la definición de la función." },
+    { id: "argumento", label: "Argumento", detail: "Valor pasado al llamar una función." },
+    { id: "retorno", label: "Valor de retorno", detail: "Salida enviada de vuelta a quien llamó." },
+    { id: "ambito-term", label: "Ámbito", detail: "Región donde una variable es accesible." },
+    { id: "lambda-term", label: "Lambda", detail: "Función anónima en línea." },
+    { id: "docstring-term", label: "Docstring", detail: "String de documentación para funciones." },
+    { id: "dry", label: "DRY", detail: "Principio Don't Repeat Yourself." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué devuelve una función que no tiene sentencia `return`?"
+  moduleSlug="python"
+  lessonSlug="lesson06_functions"
+  blockId="choice-python-l06-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Sin `return` explícito, Python devuelve `None` al finalizar la función."
+  options={[
+    { id: "a", label: "None", correct: true, feedback: "¡Exacto! El retorno por defecto es None." },
+    { id: "b", label: "0", correct: false, feedback: "Python no devuelve 0 por defecto." },
+    { id: "c", label: "Un string vacío", correct: false, feedback: "No se genera ningún string." },
+    { id: "d", label: "Lanza una excepción", correct: false, feedback: "No hay error; simplemente retorna None." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Funciones dominadas! Encapsular lógica abre la puerta a estructuras de datos más ricas, la próxima lección.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
+
 
 <Section number={7} title="Desafío de Código" eyebrow="EVALUACIÓN">
 <RevealSequence>

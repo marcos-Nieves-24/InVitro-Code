@@ -402,24 +402,53 @@ plt.show()
   ]}
 />
 
-- El pyplot de Matplotlib proporciona gráficos estilo MATLAB
-- Dos interfaces: pyplot (simple) y OO (flexible)
-- Gráficos básicos: líneas, dispersión, barras, histograma
-- Personaliza con títulos, etiquetas, leyendas, colores
-- Subplots permiten figuras multi-panel
-- Guarda en formatos PNG, PDF, SVG
-- Siempre etiqueta los ejes e incluye leyendas
+<ConceptCard variant="key-idea">
+Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subplots permiten crear, personalizar y exportar cualquier gráfico científico con control total.
+</ConceptCard>
 
-**Términos clave**
+<FeatureButtonList
+  features={[
+    { id: "pyplot", label: "pyplot", detail: "Provee gráficos estilo MATLAB a través de pyplot." },
+    { id: "interfaces", label: "Interfaces", detail: "Dos interfaces: pyplot (simple) y OO (flexible)." },
+    { id: "graficos-basicos", label: "Gráficos básicos", detail: "Líneas, dispersión, barras e histograma." },
+    { id: "personalizacion", label: "Personalización", detail: "Personaliza con títulos, etiquetas, leyendas y colores." },
+    { id: "subplots", label: "Subplots", detail: "Permiten figuras multi-panel en una sola figure." },
+    { id: "guardado", label: "Guardado", detail: "Guarda en formatos PNG, PDF y SVG." },
+    { id: "buenas-practicas", label: "Buenas prácticas", detail: "Siempre etiqueta los ejes e incluye leyendas." },
+  ]}
+/>
 
-- **Figure**: el contenedor de nivel superior (ventana completa)
-- **Axes**: el área de graficación real (una figura puede tener varios)
-- **pyplot**: interfaz tipo MATLAB para graficación rápida
-- **Subplot**: múltiples gráficos en una sola figura
-- **Leyenda**: etiquetas que identifican elementos del gráfico
-- **Tight layout**: ajuste automático de espaciado
-- **Formato vectorial**: SVG/PDF — escalable sin pérdida de calidad
-- **Formato raster**: PNG — basado en píxeles, calidad depende del DPI
+<FeatureButtonList
+  features={[
+    { id: "figure", label: "Figure", detail: "El contenedor de nivel superior (ventana completa)." },
+    { id: "axes", label: "Axes", detail: "El área de graficación real (una figura puede tener varios)." },
+    { id: "pyplot-g", label: "pyplot", detail: "Interfaz tipo MATLAB para graficación rápida." },
+    { id: "subplot", label: "Subplot", detail: "Múltiples gráficos en una sola figura." },
+    { id: "leyenda", label: "Leyenda", detail: "Etiquetas que identifican elementos del gráfico." },
+    { id: "tight-layout", label: "Tight layout", detail: "Ajuste automático de espaciado." },
+    { id: "vectorial", label: "Formato vectorial", detail: "SVG/PDF — escalable sin pérdida de calidad." },
+    { id: "raster", label: "Formato raster", detail: "PNG — basado en píxeles, calidad depende del DPI." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué conviene guardar figuras en formato vectorial (SVG/PDF) para publicaciones?"
+  moduleSlug="python"
+  lessonSlug="lesson15_matplotlib"
+  blockId="choice-python-l15-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Los formatos vectoriales escalan sin pérdida de calidad y son los preferidos en revistas científicas."
+  options={[
+    { id: "a", label: "Escalan sin pérdida de calidad", correct: true, feedback: "¡Exacto! SVG/PDF son infinitamente escalables." },
+    { id: "b", label: "Ocupan menos bytes que PNG", correct: false, feedback: "No siempre: depende de la complejidad de la figura." },
+    { id: "c", label: "Permiten animaciones nativas", correct: false, feedback: "La animación no es la razón principal del formato vectorial." },
+    { id: "d", label: "Generan archivos editables solo en Photoshop", correct: false, feedback: "Son editables en varios editores vectoriales, no solo Photoshop." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Gráficos listos! Seaborn te dará atajos estadísticos sobre el mismo motor — la próxima lección.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

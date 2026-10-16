@@ -440,23 +440,52 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
   ]}
 />
 
-- Pandas provee Series (1D) y DataFrame (2D) para análisis de datos
-- Lee datos con `read_csv()`, explora con `head()`, `info()`, `describe()`
-- Selecciona datos con `loc`, `iloc`, indexación booleana
-- Agrupa y agrega con `groupby()` y `agg()`
-- Combina DataFrames con `merge()` y `concat()`
-- Aplica funciones con `apply()` y `map()`
+<ConceptCard variant="key-idea">
+Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFrame, con `loc`/`iloc`, filtrado booleano, `groupby`, `merge` y `apply`, cubren la mayoría de los casos reales.
+</ConceptCard>
 
-**Términos clave**
+<FeatureButtonList
+  features={[
+    { id: "estructuras", label: "Estructuras", detail: "Series (1D) y DataFrame (2D) para análisis de datos." },
+    { id: "lectura", label: "Lectura/exploración", detail: "Lee datos con read_csv() y explora con head(), info(), describe()." },
+    { id: "seleccion", label: "Selección", detail: "Selecciona datos con loc, iloc e indexación booleana." },
+    { id: "agrupacion", label: "Agrupación", detail: "Agrupa y agrega con groupby() y agg()." },
+    { id: "combinacion", label: "Combinación", detail: "Combina DataFrames con merge() y concat()." },
+    { id: "funciones", label: "Funciones", detail: "Aplica funciones con apply() y map()." },
+  ]}
+/>
 
-- **DataFrame**: estructura de datos 2D etiquetada (filas × columnas)
-- **Series**: array 1D etiquetado (columna individual)
-- **Índice**: etiquetas de filas (default: 0, 1, 2...)
-- **GroupBy**: operaciones de dividir-aplicar-combinar
-- **Merge**: combinar DataFrames sobre columnas comunes
-- **Tabla dinámica**: agregación multidimensional
-- **Indexación booleana**: filtrado con condiciones True/False
-- **Encadenamiento de métodos**: aplicar múltiples operaciones secuencialmente
+<FeatureButtonList
+  features={[
+    { id: "dataframe", label: "DataFrame", detail: "Estructura de datos 2D etiquetada (filas × columnas)." },
+    { id: "series", label: "Series", detail: "Array 1D etiquetado (columna individual)." },
+    { id: "indice", label: "Índice", detail: "Etiquetas de filas (default: 0, 1, 2...)." },
+    { id: "groupby", label: "GroupBy", detail: "Operaciones de dividir-aplicar-combinar." },
+    { id: "merge", label: "Merge", detail: "Combinar DataFrames sobre columnas comunes." },
+    { id: "pivot-table", label: "Tabla dinámica", detail: "Agregación multidimensional." },
+    { id: "indexacion-booleana", label: "Indexación booleana", detail: "Filtrado con condiciones True/False." },
+    { id: "method-chaining", label: "Encadenamiento de métodos", detail: "Aplicar múltiples operaciones secuencialmente." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué método combina dos DataFrames sobre una columna común?"
+  moduleSlug="python"
+  lessonSlug="lesson14_pandas"
+  blockId="choice-python-l14-resumen-1"
+  allowContinueOnIncorrect
+  explanation="merge() une DataFrames por columnas comunes (como un JOIN de SQL); concat() apila por filas o columnas."
+  options={[
+    { id: "a", label: "merge()", correct: true, feedback: "¡Exacto! merge() combina por claves compartidas." },
+    { id: "b", label: "concat()", correct: false, feedback: "concat() apila, no combina por columna común." },
+    { id: "c", label: "apply()", correct: false, feedback: "apply() aplica una función fila/columna a fila." },
+    { id: "d", label: "groupby()", correct: false, feedback: "groupby() agrupa filas, no combina tablas." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Pandas desbloqueado! Ahora visualizamos esos resultados con Matplotlib — la próxima lección.
+</MascotMessage>
 
 </RevealSequence>
 </Section>

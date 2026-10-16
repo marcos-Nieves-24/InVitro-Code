@@ -294,27 +294,60 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
 
-- Python tiene cuatro tipos primitivos: int, float, str, bool
-- Usa `type()` para verificar el tipo de un valor
-- La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`
-- Los strings son inmutables — no se pueden modificar en su lugar
-- `None` representa la ausencia de un valor
-- Los errores de tipo son comunes y generalmente involucran mezclar strings con números
+<ConceptCard variant="key-idea">
+Python tiene cuatro tipos primitivos —int, float, str, bool— más `None`; el tipo define qué operaciones tienen sentido y cómo se almacena el valor.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "cuatro-tipos", label: "Cuatro primitivos", detail: "Python tiene cuatro tipos primitivos: int, float, str, bool." },
+    { id: "type", label: "type()", detail: "Usa `type()` para verificar el tipo de un valor." },
+    { id: "conversion", label: "Conversión de tipos", detail: "La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`." },
+    { id: "strings-inmutables", label: "Strings inmutables", detail: "Los strings son inmutables — no se pueden modificar en su lugar." },
+    { id: "none", label: "None", detail: "`None` representa la ausencia de un valor." },
+    { id: "errores-tipo", label: "Errores de tipo", detail: "Los errores de tipo son comunes y generalmente involucran mezclar strings con números." },
+  ]}
+/>
 
-- **int**: Tipo entero para números enteros
-- **float**: Tipo de coma flotante para números decimales
-- **str**: Tipo string para texto
-- **bool**: Tipo booleano para valores True/False
-- **Conversión de tipos**: Cambiar un valor de un tipo a otro
-- **Inmutable**: No se puede modificar después de su creación
-- **None**: Valor nulo de Python
-- **TypeError**: Excepción que se lanza al operar con tipos incompatibles
+<FeatureButtonList
+  features={[
+    { id: "int", label: "int", detail: "Tipo entero para números enteros." },
+    { id: "float", label: "float", detail: "Tipo de coma flotante para números decimales." },
+    { id: "str", label: "str", detail: "Tipo string para texto." },
+    { id: "bool", label: "bool", detail: "Tipo booleano para valores True/False." },
+    { id: "conversion-term", label: "Conversión de tipos", detail: "Cambiar un valor de un tipo a otro." },
+    { id: "inmutable-term", label: "Inmutable", detail: "No se puede modificar después de su creación." },
+    { id: "none-term", label: "None", detail: "Valor nulo de Python." },
+    { id: "typeerror", label: "TypeError", detail: "Excepción que se lanza al operar con tipos incompatibles." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué tipo de dato representa el valor 3.14 en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson04_data_types"
+  blockId="choice-python-l04-resumen-1"
+  allowContinueOnIncorrect
+  explanation="3.14 es un número con decimales, por lo que es de tipo float."
+  options={[
+    { id: "a", label: "int", correct: false, feedback: "int es para enteros sin decimales." },
+    { id: "b", label: "float", correct: true, feedback: "¡Correcto! Es un float." },
+    { id: "c", label: "str", correct: false, feedback: "str es para texto." },
+    { id: "d", label: "bool", correct: false, feedback: "bool es True/False." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Tipos dominados! Saber qué tipo guarda un valor prepara el terreno para compararlos con operadores.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
+
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>

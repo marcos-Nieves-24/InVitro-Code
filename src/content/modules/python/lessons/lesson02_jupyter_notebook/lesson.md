@@ -249,26 +249,58 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
 
-- Jupyter Notebook es un entorno interactivo basado en web para análisis de datos
-- Los notebooks contienen celdas de código y markdown
-- Las celdas de código ejecutan Python; las celdas markdown muestran texto e imágenes formateados
-- El kernel mantiene el estado entre ejecuciones de celdas
-- Los atajos de teclado agilizan el flujo de trabajo
-- Exporta notebooks para compartir resultados
+<ConceptCard variant="key-idea">
+Jupyter combina código, resultados y texto en un único documento interactivo cuyo estado vive en el kernel entre ejecuciones de celdas.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "entorno", label: "Entorno interactivo", detail: "Jupyter Notebook es un entorno interactivo basado en web para análisis de datos." },
+    { id: "celdas", label: "Celdas de código y markdown", detail: "Los notebooks contienen celdas de código y markdown; las de código ejecutan Python y las markdown muestran texto e imágenes formateados." },
+    { id: "kernel-estado", label: "Kernel con estado", detail: "El kernel mantiene el estado entre ejecuciones de celdas." },
+    { id: "atajos", label: "Atajos de teclado", detail: "Los atajos de teclado agilizan el flujo de trabajo." },
+    { id: "exportar", label: "Exportar", detail: "Exporta notebooks para compartir resultados." },
+  ]}
+/>
 
-- **Notebook** (`.ipynb`): Documento JSON que contiene código, texto y salidas
-- **Celda**: Unidad individual de contenido (código o markdown)
-- **Kernel**: Motor de Python que ejecuta las celdas de código
-- **Modo comando**: Modo de borde azul para acciones a nivel del notebook
-- **Modo edición**: Modo de borde verde para editar el contenido de la celda
-- **Dashboard**: Interfaz del explorador de archivos de Jupyter
-- **Shift+Enter**: Ejecutar celda actual y pasar a la siguiente
+<FeatureButtonList
+  features={[
+    { id: "notebook", label: "Notebook (.ipynb)", detail: "Documento JSON que contiene código, texto y salidas." },
+    { id: "celda", label: "Celda", detail: "Unidad individual de contenido (código o markdown)." },
+    { id: "kernel", label: "Kernel", detail: "Motor de Python que ejecuta las celdas de código." },
+    { id: "modo-comando", label: "Modo comando", detail: "Modo de borde azul para acciones a nivel del notebook." },
+    { id: "modo-edicion", label: "Modo edición", detail: "Modo de borde verde para editar el contenido de la celda." },
+    { id: "dashboard", label: "Dashboard", detail: "Interfaz del explorador de archivos de Jupyter." },
+    { id: "shift-enter", label: "Shift+Enter", detail: "Ejecutar celda actual y pasar a la siguiente." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué atajo ejecuta la celda actual y avanza a la siguiente?"
+  moduleSlug="python"
+  lessonSlug="lesson02_jupyter_notebook"
+  blockId="choice-python-l02-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Shift+Enter ejecuta la celda actual y mueve el foco a la siguiente celda."
+  options={[
+    { id: "a", label: "Shift+Enter", correct: true, feedback: "¡Exacto! Es el atajo principal de Jupyter." },
+    { id: "b", label: "Enter", correct: false, feedback: "Enter solo añade una línea dentro de la celda." },
+    { id: "c", label: "Ctrl+C", correct: false, feedback: "Ctrl+C interrumpe la ejecución del kernel, no avanza celdas." },
+    { id: "d", label: "Tab", correct: false, feedback: "Tab sirve para autocompletar, no para ejecutar." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Jupyter listo! El kernel guarda estado; ahora las variables guardarán valores.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
+
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>

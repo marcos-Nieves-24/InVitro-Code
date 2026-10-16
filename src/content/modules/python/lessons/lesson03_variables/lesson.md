@@ -285,26 +285,59 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+
 <RevealSequence>
 
-- Las variables almacenan valores en ubicaciones de memoria nombradas
-- Python tiene tipado dinámico — los tipos se infieren
-- Usa `=` para asignación y `print()` para salida
-- Los nombres de variables deben seguir reglas (letras, dígitos, guiones bajos)
-- PEP 8 recomienda nomenclatura `snake_case`
-- `input()` lee la entrada del usuario como string
+<ConceptCard variant="key-idea">
+Una variable es un nombre que referencia un valor en memoria; Python la tipa dinámicamente a partir del valor que se le asigna.
+</ConceptCard>
 
+<FeatureButtonList
+  features={[
+    { id: "almacenar", label: "Almacenar valores", detail: "Las variables almacenan valores en ubicaciones de memoria nombradas." },
+    { id: "tipado-dinamico", label: "Tipado dinámico", detail: "Python tiene tipado dinámico: los tipos se infieren a partir del valor." },
+    { id: "asignacion", label: "Asignación", detail: "Usa `=` para asignación y `print()` para salida." },
+    { id: "nombres", label: "Nombres válidos", detail: "Los nombres de variables deben seguir reglas: letras, dígitos y guiones bajos; no empezar con dígito." },
+    { id: "pep8", label: "PEP 8", detail: "PEP 8 recomienda nomenclatura `snake_case`." },
+    { id: "input", label: "input()", detail: "`input()` lee la entrada del usuario como string." },
+  ]}
+/>
 
-- **Variable**: Ubicación de almacenamiento nombrada para un valor
-- **Asignación**: Usar `=` para darle un valor a una variable
-- **Tipado dinámico**: Las variables pueden cambiar de tipo en tiempo de ejecución
-- **PEP 8**: Guía de estilo de Python
-- **snake_case**: Convención de nomenclatura que usa guiones bajos
-- **Inferencia de tipos**: Python deduce el tipo a partir del valor
-- **NameError**: Excepción que se lanza al usar una variable no definida
+<FeatureButtonList
+  features={[
+    { id: "variable", label: "Variable", detail: "Ubicación de almacenamiento nombrada para un valor." },
+    { id: "asignacion-term", label: "Asignación", detail: "Usar `=` para darle un valor a una variable." },
+    { id: "tipado-dinamico-term", label: "Tipado dinámico", detail: "Las variables pueden cambiar de tipo en tiempo de ejecución." },
+    { id: "pep8-term", label: "PEP 8", detail: "Guía de estilo de Python." },
+    { id: "snake-case", label: "snake_case", detail: "Convención de nomenclatura que usa guiones bajos." },
+    { id: "inferencia", label: "Inferencia de tipos", detail: "Python deduce el tipo a partir del valor." },
+    { id: "nameerror", label: "NameError", detail: "Excepción que se lanza al usar una variable no definida." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué excepción lanza Python al usar una variable no definida?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-resumen-1"
+  allowContinueOnIncorrect
+  explanation="NameError se lanza cuando se referencia un nombre que no está definido."
+  options={[
+    { id: "a", label: "NameError", correct: true, feedback: "¡Exacto! Python no encuentra el nombre en el ámbito actual." },
+    { id: "b", label: "SyntaxError", correct: false, feedback: "SyntaxError es por código mal formado, no por nombres faltantes." },
+    { id: "c", label: "TypeError", correct: false, feedback: "TypeError es por operar con tipos incompatibles." },
+    { id: "d", label: "ValueError", correct: false, feedback: "ValueError es por valores inapropiados, no nombres ausentes." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Variables listas! Ahora el tipo del valor que guardan también importa.
+</MascotMessage>
+
 </RevealSequence>
 
 </Section>
+
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
