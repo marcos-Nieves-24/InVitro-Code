@@ -21,7 +21,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Jupyter Notebook" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -35,7 +34,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -52,9 +50,7 @@ Quiz: quiz.md
 
 <Section number={2} title="¿Qué es Jupyter Notebook?" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### ¿Qué es Jupyter Notebook?
 
 Jupyter Notebook es una aplicación web de código abierto que te permite crear y compartir documentos que contienen código en vivo, ecuaciones, visualizaciones y texto narrativo.
 
@@ -64,23 +60,19 @@ Jupyter Notebook es una aplicación web de código abierto que te permite crear 
 - **Kernel**: El motor computacional que ejecuta el código
 - **Dashboard**: La interfaz del explorador de archivos
 
-### Tipos de Celdas
 
 1. **Celdas de código**: Contienen código Python que se puede ejecutar. La salida aparece debajo de la celda.
 2. **Celdas Markdown**: Contienen texto formateado usando sintaxis Markdown (títulos, listas, enlaces, imágenes, ecuaciones LaTeX).
 
-### Modos
 
 Jupyter tiene dos modos de teclado:
 
 - **Modo comando** (borde azul): Los atajos de teclado actúan a nivel del notebook
 - **Modo edición** (borde verde): Escribir inserta texto en la celda actual
 
-### Modelo de Ejecución
 
 Cuando ejecutas una celda de código, el kernel ejecuta el código. Las variables y funciones definidas en una celda están disponibles en las celdas siguientes. El kernel mantiene el estado hasta que se reinicia.
 
-## Explicación Visual
 
 ```
 ┌────────────────────────────────────────────────────┐
@@ -111,9 +103,7 @@ Cuando ejecutas una celda de código, el kernel ejecuta el código. Las variable
 
 <Section number={3} title="Usando Jupyter Notebook" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
-### Iniciando Jupyter
 
 ```bash
 # Instalar si no está instalado
@@ -125,19 +115,16 @@ jupyter notebook
 
 Esto abre el dashboard de Jupyter en tu navegador en `http://localhost:8888`.
 
-### Creando un Nuevo Notebook
 
 1. Haz clic en "New" → "Python 3"
 2. Se abre un nuevo notebook con una celda de código vacía
 
-### Trabajando con Celdas
 
 ```python
 # Esta es una celda de código — presiona Shift+Enter para ejecutarla
 print("¡Hola, Jupyter!")
 ```
 
-### Formato Markdown
 
 En una celda markdown puedes escribir:
 ```markdown
@@ -155,7 +142,6 @@ En una celda markdown puedes escribir:
 $$ E = mc^2 $$
 ```
 
-### Atajos de Teclado
 
 <ConceptCard variant="key-idea">
 Atajos de teclado de Jupyter:
@@ -172,7 +158,6 @@ Atajos de teclado de Jupyter:
 - **Z** — Deshacer eliminación de celda
 </ConceptCard>
 
-### Guardar y Exportar
 
 - **Guardar**: File → Save and Checkpoint (o Ctrl+S)
 - **Exportar**: File → Download as → HTML, PDF, Python script, etc.
@@ -182,7 +167,6 @@ Atajos de teclado de Jupyter:
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario**: Un investigador está analizando datos de expresión génica y quiere documentar los pasos del análisis.
 
@@ -196,7 +180,6 @@ La estructura del notebook sería:
 
 Este notebook se puede compartir con colaboradores que pueden reproducir el análisis.
 
-## Ejemplo SaaS
 
 **Escenario**: Un analista de datos en una empresa SaaS necesita explorar datos de churn de clientes y compartir hallazgos.
 
@@ -215,7 +198,6 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell → Run All) para ejecutar secuencialmente.
 2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel → Restart & Run All).
@@ -223,7 +205,6 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 4. **Usar print() excesivamente**: La última expresión de una celda se muestra automáticamente.
 5. **Cerrar la terminal**: El servidor de Jupyter corre en la terminal. Cerrarla detiene el servidor.
 
-## Buenas Prácticas
 
 - Usa celdas markdown para documentar tu análisis
 - Mantén las celdas enfocadas en una sola tarea
@@ -237,7 +218,6 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Jupyter Notebook es un entorno interactivo basado en web para análisis de datos
 - Los notebooks contienen celdas de código y markdown
@@ -246,7 +226,6 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 - Los atajos de teclado agilizan el flujo de trabajo
 - Exporta notebooks para compartir resultados
 
-## Términos Clave
 
 - **Notebook** (`.ipynb`): Documento JSON que contiene código, texto y salidas
 - **Celda**: Unidad individual de contenido (código o markdown)
@@ -261,25 +240,20 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Cuál es la diferencia entre una celda de código y una celda markdown?
 2. ¿Qué hace `Shift+Enter` en Jupyter?
 3. ¿Cómo creas una nueva celda debajo de la actual?
 
-### Nivel 2: Implementación
 
 4. Crea un notebook con al menos una celda markdown (con un título y una lista con viñetas) y una celda de código que imprima "¡Jupyter está funcionando!"
 5. Exporta tu notebook como HTML.
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué es importante ejecutar las celdas en orden de arriba hacia abajo? ¿Qué problemas pueden ocurrir si se ejecutan fuera de orden?
 7. En un entorno de investigación colaborativa, ¿qué ventajas ofrece un notebook de Jupyter sobre un script de Python tradicional?
 
-## Desafío de Código
 
 Crea un notebook de Jupyter llamado `mi_primer_notebook.ipynb` que:
 1. Tenga una celda de título (Markdown H1): "Mi Primer Notebook"
