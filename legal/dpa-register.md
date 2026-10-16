@@ -12,9 +12,9 @@
 
 | Proveedor | DPA URL | Versión / Fecha aceptada | Subencargados vigentes (con fecha) | Receipt hash | Estado |
 |-----------|---------|---------------------------|-------------------------------------|--------------|--------|
-| **Clerk Inc. (EE. UU.)** | https://clerk.com/legal/dpa | 2026-10-16-v1 | https://clerk.com/legal/subprocessors (vigente a 2026-10-16) | pendiente — `sha256sum legal/receipts/clerk-dpa-*.pdf` tras aceptar | pendiente firma — DPA estándar Clerk → `legal/receipts/clerk-dpa-YYYY-MM-DD-vN.pdf` + `node scripts/verify-receipts.mjs` |
-| **Supabase Inc. (AWS EE. UU.)** | https://supabase.com/legal/dpa | 2026-10-16-v1 | https://supabase.com/legal/subprocessors (vigente a 2026-10-16) | pendiente — `sha256sum legal/receipts/supabase-dpa-*.pdf` | pendiente firma — DPA estándar Supabase → `legal/receipts/supabase-dpa-YYYY-MM-DD-vN.pdf` |
-| **Vercel Inc. (EE. UU.)** | https://vercel.com/legal/dpa | 2026-10-16-v1 | https://vercel.com/legal/sub-processors (vigente a 2026-10-16) | pendiente — `sha256sum legal/receipts/vercel-dpa-*.pdf` | pendiente firma — DPA estándar Vercel → `legal/receipts/vercel-dpa-YYYY-MM-DD-vN.pdf` |
+| **Clerk Inc. (EE. UU.)** | https://clerk.com/legal/dpa | 2026-10-16-v1 | https://clerk.com/legal/subprocessors (vigente a 2026-10-16) | `91bbc504b3f3c5340be116c2b68a3db2b7c005bf880ecc649bffca4dd8ecc012` (`clerk-dpa-2026-10-16-v1.html`, 313 KB, curl SSR) | ✅ Capturado 2026-10-16 — DPA por referencia (incorporated into Agreement, sin botón) → `legal/receipts/clerk-dpa-2026-10-16-v1.html` |
+| **Supabase Inc. (AWS EE. UU.)** | https://supabase.com/legal/dpa | 2026-10-16-v1 | https://supabase.com/legal/subprocessors (vigente a 2026-10-16) | `176a0625bb2c60e9b5fbeb4067fe21f2049e433e58b98fbb27d55f10ffeaee24` (`supabase-dpa-2026-10-16-v1.txt` referencia; página CSR — ver nota) | ✅ Verificado 2026-10-16 — DPA por referencia (`supabase.com/terms` + DPA v1 2026-08-01) → reemplazar `.txt` por PDF vía navegador (Ctrl+P) |
+| **Vercel Inc. (EE. UU.)** | https://vercel.com/legal/dpa | 2026-10-16-v1 | https://vercel.com/legal/sub-processors (vigente a 2026-10-16) | `6bff408c80c0207b39b62660976507ad5a5f19a541eb4fbab819370b5892d04a` (`vercel-dpa-2026-10-16-v1.html`, 716 KB, curl SSR) | ✅ Capturado 2026-10-16 — DPA por referencia → `legal/receipts/vercel-dpa-2026-10-16-v1.html` |
 
 > **Cómo versionar:** cada aceptación genera una nueva fila o actualiza `Versión / Fecha aceptada` (formato `YYYY-MM-DD-vN`) y registra el hash del PDF/receipt. No sobrescribir filas previas sin conservar histórico.
 
