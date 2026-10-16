@@ -320,6 +320,10 @@ Ejecuta este código en tu notebook. Vas a ver tres paneles:
 - **Grado 15 (sobreajuste):** La curva zigzaguea para tocar cada punto de entrenamiento. En datos nuevos sería un desastre.
 </CalloutInfo>
 
+<Overfitting caption="Cambiá el grado del polinomio y mirá el error en train vs test: el sobreajuste se ve en la brecha." />
+
+<Overfitting caption="Cambiá el grado del polinomio y mirá el error en train vs test: el sobreajuste se ve en la brecha." />
+
 </RevealSequence>
 
 </Section>
