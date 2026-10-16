@@ -103,11 +103,11 @@ function renderHeader(data: Record<string, unknown>) {
         {data["Lesson Title"] as string}
       </h1>
       {objectives.length > 0 && (
-        <div className="mt-3">
-          <p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-            Objetivos de aprendizaje
-          </p>
-          <ul className="space-y-0.5">
+        <details className="mt-2">
+          <summary className="cursor-pointer text-xs font-medium text-gray-600 marker:text-gray-400">
+            Qué vas a aprender ({objectives.length})
+          </summary>
+          <ul className="mt-1 space-y-0.5">
             {objectives.map((obj: string) => (
               <li key={obj} className="flex items-start gap-2 text-xs text-gray-600">
                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
@@ -115,7 +115,7 @@ function renderHeader(data: Record<string, unknown>) {
               </li>
             ))}
           </ul>
-        </div>
+        </details>
       )}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {(data.Difficulty as string) && (
