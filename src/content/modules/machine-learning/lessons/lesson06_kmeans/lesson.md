@@ -172,6 +172,10 @@ plt.show()
 Las X rojas son los centroides. Con K=2, el algoritmo fuerza 2 grupos donde hay 4. Con K=6, divide grupos naturales innecesariamente. K=4 captura la estructura real. El arte está en elegir el K correcto.
 </CalloutInfo>
 
+<KMeans caption="Elegí K y avanzá paso a paso: asignar puntos, mover centroides, repetir hasta converger." />
+
+<KMeans caption="Elegí K y avanzá paso a paso: asignar puntos, mover centroides, repetir hasta converger." />
+
 </RevealSequence>
 
 </Section>

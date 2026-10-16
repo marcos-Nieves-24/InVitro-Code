@@ -132,6 +132,10 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
 3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
 4. Repite hasta converger
 
+<GradientDescent caption="Mueve la tasa de aprendizaje: con α chica converge paso a paso; con α grande, diverge. Probá distintos puntos de inicio." />
+
+<GradientDescent caption="Mueve la tasa de aprendizaje: con α chica converge paso a paso; con α grande, diverge. Probá distintos puntos de inicio." />
+
 <EquationTour caption="La regla de actualización: cómo cambia β en cada paso.">
   <EquationStep label="β actual">
     $\boldsymbol{\beta}$
