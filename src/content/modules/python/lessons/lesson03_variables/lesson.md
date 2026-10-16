@@ -21,7 +21,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Variables" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -36,7 +35,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -53,13 +51,10 @@ Quiz: quiz.md
 
 <Section number={2} title="¿Qué es una Variable?" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### ¿Qué es una Variable?
 
 Una **variable** es una ubicación nombrada en memoria que almacena un valor. Piénsala como una caja etiquetada donde puedes poner datos. La etiqueta es el nombre de la variable y el contenido es el valor.
 
-### Asignación de Variables
 
 En Python, el operador `=` asigna un valor a una variable:
 
@@ -83,7 +78,6 @@ print(chromosome_count)
 print(genome_size)`}
 />
 
-### Tipado Dinámico
 
 Python tiene **tipado dinámico** — las variables pueden cambiar de tipo durante la ejecución. El tipo se infiere del valor:
 
@@ -106,7 +100,6 @@ print(value, type(value))`}
   }}
 />
 
-### Convenciones de Nomenclatura
 
 Los nombres de variables en Python deben seguir estas reglas:
 - Pueden contener letras (a-z, A-Z), dígitos (0-9) y guiones bajos (_)
@@ -121,7 +114,6 @@ max_iterations = 1000
 customer_churn_rate = 0.12
 ```
 
-### Constantes
 
 Por convención, las constantes se escriben en `UPPER_SNAKE_CASE`:
 ```python
@@ -129,7 +121,6 @@ MAX_SPEED = 120
 PI = 3.14159
 ```
 
-### Asignación Múltiple
 
 Puedes asignar múltiples variables en una línea:
 ```python
@@ -156,7 +147,6 @@ print(f"Después: a={a}, b={b}")`}
   }}
 />
 
-### Entrada/Salida Básica
 
 ```python
 # Salida
@@ -174,7 +164,6 @@ name = input("Enter your name: ")
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 **Ejercicio 1:** Asigna una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
 
@@ -223,7 +212,6 @@ print(data, type(data))`}
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario:** Calculando el contenido GC de una secuencia de ADN.
 
@@ -246,7 +234,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Usar variables no definidas**: `print(x)` antes de `x = 5` lanza `NameError`
 2. **Escribir mal los nombres de variables**: `temperature` vs `temperture`
@@ -254,7 +241,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 4. **Olvidarse de convertir la entrada**: `input()` devuelve un string; usa `int()` o `float()` para números
 5. **Confundir mayúsculas y minúsculas**: `data` y `Data` son variables diferentes
 
-## Buenas Prácticas
 
 - Usa nombres de variables descriptivos y significativos
 - Sigue la convención `snake_case`
@@ -268,7 +254,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Las variables almacenan valores en ubicaciones de memoria nombradas
 - Python tiene tipado dinámico — los tipos se infieren
@@ -277,7 +262,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - PEP 8 recomienda nomenclatura `snake_case`
 - `input()` lee la entrada del usuario como string
 
-## Términos Clave
 
 - **Variable**: Ubicación de almacenamiento nombrada para un valor
 - **Asignación**: Usar `=` para darle un valor a una variable
@@ -292,7 +276,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Desafío de Código
 
 Escribe un programa que calcule el **GC content** de una secuencia de ADN más larga. Usa variables para cada paso.
 

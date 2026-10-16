@@ -23,7 +23,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -37,7 +36,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -55,9 +53,7 @@ Quiz: quiz.md
 
 <Section number={2} title="Tipos de Bucles" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### El Bucle for
 
 El bucle `for` itera sobre una secuencia (string, lista, tupla, etc.):
 
@@ -66,7 +62,6 @@ for variable in sequence:
     pass  # código a repetir
 ```
 
-### La Función range()
 
 `range()` genera secuencias de números:
 
@@ -76,7 +71,6 @@ range(start, stop)  # start, start+1, ..., stop-1
 range(start, stop, step)  # start, start+step, ...
 ```
 
-### El Bucle while
 
 El bucle `while` se repite mientras una condición sea True:
 
@@ -85,12 +79,10 @@ while condition:
     pass  # código a repetir
 ```
 
-### Break y Continue
 
 - **break**: Sale del bucle inmediatamente
 - **continue**: Salta el resto de la iteración actual, pasa a la siguiente
 
-### Bucles Anidados
 
 Bucles dentro de bucles — se usan para datos multidimensionales:
 
@@ -100,7 +92,6 @@ for i in range(3):
         print(i, j)
 ```
 
-### La Cláusula else en Bucles
 
 Los bucles de Python pueden tener una cláusula `else` que se ejecuta cuando el bucle termina normalmente (sin `break`):
 
@@ -116,7 +107,6 @@ else:
 
 <Section number={3} title="Visualización de Bucles" eyebrow="CONCEPTO">
 <RevealSequence>
-## Explicación Visual
 
 ```
 Flujo del Bucle For:
@@ -147,7 +137,6 @@ Flujo del Bucle While:
 
 <Section number={4} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # For loop con una lista
@@ -203,7 +192,6 @@ for i in range(1, 4):
 
 <Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario**: Procesando una lista de secuencias de ADN para encontrar aquellas con alto contenido GC.
 
@@ -242,7 +230,6 @@ else:
 
 <Section number={6} title="Ejemplo SaaS" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo SaaS
 
 **Escenario**: Procesando datos mensuales de transacciones para análisis de churn.
 
@@ -271,7 +258,6 @@ print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 
 <Section number={7} title="Errores y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Bucles while infinitos**: Olvidarse de actualizar la variable de condición
 2. **Modificar una lista mientras se itera**: Puede saltear elementos o causar errores. Itera sobre una copia
@@ -279,7 +265,6 @@ print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 4. **Usar `range(len(lista))` en lugar de iterar directamente**: El estilo pitónico prefiere la iteración directa
 5. **Olvidar los dos puntos y la indentación**: Sintaxis requerida para los bloques de bucle
 
-## Buenas Prácticas
 
 - Prefiere bucles `for` sobre `while` cuando iteres sobre secuencias
 - Usa `enumerate()` cuando necesites tanto el índice como el valor
@@ -301,7 +286,6 @@ for gene, expression in zip(genes, expressions):
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Los bucles `for` iteran sobre secuencias (listas, strings, ranges)
 - Los bucles `while` se repiten mientras una condición sea True
@@ -310,7 +294,6 @@ for gene, expression in zip(genes, expressions):
 - Los bucles anidados manejan datos multidimensionales
 - Los bucles pueden tener cláusulas `else` que se ejecutan al completarse normalmente
 
-## Términos Clave
 
 - **Iteración**: Una ejecución del cuerpo del bucle
 - **Iterable**: Objeto sobre el que se puede iterar (lista, str, range, etc.)
@@ -324,25 +307,20 @@ for gene, expression in zip(genes, expressions):
 
 <Section number={9} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Cuál es la salida de `for i in range(3): print(i)`?
 2. ¿Cuál es la diferencia entre `break` y `continue`?
 3. ¿Qué pasa si la condición en un bucle `while` nunca se vuelve False?
 
-### Nivel 2: Implementación
 
 4. Escribe un bucle for que calcule la suma de los números del 1 al 100.
 5. Escribe un bucle while que imprima la secuencia de Fibonacci hasta 100 (cada número es la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8...).
 
-### Nivel 3: Pensamiento Crítico
 
 6. Compara los bucles `for` y `while`. ¿Cuándo elegirías uno sobre el otro?
 7. ¿Por qué modificar una lista mientras se itera sobre ella es problemático? Muestra un ejemplo y el enfoque correcto.
 
-## Desafío de Código
 
 Escribe un programa que implemente la **Criba de Eratóstenes** para encontrar todos los números primos hasta un límite `n`:
 1. Crea una lista de booleanos de 0 a n, inicialmente todos True

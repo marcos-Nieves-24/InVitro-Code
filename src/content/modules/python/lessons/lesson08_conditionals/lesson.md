@@ -23,7 +23,6 @@ Quiz: quiz.md
 
 <Section number={1} title="¿Por qué Condicionales?" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -37,7 +36,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -55,9 +53,7 @@ Quiz: quiz.md
 
 <Section number={2} title="Sentencias if, elif y else" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### La Sentencia if
 
 El condicional más simple ejecuta código solo cuando una condición es True:
 
@@ -66,7 +62,6 @@ if condition:
     pass  # código a ejecutar si la condición es True
 ```
 
-### if/else
 
 ```python
 if condition:
@@ -75,7 +70,6 @@ else:
     pass  # código si False
 ```
 
-### if/elif/else
 
 Encadena múltiples condiciones:
 
@@ -90,7 +84,6 @@ else:
     pass  # todas las condiciones son False
 ```
 
-### Explicación Visual
 
 ```
 Flujo if/elif/else:
@@ -124,7 +117,6 @@ Flujo if/elif/else:
 
 <Section number={3} title="Truthy, Falsy y Condiciones Avanzadas" eyebrow="CONCEPTO">
 <RevealSequence>
-### Truthy y Falsy
 
 En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condición:
 
@@ -137,7 +129,6 @@ En Python, los valores pueden ser "truthy" o "falsy" cuando se usan en una condi
 
 **Todo lo demás es truthy.**
 
-### Condicionales Anidados
 
 Condicionales dentro de condicionales:
 
@@ -151,7 +142,6 @@ else:
     pass  # condition1 False
 ```
 
-### Ternario (Expresión Condicional)
 
 Condicional en una línea:
 
@@ -159,7 +149,6 @@ Condicional en una línea:
 value = true_value if condition else false_value
 ```
 
-### Sentencia Match (Python 3.10+)
 
 Pattern matching estructural (similar a switch/case):
 
@@ -178,7 +167,6 @@ match value:
 
 <Section number={4} title="Implementación y Ejemplos" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # if básico
@@ -246,7 +234,6 @@ def describe_mutation(mutation_type):
 print(describe_mutation("missense"))
 ```
 
-## Ejemplo de Biotecnología
 
 **Escenario**: Sistema de apoyo a decisiones clínicas para diagnóstico de pacientes.
 
@@ -301,7 +288,6 @@ print(f"Glucosa: {glu}")
 print(f"Emergencia: {emergency}")
 ```
 
-## Ejemplo SaaS
 
 **Escenario**: Asignación de nivel de cliente y cálculo de descuento.
 
@@ -349,7 +335,6 @@ print(f"Descuento: {discount:.0%}")
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Usar `=` en lugar de `==`**: `if x = 5:` asigna 5 a x y siempre es True
 2. **Olvidar los dos puntos**: `if x > 5` sin `:` lanza SyntaxError
@@ -358,7 +343,6 @@ print(f"Descuento: {discount:.0%}")
 5. **Verificar booleanos con `== True`**: Es redundante — usa `if condition:`
 6. **Anidamiento profundo**: Más de 3 niveles de anidamiento sugiere refactorización
 
-## Buenas Prácticas
 
 - Usa `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
 - Mantén las condiciones simples — extrae lógica compleja a variables booleanas
@@ -372,7 +356,6 @@ print(f"Descuento: {discount:.0%}")
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - `if` ejecuta código cuando una condición es True
 - `elif` verifica condiciones adicionales
@@ -382,7 +365,6 @@ print(f"Descuento: {discount:.0%}")
 - Sentencia match (3.10+) para pattern matching
 - Evita anidamiento profundo; usa cláusulas de guarda
 
-## Términos Clave
 
 - **Condicional**: Sentencia que ejecuta código basada en una condición
 - **Expresión booleana**: Expresión que evalúa a True o False
@@ -397,25 +379,20 @@ print(f"Descuento: {discount:.0%}")
 
 <Section number={7} title="Ejercicios y Desafío de Código" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Cuál es la salida de `if 0: print("sí") else: print("no")`?
 2. ¿Cuál es la diferencia entre `=` y `==`?
 3. ¿Qué valores se consideran falsy en Python?
 
-### Nivel 2: Implementación
 
 4. Escribe una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
 5. Escribe una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `if x == True:` se considera mal estilo? ¿Cuál es la alternativa pitónica?
 7. Compara y contrasta las cadenas if/elif/else con las sentencias match. ¿Cuándo usarías cada una?
 
-## Desafío de Código
 
 Escribe un sistema de **puntaje crediticio** que:
 1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados

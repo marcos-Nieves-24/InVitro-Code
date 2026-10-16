@@ -21,7 +21,6 @@ Quiz: quiz.md
 
 <Section number={1} title="Tipos de Datos" eyebrow="INICIO">
 <RevealSequence>
-## Motivación
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -35,7 +34,6 @@ Quiz: quiz.md
   ]}
 />
 
-## Panorama General
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -52,9 +50,7 @@ Quiz: quiz.md
 
 <Section number={2} title="Los Cuatro Tipos de Datos Básicos" eyebrow="CONCEPTO">
 <RevealSequence>
-## Teoría
 
-### Los Cuatro Tipos de Datos Básicos
 
 Python tiene cuatro tipos de datos primitivos:
 
@@ -75,7 +71,6 @@ Python tiene cuatro tipos de datos primitivos:
    - Solo dos valores: `True` y `False`
    - Internamente, `True` = 1 y `False` = 0
 
-### Verificación de Tipos con type()
 
 ```python
 x = 42
@@ -91,7 +86,6 @@ w = True
 print(type(w))       # <class 'bool'>
 ```
 
-### Conversión de Tipos (Casting)
 
 Puedes convertir explícitamente entre tipos:
 
@@ -116,7 +110,6 @@ bool("")             # False (string vacío)
 bool("hello")        # True (string no vacío)
 ```
 
-### Tipos Mutables vs Inmutables
 
 - **Inmutables**: int, float, bool, str — no se pueden modificar después de creados
 - **Mutables**: list, dict, set — se pueden modificar (se ven en lecciones posteriores)
@@ -126,7 +119,6 @@ name = "BRCA1"
 name[0] = "A"  # TypeError: 'str' object does not support item assignment
 ```
 
-### Valores Especiales
 
 - **None**: Representa la ausencia de un valor
 - **inf**: Infinito (float)
@@ -138,7 +130,6 @@ infinity = float('inf')
 not_a_number = float('nan')
 ```
 
-## Explicación Visual
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -163,7 +154,6 @@ not_a_number = float('nan')
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
 <RevealSequence>
-## Implementación en Python
 
 ```python
 # Demostrando los cuatro tipos
@@ -215,7 +205,6 @@ result = "The answer is " + str(42)  # Correcto
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
-## Ejemplo de Biotecnología
 
 **Escenario**: Procesando datos de expresión génica de un experimento de microarreglos.
 
@@ -237,7 +226,6 @@ if isinstance(expression_ratio, float):
     print("Valid expression ratio type")
 ```
 
-## Ejemplo SaaS
 
 **Escenario**: Procesando datos de suscripción de clientes.
 
@@ -262,7 +250,6 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
-## Errores Comunes
 
 1. **Concatenar strings con no-strings**: `"count: " + 5` lanza TypeError
 2. **Perder precisión con float**: `0.1 + 0.2 != 0.3` exactamente (aritmética de coma flotante)
@@ -270,7 +257,6 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 4. **Confundir `=` y `==`**: Asignación vs comparación de igualdad
 5. **Olvidar que `input()` devuelve un string**: Siempre convierte la entrada numérica
 
-## Buenas Prácticas
 
 - Usa `isinstance()` para verificar tipos en lugar de `type() ==`
 - Convierte tipos explícitamente en lugar de confiar en la conversión implícita
@@ -283,7 +269,6 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
-## Resumen
 
 - Python tiene cuatro tipos primitivos: int, float, str, bool
 - Usa `type()` para verificar el tipo de un valor
@@ -292,7 +277,6 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 - `None` representa la ausencia de un valor
 - Los errores de tipo son comunes y generalmente involucran mezclar strings con números
 
-## Términos Clave
 
 - **int**: Tipo entero para números enteros
 - **float**: Tipo de coma flotante para números decimales
@@ -308,25 +292,20 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 <Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 <RevealSequence>
-## Ejercicios
 
-### Nivel 1: Básico
 
 1. ¿Qué tipo devuelve `type(3.0)`?
 2. ¿Cuál es el resultado de `int(7.9)` y por qué?
 3. ¿Qué valores se convierten a `False` cuando se pasan a `bool()`?
 
-### Nivel 2: Implementación
 
 4. Escribe una función que reciba un string como "3.14" y devuelva tanto la parte float como la entera.
 5. Pregúntale al usuario dos números, súmalos e imprime el resultado. Maneja la conversión de tipos correctamente.
 
-### Nivel 3: Pensamiento Crítico
 
 6. ¿Por qué `0.1 + 0.2` no es igual a `0.3` en aritmética de coma flotante? ¿Cómo compararías números de coma flotante de forma segura?
 7. ¿Cuándo usarías explícitamente `bool()` en lugar de confiar en valores truthy/falsy?
 
-## Desafío de Código
 
 Escribe un programa que:
 1. Pregunte el nombre del usuario (string), edad (int) y salario (float)
