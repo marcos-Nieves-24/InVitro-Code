@@ -338,9 +338,11 @@ export function RevealSequence({
       if (showHint) dismissHint();
       const target = e.target as HTMLElement;
       // Don't advance when interacting with form/native interactive elements,
-      // except the explicit continue/back buttons.
+      // code editors (Monaco renders clicks on view-line divs, not its hidden
+      // textarea) or anything explicitly marked [data-no-advance] — except the
+      // explicit continue/back buttons.
       const interactiveAncestor = target.closest(
-        "button,input,textarea,select,iframe,a,[data-no-advance]"
+        "button,input,textarea,select,iframe,a,.monaco-editor,[contenteditable],[data-no-advance]"
       );
       if (interactiveAncestor) {
         const isContinue =
@@ -373,6 +375,11 @@ export function RevealSequence({
 
   const handleContainerKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Never hijack cursor keys while the user edits text (Monaco moves its
+      // cursor with arrows inside its hidden textarea; without this, ArrowLeft
+      // would step the reveal back mid-typing).
+      const t = e.target as HTMLElement | null;
+      if (t?.closest?.("input,textarea,select,[contenteditable]")) return;
       if (e.key === "ArrowLeft" && revealedCount > initialRevealed) {
         e.preventDefault();
         e.stopPropagation();
