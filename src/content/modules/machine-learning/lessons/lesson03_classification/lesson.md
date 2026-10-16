@@ -73,6 +73,25 @@ Luego aplica la **función sigmoide** para convertir $z$ en una probabilidad:
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
+<EquationTour caption="La sigmoide convierte cualquier real en una probabilidad acotada entre 0 y 1.">
+  <EquationStep label="Combinación z">
+    $z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
+    Combinación lineal de features; puede valer cualquier real.
+  </EquationStep>
+  <EquationStep label="Sigmoide">
+    $\sigma(z) = \frac{1}{1 + e^{-z}}$
+    Comprime $(-\infty, +\infty)$ al rango $(0, 1)$.
+  </EquationStep>
+  <EquationStep label="Probabilidad">
+    $\hat{p} = \sigma(z)$
+    Probabilidad de pertenecer a la clase 1.
+  </EquationStep>
+  <EquationStep label="Frontera">
+    $z = 0 \iff \hat{p} = 0.5$
+    Donde cambia la decisión de clase.
+  </EquationStep>
+</EquationTour>
+
 <CalloutInfo>
 La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$ → probabilidad cercana a 1. Valores muy negativos → probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
 </CalloutInfo>
@@ -84,6 +103,25 @@ La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. V
 
 $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$$
 </ConceptCard>
+
+<EquationTour caption="Log Loss: cada parte penaliza el error según la clase real y la confianza predicha.">
+  <EquationStep label="Clase positiva">
+    $y_i\log(\hat{p}_i)$
+    Si el real es 1, castiga cuando la probabilidad predicha es baja.
+  </EquationStep>
+  <EquationStep label="Clase negativa">
+    $(1-y_i)\log(1-\hat{p}_i)$
+    Si el real es 0, castiga cuando la probabilidad predicha es alta.
+  </EquationStep>
+  <EquationStep label="Suma y signo">
+    $y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)$
+    Sólo uno de los términos activa por cada ejemplo.
+  </EquationStep>
+  <EquationStep label="Promedio">
+    $L = -\frac{1}{n}\sum_{i=1}^{n}[\cdots]$
+    Promedio con signo negativo para que minimizar sea equivalente a maximizar la verosimilitud.
+  </EquationStep>
+</EquationTour>
 
 </RevealSequence>
 

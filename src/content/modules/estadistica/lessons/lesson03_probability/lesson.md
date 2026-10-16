@@ -86,9 +86,24 @@ El Teorema de Bayes actualiza nuestras creencias cuándo observamos evidencia:
 $$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)} = \frac{P(B \mid A) \cdot P(A)}{\sum_{i} P(B \mid A_i) \cdot P(A_i)}$$
 </ConceptCard>
 
-<ConceptCard variant="key-idea">
-$P(A)$ es la **probabilidad a priori** (lo qué creíamos antes). $P(A|B)$ es la **probabilidad a posteriori** (lo qué creemos después de ver la evidencia B). Bayes nos dice exactamente cuánto actualizar nuestras creencias.
-</ConceptCard>
+<EquationTour caption="Bayes actualiza la creencia inicial con la evidencia observada.">
+  <EquationStep label="Prior">
+    $P(A)$
+    Creencia inicial antes de ver la evidencia.
+  </EquationStep>
+  <EquationStep label="Verosimilitud">
+    $P(B \mid A)$
+    Probabilidad de la evidencia si A es cierto.
+  </EquationStep>
+  <EquationStep label="Denominador">
+    $P(B)$
+    Probabilidad total de la evidencia en todos los casos.
+  </EquationStep>
+  <EquationStep label="Posterior">
+    $P(A \mid B)$
+    Creencia actualizada después de observar B.
+  </EquationStep>
+</EquationTour>
 
 **Ley de Probabilidad Total**
 

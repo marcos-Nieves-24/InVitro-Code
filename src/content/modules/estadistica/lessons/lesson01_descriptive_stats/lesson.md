@@ -89,7 +89,20 @@ La media aritmética es la suma de todos los valores dividida por la cantidad de
 
 $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
-**Intuición**: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es dónde se equilibraría el fulcro.
+<EquationTour caption="La media suma todos los valores y los divide por n para ubicar el centro.">
+  <EquationStep label="Suma">
+    $\sum_{i=1}^{n} x_i$
+    Suma de todos los valores del conjunto.
+  </EquationStep>
+  <EquationStep label="Dividir">
+    $\frac{1}{n}$
+    Divide la suma por la cantidad de datos.
+  </EquationStep>
+  <EquationStep label="Centro">
+    $\bar{x}$
+    El punto de equilibrio: donde se balancean los datos.
+  </EquationStep>
+</EquationTour>
 
 **Mediana**
 
@@ -275,9 +288,20 @@ print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} m
 <Section number={9} title="El IQR cómo detector de outliers" eyebrow="CONCEPTO">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="definition">
-Un valor es **atípico (outlier)** si está por debajo de $Q_1 - 1.5 \times \text{IQR}$ o por encima de $Q_3 + 1.5 \times \text{IQR}$.
-</ConceptCard>
+<EquationTour caption="La regla 1.5×IQR marca el límite más allá del cual un dato es atípico.">
+  <EquationStep label="Límite inferior">
+    $Q_1 - 1.5 \times \text{IQR}$
+    Valores menores son atípicos bajos.
+  </EquationStep>
+  <EquationStep label="Centro protegido">
+    $Q_1,\ Q_3$
+    Delimitan el 50% central de los datos.
+  </EquationStep>
+  <EquationStep label="Límite superior">
+    $Q_3 + 1.5 \times \text{IQR}$
+    Valores mayores son atípicos altos.
+  </EquationStep>
+</EquationTour>
 
 ```python
 q1 = np.percentile(reduction, 25)
