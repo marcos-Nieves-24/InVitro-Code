@@ -23,15 +23,45 @@ Quiz: model_evaluation_quiz.md
 
 <Section number={1} title="Crear modelos es fácil. Evaluarlos, no." eyebrow="INICIO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Cualquiera llama a .fit(), pero saber si el modelo aprendió algo útil es otra historia.",
+    "La evaluación separa la magia de la ilusión en machine learning.",
+    "Lo que importa no es el error en training, sino la performance en datos nuevos.",
+    "Eso se llama generalización y es el corazón de la ciencia de datos.",
+  ]}
+/>
+
 <MascotMessage mood="thinking">
 Cualquiera puede llamar a `.fit()`. Lo difícil es saber si el modelo realmente aprendió algo útil o solo memorizó los datos de entrenamiento. La evaluación de modelos es dónde separamos la magia de la ilusión.
 </MascotMessage>
 
 En las lecciones anteriores construiste intuición estadística. Ahora la vas a aplicar para responder la pregunta más importante en ML: **¿este modelo es bueno?** No en training — en datos qué nunca vio. Eso se llama **generalización**.
 
+</RevealSequence>
+
 </Section>
 
 <Section number={2} title="Train/Test Split: la regla de oro" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "La regla de oro es separar los datos antes de entrenar.",
+    "El modelo nunca debe ver el test set durante el entrenamiento.",
+    "Un 70-80 % para train y 20-30 % para test es el estándar.",
+    "Evaluar en training es como corregirte el examen con las respuestas.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **Train/Test Split**: dividir los datos en dos conjuntos — uno para entrenar (train, ~70-80%) y otro para evaluar (test, ~20-30%). El modelo NUNCA ve el test set durante el entrenamiento.
@@ -46,9 +76,25 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 Evaluar en training es cómo corregirte tu propio examen con las respuestas adelante. El accuracy en training siempre es alto. Lo qué importa es el accuracy en test: los datos qué el modelo nunca vio.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Validación Cruzada: más robusta" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un solo split depende de qué ejemplos cayeron en test.",
+    "K-fold entrena k veces, rotando el fold de validación.",
+    "El promedio de las k métricas da un mejor estimado del desempeño real.",
+    "La desviación estándar te dice cuán estable es el modelo.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **K-Fold Cross-Validation**: dividir los datos en k partes (folds). Entrenar k veces, cada vez usando k-1 folds para training y 1 fold distinto para validación. El resultado es el promedio de las k métricas.
@@ -64,9 +110,25 @@ print(f"R² CV: {scores.mean():.3f} ± {scores.std():.3f}")
 La validación cruzada te da un intervalo de confianza sobre la performance real de tu modelo. Si la desviación estándar es alta, tu modelo es inestable — pequeños cambios en los datos lo afectan mucho.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Métricas de regresión" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "MAE, MSE, RMSE y R² responden preguntas distintas del error.",
+    "MAE es robusto a outliers y se interpreta en unidades originales.",
+    "MSE penaliza los errores grandes por el cuadrado.",
+    "RMSE devuelve el error a unidades originales; R² dice cuánto explica el modelo.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 **MAE** (Mean Absolute Error): $\frac{1}{n}\sum |y_i - \hat{y}_i|$ — error promedio en unidades originales. Robusto a outliers.
@@ -78,18 +140,33 @@ La validación cruzada te da un intervalo de confianza sobre la performance real
 **R²** (Coeficiente de determinación): proporción de varianza explicada. 1.0 = perfecto, 0 = siempre predice la media, negativo = peor qué la media.
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Unidad", left: "Original (ej. dólares)", right: "Original (ej. dólares)" },
-    { feature: "Outliers", left: "Robusto", right: "Muy sensible (penaliza fuerte)" },
-    { feature: "Interpretación", left: "Error típico promedio", right: "Error típico (penalizando grandes)" },
-    { feature: "Cuándo usar", left: "Errores uniformemente costosos", right: "Errores grandes son catastróficos" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+MAE vs RMSE:
+- **Unidad**: ambas en unidades originales (ej. dólares)
+- **Outliers**: MAE robusto; RMSE muy sensible (penaliza fuerte)
+- **Interpretación**: MAE error típico promedio; RMSE error típico penalizando grandes
+- **Cuándo usar**: MAE si todos los errores son igualmente costosos; RMSE si los errores grandes son catastróficos
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={5} title="Overfitting: el enemigo #1" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El sobreajuste ocurre cuando el modelo memoriza el ruido del training.",
+    "Se detecta cuando el accuracy de training es mucho mayor que el de test.",
+    "Alta varianza entre folds de CV es otro síntoma claro.",
+    "El antídoto: más datos, menos features, modelos más simples, regularización.",
+  ]}
+/>
 
 <ConceptCard variant="warning">
 **Overfitting (sobreajuste)**: El modelo memoriza el ruido del training set en vez de aprender patrones generalizables.
@@ -104,9 +181,25 @@ Síntomas:
 **Antídoto**: validación cruzada, regularización, más datos, menos features, modelos más simples. Si tu modelo es perfecto en training pero malo en test, felicitaciones — descubriste overfitting. Simplifica.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={6} title="Evaluación en código" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El flujo completo: split, ajuste, predicción y métricas sobre el test.",
+    "Luego validación cruzada repite el experimento varias veces.",
+    "Esto te da media y desviación del desempeño real del modelo.",
+    "Los números por sí solos no deciden: se comparan con un baseline.",
+  ]}
+/>
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -157,9 +250,25 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Checkpoint" eyebrow="EVALUACIÓN">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El checkpoint aclara dos trampas comunes de evaluación.",
+    "Evaluar en training mide memoria, no aprendizaje.",
+    "La elección entre MAE y RMSE depende del costo de los errores.",
+    "No es tamaño de dataset ni disponibilidad de scikit-learn.",
+  ]}
+/>
 
 <ChoiceQuestion
   question="¿Por qué no evaluamos en el training set?"
@@ -191,34 +300,64 @@ print(f"R² CV: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
   ]}
 />
 
+</RevealSequence>
+
 </Section>
 
 <Section number={8} title="Términos clave" eyebrow="CIERRE">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["Train/Test Split", "Dividir datos: 70-80% train, 20-30% test"],
-    ["Validación Cruzada", "k-fold: entrenar k veces, promediar métricas"],
-    ["MAE", "Error absoluto medio — robusto a outliers"],
-    ["MSE", "Error cuadrático medio — penaliza errores grandes"],
-    ["RMSE", "Raíz del MSE — en unidades originales, interpretable"],
-    ["R²", "Proporción de varianza explicada (1 = perfecto)"],
-    ["Overfitting", "El modelo memoriza training, falla en test"],
-    ["Generalización", "Performance en datos no vistos — lo qué importa"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Consolidamos el vocabulario de evaluación de modelos.",
+    "Train/test, validación cruzada, MAE, RMSE, R² y overfitting.",
+    "Generalización es el único métrica que importa en producción.",
+    "Esto distingue a un científico de datos senior.",
   ]}
-  searchable={true}
-  caption="Términos clave de evaluación de modelos"
 />
+
+<ConceptCard variant="key-idea">
+Términos clave:
+- **Train/Test Split**: Dividir datos: 70-80% train, 20-30% test
+- **Validación Cruzada**: k-fold: entrenar k veces, promediar métricas
+- **MAE**: Error absoluto medio — robusto a outliers
+- **MSE**: Error cuadrático medio — penaliza errores grandes
+- **RMSE**: Raíz del MSE — en unidades originales, interpretable
+- **R²**: Proporción de varianza explicada (1 = perfecto)
+- **Overfitting**: El modelo memoriza training, falla en test
+- **Generalización**: Performance en datos no vistos — lo que importa
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Para la última lección" eyebrow="CIERRE">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Ya sabes evaluar modelos: split, CV, métricas y overfitting.",
+    "Ese es el toolkit que separa modelos buenos de malos.",
+    "La última lección cierra el módulo comunicando resultados.",
+    "Porque el mejor análisis no sirve si nadie lo entiende.",
+  ]}
+/>
 
 <MascotMessage mood="celebrating">
 Ya sabes evaluar modelos. Train/test split, validación cruzada, MAE, RMSE y R²: tienes el toolkit completo para separar modelos buenos de malos. Esto es lo que distingue a un científico de datos senior.
 </MascotMessage>
 
 **En la Lección 10** cerramos el módulo con **Narración de Datos**: cómo comunicar tus hallazgos. Porque de nada sirve el mejor análisis si no puedes explicarlo. Vas a aprender a contar historias con datos qué convenzan a cualquier audiencia.
+
+</RevealSequence>
 
 </Section>

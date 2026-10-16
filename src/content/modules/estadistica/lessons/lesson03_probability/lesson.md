@@ -22,6 +22,7 @@ Quiz: probability_quiz.md
 ---
 
 <Section number={1} title="La ciencia de la incertidumbre" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
 <MascotMessage mood="thinking">
 Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasificador nunca sabe con 100% de certeza. La probabilidad es el lenguaje matemático para expresar esa incertidumbre. Sin ella, no puedes interpretar la confianza de un modelo ni evaluar métodos bayesianos.
@@ -33,9 +34,11 @@ En biotecnología, la probabilidad cuantifica la precisión de tests diagnóstic
 La probabilidad no elimina la incertidumbre — la mide. Y medirla es el primer paso para tomar decisiones informadas.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Los tres axiomas de Kolmogorov" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 Andrey Kolmogorov formalizó la probabilidad con tres axiomas qué son la base de TODO:
 
@@ -53,9 +56,11 @@ $$P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)$$
 Las probabilidades siempre están entre 0 y 1. Algo debe ocurrir (total = 1). Si dos eventos no pueden ocurrir juntos, la probabilidad de uno u otro es la suma.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Probabilidad Condicional" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 La probabilidad condicional responde: "Sabiendo qué B ocurrió, ¿cuál es la probabilidad de A?"
@@ -69,9 +74,11 @@ Intuición: Si sabemos qué B ocurrió, restringimos nuestra atención al "mundo
 **Error clásico**: confundir $P(A|B)$ con $P(B|A)$. La probabilidad de tener cáncer dado un test positivo NO es igual a la probabilidad de un test positivo dado qué tienes cáncer. Esto se llama la "falacia del fiscal".
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Teorema de Bayes: la regla qué cambia todo" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 El Teorema de Bayes actualiza nuestras creencias cuándo observamos evidencia:
@@ -83,37 +90,39 @@ $$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)} = \frac{P(B \mid A) \cdot P(
 $P(A)$ es la **probabilidad a priori** (lo qué creíamos antes). $P(A|B)$ es la **probabilidad a posteriori** (lo qué creemos después de ver la evidencia B). Bayes nos dice exactamente cuánto actualizar nuestras creencias.
 </ConceptCard>
 
-### Ley de Probabilidad Total
+**Ley de Probabilidad Total**
 
 $$P(A) = \sum_{i=1}^{k} P(A \mid B_i) \cdot P(B_i)$$
 
 Para encontrar la probabilidad total de A, consideras todas las formas en qué A puede ocurrir, ponderadas por la probabilidad de cada escenario.
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Variables Aleatorias" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 Una variable aleatoria es una función qué asigna un número real a cada resultado del espacio muestral.
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Valores", left: "Contables (0, 1, 2, ...)", right: "Cualquier valor en un intervalo" },
-    { feature: "Probabilidad", left: "PMF: $p(x) = P(X = x)$", right: "PDF: $P(a \\leq X \\leq b) = \\int_a^b f(x)dx$" },
-    { feature: "Esperanza", left: "$E[X] = \\sum x \\cdot P(X=x)$", right: "$E[X] = \\int x f(x)dx$" },
-    { feature: "Ejemplo", left: "Cantidad de usuarios qué cancelan", right: "Nivel de expresión génica" },
-    { feature: "Varianza", left: "$\\text{Var}(X) = E[X^2] - E[X]^2$", right: "Misma fórmula" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+- **Valores**: Contables (0, 1, 2, ...) → Cualquier valor en un intervalo
+- **Probabilidad**: PMF: $p(x) = P(X = x)$ → PDF: $P(a \leq X \leq b) = \int_a^b f(x)dx$
+- **Esperanza**: $E[X] = \sum x \cdot P(X=x)$ → $E[X] = \int x f(x)dx$
+- **Ejemplo**: Cantidad de usuarios qué cancelan → Nivel de expresión génica
+- **Varianza**: $\text{Var}(X) = E[X^2] - E[X]^2$ → Misma fórmula
+</ConceptCard>
 
 <CalloutInfo>
 **CDF** (Función de Distribución Acumulada): $F(x) = P(X \leq x)$. La CDF responde "¿cuál es la probabilidad de qué X sea menor o igual a x?" y funciona tanto para discretas cómo continuas.
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Bayes en acción: test de diagnóstico" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Apliquemos Bayes a un caso médico real. Una enfermedad rara y un test imperfecto:
 
@@ -152,9 +161,11 @@ print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Caso biotecnológico: variantes génicas" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Clasificación de mutaciones en ADN. Una herramienta bioinformática analiza variantes:
 
@@ -177,9 +188,11 @@ print(f"P(patogénica | detectada) = {p_pathogenic_given_detect:.3f}")
 Incluso con 95% de precisión, una variante marcada cómo patogénica tiene solo ~4.5% de probabilidad de serlo realmente. Esto explica por qué los genetistas siempre validan con estudios funcionales antes de diagnosticar.
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Predicción de deserción en SaaS" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 ```python
 # 10% de clientes cancelan cada mes
@@ -211,9 +224,11 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={9} title="Errores comunes" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="warning">
 **Cuatro trampas probabilísticas:**
@@ -232,9 +247,11 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 - La probabilidad cuantifica incertidumbre, no la elimina — no busques certezas dónde no las hay
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={10} title="Checkpoint" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
 <ChoiceQuestion
   question="¿Por qué el Axioma 2 de Kolmogorov (P(S) = 1) es necesario? ¿Qué pasaría si la probabilidad total no fuera 1?"
@@ -281,29 +298,28 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={11} title="Términos clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["Espacio Muestral", "Conjunto de todos los resultados posibles de un experimento"],
-    ["Evento", "Subconjunto del espacio muestral"],
-    ["Probabilidad Condicional", "P(A|B): probabilidad de A sabiendo qué B ocurrió"],
-    ["Teorema de Bayes", "Fórmula para actualizar probabilidades con nueva evidencia"],
-    ["Probabilidad a Priori", "Creencia inicial antes de observar evidencia"],
-    ["Probabilidad a Posteriori", "Creencia actualizada después de la evidencia"],
-    ["Variable Aleatoria", "Función qué asigna un número a cada resultado"],
-    ["Valor Esperado", "Promedio a largo plazo de una variable aleatoria"],
-  ]}
-  searchable={true}
-  caption="Términos clave de probabilidad"
-/>
+<ConceptCard variant="key-idea">
+- **Espacio Muestral**: Conjunto de todos los resultados posibles de un experimento
+- **Evento**: Subconjunto del espacio muestral
+- **Probabilidad Condicional**: P(A|B): probabilidad de A sabiendo qué B ocurrió
+- **Teorema de Bayes**: Fórmula para actualizar probabilidades con nueva evidencia
+- **Probabilidad a Priori**: Creencia inicial antes de observar evidencia
+- **Probabilidad a Posteriori**: Creencia actualizada después de la evidencia
+- **Variable Aleatoria**: Función qué asigna un número a cada resultado
+- **Valor Esperado**: Promedio a largo plazo de una variable aleatoria
+</ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={12} title="Para la próxima lección" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
 <MascotMessage mood="celebrating">
 Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el machine learning moderno —desde clasificadores naive Bayes hasta redes neuronales bayesianas— se construye sobre estas ideas.
@@ -317,4 +333,5 @@ Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el mac
 
 **En la Lección 4** vamos a conocer las distribuciones con nombre y apellido: Bernoulli, Binomial, Poisson y la famosísima distribución Normal. Porque hasta ahora hablamos de probabilidad en abstracto — es hora de ponerle nombres a las curvas.
 
+</RevealSequence>
 </Section>

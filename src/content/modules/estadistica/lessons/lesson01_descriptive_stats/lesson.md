@@ -22,8 +22,7 @@ Quiz: descriptive_statistics_quiz.md
 ---
 
 <Section number={1} title="El problema de los 10.000 genes" eyebrow="INICIO">
-
-<RevealSequence>
+<RevealSequence mode="appear">
 
 <DialogueBox
   speaker="Dra. Coni"
@@ -56,10 +55,10 @@ Resume un conjunto de datos completo en pocas medidas: centro (media, mediana) y
 />
 
 </RevealSequence>
-
 </Section>
 
 <Section number={2} title="¿Dónde estamos parados?" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 En el módulo anterior aprendiste a manipular datos usando Python, NumPy y Pandas. Ahora aprenderás a **describir** datos numéricamente.
 
@@ -74,13 +73,15 @@ Esta lección sienta las bases para todo el módulo:
 - **Lección 3**: Fundamentos de probabilidad
 - **Y más**: Distribuciones, correlaciones, clustering, y evaluación de modelos
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Medidas de Tendencia Central" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 Las medidas de tendencia central indican dónde se encuentra el "centro" de un conjunto de datos.
 
-### Media (Promedio)
+**Media (Promedio)**
 
 <ConceptCard variant="definition">
 La media aritmética es la suma de todos los valores dividida por la cantidad de valores.
@@ -90,7 +91,7 @@ $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
 **Intuición**: La media es el punto de equilibrio de los datos. Si colocaras cada punto de datos en una recta numérica con pesos iguales, la media es dónde se equilibraría el fulcro.
 
-### Mediana
+**Mediana**
 
 <ConceptCard variant="definition">
 La mediana es el valor del medio cuándo los datos están ordenados de forma ascendente.
@@ -98,7 +99,7 @@ La mediana es el valor del medio cuándo los datos están ordenados de forma asc
 
 $$\text{mediana} = \begin{cases} x_{(n+1)/2} & \text{si } n \text{ es impar} \\ \frac{x_{n/2} + x_{(n/2)+1}}{2} & \text{si } n \text{ es par} \end{cases}$$
 
-### Moda
+**Moda**
 
 <ConceptCard variant="definition">
 La moda es el valor más frecuente en un conjunto de datos.
@@ -106,26 +107,28 @@ La moda es el valor más frecuente en un conjunto de datos.
 
 Un conjunto puede tener una moda (unimodal), dos modas (bimodal) o más. En datos continuos, cada valor puede aparecer una sola vez — se usa agrupamiento para encontrar modas significativas.
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Media vs Mediana: ¿cuál usar?" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 La mediana divide el conjunto en dos mitades iguales. A diferencia de la media, **no se ve afectada por valores extremos**. Por eso es la medida preferida para datos sesgados.
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Definición", left: "Punto de equilibrio (suma / n)", right: "Valor central (mitad arriba, mitad abajo)" },
-    { feature: "Robustez a outliers", left: "Muy sensible — un valor extremo la desplaza", right: "Robusta — los outliers no la afectan" },
-    { feature: "Cuándo usarla", left: "Datos simétricos (ej. altura, peso, temperatura corporal)", right: "Datos sesgados (ej. ingresos, precios, expresión génica con outliers)" },
-    { feature: "Ejemplo", left: "Notas de un examen bien diseñado", right: "Ingresos de una población (dónde algunos ganan 100× más)" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+- **Definición**: Punto de equilibrio (suma / n) → Valor central (mitad arriba, mitad abajo)
+- **Robustez a outliers**: Muy sensible — un valor extremo la desplaza → Robusta — los outliers no la afectan
+- **Cuándo usarla**: Datos simétricos (ej. altura, peso, temperatura corporal) → Datos sesgados (ej. ingresos, precios, expresión génica con outliers)
+- **Ejemplo**: Notas de un examen bien diseñado → Ingresos de una población (dónde algunos ganan 100× más)
+</ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Manos a la obra: análisis de puntajes" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Veamos cómo calcular estas medidas en Python con datos reales de 30 estudiantes:
 
@@ -170,9 +173,11 @@ Ejecuta este código en tu notebook. ¿Están cerca la media y la mediana? Cuán
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Medidas de Dispersión" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 Las medidas de dispersión indican qué tan dispersos están los datos. No basta con saber el centro — necesitamos saber cuánto varían.
 
@@ -200,9 +205,11 @@ $$\sigma = \sqrt{\sigma^2}$$
 Está en las mismas unidades qué los datos originales — es la medida de dispersión más reportada.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={7} title="IQR: la medida robusta" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 **Rango Intercuartílico (IQR)**:
@@ -216,19 +223,19 @@ Donde $Q_1$ es el percentil 25 y $Q_3$ es el percentil 75.
 El IQR contiene el 50% central de los datos. Es **robusto frente a valores atípicos** por qué ignora los extremos. Junto con la mediana, forma la pareja ideal para datos sesgados.
 </ConceptCard>
 
-<ComparisonTable
-  rows={[
-    { feature: "Mide", left: "Recorrido total (max − min)", right: "Dispersión del 50% central (Q3 − Q1)" },
-    { feature: "Robustez", left: "Muy sensible a outliers", right: "Robusto — ignora extremos" },
-    { feature: "Unidad", left: "Misma qué los datos", right: "Misma qué los datos" },
-    { feature: "Se usa con", left: "Media y desviación estándar", right: "Mediana" },
-    { feature: "Cuándo", left: "Datos simétricos, sin outliers", right: "Datos sesgados o con outliers" },
-  ]}
-/>
+<ConceptCard variant="key-idea">
+- **Mide**: Recorrido total (max − min) → Dispersión del 50% central (Q3 − Q1)
+- **Robustez**: Muy sensible a outliers → Robusto — ignora extremos
+- **Unidad**: Misma qué los datos → Misma qué los datos
+- **Se usa con**: Media y desviación estándar → Mediana
+- **Cuándo**: Datos simétricos, sin outliers → Datos sesgados o con outliers
+</ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Caso real: reducción tumoral" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Una empresa biotecnológica prueba un nuevo fármaco. Midieron la reducción del tamaño del tumor (mm) en 20 pacientes:
 
@@ -262,9 +269,11 @@ print(f"IQR: {np.percentile(reduction, 75) - np.percentile(reduction, 25):.2f} m
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={9} title="El IQR cómo detector de outliers" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 Un valor es **atípico (outlier)** si está por debajo de $Q_1 - 1.5 \times \text{IQR}$ o por encima de $Q_3 + 1.5 \times \text{IQR}$.
@@ -287,9 +296,11 @@ print(f"Outliers detectados: {outliers}")
 Un outlier no siempre es un error. Puede serlo, pero también puede ser un caso excepcional, incluso el descubrimiento más importante del dataset. Nunca elimines valores atípicos sin investigar su causa.
 </ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={10} title="Expresión génica de TP53" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 Apliquemos todo lo aprendido a un caso real de biotecnología: análisis de expresión del gen supresor de tumores **TP53** en 50 muestras de pacientes.
 
@@ -314,9 +325,11 @@ print(df[df['TP53_expression'] < lower])
 TP53 es conocido cómo "el guardián del genoma". Una expresión anormalmente baja puede indicar una deleción del gen — un evento común en células cancerosas. La estadística descriptiva nos ayuda a identificar estas muestras para análisis más profundos.
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={11} title="Ejemplo SaaS: usuarios activos diarios" eyebrow="INTERACTIVA">
+<RevealSequence mode="appear">
 
 La estadística descriptiva no es solo para biotecnología. Analicemos usuarios activos diarios (DAU) de un producto SaaS durante 90 días:
 
@@ -352,9 +365,11 @@ plt.show()
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={12} title="Errores comunes y mejores prácticas" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
 <ConceptCard variant="warning">
 **Cuatro errores qué todo principiante comete:**
@@ -374,9 +389,11 @@ plt.show()
 - Usa `df.describe()` para una visión rápida en pandas
 </CalloutInfo>
 
+</RevealSequence>
 </Section>
 
 <Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
 Pon a prueba lo qué aprendiste:
 
@@ -429,29 +446,28 @@ Pon a prueba lo qué aprendiste:
   ]}
 />
 
+</RevealSequence>
 </Section>
 
 <Section number={14} title="Términos clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["Media", "Suma de valores dividida por la cantidad; el promedio aritmético"],
-    ["Mediana", "El valor del medio cuándo los datos están ordenados"],
-    ["Moda", "El valor más frecuente en el conjunto de datos"],
-    ["Varianza", "Distancia cuadrática promedio desde la media (σ²)"],
-    ["Desviación Estándar", "Raíz cuadrada de la varianza; distancia típica desde la media (σ)"],
-    ["Rango", "Diferencia entre el valor máximo y el mínimo"],
-    ["Rango Intercuartílico", "Diferencia entre Q3 (percentil 75) y Q1 (percentil 25)"],
-    ["Valor Atípico (Outlier)", "Punto qué difiere significativamente del resto; detectado con la regla 1.5×IQR"],
-  ]}
-  searchable={true}
-  caption="Términos clave de estadística descriptiva — usa la búsqueda para encontrar definiciones rápido"
-/>
+<ConceptCard variant="key-idea">
+- **Media**: Suma de valores dividida por la cantidad; el promedio aritmético
+- **Mediana**: El valor del medio cuándo los datos están ordenados
+- **Moda**: El valor más frecuente en el conjunto de datos
+- **Varianza**: Distancia cuadrática promedio desde la media (σ²)
+- **Desviación Estándar**: Raíz cuadrada de la varianza; distancia típica desde la media (σ)
+- **Rango**: Diferencia entre el valor máximo y el mínimo
+- **Rango Intercuartílico**: Diferencia entre Q3 (percentil 75) y Q1 (percentil 25)
+- **Valor Atípico (Outlier)**: Punto qué difiere significativamente del resto; detectado con la regla 1.5×IQR
+</ConceptCard>
 
+</RevealSequence>
 </Section>
 
 <Section number={15} title="Para la próxima lección" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
 <MascotMessage mood="celebrating">
 Excelente trabajo: ya tienes las herramientas fundamentales para describir cualquier conjunto de datos. Media, mediana, rango intercuartílico y valores atípicos son el pan de cada día de un científico de datos.
@@ -465,4 +481,5 @@ Excelente trabajo: ya tienes las herramientas fundamentales para describir cualq
 
 **En la Lección 2** vamos a complementar estos números con visualizaciones: histogramas, curvas de densidad, asimetría y curtosis. Porque un número te dice *qué*, pero un gráfico te muestra *por qué*.
 
+</RevealSequence>
 </Section>
