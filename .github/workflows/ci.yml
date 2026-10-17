@@ -27,12 +27,19 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      # Fijamos npm para que el runner use la misma version con la que se
+      # genero el lockfile. Sin esto, el npm 10 que trae Node 22 falla con
+      # "Cannot read properties of null (reading 'edgesOut')" al correr
+      # `npm ci` sobre este lockfile.
+      - name: Pin npm
+        run: npm install -g npm@11
+
       - name: Install dependencies
         run: npm ci
 
       # `npm run check` encadena type-check, test, assets:check y build.
       # El build no necesita variables de entorno: se verifica en verde sin
-      # secretos, asi que este job corre sin secrets deliberadamente.
+      # secrets, asi que este job corre sin secrets deliberadamente.
       # `npm run lint` no se incluye a proposito: Next 16 removio `next lint`
       # y el repo no tiene configuracion de eslint.
       - name: Gates (type-check, test, assets:check, build)
