@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "assets:check": "node scripts/check-hero-assets.mjs",
+    "receipts:verify": "node scripts/verify-receipts.mjs",
     "check": "npm run type-check && npm run test && npm run assets:check && npm run build",
     "assets:normalize": "node scripts/normalize-hero-assets.mjs",
     "prebuild": "node scripts/check-hero-assets.mjs",
@@ -24,7 +25,15 @@
     "anymotion:patch": "bash scripts/anymotion-patch.sh",
     "design:audit": "npx @design-harness/cli@latest audit --url http://localhost:3000 --out runs/demo",
     "design:check": "npx @design-harness/cli@latest guide check --guide ./design-guide.yaml --target . --max-tokens 2000",
-    "design:compile": "npx @design-harness/cli@latest guide compile --guide ./design-guide.yaml --target ."
+    "design:compile": "npx @design-harness/cli@latest guide compile --guide ./design-guide.yaml --target .",
+    "bench:personas": "node bench/personas/generator.mjs --fallback",
+    "bench:personas:llm": "node bench/personas/generator.mjs",
+    "bench:run": "node scripts/bench.mjs",
+    "bench:check": "node scripts/bench.mjs --check",
+    "bench:report": "node bench/report.mjs",
+    "bench:seed": "node --env-file=.env.local bench/scripts/seed-bench-users.mjs",
+    "bench:students": "node scripts/bench-students.mjs",
+    "bench:students:check": "node scripts/bench-students.mjs --check"
   },
   "dependencies": {
     "@clerk/nextjs": "7.5.20",

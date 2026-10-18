@@ -46,16 +46,16 @@ export function AnymotionControls({
       <button
         type="button"
         onClick={toggle}
-        className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-[10px] font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
+        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
         aria-label={isPlaying ? "Pausar animación" : "Reproducir animación"}
       >
         {isPlaying ? (
-          <svg className="h-3 w-3" viewBox="0 0 10 10" fill="currentColor">
+          <svg className="h-3.5 w-3.5" viewBox="0 0 10 10" fill="currentColor">
             <rect x="1" y="1" width="3" height="8" />
             <rect x="6" y="1" width="3" height="8" />
           </svg>
         ) : (
-          <svg className="ml-0.5 h-3 w-3" viewBox="0 0 10 10" fill="currentColor">
+          <svg className="ml-0.5 h-3.5 w-3.5" viewBox="0 0 10 10" fill="currentColor">
             <polygon points="1,0 10,5 1,10" />
           </svg>
         )}
@@ -64,10 +64,10 @@ export function AnymotionControls({
       <button
         type="button"
         onClick={handleReplay}
-        className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-[10px] font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
+        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
         aria-label="Repetir desde el inicio"
       >
-        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 12a9 9 0 1 0 3-6.7" />
           <polyline points="3 4 3 9 8 9" />
         </svg>
@@ -84,7 +84,7 @@ export function AnymotionControls({
         aria-label={label}
       />
 
-      <span className="font-mono text-[11px] text-storm tabular-nums">
+      <span className="font-mono text-xs text-storm tabular-nums">
         {formatTime(time)} / {formatTime(duration)}
       </span>
     </div>

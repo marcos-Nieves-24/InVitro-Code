@@ -6,6 +6,7 @@ import { evaluateAchievements } from "@/lib/gamification/achievements";
 import { getLessonSlugs } from "@/lib/content/modules";
 import { advanceStreak } from "@/lib/gamification/streak";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { getBenchUserId } from "@/lib/bench-auth";
 
 export const runtime = "nodejs";
 
@@ -35,7 +36,8 @@ function readNonNegativeInt(value: unknown): number | null {
  */
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

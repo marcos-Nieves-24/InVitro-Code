@@ -20,26 +20,54 @@ Quiz: quiz.md
 ---
 
 <Section number={1} title="Variables" eyebrow="INICIO">
+<RevealSequence>
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "Las variables son los bloques fundamentales de cualquier programa.",
+    "Te permiten almacenar, etiquetar y manipular datos.",
+    "Sin variables, tendrías que hardcodear cada valor, haciendo que los programas sean inflexibles e ilegibles.",
+    "En biotecnología, las variables almacenan secuencias de ADN, niveles de expresión génica, edades de pacientes y concentraciones de fármacos.",
+    "En SaaS, las variables almacenan cantidades de usuarios, cifras de ingresos, tasas de churn y nombres de clientes.",
+    "Dominar las variables es tu primer paso para escribir programas significativos en Python.",
+  ]}
+/>
 
-Las variables son los bloques fundamentales de cualquier programa. Te permiten almacenar, etiquetar y manipular datos. Sin variables, tendrías que hardcodear cada valor, haciendo que los programas sean inflexibles e ilegibles. En biotecnología, las variables almacenan secuencias de ADN, niveles de expresión génica, edades de pacientes y concentraciones de fármacos. En SaaS, las variables almacenan cantidades de usuarios, cifras de ingresos, tasas de churn y nombres de clientes. Dominar las variables es tu primer paso para escribir programas significativos en Python.
 
-## Panorama General
-
-En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook. Ahora vas a aprender cómo almacenar y gestionar datos usando variables. Esto te prepara directamente para la próxima lección sobre tipos de datos, donde vas a aprender sobre los distintos tipos de datos que pueden contener las variables.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  lines={[
+    "En la lección anterior aprendiste a ejecutar código Python en Jupyter Notebook.",
+    "Ahora vas a aprender cómo almacenar y gestionar datos usando variables.",
+    "Esto te prepara directamente para la próxima lección sobre tipos de datos, donde vas a aprender sobre los distintos tipos de datos que pueden contener las variables.",
+  ]}
+/>
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Qué es una Variable?" eyebrow="CONCEPTO">
+<RevealSequence>
 
-## Teoría
 
-### ¿Qué es una Variable?
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Piensa en una hoja clínica: registras la edad, la presión y el marcador del paciente en variables separadas, no en un texto mezclado.",
+    "Reasignar mal una variable es como cambiarle el diagnóstico a otra fila sin avisar.",
+    "Por eso las variables son etiquetas que guardan un solo valor y se reinterpretan si las reasignas.",
+  ]}
+/>
+
+
 
 Una **variable** es una ubicación nombrada en memoria que almacena un valor. Piénsala como una caja etiquetada donde puedes poner datos. La etiqueta es el nombre de la variable y el contenido es el valor.
 
-### Asignación de Variables
 
 En Python, el operador `=` asigna un valor a una variable:
 
@@ -63,7 +91,6 @@ print(chromosome_count)
 print(genome_size)`}
 />
 
-### Tipado Dinámico
 
 Python tiene **tipado dinámico** — las variables pueden cambiar de tipo durante la ejecución. El tipo se infiere del valor:
 
@@ -86,7 +113,6 @@ print(value, type(value))`}
   }}
 />
 
-### Convenciones de Nomenclatura
 
 Los nombres de variables en Python deben seguir estas reglas:
 - Pueden contener letras (a-z, A-Z), dígitos (0-9) y guiones bajos (_)
@@ -101,7 +127,6 @@ max_iterations = 1000
 customer_churn_rate = 0.12
 ```
 
-### Constantes
 
 Por convención, las constantes se escriben en `UPPER_SNAKE_CASE`:
 ```python
@@ -109,7 +134,6 @@ MAX_SPEED = 120
 PI = 3.14159
 ```
 
-### Asignación Múltiple
 
 Puedes asignar múltiples variables en una línea:
 ```python
@@ -136,7 +160,6 @@ print(f"Después: a={a}, b={b}")`}
   }}
 />
 
-### Entrada/Salida Básica
 
 ```python
 # Salida
@@ -149,11 +172,14 @@ name = input("Enter your name: ")
 
 > **Nota:** La función `input()` no funciona dentro del editor interactivo de esta plataforma. Cuando ejecutes Python localmente o en Jupyter, sí va a funcionar.
 
+
+
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
-
-## Implementación en Python
+<RevealSequence>
 
 **Ejercicio 1:** Asigna una secuencia de ADN, un conteo de genes, y una tasa de mutación. Mostralos.
 
@@ -196,12 +222,12 @@ print(data, type(data))`}
     ]
   }}
 />
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Ejemplo: Biotecnología" eyebrow="APLICACIÓN">
-
-## Ejemplo de Biotecnología
+<RevealSequence>
 
 **Escenario:** Calculando el contenido GC de una secuencia de ADN.
 
@@ -219,11 +245,27 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
   }}
 />
 
+<ChoiceQuestion
+  question="Asignas `b = a` y luego haces `a = 99`. ¿Qué contiene `b`?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-dens-1"
+  allowContinueOnIncorrect
+  explanation="La asignación reenlaza `a` a un nuevo objeto; `b` sigue apuntando al valor original."
+  options={[
+    { id: "a", label: "El valor original de `a`", correct: true, feedback: "¡Correcto! Reasignar `a` no mueve el objeto referenciado por `b`." },
+    { id: "b", label: "99", correct: false, feedback: "Eso sería si `b` y `a` compartieran la misma referencia mutable; aquí no." },
+    { id: "c", label: "NameError", correct: false, feedback: "Ambas variables existen; el error no se lanza." },
+    { id: "d", label: "Un tipo desconocido", correct: false, feedback: "No cambia el tipo; sigue siendo el original." },
+  ]}
+/>
+
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
-
-## Errores Comunes
+<RevealSequence>
 
 1. **Usar variables no definidas**: `print(x)` antes de `x = 5` lanza `NameError`
 2. **Escribir mal los nombres de variables**: `temperature` vs `temperture`
@@ -231,7 +273,6 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 4. **Olvidarse de convertir la entrada**: `input()` devuelve un string; usa `int()` o `float()` para números
 5. **Confundir mayúsculas y minúsculas**: `data` y `Data` son variables diferentes
 
-## Buenas Prácticas
 
 - Usa nombres de variables descriptivos y significativos
 - Sigue la convención `snake_case`
@@ -239,35 +280,67 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 - Inicializa las variables antes de usarlas
 - Usa constantes para valores fijos (UPPER_SNAKE_CASE)
 - Una variable por propósito lógico
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 
-## Resumen
+<RevealSequence>
 
-- Las variables almacenan valores en ubicaciones de memoria nombradas
-- Python tiene tipado dinámico — los tipos se infieren
-- Usa `=` para asignación y `print()` para salida
-- Los nombres de variables deben seguir reglas (letras, dígitos, guiones bajos)
-- PEP 8 recomienda nomenclatura `snake_case`
-- `input()` lee la entrada del usuario como string
+<ConceptCard variant="key-idea">
+Una variable es un nombre que referencia un valor en memoria; Python la tipa dinámicamente a partir del valor que se le asigna.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "almacenar", label: "Almacenar valores", detail: "Las variables almacenan valores en ubicaciones de memoria nombradas." },
+    { id: "tipado-dinamico", label: "Tipado dinámico", detail: "Python tiene tipado dinámico: los tipos se infieren a partir del valor." },
+    { id: "asignacion", label: "Asignación", detail: "Usa `=` para asignación y `print()` para salida." },
+    { id: "nombres", label: "Nombres válidos", detail: "Los nombres de variables deben seguir reglas: letras, dígitos y guiones bajos; no empezar con dígito." },
+    { id: "pep8", label: "PEP 8", detail: "PEP 8 recomienda nomenclatura `snake_case`." },
+    { id: "input", label: "input()", detail: "`input()` lee la entrada del usuario como string." },
+  ]}
+/>
 
-- **Variable**: Ubicación de almacenamiento nombrada para un valor
-- **Asignación**: Usar `=` para darle un valor a una variable
-- **Tipado dinámico**: Las variables pueden cambiar de tipo en tiempo de ejecución
-- **PEP 8**: Guía de estilo de Python
-- **snake_case**: Convención de nomenclatura que usa guiones bajos
-- **Inferencia de tipos**: Python deduce el tipo a partir del valor
-- **NameError**: Excepción que se lanza al usar una variable no definida
+<FeatureButtonList
+  features={[
+    { id: "variable", label: "Variable", detail: "Ubicación de almacenamiento nombrada para un valor." },
+    { id: "asignacion-term", label: "Asignación", detail: "Usar `=` para darle un valor a una variable." },
+    { id: "tipado-dinamico-term", label: "Tipado dinámico", detail: "Las variables pueden cambiar de tipo en tiempo de ejecución." },
+    { id: "pep8-term", label: "PEP 8", detail: "Guía de estilo de Python." },
+    { id: "snake-case", label: "snake_case", detail: "Convención de nomenclatura que usa guiones bajos." },
+    { id: "inferencia", label: "Inferencia de tipos", detail: "Python deduce el tipo a partir del valor." },
+    { id: "nameerror", label: "NameError", detail: "Excepción que se lanza al usar una variable no definida." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Qué excepción lanza Python al usar una variable no definida?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-resumen-1"
+  allowContinueOnIncorrect
+  explanation="NameError se lanza cuando se referencia un nombre que no está definido."
+  options={[
+    { id: "a", label: "NameError", correct: true, feedback: "¡Exacto! Python no encuentra el nombre en el ámbito actual." },
+    { id: "b", label: "SyntaxError", correct: false, feedback: "SyntaxError es por código mal formado, no por nombres faltantes." },
+    { id: "c", label: "TypeError", correct: false, feedback: "TypeError es por operar con tipos incompatibles." },
+    { id: "d", label: "ValueError", correct: false, feedback: "ValueError es por valores inapropiados, no nombres ausentes." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Variables listas! Ahora el tipo del valor que guardan también importa.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 
-<Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
 
-## Desafío de Código
+<Section number={7} title="Ejercicios y Desafío" eyebrow="EVALUACIÓN">
+<RevealSequence>
 
 Escribe un programa que calcule el **GC content** de una secuencia de ADN más larga. Usa variables para cada paso.
 
@@ -293,5 +366,29 @@ dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
 />
 
 > **Pista:** Usa `dna.count("G")` para contar las guaninas y `dna.count("C")` para las citosinas. La longitud total se obtiene con `len(dna)`.
+</RevealSequence>
+
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+
+<RevealSequence>
+
+<ChoiceQuestion
+  question="¿Qué es una variable en Python?"
+  moduleSlug="python"
+  lessonSlug="lesson03_variables"
+  blockId="choice-python-l03-conceptos-1"
+  allowContinueOnIncorrect
+  explanation="Una variable es una ubicación nombrada en memoria que almacena un valor."
+  options={[
+    { id: "a", label: "Una ubicación nombrada en memoria que almacena un valor", correct: true, feedback: "¡Correcto!" },
+    { id: "b", label: "Una función integrada del sistema", correct: false, feedback: "No es una función." },
+    { id: "c", label: "Un archivo de configuración", correct: false, feedback: "No es un archivo." },
+    { id: "d", label: "Un tipo de bucle", correct: false, feedback: "No es un bucle." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>

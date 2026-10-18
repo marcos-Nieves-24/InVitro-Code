@@ -23,15 +23,45 @@ Quiz: pca_quiz.md
 
 <Section number={1} title="Cuando hay demasiadas dimensiones" eyebrow="INICIO">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En genómica, un ensayo de expresión mide miles de genes por paciente, pero solo hay cincuenta muestras.",
+    "Con pocas muestras y miles de variables, el modelo se vuelve inestable y difícil de interpretar.",
+    "PCA encuentra las direcciones donde los datos más varían y las conserva; el resto se descarta.",
+    "Es como comprimir una radiografía sin perder la lesión que realmente importa.",
+  ]}
+/>
+
 <MascotMessage mood="thinking">
-¿Qué pasa cuándo tienes 10,000 genes pero sólo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
+¿Qué pasa cuándo tienes 10,000 genes pero solo 50 pacientes? La maldición de la dimensionalidad: demasiadas variables para tan pocas muestras. PCA (Análisis de Componentes Principales) es la herramienta para reducir dimensiones sin perder la información esencial.
 </MascotMessage>
 
 En biotecnología, los datasets de expresión génica tienen miles de genes (features) pero pocas muestras. En SaaS, cientos de métricas de comportamiento de usuario. PCA encuentra las direcciones de máxima varianza y proyecta los datos a un espacio de menor dimensión.
 
+</RevealSequence>
+
 </Section>
 
 <Section number={2} title="La intuición de PCA" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "PCA rota los ejes para alinearlos con la dirección de mayor varianza.",
+    "El primer componente principal es donde la nube de puntos está más estirada.",
+    "Los siguientes componentes buscan direcciones perpendiculares que aún capturen varianza.",
+    "Son combinaciones lineales de genes, no genes sueltos: patrones, no variables individuales.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 Imagina una nube de puntos en 3D. PCA encuentra la dirección dónde los puntos están más "estirados" (máxima varianza) — ese es el primer componente principal. Luego busca la siguiente dirección más estirada perpendicular a la primera, y así sucesivamente.
@@ -45,9 +75,25 @@ Imagina una nube de puntos en 3D. PCA encuentra la dirección dónde los puntos 
 - Los primeros componentes capturan la mayor parte de la varianza
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="¿Cuántos componentes? Elbow y scree plot" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "¿Cuántos componentes conservar? El scree plot muestra el codo de la varianza.",
+    "Buscamos el punto donde agregar otro componente aporta poco.",
+    "El criterio de Kaiser ayuda: componentes con autovalor mayor que uno.",
+    "Y la varianza acumulada: entre 80 y 90 % suele ser suficiente.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 El **gráfico de sedimentación (scree plot)** muestra la varianza explicada por cada componente. El "codo" dónde la curva se aplana indica el número óptimo.
@@ -62,9 +108,25 @@ Criterios para elegir k:
 En genómica, es común qué los primeros 2-3 componentes capturen >50% de la varianza total — eso significa qué cientos de genes se pueden reducir a un puñado de componentes para visualización y clustering.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="PCA en acción: dataset Iris" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En Iris, 4 mediciones se reducen a 2 componentes que separan las especies.",
+    "Estandarizar antes del PCA es condición necesaria, no opcional.",
+    "Sino, la variable de mayor escala acapara el primer componente principal.",
+    "El scatter de PC1 vs PC2 muestra los grupos naturales a simple vista.",
+  ]}
+/>
 
 ```python
 from sklearn.decomposition import PCA
@@ -99,9 +161,25 @@ plt.title('Iris dataset — PCA (2 componentes)')
 plt.show()
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Biotecnología: PCA en genómica" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Miles de genes por paciente se comprimen a 5 componentes principales.",
+    "La varianza explicada total nos dice cuánto de la señal conservamos.",
+    "Pero los componentes son mezclas: más poder estadístico, menos interpretabilidad.",
+    "PCA sirve para visualizar y agrupar; luego volvemos a genes para actuar.",
+  ]}
+/>
 
 ```python
 # Simular expresión génica: 1000 genes, 50 pacientes, 3 subtipos de cáncer
@@ -132,50 +210,128 @@ plt.tight_layout()
 plt.show()
 ```
 
-<ReflectionCheck
-  blockId="reflection-l07-pca-genes"
+<ChoiceQuestion
+  question="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
   moduleSlug="estadistica"
   lessonSlug="lesson07_dimensionality_reduction"
-  prompt="En genómica, 2 componentes de PCA pueden separar subtipos de cáncer. Pero los componentes son combinaciones de genes, no genes individuales. ¿Es esto una ventaja o una desventaja?"
-  answer="Es ambas. Ventaja: captura patrones multivariados qué ningún gen individual muestra (perfiles de expresión). Desventaja: pierdes interpretabilidad — PC1 = 0.3×genA + 0.1×genB − 0.5×genC... no es accionable para un biólogo qué quiere saber '¿qué gen causa esto?'. En la práctica, usamos PCA para visualización/clustering y luego volvemos a los genes originales para interpretación biológica."
+  blockId="reflection-l07-pca-genes"
+  allowContinueOnIncorrect
+  explanation="Es ambas: ventaja (captura patrones multivariados/perfiles de expresión), desventaja (pierde interpretabilidad; PC1 no es accionable por gen). Uso: PCA para visualizar/clustering y luego genes originales para interpretación."
+  options={[
+    { id: "a", label: "Es ambas: ventaja (patrones multivariados/perfiles de expresión) y desventaja (pierde interpretabilidad por gen)", correct: true, feedback: "¡Exacto! Por eso PCA se usa para visualizar/clustering y luego se vuelve a genes originales." },
+    { id: "b", label: "Sólo ventaja: las combinaciones son más interpretables que genes individuales", correct: false, feedback: "La combinación reduce interpretabilidad; un biólogo no puede actuar sobre un PC1 = 0.3genA − 0.5genC directamente." },
+    { id: "c", label: "Sólo desventaja: PCA no captura nada que un gen individual no muestre", correct: false, feedback: "PCA captura patrones de coexpresión multivariados que ningún gen individual revela." },
+    { id: "d", label: "Ni ventaja ni desventaja: en genómica siempre se debe usar t-SNE en vez de PCA", correct: false, feedback: "PCA sigue siendo útil para visualización/clustering; la elección depende del objetivo, no es t-SNE siempre." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<AnswerReveal summary="Ver respuestas">
-<p><strong>¿Por qué estandarizar antes de PCA?</strong> PCA se basa en la varianza. Si una variable está en metros (0-2) y otra en dólares (0-100000), la segunda domina completamente el primer componente sólo por su escala, no por qué sea más importante. Estandarizar (μ=0, σ=1) pone todas las variables en igualdad de condiciones.</p>
-<p><strong>¿Cuándo NO usarías PCA?</strong> Cuándo necesitas interpretabilidad (cada feature debe ser explicable), cuándo las relaciones son no lineales (PCA asume linealidad), o cuándo tus features ya son independientes y pocas.</p>
-</AnswerReveal>
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Antes de seguir, asegurate de entender por qué estandarizamos antes del PCA.",
+    "PCA se basa en la varianza: escala desigual sesga el resultado.",
+    "Los autovectores se calculan sobre la matriz de covarianza.",
+    "Sin escala común, la variable de mayor magnitud domina el componente.",
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué estandarizar antes de PCA?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson07_dimensionality_reduction"
+  blockId="choice-estadistica-l07-rev-1"
+  allowContinueOnIncorrect
+  explanation="PCA se basa en la varianza: si una variable está en metros (0–2) y otra en dólares (0–100000), la segunda domina el primer componente sólo por escala. Estandarizar (μ=0, σ=1) pone todas en igualdad de condiciones."
+  options={[
+    { id: "a", label: "Para que ninguna variable domine el componente principal por su escala distinta", correct: true, feedback: "¡Exacto! Así el PCA captura patrones reales, no diferencias de unidades." },
+    { id: "b", label: "Porque PCA matemáticamente requiere medias cero pero no varianza unitaria", correct: false, feedback: "Centrar sólo no basta; sin escalar, la variable de mayor magnitud sigue dominando." },
+    { id: "c", label: "Porque los autovectores sólo se calculan sobre datos enteros", correct: false, feedback: "Los autovectores se calculan sobre la matriz de covarianza; el tipo de dato no es el problema, la escala sí." },
+    { id: "d", label: "Para aumentar la varianza explicada del primer componente", correct: false, feedback: "Estandarizar no busca maximizar varianza explicada, sino evitar que una variable la acapare por escala." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuándo NO usarías PCA?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson07_dimensionality_reduction"
+  blockId="choice-estadistica-l07-rev-2"
+  allowContinueOnIncorrect
+  explanation="No conviene cuando necesitás interpretabilidad por feature (las combinaciones de genes no son accionables), cuando las relaciones son no lineales (PCA es lineal) o cuando ya tenés pocos features independientes."
+  options={[
+    { id: "a", label: "Cuando necesitás interpretabilidad por feature individual, relaciones no lineales o pocos features ya independientes", correct: true, feedback: "¡Exacto! En esos casos PCA pierde más de lo que aporta." },
+    { id: "b", label: "Nunca: PCA siempre reduce dimensionalidad sin perder información útil", correct: false, feedback: "PCA siempre descarta algo; perder interpretabilidad es real." },
+    { id: "c", label: "Sólo cuando el dataset tiene menos de 10 muestras", correct: false, feedback: "El tamaño de muestra no es el criterio; la linealidad e interpretabilidad sí." },
+    { id: "d", label: "Sólo con variables binarias (0/1)", correct: false, feedback: "PCA incluso soporta variables continuas; el problema es escala/no-linealidad, no la cardinalidad." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={7} title="Términos clave" eyebrow="CIERRE">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["PCA", "Transformación qué rota ejes hacia direcciones de máxima varianza"],
-    ["Componente Principal", "Combinación lineal de features originales; nuevo eje"],
-    ["Varianza Explicada", "Proporción de información qué captura cada componente"],
-    ["Scree Plot", "Gráfico de varianza explicada vs número de componente"],
-    ["Autovector", "Dirección del componente principal"],
-    ["Autovalor", "Cantidad de varianza capturada por el componente"],
-    ["Estandarización", "Centrar a μ=0 y escalar a σ=1 — necesario antes de PCA"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Antes de avanzar, fijamos el vocabulario de PCA.",
+    "Estos términos aparecen en todo el módulo de Machine Learning.",
+    "Autovector, autovalor y varianza explicada son el núcleo.",
+    "Un scree plot sin estos conceptos es solo una curva bonita.",
   ]}
-  searchable={true}
-  caption="Términos clave de PCA"
 />
+
+<ConceptCard variant="key-idea">
+Términos clave:
+- **PCA**: Transformación qué rota ejes hacia direcciones de máxima varianza
+- **Componente Principal**: Combinación lineal de features originales; nuevo eje
+- **Varianza Explicada**: Proporción de información qué captura cada componente
+- **Scree Plot**: Gráfico de varianza explicada vs número de componente
+- **Autovector**: Dirección del componente principal
+- **Autovalor**: Cantidad de varianza capturada por el componente
+- **Estandarización**: Centrar a μ=0 y escalar a σ=1 — necesario antes de PCA
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Para la próxima lección" eyebrow="CIERRE">
 
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "PCA es un paso previo al agrupamiento: visualizá primero, agrupá después.",
+    "La próxima lección usa los mismos componentes resultados para ver clusters.",
+    "La estadística y las relaciones que vimos feeds todo lo que viene.",
+    "Reducir dimensiones es simplificar sin perder la señal esencial.",
+  ]}
+/>
+
 <MascotMessage mood="celebrating">
-¡PCA es magia matemática! De 1000 dimensiones a 2, manteniendo la esencia de los datos. Ahora qué sabes reducir dimensiones, estás listo para agrupar.
+PCA es una transformación matemática que reduce 1000 dimensiones a 2 manteniendo la estructura esencial de los datos. Saber reducir dimensiones es un paso previo al agrupamiento.
 </MascotMessage>
 
 **En la Lección 8** vamos a hacer **Clustering con K-Means**: encontrar grupos naturales en los datos sin etiquetas. Vas a usar el método del codo, el puntaje de silueta, y PCA para visualizar clusters. Aprendizaje no supervisado en acción.
+
+</RevealSequence>
 
 </Section>

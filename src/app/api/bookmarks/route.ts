@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getLessonSlugs } from "@/lib/content/modules";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { getBenchUserId } from "@/lib/bench-auth";
 
 // Persistence uses createAdminClient() (service-role).
 // RLS: Clerk ONLY auth — bookmarks policies compare (auth.jwt() ->> 'sub') = user_id
@@ -12,7 +13,8 @@ import { checkRateLimit } from "@/lib/rate-limit";
 // 401 if no session; 200 { bookmarks: Bookmark[] } (unknown module → [] ; missing → all)
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -50,7 +52,8 @@ export async function GET(request: NextRequest) {
 // 401 auth; 400 Invalid module/lesson; 429 Too Many Requests; 200 { bookmark }
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -122,7 +125,8 @@ export async function POST(request: NextRequest) {
 // 401 auth; 400 missing; 200 { deleted: true }
 export async function DELETE(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

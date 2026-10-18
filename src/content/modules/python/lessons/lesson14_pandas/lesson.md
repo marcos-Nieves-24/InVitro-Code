@@ -22,30 +22,52 @@ Quiz: quiz.md
 
 # Pandas
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Pandas?" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Pandas es la librería de Python más usada para manipular y analizar datos tabulares.",
+    "Su estructura central, el DataFrame, es como una planilla con filas y columnas etiquetadas.",
+    "En biotecnología maneja ensayos clínicos, expresión génica y registros de pacientes.",
+    "En SaaS procesa clientes, logs de transacciones y resultados A/B.",
+    "La mayor parte de tu tiempo como científico de datos la vas a pasar transformando DataFrames.",
+  ]}
+/>
 
-Pandas es la librería de Python más utilizada para manipulación y análisis de datos. Proporciona el DataFrame — una estructura de datos tabular con filas y columnas etiquetadas que hace intuitiva la limpieza, transformación y análisis de datos. En biotecnología, Pandas maneja datos de ensayos clínicos, tablas de expresión génica y registros de pacientes. En SaaS, procesa bases de datos de clientes, logs de transacciones y resultados de tests A/B. La mayor parte de tu tiempo como científico de datos la vas a pasar manipulando DataFrames.
+<ConceptCard variant="key-idea">
+Pandas está construido sobre NumPy y agrega ejes etiquetados, manejo de datos faltantes y operaciones de datos poderosas. Esta lección te prepara directamente para las lecciones de visualización (Matplotlib, Seaborn) y para todo Machine Learning (scikit-learn espera arrays NumPy que vienen de DataFrames de Pandas).
+</ConceptCard>
 
-## Panorama General
+- En la lección anterior aprendiste NumPy para cómputo numérico.
+- Pandas extiende NumPy con índices y columnas con nombre.
+- Dependerás de DataFrames hasta el cierre de cada pipeline de ML.
 
-En la lección anterior aprendiste NumPy para cómputo numérico. Pandas está construido sobre NumPy y agrega ejes etiquetados, manejo de datos faltantes y operaciones de datos poderosas. Esta lección te prepara directamente para las lecciones de visualización (Matplotlib, Seaborn) y para todo Machine Learning (scikit-learn espera arrays de NumPy que vienen de DataFrames de Pandas).
-
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Estructuras de Datos en Pandas" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-## Teoría
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Pandas ofrece dos estructuras: Series (una columna) y DataFrame (la tabla completa).",
+    "Aprender su anatomía antes de operar evita la mayoría de los errores de código.",
+    "Casi todo lo demás son métodos sobre estas estructuras.",
+  ]}
+/>
 
-### ¿Qué es Pandas?
+<ConceptCard variant="definition">
+**Series**: array unidimensional etiquetado (equivalente a una columna). **DataFrame**: estructura bidimensional etiquetada estilo planilla de cálculo (filas × columnas).
+</ConceptCard>
 
-Pandas provee dos estructuras de datos principales:
-
-- **Series**: Array unidimensional etiquetado (como una columna)
-- **DataFrame**: Estructura de datos bidimensional etiquetada (como una planilla de cálculo)
-
-### Creando DataFrames
+**Creando DataFrames**
 
 ```python
 import pandas as pd
@@ -68,7 +90,7 @@ df = pd.DataFrame(np.random.randn(5, 3),
                   columns=["A", "B", "C"])
 ```
 
-### Leyendo Datos
+**Leyendo Datos**
 
 ```python
 df = pd.read_csv("data.csv")
@@ -76,27 +98,40 @@ df = pd.read_excel("data.xlsx")
 df = pd.read_json("data.json")
 ```
 
-## Explicación Visual
+**Estructura del DataFrame** (candidato a player visual):
 
-```
+```text
 Estructura del DataFrame
 
        Columnas →
        Name    Age  Salary
 Fila 0  Alice   25   50000
-  ↓ 1  Bob     30   60000
-    2  Charlie 35   70000
+  ↓  1  Bob     30   60000
+     2  Charlie 35   70000
 
      Cada columna es una Series
      Cada fila es un registro
      Ejes etiquetados para acceso intuitivo
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Selección y Manipulación de Datos" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-### Operaciones Básicas
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Seleccionar datos es el 80% del trabajo con Pandas: .loc por etiqueta, .iloc por posición y filtros booleanos.",
+    "Confundir filas con columnas o etiquetas con posiciones es el error inicial más común.",
+    "Ver la tabla de descriptivos antes de filtrar te ahorra horas.",
+  ]}
+/>
+
+**Operaciones Básicas**
 
 ```python
 df.head(10)        # Primeras 10 filas
@@ -109,7 +144,7 @@ df.shape           # (filas, columnas)
 df.dtypes          # Tipos de datos de columnas
 ```
 
-### Seleccionando Datos
+**Seleccionando Datos**
 
 ```python
 # Selección de columna
@@ -126,25 +161,38 @@ df.iloc[0]         # Fila por posición
 df[df["Age"] > 30]
 ```
 
-### Agregar/Eliminar Columnas
+**Agregar/Eliminar Columnas**
 
 ```python
 df["NewColumn"] = values
 df.drop("OldColumn", axis=1, inplace=True)
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="GroupBy, Merge y Apply" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-### Operaciones GroupBy
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "GroupBy implementa el patrón dividir-aplicar-combinar: agrupa, calcula, recombina.",
+    "Merge y concat unen tablas como en SQL o Excel, pero tipado y reproducible.",
+    "Apply y map aplican funciones por elemento o por columna; úsalos cuando la vectorización no alcanza.",
+  ]}
+/>
+
+**Operaciones GroupBy**
 
 ```python
 df.groupby("Category")["Value"].mean()
 df.groupby("Category").agg({"Value": ["mean", "std"]})
 ```
 
-### Combinando DataFrames
+**Combinando DataFrames**
 
 ```python
 pd.merge(df1, df2, on="key")
@@ -152,18 +200,35 @@ pd.merge(df1, df2, left_on="id1", right_on="id2")
 pd.concat([df1, df2], axis=0)  # Apilar filas
 ```
 
-### Aplicar Funciones
+**Aplicar Funciones**
 
 ```python
 df["Column"].apply(lambda x: x ** 2)
 df["Column"].map({"old": "new"})
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Implementación en Python
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Creación, exploración y agregación con datos reales de laboratorio.",
+    "Ejecuta cada bloque y verifica con .head(), .info() y .describe() antes de avanzar.",
+    "El hábito de Pandas: inspecciona la tabla antes de transformarla.",
+  ]}
+/>
+
+<ConceptCard variant="key-idea">
+Inspeccionar shape y dtypes antes de operar es el print-debug de Pandas; barato y evita la mayoría de los errores de unión o filtrado.
+</ConceptCard>
+
+**Creación de DataFrame y exploración**
 
 ```python
 import pandas as pd
@@ -231,13 +296,24 @@ df["Expression_Rounded"] = df["Expression"].apply(lambda x: round(x, 1))
 print(df)
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+<RevealSequence mode="appear">
 
-## Ejemplo de Biotecnología
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Dos casos end to end: ensayo clínico con groupby y segmentación de clientes con churn.",
+    "Ambos repiten el mismo ciclo: crear, explorar, filtrar, agregar y derivar columnas.",
+    "Fíjate en pd.cut y en el filtrado booleano compuesto con &.",
+  ]}
+/>
 
-**Escenario**: Analizando datos de ensayos clínicos.
+**Escenario biotecnología** — analizando datos de ensayos clínicos:
 
 ```python
 import pandas as pd
@@ -278,9 +354,7 @@ print("\nSupervivencia por grupo etario:")
 print(clinical.groupby("Age_Group")["Survival_Months"].agg(["mean", "std", "count"]))
 ```
 
-## Ejemplo SaaS
-
-**Escenario**: Analizando datos de churn de clientes.
+**Escenario SaaS** — analizando datos de churn de clientes:
 
 ```python
 import pandas as pd
@@ -315,19 +389,32 @@ high_risk = customers[(customers["Support_Tickets"] > 3) &
 print(f"\nClientes de alto riesgo: {len(high_risk)}")
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+<RevealSequence mode="appear">
 
-## Errores Comunes
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Casi todos los bugs en Pandas vienen de encadenar índices, copias vs vistas y merges mal definidos.",
+    "El encadenamiento de métodos es más legible, pero exige entender el orden de ejecución.",
+    "Prefiere vectorización antes que apply() cuando la operación lo permita.",
+  ]}
+/>
 
-1. **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usa `df.loc[0, "A"]`
-2. **Modificar una vista vs copia**: `SettingWithCopyWarning` — usa `.copy()` explícitamente
-3. **Olvidar el parámetro `axis=`**: `drop("col")` usa axis=0 por defecto (filas). Usa `axis=1` para columnas
-4. **Operaciones inplace**: Muchos métodos tienen `inplace=True`, pero el encadenamiento suele ser más limpio
-5. **Combinar sin especificar clave**: Puede crear un producto cartesiano
+**Errores comunes**
 
-## Buenas Prácticas
+- **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usa `df.loc[0, "A"]`
+- **Modificar una vista vs copia**: `SettingWithCopyWarning` — usa `.copy()` explícitamente
+- **Olvidar el parámetro `axis=`**: `drop("col")` usa axis=0 por defecto (filas). Usa `axis=1` para columnas
+- **Operaciones inplace**: muchos métodos tienen `inplace=True`, pero el encadenamiento suele ser más limpio
+- **Combinar sin especificar clave**: puede crear un producto cartesiano
+
+**Buenas prácticas**
 
 - Usa `loc` e `iloc` para selección explícita
 - Usa `query()` para filtrado complejo
@@ -336,64 +423,136 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 - Usa `to_datetime()` para columnas de fecha
 - Perfila el rendimiento: las operaciones vectorizadas son más rápidas que `apply()`
 
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-## Resumen
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Pandas es el paso de entrada a cualquier análisis de datos en Python.",
+    "Series y DataFrame, loc/iloc, booleanos, groupby, merge y apply cubren el 90% de los casos.",
+    "La próxima lección visualiza estos resultados con Matplotlib y Seaborn.",
+  ]}
+/>
 
-- Pandas provee Series (1D) y DataFrame (2D) para análisis de datos
-- Lee datos con `read_csv()`, explora con `head()`, `info()`, `describe()`
-- Selecciona datos con `loc`, `iloc`, indexación booleana
-- Agrupa y agrega con `groupby()` y `agg()`
-- Combina DataFrames con `merge()` y `concat()`
-- Aplica funciones con `apply()` y `map()`
+<ConceptCard variant="key-idea">
+Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFrame, con `loc`/`iloc`, filtrado booleano, `groupby`, `merge` y `apply`, cubren la mayoría de los casos reales.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "estructuras", label: "Estructuras", detail: "Series (1D) y DataFrame (2D) para análisis de datos." },
+    { id: "lectura", label: "Lectura/exploración", detail: "Lee datos con read_csv() y explora con head(), info(), describe()." },
+    { id: "seleccion", label: "Selección", detail: "Selecciona datos con loc, iloc e indexación booleana." },
+    { id: "agrupacion", label: "Agrupación", detail: "Agrupa y agrega con groupby() y agg()." },
+    { id: "combinacion", label: "Combinación", detail: "Combina DataFrames con merge() y concat()." },
+    { id: "funciones", label: "Funciones", detail: "Aplica funciones con apply() y map()." },
+  ]}
+/>
 
-- **DataFrame**: Estructura de datos 2D etiquetada (filas × columnas)
-- **Series**: Array 1D etiquetado (columna individual)
-- **Índice**: Etiquetas de filas (default: 0, 1, 2...)
-- **GroupBy**: Operaciones de dividir-aplicar-combinar
-- **Merge**: Combinar DataFrames sobre columnas comunes
-- **Tabla dinámica**: Agregación multidimensional
-- **Indexación booleana**: Filtrado con condiciones True/False
-- **Encadenamiento de métodos**: Aplicar múltiples operaciones secuencialmente
+<FeatureButtonList
+  features={[
+    { id: "dataframe", label: "DataFrame", detail: "Estructura de datos 2D etiquetada (filas × columnas)." },
+    { id: "series", label: "Series", detail: "Array 1D etiquetado (columna individual)." },
+    { id: "indice", label: "Índice", detail: "Etiquetas de filas (default: 0, 1, 2...)." },
+    { id: "groupby", label: "GroupBy", detail: "Operaciones de dividir-aplicar-combinar." },
+    { id: "merge", label: "Merge", detail: "Combinar DataFrames sobre columnas comunes." },
+    { id: "pivot-table", label: "Tabla dinámica", detail: "Agregación multidimensional." },
+    { id: "indexacion-booleana", label: "Indexación booleana", detail: "Filtrado con condiciones True/False." },
+    { id: "method-chaining", label: "Encadenamiento de métodos", detail: "Aplicar múltiples operaciones secuencialmente." },
+  ]}
+/>
 
+<ChoiceQuestion
+  question="¿Qué método combina dos DataFrames sobre una columna común?"
+  moduleSlug="python"
+  lessonSlug="lesson14_pandas"
+  blockId="choice-python-l14-resumen-1"
+  allowContinueOnIncorrect
+  explanation="merge() une DataFrames por columnas comunes (como un JOIN de SQL); concat() apila por filas o columnas."
+  options={[
+    { id: "a", label: "merge()", correct: true, feedback: "¡Exacto! merge() combina por claves compartidas." },
+    { id: "b", label: "concat()", correct: false, feedback: "concat() apila, no combina por columna común." },
+    { id: "c", label: "apply()", correct: false, feedback: "apply() aplica una función fila/columna a fila." },
+    { id: "d", label: "groupby()", correct: false, feedback: "groupby() agrupa filas, no combina tablas." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Pandas desbloqueado! Ahora visualizamos esos resultados con Matplotlib — la próxima lección.
+</MascotMessage>
+
+</RevealSequence>
 </Section>
 
 <Section number={9} title="Evaluación" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
-## Ejercicios
+**Ejercicios**
 
-### Nivel 1: Básico
-
+Nivel 1 — Básico:
 1. ¿Cómo lees un archivo CSV en un DataFrame?
 2. ¿Cuál es la diferencia entre `loc` e `iloc`?
 3. ¿Cómo verificas si hay valores faltantes en un DataFrame?
 
-### Nivel 2: Implementación
-
+Nivel 2 — Implementación:
 4. Carga un CSV y calcula la media de cada columna numérica agrupada por una columna categórica.
 5. Dado un DataFrame con datos de clientes, crea una nueva columna "Segment" que etiquete clientes como "High Value" (gasto > 100) o "Standard" (caso contrario).
 
-### Nivel 3: Pensamiento Crítico
-
+Nivel 3 — Pensamiento Crítico:
 6. Compara y contrasta el rendimiento de `apply()` vs operaciones vectorizadas en Pandas. ¿Cuándo necesitarías usar `apply()`?
 7. ¿Cómo manejarías valores faltantes en un dataset? Compara `dropna()`, `fillna()` y métodos de interpolación.
 
-## Desafío de Código
+**Desafío de Código**
 
 Crea un **análisis de segmentación de clientes** usando Pandas:
-
 1. Genera un dataset sintético con 500 clientes, incluyendo características: `age`, `income`, `spending_score`, `purchase_frequency`, `last_purchase_days`
 2. Limpia los datos (maneja valores faltantes, elimina outliers)
-3. Crea segmentos:
-   - Por grupo etario (Young/Middle/Senior)
-   - Por valor (Low/Medium/High spender basado en percentiles de spending_score)
-   - Por recencia (Active/At Risk/Lost basado en last_purchase_days)
-4. Analiza cada segmento: calcula ingreso promedio, gasto y frecuencia de compra
-5. Encuentra el top 10% de clientes por un puntaje compuesto (20% income + 50% spending_score + 30% purchase_frequency, normalizado)
+3. Crea segmentos (por grupo etario, por valor, por recencia)
+4. Analiza cada segmento (ingreso promedio, gasto y frecuencia de compra)
+5. Encuentra el top 10% de clientes por un puntaje compuesto
 6. Genera un reporte resumen con todos los hallazgos
 
+</RevealSequence>
+</Section>
+
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="¿Qué devuelve df.loc[0, 'Age']?"
+  moduleSlug="python"
+  lessonSlug="lesson14_pandas"
+  blockId="choice-python-l14-tema-1"
+  allowContinueOnIncorrect
+  explanation="`.loc` selecciona por etiqueta de fila y nombre de columna; devuelve el valor de 'Age' en la fila con etiqueta 0."
+  options={[
+    { id: "a", label: "La fila completa con índice 0", correct: false, feedback: "Eso sería df.loc[0] sin columna." },
+    { id: "b", label: "El valor de 'Age' en la fila etiquetada 0", correct: true, feedback: "¡Correcto! loc usa etiquetas." },
+    { id: "c", label: "La columna 'Age' completa", correct: false, feedback: "Eso sería df['Age']." },
+    { id: "d", label: "Error: loc no acepta dos argumentos", correct: false, feedback: "loc acepta (fila, columna)." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuál es el propósito de groupby() en Pandas?"
+  moduleSlug="python"
+  lessonSlug="lesson14_pandas"
+  blockId="choice-python-l14-tema-2"
+  allowContinueOnIncorrect
+  explanation="groupby() divide las filas en grupos y permite aplicar agregaciones como mean o sum a cada grupo."
+  options={[
+    { id: "a", label: "Ordenar el DataFrame por una columna", correct: false, feedback: "Para ordenar se usa sort_values()." },
+    { id: "b", label: "Dividir filas en grupos y agregar cada grupo", correct: true, feedback: "¡Exacto! Es el patrón split-apply-combine." },
+    { id: "c", label: "Eliminar filas duplicadas", correct: false, feedback: "Para eso se usa drop_duplicates()." },
+    { id: "d", label: "Combinar dos DataFrames", correct: false, feedback: "Para eso se usa merge() o concat()." },
+  ]}
+/>
+
+</RevealSequence>
 </Section>

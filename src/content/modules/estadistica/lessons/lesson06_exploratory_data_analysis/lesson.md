@@ -23,19 +23,56 @@ Quiz: eda_quiz.md
 
 <Section number={1} title="La fase más importante del ML" eyebrow="INICIO">
 
-<MascotMessage mood="thinking">
-El 80% del trabajo de un científico de datos es entender y limpiar los datos. Sólo el 20% es modelar. El Análisis Exploratorio de Datos (EDA) es dónde realmente conoces tus datos — y dónde se evitan los errores más costosos.
-</MascotMessage>
+<RevealSequence mode="appear">
 
-EDA es el proceso de examinar datos antes de modelar: detectar patrones, valores faltantes, outliers, y relaciones entre variables. Un buen EDA puede ahorrarte semanas de debugging de modelos mal alimentados.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Llegan mil muestras de un ensayo clínico con datos faltantes y valores extraños.",
+    "Antes de modelar, hay que conocer cada columna y su calidad.",
+    "El Análisis Exploratorio de Datos examina los datos antes del modelo.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-EDA no es un paso opcional. Es la diferencia entre un modelo qué funciona en producción y uno qué falla silenciosamente con datos qué nunca entendiste.
+El EDA revisa estructura, calidad, distribuciones y relaciones antes de modelar; evita que el modelo aprenda de datos sucios.
 </ConceptCard>
+
+<ChoiceQuestion
+  question="¿Qué harías primero al recibir un dataset nuevo de un hospital?"
+  moduleSlug="estadistica"
+  lessonSlug="lesson06_exploratory_data_analysis"
+  blockId="choice-estadistica-l06-s1-1"
+  allowContinueOnIncorrect
+  explanation="Explorar los datos primero detecta faltantes, outliers y sesgos antes de entrenar cualquier modelo."
+  options={[
+    { id: "a", label: "Entrenar un modelo de inmediato", correct: false, feedback: "Riesgoso: no sabes si los datos son confiables." },
+    { id: "b", label: "Explorar los datos (EDA)", correct: true, feedback: "¡Bien! Conocer los datos antes de modelar evita errores costosos." },
+    { id: "c", label: "Borrar todos los outliers", correct: false, feedback: "Primero investiga por qué aparecen; pueden ser hallazgos." },
+    { id: "d", label: "Elegir el algoritmo final", correct: false, feedback: "La elección depende de lo que el EDA revele." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="El flujo de trabajo EDA" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un EDA sistemático evita improvisar análisis.",
+    "Primero estructura y calidad, después univariado, bivariado y visualización.",
+    "Ese orden convierte un dataset nuevo en una historia legible.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 Un EDA sistemático sigue estos pasos:
@@ -51,9 +88,24 @@ Un EDA sistemático sigue estos pasos:
 `df.info()`, `df.describe()`, `df.isnull().sum()` son tus tres primeros comandos en cualquier EDA. Nunca los saltees.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="Valores faltantes: el enemigo silencioso" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los datos faltantes no son solo ceros que rellenar.",
+    "Pueden ser MCAR, MAR o MNAR, y cada patrón pide un tratamiento diferente.",
+    "Imputar sin entender por qué faltan introduce sesgo silencioso.",
+  ]}
+/>
 
 <ConceptCard variant="definition">
 Los valores faltantes (NaN) son datos ausentes. Pueden ser **MCAR** (Missing Completely At Random), **MAR** (Missing At Random) o **MNAR** (Missing Not At Random).
@@ -69,44 +121,82 @@ Los valores faltantes (NaN) son datos ausentes. Pueden ser **MCAR** (Missing Com
 Nunca imputes sin entender POR QUÉ faltan los datos. Si los valores faltan por una razón sistemática (ej. pacientes graves qué abandonan el estudio), imputar introduce sesgo.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={4} title="Outliers desde múltiples ángulos" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Método", left: "IQR (1.5×)", right: "Z-Score (|Z| > 3)" },
-    { feature: "Robustez", left: "Robusto a distribución no normal", right: "Asume distribución normal" },
-    { feature: "Cuándo usar", left: "Datos sesgados, desconocidos", right: "Datos aproximadamente normales" },
-    { feature: "Cálculo", left: "Q1 − 1.5×IQR, Q3 + 1.5×IQR", right: "|x − μ| / σ > 3" },
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un outlier puede ser un error o el descubrimiento del año.",
+    "IQR y Z-Score miran los extremos desde ángulos distintos.",
+    "Investigar antes de eliminar es parte de un EDA responsable.",
   ]}
 />
+
+<ConceptCard variant="key-idea">
+Comparación de métodos de detección:
+- **IQR (1.5×)**: robusto a distribución no normal; datos sesgados o desconocidos; $Q_1 - 1.5\times\text{IQR}$, $Q_3 + 1.5\times\text{IQR}$.
+- **Z-Score ($|Z| > 3$)**: asume distribución normal; datos aproximadamente normales; $|x - \mu| / \sigma > 3$.
+</ConceptCard>
 
 <ConceptCard variant="warning">
 Un outlier NO siempre es basura. En genómica, un outlier puede ser el descubrimiento del año. En SaaS, puede ser tu cliente más valioso. Investiga antes de eliminar.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Visualizaciones EDA clave" eyebrow="INTERACTIVA">
 
-<InteractiveTable
-  headers={["Visualización", "¿Qué muestra?", "¿Cuándo usarla?"]}
-  rows={[
-    ["Histograma", "Distribución de una variable", "Siempre — primer paso del EDA"],
-    ["Boxplot", "Mediana, IQR, outliers", "Comparar distribuciones entre grupos"],
-    ["Scatter plot", "Relación entre dos variables numéricas", "Buscar correlaciones/patrones"],
-    ["Heatmap de correlación", "Matriz de correlaciones", "Identificar multicolinealidad"],
-    ["Pairplot", "Todos los scatter plots posibles", "EDA inicial en datasets pequeños"],
-    ["Bar plot", "Frecuencias de categorías", "Variables categóricas"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Antes de modelar, hay que mirar.",
+    "Cada visualización responde una pregunta distinta del dataset.",
+    "Elegí la herramienta según el tipo de variable y el propósito.",
   ]}
-  searchable={true}
-  caption="Visualizaciones esenciales para EDA"
 />
+
+<ConceptCard variant="key-idea">
+Visualizaciones esenciales para EDA:
+- **Histograma**: distribución de una variable — siempre, primer paso del EDA.
+- **Boxplot**: mediana, IQR, outliers — comparar distribuciones entre grupos.
+- **Scatter plot**: relación entre dos variables numéricas — buscar correlaciones/patrones.
+- **Heatmap de correlación**: matriz de correlaciones — identificar multicolinealidad.
+- **Pairplot**: todos los scatter plots posibles — EDA inicial en datasets pequeños.
+- **Bar plot**: frecuencias de categorías — variables categóricas.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Manos a la obra: EDA del Titanic" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El Titanic es un caso real para practicar EDA.",
+    "Estructura, faltantes, visualización y distribuciones en un solo flujo.",
+    "No salteés pasos: los patrones aparecen al mirar con cuidado.",
+  ]}
+/>
 
 ```python
 import pandas as pd
@@ -140,9 +230,24 @@ plt.tight_layout()
 plt.show()
 ```
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Biotecnología: EDA de expresión génica" eyebrow="INTERACTIVA">
+
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En genómica el EDA revela problemas de medición antes de modelar.",
+    "Simulamos expresión génica con un 5% de valores faltantes.",
+    "Imputar con la mediana es seguro o peligroso según el patrón de faltantes.",
+  ]}
+/>
 
 ```python
 # Simular datos de expresión génica con valores faltantes
@@ -163,54 +268,111 @@ print(f"% de genes con faltantes: {(expression.isnull().any().sum() / n_genes) *
 expression_filled = expression.fillna(expression.median())
 ```
 
-<ReflectionCheck
-  blockId="reflection-l06-gene-missing"
+<ChoiceQuestion
+  question="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  prompt="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
-  answer="Seguro: cuándo los valores faltantes son MCAR (Missing Completely At Random), cómo errores aleatorios de medición. La mediana es representativa de la distribución subyacente. Peligroso: cuándo son MNAR (Missing Not At Random). Ejemplo: genes con expresión extremadamente baja o alta qué el secuenciador no puede medir. Imputar con la mediana enmascara los casos más interesantes (expresión anormal = posible cáncer). Ahí necesitas un indicador de 'estaba faltante' o un modelo específico."
+  blockId="reflection-l06-gene-missing"
+  allowContinueOnIncorrect
+  explanation="Seguro cuándo MCAR (errores aleatorios): mediana representa la distribución. Peligroso cuándo MNAR: genes con expresión extrema no medible; imputar enmascara casos anormales (posible cáncer)."
+  options={[
+    { id: "a", label: "Seguro si MCAR (errores aleatorios, mediana representativa); peligroso si MNAR, p. ej. genes de expresión extrema no medibles", correct: true, feedback: "¡Exacto! El patrón de faltantes (MCAR vs MNAR) decide, no la robustez." },
+    { id: "b", label: "Siempre seguro: la mediana es robusta a outliers, por lo que no importa el patrón de faltantes", correct: false, feedback: "La robustez no arregla MNAR; imputar enmascara precisamente los casos anómalos informativos." },
+    { id: "c", label: "Siempre peligroso: conviene eliminar toda fila con valores faltantes", correct: false, feedback: "Con muchos faltantes imputar puede ser razonable si MCAR; eliminar filas pierde información." },
+    { id: "d", label: "Seguro siempre que los datos sean normales; MCAR/MNAR no importa", correct: false, feedback: "La normalidad no decide; lo que importa es el patrón de faltantes (MCAR vs MNAR)." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="Checkpoint" eyebrow="EVALUACIÓN">
 
-<ReflectionCheck
-  blockId="reflection-l06-eda-flow"
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El EDA no es opcional ni decorativo.",
+    "Los modelos asumen propiedades que deben verificarse antes de entrenar.",
+    "Hacerlo después de modelar es una trampa costosa.",
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  prompt="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
-  answer="Porque los modelos asumen cosas sobre tus datos (normalidad, no multicolinealidad, sin outliers extremos) qué sólo puedes verificar con EDA. Si modelas primero, podrías: (1) entrenar con datos sucios y obtener métricas falsamente optimistas, (2) no darte cuenta de qué necesitas transformar variables, (3) incluir features redundantes qué inestabilizan el modelo. EDA primero, modelo después. Siempre."
+  blockId="reflection-l06-eda-flow"
+  allowContinueOnIncorrect
+  explanation="Los modelos asumen normalidad, no multicolinealidad y sin outliers extremos, verificables sólo con EDA; modelar primero da métricas falsamente optimistas, transformaciones inadvertidas y features redundantes."
+  options={[
+    { id: "a", label: "Porque los modelos asumen normalidad, no multicolinealidad y sin outliers extremos, verificables sólo con EDA", correct: true, feedback: "¡Exacto! EDA primero, modelo después." },
+    { id: "b", label: "EDA después del modelo también funciona; los modelos detectan solos los problemas", correct: false, feedback: "Los modelos asumen propiedades que deben verificarse antes; no detectan multicolinealidad ni outliers por sí solos." },
+    { id: "c", label: "EDA es solo visualización estética y no cambia las métricas del modelo", correct: false, feedback: "EDA detecta problemas que sesgan métricas; ignorarla puede inflar la performance aparente." },
+    { id: "d", label: "Modelar primero y luego EDA permite un EDA más dirigido por el modelo", correct: false, feedback: "El orden propuesto viola el flujo; los supuestos deben validarse con los datos antes de entrenar." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={9} title="Términos clave" eyebrow="CIERRE">
 
-<InteractiveTable
-  headers={["Término", "Definición"]}
-  rows={[
-    ["EDA", "Análisis Exploratorio de Datos: entender datos antes de modelar"],
-    ["Valor Faltante (NaN)", "Dato ausente — clasificado cómo MCAR, MAR o MNAR"],
-    ["Imputación", "Reemplazar valores faltantes con estimaciones"],
-    ["Outlier", "Valor atípico — detectado con IQR o Z-Score"],
-    ["MCAR", "Missing Completely At Random — falta totalmente al azar"],
-    ["MNAR", "Missing Not At Random — la ausencia es informativa"],
-    ["df.describe()", "Resumen estadístico rápido de todas las columnas numéricas"],
-    ["df.isnull().sum()", "Conteo de valores faltantes por columna"],
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Con estos términos cerramos el ciclo de EDA.",
+    "Son tu vocabulario para revisar cualquier dataset nuevo.",
+    "La próxima lección reduce dimensiones con PCA.",
   ]}
-  searchable={true}
-  caption="Términos clave de EDA"
 />
+
+<ConceptCard variant="key-idea">
+Términos clave del EDA:
+- **EDA**: Análisis Exploratorio de Datos: entender datos antes de modelar.
+- **Valor Faltante (NaN)**: dato ausente — clasificado cómo MCAR, MAR o MNAR.
+- **Imputación**: reemplazar valores faltantes con estimaciones.
+- **Outlier**: valor atípico — detectado con IQR o Z-Score.
+- **MCAR**: Missing Completely At Random — falta totalmente al azar.
+- **MNAR**: Missing Not At Random — la ausencia es informativa.
+- **df.describe()**: resumen estadístico rápido de todas las columnas numéricas.
+- **df.isnull().sum()**: conteo de valores faltantes por columna.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={10} title="Para la próxima lección" eyebrow="CIERRE">
 
+<RevealSequence mode="appear">
+
 <MascotMessage mood="celebrating">
-¡EDA dominado! Ahora tienes el superpoder de entender cualquier dataset antes de tocarlo. Esto te diferencia del 90% de los principiantes qué corren `.fit()` sin mirar los datos.
+EDA completado. Ahora tienes el hábito de comprender cualquier dataset antes de modelarlo. Esto te diferencia del principiante que ejecuta `.fit()` sin revisar los datos.
 </MascotMessage>
 
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "En la Lección 7 entramos a una técnica elegante: PCA.",
+    "¿Cómo reducir 100 dimensiones a 2 sin perder la información importante?",
+    "Te va a volar la cabeza.",
+  ]}
+/>
+
 **En la Lección 7** vamos a entrar en una de las técnicas más elegantes del ML: **PCA (Análisis de Componentes Principales)**. ¿Cómo reducir 100 dimensiones a 2 sin perder la información importante? Te va a volar la cabeza.
+
+</RevealSequence>
 
 </Section>

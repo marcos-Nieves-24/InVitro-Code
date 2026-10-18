@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # `npm run check` encadena type-check, test, assets:check y build.
+      # El build no necesita variables de entorno: se verifica en verde sin
+      # secrets, asi que este job corre sin secrets deliberadamente.
+      # `npm run lint` no se incluye a proposito: Next 16 removio `next lint`
+      # y el repo no tiene configuracion de eslint.
+      - name: Gates (type-check, test, assets:check, build)
+        run: npm run check

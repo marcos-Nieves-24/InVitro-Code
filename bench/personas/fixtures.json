@@ -1,0 +1,677 @@
+[
+  {
+    "id": "ansioso-01",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-02",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-03",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-04",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-05",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-06",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-07",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-08",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-09",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-10",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-11",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-12",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-13",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-14",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-15",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-16",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-17",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-18",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-19",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-20",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-21",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-22",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-23",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-24",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-25",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-26",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-27",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-28",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-29",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-30",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-31",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-32",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-33",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-34",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-35",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-36",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-37",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-38",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-39",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-40",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-41",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-42",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-43",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-44",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-45",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "ia/lesson01_what_is_ai",
+    "seed_title": "¿Qué es la Inteligencia Artificial?",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-46",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "ia/lesson02_how_ai_learns",
+    "seed_title": "¿Cómo aprende la IA?",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  },
+  {
+    "id": "explorador-47",
+    "archetype": "explorador",
+    "weight": 25,
+    "seed_lesson": "machine-learning/lesson01_ml_fundamentals",
+    "seed_title": "Fundamentos de ML",
+    "behavior": "Navega 2-3 lecciones seguidas, guarda bookmarks, lee referencias",
+    "actions": [
+      "view_lesson",
+      "view_lesson",
+      "bookmark"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "troll-48",
+    "archetype": "troll",
+    "weight": 20,
+    "seed_lesson": "machine-learning/lesson02_linear_regression",
+    "seed_title": "Regresión Lineal",
+    "behavior": "Envía payloads inválidos (blank slugs, last_position roto) para probar validación",
+    "actions": [
+      "invalid_progress",
+      "invalid_lab"
+    ],
+    "think_time_ms": 500
+  },
+  {
+    "id": "ansioso-49",
+    "archetype": "ansioso",
+    "weight": 30,
+    "seed_lesson": "estadistica/lesson01_descriptive_stats",
+    "seed_title": "Estadística Descriptiva",
+    "behavior": "Abandona rápido si la lección tarda >2s, revisa 1 lección y sale",
+    "actions": [
+      "view_lesson",
+      "abandon"
+    ],
+    "think_time_ms": 300
+  },
+  {
+    "id": "perfeccionista-50",
+    "archetype": "perfeccionista",
+    "weight": 25,
+    "seed_lesson": "estadistica/lesson02_data_distribution",
+    "seed_title": "Distribución de Datos",
+    "behavior": "Repite quiz hasta 100%, hace 2 POST /api/progress idempotentes",
+    "actions": [
+      "view_lesson",
+      "submit_progress",
+      "repeat_quiz"
+    ],
+    "think_time_ms": 800
+  }
+]

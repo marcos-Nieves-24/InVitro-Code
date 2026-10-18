@@ -29,6 +29,8 @@ import {
   PerceptronTrainer,
   RegressionTrainer,
   DialogueBox,
+  EquationTour,
+  EquationStep,
   RevealSequence,
   ChoiceQuestion,
   QuizButton,
@@ -37,12 +39,21 @@ import {
   LabOfflineNotice,
 } from "@/components/lesson";
 import { BrainVsChipPlayer } from "@/components/anymotion/animations/BrainVsChipPlayer";
+import { GradientDescentPlayer } from "@/components/anymotion/animations/GradientDescentPlayer";
+import { KMeansPlayer } from "@/components/anymotion/animations/KMeansPlayer";
 import { MatrixPlayer } from "@/components/anymotion/animations/MatrixPlayer";
 import { ConidiaToVectorPlayer } from "@/components/anymotion/animations/ConidiaToVectorPlayer";
 import { FeatureSpace2DPlayer } from "@/components/anymotion/animations/FeatureSpace2DPlayer";
 import { OverfittingPlayer } from "@/components/anymotion/animations/OverfittingPlayer";
 import { PipelineStagesPlayer } from "@/components/anymotion/animations/PipelineStagesPlayer";
 import { SpeciesComparePlayer } from "@/components/anymotion/animations/SpeciesComparePlayer";
+import { SupervisedFlowPlayer } from "@/components/anymotion/animations/SupervisedFlowPlayer";
+import { ConfusionMatrixPlayer } from "@/components/anymotion/animations/ConfusionMatrixPlayer";
+import { RocBuilder } from "@/components/anymotion/animations/RocBuilder";
+import { BayesUpdate } from "@/components/anymotion/animations/BayesUpdate";
+import { DistributionShape } from "@/components/anymotion/animations/DistributionShape";
+import { TreeSplit } from "@/components/anymotion/animations/TreeSplit";
+import { ModelComparePlayer } from "@/components/anymotion/animations/ModelComparePlayer";
 import InteractivePrompt from "@/components/mdx/InteractivePrompt";
 import {
   LessonCodeEditor,
@@ -96,15 +107,15 @@ function renderHeader(data: Record<string, unknown>) {
         <span className="h-px w-3 bg-gray-300" />
         <span>Lección {data["Lesson Number"] as string}</span>
       </p>
-      <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-gray-900">
+      <h1 className="mt-1 font-display text-3xl font-semibold tracking-tight text-gray-900">
         {data["Lesson Title"] as string}
       </h1>
       {objectives.length > 0 && (
-        <div className="mt-3">
-          <p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-            Objetivos de aprendizaje
-          </p>
-          <ul className="space-y-0.5">
+        <details className="mt-2">
+          <summary className="cursor-pointer text-xs font-medium text-gray-600 marker:text-gray-400">
+            Qué vas a aprender ({objectives.length})
+          </summary>
+          <ul className="mt-1 space-y-0.5">
             {objectives.map((obj: string) => (
               <li key={obj} className="flex items-start gap-2 text-xs text-gray-600">
                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
@@ -112,7 +123,7 @@ function renderHeader(data: Record<string, unknown>) {
               </li>
             ))}
           </ul>
-        </div>
+        </details>
       )}
       <div className="mt-3 flex flex-wrap gap-1.5">
         {(data.Difficulty as string) && (
@@ -169,6 +180,8 @@ export default async function LessonPage({ params }: Props) {
     PerceptronTrainer,
     RegressionTrainer,
     DialogueBox,
+    EquationTour,
+    EquationStep,
     RevealSequence,
     ChoiceQuestion,
     QuizButton,
@@ -180,8 +193,17 @@ export default async function LessonPage({ params }: Props) {
     ConidiaToVector: ConidiaToVectorPlayer,
     FeatureSpace2D: FeatureSpace2DPlayer,
     Overfitting: OverfittingPlayer,
+    GradientDescent: GradientDescentPlayer,
+    KMeans: KMeansPlayer,
     PipelineStages: PipelineStagesPlayer,
     SpeciesCompare: SpeciesComparePlayer,
+    SupervisedFlow: SupervisedFlowPlayer,
+    ConfusionMatrixVisual: ConfusionMatrixPlayer,
+    RocBuilder: RocBuilder,
+    BayesUpdate: BayesUpdate,
+    DistributionShape: DistributionShape,
+    TreeSplit: TreeSplit,
+    ModelCompare: ModelComparePlayer,
     CodeEditor: (props: ComponentProps<typeof LessonCodeEditor>) => (
       <LessonCodeEditor {...props} certifyEnabled={certifyEnabled} />
     ),

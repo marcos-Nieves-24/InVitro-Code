@@ -56,12 +56,30 @@ export function useRevealQuizBlock(): RevealQuizContextValue | null {
  * the forward direction, and navigation oscillates between two slides.
  */
 const revealAdvanceOwners = new Map<string, () => boolean>();
+let childAdvanceCounter = 0;
 
-export function registerRevealAdvance(id: string, owner: () => boolean): () => void {
+export function registerRevealAdvance(
+  idOrOwner: string | (() => boolean),
+  maybeOwner?: () => boolean,
+): () => void {
+  const id =
+    typeof idOrOwner === "string"
+      ? idOrOwner
+      : `child-advance-${++childAdvanceCounter}`;
+  const owner = typeof idOrOwner === "function" ? idOrOwner : maybeOwner!;
   revealAdvanceOwners.set(id, owner);
   return () => {
     revealAdvanceOwners.delete(id);
   };
+}
+
+function consumeChildRevealAdvance(excludeId: string): boolean {
+  const entries = Array.from(revealAdvanceOwners.entries()).reverse();
+  for (const [id, owner] of entries) {
+    if (id === excludeId) continue;
+    if (owner()) return true;
+  }
+  return false;
 }
 
 /**
@@ -69,7 +87,8 @@ export function registerRevealAdvance(id: string, owner: () => boolean): () => v
  * Returns true when a reveal consumed it (i.e. the slide must NOT change).
  */
 export function consumeRevealAdvance(): boolean {
-  for (const owner of revealAdvanceOwners.values()) {
+  const owners = Array.from(revealAdvanceOwners.values()).reverse();
+  for (const owner of owners) {
     if (owner()) return true;
   }
   return false;
@@ -99,7 +118,7 @@ export const NAV_TEXT_SECONDARY = "text-sm font-medium";
 // deliberately rendered quieter: 10px, no uppercase, no letter-spacing, and a
 // lighter weight than the 12px uppercase "Diapositiva N de M" in the shell
 // header, so the eye reads slide position first and step position second.
-const STEP_LABEL = "font-mono text-[10px] font-normal tracking-tight text-storm/80";
+const STEP_LABEL = "font-mono text-xs font-medium tracking-tight text-storm";
 
 export interface RevealSequenceProps {
   children: ReactNode;
@@ -255,14 +274,17 @@ export function RevealSequence({
   const isComplete = revealedCount >= total && total > 0;
   const hasMore = revealedCount < total;
 
+  const advanceOwnerId = useId();
+
   const advance = useCallback(() => {
     if (effectiveBlocked) return;
     if (showHint) dismissHint();
+    if (consumeChildRevealAdvance(advanceOwnerId)) return;
     setRevealedCount((c) => {
       const next = Math.min(c + 1, total);
       return next;
     });
-  }, [effectiveBlocked, total, showHint, dismissHint]);
+  }, [effectiveBlocked, total, showHint, dismissHint, advanceOwnerId]);
 
   // Single owner of the forward advance.
   //
@@ -291,7 +313,6 @@ export function RevealSequence({
   // Register this sequence as the single owner of the forward advance. The id is
   // per-instance so several sequences can coexist without clobbering each other;
   // the registry is consulted by the lesson carousel on every forward trigger.
-  const advanceOwnerId = useId();
   const handleAdvanceRef = useRef(handleAdvance);
   handleAdvanceRef.current = handleAdvance;
 
@@ -317,9 +338,11 @@ export function RevealSequence({
       if (showHint) dismissHint();
       const target = e.target as HTMLElement;
       // Don't advance when interacting with form/native interactive elements,
-      // except the explicit continue/back buttons.
+      // code editors (Monaco renders clicks on view-line divs, not its hidden
+      // textarea) or anything explicitly marked [data-no-advance] — except the
+      // explicit continue/back buttons.
       const interactiveAncestor = target.closest(
-        "button,input,textarea,select,iframe,a,[data-no-advance]"
+        "button,input,textarea,select,iframe,a,.monaco-editor,[contenteditable],[data-no-advance]"
       );
       if (interactiveAncestor) {
         const isContinue =
@@ -352,6 +375,11 @@ export function RevealSequence({
 
   const handleContainerKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Never hijack cursor keys while the user edits text (Monaco moves its
+      // cursor with arrows inside its hidden textarea; without this, ArrowLeft
+      // would step the reveal back mid-typing).
+      const t = e.target as HTMLElement | null;
+      if (t?.closest?.("input,textarea,select,[contenteditable]")) return;
       if (e.key === "ArrowLeft" && revealedCount > initialRevealed) {
         e.preventDefault();
         e.stopPropagation();
@@ -446,9 +474,9 @@ export function RevealSequence({
   // measured under the last content block.
   const containerClass = isAppear
     ? showHistory
-      ? "flex w-full flex-col items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
-      : "grid w-full place-items-center gap-4 px-4 pt-4 pb-0 md:px-6 md:pt-6 md:pb-0 relative overflow-x-visible"
-    : "flex w-full flex-col gap-4 p-4 md:p-6 relative overflow-x-visible";
+      ? "flex w-full flex-col items-center gap-4 px-2 pt-2 pb-0 md:px-4 md:pt-3 md:pb-0 relative overflow-x-visible"
+      : "grid w-full place-items-center gap-4 px-2 pt-2 pb-0 md:px-4 md:pt-3 md:pb-0 relative overflow-x-visible"
+    : "flex w-full flex-col gap-4 px-2 pt-2 pb-0 md:px-4 md:pt-3 md:pb-0 relative overflow-x-visible";
 
   // Appear mode: show only current step centered (no vertical push).
   // Stack mode: show all revealed steps stacked vertically.

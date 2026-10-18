@@ -21,39 +21,63 @@ Quiz: quiz.md
 
 # Matplotlib
 
-<Section number={1} title="Motivación y Panorama General" eyebrow="INICIO">
+<Section number={1} title="¿Por qué Matplotlib?" eyebrow="INICIO">
+<RevealSequence mode="appear">
 
-## Motivación
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Visualizar es entender: un gráfico bien elegido revela patrones, outliers y relaciones invisibles en números crudos.",
+    "Matplotlib es la librería de visualización fundamental en Python; Seaborn y Plotly se construyen sobre ella.",
+    "En biotecnología muestra distribuciones de expresión génica, curvas de supervivencia y estructuras de proteínas.",
+    "En SaaS muestra tendencias de ingresos, crecimiento de usuarios y resultados de tests A/B.",
+    "La mayor parte del tiempo de un analista de ciencia de datos se va creando y ajustando visualizaciones.",
+  ]}
+/>
 
-La visualización es esencial para entender los datos. Un gráfico bien elegido revela patrones, outliers y relaciones que son invisibles en números crudos. Matplotlib es la librería de visualización fundamental en Python, y la mayoría de las otras herramientas de visualización (Seaborn, Plotly) están construidas sobre ella. En biotecnología, las visualizaciones muestran distribuciones de expresión génica, curvas de supervivencia de pacientes y análisis de estructuras de proteínas. En SaaS, muestran tendencias de ingresos, crecimiento de usuarios y resultados de tests A/B.
+<ConceptCard variant="key-idea">
+En la lección anterior aprendiste Pandas para manipulación de datos. Ahora visualizas esos datos con Matplotlib. La próxima lección sobre Seaborn se basa en Matplotlib para crear visualizaciones estadísticas con menos código; en los módulos de ML usarás Matplotlib a diario para entender modelos, evaluar rendimiento y presentar resultados.
+</ConceptCard>
 
-## Panorama General
+- La visualización revela lo que los números crudos ocultan.
+- Matplotlib es interoperable con NumPy y Pandas.
+- Dominarla hace que los demás tools de plotting (Seaborn, Plotly) se aprendan rápido.
 
-En la lección anterior aprendiste Pandas para manipulación de datos. Ahora vas a aprender a visualizar esos datos con Matplotlib. La próxima lección sobre Seaborn se basa en Matplotlib para crear visualizaciones estadísticas con menos código. A lo largo de los módulos de ML, vas a usar Matplotlib a diario para entender modelos, evaluar rendimiento y presentar resultados.
-
+</RevealSequence>
 </Section>
 
 <Section number={2} title="Arquitectura y Tipos de Gráficos" eyebrow="CONCEPTO">
+<RevealSequence mode="appear">
 
-## Teoría
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Matplotlib tiene tres capas: backend (render), artist (todo lo que ves) y pyplot (interfaz de conveniencia).",
+    "La interfaz funcional de pyplot es rápida de escribir; la orientada a objetos es la preferida para gráficos complejos.",
+    "Elegir bien el tipo de gráfico es una habilidad clínica/analítica, no solo estética.",
+  ]}
+/>
 
-### Arquitectura de Matplotlib
+<ConceptCard variant="definition">
+**Backend**: renderiza a pantalla/archivo (Agg, PDF, SVG). **Artist**: todo lo visible (líneas, texto, ejes). **pyplot**: interfaz de conveniencia estilo MATLAB.
+</ConceptCard>
 
-Matplotlib tiene tres capas:
-1. **Backend**: Renderiza a pantalla/archivo (ej. Agg, PDF, SVG)
-2. **Artist**: Todo lo que ves en el gráfico (líneas, texto, ejes)
-3. **pyplot**: Interfaz de conveniencia (lo que más vas a usar)
+**Dos interfaces**
 
-### Dos Interfaces
+Interfaz pyplot (funcional):
 
-**Interfaz pyplot (funcional):**
 ```python
 import matplotlib.pyplot as plt
 plt.plot(x, y)
 plt.show()
 ```
 
-**Interfaz orientada a objetos (OO):**
+Interfaz orientada a objetos (OO):
+
 ```python
 fig, ax = plt.subplots()
 ax.plot(x, y)
@@ -62,7 +86,7 @@ plt.show()
 
 La interfaz OO es preferida para gráficos complejos.
 
-### Tipos de Gráficos Básicos
+**Tipos de gráficos básicos**
 
 ```python
 plt.plot(x, y)              # Gráfico de líneas
@@ -74,7 +98,7 @@ plt.pie(sizes)              # Gráfico circular
 plt.imshow(image)           # Visualización de imagen
 ```
 
-### Personalización
+**Personalización**
 
 ```python
 plt.title("Título")
@@ -87,7 +111,7 @@ plt.ylim(0, 100)
 plt.colorbar()
 ```
 
-### Figure y Axes
+**Figure y Axes**
 
 ```python
 fig, axes = plt.subplots(2, 3, figsize=(12, 8))
@@ -95,7 +119,7 @@ axes[0, 0].plot(x, y)
 axes[0, 1].scatter(x, y)
 ```
 
-### Guardando Figuras
+**Guardando Figuras**
 
 ```python
 plt.savefig("grafico.png", dpi=300, bbox_inches="tight")
@@ -103,9 +127,9 @@ plt.savefig("grafico.pdf")
 plt.savefig("grafico.svg")
 ```
 
-## Explicación Visual
+**Estructura de una figura** (candidato a player visual):
 
-```
+```text
 Estructura de una Figura de Matplotlib
 
 ┌─────────────────────────────────────────────────┐
@@ -114,11 +138,11 @@ Estructura de una Figura de Matplotlib
 │  │ Axes (el área de gráfico real)               ││
 │  │  ┌───────────────────────────────────────┐   ││
 │  │  │ Título                               │   ││
-│  │  │ ──────────────────────────────────── │   ││
+│  │  │ ────────────────────────────────────  │   ││
 │  │  │ │                                    │   ││
 │  │  │ │        Área del Gráfico            │   ││
 │  │  │ │                                    │   ││
-│  │  │ ──────────────────────────────────── │   ││
+│  │  │ ────────────────────────────────────  │   ││
 │  │  │ Etiqueta X                           │   ││
 │  │  └───────────────────────────────────────┘   ││
 │  └─────────────────────────────────────────────┘│
@@ -126,11 +150,24 @@ Estructura de una Figura de Matplotlib
 └─────────────────────────────────────────────────┘
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={3} title="Implementación en Python" eyebrow="IMPLEMENTACIÓN">
+<RevealSequence mode="appear">
 
-## Implementación en Python
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "De la teoría a la práctica: líneas, dispersión, barras, histogramas y multi-panel.",
+    "Cada bloque es independiente; ejecútalo y observa cómo cambia la figura.",
+    "El primer gráfico que hagas siempre debería tener título, ejes etiquetados y leyenda.",
+  ]}
+/>
+
+**Gráfico de líneas**
 
 ```python
 import matplotlib.pyplot as plt
@@ -151,6 +188,8 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
+**Gráfico de dispersión**
+
 ```python
 # Gráfico de dispersión
 np.random.seed(42)
@@ -165,6 +204,8 @@ plt.ylabel("Objetivo Y")
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
+
+**Gráfico de barras**
 
 ```python
 # Gráfico de barras
@@ -181,6 +222,8 @@ plt.axhline(y=0, color="black", linewidth=0.5)
 plt.show()
 ```
 
+**Histograma**
+
 ```python
 # Histograma
 data = np.random.randn(1000)
@@ -193,6 +236,8 @@ plt.ylabel("Densidad")
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
+
+**Múltiples subplots**
 
 ```python
 # Múltiples subplots
@@ -217,13 +262,24 @@ plt.tight_layout()
 plt.show()
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={4} title="Aplicaciones Prácticas" eyebrow="APLICACIÓN">
+<RevealSequence mode="appear">
 
-## Ejemplo de Biotecnología
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Dos casos end to end: expresión génica por condición y dashboard de métricas SaaS.",
+    "Ambos usan la interfaz OO con subplots y barras agrupadas.",
+    "Observa cómo fig, axes se convierten en el lienzo donde pintas cada panel.",
+  ]}
+/>
 
-**Escenario**: Visualizando datos de expresión génica en diferentes condiciones.
+**Escenario biotecnología** — visualizando datos de expresión génica en diferentes condiciones:
 
 ```python
 import matplotlib.pyplot as plt
@@ -256,9 +312,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Ejemplo SaaS
-
-**Escenario**: Visualizando un dashboard de métricas SaaS.
+**Escenario SaaS** — visualizando un dashboard de métricas SaaS:
 
 ```python
 import matplotlib.pyplot as plt
@@ -294,20 +348,33 @@ plt.tight_layout()
 plt.show()
 ```
 
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
+<RevealSequence mode="appear">
 
-## Errores Comunes
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Los errores de Matplotlib son casi siempre de forma: ejes no etiquetados, leyendas faltantes, figuras cortadas.",
+    "La interfaz OO te salva cuando el gráfico crece beyond pyplot.",
+    "Prioriza claridad sobre decoración: un gráfico simple y bien etiquetado gana a uno vistoso.",
+  ]}
+/>
 
-1. **Graficar listas sin conversión**: Matplotlib puede graficar listas, pero los arrays NumPy son más rápidos
-2. **No llamar `plt.show()`**: En scripts, los gráficos no aparecen sin esto
-3. **Demasiados elementos en el gráfico**: Gráficos recargados confunden en lugar de informar
-4. **Formas incompatibles**: x e y deben tener el mismo largo
-5. **Olvidar `tight_layout()`**: Las etiquetas pueden cortarse
-6. **Usar colores/estilos por defecto**: Personaliza para gráficos con aspecto profesional
+**Errores comunes**
 
-## Buenas Prácticas
+- **Graficar listas sin conversión**: Matplotlib puede graficar listas, pero los arrays NumPy son más rápidos
+- **No llamar `plt.show()`**: en scripts, los gráficos no aparecen sin esto
+- **Demasiados elementos en el gráfico**: gráficos recargados confunden en lugar de informar
+- **Formas incompatibles**: x e y deben tener el mismo largo
+- **Olvidar `tight_layout()`**: las etiquetas pueden cortarse
+- **Usar colores/estilos por defecto**: personaliza para gráficos con aspecto profesional
+
+**Buenas prácticas**
 
 - Usa la interfaz OO (`fig, ax = plt.subplots()`) para gráficos complejos
 - Siempre etiqueta los ejes e incluye unidades
@@ -318,62 +385,137 @@ plt.show()
 - Agrega líneas de cuadrícula con alpha bajo para legibilidad
 - Usa `tight_layout()` para evitar que se corten las etiquetas
 
+</RevealSequence>
 </Section>
 
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
+<RevealSequence mode="appear">
 
-## Resumen
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subplots son tu vocabulario.",
+    "Si etiquetas ejes, leyendas y unidades, tu gráfico ya está por encima del promedio.",
+    "Seaborn te dará atajos estadísticos, pero sobre el mismo motor.",
+  ]}
+/>
 
-- El pyplot de Matplotlib proporciona gráficos estilo MATLAB
-- Dos interfaces: pyplot (simple) y OO (flexible)
-- Gráficos básicos: líneas, dispersión, barras, histograma
-- Personaliza con títulos, etiquetas, leyendas, colores
-- Subplots permiten figuras multi-panel
-- Guarda en formatos PNG, PDF, SVG
-- Siempre etiqueta los ejes e incluye leyendas
+<ConceptCard variant="key-idea">
+Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subplots permiten crear, personalizar y exportar cualquier gráfico científico con control total.
+</ConceptCard>
 
-## Términos Clave
+<FeatureButtonList
+  features={[
+    { id: "pyplot", label: "pyplot", detail: "Provee gráficos estilo MATLAB a través de pyplot." },
+    { id: "interfaces", label: "Interfaces", detail: "Dos interfaces: pyplot (simple) y OO (flexible)." },
+    { id: "graficos-basicos", label: "Gráficos básicos", detail: "Líneas, dispersión, barras e histograma." },
+    { id: "personalizacion", label: "Personalización", detail: "Personaliza con títulos, etiquetas, leyendas y colores." },
+    { id: "subplots", label: "Subplots", detail: "Permiten figuras multi-panel en una sola figure." },
+    { id: "guardado", label: "Guardado", detail: "Guarda en formatos PNG, PDF y SVG." },
+    { id: "buenas-practicas", label: "Buenas prácticas", detail: "Siempre etiqueta los ejes e incluye leyendas." },
+  ]}
+/>
 
-- **Figure**: El contenedor de nivel superior (ventana completa)
-- **Axes**: El área de graficación real (una figura puede tener varios)
-- **pyplot**: Interfaz tipo MATLAB para graficación rápida
-- **Subplot**: Múltiples gráficos en una sola figura
-- **Leyenda**: Etiquetas que identifican elementos del gráfico
-- **Tight layout**: Ajuste automático de espaciado
-- **Formato vectorial**: SVG/PDF — escalable sin pérdida de calidad
-- **Formato raster**: PNG — basado en píxeles, calidad depende del DPI
+<FeatureButtonList
+  features={[
+    { id: "figure", label: "Figure", detail: "El contenedor de nivel superior (ventana completa)." },
+    { id: "axes", label: "Axes", detail: "El área de graficación real (una figura puede tener varios)." },
+    { id: "pyplot-g", label: "pyplot", detail: "Interfaz tipo MATLAB para graficación rápida." },
+    { id: "subplot", label: "Subplot", detail: "Múltiples gráficos en una sola figura." },
+    { id: "leyenda", label: "Leyenda", detail: "Etiquetas que identifican elementos del gráfico." },
+    { id: "tight-layout", label: "Tight layout", detail: "Ajuste automático de espaciado." },
+    { id: "vectorial", label: "Formato vectorial", detail: "SVG/PDF — escalable sin pérdida de calidad." },
+    { id: "raster", label: "Formato raster", detail: "PNG — basado en píxeles, calidad depende del DPI." },
+  ]}
+/>
 
+<ChoiceQuestion
+  question="¿Por qué conviene guardar figuras en formato vectorial (SVG/PDF) para publicaciones?"
+  moduleSlug="python"
+  lessonSlug="lesson15_matplotlib"
+  blockId="choice-python-l15-resumen-1"
+  allowContinueOnIncorrect
+  explanation="Los formatos vectoriales escalan sin pérdida de calidad y son los preferidos en revistas científicas."
+  options={[
+    { id: "a", label: "Escalan sin pérdida de calidad", correct: true, feedback: "¡Exacto! SVG/PDF son infinitamente escalables." },
+    { id: "b", label: "Ocupan menos bytes que PNG", correct: false, feedback: "No siempre: depende de la complejidad de la figura." },
+    { id: "c", label: "Permiten animaciones nativas", correct: false, feedback: "La animación no es la razón principal del formato vectorial." },
+    { id: "d", label: "Generan archivos editables solo en Photoshop", correct: false, feedback: "Son editables en varios editores vectoriales, no solo Photoshop." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+¡Gráficos listos! Seaborn te dará atajos estadísticos sobre el mismo motor — la próxima lección.
+</MascotMessage>
+
+</RevealSequence>
 </Section>
 
 <Section number={7} title="Evaluación" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
 
-## Ejercicios
+**Ejercicios**
 
-### Nivel 1: Básico
-
+Nivel 1 — Básico:
 1. ¿Cuál es la diferencia entre `plt.plot()` y `plt.scatter()`?
 2. ¿Cómo guardas una figura como archivo PNG?
 3. ¿Qué crea `fig, ax = plt.subplots(2, 3)`?
 
-### Nivel 2: Implementación
-
+Nivel 2 — Implementación:
 4. Grafica la función f(x) = x² de -10 a 10 con ejes etiquetados y un título.
 5. Crea un gráfico de barras mostrando las 5 palabras más frecuentes en un texto dado.
 
-### Nivel 3: Pensamiento Crítico
-
+Nivel 3 — Pensamiento Crítico:
 6. ¿Cuándo elegirías un gráfico de líneas sobre uno de dispersión, y viceversa?
 7. ¿Por qué es importante guardar figuras en formato vectorial (SVG/PDF) para publicaciones?
 
-## Desafío de Código
+**Desafío de Código**
 
 Crea un **reporte de datos integral** con los siguientes gráficos:
+1. **Gráfico de líneas**: grafica 4 funciones matemáticas diferentes (sen, cos, sen², cos²) en los mismos ejes con diferentes estilos y una leyenda
+2. **Gráfico de dispersión**: genera 200 puntos (x, y) aleatorios con una tendencia lineal clara, agrega una línea de regresión
+3. **Gráfico de barras**: muestra la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
+4. **Histograma**: grafica la distribución de 10.000 valores aleatorios y superpon una curva de distribución normal
+5. **Figura multi-panel**: crea un subplot 2×2 combinando lo anterior en una sola figura
+6. **Estilo**: usa un estilo profesional, incluye líneas de cuadrícula y guarda como PDF
 
-1. **Gráfico de líneas**: Grafica 4 funciones matemáticas diferentes (sen, cos, sen², cos²) en los mismos ejes con diferentes estilos y una leyenda
-2. **Gráfico de dispersión**: Genera 200 puntos (x, y) aleatorios con una tendencia lineal clara, agrega una línea de regresión
-3. **Gráfico de barras**: Muestra la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
-4. **Histograma**: Grafica la distribución de 10.000 valores aleatorios y superpon una curva de distribución normal
-5. **Figura multi-panel**: Crea un subplot 2×2 combinando lo anterior en una sola figura
-6. Estilo: Usa un estilo profesional (`plt.style.use("seaborn-v0_8")` o similar), incluye líneas de cuadrícula y guarda como PDF
+</RevealSequence>
+</Section>
 
+<Section number={99} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="¿Qué crea `fig, ax = plt.subplots(2, 3)`?"
+  moduleSlug="python"
+  lessonSlug="lesson15_matplotlib"
+  blockId="choice-python-l15-tema-1"
+  allowContinueOnIncorrect
+  explanation="`subplots(2, 3)` crea una figura con una cuadrícula de 2 filas y 3 columnas de axes."
+  options={[
+    { id: "a", label: "Una figura con 2 subplots", correct: false, feedback: "Crea 2×3 = 6 axes, no 2." },
+    { id: "b", label: "Una figura con 6 axes (2 filas × 3 columnas)", correct: true, feedback: "¡Correcto!" },
+    { id: "c", label: "Un único gráfico con 3 series", correct: false, feedback: "No: son axes separados." },
+    { id: "d", label: "Error de sintaxis", correct: false, feedback: "La llamada es válida." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="¿Cuál es la diferencia entre las interfaces pyplot y OO de Matplotlib?"
+  moduleSlug="python"
+  lessonSlug="lesson15_matplotlib"
+  blockId="choice-python-l15-tema-2"
+  allowContinueOnIncorrect
+  explanation="pyplot ofrece funciones de nivel superior estilo MATLAB; OO expone fig/ax para control fino en gráficos complejos."
+  options={[
+    { id: "a", label: "pyplot es más flexible para gráficos complejos", correct: false, feedback: "Es al revés: OO es más flexible." },
+    { id: "b", label: "pyplot es simple/rápido; OO da control fino", correct: true, feedback: "¡Correcto!" },
+    { id: "c", label: "Solo pyplot puede guardar figuras", correct: false, feedback: "Ambas pueden guardar." },
+    { id: "d", label: "No hay diferencia real", correct: false, feedback: "Hay diferencias de control y estilo de código." },
+  ]}
+/>
+
+</RevealSequence>
 </Section>

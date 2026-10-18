@@ -21,55 +21,102 @@ Assignment: assignment.md
 Quiz: quiz.md
 ---
 
+# Fundamentos de ML
+
 <Section number={1} title="De reglas programadas a reglas aprendidas" eyebrow="INICIO">
 
-<MascotMessage mood="celebrating">
-¡Bienvenido al módulo de Machine Learning! Este es el punto de inflexión: aquí dejas de decirle a la computadora qué hacer y empiezas a enseñarle a descubrir patrones por sí misma.
-</MascotMessage>
+<RevealSequence mode="appear">
 
-Todos los días usas Aprendizaje Automático sin darte cuenta: Netflix recomienda series, Gmail filtra spam, tu teléfono reconoce caras. Pero el cambio fundamental es este:
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Un patólogo mira al microscopio una muestra de un paciente: miles de células, ningún manual escrito.",
+    "¿Cómo decides cuáles son malignas sin una regla programada a mano?",
+    "El Aprendizaje Automático descubre esos patrones directamente desde los datos.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
-En la programación tradicional escribes **reglas explícitas**. En ML, la computadora **aprende las reglas** a partir de ejemplos. Es la diferencia entre darle una receta a alguien y mostrarle 1000 fotos de gatos hasta que pueda identificarlos solo.
+El ML aprende reglas a partir de ejemplos etiquetados, no de instrucciones explícitas; su objetivo es generalizar a casos nuevos.
 </ConceptCard>
 
-En biotecnología, el ML predice qué compuestos farmacológicos son efectivos. En SaaS, predice qué clientes se van a dar de baja. Esta lección construye el modelo mental que necesitas para cada algoritmo del curso.
+<ChoiceQuestion
+  question="Si le mostráramos mil fotos de lunares benignos y malignos al programa, ¿qué esperas que aprenda?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  blockId="choice-ml-l01-s1-1"
+  allowContinueOnIncorrect
+  explanation="El modelo no memoriza nombres: aprende patrones que distinguen las clases y luego generaliza a lunares nuevos."
+  options={[
+    { id: "a", label: "Patrones que distinguen malignos de benignos", correct: true, feedback: "¡Exacto! Eso es generalizar a partir de ejemplos." },
+    { id: "b", label: "Una lista fija de nombres de archivos", correct: false, feedback: "Eso no predice en casos nuevos." },
+    { id: "c", label: "La regla escrita por un médico", correct: false, feedback: "El ML no sigue reglas escritas; las aprende." },
+    { id: "d", label: "Nada útil", correct: false, feedback: "Con ejemplos etiquetados sí puede aprender." },
+  ]}
+/>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={2} title="¿Dónde estamos parados?" eyebrow="CONTEXTO">
 
-**Anterior:** El Módulo 3 te enseñó a describir y visualizar datos con estadística.
+<RevealSequence mode="appear">
 
-**Esta lección:** Aprendes cómo los algoritmos *aprenden de los datos* y qué puede salir mal en el proceso.
-
-**Siguiente:** Regresión lineal — tu primer algoritmo de ML real, donde todo esto cobra vida.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Antes de este módulo describiste datos con estadística.",
+    "Ahora ves cómo un algoritmo aprende de esos datos.",
+    "Después seguirá regresión lineal, donde todo esto cobra vida.",
+  ]}
+/>
 
 <ConceptCard variant="key-idea">
 Antes de lanzarte a implementar algoritmos, necesitas entender los fundamentos: ¿qué significa que un modelo "aprenda"? ¿Cómo sabes si aprendió bien? ¿Por qué un modelo perfecto en entrenamiento puede fallar estrepitosamente en producción?
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={3} title="¿Qué es el Aprendizaje Automático?" eyebrow="CONCEPTO">
 
-El Aprendizaje Automático es un campo de la inteligencia artificial donde las computadoras aprenden patrones a partir de datos sin ser programadas explícitamente para cada escenario.
+<RevealSequence mode="appear">
 
-<ComparisonTable
-  rows={[
-    { feature: "Enfoque", left: "Programación Tradicional", right: "Aprendizaje Automático" },
-    { feature: "Entrada", left: "Reglas + Datos", right: "Datos + Respuestas" },
-    { feature: "Salida", left: "Respuestas", right: "Reglas" },
-    { feature: "Ejemplo", left: "if spam_words > 3: marcar_spam()", right: "Mostrar 10.000 emails etiquetados → el modelo descubre qué patrones indican spam" },
-    { feature: "Cuándo usarlo", left: "Problemas con reglas claras y estables", right: "Problemas donde las reglas son difíciles de expresar o cambian con el tiempo" },
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "¿Cáncer o infección? Algunas decisiones son números, otras son categorías.",
+    "La programación tradicional te obliga a escribir cada regla a mano.",
+    "El ML invierte el flujo: datos + respuestas → reglas aprendidas.",
+    "Le damos ejemplos y la computadora descubre el patrón subyacente.",
   ]}
 />
 
-Le damos ejemplos a la computadora, y ella descubre el patrón subyacente. Simple en teoría, pero el diablo está en los detalles.
+{/* candidate-player: comparison-tradicional-vs-ml */}
+<ConceptCard variant="key-idea">
+**Programación tradicional vs Aprendizaje Automático**
+- Enfoque: tradicional = reglas + datos; ML = datos + respuestas.
+- Entrada: reglas + datos vs datos + respuestas.
+- Salida: respuestas vs reglas.
+- Ejemplo: if spam_words > 3: marcar_spam() vs mostrar 10.000 emails etiquetados y que el modelo descubra los patrones.
+- Cuándo usarlo: problemas con reglas claras y estables vs problemas donde las reglas son difíciles de expresar o cambian con el tiempo.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={4} title="Vocabulario que vas a usar todo el curso" eyebrow="CONCEPTO">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
 **Característica (X):** Una variable de entrada usada para hacer predicciones. Cantidad de habitaciones en una casa, nivel de expresión génica, días desde el último inicio de sesión. Todo lo que *mides* para predecir algo.
@@ -91,60 +138,101 @@ Le damos ejemplos a la computadora, y ella descubre el patrón subyacente. Simpl
 Regla de oro: el modelo solo puede aprender de los datos que ve durante el entrenamiento. Si tus datos de entrenamiento tienen sesgos, tu modelo también los tendrá. Garbage in, garbage out.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={5} title="Supervisado vs No Supervisado" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Datos de entrenamiento", left: "Tienen etiquetas (sabemos la respuesta correcta)", right: "Sin etiquetas (solo tenemos las características)" },
-    { feature: "Objetivo", left: "Predecir etiquetas para datos nuevos", right: "Encontrar estructura oculta en los datos" },
-    { feature: "Ejemplos", left: "Regresión (predecir un número), Clasificación (predecir una categoría)", right: "Clustering (agrupar similares), PCA (reducir dimensiones)" },
-    { feature: "Analogía", left: "Un profesor que corrige tus ejercicios", right: "Explorar una biblioteca sin catálogo y descubrir secciones por tu cuenta" },
-    { feature: "En este módulo", left: "Lecciones 1-5 y 8", right: "Lecciones 6 y 7" },
-  ]}
-/>
+<RevealSequence mode="appear">
+
+{/* candidate-player: comparison-supervisado-vs-nosupervisado */}
+<ConceptCard variant="key-idea">
+**Aprendizaje supervisado vs no supervisado**
+- Datos de entrenamiento: tienen etiquetas (sabemos la respuesta correcta) vs sin etiquetas (solo características).
+- Objetivo: predecir etiquetas para datos nuevos vs encontrar estructura oculta.
+- Ejemplos: regresión y clasificación vs clustering y PCA.
+- Analogía: un profesor que corrige vs explorar una biblioteca sin catálogo.
+- En este módulo: Lecciones 1-5 y 8 vs Lecciones 6 y 7.
+</ConceptCard>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={6} title="Generalización: el verdadero objetivo" eyebrow="CONCEPTO">
 
+<RevealSequence mode="appear">
+
 <ConceptCard variant="key-idea">
 La **generalización** es la capacidad del modelo de funcionar bien con datos *que nunca vio*. Este es el verdadero objetivo del ML — no memorizar los datos de entrenamiento, sino aprender patrones que se transfieran a situaciones nuevas.
 </ConceptCard>
 
-Si un modelo solo funciona con los datos que usaste para entrenarlo, no sirve. Es como un estudiante que se memoriza las respuestas del examen de práctica pero no entiende los conceptos.
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Memorizar no es aprender: un modelo debe funcionar con datos nunca vistos.",
+    "La división train/test es la prueba mínima de generalización.",
+    "Si solo funciona con los datos de entrenamiento, no sirve en producción.",
+  ]}
+/>
 
 <CalloutInfo>
 La división train/test es la herramienta más básica para medir generalización: entrenas con una parte de los datos y evalúas con otra que el modelo nunca vio.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={7} title="Los dos enemigos: sobreajuste y subajuste" eyebrow="CONCEPTO">
 
-<ComparisonTable
-  rows={[
-    { feature: "Qué es", left: "El modelo aprende los datos de entrenamiento **demasiado bien**, incluyendo el ruido", right: "El modelo es **demasiado simple** para capturar el patrón subyacente" },
-    { feature: "Síntoma clave", left: "Precisión en entrenamiento ≈ 100%, precisión en prueba mucho más baja", right: "Tanto la precisión en entrenamiento como en prueba son bajas" },
-    { feature: "Causa típica", left: "Modelo muy complejo con demasiados parámetros", right: "Modelo muy simple o falta de features relevantes" },
-    { feature: "Analogía", left: "Un estudiante que se memoriza cada palabra del libro pero no puede aplicar los conceptos", right: "Un estudiante que solo leyó el título del capítulo y cree que ya sabe todo" },
+<RevealSequence mode="appear">
+
+{/* candidate-player: comparison-sobreajuste-vs-subajuste */}
+<ConceptCard variant="key-idea">
+**Sobreajuste vs subajuste**
+- Sobreajuste: el modelo memoriza entrenamiento, incluyendo ruido → train ≈100%, test mucho más bajo.
+- Subajuste: el modelo es demasiado simple → train y test bajos.
+- Causa típica: modelo complejo (sobreajuste) vs modelo simple o falta de features (subajuste).
+- Analogía: memorizar cada palabra sin aplicar vs solo leer el título del capítulo.
+</ConceptCard>
+
+<ChoiceQuestion
+  question="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  blockId="reflection-l01-overfit-underfit"
+  allowContinueOnIncorrect
+  explanation="Es sobreajuste (train 99% vs test 65%): el modelo memorizó entrenamiento y no generaliza. Probar: (1) simplificar (reducir complejidad), (2) más datos de entrenamiento, (3) regularización."
+  options={[
+    { id: "a", label: "Hay sobreajuste: simplificar el modelo, agregar datos y regularizar", correct: true, feedback: "¡Correcto! El gap train/test revela sobreajuste, no generalización." },
+    { id: "b", label: "Hay subajuste: conviene aumentar la complejidad", correct: false, feedback: "Falso: train 99% descarta subajuste; el problema es generalización." },
+    { id: "c", label: "El 99% de train garantiza buen modelo; sólo recalcular la métrica", correct: false, feedback: "Falso: accuracy de train alta no implica buen rendimiento en datos nuevos." },
+    { id: "d", label: "Falta más entrenamiento con los mismos datos para mejorar test", correct: false, feedback: "Falso: más épocas empeoran la memorización del ruido." },
   ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l01-overfit-underfit"
-  moduleSlug="machine-learning"
-  lessonSlug="lesson01_ml_fundamentals"
-  prompt="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
-  answer="Es un caso claro de sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Tres cosas que probaría: (1) simplificar el modelo (reducir complejidad), (2) agregar más datos de entrenamiento si es posible, (3) aplicar regularización para penalizar la complejidad excesiva."
-/>
+</RevealSequence>
 
 </Section>
 
 <Section number={8} title="La compensación sesgo-varianza" eyebrow="MATEMÁTICA">
 
-El error esperado de un modelo se puede descomponer en tres partes:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "El error esperado se descompone en tres fuentes.",
+    "Sesgo alto genera subajuste; varianza alta genera sobreajuste.",
+    "El error irreducible es el ruido del problema.",
+  ]}
+/>
 
 $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 
@@ -160,11 +248,24 @@ $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 **La compensación:** A medida que aumentas la complejidad del modelo, el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo — existe el modelo adecuado para tu problema.
 </ConceptCard>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={9} title="Visualiza el sesgo y la varianza" eyebrow="INTERACTIVA">
 
-Veamos la compensación sesgo-varianza en acción con un ejemplo que puedes ejecutar:
+<RevealSequence mode="appear">
+
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Verás la compensación sesgo-varianza en acción.",
+    "Grado 1 subajusta, grado 4 ajusta bien, grado 15 sobreajusta.",
+    "Ejecuta el código en tu notebook y compara los tres paneles.",
+  ]}
+/>
 
 ```python
 import numpy as np
@@ -219,9 +320,17 @@ Ejecuta este código en tu notebook. Vas a ver tres paneles:
 - **Grado 15 (sobreajuste):** La curva zigzaguea para tocar cada punto de entrenamiento. En datos nuevos sería un desastre.
 </CalloutInfo>
 
+<Overfitting caption="Cambiá el grado del polinomio y mirá el error en train vs test: el sobreajuste se ve en la brecha." />
+
+<Overfitting caption="Cambiá el grado del polinomio y mirá el error en train vs test: el sobreajuste se ve en la brecha." />
+
+</RevealSequence>
+
 </Section>
 
 <Section number={10} title="Tu primer pipeline de ML" eyebrow="CÓDIGO">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 El pipeline mínimo de ML tiene tres pasos: dividir los datos, entrenar el modelo, y evaluar con datos que el modelo nunca vio. Esto se repite en absolutamente todos los algoritmos del curso.
@@ -262,43 +371,84 @@ print(f"Test MSE: {mean_squared_error(y_test, y_pred):.1f}")
 Si el R² de entrenamiento es mucho mayor que el de prueba, tu modelo está sobreajustando. Si ambos son bajos, está subajustando. El gap entre train y test es tu primer indicador de salud del modelo.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={11} title="ML en biotecnología: expresión génica" eyebrow="APLICACIÓN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es el puente entre el laboratorio húmedo y la medicina personalizada.
 </ConceptCard>
 
-Imagina que tienes datos de expresión génica de 500 pacientes con cáncer y quieres predecir qué pacientes responderán a un fármaco específico:
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Imagina datos de expresión génica de pacientes con cáncer.",
+    "Quieres predecir qué pacientes responderán a un fármaco.",
+    "El modelo aprende qué combinaciones de genes predicen la respuesta.",
+    "Así evitas quimioterapia innecesaria en no respondedores.",
+  ]}
+/>
 
-- **Características (X):** Niveles de expresión de 1000 genes
-- **Etiqueta (y):** Respondedor (1) o no respondedor (0)
+<ConceptCard variant="key-idea">
+**Caso biotecnología: expresión génica**
+- Características (X): niveles de expresión de 1000 genes.
+- Etiqueta (y): respondedor (1) o no respondedor (0).
+</ConceptCard>
 
-El modelo aprende qué combinaciones de genes predicen la respuesta al tratamiento. Esto permite evitar quimioterapia innecesaria en pacientes que no se beneficiarían.
+</RevealSequence>
 
 </Section>
 
 <Section number={12} title="ML en SaaS: predicción de abandono" eyebrow="APLICACIÓN">
 
-Una empresa SaaS quiere predecir qué usuarios cancelarán su suscripción el próximo mes:
+<RevealSequence mode="appear">
 
-- **Características:** frecuencia de inicio de sesión, tickets de soporte abiertos, días desde último login, tipo de plan, cantidad de features usadas
-- **Etiqueta:** abandonó (1) o no (0)
+<DialogueBox
+  speaker="Dra. Coni"
+  variant="scientist"
+  typing={true}
+  lines={[
+    "Una empresa SaaS quiere predecir quiénes cancelarán el próximo mes.",
+    "Las features son comportamientos de uso del producto.",
+    "Intervenir antes es el valor real del modelo.",
+  ]}
+/>
 
-El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días Y abrieron >3 tickets de soporte = 85% probabilidad de abandono"*. Con esta información, el equipo de customer success interviene **antes** de que cancelen.
+<ConceptCard variant="key-idea">
+**Caso SaaS: predicción de abandono**
+- Características: frecuencia de inicio de sesión, tickets de soporte abiertos, días desde último login, tipo de plan, cantidad de features usadas.
+- Etiqueta: abandonó (1) o no (0).
+- El modelo aprende patrones como: "usuarios que no inician sesión por >30 días Y abrieron >3 tickets = 85% probabilidad de abandono".
+</ConceptCard>
 
-<ReflectionCheck
-  blockId="reflection-l01-saas-churn"
+<ChoiceQuestion
+  question="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
-  answer="Porque predecir antes permite actuar: puedes enviar un descuento, una sesión de onboarding personalizada, o contactar al usuario para resolver sus problemas. Si solo registras quién abandonó, ya es tarde — ese cliente se fue. La predicción temprana convierte un problema reactivo en uno proactivo."
+  blockId="reflection-l01-saas-churn"
+  allowContinueOnIncorrect
+  explanation="Predecir antes permite actuar (descuento, onboarding personalizado, contacto), convirtiendo un problema reactivo en proactivo. Si sólo registras quién abandonó, ya es tarde, ese cliente se fue."
+  options={[
+    { id: "a", label: "Porque permite actuar a tiempo y convertirlo en proactivo", correct: true, feedback: "¡Correcto! La predicción temprana habilita intervención real." },
+    { id: "b", label: "Porque registrar quién abandonó alcanza para el reporting", correct: false, feedback: "Falso: eso ya no permite recuperar al cliente." },
+    { id: "c", label: "Porque esperar al abandono evita contactos innecesarios", correct: false, feedback: "Falso: perder al cliente cuesta más que contactarlo antes." },
+    { id: "d", label: "La predicción sólo sirve para reportes históricos", correct: false, feedback: "Falso: su valor está en habilitar acciones preventivas." },
+  ]}
 />
+
+</RevealSequence>
 
 </Section>
 
 <Section number={13} title="Los 4 errores que todo principiante comete" eyebrow="PELIGROS">
+
+<RevealSequence mode="appear">
 
 <CalloutInfo>
 1. **Entrenar con todos los datos y después dividir.** Haces trampa sin darte cuenta: el modelo ya "vio" los datos de prueba durante el preprocesamiento. Siempre divide primero.
@@ -310,9 +460,13 @@ El modelo aprende patrones como: *"usuarios que no inician sesión por >30 días
 4. **Confundir correlación con causalidad.** Que las ventas de helado y los ahogamientos aumenten juntos no significa que el helado cause ahogamientos. El ML encuentra patrones, no causas. La interpretación causal requiere expertise de dominio.
 </CalloutInfo>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={14} title="Buenas prácticas desde el día 1" eyebrow="BUENAS PRÁCTICAS">
+
+<RevealSequence mode="appear">
 
 <CalloutCheck>
 Siempre divide los datos **antes** de cualquier preprocesamiento. Es la regla #1.
@@ -326,50 +480,110 @@ Empieza con modelos simples antes de probar arquitecturas complejas. Si una regr
 Grafica curvas de aprendizaje para diagnosticar si necesitas más datos o un modelo más complejo. Los números sin visualización mienten.
 </CalloutCheck>
 
+</RevealSequence>
+
 </Section>
 
 <Section number={15} title="Resumen y glosario" eyebrow="RESUMEN">
+
+<RevealSequence mode="appear">
 
 <ConceptCard variant="key-idea">
 El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. Las características (X) son entradas; las etiquetas (y) son salidas. El objetivo no es memorizar — es **generalizar** a datos nunca vistos. El sobreajuste y el subajuste son los dos enemigos, y la compensación sesgo-varianza explica por qué no existe un modelo perfecto universal.
 </ConceptCard>
 
-<InteractiveTable
-  columns={[
-    { key: "term", label: "Término" },
-    { key: "def", label: "Definición" },
-  ]}
-  rows={[
-    { term: "Característica", def: "Variable de entrada usada para la predicción" },
-    { term: "Etiqueta", def: "Variable de salida a predecir" },
-    { term: "Entrenamiento", def: "Proceso de ajustar un modelo a los datos" },
-    { term: "Predicción", def: "Salida del modelo con datos nuevos" },
-    { term: "Generalización", def: "Rendimiento en datos no vistos" },
-    { term: "Sobreajuste", def: "El modelo memoriza ruido del entrenamiento" },
-    { term: "Subajuste", def: "Modelo demasiado simple para el patrón" },
-    { term: "Sesgo", def: "Error por suposiciones simplificadoras" },
-    { term: "Varianza", def: "Error por sensibilidad a fluctuaciones en los datos" },
+{/* candidate-player: interactive-table-glosario-fundamentos */}
+<ConceptCard variant="key-idea">
+**Glosario**
+- Característica: variable de entrada usada para la predicción.
+- Etiqueta: variable de salida a predecir.
+- Entrenamiento: proceso de ajustar un modelo a los datos.
+- Predicción: salida del modelo con datos nuevos.
+- Generalización: rendimiento en datos no vistos.
+- Sobreajuste: el modelo memoriza ruido del entrenamiento.
+- Subajuste: modelo demasiado simple para el patrón.
+- Sesgo: error por suposiciones simplificadoras.
+- Varianza: error por sensibilidad a fluctuaciones en los datos.
+</ConceptCard>
+
+<FeatureButtonList
+  features={[
+    { id: "aprendizaje-supervisado", label: "Aprendizaje supervisado", detail: "Aprende de datos etiquetados para predecir etiquetas nuevas." },
+    { id: "aprendizaje-no-supervisado", label: "Aprendizaje no supervisado", detail: "Descubre estructura oculta sin etiquetas." },
+    { id: "caracteristica", label: "Característica (X)", detail: "Variable de entrada que el modelo usa para predecir." },
+    { id: "etiqueta", label: "Etiqueta (y)", detail: "Variable de salida que queremos predecir." },
+    { id: "generalizacion", label: "Generalización", detail: "Desempeño del modelo en datos que nunca vio." },
+    { id: "sobreajuste-subajuste", label: "Sobreajuste y subajuste", detail: "Memorizar ruido vs modelo demasiado simple." },
   ]}
 />
+
+<FeatureButtonList
+  features={[
+    { id: "gloss-caracteristica", label: "Característica", detail: "Variable de entrada usada para la predicción." },
+    { id: "gloss-etiqueta", label: "Etiqueta", detail: "Variable de salida a predecir." },
+    { id: "gloss-entrenamiento", label: "Entrenamiento", detail: "Proceso de ajustar un modelo a los datos." },
+    { id: "gloss-prediccion", label: "Predicción", detail: "Salida del modelo con datos nuevos." },
+    { id: "gloss-generalizacion", label: "Generalización", detail: "Rendimiento en datos no vistos." },
+    { id: "gloss-sobreajuste", label: "Sobreajuste", detail: "El modelo memoriza ruido del entrenamiento." },
+    { id: "gloss-subajuste", label: "Subajuste", detail: "Modelo demasiado simple para el patrón." },
+  ]}
+/>
+
+<ChoiceQuestion
+  question="A medida que aumentas la complejidad de un modelo, ¿qué ocurre con el sesgo y la varianza?"
+  moduleSlug="machine-learning"
+  lessonSlug="lesson01_ml_fundamentals"
+  blockId="choice-ml-l01-resumen-1"
+  allowContinueOnIncorrect
+  explanation="La compensación sesgo-varianza dice que al aumentar la complejidad el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio para el problema."
+  options={[
+    { id: "a", label: "El sesgo baja y la varianza sube", correct: true, feedback: "¡Correcto! Esa es la compensación: menos sesgo, más varianza." },
+    { id: "b", label: "El sesgo sube y la varianza baja", correct: false, feedback: "Falso: es el efecto opuesto al aumentar la complejidad." },
+    { id: "c", label: "Ambos bajan a la vez", correct: false, feedback: "Falso: no se pueden reducir los dos simultáneamente aumentando complejidad." },
+    { id: "d", label: "Ambos suben a la vez", correct: false, feedback: "Falso: la complejidad reduce el sesgo a costa de aumentar la varianza." },
+  ]}
+/>
+
+<MascotMessage mood="celebrating">
+Dominaste los fundamentos del aprendizaje automático. Ahora cualquier modelo es, para ti, un problema de generalización.
+</MascotMessage>
+
+</RevealSequence>
 
 </Section>
 
 <Section number={16} title="Ejercicios y desafío" eyebrow="EJERCICIOS">
 
-<ReflectionCheck
-  blockId="reflection-l01-trad-vs-ml"
+<RevealSequence mode="appear">
+
+<ChoiceQuestion
+  question="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
-  answer="En programación tradicional escribo reglas explícitas (if temperatura > 38: alerta_fiebre()). En ML le doy ejemplos etiquetados al algoritmo y él descubre las reglas. Usaría programación tradicional para problemas con reglas claras y estables (cálculo de impuestos, validación de formularios). Usaría ML cuando las reglas son difíciles de expresar (reconocimiento de imágenes, predicción de abandono de clientes, diagnóstico médico)."
+  blockId="reflection-l01-trad-vs-ml"
+  allowContinueOnIncorrect
+  explanation="Programación tradicional = escribo reglas explícitas; ML = le doy ejemplos etiquetados y aprende las reglas. Tradicional para reglas claras y estables; ML para reglas difíciles de expresar (imágenes, abandono, diagnóstico)."
+  options={[
+    { id: "a", label: "Trad = reglas explícitas para problemas claros; ML aprende reglas de ejemplos para problemas difíciles", correct: true, feedback: "¡Correcto! Esa es la diferencia clave entre enfoques." },
+    { id: "b", label: "ML reemplaza por completo la programación tradicional", correct: false, feedback: "Falso: son complementarias, no sustitutivas." },
+    { id: "c", label: "La programación tradicional es siempre menos precisa", correct: false, feedback: "Falso: con reglas claras es exacta y predecible." },
+    { id: "d", label: "Todo problema se resuelve mejor con ML por su automatización", correct: false, feedback: "Falso: ML brilla donde las reglas son difíciles de expresar." },
+  ]}
 />
 
-<ReflectionCheck
-  blockId="reflection-l01-overfit-diagnosis"
+<ChoiceQuestion
+  question="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
   moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  prompt="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
-  answer="Es sobreajuste: el modelo memorizó los datos de entrenamiento pero no generaliza. Soluciones: (1) Simplificar el modelo — reducir complejidad, menos features, regularización. (2) Conseguir más datos de entrenamiento si es posible. (3) Usar validación cruzada para detectar el sobreajuste más temprano y parar el entrenamiento antes (early stopping)."
+  blockId="reflection-l01-overfit-diagnosis"
+  allowContinueOnIncorrect
+  explanation="Es sobreajuste (train 99%, test 65%): memorizó entrenamiento y no generaliza. Soluciones: (1) simplificar el modelo (menos complejidad/features, regularización), (2) más datos de entrenamiento, (3) validación cruzada y early stopping."
+  options={[
+    { id: "a", label: "Sobreajuste: simplificar, más datos y validación cruzada/early stopping", correct: true, feedback: "¡Correcto! El gap 99/65 denota sobreajuste, no subajuste." },
+    { id: "b", label: "Subajuste: conviene aumentar complejidad y features", correct: false, feedback: "Falso: train 99% no es síntoma de modelo demasiado simple." },
+    { id: "c", label: "El 99% de train garantiza generalización; revisar sólo el dataset", correct: false, feedback: "Falso: la métrica que importa es la de prueba, no la de train." },
+    { id: "d", label: "Entrenar más épocas con los mismos datos resuelve el gap", correct: false, feedback: "Falso: más épocas profundizan la memorización del ruido." },
+  ]}
 />
 
 <ConceptCard variant="key-idea">
@@ -405,5 +619,7 @@ print(diagnose_fit(model, X_train, X_test, y_train, y_test))
 `}
   height="350px"
 />
+
+</RevealSequence>
 
 </Section>
