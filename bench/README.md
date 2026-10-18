@@ -49,6 +49,8 @@ BENCH_AUTH_TOKEN=xxx npm run bench:run
 
 ## Escenarios
 
+### `invitro.js` — sin auth (smoke, 4 personas)
+
 | Persona | Peso | Flujo |
 |---------|------|-------|
 | ansioso | 30% | `GET /` + `GET /learn/:module/:lesson` + abandona |
@@ -58,11 +60,32 @@ BENCH_AUTH_TOKEN=xxx npm run bench:run
 
 Todos los `POST` sin auth deben dar `401` (correcto, vía Clerk `auth()`), con auth `200` o `429` si pega rate-limit.
 
+### `students.js` — estudiantes autenticados hasta quiebre (4 journeys)
+
+| Journey | Peso | Flujo real (con `BENCH_SECRET`) |
+|---------|------|----------------------------------|
+| explorador | 30% | `GET /` + `GET /dashboard` + 3 lecciones + `bookmark` |
+| completador | 30% | `lesson` + `POST /api/lab-progress` (completed) + `POST /api/progress` + streak |
+| procrastinador | 20% | `lesson` + abandona ( Sesión corta) |
+| intensivo | 20% | 2 lecciones + 2 labs + 2 progress + bookmark (7 writes) — presiona DB |
+
+Cada VU usa `bench_user_001..100` cíclico (rate-limit 100/15m por usuario). Con `BENCH_SECRET` los writes llegan a Supabase; sin él, testean 401.
+
+**Rampa hasta caída:** `10->50->100->200->500 VUs` en 5.5m, quiebre si `p95>2000ms` o `error>5%` o `429>10%`.
+
+```bash
+# Seed 100 usuarios bench (una vez, requiere SUPABASE_SERVICE_ROLE_KEY)
+npm run bench:seed
+
+# Estudiantes hasta quiebre (requiere BENCH_SECRET y app con BIND_HOST=0.0.0.0)
+BENCH_SECRET=xxx npm run bench:students        # full 10->500
+BENCH_SECRET=xxx APP_URL=https://preview... npm run bench:students # contra preview
+```
+
 ## Thresholds (k6)
 
-- `http_req_failed <1%`
-- `p95 <800ms`, `p99 <1500ms`
-- `progress p95 <600ms`
+- `invitro.js`: `http_req_failed <1%`, `p95 <800ms`, `p99 <1500ms`
+- `students.js`: `p95 <2000ms`, `students_errors <5%`, `http_req_failed <10%` — quiebre = infra o DB
 
 Si fallan, `k6` y `bench:report` marcan `FAIL`.
 
@@ -89,15 +112,35 @@ No es necesario para el bench — el generador local ya cubre el caso.
 
 No corre k6 en CI por defecto (necesita app viva). Para gate manual: `npm run bench:check` valida sintaxis.
 
+## Autenticación para bench (BENCH_SECRET)
+
+`src/lib/bench-auth.ts` permite simular estudiantes reales sin Clerk:
+
+1. Seteá `BENCH_SECRET` largo en `.env.local` y en Vercel env (preview/prod si querés testear con writes).
+2. k6 envía `x-bench-secret: <secret>` + `x-bench-user-id: bench_user_042`.
+3. Solo activo si `BENCH_SECRET` está seteado — sin él, todo sigue por Clerk normal. Nunca commitees el secret.
+
+```bash
+# .env.local
+BENCH_SECRET=6d089ba6112a642af3bdd4b82a79dff8
+# Vercel: Project Settings -> Environment Variables -> BENCH_SECRET (Preview)
+```
+
 ## Estructura
 
 ```
 bench/
-  k6.config.json            # stages y thresholds
+  k6.config.json            # stages invitro
+  k6-students.config.json   # stages students 10->500
   personas/generator.mjs    # 1 LLM call offline -> fixtures.json
   personas/fixtures.json    # 50 personas versionadas
-  scenarios/invitro.js      # k6 VU script
-  reports/summary.json      # output k6
+  scenarios/invitro.js      # 4 personas sin auth
+  scenarios/students.js     # 4 journeys con auth + writes
+  scripts/seed-bench-users.mjs # crea 100 bench_user_* en Supabase
+  reports/summary.json      # output invitro
+  reports/students-summary.json # output students
   reports/summary.md        # reporte humano
-scripts/bench.mjs           # wrapper k6 + auto-reporte
+scripts/bench.mjs           # wrapper invitro
+scripts/bench-students.mjs  # wrapper students
+src/lib/bench-auth.ts       # bypass seguro
 ```
