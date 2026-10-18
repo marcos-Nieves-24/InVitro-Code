@@ -28,27 +28,31 @@ function main() {
   const data = load();
   const m = data.metrics || {};
 
-  const vusMax = m.vus_max?.values?.max ?? m.vus?.values?.max ?? "—";
-  const reqs = m.http_reqs?.values?.count ?? 0;
-  const failedRate = m.http_req_failed?.values?.rate ?? 0;
-  const rps = m.http_reqs?.values?.rate ?? 0;
-  const p50 = m.http_req_duration?.values?.["p(50)"];
-  const p95 = m.http_req_duration?.values?.["p(95)"];
-  const p99 = m.http_req_duration?.values?.["p(99)"];
-  const avg = m.http_req_duration?.values?.avg;
-  const count429 = m.rate_limited_429?.values?.count ?? 0;
-  const checksFails = m.checks?.values?.fails ?? 0;
+  const gv = (obj) => obj?.values ?? obj ?? {};
+  const vusMax = gv(m.vus_max)?.max ?? gv(m.vus)?.max ?? "—";
+  const reqs = gv(m.http_reqs)?.count ?? 0;
+  const failedRate = gv(m.http_req_failed)?.rate ?? 0;
+  const rps = gv(m.http_reqs)?.rate ?? 0;
+  const p50 = gv(m.http_req_duration)?.["p(50)"];
+  const p95 = gv(m.http_req_duration)?.["p(95)"];
+  const p99 = gv(m.http_req_duration)?.["p(99)"];
+  const avg = gv(m.http_req_duration)?.avg;
+  const count429 = gv(m.rate_limited_429)?.count ?? 0;
+  const checksFails = gv(m.checks)?.fails ?? 0;
+  const checksPasses = gv(m.checks)?.passes ?? 0;
 
   // Per-endpoint breakdown if tagged
   const endpoints = {};
   for (const [k, v] of Object.entries(m)) {
     if (k.startsWith("http_req_duration{endpoint:")) {
       const ep = k.match(/endpoint:([^}]+)/)?.[1] || k;
-      endpoints[ep] = v.values;
+      endpoints[ep] = gv(v);
     }
   }
 
-  const passed = failedRate < 0.01 && (p95 === undefined || p95 < 800);
+  // Note: http_req_failed counts 401s as failed by k6 default — use checks for real correctness
+  const realFailed = checksFails > 0;
+  const passed = !realFailed && (p95 === undefined || p95 < 800);
 
   const md = `# Bench Report — InVitro-Code
 
@@ -87,13 +91,16 @@ ${Object.entries(endpoints).length
 
 ${(() => {
   const findings = [];
-  if (failedRate >= 0.01) findings.push("- ❌ **Tasa de fallos alta**: revisá logs de Vercel/Supabase, puede ser RLS o timeout de Clerk.");
-  if (count429 > 0) findings.push(`- ⚠️ **Rate limiting activo (${count429} x 429)**: \`checkRateLimit\` es in-memory y resetea al redeploy. En multi-instancia (Vercel) no es consistente — migrar a Upstash Redis si escala (ver \`src/lib/rate-limit.ts\` comentario F10).`);
-  if (p95 !== undefined && p95 >= 800) findings.push("- ⚠️ **p95 lento**: revisá render MDX (\`lesson.md\` split por \`<Section>\`), imágenes sin optimizar, o queries Supabase sin índice en \`progress(user_id, module_slug)\`.");
-  if (checksFails > 0) findings.push("- ❌ **Checks fallidos**: algún endpoint devolvió 500 en lugar de 400/401 esperado — el troll encontró un bug de validación.");
-  if (endpoints.progress && endpoints.progress["p(95)"] > 600) findings.push("- ⚠️ **POST /api/progress p95 >600 ms**: puede ser \`advanceStreak\` + \`evaluateAchievements\` en serie. Considerá desacoplar achievements.");
+  // 401s are expected for unauth — only checks matter for correctness
+  if (checksFails > 0) findings.push(`- ❌ **Checks fallidos (${checksFails})**: algún endpoint devolvió 500 en lugar de 400/401 esperado — el troll encontró un bug de validación.`);
+  else findings.push(`- ✅ **Checks: ${checksPasses} pasaron, 0 fallaron** — todos los endpoints respondieron con status esperado (200/307/401/400).`);
+  if (count429 > 0) findings.push(`- ⚠️ **Rate limiting activo (${count429} x 429)**: \`checkRateLimit\` es in-memory y resetea al redeploy. En multi-instancia (Vercel) no es consistente — migrar a Upstash Redis si escala.`);
+  if (p95 !== undefined && p95 >= 800) findings.push("- ⚠️ **p95 lento**: revisá render MDX, imágenes, o queries Supabase sin índice.");
+  else if (p95 !== undefined) findings.push(`- ✅ **p95 ${Math.round(p95)}ms** dentro de umbral <800ms — latencia OK.`);
+  if (failedRate >= 0.3) findings.push(`- ℹ️ **http_req_failed ${(failedRate*100).toFixed(1)}%** es esperado: son 401s de flujo sin auth (k6 los cuenta como failed aunque sean correctos). Mirá checks.`);
+  if (endpoints.progress && endpoints.progress["p(95)"] > 600) findings.push("- ⚠️ **POST /api/progress p95 >600 ms**: puede ser \`advanceStreak\` + \`evaluateAchievements\` en serie.");
   if (findings.length === 0) findings.push("- ✅ Sin hallazgos críticos. La plataforma aguanta la rampa configurada.");
-  findings.push("- ℹ️ **Siguiente paso:** subí VUs a 1000 para encontrar el punto de quiebre, o corré contra preview de Vercel para medir cold starts.");
+  findings.push("- ℹ️ **Siguiente paso:** probá 50-100 VUs o contra preview de Vercel para medir cold starts. Para test con auth: \`BENCH_AUTH_TOKEN=xxx k6 run ...\`");
   return findings.join("\n");
 })()}
 
