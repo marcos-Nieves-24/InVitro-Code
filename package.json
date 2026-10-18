@@ -25,7 +25,12 @@
     "anymotion:patch": "bash scripts/anymotion-patch.sh",
     "design:audit": "npx @design-harness/cli@latest audit --url http://localhost:3000 --out runs/demo",
     "design:check": "npx @design-harness/cli@latest guide check --guide ./design-guide.yaml --target . --max-tokens 2000",
-    "design:compile": "npx @design-harness/cli@latest guide compile --guide ./design-guide.yaml --target ."
+    "design:compile": "npx @design-harness/cli@latest guide compile --guide ./design-guide.yaml --target .",
+    "bench:personas": "node bench/personas/generator.mjs --fallback",
+    "bench:personas:llm": "node bench/personas/generator.mjs",
+    "bench:run": "node scripts/bench.mjs",
+    "bench:check": "node scripts/bench.mjs --check",
+    "bench:report": "node bench/report.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "7.5.20",
