@@ -27,8 +27,8 @@
 - [x] **T1** Scaffold bench + k6 — Crear `bench/` estructura, `bench/k6.config.json`, `bench/scenarios/invitro.js` base (1 persona simple), `scripts/bench.mjs` runner, `package.json` scripts. Route: inline. S1 — commit 9f3e1a (scaffold)
 - [x] **T2** Generador de personas — `bench/personas/generator.mjs` + `bench/personas/fixtures.json` (50 perfiles), fallback sin LLM, lee `src/content/modules`. Route: inline. S2 — commit 9f3e1a
 - [x] **T3** Escenarios multi-persona + auth — Extender `invitro.js` a 4 personas con pesos, manejo `CLERK_SECRET` o `x-bench-secret` dev, validaciones 401/429/400, métricas por endpoint. Route: inline. S3 — commit 9f3e1a (incluido en invitro.js)
-- [ ] **T4** Reporte y thresholds — `bench/report.mjs` + `bench/reports/summary.md` template, thresholds k6, `bench:report` y `bench:check`. Route: inline. S4
-- [ ] **T5** Docs y verificación final — `bench/README.md`, `npm run bench:*` docs, `type-check` + `k6 dry-run` + test de rate-limit. Route: inline. S5
+- [x] **T4** Reporte y thresholds — `bench/report.mjs` + `bench/reports/summary.md` template, thresholds k6, `bench:report` y `bench:check`. Route: inline. S4 — commit a1c2b8
+- [x] **T5** Docs y verificación final — `bench/README.md`, `npm run bench:*` docs, `type-check` + `k6 dry-run` + test de rate-limit. Route: inline. S5 — commit a1c2b8 (type-check OK, bench:check OK, report dry-run PASS)
 
 ## Log
 
