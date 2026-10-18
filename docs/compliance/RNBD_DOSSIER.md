@@ -3,7 +3,7 @@
 > **Versión:** 2026-10-16-v1 · **Fecha:** 2026-10-16
 > **Portal:** `https://rnbd.sic.gov.co` · **Norma:** Decreto 1074 de 2015, Título 3, Capítulo 26 (RNBD) · Ley 1581 de 2012
 > **Responsable:** Persona natural Colombia · NIT 700329113-7 · Corregimiento Altavista, Medellín · `invitro.code@gmail.com`
-> **Estado:** ⏳ Pendiente de inscripción — este dossier es el **borrador listo para copiar al portal SIC**. Cada campo mapea 1:1 a los formularios del RNBD.
+> **Estado:** ✅ 8/8 radicadas el 18/10/2026 — `En proceso de Finalización` en el portal. Pendiente N° de radicado por correo (48h).
 > **Fuentes:** `legal/data-inventory.md` DEFINIDA v1 · `legal/retention-policy.md §1-§2` · `legal/providers-audit.md` P-01..P-11 · `legal/dpa-register.md` · `supabase-migration.sql:1-550`
 
 ---
@@ -171,6 +171,7 @@
 | Fecha | Acción | Hash / Radicado | Responsable |
 |---|---|---|---|
 | 2026-10-16 | Dossier v1 creado (plantilla) | — | Auditoría |
+| 2026-10-18 | 8/8 finalizadas en portal (Responsable Año 2025 + Valor 1.000.000; el valor 0 lo borra la máscara del portal) | pendiente N° radicado (llega por correo en 48h) | Auditoría + titular |
 | [POR CONFIRMAR] | Clerk DPA aceptado | `[hash]` | Titular |
 | [POR CONFIRMAR] | Supabase DPA aceptado | `[hash]` | Titular |
 | [POR CONFIRMAR] | Vercel DPA aceptado | `[hash]` | Titular |
