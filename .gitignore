@@ -71,6 +71,15 @@ openspec/changes/r-labs-multi-scenario/
 openspec/specs/middleware-file-convention/
 openspec/specs/platform-architecture-docs/
 coverage/
+# bench reports (generated, keep .gitkeep)
+bench/reports/*
+!bench/reports/.gitkeep
+# local runs & visual audits
+runs/
+# logs
+*.log
+# codegraph viewer (local, 2-3 MB)
 graph.json
 graph.html
 graph-standalone.html
+bench/scenarios/students-granular.js
