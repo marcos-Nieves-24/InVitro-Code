@@ -43,7 +43,7 @@ InVitro-Code (B2C gratuito +18, `README.md:3`) completó **10/10 auditorías F1-
 ## Recomendaciones (priorizadas)
 
 1. **Firmar DPAs y guardar receipts** — aceptar DPA Clerk/Supabase/Vercel (`dpa-register.md: §3` pasos 1-5, `sha256sum legal/receipts/*.pdf` en tabla).
-2. **RNBD** — inscribir 7 bases (`profiles/progress/lab_progress/streaks/reflection_completions/user_achievements/avatars` + `consent_logs`) con `retention-policy.md` + finalidades F-01..F-08 + Encargados + medidas (`security-audit.md`) en `https://rnbd.sic.gov.co` (Decreto 1074 Título 3).
+2. **RNBD** — inscribir 7 bases (`profiles/progress/lab_progress/streaks/reflection_completions/user_achievements/avatars` + `consent_logs`) con `retention-policy.md` + finalidades F-01..F-08 + Encargados + medidas (`security-audit.md`) en `https://rnbd.sic.gov.co/sisi/login` (Decreto 1074 Título 3).
 3. **Accesibilidad P1** — fix contraste, label `reflection-check.tsx:67`, heading `page.tsx:32` (1 día).
 4. **Storage privado** — migrar `avatars` a `createSignedUrl(3600)` + RLS `auth.jwt()->>sub` (siguiente sprint).
 5. **Cron purga 60d** — implementar `pg_cron` o `vercel cron` para `codeSnapshot` 60d y 24m inactividad (hoy solo norma).

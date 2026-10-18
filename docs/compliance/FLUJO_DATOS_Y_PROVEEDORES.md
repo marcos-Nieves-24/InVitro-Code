@@ -121,7 +121,7 @@
 | Consentimiento granular separado para `gender:x` (sensible art. 6) | ✅ | `AuthForm.tsx:57` `acceptGenderX` + `domain/consent.ts:15` `GENDER_X` + webhook gate `route.ts:60` |
 | Contrato con garantías (DPA) | ⚠️ Plantilla | `legal/dpa-register.md` v1 con URLs y pasos; pendiente firma y `sha256sum legal/receipts/*.pdf` |
 | Información al Titular (país destino) | ✅ | `POLITICA_PRIVACIDAD.md §5` + `/privacidad` + `/aviso` |
-| Registro RNBD | ⚠️ Pendiente | `retention-policy.md §2` 7 bases por inscribir en `https://rnbd.sic.gov.co` (Decreto 1074 Título 3) |
+| Registro RNBD | ⚠️ Pendiente | `retention-policy.md §2` 7 bases por inscribir en `https://rnbd.sic.gov.co/sisi/login` (Decreto 1074 Título 3) |
 
 ---
 

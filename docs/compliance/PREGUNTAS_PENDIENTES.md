@@ -47,7 +47,7 @@
 
 | # | Pregunta | Por qué | Afecta | Si no se responde |
 |---|---|---|---|---|
-| I-01 | **¿Hay dominio propio (ej. `invitrocode.com`) o se opera en `*.vercel.app`?** `NEXT_PUBLIC_APP_URL=http://localhost:3000` en `.env.local.example:11` es placeholder local; no hay `vercel.json` con `domains`. | Determina DNS (P-11) y si hay que declarar dominio en `aviso-legal.md §4` y en RNBD. | `aviso-legal.md §4`, `FLUJO_DATOS_Y_PROVEEDORES.md §3` | Se declara "DNS gestionado implícitamente por Vercel" (criterio v1). |
+| I-01 | **¿Hay dominio propio (tel. confirmado 3122555086 — titular con 5 usuarios a 2026-10-16) (ej. `invitrocode.com`) o se opera en `*.vercel.app`?** `NEXT_PUBLIC_APP_URL=http://localhost:3000` en `.env.local.example:11` es placeholder local; no hay `vercel.json` con `domains`. | Determina DNS (P-11) y si hay que declarar dominio en `aviso-legal.md §4` y en RNBD. | `aviso-legal.md §4`, `FLUJO_DATOS_Y_PROVEEDORES.md §3` | Se declara "DNS gestionado implícitamente por Vercel" (criterio v1). |
 | I-02 | **¿El plan de Supabase es Free (PITR 7 d) o Pro (PITR 30 d)?** | Determina RPO/RTO para `security-audit.md §Backups` y `retention-policy.md §1`. | `AUDITORIA_TECNICA.md §3`, `retention-policy.md §1` | Se documenta "7 d free / 30 d Pro" (ambos, ver `AUDITORIA_TECNICA.md §3`). |
 | I-03 | **¿Se usa `docker-compose.prod.yml` / `monitoring.yml` en producción o solo Vercel?** | Si hay self-host, `CRON_SECRET` y `GF_SECURITY_ADMIN_PASSWORD` deben estar en `.env` del host, no solo en Vercel. | `AUDITORIA_TECNICA.md §3`, `security-audit.md C-02` | Se declara Vercel como deploy primario; Docker es opcional self-host (criterio v1). |
 

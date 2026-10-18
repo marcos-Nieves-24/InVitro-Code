@@ -79,7 +79,7 @@ Fuente primaria: `legal/retention-policy.md §1` · `legal/data-inventory.md §4
 | `localStorage`/`sessionStorage` | **Hasta limpieza manual del navegador** | — | Solo dispositivo |
 | Logs infra (Vercel/Supabase/Clerk) | **Según Encargado** (Vercel 30 d–1 año; Supabase PITR 7/30 d; Clerk según DPA) | Temporalidad delegada | Según `providers-audit.md` |
 
-**Bases a registrar en RNBD** (Decreto 1074 Título 3, `https://rnbd.sic.gov.co`): 7 bases (`profiles`, `progress`, `lab_progress`, `streaks`, `reflection_completions`, `user_achievements`, `avatars` + `consent_logs`) con Encargados Clerk/Supabase/Vercel + DPA + medidas (ver `retention-policy.md §2` checklist).
+**Bases a registrar en RNBD** (Decreto 1074 Título 3, `https://rnbd.sic.gov.co/sisi/login`): 7 bases (`profiles`, `progress`, `lab_progress`, `streaks`, `reflection_completions`, `user_achievements`, `avatars` + `consent_logs`) con Encargados Clerk/Supabase/Vercel + DPA + medidas (ver `retention-policy.md §2` checklist).
 
 ---
 

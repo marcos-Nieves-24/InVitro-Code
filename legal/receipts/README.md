@@ -9,7 +9,7 @@
 | `clerk-dpa-YYYY-MM-DD-vN.pdf` | PDF del DPA de Clerk Inc. descargado de `https://clerk.com/legal/dpa` tras aceptar | Al aceptar DPA Clerk |
 | `supabase-dpa-YYYY-MM-DD-vN.pdf` | PDF del DPA de Supabase Inc. (`https://supabase.com/legal/dpa`) | Al aceptar DPA Supabase |
 | `vercel-dpa-YYYY-MM-DD-vN.pdf` | PDF del DPA de Vercel Inc. (`https://vercel.com/legal/dpa`) | Al aceptar DPA Vercel |
-| `rnbd-radicado-YYYY-MM-DD.pdf` | Constancia de inscripción RNBD descargada de `https://rnbd.sic.gov.co` | Al inscribir las 7 bases |
+| `rnbd-radicado-YYYY-MM-DD.pdf` | Constancia de inscripción RNBD descargada de `https://rnbd.sic.gov.co/sisi/login` | Al inscribir las 7 bases |
 
 ## Cómo verificar integridad
 

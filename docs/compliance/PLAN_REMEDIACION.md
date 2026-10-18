@@ -105,7 +105,7 @@
 | # | Acción | Responsable | Plazo | Evidencia de cierre |
 |---|---|---|---|---|
 | 5.1 | **Firmar DPAs** Clerk/Supabase/Vercel y conservar `legal/receipts/*.pdf` con `sha256sum` en `legal/dpa-register.md` | Titular | 1-2 días | `sha256sum legal/receipts/*.pdf` en tabla `dpa-register.md §3` |
-| 5.2 | **Inscribir 7 bases en RNBD** (`https://rnbd.sic.gov.co`) con `retention-policy.md §2` checklist | Titular + abogado | 1 día | Certificado RNBD + `retention-policy.md` con N° de radicado |
+| 5.2 | **Inscribir 7 bases en RNBD** (`https://rnbd.sic.gov.co/sisi/login`) con `retention-policy.md §2` checklist | Titular + abogado | 1 día | Certificado RNBD + `retention-policy.md` con N° de radicado |
 | 5.3 | **Monitorear jurisdicciones** UE/UK/Brasil/California — si entra tráfico, activar anexos GDPR/LGPD/CCPA (`MATRIZ_CUMPLIMIENTO_INTERNACIONAL.md §2`) | Titular | Continuo | Log de países de usuarios + `MATRIZ` versionada si aplica |
 | 5.4 | **Definir canal y SLA de reclamos** art. 14-15 (10/15 d) + log interno | Titular | 0.5 día | Procedimiento en `POLITICA_PRIVACIDAD.md §4` + bandeja `invitro.code@gmail.com` con SLA |
 

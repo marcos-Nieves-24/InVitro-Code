@@ -24,7 +24,7 @@ La retención de cada base respeta el principio de temporalidad: conservar solo 
 
 ## 2. RNBD — Bases a registrar
 
-Registrar ante la SIC cada base con finalidad, Encargados y medidas (Decreto 1074, Título 3). **Dossier listo:** `docs/compliance/RNBD_DOSSIER.md §2.1..§2.8` (copiar al portal `https://rnbd.sic.gov.co`):
+Registrar ante la SIC cada base con finalidad, Encargados y medidas (Decreto 1074, Título 3). **Dossier listo:** `docs/compliance/RNBD_DOSSIER.md §2.1..§2.8` (copiar al portal `https://rnbd.sic.gov.co/sisi/login`):
 
 - [ ] **Base `profiles`** — Finalidad: autenticación, perfil, preferencias y control de cuenta. Encargados: Clerk Inc. (EE. UU., IdP), Supabase/AWS (EE. UU., BD). Medidas: RLS `auth.jwt()->>sub`, TLS, `service_role` solo server. Retención: §1. Canal derechos: `invitro.code@gmail.com` (10/15 días hábiles).
 - [ ] **Base `progress`** — Finalidad: avance pedagógico y gamificación. Encargado: Supabase. Retención: vida cuenta.

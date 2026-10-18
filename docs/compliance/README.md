@@ -41,7 +41,7 @@ Verificación: `npm run type-check` ✅ · `npm run test` 223/223 ✅ · `npm ru
 
 ## Infra RNBD/DPAs (2026-10-16)
 
-- **Dossier:** `RNBD_DOSSIER.md` — 8 bases listas para `https://rnbd.sic.gov.co` (§2.1..§2.8 con Finalidad/Datos/Medidas/Encargados/Transferencia/Retención)
+- **Dossier:** `RNBD_DOSSIER.md` — 8 bases listas para `https://rnbd.sic.gov.co/sisi/login` (§2.1..§2.8 con Finalidad/Datos/Medidas/Encargados/Transferencia/Retención)
 - **DPAs:** `legal/dpa-register.md` v1 2026-10-16 + `legal/receipts/README.md` + `scripts/verify-receipts.mjs` (`npm run receipts:verify`)
 - **Flujo:** aceptar 3 DPAs → `sha256sum legal/receipts/*.pdf` → inscribir 8 bases → guardar `rnbd-radicado-*.pdf` → anotar radicado
 
@@ -51,6 +51,6 @@ Un nuevo proveedor, nueva cookie, nueva columna `supabase-migration.sql`, nuevo 
 
 ## Referencias rápidas
 
-- **RNBD:** `https://rnbd.sic.gov.co` — inscribir 7 bases (`retention-policy.md §2`)
+- **RNBD:** `https://rnbd.sic.gov.co/sisi/login` — inscribir 7 bases (`retention-policy.md §2`)
 - **DPAs:** `legal/dpa-register.md §3` — Clerk `https://clerk.com/legal/dpa` · Supabase `https://supabase.com/legal/dpa` · Vercel `https://vercel.com/legal/dpa`
 - **Contacto derechos:** `invitro.code@gmail.com` — 10 d consultas / 15 d reclamos (art. 14-15)

@@ -1,7 +1,7 @@
 # Dossier RNBD — InVitro-Code
 
 > **Versión:** 2026-10-16-v1 · **Fecha:** 2026-10-16
-> **Portal:** `https://rnbd.sic.gov.co` · **Norma:** Decreto 1074 de 2015, Título 3, Capítulo 26 (RNBD) · Ley 1581 de 2012
+> **Portal:** `https://rnbd.sic.gov.co/sisi/login` · **Norma:** Decreto 1074 de 2015, Título 3, Capítulo 26 (RNBD) · Ley 1581 de 2012
 > **Responsable:** Persona natural Colombia · NIT 700329113-7 · Corregimiento Altavista, Medellín · `invitro.code@gmail.com`
 > **Estado:** ⏳ Pendiente de inscripción — este dossier es el **borrador listo para copiar al portal SIC**. Cada campo mapea 1:1 a los formularios del RNBD.
 > **Fuentes:** `legal/data-inventory.md` DEFINIDA v1 · `legal/retention-policy.md §1-§2` · `legal/providers-audit.md` P-01..P-11 · `legal/dpa-register.md` · `supabase-migration.sql:1-550`
@@ -10,7 +10,7 @@
 
 ## Cómo usar este dossier
 
-1. Entrá a `https://rnbd.sic.gov.co` con tu usuario (si no tenés, registrate como Persona Natural).
+1. Entrá a `https://rnbd.sic.gov.co/sisi/login` con tu usuario (si no tenés, registrate como Persona Natural).
 2. Creá el Responsable con los datos de §1.
 3. Por cada base (§2.1..§2.8), creá una entrada en el RNBD copiando los campos tal cual (Finalidad, Datos, Medidas, Encargados, Transferencia, Retención).
 4. Al terminar, descargá la constancia PDF y guardala en `legal/receipts/rnbd-radicado-YYYY-MM-DD.pdf`.
@@ -29,7 +29,7 @@
 | **Nombre / Razón social** | [Titular — persona natural, ver `legal/aviso-legal.md §1`] |
 | **Domicilio** | Corregimiento Altavista, Medellín, Colombia |
 | **Correo de contacto (canal art. 14-15)** | `invitro.code@gmail.com` |
-| **Teléfono** | [POR CONFIRMAR — completar antes de inscribir] |
+| **Teléfono** | 3122555086 |
 | **Actividad económica** | Plataforma educativa gratuita — enseñanza de ciencia de datos aplicada a biotecnología (sin venta, sin suscripción) |
 | **Público** | Mayores de 18 años, LATAM, idioma español (`src/app/layout.tsx:39` `lang="es"`) |
 
@@ -37,7 +37,7 @@
 
 ## 2. Bases de datos a inscribir (8 entradas)
 
-> **Criterio:** 7 bases operativas + 1 base de evidencia de consentimiento. Cada base es una tabla/bucket con finalidad distinta (art. 4). `logs infra` (Vercel/Clerk/Supabase) son infra del Encargado, no base del Responsable — se informan como Encargado, no como base separada (ver §2.8).
+> **Criterio:** 7 bases operativas + 1 base de evidencia — 5 titulares a 2026-10-16 (tel. 3122555086) de consentimiento. Cada base es una tabla/bucket con finalidad distinta (art. 4). `logs infra` (Vercel/Clerk/Supabase) son infra del Encargado, no base del Responsable — se informan como Encargado, no como base separada (ver §2.8).
 
 ### 2.1 Base `profiles` — Perfil y cuenta
 
@@ -47,7 +47,7 @@
 | **Finalidad** | F-01 Registro y autenticación + F-02 Perfil y personalización + F-04 Preferencias y control de cuenta |
 | **Categorías de datos** | `id` (TEXT, `sub` Clerk), `email`, `username` (derivado `first_name`), `gender` (`f`/`m`/`x` — **dato sensible art. 6** cuando `x`), `avatar_url`, `bio`, `theme`, `notification_prefs` (JSONB), `daily_goal_xp`, `last_nudge_at`, `is_banned`, `role`, `consent_status`/`consent_version`/`pending_since`, `last_active_at`, `created_at` |
 | **Dato sensible** | **Sí** — `gender=x` (art. 6). Requiere autorización explícita reforzada (`AuthForm.tsx:57` `acceptGenderX` + gate `webhooks/clerk/route.ts:60`). |
-| **Cantidad de titulares** | [POR CONFIRMAR — ej. 0-1000 al inscribir] |
+| **Cantidad de titulares** | 5 (a 2026-10-16 — actualizar anualmente ene-mar) |
 | **Forma de recolección** | Formulario `AuthForm.tsx:48` + Clerk `signUp` + webhook `user.created/updated` (`src/app/api/webhooks/clerk/route.ts:27`) |
 | **Medidas de seguridad** | RLS `USING (auth.jwt()->>sub = id)` (`supabase-migration.sql:52-62`) + `service_role` solo servidor (`src/lib/supabase/admin.ts:11` guard `typeof window`) + TLS Vercel + `validateAvatar` para `avatar_url` |
 | **Encargados** | Clerk Inc. (EE. UU., IdP) + Supabase Inc./AWS (EE. UU., BD) + Vercel Inc. (EE. UU., tránsito) |
@@ -164,7 +164,7 @@
 
 - [ ] **Paso 1 — DPAs:** Aceptar los 3 DPAs en sus URLs, descargar PDFs a `legal/receipts/` con nombre `*-dpa-YYYY-MM-DD-vN.pdf`.
 - [ ] **Paso 2 — Hashes:** Correr `node scripts/verify-receipts.mjs` y `sha256sum legal/receipts/*.pdf` → copiar a `legal/dpa-register.md §1` columna `Receipt hash`.
-- [ ] **Paso 3 — RNBD:** Inscribir las 8 bases (§2.1..§2.8) en `https://rnbd.sic.gov.co` copiando cada tabla.
+- [ ] **Paso 3 — RNBD:** Inscribir las 8 bases (§2.1..§2.8) en `https://rnbd.sic.gov.co/sisi/login` copiando cada tabla.
 - [ ] **Paso 4 — Constancia:** Descargar constancia RNBD PDF → `legal/receipts/rnbd-radicado-YYYY-MM-DD.pdf` + `sha256sum` → registrar en este dossier.
 - [ ] **Paso 5 — Actualizar docs:** Anotar N° de radicado RNBD en `retention-policy.md §2` y en `docs/compliance/INVENTARIO_TRATAMIENTO_DATOS.md §4`.
 
@@ -183,7 +183,7 @@
 - Decreto 1074 de 2015, Título 3, Capítulo 26: `https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=76838`
 - Ley 1581 de 2012: `https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981`
 - Ley 527 de 1999: `https://www.secretariasenado.gov.co/senado/basedoc/ley_0527_1999.html`
-- RNBD portal: `https://rnbd.sic.gov.co`
+- RNBD portal: `https://rnbd.sic.gov.co/sisi/login`
 - SIC Guía RNBD: `https://www.sic.gov.co/manejo-de-datos-personales`
 - Este dossier complementa `legal/retention-policy.md`, `legal/data-inventory.md` y `legal/dpa-register.md`.
 
