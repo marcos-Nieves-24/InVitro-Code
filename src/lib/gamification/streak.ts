@@ -3,14 +3,10 @@ import {
   canAutoFreeze as domainCanAutoFreeze,
   applyAutoFreeze as domainApplyAutoFreeze,
   dateMinusDays,
+  utcDay,
 } from "@/domain/streak";
 
-/** UTC calendar day as YYYY-MM-DD. Streaks are day-granular, so UTC avoids DST drift. */
-export function utcDay(offsetDays = 0): string {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() + offsetDays);
-  return d.toISOString().slice(0, 10);
-}
+export { utcDay };
 
 export interface StreakRow {
   current_streak: number;

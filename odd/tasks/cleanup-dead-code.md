@@ -13,8 +13,8 @@ S4 — Verification: knip unused files drops from 46 to <20 (only bench/scripts/
 
 ## Tasks
 - [x] T1 — Verify 37 files are not dynamically imported and have 0 incoming imports outside deletion set — evidence: graph.json 7659 edges, knip 46, grep 0 hits for 27 high-confidence + 9 cluster validated as safe (only dead cluster importers)
-- [x] T2 — Delete 36 files and clean empty barrel dirs if needed — route: inline — Risk: none (deletions only, no logic change) — commit: staged 36 D
-- [ ] T3 — Fix utcDay: make lib/gamification/streak.ts re-export from domain — route: inline — Risk: none
+- [x] T2 — Delete 36 files and clean empty barrel dirs if needed — route: inline — Risk: none (deletions only, no logic change) — commit: 438536b
+- [x] T3 — Fix utcDay: make lib/gamification/streak.ts re-export from domain — route: inline — Risk: none — commit: pending
 - [ ] T4 — Verify: type-check, test, build, knip — route: inline
 
 ## Log
