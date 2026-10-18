@@ -30,7 +30,10 @@
     "bench:personas:llm": "node bench/personas/generator.mjs",
     "bench:run": "node scripts/bench.mjs",
     "bench:check": "node scripts/bench.mjs --check",
-    "bench:report": "node bench/report.mjs"
+    "bench:report": "node bench/report.mjs",
+    "bench:seed": "node --env-file=.env.local bench/scripts/seed-bench-users.mjs",
+    "bench:students": "node scripts/bench-students.mjs",
+    "bench:students:check": "node scripts/bench-students.mjs --check"
   },
   "dependencies": {
     "@clerk/nextjs": "7.5.20",

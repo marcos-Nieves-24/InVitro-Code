@@ -21,6 +21,9 @@
 *   **S3** Escenarios invitro-code — `bench/scenarios/invitro.js` simula flujo real: `GET /`, `GET /learn/[module]/[slug]`, `POST /api/progress` (con módulos/lecciones válidas de `getLessonSlugs`), `POST /api/lab-progress`, `GET /api/bookmarks`. Incluye 4 personas con pesos distintos y valida `401` vs `200` según auth, `429` por rate-limit, `400` por payload inválido. Mide `http_req_duration` por endpoint.
 *   **S4** Reporte y hallazgos — `bench/report.mjs` parsea `bench/reports/*.json` y genera `bench/reports/summary.md` con RPS, p50/p95/p99, tasa 429/500, endpoint más lento, y lista de bugs/hallazgos (ej: rate-limit en memoria resetea en multi-instancia, streak race, MDX render lento). Incluye `npm run bench:report`.
 *   **S5** DX y docs — `bench/README.md` explica instalación (`k6` + `npm run bench:personas` + `npm run bench:run`), cómo usar MiroFish externo opcional para seed avanzado, y tabla de `cuántos usuarios aguanta` por entorno (local vs Vercel). Scripts `bench:personas`, `bench:run`, `bench:report`, `bench:check` en `package.json`.
+*   **S6** Auth bypass para bench — `src/lib/bench-auth.ts` con `BENCH_SECRET` + `x-bench-secret`/`x-bench-user-id`, integrado en `progress`, `lab-progress`, `bookmarks` para permitir agentes autenticados sin Clerk en dev/preview. Seguro: solo si `BENCH_SECRET` está seteado.
+*   **S7** Escenario estudiantes autenticados — `bench/scenarios/students.js` con 4 journeys reales (explorador, completador, procrastinador, intensivo) que hacen `GET /dashboard`, `GET /learn`, `POST /api/progress`, `POST /api/lab-progress`, `GET /api/bookmarks` como estudiante logueado, con rampa 10->50->100->200->500 hasta quiebre.
+*   **S8** Rampa hasta caída — `bench/k6-students.config.json` + `scripts/bench-students.mjs` + `bench/scripts/seed-bench-users.mjs` para crear 100 usuarios bench en Supabase y correr rampa exponencial hasta `p95>2000ms` o `error>5%` o `429>10%`, con reporte de punto de quiebre.
 
 ## Tasks
 
@@ -29,6 +32,9 @@
 - [x] **T3** Escenarios multi-persona + auth — Extender `invitro.js` a 4 personas con pesos, manejo `CLERK_SECRET` o `x-bench-secret` dev, validaciones 401/429/400, métricas por endpoint. Route: inline. S3 — commit 9f3e1a (incluido en invitro.js)
 - [x] **T4** Reporte y thresholds — `bench/report.mjs` + `bench/reports/summary.md` template, thresholds k6, `bench:report` y `bench:check`. Route: inline. S4 — commit a1c2b8
 - [x] **T5** Docs y verificación final — `bench/README.md`, `npm run bench:*` docs, `type-check` + `k6 dry-run` + test de rate-limit. Route: inline. S5 — commit a1c2b8 (type-check OK, bench:check OK, report dry-run PASS)
+- [x] **T6** Auth bypass bench — `src/lib/bench-auth.ts` + patch 3 routes (`progress`, `lab-progress`, `bookmarks`). Route: inline. S6 — commit 9b390c5 + fix (BENCH_SECRET + x-bench-user-id)
+- [x] **T7** Escenario students autenticados — `bench/scenarios/students.js` (4 journeys 30/30/20/20) + `bench/k6-students.config.json` (rampa 10->500, p95<2000, error<5%). Route: inline. S7 — commit 9b390c5
+- [x] **T8** Seed + rampa hasta caída — `bench/scripts/seed-bench-users.mjs` (100 users, verified) + `scripts/bench-students.mjs` + `bench:students` scripts + `BENCH_SECRET` en .env.local. Route: inline. S8 — seed 100 OK, k6 students running (pid 52922, 5.5m rampa)
 
 ## Log
 
