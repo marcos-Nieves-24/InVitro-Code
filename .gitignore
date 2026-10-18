@@ -83,3 +83,5 @@ graph.json
 graph.html
 graph-standalone.html
 bench/scenarios/students-granular.js
+codebase-memory-graph.json
+codebase-memory-graph.html
