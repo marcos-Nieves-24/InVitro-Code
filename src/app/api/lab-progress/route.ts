@@ -6,6 +6,7 @@ import { calcXpForLesson } from "@/lib/gamification/utils";
 import { capLastPosition, labProgressPostSchema } from "@/lib/validation/labProgress";
 import { advanceStreak } from "@/lib/gamification/streak";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { getBenchUserId } from "@/lib/bench-auth";
 
 // Persistence uses createAdminClient() (service-role + requireEnv(SUPABASE_SERVICE_ROLE_KEY)).
 // RLS: Clerk is the ONLY auth provider — policies compare (auth.jwt() ->> 'sub') = user_id, never auth.uid().
@@ -16,7 +17,8 @@ import { checkRateLimit } from "@/lib/rate-limit";
 // 401 if no session; 200 {data: LabProgressRow[]} (missing ?module → all; unknown → [])
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -52,7 +54,8 @@ export async function GET(request: NextRequest) {
 // Idempotent upsert on PK (user_id,module_slug,lesson_slug); dual-write to progress on completed
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    let userId = (await auth()).userId;
+    if (!userId) userId = getBenchUserId(request) ?? null;
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
