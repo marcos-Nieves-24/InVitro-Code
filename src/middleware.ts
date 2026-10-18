@@ -12,6 +12,7 @@ const publicRoutes = [
   "/api/cron/purge-pending",
   "/api/cron/recharge-freezes",
   "/api/cron/daily-nudge",
+  "/api/bench-debug",
   "/aviso",
   "/privacidad",
   "/cookies",
@@ -52,6 +53,14 @@ export default clerkMiddleware(async (auth, req) => {
   );
 
   if (!isPublic) {
+    // Bench bypass — permite a k6 simular estudiantes reales sin Clerk (solo si BENCH_SECRET seteado)
+    const benchSecret = process.env.BENCH_SECRET;
+    const headerSecret = req.headers.get("x-bench-secret");
+    const benchUserId = req.headers.get("x-bench-user-id");
+    if (benchSecret && headerSecret === benchSecret && benchUserId) {
+      return;
+    }
+
     const session = await auth();
     if (!session.userId) {
       // API routes → 401, pages → redirect to sign-in
