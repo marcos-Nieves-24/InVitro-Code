@@ -71,7 +71,6 @@ openspec/changes/r-labs-multi-scenario/
 openspec/specs/middleware-file-convention/
 openspec/specs/platform-architecture-docs/
 coverage/
-
 # bench reports (generated, keep .gitkeep)
 bench/reports/*
 !bench/reports/.gitkeep
