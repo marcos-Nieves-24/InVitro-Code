@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: https://img.clerk.com https://vercel.com",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.clerk.accounts.dev",
               "connect-src 'self' https://*.supabase.co https://*.clerk.com https://*.clerk.accounts.dev https://cdn.jsdelivr.net https://files.pythonhosted.org https://pypi.org",
-              "style-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
               "font-src 'self' data:",
               "frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com",
               "worker-src 'self' blob:",

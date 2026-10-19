@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { auth } from "@clerk/nextjs/server";
+import { headers } from "next/headers";
+import { getBenchUserId } from "@/lib/bench-auth";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
@@ -90,9 +92,19 @@ interface Props {
  * gated on hasNotebook.
  */
 export default async function ProjectDetailPage({ params }: Props) {
-  const { userId } = await auth();
+  let { userId } = await auth();
   if (!userId) {
-    redirect("/sign-in");
+    const h = await headers();
+    const benchUserId = getBenchUserId({
+      headers: {
+        get: (name: string) => h.get(name),
+      } as unknown as Request["headers"],
+    } as unknown as Parameters<typeof getBenchUserId>[0]);
+    if (benchUserId) {
+      userId = benchUserId;
+    } else {
+      redirect("/sign-in");
+    }
   }
 
   const { module: modSlug, lesson: lessonSlug } = await params;

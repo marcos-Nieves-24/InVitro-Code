@@ -1,6 +1,7 @@
 "use client";
 
 import Editor, { OnMount, BeforeMount } from "@monaco-editor/react";
+import { useState, useEffect } from "react";
 import { ConsoleFrame } from "./ConsoleFrame";
 
 interface CodeEditorProps {
@@ -28,6 +29,28 @@ export default function CodeEditor({
   title = "main.py",
   status,
 }: CodeEditorProps) {
+  const [isMaximized, setIsMaximized] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("console-editor") === "true") setIsMaximized(true);
+    } catch {}
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "console-editor") setIsMaximized(e.newValue === '"true"' || e.newValue === "true");
+    };
+    const onCustom = () => {
+      try {
+        setIsMaximized(sessionStorage.getItem("console-editor") === "true");
+      } catch {}
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("console-editor-toggle", onCustom);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("console-editor-toggle", onCustom);
+    };
+  }, []);
+
   // Define the dark console theme BEFORE the editor is created so the
   // `theme="console-dark"` prop resolves on first paint. Defining it inside
   // onMount (after mount) left the editor on the default (light) theme.
@@ -71,6 +94,8 @@ export default function CodeEditor({
       title={title}
       maximizable
       storageKey="console-editor"
+      isMaximized={isMaximized}
+      onMaximizedChange={setIsMaximized}
       action={
         <>
           {status ? (
@@ -93,9 +118,9 @@ export default function CodeEditor({
         </>
       }
     >
-      <div className="overflow-hidden rounded-lg border border-[#222]">
+      <div className={`overflow-hidden rounded-lg border border-[#222] ${isMaximized ? "flex-1 min-h-0 flex flex-col" : ""}`}>
         <Editor
-          height={height}
+          height={isMaximized ? "100%" : height}
           language={language}
           theme="console-dark"
           value={value}

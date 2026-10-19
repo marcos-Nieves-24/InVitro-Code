@@ -1,5 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
+import { headers } from "next/headers";
+import { getBenchUserId } from "@/lib/bench-auth";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
@@ -44,10 +46,21 @@ interface Props {
  * compileMDX for lab, InVitroShell wrap, LabWorkspace 2-col layout.
  */
 export default async function LabLessonPage({ params }: Props) {
-  // REQ-LABPAGE-01: Clerk auth gate
-  const { userId } = await auth();
+  // REQ-LABPAGE-01: Clerk auth gate (with bench bypass for k6/Nightly)
+  let { userId } = await auth();
   if (!userId) {
-    redirect("/sign-in");
+    const h = await headers();
+    // Reconstruct a NextRequest-like header map for getBenchUserId
+    const benchUserId = getBenchUserId({
+      headers: {
+        get: (name: string) => h.get(name),
+      } as unknown as Request["headers"],
+    } as unknown as Parameters<typeof getBenchUserId>[0]);
+    if (benchUserId) {
+      userId = benchUserId;
+    } else {
+      redirect("/sign-in");
+    }
   }
 
   const { module: modSlug, lesson: lessonSlug } = await params;
