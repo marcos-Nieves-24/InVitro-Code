@@ -7,7 +7,8 @@ const PYODIDE_CDN = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`
 let pyodide = null;
 let numpyReady = false;
 let sklearnReady = false;
-let statsReady = false;
+let scipyReady = false;
+let seabornReady = false;
 let plotlyReady = false;
 let micropipReady = false;
 let initPromise = null;
@@ -61,14 +62,20 @@ async function ensureSklearn() {
   sklearnReady = true;
 }
 
-async function ensureStats() {
-  if (statsReady) return;
+async function ensureScipy() {
+  if (scipyReady) return;
   await pyodide.loadPackage("scipy");
+  scipyReady = true;
+}
+
+async function ensureStats() {
+  if (seabornReady) return;
+  if (!scipyReady) await ensureScipy();
   // seaborn is not a native Pyodide package — install via micropip from PyPI
   await ensureMicropip();
   const micropip = pyodide.pyimport("micropip");
   await micropip.install("seaborn");
-  statsReady = true;
+  seabornReady = true;
 }
 
 async function ensurePlotly() {
@@ -232,20 +239,21 @@ async function handleMessage(event) {
           await ensureSklearn();
         }
 
-        // Install scipy/seaborn if the code needs them
-        if (
-          statsReady === false &&
-          (code.includes("scipy") ||
-            code.includes("seaborn") ||
-            code.includes("sns.") ||
-            code.includes("pearsonr") ||
-            code.includes("spearmanr") ||
-            code.includes("skew") ||
-            code.includes("kurtosis") ||
-            code.includes("norm") ||
-            code.includes("ttest"))
-        ) {
+        // Install scipy/seaborn if the code needs them (decoupled: scipy via CDN, seaborn via micropip)
+        const needsSeaborn =
+          code.includes("seaborn") || code.includes("sns.");
+        const needsScipy =
+          code.includes("scipy") ||
+          code.includes("pearsonr") ||
+          code.includes("spearmanr") ||
+          code.includes("skew") ||
+          code.includes("kurtosis") ||
+          code.includes("norm") ||
+          code.includes("ttest");
+        if (seabornReady === false && needsSeaborn) {
           await ensureStats();
+        } else if (scipyReady === false && needsScipy) {
+          await ensureScipy();
         }
 
         // Install plotly if the code references it (lazy, one-time)
@@ -262,8 +270,11 @@ async function handleMessage(event) {
           },
         });
 
+        // Matplotlib in a Worker must use Agg (no GUI thread). Pre-set backend to avoid _warn_if_gui_out_of_main_thread.
+        const needsMpl = code.includes("matplotlib");
+        const mplPre = needsMpl ? "import matplotlib\nmatplotlib.use('Agg')\n" : "";
         const pyResult = await pyodide.runPythonAsync(
-          PLOTLY_CAPTURE_PREAMBLE + code,
+          PLOTLY_CAPTURE_PREAMBLE + mplPre + code,
         );
 
         // Build output: stdout first, then return value
