@@ -42,6 +42,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const len = modules.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
+  const [isPaused, setIsPaused] = useState(false);
   // Default to a single card so SSR/first paint renders exactly one card: the
   // wider window only appears after the client measures the track. Rendering
   // the full window in the SSR HTML makes the track ~1096px wide at a 390px
@@ -90,9 +91,18 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
     [prev, next],
   );
 
+  // ── Autoplay (T4) — avanza cada 4.5s, pausa en hover/focus y con reduced-motion ──
+  useEffect(() => {
+    if (len <= 1 || shouldReduceMotion || isPaused) return;
+    const id = setInterval(() => {
+      setActiveIndex((i) => (i + 1) % len);
+    }, 4500);
+    return () => clearInterval(id);
+  }, [len, shouldReduceMotion, isPaused]);
+
   if (len === 0) {
     return (
-      <div className="mx-auto max-w-[1360px] py-12 text-center text-storm">
+      <div className="mx-auto max-w-[1280px] py-12 text-center text-storm">
         <p className="text-sm">No hay expediciones disponibles.</p>
       </div>
     );
@@ -178,18 +188,22 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
 
   return (
     <div
-      className="mx-auto max-w-[1360px]"
+      className="mx-auto max-w-[1280px]"
       role="region"
       aria-label="Carrusel de expediciones"
       tabIndex={0}
       onKeyDown={onKeyDown}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
     >
       {/* Flex row: the arrows flank the viewport as siblings (not absolute
           children), so flex + items-center centers them against the card height
           without computing a top. overflow-hidden lives only on the central
           viewport, never on the outer container, so the arrows are never cut.
           The desktop set hides below md; mobile has its own row further down. */}
-      <div className="relative mx-auto flex max-w-[1360px] items-center gap-2 md:gap-4">
+      <div className="relative mx-auto flex max-w-[1280px] items-center gap-2 md:gap-4">
         <button
           type="button"
           aria-label="Anterior"

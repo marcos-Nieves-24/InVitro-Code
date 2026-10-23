@@ -20,7 +20,7 @@ function LinkedInIcon({ size = 18 }: { size?: number }) {
 
 export function Footer() {
   return (
-    <footer className="bg-ink px-6 py-12">
+    <footer className="bg-brand-950 px-6 py-12">
       <div className="mx-auto max-w-[1280px]">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex items-center gap-3">

@@ -83,7 +83,13 @@ export default async function ProfilePage() {
                 if (uploadError) throw new Error(uploadError.message);
                 // SECURITY: bucket público — migrar a createSignedUrl(3600) + RLS en siguiente iteración
                 const { data: urlData } = admin.storage.from("avatars").getPublicUrl(filePath);
-                await admin.from("profiles").update({ avatar_url: urlData.publicUrl }).eq("id", uid);
+                const { error: avatarUpdateError } = await admin
+                  .from("profiles")
+                  .update({ avatar_url: urlData.publicUrl })
+                  .eq("id", uid);
+                if (avatarUpdateError) throw new Error(avatarUpdateError.message);
+                const { revalidatePath } = await import("next/cache");
+                revalidatePath("/perfil");
               }}
             />
           </div>
@@ -115,14 +121,15 @@ export default async function ProfilePage() {
                   }
                 }
                 const { revalidatePath } = await import("next/cache");
-                await admin
+                const { error: updateError } = await admin
                   .from("profiles")
                   .update({
-                    username: data.username,
-                    bio: data.bio,
+                    username: data.username.trim() || null,
+                    bio: data.bio.trim() || null,
                     gender,
                   })
                   .eq("id", uid);
+                if (updateError) throw new Error(updateError.message);
                 revalidatePath("/perfil");
                 revalidatePath("/dashboard");
               }}
