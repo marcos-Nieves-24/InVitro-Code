@@ -33,7 +33,10 @@
     "bench:report": "node bench/report.mjs",
     "bench:seed": "node --env-file=.env.local bench/scripts/seed-bench-users.mjs",
     "bench:students": "node scripts/bench-students.mjs",
-    "bench:students:check": "node scripts/bench-students.mjs --check"
+    "bench:students:check": "node scripts/bench-students.mjs --check",
+    "tour:quick": "node --env-file=.env.local scripts/verify-tours.mjs --quick",
+    "tour": "node --env-file=.env.local scripts/verify-tours.mjs",
+    "screenshots": "node --env-file=.env.local scripts/take-lab-screenshot.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "7.5.20",
