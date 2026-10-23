@@ -115,12 +115,12 @@ export function ConsoleFrame({
     </div>
   );
 
-  // Maximised overlay: fixed fullscreen below sidebar (z-40 < z-50) — portaled to body to escape any transformed ancestor
+  // Maximised overlay: fixed fullscreen above header (z-[60] > sticky z-50) — portaled to body to escape any transformed ancestor
   if (isMaximized) {
     const content = (
       <ConsoleFrameContext.Provider value={true}>
         <div
-          className="fixed inset-0 z-40 flex flex-col bg-[#0a0a0a] py-4 pr-6"
+          className="fixed inset-0 z-[60] flex flex-col bg-[#0a0a0a] py-4 pr-6"
           style={{
             paddingLeft: "var(--sidebar-offset, 0px)",
             transition: "padding-left 300ms ease-in-out",
