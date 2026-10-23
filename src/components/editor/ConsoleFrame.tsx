@@ -68,28 +68,30 @@ export function ConsoleFrame({
   }, [isControlled, maximizable, storageKey]);
 
   const titleBar = (
-    <div className="flex items-center justify-between border-b border-[#1d1d1d] bg-[#111] px-4 py-2.5">
-      <div className="flex items-center gap-2">
-        <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-        <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-        <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-3 font-mono text-[12px] font-medium tracking-tight text-[#a0a0a0]">
+    <div className="relative z-10 flex shrink-0 items-center justify-between border-b border-[#1d1d1d] bg-[#111] px-4 py-2.5">
+      <div className="flex min-w-0 items-center gap-2">
+        <span className="h-3 w-3 shrink-0 rounded-full bg-[#ff5f56]" />
+        <span className="h-3 w-3 shrink-0 rounded-full bg-[#ffbd2e]" />
+        <span className="h-3 w-3 shrink-0 rounded-full bg-[#27c93f]" />
+        <span className="ml-3 truncate font-mono text-[12px] font-medium tracking-tight text-[#a0a0a0]">
           {title}
         </span>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         {action}
         {maximizable && (
           <button
+            type="button"
             onClick={() => setIsMaximized((prev) => !prev)}
             aria-label={isMaximized ? "Restaurar" : "Maximizar"}
-            className="rounded-md p-1 text-[#a0a0a0] transition-colors hover:bg-[#2a2a2a] hover:text-white"
+            title={isMaximized ? "Restaurar" : "Maximizar"}
+            className="shrink-0 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-2 text-white transition-colors hover:bg-[#2a2a2a] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           >
             {isMaximized ? (
-              <Minimize2 size={16} />
+              <Minimize2 size={20} />
             ) : (
-              <Maximize2 size={16} />
+              <Maximize2 size={20} />
             )}
           </button>
         )}
@@ -118,7 +120,7 @@ export function ConsoleFrame({
     const content = (
       <ConsoleFrameContext.Provider value={true}>
         <div
-          className="fixed inset-0 z-40 flex flex-col bg-[#0a0a0a] p-4"
+          className="fixed inset-0 z-40 flex flex-col bg-[#0a0a0a] py-4 pr-6"
           style={{
             paddingLeft: "var(--sidebar-offset, 0px)",
             transition: "padding-left 300ms ease-in-out",
