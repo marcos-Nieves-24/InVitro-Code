@@ -8,6 +8,7 @@ import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 /**
  * Landing page — InVitro-Code interactive learning platform.
@@ -19,7 +20,17 @@ export default async function Home() {
   let headerUser: { name: string; imageUrl?: string | null } | null = null;
   if (userId) {
     const cu = await currentUser();
+    // Prioriza profiles.username (editable en /perfil) sobre Clerk
+    let profileUsername: string | null = null;
+    try {
+      const supabase = createAdminClient();
+      const { data } = await supabase.from("profiles").select("username").eq("id", userId).maybeSingle();
+      profileUsername = (data as { username?: string | null } | null)?.username?.trim() || null;
+    } catch {
+      // fallback a Clerk si Supabase no responde
+    }
     const name =
+      profileUsername ??
       cu?.username ??
       cu?.firstName ??
       cu?.emailAddresses?.[0]?.emailAddress?.split("@")[0] ??

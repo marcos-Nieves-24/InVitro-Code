@@ -18,6 +18,9 @@ function LinkedInIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+const APP_VERSION = "1.0.0";
+const RELEASE_URL = `https://github.com/marcos-Nieves-24/InVitro-Code/releases/tag/v${APP_VERSION}`;
+
 export function Footer() {
   return (
     <footer className="bg-brand-950 px-6 py-12">
@@ -28,13 +31,12 @@ export function Footer() {
             <img
               src="/logo-negativo.svg"
               alt="InVitro-Code"
-              className="h-8 w-8"
+              className="h-8 w-8 brightness-0 invert-0"
             />
             <div>
               <p className="font-display text-lg font-bold text-white">
                 InVitro-Code
               </p>
-              <p className="text-xs text-storm">Biotecnologia + IA</p>
             </div>
           </div>
 
@@ -43,7 +45,7 @@ export function Footer() {
               href="https://github.com/marcos-Nieves-24/InVitro-Code"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-storm transition-all hover:border-mint hover:text-mint"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-all hover:border-mint hover:text-mint"
               aria-label="GitHub"
             >
               <GitHubIcon size={18} />
@@ -52,23 +54,28 @@ export function Footer() {
               href="https://www.linkedin.com/in/marcos-alvarez-362b721a8/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-storm transition-all hover:border-mint hover:text-mint"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-all hover:border-mint hover:text-mint"
               aria-label="LinkedIn"
             >
               <LinkedInIcon size={18} />
             </a>
             <a
               href="mailto:invitro.code@gmail.com"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-storm transition-all hover:border-mint hover:text-mint"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-all hover:border-mint hover:text-mint"
               aria-label="Email"
             >
               <Mail size={18} />
             </a>
           </div>
 
-          <p className="font-mono text-xs text-storm">
-            InVitro-Code v0.1.0
-          </p>
+          <a
+            href={RELEASE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-white/80 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/60"
+          >
+            InVitro-Code v{APP_VERSION}
+          </a>
         </div>
 
         <nav aria-label="Legal" className="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs">
