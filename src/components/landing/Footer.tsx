@@ -31,7 +31,7 @@ export function Footer() {
             <img
               src="/logo-negativo.svg"
               alt="InVitro-Code"
-              className="h-8 w-8 brightness-0 invert-0"
+              className="h-8 w-8 brightness-0 invert"
             />
             <div>
               <p className="font-display text-lg font-bold text-white">
