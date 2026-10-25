@@ -7,6 +7,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { calcLevel, rankTitle } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import { EMPTY_STATES } from "@/lib/ui/empty-states";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 import {
   Medal,
   Trophy,
@@ -58,9 +59,13 @@ export default async function ComunidadPage() {
   const entries = (leaderboardRes.data ?? []) as Array<{
     userId: string;
     username: string | null;
+    avatar_url: string | null;
     totalXp: number;
   }>;
-  const myRank = rankRes.data as { position: number } | null;
+  // get_leaderboard_rank returns INTEGER directly, not object
+  const rawRank = rankRes.data as number | { position: number } | null;
+  const myRank: { position: number } | null =
+    typeof rawRank === "number" ? { position: rawRank } : rawRank;
   const myProfile = profileRes.data ?? {};
 
   // Real XP per leaderboard user, to derive honest level/rank chips.
@@ -77,7 +82,7 @@ export default async function ComunidadPage() {
     streakUserIds.length > 0
       ? await supabase
           .from("profiles")
-          .select("id, username, email")
+          .select("id, username, email, avatar_url")
           .in("id", streakUserIds)
       : { data: [] };
 
@@ -88,6 +93,7 @@ export default async function ComunidadPage() {
     .map((profile) => ({
       id: profile.id,
       name: getDisplayName(profile),
+      avatar_url: (profile as { avatar_url?: string | null }).avatar_url ?? null,
       streak: streakByUser.get(profile.id) ?? 0,
       xp: xpByUser.get(profile.id) ?? null,
     }))
@@ -151,9 +157,7 @@ export default async function ComunidadPage() {
                       key={researcher.id}
                         className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-card"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-mint/20 bg-fog/20 text-xs font-bold text-ink">
-                        {initials(researcher.name)}
-                      </div>
+                      <UserAvatar username={researcher.name} avatarUrl={researcher.avatar_url} size="md" className="border-2 border-mint/20" />
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-bold text-ink">
                           {researcher.name}
@@ -214,9 +218,7 @@ export default async function ComunidadPage() {
                               index + 1
                             )}
                           </span>
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-raised text-[10px] font-bold">
-                            {initials(row.username ?? "Investigador")}
-                          </div>
+                          <UserAvatar username={row.username ?? "Investigador"} avatarUrl={row.avatar_url} size="sm" />
                           <span
                             className={`text-sm font-bold ${
                               isMe ? "text-mint" : "text-ink"
