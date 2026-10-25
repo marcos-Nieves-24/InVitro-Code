@@ -74,19 +74,19 @@ const DETAIL_LINES = STAGES.map((s) => wrapText(s.detail, DETAIL_CHARS_PER_LINE)
 // ---------------------------------------------------------------------------
 
 const VB_W = 1120;
-const VB_H = 560;
+const VB_H = 520;
 
 const CARD_W = 168;
 const CARD_GAP = 10;
 const CARD_TOP = 96;
-const CARD_H = 360;
+const CARD_H = 280;
 const TOTAL_W = COUNT * CARD_W + (COUNT - 1) * CARD_GAP;
 const START_X = (VB_W - TOTAL_W) / 2;
 const cardX = (i: number) => START_X + i * (CARD_W + CARD_GAP);
 const cardCx = (i: number) => cardX(i) + CARD_W / 2;
 
 const TRACK_Y = 70;
-const RAIL_Y = 476;
+const RAIL_Y = 402;
 
 const COLORS = {
   accent: "#45dcc6",
