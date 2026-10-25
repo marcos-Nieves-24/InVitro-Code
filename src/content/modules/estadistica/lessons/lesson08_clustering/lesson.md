@@ -99,7 +99,7 @@ K Means minimiza la **inercia**: suma de distancias al cuadrado de cada punto a 
 
 <ConceptCard variant="key idea">
 Método del codo vs Puntaje de silueta:
-- **Qué mide**: codo → inercia (distancia intra cluster); silueta → cohesión + separación de clusters
+- **Qué mide**: codo  inercia (distancia intra cluster); silueta  cohesión + separación de clusters
 - **Rango**: codo siempre decrece con k; silueta va de [-1, 1], >0.5 = buen clustering
 - **Cómo elegir k**: codo busca el aplanamiento; silueta elige el k con mayor score
 - **Ventaja**: codo simple e intuitivo; silueta considera cohesión y separación

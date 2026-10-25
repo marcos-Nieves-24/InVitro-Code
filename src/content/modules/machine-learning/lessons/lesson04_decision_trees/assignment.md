@@ -26,6 +26,6 @@ Estás construyendo una herramienta de soporte a decisiones clínicas. La herram
    min_samples_leaf: [1, 5, 10]
 3. **Selecciona el mejor modelo** que cumpla todos los requisitos
 4. **Visualiza** el árbol final
-5. **Extrae las reglas de decisión** del árbol (p. ej., "Si worst radius > 15 y worst concave points > 0.1 → malignant")
+5. **Extrae las reglas de decisión** del árbol (p. ej., "Si worst radius > 15 y worst concave points > 0.1  malignant")
 6. **Evalúa** en el set de prueba
 

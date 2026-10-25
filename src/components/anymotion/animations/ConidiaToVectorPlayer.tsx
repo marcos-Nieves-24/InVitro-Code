@@ -201,7 +201,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
 
             {/* Feature count hint */}
             <text x={580} y={342} textAnchor="middle" fill="white" fontSize={13} fontFamily="monospace" opacity={0.38}>
-              4 features → 4 dimensiones
+              4 features  4 dimensiones
             </text>
           </g>
         </svg>

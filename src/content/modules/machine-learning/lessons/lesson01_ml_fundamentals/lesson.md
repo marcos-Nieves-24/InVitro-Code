@@ -95,7 +95,7 @@ Antes de lanzarte a implementar algoritmos, necesitas entender los fundamentos: 
   lines={[
     "¿Cáncer o infección? Algunas decisiones son números, otras son categorías.",
     "La programación tradicional te obliga a escribir cada regla a mano.",
-    "El ML invierte el flujo: datos + respuestas → reglas aprendidas.",
+    "El ML invierte el flujo: datos + respuestas  reglas aprendidas.",
     "Le damos ejemplos y la computadora descubre el patrón subyacente.",
   ]}
 />
@@ -194,8 +194,8 @@ La división train/test es la herramienta más básica para medir generalizació
 {/* candidate player: comparison sobreajuste vs subajuste */}
 <ConceptCard variant="key idea">
 **Sobreajuste vs subajuste**
-- Sobreajuste: el modelo memoriza entrenamiento, incluyendo ruido → train ≈100%, test mucho más bajo.
-- Subajuste: el modelo es demasiado simple → train y test bajos.
+- Sobreajuste: el modelo memoriza entrenamiento, incluyendo ruido  train ≈100%, test mucho más bajo.
+- Subajuste: el modelo es demasiado simple  train y test bajos.
 - Causa típica: modelo complejo (sobreajuste) vs modelo simple o falta de features (subajuste).
 - Analogía: memorizar cada palabra sin aplicar vs solo leer el título del capítulo.
 </ConceptCard>
@@ -237,9 +237,9 @@ La división train/test es la herramienta más básica para medir generalizació
 $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 
 <ConceptCard variant="definition">
-**Sesgo:** Error por suposiciones demasiado simplificadoras. Sesgo alto → subajuste. Es como disparar consistentemente lejos del blanco.
+**Sesgo:** Error por suposiciones demasiado simplificadoras. Sesgo alto  subajuste. Es como disparar consistentemente lejos del blanco.
 
-**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos. Varianza alta → sobreajuste. Es como disparar por todos lados sin consistencia.
+**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos. Varianza alta  sobreajuste. Es como disparar por todos lados sin consistencia.
 
 **Error irreducible:** Ruido inherente al problema que ningún modelo puede eliminar.
 </ConceptCard>

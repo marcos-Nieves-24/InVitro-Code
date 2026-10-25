@@ -33,7 +33,7 @@ Quiz: quiz.md
     "Matplotlib y Seaborn no hacen eso sin trabajo extra.",
     "En biotecnología: inspeccionar genes individuales con hover, rotar moléculas en 3D, dashboards interactivos.",
     "En SaaS: la base de Dash para paneles ejecutivos dinámicos.",
-    "La progresión es Matplotlib → Seaborn → Plotly → Dash.",
+    "La progresión es Matplotlib  Seaborn  Plotly  Dash.",
   ]}
 />
 
@@ -41,7 +41,7 @@ Quiz: quiz.md
 Plotly es una librería de visualización interactiva que genera gráficos web con zoom, hover, pan y animaciones por defecto   algo que Matplotlib y Seaborn no pueden hacer sin trabajo extra. Mientras Matplotlib produce imágenes estáticas, Plotly renderiza figuras como HTML+JavaScript que el usuario puede explorar. En biotecnología, Plotly permite inspeccionar datos de expresión génica con hover que muestra genes individuales, rotar moléculas en 3D y construir dashboards interactivos. En SaaS, es la base de Dash para paneles ejecutivos dinámicos.
 </ConceptCard>
 
-En las lecciones anteriores aprendiste Matplotlib (control total, salida estática) y Seaborn (visualización estadística de alto nivel). Plotly agrega la tercera dimensión: **interactividad**. La progresión es: Matplotlib → Seaborn → Plotly → Dash (apps web). Plotly Express (`px`) es el punto de entrada recomendado para creación rápida, y Graph Objects (`go`) para control fino. Al final del módulo vas a combinar Plotly con Dash para construir aplicaciones web de datos.
+En las lecciones anteriores aprendiste Matplotlib (control total, salida estática) y Seaborn (visualización estadística de alto nivel). Plotly agrega la tercera dimensión: **interactividad**. La progresión es: Matplotlib  Seaborn  Plotly  Dash (apps web). Plotly Express (`px`) es el punto de entrada recomendado para creación rápida, y Graph Objects (`go`) para control fino. Al final del módulo vas a combinar Plotly con Dash para construir aplicaciones web de datos.
 
 - Matplotlib: control total, salida estática
 - Seaborn: estadística de alto nivel
@@ -80,7 +80,7 @@ Toda figura es un objeto `go.Figure` con dos componentes principales:
 - **`data`**: lista de `Trace` (Scatter, Bar, Heatmap, etc.)
 - **`layout`**: configuración global (título, ejes, template, hovermode)
 
-**Plotly Express vs Graph Objects** (candidato a tabla → ConceptCard+bullets):
+**Plotly Express vs Graph Objects** (candidato a tabla  ConceptCard+bullets):
 
 <ConceptCard variant="key idea">
 - **Nivel**: Plotly Express alto (1 llamada), Graph Objects bajo (control total)

@@ -122,11 +122,11 @@ Una variable aleatoria es una función qué asigna un número real a cada result
 </ConceptCard>
 
 <ConceptCard variant="key idea">
-- **Valores**: Contables (0, 1, 2, ...) → Cualquier valor en un intervalo
-- **Probabilidad**: PMF: $p(x) = P(X = x)$ → PDF: $P(a \leq X \leq b) = \int_a^b f(x)dx$
-- **Esperanza**: $E[X] = \sum x \cdot P(X=x)$ → $E[X] = \int x f(x)dx$
-- **Ejemplo**: Cantidad de usuarios qué cancelan → Nivel de expresión génica
-- **Varianza**: $\text{Var}(X) = E[X^2] E[X]^2$ → Misma fórmula
+- **Valores**: Contables (0, 1, 2, ...)  Cualquier valor en un intervalo
+- **Probabilidad**: PMF: $p(x) = P(X = x)$  PDF: $P(a \leq X \leq b) = \int_a^b f(x)dx$
+- **Esperanza**: $E[X] = \sum x \cdot P(X=x)$  $E[X] = \int x f(x)dx$
+- **Ejemplo**: Cantidad de usuarios qué cancelan  Nivel de expresión génica
+- **Varianza**: $\text{Var}(X) = E[X^2] E[X]^2$  Misma fórmula
 </ConceptCard>
 
 <CalloutInfo>
@@ -169,7 +169,7 @@ print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
   lessonSlug="lesson03_probability"
   blockId="reflection l03 bayes rare"
   allowContinueOnIncorrect
-  explanation="No es malo: con prevalencia del 1%, de 1000 sólo 10 están enfermos; el test detecta ~9.5 y genera ~99 falsos positivos entre 990 sanos. De ~108 positivos sólo ~9.5 son reales (~8.8%). Paradoja de la tasa base: condición rara → la mayoría de los positivos son falsos."
+  explanation="No es malo: con prevalencia del 1%, de 1000 sólo 10 están enfermos; el test detecta ~9.5 y genera ~99 falsos positivos entre 990 sanos. De ~108 positivos sólo ~9.5 son reales (~8.8%). Paradoja de la tasa base: condición rara  la mayoría de los positivos son falsos."
   options={[
     { id: "a", label: "El test no es malo; la enfermedad es rara: los falsos positivos dominan los positivos", correct: true, feedback: "Correcto: baja prevalencia hace que falsos positivos superen a verdaderos positivos." },
     { id: "b", label: "El test es malo por falta de especificidad (10% FP)", correct: false, feedback: "Especificidad ~90% es razonable; el cuello de botella es la prevalencia del 1%." },
@@ -232,7 +232,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   lessonSlug="lesson03_probability"
   blockId="reflection l03 churn bayes"
   allowContinueOnIncorrect
-  explanation="Depende del costo de contactar vs perder cliente: contacto barato (email) → contactar todos y rescatar ~80% de los que cancelarían; contacto caro → modelo más preciso. Trade off entre recall (detectar canceladores) y precision (no molestar no canceladores)."
+  explanation="Depende del costo de contactar vs perder cliente: contacto barato (email)  contactar todos y rescatar ~80% de los que cancelarían; contacto caro  modelo más preciso. Trade off entre recall (detectar canceladores) y precision (no molestar no canceladores)."
   options={[
     { id: "a", label: "Depende del costo: si contactar es barato, sí (rescata ~80% de canceladores); trade off recall vs precision", correct: true, feedback: "Correcto: el contacto barato justifica rescatar la mayoría de canceladores." },
     { id: "b", label: "Contactar a todos siempre, sin importar el costo", correct: false, feedback: "Si contactar es caro (account manager), el beneficio puede no cubrir el costo." },
@@ -345,7 +345,7 @@ Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el mac
 **¿Qué aprendiste hoy?**
 - Los tres axiomas de Kolmogorov son los cimientos de la probabilidad
 - $P(A|B) \neq P(B|A)$   la falacia del fiscal se cobra víctimas todos los días
-- Bayes actualiza creencias: a priori → evidencia → a posteriori
+- Bayes actualiza creencias: a priori  evidencia  a posteriori
 - Las variables aleatorias discretas y continuas se manejan con PMF y PDF
 
 **En la Lección 4** vamos a conocer las distribuciones con nombre y apellido: Bernoulli, Binomial, Poisson y la famosísima distribución Normal. Porque hasta ahora hablamos de probabilidad en abstracto   es hora de ponerle nombres a las curvas.

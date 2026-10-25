@@ -68,7 +68,7 @@ PCA no selecciona features   crea **nuevas features** (componentes principales) 
 - Estandariza los datos (media 0, varianza 1 por feature)
 - Calcula la matriz de covarianza entre features
 - Encuentra valores y vectores propios de la matriz de covarianza
-- Ordena los vectores propios por valor propio (mayor → más varianza explicada)
+- Ordena los vectores propios por valor propio (mayor  más varianza explicada)
 - Proyecta los datos al subespacio de los primeros K vectores propios
 </ConceptCard>
 

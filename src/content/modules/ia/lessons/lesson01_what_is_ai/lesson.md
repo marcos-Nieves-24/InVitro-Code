@@ -9,7 +9,7 @@ Learning Objectives:
   Explicar el concepto de "características" (features) en datos
   Comprender cómo las máquinas reconocen patrones a partir de datos numéricos
   Identificar las limitaciones de las reglas fijas frente al aprendizaje automático
-Keywords: inteligencia artificial, features, patrones, clasificación, conidias, Aspergillus, Penicillium
+Keywords: inteligencia artificial, features, patrones, clasificación, conidias, *Aspergillus*, *Penicillium*
 Difficulty: Principiante
 Programming Concepts: Ninguno
 Mathematical Concepts: Ninguno
@@ -86,8 +86,8 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 </div>
 
 <SpeciesCompare
-  leftLabel="Aspergillus"
-  rightLabel="Penicillium"
+  leftLabel="*Aspergillus*"
+  rightLabel="*Penicillium*"
   caption="Cada atributo se resalta sobre las dos conidias a la vez"
   rows={[
     { feature: "Forma", left: "Más redondeada", right: "Más alargada" },
@@ -170,17 +170,17 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 <div className="space y 3">
 <p className="m 0 text sm leading relaxed text gray 700">Mismo concepto, otro ejemplo clínico real: las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales   cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que en nuestras conidias.</p>
 <ChoiceQuestion
-  question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre Aspergillus de Penicillium?"
+  question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre *Aspergillus* de *Penicillium*?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
   blockId="choice l01 area 1"
   allowContinueOnIncorrect
   explanation="Los rangos de área se superponen entre especies. Una sola feature rara vez separa bien, combinar varias (área + textura + circularidad) mejora la clasificación."
   options={[
-    { id: "a", label: "Sí, el área por sí sola separa perfectamente ambas especies", correct: false, feedback: "No: hay superposición. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes." },
+    { id: "a", label: "Sí, el área por sí sola separa perfectamente ambas especies", correct: false, feedback: "No: hay superposición. Algunas conidias de *Aspergillus* son pequeñas y algunas de *Penicillium* son grandes." },
     { id: "b", label: "No, los rangos se superponen, necesitamos múltiples features", correct: true, feedback: "¡Correcto! Una sola dimensión no alcanza. El espacio de features multidimensional separa mejor." },
     { id: "c", label: "Solo si el microscopio está perfectamente calibrado", correct: false, feedback: "La calibración ayuda, pero no elimina la variabilidad biológica natural." },
-    { id: "d", label: "Sí, porque Penicillium siempre es más grande", correct: false, feedback: "Falso: hay conidias pequeñas de Aspergillus y grandes de Penicillium. No es determinista." },
+    { id: "d", label: "Sí, porque *Penicillium* siempre es más grande", correct: false, feedback: "Falso: hay conidias pequeñas de *Aspergillus* y grandes de *Penicillium*. No es determinista." },
   ]}
 />
 </div>
@@ -312,7 +312,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 <div className="rounded lg border border gray 200 bg surface card p 4 text sm text gray 700">
 <ul className="m 0 list disc space y 1.5 pl 5">
 <li>Hay <strong>superposición natural</strong> entre especies: algunas conidias de <em>Aspergillus</em> se parecen a <em>Penicillium</em></li>
-<li>Para capturar la complejidad, necesitaríamos <strong>cientos de reglas</strong> → imposible de mantener</li>
+<li>Para capturar la complejidad, necesitaríamos <strong>cientos de reglas</strong>  imposible de mantener</li>
 <li>Cada regla nueva puede contradecir a las anteriores</li>
 <li><strong>Aquí entra el machine learning</strong>: en lugar de programar reglas, la máquina <em>aprende</em> los patrones de los datos</li>
 </ul>

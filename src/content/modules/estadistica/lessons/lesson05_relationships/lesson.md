@@ -86,7 +86,7 @@ $$\text{Cov}(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (x_i \bar{x})(y_i \bar{y})$$
   </EquationStep>
 </EquationTour>
 
-Cuando X está por encima de su media, ¿Y también? → **covarianza positiva**. ¿Y está por debajo? → **covarianza negativa**. ¿Sin patrón? → cercana a cero.
+Cuando X está por encima de su media, ¿Y también?  **covarianza positiva**. ¿Y está por debajo?  **covarianza negativa**. ¿Sin patrón?  cercana a cero.
 
 <ConceptCard variant="warning">
 **Limitación clave**: La covarianza depende de la escala. Dos variables en distintas unidades (metros vs kilos) no son comparables por covarianza. Necesitamos normalizarla.
@@ -238,9 +238,9 @@ print("Sin relac: ", f"Pearson={pearsonr(x, y_none)[0]:.3f}", f"Spearman={spearm
   lessonSlug="lesson05_relationships"
   blockId="reflection l05 pearson spearman"
   allowContinueOnIncorrect
-  explanation="Pearson mide relación lineal (x³ no es lineal → bajo ~0.2); Spearman mide relación monotónica (x³ siempre crece → alto ~0.95). No hay correlación 'más real': depende del objetivo; Spearman suele ayudar en selección de features para árboles."
+  explanation="Pearson mide relación lineal (x³ no es lineal  bajo ~0.2); Spearman mide relación monotónica (x³ siempre crece  alto ~0.95). No hay correlación 'más real': depende del objetivo; Spearman suele ayudar en selección de features para árboles."
   options={[
-    { id: "a", label: "Pearson mide lineal (x³ no es lineal → ~0.2) y Spearman mide monotónica (x³ siempre crece → ~0.95); no hay 'más real', depende del objetivo", correct: true, feedback: "¡Exacto! Tipo de relación (lineal vs monotónica) explica la diferencia." },
+    { id: "a", label: "Pearson mide lineal (x³ no es lineal  ~0.2) y Spearman mide monotónica (x³ siempre crece  ~0.95); no hay 'más real', depende del objetivo", correct: true, feedback: "¡Exacto! Tipo de relación (lineal vs monotónica) explica la diferencia." },
     { id: "b", label: "Spearman está mal: la verdadera correlación es el valor de Pearson (~0.2)", correct: false, feedback: "Pearson sólo mide linealidad; una monotónica fuerte puede dar Pearson bajo sin error de cálculo." },
     { id: "c", label: "Pearson es el correcto porque toda correlación real es lineal por definición", correct: false, feedback: "Pearson cuantifica linealidad, pero no toda relación real se reduce a una recta." },
     { id: "d", label: "El bajo Pearson indica outliers extremos en x³ que habría que eliminar", correct: false, feedback: "No hay outliers: la diferencia se explica por el tipo de relación, no por anomalías." },

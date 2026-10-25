@@ -85,7 +85,7 @@ pip install seaborn
 import seaborn as sns
 ```
 
-**Seaborn vs Matplotlib** (candidato a tabla → ConceptCard+bullets):
+**Seaborn vs Matplotlib** (candidato a tabla  ConceptCard+bullets):
 
 <ConceptCard variant="key idea">
 - **Nivel**: Matplotlib bajo nivel, Seaborn alto nivel

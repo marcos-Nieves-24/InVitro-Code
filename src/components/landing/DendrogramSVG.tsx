@@ -47,10 +47,10 @@ function h(ward: number) {
 
 // Merge table: [leftIdx, rightIdx, wardHeight, isLeafLeft, isLeafRight]
 const mergeData: [number, number, number, boolean, boolean][] = [
-  [6, 7, h(0.08), true, true], // merge0: Gen-2 & Gen-1 → cluster A
-  [4, 5, h(0.1), true, true], // merge1: Gen-4 & Gen-3 → cluster B
-  [2, 3, h(0.11), true, true], // merge2: Gen-6 & Gen-5 → cluster C
-  [0, 1, h(0.09), true, true], // merge3: Gen-8 & Gen-7 → cluster D
+  [6, 7, h(0.08), true, true], // merge0: Gen-2 & Gen-1  cluster A
+  [4, 5, h(0.1), true, true], // merge1: Gen-4 & Gen-3  cluster B
+  [2, 3, h(0.11), true, true], // merge2: Gen-6 & Gen-5  cluster C
+  [0, 1, h(0.09), true, true], // merge3: Gen-8 & Gen-7  cluster D
   [2, 1, h(0.32), false, false], // merge4: cluster C (merge2) + cluster B (merge1)
   [3, 0, h(0.28), false, false], // merge5: cluster D (merge3) + cluster A (merge0)
   [4, 5, h(0.58), false, false], // merge6: (C+B) (merge4) + (D+A) (merge5)

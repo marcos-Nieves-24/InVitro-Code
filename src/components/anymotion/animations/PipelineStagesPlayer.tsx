@@ -66,20 +66,20 @@ function wrapText(text: string, maxChars: number): string[] {
   return lines;
 }
 
-const DETAIL_CHARS_PER_LINE = 19;
+const DETAIL_CHARS_PER_LINE = 22;
 const DETAIL_LINES = STAGES.map((s) => wrapText(s.detail, DETAIL_CHARS_PER_LINE));
 
 // ---------------------------------------------------------------------------
 // Geometry (single 16:9 viewBox — no hardcoded pixel widths)
 // ---------------------------------------------------------------------------
 
-const VB_W = 880;
-const VB_H = 495;
+const VB_W = 1024;
+const VB_H = 520;
 
-const CARD_W = 128;
-const CARD_GAP = 16;
-const CARD_TOP = 100;
-const CARD_H = 250;
+const CARD_W = 148;
+const CARD_GAP = 14;
+const CARD_TOP = 96;
+const CARD_H = 300;
 const TOTAL_W = COUNT * CARD_W + (COUNT - 1) * CARD_GAP;
 const START_X = (VB_W - TOTAL_W) / 2;
 const cardX = (i: number) => START_X + i * (CARD_W + CARD_GAP);
@@ -130,10 +130,10 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
       <AnymotionStage title="Pipeline de ML en biotecnología: seis etapas encadenadas">
         <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="h-full w-full bg-[#0a0a0a]" role="img" aria-label="Pipeline de machine learning: token que recorre las etapas de datos a interpretación">
           {/* Title */}
-          <text x={VB_W / 2} y={30} textAnchor="middle" fill="white" fontSize={15} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
+          <text x={VB_W / 2} y={30} textAnchor="middle" fill="white" fontSize={17} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
             Pipeline de ML: de datos brutos a predicciones útiles
           </text>
-          <text x={VB_W / 2} y={48} textAnchor="middle" fill="white" fontSize={13} fontFamily="monospace" opacity={0.45}>
+          <text x={VB_W / 2} y={48} textAnchor="middle" fill="white" fontSize={15} fontFamily="monospace" opacity={0.45}>
             cada etapa transforma la salida de la anterior
           </text>
 
@@ -187,17 +187,17 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
 
                 {/* Step number badge */}
                 <circle cx={cardCx(i)} cy={CARD_TOP + 30} r={14} fill={badgeFill} stroke={badgeStroke} strokeWidth={1.4} />
-                <text x={cardCx(i)} y={CARD_TOP + 35} textAnchor="middle" fill={badgeTextFill} fontSize={12} fontFamily="monospace" fontWeight={700}>
+                <text x={cardCx(i)} y={CARD_TOP + 35} textAnchor="middle" fill={badgeTextFill} fontSize={13} fontFamily="monospace" fontWeight={700}>
                   {i + 1}
                 </text>
 
                 {/* Stage name */}
-                <text x={cardCx(i)} y={CARD_TOP + 74} textAnchor="middle" fill={nameFill} fontSize={14} fontFamily="sans-serif" fontWeight={700}>
+                <text x={cardCx(i)} y={CARD_TOP + 74} textAnchor="middle" fill={nameFill} fontSize={16} fontFamily="sans-serif" fontWeight={700}>
                   {stage.name}
                 </text>
 
                 {/* Biotech example, wrapped deterministically */}
-                <g fontFamily="monospace" fontSize={13} fill="white" opacity={detailOpacity} textAnchor="middle">
+                <g fontFamily="monospace" fontSize={15} fill="white" opacity={detailOpacity} textAnchor="middle">
                   {DETAIL_LINES[i].map((line, li) => (
                     <text key={`d-${i}-${li}`} x={cardCx(i)} y={CARD_TOP + 104 + li * 16}>
                       {line}
@@ -229,7 +229,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
               fill={passThrough(i) > 0.5 ? COLORS.accent : "rgba(255,255,255,0.35)"}
             />
           ))}
-          <g fontFamily="monospace" fontSize={12} fill={COLORS.dim} textAnchor="middle">
+          <g fontFamily="monospace" fontSize={14} fill={COLORS.dim} textAnchor="middle">
             {STAGES.map((s, i) => (
               <text key={`rl-${i}`} x={cardCx(i)} y={RAIL_Y + 20} opacity={i === currentIndex ? 1 : 0.6}>
                 {s.name}
@@ -244,14 +244,14 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
       {/* Readable readout of the stage the token is in — the SVG keeps the
           sequence legible, this keeps the wording legible at any stage size. */}
       <div className="mt-2 flex flex-col gap-1 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm sm:flex-row sm:items-center sm:gap-4">
-        <span className="font-mono text-sm whitespace-nowrap text-storm">
+        <span className="font-mono text-base whitespace-nowrap text-storm">
           Etapa{" "}
           <span className="font-semibold text-mint">
             {currentIndex + 1} / {COUNT}
           </span>
         </span>
-        <span className="text-sm font-semibold text-storm">{current.name}</span>
-        <span className="text-sm text-storm">{current.detail}</span>
+        <span className="text-base font-semibold text-storm">{current.name}</span>
+        <span className="text-base text-storm">{current.detail}</span>
       </div>
 
       {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}

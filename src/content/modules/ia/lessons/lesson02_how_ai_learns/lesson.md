@@ -234,7 +234,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   variant="scientist"
   mood="neutral"
   lines={[
-    "Hasta aquí hemos clasificado en categorías discretas: Aspergillus o Penicillium, benigno o maligno.",
+    "Hasta aquí hemos clasificado en categorías discretas: *Aspergillus* o *Penicillium*, benigno o maligno.",
     "Pero en biotecnología a menudo necesitamos predecir una cantidad continua.",
     "Por ejemplo: ¿qué halo de inhibición en milímetros generará una dosis de antifúngico?",
   ]}
@@ -255,7 +255,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   explanation="Es clasificación (categoría discreta). k=1 es muy sensible al ruido: un dato mal medido decide la clase. k grande diluye el ruido."
   options={[
     { id: "a", label: "Es clasificación, k=1 puede fallar por un vecino ruidoso, k=20 diluye el ruido", correct: true, feedback: "¡Correcto! k controla el balance entre detalle local y robustez al ruido." },
-    { id: "b", label: "Es regresión, k no importa porque KNN siempre es regresión", correct: false, feedback: "Regresión predice números continuos, acá predecimos especie (categoría) → clasificación." },
+    { id: "b", label: "Es regresión, k no importa porque KNN siempre es regresión", correct: false, feedback: "Regresión predice números continuos, acá predecimos especie (categoría)  clasificación." },
     { id: "c", label: "Es clasificación, k=1 siempre es más preciso que k=20", correct: false, feedback: "No siempre: k=1 sobreajusta. k grande generaliza mejor aunque pierda algo de detalle." },
     { id: "d", label: "Son lo mismo, clasificación y regresión son sinónimos", correct: false, feedback: "No: clasificación = categorías discretas, regresión = valores continuos." },
   ]}
@@ -299,7 +299,7 @@ La regresión lineal encuentra la relación óptima entre una variable independi
 </ConceptCard>
 
 <ChoiceQuestion
-  question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radio→textura es tan bajo (≈0,10)?"
+  question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radiotextura es tan bajo (≈0,10)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
   blockId="choice l02 ecm 1"
@@ -475,7 +475,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   explanation="Clasificación predice categorías discretas, regresión predice valores continuos."
   options={[
     { id: "a", label: "Clasificación es siempre más precisa que regresión", correct: false, feedback: "Precisión depende del problema y los datos, no del tipo de tarea." },
-    { id: "b", label: "Clasificación predice categorías discretas, regresión predice valores continuos", correct: true, feedback: "¡Exacto! Aspergillus/Penicillium es clasificación, predecir concentración es regresión." },
+    { id: "b", label: "Clasificación predice categorías discretas, regresión predice valores continuos", correct: true, feedback: "¡Exacto! *Aspergillus*/*Penicillium* es clasificación, predecir concentración es regresión." },
     { id: "c", label: "No hay diferencia, son sinónimos", correct: false, feedback: "Son familias distintas de problemas con métricas diferentes." },
     { id: "d", label: "Regresión solo funciona con datos biológicos", correct: false, feedback: "Regresión es general, funciona en cualquier dominio con variable continua." },
   ]}

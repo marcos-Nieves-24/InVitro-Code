@@ -78,7 +78,7 @@ Una estimación de densidad por kernel (KDE) traza una versión suavizada del hi
 
 $$\hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x x_i}{h}\right)$$
 
-El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$ chico → más detalle.
+El ancho de banda $h$ controla la suavidad: $h$ grande  curva más suave, $h$ chico  más detalle.
 
 </RevealSequence>
 </Section>
@@ -102,10 +102,10 @@ El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$
 </EquationTour>
 
 <ConceptCard variant="key idea">
-- **Valor**: Asimetría = 0 → Distribución simétrica (ej. normal)
-- **Dirección**: Asimetría > 0 → Cola larga a la derecha → media > mediana
-- **Caso típico**: Asimetría < 0 → Cola larga a la izquierda → media < mediana
-- **Ejemplo**: Precios de casas (cola derecha) → Notas de examen fácil (cola izquierda)
+- **Valor**: Asimetría = 0  Distribución simétrica (ej. normal)
+- **Dirección**: Asimetría > 0  Cola larga a la derecha  media > mediana
+- **Caso típico**: Asimetría < 0  Cola larga a la izquierda  media < mediana
+- **Ejemplo**: Precios de casas (cola derecha)  Notas de examen fácil (cola izquierda)
 </ConceptCard>
 
 <ConceptCard variant="key idea">
@@ -134,9 +134,9 @@ En una distribución con asimetría a la derecha, la media es mayor que la media
 </EquationTour>
 
 <ConceptCard variant="key idea">
-- **Curtosis = 0**: Mesocúrtica → Similar a la distribución normal
-- **Curtosis > 0**: Leptocúrtica → Colas pesadas → más outliers. Ej: retornos financieros
-- **Curtosis < 0**: Platicúrtica → Colas livianas → menos outliers. Ej: distribución uniforme
+- **Curtosis = 0**: Mesocúrtica  Similar a la distribución normal
+- **Curtosis > 0**: Leptocúrtica  Colas pesadas  más outliers. Ej: retornos financieros
+- **Curtosis < 0**: Platicúrtica  Colas livianas  menos outliers. Ej: distribución uniforme
 </ConceptCard>
 
 <CalloutInfo>

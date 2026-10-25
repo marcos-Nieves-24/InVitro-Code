@@ -210,7 +210,7 @@ Lista de Python:           Array NumPy:
 └──────┴──────┴──────┘      └──────────────────┘
                             Memoria contigua
 Cada elemento es un         Tipo homogéneo
-objeto Python → lento       → cómputo rápido
+objeto Python  lento        cómputo rápido
 ```
 
 </RevealSequence>
@@ -410,7 +410,7 @@ Errores comunes:
 - **Confundir copia vs vista**: el slicing devuelve una vista, no una copia   usa `.copy()` para datos independientes.
 - **Errores de broadcasting**: formas incompatibles lanzan ValueError; verifica las formas con `.shape`.
 - **Usar `==` con floats**: mismos problemas de precisión que Python; usa `np.isclose()`.
-- **Olvidar el dtype**: tipos mixtos en lista → dtype string (todos los elementos se vuelven strings).
+- **Olvidar el dtype**: tipos mixtos en lista  dtype string (todos los elementos se vuelven strings).
 
 Buenas prácticas:
 

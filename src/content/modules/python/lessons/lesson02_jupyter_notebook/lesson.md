@@ -129,7 +129,7 @@ jupyter notebook
 Esto abre el dashboard de Jupyter en tu navegador en `http://localhost:8888`.
 
 
-1. Haz clic en "New" → "Python 3"
+1. Haz clic en "New"  "Python 3"
 2. Se abre un nuevo notebook con una celda de código vacía
 
 
@@ -172,8 +172,8 @@ Atajos de teclado de Jupyter:
 </ConceptCard>
 
 
-- **Guardar**: File → Save and Checkpoint (o Ctrl+S)
-- **Exportar**: File → Download as → HTML, PDF, Python script, etc.
+- **Guardar**: File  Save and Checkpoint (o Ctrl+S)
+- **Exportar**: File  Download as  HTML, PDF, Python script, etc.
 
 
 
@@ -231,8 +231,8 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
 
-1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell → Run All) para ejecutar secuencialmente.
-2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel → Restart & Run All).
+1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell  Run All) para ejecutar secuencialmente.
+2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel  Restart & Run All).
 3. **Olvidarse de guardar**: Jupyter guarda automáticamente, pero guarda manualmente antes de cerrar.
 4. **Usar print() excesivamente**: La última expresión de una celda se muestra automáticamente.
 5. **Cerrar la terminal**: El servidor de Jupyter corre en la terminal. Cerrarla detiene el servidor.

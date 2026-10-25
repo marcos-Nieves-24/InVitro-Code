@@ -27,7 +27,7 @@ const STAGES: SupervisedStage[] = [
     biotechDetail:
       "Conidias etiquetadas (Aspergillus / Penicillium) con sus features medibles: [área, circularidad, textura].",
     analogy: "Ejercicios resueltos de un libro de texto",
-    sampleCode: "[4.8µm, 0.91, rugosa] → Aspergillus",
+    sampleCode: "[4.8µm, 0.91, rugosa]  Aspergillus",
   },
   {
     id: "algorithm",
@@ -54,7 +54,7 @@ const STAGES: SupervisedStage[] = [
     biotechDetail:
       "Clasifica nuevas conidias nunca vistas aplicando el modelo aprendido en segundos.",
     analogy: "Ejercicios nuevos que resuelve en el examen",
-    sampleCode: "nueva muestra → 94% Aspergillus",
+    sampleCode: "nueva muestra  94% Aspergillus",
   },
 ];
 
@@ -347,8 +347,9 @@ export function SupervisedFlowPlayer({
                   y={CARD_TOP + 201}
                   textAnchor="middle"
                   fill={COLORS.accent}
-                  fontSize={9.5}
+                  fontSize={11}
                   fontFamily="monospace"
+                  fontStyle={stage.sampleCode.includes("Aspergillus") ? "italic" : undefined}
                 >
                   {stage.sampleCode}
                 </text>

@@ -99,12 +99,12 @@ Ejemplo biotecnológico: "Este nuevo fármaco reduce tumores en el 60 % de los p
 
 <ConceptCard variant="key idea">
 Visualización por objetivo:
-- **Tendencias** → gráfico de líneas (fácil de leer, tiempo en eje X)
-- **Comparar categorías** → gráfico de barras (ordenar por valor, no alfabéticamente)
-- **Mostrar distribución** → histograma o boxplot (mejor que tabla de frecuencias)
-- **Relación entre variables** → scatter plot (agregar línea de tendencia si hay correlación)
-- **Partes de un todo** → gráfico de barras apiladas (evitar gráficos de torta)
-- **Matriz de correlación** → heatmap (anotar con valores para referencia rápida)
+- **Tendencias**  gráfico de líneas (fácil de leer, tiempo en eje X)
+- **Comparar categorías**  gráfico de barras (ordenar por valor, no alfabéticamente)
+- **Mostrar distribución**  histograma o boxplot (mejor que tabla de frecuencias)
+- **Relación entre variables**  scatter plot (agregar línea de tendencia si hay correlación)
+- **Partes de un todo**  gráfico de barras apiladas (evitar gráficos de torta)
+- **Matriz de correlación**  heatmap (anotar con valores para referencia rápida)
 </ConceptCard>
 
 <ConceptCard variant="warning">
@@ -177,10 +177,10 @@ Errores clásicos de visualización: ejes truncados que exageran las diferencias
 
 <ConceptCard variant="key idea">
 Traducir estadística a decisiones:
-- **"El RMSE fue 3.4 con R² de 0.72"** → "El modelo predice el precio con un error típico de $3,400 y captura el 72 % de la variación" (unidades y contexto humano)
-- **"Realizamos PCA con 3 componentes que explican el 85 % de la varianza"** → "Redujimos 50 variables a 3 dimensiones principales sin perder casi información" (analogía visual intuitiva)
-- **"El p valor fue 0.03, rechazamos H₀"** → "Hay solo un 3 % de probabilidad de que este resultado sea casualidad" (traducir la significancia estadística a lenguaje común)
-- **"K Means con k=4, silueta 0.65"** → "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos" (resultado accionable, no parámetro técnico)
+- **"El RMSE fue 3.4 con R² de 0.72"**  "El modelo predice el precio con un error típico de $3,400 y captura el 72 % de la variación" (unidades y contexto humano)
+- **"Realizamos PCA con 3 componentes que explican el 85 % de la varianza"**  "Redujimos 50 variables a 3 dimensiones principales sin perder casi información" (analogía visual intuitiva)
+- **"El p valor fue 0.03, rechazamos H₀"**  "Hay solo un 3 % de probabilidad de que este resultado sea casualidad" (traducir la significancia estadística a lenguaje común)
+- **"K Means con k=4, silueta 0.65"**  "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos" (resultado accionable, no parámetro técnico)
 </ConceptCard>
 
 </RevealSequence>

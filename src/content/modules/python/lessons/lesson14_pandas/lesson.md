@@ -103,7 +103,7 @@ df = pd.read_json("data.json")
 ```text
 Estructura del DataFrame
 
-       Columnas →
+       Columnas 
        Name    Age  Salary
 Fila 0  Alice   25   50000
   ↓  1  Bob     30   60000

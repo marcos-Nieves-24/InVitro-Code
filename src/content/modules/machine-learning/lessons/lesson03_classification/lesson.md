@@ -93,7 +93,7 @@ $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 </EquationTour>
 
 <CalloutInfo>
-La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$ → probabilidad cercana a 1. Valores muy negativos → probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
+La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. Valores grandes de $z$  probabilidad cercana a 1. Valores muy negativos  probabilidad cercana a 0. En $z=0$, la probabilidad es exactamente 0.5.
 </CalloutInfo>
 
 **Regla de decisión:** si $\hat{p} \geq 0.5$, predices clase 1. Si $\hat{p} < 0.5$, clase 0. La **frontera de decisión** es el hiperplano donde $\hat{p} = 0.5$, es decir, $z = 0$.
@@ -164,7 +164,7 @@ De la matriz salen todas las métricas:
 <ConceptCard variant="definition">
 La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras varías el umbral de decisión de 0 a 1. Cada punto de la curva es un umbral diferente.
 
-**AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0 → clasificador perfecto. AUC = 0.5 → no mejor que tirar una moneda. AUC < 0.5 → estás haciendo todo al revés.
+**AUC (Área Bajo la Curva):** Un solo número que resume la curva. AUC = 1.0  clasificador perfecto. AUC = 0.5  no mejor que tirar una moneda. AUC < 0.5  estás haciendo todo al revés.
 </ConceptCard>
 
 <RocBuilder caption="Mové el umbral y seguí el punto sobre la curva: cada paso hacia la derecha gana recall (menos FN) y paga con falsos positivos." />

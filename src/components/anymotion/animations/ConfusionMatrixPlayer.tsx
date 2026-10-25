@@ -164,7 +164,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.94}
           >
-            Matriz de confusión: Aspergillus (positivo) vs Penicillium (negativo)
+            Matriz de confusión: <tspan font-style="italic">Aspergillus</tspan> (positivo) vs <tspan font-style="italic">Penicillium</tspan> (negativo)
           </text>
           <text
             x={VB_W / 2}
@@ -444,7 +444,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             {lens.title}
           </span>
           <span className="rounded-md bg-brand-50 px-2.5 py-1 font-mono text-sm font-semibold text-brand-700">
-            {lens.formula} → {lens.calculation}
+            {lens.formula}  {lens.calculation}
           </span>
         </div>
         <p className="mt-1.5 text-sm text-ink">{lens.meaning}</p>

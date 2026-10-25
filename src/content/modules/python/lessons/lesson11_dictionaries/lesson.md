@@ -31,7 +31,7 @@ Quiz: quiz.md
   lines={[
     "Las listas indexan por posición: el elemento 3 es el tercero.",
     "Pero en la vida real buscas a un paciente por su ID, no por su posición en una fila.",
-    "Los diccionarios te dejan buscar por clave: un mapeo directo nombre → valor.",
+    "Los diccionarios te dejan buscar por clave: un mapeo directo nombre  valor.",
     "Son la estructura más importante de Python para ciencia de datos.",
   ]}
 />
@@ -163,11 +163,11 @@ Estructura del Diccionario (Tabla Hash)
 
 Clave      Función Hash    Bucket
 ┌──────┐   ┌──────────┐   ┌───────┐
-│"name"│ → │ hash()   │ → │ Índice│ → "Alice"
+│"name"│  │ hash()   │  │ Índice│  "Alice"
 ├──────┤   └──────────┘   ├───────┤
-│"age" │ → │ hash()   │ → │ Índice│ → 22
+│"age" │  │ hash()   │  │ Índice│  22
 ├──────┤   └──────────┘   ├───────┤
-│"grade"│→ │ hash()   │ → │ Índice│ → "A"
+│"grade"│ │ hash()   │  │ Índice│  "A"
 └──────┘   └──────────┘   └───────┘
 
 La búsqueda por clave es O(1): muy rápida.

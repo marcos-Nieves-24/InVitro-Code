@@ -122,7 +122,7 @@ else:
 ```
 Flujo del Bucle For:
 ┌─────────┐     ┌──────────────┐     ┌─────────┐
-│ Inicio  │ ──→ │ ¿Más items?  │ ──→ │ Ejecutar│
+│ Inicio  │ ── │ ¿Más items?  │ ── │ Ejecutar│
 │         │     │ en secuencia │     │ Bloque  │
 └─────────┘     └──────┬───────┘     └────┬────┘
                        │ No               │ Sí
@@ -133,7 +133,7 @@ Flujo del Bucle For:
 
 Flujo del Bucle While:
 ┌─────────┐     ┌──────────┐     ┌─────────┐
-│ Inicio  │ ──→ │¿Condición?│ ──→ │ Ejecutar│
+│ Inicio  │ ── │¿Condición?│ ── │ Ejecutar│
 │         │     │          │     │ Bloque  │
 └─────────┘     └────┬─────┘     └────┬────┘
                      │ False          │ True

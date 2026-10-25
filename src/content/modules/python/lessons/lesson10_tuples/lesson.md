@@ -138,7 +138,7 @@ t.index(2)    # 1 (primera ocurrencia)
 ### Comparación Tupla vs Lista
 
 <ConceptCard variant="key idea">
-Tupla o lista, elegí por inmutabilidad: datos fijos y claves → tupla `()`; datos que cambian → lista `[]`. Las tuplas son hashables (sirven de clave); las listas no.
+Tupla o lista, elegí por inmutabilidad: datos fijos y claves  tupla `()`; datos que cambian  lista `[]`. Las tuplas son hashables (sirven de clave); las listas no.
 </ConceptCard>
 
 ### Explicación Visual
@@ -219,7 +219,7 @@ variants = [
 # Desempaquetar y analizar
 for chrom, pos, ref, alt, qual in variants:
     if qual > 90:
-        print(f"Variante de alta calidad: {chrom}:{pos} {ref}→{alt} (Q{qual})")
+        print(f"Variante de alta calidad: {chrom}:{pos} {ref}{alt} (Q{qual})")
 
 # Las tuplas aseguran que los datos de variantes no se modifiquen accidentalmente
 ```
@@ -241,7 +241,7 @@ def lookup_codon(codon):
     return None, "Unknown"
 
 aa, note = lookup_codon("ATG")
-print(f"ATG → {aa} ({note})")
+print(f"ATG  {aa} ({note})")
 ```
 
 ## Ejemplo SaaS

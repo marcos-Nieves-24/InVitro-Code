@@ -107,9 +107,9 @@ Indexación de Listas (desde 0):
 Índice:  -5     -4     -3     -2     -1
 
 Slicing [inicio:fin]:
-  [1:4] → "b", "c", "d"  (fin es exclusivo)
-  [:3]  → "a", "b", "c"
-  [2:]  → "c", "d", "e"
+  [1:4]  "b", "c", "d"  (fin es exclusivo)
+  [:3]   "a", "b", "c"
+  [2:]   "c", "d", "e"
 ```
 
 </RevealSequence>
@@ -437,7 +437,7 @@ Desafío de Código   promedio móvil con ventana:
 1. Dada una lista de números y un tamaño de ventana `k`.
 2. Calcula el promedio de cada `k` elementos consecutivos.
 3. Devuelve una lista de estos promedios.
-4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)` → `[2.0, 3.0, 4.0]`.
+4. Ejemplo: `rolling_average([1, 2, 3, 4, 5], 3)`  `[2.0, 3.0, 4.0]`.
 5. Usa list comprehension y slicing.
 6. Maneja casos borde: lista vacía, `k > len(lista)`, `k = 1`.
 

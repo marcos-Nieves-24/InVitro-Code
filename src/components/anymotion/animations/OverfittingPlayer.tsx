@@ -263,7 +263,7 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
             fontFamily="monospace"
             opacity={0.7}
           >
-            {`x ${tracerT.toFixed(2)} → ŷ ${tracerPred.toFixed(2)}`}
+            {`x ${tracerT.toFixed(2)}  ŷ ${tracerPred.toFixed(2)}`}
           </text>
 
           {/* legend (left panel) */}

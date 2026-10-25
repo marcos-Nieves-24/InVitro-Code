@@ -101,13 +101,13 @@ En cada nodo, el algoritmo evalúa todas las features y todos los thresholds pos
 <ConceptCard variant="definition">
 **Impureza de Gini:** $\text{Gini}(t) = 1 \sum_{i=1}^{c} p_i^2$
 
-Mide la probabilidad de clasificar mal un elemento al azar. Gini = 0 → nodo puro (todas las muestras son de la misma clase). Gini alto → mezcla de clases.
+Mide la probabilidad de clasificar mal un elemento al azar. Gini = 0  nodo puro (todas las muestras son de la misma clase). Gini alto  mezcla de clases.
 </ConceptCard>
 
 <ConceptCard variant="definition">
 **Entropía:** $\text{Entropía}(t) = -\sum_{i=1}^{c} p_i \log_2(p_i)$
 
-Otra medida de "desorden". Entropía = 0 → pureza total. La entropía penaliza más la incertidumbre que Gini cuando hay muchas clases.
+Otra medida de "desorden". Entropía = 0  pureza total. La entropía penaliza más la incertidumbre que Gini cuando hay muchas clases.
 </ConceptCard>
 
 **Ganancia de información:** Reducción en impureza después de dividir:

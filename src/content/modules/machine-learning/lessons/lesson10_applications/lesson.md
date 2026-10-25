@@ -55,14 +55,14 @@ Un pipeline de ML completo tiene 5 etapas: (1) entender el problema y los datos,
   lines={[
     "Una empresa produce proteínas terapéuticas y mide variables del biorreactor.",
     "El objetivo: predecir el puntaje de calidad (0 a 100) para aprobar o descartar lotes.",
-    "Features numéricas → StandardScaler; comparar LR, RF, GBR; métrica RMSE.",
+    "Features numéricas  StandardScaler; comparar LR, RF, GBR; métrica RMSE.",
   ]}
 />
 
 <ConceptCard variant="key idea">
 **Pipeline biomanufactura**
 - Caso: temperatura, pH, nutrientes, tiempo de fermentación, velocidad de agitación
-- Features numéricas → `StandardScaler`
+- Features numéricas  `StandardScaler`
 - Modelos a comparar: `LinearRegression`, `RandomForestRegressor`, `GradientBoostingRegressor`
 - Métrica: RMSE (necesitas saber cuánto te equivocas en la escala de calidad)
 - Hiperparámetros: `GridSearchCV` para encontrar la mejor combinación

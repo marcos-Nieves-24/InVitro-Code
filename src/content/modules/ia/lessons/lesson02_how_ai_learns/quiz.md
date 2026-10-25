@@ -36,6 +36,6 @@ d) Porque solo funciona con redes neuronales
 
 1. **b)** La frontera separa clases. En 2D es una línea, en 3D es un plano, en más dimensiones es un hiperplano.
 2. **b)** k grande suaviza la frontera pero puede perder detalle local. Es un balance.
-3. **b)** Clasificación → categorías (*Aspergillus*/*Penicillium*). Regresión → números continuos (concentración, peso, temperatura).
+3. **b)** Clasificación  categorías (*Aspergillus*/*Penicillium*). Regresión  números continuos (concentración, peso, temperatura).
 4. **a)** Subajuste: el modelo es demasiado simple (ambos errores altos). Sobreajuste: el modelo es demasiado complejo (train bajo, test alto).
 5. **b)** El modelo memoriza los datos de entrenamiento y no generaliza. Es el problema más común en ML.

@@ -377,7 +377,7 @@ print(f"R²: {model_s.score(X_s, y_s):.3f}")
 ```
 
 <ConceptCard variant="key idea">
-La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
+La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas  menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
 </ConceptCard>
 
 </RevealSequence>

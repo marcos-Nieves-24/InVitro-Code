@@ -358,7 +358,7 @@ print(f"P(más de 5 mutaciones) = {1 poi.cdf(5):.3f}")  # gen muy dañado
   explanation="Poisson asume eventos independientes a tasa constante λ; en ADN cada posición muta independientemente con tasa ≈ constante por región. En hotspots (λ variable) subestima la varianza y se prefiere binomial negativa."
   options={[
     { id: "a", label: "Porque cada mutación es independiente a tasa constante λ por región; si la tasa varía (hotspots), Poisson subestima la varianza", correct: true, feedback: "¡Exacto! La constancia de λ por región es el supuesto clave; en hotspots falla." },
-    { id: "b", label: "Porque las mutaciones ocurren en clusters (hotspots) y Poisson los captura automáticamente", correct: false, feedback: "Al revés: hotspots rompen la tasa constante y Poisson subestima la varianza (→ binomial negativa)." },
+    { id: "b", label: "Porque las mutaciones ocurren en clusters (hotspots) y Poisson los captura automáticamente", correct: false, feedback: "Al revés: hotspots rompen la tasa constante y Poisson subestima la varianza ( binomial negativa)." },
     { id: "c", label: "Porque en genética λ cambia por generación pero Poisson se adapta automáticamente", correct: false, feedback: "Poisson asume λ constante en el intervalo; no se adapta a tasas variables." },
     { id: "d", label: "Porque media y varianza iguales son garantía en mutaciones, no supuesto", correct: false, feedback: "Media=varianza es supuesto, no garantía; sobredispersión señala que el supuesto falla." },
   ]}
@@ -389,7 +389,7 @@ print(f"P(más de 5 mutaciones) = {1 poi.cdf(5):.3f}")  # gen muy dañado
   lessonSlug="lesson04_statistical_distributions"
   blockId="reflection l04 choose dist"
   allowContinueOnIncorrect
-  explanation="Poisson con λ=5: llegadas por unidad de tiempo son caso clásico Poisson. Verificar: si varianza empírica ≫ 5 (sobredispersión) → binomial negativa; si hay patrones temporales (hora pico) → Poisson no homogéneo λ(t)."
+  explanation="Poisson con λ=5: llegadas por unidad de tiempo son caso clásico Poisson. Verificar: si varianza empírica ≫ 5 (sobredispersión)  binomial negativa; si hay patrones temporales (hora pico)  Poisson no homogéneo λ(t)."
   options={[
     { id: "a", label: "Poisson con λ=5, porque son llegadas por unidad de tiempo; verificar sobredispersión (varianza ≫ 5) y patrones temporales", correct: true, feedback: "¡Exacto! Poisson clásico; con sobredispersión o peaks temporales se ajusta." },
     { id: "b", label: "Normal N(μ=5, σ²=5), porque todo conteo converge a normal por el TCL", correct: false, feedback: "Llegadas por intervalo son caso Poisson discreto; Normal aproxima pero no modela el conteo real." },

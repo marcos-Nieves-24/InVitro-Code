@@ -131,10 +131,10 @@ La mediana divide el conjunto en dos mitades iguales. A diferencia de la media, 
 </ConceptCard>
 
 <ConceptCard variant="key idea">
-- **Definición**: Punto de equilibrio (suma / n) → Valor central (mitad arriba, mitad abajo)
-- **Robustez a outliers**: Muy sensible   un valor extremo la desplaza → Robusta   los outliers no la afectan
-- **Cuándo usarla**: Datos simétricos (ej. altura, peso, temperatura corporal) → Datos sesgados (ej. ingresos, precios, expresión génica con outliers)
-- **Ejemplo**: Notas de un examen bien diseñado → Ingresos de una población (dónde algunos ganan 100× más)
+- **Definición**: Punto de equilibrio (suma / n)  Valor central (mitad arriba, mitad abajo)
+- **Robustez a outliers**: Muy sensible   un valor extremo la desplaza  Robusta   los outliers no la afectan
+- **Cuándo usarla**: Datos simétricos (ej. altura, peso, temperatura corporal)  Datos sesgados (ej. ingresos, precios, expresión génica con outliers)
+- **Ejemplo**: Notas de un examen bien diseñado  Ingresos de una población (dónde algunos ganan 100× más)
 </ConceptCard>
 
 </RevealSequence>
@@ -237,11 +237,11 @@ El IQR contiene el 50% central de los datos. Es **robusto frente a valores atíp
 </ConceptCard>
 
 <ConceptCard variant="key idea">
-- **Mide**: Recorrido total (max − min) → Dispersión del 50% central (Q3 − Q1)
-- **Robustez**: Muy sensible a outliers → Robusto   ignora extremos
-- **Unidad**: Misma qué los datos → Misma qué los datos
-- **Se usa con**: Media y desviación estándar → Mediana
-- **Cuándo**: Datos simétricos, sin outliers → Datos sesgados o con outliers
+- **Mide**: Recorrido total (max − min)  Dispersión del 50% central (Q3 − Q1)
+- **Robustez**: Muy sensible a outliers  Robusto   ignora extremos
+- **Unidad**: Misma qué los datos  Misma qué los datos
+- **Se usa con**: Media y desviación estándar  Mediana
+- **Cuándo**: Datos simétricos, sin outliers  Datos sesgados o con outliers
 </ConceptCard>
 
 </RevealSequence>
@@ -313,7 +313,7 @@ outliers = reduction[(reduction < lower_bound) | (reduction > upper_bound)]
 
 print(f"Límites: [{lower_bound:.2f}, {upper_bound:.2f}]")
 print(f"Outliers detectados: {outliers}")
-# → Outliers detectados: [45]
+#  Outliers detectados: [45]
 ```
 
 <ConceptCard variant="warning">

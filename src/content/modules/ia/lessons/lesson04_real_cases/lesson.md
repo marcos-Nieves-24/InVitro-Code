@@ -105,7 +105,7 @@ Sin embargo, el ARN es una molécula químicamente inestable que el sistema inmu
   explanation="La IA entrena con formulaciones previas y predice las 50 más prometedoras, evitando probar 1.000 al azar y ahorrando meses."
   options={[
     { id: "a", label: "Probando todas las combinaciones al azar en el laboratorio sin usar datos", correct: false, feedback: "Eso es lo que hacía el método tradicional lento, la IA justamente evita eso." },
-    { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición → rendimiento y guía los experimentos." },
+    { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición  rendimiento y guía los experimentos." },
     { id: "c", label: "Reemplazando por completo los experimentos de laboratorio", correct: false, feedback: "La IA no reemplaza el laboratorio, lo hace más inteligente y enfocado." },
     { id: "d", label: "Eligiendo lípidos solo por su precio más barato", correct: false, feedback: "El costo no determina eficacia ni estabilidad, importan las propiedades químicas." },
   ]}

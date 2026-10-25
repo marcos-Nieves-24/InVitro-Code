@@ -199,7 +199,7 @@ export function LessonCarousel({
           </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + single dot rail — fuente ampliada */}
+        {/* Footer — Atrás / Continuar + slice indicator — fuente ampliada, sin flechas */}
         <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-4 py-3">
           <Button
             variant="ghost"
@@ -209,17 +209,14 @@ export function LessonCarousel({
             aria-label="Diapositiva anterior"
             className={`focus-ring ${NAV_TOKEN} text-base font-medium justify-self-start px-6 py-2`}
           >
-            ← Atrás
+            Atrás
           </Button>
 
-          {/* Single positional affordance in the footer: the dot rail.
-              The bare "N / M" counter that sat next to it was removed — it
-              restated the slide number the header's "Diapositiva N de M" text
-              already gives. The rail wins over the bare number because it also
-              shows remaining distance, and it stays aria-hidden here so the
-              header text remains the single announced source of truth. */}
-          <div className="flex items-center gap-3" aria-hidden="true">
-            <div className="hidden items-center gap-2 sm:flex">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-sm font-medium text-storm">
+              slice {current + 1} de {total}
+            </span>
+            <div className="hidden items-center gap-2 sm:flex" aria-hidden="true">
               {Array.from({ length: total }, (_, i) => (
                 <span
                   key={`dot-${i}`}
@@ -240,9 +237,9 @@ export function LessonCarousel({
               Footer is enabled when hasMore and not blocked; disabled only when quiz blocks. */}
           {isLast ? (
             <Button
-              variant="secondary"
+              variant="primary"
               size="sm"
-              className={`${NAV_TOKEN} text-base font-semibold justify-self-end !border-teal-600 !bg-teal-600 px-6 py-2 !text-white shadow-teal-600/20 hover:!bg-teal-700`}
+              className={`${NAV_TOKEN} text-base font-semibold justify-self-end px-6 py-2`}
               onClick={handleFinish}
               disabled={state === "loading" || isRevealBlocked}
               aria-label="Finalizar lección"
@@ -270,7 +267,7 @@ export function LessonCarousel({
               }
               className={`focus-ring ${NAV_TOKEN} text-base font-semibold justify-self-end px-6 py-2 ${isRevealBlocked ? "opacity-50" : ""}`}
             >
-              Continuar →
+              Continuar
             </Button>
           )}
         </div>

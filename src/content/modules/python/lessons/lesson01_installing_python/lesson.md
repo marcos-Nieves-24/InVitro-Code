@@ -266,10 +266,10 @@ Para salir del intérprete interactivo escribe `exit()` o presiona **Ctrl+D** (L
 <ConceptCard variant="key idea">
 Comandos fundamentales de pip:
 
-- `pip install numpy` → Instala un paquete
-- `pip uninstall numpy` → Lo elimina
-- `pip list` → Lista paquetes instalados
-- `pip freeze` → Lista paquetes con sus versiones
+- `pip install numpy`  Instala un paquete
+- `pip uninstall numpy`  Lo elimina
+- `pip list`  Lista paquetes instalados
+- `pip freeze`  Lista paquetes con sus versiones
 </ConceptCard>
 
 ```bash
@@ -612,7 +612,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   allowContinueOnIncorrect
   explanation="python -m venv venv, luego activar (source venv/bin/activate o venv\Scripts\activate en Windows), pip install numpy y python -c 'import numpy; print(numpy.__version__)'."
   options={[
-    { id: "a", label: "python -m venv venv → activar → pip install numpy → python -c 'import numpy; print(numpy.__version__)'", correct: true, feedback: "¡Exacto! Es la secuencia estándar." },
+    { id: "a", label: "python -m venv venv  activar  pip install numpy  python -c 'import numpy; print(numpy.__version__)'", correct: true, feedback: "¡Exacto! Es la secuencia estándar." },
     { id: "b", label: "pip install venv && venv create", correct: false, feedback: "venv es un módulo de Python, no un paquete de pip." },
     { id: "c", label: "conda create -n venv numpy sin activar el entorno", correct: false, feedback: "Con conda hay que activar el entorno antes de instalar/usar." },
     { id: "d", label: "python -m pip install venv numpy en un solo paso", correct: false, feedback: "venv no se instala por pip y la creación del entorno es un paso aparte." },

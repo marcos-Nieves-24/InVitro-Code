@@ -178,7 +178,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           {/* Callout for separation */}
           <g opacity={frontierO}>
             <text x={400} y={418} textAnchor="middle" fill="#45dcc6" fontSize={13} fontFamily="monospace" fontWeight={600}>
-              dos features → separacion clara
+              dos features  separacion clara
             </text>
           </g>
         </svg>

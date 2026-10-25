@@ -43,7 +43,7 @@ export function LabRunner({ content, rawFallback }: LabRunnerProps) {
   }
 
   // REQ-LABRUN-01: Render compiled MDX (headings, LaTeX math, tables via
-  // MarkdownTable, and code fences via LabCodeBlock → PyodideRunner)
+  // MarkdownTable, and code fences via LabCodeBlock  PyodideRunner)
   return (
     <div className={labProseClass}>
       {content}

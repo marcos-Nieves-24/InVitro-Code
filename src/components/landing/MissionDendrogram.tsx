@@ -5,7 +5,7 @@ import { Target, Eye } from "lucide-react";
 
 /*
   Dendrogram layout — top-down, orthogonal segments.
-  Root → Misión (3 pilares) + Visión.
+  Root  Misión (3 pilares) + Visión.
 
   Compact viewBox (1200×815) so the graph renders large inside the
   max-w-1280 card, with20px fonts and no axis-label overlap.

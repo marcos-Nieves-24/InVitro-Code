@@ -86,7 +86,7 @@ export function EquationTour({ caption, children }: EquationTourProps) {
             aria-label="Siguiente parte de la ecuación"
             className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-5 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none"
           >
-            Siguiente <span aria-hidden="true">→</span>
+            Siguiente <span aria-hidden="true"></span>
           </button>
         </div>
 

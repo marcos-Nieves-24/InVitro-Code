@@ -69,13 +69,13 @@ Los operadores aritméticos realizan operaciones matemáticas sobre tipos numér
 <ConceptCard variant="key idea">
 Operadores aritméticos:
 
-- `+` Suma   `5 + 3` → `8`
-- `-` Resta   `5 3` → `2`
-- `*` Multiplicación   `5 * 3` → `15`
-- `/` División float   `5 / 3` → `1.666...`
-- `//` División entera   `5 // 3` → `1`
-- `%` Módulo (resto)   `5 % 3` → `2`
-- `**` Exponenciación   `5 ** 3` → `125`
+- `+` Suma   `5 + 3`  `8`
+- `-` Resta   `5 3`  `2`
+- `*` Multiplicación   `5 * 3`  `15`
+- `/` División float   `5 / 3`  `1.666...`
+- `//` División entera   `5 // 3`  `1`
+- `%` Módulo (resto)   `5 % 3`  `2`
+- `**` Exponenciación   `5 ** 3`  `125`
 </ConceptCard>
 
 
@@ -84,12 +84,12 @@ Los operadores de comparación comparan dos valores y devuelven un booleano.
 <ConceptCard variant="key idea">
 Operadores de comparación:
 
-- `==` Igual a   `5 == 3` → `False`
-- `!=` Distinto de   `5 != 3` → `True`
-- `<` Menor que   `5 < 3` → `False`
-- `>` Mayor que   `5 > 3` → `True`
-- `<=` Menor o igual   `5 <= 5` → `True`
-- `>=` Mayor o igual   `5 >= 3` → `True`
+- `==` Igual a   `5 == 3`  `False`
+- `!=` Distinto de   `5 != 3`  `True`
+- `<` Menor que   `5 < 3`  `False`
+- `>` Mayor que   `5 > 3`  `True`
+- `<=` Menor o igual   `5 <= 5`  `True`
+- `>=` Mayor o igual   `5 >= 3`  `True`
 </ConceptCard>
 
 
@@ -98,9 +98,9 @@ Los operadores lógicos combinan expresiones booleanas.
 <ConceptCard variant="key idea">
 Operadores lógicos:
 
-- `and`   True si ambos son True   `True and False` → `False`
-- `or`   True si al menos uno es True   `True or False` → `True`
-- `not`   Invierte el booleano   `not True` → `False`
+- `and`   True si ambos son True   `True and False`  `False`
+- `or`   True si al menos uno es True   `True or False`  `True`
+- `not`   Invierte el booleano   `not True`  `False`
 </ConceptCard>
 
 
@@ -109,14 +109,14 @@ Los operadores de asignación actualizan variables con un cómputo.
 <ConceptCard variant="key idea">
 Operadores de asignación:
 
-- `=`   `x = 5` → `x = 5`
-- `+=`   `x += 3` → `x = x + 3`
-- `-=`   `x -= 3` → `x = x 3`
-- `*=`   `x *= 3` → `x = x * 3`
-- `/=`   `x /= 3` → `x = x / 3`
-- `//=`   `x //= 3` → `x = x // 3`
-- `%=`   `x %= 3` → `x = x % 3`
-- `**=`   `x **= 3` → `x = x ** 3`
+- `=`   `x = 5`  `x = 5`
+- `+=`   `x += 3`  `x = x + 3`
+- `-=`   `x -= 3`  `x = x 3`
+- `*=`   `x *= 3`  `x = x * 3`
+- `/=`   `x /= 3`  `x = x / 3`
+- `//=`   `x //= 3`  `x = x // 3`
+- `%=`   `x %= 3`  `x = x % 3`
+- `**=`   `x **= 3`  `x = x ** 3`
 </ConceptCard>
 
 
@@ -141,7 +141,7 @@ Python sigue la precedencia matemática estándar (PEMDAS):
 ```
 Precedencia de Operadores (de mayor a menor)
 
-  ()   →   **   →   *,/,//,%   →   +,-   →   ==,!=,<,>   →   not   →   and   →   or
+  ()      **      *,/,//,%      +,-      ==,!=,<,>      not      and      or
 
 Ejemplo:   5 + 3 * 2 ** 2
            = 5 + 3 * 4       (exponenciación primero)
@@ -298,7 +298,7 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 <RevealSequence>
 
 <ConceptCard variant="key idea">
-Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`. Ante la duda, paréntesis.
+Todo operador cae en una familia. El orden en que se evalúan: `()`  `**`  `*,/`  `+,-`  comparaciones  `not`  `and`  `or`. Ante la duda, paréntesis.
 </ConceptCard>
 
 <FeatureButtonList

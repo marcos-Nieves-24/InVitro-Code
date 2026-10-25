@@ -390,7 +390,7 @@ function resolveSingleShellCommand(cmd: string): string | null {
     return "(venv) activado";
   }
 
-  // bare python / python3 → REPL banner
+  // bare python / python3  REPL banner
   if (/^python3?\s*$/.test(cmd)) {
     return 'Python 3.12.0 (main, Oct  2 2024, 00:00:00) [GCC 13.2.0] on linux\nType "help", "copyright", "credits" or "license" for more information.';
   }

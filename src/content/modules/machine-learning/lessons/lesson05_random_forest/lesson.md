@@ -72,7 +72,7 @@ El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La r
 - Aleatoriedad 1: cada árbol se entrena con una muestra bootstrap diferente (~63% de los datos, con reemplazo).
 - Aleatoriedad 2: en cada división del árbol, solo se considera un subconjunto aleatorio de features (√p para clasificación, p/3 para regresión).
 - ¿Por qué dos?: si solo usáramos bootstrap, los árboles todavía estarían correlacionados (las features más fuertes dominarían). La segunda aleatoriedad fuerza diversidad real.
-- Resultado: árboles descorrelacionados que cometen errores en distintas direcciones → el promedio es mucho mejor que cualquiera individual.
+- Resultado: árboles descorrelacionados que cometen errores en distintas direcciones  el promedio es mucho mejor que cualquiera individual.
 </ConceptCard>
 
 <ConceptCard variant="definition">
@@ -360,7 +360,7 @@ plt.show()
 # ¿Dónde se aplana la mejora?
 for i in range(1, len(oob_scores)):
     improvement = oob_scores[i] oob_scores[i 1]
-    print(f"{n_trees[i 1]} → {n_trees[i]}: mejora = {improvement:.5f}")`}
+    print(f"{n_trees[i 1]}  {n_trees[i]}: mejora = {improvement:.5f}")`}
   height="380px"
 />
 

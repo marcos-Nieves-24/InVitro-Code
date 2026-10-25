@@ -105,11 +105,11 @@ Flujo if/elif/else:
          └─────┬─────┘
                │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition1 ├───────→│ bloque código 1  │
+         │ condition1 ├───────│ bloque código 1  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition2 ├───────→│ bloque código 2  │
+         │ condition2 ├───────│ bloque código 2  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐               │
@@ -456,9 +456,9 @@ Escribe un sistema de **puntaje crediticio** que:
 1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados
 2. Calcule un puntaje crediticio (0 a 100) usando una fórmula ponderada
 3. Asigne una calificación: Excelente (≥ 80), Buena (60 a 79), Regular (40 a 59), Mala (< 40)
-4. Aplique modificadores: si deuda > ingresos → -20 puntos; si pagos atrasados > 3 → -15 puntos; si antigüedad crediticia > 10 años → +10 puntos
+4. Aplique modificadores: si deuda > ingresos  -20 puntos; si pagos atrasados > 3  -15 puntos; si antigüedad crediticia > 10 años  +10 puntos
 5. Use `match` para la asignación de calificación
-6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena → Aprobado, sino → Revisión Requerida)
+6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena  Aprobado, sino  Revisión Requerida)
 </RevealSequence>
 
 </Section>

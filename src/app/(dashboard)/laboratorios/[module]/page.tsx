@@ -99,21 +99,11 @@ export default async function LabModuleLandingPage({ params }: Props) {
     }
   }
 
-  // Fallback counters from legacy progress when lab_progress empty
-  const completedLessonKeysFallback = new Set(
-    (progressRes.data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
-  );
-
-  let completedCount: number;
+  // Labs only count via lab_progress — never fallback to lesson progress
+  let completedCount = 0;
   if (hasLabProgressRows) {
-    completedCount = 0;
     for (const slug of lessonSlugs) {
       if (progressMap.get(slug)?.status === "completed") completedCount += 1;
-    }
-  } else {
-    completedCount = 0;
-    for (const slug of lessonSlugs) {
-      if (completedLessonKeysFallback.has(`${modSlug}/${slug}`)) completedCount += 1;
     }
   }
 
@@ -126,7 +116,7 @@ export default async function LabModuleLandingPage({ params }: Props) {
 
   // Smart resume CTA (REQ-LC-06..08)
   const resume = getLabResumeTarget(modSlug, progressMap);
-  // When fallback (no lab_progress rows), getLabResumeTarget will scan missing as not_started → Caso 2, but completedCount already fallback-based.
+  // When fallback (no lab_progress rows), getLabResumeTarget will scan missing as not_started  Caso 2, but completedCount already fallback-based.
   // If fallback and labCount>0 and completedCount covers all via legacy, override to case 3 presentation
   const allCompleted = labCount > 0 && completedCount === labCount;
 
@@ -145,21 +135,10 @@ export default async function LabModuleLandingPage({ params }: Props) {
       ctaLabel = resume.case === 1 ? "Continuar" : "Empezar";
     }
   } else {
-    // Legacy behavior: first incomplete else Repasar
-    let legacySlug = lessonSlugs[0] ?? "";
-    for (const slug of lessonSlugs) {
-      if (!completedLessonKeysFallback.has(`${modSlug}/${slug}`)) {
-        legacySlug = slug;
-        break;
-      }
-    }
+    const legacySlug = lessonSlugs[0] ?? "";
     ctaHref = legacySlug ? `/laboratorios/${modSlug}/${legacySlug}` : "/laboratorios";
-    ctaLabel = allCompleted ? "Repasar" : "Empezar";
-    showSingleCTA = !allCompleted;
-    // For Caso 3 fallback, hide single CTA and show message + per-card Repasar
-    if (allCompleted) {
-      showSingleCTA = false;
-    }
+    ctaLabel = "Empezar";
+    showSingleCTA = true;
   }
 
   const eyebrow = `${moduleName} · ${labCount} laboratorios · ${xpTotal} XP`;
@@ -219,9 +198,6 @@ export default async function LabModuleLandingPage({ params }: Props) {
                   status = entry.status;
                   completionDate = entry.completion_date;
                   updatedAt = entry.updated_at;
-                } else if (completedLessonKeysFallback.has(`${modSlug}/${slug}`) && !hasLabProgressRows) {
-                  status = "completed";
-                  updatedAt = null;
                 } else {
                   status = "not_started";
                 }

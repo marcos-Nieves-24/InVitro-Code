@@ -22,7 +22,7 @@ Crea un script de Python `clinical_triage.py` que implemente un sistema de triaj
 
 3. **Recomendación**: Según el nivel de triaje, emite una recomendación.
 
-4. Usa una sentencia `match` para el mapeo de nivel de triaje → recomendación.
+4. Usa una sentencia `match` para el mapeo de nivel de triaje  recomendación.
 
 ## Esquema de código inicial
 
