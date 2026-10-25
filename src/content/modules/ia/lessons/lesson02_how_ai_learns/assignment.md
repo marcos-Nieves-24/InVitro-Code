@@ -23,18 +23,18 @@ y = data.target
 3. Entrena un clasificador `KNeighborsClassifier` para valores de `k` entre 1 y 20 (ambos inclusive).
 
 4. Para cada `k`, calcula:
-   - *Accuracy* en entrenamiento
-   - *Accuracy* en prueba
-   - También puedes usar `mean_squared_error` o `1 - accuracy` para graficar errores
+   *Accuracy* en entrenamiento
+   *Accuracy* en prueba
+   También puedes usar `mean_squared_error` o `1 accuracy` para graficar errores
 
 5. Grafica en un mismo gráfico:
-   - La curva de *accuracy* (o error) en entrenamiento vs. `k`
-   - La curva de *accuracy* (o error) en prueba vs. `k`
-   - Marca con una línea vertical o un punto el valor de `k` que consideras óptimo
+   La curva de *accuracy* (o error) en entrenamiento vs. `k`
+   La curva de *accuracy* (o error) en prueba vs. `k`
+   Marca con una línea vertical o un punto el valor de `k` que consideras óptimo
 
 6. Responde en una celda de markdown:
-   - ¿Cuál es el valor óptimo de `k`? ¿Por qué lo elegiste?
-   - ¿Qué pasa con `k=1`? ¿Qué observas en el *accuracy* de entrenamiento?
-   - ¿Qué pasa con `k=20` o más grande? ¿La frontera se vuelve más suave o más irregular?
-   - ¿Cuándo dices que un modelo está sobreajustado? ¿Qué evidencia hay en tus gráficos?
+   ¿Cuál es el valor óptimo de `k`? ¿Por qué lo elegiste?
+   ¿Qué pasa con `k=1`? ¿Qué observas en el *accuracy* de entrenamiento?
+   ¿Qué pasa con `k=20` o más grande? ¿La frontera se vuelve más suave o más irregular?
+   ¿Cuándo dices que un modelo está sobreajustado? ¿Qué evidencia hay en tus gráficos?
 

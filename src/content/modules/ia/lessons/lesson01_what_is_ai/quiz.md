@@ -3,7 +3,7 @@
 
 **1. ¿Cuál de las siguientes NO es una feature (característica medible) para clasificar una célula o conidia?**
 a) El área en µm²
-b) La circularidad (0-1)
+b) La circularidad (0 a 1)
 c) El nombre del laboratorio donde se tomó la muestra
 d) La intensidad de gris al microscopio
 
@@ -19,7 +19,7 @@ b) Encontrando patrones estadísticos en los datos sin reglas explícitas
 c) Conversando con los científicos
 d) Siguiendo las instrucciones de un manual de biología
 
----
+
 ## Clave de respuestas
 
 1. **c)** El nombre del laboratorio no es una propiedad medible de los datos.
