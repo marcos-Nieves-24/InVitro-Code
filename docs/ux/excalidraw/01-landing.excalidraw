@@ -546,171 +546,6 @@
       "index": "a13"
     },
     {
-      "id": "0ebfe5af_3055f6c6",
-      "type": "rectangle",
-      "x": 35,
-      "y": 85,
-      "width": 1350,
-      "height": 260,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [
-        "G1967ad1b"
-      ],
-      "frameId": null,
-      "roundness": {
-        "type": 3
-      },
-      "seed": 636253586,
-      "version": 100,
-      "versionNonce": 468797790,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1792877113237,
-      "link": null,
-      "locked": false,
-      "index": "a14"
-    },
-    {
-      "id": "9ccbbb0d_7c63aeda",
-      "type": "line",
-      "x": 35,
-      "y": 85,
-      "width": 1350,
-      "height": 260,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [
-        "G1967ad1b"
-      ],
-      "frameId": null,
-      "roundness": {
-        "type": 2
-      },
-      "seed": 266544116,
-      "version": 100,
-      "versionNonce": 196207181,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1792877113237,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          1350,
-          260
-        ]
-      ],
-      "startBinding": null,
-      "endBinding": null,
-      "startArrowhead": null,
-      "endArrowhead": null,
-      "polygon": false,
-      "index": "a15"
-    },
-    {
-      "id": "d20381f6_ac5157e4",
-      "type": "line",
-      "x": 1385,
-      "y": 85,
-      "width": -1350,
-      "height": 260,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [
-        "G1967ad1b"
-      ],
-      "frameId": null,
-      "roundness": {
-        "type": 2
-      },
-      "seed": 361957735,
-      "version": 100,
-      "versionNonce": 799951966,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1792877113237,
-      "link": null,
-      "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -1350,
-          260
-        ]
-      ],
-      "startBinding": null,
-      "endBinding": null,
-      "startArrowhead": null,
-      "endArrowhead": null,
-      "polygon": false,
-      "index": "a16"
-    },
-    {
-      "id": "bc613dc0_91231e98",
-      "type": "text",
-      "x": 620,
-      "y": 210,
-      "width": 150,
-      "height": 9,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [
-        "G1967ad1b"
-      ],
-      "frameId": null,
-      "roundness": null,
-      "seed": 370316978,
-      "version": 100,
-      "versionNonce": 328256181,
-      "isDeleted": false,
-      "boundElements": [],
-      "updated": 1792877113237,
-      "link": null,
-      "locked": false,
-      "text": "landing-background.png",
-      "fontSize": 8,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "landing-background.png",
-      "autoResize": true,
-      "lineHeight": 1.25,
-      "index": "a17"
-    },
-    {
       "id": "d2312844_a45574b8",
       "type": "text",
       "x": 60,
@@ -747,7 +582,7 @@
       "originalText": "APRENDIZAJE INTERACTIVO",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a18"
+      "index": "a14"
     },
     {
       "id": "fd81078b_f0ea09db",
@@ -786,7 +621,7 @@
       "originalText": "Aprende IA y Machine Learning",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a19"
+      "index": "a15"
     },
     {
       "id": "295a9013_1de032c7",
@@ -825,7 +660,7 @@
       "originalText": "con Python para Biotecnología",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a20"
+      "index": "a16"
     },
     {
       "id": "44fc040d_9fc3837f",
@@ -864,7 +699,7 @@
       "originalText": "Un curso para biotecnólogos… labs en vivo",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a21"
+      "index": "a17"
     },
     {
       "id": "a6981a09_b2ab03cf",
@@ -896,7 +731,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a22"
+      "index": "a18"
     },
     {
       "id": "13a9fc23_7c9d08ce",
@@ -935,7 +770,7 @@
       "originalText": "Empezar ahora →",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a23"
+      "index": "a19"
     },
     {
       "id": "d356601d_d77db87e",
@@ -967,7 +802,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a24"
+      "index": "a20"
     },
     {
       "id": "8a2ea7ac_afd2d491",
@@ -1006,7 +841,7 @@
       "originalText": "Iniciar sesión →",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a25"
+      "index": "a21"
     },
     {
       "id": "4e113fa7_f06e20c7",
@@ -1038,7 +873,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a26"
+      "index": "a22"
     },
     {
       "id": "53a66ae8_7fad9352",
@@ -1085,7 +920,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a27"
+      "index": "a23"
     },
     {
       "id": "72d1dfa0_45234efa",
@@ -1132,7 +967,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a28"
+      "index": "a24"
     },
     {
       "id": "c8a9e298_610fa033",
@@ -1171,7 +1006,7 @@
       "originalText": "imagen hero",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a29"
+      "index": "a25"
     },
     {
       "id": "e38552d8_f79449eb",
@@ -1203,7 +1038,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a30"
+      "index": "a26"
     },
     {
       "id": "f870ffc1_e185a05f",
@@ -1242,7 +1077,7 @@
       "originalText": "NUESTRA IDENTIDAD",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a31"
+      "index": "a27"
     },
     {
       "id": "159a4991_3a139bd6",
@@ -1281,7 +1116,7 @@
       "originalText": "Donde la biotecnología",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a32"
+      "index": "a28"
     },
     {
       "id": "d03f5ff3_8d2aa91f",
@@ -1320,7 +1155,7 @@
       "originalText": "encuentra la IA",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a33"
+      "index": "a29"
     },
     {
       "id": "bbf9b048_88993fd7",
@@ -1367,7 +1202,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a34"
+      "index": "a30"
     },
     {
       "id": "61e1f12e_8f428cad",
@@ -1414,7 +1249,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a35"
+      "index": "a31"
     },
     {
       "id": "bc649265_b394f545",
@@ -1461,7 +1296,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a36"
+      "index": "a32"
     },
     {
       "id": "d8649fc9_d5cd8a43",
@@ -1493,7 +1328,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a37"
+      "index": "a33"
     },
     {
       "id": "adefe135_532be17b",
@@ -1540,7 +1375,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a38"
+      "index": "a34"
     },
     {
       "id": "a07ed5f7_72b82fcd",
@@ -1572,7 +1407,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a39"
+      "index": "a35"
     },
     {
       "id": "b8114ed8_49d0c4ba",
@@ -1619,7 +1454,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a40"
+      "index": "a36"
     },
     {
       "id": "77a53e81_c9ed4ef9",
@@ -1666,7 +1501,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a41"
+      "index": "a37"
     },
     {
       "id": "fc340ffe_2833f564",
@@ -1698,7 +1533,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a42"
+      "index": "a38"
     },
     {
       "id": "618c42a4_9f036c39",
@@ -1737,7 +1572,7 @@
       "originalText": "Misión",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a43"
+      "index": "a39"
     },
     {
       "id": "d14714e7_668a9553",
@@ -1776,7 +1611,7 @@
       "originalText": "Cerrar distancia bio ↔ aula",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a44"
+      "index": "a40"
     },
     {
       "id": "03128067_d344d8fb",
@@ -1808,7 +1643,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a45"
+      "index": "a41"
     },
     {
       "id": "58dc2538_621ceb7a",
@@ -1847,7 +1682,7 @@
       "originalText": "Visión",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a46"
+      "index": "a42"
     },
     {
       "id": "d54de0eb_fc4d414f",
@@ -1886,7 +1721,7 @@
       "originalText": "Referente español LatAm",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a47"
+      "index": "a43"
     },
     {
       "id": "1f48d7e3_5203565c",
@@ -1918,7 +1753,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a48"
+      "index": "a44"
     },
     {
       "id": "72829b0c_166250ef",
@@ -1957,7 +1792,7 @@
       "originalText": "Aprendizaje Activo",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a49"
+      "index": "a45"
     },
     {
       "id": "e8788589_1c9e7951",
@@ -1996,7 +1831,7 @@
       "originalText": "Labs en vivo + terminales",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a50"
+      "index": "a46"
     },
     {
       "id": "eaac7dde_f74f3548",
@@ -2028,7 +1863,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a51"
+      "index": "a47"
     },
     {
       "id": "a35f673b_6f3ebfa9",
@@ -2067,7 +1902,7 @@
       "originalText": "Comunidad",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a52"
+      "index": "a48"
     },
     {
       "id": "5475e23e_efb80444",
@@ -2106,7 +1941,7 @@
       "originalText": "Conecta • Accesible • Gratis",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a53"
+      "index": "a49"
     },
     {
       "id": "e9d89866_63d89f99",
@@ -2138,7 +1973,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a54"
+      "index": "a50"
     },
     {
       "id": "e0fab7c7_849a6663",
@@ -2177,7 +2012,7 @@
       "originalText": "Contenido",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a55"
+      "index": "a51"
     },
     {
       "id": "e1c0abd5_13d7be7b",
@@ -2216,7 +2051,7 @@
       "originalText": "Expediciones del curso",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a56"
+      "index": "a52"
     },
     {
       "id": "1df97e2d_6474f6c2",
@@ -2248,7 +2083,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a57"
+      "index": "a53"
     },
     {
       "id": "f55cebf5_05aff3a2",
@@ -2287,7 +2122,7 @@
       "originalText": "Introducción a la IA",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a58"
+      "index": "a54"
     },
     {
       "id": "5f2f6220_b18aa7cb",
@@ -2326,7 +2161,7 @@
       "originalText": "Explora fundamentos IA",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a59"
+      "index": "a55"
     },
     {
       "id": "89ec94e3_9672d49d",
@@ -2358,7 +2193,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a60"
+      "index": "a56"
     },
     {
       "id": "bfe07375_121b3af7",
@@ -2397,7 +2232,7 @@
       "originalText": "100 XP",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a61"
+      "index": "a57"
     },
     {
       "id": "6c51f9f5_6efa4b5c",
@@ -2429,7 +2264,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a62"
+      "index": "a58"
     },
     {
       "id": "13c41069_ac0e5781",
@@ -2468,7 +2303,7 @@
       "originalText": "4 labs",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a63"
+      "index": "a59"
     },
     {
       "id": "eb83948f_caf51f2c",
@@ -2500,7 +2335,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a64"
+      "index": "a60"
     },
     {
       "id": "46feb52e_0f192a5e",
@@ -2539,7 +2374,7 @@
       "originalText": "Python para Biotecnología",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a65"
+      "index": "a61"
     },
     {
       "id": "dd94f322_7f3a293f",
@@ -2578,7 +2413,7 @@
       "originalText": "Secuencias, expresión, datos",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a66"
+      "index": "a62"
     },
     {
       "id": "94911211_b0cf7322",
@@ -2610,7 +2445,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a67"
+      "index": "a63"
     },
     {
       "id": "b8ff180f_76e2462b",
@@ -2649,7 +2484,7 @@
       "originalText": "425 XP",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a68"
+      "index": "a64"
     },
     {
       "id": "0da06d42_b944b9b3",
@@ -2681,7 +2516,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a69"
+      "index": "a65"
     },
     {
       "id": "64363dc4_076d03a9",
@@ -2720,7 +2555,7 @@
       "originalText": "17 labs",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a70"
+      "index": "a66"
     },
     {
       "id": "3d1638f2_c6c536d8",
@@ -2752,7 +2587,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a71"
+      "index": "a67"
     },
     {
       "id": "c9f00424_688a9531",
@@ -2791,7 +2626,7 @@
       "originalText": "Estadística y Probabilidad",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a72"
+      "index": "a68"
     },
     {
       "id": "e0532ceb_cc3bef3a",
@@ -2830,7 +2665,7 @@
       "originalText": "Diseño experimental",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a73"
+      "index": "a69"
     },
     {
       "id": "a941aa3c_69589450",
@@ -2862,7 +2697,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a74"
+      "index": "a70"
     },
     {
       "id": "fb1ffd67_2581589b",
@@ -2901,7 +2736,7 @@
       "originalText": "250 XP",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a75"
+      "index": "a71"
     },
     {
       "id": "ea114067_e8009122",
@@ -2933,7 +2768,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a76"
+      "index": "a72"
     },
     {
       "id": "c117d94e_02e21925",
@@ -2972,7 +2807,7 @@
       "originalText": "10 labs",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a77"
+      "index": "a73"
     },
     {
       "id": "d552e2e4_7f4c4dcb",
@@ -3004,7 +2839,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a78"
+      "index": "a74"
     },
     {
       "id": "8aaf7a43_020888b2",
@@ -3043,7 +2878,7 @@
       "originalText": "Machine Learning",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a79"
+      "index": "a75"
     },
     {
       "id": "129bced1_9c08ea3f",
@@ -3082,7 +2917,7 @@
       "originalText": "Modelos predictivos",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a80"
+      "index": "a76"
     },
     {
       "id": "d90151fe_109e0fd7",
@@ -3114,7 +2949,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a81"
+      "index": "a77"
     },
     {
       "id": "03e819d4_9d049d0e",
@@ -3153,7 +2988,7 @@
       "originalText": "300 XP",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a82"
+      "index": "a78"
     },
     {
       "id": "cb8a86df_8d6b0f58",
@@ -3185,7 +3020,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a83"
+      "index": "a79"
     },
     {
       "id": "d49896cb_d11e4d14",
@@ -3224,7 +3059,7 @@
       "originalText": "10 labs",
       "autoResize": true,
       "lineHeight": 1.25,
-      "index": "a84"
+      "index": "a80"
     },
     {
       "id": "76584e7e_945bb4b9",
@@ -3256,7 +3091,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a85"
+      "index": "a81"
     },
     {
       "id": "accf86dc_49aa408e",
@@ -3288,7 +3123,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a86"
+      "index": "a82"
     },
     {
       "id": "bc4c1bf2_b642d834",
@@ -3335,7 +3170,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a87"
+      "index": "a83"
     },
     {
       "id": "ca763e57_525e3927",
@@ -3382,7 +3217,7 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "polygon": false,
-      "index": "a88"
+      "index": "a84"
     },
     {
       "id": "3d209d49_d0dfac16",
@@ -3414,7 +3249,7 @@
       "updated": 1792877113237,
       "link": null,
       "locked": false,
-      "index": "a89"
+      "index": "a85"
     }
   ],
   "appState": {
