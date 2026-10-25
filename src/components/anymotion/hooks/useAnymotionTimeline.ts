@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export interface AnymotionTimelineOptions {
   duration: number;
   autoPlay?: boolean;
+  loop?: boolean;
   fps?: number;
 }
 
@@ -74,6 +75,7 @@ function usePrefersReducedMotion(): boolean {
 export function useAnymotionTimeline({
   duration,
   autoPlay = false,
+  loop = true,
 }: AnymotionTimelineOptions): AnymotionTimeline {
   const prefersReducedMotion = usePrefersReducedMotion();
   // When the user prefers reduced motion, never auto-play: the timeline rests
@@ -96,20 +98,35 @@ export function useAnymotionTimeline({
     }
   }, [duration]);
 
+  const loopRef = useRef(loop);
+  useEffect(() => {
+    loopRef.current = loop;
+  }, [loop]);
+
   const frame = useCallback((now: number) => {
     if (!playingRef.current) return;
     const dt = lastFrameRef.current ? (now - lastFrameRef.current) / 1000 : 0;
     lastFrameRef.current = now;
     const dur = durationRef.current;
-    const next = Math.min(timeRef.current + dt, dur);
-    timeRef.current = next;
-    setTime(next);
+    let next = timeRef.current + dt;
     if (next >= dur) {
+      if (loopRef.current && !readReducedMotion()) {
+        next = next % dur;
+        timeRef.current = next;
+        setTime(next);
+        rafRef.current = requestAnimationFrame(frame);
+        return;
+      }
+      next = Math.min(next, dur);
+      timeRef.current = next;
+      setTime(next);
       playingRef.current = false;
       setIsPlaying(false);
       lastFrameRef.current = 0;
       return;
     }
+    timeRef.current = next;
+    setTime(next);
     rafRef.current = requestAnimationFrame(frame);
   }, []);
 

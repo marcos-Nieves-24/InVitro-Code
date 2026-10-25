@@ -133,7 +133,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
           <text x={VB_W / 2} y={30} textAnchor="middle" fill="white" fontSize={15} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
             Pipeline de ML: de datos brutos a predicciones útiles
           </text>
-          <text x={VB_W / 2} y={48} textAnchor="middle" fill="white" fontSize={10} fontFamily="monospace" opacity={0.45}>
+          <text x={VB_W / 2} y={48} textAnchor="middle" fill="white" fontSize={13} fontFamily="monospace" opacity={0.45}>
             cada etapa transforma la salida de la anterior
           </text>
 
@@ -197,7 +197,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
                 </text>
 
                 {/* Biotech example, wrapped deterministically */}
-                <g fontFamily="monospace" fontSize={10} fill="white" opacity={detailOpacity} textAnchor="middle">
+                <g fontFamily="monospace" fontSize={13} fill="white" opacity={detailOpacity} textAnchor="middle">
                   {DETAIL_LINES[i].map((line, li) => (
                     <text key={`d-${i}-${li}`} x={cardCx(i)} y={CARD_TOP + 104 + li * 16}>
                       {line}
@@ -229,7 +229,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
               fill={passThrough(i) > 0.5 ? COLORS.accent : "rgba(255,255,255,0.35)"}
             />
           ))}
-          <g fontFamily="monospace" fontSize={9} fill={COLORS.dim} textAnchor="middle">
+          <g fontFamily="monospace" fontSize={12} fill={COLORS.dim} textAnchor="middle">
             {STAGES.map((s, i) => (
               <text key={`rl-${i}`} x={cardCx(i)} y={RAIL_Y + 20} opacity={i === currentIndex ? 1 : 0.6}>
                 {s.name}
@@ -244,7 +244,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
       {/* Readable readout of the stage the token is in — the SVG keeps the
           sequence legible, this keeps the wording legible at any stage size. */}
       <div className="mt-2 flex flex-col gap-1 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm sm:flex-row sm:items-center sm:gap-4">
-        <span className="font-mono text-xs whitespace-nowrap text-storm">
+        <span className="font-mono text-sm whitespace-nowrap text-storm">
           Etapa{" "}
           <span className="font-semibold text-mint">
             {currentIndex + 1} / {COUNT}
@@ -254,7 +254,7 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
         <span className="text-sm text-storm">{current.detail}</span>
       </div>
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }

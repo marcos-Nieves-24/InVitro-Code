@@ -54,7 +54,7 @@ fig = px.scatter(df_plot, x="mean_radius", y="mean_texture", color="clase",
 fig.show()
 # PASO 4: Comparacion estadistica de features entre clases.
 # La diferencia relativa de medias identifica las features mas
-# discriminativas; las 4 mejores se visualizan con box plots.
+# discriminativas, las 4 mejores se visualizan con box plots.
 mal_mean = X[y == 0].mean(axis=0)
 ben_mean = X[y == 1].mean(axis=0)
 differences = []

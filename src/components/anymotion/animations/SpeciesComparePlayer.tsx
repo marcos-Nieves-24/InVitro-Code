@@ -409,7 +409,7 @@ function Specimen({ cx, cy, baseR, state, label, value, showCaliper, reduced }: 
             y={CHIP_Y + 17}
             textAnchor="middle"
             fill={COLORS.text}
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             opacity={0.92}
           >
@@ -473,7 +473,7 @@ export function SpeciesComparePlayer({
           <text x={VB_W / 2} y={32} textAnchor="middle" fill="white" fontSize={17} fontFamily="sans-serif" fontWeight={700} fontStyle="italic" opacity={0.92}>
             {leftLabel} vs {rightLabel}
           </text>
-          <text x={VB_W / 2} y={54} textAnchor="middle" fill={COLORS.mint} fontSize={11.5} fontFamily="monospace" opacity={0.9}>
+          <text x={VB_W / 2} y={54} textAnchor="middle" fill={COLORS.mint} fontSize={14.5} fontFamily="monospace" opacity={0.9}>
             {`atributo comparado: ${currentRow.feature}`}
           </text>
 
@@ -535,7 +535,7 @@ export function SpeciesComparePlayer({
           />
 
           {/* Footnote */}
-          <text x={VB_W / 2} y={VB_H - 26} textAnchor="middle" fill={COLORS.dim} fontSize={10} fontFamily="monospace">
+          <text x={VB_W / 2} y={VB_H - 26} textAnchor="middle" fill={COLORS.dim} fontSize={13} fontFamily="monospace">
             {`la diferencia se resalta solo en "${currentRow.feature}"`}
           </text>
         </svg>
@@ -575,7 +575,7 @@ export function SpeciesComparePlayer({
         data-species-readout
         className="mt-2 flex flex-col gap-1 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm sm:flex-row sm:items-center sm:gap-4"
       >
-        <span className="font-mono text-xs whitespace-nowrap text-storm">{currentRow.feature}</span>
+        <span className="font-mono text-sm whitespace-nowrap text-storm">{currentRow.feature}</span>
         <span className="text-sm text-storm">
           <span className="font-semibold italic text-mint">{leftLabel}</span> {currentRow.left}
         </span>
@@ -584,7 +584,7 @@ export function SpeciesComparePlayer({
         </span>
       </div>
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }

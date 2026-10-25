@@ -27,7 +27,7 @@ print(f"Dataset: {X.shape[0]} muestras, {X.shape[1]} features")
 print(f"Train: {X_train.shape[0]} | Test: {X_test.shape[0]}")
 
 # PASO 2: Entrenar ambos modelos sobre los mismos datos.
-# LogisticRegression es interpretable; RandomForest captura relaciones
+# LogisticRegression es interpretable, RandomForest captura relaciones
 # no lineales. Entrenamos ambos y guardamos las predicciones.
 lr = LogisticRegression(max_iter=1000, random_state=42)
 lr.fit(X_train, y_train)
@@ -41,7 +41,7 @@ print(f"\nLogisticRegression train_acc: {accuracy_score(y_train, lr.predict(X_tr
 print(f"RandomForest train_acc:       {accuracy_score(y_train, rf.predict(X_train)):.3f}")
 
 # PASO 3: Metricas de evaluacion para cada modelo.
-# La matriz de confusion muestra los errores; el reporte resume precision,
+# La matriz de confusion muestra los errores, el reporte resume precision,
 # recall y f1 por clase. En diagnostico, el recall evita falsos negativos.
 print("\n--- LogisticRegression ---")
 print(confusion_matrix(y_test, y_pred_lr))

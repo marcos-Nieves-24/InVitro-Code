@@ -270,20 +270,15 @@ export function DialogueBox({
     [onNext, handleAdvance, hasLines, isLastLine],
   );
 
-  // Interactive when a consumer passes onNext, or when lines drive the bubble
-  // on its own (lines are serializable in MDX, onNext is not).
-  const canInteract = Boolean(onNext) || hasLines;
-
+  // ALL advance is via footer Continuar only — bubble is not clickable.
+  // Lines still advance when footer goNext consumes the registered advance.
   return (
     <div
       ref={containerRef}
       role="region"
       aria-live="polite"
       aria-label={`Diálogo de ${resolvedSpeaker}`}
-      tabIndex={canInteract ? 0 : undefined}
-      onClick={canInteract ? handleContainerClick : undefined}
-      onKeyDown={canInteract ? handleKeyDown : undefined}
-      className={`relative flex w-full items-start gap-3 md:gap-3.5 ${canInteract ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface" : ""}`}
+      className="relative flex w-full items-start gap-3 md:gap-3.5"
     >
       {/* Avatar */}
       <div className="shrink-0 pt-1">
@@ -343,23 +338,23 @@ export function DialogueBox({
             {hasLines && !isLastLine ? (
               <span
                 aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
               >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
+                Usa Continuar → del pie
               </span>
             ) : hasLines && isLastLine && !(showContinueResolved && onNext) ? (
               <span
                 aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
               >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar al siguiente paso
+                Usa Continuar → del pie
               </span>
             ) : showContinueResolved && onNext ? (
               <span
                 aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
               >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
+                Usa Continuar → del pie
               </span>
             ) : null}
           </div>

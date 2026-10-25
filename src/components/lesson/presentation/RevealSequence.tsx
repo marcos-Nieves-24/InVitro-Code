@@ -161,7 +161,6 @@ export function RevealSequence({
   const [revealedCount, setRevealedCount] = useState(initialRevealed);
   const [isQuizBlocked, setIsQuizBlocked] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
 
   // Keep revealedCount in sync if total shrinks (e.g. conditional children) –
   // never exceed total, never drop below 0.
@@ -194,17 +193,6 @@ export function RevealSequence({
     const timer = setTimeout(() => dismissHint(), 5000);
     return () => clearTimeout(timer);
   }, [showHint, dismissHint]);
-
-  const handleMouseMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const leftThreshold = rect.left + rect.width * 0.3;
-    const rightThreshold = rect.left + rect.width * 0.7;
-    if (e.clientX < leftThreshold) setHoverSide("left");
-    else if (e.clientX > rightThreshold) setHoverSide("right");
-    else setHoverSide(null);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => setHoverSide(null), []);
 
   // Auto-detection fallback: if blockOnQuiz is true, scan visible slice for
   // [data-quiz-blocked="true"]. This covers ChoiceQuestion implementations that
@@ -333,61 +321,8 @@ export function RevealSequence({
     }
   }, [isComplete, onComplete]);
 
-  const handleContainerClick = useCallback(
-    (e: MouseEvent<HTMLDivElement>) => {
-      if (showHint) dismissHint();
-      const target = e.target as HTMLElement;
-      // Don't advance when interacting with form/native interactive elements,
-      // code editors (Monaco renders clicks on view-line divs, not its hidden
-      // textarea) or anything explicitly marked [data-no-advance] — except the
-      // explicit continue/back buttons.
-      const interactiveAncestor = target.closest(
-        "button,input,textarea,select,iframe,a,.monaco-editor,[contenteditable],[data-no-advance]"
-      );
-      if (interactiveAncestor) {
-        const isContinue =
-          target.closest("[data-reveal-continue]") != null ||
-          interactiveAncestor.closest("[data-reveal-continue]") != null ||
-          interactiveAncestor.matches("[data-reveal-continue]");
-        const isBack =
-          target.closest("[data-reveal-back]") != null ||
-          interactiveAncestor.closest("[data-reveal-back]") != null ||
-          interactiveAncestor.matches("[data-reveal-back]");
-        if (!isContinue && !isBack) return;
-        // Back / Continue buttons handle their own onClick with stopPropagation
-        if (isBack) return;
-        // Continue button click is handled by its own onClick; avoid double advance via container
-        if (isContinue) return;
-      }
-      const rect = e.currentTarget.getBoundingClientRect();
-      const midX = rect.left + rect.width / 2;
-      const x = e.clientX;
-      if (x < midX) {
-        if (revealedCount > initialRevealed) goPrev();
-        return;
-      }
-      if (!hasMore) return;
-      if (effectiveBlocked) return;
-      advance();
-    },
-    [hasMore, effectiveBlocked, advance, goPrev, revealedCount, initialRevealed, showHint, dismissHint]
-  );
-
-  const handleContainerKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      // Never hijack cursor keys while the user edits text (Monaco moves its
-      // cursor with arrows inside its hidden textarea; without this, ArrowLeft
-      // would step the reveal back mid-typing).
-      const t = e.target as HTMLElement | null;
-      if (t?.closest?.("input,textarea,select,[contenteditable]")) return;
-      if (e.key === "ArrowLeft" && revealedCount > initialRevealed) {
-        e.preventDefault();
-        e.stopPropagation();
-        goPrev();
-      }
-    },
-    [revealedCount, initialRevealed, goPrev]
-  );
+  // ALL advance is via footer Continuar only — no container click, no keyboard, no hover.
+  // RevealSequence still exposes advance via registerRevealAdvance so footer goNext can consume it.
 
   // Keep the revealed step inside the slide's visible band.
   //
@@ -497,32 +432,11 @@ export function RevealSequence({
         role="region"
         aria-live="polite"
         aria-label="Contenido progresivo"
-        onClick={handleContainerClick}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onKeyDown={handleContainerKeyDown}
         data-reveal-has-more={hasMore ? "true" : "false"}
         data-reveal-blocked={effectiveBlocked ? "true" : "false"}
         data-reveal-mode={mode}
         className={containerClass}
       >
-        {/* Ghost arrow hints on hover — faint left/right indicators */}
-        {hoverSide === "left" && revealedCount > initialRevealed && (
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 select-none text-3xl font-bold text-storm opacity-20"
-          >
-            ←
-          </span>
-        )}
-        {hoverSide === "right" && hasMore && !effectiveBlocked && (
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-3xl font-bold text-storm opacity-20"
-          >
-            →
-          </span>
-        )}
         {isAppear && showHistory
           ? // Stack with faint history: previous steps stay visible, current animates in
             renderChildren.map((child, index) => {
@@ -596,7 +510,7 @@ export function RevealSequence({
                 role="status"
                 className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-brand-200 bg-white/90 px-4 py-2 text-xs font-medium text-storm shadow-sm backdrop-blur"
               >
-                <span>Tip: click a la derecha → Continuar, a la izquierda ← Atrás (o usa flechas)</span>
+                <span>Tip: usa Continuar y Atrás del pie para navegar</span>
                 <button
                   type="button"
                   onClick={(e) => {
@@ -620,9 +534,9 @@ export function RevealSequence({
             ) : (
               <p
                 aria-hidden="true"
-                className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
+                className="text-xs font-medium text-storm"
               >
-                ▸ Click para continuar o usa el botón Continuar del pie
+                Usa Continuar → del pie
               </p>
             )}
           </div>

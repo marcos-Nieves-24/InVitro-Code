@@ -34,7 +34,7 @@ fig = px.scatter(df_iris, x="sepal length (cm)", y="petal length (cm)",
 fig.show()
 
 # PASO 2: Division en entrenamiento y prueba (estratificada).
-# El modelo solo ve datos de train; el accuracy en test mide si
+# El modelo solo ve datos de train, el accuracy en test mide si
 # generaliza a datos que nunca vio durante el entrenamiento.
 X_tr, X_te, y_tr, y_te = train_test_split(
     iris.data, iris.target, test_size=0.3, random_state=42, stratify=iris.target)

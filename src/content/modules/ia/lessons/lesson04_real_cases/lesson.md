@@ -104,10 +104,10 @@ Sin embargo, el ARN es una molécula químicamente inestable que el sistema inmu
   allowContinueOnIncorrect
   explanation="La IA entrena con formulaciones previas y predice las 50 más prometedoras, evitando probar 1.000 al azar y ahorrando meses."
   options={[
-    { id: "a", label: "Probando todas las combinaciones al azar en el laboratorio sin usar datos", correct: false, feedback: "Eso es lo que hacía el método tradicional lento; la IA justamente evita eso." },
+    { id: "a", label: "Probando todas las combinaciones al azar en el laboratorio sin usar datos", correct: false, feedback: "Eso es lo que hacía el método tradicional lento, la IA justamente evita eso." },
     { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición → rendimiento y guía los experimentos." },
-    { id: "c", label: "Reemplazando por completo los experimentos de laboratorio", correct: false, feedback: "La IA no reemplaza el laboratorio; lo hace más inteligente y enfocado." },
-    { id: "d", label: "Eligiendo lípidos solo por su precio más barato", correct: false, feedback: "El costo no determina eficacia ni estabilidad; importan las propiedades químicas." },
+    { id: "c", label: "Reemplazando por completo los experimentos de laboratorio", correct: false, feedback: "La IA no reemplaza el laboratorio, lo hace más inteligente y enfocado." },
+    { id: "d", label: "Eligiendo lípidos solo por su precio más barato", correct: false, feedback: "El costo no determina eficacia ni estabilidad, importan las propiedades químicas." },
   ]}
 />
 
@@ -146,9 +146,9 @@ La IA actuó como un filtro de alta eficiencia: en lugar de testear 1.000 formul
   allowContinueOnIncorrect
   explanation="Es clasificación binaria (se une/no se une). En clínica priorizas sensibilidad/recall para no descartar fármacos útiles, balanceando con especificidad para no generar falsos positivos costosos."
   options={[
-    { id: "a", label: "Regresión para predecir concentración; métrica principal R²", correct: false, feedback: "No es predecir número continuo, sino decidir si hay unión o no." },
-    { id: "b", label: "Clasificación binaria se une/no se une; priorizar sensibilidad para minimizar falsos negativos", correct: true, feedback: "¡Exacto! Un falso negativo descarta un fármaco que podría salvar vidas." },
-    { id: "c", label: "Clustering sin etiquetas; no hay métrica clínica", correct: false, feedback: "Tenemos etiquetas (se une/no), así que es supervisado, no clustering." },
+    { id: "a", label: "Regresión para predecir concentración, métrica principal R²", correct: false, feedback: "No es predecir número continuo, sino decidir si hay unión o no." },
+    { id: "b", label: "Clasificación binaria se une/no se une, priorizar sensibilidad para minimizar falsos negativos", correct: true, feedback: "¡Exacto! Un falso negativo descarta un fármaco que podría salvar vidas." },
+    { id: "c", label: "Clustering sin etiquetas, no hay métrica clínica", correct: false, feedback: "Tenemos etiquetas (se une/no), así que es supervisado, no clustering." },
     { id: "d", label: "Clasificación pero priorizar accuracy sin distinguir errores", correct: false, feedback: "Accuracy solo oculta la diferencia entre falso positivo y falso negativo, crítica en clínica." },
   ]}
 />
@@ -183,7 +183,7 @@ Ejemplos históricos de la pandemia:
   options={[
     { id: "a", label: "Porque reemplaza todos los ensayos y ya se puede usar en humanos", correct: false, feedback: "No: sigue requiriendo validación clínica completa." },
     { id: "b", label: "Acelera el acceso pero siguen siendo obligatorias toxicología y fases clínicas", correct: true, feedback: "¡Exacto! IA acelera, validación confirma." },
-    { id: "c", label: "No es revolucionario, siempre se descubren fármacos en 18 meses", correct: false, feedback: "Tradicional lleva 4-6 años; 18 meses es un salto enorme." },
+    { id: "c", label: "No es revolucionario, siempre se descubren fármacos en 18 meses", correct: false, feedback: "Tradicional lleva 4-6 años, 18 meses es un salto enorme." },
     { id: "d", label: "Solo importa el costo, no la seguridad", correct: false, feedback: "Seguridad y eficacia son prioritarias, no solo el costo." },
   ]}
 />
@@ -219,10 +219,10 @@ La inteligencia artificial comprime drásticamente la fase de diseño y cribado 
   allowContinueOnIncorrect
   explanation="AlphaFold da la conformación más probable, pero las proteínas son dinámicas y cambian al unirse. Validar experimentalmente sigue siendo obligatorio."
   options={[
-    { id: "a", label: "Las proteínas son dinámicas; la predicción es estática y puede no reflejar el estado activo", correct: true, feedback: "¡Correcto! Por eso una predicción útil sigue necesitando confirmación experimental." },
+    { id: "a", label: "Las proteínas son dinámicas, la predicción es estática y puede no reflejar el estado activo", correct: true, feedback: "¡Correcto! Por eso una predicción útil sigue necesitando confirmación experimental." },
     { id: "b", label: "AlphaFold solo predice proteínas humanas, no virales", correct: false, feedback: "Predice cualquier secuencia, incluidas proteínas virales." },
     { id: "c", label: "Las predicciones son siempre incorrectas por definición", correct: false, feedback: "No: CASP14 alcanzó 92.4 GDT, comparable a métodos experimentales en muchos casos." },
-    { id: "d", label: "El docking no se puede simular con computadoras", correct: false, feedback: "Sí se puede simular; justamente la estructura predicha permite el screening virtual." },
+    { id: "d", label: "El docking no se puede simular con computadoras", correct: false, feedback: "Sí se puede simular, justamente la estructura predicha permite el screening virtual." },
   ]}
 />
 
@@ -272,7 +272,7 @@ Las proteínas en solución fisiológica se mueven e inducen ajustes conformacio
   explanation="Oportunidad: investigación que antes requería equipamiento costoso ahora es accesible. Riesgo: confiar ciegamente sin validación y seleccionar una diana incorrecta, desperdiciando años."
   options={[
     { id: "a", label: "Solo Risiken: no sirve para nada en países con menos recursos", correct: false, feedback: "Al revés: abre puertas, pero exige criterio." },
-    { id: "b", label: "Amplía acceso pero exige validar; confiar ciegamente puede desperdiciar años en una diana errónea", correct: true, feedback: "¡Exacto! Democratiza, pero no elimina la validación." },
+    { id: "b", label: "Amplía acceso pero exige validar, confiar ciegamente puede desperdiciar años en una diana errónea", correct: true, feedback: "¡Exacto! Democratiza, pero no elimina la validación." },
     { id: "c", label: "Elimina la necesidad de validar experimentalmente", correct: false, feedback: "No: prioriza mejor la validación, no la elimina." },
     { id: "d", label: "Solo beneficia a laboratorios con criomicroscopía", correct: false, feedback: "Beneficia justamente a quienes no tienen esos equipos." },
   ]}
@@ -415,9 +415,9 @@ La IA no sustituirá al científico: los científicos que utilicen IA reemplazar
   explanation="AlphaFold predice coordenadas 3D a partir de aminoácidos. Evo es generativo sobre ADN completo (incluyendo no codificante) y puede diseñar secuencias novedosas."
   options={[
     { id: "a", label: "AlphaFold genera secuencias nuevas de ADN, Evo solo predice estructuras", correct: false, feedback: "Al revés: Evo genera, AlphaFold predice estructura." },
-    { id: "b", label: "AlphaFold predice estructura 3D de proteínas; Evo genera y comprende secuencias genómicas completas", correct: true, feedback: "¡Perfecto! Son complementarios: forma vs secuencia generativa." },
+    { id: "b", label: "AlphaFold predice estructura 3D de proteínas, Evo genera y comprende secuencias genómicas completas", correct: true, feedback: "¡Perfecto! Son complementarios: forma vs secuencia generativa." },
     { id: "c", label: "No hay diferencia, son el mismo modelo con distinto nombre", correct: false, feedback: "Son arquitecturas y objetivos distintos, publicados por equipos diferentes." },
-    { id: "d", label: "Ambos requieren cristalografía de rayos X para cada predicción", correct: false, feedback: "No requieren experimento nuevo; aprenden de datos previos." },
+    { id: "d", label: "Ambos requieren cristalografía de rayos X para cada predicción", correct: false, feedback: "No requieren experimento nuevo, aprenden de datos previos." },
   ]}
 />
 
@@ -442,7 +442,7 @@ Ambos modelos representan dos caras de la misma revolución: AlphaFold resuelve 
   explanation="No: 95% del modelo no es probabilidad clínica. Puede esconder sesgos, falta de fisiología real y efectos no modelados. Validación clínica en fases es obligatoria."
   options={[
     { id: "a", label: "Sí, 95% del modelo equivale a 95% de éxito en humanos", correct: false, feedback: "No: esa confianza no incluye lo que el modelo no modeló (metabolismo, genética)." },
-    { id: "b", label: "No, faltan sesgos, fisiología real y efectos no modelados; requiere validación clínica", correct: true, feedback: "¡Correcto! La incertidumbre real está fuera del 5% reportado." },
+    { id: "b", label: "No, faltan sesgos, fisiología real y efectos no modelados, requiere validación clínica", correct: true, feedback: "¡Correcto! La incertidumbre real está fuera del 5% reportado." },
     { id: "c", label: "Sí, si es barato aunque no esté validado", correct: false, feedback: "Costo no sustituye seguridad clínica." },
     { id: "d", label: "No, pero basta con repetir el mismo modelo", correct: false, feedback: "Repetir el mismo sesgo no corrige la validación faltante." },
   ]}
@@ -477,15 +477,15 @@ Las cinco limitaciones irreductibles de la IA en biología:
 <div className="grid gap-2 sm:grid-cols-2 my-3 text-xs">
   <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3">
     <strong className="text-blue-900 block mb-0.5">Lección 1: Features y límites</strong>
-    Las computadoras ven matrices de números; las reglas fijas se quiebran ante la variabilidad biológica.
+    Las computadoras ven matrices de números, las reglas fijas se quiebran ante la variabilidad biológica.
   </div>
   <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-3">
     <strong className="text-indigo-900 block mb-0.5">Lección 2: Algoritmos y sobreajuste</strong>
-    Perceptrón, KNN y regresión lineal; la defensa del train/test split contra la memorización de ruido.
+    Perceptrón, KNN y regresión lineal, la defensa del train/test split contra la memorización de ruido.
   </div>
   <div className="rounded-lg border border-teal-200 bg-teal-50/70 p-3">
     <strong className="text-teal-900 block mb-0.5">Lección 3: Biología 3D y Pipelines</strong>
-    AlphaFold y el PDB; calibración rigurosa y matrices de confusión clínica (precisión, recall, F1).
+    AlphaFold y el PDB, calibración rigurosa y matrices de confusión clínica (precisión, recall, F1).
   </div>
   <div className="rounded-lg border border-emerald-200 bg-emerald-50/70 p-3">
     <strong className="text-emerald-900 block mb-0.5">Lección 4: Casos reales y futuro</strong>
@@ -517,7 +517,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
     { id: "a", label: "Diseñó la secuencia genética del virus", correct: false, feedback: "La secuencia viral se obtuvo por secuenciación, no por diseño de IA." },
     { id: "b", label: "Predijo qué formulaciones de nanopartículas lipídicas serían más efectivas", correct: true, feedback: "¡Correcto! Priorizó 50 candidatas prometedoras sobre 1.000 posibles." },
     { id: "c", label: "Fabricó las vacunas en laboratorios autónomos sin humanos", correct: false, feedback: "Los laboratorios autónomos son tendencia futura, no lo usado en 2020." },
-    { id: "d", label: "Reemplazó por completo los ensayos clínicos", correct: false, feedback: "Los ensayos clínicos siguen siendo obligatorios; la IA no los reemplaza." },
+    { id: "d", label: "Reemplazó por completo los ensayos clínicos", correct: false, feedback: "Los ensayos clínicos siguen siendo obligatorios, la IA no los reemplaza." },
   ]}
 />
 
@@ -526,9 +526,9 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
   blockId="choice-l04-check-2"
-  explanation="Encontrar nuevos usos para fármacos aprobados usando ML predictivo; ahorra años porque ya pasaron pruebas de seguridad."
+  explanation="Encontrar nuevos usos para fármacos aprobados usando ML predictivo, ahorra años porque ya pasaron pruebas de seguridad."
   options={[
-    { id: "a", label: "Mover fármacos de un laboratorio a otro", correct: false, feedback: "No es logística; es predicción computacional de nuevas indicaciones." },
+    { id: "a", label: "Mover fármacos de un laboratorio a otro", correct: false, feedback: "No es logística, es predicción computacional de nuevas indicaciones." },
     { id: "b", label: "Usar modelos de ML para predecir si fármacos existentes pueden tratar nuevas enfermedades", correct: true, feedback: "¡Exacto! Baricitinib y remdesivir son ejemplos reales." },
     { id: "c", label: "Rediseñar la estructura química de un fármaco desde cero", correct: false, feedback: "Eso sería diseño de novo, no reposicionamiento." },
     { id: "d", label: "Almacenar fármacos en condiciones óptimas", correct: false, feedback: "Eso es logística de almacenamiento, no ML." },
@@ -540,12 +540,12 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
   blockId="choice-l04-check-3"
-  explanation="Es una foto estática de la conformación más probable; la proteína real es dinámica y puede adoptar otras conformaciones al unirse."
+  explanation="Es una foto estática de la conformación más probable, la proteína real es dinámica y puede adoptar otras conformaciones al unirse."
   options={[
     { id: "a", label: "Porque AlphaFold solo funciona con proteínas humanas", correct: false, feedback: "Funciona con cualquier secuencia, incluidas virales." },
     { id: "b", label: "Porque las proteínas son dinámicas y la predicción muestra un estado estático", correct: true, feedback: "¡Correcto! Por eso el docking basado solo en predicción puede dar falsos positivos." },
     { id: "c", label: "Porque las predicciones son siempre incorrectas", correct: false, feedback: "Muchas predicciones alcanzan 92.4 GDT, comparables a experimental." },
-    { id: "d", label: "Porque requiere demasiado poder computacional para docking", correct: false, feedback: "El docking es factible; el límite es la dinámica, no el cómputo." },
+    { id: "d", label: "Porque requiere demasiado poder computacional para docking", correct: false, feedback: "El docking es factible, el límite es la dinámica, no el cómputo." },
   ]}
 />
 
@@ -556,10 +556,10 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   blockId="choice-l04-check-4"
   explanation="Datos escasos y caros, correlación sin causalidad, mala generalización entre laboratorios y cajas negras difíciles de interpretar."
   options={[
-    { id: "a", label: "Es demasiado cara para usarla", correct: false, feedback: "El costo baja; el problema es la calidad y cantidad de datos biológicos." },
+    { id: "a", label: "Es demasiado cara para usarla", correct: false, feedback: "El costo baja, el problema es la calidad y cantidad de datos biológicos." },
     { id: "b", label: "Los datos biológicos son escasos, caros, y el modelo no entiende mecanismos causales", correct: true, feedback: "¡Exacto! La IA encuentra correlaciones, no explica mecanismos biológicos." },
     { id: "c", label: "No hay suficientes científicos que sepan usarla", correct: false, feedback: "La brecha de formación existe, pero no es la limitación fundamental técnica." },
-    { id: "d", label: "Las computadoras no tienen la potencia necesaria", correct: false, feedback: "El cómputo es mayormente suficiente; los datos siguen siendo el cuello de botella." },
+    { id: "d", label: "Las computadoras no tienen la potencia necesaria", correct: false, feedback: "El cómputo es mayormente suficiente, los datos siguen siendo el cuello de botella." },
   ]}
 />
 

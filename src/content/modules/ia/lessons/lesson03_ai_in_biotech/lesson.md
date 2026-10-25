@@ -101,7 +101,7 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
   allowContinueOnIncorrect
   explanation="Las hélices alfa se ven como tirabuzones, las láminas beta como flechas planas y los loops como fideos sin estructura fija."
   options={[
-    { id: "a", label: "Las hélices alfa se ven como tirabuzones; los loops como fideos desordenados", correct: true, feedback: "¡Exacto! La forma 3D refleja la función." },
+    { id: "a", label: "Las hélices alfa se ven como tirabuzones, los loops como fideos desordenados", correct: true, feedback: "¡Exacto! La forma 3D refleja la función." },
     { id: "b", label: "No hay diferencia visible, todo se ve igual al rotar", correct: false, feedback: "Sí hay diferencias: hélices y láminas tienen patrones visuales distintivos." },
     { id: "c", label: "Las hélices alfa son las regiones que no aparecen en la visualización", correct: false, feedback: "Las hélices sí se visualizan, como cintas en tirabuzón." },
     { id: "d", label: "Los loops son siempre hélices perfectas", correct: false, feedback: "Al revés: los loops son las zonas sin estructura regular." },
@@ -138,10 +138,10 @@ Cada átomo en el visualizador posee coordenadas continuas $(x, y, z)$ en ángst
   allowContinueOnIncorrect
   explanation="Es regresión: coordenadas continuas. El error se mide con RMSD, que es el ECM en 3D: distancia promedio entre átomos equivalentes."
   options={[
-    { id: "a", label: "Clasificación; se mide con accuracy", correct: false, feedback: "No: clasificar sería elegir una categoría. Acá predecimos números continuos." },
-    { id: "b", label: "Regresión; se mide con RMSD (ECM en 3D) entre átomos equivalentes", correct: true, feedback: "¡Correcto! RMSD < 1Å es excelente; >3Å es poco confiable." },
-    { id: "c", label: "Clasificación; se mide con RMSD como si fuera clasificación", correct: false, feedback: "RMSD es métrica de regresión, no de clasificación." },
-    { id: "d", label: "Regresión; se mide contando cuántos aminoácidos coinciden", correct: false, feedback: "Coincidencia binaria sería clasificación; acá importan las coordenadas exactas." },
+    { id: "a", label: "Clasificación, se mide con accuracy", correct: false, feedback: "No: clasificar sería elegir una categoría. Acá predecimos números continuos." },
+    { id: "b", label: "Regresión, se mide con RMSD (ECM en 3D) entre átomos equivalentes", correct: true, feedback: "¡Correcto! RMSD < 1Å es excelente, >3Å es poco confiable." },
+    { id: "c", label: "Clasificación, se mide con RMSD como si fuera clasificación", correct: false, feedback: "RMSD es métrica de regresión, no de clasificación." },
+    { id: "d", label: "Regresión, se mide contando cuántos aminoácidos coinciden", correct: false, feedback: "Coincidencia binaria sería clasificación, acá importan las coordenadas exactas." },
   ]}
 />
 
@@ -162,7 +162,7 @@ El **RMSD (Root Mean Square Deviation)** mide la distancia cuadrática media ent
   variant="scientist"
   mood="thinking"
   lines={[
-    "AlphaFold no simula las fuerzas físicas newtonianas átomo por átomo; eso tomaría siglos de supercómputo.",
+    "AlphaFold no simula las fuerzas físicas newtonianas átomo por átomo, eso tomaría siglos de supercómputo.",
     "En su lugar, reformuló el plegamiento como un problema de aprendizaje estadístico profundo sobre 170.000 estructuras del PDB.",
   ]}
 />
@@ -208,7 +208,7 @@ La gran innovación fue tratar el plegamiento como **reconocimiento de patrones 
   options={[
     { id: "a", label: "Solo sirve para contar proteínas, sin aplicaciones reales", correct: false, feedback: "No: habilita diseño de fármacos, ingeniería de enzimas y estudio de enfermedades." },
     { id: "b", label: "Permite docking e ingeniería de enzimas, pero falla en dinámicas e interacciones", correct: true, feedback: "¡Exacto! Es una foto estática de la conformación más probable, no la dinámica completa." },
-    { id: "c", label: "Reemplaza por completo los experimentos de laboratorio", correct: false, feedback: "No reemplaza validación experimental; la hace más enfocada." },
+    { id: "c", label: "Reemplaza por completo los experimentos de laboratorio", correct: false, feedback: "No reemplaza validación experimental, la hace más enfocada." },
     { id: "d", label: "Solo funciona si la proteína ya tiene estructura en el PDB", correct: false, feedback: "Justamente predice las que no tienen estructura experimental resuelta." },
   ]}
 />
@@ -268,8 +268,8 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
   explanation="Limpieza consume >60% del tiempo. Feature engineering genera errores silenciosos: si el microscopio está mal calibrado, el modelo aprende el artefacto y falla al transferirse."
   options={[
     { id: "a", label: "Entrenamiento y despliegue son las etapas más largas y con más errores silenciosos", correct: false, feedback: "No: entrenar es rápido comparado con conseguir y limpiar datos." },
-    { id: "b", label: "Limpieza consume más tiempo; feature engineering genera errores silenciosos de calibración", correct: true, feedback: "¡Exacto! Un error sistemático de calibración contamina todo el modelo." },
-    { id: "c", label: "La elección del algoritmo es lo más costoso", correct: false, feedback: "Elegir algoritmo es rápido; lo caro es tener datos limpios y bien definidos." },
+    { id: "b", label: "Limpieza consume más tiempo, feature engineering genera errores silenciosos de calibración", correct: true, feedback: "¡Exacto! Un error sistemático de calibración contamina todo el modelo." },
+    { id: "c", label: "La elección del algoritmo es lo más costoso", correct: false, feedback: "Elegir algoritmo es rápido, lo caro es tener datos limpios y bien definidos." },
     { id: "d", label: "Ninguna etapa tiene errores silenciosos", correct: false, feedback: "Sí existen: errores que parecen correctos localmente pero arruinan la generalización." },
   ]}
 />
@@ -384,7 +384,7 @@ $$\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{35}{35 + 5
 <div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3.5 text-xs text-gray-800">
 <strong className="text-rose-900 block mb-1">2. Recall o Sensibilidad: Capacidad de detección</strong>
 $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{35}{35 + 10} = \frac{35}{45} \approx 0.778\ (77.8\%)$$
-<em>De los 45 casos reales de Aspergillus existentes en la muestra, el modelo capturó el 77.8%; un 22.2% de infecciones escapó al radar.</em>
+<em>De los 45 casos reales de Aspergillus existentes en la muestra, el modelo capturó el 77.8%, un 22.2% de infecciones escapó al radar.</em>
 </div>
 
 <div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3.5 text-xs text-gray-800">
@@ -404,7 +404,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
     { id: "a", label: "Porque es más vistosa que un número solo", correct: false, feedback: "No es estética: revela tipos de error con distinto costo." },
     { id: "b", label: "Porque distingue falsos negativos vs falsos positivos con costos clínicos distintos", correct: true, feedback: "¡Exacto! En clínica, perder un patógeno no es lo mismo que una falsa alarma." },
     { id: "c", label: "Porque reemplaza al accuracy y lo hace innecesario", correct: false, feedback: "Complementa, no reemplaza: accuracy sigue siendo útil junto a precisión/recall." },
-    { id: "d", label: "Solo sirve para regresión, no para clasificación", correct: false, feedback: "Es específica de clasificación; regresión usa ECM/R²." },
+    { id: "d", label: "Solo sirve para regresión, no para clasificación", correct: false, feedback: "Es específica de clasificación, regresión usa ECM/R²." },
   ]}
 />
 
@@ -439,7 +439,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   blockId="choice-l03-check-2"
   explanation="Reformuló el plegamiento como aprendizaje a partir de 170k estructuras, sin simulaciones físicas costosas."
   options={[
-    { id: "a", label: "Porque fue el primer modelo de deep learning", correct: false, feedback: "Hubo muchos antes; lo disruptivo fue el enfoque aplicado al plegamiento." },
+    { id: "a", label: "Porque fue el primer modelo de deep learning", correct: false, feedback: "Hubo muchos antes, lo disruptivo fue el enfoque aplicado al plegamiento." },
     { id: "b", label: "Porque resolvió el plegamiento como aprendizaje sin simulaciones físicas costosas", correct: true, feedback: "¡Exacto! Aprendió de datos experimentales del PDB." },
     { id: "c", label: "Porque eliminó la necesidad de experimentos de laboratorio", correct: false, feedback: "Acelera, pero la validación experimental sigue siendo necesaria." },
     { id: "d", label: "Porque predice secuencias de ADN", correct: false, feedback: "Predice estructuras 3D a partir de secuencia de aminoácidos, no ADN." },
@@ -451,11 +451,11 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
   blockId="choice-l03-check-3"
-  explanation="Solo ~200k estructuras resueltas vs millones de secuencias conocidas; por eso predecir las faltantes era tan valioso."
+  explanation="Solo ~200k estructuras resueltas vs millones de secuencias conocidas, por eso predecir las faltantes era tan valioso."
   options={[
-    { id: "a", label: "Es demasiado grande para descargarlo", correct: false, feedback: "El tamaño es manejable; el problema es la cobertura." },
+    { id: "a", label: "Es demasiado grande para descargarlo", correct: false, feedback: "El tamaño es manejable, el problema es la cobertura." },
     { id: "b", label: "Solo ~200.000 estructuras resueltas vs millones de proteínas conocidas", correct: true, feedback: "¡Correcto! Esa brecha hizo necesario AlphaFold." },
-    { id: "c", label: "Los datos están en formato incorrecto", correct: false, feedback: "El formato PDB es estándar; no es el problema." },
+    { id: "c", label: "Los datos están en formato incorrecto", correct: false, feedback: "El formato PDB es estándar, no es el problema." },
     { id: "d", label: "No contiene proteínas humanas", correct: false, feedback: "Sí contiene miles de proteínas humanas, pero faltan muchas otras." },
   ]}
 />
@@ -465,12 +465,12 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
   blockId="choice-l03-check-4"
-  explanation="La limpieza y preparación de datos consume más del 60% del tiempo; además es donde aparecen errores silenciosos."
+  explanation="La limpieza y preparación de datos consume más del 60% del tiempo, además es donde aparecen errores silenciosos."
   options={[
     { id: "a", label: "El entrenamiento del modelo", correct: false, feedback: "El entreno es rápido comparado con conseguir y limpiar datos biológicos." },
     { id: "b", label: "La limpieza y preparación de datos", correct: true, feedback: "¡Exacto! Control de calidad, normalización entre lotes y corrección de artefactos llevan la mayor parte." },
     { id: "c", label: "El despliegue en producción", correct: false, feedback: "Desplegar es menor comparado con la preparación inicial." },
-    { id: "d", label: "La elección del algoritmo", correct: false, feedback: "Elegir algoritmo es rápido; lo costoso es tener datos limpios." },
+    { id: "d", label: "La elección del algoritmo", correct: false, feedback: "Elegir algoritmo es rápido, lo costoso es tener datos limpios." },
   ]}
 />
 
@@ -479,9 +479,9 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
   blockId="choice-l03-check-5"
-  explanation="Convierte letras (aminoácidos) en vectores numéricos que el modelo puede procesar; es el paso inicial de AlphaFold."
+  explanation="Convierte letras (aminoácidos) en vectores numéricos que el modelo puede procesar, es el paso inicial de AlphaFold."
   options={[
-    { id: "a", label: "Una imagen de la proteína", correct: false, feedback: "No es visual; es una representación numérica." },
+    { id: "a", label: "Una imagen de la proteína", correct: false, feedback: "No es visual, es una representación numérica." },
     { id: "b", label: "Una representación numérica de la secuencia que el modelo puede procesar", correct: true, feedback: "¡Correcto! Transforma secuencia en números para el aprendizaje." },
     { id: "c", label: "El archivo PDB de la proteína", correct: false, feedback: "El PDB almacena coordenadas, no es el embedding." },
     { id: "d", label: "El nombre de la proteína", correct: false, feedback: "El nombre es texto, no un vector procesable por el modelo." },

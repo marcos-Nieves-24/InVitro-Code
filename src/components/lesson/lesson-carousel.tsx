@@ -99,78 +99,36 @@ export function LessonCarousel({
     if (r.ok) setShowCelebration(true);
   };
 
-  // Navigation rails below (two <button> overlays) own the left/right advance.
-  // The central stage has no click handler of its own, so the outer slide area
-  // never advances on a prose/card/trainer click; only rails fire goNext/goPrev.
-
-  // Keyboard navigation: Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop.
-  // Space is deliberately NOT a forward key: inside editors and quizzes it
-  // types/activates, and as a global advance it fires by accident. Enter and
-  // ArrowRight already cover keyboard advancement; native buttons keep working.
+  // ALL movement is via footer Continuar/Atrás only — no rails, no click zones, no keyboard forward.
+  // Keyboard is disabled for forward (ArrowRight/Enter) so Dra. Coni + RevealSequence
+  // slices only advance via footer Continuar (single source of truth).
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const active = document.activeElement as HTMLElement | null;
       const isTypingTarget =
         active?.closest("input,textarea,select,[contenteditable='true']") != null;
-
-      // When typing, only Escape would be relevant; but spec says ESC does nothing, so ignore typing context
-      if (isTypingTarget) {
-        // Allow Escape to remain noop; block slide navigation while typing except Esc
-        if (e.key === "Escape") return;
-        // Space/Enter inside input/textarea should not navigate
-        if (e.key === " " || e.key === "Enter" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
-          return;
-        }
-        // Home/End belong to the focused control (range: jump to min/max; text:
-        // line start/end). Without this, seeking a slider with End teleports the
-        // learner to the last slide and loses their place mid-exercise.
-        if (e.key === "Home" || e.key === "End") {
-          return;
-        }
+      if (isTypingTarget) return;
+      // Only allow Atrás via ArrowLeft for accessibility; forward is footer-only
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+        return;
       }
-
-      // All forward keys below funnel through goNext, which delegates to the
-      // single reveal owner while it still has steps and only changes the slide
-      // once the reveal is complete.
-      switch (e.key) {
-        case "ArrowRight":
-          e.preventDefault();
-          if (!isLast) goNext();
-          else {
-            // on last slide, ArrowRight does not auto-finish; user must press Finalizar
-          }
-          break;
-        case "Enter":
-          // Do not intercept when focus is on a native button (it already handles click)
-          if (active?.tagName === "BUTTON" && e.key === "Enter") return;
-          e.preventDefault();
-          if (!isLast) goNext();
-          break;
-        case "ArrowLeft":
-          // Intra-slide back is handled by RevealSequence's own keydown, which
-          // stops propagation, so this fallback only runs for inter-slide back.
-          e.preventDefault();
-          goPrev();
-          break;
-        case "Home":
-          e.preventDefault();
-          setCurrent(0);
-          break;
-        case "End":
-          e.preventDefault();
-          setCurrent(total - 1);
-          break;
-        case "Escape":
-          // Intentionally no-op: fullscreen is fixed overlay, not native Fullscreen API
-          break;
-        default:
-          break;
+      if (e.key === "Home") {
+        e.preventDefault();
+        setCurrent(0);
+        return;
       }
+      if (e.key === "End") {
+        e.preventDefault();
+        setCurrent(total - 1);
+        return;
+      }
+      // ArrowRight, Enter, Space intentionally no-op — must use footer Continuar
     };
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isLast, goNext, goPrev, total]);
+  }, [goPrev, total]);
 
   if (total === 0) return null;
 
@@ -196,55 +154,13 @@ export function LessonCarousel({
           </p>
         </div>
 
-        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar.
-            Flex column so the inner wrapper owns the whole stage band and can
-            centre the slide inside it: a short slide used to hang from the top of
-            the band and dump every pixel of void at the bottom (measured 694px). */}
+        {/* Slide area — no click zones, no rails. ALL advance is via footer Continuar only. */}
         <div
           ref={slideAreaRef}
           className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
-          // Provide hint for coarse pointers
           role="group"
           aria-label="Área de la diapositiva"
-          // Make area focusable so keyboard works even without explicit focus elsewhere
-          tabIndex={0}
-          // Clicks no longer bubble from the whole slide area; navigation is owned
-          // only by the two rail buttons below, which cover the empty edge gutters.
         >
-          {/* Left rail — advances to the previous scene, only on rail clicks. */}
-          {current > 0 && (
-            <button
-              type="button"
-              data-rail="left"
-              onClick={goPrev}
-              aria-label="Anterior: ir a la escena anterior"
-              className="absolute left-0 top-0 z-30 h-full w-[clamp(40px,6%,96px)] cursor-w-resize text-storm/30 transition-colors hover:bg-storm/5 hover:text-storm/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-[-2px]"
-            >
-              <span
-                className="pointer-events-none absolute left-1 top-1/2 -translate-y-1/2 select-none text-xl leading-none"
-                aria-hidden="true"
-              >
-                ‹
-              </span>
-            </button>
-          )}
-          {/* Right rail — advances to the next scene (or reveal owner's next). */}
-          {!isLast && (
-            <button
-              type="button"
-              data-rail="right"
-              onClick={goNext}
-              aria-label="Siguiente: ir a la siguiente escena"
-              className="absolute right-0 top-0 z-30 h-full w-[clamp(40px,6%,96px)] cursor-e-resize text-storm/30 transition-colors hover:bg-storm/5 hover:text-storm/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-[-2px]"
-            >
-              <span
-                className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 select-none text-xl leading-none"
-                aria-hidden="true"
-              >
-                ›
-              </span>
-            </button>
-          )}
 
           {/* Center stage — no click-owner; events only on its interactive children. */}
           <div

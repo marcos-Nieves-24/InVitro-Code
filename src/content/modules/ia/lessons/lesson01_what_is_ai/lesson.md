@@ -152,7 +152,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
   allowContinueOnIncorrect
   explanation="Una feature es una propiedad medible (como área, textura o intensidad) que convertimos en número para que el algoritmo pueda aprender patrones."
   options={[
-    { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "El hardware no define la feature; hablamos de propiedades medibles de la muestra, no del equipo." },
+    { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "El hardware no define la feature, hablamos de propiedades medibles de la muestra, no del equipo." },
     { id: "b", label: "Una propiedad medible de los datos que usamos para clasificar", correct: true, feedback: "¡Exacto! Área, circularidad, textura e intensidad son ejemplos de features." },
     { id: "c", label: "Un tipo de algoritmo de aprendizaje automático", correct: false, feedback: "No: los algoritmos usan features, pero no son la feature en sí." },
     { id: "d", label: "Un error que comete el modelo al predecir", correct: false, feedback: "Eso sería un error de predicción, no una feature." },
@@ -175,10 +175,10 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
   lessonSlug="lesson01_what_is_ai"
   blockId="choice-l01-area-1"
   allowContinueOnIncorrect
-  explanation="Los rangos de área se superponen entre especies. Una sola feature rara vez separa bien; combinar varias (área + textura + circularidad) mejora la clasificación."
+  explanation="Los rangos de área se superponen entre especies. Una sola feature rara vez separa bien, combinar varias (área + textura + circularidad) mejora la clasificación."
   options={[
     { id: "a", label: "Sí, el área por sí sola separa perfectamente ambas especies", correct: false, feedback: "No: hay superposición. Algunas conidias de Aspergillus son pequeñas y algunas de Penicillium son grandes." },
-    { id: "b", label: "No, los rangos se superponen; necesitamos múltiples features", correct: true, feedback: "¡Correcto! Una sola dimensión no alcanza. El espacio de features multidimensional separa mejor." },
+    { id: "b", label: "No, los rangos se superponen, necesitamos múltiples features", correct: true, feedback: "¡Correcto! Una sola dimensión no alcanza. El espacio de features multidimensional separa mejor." },
     { id: "c", label: "Solo si el microscopio está perfectamente calibrado", correct: false, feedback: "La calibración ayuda, pero no elimina la variabilidad biológica natural." },
     { id: "d", label: "Sí, porque Penicillium siempre es más grande", correct: false, feedback: "Falso: hay conidias pequeñas de Aspergillus y grandes de Penicillium. No es determinista." },
   ]}
@@ -198,7 +198,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 <RevealSequence>
 
-<FeatureSpace2D caption="Una dimensión no alcanza; dos separan" />
+<FeatureSpace2D caption="Una dimensión no alcanza, dos separan" />
 
 <div className="space-y-3">
 <div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
@@ -233,7 +233,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
   explanation="Depende del problema: el humano es preciso en patrones visuales claros pero se cansa y es inconsistente. La IA es consistente, escalable y procesa miles de conidias por segundo."
   options={[
     { id: "a", label: "Sí, el humano siempre gana a cualquier algoritmo", correct: false, feedback: "No siempre: el humano se cansa y no escala a miles de muestras." },
-    { id: "b", label: "Depende: humano preciso pero inconsistente; IA consistente y escalable", correct: true, feedback: "¡Exacto! El humano aporta intuición; la IA, consistencia y escala." },
+    { id: "b", label: "Depende: humano preciso pero inconsistente, IA consistente y escalable", correct: true, feedback: "¡Exacto! El humano aporta intuición, la IA, consistencia y escala." },
     { id: "c", label: "El algoritmo siempre es peor que el humano", correct: false, feedback: "No: en volumen y consistencia, la IA supera al humano." },
     { id: "d", label: "Ninguno puede clasificar conidias correctamente", correct: false, feedback: "Ambos pueden, con enfoques y límites distintos." },
   ]}
@@ -282,11 +282,11 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   lessonSlug="lesson01_what_is_ai"
   blockId="choice-l01-reglas-1"
   allowContinueOnIncorrect
-  explanation="Por más que ajustes los umbrales, siempre hay conidias atípicas. La variabilidad biológica no se captura con reglas fijas; por eso usamos ML."
+  explanation="Por más que ajustes los umbrales, siempre hay conidias atípicas. La variabilidad biológica no se captura con reglas fijas, por eso usamos ML."
   options={[
     { id: "a", label: "Sí, basta con ajustar bien los umbrales para llegar al 100%", correct: false, feedback: "No: probarás que siempre quedan puntos mal clasificados por superposición natural." },
     { id: "b", label: "No, la variabilidad natural deja excepciones que ninguna regla simple captura", correct: true, feedback: "¡Exacto! Necesitarías cientos de reglas y aún así fallarías. El ML aprende la frontera flexible." },
-    { id: "c", label: "Solo si usamos una única regla en lugar de dos", correct: false, feedback: "Una regla es aún más limitada que dos; empeora la separación." },
+    { id: "c", label: "Solo si usamos una única regla en lugar de dos", correct: false, feedback: "Una regla es aún más limitada que dos, empeora la separación." },
     { id: "d", label: "Sí, porque las conidias de cada especie son idénticas entre sí", correct: false, feedback: "Falso: hay variabilidad intra-especie considerable." },
   ]}
 />
@@ -362,7 +362,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
   blockId="choice-l01-check-1"
-  explanation="Las features son los números que la IA usa para aprender; elegir buenas features es el primer paso del pipeline."
+  explanation="Las features son los números que la IA usa para aprender, elegir buenas features es el primer paso del pipeline."
   options={[
     { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "No: el hardware es el equipo físico. La feature es una propiedad medible del dato." },
     { id: "b", label: "Una propiedad medible de los datos que usamos para clasificar", correct: true, feedback: "¡Correcto! Por ejemplo, área y textura de la conidia." },
@@ -377,11 +377,11 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
   blockId="choice-l01-check-2"
-  explanation="La naturaleza tiene variabilidad; cualquier umbral fijo deja excepciones. El ML aprende fronteras flexibles."
+  explanation="La naturaleza tiene variabilidad, cualquier umbral fijo deja excepciones. El ML aprende fronteras flexibles."
   options={[
-    { id: "a", label: "Porque las reglas son muy lentas de ejecutar", correct: false, feedback: "La velocidad no es el problema central; es la falta de flexibilidad." },
+    { id: "a", label: "Porque las reglas son muy lentas de ejecutar", correct: false, feedback: "La velocidad no es el problema central, es la falta de flexibilidad." },
     { id: "b", label: "Porque la naturaleza tiene variabilidad que las reglas no capturan", correct: true, feedback: "¡Exacto! Siempre hay casos atípicos que rompen la regla." },
-    { id: "c", label: "Porque las computadoras no entienden reglas", correct: false, feedback: "Las computadoras ejecutan reglas perfectamente; el problema es que no alcanzan." },
+    { id: "c", label: "Porque las computadoras no entienden reglas", correct: false, feedback: "Las computadoras ejecutan reglas perfectamente, el problema es que no alcanzan." },
     { id: "d", label: "Porque las conidias cambian de forma constantemente", correct: false, feedback: "Cambian entre individuos, no de forma dinámica constante, pero esa variabilidad ya rompe reglas fijas." },
   ]}
 />
@@ -394,9 +394,9 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   blockId="choice-l01-check-3"
   explanation="Aprender es encontrar patrones estadísticos en los datos sin ser programada explícitamente para cada caso."
   options={[
-    { id: "a", label: "Que entiende el significado de lo que clasifica", correct: false, feedback: "No hay conciencia ni comprensión real; solo correlaciones estadísticas." },
+    { id: "a", label: "Que entiende el significado de lo que clasifica", correct: false, feedback: "No hay conciencia ni comprensión real, solo correlaciones estadísticas." },
     { id: "b", label: "Que encuentra patrones estadísticos en los datos sin ser programada explícitamente", correct: true, feedback: "¡Correcto! Esa es la definición de machine learning." },
-    { id: "c", label: "Que puede tener conversaciones como un humano", correct: false, feedback: "Conversar es otra capacidad (PLN); aprender en este contexto es clasificar por patrones." },
+    { id: "c", label: "Que puede tener conversaciones como un humano", correct: false, feedback: "Conversar es otra capacidad (PLN), aprender en este contexto es clasificar por patrones." },
     { id: "d", label: "Que reemplaza completamente al científico", correct: false, feedback: "La IA asiste y acelera, pero no reemplaza el criterio del científico." },
   ]}
 />

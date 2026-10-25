@@ -259,7 +259,7 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
             y={Math.max(LY0 + 8, yLc(tracerPred) - 12)}
             textAnchor="middle"
             fill="white"
-            fontSize={9}
+            fontSize={12}
             fontFamily="monospace"
             opacity={0.7}
           >
@@ -267,7 +267,7 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
           </text>
 
           {/* legend (left panel) */}
-          <g fontFamily="monospace" fontSize={9} opacity={0.85}>
+          <g fontFamily="monospace" fontSize={12} opacity={0.85}>
             <circle cx={LX0 + 6} cy={350} r={4} fill={COLORS.train} />
             <text x={LX0 + 14} y={353} fill="white">entrenamiento</text>
             <circle cx={LX0 + 118} cy={350} r={4} fill={COLORS.test} />
@@ -281,14 +281,14 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
           {/* === RIGHT: error curves === */}
           <line x1={RX0} y1={RY0} x2={RX0} y2={RY1} stroke="white" strokeWidth={1.1} opacity={0.45} />
           <line x1={RX0} y1={RY1} x2={RX1} y2={RY1} stroke="white" strokeWidth={1.1} opacity={0.5} />
-          <text x={RX0 - 8} y={RY0 - 8} fill="white" fontSize={9} fontFamily="monospace" opacity={0.6} transform={`rotate(-90 ${RX0 - 8} ${RY0 - 8})`} textAnchor="end">
+          <text x={RX0 - 8} y={RY0 - 8} fill="white" fontSize={12} fontFamily="monospace" opacity={0.6} transform={`rotate(-90 ${RX0 - 8} ${RY0 - 8})`} textAnchor="end">
             ECM
           </text>
 
           {/* optimum vertical marker */}
           <line x1={xd(OPTIMUM_DEGREE)} y1={RY0} x2={xd(OPTIMUM_DEGREE)} y2={RY1} stroke="#f59e0b" strokeWidth={1} strokeDasharray="4 4" opacity={0.8} />
           <polygon points={`${xd(OPTIMUM_DEGREE)},${RY0 - 2} ${xd(OPTIMUM_DEGREE) - 4},${RY0 - 9} ${xd(OPTIMUM_DEGREE) + 4},${RY0 - 9}`} fill="#f59e0b" />
-          <text x={xd(OPTIMUM_DEGREE)} y={RY0 - 14} textAnchor="middle" fill="#f59e0b" fontSize={9} fontFamily="monospace" fontWeight={700}>
+          <text x={xd(OPTIMUM_DEGREE)} y={RY0 - 14} textAnchor="middle" fill="#f59e0b" fontSize={12} fontFamily="monospace" fontWeight={700}>
             punto óptimo
           </text>
 
@@ -307,12 +307,12 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
             <text x={xd(Math.round((MIN_DEGREE + MAX_DEGREE) / 2))} y={RY1 + 14}>{Math.round((MIN_DEGREE + MAX_DEGREE) / 2)}</text>
             <text x={xd(MAX_DEGREE)} y={RY1 + 14}>{MAX_DEGREE}</text>
           </g>
-          <text x={(RX0 + RX1) / 2} y={RY1 + 30} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.55}>
+          <text x={(RX0 + RX1) / 2} y={RY1 + 30} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.55}>
             grado del polinomio
           </text>
 
           {/* numeric ECM readouts (Spanish) */}
-          <g fontFamily="monospace" fontSize={10}>
+          <g fontFamily="monospace" fontSize={13}>
             <rect x={RX0} y={RY0 + 8} width={9} height={9} rx={2} fill={COLORS.train} />
             <text x={RX0 + 14} y={RY0 + 16} fill="white">ECM entrenamiento: <tspan fill={COLORS.train}>{current.train.toFixed(3)}</tspan></text>
             <rect x={RX0} y={RY0 + 26} width={9} height={9} rx={2} fill={COLORS.test} />
@@ -334,7 +334,7 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
           >
             −
           </button>
-          <label htmlFor="overfit-degree" className="font-mono text-xs whitespace-nowrap text-storm">
+          <label htmlFor="overfit-degree" className="font-mono text-sm whitespace-nowrap text-storm">
             Grado{" "}
             <span className="font-semibold text-mint">
               {degree} / {MAX_DEGREE}
@@ -361,12 +361,12 @@ export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlaye
           className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-gray-200 accent-mint"
           aria-label="Grado del polinomio"
         />
-        <span className={`font-mono text-xs ${tone}`} aria-live="polite">
+        <span className={`font-mono text-sm ${tone}`} aria-live="polite">
           {diagnosis}
         </span>
       </div>
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }

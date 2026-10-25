@@ -120,7 +120,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             y={50}
             textAnchor="middle"
             fill="#45dcc6"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             opacity={0.9}
           >
@@ -162,10 +162,10 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             fillOpacity={0.45}
             opacity={op1}
           />
-          <text x={BAR_X + wSick / 2} y={84 + ROW_H / 2 + 4} textAnchor="middle" fill="white" fontSize={11} fontFamily="monospace" fontWeight={700} opacity={op1}>
+          <text x={BAR_X + wSick / 2} y={84 + ROW_H / 2 + 4} textAnchor="middle" fill="white" fontSize={14} fontFamily="monospace" fontWeight={700} opacity={op1}>
             Enfermos {sick}
           </text>
-          <text x={BAR_X + wSick + wHealthy / 2} y={84 + ROW_H / 2 + 4} textAnchor="middle" fill="white" fontSize={11} fontFamily="monospace" opacity={op1}>
+          <text x={BAR_X + wSick + wHealthy / 2} y={84 + ROW_H / 2 + 4} textAnchor="middle" fill="white" fontSize={14} fontFamily="monospace" opacity={op1}>
             Sanos {healthy}
           </text>
 
@@ -218,12 +218,12 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             opacity={step >= 2 ? 0.6 : 0.2}
           />
           {step >= 2 && (
-            <text x={BAR_X + wTp / 2} y={164 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={11} fontFamily="monospace" fontWeight={700}>
+            <text x={BAR_X + wTp / 2} y={164 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={14} fontFamily="monospace" fontWeight={700}>
               TP {tp}
             </text>
           )}
           {step >= 3 && (
-            <text x={BAR_X + wTp + wFp / 2} y={164 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={11} fontFamily="monospace" fontWeight={700}>
+            <text x={BAR_X + wTp + wFp / 2} y={164 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={14} fontFamily="monospace" fontWeight={700}>
               FP {fp}
             </text>
           )}
@@ -254,7 +254,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             opacity={op4}
           />
           {step >= 4 && (
-            <text x={BAR_X + (posterior / 100) * BAR_W / 2} y={244 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={11} fontFamily="monospace" fontWeight={700}>
+            <text x={BAR_X + (posterior / 100) * BAR_W / 2} y={244 + ROW_H / 2 + 4} textAnchor="middle" fill="#0a0a0a" fontSize={14} fontFamily="monospace" fontWeight={700}>
               {tp} verdaderos
             </text>
           )}
@@ -271,7 +271,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
           </text>
 
           {/* Detalle numérico lateral */}
-          <g fontFamily="monospace" fontSize={11} fill="white" opacity={0.85}>
+          <g fontFamily="monospace" fontSize={14} fill="white" opacity={0.85}>
             <text x={BAR_X} y={316}>Enfermos (TP+FN) = {sick} (TP {tp} + FN {fn})</text>
             <text x={BAR_X} y={336}>Sanos (TN+FP) = {healthy} (TN {tn} + FP {fp})</text>
             <text x={BAR_X} y={356}>Positivos totales = TP {tp} + FP {fp} = {totalPos}</text>
@@ -286,7 +286,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             y={VB_H - 18}
             textAnchor="middle"
             fill="rgba(255,255,255,0.6)"
-            fontSize={10.5}
+            fontSize={13}
             fontFamily="monospace"
           >
             Avanza paso a paso para ver cómo la prevalencia se actualiza con la evidencia del test
@@ -303,7 +303,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
         {/* Deslizadores */}
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap items-center gap-3">
-            <label htmlFor="bayes-prevalence" className="font-mono text-xs whitespace-nowrap text-storm">
+            <label htmlFor="bayes-prevalence" className="font-mono text-sm whitespace-nowrap text-storm">
               Prevalencia{" "}
               <span className="font-semibold text-mint">{prevalence}%</span>
             </label>
@@ -321,7 +321,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <label htmlFor="bayes-sensitivity" className="font-mono text-xs whitespace-nowrap text-storm">
+            <label htmlFor="bayes-sensitivity" className="font-mono text-sm whitespace-nowrap text-storm">
               Sensibilidad{" "}
               <span className="font-semibold text-mint">{sensitivity}%</span>
             </label>
@@ -339,7 +339,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <label htmlFor="bayes-specificity" className="font-mono text-xs whitespace-nowrap text-storm">
+            <label htmlFor="bayes-specificity" className="font-mono text-sm whitespace-nowrap text-storm">
               Especificidad{" "}
               <span className="font-semibold text-mint">{specificity}%</span>
             </label>
@@ -363,7 +363,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             type="button"
             onClick={advance}
             disabled={step >= 4}
-            className="min-h-11 rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-xs font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="min-h-11 rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-sm font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
             aria-label="Avanzar al siguiente paso de la partición"
           >
             {step === 0 ? "Siguiente paso" : step >= 4 ? "Completado" : "Siguiente paso"}
@@ -371,12 +371,12 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
           <button
             type="button"
             onClick={reset}
-            className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
             aria-label="Reiniciar la partición"
           >
             Reiniciar
           </button>
-          <span className="font-mono text-xs tabular-nums text-storm">
+          <span className="font-mono text-sm tabular-nums text-storm">
             Paso {step} / 4
           </span>
         </div>
@@ -392,7 +392,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
         {/* Lectura numérica viva */}
         <div
           aria-live="polite"
-          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-xs text-storm sm:grid-cols-4"
+          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-sm text-storm sm:grid-cols-4"
         >
           <span>Prevalencia = {prevalence}%</span>
           <span>Sensibilidad = {sensitivity}%</span>
@@ -411,7 +411,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
         aria-label="La trampa del test perfecto"
         className="mt-2 rounded-card border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-storm"
       >
-        <p className="font-mono text-xs font-semibold text-amber-300">
+        <p className="font-mono text-sm font-semibold text-amber-300">
           La trampa clásica
         </p>
         <p className="mt-1 text-sm text-ink">
@@ -420,7 +420,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
         </p>
         <div className="mt-2 flex items-center gap-3">
           <div className="flex-1">
-            <div className="mb-1 flex justify-between font-mono text-[10px] text-storm">
+            <div className="mb-1 flex justify-between font-mono text-sm text-storm">
               <span>Creencia ingenua (sensibilidad)</span>
               <span>{sensitivity}%</span>
             </div>
@@ -432,7 +432,7 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             </div>
           </div>
           <div className="flex-1">
-            <div className="mb-1 flex justify-between font-mono text-[10px] text-storm">
+            <div className="mb-1 flex justify-between font-mono text-sm text-storm">
               <span>Probabilidad real (posterior)</span>
               <span>{pct(posterior)}</span>
             </div>
@@ -444,13 +444,13 @@ export function BayesUpdate({ caption }: BayesUpdateProps) {
             </div>
           </div>
         </div>
-        <p className="mt-2 text-xs text-storm">
+        <p className="mt-2 text-sm text-storm">
           Con prevalencia baja, incluso un test bueno genera muchos falsos positivos: la mayoría de los positivos no está enferma.
         </p>
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {caption}
         </figcaption>
       )}

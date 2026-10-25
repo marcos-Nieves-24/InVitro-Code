@@ -149,10 +149,10 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
 
           <line x1={PLOT_X0} y1={PLOT_Y0} x2={PLOT_X0} y2={PLOT_Y1} stroke="white" strokeWidth={1.1} opacity={0.5} />
           <line x1={PLOT_X0} y1={PLOT_Y1} x2={PLOT_X1} y2={PLOT_Y1} stroke="white" strokeWidth={1.1} opacity={0.5} />
-          <text x={PLOT_X1 + 6} y={PLOT_Y1 + 4} fill="white" fontSize={11} fontFamily="monospace" opacity={0.7}>
+          <text x={PLOT_X1 + 6} y={PLOT_Y1 + 4} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7}>
             θ
           </text>
-          <text x={PLOT_X0 - 8} y={PLOT_Y0 - 8} fill="white" fontSize={11} fontFamily="monospace" opacity={0.7}>
+          <text x={PLOT_X0 - 8} y={PLOT_Y0 - 8} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7}>
             J(θ)
           </text>
 
@@ -160,7 +160,7 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
 
           <line x1={thetaToX(1)} y1={PLOT_Y1} x2={thetaToX(1)} y2={jToY(0)} stroke="#f59e0b" strokeWidth={1} strokeDasharray="4 4" opacity={0.7} />
           <circle cx={thetaToX(1)} cy={jToY(0)} r={4} fill="#f59e0b" stroke="#0a0a0a" strokeWidth={1} />
-          <text x={thetaToX(1)} y={jToY(0) - 10} textAnchor="middle" fill="#f59e0b" fontSize={9} fontFamily="monospace" fontWeight={700}>
+          <text x={thetaToX(1)} y={jToY(0) - 10} textAnchor="middle" fill="#f59e0b" fontSize={12} fontFamily="monospace" fontWeight={700}>
             mínimo
           </text>
 
@@ -223,7 +223,7 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
             </marker>
           </defs>
 
-          <g fontFamily="monospace" fontSize={11} fill="white">
+          <g fontFamily="monospace" fontSize={14} fill="white">
             <text x={PLOT_X0 + 8} y={PLOT_Y0 + 14} opacity={0.9}>
               {`θ = ${currentTheta.toFixed(3)}`}
             </text>
@@ -250,7 +250,7 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
 
       <div className="mt-2 flex flex-col gap-2 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm sm:flex-row sm:items-center sm:gap-4">
         <div className="flex items-center gap-2">
-          <label htmlFor="gd-lr" className="font-mono text-xs whitespace-nowrap text-storm">
+          <label htmlFor="gd-lr" className="font-mono text-sm whitespace-nowrap text-storm">
             Tasa de aprendizaje{" "}
             <span className="font-semibold text-mint">{lr.toFixed(2)}</span>
           </label>
@@ -267,7 +267,7 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
           />
         </div>
         <div className="flex items-center gap-2">
-          <label htmlFor="gd-start" className="font-mono text-xs whitespace-nowrap text-storm">
+          <label htmlFor="gd-start" className="font-mono text-sm whitespace-nowrap text-storm">
             Punto inicial{" "}
             <span className="font-semibold text-mint">{start.toFixed(1)}</span>
           </label>
@@ -286,12 +286,12 @@ export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDesc
       </div>
 
       {diverged && (
-        <p className="mt-2 text-center font-mono text-xs text-rose-300" aria-live="polite">
+        <p className="mt-2 text-center font-mono text-sm text-rose-300" aria-live="polite">
           Divergió: baja la tasa de aprendizaje.
         </p>
       )}
 
-      {caption && <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }
