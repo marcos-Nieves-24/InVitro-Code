@@ -1,21 +1,21 @@
-
+---
 Module: 1
 Lesson Number: 1
 Lesson Title: ¿Qué es la Inteligencia Artificial?
 Estimated Duration: 60 minutos
 Prerequisites: Ninguno
 Learning Objectives:
-  Definir inteligencia artificial y distinguirla de la inteligencia natural
-  Explicar el concepto de "características" (features) en datos
-  Comprender cómo las máquinas reconocen patrones a partir de datos numéricos
-  Identificar las limitaciones de las reglas fijas frente al aprendizaje automático
+  - Definir inteligencia artificial y distinguirla de la inteligencia natural
+  - Explicar el concepto de "características" (features) en datos
+  - Comprender cómo las máquinas reconocen patrones a partir de datos numéricos
+  - Identificar las limitaciones de las reglas fijas frente al aprendizaje automático
 Keywords: inteligencia artificial, features, patrones, clasificación, conidias, *Aspergillus*, *Penicillium*
 Difficulty: Principiante
 Programming Concepts: Ninguno
 Mathematical Concepts: Ninguno
 Machine Learning Concepts: Features, clasificación, reconocimiento de patrones
 Datasets Used: module01_ai_cell_features.csv
-
+---
 
 <Section number={1} title="El microscopio y la conidia" eyebrow="INICIO">
 
@@ -36,7 +36,7 @@ Datasets Used: module01_ai_cell_features.csv
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Imagina que eres microbióloga/o y estás mirando al microscopio una muestra de un paciente inmunocomprometido. Ves cientos de conidias (esporas fúngicas) y necesitas identificar rápidamente si pertenecen al género *Aspergillus* o *Penicillium*. La diferencia es crítica: *Aspergillus* puede causar infecciones invasivas graves en pacientes neutropénicos.
 
 Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computadora pudiera aprender a hacer esta clasificación por ti, en segundos, con la misma precisión que un especialista? Eso es la inteligencia artificial aplicada a la biotecnología.
@@ -54,7 +54,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Definición**: La inteligencia artificial (IA) es la rama de la computación que se ocupa de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana.
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 </ConceptCard>
 
@@ -66,7 +66,7 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 
 <RevealSequence>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
 
@@ -78,9 +78,9 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 <RevealSequence>
 
-<div className="space y 3">
-<p className="m 0 text base text gray 700">Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo. Las conidias de <em>Aspergillus</em> y <em>Penicillium</em> tienen diferencias sutiles:</p>
-<div className="rounded lg border border blue 200 bg blue 50 p 3 text sm text gray 700">
+<div className="space-y-3">
+<p className="m-0 text-base text-gray-700">Vamos a usar un ejemplo concreto que nos va a acompañar todo el módulo. Las conidias de <em>Aspergillus</em> y <em>Penicillium</em> tienen diferencias sutiles:</p>
+<div className="rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-gray-700">
 <strong>Glosario:</strong> <em>feature</em> = propiedad medible de un dato que la IA usa para aprender (ej. área, textura) | <em>vector</em> = lista ordenada de números que representa una muestra (ej. [área, circularidad, textura, intensidad])
 </div>
 </div>
@@ -97,7 +97,7 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computadora solo entiende **números**. Necesitamos convertir esas características en datos numéricos.
 </ConceptCard>
 
@@ -118,7 +118,7 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
     { id: "area", label: "Área (µm²)", detail: "Qué tan grande es la conidia" },
     { id: "circularidad", label: "Circularidad (0 a 1)", detail: "Qué tan redonda es (1 = círculo perfecto)" },
     { id: "textura", label: "Textura (índice)", detail: "Qué tan rugosa es la superficie" },
-    { id: "intensidad", label: "Intensidad (0 a 255)", detail: "Qué tan clara u oscura es al microscopio" },
+    { id: "intensidad", label: "Intensidad (0-255)", detail: "Qué tan clara u oscura es al microscopio" },
   ]}
 />
 
@@ -132,7 +132,7 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
 
 <ConidiaToVector caption="De imagen a números: así habla la máquina" />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes como nosotros: ve matrices de números, y cada número es una pista que ayuda a clasificar.
 </ConceptCard>
 
@@ -148,7 +148,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
   question="¿Qué es una feature en el contexto de IA?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 features 1"
+  blockId="choice-l01-features-1"
   allowContinueOnIncorrect
   explanation="Una feature es una propiedad medible (como área, textura o intensidad) que convertimos en número para que el algoritmo pueda aprender patrones."
   options={[
@@ -167,13 +167,13 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 <RevealSequence>
 
-<div className="space y 3">
-<p className="m 0 text sm leading relaxed text gray 700">Mismo concepto, otro ejemplo clínico real: las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales   cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que en nuestras conidias.</p>
+<div className="space-y-3">
+<p className="m-0 text-sm leading-relaxed text-gray-700">Mismo concepto, otro ejemplo clínico real: las conidias nos enseñaron que área + textura separan especies. Los mismos features (área, textura, radio) se usan en medicina: el dataset Breast Cancer Wisconsin contiene 569 biopsias reales cada una con 30 features numéricas extraídas de imágenes de núcleos celulares, igual que en nuestras conidias.</p>
 <ChoiceQuestion
   question="Si medimos solo el área de una conidia, ¿podemos distinguir siempre *Aspergillus* de *Penicillium*?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 area 1"
+  blockId="choice-l01-area-1"
   allowContinueOnIncorrect
   explanation="Los rangos de área se superponen entre especies. Una sola feature rara vez separa bien, combinar varias (área + textura + circularidad) mejora la clasificación."
   options={[
@@ -185,9 +185,9 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 />
 </div>
 
-<div className="space y 2">
+<div className="space-y-2">
 <DiagnosticTrainer />
-<p className="m 0 text xs text gray 600">Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el menú desplegable y nota cómo algunas combinaciones separan mejor tumores benignos de malignos.</p>
+<p className="m-0 text-xs text-gray-600">Cada punto en el gráfico es un caso real de biopsia. Cambia las features con el menú desplegable y nota cómo algunas combinaciones separan mejor tumores benignos de malignos.</p>
 </div>
 
 </RevealSequence>
@@ -200,17 +200,17 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 <FeatureSpace2D caption="Una dimensión no alcanza, dos separan" />
 
-<div className="space y 3">
-<div className="rounded lg border border gray 200 bg surface card p 4 text sm text gray 700">
-<p className="m 0 mb 2 font semibold text gray 900">¿Qué observamos en la simulación?</p>
-<ul className="m 0 list disc space y 1 pl 5">
+<div className="space-y-3">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<p className="m-0 mb-2 font-semibold text-gray-900">¿Qué observamos en la simulación?</p>
+<ul className="m-0 list-disc space-y-1 pl-5">
 <li>Si usamos solo una característica, hay superposición entre especies</li>
 <li>Con dos o más características, la separación mejora</li>
 <li>El &quot;espacio de características&quot; (feature space) es donde la IA trabaja</li>
 </ul>
 </div>
-<ConceptCard variant="key idea">
-Cada característica que agregamos es una nueva dimensión que ayuda a separar las clases. Pero tampoco sirve agregar cien features al azar   el arte está en elegir las correctas.
+<ConceptCard variant="key-idea">
+Cada característica que agregamos es una nueva dimensión que ayuda a separar las clases. Pero tampoco sirve agregar cien features al azar el arte está en elegir las correctas.
 </ConceptCard>
 </div>
 
@@ -222,13 +222,13 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 <RevealSequence>
 
-<div className="space y 3">
-<p className="m 0 text sm text gray 700">Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.</p>
+<div className="space-y-3">
+<p className="m-0 text-sm text-gray-700">Ahora vamos a hacer el ejercicio inverso: tú actúas como clasificador.</p>
 <ChoiceQuestion
   question="¿Crees que un ojo humano entrenado clasifica mejor que un algoritmo simple?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 patrones 1"
+  blockId="choice-l01-patrones-1"
   allowContinueOnIncorrect
   explanation="Depende del problema: el humano es preciso en patrones visuales claros pero se cansa y es inconsistente. La IA es consistente, escalable y procesa miles de conidias por segundo."
   options={[
@@ -240,9 +240,9 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 />
 </div>
 
-<div className="space y 2">
+<div className="space-y-2">
 <ConidiaSortGame />
-<p className="m 0 text xs text gray 600">Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Clasifica cada una como <em>Aspergillus</em> o <em>Penicillium</em> basándote en el patrón visual.</p>
+<p className="m-0 text-xs text-gray-600">Cada cuadrícula de 5×5 representa el patrón de una conidia simplificado. Clasifica cada una como <em>Aspergillus</em> o <em>Penicillium</em> basándote en el patrón visual.</p>
 </div>
 
 </RevealSequence>
@@ -253,16 +253,16 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 <RevealSequence>
 
-<div className="rounded lg border border gray 200 bg surface card p 4 text sm text gray 700">
-<p className="m 0 mb 2 font semibold text gray 900">¿Qué aprendemos de la simulación?</p>
-<ul className="m 0 list disc space y 1.5 pl 5">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<p className="m-0 mb-2 font-semibold text-gray-900">¿Qué aprendemos de la simulación?</p>
+<ul className="m-0 list-disc space-y-1.5 pl-5">
 <li>Los humanos reconocemos patrones visuales intuitivamente</li>
 <li>Pero no podemos explicar fácilmente <em>cómo</em> lo hacemos</li>
 <li>La IA necesita convertir esos patrones en números para aprender</li>
 </ul>
 </div>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Los humanos clasificamos por intuición visual. La IA clasifica con matemática. La intuición es poderosa pero difícil de programar. La matemática es fría pero se puede escalar a millones de datos.
 </ConceptCard>
 
@@ -274,27 +274,27 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 <RevealSequence>
 
-<div className="space y 3">
-<p className="m 0 text sm text gray 700">Antes de que existiera el machine learning, se usaban <strong>sistemas basados en reglas</strong>. Veamos por qué no son suficientes.</p>
+<div className="space-y-3">
+<p className="m-0 text-sm text-gray-700">Antes de que existiera el machine learning, se usaban <strong>sistemas basados en reglas</strong>. Veamos por qué no son suficientes.</p>
 <ChoiceQuestion
   question="Si creamos reglas manuales del tipo 'área > X y textura > Y', ¿podemos clasificar todas las conidias correctamente?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 reglas 1"
+  blockId="choice-l01-reglas-1"
   allowContinueOnIncorrect
   explanation="Por más que ajustes los umbrales, siempre hay conidias atípicas. La variabilidad biológica no se captura con reglas fijas, por eso usamos ML."
   options={[
     { id: "a", label: "Sí, basta con ajustar bien los umbrales para llegar al 100%", correct: false, feedback: "No: probarás que siempre quedan puntos mal clasificados por superposición natural." },
     { id: "b", label: "No, la variabilidad natural deja excepciones que ninguna regla simple captura", correct: true, feedback: "¡Exacto! Necesitarías cientos de reglas y aún así fallarías. El ML aprende la frontera flexible." },
     { id: "c", label: "Solo si usamos una única regla en lugar de dos", correct: false, feedback: "Una regla es aún más limitada que dos, empeora la separación." },
-    { id: "d", label: "Sí, porque las conidias de cada especie son idénticas entre sí", correct: false, feedback: "Falso: hay variabilidad intra especie considerable." },
+    { id: "d", label: "Sí, porque las conidias de cada especie son idénticas entre sí", correct: false, feedback: "Falso: hay variabilidad intra-especie considerable." },
   ]}
 />
 </div>
 
-<div className="space y 2">
-<ThresholdLab moduleSlug="ia" lessonSlug="lesson01_what_is_ai" blockId="lab l01 threshold" />
-<p className="m 0 text xs text gray 600">Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas afecta la precisión: por más que ajustes, siempre hay puntos que se clasifican mal.</p>
+<div className="space-y-2">
+<ThresholdLab moduleSlug="ia" lessonSlug="lesson01_what_is_ai" blockId="lab-l01-threshold" />
+<p className="m-0 text-xs text-gray-600">Mueve los sliders para ajustar los umbrales. Fíjate cómo cambiar las reglas afecta la precisión: por más que ajustes, siempre hay puntos que se clasifican mal.</p>
 </div>
 
 </RevealSequence>
@@ -309,10 +309,10 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 **La naturaleza es difusa, no binaria.** Las reglas fijas asumen que el mundo se puede partir con líneas rectas. La biología no funciona así.
 </ConceptCard>
 
-<div className="rounded lg border border gray 200 bg surface card p 4 text sm text gray 700">
-<ul className="m 0 list disc space y 1.5 pl 5">
+<div className="rounded-lg border border-gray-200 bg-surface-card p-4 text-sm text-gray-700">
+<ul className="m-0 list-disc space-y-1.5 pl-5">
 <li>Hay <strong>superposición natural</strong> entre especies: algunas conidias de <em>Aspergillus</em> se parecen a <em>Penicillium</em></li>
-<li>Para capturar la complejidad, necesitaríamos <strong>cientos de reglas</strong>  imposible de mantener</li>
+<li>Para capturar la complejidad, necesitaríamos <strong>cientos de reglas</strong> → imposible de mantener</li>
 <li>Cada regla nueva puede contradecir a las anteriores</li>
 <li><strong>Aquí entra el machine learning</strong>: en lugar de programar reglas, la máquina <em>aprende</em> los patrones de los datos</li>
 </ul>
@@ -361,7 +361,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   question="¿Qué es una 'feature' en el contexto de IA?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 check 1"
+  blockId="choice-l01-check-1"
   explanation="Las features son los números que la IA usa para aprender, elegir buenas features es el primer paso del pipeline."
   options={[
     { id: "a", label: "Una característica del hardware de la computadora", correct: false, feedback: "No: el hardware es el equipo físico. La feature es una propiedad medible del dato." },
@@ -376,7 +376,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   question="¿Por qué los sistemas basados en reglas fijas no son ideales para clasificar conidias?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 check 2"
+  blockId="choice-l01-check-2"
   explanation="La naturaleza tiene variabilidad, cualquier umbral fijo deja excepciones. El ML aprende fronteras flexibles."
   options={[
     { id: "a", label: "Porque las reglas son muy lentas de ejecutar", correct: false, feedback: "La velocidad no es el problema central, es la falta de flexibilidad." },
@@ -391,7 +391,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
   question="¿Qué significa que una máquina 'aprenda'?"
   moduleSlug="ia"
   lessonSlug="lesson01_what_is_ai"
-  blockId="choice l01 check 3"
+  blockId="choice-l01-check-3"
   explanation="Aprender es encontrar patrones estadísticos en los datos sin ser programada explícitamente para cada caso."
   options={[
     { id: "a", label: "Que entiende el significado de lo que clasifica", correct: false, feedback: "No hay conciencia ni comprensión real, solo correlaciones estadísticas." },
@@ -413,7 +413,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 Excelente trabajo. Completaste la primera lección. Las reglas fijas no alcanzan, pero el machine learning puede aprender patrones de los datos.
 </MascotMessage>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Viste que las reglas fijas no alcanzan. En la Lección 2 vamos a ver *cómo* las máquinas realmente aprenden: desde la frontera de decisión más simple (el perceptrón) hasta algoritmos como KNN que clasifican por cercanía. También vamos a entender qué es el "sobreajuste" (overfitting) y por qué un modelo demasiado complejo puede ser peor que uno simple.
 </ConceptCard>
 

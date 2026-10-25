@@ -1,21 +1,21 @@
-
+---
 Module: 1
 Lesson Number: 4
 Lesson Title: Casos Reales y Futuro
 Estimated Duration: 60 minutos
-Prerequisites: Lección 3   IA en Biotecnología
+Prerequisites: Lección 3 IA en Biotecnología
 Learning Objectives:
-  Analizar cómo se aplicó ML en el desarrollo de la vacuna mRNA del COVID 19
-  Comprender el reposicionamiento de fármacos mediante modelos predictivos
-  Evaluar las limitaciones actuales de la IA en biotecnología
-  Discutir el futuro de la IA en el laboratorio
+  - Analizar cómo se aplicó ML en el desarrollo de la vacuna mRNA del COVID-19
+  - Comprender el reposicionamiento de fármacos mediante modelos predictivos
+  - Evaluar las limitaciones actuales de la IA en biotecnología
+  - Discutir el futuro de la IA en el laboratorio
 Keywords: mRNA, vacunas, reposicionamiento, ARN, nanolípidos, docking, DeepMind, Isomorphic Labs
 Difficulty: Principiante
 Programming Concepts: Ninguno
 Mathematical Concepts: Ninguno nuevos
 Machine Learning Concepts: Aplicaciones, limitaciones, pipeline completo
 Datasets Used: Ninguno específico
-
+---
 
 <Section number={1} title="De los fundamentos a las aplicaciones" eyebrow="INICIO">
 
@@ -45,7 +45,7 @@ En tres etapas construimos los cimientos:
 3. **Estructuras y pipelines**: La revolución 3D de AlphaFold y la rigurosidad de las matrices de confusión.
 </div>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 En esta lección cerramos el módulo analizando casos reales donde los modelos predictivos y generativos salvaron vidas, recortaron años de desarrollo preclínico y sentaron las bases del laboratorio autónomo del futuro.
 </ConceptCard>
 
@@ -53,7 +53,7 @@ En esta lección cerramos el módulo analizando casos reales donde los modelos p
 
 </Section>
 
-<Section number={2} title="El problema: COVID 19 y la urgencia global" eyebrow="CONTEXTO">
+<Section number={2} title="El problema: COVID-19 y la urgencia global" eyebrow="CONTEXTO">
 
 <RevealSequence showHistory>
 
@@ -100,18 +100,18 @@ Sin embargo, el ARN es una molécula químicamente inestable que el sistema inmu
   question="Diseñar la LNP óptima implica miles de formulaciones. ¿Cómo acelera la IA ese proceso?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 lnp 1"
+  blockId="choice-l04-lnp-1"
   allowContinueOnIncorrect
   explanation="La IA entrena con formulaciones previas y predice las 50 más prometedoras, evitando probar 1.000 al azar y ahorrando meses."
   options={[
     { id: "a", label: "Probando todas las combinaciones al azar en el laboratorio sin usar datos", correct: false, feedback: "Eso es lo que hacía el método tradicional lento, la IA justamente evita eso." },
-    { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición  rendimiento y guía los experimentos." },
+    { id: "b", label: "Entrenando un modelo con formulaciones previas para predecir las más efectivas y priorizarlas", correct: true, feedback: "¡Correcto! El modelo aprende composición → rendimiento y guía los experimentos." },
     { id: "c", label: "Reemplazando por completo los experimentos de laboratorio", correct: false, feedback: "La IA no reemplaza el laboratorio, lo hace más inteligente y enfocado." },
     { id: "d", label: "Eligiendo lípidos solo por su precio más barato", correct: false, feedback: "El costo no determina eficacia ni estabilidad, importan las propiedades químicas." },
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La IA actuó como un filtro de alta eficiencia: en lugar de testear 1.000 formulaciones al azar en placas de cultivo, los algoritmos predijeron qué 50 mezclas tenían mayor estabilidad térmica y afinidad de transfección celular, ahorrando meses críticos de desarrollo.
 </ConceptCard>
 
@@ -142,7 +142,7 @@ La IA actuó como un filtro de alta eficiencia: en lugar de testear 1.000 formul
   question="Si tienes datos de qué fármacos se unen a qué proteínas virales, ¿cómo modelas el reposicionamiento y qué métrica priorizas?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 reposition 1"
+  blockId="choice-l04-reposition-1"
   allowContinueOnIncorrect
   explanation="Es clasificación binaria (se une/no se une). En clínica priorizas sensibilidad/recall para no descartar fármacos útiles, balanceando con especificidad para no generar falsos positivos costosos."
   options={[
@@ -156,7 +156,7 @@ La IA actuó como un filtro de alta eficiencia: en lugar de testear 1.000 formul
 <div>
 Ejemplos históricos de la pandemia:
 <br />
-• **Baricitinib**: Fármaco aprobado para artritis reumatoide, identificado por algoritmos de grafos biomédicos como inhibidor de la tormenta de citoquinas en COVID 19.
+• **Baricitinib**: Fármaco aprobado para artritis reumatoide, identificado por algoritmos de grafos biomédicos como inhibidor de la tormenta de citoquinas en COVID-19.
 <br />
 • **Remdesivir**: Antiviral originalmente evaluado para Ébola, priorizado mediante simulaciones computacionales de acoplamiento molecular.
 </div>
@@ -177,18 +177,18 @@ Ejemplos históricos de la pandemia:
   question="¿Por qué es revolucionario descubrir un fármaco en 18 meses y qué validaciones siguen siendo obligatorias?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 rentosertib 1"
+  blockId="choice-l04-rentosertib-1"
   allowContinueOnIncorrect
-  explanation="Ahorra años y costos vs 4 a 6 años tradicionales, pero no reemplaza toxicología, seguridad y fases clínicas en humanos."
+  explanation="Ahorra años y costos vs 4-6 años tradicionales, pero no reemplaza toxicología, seguridad y fases clínicas en humanos."
   options={[
     { id: "a", label: "Porque reemplaza todos los ensayos y ya se puede usar en humanos", correct: false, feedback: "No: sigue requiriendo validación clínica completa." },
     { id: "b", label: "Acelera el acceso pero siguen siendo obligatorias toxicología y fases clínicas", correct: true, feedback: "¡Exacto! IA acelera, validación confirma." },
-    { id: "c", label: "No es revolucionario, siempre se descubren fármacos en 18 meses", correct: false, feedback: "Tradicional lleva 4 a 6 años, 18 meses es un salto enorme." },
+    { id: "c", label: "No es revolucionario, siempre se descubren fármacos en 18 meses", correct: false, feedback: "Tradicional lleva 4-6 años, 18 meses es un salto enorme." },
     { id: "d", label: "Solo importa el costo, no la seguridad", correct: false, feedback: "Seguridad y eficacia son prioritarias, no solo el costo." },
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La inteligencia artificial comprime drásticamente la fase de diseño y cribado virtual, pero los ensayos de toxicología animal y las tres fases de ensayos clínicos en pacientes humanos son pasos regulatorios obligatorios e irremplazables.
 </ConceptCard>
 
@@ -215,7 +215,7 @@ La inteligencia artificial comprime drásticamente la fase de diseño y cribado 
   question="AlphaFold predice estructuras para docking de fármacos. ¿Qué limitación puede causar falsos positivos si te basas solo en la predicción?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 alphafold 1"
+  blockId="choice-l04-alphafold-1"
   allowContinueOnIncorrect
   explanation="AlphaFold da la conformación más probable, pero las proteínas son dinámicas y cambian al unirse. Validar experimentalmente sigue siendo obligatorio."
   options={[
@@ -248,17 +248,17 @@ Las proteínas en solución fisiológica se mueven e inducen ajustes conformacio
   ]}
 />
 
-<div className="grid gap 2.5 sm:grid cols 3 my 2 text xs">
-  <div className="rounded lg border border teal 200 bg teal 50/80 p 3">
-    <strong className="text teal 900 block mb 1">Enfermedades parasitarias</strong>
+<div className="grid gap-2.5 sm:grid-cols-3 my-2 text-xs">
+  <div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3">
+    <strong className="text-teal-900 block mb-1">Enfermedades parasitarias</strong>
     Predicción de proteínas diana en parásitos como <em>Trypanosoma</em> y <em>Leishmania</em>, históricamente postergados por falta de financiamiento para cristalografía.
   </div>
-  <div className="rounded lg border border rose 200 bg rose 50/80 p 3">
-    <strong className="text rose 900 block mb 1">Resistencia antimicrobiana</strong>
+  <div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3">
+    <strong className="text-rose-900 block mb-1">Resistencia antimicrobiana</strong>
     Modelado predictivo de cómo las mutaciones en betalactamasas bacterianas alteran el bolsillo de unión y eluden los antibióticos actuales.
   </div>
-  <div className="rounded lg border border blue 200 bg blue 50/80 p 3">
-    <strong className="text blue 900 block mb 1">Enfermedades raras</strong>
+  <div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3">
+    <strong className="text-blue-900 block mb-1">Enfermedades raras</strong>
     Simulación del impacto estructural provocado por variantes genéticas individuales en pacientes pediátricos con patologías de baja prevalencia.
   </div>
 </div>
@@ -267,7 +267,7 @@ Las proteínas en solución fisiológica se mueven e inducen ajustes conformacio
   question="AlphaFold democratizó estructuras 3D: ¿qué oportunidades y riesgos crea para labs con menos recursos?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 industria 1"
+  blockId="choice-l04-industria-1"
   allowContinueOnIncorrect
   explanation="Oportunidad: investigación que antes requería equipamiento costoso ahora es accesible. Riesgo: confiar ciegamente sin validación y seleccionar una diana incorrecta, desperdiciando años."
   options={[
@@ -292,26 +292,26 @@ Las proteínas en solución fisiológica se mueven e inducen ajustes conformacio
   mood="thinking"
   lines={[
     "¿Hacia dónde se dirige la biotecnología en los próximos 10 años?",
-    "La tendencia converge hacia el 'Closed Loop Lab': sistemas donde la IA no solo analiza resultados, sino que programa los robots de cultivo.",
+    "La tendencia converge hacia el 'Closed-Loop Lab': sistemas donde la IA no solo analiza resultados, sino que programa los robots de cultivo.",
   ]}
 />
 
-<div className="space y 2 text xs">
-  <div className="rounded lg border border gray 200 bg surface card p 2.5">
-    <strong>1. Laboratorios autónomos (Self driving labs):</strong> Brazos robóticos que pipetean, incuban y secuencian guiados por algoritmos bayesianos 24/7.
+<div className="space-y-2 text-xs">
+  <div className="rounded-lg border border-gray-200 bg-surface-card p-2.5">
+    <strong>1. Laboratorios autónomos (Self-driving labs):</strong> Brazos robóticos que pipetean, incuban y secuencian guiados por algoritmos bayesianos 24/7.
   </div>
-  <div className="rounded lg border border gray 200 bg surface card p 2.5">
+  <div className="rounded-lg border border-gray-200 bg-surface-card p-2.5">
     <strong>2. Gemelos digitales de bioprocesos:</strong> Simulaciones de biorreactores que anticipan el consumo de nutrientes antes de inocular las células.
   </div>
-  <div className="rounded lg border border gray 200 bg surface card p 2.5">
+  <div className="rounded-lg border border-gray-200 bg-surface-card p-2.5">
     <strong>3. Visión computacional en tiempo real:</strong> Microscopios que identifican automáticamente conidias patógenas al momento de enfocar el campo.
   </div>
-  <div className="rounded lg border border gray 200 bg surface card p 2.5">
+  <div className="rounded-lg border border-gray-200 bg-surface-card p-2.5">
     <strong>4. Diseño de novo de proteínas:</strong> Modelos generativos que inventan enzimas catalíticas que jamás existieron en la naturaleza.
   </div>
 </div>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La IA no sustituirá al científico: los científicos que utilicen IA reemplazarán a los que no la utilicen, liberando horas rutinarias para dedicarse a la formulación de hipótesis audaces.
 </ConceptCard>
 
@@ -338,61 +338,61 @@ La IA no sustituirá al científico: los científicos que utilicen IA reemplazar
 <strong>Evo</strong> es un modelo fundacional para genómica entrenado sobre <strong>300.000 millones de pares de bases de ADN</strong> procariota y eucariota. Es capaz de modelar el impacto de variantes genéticas y generar secuencias biológicas completas de novo.
 </ConceptCard>
 
-<div className="grid gap 3 sm:grid cols 2 my 3">
-  <div className="rounded xl border border blue 200 bg blue 50/80 p 4 flex flex col justify between">
+<div className="grid gap-3 sm:grid-cols-2 my-3">
+  <div className="rounded-xl border border-blue-200 bg-blue-50/80 p-4 flex flex-col justify-between">
     <div>
-      <div className="flex items center justify between mb 2">
-        <h4 className="font semibold text gray 900 text sm">AlphaFold</h4>
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="font-semibold text-gray-900 text-sm">AlphaFold</h4>
         <Badge variant="info">Estructural</Badge>
       </div>
-      <p className="text-[11px] text gray 500 mb 3 font mono">DeepMind / EMBL EBI</p>
+      <p className="text-[11px] text-gray-500 mb-3 font-mono">DeepMind / EMBL-EBI</p>
 
-      <div className="space y 2 text xs">
+      <div className="space-y-2 text-xs">
         <div>
-          <span className="font semibold text gray 700 block">Entrada:</span>
-          <span className="text gray 600">Secuencia lineal de aminoácidos</span>
+          <span className="font-semibold text-gray-700 block">Entrada:</span>
+          <span className="text-gray-600">Secuencia lineal de aminoácidos</span>
         </div>
         <div>
-          <span className="font semibold text gray 700 block">Salida:</span>
-          <span className="text gray 600">Coordenadas 3D (x, y, z) de la proteína</span>
+          <span className="font-semibold text-gray-700 block">Salida:</span>
+          <span className="text-gray-600">Coordenadas 3D (x, y, z) de la proteína</span>
         </div>
         <div>
-          <span className="font semibold text gray 700 block">Capacidad Generativa:</span>
+          <span className="font-semibold text-gray-700 block">Capacidad Generativa:</span>
           <Badge variant="warning">No generativo</Badge>
         </div>
       </div>
     </div>
 
-    <div className="mt 3 pt 2.5 border t border blue 200/70 text xs text blue 900">
+    <div className="mt-3 pt-2.5 border-t border-blue-200/70 text-xs text-blue-900">
       <strong>Impacto biológico:</strong> Resuelve la forma espacial y reduce la dependencia de cristalografía de rayos X.
     </div>
   </div>
 
-  <div className="rounded xl border border teal 200 bg teal 50/80 p 4 flex flex col justify between">
+  <div className="rounded-xl border border-teal-200 bg-teal-50/80 p-4 flex flex-col justify-between">
     <div>
-      <div className="flex items center justify between mb 2">
-        <h4 className="font semibold text gray 900 text sm">Evo</h4>
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="font-semibold text-gray-900 text-sm">Evo</h4>
         <Badge variant="success">Fundacional</Badge>
       </div>
-      <p className="text-[11px] text gray 500 mb 3 font mono">Arc Institute / Science 2024</p>
+      <p className="text-[11px] text-gray-500 mb-3 font-mono">Arc Institute / Science 2024</p>
 
-      <div className="space y 2 text xs">
+      <div className="space-y-2 text-xs">
         <div>
-          <span className="font semibold text gray 700 block">Entrada:</span>
-          <span className="text gray 600">Genomas completos de ADN (codificante y no codificante)</span>
+          <span className="font-semibold text-gray-700 block">Entrada:</span>
+          <span className="text-gray-600">Genomas completos de ADN (codificante y no codificante)</span>
         </div>
         <div>
-          <span className="font semibold text gray 700 block">Salida:</span>
-          <span className="text gray 600">Predicción de variantes + secuencias de novo</span>
+          <span className="font-semibold text-gray-700 block">Salida:</span>
+          <span className="text-gray-600">Predicción de variantes + secuencias de novo</span>
         </div>
         <div>
-          <span className="font semibold text gray 700 block">Capacidad Generativa:</span>
+          <span className="font-semibold text-gray-700 block">Capacidad Generativa:</span>
           <Badge variant="success">Generativo (ADN y proteínas)</Badge>
         </div>
       </div>
     </div>
 
-    <div className="mt 3 pt 2.5 border t border teal 200/70 text xs text teal 900">
+    <div className="mt-3 pt-2.5 border-t border-teal-200/70 text-xs text-teal-900">
       <strong>Impacto biológico:</strong> Pasa del análisis descriptivo al diseño biológico de novo a escala genómica.
     </div>
   </div>
@@ -410,7 +410,7 @@ La IA no sustituirá al científico: los científicos que utilicen IA reemplazar
   question="¿En qué se diferencia Evo de AlphaFold?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 evo 1"
+  blockId="choice-l04-evo-1"
   allowContinueOnIncorrect
   explanation="AlphaFold predice coordenadas 3D a partir de aminoácidos. Evo es generativo sobre ADN completo (incluyendo no codificante) y puede diseñar secuencias novedosas."
   options={[
@@ -421,7 +421,7 @@ La IA no sustituirá al científico: los científicos que utilicen IA reemplazar
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Ambos modelos representan dos caras de la misma revolución: AlphaFold resuelve **qué arquitectura espacial** adopta una proteína, mientras que Evo predice **qué código de ADN** es capaz de generar funciones biológicas novedosas.
 </ConceptCard>
 
@@ -437,7 +437,7 @@ Ambos modelos representan dos caras de la misma revolución: AlphaFold resuelve 
   question="Si un modelo predice con 95% que un fármaco funciona, ¿lo usarías directo en pacientes?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 limites 1"
+  blockId="choice-l04-limites-1"
   allowContinueOnIncorrect
   explanation="No: 95% del modelo no es probabilidad clínica. Puede esconder sesgos, falta de fisiología real y efectos no modelados. Validación clínica en fases es obligatoria."
   options={[
@@ -474,26 +474,26 @@ Las cinco limitaciones irreductibles de la IA en biología:
 ¡Hemos completado las cuatro expediciones del Módulo 1! Desde el reconocimiento numérico de esporas fúngicas hasta los modelos fundacionales de genómica.
 </MascotMessage>
 
-<div className="grid gap 2 sm:grid cols 2 my 3 text xs">
-  <div className="rounded lg border border blue 200 bg blue 50/70 p 3">
-    <strong className="text blue 900 block mb 0.5">Lección 1: Features y límites</strong>
+<div className="grid gap-2 sm:grid-cols-2 my-3 text-xs">
+  <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3">
+    <strong className="text-blue-900 block mb-0.5">Lección 1: Features y límites</strong>
     Las computadoras ven matrices de números, las reglas fijas se quiebran ante la variabilidad biológica.
   </div>
-  <div className="rounded lg border border indigo 200 bg indigo 50/70 p 3">
-    <strong className="text indigo 900 block mb 0.5">Lección 2: Algoritmos y sobreajuste</strong>
+  <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-3">
+    <strong className="text-indigo-900 block mb-0.5">Lección 2: Algoritmos y sobreajuste</strong>
     Perceptrón, KNN y regresión lineal, la defensa del train/test split contra la memorización de ruido.
   </div>
-  <div className="rounded lg border border teal 200 bg teal 50/70 p 3">
-    <strong className="text teal 900 block mb 0.5">Lección 3: Biología 3D y Pipelines</strong>
+  <div className="rounded-lg border border-teal-200 bg-teal-50/70 p-3">
+    <strong className="text-teal-900 block mb-0.5">Lección 3: Biología 3D y Pipelines</strong>
     AlphaFold y el PDB, calibración rigurosa y matrices de confusión clínica (precisión, recall, F1).
   </div>
-  <div className="rounded lg border border emerald 200 bg emerald 50/70 p 3">
-    <strong className="text emerald 900 block mb 0.5">Lección 4: Casos reales y futuro</strong>
+  <div className="rounded-lg border border-emerald-200 bg-emerald-50/70 p-3">
+    <strong className="text-emerald-900 block mb-0.5">Lección 4: Casos reales y futuro</strong>
     Vacunas mRNA, nanopartículas lipídicas, reposicionamiento, modelo Evo y el criterio bioético ineludible.
   </div>
 </div>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Principio supremo: Sin datos limpios, features representativas y validación cruzada con criterio científico, ninguna arquitectura de inteligencia artificial es de utilidad.
 </ConceptCard>
 
@@ -508,10 +508,10 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
 <div>Checkpoint final del módulo. Valida las ideas maestras antes de obtener tu certificación de finalización del Módulo 1.</div>
 
 <ChoiceQuestion
-  question="¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID 19?"
+  question="¿Cómo ayudó la IA al desarrollo de la vacuna mRNA del COVID-19?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 check 1"
+  blockId="choice-l04-check-1"
   explanation="Los modelos predijeron qué formulaciones de LNPs tenían más chance de funcionar, reduciendo meses de prueba al azar."
   options={[
     { id: "a", label: "Diseñó la secuencia genética del virus", correct: false, feedback: "La secuencia viral se obtuvo por secuenciación, no por diseño de IA." },
@@ -525,7 +525,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   question="¿Qué es el reposicionamiento de fármacos?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 check 2"
+  blockId="choice-l04-check-2"
   explanation="Encontrar nuevos usos para fármacos aprobados usando ML predictivo, ahorra años porque ya pasaron pruebas de seguridad."
   options={[
     { id: "a", label: "Mover fármacos de un laboratorio a otro", correct: false, feedback: "No es logística, es predicción computacional de nuevas indicaciones." },
@@ -539,7 +539,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   question="¿Por qué una estructura predicha por AlphaFold no es suficiente para diseñar un fármaco?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 check 3"
+  blockId="choice-l04-check-3"
   explanation="Es una foto estática de la conformación más probable, la proteína real es dinámica y puede adoptar otras conformaciones al unirse."
   options={[
     { id: "a", label: "Porque AlphaFold solo funciona con proteínas humanas", correct: false, feedback: "Funciona con cualquier secuencia, incluidas virales." },
@@ -553,7 +553,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   question="¿Cuál es una limitación FUNDAMENTAL de la IA en biotecnología?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 check 4"
+  blockId="choice-l04-check-4"
   explanation="Datos escasos y caros, correlación sin causalidad, mala generalización entre laboratorios y cajas negras difíciles de interpretar."
   options={[
     { id: "a", label: "Es demasiado cara para usarla", correct: false, feedback: "El costo baja, el problema es la calidad y cantidad de datos biológicos." },
@@ -567,7 +567,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
   question="¿Cuál es la idea más importante de este módulo?"
   moduleSlug="ia"
   lessonSlug="lesson04_real_cases"
-  blockId="choice l04 check 5"
+  blockId="choice-l04-check-5"
   explanation="Sin buenos datos, features relevantes, modelo adecuado y validación rigurosa, ningún modelo es confiable. No hay atajos."
   options={[
     { id: "a", label: "La IA reemplazará a los científicos", correct: false, feedback: "La IA aumenta la capacidad del científico, no la reemplaza." },
