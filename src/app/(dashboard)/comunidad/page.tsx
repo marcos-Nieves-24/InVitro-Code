@@ -240,7 +240,7 @@ export default async function ComunidadPage() {
               <EmptyState icon={Trophy} {...EMPTY_STATES.leaderboard} />
             )}
 
-            {/* Tu posición — real rank from get_leaderboard_rank */}
+            {/* Tu posición — real rank + XP comparado */}
             <div className="rounded-2xl border-t-4 border-t-mint glass-card space-y-4 p-6">
               <div className="flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-mint" />
@@ -248,16 +248,40 @@ export default async function ComunidadPage() {
                   Tu posición
                 </span>
               </div>
-              {myRank && entries.length > 0 ? (
+              {myRank && entries.length > 0 && myEntry ? (
+                (() => {
+                  const leaderXp = entries[0]?.totalXp ?? 0;
+                  const myXp = myEntry.totalXp ?? 0;
+                  const diff = leaderXp - myXp;
+                  const pct = leaderXp > 0 ? Math.round((myXp / leaderXp) * 100) : 0;
+                  return (
+                    <>
+                      <div className="flex items-baseline gap-3">
+                        <p className="text-3xl font-black text-mint">#{myRank.position}</p>
+                        <p className="text-sm font-bold text-ink">{myXp.toLocaleString("es")} XP</p>
+                        <span className="text-xs text-storm">/ {leaderXp.toLocaleString("es")} XP líder</span>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-surface-raised">
+                          <div className="h-full bg-mint transition-all" style={{ width: `${pct}%` }} />
+                        </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="font-medium text-ink">{pct}% del líder</span>
+                          <span className="text-storm">
+                            {diff > 0 ? `Te faltan ${diff.toLocaleString("es")} XP` : "¡Vas líder!"}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-storm">
+                        Comparado con {entries.length} usuarios en el ranking.
+                      </p>
+                    </>
+                  );
+                })()
+              ) : myRank && entries.length > 0 ? (
                 <>
-                  <p className="text-3xl font-black text-mint">
-                    #{myRank.position}
-                  </p>
-                  <p className="text-xs text-storm">
-                    {myEntry
-                      ? `${(myEntry.totalXp ?? 0).toLocaleString("es")} XP reales`
-                      : "Ranking calculado sobre XP real."}
-                  </p>
+                  <p className="text-3xl font-black text-mint">#{myRank.position}</p>
+                  <p className="text-xs text-storm">Ranking calculado sobre XP real.</p>
                 </>
               ) : (
                 <p className="text-sm text-storm">
