@@ -46,14 +46,14 @@ export function ConectaFloatingWidget({ suggested, isOpen, onClose, onConnect }:
 
   return (
     <>
-      {/* Desktop floating card — controlled by isOpen */}
+      {/* Desktop floating card — controlled by isOpen, amplificado y despliega hacia arriba */}
       {isOpen && (
         <div
           ref={dialogRef}
           role="dialog"
           aria-modal="false"
           aria-label="Conecta - usuarios sugeridos"
-          className="fixed bottom-6 right-6 z-50 hidden w-[317px] rounded-card border border-surface-raised bg-surface-card p-4 shadow-xl md:block"
+          className="fixed bottom-24 right-6 z-50 hidden max-h-[520px] w-[420px] overflow-y-auto rounded-card border border-surface-raised bg-surface-card p-6 shadow-2xl md:block animate-in slide-in-from-bottom-2 duration-200"
         >
           <div className="mb-3 flex items-center justify-between">
             <h3 className="text-sm font-bold text-ink">Conecta</h3>

@@ -27,12 +27,19 @@ export default async function ProfilePage() {
 
   let leaderboardRank: number | null = null;
   try {
-    const { data: rankData } = await supabase.rpc("get_leaderboard_rank", {
+    const { data: rankData, error: rankError } = await supabase.rpc("get_leaderboard_rank", {
       target_user_id: userId,
     });
-    if (typeof rankData === "number") leaderboardRank = rankData;
+    if (!rankError) {
+      if (typeof rankData === "number") leaderboardRank = rankData;
+      else if (rankData && typeof (rankData as { position: number }).position === "number") {
+        leaderboardRank = (rankData as { position: number }).position;
+      } else if (rankData && typeof (rankData as { rank: number }).rank === "number") {
+        leaderboardRank = (rankData as { rank: number }).rank;
+      }
+    }
   } catch {
-    // ignore
+    // ignore — leaderboard sync best-effort, keep null
   }
 
   const socialRepo = new MockProfileSocialRepository();

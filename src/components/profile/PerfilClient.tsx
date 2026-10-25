@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import { ProfileHero } from "./ProfileHero";
 import { FollowStats } from "./FollowStats";
@@ -35,6 +36,7 @@ export function PerfilClient({
   onAvatarUpload,
   onProfileSave,
 }: PerfilClientProps) {
+  const router = useRouter();
   const [conectaOpen, setConectaOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -98,7 +100,13 @@ export function PerfilClient({
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-storm">
                   Foto de perfil
                 </h3>
-                <AvatarUpload currentAvatar={profile.avatar_url} onUpload={onAvatarUpload} />
+                <AvatarUpload
+                  currentAvatar={profile.avatar_url}
+                  onUpload={async (file) => {
+                    await onAvatarUpload(file);
+                    router.refresh();
+                  }}
+                />
               </div>
 
               <div className="rounded-card border border-surface-raised bg-surface p-6">
@@ -111,6 +119,7 @@ export function PerfilClient({
                   gender={profile.gender ?? null}
                   onSave={async (data) => {
                     await onProfileSave(data);
+                    router.refresh();
                     setEditOpen(false);
                   }}
                 />

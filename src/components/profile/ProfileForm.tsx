@@ -45,6 +45,7 @@ export function ProfileForm({ username, bio, gender, onSave }: ProfileFormProps)
     } catch (err) {
       const message = err instanceof Error ? err.message : "Error al guardar el perfil";
       setGeneralError(message);
+      throw err;
     } finally {
       setSaving(false);
     }

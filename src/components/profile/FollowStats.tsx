@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { SocialUser } from "@/domain/profile/social";
 
 interface FollowStatsProps {
@@ -33,29 +34,47 @@ function UserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: strin
 }
 
 export function FollowStats({ following, followers, onConnect, onOpenConecta }: FollowStatsProps) {
+  const [activeTab, setActiveTab] = useState<"following" | "followers">("following");
+  const list = activeTab === "following" ? following : followers;
+
   return (
     <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md">
       <div className="grid grid-cols-2 gap-6">
-        <div className="rounded-btn bg-surface px-4 py-4 text-center">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-            Siguiendo
-          </h3>
-          <p className="mt-2 text-center text-3xl font-bold text-ink">{following.length}</p>
-        </div>
-        <div className="rounded-btn bg-surface px-4 py-4 text-center">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-storm">
-            Seguidores
-          </h3>
-          <p className="mt-2 text-center text-3xl font-bold text-ink">{followers.length}</p>
-        </div>
+        <button
+          type="button"
+          onClick={() => setActiveTab("following")}
+          className={`rounded-btn px-4 py-4 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint ${
+            activeTab === "following" ? "bg-mint text-ink" : "bg-surface text-storm hover:bg-surface-card"
+          }`}
+          aria-pressed={activeTab === "following"}
+        >
+          <h3 className="text-xs font-bold uppercase tracking-wider">Siguiendo</h3>
+          <p className="mt-2 text-center text-3xl font-bold">{following.length}</p>
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("followers")}
+          className={`rounded-btn px-4 py-4 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint ${
+            activeTab === "followers" ? "bg-mint text-ink" : "bg-surface text-storm hover:bg-surface-card"
+          }`}
+          aria-pressed={activeTab === "followers"}
+        >
+          <h3 className="text-xs font-bold uppercase tracking-wider">Seguidores</h3>
+          <p className="mt-2 text-center text-3xl font-bold">{followers.length}</p>
+        </button>
       </div>
 
       <div className="mt-8 border-t border-surface-raised pt-6">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-storm">Siguiendo</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-storm">
+          {activeTab === "following" ? "Siguiendo" : "Seguidores"}
+        </p>
         <div className="space-y-2">
-          {following.slice(0, 3).map((u) => (
+          {list.slice(0, 5).map((u) => (
             <UserRow key={u.id} user={u} onConnect={onConnect} />
           ))}
+          {list.length === 0 && (
+            <p className="py-4 text-center text-sm text-storm">Aún no hay usuarios aquí.</p>
+          )}
         </div>
       </div>
 
