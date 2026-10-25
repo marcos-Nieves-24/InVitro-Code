@@ -32,6 +32,7 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
+  const [isRevealBlocked, setIsRevealBlocked] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -56,12 +57,15 @@ export function LessonCarousel({
   }, [current]);
 
   // Detect whether current slide has incomplete RevealSequence (data-reveal-has-more="true")
+  // and whether it is blocked (quiz not answered)
   useEffect(() => {
     const check = () => {
       const root = slideAreaRef.current;
       const hasIncompleteReveal =
         root?.querySelector('[data-reveal-has-more="true"]') != null;
+      const hasBlocked = root?.querySelector('[data-reveal-blocked="true"]') != null;
       setIsRevealIncomplete(hasIncompleteReveal);
+      setIsRevealBlocked(hasBlocked);
     };
     // Initial check after render
     const raf = requestAnimationFrame(check);
@@ -231,21 +235,20 @@ export function LessonCarousel({
             </div>
           </div>
 
-          {/* Single Continuar — footer is the ONLY primary advance control.
-              RevealSequence/DialogueBox no longer render their own Continuar;
-              they delegate via consumeRevealAdvance(). While incomplete the
-              footer button stays but disabled (so focus never jumps). */}
+          {/* Single Continuar — footer is the ONLY advance control.
+              All slices (RevealSequence + Dra. Coni lines) advance via footer goNext -> consumeRevealAdvance().
+              Footer is enabled when hasMore and not blocked; disabled only when quiz blocks. */}
           {isLast ? (
             <Button
               variant="secondary"
               size="sm"
               className={`${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end !border-teal-600 !bg-teal-600 px-5 !text-white shadow-teal-600/20 hover:!bg-teal-700`}
               onClick={handleFinish}
-              disabled={state === "loading" || isRevealIncomplete}
+              disabled={state === "loading" || isRevealBlocked}
               aria-label="Finalizar lección"
-              aria-disabled={isRevealIncomplete || undefined}
+              aria-disabled={isRevealBlocked || undefined}
               title={
-                isRevealIncomplete
+                isRevealBlocked
                   ? "Completa el contenido para continuar"
                   : undefined
               }
@@ -258,14 +261,14 @@ export function LessonCarousel({
               size="sm"
               onClick={goNext}
               aria-label="Siguiente diapositiva"
-              aria-disabled={isRevealIncomplete || undefined}
-              disabled={isRevealIncomplete}
+              aria-disabled={isRevealBlocked || undefined}
+              disabled={isRevealBlocked}
               title={
-                isRevealIncomplete
+                isRevealBlocked
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealIncomplete ? "opacity-50" : ""}`}
+              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealBlocked ? "opacity-50" : ""}`}
             >
               Continuar →
             </Button>
