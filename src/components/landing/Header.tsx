@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { UserAvatar, UserAvatarPlaceholder } from "@/components/ui/UserAvatar";
+import { useAvatar } from "@/lib/avatar/AvatarContext";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
@@ -17,6 +19,7 @@ interface HeaderUser {
 
 export function Header({ user }: { user?: HeaderUser | null }) {
   const [scrolled, setScrolled] = useState(false);
+  const { avatarUrl: contextAvatarUrl, isLoading: avatarLoading } = useAvatar();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -80,17 +83,15 @@ export function Header({ user }: { user?: HeaderUser | null }) {
                 className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm transition-colors hover:bg-white/20"
                 title={user!.name}
               >
-                {user!.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={user!.imageUrl}
-                    alt={user!.name}
-                    className="h-6 w-6 rounded-full object-cover"
-                  />
+                {avatarLoading ? (
+                  <UserAvatarPlaceholder size="sm" className="h-6 w-6" />
                 ) : (
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
-                    {user!.name.charAt(0).toUpperCase()}
-                  </span>
+                  <UserAvatar
+                    username={user!.name}
+                    avatarUrl={contextAvatarUrl ?? user!.imageUrl ?? null}
+                    size="sm"
+                    className="h-6 w-6"
+                  />
                 )}
                 <span
                   className={`max-w-[120px] truncate text-sm font-medium ${

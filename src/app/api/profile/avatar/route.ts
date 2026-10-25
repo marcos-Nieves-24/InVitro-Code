@@ -26,7 +26,8 @@ export async function POST(request: Request) {
 
   const supabase = createAdminClient();
 
-  // Best-effort: remove previous avatar to avoid orphaned objects
+  // Fetch old avatar before upload to delete after success
+  let oldPath: string | null = null;
   try {
     const { data: existing } = await supabase
       .from("profiles")
@@ -35,13 +36,12 @@ export async function POST(request: Request) {
       .maybeSingle();
     const oldUrl: string | null | undefined = existing?.avatar_url;
     if (oldUrl && oldUrl.includes("/avatars/")) {
-      const oldPath = oldUrl.split("/avatars/")[1]?.split("?")[0];
-      if (oldPath) {
-        await supabase.storage.from("avatars").remove([oldPath]);
-      }
+      oldPath = oldUrl.split("/avatars/")[1]?.split("?")[0] ?? null;
+      // oldPath is like "avatars/user_...jpg" — full path inside bucket
+      if (oldPath && !oldPath.startsWith("avatars/")) oldPath = `avatars/${oldPath}`;
     }
   } catch {
-    // best-effort — do not block upload if cleanup fails
+    // ignore
   }
 
   const fileName = `${userId}-${Date.now()}.${ext}`;
@@ -65,7 +65,18 @@ export async function POST(request: Request) {
     .eq("id", userId);
 
   if (updateError) {
+    // Rollback: remove newly uploaded file if DB update fails
+    await supabase.storage.from("avatars").remove([filePath]);
     return NextResponse.json({ error: updateError.message }, { status: 500 });
+  }
+
+  // Best-effort: remove previous avatar after successful update (if different)
+  if (oldPath && oldPath !== filePath) {
+    try {
+      await supabase.storage.from("avatars").remove([oldPath]);
+    } catch {
+      // ignore
+    }
   }
 
   return NextResponse.json({ avatar_url: urlData.publicUrl });

@@ -20,12 +20,14 @@ export default async function Home() {
   let headerUser: { name: string; imageUrl?: string | null } | null = null;
   if (userId) {
     const cu = await currentUser();
-    // Prioriza profiles.username (editable en /perfil) sobre Clerk
+    // Prioriza profiles.username y avatar_url (editable en /perfil) sobre Clerk
     let profileUsername: string | null = null;
+    let profileAvatarUrl: string | null = null;
     try {
       const supabase = createAdminClient();
-      const { data } = await supabase.from("profiles").select("username").eq("id", userId).maybeSingle();
+      const { data } = await supabase.from("profiles").select("username, avatar_url").eq("id", userId).maybeSingle();
       profileUsername = (data as { username?: string | null } | null)?.username?.trim() || null;
+      profileAvatarUrl = (data as { avatar_url?: string | null } | null)?.avatar_url ?? null;
     } catch {
       // fallback a Clerk si Supabase no responde
     }
@@ -35,7 +37,7 @@ export default async function Home() {
       cu?.firstName ??
       cu?.emailAddresses?.[0]?.emailAddress?.split("@")[0] ??
       "Usuario";
-    headerUser = { name, imageUrl: cu?.imageUrl ?? null };
+    headerUser = { name, imageUrl: profileAvatarUrl ?? cu?.imageUrl ?? null };
   }
 
   return (
