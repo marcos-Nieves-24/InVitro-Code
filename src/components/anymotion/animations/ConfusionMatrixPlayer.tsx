@@ -135,9 +135,9 @@ const CELL_W = 200;
 const CELL_H = 140;
 const CELL_GAP = 14;
 
-const PANEL_X = 595;
+const PANEL_X = 585;
 const PANEL_Y = 104;
-const PANEL_W = 250;
+const PANEL_W = 270;
 const PANEL_H = 294;
 
 export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
@@ -371,7 +371,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={PANEL_Y + 102}
             textAnchor="middle"
             fill="#45dcc6"
-            fontSize={14.5}
+            fontSize={12.5}
             fontFamily="monospace"
             fontWeight={700}
           >
