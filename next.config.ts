@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "img.clerk.com" },
       { protocol: "https", hostname: "vercel.com" },
+      { protocol: "https", hostname: "*.supabase.co" },
     ],
   },
   async headers() {
@@ -41,7 +42,7 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "img-src 'self' data: https://img.clerk.com https://vercel.com",
+              "img-src 'self' data: https://img.clerk.com https://vercel.com https://*.supabase.co",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.clerk.accounts.dev",
               "connect-src 'self' https://*.supabase.co https://*.clerk.com https://*.clerk.accounts.dev https://cdn.jsdelivr.net https://files.pythonhosted.org https://pypi.org",
               "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
