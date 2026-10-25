@@ -33,7 +33,7 @@ export default async function ComunidadPage() {
 
   const supabase = createAdminClient();
 
-  const [leaderboardRes, rankRes, streaksRes, profileRes, myStreakRes] =
+  const [leaderboardRes, rankRes, streaksRes, profileRes, myStreakRes, eventsRes] =
     await Promise.all([
       supabase.rpc("get_leaderboard", { limit_n: 50 }),
       supabase.rpc("get_leaderboard_rank", { target_user_id: userId }),
@@ -52,6 +52,7 @@ export default async function ComunidadPage() {
         .select("current_streak")
         .eq("user_id", userId)
         .maybeSingle(),
+      supabase.from("events").select("*").order("event_date", { ascending: true }).limit(5),
     ]);
 
   const entries = (leaderboardRes.data ?? []) as Array<{
@@ -97,6 +98,8 @@ export default async function ComunidadPage() {
     }))
     .sort((a, b) => b.streak - a.streak);
 
+  const events = (eventsRes.data ?? []) as Array<{ id: string; title: string; description: string | null; event_date: string | null; location: string | null }>;
+
   const totalXp = await getTotalXp(userId, supabase);
   const levelInfo = calcLevel(totalXp);
   const userName = getDisplayName(myProfile);
@@ -112,13 +115,12 @@ export default async function ComunidadPage() {
       <InVitroTopBar
         totalXp={totalXp}
         currentStreak={myStreakRes.data?.current_streak ?? 0}
-        trail="Centro de la Comunidad"
       />
 
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-          {/* Left column: Leaderboard */}
-          <div className="space-y-6 lg:col-span-8">
+        <section className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          {/* Left column: Leaderboard amplificado */}
+          <div className="space-y-6 lg:col-span-8 xl:col-span-9">
             {/* Leaderboard de estudiantes */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-ink">
@@ -235,6 +237,35 @@ export default async function ComunidadPage() {
                     ? `Todavía no entras en el top 50 — tienes ${totalXp.toLocaleString("es")} XP.`
                     : "Completa tu primera lección para aparecer en el ranking."}
                 </p>
+              )}
+            </div>
+
+            {/* Eventos del admin */}
+            <div className="rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-sm">
+              <h3 className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-ink">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-mint text-[10px] font-bold text-white">📅</span>
+                Próximos eventos
+              </h3>
+              {events.length > 0 ? (
+                <div className="space-y-4">
+                  {events.map((ev) => (
+                    <div key={ev.id} className="rounded-xl border border-surface-raised bg-surface p-4">
+                      <h4 className="text-sm font-bold text-ink">{ev.title}</h4>
+                      {ev.description && <p className="mt-1 text-xs leading-relaxed text-storm">{ev.description}</p>}
+                      <div className="mt-2 flex flex-wrap gap-3 text-xs text-storm">
+                        {ev.event_date && (
+                          <span>🕒 {new Date(ev.event_date).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })}</span>
+                        )}
+                        {ev.location && <span>📍 {ev.location}</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="py-4 text-center text-sm text-storm">No hay eventos programados. El admin los creará aquí.</p>
+              )}
+              {profileRes.data?.role === "admin" && (
+                <p className="mt-4 text-center text-xs text-storm">Admin: crea eventos en Supabase `events`.</p>
               )}
             </div>
           </div>
