@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnymotionStage } from "../AnymotionStage";
 import { AnymotionControls } from "../AnymotionControls";
 import { useAnymotionTimeline } from "../hooks/useAnymotionTimeline";
+import { renderWithMicroorganismItalics } from "@/lib/microorganisms";
 
 interface SupervisedFlowPlayerProps {
   caption?: string;
@@ -27,7 +28,7 @@ const STAGES: SupervisedStage[] = [
     biotechDetail:
       "Conidias etiquetadas (Aspergillus / Penicillium) con sus features medibles: [área, circularidad, textura].",
     analogy: "Ejercicios resueltos de un libro de texto",
-    sampleCode: "[4.8µm, 0.91, rugosa] → Aspergillus",
+    sampleCode: "[4.8µm, 0.91, rugosa]  Aspergillus",
   },
   {
     id: "algorithm",
@@ -54,7 +55,7 @@ const STAGES: SupervisedStage[] = [
     biotechDetail:
       "Clasifica nuevas conidias nunca vistas aplicando el modelo aprendido en segundos.",
     analogy: "Ejercicios nuevos que resuelve en el examen",
-    sampleCode: "nueva muestra → 94% Aspergillus",
+    sampleCode: "nueva muestra  94% Aspergillus",
   },
 ];
 
@@ -175,7 +176,7 @@ export function SupervisedFlowPlayer({
             y={50}
             textAnchor="middle"
             fill={COLORS.accent}
-            fontSize={11}
+            fontSize={14}
             fontFamily="monospace"
             opacity={0.85}
           >
@@ -305,7 +306,7 @@ export function SupervisedFlowPlayer({
                   y={CARD_TOP + 82}
                   textAnchor="middle"
                   fill={COLORS.sky}
-                  fontSize={10.5}
+                  fontSize={13}
                   fontFamily="monospace"
                   opacity={0.9}
                 >
@@ -315,7 +316,7 @@ export function SupervisedFlowPlayer({
                 {/* Biotech detail wrapped */}
                 <g
                   fontFamily="sans-serif"
-                  fontSize={10.5}
+                  fontSize={13}
                   fill="white"
                   opacity={isCurrent ? 0.95 : 0.65}
                   textAnchor="middle"
@@ -347,8 +348,9 @@ export function SupervisedFlowPlayer({
                   y={CARD_TOP + 201}
                   textAnchor="middle"
                   fill={COLORS.accent}
-                  fontSize={9.5}
+                  fontSize={11}
                   fontFamily="monospace"
+                  fontStyle={stage.sampleCode.includes("Aspergillus") ? "italic" : undefined}
                 >
                   {stage.sampleCode}
                 </text>
@@ -420,7 +422,7 @@ export function SupervisedFlowPlayer({
                 y={RAIL_Y + 22}
                 textAnchor="middle"
                 fill={i === activeIndex ? COLORS.accent : COLORS.dim}
-                fontSize={10}
+                fontSize={13}
                 fontFamily="monospace"
               >
                 {`${i + 1}. ${stage.title}`}
@@ -449,7 +451,7 @@ export function SupervisedFlowPlayer({
               type="button"
               onClick={() => handleSelectStage(idx)}
               aria-pressed={active}
-              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
+              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
                 active
                   ? "border-mint bg-mint/20 text-mint"
                   : "border-gray-200 bg-surface-card text-storm hover:border-mint/60 hover:text-mint"
@@ -467,18 +469,18 @@ export function SupervisedFlowPlayer({
         className="mt-2 flex flex-col gap-1.5 rounded-card border border-gray-200 bg-surface-card px-4 py-3 text-storm sm:flex-row sm:items-center sm:justify-between sm:gap-4"
       >
         <div>
-          <span className="font-mono text-xs font-semibold text-brand-600">
+          <span className="font-mono text-sm font-semibold text-brand-600">
             Etapa {activeIndex + 1} de {COUNT}: {current.title}
           </span>
-          <p className="mt-0.5 text-sm text-ink">{current.biotechDetail}</p>
+          <p className="mt-0.5 text-sm text-ink">{renderWithMicroorganismItalics(current.biotechDetail)}</p>
         </div>
-        <div className="shrink-0 rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs text-amber-900">
+        <div className="shrink-0 rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm text-amber-900">
           <span className="font-semibold">Analogía:</span> {current.analogy}
         </div>
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {caption}
         </figcaption>
       )}

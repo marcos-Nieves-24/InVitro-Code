@@ -48,9 +48,9 @@ export function FeatureButtonList({ features }: FeatureButtonListProps) {
               id={panelId}
               role="region"
               aria-label={f.label}
-              aria-hidden={!isExpanded}
-              data-open={isExpanded ? "true" : "false"}
-              className="accordion-panel mt-2 rounded-card border border-gray-200 bg-surface-card shadow-sm"
+              aria-hidden="false"
+              data-open="true"
+              className="mt-2 rounded-card border border-gray-200 bg-surface-card shadow-sm"
             >
               <div className="px-4 py-3 text-[15px] leading-relaxed text-gray-700">
                 {f.detail}
