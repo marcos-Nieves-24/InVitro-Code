@@ -35,7 +35,7 @@ export const AnymotionStage = forwardRef<HTMLDivElement, AnymotionStageProps>(
         ref={ref}
         role="img"
         aria-label={title}
-        className={`relative mx-auto aspect-video w-full max-h-[min(62vh,calc(100vw*9/16))] max-w-[calc(min(62vh,calc(100vw*9/16))*16/9)] overflow-hidden rounded-card border border-white/10 bg-[#0a0a0a] shadow-lg ${className}`}
+        className={`relative mx-auto aspect-video w-full max-h-[min(72vh,calc(100vw*9/16))] max-w-[calc(min(72vh,calc(100vw*9/16))*16/9)] overflow-hidden rounded-card border border-white/10 bg-[#0a0a0a] shadow-lg ${className}`}
       >
         {children}
       </div>

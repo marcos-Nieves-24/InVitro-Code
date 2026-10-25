@@ -66,7 +66,7 @@ function wrapText(text: string, maxChars: number): string[] {
   return lines;
 }
 
-const DETAIL_CHARS_PER_LINE = 17;
+const DETAIL_CHARS_PER_LINE = 16;
 const DETAIL_LINES = STAGES.map((s) => wrapText(s.detail, DETAIL_CHARS_PER_LINE));
 
 // ---------------------------------------------------------------------------
@@ -76,17 +76,17 @@ const DETAIL_LINES = STAGES.map((s) => wrapText(s.detail, DETAIL_CHARS_PER_LINE)
 const VB_W = 1024;
 const VB_H = 520;
 
-const CARD_W = 148;
-const CARD_GAP = 14;
+const CARD_W = 155;
+const CARD_GAP = 11;
 const CARD_TOP = 96;
-const CARD_H = 300;
+const CARD_H = 320;
 const TOTAL_W = COUNT * CARD_W + (COUNT - 1) * CARD_GAP;
 const START_X = (VB_W - TOTAL_W) / 2;
 const cardX = (i: number) => START_X + i * (CARD_W + CARD_GAP);
 const cardCx = (i: number) => cardX(i) + CARD_W / 2;
 
 const TRACK_Y = 70;
-const RAIL_Y = 404;
+const RAIL_Y = 436;
 
 const COLORS = {
   accent: "#45dcc6",
@@ -196,10 +196,10 @@ export function PipelineStagesPlayer({ caption, autoPlay = true }: PipelineStage
                   {stage.name}
                 </text>
 
-                {/* Biotech example, wrapped deterministically */}
-                <g fontFamily="monospace" fontSize={15} fill="white" opacity={detailOpacity} textAnchor="middle">
+                {/* Biotech example, wrapped deterministically — más legible */}
+                <g fontFamily="monospace" fontSize={16.5} fill="white" opacity={detailOpacity} textAnchor="middle" fontWeight={500}>
                   {DETAIL_LINES[i].map((line, li) => (
-                    <text key={`d-${i}-${li}`} x={cardCx(i)} y={CARD_TOP + 104 + li * 16}>
+                    <text key={`d-${i}-${li}`} x={cardCx(i)} y={CARD_TOP + 106 + li * 18}>
                       {line}
                     </text>
                   ))}
