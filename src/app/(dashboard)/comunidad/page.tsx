@@ -9,6 +9,9 @@ import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import { EMPTY_STATES } from "@/lib/ui/empty-states";
 import { UserAvatar } from "@/components/ui/UserAvatar";
 import {
+  Calendar,
+  Clock,
+  MapPin,
   Medal,
   Trophy,
   Users,
@@ -120,7 +123,7 @@ export default async function ComunidadPage() {
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
         <section className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Left column: Leaderboard amplificado */}
-          <div className="space-y-6 lg:col-span-8 xl:col-span-9">
+          <div className="space-y-6 lg:col-span-8 xl:col-span-8">
             {/* Leaderboard de estudiantes */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-ink">
@@ -243,7 +246,7 @@ export default async function ComunidadPage() {
             {/* Eventos del admin */}
             <div className="rounded-2xl border border-surface-raised bg-surface-card p-6 shadow-sm">
               <h3 className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-widest text-ink">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-mint text-[10px] font-bold text-white">📅</span>
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-mint text-white"><Calendar className="h-3.5 w-3.5" /></span>
                 Próximos eventos
               </h3>
               {events.length > 0 ? (
@@ -254,9 +257,9 @@ export default async function ComunidadPage() {
                       {ev.description && <p className="mt-1 text-xs leading-relaxed text-storm">{ev.description}</p>}
                       <div className="mt-2 flex flex-wrap gap-3 text-xs text-storm">
                         {ev.event_date && (
-                          <span>🕒 {new Date(ev.event_date).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })}</span>
+                          <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {new Date(ev.event_date).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })}</span>
                         )}
-                        {ev.location && <span>📍 {ev.location}</span>}
+                        {ev.location && <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {ev.location}</span>}
                       </div>
                     </div>
                   ))}
