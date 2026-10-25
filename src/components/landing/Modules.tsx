@@ -66,7 +66,7 @@ export function Modules() {
         </svg>
       </div>
 
-      <div className="relative mx-auto max-w-[1360px] sm:px-2 md:px-4">
+      <div className="relative mx-auto max-w-[1280px] sm:px-2 md:px-4">
         <Reveal>
           <div className="mb-16 text-center">
             <p className="font-mono text-xs font-semibold tracking-[0.22em] text-[#0AAE9A] uppercase">

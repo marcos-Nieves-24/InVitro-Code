@@ -2,9 +2,9 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 import { Flame, LogOut, Menu, Search, X } from "lucide-react";
 import Link from "next/link";
-import { SectionsDropdown } from "./SectionsDropdown";
 
 interface InVitroShellProps {
   children: ReactNode;
@@ -46,19 +46,59 @@ export function InVitroShell({
     .join("")
     .toUpperCase() ?? "?";
 
+  const pathname = usePathname();
+  const HEADER_SECTIONS = [
+    { label: "Expediciones", href: "/learn" },
+    { label: "Laboratorios", href: "/laboratorios" },
+    { label: "Proyectos", href: "/proyectos" },
+    { label: "Misiones", href: "/niveles" },
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Logros", href: "/logros" },
+    { label: "Comunidad", href: "/comunidad" },
+  ] as const;
+
+  const isActive = (href: string) =>
+    pathname === href || pathname?.startsWith(href + "/") || false;
+
   return (
     <div className="min-h-screen bg-surface text-ink">
       <header className="sticky top-0 z-50 border-b border-surface-raised bg-surface/80 backdrop-blur-xl">
-        <div className="flex h-14 items-center justify-between px-4 md:px-8">
-          {/* Left: Logo + Sections dropdown */}
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2 mr-2">
+        <div className="flex h-14 items-center justify-between gap-4 px-4 md:px-8">
+          {/* Left: Logo */}
+          <div className="flex items-center gap-2 shrink-0">
+            <Link href="/" className="flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-negativo.svg" alt="InVitro-Code" className="h-8 w-8" />
               <span className="font-display text-lg font-bold hidden sm:inline">InVitro-Code</span>
             </Link>
-            <SectionsDropdown />
           </div>
+
+          {/* Center: Secciones ocupando el div del header */}
+          <nav
+            className="hidden flex-1 items-center justify-center gap-1 lg:flex"
+            aria-label="Secciones"
+          >
+            {HEADER_SECTIONS.map((s) => {
+              const active = isActive(s.href);
+              return (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                    active
+                      ? "bg-surface-raised text-ink"
+                      : "text-storm hover:bg-surface-raised/70 hover:text-ink"
+                  }`}
+                >
+                  {s.label}
+                  {active && (
+                    <span className="absolute -bottom-[9px] left-1/2 h-[2px] w-6 -translate-x-1/2 rounded-full bg-brand-500" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
 
           {/* Right: Search + Streak + User info + Logout */}
           <div className="flex items-center gap-3">

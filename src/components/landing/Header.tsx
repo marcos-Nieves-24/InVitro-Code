@@ -10,7 +10,12 @@ const navLinks = [
   { label: "Contacto", href: "#contacto" },
 ];
 
-export function Header() {
+interface HeaderUser {
+  name: string;
+  imageUrl?: string | null;
+}
+
+export function Header({ user }: { user?: HeaderUser | null }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -18,6 +23,8 @@ export function Header() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isAuthed = !!user;
 
   return (
     <header
@@ -58,12 +65,50 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <a
-            href="/sign-up"
-            className="rounded-[10px] bg-mint px-5 py-2.5 text-sm font-medium text-ink transition-all hover:shadow-glow"
-          >
-            Comenzar
-          </a>
+          {isAuthed ? (
+            <div className="flex items-center gap-3">
+              <a
+                href="/dashboard"
+                className={`text-sm font-medium transition-colors ${
+                  scrolled ? "text-ink hover:text-brand-600" : "text-white hover:text-mint"
+                }`}
+              >
+                Dashboard
+              </a>
+              <a
+                href="/perfil"
+                className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm transition-colors hover:bg-white/20"
+                title={user!.name}
+              >
+                {user!.imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={user!.imageUrl}
+                    alt={user!.name}
+                    className="h-6 w-6 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
+                    {user!.name.charAt(0).toUpperCase()}
+                  </span>
+                )}
+                <span
+                  className={`max-w-[120px] truncate text-sm font-medium ${
+                    scrolled ? "text-ink" : "text-white"
+                  }`}
+                >
+                  {user!.name}
+                </span>
+              </a>
+            </div>
+          ) : (
+            <a
+              href="/sign-up"
+              className="rounded-[10px] bg-mint px-5 py-2.5 text-sm font-medium text-ink transition-all hover:shadow-glow"
+            >
+              Comenzar
+            </a>
+          )}
         </nav>
       </div>
     </header>

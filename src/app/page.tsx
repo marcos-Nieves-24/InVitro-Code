@@ -7,20 +7,44 @@ import { Contact } from "@/components/landing/Contact";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { SlideArrowButton } from "@/components/ui/SlideArrowButton";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 /**
  * Landing page — InVitro-Code interactive learning platform.
  * Dark hero with live terminal, semantic dendrogram, modules,
  * team section, and contact CTA.
  */
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  let headerUser: { name: string; imageUrl?: string | null } | null = null;
+  if (userId) {
+    const cu = await currentUser();
+    // Prioriza profiles.username (editable en /perfil) sobre Clerk
+    let profileUsername: string | null = null;
+    try {
+      const supabase = createAdminClient();
+      const { data } = await supabase.from("profiles").select("username").eq("id", userId).maybeSingle();
+      profileUsername = (data as { username?: string | null } | null)?.username?.trim() || null;
+    } catch {
+      // fallback a Clerk si Supabase no responde
+    }
+    const name =
+      profileUsername ??
+      cu?.username ??
+      cu?.firstName ??
+      cu?.emailAddresses?.[0]?.emailAddress?.split("@")[0] ??
+      "Usuario";
+    headerUser = { name, imageUrl: cu?.imageUrl ?? null };
+  }
+
   return (
     <div className="min-h-screen bg-surface text-ink">
-      <Header />
+      <Header user={headerUser} />
 
       <main id="main-content">
-        {/* ── Hero: Dark cinematic section ──────────────── */}
-        <section className="relative overflow-hidden bg-[#111439] px-6 pt-20 pb-16 md:px-10 md:pt-32 md:pb-24">
+        {/* ── Hero: Dark cinematic section — ocupa el div del header (fixed overlay, sin banda blanca) ── */}
+        <section className="relative overflow-hidden bg-[#111439] px-6 pb-16 pt-[72px] md:px-10 md:pb-24 md:pt-[88px]">
           <HeroBackground />
 
           <div className="relative z-10 mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
