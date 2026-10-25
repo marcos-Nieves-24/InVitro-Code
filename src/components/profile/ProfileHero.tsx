@@ -1,6 +1,7 @@
 "use client";
 
 import { Trophy, Calendar, Pencil } from "lucide-react";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 
 interface ProfileHeroProps {
   username?: string | null;
@@ -61,17 +62,7 @@ export function ProfileHero({
       {/* Avatar row — mirrors Excalidraw left column: large avatar centered - AMPLIFIED */}
       <div className="flex flex-col items-center text-center">
         <div className="relative">
-          {avatar_url ? (
-            <img
-              src={avatar_url}
-              alt={displayName}
-              className="h-32 w-32 rounded-full object-cover ring-2 ring-surface-raised md:h-[140px] md:w-[140px]"
-            />
-          ) : (
-            <div className="flex h-32 w-32 items-center justify-center rounded-full bg-fog text-3xl font-bold text-ink ring-2 ring-surface-raised md:h-[140px] md:w-[140px] md:text-4xl">
-              {initials}
-            </div>
-          )}
+          <UserAvatar username={displayName} email={email} avatarUrl={avatar_url} size="xl" className="ring-2 ring-surface-raised" />
         </div>
 
         <h2 className="mt-6 font-display text-3xl font-bold text-ink md:text-[32px]">

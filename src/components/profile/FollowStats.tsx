@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { SocialUser } from "@/domain/profile/social";
 import { FollowButton } from "./FollowButton";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 
 interface FollowStatsProps {
   following: SocialUser[];
@@ -12,23 +13,9 @@ interface FollowStatsProps {
 }
 
 function UserRow({ user }: { user: SocialUser }) {
-  const initials = user.username.slice(0, 2).toUpperCase();
-  const [imgError, setImgError] = useState(false);
-  const showImg = !!user.avatar_url && !imgError;
   return (
     <div className="flex items-center gap-3 py-3">
-      {showImg ? (
-        <img
-          src={user.avatar_url!}
-          alt={user.username}
-          className="h-12 w-12 shrink-0 rounded-full object-cover"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-fog text-sm font-bold text-ink">
-          {initials}
-        </div>
-      )}
+      <UserAvatar username={user.username} avatarUrl={user.avatar_url} size="md" />
       <span className="flex-1 truncate text-sm font-semibold text-ink">{user.username}</span>
       <FollowButton targetUserId={user.id} />
     </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { X, ChevronUp } from "lucide-react";
 import type { SocialUser } from "@/domain/profile/social";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 
 interface ConectaFloatingWidgetProps {
   suggested: SocialUser[];
@@ -131,9 +132,6 @@ export function ConectaFloatingWidget({ suggested, isOpen, onClose, onConnect }:
 function ConectaUserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: string) => void }) {
   const [status, setStatus] = useState<"idle" | "pending" | "sent" | "friends">("idle");
   const [loading, setLoading] = useState(false);
-  const [imgError, setImgError] = useState(false);
-  const initials = user.username.slice(0, 2).toUpperCase();
-  const showImg = !!user.avatar_url && !imgError;
 
   const handleConnect = async () => {
     if (onConnect) {
@@ -161,18 +159,7 @@ function ConectaUserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id
 
   return (
     <div className="flex items-center gap-3 rounded-btn bg-surface px-3 py-2">
-      {showImg ? (
-        <img
-          src={user.avatar_url!}
-          alt={user.username}
-          className="h-8 w-8 shrink-0 rounded-full object-cover"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fog text-[10px] font-bold text-ink">
-          {initials}
-        </div>
-      )}
+      <UserAvatar username={user.username} avatarUrl={user.avatar_url} size="sm" />
       <span className="flex-1 truncate text-sm font-medium text-ink">{user.username}</span>
       {status === "sent" || status === "pending" ? (
         <span className="shrink-0 rounded-btn bg-surface px-3 py-1 text-xs font-semibold text-storm">Enviada</span>

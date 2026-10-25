@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Camera, Loader2, X } from "lucide-react";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 
 interface AvatarUploadProps {
   currentAvatar?: string | null;
@@ -71,16 +72,8 @@ export function AvatarUpload({ currentAvatar, username, onUpload }: AvatarUpload
             alt="Preview"
             className="h-20 w-20 rounded-full object-cover"
           />
-        ) : currentAvatar ? (
-          <img
-            src={currentAvatar}
-            alt={displayName}
-            className="h-20 w-20 rounded-full object-cover"
-          />
         ) : (
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-fog text-xl font-bold text-ink">
-            {initials}
-          </div>
+          <UserAvatar username={displayName} avatarUrl={currentAvatar} size="md" className="h-20 w-20 text-xl" />
         )}
 
         <button

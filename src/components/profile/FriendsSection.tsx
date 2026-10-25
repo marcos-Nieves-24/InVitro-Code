@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Users, UserPlus, Check, X } from "lucide-react";
+import { UserAvatar } from "@/components/ui/UserAvatar";
 
 type Friend = {
   friendId: string;
@@ -117,16 +118,9 @@ export function FriendsSection() {
       ) : (
         <div className="space-y-2">
           {friends.map((f) => {
-            const initials = (f.profile?.username ?? f.friendId).slice(0, 2).toUpperCase();
             return (
               <div key={f.friendId} className="flex items-center gap-3 rounded-btn bg-surface px-4 py-3">
-                {f.profile?.avatar_url ? (
-                  <img src={f.profile.avatar_url} alt={f.profile.username ?? "Amigo"} className="h-10 w-10 rounded-full object-cover" />
-                ) : (
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-fog text-xs font-bold text-ink">
-                    {initials}
-                  </div>
-                )}
+                <UserAvatar username={f.profile?.username ?? f.friendId} avatarUrl={f.profile?.avatar_url ?? null} size="md" />
                 <div className="flex-1">
                   <p className="text-sm font-semibold text-ink">{f.profile?.username ?? f.friendId.slice(0, 8)}</p>
                   <p className="text-xs text-storm">Amigos desde {new Date(f.created_at).toLocaleDateString("es-AR")}</p>

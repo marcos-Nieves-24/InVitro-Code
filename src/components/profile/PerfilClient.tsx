@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
+import { useAvatar } from "@/lib/avatar/AvatarContext";
 import { ProfileHero } from "./ProfileHero";
 import { FollowStats } from "./FollowStats";
 import { ConectaFloatingWidget } from "./ConectaFloatingWidget";
@@ -38,6 +39,7 @@ export function PerfilClient({
   onProfileSave,
 }: PerfilClientProps) {
   const router = useRouter();
+  const { setAvatarUrl, refresh: refreshAvatar } = useAvatar();
   const [conectaOpen, setConectaOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -119,6 +121,9 @@ export function PerfilClient({
                     if (!res.ok) {
                       throw new Error(data.error || "Error al subir la foto");
                     }
+                    // Update global avatar context immediately (all windows/components)
+                    if (data.avatar_url) setAvatarUrl(data.avatar_url);
+                    else await refreshAvatar();
                     router.refresh();
                   }}
                 />

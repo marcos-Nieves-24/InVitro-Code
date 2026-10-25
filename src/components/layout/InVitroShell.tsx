@@ -5,6 +5,8 @@ import { useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { Flame, LogOut, Menu, Search, X } from "lucide-react";
 import Link from "next/link";
+import { UserAvatar, UserAvatarPlaceholder } from "@/components/ui/UserAvatar";
+import { useAvatar } from "@/lib/avatar/AvatarContext";
 
 interface InVitroShellProps {
   children: ReactNode;
@@ -41,12 +43,10 @@ export function InVitroShell({
     }
   }, [theme]);
 
-  const initials = userName
-    ?.split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w.charAt(0))
-    .join("")
-    .toUpperCase() ?? "?";
+  const { avatarUrl: contextAvatarUrl, isLoading: avatarLoading } = useAvatar();
+  // Use context avatar if available, otherwise fallback to prop (for SSR)
+  const effectiveAvatarUrl = contextAvatarUrl ?? avatarUrl ?? null;
+  const displayName = userName ?? "Usuario";
 
   const pathname = usePathname();
   const HEADER_SECTIONS = [
@@ -121,12 +121,10 @@ export function InVitroShell({
               </div>
             )}
             <Link href="/perfil" className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-surface-raised">
-              {avatarUrl ? (
-                <img src={avatarUrl} alt={userName ?? "Usuario"} className="h-8 w-8 rounded-full object-cover" />
+              {avatarLoading ? (
+                <UserAvatarPlaceholder size="sm" />
               ) : (
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
-                  {initials}
-                </div>
+                <UserAvatar username={displayName} email={userName} avatarUrl={effectiveAvatarUrl} size="sm" />
               )}
               <div className="hidden lg:block">
                 <p className="text-xs font-bold text-ink">{userName}</p>

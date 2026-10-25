@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { AvatarProvider } from "@/lib/avatar/AvatarContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,7 +48,7 @@ export default function RootLayout({
         >
           Saltar al contenido principal
         </a>
-        {children}
+        <AvatarProvider>{children}</AvatarProvider>
       </body>
       </html>
     </ClerkProvider>
