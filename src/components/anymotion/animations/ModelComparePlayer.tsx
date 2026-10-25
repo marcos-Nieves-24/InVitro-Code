@@ -196,7 +196,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
                   y={CARD_Y + 34}
                   textAnchor="middle"
                   fill={model.color}
-                  fontSize={10.5}
+                  fontSize={13}
                   fontFamily="monospace"
                   fontWeight={700}
                 >
@@ -220,7 +220,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
                   y={CARD_Y + 92}
                   textAnchor="middle"
                   fill="rgba(255,255,255,0.62)"
-                  fontSize={10.5}
+                  fontSize={13}
                   fontFamily="monospace"
                 >
                   {model.org}
@@ -243,7 +243,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
                   y={CARD_Y + 140}
                   textAnchor="middle"
                   fill={model.color}
-                  fontSize={11}
+                  fontSize={14}
                   fontFamily="monospace"
                   fontWeight={700}
                 >
@@ -272,17 +272,20 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
             );
           })}
 
-          {/* Bottom synthesis bar */}
-          <text
-            x={VB_W / 2}
-            y={VB_H - 28}
-            textAnchor="middle"
-            fill="rgba(255,255,255,0.75)"
-            fontSize={11}
-            fontFamily="monospace"
-          >
-            {currentDim.takeaway}
-          </text>
+          {/* Bottom synthesis bar — wrapped to 55 chars so it never bleeds */}
+          {wrapText(currentDim.takeaway, 55).map((line, li) => (
+            <text
+              key={`takeaway-${li}`}
+              x={VB_W / 2}
+              y={VB_H - 36 + li * 16}
+              textAnchor="middle"
+              fill="rgba(255,255,255,0.75)"
+              fontSize={13}
+              fontFamily="monospace"
+            >
+              {line}
+            </text>
+          ))}
         </svg>
       </AnymotionStage>
 
@@ -300,7 +303,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
               type="button"
               onClick={() => setActiveDimId(dim.id)}
               aria-pressed={active}
-              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
+              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
                 active
                   ? "border-mint bg-mint/20 text-mint"
                   : "border-gray-200 bg-surface-card text-storm hover:border-mint/60 hover:text-mint"
@@ -318,7 +321,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
         className="mt-2 grid gap-2 sm:grid-cols-3"
       >
         <div className="rounded-card border border-sky-200 bg-sky-50/70 px-3.5 py-2.5">
-          <p className="m-0 font-mono text-xs font-semibold text-sky-800">
+          <p className="m-0 font-mono text-sm font-semibold text-sky-800">
             AlphaFold · {currentDim.label}
           </p>
           <p className="mt-1 mb-0 text-sm font-medium text-ink">
@@ -326,7 +329,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
           </p>
         </div>
         <div className="rounded-card border border-teal-200 bg-teal-50/70 px-3.5 py-2.5">
-          <p className="m-0 font-mono text-xs font-semibold text-teal-800">
+          <p className="m-0 font-mono text-sm font-semibold text-teal-800">
             Evo (Arc Institute) · {currentDim.label}
           </p>
           <p className="mt-1 mb-0 text-sm font-medium text-ink">
@@ -334,7 +337,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
           </p>
         </div>
         <div className="rounded-card border border-amber-200 bg-amber-50/70 px-3.5 py-2.5">
-          <p className="m-0 font-mono text-xs font-semibold text-amber-900">
+          <p className="m-0 font-mono text-sm font-semibold text-amber-900">
             Métodos tradicionales · {currentDim.label}
           </p>
           <p className="mt-1 mb-0 text-sm font-medium text-ink">
@@ -344,7 +347,7 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {caption}
         </figcaption>
       )}

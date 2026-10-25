@@ -77,15 +77,15 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           <text x={400} y={38} textAnchor="middle" fill="white" fontSize={13} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
             {p < 0.4 ? "1 dimension: superposicion" : "2 dimensiones: separacion"}
           </text>
-          <text x={400} y={54} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.42}>
+          <text x={400} y={54} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.42}>
             {p < 0.4 ? "solo area" : "area x circularidad"}
           </text>
 
-          {/* X axis (always) */}
+          {/* X axis (always) — inset para no desplazarse */}
           <g opacity={show1D}>
             <line x1={AXIS_X0} y1={AXIS_Y1} x2={AXIS_X1} y2={AXIS_Y1} stroke="white" strokeWidth={1.2} opacity={0.9} />
             <polygon points={`${AXIS_X1},${AXIS_Y1} ${AXIS_X1 - 8},${AXIS_Y1 - 4} ${AXIS_X1 - 8},${AXIS_Y1 + 4}`} fill="white" opacity={0.9} />
-            <text x={AXIS_X1 + 6} y={AXIS_Y1 + 4} fill="white" fontSize={11} fontFamily="monospace" opacity={0.7}>
+            <text x={AXIS_X1 - 12} y={AXIS_Y1 - 8} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} textAnchor="end">
               area
             </text>
             {/* ticks */}
@@ -96,11 +96,11 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
             </g>
           </g>
 
-          {/* Y axis (appears at 0.4) */}
+          {/* Y axis (appears at 0.4) — inset */}
           <g opacity={yAxisO}>
             <line x1={AXIS_X0} y1={AXIS_Y1} x2={AXIS_X0} y2={AXIS_Y0} stroke="white" strokeWidth={1.2} opacity={0.9} />
             <polygon points={`${AXIS_X0},${AXIS_Y0} ${AXIS_X0 - 4},${AXIS_Y0 + 8} ${AXIS_X0 + 4},${AXIS_Y0 + 8}`} fill="white" opacity={0.9} />
-            <text x={22} y={88} fill="white" fontSize={11} fontFamily="monospace" opacity={0.7} transform="rotate(-90 22 88)">
+            <text x={34} y={220} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} textAnchor="middle" transform="rotate(-90 34 220)">
               circularidad
             </text>
             <g fontSize={8} fontFamily="monospace" fill="white" opacity={0.35} textAnchor="middle">
@@ -112,7 +112,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           {/* Overlap hint (only in 1D) */}
           <g opacity={overlapHintO}>
             <rect x={290} y={288} width={220} height={22} rx={11} fill="#f59e0b" opacity={0.12} />
-            <text x={400} y={303} textAnchor="middle" fill="#f59e0b" fontSize={10} fontFamily="monospace" fontWeight={600}>
+            <text x={400} y={303} textAnchor="middle" fill="#f59e0b" fontSize={13} fontFamily="monospace" fontWeight={600}>
               se superponen
             </text>
           </g>
@@ -120,7 +120,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           {/* Frontier line in 2D */}
           <g opacity={frontierO}>
             <line x1={180} y1={300} x2={620} y2={110} stroke="#45dcc6" strokeWidth={1.4} strokeDasharray="8 5" opacity={0.95} />
-            <text x={520} y={118} fill="#45dcc6" fontSize={10} fontFamily="monospace" fontWeight={600} opacity={0.9}>
+            <text x={520} y={118} fill="#45dcc6" fontSize={13} fontFamily="monospace" fontWeight={600} opacity={0.9}>
               frontera
             </text>
           </g>
@@ -152,11 +152,11 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           <g opacity={label2DO}>
             <g transform="translate(540,400)">
               <circle cx={0} cy={0} r={6} fill="#f59e0b" />
-              <text x={12} y={4} fill="white" fontSize={10} fontFamily="monospace" opacity={0.85}>
+              <text x={12} y={4} fill="white" fontSize={13} fontFamily="monospace" fontStyle="italic" opacity={0.85}>
                 Aspergillus
               </text>
               <circle cx={110} cy={0} r={6} fill="#38bdf8" />
-              <text x={122} y={4} fill="white" fontSize={10} fontFamily="monospace" opacity={0.85}>
+              <text x={122} y={4} fill="white" fontSize={13} fontFamily="monospace" fontStyle="italic" opacity={0.85}>
                 Penicillium
               </text>
             </g>
@@ -168,7 +168,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
               <g>
                 <circle cx={120} cy={400} r={6} fill="#f59e0b" opacity={0.9} />
                 <circle cx={138} cy={400} r={6} fill="#38bdf8" opacity={0.9} />
-                <text x={152} y={404} fill="white" fontSize={10} fontFamily="monospace" opacity={0.6}>
+                <text x={152} y={404} fill="white" fontSize={13} fontFamily="monospace" opacity={0.6}>
                   mezclados
                 </text>
               </g>
@@ -177,14 +177,14 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
 
           {/* Callout for separation */}
           <g opacity={frontierO}>
-            <text x={400} y={418} textAnchor="middle" fill="#45dcc6" fontSize={10} fontFamily="monospace" fontWeight={600}>
-              dos features → separacion clara
+            <text x={400} y={418} textAnchor="middle" fill="#45dcc6" fontSize={13} fontFamily="monospace" fontWeight={600}>
+              dos features  separacion clara
             </text>
           </g>
         </svg>
       </AnymotionStage>
       <AnymotionControls timeline={timeline} label="Espacio de features 1D a 2D" />
-      {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }

@@ -26,8 +26,8 @@ const LENSES: LensSpec[] = [
     id: "matrix",
     buttonLabel: "Matriz (n = 100)",
     title: "Desglose de 100 conidias clasificadas (Aspergillus = positivo)",
-    formula: "Total = TP (35) + FN (10) + FP (5) + TN (50) = 100",
-    calculation: "Aciertos = 85/100 (85%) · Errores = 10 FN + 5 FP",
+    formula: "Total = 35 + 10 + 5 + 50 = 100",
+    calculation: "Aciertos 85/100 (85%) · Errores 15",
     meaning:
       "La matriz de confusión separa los aciertos (TP, TN) y desagrega qué tipo de errores comete el clasificador (FP vs FN).",
     clinicalNote:
@@ -135,9 +135,9 @@ const CELL_W = 200;
 const CELL_H = 140;
 const CELL_GAP = 14;
 
-const PANEL_X = 595;
+const PANEL_X = 580;
 const PANEL_Y = 104;
-const PANEL_W = 250;
+const PANEL_W = 285;
 const PANEL_H = 294;
 
 export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
@@ -164,14 +164,14 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.94}
           >
-            Matriz de confusión: Aspergillus (positivo) vs Penicillium (negativo)
+            Matriz de confusión: <tspan font-style="italic">Aspergillus</tspan> (positivo) vs <tspan font-style="italic">Penicillium</tspan> (negativo)
           </text>
           <text
             x={VB_W / 2}
             y={50}
             textAnchor="middle"
             fill="#45dcc6"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             opacity={0.9}
           >
@@ -184,24 +184,24 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={GRID_Y - 14}
             textAnchor="middle"
             fill="white"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             fontWeight={700}
             opacity={0.9}
           >
-            Predicho Aspergillus
+            Predicho <tspan font-style="italic">Aspergillus</tspan>
           </text>
           <text
             x={GRID_X + CELL_W + CELL_GAP + CELL_W / 2}
             y={GRID_Y - 14}
             textAnchor="middle"
             fill="white"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             fontWeight={700}
             opacity={0.9}
           >
-            Predicho Penicillium
+            Predicho <tspan font-style="italic">Penicillium</tspan>
           </text>
 
           {/* Row headers */}
@@ -210,19 +210,19 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={GRID_Y + CELL_H / 2 - 4}
             textAnchor="end"
             fill="white"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             fontWeight={700}
             opacity={0.9}
           >
-            Real Aspergillus
+            Real <tspan font-style="italic">Aspergillus</tspan>
           </text>
           <text
             x={GRID_X - 14}
             y={GRID_Y + CELL_H / 2 + 12}
             textAnchor="end"
             fill="rgba(255,255,255,0.55)"
-            fontSize={10}
+            fontSize={13}
             fontFamily="monospace"
           >
             (45 reales)
@@ -233,19 +233,19 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={GRID_Y + CELL_H + CELL_GAP + CELL_H / 2 - 4}
             textAnchor="end"
             fill="white"
-            fontSize={11.5}
+            fontSize={14.5}
             fontFamily="monospace"
             fontWeight={700}
             opacity={0.9}
           >
-            Real Penicillium
+            Real <tspan font-style="italic">Penicillium</tspan>
           </text>
           <text
             x={GRID_X - 14}
             y={GRID_Y + CELL_H + CELL_GAP + CELL_H / 2 + 12}
             textAnchor="end"
             fill="rgba(255,255,255,0.55)"
-            fontSize={10}
+            fontSize={13}
             fontFamily="monospace"
           >
             (55 reales)
@@ -304,20 +304,28 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
                   y={y + 104}
                   textAnchor="middle"
                   fill="rgba(255,255,255,0.78)"
-                  fontSize={10}
+                  fontSize={13}
                   fontFamily="monospace"
                 >
-                  {cell.row === 0 ? "Real: Aspergillus" : "Real: Penicillium"}
+                  {cell.row === 0 ? (
+                    <>Real: <tspan font-style="italic">Aspergillus</tspan></>
+                  ) : (
+                    <>Real: <tspan font-style="italic">Penicillium</tspan></>
+                  )}
                 </text>
                 <text
                   x={cx}
                   y={y + 120}
                   textAnchor="middle"
                   fill="rgba(255,255,255,0.78)"
-                  fontSize={10}
+                  fontSize={13}
                   fontFamily="monospace"
                 >
-                  {cell.col === 0 ? "Pred: Aspergillus" : "Pred: Penicillium"}
+                  {cell.col === 0 ? (
+                    <>Pred: <tspan font-style="italic">Aspergillus</tspan></>
+                  ) : (
+                    <>Pred: <tspan font-style="italic">Penicillium</tspan></>
+                  )}
                 </text>
               </g>
             );
@@ -350,16 +358,16 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={PANEL_Y + 62}
             textAnchor="middle"
             fill="white"
-            fontSize={11.5}
+            fontSize={12}
             fontFamily="monospace"
             fontWeight={700}
           >
             {lens.formula}
           </text>
           <rect
-            x={PANEL_X + 16}
+            x={PANEL_X + 10}
             y={PANEL_Y + 80}
-            width={PANEL_W - 32}
+            width={PANEL_W - 20}
             height={34}
             rx={10}
             fill="rgba(69,220,198,0.14)"
@@ -379,7 +387,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
           </text>
 
           {/* All 3 reference metrics always visible for quick comparison */}
-          <g fontFamily="monospace" fontSize={11} fill="white">
+          <g fontFamily="monospace" fontSize={14} fill="white">
             <text x={PANEL_X + 20} y={PANEL_Y + 150} opacity={activeLensId === "precision" ? 1 : 0.65}>
               • Precisión: 35 / 40 = 0.875
             </text>
@@ -400,7 +408,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={VB_H - 26}
             textAnchor="middle"
             fill="rgba(255,255,255,0.65)"
-            fontSize={11}
+            fontSize={14}
             fontFamily="monospace"
           >
             Selecciona una métrica abajo para resaltar qué celdas de la matriz intervienen en su cálculo
@@ -422,7 +430,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
               type="button"
               onClick={() => setActiveLensId(item.id)}
               aria-pressed={active}
-              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
+              className={`min-h-11 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none ${
                 active
                   ? "border-mint bg-mint/20 text-mint"
                   : "border-gray-200 bg-surface-card text-storm hover:border-mint/60 hover:text-mint"
@@ -440,19 +448,19 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
         className="mt-2 rounded-card border border-gray-200 bg-surface-card px-4 py-3 text-storm"
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="font-mono text-xs font-semibold text-brand-600">
-            {lens.title}
+          <span className="font-mono text-sm font-semibold text-brand-600">
+            {renderWithMicroorganismItalics(lens.title)}
           </span>
-          <span className="rounded-md bg-brand-50 px-2.5 py-1 font-mono text-xs font-semibold text-brand-700">
-            {lens.formula} → {lens.calculation}
+          <span className="rounded-md bg-brand-50 px-2.5 py-1 font-mono text-sm font-semibold text-brand-700">
+            {lens.formula}  {lens.calculation}
           </span>
         </div>
-        <p className="mt-1.5 text-sm text-ink">{lens.meaning}</p>
-        <p className="mt-1 text-xs text-storm">{lens.clinicalNote}</p>
+        <p className="mt-1.5 text-sm text-ink">{renderWithMicroorganismItalics(lens.meaning)}</p>
+        <p className="mt-1 text-sm text-storm">{renderWithMicroorganismItalics(lens.clinicalNote)}</p>
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {renderWithMicroorganismItalics(caption)}
         </figcaption>
       )}

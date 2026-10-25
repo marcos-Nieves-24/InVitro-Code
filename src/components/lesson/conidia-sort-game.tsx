@@ -158,19 +158,19 @@ export function ConidiaSortGame({
           )}
         </div>
 
-        {/* Buttons */}
+        {/* Buttons — microorganismos en cursiva */}
         <div className="mt-4 flex gap-3">
           <button
             onClick={() => handleChoice("Aspergillus")}
             disabled={!!feedback}
-            className="rounded-lg bg-blue-600 px-6 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg bg-blue-600 px-6 py-2 text-sm font-semibold italic text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Aspergillus
           </button>
           <button
             onClick={() => handleChoice("Penicillium")}
             disabled={!!feedback}
-            className="rounded-lg bg-orange-500 px-6 py-2 text-sm font-semibold text-white transition-all hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg bg-orange-500 px-6 py-2 text-sm font-semibold italic text-white transition-all hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Penicillium
           </button>

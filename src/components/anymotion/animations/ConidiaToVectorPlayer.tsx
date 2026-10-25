@@ -84,39 +84,39 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
               {/* vertical ticks */}
               <line x1={98} y1={268} x2={98} y2={298} stroke="#f59e0b" strokeWidth={1} opacity={0.7} />
               <line x1={242} y1={268} x2={242} y2={298} stroke="#f59e0b" strokeWidth={1} opacity={0.7} />
-              <text x={170} y={304} textAnchor="middle" fill="#f59e0b" fontSize={11} fontFamily="monospace" fontWeight={600}>
+              <text x={170} y={304} textAnchor="middle" fill="#f59e0b" fontSize={14} fontFamily="monospace" fontWeight={600}>
                 Area
               </text>
-              <text x={170} y={316} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.55}>
+              <text x={170} y={316} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.55}>
                 12.3 um2
               </text>
             </g>
 
-            {/* Circularidad — dashed outline + label */}
+            {/* Circularidad — dashed outline + label — separada de la conidia */}
             <g opacity={circO}>
               <circle cx={170} cy={190} r={82} fill="none" stroke="#a78bfa" strokeWidth={1.3} strokeDasharray="7 5" opacity={0.9} />
-              <text x={170} y={128} textAnchor="middle" fill="#a78bfa" fontSize={11} fontFamily="monospace" fontWeight={600}>
+              <text x={170} y={108} textAnchor="middle" fill="#a78bfa" fontSize={14} fontFamily="monospace" fontWeight={600}>
                 Circularidad
               </text>
-              <text x={170} y={140} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.55}>
+              <text x={170} y={120} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.55}>
                 0.87
               </text>
             </g>
 
             {/* Labels for textura / intensidad at bottom of left panel */}
             <g opacity={texturaO}>
-              <text x={88} y={350} fill="#00b5c5" fontSize={10} fontFamily="monospace" fontWeight={600}>
+              <text x={88} y={350} fill="#00b5c5" fontSize={13} fontFamily="monospace" fontWeight={600}>
                 textura
               </text>
-              <text x={88} y={362} fill="white" fontSize={9} fontFamily="monospace" opacity={0.6}>
+              <text x={88} y={362} fill="white" fontSize={12} fontFamily="monospace" opacity={0.6}>
                 42
               </text>
             </g>
             <g opacity={intensidadO}>
-              <text x={210} y={350} fill="#f472b6" fontSize={10} fontFamily="monospace" fontWeight={600}>
+              <text x={210} y={350} fill="#f472b6" fontSize={13} fontFamily="monospace" fontWeight={600}>
                 intensidad
               </text>
-              <text x={210} y={362} fill="white" fontSize={9} fontFamily="monospace" opacity={0.6}>
+              <text x={210} y={362} fill="white" fontSize={12} fontFamily="monospace" opacity={0.6}>
                 128
               </text>
             </g>
@@ -125,7 +125,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
             <text x={170} y={42} textAnchor="middle" fill="white" fontSize={13} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
               Conidia
             </text>
-            <text x={170} y={58} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.45}>
+            <text x={170} y={58} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.45}>
               imagen microscopio
             </text>
           </g>
@@ -134,7 +134,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
           <g opacity={arrowO} transform={`translate(${(1 - arrowO) * -8},0)`}>
             <line x1={310} y1={190} x2={400} y2={190} stroke="white" strokeWidth={1.8} opacity={0.85} />
             <polygon points="400,190 388,182 388,198" fill="white" opacity={0.9} />
-            <text x={355} y={178} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.5} letterSpacing="0.08em">
+            <text x={355} y={178} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.5} letterSpacing="0.08em">
               extrae
             </text>
           </g>
@@ -144,7 +144,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
             <text x={580} y={42} textAnchor="middle" fill="white" fontSize={13} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
               Vector
             </text>
-            <text x={580} y={58} textAnchor="middle" fill="white" fontSize={9} fontFamily="monospace" opacity={0.45}>
+            <text x={580} y={58} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.45}>
               numeros para la IA
             </text>
 
@@ -184,7 +184,7 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
             </g>
 
             {/* Labels under vector */}
-            <g fontFamily="monospace" fontSize={9} textAnchor="middle">
+            <g fontFamily="monospace" fontSize={12} textAnchor="middle">
               <text x={466} y={188} fill="#f59e0b" opacity={nArea * 0.85}>area</text>
               <text x={546} y={188} fill="#a78bfa" opacity={nCirc * 0.85}>circ.</text>
               <text x={612} y={188} fill="#00b5c5" opacity={nText * 0.85}>text.</text>
@@ -194,20 +194,20 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
             {/* Complete check when done */}
             <g opacity={completeO}>
               <rect x={488} y={210} width={184} height={28} rx={14} fill="#00b5c5" opacity={0.14} />
-              <text x={580} y={228} textAnchor="middle" fill="#45dcc6" fontSize={11} fontFamily="monospace" fontWeight={700}>
+              <text x={580} y={228} textAnchor="middle" fill="#45dcc6" fontSize={14} fontFamily="monospace" fontWeight={700}>
                 vector listo
               </text>
             </g>
 
             {/* Feature count hint */}
-            <text x={580} y={342} textAnchor="middle" fill="white" fontSize={10} fontFamily="monospace" opacity={0.38}>
-              4 features → 4 dimensiones
+            <text x={580} y={342} textAnchor="middle" fill="white" fontSize={13} fontFamily="monospace" opacity={0.38}>
+              4 features  4 dimensiones
             </text>
           </g>
         </svg>
       </AnymotionStage>
       <AnymotionControls timeline={timeline} label="Conidia a vector" />
-      {caption && <figcaption className="mt-2 text-center font-mono text-[11px] text-storm">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>}
     </figure>
   );
 }
