@@ -148,7 +148,7 @@ export default async function ProfilePage() {
   }
 
   return (
-    <InVitroShell userName={userName} userRole={profile?.role} theme={profile?.theme}>
+    <InVitroShell userName={userName} userRole={profile?.role} theme={profile?.theme} avatarUrl={profile?.avatar_url ?? null}>
       <div className="p-6 md:p-8">
         <div className="mx-auto max-w-[1379px]">
           <h1 className="font-display text-3xl font-bold text-ink">Mi Perfil</h1>

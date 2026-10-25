@@ -107,6 +107,7 @@ export function PerfilClient({
                 </h3>
                 <AvatarUpload
                   currentAvatar={profile.avatar_url}
+                  username={profile.username ?? profile.email ?? "Usuario"}
                   onUpload={async (file) => {
                     const formData = new FormData();
                     formData.append("avatar", file);

@@ -5,10 +5,11 @@ import { Camera, Loader2, X } from "lucide-react";
 
 interface AvatarUploadProps {
   currentAvatar?: string | null;
+  username?: string | null;
   onUpload: (file: File) => Promise<void>;
 }
 
-export function AvatarUpload({ currentAvatar, onUpload }: AvatarUploadProps) {
+export function AvatarUpload({ currentAvatar, username, onUpload }: AvatarUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -52,8 +53,14 @@ export function AvatarUpload({ currentAvatar, onUpload }: AvatarUploadProps) {
     }
   };
 
-  const displayName = "Avatar";
-  const initials = "A";
+  const displayName = username ?? "Avatar";
+  const initials = displayName
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w.charAt(0))
+    .join("")
+    .toUpperCase()
+    .slice(0, 2) || "A";
 
   return (
     <div className="flex items-center gap-4">

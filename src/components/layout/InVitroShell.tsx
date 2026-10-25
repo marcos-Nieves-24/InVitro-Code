@@ -15,6 +15,7 @@ interface InVitroShellProps {
   theme?: string | null;
   hud?: ReactNode;
   currentStreak?: number;
+  avatarUrl?: string | null;
 }
 
 export function InVitroShell({
@@ -24,6 +25,7 @@ export function InVitroShell({
   theme,
   hud,
   currentStreak,
+  avatarUrl,
 }: InVitroShellProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { signOut } = useClerk();
@@ -119,9 +121,13 @@ export function InVitroShell({
               </div>
             )}
             <Link href="/perfil" className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-surface-raised">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
-                {initials}
-              </div>
+              {avatarUrl ? (
+                <img src={avatarUrl} alt={userName ?? "Usuario"} className="h-8 w-8 rounded-full object-cover" />
+              ) : (
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-xs font-bold text-ink">
+                  {initials}
+                </div>
+              )}
               <div className="hidden lg:block">
                 <p className="text-xs font-bold text-ink">{userName}</p>
               </div>
