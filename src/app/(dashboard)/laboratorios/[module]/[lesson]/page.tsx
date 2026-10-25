@@ -86,7 +86,7 @@ export default async function LabLessonPage({ params }: Props) {
     .maybeSingle();
   const userName = getDisplayName(profileRes.data ?? {});
 
-  // ── Onboarding gate: completedCount === 0 → show onboarding ──
+  // ── Onboarding gate: completedCount === 0  show onboarding ──
   let completedCount = 0;
   try {
     const { data, error } = await supabase

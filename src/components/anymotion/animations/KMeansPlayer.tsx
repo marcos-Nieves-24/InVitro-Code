@@ -236,7 +236,7 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
 
       <div className="mt-3 flex flex-col gap-3 rounded-b-card bg-surface-card px-4 py-3 text-storm">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide opacity-70">Dataset</span>
+          <span className="text-sm font-semibold uppercase tracking-wide opacity-70">Dataset</span>
           <div role="group" aria-label="Selector de dataset" className="flex gap-2">
             {(["blobs", "rings"] as DatasetKey[]).map((d) => {
               const active = d === dataset;
@@ -247,7 +247,7 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
                   type="button"
                   onClick={() => onDatasetChange(d)}
                   aria-pressed={active}
-                  className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                  className={`rounded-full border px-3 py-1 text-sm font-semibold transition-colors ${
                     active
                       ? "border-mint bg-mint/15 text-mint"
                       : "border-gray-200 bg-white text-storm hover:bg-mint/10 hover:text-mint"
@@ -261,7 +261,7 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide opacity-70">K</span>
+          <span className="text-sm font-semibold uppercase tracking-wide opacity-70">K</span>
           <div role="group" aria-label="Selector de K" className="flex gap-2">
             {[2, 3, 4].map((kk) => {
               const active = kk === k;
@@ -271,7 +271,7 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
                   type="button"
                   onClick={() => onKChange(kk)}
                   aria-pressed={active}
-                  className={`h-9 w-9 rounded-full border text-xs font-semibold transition-colors ${
+                  className={`h-9 w-9 rounded-full border text-sm font-semibold transition-colors ${
                     active
                       ? "border-mint bg-mint/15 text-mint"
                       : "border-gray-200 bg-white text-storm hover:bg-mint/10 hover:text-mint"
@@ -289,22 +289,22 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
             type="button"
             onClick={step}
             disabled={converged}
-            className="rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-xs font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-sm font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Paso
           </button>
           <button
             type="button"
             onClick={reset}
-            className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint"
+            className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint"
           >
             Reiniciar
           </button>
-          <span className="font-mono text-xs tabular-nums">
+          <span className="font-mono text-sm tabular-nums">
             Iteración: {iteration}
           </span>
           <span
-            className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+            className={`rounded-full border px-3 py-1 text-sm font-semibold ${
               phase === "assign"
                 ? "border-sky-400/40 bg-sky-400/10 text-sky-300"
                 : "border-amber-400/40 bg-amber-400/10 text-amber-300"
@@ -313,7 +313,7 @@ export function KMeansPlayer({ caption }: KMeansPlayerProps) {
             Fase: {phaseLabel}
           </span>
           {converged ? (
-            <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+            <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-sm font-semibold text-emerald-300">
               Convergido
             </span>
           ) : null}

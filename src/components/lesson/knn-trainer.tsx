@@ -789,8 +789,8 @@ export function KnnTrainer() {
             >
               {knnResult ? (
                 <p className="text-xs text-gray-700">
-                  <span className="font-mono">k={k}</span> → {knnResult.benignCount} benigno,{" "}
-                  {knnResult.malignCount} maligno → predice:{" "}
+                  <span className="font-mono">k={k}</span>  {knnResult.benignCount} benigno,{" "}
+                  {knnResult.malignCount} maligno  predice:{" "}
                   <span
                     className={`font-medium ${
                       knnResult.prediction === 1 ? "text-[#3525cd]" : "text-[#14b8a6]"
