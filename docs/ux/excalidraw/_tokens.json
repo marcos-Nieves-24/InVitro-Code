@@ -1,0 +1,22 @@
+{
+  "strokeColor": "#1e1e1e",
+  "backgroundColor": "transparent",
+  "fillStyle": "solid",
+  "strokeWidth_containers": 4,
+  "strokeWidth_details": 2,
+  "roughness": 1,
+  "opacity": 100,
+  "roundness_rect": {
+    "type": 3
+  },
+  "roundness_line": {
+    "type": 2
+  },
+  "fontFamily": 5,
+  "fontSizes": [
+    16,
+    20,
+    28,
+    36
+  ]
+}
