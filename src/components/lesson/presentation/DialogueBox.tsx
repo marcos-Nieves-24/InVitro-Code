@@ -270,28 +270,23 @@ export function DialogueBox({
     [onNext, handleAdvance, hasLines, isLastLine],
   );
 
-  // Interactive when a consumer passes onNext, or when lines drive the bubble
-  // on its own (lines are serializable in MDX, onNext is not).
-  const canInteract = Boolean(onNext) || hasLines;
-
+  // ALL advance is via footer Continuar only — bubble is not clickable.
+  // Lines still advance when footer goNext consumes the registered advance.
   return (
     <div
       ref={containerRef}
       role="region"
       aria-live="polite"
       aria-label={`Diálogo de ${resolvedSpeaker}`}
-      tabIndex={canInteract ? 0 : undefined}
-      onClick={canInteract ? handleContainerClick : undefined}
-      onKeyDown={canInteract ? handleKeyDown : undefined}
-      className={`relative flex w-full items-start gap-3 md:gap-3.5 ${canInteract ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface" : ""}`}
+      className="relative flex w-full max-w-[720px] items-start gap-3 md:gap-3.5"
     >
       {/* Avatar */}
       <div className="shrink-0 pt-1">
         {variant === "scientist" ? <ScientistAvatar mood={mood} /> : <ConiAvatar mood={mood} />}
       </div>
 
-      {/* Bubble wrapper for tail positioning */}
-      <div className="relative min-w-0 flex-1">
+      {/* Bubble wrapper for tail positioning — recortado */}
+      <div className="relative min-w-0 flex-1 max-w-[640px]">
         {/* Tail — 45deg square clipped as triangle */}
         <div
           aria-hidden="true"
@@ -307,13 +302,13 @@ export function DialogueBox({
             boxShadow: "0 4px 16px var(--color-bubble-glow, rgba(163,207,205,0.35)), 0 1px 3px rgba(0,0,0,0.08)",
           }}
         >
-          {/* Speaker label */}
-          <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+          {/* Speaker label — unificado */}
+          <p className="mb-1 font-mono text-[13px] font-semibold uppercase tracking-widest text-brand-600">
             {resolvedSpeaker}
           </p>
 
-          {/* Content */}
-          <div className="text-base leading-relaxed text-gray-700 md:text-lg">
+          {/* Content — unificado y agrandado */}
+          <div className="text-lg leading-relaxed text-gray-700 md:text-[19px]">
             {hasLines && displayedText !== null && displayedText.length > 0 ? (
               <p className="m-0">
                 {displayedText}
@@ -330,38 +325,17 @@ export function DialogueBox({
             ) : null}
           </div>
 
-          {/* Progress + continue */}
+          {/* Progress + continue — unificado */}
           <div className="mt-1.5 flex items-center justify-between gap-2">
             {hasLines && (lines as string[]).length > 1 && !isLastLine ? (
-              <span className="font-mono text-xs tracking-wide text-storm">
+              <span className="font-mono text-[13px] tracking-wide text-storm">
                 {Math.min(lineIndex + 1, (lines as string[]).length)} / {(lines as string[]).length}
               </span>
             ) : (
               <span />
             )}
 
-            {hasLines && !isLastLine ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
-              >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
-              </span>
-            ) : hasLines && isLastLine && !(showContinueResolved && onNext) ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
-              >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar al siguiente paso
-              </span>
-            ) : showContinueResolved && onNext ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
-              >
-                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
-              </span>
-            ) : null}
+            {null}
           </div>
         </div>
       </div>

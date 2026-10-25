@@ -46,7 +46,7 @@ export function AnymotionControls({
       <button
         type="button"
         onClick={toggle}
-        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
+        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
         aria-label={isPlaying ? "Pausar animación" : "Reproducir animación"}
       >
         {isPlaying ? (
@@ -64,7 +64,7 @@ export function AnymotionControls({
       <button
         type="button"
         onClick={handleReplay}
-        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-xs font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
+        className="flex h-11 w-11 min-h-11 min-w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-sm font-semibold transition-colors hover:bg-mint/10 hover:text-mint"
         aria-label="Repetir desde el inicio"
       >
         <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +84,7 @@ export function AnymotionControls({
         aria-label={label}
       />
 
-      <span className="font-mono text-xs text-storm tabular-nums">
+      <span className="font-mono text-sm text-storm tabular-nums">
         {formatTime(time)} / {formatTime(duration)}
       </span>
     </div>
