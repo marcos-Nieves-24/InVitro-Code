@@ -7,8 +7,8 @@ El aprendizaje supervisado es el tipo de ML más común: tienes features (X) y e
 ## Lecciones
 
 | # | Lección | Tema principal |
-||||
-| L1 | Fundamentos de ML | Features, etiquetas, train/test, sobreajuste, sesgo varianza |
+|---|---------|---------------|
+| L1 | Fundamentos de ML | Features, etiquetas, train/test, sobreajuste, sesgo-varianza |
 | L2 | Regresión Lineal | OLS, descenso por gradiente, R², MSE, RMSE |
 | L3 | Clasificación | Regresión logística, matriz de confusión, ROC AUC |
 | L4 | Árboles de Decisión | Gini, entropía, poda, visualización |
@@ -17,9 +17,9 @@ El aprendizaje supervisado es el tipo de ML más común: tienes features (X) y e
 ## Temas complementarios
 
 - **Regularización:** Ridge (L2), Lasso (L1), Elastic Net
-- **SVM:** Kernels, margen, soft margin, one class SVM
-- **Feature Engineering:** Polynomial features, interaction terms, domain specific features
-- **Validación Cruzada:** K fold, stratified, leave one out
+- **SVM:** Kernels, margen, soft margin, one-class SVM
+- **Feature Engineering:** Polynomial features, interaction terms, domain-specific features
+- **Validación Cruzada:** K-fold, stratified, leave-one-out
 - **Hiperparámetros:** GridSearchCV, RandomizedSearchCV, Bayesian optimization
 
 ## Habilidades clave

@@ -29,7 +29,7 @@ d) Fuga de datos en el set de prueba
 
 <details><summary>Respuesta</summary>c) Sobreajuste</details>
 
-**Q4.** El tradeoff sesgo varianza establece que:
+**Q4.** El tradeoff sesgo-varianza establece que:
 
 a) Un sesgo alto siempre lleva a una varianza alta
 b) A medida que aumenta la complejidad del modelo, el sesgo tiende a disminuir y la varianza tiende a aumentar
@@ -55,7 +55,7 @@ d) Predecir si un paciente tiene una enfermedad
 
 **Q7.** Un colega te dice: "Mi modelo tiene R² = 0.95 en el set de entrenamiento, así que es excelente". ¿Por qué esto podría ser engañoso?
 
-<details><summary>Respuesta</summary>Un R² alto en entrenamiento no garantiza una buena generalización. El modelo podría estar sobreajustado   memorizando el ruido de los datos de entrenamiento en lugar de aprender patrones verdaderos. El R² del set de prueba es la medida confiable del rendimiento. El colega debería evaluar en un set de prueba reservado o usar validación cruzada.</details>
+<details><summary>Respuesta</summary>Un R² alto en entrenamiento no garantiza una buena generalización. El modelo podría estar sobreajustado — memorizando el ruido de los datos de entrenamiento en lugar de aprender patrones verdaderos. El R² del set de prueba es la medida confiable del rendimiento. El colega debería evaluar en un set de prueba reservado o usar validación cruzada.</details>
 
 ## Pregunta de código (1 pregunta)
 

@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 7: Reduccion de dimensionalidad con PCA
-# -
+# -------------------------------------------------------------------------
 # Aplicamos PCA al dataset iris: varianza explicada, proyeccion 2D y
 # analisis de las cargas de los componentes. Cada figura termina con
 # fig.show() para capturarla en la consola.
@@ -65,7 +65,7 @@ fig = px.imshow(cargas, text_auto=".2f", color_continuous_scale="RdBu_r",
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 6: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Los primeros 2 PCs explican la mayor parte de la varianza.")
 print("PC1 separa la especie setosa del resto; las cargas muestran que feature pesa mas.")
 ```

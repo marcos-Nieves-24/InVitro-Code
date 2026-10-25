@@ -28,7 +28,7 @@ Desarrollar intuición estadística para Machine Learning.
 - PCA, Varianza Explicada
 
 ### Clustering
-- K Means, Método del Codo, Puntuación de Silueta
+- K-Means, Método del Codo, Puntuación de Silueta
 
 ### Evaluación de Modelos
 - División Train/Test, Validación Cruzada, MAE, MSE, RMSE, R²

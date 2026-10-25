@@ -20,7 +20,7 @@ d) Para prevenir el sobreajuste de los árboles individuales
 
 <details><summary>Respuesta</summary>b) Para descorrelacionar los árboles. Si todos los árboles usaran el mismo mejor split, estarían altamente correlacionados y promediar no ayudaría mucho.</details>
 
-**Q3.** El out of bag (OOB) score se calcula usando:
+**Q3.** El out-of-bag (OOB) score se calcula usando:
 
 a) Los datos de entrenamiento
 b) Los datos de prueba
@@ -36,7 +36,7 @@ b) Más árboles siempre garantizan un mejor rendimiento
 c) El bosque aleatorio solo puede usarse para clasificación
 d) La importancia de características no está disponible
 
-<details><summary>Respuesta</summary>a) Aumentar n_estimators siempre aumenta el tiempo de entrenamiento de forma lineal. (b es falsa   los rendimientos decrecen; c es falsa   existe RandomForestRegressor; d es falsa   la importancia de características es un resultado clave)</details>
+<details><summary>Respuesta</summary>a) Aumentar n_estimators siempre aumenta el tiempo de entrenamiento de forma lineal. (b es falsa — los rendimientos decrecen; c es falsa — existe RandomForestRegressor; d es falsa — la importancia de características es un resultado clave)</details>
 
 **Q5.** Un bosque aleatorio normalmente tiene _____ sesgo y _____ varianza comparado con un único árbol de decisión.
 

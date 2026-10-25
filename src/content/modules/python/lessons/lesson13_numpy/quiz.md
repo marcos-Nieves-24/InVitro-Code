@@ -56,7 +56,7 @@
 
 **Q6:** Una vista es otra forma de acceder a los mismos datos subyacentes: modificar una vista modifica el original. Una copia es un array independiente con sus propios datos. El rebanado devuelve una vista; `.copy()` crea una copia. Usa `.copy()` cuando necesites modificar una rebanada de forma independiente.
 
-**Q7:** La vectorización significa aplicar una operación a un array completo de una vez en lugar de recorrer los elementos individuales en un bucle. Las operaciones de NumPy están implementadas en C y operan sobre bloques de memoria contiguos, lo que las hace 10 a 100 veces más rápidas que los bucles equivalentes en Python. NumPy también usa instrucciones SIMD en CPUs modernas para operaciones en paralelo.
+**Q7:** La vectorización significa aplicar una operación a un array completo de una vez en lugar de recorrer los elementos individuales en un bucle. Las operaciones de NumPy están implementadas en C y operan sobre bloques de memoria contiguos, lo que las hace 10-100 veces más rápidas que los bucles equivalentes en Python. NumPy también usa instrucciones SIMD en CPUs modernas para operaciones en paralelo.
 
 **Q8:**
 ```python

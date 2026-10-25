@@ -1,25 +1,25 @@
-
+---
 Module: 4
 Lesson Number: 1
 Lesson Title: Fundamentos de ML
 Estimated Duration: 75 minutos
 Prerequisites: Módulo 3 (Estadística para Aprendizaje Automático)
 Learning Objectives:
-  Explicar qué es el Aprendizaje Automático y cómo difiere de la programación tradicional
-  Definir características, etiquetas, entrenamiento y predicción
-  Distinguir entre aprendizaje supervisado y no supervisado
-  Diagnosticar sobreajuste y subajuste a partir de curvas de aprendizaje
-  Explicar la compensación sesgo varianza con ejemplos
-Keywords: aprendizaje supervisado, aprendizaje no supervisado, características, etiquetas, sobreajuste, subajuste, compensación sesgo varianza, generalización
+  - Explicar qué es el Aprendizaje Automático y cómo difiere de la programación tradicional
+  - Definir características, etiquetas, entrenamiento y predicción
+  - Distinguir entre aprendizaje supervisado y no supervisado
+  - Diagnosticar sobreajuste y subajuste a partir de curvas de aprendizaje
+  - Explicar la compensación sesgo-varianza con ejemplos
+Keywords: aprendizaje supervisado, aprendizaje no supervisado, características, etiquetas, sobreajuste, subajuste, compensación sesgo-varianza, generalización
 Difficulty: Principiante
 Programming Concepts: train_test_split, model.fit, model.predict
 Mathematical Concepts: varianza, sesgo, error cuadrático medio
 Machine Learning Concepts: conjunto de entrenamiento, conjunto de prueba, generalización, sobreajuste, subajuste
-Datasets Used: scikit learn diabetes, sinusoidal sintético
+Datasets Used: scikit-learn diabetes, sinusoidal sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Fundamentos de ML
 
@@ -38,15 +38,15 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 El ML aprende reglas a partir de ejemplos etiquetados, no de instrucciones explícitas; su objetivo es generalizar a casos nuevos.
 </ConceptCard>
 
 <ChoiceQuestion
   question="Si le mostráramos mil fotos de lunares benignos y malignos al programa, ¿qué esperas que aprenda?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="choice ml l01 s1 a 1"
+  blockId="choice-ml-l01-s1-1"
   allowContinueOnIncorrect
   explanation="El modelo no memoriza nombres: aprende patrones que distinguen las clases y luego generaliza a lunares nuevos."
   options={[
@@ -76,7 +76,7 @@ El ML aprende reglas a partir de ejemplos etiquetados, no de instrucciones expl�
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Antes de lanzarte a implementar algoritmos, necesitas entender los fundamentos: ¿qué significa que un modelo "aprenda"? ¿Cómo sabes si aprendió bien? ¿Por qué un modelo perfecto en entrenamiento puede fallar estrepitosamente en producción?
 </ConceptCard>
 
@@ -95,13 +95,13 @@ Antes de lanzarte a implementar algoritmos, necesitas entender los fundamentos: 
   lines={[
     "¿Cáncer o infección? Algunas decisiones son números, otras son categorías.",
     "La programación tradicional te obliga a escribir cada regla a mano.",
-    "El ML invierte el flujo: datos + respuestas  reglas aprendidas.",
+    "El ML invierte el flujo: datos + respuestas → reglas aprendidas.",
     "Le damos ejemplos y la computadora descubre el patrón subyacente.",
   ]}
 />
 
-{/* candidate player: comparison tradicional vs ml */}
-<ConceptCard variant="key idea">
+{/* candidate-player: comparison-tradicional-vs-ml */}
+<ConceptCard variant="key-idea">
 **Programación tradicional vs Aprendizaje Automático**
 - Enfoque: tradicional = reglas + datos; ML = datos + respuestas.
 - Entrada: reglas + datos vs datos + respuestas.
@@ -146,14 +146,14 @@ Regla de oro: el modelo solo puede aprender de los datos que ve durante el entre
 
 <RevealSequence mode="appear">
 
-{/* candidate player: comparison supervisado vs nosupervisado */}
-<ConceptCard variant="key idea">
+{/* candidate-player: comparison-supervisado-vs-nosupervisado */}
+<ConceptCard variant="key-idea">
 **Aprendizaje supervisado vs no supervisado**
 - Datos de entrenamiento: tienen etiquetas (sabemos la respuesta correcta) vs sin etiquetas (solo características).
 - Objetivo: predecir etiquetas para datos nuevos vs encontrar estructura oculta.
 - Ejemplos: regresión y clasificación vs clustering y PCA.
 - Analogía: un profesor que corrige vs explorar una biblioteca sin catálogo.
-- En este módulo: Lecciones 1 a 5 y 8 vs Lecciones 6 y 7.
+- En este módulo: Lecciones 1-5 y 8 vs Lecciones 6 y 7.
 </ConceptCard>
 
 </RevealSequence>
@@ -164,8 +164,8 @@ Regla de oro: el modelo solo puede aprender de los datos que ve durante el entre
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
-La **generalización** es la capacidad del modelo de funcionar bien con datos *que nunca vio*. Este es el verdadero objetivo del ML   no memorizar los datos de entrenamiento, sino aprender patrones que se transfieran a situaciones nuevas.
+<ConceptCard variant="key-idea">
+La **generalización** es la capacidad del modelo de funcionar bien con datos *que nunca vio*. Este es el verdadero objetivo del ML — no memorizar los datos de entrenamiento, sino aprender patrones que se transfieran a situaciones nuevas.
 </ConceptCard>
 
 <DialogueBox
@@ -191,20 +191,20 @@ La división train/test es la herramienta más básica para medir generalizació
 
 <RevealSequence mode="appear">
 
-{/* candidate player: comparison sobreajuste vs subajuste */}
-<ConceptCard variant="key idea">
+{/* candidate-player: comparison-sobreajuste-vs-subajuste */}
+<ConceptCard variant="key-idea">
 **Sobreajuste vs subajuste**
-- Sobreajuste: el modelo memoriza entrenamiento, incluyendo ruido  train ≈100%, test mucho más bajo.
-- Subajuste: el modelo es demasiado simple  train y test bajos.
+- Sobreajuste: el modelo memoriza entrenamiento, incluyendo ruido → train ≈100%, test mucho más bajo.
+- Subajuste: el modelo es demasiado simple → train y test bajos.
 - Causa típica: modelo complejo (sobreajuste) vs modelo simple o falta de features (subajuste).
 - Analogía: memorizar cada palabra sin aplicar vs solo leer el título del capítulo.
 </ConceptCard>
 
 <ChoiceQuestion
   question="Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando y qué harías para solucionarlo?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="reflection l01 overfit underfit"
+  blockId="reflection-l01-overfit-underfit"
   allowContinueOnIncorrect
   explanation="Es sobreajuste (train 99% vs test 65%): el modelo memorizó entrenamiento y no generaliza. Probar: (1) simplificar (reducir complejidad), (2) más datos de entrenamiento, (3) regularización."
   options={[
@@ -219,7 +219,7 @@ La división train/test es la herramienta más básica para medir generalizació
 
 </Section>
 
-<Section number={8} title="La compensación sesgo varianza" eyebrow="MATEMÁTICA">
+<Section number={8} title="La compensación sesgo-varianza" eyebrow="MATEMÁTICA">
 
 <RevealSequence mode="appear">
 
@@ -237,15 +237,15 @@ La división train/test es la herramienta más básica para medir generalizació
 $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
 
 <ConceptCard variant="definition">
-**Sesgo:** Error por suposiciones demasiado simplificadoras. Sesgo alto  subajuste. Es como disparar consistentemente lejos del blanco.
+**Sesgo:** Error por suposiciones demasiado simplificadoras. Sesgo alto → subajuste. Es como disparar consistentemente lejos del blanco.
 
-**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos. Varianza alta  sobreajuste. Es como disparar por todos lados sin consistencia.
+**Varianza:** Error por sensibilidad a pequeñas fluctuaciones en los datos. Varianza alta → sobreajuste. Es como disparar por todos lados sin consistencia.
 
 **Error irreducible:** Ruido inherente al problema que ningún modelo puede eliminar.
 </ConceptCard>
 
-<ConceptCard variant="key idea">
-**La compensación:** A medida que aumentas la complejidad del modelo, el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo   existe el modelo adecuado para tu problema.
+<ConceptCard variant="key-idea">
+**La compensación:** A medida que aumentas la complejidad del modelo, el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio. No existe un modelo perfecto para todo — existe el modelo adecuado para tu problema.
 </ConceptCard>
 
 </RevealSequence>
@@ -261,7 +261,7 @@ $$\text{Error} = \text{Sesgo}^2 + \text{Varianza} + \text{Error irreducible}$$
   variant="scientist"
   typing={true}
   lines={[
-    "Verás la compensación sesgo varianza en acción.",
+    "Verás la compensación sesgo-varianza en acción.",
     "Grado 1 subajusta, grado 4 ajusta bien, grado 15 sobreajusta.",
     "Ejecuta el código en tu notebook y compara los tres paneles.",
   ]}
@@ -332,7 +332,7 @@ Ejecuta este código en tu notebook. Vas a ver tres paneles:
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 El pipeline mínimo de ML tiene tres pasos: dividir los datos, entrenar el modelo, y evaluar con datos que el modelo nunca vio. Esto se repite en absolutamente todos los algoritmos del curso.
 </ConceptCard>
 
@@ -379,7 +379,7 @@ Si el R² de entrenamiento es mucho mayor que el de prueba, tu modelo está sobr
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es el puente entre el laboratorio húmedo y la medicina personalizada.
 </ConceptCard>
 
@@ -395,7 +395,7 @@ En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es 
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Caso biotecnología: expresión génica**
 - Características (X): niveles de expresión de 1000 genes.
 - Etiqueta (y): respondedor (1) o no respondedor (0).
@@ -420,7 +420,7 @@ En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es 
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Caso SaaS: predicción de abandono**
 - Características: frecuencia de inicio de sesión, tickets de soporte abiertos, días desde último login, tipo de plan, cantidad de features usadas.
 - Etiqueta: abandonó (1) o no (0).
@@ -429,9 +429,9 @@ En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es 
 
 <ChoiceQuestion
   question="En el caso de SaaS, ¿por qué es importante predecir el abandono *antes* de que ocurra en lugar de simplemente registrar quién abandonó?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="reflection l01 saas churn"
+  blockId="reflection-l01-saas-churn"
   allowContinueOnIncorrect
   explanation="Predecir antes permite actuar (descuento, onboarding personalizado, contacto), convirtiendo un problema reactivo en proactivo. Si sólo registras quién abandonó, ya es tarde, ese cliente se fue."
   options={[
@@ -453,9 +453,9 @@ En biotecnología, el ML conecta datos moleculares con resultados clínicos. Es 
 <CalloutInfo>
 1. **Entrenar con todos los datos y después dividir.** Haces trampa sin darte cuenta: el modelo ya "vio" los datos de prueba durante el preprocesamiento. Siempre divide primero.
 
-2. **Usar el conjunto de prueba para ajustar hiperparámetros.** El conjunto de prueba es sagrado   solo se toca una vez al final. Para ajustar parámetros usa validación cruzada sobre el conjunto de entrenamiento.
+2. **Usar el conjunto de prueba para ajustar hiperparámetros.** El conjunto de prueba es sagrado — solo se toca una vez al final. Para ajustar parámetros usa validación cruzada sobre el conjunto de entrenamiento.
 
-3. **Asumir que precisión de entrenamiento alta = buen modelo.** Si tu modelo tiene 99% en train y 65% en test, no es bueno   está sobreajustado. La métrica que importa es la de test.
+3. **Asumir que precisión de entrenamiento alta = buen modelo.** Si tu modelo tiene 99% en train y 65% en test, no es bueno — está sobreajustado. La métrica que importa es la de test.
 
 4. **Confundir correlación con causalidad.** Que las ventas de helado y los ahogamientos aumenten juntos no significa que el helado cause ahogamientos. El ML encuentra patrones, no causas. La interpretación causal requiere expertise de dominio.
 </CalloutInfo>
@@ -488,12 +488,12 @@ Grafica curvas de aprendizaje para diagnosticar si necesitas más datos o un mod
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
-El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. Las características (X) son entradas; las etiquetas (y) son salidas. El objetivo no es memorizar   es **generalizar** a datos nunca vistos. El sobreajuste y el subajuste son los dos enemigos, y la compensación sesgo varianza explica por qué no existe un modelo perfecto universal.
+<ConceptCard variant="key-idea">
+El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. Las características (X) son entradas; las etiquetas (y) son salidas. El objetivo no es memorizar — es **generalizar** a datos nunca vistos. El sobreajuste y el subajuste son los dos enemigos, y la compensación sesgo-varianza explica por qué no existe un modelo perfecto universal.
 </ConceptCard>
 
-{/* candidate player: interactive table glosario fundamentos */}
-<ConceptCard variant="key idea">
+{/* candidate-player: interactive-table-glosario-fundamentos */}
+<ConceptCard variant="key-idea">
 **Glosario**
 - Característica: variable de entrada usada para la predicción.
 - Etiqueta: variable de salida a predecir.
@@ -508,34 +508,34 @@ El ML aprende patrones a partir de datos en lugar de seguir reglas explícitas. 
 
 <FeatureButtonList
   features={[
-    { id: "aprendizaje supervisado", label: "Aprendizaje supervisado", detail: "Aprende de datos etiquetados para predecir etiquetas nuevas." },
-    { id: "aprendizaje no supervisado", label: "Aprendizaje no supervisado", detail: "Descubre estructura oculta sin etiquetas." },
+    { id: "aprendizaje-supervisado", label: "Aprendizaje supervisado", detail: "Aprende de datos etiquetados para predecir etiquetas nuevas." },
+    { id: "aprendizaje-no-supervisado", label: "Aprendizaje no supervisado", detail: "Descubre estructura oculta sin etiquetas." },
     { id: "caracteristica", label: "Característica (X)", detail: "Variable de entrada que el modelo usa para predecir." },
     { id: "etiqueta", label: "Etiqueta (y)", detail: "Variable de salida que queremos predecir." },
     { id: "generalizacion", label: "Generalización", detail: "Desempeño del modelo en datos que nunca vio." },
-    { id: "sobreajuste subajuste", label: "Sobreajuste y subajuste", detail: "Memorizar ruido vs modelo demasiado simple." },
+    { id: "sobreajuste-subajuste", label: "Sobreajuste y subajuste", detail: "Memorizar ruido vs modelo demasiado simple." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss caracteristica", label: "Característica", detail: "Variable de entrada usada para la predicción." },
-    { id: "gloss etiqueta", label: "Etiqueta", detail: "Variable de salida a predecir." },
-    { id: "gloss entrenamiento", label: "Entrenamiento", detail: "Proceso de ajustar un modelo a los datos." },
-    { id: "gloss prediccion", label: "Predicción", detail: "Salida del modelo con datos nuevos." },
-    { id: "gloss generalizacion", label: "Generalización", detail: "Rendimiento en datos no vistos." },
-    { id: "gloss sobreajuste", label: "Sobreajuste", detail: "El modelo memoriza ruido del entrenamiento." },
-    { id: "gloss subajuste", label: "Subajuste", detail: "Modelo demasiado simple para el patrón." },
+    { id: "gloss-caracteristica", label: "Característica", detail: "Variable de entrada usada para la predicción." },
+    { id: "gloss-etiqueta", label: "Etiqueta", detail: "Variable de salida a predecir." },
+    { id: "gloss-entrenamiento", label: "Entrenamiento", detail: "Proceso de ajustar un modelo a los datos." },
+    { id: "gloss-prediccion", label: "Predicción", detail: "Salida del modelo con datos nuevos." },
+    { id: "gloss-generalizacion", label: "Generalización", detail: "Rendimiento en datos no vistos." },
+    { id: "gloss-sobreajuste", label: "Sobreajuste", detail: "El modelo memoriza ruido del entrenamiento." },
+    { id: "gloss-subajuste", label: "Subajuste", detail: "Modelo demasiado simple para el patrón." },
   ]}
 />
 
 <ChoiceQuestion
   question="A medida que aumentas la complejidad de un modelo, ¿qué ocurre con el sesgo y la varianza?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="choice ml l01 resumen 1"
+  blockId="choice-ml-l01-resumen-1"
   allowContinueOnIncorrect
-  explanation="La compensación sesgo varianza dice que al aumentar la complejidad el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio para el problema."
+  explanation="La compensación sesgo-varianza dice que al aumentar la complejidad el sesgo baja (capturas más patrones) pero la varianza sube (empiezas a capturar ruido). El modelo óptimo encuentra el equilibrio para el problema."
   options={[
     { id: "a", label: "El sesgo baja y la varianza sube", correct: true, feedback: "¡Correcto! Esa es la compensación: menos sesgo, más varianza." },
     { id: "b", label: "El sesgo sube y la varianza baja", correct: false, feedback: "Falso: es el efecto opuesto al aumentar la complejidad." },
@@ -557,10 +557,10 @@ Dominaste los fundamentos del aprendizaje automático. Ahora cualquier modelo es
 <RevealSequence mode="appear">
 
 <ChoiceQuestion
-  question="Nivel 1   Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
-  moduleSlug="machine learning"
+  question="Nivel 1 — Explica con tus palabras la diferencia entre la programación tradicional y el Aprendizaje Automático. ¿En qué situaciones usarías cada una?"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="reflection l01 trad vs ml"
+  blockId="reflection-l01-trad-vs-ml"
   allowContinueOnIncorrect
   explanation="Programación tradicional = escribo reglas explícitas; ML = le doy ejemplos etiquetados y aprende las reglas. Tradicional para reglas claras y estables; ML para reglas difíciles de expresar (imágenes, abandono, diagnóstico)."
   options={[
@@ -572,10 +572,10 @@ Dominaste los fundamentos del aprendizaje automático. Ahora cualquier modelo es
 />
 
 <ChoiceQuestion
-  question="Nivel 3   Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
-  moduleSlug="machine learning"
+  question="Nivel 3 — Entrenas un modelo y obtienes precisión en entrenamiento = 99% y precisión en prueba = 65%. ¿Qué está pasando probablemente? ¿Qué tres cosas probarías para solucionarlo?"
+  moduleSlug="machine-learning"
   lessonSlug="lesson01_ml_fundamentals"
-  blockId="reflection l01 overfit diagnosis"
+  blockId="reflection-l01-overfit-diagnosis"
   allowContinueOnIncorrect
   explanation="Es sobreajuste (train 99%, test 65%): memorizó entrenamiento y no generaliza. Soluciones: (1) simplificar el modelo (menos complejidad/features, regularización), (2) más datos de entrenamiento, (3) validación cruzada y early stopping."
   options={[
@@ -586,7 +586,7 @@ Dominaste los fundamentos del aprendizaje automático. Ahora cualquier modelo es
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Desafío de programación:** Escribe una función `diagnose_fit` que detecte sobreajuste. Ejecuta tu código con Shift+Enter.
 </ConceptCard>
 
@@ -599,7 +599,7 @@ import numpy as np
 def diagnose_fit(model, X_train, X_test, y_train, y_test):
     train_score = model.score(X_train, y_train)
     test_score = model.score(X_test, y_test)
-    gap = train_score test_score
+    gap = train_score - test_score
     
     if gap > 0.15:
         return "SOBREAJUSTE"

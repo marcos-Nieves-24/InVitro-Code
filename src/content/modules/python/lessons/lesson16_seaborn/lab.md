@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 16: Visualizacion estadistica con Plotly
-# -
+# -------------------------------------------------------------------------
 # El laboratorio original usaba bibliotecas de graficos estaticos; aqui
 # reescribimos las mismas visualizaciones estadisticas con Plotly sobre el
 # dataset "tips" (propinas de un restaurante), incluido en plotly.express:
@@ -76,7 +76,7 @@ fig.update_layout(legend=dict(orientation="h", y=1.1))
 fig.show()
 
 # PASO 7: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Box plot y violin para comparar distribuciones por dia y sexo.")
 print("Matriz de dispersion y mapa de calor de correlaciones.")
 print("Graficos interactivos de Plotly en lugar de Seaborn/Matplotlib.")

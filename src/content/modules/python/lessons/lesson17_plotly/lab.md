@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 17: Visualizacion interactiva con Plotly
-# -
+# -------------------------------------------------------------------------
 # Repasamos Plotly Express (codigo breve), Graph Objects (control total),
 # los subplots con make_subplots y la interactividad (menus y rangos).
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -21,7 +21,7 @@ fig.show()
 # Grafico de lineas: la esperanza de vida de Argentina a lo largo del tiempo.
 df = px.data.gapminder()
 fig = px.line(df[df.country == "Argentina"], x="year", y="lifeExp",
-              title="Esperanza de vida Argentina",
+              title="Esperanza de vida - Argentina",
               labels={"year": "Ano", "lifeExp": "Esperanza de vida"})
 fig.show()
 
@@ -99,7 +99,7 @@ fig.update_layout(height=600, width=900, title_text="Panel de graficos 2x2",
                   showlegend=False)
 fig.show()
 
-# PASO 6: Tarea resuelta subplots 1x3 con tips.
+# PASO 6: Tarea resuelta - subplots 1x3 con tips.
 # La tarea pedía una disposicion de una fila y tres columnas con scatter,
 # barras y box plot sobre el dataset tips.
 tips = px.data.tips()
@@ -118,7 +118,7 @@ fig.update_layout(title_text="Analisis de propinas (1x3)", showlegend=False,
                   xaxis_title="Total", yaxis_title="Propina")
 fig.show()
 
-# PASO 7: Interactividad menu desplegable y rango deslizante.
+# PASO 7: Interactividad - menu desplegable y rango deslizante.
 # Creamos un scatter logaritmico de Gapminder 2007 y agregamos un menu
 # para alternar la escala del eje x (log / lineal).
 df = px.data.gapminder().query("year == 2007")
@@ -136,19 +136,19 @@ fig.update_layout(
         direction="down")])
 fig.show()
 
-# PASO 8: Tarea resuelta linea con range slider.
+# PASO 8: Tarea resuelta - linea con range slider.
 # Line chart del PBI de Espana a lo largo del tiempo con un rango
 # deslizante (rangeslider) en el eje x para explorar los datos.
 df = px.data.gapminder()
 pais = "Spain"
 fig = px.line(df[df.country == pais], x="year", y="gdpPercap",
-              title=f"PBI per capita {pais}",
+              title=f"PBI per capita - {pais}",
               labels={"year": "Ano", "gdpPercap": "PBI per capita"})
 fig.update_layout(xaxis=dict(rangeslider=dict(visible=True)))
 fig.show()
 
 # PASO 9: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Plotly Express genera figuras con una linea sobre un DataFrame.")
 print("Graph Objects permite control total de cada traza y del layout.")
 print("make_subplots combina varios paneles y agregamos interactividad.")

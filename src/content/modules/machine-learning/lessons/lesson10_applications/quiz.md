@@ -2,7 +2,7 @@
 
 ## Opción múltiple (5 preguntas)
 
-**Q1.** ¿Cuál es el principal beneficio de usar un Pipeline en scikit learn?
+**Q1.** ¿Cuál es el principal beneficio de usar un Pipeline en scikit-learn?
 
 a) Entrena los modelos más rápido
 b) Encadena el preprocesamiento y el modelado en un único objeto reproducible

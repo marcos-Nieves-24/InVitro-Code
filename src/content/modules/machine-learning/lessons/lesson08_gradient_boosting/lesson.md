@@ -1,15 +1,15 @@
-
+---
 Module: 4
 Lesson Number: 8
 Lesson Title: Gradient Boosting
 Estimated Duration: 90 minutos
 Prerequisites: L4 (Árboles de Decisión), L5 (Bosque Aleatorio)
 Learning Objectives:
-  Explicar el paradigma de boosting y cómo difiere del bagging
-  Describir el algoritmo de Gradient Boosting
-  Entrenar modelos de Gradient Boosting con scikit learn
-  "Ajustar hiperparámetros: learning_rate, n_estimators, max_depth"
-  Describir cómo XGBoost y LightGBM mejoran el gradient boosting básico
+  - Explicar el paradigma de boosting y cómo difiere del bagging
+  - Describir el algoritmo de Gradient Boosting
+  - Entrenar modelos de Gradient Boosting con scikit-learn
+  - "Ajustar hiperparámetros: learning_rate, n_estimators, max_depth"
+  - Describir cómo XGBoost y LightGBM mejoran el gradient boosting básico
 Keywords: boosting, gradient boosting, XGBoost, LightGBM, tasa de aprendizaje, modelo aditivo, residual
 Difficulty: Avanzado
 Programming Concepts: sklearn.ensemble.GradientBoostingClassifier, learning_rate, early_stopping
@@ -19,7 +19,7 @@ Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 <Section number={1} title="Aprender de los errores, uno por uno" eyebrow="INICIO">
 
@@ -36,7 +36,7 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Boosting (secuencial) vs Bagging (paralelo)**
 - Paradigma: bagging paralelo vs boosting secuencial
 - Árboles: independientes, profundos, alta varianza vs dependientes, shallow, alta precisión incremental
@@ -44,8 +44,8 @@ Quiz: quiz.md
 - Riesgo: sobreajuste por árboles profundos vs sobreajuste si learning_rate muy alto o demasiados árboles
 </ConceptCard>
 
-{/* candidate player: comparison bagging vs boosting */}
-<ConceptCard variant="key idea">
+{/* candidate-player: comparison-bagging-vs-boosting */}
+<ConceptCard variant="key-idea">
 Gradient Boosting entrena árboles en **serie**: cada árbol nuevo se enfoca en corregir los errores del anterior. Es como un estudiante que después de cada examen revisa qué preguntas falló y estudia específicamente eso.
 </ConceptCard>
 
@@ -69,18 +69,18 @@ Gradient Boosting entrena árboles en **serie**: cada árbol nuevo se enfoca en 
 />
 
 <ConceptCard variant="definition">
-Cada nuevo árbol no predice la variable objetivo directamente   predice los **residuales** (errores) del ensemble actual. Luego se suma al ensemble con un peso controlado por la **tasa de aprendizaje** (learning rate).
+Cada nuevo árbol no predice la variable objetivo directamente — predice los **residuales** (errores) del ensemble actual. Luego se suma al ensemble con un peso controlado por la **tasa de aprendizaje** (learning rate).
 
 **Flujo del algoritmo**
 - Empieza con una predicción constante (el promedio)
 - Calcula los residuales (error = real − predicción actual)
 - Entrena un árbol para predecir esos residuales
 - Actualiza: nueva predicción = predicción anterior + learning_rate × predicción del árbol
-- Repite 2 a 4 para n_estimators árboles
+- Repite 2-4 para n_estimators árboles
 </ConceptCard>
 
 <CalloutInfo>
-El **learning rate** (típicamente 0.01 0.1) es el hiperparámetro más importante. Controla cuánto contribuye cada árbol. LR bajo + muchos árboles = mejor generalización pero más lento. LR alto + pocos árboles = rápido pero riesgo de sobreajuste.
+El **learning rate** (típicamente 0.01–0.1) es el hiperparámetro más importante. Controla cuánto contribuye cada árbol. LR bajo + muchos árboles = mejor generalización pero más lento. LR alto + pocos árboles = rápido pero riesgo de sobreajuste.
 </CalloutInfo>
 
 </RevealSequence>
@@ -102,12 +102,12 @@ El **learning rate** (típicamente 0.01 0.1) es el hiperparámetro más importan
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **n_estimators:** Cuántos árboles. Más = mejor (hasta cierto punto). Con early stopping, dejas que crezca y paras cuando la validación deja de mejorar.
 
-**learning_rate:** Cuánto aporta cada árbol (0.01 0.3). Valores bajos necesitan más árboles pero generalizan mejor. Es la perilla fina del modelo.
+**learning_rate:** Cuánto aporta cada árbol (0.01–0.3). Valores bajos necesitan más árboles pero generalizan mejor. Es la perilla fina del modelo.
 
-**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3 5, mucho menor que en un Random Forest. Árboles shallow = aprendices débiles, que es justo lo que quieres.
+**max_depth:** Profundidad de cada árbol. En boosting, típicamente 3–5, mucho menor que en un Random Forest. Árboles shallow = aprendices débiles, que es justo lo que quieres.
 </ConceptCard>
 
 <CalloutCheck>
@@ -116,16 +116,16 @@ En la práctica: learning_rate=0.1, max_depth=3, y n_estimators con early stoppi
 
 <ChoiceQuestion
   question="Estás eligiendo el learning_rate. ¿Qué combinación ofrece la mejor generalización y con qué contraparte?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson08_gradient_boosting"
-  blockId="choice ml l08 e2 a 1"
+  blockId="choice-ml-l08-e2-1"
   allowContinueOnIncorrect
-  explanation="Un learning_rate bajo (por ejemplo 0.01 0.05) reduce la contribución de cada árbol y requiere más árboles, pero generaliza mejor; aceleras con early stopping. Un LR alto entrena rápido pero sobreajusta más fácil."
+  explanation="Un learning_rate bajo (por ejemplo 0.01–0.05) reduce la contribución de cada árbol y requiere más árboles, pero generaliza mejor; aceleras con early stopping. Un LR alto entrena rápido pero sobreajusta más fácil."
   options={[
     { id: "a", label: "Learning_rate bajo + muchos árboles con early stopping", correct: true, feedback: "¡Correcto! Más árboles de aportes pequeños generalizan mejor." },
     { id: "b", label: "Learning_rate alto + pocos árboles para velocidad", correct: false, feedback: "Falso: rápido pero más riesgo de sobreajuste." },
     { id: "c", label: "El learning_rate no afecta la generalización", correct: false, feedback: "Falso: es el hiperparámetro más importante del boosting." },
-    { id: "d", label: "Usar max_depth alto compensa un learning_rate bajo", correct: false, feedback: "Falso: en boosting conviene árboles shallow (3 5)." },
+    { id: "d", label: "Usar max_depth alto compensa un learning_rate bajo", correct: false, feedback: "Falso: en boosting conviene árboles shallow (3–5)." },
   ]}
 />
 
@@ -144,20 +144,20 @@ En la práctica: learning_rate=0.1, max_depth=3, y n_estimators con early stoppi
   lines={[
     "sklearn es la versión académica; en producción se usan implementaciones optimizadas.",
     "XGBoost añade regularización y manejo de nulos; LightGBM entrena con histogramas.",
-    "CatBoost maneja variables categóricas sin one hot encoding.",
+    "CatBoost maneja variables categóricas sin one-hot encoding.",
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Implementaciones optimizadas**
 - XGBoost: regularización L1/L2 incorporada, manejo de valores nulos, paralelización por feature. El estándar de facto en competencias.
 - LightGBM: entrena con histogramas (no ordena todos los datos), crece por hoja (no por nivel). Más rápido y menos memoria que XGBoost en datasets grandes.
-- CatBoost: maneja variables categóricas nativamente sin one hot encoding. Bueno cuando tienes muchas features categóricas.
+- CatBoost: maneja variables categóricas nativamente sin one-hot encoding. Bueno cuando tienes muchas features categóricas.
 </ConceptCard>
 
-{/* candidate player: comparison boosting implementations */}
+{/* candidate-player: comparison-boosting-implementations */}
 <CalloutInfo>
-Para datasets menores a 10,000 filas, sklearn GradientBoosting es suficiente. Para datasets más grandes o competitivos, XGBoost o LightGBM. La diferencia en accuracy suele ser pequeña (1 a 3%), pero en tiempo de entrenamiento puede ser 10x.
+Para datasets menores a 10,000 filas, sklearn GradientBoosting es suficiente. Para datasets más grandes o competitivos, XGBoost o LightGBM. La diferencia en accuracy suele ser pequeña (1-3%), pero en tiempo de entrenamiento puede ser 10x.
 </CalloutInfo>
 
 </RevealSequence>
@@ -207,7 +207,7 @@ test_scores = [accuracy_score(y_test, y_pred)
 plt.plot(train_scores, label='Train')
 plt.plot(test_scores, label='Test')
 plt.xlabel('N° de árboles'); plt.ylabel('Accuracy')
-plt.legend(); plt.title('Curvas de aprendizaje   Gradient Boosting')
+plt.legend(); plt.title('Curvas de aprendizaje — Gradient Boosting')
 plt.show()
 ```
 
@@ -230,38 +230,38 @@ plt.show()
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Gradient Boosting entrena árboles secuencialmente, cada uno corrigiendo los errores del anterior. Learning rate bajo + early stopping es la receta para la mejor generalización. XGBoost/LightGBM son las implementaciones de producción. Es el algoritmo dominante en datos tabulares.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
     { id: "boosting", label: "Boosting", detail: "Entrenar árboles en serie, cada uno corrigiendo los errores del anterior." },
-    { id: "learning rate", label: "Learning rate", detail: "Peso de cada árbol; típicamente entre 0.01 y 0.1." },
+    { id: "learning-rate", label: "Learning rate", detail: "Peso de cada árbol; típicamente entre 0.01 y 0.1." },
     { id: "residuales", label: "Residuales", detail: "Errores del ensemble actual que el siguiente árbol predice." },
-    { id: "early stopping", label: "Early stopping", detail: "Parar cuando la validación deja de mejorar." },
-    { id: "max depth", label: "max_depth", detail: "Profundidad shallow (3 5) para aprendices débiles." },
-    { id: "xgboost lightgbm", label: "XGBoost / LightGBM", detail: "Implementaciones optimizadas para producción." },
+    { id: "early-stopping", label: "Early stopping", detail: "Parar cuando la validación deja de mejorar." },
+    { id: "max-depth", label: "max_depth", detail: "Profundidad shallow (3–5) para aprendices débiles." },
+    { id: "xgboost-lightgbm", label: "XGBoost / LightGBM", detail: "Implementaciones optimizadas para producción." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss boosting", label: "Boosting", detail: "Ensemble secuencial que corrige errores." },
-    { id: "gloss learning rate", label: "Learning rate", detail: "Tasa de aprendizaje del boosting." },
-    { id: "gloss residual", label: "Residual", detail: "Diferencia entre valor real y predicción actual." },
-    { id: "gloss early stopping", label: "Early stopping", detail: "Criterio de parada anticipada." },
-    { id: "gloss aditivo", label: "Modelo aditivo", detail: "Modelo que suma contribuciones de árboles." },
-    { id: "gloss xgboost", label: "XGBoost", detail: "Implementación optimizada con regularización." },
-    { id: "gloss lightgbm", label: "LightGBM", detail: "Boosting basado en histogramas, rápido y eficiente." },
+    { id: "gloss-boosting", label: "Boosting", detail: "Ensemble secuencial que corrige errores." },
+    { id: "gloss-learning-rate", label: "Learning rate", detail: "Tasa de aprendizaje del boosting." },
+    { id: "gloss-residual", label: "Residual", detail: "Diferencia entre valor real y predicción actual." },
+    { id: "gloss-early-stopping", label: "Early stopping", detail: "Criterio de parada anticipada." },
+    { id: "gloss-aditivo", label: "Modelo aditivo", detail: "Modelo que suma contribuciones de árboles." },
+    { id: "gloss-xgboost", label: "XGBoost", detail: "Implementación optimizada con regularización." },
+    { id: "gloss-lightgbm", label: "LightGBM", detail: "Boosting basado en histogramas, rápido y eficiente." },
   ]}
 />
 
 <ChoiceQuestion
   question="En Gradient Boosting, ¿qué predice cada nuevo árbol?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson08_gradient_boosting"
-  blockId="choice ml l08 resumen 1"
+  blockId="choice-ml-l08-resumen-1"
   allowContinueOnIncorrect
   explanation="Cada árbol nuevo no predice la variable objetivo directamente: predice los residuales (errores) del ensemble actual, y su aporte se suma ponderado por el learning rate."
   options={[
@@ -295,7 +295,7 @@ Gradient Boosting dominado. Ya puedes entrenar modelos que aprenden de sus error
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Desafío:** Compara GB vs Random Forest y analiza el efecto del learning rate.
 </ConceptCard>
 

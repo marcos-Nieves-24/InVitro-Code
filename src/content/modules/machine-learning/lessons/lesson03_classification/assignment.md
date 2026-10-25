@@ -13,7 +13,7 @@ Trabajas en una **startup de healthtech** que desarrolló un análisis de sangre
 
 ## Dataset
 
-Usa `load_breast_cancer()` de scikit learn. Trata malignant = positivo (enfermedad presente), benign = negativo.
+Usa `load_breast_cancer()` de scikit-learn. Trata malignant = positivo (enfermedad presente), benign = negativo.
 
 ## Instrucciones
 
@@ -21,11 +21,11 @@ Usa `load_breast_cancer()` de scikit learn. Trata malignant = positivo (enfermed
 2. **Entrena** una regresión logística (configuración por defecto)
 3. **Evalúa** usando todas las métricas en el set de validación
 4. **Encuentra el umbral óptimo** para dos escenarios:
-   Escenario A: Perderse un caso cuesta 50× más que una falsa alarma
-   Escenario B: Las falsas alarmas cuestan 10× más que perderse un caso
+   - Escenario A: Perderse un caso cuesta 50× más que una falsa alarma
+   - Escenario B: Las falsas alarmas cuestan 10× más que perderse un caso
 5. **Evaluación final** en el set de prueba usando los umbrales elegidos
 6. **Escribe una recomendación** (máx. 300 palabras) para el CEO:
-   ¿Qué umbral usarías para evaluar a la población general?
-   ¿Qué tradeoff estás haciendo?
-   ¿Cuál es la tasa esperada de falsos positivos?
+   - ¿Qué umbral usarías para evaluar a la población general?
+   - ¿Qué tradeoff estás haciendo?
+   - ¿Cuál es la tasa esperada de falsos positivos?
 

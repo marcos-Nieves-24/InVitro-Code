@@ -1,4 +1,4 @@
-# Quiz: Agrupamiento K Means
+# Quiz: Agrupamiento K-Means
 
 ## Opción múltiple (5 preguntas)
 
@@ -11,7 +11,7 @@ d) El modelo requiere un set de validación para el ajuste
 
 <details><summary>Respuesta</summary>b) El modelo descubre patrones en los datos sin etiquetas</details>
 
-**Q2.** En K Means, el "paso de asignación" consiste en:
+**Q2.** En K-Means, el "paso de asignación" consiste en:
 
 a) Inicializar centroides al azar
 b) Asignar cada punto al centroide más cercano
@@ -38,12 +38,12 @@ d) K es demasiado pequeña
 
 <details><summary>Respuesta</summary>b) El punto probablemente está asignado al cluster incorrecto (la silueta va de -1 a 1; un valor negativo significa que el punto está más cerca de otro cluster)</details>
 
-**Q5.** ¿Por qué es importante el escalado de features en K Means?
+**Q5.** ¿Por qué es importante el escalado de features en K-Means?
 
 a) Acelera el algoritmo
 b) Las features con unidades más grandes dominarían el cálculo de distancia
 c) Garantiza encontrar el óptimo global
-d) No es importante   K Means maneja la escala automáticamente
+d) No es importante — K-Means maneja la escala automáticamente
 
 <details><summary>Respuesta</summary>b) Las features con unidades más grandes dominarían el cálculo de la distancia euclidiana, haciendo que el algoritmo ignore efectivamente las features de menor escala</details>
 
@@ -53,13 +53,13 @@ d) No es importante   K Means maneja la escala automáticamente
 
 <details><summary>Respuesta</summary>La inercia mide qué tan compactos son los clusters (suma de distancias al cuadrado a los centroides). Siempre decrece a medida que K aumenta (eventualmente a 0 cuando K=n). Puede ser engañosa porque favorece muchos clusters pequeños. La silueta mide tanto la cohesión (dentro del cluster) como la separación (entre clusters). Un punto con silueta negativa probablemente está en el cluster incorrecto. La silueta puede ser engañosa en clusters muy pequeños o de forma irregular.</details>
 
-**Q7.** ¿Por qué K Means a veces produce resultados diferentes cuando se corre varias veces sobre los mismos datos?
+**Q7.** ¿Por qué K-Means a veces produce resultados diferentes cuando se corre varias veces sobre los mismos datos?
 
-<details><summary>Respuesta</summary>K Means depende de la inicialización aleatoria de los centroides. Diferentes posiciones iniciales llevan a diferentes mínimos locales del objetivo de inercia (el problema es NP hard). La inicialización K Means++ (la de sklearn por defecto) ayuda pero no garantiza el óptimo global. Usar n_init=10 corre el algoritmo 10 veces y devuelve el mejor resultado.</details>
+<details><summary>Respuesta</summary>K-Means depende de la inicialización aleatoria de los centroides. Diferentes posiciones iniciales llevan a diferentes mínimos locales del objetivo de inercia (el problema es NP-hard). La inicialización K-Means++ (la de sklearn por defecto) ayuda pero no garantiza el óptimo global. Usar n_init=10 corre el algoritmo 10 veces y devuelve el mejor resultado.</details>
 
 ## Pregunta de código (1 pregunta)
 
-**Q8.** Escribe una función en Python `kmeans_with_metrics(X, K_range)` que realice K Means para cada K en K_range, calcule la inercia y los silhouette scores, y devuelva un DataFrame con las columnas ['K', 'inertia', 'silhouette'].
+**Q8.** Escribe una función en Python `kmeans_with_metrics(X, K_range)` que realice K-Means para cada K en K_range, calcule la inercia y los silhouette scores, y devuelva un DataFrame con las columnas ['K', 'inertia', 'silhouette'].
 
 <details><summary>Respuesta</summary>
 

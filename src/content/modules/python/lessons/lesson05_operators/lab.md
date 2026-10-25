@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 5: Operadores en accion
-# -
+# -------------------------------------------------------------------------
 # Practicamos los operadores aritmeticos, de comparacion, logicos y de
 # asignacion, con ejemplos numericos, de paridad y de condiciones
 # ambientales.
@@ -13,7 +13,7 @@
 a, b = 20, 7
 print(f"a = {a}, b = {b}")
 print(f"a + b = {a + b}")
-print(f"a b = {a b}")
+print(f"a - b = {a - b}")
 print(f"a * b = {a * b}")
 print(f"a / b = {a / b:.4f}   (division real)")
 print(f"a // b = {a // b}     (division entera)")
@@ -32,19 +32,19 @@ else:
 
 # PASO 3: Tabla de verdad de los operadores logicos.
 # and, or y not operan sobre valores booleanos (True/False).
-print("\n Tabla de verdad: and ")
+print("\n--- Tabla de verdad: and ---")
 print(f"True  and True  = {True and True}")
 print(f"True  and False = {True and False}")
 print(f"False and True  = {False and True}")
 print(f"False and False = {False and False}")
 
-print("\n Tabla de verdad: or ")
+print("\n--- Tabla de verdad: or ---")
 print(f"True  or True   = {True or True}")
 print(f"True  or False  = {True or False}")
 print(f"False or True   = {False or True}")
 print(f"False or False  = {False or False}")
 
-print("\n Negacion: not ")
+print("\n--- Negacion: not ---")
 print(f"not True  = {not True}")
 print(f"not False = {not False}")
 
@@ -80,7 +80,7 @@ print(f"Incomodo: {is_uncomfortable}")
 print(f"Agradable: {is_pleasant}")
 
 # PASO 6: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Repasamos +, -, *, /, //, %, ** y los atajos de asignacion.")
 print("Combinamos comparaciones y logicos para tomar decisiones.")
 ```

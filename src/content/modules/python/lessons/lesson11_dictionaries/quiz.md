@@ -54,7 +54,7 @@
 
 **Q5:** A) O(1)
 
-**Q6:** Las claves de los diccionarios deben ser hashables   necesitan un valor de hash estable que no cambie. Las listas son mutables (se pueden modificar), así que su hash cambiaría si se modificaran, rompiendo el diccionario. Las tuplas son inmutables, por lo que su hash es estable y se pueden usar como claves.
+**Q6:** Las claves de los diccionarios deben ser hashables — necesitan un valor de hash estable que no cambie. Las listas son mutables (se pueden modificar), así que su hash cambiaría si se modificaran, rompiendo el diccionario. Las tuplas son inmutables, por lo que su hash es estable y se pueden usar como claves.
 
 **Q7:** `d[key]` lanza un KeyError si la clave no existe. `d.get(key)` devuelve None si la clave no existe (o un valor por defecto si se lo proporcionas). `get()` es más seguro y se prefiere cuando no estás seguro de que la clave exista.
 

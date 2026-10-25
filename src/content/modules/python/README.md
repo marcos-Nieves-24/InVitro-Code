@@ -27,7 +27,7 @@ Enseñar la programación en Python requerida para Machine Learning.
 
 - Lecciones basadas en notebooks
 - Ejercicios de programación
-- Mini proyectos
+- Mini-proyectos
 - Laboratorios
 - Cuestionarios
 

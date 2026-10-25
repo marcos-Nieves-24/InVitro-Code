@@ -1,24 +1,24 @@
-
+---
 Module: 2
 Lesson Number: 14
 Lesson Title: Pandas
 Estimated Duration: 90 minutos
-Prerequisites: L13   NumPy
+Prerequisites: L13 — NumPy
 Learning Objectives:
-  Crear y manipular objetos Series y DataFrame
-  Cargar datos desde archivos CSV usando read_csv()
-  Filtrar, seleccionar y subdividir datos usando indexación booleana
-  Usar groupby para agregación de datos
-  Combinar/unir múltiples DataFrames
-  Aplicar funciones a datos con apply() y map()
+  - Crear y manipular objetos Series y DataFrame
+  - Cargar datos desde archivos CSV usando read_csv()
+  - Filtrar, seleccionar y subdividir datos usando indexación booleana
+  - Usar groupby para agregación de datos
+  - Combinar/unir múltiples DataFrames
+  - Aplicar funciones a datos con apply() y map()
 Keywords: Pandas, DataFrame, Series, groupby, merge, apply, read_csv
-Difficulty: Beginner Intermediate
+Difficulty: Beginner-Intermediate
 Programming Concepts: Manipulación de datos, datos tabulares, agregación
 Datasets Used: None (datos sintéticos)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Pandas
 
@@ -38,8 +38,8 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
-Pandas está construido sobre NumPy y agrega ejes etiquetados, manejo de datos faltantes y operaciones de datos poderosas. Esta lección te prepara directamente para las lecciones de visualización (Matplotlib, Seaborn) y para todo Machine Learning (scikit learn espera arrays NumPy que vienen de DataFrames de Pandas).
+<ConceptCard variant="key-idea">
+Pandas está construido sobre NumPy y agrega ejes etiquetados, manejo de datos faltantes y operaciones de datos poderosas. Esta lección te prepara directamente para las lecciones de visualización (Matplotlib, Seaborn) y para todo Machine Learning (scikit-learn espera arrays NumPy que vienen de DataFrames de Pandas).
 </ConceptCard>
 
 - En la lección anterior aprendiste NumPy para cómputo numérico.
@@ -103,7 +103,7 @@ df = pd.read_json("data.json")
 ```text
 Estructura del DataFrame
 
-       Columnas 
+       Columnas →
        Name    Age  Salary
 Fila 0  Alice   25   50000
   ↓  1  Bob     30   60000
@@ -179,7 +179,7 @@ df.drop("OldColumn", axis=1, inplace=True)
   variant="scientist"
   typing={true}
   lines={[
-    "GroupBy implementa el patrón dividir aplicar combinar: agrupa, calcula, recombina.",
+    "GroupBy implementa el patrón dividir-aplicar-combinar: agrupa, calcula, recombina.",
     "Merge y concat unen tablas como en SQL o Excel, pero tipado y reproducible.",
     "Apply y map aplican funciones por elemento o por columna; úsalos cuando la vectorización no alcanza.",
   ]}
@@ -224,8 +224,8 @@ df["Column"].map({"old": "new"})
   ]}
 />
 
-<ConceptCard variant="key idea">
-Inspeccionar shape y dtypes antes de operar es el print debug de Pandas; barato y evita la mayoría de los errores de unión o filtrado.
+<ConceptCard variant="key-idea">
+Inspeccionar shape y dtypes antes de operar es el print-debug de Pandas; barato y evita la mayoría de los errores de unión o filtrado.
 </ConceptCard>
 
 **Creación de DataFrame y exploración**
@@ -313,7 +313,7 @@ print(df)
   ]}
 />
 
-**Escenario biotecnología**   analizando datos de ensayos clínicos:
+**Escenario biotecnología** — analizando datos de ensayos clínicos:
 
 ```python
 import pandas as pd
@@ -329,7 +329,7 @@ clinical = pd.DataFrame({
     "Sex": np.random.choice(["M", "F"], n_patients),
     "Treatment": np.random.choice(["Drug", "Placebo"], n_patients),
     "Biomarker_Level": np.random.randn(n_patients) * 2 + 5,
-    "Response": np.random.choice(["Responder", "Non responder"], n_patients, p=[0.6, 0.4]),
+    "Response": np.random.choice(["Responder", "Non-responder"], n_patients, p=[0.6, 0.4]),
     "Survival_Months": np.random.exponential(24, n_patients).astype(int)
 })
 
@@ -349,12 +349,12 @@ print(f"\nPacientes con biomarcador alto: {len(high_biomarker)}")
 
 # Grupos etarios
 clinical["Age_Group"] = pd.cut(clinical["Age"], bins=[0, 30, 50, 65, 100],
-                                labels=["<30", "30 a 50", "51 a 65", ">65"])
+                                labels=["<30", "30-50", "51-65", ">65"])
 print("\nSupervivencia por grupo etario:")
 print(clinical.groupby("Age_Group")["Survival_Months"].agg(["mean", "std", "count"]))
 ```
 
-**Escenario SaaS**   analizando datos de churn de clientes:
+**Escenario SaaS** — analizando datos de churn de clientes:
 
 ```python
 import pandas as pd
@@ -409,7 +409,7 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
 **Errores comunes**
 
 - **Encadenar `[]` en lugar de `loc`**: `df["A"][0]` funciona pero genera advertencia. Usa `df.loc[0, "A"]`
-- **Modificar una vista vs copia**: `SettingWithCopyWarning`   usa `.copy()` explícitamente
+- **Modificar una vista vs copia**: `SettingWithCopyWarning` — usa `.copy()` explícitamente
 - **Olvidar el parámetro `axis=`**: `drop("col")` usa axis=0 por defecto (filas). Usa `axis=1` para columnas
 - **Operaciones inplace**: muchos métodos tienen `inplace=True`, pero el encadenamiento suele ser más limpio
 - **Combinar sin especificar clave**: puede crear un producto cartesiano
@@ -440,7 +440,7 @@ print(f"\nClientes de alto riesgo: {len(high_risk)}")
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFrame, con `loc`/`iloc`, filtrado booleano, `groupby`, `merge` y `apply`, cubren la mayoría de los casos reales.
 </ConceptCard>
 
@@ -460,11 +460,11 @@ Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFra
     { id: "dataframe", label: "DataFrame", detail: "Estructura de datos 2D etiquetada (filas × columnas)." },
     { id: "series", label: "Series", detail: "Array 1D etiquetado (columna individual)." },
     { id: "indice", label: "Índice", detail: "Etiquetas de filas (default: 0, 1, 2...)." },
-    { id: "groupby", label: "GroupBy", detail: "Operaciones de dividir aplicar combinar." },
+    { id: "groupby", label: "GroupBy", detail: "Operaciones de dividir-aplicar-combinar." },
     { id: "merge", label: "Merge", detail: "Combinar DataFrames sobre columnas comunes." },
-    { id: "pivot table", label: "Tabla dinámica", detail: "Agregación multidimensional." },
-    { id: "indexacion booleana", label: "Indexación booleana", detail: "Filtrado con condiciones True/False." },
-    { id: "method chaining", label: "Encadenamiento de métodos", detail: "Aplicar múltiples operaciones secuencialmente." },
+    { id: "pivot-table", label: "Tabla dinámica", detail: "Agregación multidimensional." },
+    { id: "indexacion-booleana", label: "Indexación booleana", detail: "Filtrado con condiciones True/False." },
+    { id: "method-chaining", label: "Encadenamiento de métodos", detail: "Aplicar múltiples operaciones secuencialmente." },
   ]}
 />
 
@@ -472,7 +472,7 @@ Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFra
   question="¿Qué método combina dos DataFrames sobre una columna común?"
   moduleSlug="python"
   lessonSlug="lesson14_pandas"
-  blockId="choice python l14 resumen 1"
+  blockId="choice-python-l14-resumen-1"
   allowContinueOnIncorrect
   explanation="merge() une DataFrames por columnas comunes (como un JOIN de SQL); concat() apila por filas o columnas."
   options={[
@@ -484,7 +484,7 @@ Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFra
 />
 
 <MascotMessage mood="celebrating">
-¡Pandas desbloqueado! Ahora visualizamos esos resultados con Matplotlib   la próxima lección.
+¡Pandas desbloqueado! Ahora visualizamos esos resultados con Matplotlib — la próxima lección.
 </MascotMessage>
 
 </RevealSequence>
@@ -495,16 +495,16 @@ Pandas es la puerta de entrada al análisis de datos en Python: Series y DataFra
 
 **Ejercicios**
 
-Nivel 1   Básico:
+Nivel 1 — Básico:
 1. ¿Cómo lees un archivo CSV en un DataFrame?
 2. ¿Cuál es la diferencia entre `loc` e `iloc`?
 3. ¿Cómo verificas si hay valores faltantes en un DataFrame?
 
-Nivel 2   Implementación:
+Nivel 2 — Implementación:
 4. Carga un CSV y calcula la media de cada columna numérica agrupada por una columna categórica.
 5. Dado un DataFrame con datos de clientes, crea una nueva columna "Segment" que etiquete clientes como "High Value" (gasto > 100) o "Standard" (caso contrario).
 
-Nivel 3   Pensamiento Crítico:
+Nivel 3 — Pensamiento Crítico:
 6. Compara y contrasta el rendimiento de `apply()` vs operaciones vectorizadas en Pandas. ¿Cuándo necesitarías usar `apply()`?
 7. ¿Cómo manejarías valores faltantes en un dataset? Compara `dropna()`, `fillna()` y métodos de interpolación.
 
@@ -528,7 +528,7 @@ Crea un **análisis de segmentación de clientes** usando Pandas:
   question="¿Qué devuelve df.loc[0, 'Age']?"
   moduleSlug="python"
   lessonSlug="lesson14_pandas"
-  blockId="choice python l14 tema 1"
+  blockId="choice-python-l14-tema-1"
   allowContinueOnIncorrect
   explanation="`.loc` selecciona por etiqueta de fila y nombre de columna; devuelve el valor de 'Age' en la fila con etiqueta 0."
   options={[
@@ -543,12 +543,12 @@ Crea un **análisis de segmentación de clientes** usando Pandas:
   question="¿Cuál es el propósito de groupby() en Pandas?"
   moduleSlug="python"
   lessonSlug="lesson14_pandas"
-  blockId="choice python l14 tema 2"
+  blockId="choice-python-l14-tema-2"
   allowContinueOnIncorrect
   explanation="groupby() divide las filas en grupos y permite aplicar agregaciones como mean o sum a cada grupo."
   options={[
     { id: "a", label: "Ordenar el DataFrame por una columna", correct: false, feedback: "Para ordenar se usa sort_values()." },
-    { id: "b", label: "Dividir filas en grupos y agregar cada grupo", correct: true, feedback: "¡Exacto! Es el patrón split apply combine." },
+    { id: "b", label: "Dividir filas en grupos y agregar cada grupo", correct: true, feedback: "¡Exacto! Es el patrón split-apply-combine." },
     { id: "c", label: "Eliminar filas duplicadas", correct: false, feedback: "Para eso se usa drop_duplicates()." },
     { id: "d", label: "Combinar dos DataFrames", correct: false, feedback: "Para eso se usa merge() o concat()." },
   ]}

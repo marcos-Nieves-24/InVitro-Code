@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 1: Estadistica descriptiva con el dataset de diabetes
-# -
+# -------------------------------------------------------------------------
 # Calculamos medidas de tendencia central y dispersion, detectamos valores
 # atipicos con la regla del RIQ y construimos una funcion summarize().
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -29,19 +29,19 @@ print(df.describe())
 # PASO 3: Varianza, desviacion estandar y rango por columna.
 varianza = df.var(numeric_only=True)
 desvio = df.std(numeric_only=True)
-rango = df.max(numeric_only=True) df.min(numeric_only=True)
+rango = df.max(numeric_only=True) - df.min(numeric_only=True)
 print("\nVarianza:\n", varianza)
 print("\nDesvio estandar:\n", desvio)
 print("\nRango:\n", rango)
 
 # PASO 4: RIQ y deteccion de valores atipicos en la columna bmi.
 # Regla del RIQ: un valor es atipico si queda fuera de
-# [Q1 1.5*RIQ, Q3 + 1.5*RIQ].
+# [Q1 - 1.5*RIQ, Q3 + 1.5*RIQ].
 col = "bmi"
 q1 = df[col].quantile(0.25)
 q3 = df[col].quantile(0.75)
-iqr = q3 q1
-lim_inf = q1 1.5 * iqr
+iqr = q3 - q1
+lim_inf = q1 - 1.5 * iqr
 lim_sup = q3 + 1.5 * iqr
 atipicos = df[(df[col] < lim_inf) | (df[col] > lim_sup)]
 print(f"\nQ1={q1:.3f}, Q3={q3:.3f}, RIQ={iqr:.3f}")
@@ -70,8 +70,8 @@ def summarize(df):
     for c in df.select_dtypes(include=[np.number]).columns:
         q1 = df[c].quantile(0.25)
         q3 = df[c].quantile(0.75)
-        iqr = q3 q1
-        lim_inf = q1 1.5 * iqr
+        iqr = q3 - q1
+        lim_inf = q1 - 1.5 * iqr
         lim_sup = q3 + 1.5 * iqr
         n_atip = int(((df[c] < lim_inf) | (df[c] > lim_sup)).sum())
         registros.append({
@@ -93,7 +93,7 @@ print("\nInforme resumido por columna:")
 print(resumen.to_string(index=False))
 
 # PASO 8: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("La regla del RIQ detecta valores atipicos por columna.")
 print("El boxplot y el histograma muestran forma y dispersion de los datos.")
 ```

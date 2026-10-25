@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 6: Escribir funciones
-# -
+# -------------------------------------------------------------------------
 # Practicamos la definicion de funciones, parametros, valores por defecto,
 # valores de retorno, lambdas y el scope (alcance) de las variables.
 # =========================================================================
@@ -76,7 +76,7 @@ modify_global()
 print(f"Despues de modificar: {x}")
 
 # PASO 6: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Definimos funciones con def y docstrings explicativos.")
 print("Devolvimos multiples valores (bmi, categoria) en una tupla.")
 print("Usamos parametros por defecto, lambdas y la palabra global.")

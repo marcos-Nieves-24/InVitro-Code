@@ -4,7 +4,7 @@
 
 **Q1:** ¿Cuál de los siguientes es un nombre de variable válido en Python?
 - A) `2nd_place`
-- B) `my variable`
+- B) `my-variable`
 - C) `_count`
 - D) `class`
 
@@ -30,7 +30,7 @@
 - A) camelCase
 - B) PascalCase
 - C) snake_case
-- D) kebab case
+- D) kebab-case
 
 ## Respuesta corta (2 preguntas)
 

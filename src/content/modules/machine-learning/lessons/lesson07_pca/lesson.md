@@ -1,14 +1,14 @@
-
+---
 Module: 4
 Lesson Number: 7
 Lesson Title: PCA
 Estimated Duration: 75 minutos
 Prerequisites: L1 (Fundamentos de ML), álgebra lineal básica
 Learning Objectives:
-  Explicar cómo PCA reduce la dimensionalidad preservando la varianza
-  Calcular e interpretar componentes principales y varianza explicada
-  Aplicar PCA con scikit learn para visualización 2D y preprocesamiento
-  Determinar el número óptimo de componentes usando la varianza explicada acumulada
+  - Explicar cómo PCA reduce la dimensionalidad preservando la varianza
+  - Calcular e interpretar componentes principales y varianza explicada
+  - Aplicar PCA con scikit-learn para visualización 2D y preprocesamiento
+  - Determinar el número óptimo de componentes usando la varianza explicada acumulada
 Keywords: PCA, componentes principales, reducción de dimensionalidad, valores propios, varianza explicada, visualización
 Difficulty: Intermedio
 Programming Concepts: sklearn.decomposition.PCA
@@ -18,7 +18,7 @@ Datasets Used: iris, breast cancer, California Housing
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 <Section number={1} title="Cuando tienes demasiadas dimensiones" eyebrow="INICIO">
 
@@ -35,13 +35,13 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
-**Biotecnología   alta dimensionalidad:** genómica con 20,000 genes y 100 pacientes; SaaS con cientos de métricas. Visualizar, modelar y entender datos de alta dimensionalidad es difícil.
+<ConceptCard variant="key-idea">
+**Biotecnología — alta dimensionalidad:** genómica con 20,000 genes y 100 pacientes; SaaS con cientos de métricas. Visualizar, modelar y entender datos de alta dimensionalidad es difícil.
 </ConceptCard>
 
-{/* candidate player: mascot mil features 2d */}
-<ConceptCard variant="key idea">
-PCA no selecciona features   crea **nuevas features** (componentes principales) que son combinaciones lineales de las originales. El primer componente captura la dirección de mayor varianza, el segundo la siguiente (ortogonal al primero), y así.
+{/* candidate-player: mascot-mil-features-2d */}
+<ConceptCard variant="key-idea">
+PCA no selecciona features — crea **nuevas features** (componentes principales) que son combinaciones lineales de las originales. El primer componente captura la dirección de mayor varianza, el segundo la siguiente (ortogonal al primero), y así.
 </ConceptCard>
 
 </RevealSequence>
@@ -63,12 +63,12 @@ PCA no selecciona features   crea **nuevas features** (componentes principales) 
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Pasos del algoritmo PCA**
 - Estandariza los datos (media 0, varianza 1 por feature)
 - Calcula la matriz de covarianza entre features
 - Encuentra valores y vectores propios de la matriz de covarianza
-- Ordena los vectores propios por valor propio (mayor  más varianza explicada)
+- Ordena los vectores propios por valor propio (mayor → más varianza explicada)
 - Proyecta los datos al subespacio de los primeros K vectores propios
 </ConceptCard>
 
@@ -172,9 +172,9 @@ plt.show()
 
 <ChoiceQuestion
   question="¿Por qué es importante estandarizar los datos antes de aplicar PCA? ¿Qué pasaría si no lo haces?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson07_pca"
-  blockId="reflection l07 pca components"
+  blockId="reflection-l07-pca-components"
   allowContinueOnIncorrect
   explanation="PCA es sensible a la escala: la feature de mayor rango domina la matriz de covarianza y el primer componente sería básicamente esa feature. Estandarizar (restar media, dividir por desvío) pone todas en igualdad y deja que PCA descubra las verdaderas direcciones de varianza."
   options={[
@@ -200,16 +200,16 @@ plt.show()
   lines={[
     "Genómica: 20,000 genes a ~50 componentes que capturan el 90% de la varianza.",
     "SaaS: cientos de métricas proyectadas a 2D revelan clústeres de usuarios.",
-    "Preprocesamiento: PCA elimina ruido y redundancia antes de K Means u otros modelos.",
+    "Preprocesamiento: PCA elimina ruido y redundancia antes de K-Means u otros modelos.",
   ]}
 />
 
-<ConceptCard variant="key idea">
-**Biotecnología   Genómica:** Reduces 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
+<ConceptCard variant="key-idea">
+**Biotecnología — Genómica:** Reduces 20,000 genes a 50 componentes principales que capturan el 90% de la varianza. Con 50 features en vez de 20,000, cualquier modelo (regresión, random forest) entrena en segundos en vez de horas.
 
-**SaaS   Visualización de usuarios:** Proyectas cientos de métricas de comportamiento a 2D y ves clústeres naturales de usuarios: "power users", "en riesgo", "casuales". Sin PCA, estas estructuras serían invisibles.
+**SaaS — Visualización de usuarios:** Proyectas cientos de métricas de comportamiento a 2D y ves clústeres naturales de usuarios: "power users", "en riesgo", "casuales". Sin PCA, estas estructuras serían invisibles.
 
-**Preprocesamiento:** Antes de aplicar K Means o cualquier modelo, PCA elimina ruido y features redundantes, acelerando el entrenamiento y mejorando la generalización.
+**Preprocesamiento:** Antes de aplicar K-Means o cualquier modelo, PCA elimina ruido y features redundantes, acelerando el entrenamiento y mejorando la generalización.
 </ConceptCard>
 
 </RevealSequence>
@@ -231,12 +231,12 @@ plt.show()
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 PCA reduce dimensionalidad creando nuevas features (componentes principales) que son combinaciones lineales de las originales, ordenadas por varianza explicada. Estandarizar es obligatorio. La varianza explicada acumulada te dice cuántos componentes retener. Esencial para visualización, compresión y preprocesamiento.
 </ConceptCard>
 
-{/* candidate player: interactive table glosario pca */}
-<ConceptCard variant="key idea">
+{/* candidate-player: interactive-table-glosario-pca */}
+<ConceptCard variant="key-idea">
 **Glosario**
 - Componente principal: nueva feature = combinación lineal de las originales, ortogonal a las demás
 - Valor propio: cantidad de varianza capturada por un componente
@@ -246,32 +246,32 @@ PCA reduce dimensionalidad creando nuevas features (componentes principales) que
 
 <FeatureButtonList
   features={[
-    { id: "componente principal", label: "Componente principal", detail: "Nueva feature = combinación lineal de las originales, ordenada por varianza." },
-    { id: "valor propio", label: "Valor propio", detail: "Cantidad de varianza capturada por un componente." },
-    { id: "varianza explicada", label: "Varianza explicada", detail: "Porcentaje de la varianza total que captura un componente." },
-    { id: "varianza acumulada", label: "Varianza acumulada", detail: "Suma de varianzas explicadas por los primeros K componentes." },
+    { id: "componente-principal", label: "Componente principal", detail: "Nueva feature = combinación lineal de las originales, ordenada por varianza." },
+    { id: "valor-propio", label: "Valor propio", detail: "Cantidad de varianza capturada por un componente." },
+    { id: "varianza-explicada", label: "Varianza explicada", detail: "Porcentaje de la varianza total que captura un componente." },
+    { id: "varianza-acumulada", label: "Varianza acumulada", detail: "Suma de varianzas explicadas por los primeros K componentes." },
     { id: "estandarizacion", label: "Estandarización", detail: "Restar la media y dividir por el desvío antes de PCA." },
-    { id: "reduccion dimensionalidad", label: "Reducción de dimensionalidad", detail: "Comprimir features preservando la varianza." },
+    { id: "reduccion-dimensionalidad", label: "Reducción de dimensionalidad", detail: "Comprimir features preservando la varianza." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss pca", label: "PCA", detail: "Análisis de Componentes Principales." },
-    { id: "gloss componente principal", label: "Componente principal", detail: "Nueva feature ortogonal ordenada por varianza." },
-    { id: "gloss valor propio", label: "Valor propio", detail: "Medida de varianza capturada." },
-    { id: "gloss varianza explicada", label: "Varianza explicada", detail: "Porcentaje de varianza por componente." },
-    { id: "gloss covarianza", label: "Covarianza", detail: "Matriz de covarianzas entre features." },
-    { id: "gloss ortogonalidad", label: "Ortogonalidad", detail: "Componentes perpendiculares entre sí." },
-    { id: "gloss compresion", label: "Compresión", detail: "Reducir dimensiones perdiendo poca información." },
+    { id: "gloss-pca", label: "PCA", detail: "Análisis de Componentes Principales." },
+    { id: "gloss-componente-principal", label: "Componente principal", detail: "Nueva feature ortogonal ordenada por varianza." },
+    { id: "gloss-valor-propio", label: "Valor propio", detail: "Medida de varianza capturada." },
+    { id: "gloss-varianza-explicada", label: "Varianza explicada", detail: "Porcentaje de varianza por componente." },
+    { id: "gloss-covarianza", label: "Covarianza", detail: "Matriz de covarianzas entre features." },
+    { id: "gloss-ortogonalidad", label: "Ortogonalidad", detail: "Componentes perpendiculares entre sí." },
+    { id: "gloss-compresion", label: "Compresión", detail: "Reducir dimensiones perdiendo poca información." },
   ]}
 />
 
 <ChoiceQuestion
   question="¿Por qué es obligatorio estandarizar los datos antes de aplicar PCA?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson07_pca"
-  blockId="choice ml l07 resumen 1"
+  blockId="choice-ml-l07-resumen-1"
   allowContinueOnIncorrect
   explanation="PCA es sensible a la escala: la feature de mayor rango domina la matriz de covarianza y el primer componente sería básicamente esa feature. Estandarizar pone todas las features en igualdad."
   options={[
@@ -305,7 +305,7 @@ PCA dominado. Ya puedes comprimir datos de alta dimensionalidad sin perder lo es
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Desafío:** Aplica PCA a breast cancer y compara rendimiento con features originales.
 </ConceptCard>
 
@@ -334,7 +334,7 @@ for name, X_data in [("Original", X), ("PCA", PCA(n_components=n_components).fit
     start = time.time()
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
     rf.fit(X_tr, y_tr)
-    elapsed = time.time() start
+    elapsed = time.time() - start
     print(f"{name}: accuracy={rf.score(X_te, y_te):.3f}, tiempo={elapsed:.3f}s")
 `}
   height="380px"

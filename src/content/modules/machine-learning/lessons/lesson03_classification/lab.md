@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 3: Clasificacion con regresion logistica
-# -
+# -------------------------------------------------------------------------
 # Entrenamos una regresion logistica sobre datos sinteticos y sobre
 # breast_cancer, visualizamos el limite de decision, evaluamos con matriz
 # de confusion, curva ROC/AUC, exploramos umbrales de clasificacion y
@@ -27,13 +27,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 modelo = LogisticRegression(max_iter=1000)
 modelo.fit(X_train, y_train)
-print("PASO 1 Regresion logistica entrenada")
+print("PASO 1 - Regresion logistica entrenada")
 print(f"Coeficientes: {modelo.coef_[0]} | Intercepto: {modelo.intercept_[0]:.2f}")
 
 # PASO 2: Limite de decision sobre una cuadricula.
 # Predecimos sobre un grid denso y coloreamos cada punto segun su clase.
-x_min, x_max = X[:, 0].min() 1, X[:, 0].max() + 1
-y_min, y_max = X[:, 1].min() 1, X[:, 1].max() + 1
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
 xx, yy = np.meshgrid(np.linspace(x_min, x_max, 80),
                      np.linspace(y_min, y_max, 80))
 Z = modelo.predict(np.c_[xx.ravel(), yy.ravel()])
@@ -48,11 +48,11 @@ fig.add_trace(go.Scatter(x=X[:, 0], y=X[:, 1], mode="markers",
 fig.update_layout(title="Limite de decision",
                   xaxis_title="Feature 1", yaxis_title="Feature 2")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 2 El limite de decision separa visualmente las dos clases.")
+print("PASO 2 - El limite de decision separa visualmente las dos clases.")
 
 # PASO 3: Exactitud y matriz de confusion en el conjunto de prueba.
 y_pred = modelo.predict(X_test)
-print("PASO 3 Metricas en prueba")
+print("PASO 3 - Metricas en prueba")
 print(f"Exactitud: {accuracy_score(y_test, y_pred):.3f}")
 print(f"Matriz de confusion:\n{confusion_matrix(y_test, y_pred)}")
 
@@ -66,7 +66,7 @@ Xc_tr, Xc_te, yc_tr, yc_te = train_test_split(
 mod_cancer = LogisticRegression(max_iter=5000)
 mod_cancer.fit(Xc_tr, yc_tr)
 pred_cancer = mod_cancer.predict(Xc_te)
-print("\nPASO 4 Breast cancer (regresion logistica)")
+print("\nPASO 4 - Breast cancer (regresion logistica)")
 print(f"Exactitud: {accuracy_score(yc_te, pred_cancer):.3f}")
 print(f"Matriz de confusion:\n{confusion_matrix(yc_te, pred_cancer)}")
 print(classification_report(yc_te, pred_cancer, target_names=cancer.target_names))
@@ -76,7 +76,7 @@ fpr, tpr, _ = roc_curve(yc_te, prob)
 print(f"AUC: {auc(fpr, tpr):.4f}")
 
 fig = px.line(x=fpr, y=tpr,
-              title="Curva ROC breast cancer",
+              title="Curva ROC - breast cancer",
               labels={"x": "Tasa de falsos positivos",
                       "y": "Tasa de verdaderos positivos"})
 fig.add_scatter(x=[0, 1], y=[0, 1], mode="lines", name="Modelo aleatorio")
@@ -85,7 +85,7 @@ fig.show()                                 # Mostrar grafico interactivo
 # PASO 5: Exploracion del umbral de clasificacion.
 # Bajando el umbral ganamos sensibilidad (detectar mas positivos) pero
 # perdemos precision (mas falsos positivos); subiendolo pasa al reves.
-print("\nPASO 5 Exploracion de umbrales")
+print("\nPASO 5 - Exploracion de umbrales")
 print(f"{'Umbral':<8}{'Precision':>10}{'Sensibilidad':>14}{'F1':>8}")
 for umbral in [0.1, 0.3, 0.5, 0.7, 0.9]:
     pred_umb = (prob >= umbral).astype(int)
@@ -114,7 +114,7 @@ Xi_tr, Xi_te, yi_tr, yi_te = train_test_split(
 modelo_imb = LogisticRegression(max_iter=1000)
 modelo_imb.fit(Xi_tr, yi_tr)
 pred_imb = modelo_imb.predict(Xi_te)
-print("\nPASO 6 Datos desbalanceados")
+print("\nPASO 6 - Datos desbalanceados")
 print(f"Exactitud: {accuracy_score(yi_te, pred_imb):.3f}")
 print(f"Recall clase minoritaria: {recall_score(yi_te, pred_imb):.3f}")
 print(classification_report(yi_te, pred_imb, zero_division=0))

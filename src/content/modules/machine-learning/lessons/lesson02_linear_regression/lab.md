@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 2: Regresion lineal simple y multiple
-# -
+# -------------------------------------------------------------------------
 # Ajustamos una regresion lineal sobre diabetes: primero con una sola
 # feature y luego con dos. Interpretamos coeficientes e intercepto y
 # evaluamos con MSE y R2. El scatter incluye la recta OLS con trendline.
@@ -23,7 +23,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 modelo1 = LinearRegression()               # Crear modelo con 1 feature
 modelo1.fit(X_train, y_train)              # Entrenar
-print("PASO 1 Regresion simple")
+print("PASO 1 - Regresion simple")
 print(f"Coeficiente: {modelo1.coef_[0]:.3f} | Intercepto: {modelo1.intercept_:.2f}")
 print(f"R2 prueba: {r2_score(y_test, modelo1.predict(X_test)):.3f}")
 
@@ -39,7 +39,7 @@ recta_x = np.array([X_test[:, 0].min(), X_test[:, 0].max()])  # Puntos de la rec
 fig.add_scatter(x=recta_x, y=modelo1.predict(recta_x.reshape(-1, 1)),  # Recta OLS
                 mode="lines", name="Recta OLS")
 fig.show()                                 # Mostrar grafico
-print("PASO 2 La recta OLS queda superpuesta al scatter.")
+print("PASO 2 - La recta OLS queda superpuesta al scatter.")
 
 # PASO 3: Regresion multiple con dos features.
 # Agregamos la feature 5 (BMI) para mejorar la prediccion.
@@ -50,7 +50,7 @@ X_train2, X_test2, y_train2, y_test2 = train_test_split(
 modelo2 = LinearRegression()               # Crear modelo con 2 features
 modelo2.fit(X_train2, y_train2)            # Entrenar
 y_pred2 = modelo2.predict(X_test2)         # Predecir
-print("PASO 3 Regresion multiple")
+print("PASO 3 - Regresion multiple")
 print(f"Coeficientes: {modelo2.coef_} | Intercepto: {modelo2.intercept_:.2f}")
 print(f"MSE prueba: {mean_squared_error(y_test2, y_pred2):.2f}")
 print(f"R2 prueba: {r2_score(y_test2, y_pred2):.3f}")
@@ -63,5 +63,5 @@ fig = px.scatter_3d(x=X_test2[:, 0], y=X_test2[:, 1], z=y_test2,  # Scatter 3D
                     labels={"x": "Colesterol", "y": "BMI", "z": "Progresion"},
                     title="Regresion multiple con dos features")
 fig.show()                                 # Mostrar grafico 3D
-print("PASO 4 El color del grafico 3D muestra la prediccion del modelo.")
+print("PASO 4 - El color del grafico 3D muestra la prediccion del modelo.")
 ```

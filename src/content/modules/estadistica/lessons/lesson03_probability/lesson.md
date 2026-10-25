@@ -1,15 +1,15 @@
-
+---
 Module: 3
 Lesson Number: 3
 Lesson Title: Fundamentos de Probabilidad
 Estimated Duration: 90 minutos
 Prerequisites: Lección 1 (Estadística Descriptiva)
 Learning Objectives:
-  Enunciar los tres axiomas de Kolmogorov de la probabilidad
-  Calcular probabilidades condicionales usando el teorema de Bayes
-  Aplicar la ley de probabilidad total a problemas de partición
-  Distinguir entre variables aleatorias discretas y continuas
-  Resolver problemas de probabilidad con datos del mundo real
+  - Enunciar los tres axiomas de Kolmogorov de la probabilidad
+  - Calcular probabilidades condicionales usando el teorema de Bayes
+  - Aplicar la ley de probabilidad total a problemas de partición
+  - Distinguir entre variables aleatorias discretas y continuas
+  - Resolver problemas de probabilidad con datos del mundo real
 Keywords: probabilidad, axiomas de Kolmogorov, probabilidad condicional, teorema de Bayes, variables aleatorias, ley de probabilidad total
 Difficulty: Intermedio
 Programming Concepts: numpy, scipy.stats, matplotlib
@@ -19,7 +19,7 @@ Datasets Used: Datos sintéticos, datos de pruebas médicas
 Notebook: 03_probability.ipynb
 Assignment: probability_assignment.md
 Quiz: probability_quiz.md
-
+---
 
 <Section number={1} title="La ciencia de la incertidumbre" eyebrow="INICIO">
 <RevealSequence mode="appear">
@@ -30,8 +30,8 @@ Todo modelo de machine learning hace predicciones bajo incertidumbre. Un clasifi
 
 En biotecnología, la probabilidad cuantifica la precisión de tests diagnósticos: "Si un paciente da positivo, ¿cuál es la probabilidad de qué realmente tenga la enfermedad?" En SaaS, modelos de probabilidad predicen la deserción: "¿Cuál es la probabilidad de qué este usuario cancele en 30 días?"
 
-<ConceptCard variant="key idea">
-La probabilidad no elimina la incertidumbre   la mide. Y medirla es el primer paso para tomar decisiones informadas.
+<ConceptCard variant="key-idea">
+La probabilidad no elimina la incertidumbre — la mide. Y medirla es el primer paso para tomar decisiones informadas.
 </ConceptCard>
 
 </RevealSequence>
@@ -52,7 +52,7 @@ Andrey Kolmogorov formalizó la probabilidad con tres axiomas qué son la base d
 $$P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)$$
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Las probabilidades siempre están entre 0 y 1. Algo debe ocurrir (total = 1). Si dos eventos no pueden ocurrir juntos, la probabilidad de uno u otro es la suma.
 </ConceptCard>
 
@@ -121,12 +121,12 @@ Para encontrar la probabilidad total de A, consideras todas las formas en qué A
 Una variable aleatoria es una función qué asigna un número real a cada resultado del espacio muestral.
 </ConceptCard>
 
-<ConceptCard variant="key idea">
-- **Valores**: Contables (0, 1, 2, ...)  Cualquier valor en un intervalo
-- **Probabilidad**: PMF: $p(x) = P(X = x)$  PDF: $P(a \leq X \leq b) = \int_a^b f(x)dx$
-- **Esperanza**: $E[X] = \sum x \cdot P(X=x)$  $E[X] = \int x f(x)dx$
-- **Ejemplo**: Cantidad de usuarios qué cancelan  Nivel de expresión génica
-- **Varianza**: $\text{Var}(X) = E[X^2] E[X]^2$  Misma fórmula
+<ConceptCard variant="key-idea">
+- **Valores**: Contables (0, 1, 2, ...) → Cualquier valor en un intervalo
+- **Probabilidad**: PMF: $p(x) = P(X = x)$ → PDF: $P(a \leq X \leq b) = \int_a^b f(x)dx$
+- **Esperanza**: $E[X] = \sum x \cdot P(X=x)$ → $E[X] = \int x f(x)dx$
+- **Ejemplo**: Cantidad de usuarios qué cancelan → Nivel de expresión génica
+- **Varianza**: $\text{Var}(X) = E[X^2] - E[X]^2$ → Misma fórmula
 </ConceptCard>
 
 <CalloutInfo>
@@ -154,22 +154,22 @@ p_pos_given_no_disease = 0.10  # 10% falsos positivos
 
 # Bayes: P(enfermedad | positivo)
 p_disease_given_pos = (p_pos_given_disease * p_disease) / (
-    p_pos_given_disease * p_disease + p_pos_given_no_disease * (1 p_disease)
+    p_pos_given_disease * p_disease + p_pos_given_no_disease * (1 - p_disease)
 )
 
 print(f"P(enfermedad | positivo) = {p_disease_given_pos:.3f}")
 print(f"¡Sólo {p_disease_given_pos*100:.1f}%!")
 ```
 
-<BayesUpdate caption="Recorrí los pasos con estos mismos números  prevalencia 1%, sensibilidad 95%, especificidad 90%  y después subí la prevalencia para ver cómo el positivo deja de ser engañoso." />
+<BayesUpdate caption="Recorrí los pasos con estos mismos números —prevalencia 1%, sensibilidad 95%, especificidad 90%— y después subí la prevalencia para ver cómo el positivo deja de ser engañoso." />
 
 <ChoiceQuestion
   question="El test tiene 95% de sensibilidad, pero un resultado positivo solo implica 8.8% de probabilidad de tener la enfermedad. ¿Cómo es posible? ¿El test es malo?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  blockId="reflection l03 bayes rare"
+  blockId="reflection-l03-bayes-rare"
   allowContinueOnIncorrect
-  explanation="No es malo: con prevalencia del 1%, de 1000 sólo 10 están enfermos; el test detecta ~9.5 y genera ~99 falsos positivos entre 990 sanos. De ~108 positivos sólo ~9.5 son reales (~8.8%). Paradoja de la tasa base: condición rara  la mayoría de los positivos son falsos."
+  explanation="No es malo: con prevalencia del 1%, de 1000 sólo 10 están enfermos; el test detecta ~9.5 y genera ~99 falsos positivos entre 990 sanos. De ~108 positivos sólo ~9.5 son reales (~8.8%). Paradoja de la tasa base: condición rara → la mayoría de los positivos son falsos."
   options={[
     { id: "a", label: "El test no es malo; la enfermedad es rara: los falsos positivos dominan los positivos", correct: true, feedback: "Correcto: baja prevalencia hace que falsos positivos superen a verdaderos positivos." },
     { id: "b", label: "El test es malo por falta de especificidad (10% FP)", correct: false, feedback: "Especificidad ~90% es razonable; el cuello de botella es la prevalencia del 1%." },
@@ -221,20 +221,20 @@ p_pred_churn_given_churn = 0.80
 p_pred_churn_given_stay = 0.15
 
 p_churn_given_pred = (p_pred_churn_given_churn * p_churn) / (
-    p_pred_churn_given_churn * p_churn + p_pred_churn_given_stay * (1 p_churn)
+    p_pred_churn_given_churn * p_churn + p_pred_churn_given_stay * (1 - p_churn)
 )
 print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 ```
 
 <ChoiceQuestion
-  question="De los clientes marcados cómo 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade off enfrentan?"
+  question="De los clientes marcados cómo 'en riesgo de cancelar', solo el 37% realmente cancela. ¿Debería el equipo de retención contactar a todos los marcados? ¿Qué trade-off enfrentan?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  blockId="reflection l03 churn bayes"
+  blockId="reflection-l03-churn-bayes"
   allowContinueOnIncorrect
-  explanation="Depende del costo de contactar vs perder cliente: contacto barato (email)  contactar todos y rescatar ~80% de los que cancelarían; contacto caro  modelo más preciso. Trade off entre recall (detectar canceladores) y precision (no molestar no canceladores)."
+  explanation="Depende del costo de contactar vs perder cliente: contacto barato (email) → contactar todos y rescatar ~80% de los que cancelarían; contacto caro → modelo más preciso. Trade-off entre recall (detectar canceladores) y precision (no molestar no-canceladores)."
   options={[
-    { id: "a", label: "Depende del costo: si contactar es barato, sí (rescata ~80% de canceladores); trade off recall vs precision", correct: true, feedback: "Correcto: el contacto barato justifica rescatar la mayoría de canceladores." },
+    { id: "a", label: "Depende del costo: si contactar es barato, sí (rescata ~80% de canceladores); trade-off recall vs precision", correct: true, feedback: "Correcto: el contacto barato justifica rescatar la mayoría de canceladores." },
     { id: "b", label: "Contactar a todos siempre, sin importar el costo", correct: false, feedback: "Si contactar es caro (account manager), el beneficio puede no cubrir el costo." },
     { id: "c", label: "No contactar hasta tener precisión perfecta", correct: false, feedback: "Esperar precisión perfecta deja escapar la mayoría de canceladores." },
     { id: "d", label: "El 37% de precisión hace el modelo inútil", correct: false, feedback: "Con contacto barato, rescatar ~80% de canceladores ya justifica usarlo." },
@@ -250,18 +250,18 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 <ConceptCard variant="warning">
 **Cuatro trampas probabilísticas:**
 
-1. **Confundir $P(A|B)$ con $P(B|A)$**   la falacia del fiscal. Son cosas completamente diferentes.
-2. **Ignorar la tasa base**   Bayes muestra qué eventos raros siguen siendo raros incluso con evidencia positiva.
-3. **Asumir independencia sin verificar**   multiplicar probabilidades solo funciona si los eventos son independientes.
-4. **Malinterpretar el valor p**   un valor p NO es la probabilidad de qué la hipótesis nula sea verdadera.
+1. **Confundir $P(A|B)$ con $P(B|A)$** — la falacia del fiscal. Son cosas completamente diferentes.
+2. **Ignorar la tasa base** — Bayes muestra qué eventos raros siguen siendo raros incluso con evidencia positiva.
+3. **Asumir independencia sin verificar** — multiplicar probabilidades solo funciona si los eventos son independientes.
+4. **Malinterpretar el valor p** — un valor p NO es la probabilidad de qué la hipótesis nula sea verdadera.
 </ConceptCard>
 
 <CalloutInfo>
 **Mejores prácticas:**
 - Escribe siempre la probabilidad a priori antes de actualizar con evidencia
 - Usa simulación para verificar cálculos de probabilidad (es más fácil qué el álgebra)
-- Visualiza distribuciones cuándo sea posible   una imagen vale más qué mil fórmulas
-- La probabilidad cuantifica incertidumbre, no la elimina   no busques certezas dónde no las hay
+- Visualiza distribuciones cuándo sea posible — una imagen vale más qué mil fórmulas
+- La probabilidad cuantifica incertidumbre, no la elimina — no busques certezas dónde no las hay
 </CalloutInfo>
 
 </RevealSequence>
@@ -274,7 +274,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   question="¿Por qué el Axioma 2 de Kolmogorov (P(S) = 1) es necesario? ¿Qué pasaría si la probabilidad total no fuera 1?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  blockId="reflection l03 axioms"
+  blockId="reflection-l03-axioms"
   allowContinueOnIncorrect
   explanation="P(S)=1 garantiza que 'algo ocurre' y que las probabilidades sean interpretables como frecuencias o grados de creencia. Sin él, ningún resultado podría ocurrir: inconsistencia lógica. Es 'el todo es la suma de las partes'."
   options={[
@@ -289,7 +289,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   question="Se lanza un dado justo. ¿Cuáles son P(sacar 3) y P(número par)?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  blockId="choice estadistica l03 rev 1"
+  blockId="choice-estadistica-l03-rev-1"
   allowContinueOnIncorrect
   explanation="P(3) = 1/6 (un resultado favorable entre seis igualmente probables); P(par) = 3/6 = 1/2 (tres resultados pares: 2, 4, 6)."
   options={[
@@ -304,7 +304,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
   question="¿Por qué es esencial entender probabilidad condicional para interpretar puntajes de confianza de ML?"
   moduleSlug="estadistica"
   lessonSlug="lesson03_probability"
-  blockId="choice estadistica l03 rev 2"
+  blockId="choice-estadistica-l03-rev-2"
   allowContinueOnIncorrect
   explanation="Un clasificador con '95% confianza' entrega P(clase | features), no P(features | clase); confundirlas sobreestima la precisión, sobre todo con clases desbalanceadas."
   options={[
@@ -321,7 +321,7 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 <Section number={11} title="Términos clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 - **Espacio Muestral**: Conjunto de todos los resultados posibles de un experimento
 - **Evento**: Subconjunto del espacio muestral
 - **Probabilidad Condicional**: P(A|B): probabilidad de A sabiendo qué B ocurrió
@@ -339,16 +339,16 @@ print(f"P(deserción | predicho) = {p_churn_given_pred:.3f}")
 <RevealSequence mode="appear">
 
 <MascotMessage mood="celebrating">
-Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el machine learning moderno  desde clasificadores naive Bayes hasta redes neuronales bayesianas  se construye sobre estas ideas.
+Bayes es la herramienta matemática para razonar bajo incertidumbre. Todo el machine learning moderno —desde clasificadores naive Bayes hasta redes neuronales bayesianas— se construye sobre estas ideas.
 </MascotMessage>
 
 **¿Qué aprendiste hoy?**
 - Los tres axiomas de Kolmogorov son los cimientos de la probabilidad
-- $P(A|B) \neq P(B|A)$   la falacia del fiscal se cobra víctimas todos los días
-- Bayes actualiza creencias: a priori  evidencia  a posteriori
+- $P(A|B) \neq P(B|A)$ — la falacia del fiscal se cobra víctimas todos los días
+- Bayes actualiza creencias: a priori → evidencia → a posteriori
 - Las variables aleatorias discretas y continuas se manejan con PMF y PDF
 
-**En la Lección 4** vamos a conocer las distribuciones con nombre y apellido: Bernoulli, Binomial, Poisson y la famosísima distribución Normal. Porque hasta ahora hablamos de probabilidad en abstracto   es hora de ponerle nombres a las curvas.
+**En la Lección 4** vamos a conocer las distribuciones con nombre y apellido: Bernoulli, Binomial, Poisson y la famosísima distribución Normal. Porque hasta ahora hablamos de probabilidad en abstracto — es hora de ponerle nombres a las curvas.
 
 </RevealSequence>
 </Section>

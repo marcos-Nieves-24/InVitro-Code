@@ -43,7 +43,7 @@
 **Q8:** Escribe una celda de markdown que muestre:
 - Un encabezado de nivel 2 que diga "Results"
 - Una lista con viñetas con tres elementos
-- El texto "p value < 0.05" formateado como código inline
+- El texto "p-value < 0.05" formateado como código inline
 
 ## Clave de respuestas
 
@@ -67,7 +67,7 @@
 
 - Experiment 1 showed significant effects
 - Experiment 2 was inconclusive
-- Experiment 3 requires follow up
+- Experiment 3 requires follow-up
 
-The `p value < 0.05` threshold was used.
+The `p-value < 0.05` threshold was used.
 ```

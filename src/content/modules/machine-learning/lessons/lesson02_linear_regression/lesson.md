@@ -1,25 +1,25 @@
-
+---
 Module: 4
 Lesson Number: 2
 Lesson Title: Regresión Lineal
 Estimated Duration: 90 minutos
 Prerequisites: L1 (Fundamentos de ML), Módulo 3 estadística (varianza, covarianza, correlación)
 Learning Objectives:
-  Explicar la formulación matemática de la regresión lineal simple y múltiple
-  Implementar regresión lineal con scikit learn
-  Interpretar coeficientes de regresión en contexto
-  Evaluar modelos de regresión usando R², MSE y RMSE
-  Describir cómo el descenso por gradiente optimiza los parámetros del modelo
-Keywords: regresión lineal, OLS, descenso por gradiente, R cuadrado, MSE, coeficiente, intersección
+  - Explicar la formulación matemática de la regresión lineal simple y múltiple
+  - Implementar regresión lineal con scikit-learn
+  - Interpretar coeficientes de regresión en contexto
+  - Evaluar modelos de regresión usando R², MSE y RMSE
+  - Describir cómo el descenso por gradiente optimiza los parámetros del modelo
+Keywords: regresión lineal, OLS, descenso por gradiente, R-cuadrado, MSE, coeficiente, intersección
 Difficulty: Principiante
 Programming Concepts: sklearn.linear_model.LinearRegression, álgebra lineal con numpy
 Mathematical Concepts: Mínimos Cuadrados Ordinarios, descenso por gradiente, R², MSE, RMSE
 Machine Learning Concepts: regresión, ponderación de características, residuales
-Datasets Used: scikit learn diabetes, California Housing, sintético
+Datasets Used: scikit-learn diabetes, California Housing, sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Regresión Lineal
 
@@ -38,15 +38,15 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La regresión lineal predice un valor numérico continuo modelando la salida como suma ponderada de las características.
 </ConceptCard>
 
 <ChoiceQuestion
   question="Si quieres predecir la presión arterial (un número) a partir de edad y peso, ¿qué tipo de problema es?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  blockId="choice ml l02 s1 a 1"
+  blockId="choice-ml-l02-s1-1"
   allowContinueOnIncorrect
   explanation="Predecir un valor continuo (presión arterial) a partir de features es regresión."
   options={[
@@ -129,7 +129,7 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
 
 1. Inicia con $\boldsymbol{\beta}$ aleatorio
 2. Calcula el gradiente del error respecto a $\boldsymbol{\beta}$
-3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} \alpha \nabla \text{MSE}$
+3. Actualiza: $\boldsymbol{\beta} := \boldsymbol{\beta} - \alpha \nabla \text{MSE}$
 4. Repite hasta converger
 
 <GradientDescent caption="Mueve la tasa de aprendizaje: con α chica converge paso a paso; con α grande, diverge. Probá distintos puntos de inicio." />
@@ -150,7 +150,7 @@ Cuando tienes miles de features, calcular $(\mathbf{X}^\top\mathbf{X})^{-1}$ es 
     Dirección de mayor aumento del error; se resta para bajar.
   </EquationStep>
   <EquationStep label="Nuevo β">
-    $\boldsymbol{\beta} \alpha \nabla \text{MSE}$
+    $\boldsymbol{\beta} - \alpha \nabla \text{MSE}$
     Coeficientes actualizados hacia el mínimo.
   </EquationStep>
 </EquationTour>
@@ -177,7 +177,7 @@ $\alpha$ es la **tasa de aprendizaje** (learning rate). Si es muy chica, tardas 
 <RevealSequence mode="appear">
 
 <ConceptCard variant="definition">
-**MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i \hat{y}_i)^2$
+**MSE (Error Cuadrático Medio):** $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
 
 Penaliza fuerte los errores grandes (los eleva al cuadrado). La métrica que el modelo optimiza internamente.
 </ConceptCard>
@@ -189,26 +189,26 @@ La ventaja: está en las mismas unidades que $y$. Si predices precios en dólare
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**R² (Coeficiente de Determinación):** $1 \frac{\sum(y_i \hat{y}_i)^2}{\sum(y_i \bar{y})^2}$
+**R² (Coeficiente de Determinación):** $1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$
 
 Proporción de varianza explicada. R² = 1 es ajuste perfecto, R² = 0 es tan bueno como predecir siempre el promedio, R² < 0 es peor que el promedio.
 </ConceptCard>
 
 <EquationTour caption="MSE penaliza el error; R² mide qué porción de la varianza captura el modelo.">
   <EquationStep label="Error residual">
-    $y_i \hat{y}_i$
+    $y_i - \hat{y}_i$
     Qué tanto se equivocó el modelo en un punto.
   </EquationStep>
   <EquationStep label="MSE">
-    $\frac{1}{n}\sum(y_i \hat{y}_i)^2$
+    $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$
     Promedio de errores al cuadrado: base que el modelo optimiza.
   </EquationStep>
   <EquationStep label="SS_res">
-    $\sum(y_i \hat{y}_i)^2$
+    $\sum(y_i - \hat{y}_i)^2$
     Error acumulado del modelo.
   </EquationStep>
   <EquationStep label="R²">
-    $1 \frac{SS_{\text{res}}}{SS_{\text{tot}}}$
+    $1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$
     Fracción de varianza explicada; 1 es perfecto, 0 equivale a la media.
   </EquationStep>
 </EquationTour>
@@ -248,7 +248,7 @@ plt.show()
 ```
 
 <CalloutInfo>
-La línea roja es lo que el modelo aprendió. Cada punto azul que se desvía de la línea es un residual   lo que el modelo no pudo explicar. El objetivo de OLS es hacer que esas desviaciones verticales sean lo más chicas posible, en promedio.
+La línea roja es lo que el modelo aprendió. Cada punto azul que se desvía de la línea es un residual — lo que el modelo no pudo explicar. El objetivo de OLS es hacer que esas desviaciones verticales sean lo más chicas posible, en promedio.
 </CalloutInfo>
 
 </RevealSequence>
@@ -290,9 +290,9 @@ print(f"R²:   {r2_score(y_test, y_pred):.3f}")
 
 <ChoiceQuestion
   question="Mira los coeficientes. Si un coeficiente es 50 y otro es 0.5, ¿significa que la primera feature es 100 veces más importante?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  blockId="reflection l02 coefficients"
+  blockId="reflection-l02-coefficients"
   allowContinueOnIncorrect
   explanation="No necesariamente: los coeficientes dependen de las unidades de cada feature. Si una feature va de 0 a 1 y otra de 0 a 1000, no son comparables. Hay que estandarizar (restar media, dividir por desvío) para comparar importancia real."
   options={[
@@ -359,7 +359,7 @@ solubility_data = pd.DataFrame({
 
 solubility_data['solubility'] = (
     0.5
-    0.3 * solubility_data['hydrophobicity']
+    - 0.3 * solubility_data['hydrophobicity']
     + 0.1 * solubility_data['charge']
     + 0.2 * solubility_data['helix_fraction']
     + np.random.normal(0, 0.1, n_proteins)
@@ -376,8 +376,8 @@ for col, coef in zip(X_s.columns, model_s.coef_):
 print(f"R²: {model_s.score(X_s, y_s):.3f}")
 ```
 
-<ConceptCard variant="key idea">
-La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas  menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
+<ConceptCard variant="key-idea">
+La hidrofobicidad tiene el coeficiente negativo más grande: proteínas más hidrofóbicas → menos solubles en agua. Esto coincide con lo que sabemos de bioquímica. Cuando los coeficientes tienen sentido físico, confías más en el modelo.
 </ConceptCard>
 
 </RevealSequence>
@@ -413,7 +413,7 @@ revenue_data = pd.DataFrame({
 true_mrr = (
     0.5 * revenue_data['active_users']
     + 2.0 * revenue_data['new_signups']
-    500 * revenue_data['churn_rate']
+    - 500 * revenue_data['churn_rate']
     + revenue_data['avg_revenue_per_user'] * revenue_data['active_users'] * 0.01
     + np.random.normal(0, 100, n_months)
 )
@@ -461,7 +461,7 @@ for col, coef in zip(X_r.columns, model_r.coef_):
 <CalloutCheck>
 Visualiza siempre los datos antes de modelar. Un scatter plot te dice más que cualquier métrica.
 
-Revisa los gráficos de residuales (residuales vs. ajustados, Q Q plot). Son tu alerta temprana de violaciones de supuestos.
+Revisa los gráficos de residuales (residuales vs. ajustados, Q-Q plot). Son tu alerta temprana de violaciones de supuestos.
 
 Usa RMSE en lugar de MSE para comunicar resultados. "El modelo se equivoca en promedio por \$3,200" es más claro que "MSE = 10,240,000".
 
@@ -478,51 +478,51 @@ Considera regularización (Ridge, Lasso) cuando tengas muchas features. La regre
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La regresión lineal modela el objetivo como suma ponderada de features. OLS encuentra los coeficientes óptimos minimizando el error cuadrático. R² mide cuánta varianza explicas, RMSE mide cuánto te equivocas en unidades reales. El descenso por gradiente es la alternativa iterativa cuando la solución cerrada es inviable.
 </ConceptCard>
 
-{/* candidate player: interactive table glosario regresion */}
-<ConceptCard variant="key idea">
+{/* candidate-player: interactive-table-glosario-regresion */}
+<ConceptCard variant="key-idea">
 **Glosario**
-- OLS: Mínimos Cuadrados Ordinarios   solución cerrada que minimiza MSE.
+- OLS: Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE.
 - Coeficiente: peso asignado a una feature.
 - Intersección: predicción cuando todas las features son 0.
 - Residual: diferencia entre valor real y predicción: yᵢ − ŷᵢ.
 - R²: proporción de varianza explicada. 1 = perfecto, 0 = promedio.
 - MSE: error cuadrático medio. Penaliza fuerte los errores grandes.
-- RMSE: raíz del MSE. Mismas unidades que y   interpretable.
+- RMSE: raíz del MSE. Mismas unidades que y — interpretable.
 - Descenso por gradiente: optimización iterativa ajustando β en dirección del gradiente negativo.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
-    { id: "modelo lineal", label: "Modelo lineal", detail: "Predicción como suma ponderada de features más intersección." },
+    { id: "modelo-lineal", label: "Modelo lineal", detail: "Predicción como suma ponderada de features más intersección." },
     { id: "ols", label: "OLS", detail: "Solución cerrada que minimiza el error cuadrático medio." },
     { id: "coeficiente", label: "Coeficiente", detail: "Peso asignado a cada feature." },
     { id: "r2", label: "R²", detail: "Proporción de varianza explicada por el modelo." },
     { id: "rmse", label: "RMSE", detail: "Raíz del error cuadrático medio, en unidades de y." },
-    { id: "descenso gradiente", label: "Descenso por gradiente", detail: "Optimización iterativa cuando la solución cerrada es inviable." },
+    { id: "descenso-gradiente", label: "Descenso por gradiente", detail: "Optimización iterativa cuando la solución cerrada es inviable." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss ols", label: "OLS", detail: "Mínimos Cuadrados Ordinarios   solución cerrada que minimiza MSE." },
-    { id: "gloss coeficiente", label: "Coeficiente", detail: "Peso asignado a una feature." },
-    { id: "gloss interseccion", label: "Intersección", detail: "Predicción cuando todas las features son 0." },
-    { id: "gloss residual", label: "Residual", detail: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ." },
-    { id: "gloss r2", label: "R²", detail: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio." },
-    { id: "gloss mse", label: "MSE", detail: "Error cuadrático medio. Penaliza fuerte los errores grandes." },
-    { id: "gloss rmse", label: "RMSE", detail: "Raíz del MSE. Mismas unidades que y   interpretable." },
+    { id: "gloss-ols", label: "OLS", detail: "Mínimos Cuadrados Ordinarios — solución cerrada que minimiza MSE." },
+    { id: "gloss-coeficiente", label: "Coeficiente", detail: "Peso asignado a una feature." },
+    { id: "gloss-interseccion", label: "Intersección", detail: "Predicción cuando todas las features son 0." },
+    { id: "gloss-residual", label: "Residual", detail: "Diferencia entre valor real y predicción: yᵢ − ŷᵢ." },
+    { id: "gloss-r2", label: "R²", detail: "Proporción de varianza explicada. 1 = perfecto, 0 = promedio." },
+    { id: "gloss-mse", label: "MSE", detail: "Error cuadrático medio. Penaliza fuerte los errores grandes." },
+    { id: "gloss-rmse", label: "RMSE", detail: "Raíz del MSE. Mismas unidades que y — interpretable." },
   ]}
 />
 
 <ChoiceQuestion
   question="¿Qué mide el R² en una regresión lineal?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  blockId="choice ml l02 resumen 1"
+  blockId="choice-ml-l02-resumen-1"
   allowContinueOnIncorrect
   explanation="R² mide la proporción de varianza de la variable objetivo que el modelo logra explicar. Un valor de 1 indica ajuste perfecto, 0 equivale a predecir siempre el promedio, y valores negativos indican peor que el promedio."
   options={[
@@ -546,10 +546,10 @@ La regresión lineal ya no tiene secretos para ti. El siguiente paso son los ár
 <RevealSequence mode="appear">
 
 <ChoiceQuestion
-  question="Nivel 1   ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
-  moduleSlug="machine learning"
+  question="Nivel 1 — ¿Qué significan en la práctica R² = 1, R² = 0 y R² = -0.5?"
+  moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  blockId="reflection l02 r2 values"
+  blockId="reflection-l02-r2-values"
   allowContinueOnIncorrect
   explanation="R²=1: explica 100% de varianza (posible sobreajuste); R²=0: no mejor que predecir siempre el promedio de y; R²=-0.5: peor que el promedio (error en código o modelo inadecuado)."
   options={[
@@ -561,10 +561,10 @@ La regresión lineal ya no tiene secretos para ti. El siguiente paso son los ár
 />
 
 <ChoiceQuestion
-  question="Nivel 3   Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
-  moduleSlug="machine learning"
+  question="Nivel 3 — Tienes 5 features. Después de entrenar, 3 tienen coeficientes enormes y 2 muy chicos. ¿Son irrelevantes esas 2 features?"
+  moduleSlug="machine-learning"
   lessonSlug="lesson02_linear_regression"
-  blockId="reflection l02 feature importance"
+  blockId="reflection-l02-feature-importance"
   allowContinueOnIncorrect
   explanation="No necesariamente: por falta de escala, multicolinealidad (features correlacionadas reparten peso) o irrelevancia real. Para saberlo, estandarizar y usar Lasso, que lleva irrelevantes a cero."
   options={[
@@ -575,7 +575,7 @@ La regresión lineal ya no tiene secretos para ti. El siguiente paso son los ár
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Desafío:** Implementa OLS desde cero con la solución cerrada. Compara tus coeficientes con `sklearn`.
 </ConceptCard>
 
@@ -594,16 +594,16 @@ def linear_regression_from_scratch(X, y):
     
     # R²
     y_pred = X_b @ beta
-    ss_res = np.sum((y y_pred) ** 2)
-    ss_tot = np.sum((y np.mean(y)) ** 2)
-    r2 = 1 ss_res / ss_tot
+    ss_res = np.sum((y - y_pred) ** 2)
+    ss_tot = np.sum((y - np.mean(y)) ** 2)
+    r2 = 1 - ss_res / ss_tot
     
     return coefs, intercept, r2
 
 # Prueba con datos sintéticos
 np.random.seed(42)
 X = np.random.rand(100, 3) * 10
-y = 2.5 + 1.3 * X[:, 0] 0.7 * X[:, 1] + 0.5 * X[:, 2] + np.random.normal(0, 1, 100)
+y = 2.5 + 1.3 * X[:, 0] - 0.7 * X[:, 1] + 0.5 * X[:, 2] + np.random.normal(0, 1, 100)
 
 coefs, intercept, r2 = linear_regression_from_scratch(X, y)
 print(f"Intercept: {intercept:.4f}")

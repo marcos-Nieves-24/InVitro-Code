@@ -56,7 +56,7 @@
 
 **Q6:** Plotly Express es una API de alto nivel que crea figuras completas con una sola llamada a una función: es ideal para exploración rápida y gráficos estándar. Graph Objects es una API de menor nivel que da control total sobre cada elemento de la figura (traces, layout, anotaciones): es ideal para paneles personalizados, figuras con múltiples traces y disposiciones de subplots. Empieza con Express y migra a Graph Objects cuando necesites un control más fino.
 
-**Q7:** La visualización interactiva importa en biotecnología porque: (1) los volcano plots con hover permiten identificar genes específicos por nombre sin saturar el gráfico con etiquetas; (2) los scatter plots 3D de datos de PCA o t SNE con zoom/rotación permiten identificar agrupaciones visualmente; (3) los paneles con menús desplegables permiten que los biólogos cambien entre métricas de expresión génica sin reescribir código; (4) los scatter plots animados muestran la evolución temporal de datos moleculares.
+**Q7:** La visualización interactiva importa en biotecnología porque: (1) los volcano plots con hover permiten identificar genes específicos por nombre sin saturar el gráfico con etiquetas; (2) los scatter plots 3D de datos de PCA o t-SNE con zoom/rotación permiten identificar agrupaciones visualmente; (3) los paneles con menús desplegables permiten que los biólogos cambien entre métricas de expresión génica sin reescribir código; (4) los scatter plots animados muestran la evolución temporal de datos moleculares.
 
 **Q8:**
 ```python

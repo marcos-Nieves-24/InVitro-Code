@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 4: Arboles de decision
-# -
+# -------------------------------------------------------------------------
 # Entrenamos un DecisionTreeClassifier sobre iris, imprimimos su estructura
 # textual (nodos, umbrales, impurezas y hojas) y analizamos la importancia
 # de cada feature junto con el efecto de la profundidad.
@@ -22,7 +22,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 arbol = DecisionTreeClassifier(max_depth=3, random_state=42)
 arbol.fit(X_train, y_train)
 y_pred = arbol.predict(X_test)
-print("PASO 1 Arbol entrenado")
+print("PASO 1 - Arbol entrenado")
 print(f"Exactitud en prueba: {accuracy_score(y_test, y_pred):.3f}")
 
 # PASO 2: Estructura textual del arbol.
@@ -43,7 +43,7 @@ def imprimir_nodo(clf, nombres, nodo=0, nivel=0):
         imprimir_nodo(clf, nombres, tree.children_left[nodo], nivel + 1)
         imprimir_nodo(clf, nombres, tree.children_right[nodo], nivel + 1)
 
-print("PASO 2 Estructura textual del arbol")
+print("PASO 2 - Estructura textual del arbol")
 imprimir_nodo(arbol, iris.feature_names)
 
 # PASO 3: Importancia de las features.
@@ -53,9 +53,9 @@ import plotly.express as px                # Graficos interactivos
 importancias = arbol.feature_importances_
 fig = px.bar(x=iris.feature_names, y=importancias,
              labels={"x": "Feature", "y": "Importancia"},
-             title="Importancia de features DecisionTreeClassifier")
+             title="Importancia de features - DecisionTreeClassifier")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 3 Feature mas importante:",
+print("PASO 3 - Feature mas importante:",
       iris.feature_names[int(np.argmax(importancias))])
 
 # PASO 4: Profundidad y sobreajuste.
@@ -80,6 +80,6 @@ fig = px.line(x=profundidades, y=acc_test,
 fig.add_scatter(x=profundidades, y=acc_train, mode="lines",
                 name="Entrenamiento")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 4 Profundidad optima en prueba:",
+print("PASO 4 - Profundidad optima en prueba:",
       profundidades[int(np.argmax(acc_test))])
 ```

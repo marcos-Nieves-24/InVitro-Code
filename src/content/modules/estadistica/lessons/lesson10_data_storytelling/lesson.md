@@ -1,15 +1,15 @@
-
+---
 Module: 3
 Lesson Number: 10
 Lesson Title: Narración de Datos
 Estimated Duration: 60 minutos
-Prerequisites: Lecciones 1 a 6
+Prerequisites: Lecciones 1-6
 Learning Objectives:
-  Estructurar una historia de datos con arco narrativo
-  Aplicar mejores prácticas de visualización para una comunicación efectiva
-  Diseñar dashboards informativos
-  Comunicar hallazgos estadísticos a audiencias no técnicas
-  Evitar errores comunes de visualización
+  - Estructurar una historia de datos con arco narrativo
+  - Aplicar mejores prácticas de visualización para una comunicación efectiva
+  - Diseñar dashboards informativos
+  - Comunicar hallazgos estadísticos a audiencias no técnicas
+  - Evitar errores comunes de visualización
 Keywords: narración de datos, visualización, dashboard, comunicación, narrativa, periodismo de datos
 Difficulty: Intermedio
 Programming Concepts: matplotlib, plotly, seaborn, dashboards
@@ -19,7 +19,7 @@ Datasets Used: pingüinos, mpg, sintético
 Notebook: 10_data_storytelling.ipynb
 Assignment: data_storytelling_assignment.md
 Quiz: data_storytelling_quiz.md
-
+---
 
 <Section number={1} title="El análisis que nadie lee" eyebrow="INICIO">
 
@@ -43,7 +43,7 @@ Realizaste el EDA, corriste PCA, evaluaste tu modelo con validación cruzada... 
 
 El mejor análisis del mundo resulta inútil si no convence a quien toma las decisiones. Un médico necesita entender por qué el modelo recomienda un tratamiento. Un director ejecutivo necesita ver el retorno sobre la inversión, no el error cuadrático medio. La narración de datos es el puente entre el análisis técnico y la decisión humana.
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Los datos, en sí mismos, no producen decisiones. Quien decide necesita contexto, comparación y una explicación de por qué el hallazgo importa. La narración de datos aporta ese contexto.
 </ConceptCard>
 
@@ -97,14 +97,14 @@ Ejemplo biotecnológico: "Este nuevo fármaco reduce tumores en el 60 % de los p
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Visualización por objetivo:
-- **Tendencias**  gráfico de líneas (fácil de leer, tiempo en eje X)
-- **Comparar categorías**  gráfico de barras (ordenar por valor, no alfabéticamente)
-- **Mostrar distribución**  histograma o boxplot (mejor que tabla de frecuencias)
-- **Relación entre variables**  scatter plot (agregar línea de tendencia si hay correlación)
-- **Partes de un todo**  gráfico de barras apiladas (evitar gráficos de torta)
-- **Matriz de correlación**  heatmap (anotar con valores para referencia rápida)
+- **Tendencias** → gráfico de líneas (fácil de leer, tiempo en eje X)
+- **Comparar categorías** → gráfico de barras (ordenar por valor, no alfabéticamente)
+- **Mostrar distribución** → histograma o boxplot (mejor que tabla de frecuencias)
+- **Relación entre variables** → scatter plot (agregar línea de tendencia si hay correlación)
+- **Partes de un todo** → gráfico de barras apiladas (evitar gráficos de torta)
+- **Matriz de correlación** → heatmap (anotar con valores para referencia rápida)
 </ConceptCard>
 
 <ConceptCard variant="warning">
@@ -133,7 +133,7 @@ Errores clásicos de visualización: ejes truncados que exageran las diferencias
 
 <CalloutInfo>
 **Reglas de oro del dashboard**:
-- 3 a 5 visualizaciones máximo. Si necesitas mas, hace dos dashboards
+- 3-5 visualizaciones máximo. Si necesitas mas, hace dos dashboards
 - La visualizacion más importante arriba a la izquierda (patron de lectura F)
 - Cada gráfico responde UNA pregunta
 - Colores con significado: rojo = problema, verde = bien, azul = neutral
@@ -144,7 +144,7 @@ Errores clásicos de visualización: ejes truncados que exageran las diferencias
   question="Un dashboard tiene 12 graficos y ocupa 3 pantallas de scroll. Cuál es el problema y cómo lo arreglarias?"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  blockId="reflection l10 dashboard"
+  blockId="reflection-l10-dashboard"
   allowContinueOnIncorrect
   explanation="La atención es escasa: elige los 3 KPIs clave para la primera pantalla sin scroll y mueve los otros 9 a una página secundaria; la prueba es que el CEO lo entienda en 10 segundos."
   options={[
@@ -175,12 +175,12 @@ Errores clásicos de visualización: ejes truncados que exageran las diferencias
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Traducir estadística a decisiones:
-- **"El RMSE fue 3.4 con R² de 0.72"**  "El modelo predice el precio con un error típico de $3,400 y captura el 72 % de la variación" (unidades y contexto humano)
-- **"Realizamos PCA con 3 componentes que explican el 85 % de la varianza"**  "Redujimos 50 variables a 3 dimensiones principales sin perder casi información" (analogía visual intuitiva)
-- **"El p valor fue 0.03, rechazamos H₀"**  "Hay solo un 3 % de probabilidad de que este resultado sea casualidad" (traducir la significancia estadística a lenguaje común)
-- **"K Means con k=4, silueta 0.65"**  "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos" (resultado accionable, no parámetro técnico)
+- **"El RMSE fue 3.4 con R² de 0.72"** → "El modelo predice el precio con un error típico de $3,400 y captura el 72 % de la variación" (unidades y contexto humano)
+- **"Realizamos PCA con 3 componentes que explican el 85 % de la varianza"** → "Redujimos 50 variables a 3 dimensiones principales sin perder casi información" (analogía visual intuitiva)
+- **"El p-valor fue 0.03, rechazamos H₀"** → "Hay solo un 3 % de probabilidad de que este resultado sea casualidad" (traducir la significancia estadística a lenguaje común)
+- **"K-Means con k=4, silueta 0.65"** → "Encontramos 4 grupos naturales de clientes con comportamientos muy distintos" (resultado accionable, no parámetro técnico)
 </ConceptCard>
 
 </RevealSequence>
@@ -243,7 +243,7 @@ Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son
   question="Tu modelo de ML predice que el 85 % de los pacientes responde a un tratamiento. El director médico te pregunta si deben usarlo en el hospital. ¿Qué le respondes?"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  blockId="reflection l10 storytelling"
+  blockId="reflection-l10-storytelling"
   allowContinueOnIncorrect
   explanation="Del 85 % de aciertos, los 15 errores se dividen en falsos negativos (pacientes que perderían tratamiento) y falsos positivos (tratamiento sin beneficio + efectos secundarios); la respuesta debe convertir la métrica en un dilema clínico."
   options={[
@@ -258,7 +258,7 @@ Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son
   question="Gráfico de torta o de barras para mostrar participación de mercado de 5 competidores?"
   moduleSlug="estadistica"
   lessonSlug="lesson10_data_storytelling"
-  blockId="choice estadistica l10 rev 1"
+  blockId="choice-estadistica-l10-rev-1"
   allowContinueOnIncorrect
   explanation="Barras, siempre: las tortas son difíciles de comparar (el ojo humano es malo comparando ángulos). Con barras ordenadas de mayor a menor, en 2 segundos entendés quién lidera y por cuánto."
   options={[
@@ -289,7 +289,7 @@ Plotly genera gráficos interactivos: zoom, tooltips con datos y selección. Son
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Términos clave:
 - **Narración de Datos**: Comunicar hallazgos con contexto, narrativa y visualizaciones
 - **Arco Narrativo**: Estructura: contexto, conflicto, resolución
@@ -331,7 +331,7 @@ Felicitaciones por completar el Módulo 3 de Estadística y Probabilidad. De est
 - Relaciones: Pearson, Spearman, correlación vs. causalidad
 - EDA: el flujo de trabajo del científico de datos
 - PCA: reducir dimensionalidad sin perder información
-- Clustering: encontrar grupos naturales con K Means
+- Clustering: encontrar grupos naturales con K-Means
 - Evaluación: medir qué tan bueno es el modelo
 - Narración de datos: comunicar resultados para generar acción
 

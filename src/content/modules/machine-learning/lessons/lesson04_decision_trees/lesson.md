@@ -1,15 +1,15 @@
-
+---
 Module: 4
 Lesson Number: 4
 Lesson Title: Árboles de Decisión
 Estimated Duration: 75 minutos
 Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  Explicar cómo los árboles de decisión hacen predicciones mediante particionamiento recursivo
-  Describir la impureza de Gini y la entropía como criterios de división
-  Entrenar y visualizar árboles de decisión con scikit learn
-  Diagnosticar sobreajuste en árboles de decisión y aplicar poda
-  Comparar árboles de decisión con modelos lineales
+  - Explicar cómo los árboles de decisión hacen predicciones mediante particionamiento recursivo
+  - Describir la impureza de Gini y la entropía como criterios de división
+  - Entrenar y visualizar árboles de decisión con scikit-learn
+  - Diagnosticar sobreajuste en árboles de decisión y aplicar poda
+  - Comparar árboles de decisión con modelos lineales
 Keywords: árbol de decisión, impureza de Gini, entropía, ganancia de información, poda, sobreajuste
 Difficulty: Intermedio
 Programming Concepts: sklearn.tree.DecisionTreeClassifier, sklearn.tree.plot_tree
@@ -19,7 +19,7 @@ Datasets Used: iris, breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Árboles de Decisión
 
@@ -43,7 +43,7 @@ Quiz: quiz.md
 Los árboles de decisión son el algoritmo más intuitivo del ML. Hacen exactamente lo que harías tú: una serie de preguntas de sí/no hasta llegar a una conclusión. Y lo mejor: puedes dibujar el resultado y explicárselo a cualquiera.
 </MascotMessage>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 A diferencia de la regresión logística (fronteras lineales), los árboles crean **fronteras en forma de escalera** alineadas a los ejes. Esto los hace naturales para datos donde las relaciones no son lineales y los thresholds importan más que las pendientes.
 </ConceptCard>
 
@@ -66,7 +66,7 @@ A diferencia de la regresión logística (fronteras lineales), los árboles crea
   ]}
 />
 
-- **Nodo raíz:** La primera pregunta   la feature más informativa del dataset
+- **Nodo raíz:** La primera pregunta — la feature más informativa del dataset
 - **Nodos internos:** Preguntas basadas en thresholds de features
 - **Ramas:** Los caminos que siguen las respuestas (sí / no)
 - **Hojas:** Donde se detiene el árbol y se hace la predicción final
@@ -99,23 +99,23 @@ Un árbol con profundidad 1 se llama **stump** (tocón). Hace una sola pregunta.
 En cada nodo, el algoritmo evalúa todas las features y todos los thresholds posibles, y elige la división que maximiza la **ganancia de información**.
 
 <ConceptCard variant="definition">
-**Impureza de Gini:** $\text{Gini}(t) = 1 \sum_{i=1}^{c} p_i^2$
+**Impureza de Gini:** $\text{Gini}(t) = 1 - \sum_{i=1}^{c} p_i^2$
 
-Mide la probabilidad de clasificar mal un elemento al azar. Gini = 0  nodo puro (todas las muestras son de la misma clase). Gini alto  mezcla de clases.
+Mide la probabilidad de clasificar mal un elemento al azar. Gini = 0 → nodo puro (todas las muestras son de la misma clase). Gini alto → mezcla de clases.
 </ConceptCard>
 
 <ConceptCard variant="definition">
 **Entropía:** $\text{Entropía}(t) = -\sum_{i=1}^{c} p_i \log_2(p_i)$
 
-Otra medida de "desorden". Entropía = 0  pureza total. La entropía penaliza más la incertidumbre que Gini cuando hay muchas clases.
+Otra medida de "desorden". Entropía = 0 → pureza total. La entropía penaliza más la incertidumbre que Gini cuando hay muchas clases.
 </ConceptCard>
 
 **Ganancia de información:** Reducción en impureza después de dividir:
 
-$$\text{IG} = \text{Impureza}_{\text{padre}} \sum_{j} \frac{n_j}{n} \text{Impureza}_{\text{hijo}_j}$$
+$$\text{IG} = \text{Impureza}_{\text{padre}} - \sum_{j} \frac{n_j}{n} \text{Impureza}_{\text{hijo}_j}$$
 
 <CalloutCheck>
-En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es más rápido computacionalmente y es el default de scikit learn. Usa Entropía solo si tienes razones teóricas para preferirla.
+En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es más rápido computacionalmente y es el default de scikit-learn. Usa Entropía solo si tienes razones teóricas para preferirla.
 </CalloutCheck>
 
 </RevealSequence>
@@ -133,28 +133,28 @@ En la práctica, Gini y Entropía rara vez dan árboles muy diferentes. Gini es 
   lines={[
     "Un árbol sin límite memoriza cada paciente y sobreajusta.",
     "La poda controla la profundidad para que generalice.",
-    "Pre poda pone barreras antes de crecer; post poda recorta ramas inútiles.",
+    "Pre-poda pone barreras antes de crecer; post-poda recorta ramas inútiles.",
   ]}
 />
 
-Los árboles sin límites crecen hasta que cada hoja es 100% pura   memorizan los datos de entrenamiento. La **poda** es el mecanismo para controlar esto:
+Los árboles sin límites crecen hasta que cada hoja es 100% pura — memorizan los datos de entrenamiento. La **poda** es el mecanismo para controlar esto:
 
-{/* candidate player: comparison poda pre vs post */}
-<ConceptCard variant="key idea">
-**Pre poda vs post poda**
-- Cuándo: pre poda durante el crecimiento del árbol; post poda después de que el árbol creció completo.
-- Cómo: pre poda con parámetros `max_depth`, `min_samples_split`, `min_samples_leaf`; post poda eliminando ramas que no mejoran la validación.
-- Ventaja: pre poda más rápido y menos cómputo; post poda puede encontrar interacciones sutiles que la pre poda perdería.
-- En sklearn: pre poda `max_depth=5`, `min_samples_leaf=10`; post poda `ccp_alpha` (Cost Complexity Pruning).
+{/* candidate-player: comparison-poda-pre-vs-post */}
+<ConceptCard variant="key-idea">
+**Pre-poda vs post-poda**
+- Cuándo: pre-poda durante el crecimiento del árbol; post-poda después de que el árbol creció completo.
+- Cómo: pre-poda con parámetros `max_depth`, `min_samples_split`, `min_samples_leaf`; post-poda eliminando ramas que no mejoran la validación.
+- Ventaja: pre-poda más rápido y menos cómputo; post-poda puede encontrar interacciones sutiles que la pre-poda perdería.
+- En sklearn: pre-poda `max_depth=5`, `min_samples_leaf=10`; post-poda `ccp_alpha` (Cost Complexity Pruning).
 </ConceptCard>
 
 <ChoiceQuestion
   question="Un árbol con max_depth=None alcanza 100% de precisión en entrenamiento pero 60% en prueba. ¿Qué está pasando y cómo lo arreglas?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson04_decision_trees"
-  blockId="reflection l04 depth overfit"
+  blockId="reflection-l04-depth-overfit"
   allowContinueOnIncorrect
-  explanation="Sobreajuste clásico: el árbol creció hasta memorizar cada muestra. Estrategias: (1) limitar max_depth con CV, (2) aumentar min_samples_split, (3) poda por costo complejidad (ccp_alpha)."
+  explanation="Sobreajuste clásico: el árbol creció hasta memorizar cada muestra. Estrategias: (1) limitar max_depth con CV, (2) aumentar min_samples_split, (3) poda por costo-complejidad (ccp_alpha)."
   options={[
     { id: "a", label: "Sobreajuste: limitar max_depth, subir min_samples_split y podar (ccp_alpha)", correct: true, feedback: "¡Correcto! Es la receta clásica para árboles sobreajustados." },
     { id: "b", label: "Subajuste: conviene profundizar más el árbol", correct: false, feedback: "Falso: train 100% indica que ya es demasiado profundo." },
@@ -201,7 +201,7 @@ plt.show()
 ```
 
 <CalloutInfo>
-Cada nodo muestra: la feature y threshold de división, la impureza de Gini, cuántas muestras llegaron, y la distribución de clases. Los colores indican la clase predominante   cuanto más intenso, más puro es el nodo.
+Cada nodo muestra: la feature y threshold de división, la impureza de Gini, cuántas muestras llegaron, y la distribución de clases. Los colores indican la clase predominante — cuanto más intenso, más puro es el nodo.
 </CalloutInfo>
 
 <TreeSplit caption="Elegí la feature y el umbral vos mismo: mirá cómo la impureza de Gini baja en los dos hijos, y usá Dividir para hacer crecer el árbol." />
@@ -235,7 +235,7 @@ for depth in [1, 3, 5, 10, None]:
 ```
 
 <CalloutCheck>
-El mejor árbol no es el más profundo   es el que tiene el menor gap entre train y test. Cuando la precisión de entrenamiento sigue subiendo pero la de prueba se estanca (o empeora), ya estás sobreajustando.
+El mejor árbol no es el más profundo — es el que tiene el menor gap entre train y test. Cuando la precisión de entrenamiento sigue subiendo pero la de prueba se estanca (o empeora), ya estás sobreajustando.
 </CalloutCheck>
 
 </RevealSequence>
@@ -266,7 +266,7 @@ bio_data = pd.DataFrame({
     'age': np.random.randint(20, 80, n),
     'gene_mutation_count': np.random.poisson(3, n),
 })
-risk = (0.3 * bio_data['biomarker_1'] 0.2 * bio_data['biomarker_2']
+risk = (0.3 * bio_data['biomarker_1'] - 0.2 * bio_data['biomarker_2']
         + 0.01 * bio_data['age'] + 0.1 * bio_data['gene_mutation_count']
         + np.random.normal(0, 0.3, n))
 bio_data['high_risk'] = (risk > risk.median()).astype(int)
@@ -276,7 +276,7 @@ tree.fit(bio_data.drop('high_risk', axis=1), bio_data['high_risk'])
 print(f"Importancias: {dict(zip(bio_data.columns[:-1], tree.feature_importances_))}")
 ```
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 La ventaja del árbol en medicina: es **explicable**. Puedes mostrarle al médico el diagrama y decirle "el modelo decidió alto riesgo porque biomarker_1 > 0.5 Y edad > 60". Con una red neuronal, no podrías.
 </ConceptCard>
 
@@ -317,7 +317,7 @@ print(f"Importancias: {dict(zip(lead_data.columns[:-1], tree.feature_importances
 <CalloutInfo>
 1. **Sin límite de profundidad.** El árbol crece hasta pureza total y sobreajusta catastróficamente. Siempre pon max_depth.
 
-2. **Ignorar feature importance.** Los árboles te regalan un ranking de features. No lo desperdicies   es oro para entender tu problema.
+2. **Ignorar feature importance.** Los árboles te regalan un ranking de features. No lo desperdicies — es oro para entender tu problema.
 
 3. **Inestabilidad.** Pequeños cambios en los datos pueden producir árboles muy distintos. Para eso existen Random Forests (próxima lección).
 
@@ -336,48 +336,48 @@ Limita profundidad con validación cruzada. Visualiza el árbol para comunicar r
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
-Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpretables, manejan no linealidades naturalmente, pero tienden al sobreajuste. La poda (max_depth, min_samples_leaf) es obligatoria. La feature importance es uno de sus outputs más valiosos.
+<ConceptCard variant="key-idea">
+Los árboles dividen datos recursivamente usando Gini o Entropía. Son interpretables, manejan no-linealidades naturalmente, pero tienden al sobreajuste. La poda (max_depth, min_samples_leaf) es obligatoria. La feature importance es uno de sus outputs más valiosos.
 </ConceptCard>
 
-{/* candidate player: interactive table glosario decision trees */}
-<ConceptCard variant="key idea">
+{/* candidate-player: interactive-table-glosario-decision-trees */}
+<ConceptCard variant="key-idea">
 **Glosario**
 - **Gini:** probabilidad de clasificar mal un elemento al azar en un nodo.
 - **Entropía:** medida de desorden; penaliza más la incertidumbre que Gini.
 - **Ganancia de información:** reducción de impureza tras una división.
 - **Nodo hoja:** nodo terminal donde se emite la predicción.
 - **Poda:** limitar la profundidad para evitar sobreajuste.
-- **Stump:** árbol de profundidad 1   el clasificador más simple posible.
+- **Stump:** árbol de profundidad 1 — el clasificador más simple posible.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
-    { id: "division recursiva", label: "División recursiva", detail: "Parte los datos en ramas según una condición de una feature." },
+    { id: "division-recursiva", label: "División recursiva", detail: "Parte los datos en ramas según una condición de una feature." },
     { id: "gini", label: "Índice Gini", detail: "Probabilidad de clasificar mal un elemento al azar en un nodo." },
     { id: "entropia", label: "Entropía", detail: "Medida de desorden; penaliza más la incertidumbre que Gini." },
-    { id: "ganancia informacion", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
+    { id: "ganancia-informacion", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
     { id: "poda", label: "Poda", detail: "Limitar la profundidad para evitar sobreajuste." },
-    { id: "feature importance", label: "Importancia de features", detail: "Qué features más reducen la impureza en el árbol." },
+    { id: "feature-importance", label: "Importancia de features", detail: "Qué features más reducen la impureza en el árbol." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss gini", label: "Gini", detail: "Probabilidad de clasificar mal un elemento al azar en un nodo." },
-    { id: "gloss entropia", label: "Entropía", detail: "Medida de desorden; penaliza más la incertidumbre que Gini." },
-    { id: "gloss ganancia", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
-    { id: "gloss nodo hoja", label: "Nodo hoja", detail: "Nodo terminal donde se emite la predicción." },
-    { id: "gloss poda", label: "Poda", detail: "Limitar la profundidad para evitar sobreajuste." },
-    { id: "gloss stump", label: "Stump", detail: "Árbol de profundidad 1   el clasificador más simple posible." },
+    { id: "gloss-gini", label: "Gini", detail: "Probabilidad de clasificar mal un elemento al azar en un nodo." },
+    { id: "gloss-entropia", label: "Entropía", detail: "Medida de desorden; penaliza más la incertidumbre que Gini." },
+    { id: "gloss-ganancia", label: "Ganancia de información", detail: "Reducción de impureza tras una división." },
+    { id: "gloss-nodo-hoja", label: "Nodo hoja", detail: "Nodo terminal donde se emite la predicción." },
+    { id: "gloss-poda", label: "Poda", detail: "Limitar la profundidad para evitar sobreajuste." },
+    { id: "gloss-stump", label: "Stump", detail: "Árbol de profundidad 1 — el clasificador más simple posible." },
   ]}
 />
 
 <ChoiceQuestion
   question="¿Por qué un árbol de decisión sin poda suele sobreajustar?"
-  moduleSlug="machine learning"
+  moduleSlug="machine-learning"
   lessonSlug="lesson04_decision_trees"
-  blockId="choice ml l04 resumen 1"
+  blockId="choice-ml-l04-resumen-1"
   allowContinueOnIncorrect
   explanation="Sin poda el árbol sigue dividiendo hasta que cada hoja es pura, memorizando el ruido del entrenamiento. La poda (max_depth, min_samples_leaf) obliga a generalizar y reduce la varianza."
   options={[
@@ -400,7 +400,7 @@ Los árboles de decisión ya no te intimidan. El próximo bloque son los ensembl
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Desafío:** Encuentra la profundidad óptima para un árbol de decisión.
 </ConceptCard>
 

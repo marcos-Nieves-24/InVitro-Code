@@ -19,7 +19,7 @@ Crea un script de Python `list_processor.py` que realice las siguientes tareas:
 
 4. **Promedio móvil**: Implementa una función `moving_average(data, window_size)` usando list comprehension.
 
-5. **Detección de valores atípicos**: Dada una lista de números, identifica los valores atípicos usando el método IQR (Q1 1.5*IQR, Q3 + 1.5*IQR).
+5. **Detección de valores atípicos**: Dada una lista de números, identifica los valores atípicos usando el método IQR (Q1 - 1.5*IQR, Q3 + 1.5*IQR).
 
 ## Datos iniciales
 

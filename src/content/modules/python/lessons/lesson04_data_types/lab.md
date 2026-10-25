@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 4: Tipos de datos en la practica
-# -
+# -------------------------------------------------------------------------
 # Practicamos la identificacion, conversion y el trabajo con los tipos de
 # datos primitivos de Python: int, float, str, bool y None.
 # =========================================================================
@@ -64,11 +64,11 @@ print(f"Deberia descansar: {should_rest}")
 print("\n0.1 + 0.2 =", 0.1 + 0.2)
 print("0.1 + 0.2 == 0.3 ->", 0.1 + 0.2 == 0.3)
 # Para comparar flotantes se usa una tolerancia (epsilon).
-tolerancia = 1e 10
-print("abs((0.1 + 0.2) 0.3) < 1e 10 ->", abs((0.1 + 0.2) 0.3) < tolerancia)
+tolerancia = 1e-10
+print("abs((0.1 + 0.2) - 0.3) < 1e-10 ->", abs((0.1 + 0.2) - 0.3) < tolerancia)
 
 # PASO 6: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Identificamos int, float, str, bool y None con type().")
 print("Convertimos tipos con float(), str() e int().")
 print("Recordamos que input() siempre devuelve str: hay que convertir.")

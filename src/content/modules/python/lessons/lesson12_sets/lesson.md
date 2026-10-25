@@ -1,15 +1,15 @@
-
+---
 Module: 2
 Lesson Number: 12
 Lesson Title: Conjuntos
 Estimated Duration: 30 minutos
-Prerequisites: L9   Listas
+Prerequisites: L9 — Listas
 Learning Objectives:
-  Crear conjuntos y explicar sus propiedades (sin orden, únicos, hashables)
-  "Realizar operaciones de conjuntos: unión, intersección, diferencia, diferencia simétrica"
-  Usar conjuntos para eliminar duplicados y prueba de pertenencia
-  Distinguir entre conjuntos y frozensets
-  Elegir entre conjuntos, listas y tuplas según el caso de uso
+  - Crear conjuntos y explicar sus propiedades (sin orden, únicos, hashables)
+  - "Realizar operaciones de conjuntos: unión, intersección, diferencia, diferencia simétrica"
+  - Usar conjuntos para eliminar duplicados y prueba de pertenencia
+  - Distinguir entre conjuntos y frozensets
+  - Elegir entre conjuntos, listas y tuplas según el caso de uso
 Keywords: conjunto, frozenset, unión, intersección, diferencia, pertenencia
 Difficulty: Beginner
 Programming Concepts: Hash sets, unicidad, operaciones de conjuntos
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Conjuntos
 
@@ -29,7 +29,7 @@ Quiz: quiz.md
   variant="scientist"
   typing={true}
   lines={[
-    "Las listas ordenan, las tuplas congelan, los diccionarios asocian   pero ninguna de ellas responde '¿este elemento está aquí?' de forma instantánea.",
+    "Las listas ordenan, las tuplas congelan, los diccionarios asocian — pero ninguna de ellas responde '¿este elemento está aquí?' de forma instantánea.",
     "Los conjuntos existen para dos tareas: eliminar duplicados y prueba de pertenencia rápida.",
     "En biotecnología aparecen al comparar genes únicos entre experimentos, variantes comunes entre pacientes y secuencias duplicadas.",
     "En SaaS sirven para contar usuarios únicos, features comunes entre planes y filtrar eventos duplicados en logs.",
@@ -37,11 +37,11 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Los conjuntos son colecciones **sin orden**, de elementos **únicos** y **hashables**, optimizadas para unicidad y para preguntas del tipo "¿está este elemento?".
 </ConceptCard>
 
-- En lecciones anteriores aprendiste listas (ordenadas, mutables), tuplas (ordenadas, inmutables) y diccionarios (clave valor).
+- En lecciones anteriores aprendiste listas (ordenadas, mutables), tuplas (ordenadas, inmutables) y diccionarios (clave-valor).
 - Los conjuntos comparten la implementación basada en hash con los diccionarios, pero almacenan solo claves.
 - Entender los conjuntos completa tu conocimiento de las estructuras de datos principales de Python.
 
@@ -71,7 +71,7 @@ Los conjuntos se crean con llaves o con `set()`. Nota: `{}` crea un diccionario 
 ```python
 empty = set()           # Nota: {} crea un dict vacío
 fruits = {"apple", "banana", "cherry"}
-numbers = set([1, 2, 3, 2, 1])  # {1, 2, 3}   duplicados eliminados
+numbers = set([1, 2, 3, 2, 1])  # {1, 2, 3} — duplicados eliminados
 string_set = set("hello")  # {'h', 'e', 'l', 'o'}
 ```
 
@@ -90,8 +90,8 @@ b = {4, 5, 6, 7, 8}
 
 a | b          # Unión: {1, 2, 3, 4, 5, 6, 7, 8}
 a & b          # Intersección: {4, 5}
-a b          # Diferencia: {1, 2, 3}
-b a          # Diferencia: {6, 7, 8}
+a - b          # Diferencia: {1, 2, 3}
+b - a          # Diferencia: {6, 7, 8}
 a ^ b          # Diferencia simétrica: {1, 2, 3, 6, 7, 8}
 ```
 
@@ -149,7 +149,7 @@ Operaciones de Conjuntos (Diagrama de Venn)
   │ 6 7 8      │  └────────┘
   └────────────┘
 
-  Diferencia (A B):  Diff. Simétrica (A △ B):
+  Diferencia (A - B):  Diff. Simétrica (A △ B):
   ┌────────┐           ┌────────────────┐
   │ 1 2 3  │           │ 1 2 3 6 7 8    │
   └────────┘           └────────────────┘
@@ -172,8 +172,8 @@ Operaciones de Conjuntos (Diagrama de Venn)
   ]}
 />
 
-<ConceptCard variant="key idea">
-Primero datos únicos, luego operaciones, luego la pregunta "¿está?"   esa es la receta típica de sets en código real.
+<ConceptCard variant="key-idea">
+Primero datos únicos, luego operaciones, luego la pregunta "¿está?" — esa es la receta típica de sets en código real.
 </ConceptCard>
 
 ```python
@@ -194,7 +194,7 @@ mutated = {"TP53", "KRAS", "EGFR", "MYC"}
 
 print(f"Todos los genes: {expressed | mutated}")
 print(f"Expresados y mutados: {expressed & mutated}")
-print(f"Expresados pero no mutados: {expressed mutated}")
+print(f"Expresados pero no mutados: {expressed - mutated}")
 print(f"En exactamente uno: {expressed ^ mutated}")
 
 # Verificar relaciones
@@ -216,12 +216,12 @@ data_set = set(data_list)
 start = time.time()
 for _ in range(1000):
     999999 in data_list
-list_time = time.time() start
+list_time = time.time() - start
 
 start = time.time()
 for _ in range(1000):
     999999 in data_set
-set_time = time.time() start
+set_time = time.time() - start
 
 print(f"Pertenencia en lista: {list_time:.4f}s")
 print(f"Pertenencia en conjunto: {set_time:.4f}s")
@@ -245,7 +245,7 @@ print(f"El conjunto es {list_time/set_time:.0f}x más rápido!")
   ]}
 />
 
-**Escenario biotecnología**   comparando conjuntos de genes entre diferentes experimentos:
+**Escenario biotecnología** — comparando conjuntos de genes entre diferentes experimentos:
 
 ```python
 # Conjuntos de genes de diferentes experimentos
@@ -265,11 +265,11 @@ in_at_least_2 = {g for g in all_genes
 print(f"En al menos 2 experimentos: {in_at_least_2}")
 
 # Únicos de cada experimento
-unique_to_1 = experiment_1 experiment_2 experiment_3
+unique_to_1 = experiment_1 - experiment_2 - experiment_3
 print(f"Únicos del experimento 1: {unique_to_1}")
 ```
 
-**Escenario SaaS**   analizando adopción de funcionalidades por usuarios:
+**Escenario SaaS** — analizando adopción de funcionalidades por usuarios:
 
 ```python
 # Funcionalidades usadas por diferentes segmentos de clientes
@@ -283,11 +283,11 @@ common_features = basic_users & premium_users & enterprise_users
 print(f"Funcionalidades comunes: {common_features}")
 
 # Funcionalidades solo de premium
-premium_only = premium_users basic_users
+premium_only = premium_users - basic_users
 print(f"Solo premium: {premium_only}")
 
 # Funcionalidades que faltan en basic
-missing_from_basic = premium_users | enterprise_users basic_users
+missing_from_basic = premium_users | enterprise_users - basic_users
 print(f"Faltan en basic: {missing_from_basic}")
 
 # Verificar si un conjunto de funcionalidades es subconjunto
@@ -313,7 +313,7 @@ print(f"¿Basic es subconjunto de premium? {basic_users.issubset(premium_users)}
 
 Erros comunes:
 
-- **Usar `{}` para conjunto vacío**: crea un dict vacío, no un conjunto   usa `set()`.
+- **Usar `{}` para conjunto vacío**: crea un dict vacío, no un conjunto — usa `set()`.
 - **Asumir orden en conjuntos**: no tienen orden, no confíes en el orden de los elementos.
 - **Agregar elementos mutables**: no se pueden agregar listas o dicts a un conjunto.
 - **Modificar un conjunto mientras se itera**: mismo problema que con listas.
@@ -333,7 +333,7 @@ Buenas prácticas:
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Un set es una colección sin orden de elementos únicos y hashables con pertenencia O(1); sus operaciones (unión, intersección, diferencia) comparan conjuntos y `frozenset` permite usarlos como claves.
 </ConceptCard>
 
@@ -350,14 +350,14 @@ Un set es una colección sin orden de elementos únicos y hashables con pertenen
 
 <FeatureButtonList
   features={[
-    { id: "gloss conjunto", label: "Conjunto", detail: "Colección sin orden de elementos únicos." },
-    { id: "gloss frozenset", label: "Frozenset", detail: "Versión inmutable de un conjunto." },
-    { id: "gloss union", label: "Unión", detail: "Todos los elementos de ambos conjuntos." },
-    { id: "gloss interseccion", label: "Intersección", detail: "Elementos comunes a ambos conjuntos." },
-    { id: "gloss diferencia", label: "Diferencia", detail: "Elementos en un conjunto pero no en el otro." },
-    { id: "gloss simetrica", label: "Diferencia simétrica", detail: "Elementos en exactamente uno de los conjuntos." },
-    { id: "gloss hashable", label: "Hashable", detail: "Se puede usar como elemento (tipos inmutables)." },
-    { id: "gloss prueba", label: "Prueba de pertenencia", detail: "Verificar si un elemento está (O(1))." },
+    { id: "gloss-conjunto", label: "Conjunto", detail: "Colección sin orden de elementos únicos." },
+    { id: "gloss-frozenset", label: "Frozenset", detail: "Versión inmutable de un conjunto." },
+    { id: "gloss-union", label: "Unión", detail: "Todos los elementos de ambos conjuntos." },
+    { id: "gloss-interseccion", label: "Intersección", detail: "Elementos comunes a ambos conjuntos." },
+    { id: "gloss-diferencia", label: "Diferencia", detail: "Elementos en un conjunto pero no en el otro." },
+    { id: "gloss-simetrica", label: "Diferencia simétrica", detail: "Elementos en exactamente uno de los conjuntos." },
+    { id: "gloss-hashable", label: "Hashable", detail: "Se puede usar como elemento (tipos inmutables)." },
+    { id: "gloss-prueba", label: "Prueba de pertenencia", detail: "Verificar si un elemento está (O(1))." },
   ]}
 />
 
@@ -365,7 +365,7 @@ Un set es una colección sin orden de elementos únicos y hashables con pertenen
   question="¿Qué operación devuelve todos los elementos presentes en A o en B?"
   moduleSlug="python"
   lessonSlug="lesson12_sets"
-  blockId="choice python l12 resumen 1"
+  blockId="choice-python-l12-resumen-1"
   allowContinueOnIncorrect
   explanation="La unión (`|` o `union()`) reúne todos los elementos de ambos conjuntos."
   options={[
@@ -377,7 +377,7 @@ Un set es una colección sin orden de elementos únicos y hashables con pertenen
 />
 
 <MascotMessage mood="celebrating">
-¡Sets dominados! Ya comparás colecciones sin orden   NumPy del próximo bloque lleva estas ideas a arreglos numéricos.
+¡Sets dominados! Ya comparás colecciones sin orden — NumPy del próximo bloque lleva estas ideas a arreglos numéricos.
 </MascotMessage>
 
 </RevealSequence>
@@ -396,23 +396,23 @@ Un set es una colección sin orden de elementos únicos y hashables con pertenen
   ]}
 />
 
-Nivel 1   Básico:
+Nivel 1 — Básico:
 
 1. ¿Cómo creas un conjunto vacío?
 2. ¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?
 3. ¿Cuál es la diferencia entre `add()` y `update()` para conjuntos?
 
-Nivel 2   Implementación:
+Nivel 2 — Implementación:
 
 4. Escribe una función `unique_words(texto)` que devuelva un conjunto de palabras únicas en un string.
 5. Dadas dos listas (por ejemplo, usuarios que vieron una página y usuarios que compraron), encuentra los usuarios que vieron pero no compraron.
 
-Nivel 3   Pensamiento Crítico:
+Nivel 3 — Pensamiento Crítico:
 
 6. ¿Por qué la prueba de pertenencia es O(1) para conjuntos pero O(n) para listas? ¿Cómo es la implementación subyacente?
 7. ¿Cómo encontrarías elementos que aparecen en al menos k de n conjuntos sin usar Counter?
 
-Desafío de Código   similitud de Jaccard:
+Desafío de Código — similitud de Jaccard:
 
 1. Similitud de Jaccard = |A ∩ B| / |A ∪ B| (tamaño de intersección / tamaño de unión).
 2. Escribe `jaccard_similarity(conjunto1, conjunto2)` que devuelva un valor entre 0 y 1.
@@ -430,7 +430,7 @@ Desafío de Código   similitud de Jaccard:
   question="¿Cuál es la salida de `set([1, 2, 2, 3, 1, 3])`?"
   moduleSlug="python"
   lessonSlug="lesson12_sets"
-  blockId="choice python l12 conjuntos 1"
+  blockId="choice-python-l12-conjuntos-1"
   allowContinueOnIncorrect
   explanation="Los conjuntos eliminan duplicados y el orden no importa, por lo que el resultado es {1, 2, 3}."
   options={[
@@ -445,7 +445,7 @@ Desafío de Código   similitud de Jaccard:
   question="¿Qué construye la expresión `{}` en Python?"
   moduleSlug="python"
   lessonSlug="lesson12_sets"
-  blockId="choice python l12 operaciones 2"
+  blockId="choice-python-l12-operaciones-2"
   allowContinueOnIncorrect
   explanation="Los literales vacíos con llaves crean un diccionario; para un set vacío usa `set()`."
   options={[

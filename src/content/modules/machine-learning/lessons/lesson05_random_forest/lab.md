@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 5: Bosque aleatorio
-# -
+# -------------------------------------------------------------------------
 # Comparamos un arbol individual contra un bosque aleatorio, analizamos la
 # importancia de las features y evaluamos un escenario desbalanceado donde
 # la exactitud es enganosa y conviene mirar el recall.
@@ -26,9 +26,9 @@ arbol = DecisionTreeClassifier(max_depth=5, random_state=42)
 arbol.fit(X_train, y_train)
 bosque = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
 bosque.fit(X_train, y_train)
-print("PASO 1 Arbol individual vs bosque")
-print(f"Arbol  exactitud prueba: {accuracy_score(y_test, arbol.predict(X_test)):.3f}")
-print(f"Bosque exactitud prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
+print("PASO 1 - Arbol individual vs bosque")
+print(f"Arbol  - exactitud prueba: {accuracy_score(y_test, arbol.predict(X_test)):.3f}")
+print(f"Bosque - exactitud prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
 
 # PASO 2: Importancia de features de ambos modelos.
 # El bosque promedia muchos arboles y estabiliza las importancias.
@@ -41,7 +41,7 @@ fig = px.bar(x=nombres, y=bosque.feature_importances_,
 fig.add_bar(x=nombres, y=arbol.feature_importances_, name="Arbol")
 fig.update_layout(barmode="group")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 2 El bosque reparte mejor la importancia entre features utiles.")
+print("PASO 2 - El bosque reparte mejor la importancia entre features utiles.")
 
 # PASO 3: Escenario desbalanceado.
 # Con 90% de clase 0, predecir siempre 0 daria 90% de exactitud.
@@ -53,7 +53,7 @@ Xi_tr, Xi_te, yi_tr, yi_te = train_test_split(
 modelo_imb = RandomForestClassifier(n_estimators=100, random_state=42)
 modelo_imb.fit(Xi_tr, yi_tr)
 pred_imb = modelo_imb.predict(Xi_te)
-print("PASO 3 Datos desbalanceados")
+print("PASO 3 - Datos desbalanceados")
 print(f"Exactitud: {accuracy_score(yi_te, pred_imb):.3f}")
 print(f"Recall clase minoritaria: {recall_score(yi_te, pred_imb):.3f}")
 
@@ -70,5 +70,5 @@ fig = px.line(x=n_arboles, y=scores,
               labels={"x": "n_estimators", "y": "Exactitud prueba"},
               title="Exactitud segun numero de arboles")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 4 A partir de ~100 arboles la mejora es marginal.")
+print("PASO 4 - A partir de ~100 arboles la mejora es marginal.")
 ```

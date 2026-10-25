@@ -1,15 +1,15 @@
-
+---
 Module: 2
 Lesson Number: 7
 Lesson Title: Bucles
 Estimated Duration: 60 minutos
-Prerequisites: L6   Funciones
+Prerequisites: L6 — Funciones
 Learning Objectives:
-  Usar bucles for para iterar sobre secuencias
-  Usar bucles while para iteración condicional
-  Usar range() para generar secuencias numéricas
-  Controlar el flujo de bucles con break y continue
-  Escribir bucles anidados para datos multidimensionales
+  - Usar bucles for para iterar sobre secuencias
+  - Usar bucles while para iteración condicional
+  - Usar range() para generar secuencias numéricas
+  - Controlar el flujo de bucles con break y continue
+  - Escribir bucles anidados para datos multidimensionales
 Keywords: for, while, range, break, continue, bucle anidado, iteración
 Difficulty: Beginner
 Programming Concepts: Iteración, control de bucles, bucles anidados
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Bucles
 
@@ -41,7 +41,7 @@ Quiz: quiz.md
   speaker="Dra. Coni"
   variant="scientist"
   lines={[
-    "En la lección anterior aprendiste funciones   bloques de código reutilizables.",
+    "En la lección anterior aprendiste funciones — bloques de código reutilizables.",
     "Los bucles agregan repetición a tu kit de herramientas.",
     "Combinados con condicionales (próxima lección), los bucles te permiten construir pipelines complejos de procesamiento de datos.",
     "Después de esta lección, vas a entender mejor las listas (Lección 9) porque los bucles son la forma principal de procesar elementos de una lista.",
@@ -77,8 +77,8 @@ for variable in sequence:
 `range()` genera secuencias de números:
 
 ```python
-range(stop)       # 0, 1, 2, ..., stop 1
-range(start, stop)  # start, start+1, ..., stop 1
+range(stop)       # 0, 1, 2, ..., stop-1
+range(start, stop)  # start, start+1, ..., stop-1
 range(start, stop, step)  # start, start+step, ...
 ```
 
@@ -95,7 +95,7 @@ while condition:
 - **continue**: Salta el resto de la iteración actual, pasa a la siguiente
 
 
-Bucles dentro de bucles   se usan para datos multidimensionales:
+Bucles dentro de bucles — se usan para datos multidimensionales:
 
 ```python
 for i in range(3):
@@ -122,7 +122,7 @@ else:
 ```
 Flujo del Bucle For:
 ┌─────────┐     ┌──────────────┐     ┌─────────┐
-│ Inicio  │ ── │ ¿Más items?  │ ── │ Ejecutar│
+│ Inicio  │ ──→ │ ¿Más items?  │ ──→ │ Ejecutar│
 │         │     │ en secuencia │     │ Bloque  │
 └─────────┘     └──────┬───────┘     └────┬────┘
                        │ No               │ Sí
@@ -133,7 +133,7 @@ Flujo del Bucle For:
 
 Flujo del Bucle While:
 ┌─────────┐     ┌──────────┐     ┌─────────┐
-│ Inicio  │ ── │¿Condición?│ ── │ Ejecutar│
+│ Inicio  │ ──→ │¿Condición?│ ──→ │ Ejecutar│
 │         │     │          │     │ Bloque  │
 └─────────┘     └────┬─────┘     └────┬────┘
                      │ False          │ True
@@ -191,7 +191,7 @@ for i in range(10):
 ```
 
 ```python
-# Bucles anidados   tabla de multiplicar
+# Bucles anidados — tabla de multiplicar
 for i in range(1, 4):
     for j in range(1, 4):
         print(f"{i} × {j} = {i * j:2d}", end="  ")
@@ -240,7 +240,7 @@ else:
   question="Tienes una lista de genes y recorres con `for gene in genes: if gene.startswith('BRCA'): process(gene); continue; log_skipped(gene)`. ¿Cuándo se ejecuta `log_skipped`?"
   moduleSlug="python"
   lessonSlug="lesson07_loops"
-  blockId="choice python l07 dens 1"
+  blockId="choice-python-l07-dens-1"
   allowContinueOnIncorrect
   explanation="`continue` salta el resto de la iteración actual, así que `log_skipped` se ejecuta sólo cuando la condición del `if` es falsa."
   options={[
@@ -288,7 +288,7 @@ print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 
 1. **Bucles while infinitos**: Olvidarse de actualizar la variable de condición
 2. **Modificar una lista mientras se itera**: Puede saltear elementos o causar errores. Itera sobre una copia
-3. **Errores de off by one**: `range(n)` da de 0 a n 1, no de 1 a n
+3. **Errores de off-by-one**: `range(n)` da de 0 a n-1, no de 1 a n
 4. **Usar `range(len(lista))` en lugar de iterar directamente**: El estilo pitónico prefiere la iteración directa
 5. **Olvidar los dos puntos y la indentación**: Sintaxis requerida para los bloques de bucle
 
@@ -296,7 +296,7 @@ print(f"Churn mensual promedio: {total_churned / len(monthly_activity):.0f}")
 - Prefiere bucles `for` sobre `while` cuando iteres sobre secuencias
 - Usa `enumerate()` cuando necesites tanto el índice como el valor
 - Usa `zip()` para iterar sobre múltiples secuencias en paralelo
-- Mantén los cuerpos de los bucles cortos   extrae lógica compleja a funciones
+- Mantén los cuerpos de los bucles cortos — extrae lógica compleja a funciones
 - Usa nombres de variables de bucle descriptivos (no solo `i`, `j` para casos complejos)
 
 ```python
@@ -314,7 +314,7 @@ for gene, expression in zip(genes, expressions):
 <Section number={8} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas, strings) y `while` repite mientras su condición sea True; `break`, `continue` y la cláusula `else` afinan el flujo sin perder legibilidad.
 </ConceptCard>
 
@@ -323,7 +323,7 @@ Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas
     { id: "for", label: "for", detail: "Itera sobre secuencias (listas, strings, ranges)." },
     { id: "while", label: "while", detail: "Se repite mientras una condición sea True." },
     { id: "range", label: "range", detail: "`range(start, stop, step)` genera secuencias numéricas." },
-    { id: "break continue", label: "break / continue", detail: "`break` sale del bucle; `continue` salta a la siguiente iteración." },
+    { id: "break-continue", label: "break / continue", detail: "`break` sale del bucle; `continue` salta a la siguiente iteración." },
     { id: "anidados", label: "Bucles anidados", detail: "Manejan datos multidimensionales." },
     { id: "else", label: "Cláusula else", detail: "Se ejecuta si el bucle termina sin `break`." },
   ]}
@@ -333,9 +333,9 @@ Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas
   features={[
     { id: "iteracion", label: "Iteración", detail: "Una ejecución del cuerpo del bucle." },
     { id: "iterable", label: "Iterable", detail: "Objeto sobre el que se puede iterar (lista, str, range, etc.)." },
-    { id: "var bucle", label: "Variable de bucle", detail: "Variable que toma cada valor de la secuencia." },
-    { id: "bucle infinito", label: "Bucle infinito", detail: "Bucle que nunca termina." },
-    { id: "bucle anidado", label: "Bucle anidado", detail: "Bucle dentro de otro bucle." },
+    { id: "var-bucle", label: "Variable de bucle", detail: "Variable que toma cada valor de la secuencia." },
+    { id: "bucle-infinito", label: "Bucle infinito", detail: "Bucle que nunca termina." },
+    { id: "bucle-anidado", label: "Bucle anidado", detail: "Bucle dentro de otro bucle." },
     { id: "enumerate", label: "enumerate()", detail: "Función incorporada que produce pares (índice, valor)." },
   ]}
 />
@@ -344,7 +344,7 @@ Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas
   question="¿Qué imprime este código: for i in range(2, 8, 2): print(i)?"
   moduleSlug="python"
   lessonSlug="lesson07_loops"
-  blockId="choice python l07 resumen 1"
+  blockId="choice-python-l07-resumen-1"
   allowContinueOnIncorrect
   explanation="range(2, 8, 2) genera 2, 4, 6 (el límite superior 8 se excluye)."
   options={[
@@ -356,7 +356,7 @@ Los bucles automatizan la repetición: `for` recorre secuencias (`range`, listas
 />
 
 <MascotMessage mood="celebrating">
-¡Bucles dominados! Ya podés recorrer, filtrar y acumular   las condicionales del próximo bloque deciden qué hacer en cada vuelta.
+¡Bucles dominados! Ya podés recorrer, filtrar y acumular — las condicionales del próximo bloque deciden qué hacer en cada vuelta.
 </MascotMessage>
 
 </RevealSequence>
@@ -397,7 +397,7 @@ Escribe un programa que implemente la **Criba de Eratóstenes** para encontrar t
   question="¿Qué bucle se usa para iterar sobre una secuencia en Python?"
   moduleSlug="python"
   lessonSlug="lesson07_loops"
-  blockId="choice python l07 conceptos 1"
+  blockId="choice-python-l07-conceptos-1"
   allowContinueOnIncorrect
   explanation="El for pertenece a iterables; while se basa en una condición."
   options={[

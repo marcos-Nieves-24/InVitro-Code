@@ -18,19 +18,19 @@ Eres una data scientist en un hospital. Construiste un modelo de diagnóstico de
 
 1. **Entrena** un Random Forest (ajustálo brevemente)
 2. **Interpretación global:**
-   Calcula la importancia por permutación (top 5 features)
-   Crea los PDP de las top 2 features
-   Escribe una explicación en lenguaje sencillo de qué impulsa las predicciones de cáncer
+   - Calcula la importancia por permutación (top 5 features)
+   - Crea los PDP de las top 2 features
+   - Escribe una explicación en lenguaje sencillo de qué impulsa las predicciones de cáncer
 3. **Interpretación local:**
-   Elige 2 muestras de prueba (una maligna, una benigna)
-   Explica cada predicción usando las top features
-   Para cada una, di qué empujó la predicción hacia maligno o benigno
+   - Elige 2 muestras de prueba (una maligna, una benigna)
+   - Explica cada predicción usando las top features
+   - Para cada una, di qué empujó la predicción hacia maligno o benigno
 4. **Valida con conocimiento del dominio:**
-   Verifica: ¿las features importantes tienen sentido clínico?
-   ¿Hay alguna feature sospechosa que pueda causar sesgo?
+   - Verifica: ¿las features importantes tienen sentido clínico?
+   - ¿Hay alguna feature sospechosa que pueda causar sesgo?
 5. **Escribe un memo** (máx. 500 palabras) para el equipo clínico:
-   ¿Cómo funciona el modelo?
-   ¿Qué features son las más importantes?
-   ¿Cuáles son las limitaciones?
-   ¿Recomendarías el despliegue?
+   - ¿Cómo funciona el modelo?
+   - ¿Qué features son las más importantes?
+   - ¿Cuáles son las limitaciones?
+   - ¿Recomendarías el despliegue?
 

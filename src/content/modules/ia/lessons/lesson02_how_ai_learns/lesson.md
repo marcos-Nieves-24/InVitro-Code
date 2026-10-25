@@ -1,3 +1,4 @@
+---
 Module: 1
 Lesson Number: 2
 Lesson Title: ¿Cómo aprende la IA?

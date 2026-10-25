@@ -1,15 +1,15 @@
-
+---
 Module: 2
 Lesson Number: 8
 Lesson Title: Condicionales
 Estimated Duration: 45 minutos
-Prerequisites: L6   Funciones
+Prerequisites: L6 — Funciones
 Learning Objectives:
-  Escribir sentencias condicionales if/elif/else
-  Evaluar expresiones booleanas con operadores de comparación y lógicos
-  Usar valores truthy y falsy en condiciones
-  Escribir sentencias condicionales anidadas
-  Usar expresiones condicionales (operador ternario)
+  - Escribir sentencias condicionales if/elif/else
+  - Evaluar expresiones booleanas con operadores de comparación y lógicos
+  - Usar valores truthy y falsy en condiciones
+  - Escribir sentencias condicionales anidadas
+  - Usar expresiones condicionales (operador ternario)
 Keywords: if, elif, else, booleano, truthy, falsy, condicional, ternario
 Difficulty: Beginner
 Programming Concepts: Flujo de control, lógica booleana, expresiones condicionales
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 # Condicionales
 
@@ -43,7 +43,7 @@ Quiz: quiz.md
   lines={[
     "En la lección anterior aprendiste bucles (repetición).",
     "Ahora aprendes condicionales (toma de decisiones).",
-    "Estas dos estructuras de control   bucles y condicionales   forman la columna vertebral de todos los programas no triviales.",
+    "Estas dos estructuras de control — bucles y condicionales — forman la columna vertebral de todos los programas no triviales.",
     "Junto con funciones y operadores, ahora tienes todo lo necesario para escribir lógica de procesamiento de datos sofisticada.",
   ]}
 />
@@ -105,11 +105,11 @@ Flujo if/elif/else:
          └─────┬─────┘
                │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition1 ├───────│ bloque código 1  │
+         │ condition1 ├───────→│ bloque código 1  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐  True  ┌──────────────────┐
-         │ condition2 ├───────│ bloque código 2  │
+         │ condition2 ├───────→│ bloque código 2  │
          └─────┬──────┘       └────────┬─────────┘
                │ False                 │
          ┌─────▼──────┐               │
@@ -204,7 +204,7 @@ elif bmi < 30:
     category = "Sobrepeso"
 else:
     category = "Obeso"
-print(f"IMC: {bmi:.1f} {category}")
+print(f"IMC: {bmi:.1f} - {category}")
 ```
 
 ```python
@@ -346,11 +346,11 @@ print(f"Descuento: {discount:.0%}")
   question="En la cadena if/elif/else del IMC, si `bmi = 26.3`, ¿qué valor queda en `category`?"
   moduleSlug="python"
   lessonSlug="lesson08_conditionals"
-  blockId="choice python l08 dens 1"
+  blockId="choice-python-l08-dens-1"
   allowContinueOnIncorrect
   explanation="Se evalúan los elif en orden; el primero que se cumple (25 <= 26.3 < 30) asigna `Sobrepeso`."
   options={[
-    { id: "a", label: "Sobrepeso", correct: true, feedback: "¡Correcto! 26.3 está en el rango 25 29.9." },
+    { id: "a", label: "Sobrepeso", correct: true, feedback: "¡Correcto! 26.3 está en el rango 25–29.9." },
     { id: "b", label: "Normal", correct: false, feedback: "Normal cubre < 25; 26.3 ya sale de ese rango." },
     { id: "c", label: "Obeso", correct: false, feedback: "Obeso exige BMI >= 30." },
     { id: "d", label: "Bajo peso", correct: false, feedback: "Bajo peso exige BMI < 18.5." },
@@ -368,12 +368,12 @@ print(f"Descuento: {discount:.0%}")
 2. **Olvidar los dos puntos**: `if x > 5` sin `:` lanza SyntaxError
 3. **Errores de indentación**: Indentación inconsistente rompe los condicionales
 4. **Comparar None con `==`**: Usa `is None` en lugar de `== None`
-5. **Verificar booleanos con `== True`**: Es redundante   usa `if condition:`
+5. **Verificar booleanos con `== True`**: Es redundante — usa `if condition:`
 6. **Anidamiento profundo**: Más de 3 niveles de anidamiento sugiere refactorización
 
 
 - Usa `elif` en lugar de `if` anidados para condiciones mutuamente excluyentes
-- Mantén las condiciones simples   extrae lógica compleja a variables booleanas
+- Mantén las condiciones simples — extrae lógica compleja a variables booleanas
 - Usa verificaciones truthy/falsy de forma natural: `if items:` en lugar de `if len(items) > 0:`
 - Evita anidamiento profundo (máx. 3 niveles)
 - Usa cláusulas de guarda (returns tempranos) para reducir el anidamiento
@@ -385,7 +385,7 @@ print(f"Descuento: {discount:.0%}")
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Un condicional elige el camino del programa según una expresión booleana: `if`/`elif`/`else`, valores truthy/falsy, el operador ternario y `match` (3.10+) permiten decidir sin anidar en exceso.
 </ConceptCard>
 
@@ -394,7 +394,7 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
     { id: "if", label: "if", detail: "Ejecuta código cuando una condición es True." },
     { id: "elif", label: "elif", detail: "Verifica condiciones adicionales." },
     { id: "else", label: "else", detail: "Maneja el caso por defecto." },
-    { id: "truthy falsy", label: "truthy / falsy", detail: "Los valores se clasifican como truthy o falsy (False, None, 0, secuencias vacías)." },
+    { id: "truthy-falsy", label: "truthy / falsy", detail: "Los valores se clasifican como truthy o falsy (False, None, 0, secuencias vacías)." },
     { id: "ternario", label: "Ternario", detail: "`x if condition else y`." },
     { id: "match", label: "match", detail: "Sentencia `match` (3.10+) para pattern matching." },
     { id: "guarda", label: "Cláusula de guarda", detail: "Return temprano para evitar anidamiento." },
@@ -404,12 +404,12 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
 <FeatureButtonList
   features={[
     { id: "condicional", label: "Condicional", detail: "Sentencia que ejecuta código basada en una condición." },
-    { id: "exp bool", label: "Expresión booleana", detail: "Expresión que evalúa a True o False." },
+    { id: "exp-bool", label: "Expresión booleana", detail: "Expresión que evalúa a True o False." },
     { id: "truthy", label: "Truthy", detail: "Valor que evalúa a True en un contexto booleano." },
     { id: "falsy", label: "Falsy", detail: "Valor que evalúa a False en un contexto booleano." },
-    { id: "op ternario", label: "Operador ternario", detail: "Expresión condicional para if/else en línea." },
-    { id: "clausula guarda", label: "Cláusula de guarda", detail: "Return temprano para evitar anidamiento." },
-    { id: "sent match", label: "Sentencia match", detail: "Pattern matching estructural de Python 3.10+." },
+    { id: "op-ternario", label: "Operador ternario", detail: "Expresión condicional para if/else en línea." },
+    { id: "clausula-guarda", label: "Cláusula de guarda", detail: "Return temprano para evitar anidamiento." },
+    { id: "sent-match", label: "Sentencia match", detail: "Pattern matching estructural de Python 3.10+." },
   ]}
 />
 
@@ -417,7 +417,7 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
   question="¿Qué imprime: if 0: print('sí') else: print('no')?"
   moduleSlug="python"
   lessonSlug="lesson08_conditionals"
-  blockId="choice python l08 resumen 1"
+  blockId="choice-python-l08-resumen-1"
   allowContinueOnIncorrect
   explanation="0 es falsy, así que se ejecuta la rama else e imprime 'no'."
   options={[
@@ -429,7 +429,7 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
 />
 
 <MascotMessage mood="celebrating">
-¡Condicionales dominadas! Ahora decidís en cada paso   las listas del próximo bloque guardan los datos que vas a filtrar.
+¡Condicionales dominadas! Ahora decidís en cada paso — las listas del próximo bloque guardan los datos que vas a filtrar.
 </MascotMessage>
 
 </RevealSequence>
@@ -444,7 +444,7 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
 3. ¿Qué valores se consideran falsy en Python?
 
 
-4. Escribe una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15 a 25), "Calor" (> 25).
+4. Escribe una función que reciba una temperatura en Celsius y devuelva "Frío" (< 15), "Templado" (15-25), "Calor" (> 25).
 5. Escribe una función que reciba un año y devuelva si es bisiesto (divisible por 400, o divisible por 4 pero no por 100).
 
 
@@ -454,11 +454,11 @@ Un condicional elige el camino del programa según una expresión booleana: `if`
 
 Escribe un sistema de **puntaje crediticio** que:
 1. Reciba ingresos, antigüedad crediticia (años), deuda pendiente y cantidad de pagos atrasados
-2. Calcule un puntaje crediticio (0 a 100) usando una fórmula ponderada
-3. Asigne una calificación: Excelente (≥ 80), Buena (60 a 79), Regular (40 a 59), Mala (< 40)
-4. Aplique modificadores: si deuda > ingresos  -20 puntos; si pagos atrasados > 3  -15 puntos; si antigüedad crediticia > 10 años  +10 puntos
+2. Calcule un puntaje crediticio (0-100) usando una fórmula ponderada
+3. Asigne una calificación: Excelente (≥ 80), Buena (60-79), Regular (40-59), Mala (< 40)
+4. Aplique modificadores: si deuda > ingresos → -20 puntos; si pagos atrasados > 3 → -15 puntos; si antigüedad crediticia > 10 años → +10 puntos
 5. Use `match` para la asignación de calificación
-6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena  Aprobado, sino  Revisión Requerida)
+6. Imprima el puntaje final, la calificación y el estado de aprobación (Excelente/Buena → Aprobado, sino → Revisión Requerida)
 </RevealSequence>
 
 </Section>
@@ -471,7 +471,7 @@ Escribe un sistema de **puntaje crediticio** que:
   question="¿Qué bloque se ejecuta cuando la condición del if es False y hay un else?"
   moduleSlug="python"
   lessonSlug="lesson08_conditionals"
-  blockId="choice python l08 conceptos 1"
+  blockId="choice-python-l08-conceptos-1"
   allowContinueOnIncorrect
   explanation="El bloque else (o elif correspondiente) se ejecuta si ningún if/elif fue True."
   options={[

@@ -1,15 +1,15 @@
-
+---
 Module: 2
 Lesson Number: 1
 Lesson Title: Instalando Python
 Estimated Duration: 30 minutos
 Prerequisites: None
 Learning Objectives:
-  Explicar qué es Python y por qué se usa en ciencia de datos
-  Instalar Python en Windows, macOS o Linux
-  Verificar la instalación usando la línea de comandos
-  Usar pip para instalar paquetes de Python
-  Crear y activar un entorno virtual
+  - Explicar qué es Python y por qué se usa en ciencia de datos
+  - Instalar Python en Windows, macOS o Linux
+  - Verificar la instalación usando la línea de comandos
+  - Usar pip para instalar paquetes de Python
+  - Crear y activar un entorno virtual
 Keywords: Python, pip, entorno virtual, línea de comandos, instalación
 Difficulty: Beginner
 Programming Concepts: Intérprete de Python, CLI, gestión de paquetes, entornos virtuales
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 <Section number={1} title="Instalando Python" eyebrow="INICIO">
 
@@ -39,7 +39,7 @@ Quiz: quiz.md
 Bienvenido al curso práctico. Todo científico de datos, ingeniero de machine learning y desarrollador de software arranca aquí.
 </MascotMessage>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 En biotecnología vas a usar Python para analizar secuencias de ADN, procesar datos clínicos y entrenar modelos predictivos. En SaaS, Python impulsa motores de recomendación, análisis de clientes y reportes automatizados.
 
 Esta es la base de todo el curso: sin Python instalado no puedes ejecutar ningún código. En el módulo anterior aprendiste qué es la IA. Ahora vas a construir las habilidades prácticas que necesitas para implementar soluciones de IA. En la próxima lección vas a aprender a usar Jupyter Notebook, un entorno interactivo que corre sobre tu instalación de Python.
@@ -49,12 +49,12 @@ Esta es la base de todo el curso: sin Python instalado no puedes ejecutar ningú
   question="¿Cuál es el primer paso recomendado para tener un entorno Python funcional?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 paso 1"
+  blockId="choice-python-l01-paso-1"
   allowContinueOnIncorrect
   explanation="La base es descargar e instalar Python desde python.org, verificarlo con python --version y luego crear entornos virtuales."
   options={[
     { id: "a", label: "Descargar Python desde python.org e instalarlo", correct: true, feedback: "¡Correcto! Empezar por la distribución oficial es la opción más limpia y predecible." },
-    { id: "b", label: "Instalar directamente scikit learn con sudo pip", correct: false, feedback: "No: instalar paquetes sobre el Python del sistema puede corromperlo. Primero el intérprete." },
+    { id: "b", label: "Instalar directamente scikit-learn con sudo pip", correct: false, feedback: "No: instalar paquetes sobre el Python del sistema puede corromperlo. Primero el intérprete." },
     { id: "c", label: "Crear un entorno virtual sin tener Python instalado", correct: false, feedback: "Falso: el entorno virtual requiere un intérprete Python base." },
     { id: "d", label: "Usar únicamente Anaconda Distribution", correct: false, feedback: "Anaconda es una opción válida, pero no el único ni siempre el recomendado para este curso." },
   ]}
@@ -82,14 +82,14 @@ Esta es la base de todo el curso: sin Python instalado no puedes ejecutar ningú
 />
 
 <CalloutCheck>
-**Dato clave**: Python tiene un ecosistema de librerías enorme: NumPy, Pandas, scikit learn, TensorFlow, Biopython... todas las que vas a usar en este curso. Cada una se instala con un solo comando.
+**Dato clave**: Python tiene un ecosistema de librerías enorme: NumPy, Pandas, scikit-learn, TensorFlow, Biopython... todas las que vas a usar en este curso. Cada una se instala con un solo comando.
 </CalloutCheck>
 
 <ChoiceQuestion
   question="¿Qué obtienes al instalar Python?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 interprete 2"
+  blockId="choice-python-l01-interprete-2"
   allowContinueOnIncorrect
   explanation="La instalación entrega el intérprete, que puede ejecutar código en modo interactivo o como script, más el gestor pip."
   options={[
@@ -116,14 +116,14 @@ Esta es la base de todo el curso: sin Python instalado no puedes ejecutar ningú
   ]}
 />
 
-<ConceptCard variant="key idea">
-- **Distribución**: **Python Oficial** (python.org)   **Descripción**: Implementación de referencia (CPython)   **Veredicto**: Recomendada para este curso
-- **Distribución**: **Anaconda Distribution**   **Descripción**: Python + 250+ paquetes preinstalados   **Veredicto**: Buena para comenzar pero pesada
-- **Distribución**: **Miniconda**   **Descripción**: Solo conda y Python mínimo   **Veredicto**: Liviana pero requiere conda
-- **Distribución**: **Microsoft Store** (Windows)   **Descripción**: Conveniente para Windows   **Veredicto**: Puede tener problemas de PATH
+<ConceptCard variant="key-idea">
+- **Distribución**: **Python Oficial** (python.org) — **Descripción**: Implementación de referencia (CPython) — **Veredicto**: Recomendada para este curso
+- **Distribución**: **Anaconda Distribution** — **Descripción**: Python + 250+ paquetes preinstalados — **Veredicto**: Buena para comenzar pero pesada
+- **Distribución**: **Miniconda** — **Descripción**: Solo conda y Python mínimo — **Veredicto**: Liviana pero requiere conda
+- **Distribución**: **Microsoft Store** (Windows) — **Descripción**: Conveniente para Windows — **Veredicto**: Puede tener problemas de PATH
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Para este curso recomendamos instalar Python directamente desde **python.org**. Es la opción más limpia, predecible y con menos sorpresas.
 </ConceptCard>
 
@@ -131,7 +131,7 @@ Para este curso recomendamos instalar Python directamente desde **python.org**. 
   question="¿Qué distribución recomienda este curso?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 distro 3"
+  blockId="choice-python-l01-distro-3"
   allowContinueOnIncorrect
   explanation="La distribución oficial desde python.org es la opción más limpia y predecible."
   options={[
@@ -156,11 +156,11 @@ Para este curso recomendamos instalar Python directamente desde **python.org**. 
   lines={[
     "En Windows: ve a python.org, descarga el instalador, marca 'Add Python to PATH' y haz clic en Install Now. Luego verifica en el Símbolo del Sistema con python --version y pip --version.",
     "En macOS: instala Homebrew y luego ejecuta brew install python; verifica con python3 --version y pip3 --version.",
-    "En Linux (Ubuntu/Debian): sudo apt update && sudo apt install python3 python3 pip. Fedora: sudo dnf install python3 python3 pip.",
+    "En Linux (Ubuntu/Debian): sudo apt update && sudo apt install python3 python3-pip. Fedora: sudo dnf install python3 python3-pip.",
   ]}
 />
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Windows**
 1. Ve a [python.org](https://python.org) y descarga el instalador más reciente
 2. **IMPORTANTE**: marca **"Add Python to PATH"**
@@ -173,7 +173,7 @@ pip --version
 ```
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **macOS**
 
 ```bash
@@ -189,7 +189,7 @@ pip3 --version
 ```
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 **Linux**
 
 ```bash
@@ -198,10 +198,10 @@ python3 --version
 
 # Si no está:
 # Ubuntu/Debian
-sudo apt update && sudo apt install python3 python3 pip
+sudo apt update && sudo apt install python3 python3-pip
 
 # Fedora
-sudo dnf install python3 python3 pip
+sudo dnf install python3 python3-pip
 ```
 </ConceptCard>
 
@@ -240,7 +240,7 @@ Para salir del intérprete interactivo escribe `exit()` o presiona **Ctrl+D** (L
   question="¿Cómo sales del intérprete interactivo de Python?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 exit 5"
+  blockId="choice-python-l01-exit-5"
   allowContinueOnIncorrect
   explanation="Se sale con exit() o con Ctrl+D (Linux/macOS) / Ctrl+Z + Enter (Windows)."
   options={[
@@ -255,7 +255,7 @@ Para salir del intérprete interactivo escribe `exit()` o presiona **Ctrl+D** (L
 
 </Section>
 
-<Section number={6} title="pip   El Instalador de Paquetes" eyebrow="CONCEPTO">
+<Section number={6} title="pip — El Instalador de Paquetes" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -263,13 +263,13 @@ Para salir del intérprete interactivo escribe `exit()` o presiona **Ctrl+D** (L
 **pip** es el gestor de paquetes de Python. Descarga e instala paquetes desde el **Python Package Index (PyPI)**, que alberga más de 400.000 paquetes.
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Comandos fundamentales de pip:
 
-- `pip install numpy`  Instala un paquete
-- `pip uninstall numpy`  Lo elimina
-- `pip list`  Lista paquetes instalados
-- `pip freeze`  Lista paquetes con sus versiones
+- `pip install numpy` → Instala un paquete
+- `pip uninstall numpy` → Lo elimina
+- `pip list` → Lista paquetes instalados
+- `pip freeze` → Lista paquetes con sus versiones
 </ConceptCard>
 
 ```bash
@@ -296,7 +296,7 @@ Este archivo `requirements.txt` es la base de la reproducibilidad en ciencia de 
   question="¿Qué hace `pip freeze`?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 pip 6"
+  blockId="choice-python-l01-pip-6"
   allowContinueOnIncorrect
   explanation="Lista todos los paquetes instalados con sus versiones exactas; se usa para generar requirements.txt."
   options={[
@@ -315,11 +315,11 @@ Este archivo `requirements.txt` es la base de la reproducibilidad en ciencia de 
 
 <RevealSequence>
 
-<ConceptCard variant="key idea">
-Un **entorno virtual** es un entorno Python aislado que te permite instalar paquetes sin afectar al Python del sistema ni a otros proyectos. Cada proyecto puede tener sus propias dependencias: un proyecto usa Django 4.2, otro usa Django 5.0   con entornos virtuales ambos conviven sin conflictos.
+<ConceptCard variant="key-idea">
+Un **entorno virtual** es un entorno Python aislado que te permite instalar paquetes sin afectar al Python del sistema ni a otros proyectos. Cada proyecto puede tener sus propias dependencias: un proyecto usa Django 4.2, otro usa Django 5.0 — con entornos virtuales ambos conviven sin conflictos.
 </ConceptCard>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Creación y activación del entorno virtual:
 
 ```bash
@@ -357,7 +357,7 @@ Cuando terminas de trabajar, desactivas el entorno con el comando `deactivate`.
   question="¿Qué es un entorno virtual?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 venv 7"
+  blockId="choice-python-l01-venv-7"
   allowContinueOnIncorrect
   explanation="Es un entorno Python aislado que permite instalar paquetes sin afectar al sistema ni a otros proyectos."
   options={[
@@ -410,7 +410,7 @@ pip freeze > requirements.txt
 />
 
 <ConceptCard variant="definition">
-**Reproducibilidad**: todos tienen las mismas versiones de cada paquete. No importa si usan Windows, macOS o Linux   el entorno es idéntico.
+**Reproducibilidad**: todos tienen las mismas versiones de cada paquete. No importa si usan Windows, macOS o Linux — el entorno es idéntico.
 </ConceptCard>
 
 </RevealSequence>
@@ -434,7 +434,7 @@ pip freeze > requirements.txt
 # Entorno de desarrollo
 python -m venv venv
 source venv/bin/activate
-pip install scikit learn pandas flask gunicorn
+pip install scikit-learn pandas flask gunicorn
 pip freeze > requirements.txt
 
 # En el servidor de producción:
@@ -470,7 +470,7 @@ pip install -r requirements.txt
 - Usa `requirements.txt` para reproducibilidad
 - Mantén Python actualizado (dentro de la misma versión mayor)
 - Documenta la versión de Python que requiere tu proyecto
-- Nunca uses `sudo pip install`   puede corromper paquetes del sistema
+- Nunca uses `sudo pip install` — puede corromper paquetes del sistema
 - Considera **pyenv** para gestionar múltiples versiones de Python
 </CalloutCheck>
 
@@ -478,7 +478,7 @@ pip install -r requirements.txt
   question="¿Cuál es una buena práctica al usar pip y entornos virtuales?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 bp 10"
+  blockId="choice-python-l01-bp-10"
   allowContinueOnIncorrect
   explanation="La mejor práctica es aislar cada proyecto en su propio entorno virtual y congelar dependencias en requirements.txt."
   options={[
@@ -497,8 +497,8 @@ pip install -r requirements.txt
 
 <RevealSequence>
 
-<ConceptCard variant="key idea">
-Tener Python funcionando, con pip y un entorno virtual es la base de todo lo demás: Jupyter, NumPy, Pandas y scikit learn están a un `pip install` de distancia.
+<ConceptCard variant="key-idea">
+Tener Python funcionando, con pip y un entorno virtual es la base de todo lo demás: Jupyter, NumPy, Pandas y scikit-learn están a un `pip install` de distancia.
 </ConceptCard>
 
 <FeatureButtonList
@@ -506,7 +506,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
     { id: "python", label: "Python", detail: "Lenguaje interpretado de alto nivel, esencial para ciencia de datos." },
     { id: "instalacion", label: "Instalación", detail: "Descarga desde python.org y verifica con `python --version`." },
     { id: "pip", label: "pip", detail: "Instala paquetes desde PyPI." },
-    { id: "entorno virtual", label: "Entorno virtual", detail: "Aísla las dependencias de cada proyecto." },
+    { id: "entorno-virtual", label: "Entorno virtual", detail: "Aísla las dependencias de cada proyecto." },
     { id: "requirements", label: "requirements.txt", detail: "Lista exacta de dependencias para reproducibilidad." },
   ]}
 />
@@ -514,11 +514,11 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
 <FeatureButtonList
   features={[
     { id: "interprete", label: "Intérprete", detail: "Programa que ejecuta código Python línea por línea." },
-    { id: "pip instalador", label: "pip", detail: "Instalador de paquetes de Python." },
-    { id: "pypi", label: "PyPI", detail: "Python Package Index   repositorio oficial de paquetes." },
-    { id: "entorno virtual aislado", label: "Entorno virtual", detail: "Entorno Python aislado para un proyecto específico." },
+    { id: "pip-instalador", label: "pip", detail: "Instalador de paquetes de Python." },
+    { id: "pypi", label: "PyPI", detail: "Python Package Index — repositorio oficial de paquetes." },
+    { id: "entorno-virtual-aislado", label: "Entorno virtual", detail: "Entorno Python aislado para un proyecto específico." },
     { id: "path", label: "PATH", detail: "Variable del sistema que le dice al SO dónde encontrar ejecutables." },
-    { id: "repl", label: "REPL", detail: "Read Eval Print Loop   shell interactiva de Python." },
+    { id: "repl", label: "REPL", detail: "Read-Eval-Print Loop — shell interactiva de Python." },
   ]}
 />
 
@@ -526,7 +526,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Qué archivo captura las dependencias exactas de un proyecto para poder reproducirlo?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 resumen 1"
+  blockId="choice-python-l01-resumen-1"
   allowContinueOnIncorrect
   explanation="requirements.txt lista los paquetes con sus versiones exactas para reinstalarlos iguales."
   options={[
@@ -553,9 +553,9 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   speaker="Dra. Coni"
   variant="scientist"
   lines={[
-    "Antes de cerrar, repasemos: primer nivel   ¿qué comando verifica la versión de Python? ¿cuál es el propósito de un entorno virtual? ¿qué hace pip freeze?",
-    "Segundo nivel   instala Python, crea un entorno virtual e instala NumPy; crea un requirements.txt con pandas y matplotlib.",
-    "Tercer nivel   compara la distribución oficial con Anaconda y argumenta cuándo usar cada una; explica por qué sudo pip install es una mala práctica.",
+    "Antes de cerrar, repasemos: primer nivel — ¿qué comando verifica la versión de Python? ¿cuál es el propósito de un entorno virtual? ¿qué hace pip freeze?",
+    "Segundo nivel — instala Python, crea un entorno virtual e instala NumPy; crea un requirements.txt con pandas y matplotlib.",
+    "Tercer nivel — compara la distribución oficial con Anaconda y argumenta cuándo usar cada una; explica por qué sudo pip install es una mala práctica.",
   ]}
 />
 
@@ -563,7 +563,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Qué comando verifica la versión de Python instalada?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 1"
+  blockId="choice-python-l01-rev-1"
   allowContinueOnIncorrect
   explanation="Usá python --version (o python3 --version en macOS/Linux)."
   options={[
@@ -578,7 +578,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Cuál es el propósito de un entorno virtual (venv)?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 2"
+  blockId="choice-python-l01-rev-2"
   allowContinueOnIncorrect
   explanation="Aislar las dependencias de un proyecto para que no interfieran con otros proyectos ni con el Python del sistema."
   options={[
@@ -593,7 +593,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Qué hace pip freeze?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 3"
+  blockId="choice-python-l01-rev-3"
   allowContinueOnIncorrect
   explanation="Lista todos los paquetes instalados con sus versiones exactas; se usa para generar un requirements.txt."
   options={[
@@ -608,11 +608,11 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Qué comandos crean un entorno virtual e instalan NumPy verificando la instalación?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 4"
+  blockId="choice-python-l01-rev-4"
   allowContinueOnIncorrect
   explanation="python -m venv venv, luego activar (source venv/bin/activate o venv\Scripts\activate en Windows), pip install numpy y python -c 'import numpy; print(numpy.__version__)'."
   options={[
-    { id: "a", label: "python -m venv venv  activar  pip install numpy  python -c 'import numpy; print(numpy.__version__)'", correct: true, feedback: "¡Exacto! Es la secuencia estándar." },
+    { id: "a", label: "python -m venv venv → activar → pip install numpy → python -c 'import numpy; print(numpy.__version__)'", correct: true, feedback: "¡Exacto! Es la secuencia estándar." },
     { id: "b", label: "pip install venv && venv create", correct: false, feedback: "venv es un módulo de Python, no un paquete de pip." },
     { id: "c", label: "conda create -n venv numpy sin activar el entorno", correct: false, feedback: "Con conda hay que activar el entorno antes de instalar/usar." },
     { id: "d", label: "python -m pip install venv numpy en un solo paso", correct: false, feedback: "venv no se instala por pip y la creación del entorno es un paso aparte." },
@@ -623,7 +623,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Cómo genero un archivo requirements.txt a partir de un entorno virtual?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 5"
+  blockId="choice-python-l01-rev-5"
   allowContinueOnIncorrect
   explanation="Ejecutá pip freeze > requirements.txt después de instalar pandas y matplotlib (u otras dependencias)."
   options={[
@@ -638,7 +638,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Cuándo conviene la distribución oficial de Python vs Anaconda?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 6"
+  blockId="choice-python-l01-rev-6"
   allowContinueOnIncorrect
   explanation="La distribución oficial es más liviana y da control total; Anaconda trae muchos paquetes preinstalados, ideal para empezar rápido, pero ocupa mucho espacio."
   options={[
@@ -653,7 +653,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Por qué es mala práctica usar sudo pip install?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 rev 7"
+  blockId="choice-python-l01-rev-7"
   allowContinueOnIncorrect
   explanation="sudo pip install instala paquetes globalmente como root y puede corromper paquetes del sistema. Alternativas: entornos virtuales o pip install --user."
   options={[
@@ -676,7 +676,7 @@ Tener Python funcionando, con pip y un entorno virtual es la base de todo lo dem
   question="¿Qué comando usas para verificar la versión de Python?"
   moduleSlug="python"
   lessonSlug="lesson01_installing_python"
-  blockId="choice python l01 verify 12"
+  blockId="choice-python-l01-verify-12"
   allowContinueOnIncorrect
   explanation="python --version (o python3 --version en macOS/Linux)."
   options={[

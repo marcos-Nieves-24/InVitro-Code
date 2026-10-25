@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
-# LAB 8: Clustering con K Means
-# -
+# LAB 8: Clustering con K-Means
+# -------------------------------------------------------------------------
 # Buscamos el k optimo con inercia y silhouette sobre blobs sinteticos y
 # luego agrupamos el dataset iris, comparando con las especies reales.
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -43,7 +43,7 @@ fig = px.line(x=ks, y=sil, markers=True,
               labels={"x": "k", "y": "Silhouette"})
 fig.show()                                 # Mostrar grafico interactivo
 
-# PASO 4: Aplicar K Means con el k optimo y visualizar los clusters.
+# PASO 4: Aplicar K-Means con el k optimo y visualizar los clusters.
 print("\nGraficando los clusters finales con sus centroides:")
 k_optimo = 5
 modelo = KMeans(n_clusters=k_optimo, n_init=10, random_state=42)
@@ -51,14 +51,14 @@ etiquetas = modelo.fit_predict(X)
 
 df_blobs = pd.DataFrame({"x": X[:, 0], "y": X[:, 1], "cluster": etiquetas})
 fig = px.scatter(df_blobs, x="x", y="y", color="cluster",
-                 title=f"Clusters de K Means (k={k_optimo})")
+                 title=f"Clusters de K-Means (k={k_optimo})")
 fig.add_scatter(x=modelo.cluster_centers_[:, 0],
                 y=modelo.cluster_centers_[:, 1],
                 mode="markers", marker=dict(size=14, symbol="x", color="black"),
                 name="Centroides")
 fig.show()                                 # Mostrar grafico interactivo
 
-# PASO 5: K Means sobre iris estandarizado con k = 3.
+# PASO 5: K-Means sobre iris estandarizado con k = 3.
 iris = load_iris()
 escalador = StandardScaler()
 X_iris = escalador.fit_transform(iris.data)
@@ -87,7 +87,7 @@ fig = px.scatter(df_iris, x="PC1", y="PC2", color="cluster",
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("El codo y el silhouette sugieren un k optimo cercano a 5 para los blobs.")
-print("En iris, K Means separa setosa claramente y distingue casi del todo al resto.")
+print("En iris, K-Means separa setosa claramente y distingue casi del todo al resto.")
 ```

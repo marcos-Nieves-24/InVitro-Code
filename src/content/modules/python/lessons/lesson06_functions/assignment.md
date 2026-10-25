@@ -11,12 +11,12 @@
 
 Crea un módulo de Python `sequence_tools.py` con las siguientes funciones:
 
-1. `gc_content(sequence)`   devuelve el porcentaje de GC
-2. `reverse_complement(sequence)`   devuelve el complemento inverso del ADN
-3. `transcribe(sequence)`   transcribe ADN a ARN (T  U)
-4. `translate(sequence)`   traduce ADN a proteína (usando una tabla de codones provista). Para simplificar, traduce solo el primer marco de lectura.
-5. `has_motif(sequence, motif)`   devuelve True si se encuentra el motivo
-6. `filter_by_gc(sequences, min_gc, max_gc)`   usa una lambda para filtrar secuencias por el rango de contenido de GC
+1. `gc_content(sequence)` — devuelve el porcentaje de GC
+2. `reverse_complement(sequence)` — devuelve el complemento inverso del ADN
+3. `transcribe(sequence)` — transcribe ADN a ARN (T → U)
+4. `translate(sequence)` — traduce ADN a proteína (usando una tabla de codones provista). Para simplificar, traduce solo el primer marco de lectura.
+5. `has_motif(sequence, motif)` — devuelve True si se encuentra el motivo
+6. `filter_by_gc(sequences, min_gc, max_gc)` — usa una lambda para filtrar secuencias por el rango de contenido de GC
 
 Incluye:
 - Docstrings para todas las funciones (formato PEP 257)

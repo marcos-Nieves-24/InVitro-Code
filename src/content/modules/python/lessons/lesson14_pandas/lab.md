@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 14: Manipulacion de datos con Pandas
-# -
+# -------------------------------------------------------------------------
 # Practicamos la creacion de DataFrames, la exploracion de datos, el
 # filtrado, el groupby, la fusion (merge) y la aplicacion de funciones.
 # =========================================================================
@@ -96,7 +96,7 @@ fig = px.bar(means, x="Category", y="Value", color="Category",
 fig.show()
 
 # PASO 8: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Creamos DataFrames desde diccionarios y listas.")
 print("Filtramos con condiciones booleanas y agrupamos con groupby.")
 print("Fusionamos tablas con merge y transformamos columnas con apply.")

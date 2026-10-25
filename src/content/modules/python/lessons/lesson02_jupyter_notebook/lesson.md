@@ -1,15 +1,15 @@
-
+---
 Module: 2
 Lesson Number: 2
 Lesson Title: Jupyter Notebook
 Estimated Duration: 45 minutos
-Prerequisites: L1   Instalando Python
+Prerequisites: L1 — Instalando Python
 Learning Objectives:
-  Iniciar Jupyter Notebook desde la línea de comandos
-  Crear y editar celdas de código y celdas markdown
-  Ejecutar código Python interactivamente en un notebook
-  Usar atajos de teclado para navegar eficientemente
-  Exportar un notebook a HTML o PDF
+  - Iniciar Jupyter Notebook desde la línea de comandos
+  - Crear y editar celdas de código y celdas markdown
+  - Ejecutar código Python interactivamente en un notebook
+  - Usar atajos de teclado para navegar eficientemente
+  - Exportar un notebook a HTML o PDF
 Keywords: Jupyter, notebook, celda, kernel, markdown, REPL
 Difficulty: Beginner
 Programming Concepts: Interfaz de notebook, markdown, ejecución de código, kernel
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
-
+---
 
 <Section number={1} title="Jupyter Notebook" eyebrow="INICIO">
 <RevealSequence>
@@ -58,7 +58,7 @@ Quiz: quiz.md
   typing={true}
   lines={[
     "Un notebook es un laboratorio en el navegador: una celda lee el CSV de expresión génica, la siguiente filtra genes, y el kernel recuerda ambas salidas.",
-    "Si reinicias el kernel a mitad del análisis, todas las variables desaparecen y debes re ejecutar de arriba abajo.",
+    "Si reinicias el kernel a mitad del análisis, todas las variables desaparecen y debes re-ejecutar de arriba abajo.",
     "Por eso el orden de las celdas no es decorativo: es tu historia reproducible.",
   ]}
 />
@@ -129,12 +129,12 @@ jupyter notebook
 Esto abre el dashboard de Jupyter en tu navegador en `http://localhost:8888`.
 
 
-1. Haz clic en "New"  "Python 3"
+1. Haz clic en "New" → "Python 3"
 2. Se abre un nuevo notebook con una celda de código vacía
 
 
 ```python
-# Esta es una celda de código   presiona Shift+Enter para ejecutarla
+# Esta es una celda de código — presiona Shift+Enter para ejecutarla
 print("¡Hola, Jupyter!")
 ```
 
@@ -156,24 +156,24 @@ $$ E = mc^2 $$
 ```
 
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Atajos de teclado de Jupyter:
 
-- **Shift+Enter**   Ejecutar celda y seleccionar siguiente
-- **Ctrl+Enter**   Ejecutar celda y quedarse
-- **Alt+Enter**   Ejecutar celda e insertar debajo
-- **A**   Insertar celda arriba (modo comando)
-- **B**   Insertar celda abajo (modo comando)
-- **DD**   Eliminar celda (modo comando)
-- **M**   Cambiar a celda markdown (modo comando)
-- **Y**   Cambiar a celda de código (modo comando)
-- **Ctrl+S**   Guardar notebook
-- **Z**   Deshacer eliminación de celda
+- **Shift+Enter** — Ejecutar celda y seleccionar siguiente
+- **Ctrl+Enter** — Ejecutar celda y quedarse
+- **Alt+Enter** — Ejecutar celda e insertar debajo
+- **A** — Insertar celda arriba (modo comando)
+- **B** — Insertar celda abajo (modo comando)
+- **DD** — Eliminar celda (modo comando)
+- **M** — Cambiar a celda markdown (modo comando)
+- **Y** — Cambiar a celda de código (modo comando)
+- **Ctrl+S** — Guardar notebook
+- **Z** — Deshacer eliminación de celda
 </ConceptCard>
 
 
-- **Guardar**: File  Save and Checkpoint (o Ctrl+S)
-- **Exportar**: File  Download as  HTML, PDF, Python script, etc.
+- **Guardar**: File → Save and Checkpoint (o Ctrl+S)
+- **Exportar**: File → Download as → HTML, PDF, Python script, etc.
 
 
 
@@ -213,7 +213,7 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
   question="Tu colaboradora recibe un notebook con salida visible, pero al ejecutar «Run All» obtiene NameError en celdas que antes funcionaban. ¿Cuál es la causa más probable?"
   moduleSlug="python"
   lessonSlug="lesson02_jupyter_notebook"
-  blockId="choice python l02 dens 1"
+  blockId="choice-python-l02-dens-1"
   allowContinueOnIncorrect
   explanation="El estado del kernel vive en memoria: si las celdas originales se ejecutaron fuera de orden, esa variable nunca existió en una ejecución limpia."
   options={[
@@ -231,8 +231,8 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
 
-1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell  Run All) para ejecutar secuencialmente.
-2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel  Restart & Run All).
+1. **Ejecutar celdas fuera de orden**: Las variables definidas después pueden no estar disponibles. Usa "Run All" (Cell → Run All) para ejecutar secuencialmente.
+2. **No reiniciar el kernel**: Cuando el código se comporta de forma inesperada, reinicia el kernel (Kernel → Restart & Run All).
 3. **Olvidarse de guardar**: Jupyter guarda automáticamente, pero guarda manualmente antes de cerrar.
 4. **Usar print() excesivamente**: La última expresión de una celda se muestra automáticamente.
 5. **Cerrar la terminal**: El servidor de Jupyter corre en la terminal. Cerrarla detiene el servidor.
@@ -252,7 +252,7 @@ El notebook se puede exportar a HTML y compartir con el equipo de producto.
 
 <RevealSequence>
 
-<ConceptCard variant="key idea">
+<ConceptCard variant="key-idea">
 Jupyter combina código, resultados y texto en un único documento interactivo cuyo estado vive en el kernel entre ejecuciones de celdas.
 </ConceptCard>
 
@@ -260,7 +260,7 @@ Jupyter combina código, resultados y texto en un único documento interactivo c
   features={[
     { id: "entorno", label: "Entorno interactivo", detail: "Jupyter Notebook es un entorno interactivo basado en web para análisis de datos." },
     { id: "celdas", label: "Celdas de código y markdown", detail: "Los notebooks contienen celdas de código y markdown; las de código ejecutan Python y las markdown muestran texto e imágenes formateados." },
-    { id: "kernel estado", label: "Kernel con estado", detail: "El kernel mantiene el estado entre ejecuciones de celdas." },
+    { id: "kernel-estado", label: "Kernel con estado", detail: "El kernel mantiene el estado entre ejecuciones de celdas." },
     { id: "atajos", label: "Atajos de teclado", detail: "Los atajos de teclado agilizan el flujo de trabajo." },
     { id: "exportar", label: "Exportar", detail: "Exporta notebooks para compartir resultados." },
   ]}
@@ -271,10 +271,10 @@ Jupyter combina código, resultados y texto en un único documento interactivo c
     { id: "notebook", label: "Notebook (.ipynb)", detail: "Documento JSON que contiene código, texto y salidas." },
     { id: "celda", label: "Celda", detail: "Unidad individual de contenido (código o markdown)." },
     { id: "kernel", label: "Kernel", detail: "Motor de Python que ejecuta las celdas de código." },
-    { id: "modo comando", label: "Modo comando", detail: "Modo de borde azul para acciones a nivel del notebook." },
-    { id: "modo edicion", label: "Modo edición", detail: "Modo de borde verde para editar el contenido de la celda." },
+    { id: "modo-comando", label: "Modo comando", detail: "Modo de borde azul para acciones a nivel del notebook." },
+    { id: "modo-edicion", label: "Modo edición", detail: "Modo de borde verde para editar el contenido de la celda." },
     { id: "dashboard", label: "Dashboard", detail: "Interfaz del explorador de archivos de Jupyter." },
-    { id: "shift enter", label: "Shift+Enter", detail: "Ejecutar celda actual y pasar a la siguiente." },
+    { id: "shift-enter", label: "Shift+Enter", detail: "Ejecutar celda actual y pasar a la siguiente." },
   ]}
 />
 
@@ -282,7 +282,7 @@ Jupyter combina código, resultados y texto en un único documento interactivo c
   question="¿Qué atajo ejecuta la celda actual y avanza a la siguiente?"
   moduleSlug="python"
   lessonSlug="lesson02_jupyter_notebook"
-  blockId="choice python l02 resumen 1"
+  blockId="choice-python-l02-resumen-1"
   allowContinueOnIncorrect
   explanation="Shift+Enter ejecuta la celda actual y mueve el foco a la siguiente celda."
   options={[
@@ -338,7 +338,7 @@ Exporta el notebook como HTML.
   question="¿Qué componente de Jupyter mantiene el estado entre ejecuciones de celdas?"
   moduleSlug="python"
   lessonSlug="lesson02_jupyter_notebook"
-  blockId="choice python l02 conceptos 1"
+  blockId="choice-python-l02-conceptos-1"
   allowContinueOnIncorrect
   explanation="El kernel ejecuta el código y mantiene variables y funciones definidas entre celdas."
   options={[

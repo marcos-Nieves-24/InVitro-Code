@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 10: Narracion de datos con el dataset tips
-# -
+# -------------------------------------------------------------------------
 # Contamos una historia con datos de propinas: barras, scatter con OLS,
 # histograma y boxplot, con anotaciones y etiquetas claras en espanol.
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -68,7 +68,7 @@ fig.update_layout(xaxis_title="Dia de la semana", yaxis_title="Propina promedio 
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Los viernes y sabados las propinas promedio son mas altas.")
 print("El total de la cuenta y la propina correlacionan positivamente.")
 print("La cena concentra cuentas y propinas mayores que el almuerzo.")

@@ -23,7 +23,7 @@ b) Media > Mediana
 c) Media = Mediana
 d) Moda > Mediana
 
-**4. La regla de Freedman Diaconis determina:**
+**4. La regla de Freedman-Diaconis determina:**
 
 a) La cantidad de bins para un histograma
 b) El ancho de banda para el KDE
@@ -50,7 +50,7 @@ d) La misma cantidad de valores atípicos que la normal
 - Cree un histograma con KDE superpuesto
 - Calcule e imprima la asimetría (skewness) y la curtosis
 
-
+---
 
 # Clave de respuestas
 

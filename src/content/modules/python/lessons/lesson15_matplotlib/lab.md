@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 15: Visualizacion de datos con Plotly
-# -
+# -------------------------------------------------------------------------
 # El laboratorio original usaba Matplotlib; aqui reescribimos los mismos
 # graficos con Plotly para que se muestren de forma INTERACTIVA en la
 # consola de visualizacion: lineas, dispersion, barras, histograma y un
@@ -86,7 +86,7 @@ fig.update_layout(title="Panel de graficos 2x2", height=600,
 fig.show()
 
 # PASO 6: Resumen del laboratorio.
-print("\n Resumen ")
+print("\n--- Resumen ---")
 print("Creamos lineas, dispersion, barras e histogramas con Plotly.")
 print("Todo es interactivo: puedes hacer zoom, pan y ver tooltips.")
 print("El panel 2x2 combina 4 graficos con make_subplots.")

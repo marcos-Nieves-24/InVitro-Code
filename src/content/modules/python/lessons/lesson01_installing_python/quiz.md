@@ -43,7 +43,7 @@
 **Q8:** Escribe la secuencia de comandos de terminal para:
 1. Crear un virtual environment llamado `ml_env`
 2. Activarlo (en macOS/Linux)
-3. Instalar el paquete `scikit learn`
+3. Instalar el paquete `scikit-learn`
 4. Guardar la lista de paquetes instalados en un archivo
 
 ## Clave de respuestas
@@ -66,6 +66,6 @@
 ```bash
 python -m venv ml_env
 source ml_env/bin/activate
-pip install scikit learn
+pip install scikit-learn
 pip freeze > requirements.txt
 ```

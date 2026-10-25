@@ -25,9 +25,9 @@ Estás analizando datos de pacientes de alta dimensionalidad. Necesitas:
 2. **PCA completo:** calcula y grafica la varianza explicada; determina n para 80%, 90%, 95%, 99%
 3. **Interpreta los componentes:** para PC1 y PC2, lista las 5 features principales por magnitud de carga. ¿Qué tema biológico representa cada componente?
 4. **Experimento de clasificación:**
-   Entrena una LogisticRegression con las 30 features originales (escaladas)
-   Entrena LogisticRegression con los datos reducidos por PCA (2, 5, 10 componentes)
-   Entrena LogisticRegression con los datos reducidos por PCA (n óptima para 90%)
-   Compara las exactitudes de prueba
+   - Entrena una LogisticRegression con las 30 features originales (escaladas)
+   - Entrena LogisticRegression con los datos reducidos por PCA (2, 5, 10 componentes)
+   - Entrena LogisticRegression con los datos reducidos por PCA (n óptima para 90%)
+   - Compara las exactitudes de prueba
 5. **Conclusión final:** ¿PCA mejora o perjudica la clasificación? ¿Por qué?
 

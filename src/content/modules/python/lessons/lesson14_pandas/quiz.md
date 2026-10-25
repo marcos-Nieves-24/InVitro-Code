@@ -54,7 +54,7 @@
 
 **Q5:** C) `df.describe()`
 
-**Q6:** `groupby()` divide el DataFrame en grupos según una o más columnas, aplica una función a cada grupo de forma independiente y combina los resultados. Implementa el patrón "split apply combine" para la agregación de datos. Por ejemplo, `df.groupby("Category")["Value"].mean()` calcula la media de Value para cada Category.
+**Q6:** `groupby()` divide el DataFrame en grupos según una o más columnas, aplica una función a cada grupo de forma independiente y combina los resultados. Implementa el patrón "split-apply-combine" para la agregación de datos. Por ejemplo, `df.groupby("Category")["Value"].mean()` calcula la media de Value para cada Category.
 
 **Q7:** El encadenamiento de métodos es llamar varios métodos de forma secuencial sobre el mismo objeto, como `df.dropna().groupby("A").mean().reset_index()`. Es útil porque crea código legible y conciso que se lee como un pipeline de operaciones sin necesidad de variables intermedias.
 
