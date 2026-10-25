@@ -14,29 +14,28 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section className="px-3 py-2 sm:px-5 md:py-2.5 lg:px-6 lg:py-3.5">
-      <div className="mx-auto w-full max-w-4xl">
-        {/* Eyebrow */}
-        <div className="eyebrow mb-1.5 flex items-center gap-2 text-xs font-semibold text-brand-600">
+    <section className="px-4 py-3 sm:px-6 md:py-4 lg:px-8 lg:py-6">
+      <div className="w-full">
+        {/* Eyebrow — unificado */}
+        <div className="eyebrow mb-2 flex items-center gap-2 text-[15px] font-semibold text-brand-600">
           <span>{String(number).padStart(2, "0")}</span>
-          <span className="h-px w-6 bg-gray-300" />
           <span>{eyebrow}</span>
         </div>
 
-        {/* Title in display font */}
-        <h2 className="font-display text-xl leading-[1.15] font-bold tracking-tight text-ink md:text-2xl lg:text-[28px]">
+        {/* Title — unificado y agrandado */}
+        <h2 className="font-display text-[28px] leading-[1.15] font-bold tracking-tight text-ink md:text-[34px] lg:text-[36px]">
           {title}
         </h2>
 
-        {/* Optional description */}
+        {/* Optional description — unificada */}
         {description && (
-          <p className="mt-1 w-full text-sm leading-relaxed text-gray-600">
+          <p className="mt-2 w-full text-lg leading-relaxed text-gray-600">
             {description}
           </p>
         )}
 
-        {/* Content — sin guiones: desactivar partición silábica en expediciones */}
-        <div className="mt-3 w-full [hyphens:none]" style={{ hyphens: "none" as const }}>
+        {/* Content — 100% width, sin guiones */}
+        <div className="mt-4 w-full [hyphens:none]" style={{ hyphens: "none" as const }}>
           {children}
         </div>
       </div>

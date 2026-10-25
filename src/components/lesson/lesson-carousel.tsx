@@ -32,6 +32,7 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
+  const [isRevealBlocked, setIsRevealBlocked] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -56,12 +57,15 @@ export function LessonCarousel({
   }, [current]);
 
   // Detect whether current slide has incomplete RevealSequence (data-reveal-has-more="true")
+  // and whether it is blocked (quiz not answered)
   useEffect(() => {
     const check = () => {
       const root = slideAreaRef.current;
       const hasIncompleteReveal =
         root?.querySelector('[data-reveal-has-more="true"]') != null;
+      const hasBlocked = root?.querySelector('[data-reveal-blocked="true"]') != null;
       setIsRevealIncomplete(hasIncompleteReveal);
+      setIsRevealBlocked(hasBlocked);
     };
     // Initial check after render
     const raf = requestAnimationFrame(check);
@@ -99,78 +103,36 @@ export function LessonCarousel({
     if (r.ok) setShowCelebration(true);
   };
 
-  // Navigation rails below (two <button> overlays) own the left/right advance.
-  // The central stage has no click handler of its own, so the outer slide area
-  // never advances on a prose/card/trainer click; only rails fire goNext/goPrev.
-
-  // Keyboard navigation: Enter/Right -> next (blocked while reveal incomplete), Left -> prev, Home/End -> first/last, Esc -> noop.
-  // Space is deliberately NOT a forward key: inside editors and quizzes it
-  // types/activates, and as a global advance it fires by accident. Enter and
-  // ArrowRight already cover keyboard advancement; native buttons keep working.
+  // ALL movement is via footer Continuar/Atrás only — no rails, no click zones, no keyboard forward.
+  // Keyboard is disabled for forward (ArrowRight/Enter) so Dra. Coni + RevealSequence
+  // slices only advance via footer Continuar (single source of truth).
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const active = document.activeElement as HTMLElement | null;
       const isTypingTarget =
         active?.closest("input,textarea,select,[contenteditable='true']") != null;
-
-      // When typing, only Escape would be relevant; but spec says ESC does nothing, so ignore typing context
-      if (isTypingTarget) {
-        // Allow Escape to remain noop; block slide navigation while typing except Esc
-        if (e.key === "Escape") return;
-        // Space/Enter inside input/textarea should not navigate
-        if (e.key === " " || e.key === "Enter" || e.key === "ArrowRight" || e.key === "ArrowLeft") {
-          return;
-        }
-        // Home/End belong to the focused control (range: jump to min/max; text:
-        // line start/end). Without this, seeking a slider with End teleports the
-        // learner to the last slide and loses their place mid-exercise.
-        if (e.key === "Home" || e.key === "End") {
-          return;
-        }
+      if (isTypingTarget) return;
+      // Only allow Atrás via ArrowLeft for accessibility; forward is footer-only
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+        return;
       }
-
-      // All forward keys below funnel through goNext, which delegates to the
-      // single reveal owner while it still has steps and only changes the slide
-      // once the reveal is complete.
-      switch (e.key) {
-        case "ArrowRight":
-          e.preventDefault();
-          if (!isLast) goNext();
-          else {
-            // on last slide, ArrowRight does not auto-finish; user must press Finalizar
-          }
-          break;
-        case "Enter":
-          // Do not intercept when focus is on a native button (it already handles click)
-          if (active?.tagName === "BUTTON" && e.key === "Enter") return;
-          e.preventDefault();
-          if (!isLast) goNext();
-          break;
-        case "ArrowLeft":
-          // Intra-slide back is handled by RevealSequence's own keydown, which
-          // stops propagation, so this fallback only runs for inter-slide back.
-          e.preventDefault();
-          goPrev();
-          break;
-        case "Home":
-          e.preventDefault();
-          setCurrent(0);
-          break;
-        case "End":
-          e.preventDefault();
-          setCurrent(total - 1);
-          break;
-        case "Escape":
-          // Intentionally no-op: fullscreen is fixed overlay, not native Fullscreen API
-          break;
-        default:
-          break;
+      if (e.key === "Home") {
+        e.preventDefault();
+        setCurrent(0);
+        return;
       }
+      if (e.key === "End") {
+        e.preventDefault();
+        setCurrent(total - 1);
+        return;
+      }
+      // ArrowRight, Enter, Space intentionally no-op — must use footer Continuar
     };
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isLast, goNext, goPrev, total]);
+  }, [goPrev, total]);
 
   if (total === 0) return null;
 
@@ -184,67 +146,17 @@ export function LessonCarousel({
         aria-live="polite"
         className="fixed inset-y-0 left-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
-        {/* Top bar — the ONE slide-position indicator.
-            The dot rail (LabProgress) that used to sit here was removed: it
-            stated slide position a second time alongside the "Diapositiva N de M"
-            text below it and the rail + "N / M" pair in the footer. Position is
-            now stated exactly once (this text) plus the intra-slide "Paso x de y"
-            rendered by the reveal itself. */}
-        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1">
-          <p className="text-center font-mono text-xs uppercase tracking-widest text-storm">
-            {lessonTitle ? `${lessonTitle} — ` : ""}Escena {current + 1} de {total}
-          </p>
-        </div>
 
-        {/* Slide area — full bleed; click zones: left=Atrás right=Continuar.
-            Flex column so the inner wrapper owns the whole stage band and can
-            centre the slide inside it: a short slide used to hang from the top of
-            the band and dump every pixel of void at the bottom (measured 694px). */}
+
+        {/* Slide area — no click zones, no rails. ALL advance is via footer Continuar only.
+            Scrollbar mejorado: más visible y grueso para expediciones amplias. */}
         <div
           ref={slideAreaRef}
-          className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
-          // Provide hint for coarse pointers
+          className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0 scrollbar-thin scrollbar-track-surface scrollbar-thumb-brand-300 hover:scrollbar-thumb-brand-400"
           role="group"
           aria-label="Área de la diapositiva"
-          // Make area focusable so keyboard works even without explicit focus elsewhere
-          tabIndex={0}
-          // Clicks no longer bubble from the whole slide area; navigation is owned
-          // only by the two rail buttons below, which cover the empty edge gutters.
+          style={{ scrollbarWidth: "thin", scrollbarColor: "var(--color-brand-300) transparent" } as React.CSSProperties}
         >
-          {/* Left rail — advances to the previous scene, only on rail clicks. */}
-          {current > 0 && (
-            <button
-              type="button"
-              data-rail="left"
-              onClick={goPrev}
-              aria-label="Anterior: ir a la escena anterior"
-              className="absolute left-0 top-0 z-30 h-full w-[clamp(40px,6%,96px)] cursor-w-resize text-storm/30 transition-colors hover:bg-storm/5 hover:text-storm/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-[-2px]"
-            >
-              <span
-                className="pointer-events-none absolute left-1 top-1/2 -translate-y-1/2 select-none text-xl leading-none"
-                aria-hidden="true"
-              >
-                ‹
-              </span>
-            </button>
-          )}
-          {/* Right rail — advances to the next scene (or reveal owner's next). */}
-          {!isLast && (
-            <button
-              type="button"
-              data-rail="right"
-              onClick={goNext}
-              aria-label="Siguiente: ir a la siguiente escena"
-              className="absolute right-0 top-0 z-30 h-full w-[clamp(40px,6%,96px)] cursor-e-resize text-storm/30 transition-colors hover:bg-storm/5 hover:text-storm/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-[-2px]"
-            >
-              <span
-                className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 select-none text-xl leading-none"
-                aria-hidden="true"
-              >
-                ›
-              </span>
-            </button>
-          )}
 
           {/* Center stage — no click-owner; events only on its interactive children. */}
           <div
@@ -277,59 +189,53 @@ export function LessonCarousel({
           </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + single dot rail (compact).
-            Grid instead of justify-between so the centre rail stays centred
-            when the advance slot renders nothing. */}
-        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-3 py-1">
+        {/* Footer — Atrás / Continuar + slice indicator — fuente ampliada, sin flechas */}
+        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-4 py-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={goPrev}
             disabled={current === 0}
             aria-label="Diapositiva anterior"
-            className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_SECONDARY} justify-self-start px-4`}
+            className={`focus-ring ${NAV_TOKEN} text-base font-medium justify-self-start px-6 py-2`}
           >
-            ← Atrás
+            Atrás
           </Button>
 
-          {/* Single positional affordance in the footer: the dot rail.
-              The bare "N / M" counter that sat next to it was removed — it
-              restated the slide number the header's "Diapositiva N de M" text
-              already gives. The rail wins over the bare number because it also
-              shows remaining distance, and it stays aria-hidden here so the
-              header text remains the single announced source of truth. */}
-          <div className="flex items-center gap-3" aria-hidden="true">
-            <div className="hidden items-center gap-1.5 sm:flex">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-sm font-medium text-storm">
+              slice {current + 1} de {total}
+            </span>
+            <div className="hidden items-center gap-2 sm:flex" aria-hidden="true">
               {Array.from({ length: total }, (_, i) => (
                 <span
                   key={`dot-${i}`}
-                  className={`h-1.5 rounded-full transition-all duration-200 motion-reduce:transition-none ${
+                  className={`h-2 rounded-full transition-all duration-200 motion-reduce:transition-none ${
                     i === current
-                      ? "w-6 bg-brand-500"
+                      ? "w-8 bg-brand-500"
                       : i < current
-                        ? "w-1.5 bg-success"
-                        : "w-1.5 bg-surface-raised"
+                        ? "w-2 bg-success"
+                        : "w-2 bg-surface-raised"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* Single Continuar — footer is the ONLY primary advance control.
-              RevealSequence/DialogueBox no longer render their own Continuar;
-              they delegate via consumeRevealAdvance(). While incomplete the
-              footer button stays but disabled (so focus never jumps). */}
+          {/* Single Continuar — footer is the ONLY advance control.
+              All slices (RevealSequence + Dra. Coni lines) advance via footer goNext -> consumeRevealAdvance().
+              Footer is enabled when hasMore and not blocked; disabled only when quiz blocks. */}
           {isLast ? (
             <Button
-              variant="secondary"
+              variant="primary"
               size="sm"
-              className={`${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end !border-teal-600 !bg-teal-600 px-5 !text-white shadow-teal-600/20 hover:!bg-teal-700`}
+              className={`${NAV_TOKEN} text-base font-semibold justify-self-end px-6 py-2`}
               onClick={handleFinish}
-              disabled={state === "loading" || isRevealIncomplete}
+              disabled={state === "loading" || isRevealBlocked}
               aria-label="Finalizar lección"
-              aria-disabled={isRevealIncomplete || undefined}
+              aria-disabled={isRevealBlocked || undefined}
               title={
-                isRevealIncomplete
+                isRevealBlocked
                   ? "Completa el contenido para continuar"
                   : undefined
               }
@@ -342,16 +248,16 @@ export function LessonCarousel({
               size="sm"
               onClick={goNext}
               aria-label="Siguiente diapositiva"
-              aria-disabled={isRevealIncomplete || undefined}
-              disabled={isRevealIncomplete}
+              aria-disabled={isRevealBlocked || undefined}
+              disabled={isRevealBlocked}
               title={
-                isRevealIncomplete
+                isRevealBlocked
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealIncomplete ? "opacity-50" : ""}`}
+              className={`focus-ring ${NAV_TOKEN} text-base font-semibold justify-self-end px-6 py-2 ${isRevealBlocked ? "opacity-50" : ""}`}
             >
-              Continuar →
+              Continuar
             </Button>
           )}
         </div>

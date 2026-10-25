@@ -25,10 +25,10 @@ export function ConceptCard({
     <div
       className={`my-3 rounded-[12px] border-l-4 p-3 md:p-4 ${variantStyles[variant]}`}
     >
-      <p className="mb-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+      <p className="mb-1.5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">
         {variantLabels[variant]}
       </p>
-      <div className="text-[15px] leading-relaxed text-gray-800 lg:text-base [&_strong]:text-gray-900">
+      <div className="text-base leading-relaxed text-gray-800 md:text-[17px] lg:text-lg [&_strong]:text-gray-900">
         {children}
       </div>
     </div>
