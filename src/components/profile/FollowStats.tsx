@@ -6,6 +6,7 @@ interface FollowStatsProps {
   following: SocialUser[];
   followers: SocialUser[];
   onConnect?: (userId: string) => void;
+  onOpenConecta?: () => void;
 }
 
 function UserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: string) => void }) {
@@ -31,7 +32,7 @@ function UserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: strin
   );
 }
 
-export function FollowStats({ following, followers, onConnect }: FollowStatsProps) {
+export function FollowStats({ following, followers, onConnect, onOpenConecta }: FollowStatsProps) {
   return (
     <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md">
       <div className="grid grid-cols-2 gap-6">
@@ -61,7 +62,8 @@ export function FollowStats({ following, followers, onConnect }: FollowStatsProp
       <div className="mt-6">
         <button
           type="button"
-          className="w-full rounded-btn bg-mint px-5 py-3 text-sm font-bold text-ink shadow-sm hover:bg-fog"
+          onClick={onOpenConecta}
+          className="w-full rounded-btn bg-mint px-5 py-3 text-sm font-bold text-ink shadow-sm hover:bg-fog focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
         >
           Conectar
         </button>

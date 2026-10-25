@@ -1,8 +1,6 @@
 "use client";
 
-import { ProfileHero } from "@/components/profile/ProfileHero";
-import { FollowStats } from "@/components/profile/FollowStats";
-import { ConectaFloatingWidget } from "@/components/profile/ConectaFloatingWidget";
+import { PerfilClient } from "@/components/profile/PerfilClient";
 
 const MOCK_FOLLOWING = [
   { id: "1", username: "ana_bio" },
@@ -26,24 +24,29 @@ export default function PreviewPerfilFull() {
     <div className="min-h-screen bg-surface p-6 md:p-8">
       <div className="mx-auto max-w-[1379px]">
         <h1 className="font-display text-3xl font-bold text-ink">Mi Perfil</h1>
-
-        <div className="mt-8 grid gap-8 lg:grid-cols-[560px_1fr] lg:items-start">
-          <div>
-            <ProfileHero
-              username="ana_bio"
-              email="ana@invitro.code"
-              avatar_url={null}
-              bio="Estudiante de Biotecnología — explorando ML para análisis de secuencias."
-              created_at="2024-03-15T10:00:00.000Z"
-              leaderboardRank={7}
-              level={4}
-              totalXp={3420}
-            />
-          </div>
-          <FollowStats following={MOCK_FOLLOWING} followers={MOCK_FOLLOWERS} />
+        <p className="mt-1 text-xs text-storm">Preview — mock sin auth (mismo layout que /perfil)</p>
+        <div className="mt-8">
+          <PerfilClient
+            profile={{
+              username: "ana_bio",
+              email: "ana@invitro.code",
+              avatar_url: null,
+              bio: "Estudiante de Biotecnología — explorando ML para análisis de secuencias.",
+              created_at: "2024-03-15T10:00:00.000Z",
+              gender: null,
+            }}
+            leaderboardRank={7}
+            following={MOCK_FOLLOWING}
+            followers={MOCK_FOLLOWERS}
+            suggested={MOCK_SUGGESTED}
+            onAvatarUpload={async () => {
+              alert("Preview: avatar upload mock");
+            }}
+            onProfileSave={async () => {
+              alert("Preview: save mock");
+            }}
+          />
         </div>
-
-        <ConectaFloatingWidget suggested={MOCK_SUGGESTED} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Trophy, Calendar } from "lucide-react";
+import { Trophy, Calendar, Pencil } from "lucide-react";
 
 interface ProfileHeroProps {
   username?: string | null;
@@ -11,6 +11,7 @@ interface ProfileHeroProps {
   leaderboardRank?: number | null;
   level?: number;
   totalXp?: number;
+  onEdit?: () => void;
 }
 
 function formatJoinDate(iso: string | null | undefined): string | null {
@@ -33,6 +34,7 @@ export function ProfileHero({
   leaderboardRank,
   level,
   totalXp,
+  onEdit,
 }: ProfileHeroProps) {
   const displayName = username || email?.split("@")[0] || "Investigador";
   const initials = displayName
@@ -44,7 +46,18 @@ export function ProfileHero({
   const joinDate = formatJoinDate(created_at);
 
   return (
-    <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md md:p-10">
+    <div className="relative rounded-card border border-surface-raised bg-surface-card p-8 shadow-md md:p-10">
+      {onEdit && (
+        <button
+          type="button"
+          onClick={onEdit}
+          className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-btn border border-surface-raised bg-surface px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
+          aria-label="Editar perfil"
+        >
+          <Pencil className="h-3.5 w-3.5" aria-hidden="true" />
+          Editar perfil
+        </button>
+      )}
       {/* Avatar row — mirrors Excalidraw left column: large avatar centered - AMPLIFIED */}
       <div className="flex flex-col items-center text-center">
         <div className="relative">
