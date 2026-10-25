@@ -13,8 +13,6 @@ import {
   Trophy,
   Users,
   Flame,
-  ArrowRight,
-  FlaskConical,
 } from "lucide-react";
 
 function initials(name: string) {
@@ -119,32 +117,8 @@ export default async function ComunidadPage() {
 
       <div className="mx-auto max-w-[1440px] space-y-10 px-6 py-10 md:px-10">
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-          {/* Left column: real challenge + active researchers */}
+          {/* Left column: Leaderboard */}
           <div className="space-y-6 lg:col-span-8">
-            {/* Desafío real de la expedición (D1: static, no fake numbers) */}
-            <div className="glass-card flex flex-col gap-4 rounded-2xl p-6 md:flex-row md:items-center">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fog/20 text-mint">
-                <FlaskConical className="h-6 w-6" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <h2 className="font-display text-2xl font-bold text-ink">
-                  Desafío Bio-Data 2026
-                </h2>
-                <p className="mt-1 text-sm text-storm">
-                  Análisis de 11 variables físico-químicas para predecir la
-                  calidad sensorial del vino. Resolvelo en las lecciones del
-                  módulo de Machine Learning.
-                </p>
-              </div>
-              <a
-                href="/proyectos"
-                className="flex shrink-0 items-center gap-1 rounded-xl bg-mint px-5 py-3 text-sm font-bold text-ink shadow-lg transition-colors hover:bg-mint/90"
-              >
-                Explorar
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-
             {/* Leaderboard de estudiantes */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-ink">
