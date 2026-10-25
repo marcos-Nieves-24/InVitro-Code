@@ -26,8 +26,8 @@ const LENSES: LensSpec[] = [
     id: "matrix",
     buttonLabel: "Matriz (n = 100)",
     title: "Desglose de 100 conidias clasificadas (Aspergillus = positivo)",
-    formula: "Total = TP (35) + FN (10) + FP (5) + TN (50) = 100",
-    calculation: "Aciertos = 85/100 (85%) · Errores = 10 FN + 5 FP",
+    formula: "Total = 35 + 10 + 5 + 50 = 100",
+    calculation: "Aciertos 85/100 (85%) · Errores 15",
     meaning:
       "La matriz de confusión separa los aciertos (TP, TN) y desagrega qué tipo de errores comete el clasificador (FP vs FN).",
     clinicalNote:
@@ -135,9 +135,9 @@ const CELL_W = 200;
 const CELL_H = 140;
 const CELL_GAP = 14;
 
-const PANEL_X = 585;
+const PANEL_X = 580;
 const PANEL_Y = 104;
-const PANEL_W = 270;
+const PANEL_W = 285;
 const PANEL_H = 294;
 
 export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
@@ -350,16 +350,16 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={PANEL_Y + 62}
             textAnchor="middle"
             fill="white"
-            fontSize={14.5}
+            fontSize={12}
             fontFamily="monospace"
             fontWeight={700}
           >
             {lens.formula}
           </text>
           <rect
-            x={PANEL_X + 16}
+            x={PANEL_X + 10}
             y={PANEL_Y + 80}
-            width={PANEL_W - 32}
+            width={PANEL_W - 20}
             height={34}
             rx={10}
             fill="rgba(69,220,198,0.14)"
@@ -371,7 +371,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             y={PANEL_Y + 102}
             textAnchor="middle"
             fill="#45dcc6"
-            fontSize={12.5}
+            fontSize={11.5}
             fontFamily="monospace"
             fontWeight={700}
           >
