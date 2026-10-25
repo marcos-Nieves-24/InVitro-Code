@@ -302,13 +302,13 @@ export function DialogueBox({
             boxShadow: "0 4px 16px var(--color-bubble-glow, rgba(163,207,205,0.35)), 0 1px 3px rgba(0,0,0,0.08)",
           }}
         >
-          {/* Speaker label */}
-          <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+          {/* Speaker label — unificado */}
+          <p className="mb-1 font-mono text-[13px] font-semibold uppercase tracking-widest text-brand-600">
             {resolvedSpeaker}
           </p>
 
-          {/* Content */}
-          <div className="text-base leading-relaxed text-gray-700 md:text-lg">
+          {/* Content — unificado y agrandado */}
+          <div className="text-lg leading-relaxed text-gray-700 md:text-[19px]">
             {hasLines && displayedText !== null && displayedText.length > 0 ? (
               <p className="m-0">
                 {displayedText}
@@ -325,10 +325,10 @@ export function DialogueBox({
             ) : null}
           </div>
 
-          {/* Progress + continue */}
+          {/* Progress + continue — unificado */}
           <div className="mt-1.5 flex items-center justify-between gap-2">
             {hasLines && (lines as string[]).length > 1 && !isLastLine ? (
-              <span className="font-mono text-xs tracking-wide text-storm">
+              <span className="font-mono text-[13px] tracking-wide text-storm">
                 {Math.min(lineIndex + 1, (lines as string[]).length)} / {(lines as string[]).length}
               </span>
             ) : (
