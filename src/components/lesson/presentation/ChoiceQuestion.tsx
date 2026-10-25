@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { QuizOption } from "@/domain/slide";
 import { useRevealQuizBlock } from "./RevealSequence";
 import { QuizButton } from "./QuizButton";
+import { renderWithMicroorganismItalics } from "@/lib/microorganisms";
 
 export interface ChoiceQuestionProps {
   question: string;
@@ -155,7 +156,7 @@ export function ChoiceQuestion({
       className="my-3 rounded-card border border-gray-200 bg-surface-card p-4 shadow-sm"
     >
       <p className="mb-3 text-[15px] font-semibold leading-relaxed text-ink md:text-base">
-        {question}
+        {renderWithMicroorganismItalics(question)}
       </p>
 
       <div
@@ -203,11 +204,11 @@ export function ChoiceQuestion({
           </p>
           {selectedOption?.feedback && (
             <p className="mb-1 text-sm leading-relaxed">
-              {selectedOption.feedback}
+              {renderWithMicroorganismItalics(selectedOption.feedback)}
             </p>
           )}
           {explanation && (
-            <p className="text-sm leading-relaxed opacity-90">{explanation}</p>
+            <p className="text-sm leading-relaxed opacity-90">{renderWithMicroorganismItalics(explanation)}</p>
           )}
           {!isCorrect && !allowContinueOnIncorrect && (
             <p className="mt-2 text-xs font-medium opacity-80">
@@ -223,7 +224,7 @@ export function ChoiceQuestion({
           role="note"
           aria-live="polite"
         >
-          Pista: {hintText}
+          Pista: {hintText ? renderWithMicroorganismItalics(hintText) : null}
         </div>
       )}
     </div>

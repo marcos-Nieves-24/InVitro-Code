@@ -80,13 +80,13 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
 </Section>
 
 <Section number={3} title="Laboratorio: Exploración molecular 3D" eyebrow="INTERACTIVA">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Explora:</strong> Rota la molécula arrastrando con el cursor. Alterna entre vistas de cintas (ribbon) y esferas para reconocer hélices alfa, láminas beta y loops desordenados.
 </div>
 
 <InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="480px" caption="Visualización interactiva de coordenadas reales del Protein Data Bank (PDB)" />
-
+</RevealSequence>
 </Section>
 
 <Section number={4} title="De coordenadas 3D a regresión espacial" eyebrow="CONCEPTO">
@@ -246,13 +246,13 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
 </Section>
 
 <Section number={9} title="Laboratorio: Simulación de pipeline" eyebrow="INTERACTIVA">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Explora:</strong> Modifica los parámetros de entrada y observa cómo las decisiones de calibración y preprocesamiento repercuten en el rendimiento final del modelo.
 </div>
 
 <InteractiveFrame src="/interactives/demo_10_pipeline.html" height="480px" caption="Simulación educativa: etapas de un pipeline de bioinformática" />
-
+</RevealSequence>
 </Section>
 
 <Section number={10} title="Calibración y prevención de contaminación" eyebrow="CONCEPTO">
@@ -493,11 +493,11 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
 </Section>
 
 <Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
-
+<RevealSequence showHistory>
 <MascotMessage mood="celebrating">
 ¡Estructuras 3D conquistadas, pipelines dominados y matrices de confusión interpretadas con rigor clínico! Estás a las puertas de los casos del mundo real.
 </MascotMessage>
 
 En la última lección del módulo exploraremos aplicaciones reales que impactaron al planeta: cómo la IA aceleró la formulación de nanopartículas para la vacuna del COVID-19, el reposicionamiento exprés de moléculas terapéuticas y los nuevos modelos fundacionales de ADN como **Evo**.
-
+</RevealSequence>
 </Section>

@@ -173,7 +173,7 @@ const yc = (e: number) => RY1 - (Math.min(e, ECM_SCALE) / ECM_SCALE) * (RY1 - RY
  * playback bar), so pressing play or scrubbing reads off the model's prediction
  * across the feature range. Everything is deterministic.
  */
-export function OverfittingPlayer({ caption, autoPlay = false }: OverfittingPlayerProps) {
+export function OverfittingPlayer({ caption, autoPlay = true }: OverfittingPlayerProps) {
   const [degree, setDegree] = useState(2);
   const timeline = useAnymotionTimeline({ duration: 2.4, autoPlay });
 

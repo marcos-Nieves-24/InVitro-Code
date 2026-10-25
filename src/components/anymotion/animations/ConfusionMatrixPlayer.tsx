@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnymotionStage } from "../AnymotionStage";
+import { renderWithMicroorganismItalics } from "@/lib/microorganisms";
 
 interface ConfusionMatrixPlayerProps {
   caption?: string;
@@ -452,7 +453,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
 
       {caption && (
         <figcaption className="mt-2 text-center font-mono text-xs text-storm">
-          {caption}
+          {renderWithMicroorganismItalics(caption)}
         </figcaption>
       )}
     </figure>

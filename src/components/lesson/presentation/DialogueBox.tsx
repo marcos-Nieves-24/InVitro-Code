@@ -355,17 +355,12 @@ export function DialogueBox({
                 <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar al siguiente paso
               </span>
             ) : showContinueResolved && onNext ? (
-              <button
-                type="button"
-                data-dialogue-continue
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleAdvance();
-                }}
-                className="inline-flex items-center gap-1 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              <span
+                aria-hidden="true"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 motion-safe:animate-[dialogue-continue-pulse_1.6s_ease-in-out_infinite] motion-reduce:animate-none"
               >
-                Continuar <span aria-hidden="true">→</span>
-              </button>
+                <span className="inline-block translate-y-[-1px]">▸</span> Click para continuar
+              </span>
             ) : null}
           </div>
         </div>

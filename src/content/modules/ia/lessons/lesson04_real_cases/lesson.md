@@ -582,7 +582,7 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
 </Section>
 
 <Section number={14} title="¡Fin del Módulo 1!" eyebrow="COMPLETADO">
-
+<RevealSequence showHistory>
 <MascotMessage mood="celebrating">
 ¡Felicidades por culminar el Módulo 1: Introducción a la Inteligencia Artificial! Has adquirido el pensamiento crítico necesario para navegar la bioinformática moderna.
 </MascotMessage>
@@ -596,5 +596,5 @@ Principio supremo: Sin datos limpios, features representativas y validación cru
 • **Modelos Generativos**: Diseño computacional de péptidos y biomoléculas.
 
 ¡Excelente trabajo y nos vemos en la próxima expedición científica!
-
+</RevealSequence>
 </Section>

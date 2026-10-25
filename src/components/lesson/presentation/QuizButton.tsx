@@ -2,6 +2,7 @@
 
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import type { QuizOption } from "@/domain/slide";
+import { renderWithMicroorganismItalics } from "@/lib/microorganisms";
 
 export interface QuizButtonProps {
   option: QuizOption;
@@ -128,7 +129,7 @@ export function QuizButton({
         ) : null}
       </span>
 
-      <span className="min-w-0 flex-1 leading-relaxed">{option.label}</span>
+      <span className="min-w-0 flex-1 leading-relaxed">{renderWithMicroorganismItalics(option.label)}</span>
 
       {/* Trailing icon for revealed state */}
       {revealed && (

@@ -35,8 +35,10 @@ export function Section({
           </p>
         )}
 
-        {/* Content */}
-        <div className="mt-3 w-full">{children}</div>
+        {/* Content — sin guiones: desactivar partición silábica en expediciones */}
+        <div className="mt-3 w-full [hyphens:none]" style={{ hyphens: "none" as const }}>
+          {children}
+        </div>
       </div>
     </section>
   );

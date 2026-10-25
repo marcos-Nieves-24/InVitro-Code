@@ -327,23 +327,23 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 <RevealSequence>
 
 <ConceptCard variant="definition">
-**Inteligencia Artificial** — Máquinas que realizan tareas que requieren inteligencia humana
+**Inteligencia Artificial:** máquinas que realizan tareas que requieren inteligencia humana
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**Features (características)** — Propiedades medibles de los datos que usamos para clasificar
+**Features (características):** propiedades medibles de los datos que usamos para clasificar
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**Espacio de características** — El "universo" multidimensional donde la IA busca patrones
+**Espacio de características:** el universo multidimensional donde la IA busca patrones
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**Reglas fijas** — Funcionan para problemas simples, fallan en la complejidad del mundo real
+**Reglas fijas:** funcionan para problemas simples, fallan en la complejidad del mundo real
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**Aprendizaje automático** — La máquina encuentra patrones por sí misma a partir de ejemplos
+**Aprendizaje automático:** la máquina encuentra patrones por sí misma a partir de ejemplos
 </ConceptCard>
 
 </RevealSequence>

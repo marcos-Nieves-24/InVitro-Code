@@ -470,7 +470,7 @@ export function SpeciesComparePlayer({
           aria-label={`Comparación visual de conidias: ${leftLabel} frente a ${rightLabel}. Atributo comparado: ${currentRow.feature}.`}
         >
           {/* Titles */}
-          <text x={VB_W / 2} y={32} textAnchor="middle" fill="white" fontSize={17} fontFamily="sans-serif" fontWeight={700} opacity={0.92}>
+          <text x={VB_W / 2} y={32} textAnchor="middle" fill="white" fontSize={17} fontFamily="sans-serif" fontWeight={700} fontStyle="italic" opacity={0.92}>
             {leftLabel} vs {rightLabel}
           </text>
           <text x={VB_W / 2} y={54} textAnchor="middle" fill={COLORS.mint} fontSize={11.5} fontFamily="monospace" opacity={0.9}>
@@ -577,10 +577,10 @@ export function SpeciesComparePlayer({
       >
         <span className="font-mono text-xs whitespace-nowrap text-storm">{currentRow.feature}</span>
         <span className="text-sm text-storm">
-          <span className="font-semibold text-mint">{leftLabel}</span> {currentRow.left}
+          <span className="font-semibold italic text-mint">{leftLabel}</span> {currentRow.left}
         </span>
         <span className="text-sm text-storm">
-          <span className="font-semibold text-mint">{rightLabel}</span> {currentRow.right}
+          <span className="font-semibold italic text-mint">{rightLabel}</span> {currentRow.right}
         </span>
       </div>
 

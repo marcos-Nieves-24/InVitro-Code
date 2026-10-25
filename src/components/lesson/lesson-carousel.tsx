@@ -32,10 +32,6 @@ export function LessonCarousel({
   const [current, setCurrent] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [isRevealIncomplete, setIsRevealIncomplete] = useState(false);
-  // True while the current slide's RevealSequence still has unblocked steps.
-  // While it is true the reveal owns the visible advance control and the footer
-  // renders none, so a screen never shows two "Continuar" buttons.
-  const [revealOwnsAdvance, setRevealOwnsAdvance] = useState(false);
   const isLast = current === total - 1;
   const slideAreaRef = useRef<HTMLDivElement>(null);
   const { state, xp, streak, error, complete } = useLessonCompletion();
@@ -65,14 +61,7 @@ export function LessonCarousel({
       const root = slideAreaRef.current;
       const hasIncompleteReveal =
         root?.querySelector('[data-reveal-has-more="true"]') != null;
-      // A blocked reveal (quiz not answered yet) renders no advance button of its
-      // own — it renders "Responde correctamente para continuar" — so the footer
-      // keeps its (disabled) control in that state and only steps aside while the
-      // reveal can actually advance.
-      const isRevealBlocked =
-        root?.querySelector('[data-reveal-blocked="true"]') != null;
       setIsRevealIncomplete(hasIncompleteReveal);
-      setRevealOwnsAdvance(hasIncompleteReveal && !isRevealBlocked);
     };
     // Initial check after render
     const raf = requestAnimationFrame(check);
@@ -326,12 +315,10 @@ export function LessonCarousel({
             </div>
           </div>
 
-          {/* One advance control per screen. While the current slide's reveal
-              still has unblocked steps, IT renders the "Continuar" next to the
-              step it advances and this slot renders nothing — no hidden-but-
-              focusable duplicate left in the DOM. When the reveal is blocked by a
-              quiz it renders no advance button, so the footer keeps its own
-              (disabled) control there. */}
+          {/* Single Continuar — footer is the ONLY primary advance control.
+              RevealSequence/DialogueBox no longer render their own Continuar;
+              they delegate via consumeRevealAdvance(). While incomplete the
+              footer button stays but disabled (so focus never jumps). */}
           {isLast ? (
             <Button
               variant="secondary"
@@ -349,13 +336,14 @@ export function LessonCarousel({
             >
               {state === "loading" ? "Guardando progreso…" : "Finalizar"}
             </Button>
-          ) : revealOwnsAdvance ? null : (
+          ) : (
             <Button
               variant="secondary"
               size="sm"
               onClick={goNext}
               aria-label="Siguiente diapositiva"
               aria-disabled={isRevealIncomplete || undefined}
+              disabled={isRevealIncomplete}
               title={
                 isRevealIncomplete
                   ? "Completa el contenido para continuar"

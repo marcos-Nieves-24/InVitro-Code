@@ -7,6 +7,7 @@ import { AnymotionControls } from "../AnymotionControls";
 
 interface GradientDescentPlayerProps {
   caption: string;
+  autoPlay?: boolean;
 }
 
 const MAX_STEPS = 40;
@@ -36,7 +37,7 @@ function grad(theta: number): number {
   return 2 * (theta - 1);
 }
 
-export function GradientDescentPlayer({ caption }: GradientDescentPlayerProps) {
+export function GradientDescentPlayer({ caption, autoPlay = true }: GradientDescentPlayerProps) {
   const [lr, setLr] = useState(0.3);
   const [start, setStart] = useState(-3);
 
@@ -57,7 +58,7 @@ export function GradientDescentPlayer({ caption }: GradientDescentPlayerProps) {
     return { path: pts, diverged: didDiverge };
   }, [lr, start]);
 
-  const timeline = useAnymotionTimeline({ duration: 4, autoPlay: false });
+  const timeline = useAnymotionTimeline({ duration: 4, autoPlay });
   const { progress, seek, reset, pause } = timeline;
 
   const prefersReduced =

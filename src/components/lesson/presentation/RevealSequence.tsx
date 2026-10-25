@@ -582,8 +582,8 @@ export function RevealSequence({
 
         {/* Hidden slice not rendered — keeps DOM minimal; a11y aria-hidden implied by absence */}
 
-        {/* Controls / indicator area — sticky to the bottom of the scroll region so
-            the Atrás / Continuar buttons always clear the presentation footer. */}
+        {/* Indicator area — single Continuar lives in the footer. This block only
+            shows Paso x de y + blocked hint + helper text; no buttons. */}
         {hasMore ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
             {total > 1 && (
@@ -618,63 +618,13 @@ export function RevealSequence({
                 Responde correctamente para continuar
               </p>
             ) : (
-              <>
-                <div className="flex items-center gap-3">
-                  {revealedCount > initialRevealed && (
-                    <button
-                      type="button"
-                      data-reveal-back
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        goPrev();
-                      }}
-                      aria-label="Mostrar contenido anterior"
-                      className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_SECONDARY} border border-gray-200 bg-surface-card px-5 text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
-                    >
-                      <span aria-hidden="true">←</span> Atrás
-                    </button>
-                  )}
-                  <button
-                    type="button"
-                    data-reveal-continue
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      advance();
-                    }}
-                    aria-label="Mostrar siguiente contenido"
-                    className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_PRIMARY} border border-brand-200 bg-brand-50 px-5 text-brand-700 shadow-sm transition hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
-                  >
-                    Continuar <span aria-hidden="true">→</span>
-                  </button>
-                </div>
-                <p
-                  aria-hidden="true"
-                  className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
-                >
-                  ▸ Click para continuar
-                </p>
-              </>
-            )}
-          </div>
-        ) : revealedCount > initialRevealed ? (
-          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
-            {total > 1 && (
-              <p className={STEP_LABEL}>
-                Paso {revealedCount} de {total}
+              <p
+                aria-hidden="true"
+                className="text-xs font-medium text-storm motion-safe:animate-pulse motion-reduce:animate-none"
+              >
+                ▸ Click para continuar o usa el botón Continuar del pie
               </p>
             )}
-            <button
-              type="button"
-              data-reveal-back
-              onClick={(e) => {
-                e.stopPropagation();
-                goPrev();
-              }}
-              aria-label="Mostrar contenido anterior"
-              className={`inline-flex ${NAV_TOKEN} items-center gap-2 ${NAV_TEXT_SECONDARY} border border-gray-200 bg-surface-card px-5 text-storm shadow-sm transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:transition-none`}
-            >
-              <span aria-hidden="true">←</span> Atrás
-            </button>
           </div>
         ) : total > 1 ? (
           <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">

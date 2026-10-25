@@ -133,13 +133,13 @@ La **frontera de decisión** es la línea (o hiperplano) que separa diferentes c
 </Section>
 
 <Section number={4} title="Laboratorio: Perceptrón en acción" eyebrow="ENTRENADOR">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Objetivo:</strong> Ajusta la tasa de aprendizaje con el slider y presiona <em>Entrenar</em> o <em>Paso</em> para observar cómo el perceptrón ajusta los pesos de la recta ante cada equivocación. Haz clic en el plano para predecir una muestra nueva.
 </div>
 
 <PerceptronTrainer />
-
+</RevealSequence>
 </Section>
 
 <Section number={5} title="Límites de la frontera lineal" eyebrow="CONCEPTO">
@@ -216,13 +216,13 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 </Section>
 
 <Section number={7} title="Laboratorio: KNN en acción" eyebrow="ENTRENADOR">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Objetivo:</strong> Modifica el valor de <em>k</em> con el slider y haz clic en el plano para posicionar un punto de prueba. Observa la votación de los vecinos más cercanos, la frontera sombreada y la curva de accuracy vs <em>k</em>.
 </div>
 
 <KnnTrainer />
-
+</RevealSequence>
 </Section>
 
 <Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
@@ -281,13 +281,13 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 </Section>
 
 <Section number={9} title="Laboratorio: Regresión lineal" eyebrow="ENTRENADOR">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Objetivo:</strong> Ajusta la pendiente y el intercepto con los sliders para minimizar la distancia a los 569 puntos reales del dataset de biopsias. Pulsa <em>Calcular mejor recta</em> para obtener la solución por mínimos cuadrados.
 </div>
 
 <RegressionTrainer />
-
+</RevealSequence>
 </Section>
 
 <Section number={10} title="Mínimos cuadrados y dispersión biológica" eyebrow="CONCEPTO">
@@ -360,13 +360,13 @@ El objetivo del aprendizaje automático no es conseguir un error nulo memorizand
 </Section>
 
 <Section number={12} title="Laboratorio: Grados de ajuste polinomial" eyebrow="INTERACTIVA">
-
+<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Explora:</strong> Arrastra el grado del polinomio y observa la brecha creciente entre el error en los datos de entrenamiento (azul) y el error en las muestras de validación (rojo).
 </div>
 
 <Overfitting caption="Ajuste polinomial: arrastra el grado y mira cómo el error de validación se separa del de entrenamiento" />
-
+</RevealSequence>
 </Section>
 
 <Section number={13} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
@@ -514,11 +514,11 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
 </Section>
 
 <Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
-
+<RevealSequence showHistory>
 <MascotMessage mood="celebrating">
 ¡Tres algoritmos dominados, el dilema del sobreajuste clarificado y las salvaguardas metodológicas listas! Ya entiendes los engranajes del aprendizaje automático.
 </MascotMessage>
 
 En la Lección 3 trasladaremos estos principios a aplicaciones biotecnológicas de vanguardia: cómo **AlphaFold** revolucionó la predicción estructural de proteínas en 3D a partir del PDB, cómo interpretar matrices de confusión en diagnóstico y cómo se estructura un pipeline de machine learning completo en un laboratorio real.
-
+</RevealSequence>
 </Section>
