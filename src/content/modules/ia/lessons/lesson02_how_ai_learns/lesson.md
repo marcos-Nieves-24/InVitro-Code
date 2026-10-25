@@ -2,19 +2,19 @@ Module: 1
 Lesson Number: 2
 Lesson Title: ¿Cómo aprende la IA?
 Estimated Duration: 60 minutos
-Prerequisites: Lección 1 — ¿Qué es la IA?
+Prerequisites: Lección 1   ¿Qué es la IA?
 Learning Objectives:
-  - Comprender el concepto de frontera de decisión en clasificación binaria
-  - Explicar cómo funciona el algoritmo KNN (K-Nearest Neighbors)
-  - Distinguir entre regresión y clasificación como problemas de aprendizaje
-  - Reconocer el sobreajuste (overfitting) y por qué es problemático
+  Comprender el concepto de frontera de decisión en clasificación binaria
+  Explicar cómo funciona el algoritmo KNN (K Nearest Neighbors)
+  Distinguir entre regresión y clasificación como problemas de aprendizaje
+  Reconocer el sobreajuste (overfitting) y por qué es problemático
 Keywords: frontera de decisión, KNN, regresión lineal, clasificación, overfitting, perceptrón
 Difficulty: Principiante
 Programming Concepts: Ninguno
 Mathematical Concepts: Concepto de distancia, promedios
 Machine Learning Concepts: Clasificación binaria, regresión, KNN, perceptrón, overfitting, train/test
 Datasets Used: module01_ai_cell_features.csv
----
+
 
 <Section number={1} title="De reglas fijas a aprendizaje" eyebrow="INICIO">
 
@@ -39,7 +39,7 @@ Datasets Used: module01_ai_cell_features.csv
 En lugar de que un investigador programe manualmente cada condición, en el **aprendizaje automático** (machine learning) le mostramos ejemplos a la máquina para que ella misma descubra los patrones subyacentes.
 </div>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Aprender de los datos no es memorizar respuestas: es descubrir la estructura matemática que vincula las características medidas (features) con la realidad biológica.
 </ConceptCard>
 
@@ -75,7 +75,7 @@ El flujo de trabajo supervisado sigue cuatro momentos clave:
 **Modelo**: Es el resultado del proceso de aprendizaje. Una representación matemática (pesos, ecuaciones o geometrías) de las regularidades que el algoritmo encontró en los datos.
 </ConceptCard>
 
-<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<div className="rounded lg border border blue 200 bg blue 50/80 p 3 text xs text gray 700">
 <strong>La analogía del estudiante de laboratorio:</strong>
 <br />
 • Los <strong>datos de entrenamiento</strong> son los protocolos y ejercicios resueltos de una guía práctica.
@@ -105,7 +105,7 @@ El flujo de trabajo supervisado sigue cuatro momentos clave:
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La **frontera de decisión** es la línea (o hiperplano) que separa diferentes clases en el espacio de características. De un lado predice una clase (ej. *Aspergillus* o benigno), del otro, la clase contraria (ej. *Penicillium* o maligno).
 </ConceptCard>
 
@@ -113,7 +113,7 @@ La **frontera de decisión** es la línea (o hiperplano) que separa diferentes c
   question="¿Qué ajusta el perceptrón para trazar la frontera que separa dos clases?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-perceptron-1"
+  blockId="choice l02 perceptron 1"
   allowContinueOnIncorrect
   explanation="La recta se define como w₁·x₁ + w₂·x₂ + b = 0. El perceptrón aprende corrigiendo w₁, w₂ y b solo cuando se equivoca."
   options={[
@@ -124,7 +124,7 @@ La **frontera de decisión** es la línea (o hiperplano) que separa diferentes c
   ]}
 />
 
-<div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3 text-xs text-gray-700">
+<div className="rounded lg border border teal 200 bg teal 50/80 p 3 text xs text gray 700">
 <strong>Próximo paso en el laboratorio interactivo:</strong> En la siguiente pantalla vas a controlar un perceptrón entrenando con biopsias reales de tejido mamario (Wisconsin Breast Cancer). Observa cómo ajusta sus pesos únicamente tras cometer un error.
 </div>
 
@@ -134,7 +134,7 @@ La **frontera de decisión** es la línea (o hiperplano) que separa diferentes c
 
 <Section number={4} title="Laboratorio: Perceptrón en acción" eyebrow="ENTRENADOR">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Objetivo:</strong> Ajusta la tasa de aprendizaje con el slider y presiona <em>Entrenar</em> o <em>Paso</em> para observar cómo el perceptrón ajusta los pesos de la recta ante cada equivocación. Haz clic en el plano para predecir una muestra nueva.
 </div>
 
@@ -146,7 +146,7 @@ La **frontera de decisión** es la línea (o hiperplano) que separa diferentes c
 
 <RevealSequence showHistory>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El perceptrón aprende **corrigiendo sus errores**: solo actualiza sus pesos cuando clasifica mal una muestra, desplazando y rotando la frontera de decisión hacia la orientación correcta.
 </ConceptCard>
 
@@ -154,7 +154,7 @@ El perceptrón aprende **corrigiendo sus errores**: solo actualiza sus pesos cua
   question="¿Qué pasa si las clases no son separables linealmente y por qué el accuracy no llega al 100%?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-frontera-1"
+  blockId="choice l02 frontera 1"
   allowContinueOnIncorrect
   explanation="Si no hay separación lineal, la frontera debe ser curva. El accuracy no llega al 100% por solapamiento natural: conidias atípicas, ruido y variabilidad biológica."
   options={[
@@ -183,22 +183,22 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   mood="thinking"
   lines={[
     "¿Y si en vez de calcular una fórmula rígida simplemente consultamos a los vecinos más próximos?",
-    "Ese es el principio de KNN (K-Nearest Neighbors).",
+    "Ese es el principio de KNN (K Nearest Neighbors).",
     "KNN no calcula coeficientes en una fase de entrenamiento: memoriza los datos y consulta el vecindario cuando llega un caso nuevo.",
   ]}
 />
 
 <ConceptCard variant="definition">
-**KNN (K-Nearest Neighbors)**: Al recibir una muestra desconocida, el algoritmo calcula la distancia a todos los puntos registrados, identifica los **k** vecinos más cercanos y le adjudica la clase mayoritaria entre ellos.
+**KNN (K Nearest Neighbors)**: Al recibir una muestra desconocida, el algoritmo calcula la distancia a todos los puntos registrados, identifica los **k** vecinos más cercanos y le adjudica la clase mayoritaria entre ellos.
 </ConceptCard>
 
 <ChoiceQuestion
   question="Si k=1 usamos el vecino más cercano y si subimos a k=15, ¿qué crees que pasa con la frontera de KNN?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-knn-1"
+  blockId="choice l02 knn 1"
   allowContinueOnIncorrect
-  explanation="k grande suaviza la frontera y la hace menos sensible al ruido, pero puede ignorar patrones locales. Es un balance sesgo-varianza."
+  explanation="k grande suaviza la frontera y la hace menos sensible al ruido, pero puede ignorar patrones locales. Es un balance sesgo varianza."
   options={[
     { id: "a", label: "La frontera se vuelve más suave y menos sensible al ruido", correct: true, feedback: "¡Exacto! k grande promedia más vecinos y diluye el efecto de datos atípicos." },
     { id: "b", label: "El accuracy de prueba siempre mejora, sin importar cuánto suba k", correct: false, feedback: "No: k demasiado grande pierde detalle local y puede empeorar." },
@@ -207,7 +207,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   ]}
 />
 
-<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<div className="rounded lg border border blue 200 bg blue 50/80 p 3 text xs text gray 700">
 <strong>En el laboratorio interactivo:</strong> Vas a poder variar <em>k</em> desde 1 hasta 15 sobre 569 biopsias reales y hacer clic en cualquier sector del gráfico para clasificar una muestra hipotética.
 </div>
 
@@ -217,7 +217,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 
 <Section number={7} title="Laboratorio: KNN en acción" eyebrow="ENTRENADOR">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Objetivo:</strong> Modifica el valor de <em>k</em> con el slider y haz clic en el plano para posicionar un punto de prueba. Observa la votación de los vecinos más cercanos, la frontera sombreada y la curva de accuracy vs <em>k</em>.
 </div>
 
@@ -250,7 +250,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   question="Clasificar un patógeno por similitud con aislamientos previos, ¿es clasificación o regresión? ¿Qué riesgo tiene k=1 con datos ruidosos?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-clasif-1"
+  blockId="choice l02 clasif 1"
   allowContinueOnIncorrect
   explanation="Es clasificación (categoría discreta). k=1 es muy sensible al ruido: un dato mal medido decide la clase. k grande diluye el ruido."
   options={[
@@ -265,7 +265,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   question="Si solo conocemos el radio medio de una biopsia, ¿podemos predecir con precisión la textura media?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-regresion-1"
+  blockId="choice l02 regresion 1"
   allowContinueOnIncorrect
   explanation="No con gran precisión: R²≈0,10. La textura depende de muchos factores más, la recta es la mejor aproximación lineal, pero siempre tiene dispersión."
   options={[
@@ -282,7 +282,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 
 <Section number={9} title="Laboratorio: Regresión lineal" eyebrow="ENTRENADOR">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Objetivo:</strong> Ajusta la pendiente y el intercepto con los sliders para minimizar la distancia a los 569 puntos reales del dataset de biopsias. Pulsa <em>Calcular mejor recta</em> para obtener la solución por mínimos cuadrados.
 </div>
 
@@ -294,7 +294,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 
 <RevealSequence showHistory>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La regresión lineal encuentra la relación óptima entre una variable independiente (radio medio) y una dependiente (textura media). La mejor recta minimiza el **Error Cuadrático Medio (ECM)** mediante el método de **mínimos cuadrados**.
 </ConceptCard>
 
@@ -302,7 +302,7 @@ La regresión lineal encuentra la relación óptima entre una variable independi
   question="¿Por qué elevamos al cuadrado los errores (ECM) y por qué el R² radio→textura es tan bajo (≈0,10)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-ecm-1"
+  blockId="choice l02 ecm 1"
   allowContinueOnIncorrect
   explanation="Cuadrar penaliza errores grandes y evita cancelación. R² bajo porque la textura depende de muchos factores, no solo del radio: datos reales son ruidosos."
   options={[
@@ -340,7 +340,7 @@ En biología experimental, un coeficiente $R^2$ modesto no implica un fallo del 
   question="Un modelo con error cero en entrenamiento, ¿generalizará bien a datos nuevos?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-overfitting-1"
+  blockId="choice l02 overfitting 1"
   allowContinueOnIncorrect
   explanation="Error cero en entrenamiento suele indicar que el modelo memorizó ruido, no el patrón general. Falla con datos nuevos."
   options={[
@@ -361,7 +361,7 @@ El objetivo del aprendizaje automático no es conseguir un error nulo memorizand
 
 <Section number={12} title="Laboratorio: Grados de ajuste polinomial" eyebrow="INTERACTIVA">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Explora:</strong> Arrastra el grado del polinomio y observa la brecha creciente entre el error en los datos de entrenamiento (azul) y el error en las muestras de validación (rojo).
 </div>
 
@@ -373,22 +373,22 @@ El objetivo del aprendizaje automático no es conseguir un error nulo memorizand
 
 <RevealSequence showHistory>
 
-<div className="rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs text-gray-800">
-<strong>1. Subajuste (Underfitting, Grados 1–2):</strong>
+<div className="rounded lg border border amber 200 bg amber 50/80 p 3 text xs text gray 800">
+<strong>1. Subajuste (Underfitting, Grados 1 2):</strong>
 El modelo es excesivamente rígido e incapaz de capturar la curva biológica. Tanto el error de entrenamiento como el de prueba son elevados.
 </div>
 
-<div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-xs text-gray-800">
-<strong>2. Punto óptimo (Grados 3–6):</strong>
+<div className="rounded lg border border emerald 200 bg emerald 50/80 p 3 text xs text gray 800">
+<strong>2. Punto óptimo (Grados 3 6):</strong>
 El modelo modela la tendencia estructural general sin copiar las perturbaciones aleatorias. Ambos errores se mantienen bajos y parejos.
 </div>
 
-<div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3 text-xs text-gray-800">
-<strong>3. Sobreajuste (Overfitting, Grados 8–15):</strong>
+<div className="rounded lg border border rose 200 bg rose 50/80 p 3 text xs text gray 800">
+<strong>3. Sobreajuste (Overfitting, Grados 8 15):</strong>
 El polinomio se retuerce para tocar cada punto azul de entrenamiento ($ECM \approx 0$), pero al evaluar datos nuevos de prueba, el error se dispara a valores desastrosos.
 </div>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El equilibrio entre sesgo y varianza es el principio rector del machine learning: ni modelos ciegos a la señal, ni modelos esclavizados por el ruido.
 </ConceptCard>
 
@@ -405,10 +405,10 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
 </ConceptCard>
 
 <ChoiceQuestion
-  question="Un modelo con 99% en entreno y 60% en test — ¿qué es y cuál preferirías para diagnosticar una infección?"
+  question="Un modelo con 99% en entreno y 60% en test   ¿qué es y cuál preferirías para diagnosticar una infección?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-overfitting-final-1"
+  blockId="choice l02 overfitting final 1"
   allowContinueOnIncorrect
   explanation="Es sobreajuste. Soluciones: simplificar, más datos, regularización. Para diagnóstico, preferir el simple consistente (80%) que generaliza, el sobreajustado arriesga falsos negativos."
   options={[
@@ -419,12 +419,12 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   ]}
 />
 
-<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
+<div className="rounded lg border border blue 200 bg blue 50/80 p 3 text xs text gray 700">
 <strong>Tres salvaguardas metodológicas en bioinformática:</strong>
 <br />
 1. <strong>División Train/Test:</strong> Separar rigurosamente los datos antes de entrenar, nunca evaluar con el material de estudio.
 <br />
-2. <strong>Validación cruzada (Cross-validation):</strong> Iterar múltiples particiones para asegurar estabilidad frente a distintas réplicas biológicas.
+2. <strong>Validación cruzada (Cross validation):</strong> Iterar múltiples particiones para asegurar estabilidad frente a distintas réplicas biológicas.
 <br />
 3. <strong>Principio de parsimonia:</strong> Entre dos modelos con similar rendimiento, preferir siempre el más simple.
 </div>
@@ -443,7 +443,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   question="¿Qué es una frontera de decisión?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-check-1"
+  blockId="choice l02 check 1"
   explanation="En 2D es una línea, en 3D un plano, en más dimensiones, un hiperplano que separa clases."
   options={[
     { id: "a", label: "El límite ético de lo que la IA puede decidir", correct: false, feedback: "Esa es una frontera ética, no la técnica de ML." },
@@ -457,7 +457,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   question="En KNN, ¿qué significa que k sea muy grande (ej. k=20)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-check-2"
+  blockId="choice l02 check 2"
   explanation="k grande reduce varianza y ruido, pero puede perder patrones locales, es un hiperparámetro a elegir."
   options={[
     { id: "a", label: "El modelo clasifica más rápido siempre", correct: false, feedback: "k grande implica más vecinos a consultar, no es más rápido." },
@@ -471,7 +471,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   question="¿Cuál es la diferencia entre clasificación y regresión?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-check-3"
+  blockId="choice l02 check 3"
   explanation="Clasificación predice categorías discretas, regresión predice valores continuos."
   options={[
     { id: "a", label: "Clasificación es siempre más precisa que regresión", correct: false, feedback: "Precisión depende del problema y los datos, no del tipo de tarea." },
@@ -485,7 +485,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   question="¿Qué diferencia al subajuste (underfitting) del sobreajuste (overfitting)?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-check-4"
+  blockId="choice l02 check 4"
   explanation="Subajuste: modelo demasiado simple (ambos errores altos). Sobreajuste: demasiado complejo (train bajo, test alto)."
   options={[
     { id: "a", label: "En subajuste ambos errores son altos, en sobreajuste train bajo pero test alto", correct: true, feedback: "¡Perfecto! Son los dos extremos del espectro de complejidad." },
@@ -499,7 +499,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
   question="¿Por qué el overfitting es problemático?"
   moduleSlug="ia"
   lessonSlug="lesson02_how_ai_learns"
-  blockId="choice-l02-check-5"
+  blockId="choice l02 check 5"
   explanation="El modelo memoriza variaciones y ruido de entreno y falla en datos nuevos, la validación en test es la defensa."
   options={[
     { id: "a", label: "Porque el modelo tarda mucho en entrenar", correct: false, feedback: "El tiempo de entreno puede ser alto, pero el problema esencial es la mala generalización." },

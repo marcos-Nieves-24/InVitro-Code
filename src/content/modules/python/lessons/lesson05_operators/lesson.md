@@ -1,15 +1,15 @@
----
+
 Module: 2
 Lesson Number: 5
 Lesson Title: Operadores
 Estimated Duration: 45 minutos
-Prerequisites: L4 — Tipos de Datos
+Prerequisites: L4   Tipos de Datos
 Learning Objectives:
-  - Usar operadores aritméticos para cómputos numéricos
-  - Usar operadores de comparación para comparar valores
-  - Usar operadores lógicos para combinar expresiones booleanas
-  - Usar operadores de asignación para actualizar variables
-  - Entender la precedencia de operadores
+  Usar operadores aritméticos para cómputos numéricos
+  Usar operadores de comparación para comparar valores
+  Usar operadores lógicos para combinar expresiones booleanas
+  Usar operadores de asignación para actualizar variables
+  Entender la precedencia de operadores
 Keywords: aritmética, comparación, lógica, asignación, precedencia de operadores
 Difficulty: Beginner
 Programming Concepts: Operadores, expresiones, precedencia de operadores
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Operadores
 
@@ -29,7 +29,7 @@ Quiz: quiz.md
   variant="scientist"
   lines={[
     "Los operadores son las herramientas que te permiten computar, comparar y combinar valores.",
-    "Cada programa — desde una calculadora simple hasta un modelo de machine learning — depende de operadores.",
+    "Cada programa   desde una calculadora simple hasta un modelo de machine learning   depende de operadores.",
     "En biotecnología usas operadores para calcular concentraciones de fármacos, comparar niveles de expresión génica y determinar significancia.",
     "En SaaS los usas para calcular ingresos, comparar métricas de engagement de usuarios y evaluar reglas de negocio.",
   ]}
@@ -66,57 +66,57 @@ Quiz: quiz.md
 
 Los operadores aritméticos realizan operaciones matemáticas sobre tipos numéricos (int, float).
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Operadores aritméticos:
 
-- `+` Suma — `5 + 3` → `8`
-- `-` Resta — `5 - 3` → `2`
-- `*` Multiplicación — `5 * 3` → `15`
-- `/` División float — `5 / 3` → `1.666...`
-- `//` División entera — `5 // 3` → `1`
-- `%` Módulo (resto) — `5 % 3` → `2`
-- `**` Exponenciación — `5 ** 3` → `125`
+- `+` Suma   `5 + 3` → `8`
+- `-` Resta   `5 3` → `2`
+- `*` Multiplicación   `5 * 3` → `15`
+- `/` División float   `5 / 3` → `1.666...`
+- `//` División entera   `5 // 3` → `1`
+- `%` Módulo (resto)   `5 % 3` → `2`
+- `**` Exponenciación   `5 ** 3` → `125`
 </ConceptCard>
 
 
 Los operadores de comparación comparan dos valores y devuelven un booleano.
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Operadores de comparación:
 
-- `==` Igual a — `5 == 3` → `False`
-- `!=` Distinto de — `5 != 3` → `True`
-- `<` Menor que — `5 < 3` → `False`
-- `>` Mayor que — `5 > 3` → `True`
-- `<=` Menor o igual — `5 <= 5` → `True`
-- `>=` Mayor o igual — `5 >= 3` → `True`
+- `==` Igual a   `5 == 3` → `False`
+- `!=` Distinto de   `5 != 3` → `True`
+- `<` Menor que   `5 < 3` → `False`
+- `>` Mayor que   `5 > 3` → `True`
+- `<=` Menor o igual   `5 <= 5` → `True`
+- `>=` Mayor o igual   `5 >= 3` → `True`
 </ConceptCard>
 
 
 Los operadores lógicos combinan expresiones booleanas.
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Operadores lógicos:
 
-- `and` — True si ambos son True — `True and False` → `False`
-- `or` — True si al menos uno es True — `True or False` → `True`
-- `not` — Invierte el booleano — `not True` → `False`
+- `and`   True si ambos son True   `True and False` → `False`
+- `or`   True si al menos uno es True   `True or False` → `True`
+- `not`   Invierte el booleano   `not True` → `False`
 </ConceptCard>
 
 
 Los operadores de asignación actualizan variables con un cómputo.
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Operadores de asignación:
 
-- `=` — `x = 5` → `x = 5`
-- `+=` — `x += 3` → `x = x + 3`
-- `-=` — `x -= 3` → `x = x - 3`
-- `*=` — `x *= 3` → `x = x * 3`
-- `/=` — `x /= 3` → `x = x / 3`
-- `//=` — `x //= 3` → `x = x // 3`
-- `%=` — `x %= 3` → `x = x % 3`
-- `**=` — `x **= 3` → `x = x ** 3`
+- `=`   `x = 5` → `x = 5`
+- `+=`   `x += 3` → `x = x + 3`
+- `-=`   `x -= 3` → `x = x 3`
+- `*=`   `x *= 3` → `x = x * 3`
+- `/=`   `x /= 3` → `x = x / 3`
+- `//=`   `x //= 3` → `x = x // 3`
+- `%=`   `x %= 3` → `x = x % 3`
+- `**=`   `x **= 3` → `x = x ** 3`
 </ConceptCard>
 
 
@@ -160,7 +160,7 @@ Ejemplo:   5 + 3 * 2 ** 2
 a, b = 10, 3
 print(f"a = {a}, b = {b}")
 print(f"Suma: {a} + {b} = {a + b}")
-print(f"Resta: {a} - {b} = {a - b}")
+print(f"Resta: {a} {b} = {a b}")
 print(f"Multiplicación: {a} * {b} = {a * b}")
 print(f"División float: {a} / {b} = {a / b}")
 print(f"División entera: {a} // {b} = {a // b}")
@@ -205,10 +205,10 @@ print(f"Final count: {count}")
 <Section number={5} title="Ejemplo de Biotecnología" eyebrow="APLICACIÓN">
 <RevealSequence>
 
-**Escenario**: Analizando datos de dosis-respuesta de fármacos.
+**Escenario**: Analizando datos de dosis respuesta de fármacos.
 
 ```python
-# Cálculo de dosis-respuesta de fármaco
+# Cálculo de dosis respuesta de fármaco
 dose_mg = 50
 weight_kg = 70
 half_life_hours = 6
@@ -232,7 +232,7 @@ print(f"En rango terapéutico: {in_range}")
   question="En la expresión `dose_mg / weight_kg * (0.5) ** (time_hours / half_life_hours)`, ¿qué operador se evalúa primero?"
   moduleSlug="python"
   lessonSlug="lesson05_operators"
-  blockId="choice-python-l05-dens-1"
+  blockId="choice python l05 dens 1"
   allowContinueOnIncorrect
   explanation="La exponenciación tiene mayor precedencia que la división y la multiplicación."
   options={[
@@ -286,9 +286,9 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 - Usa paréntesis para hacer explícita la precedencia
 - Usa `+=` y operadores similares para código más limpio
-- Usa `==` con cuidado para comparar floats; usa `abs(a-b) < epsilon`
+- Usa `==` con cuidado para comparar floats; usa `abs(a b) < epsilon`
 - Aprovecha las comparaciones encadenadas de Python: `0 <= x <= 100`
-- Usa `not` con moderación — reformula las condiciones para que sean legibles
+- Usa `not` con moderación   reformula las condiciones para que sean legibles
 </RevealSequence>
 
 </Section>
@@ -297,7 +297,7 @@ print(f"Alto riesgo de churn: {high_churn_risk}")
 
 <RevealSequence>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` → `*,/` → `+,-` → comparaciones → `not` → `and` → `or`. Ante la duda, paréntesis.
 </ConceptCard>
 
@@ -324,7 +324,7 @@ Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` →
   question="¿Qué devuelve 7 // 2 * 3 en Python?"
   moduleSlug="python"
   lessonSlug="lesson05_operators"
-  blockId="choice-python-l05-resumen-1"
+  blockId="choice python l05 resumen 1"
   allowContinueOnIncorrect
   explanation="// y * tienen la misma precedencia y se evalúan de izquierda a derecha: (7 // 2) * 3 = 3 * 3 = 9."
   options={[
@@ -335,7 +335,7 @@ Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` →
 />
 
 <MascotMessage mood="celebrating">
-¡Operadores dominados! Con esto ya podés calcular, comparar y decidir — las funciones los van a empaquetar.
+¡Operadores dominados! Con esto ya podés calcular, comparar y decidir   las funciones los van a empaquetar.
 </MascotMessage>
 
 </RevealSequence>
@@ -354,7 +354,7 @@ Todo operador cae en una familia. El orden en que se evalúan: `()` → `**` →
 
 
 4. Escribe código que verifique si un número es par (usa `%`) e imprima "par" o "impar".
-5. Escribe una calculadora de IMC: peso (kg) / altura² (m). Clasifica como bajo peso (< 18.5), normal (18.5-24.9), sobrepeso (25-29.9), obeso (≥ 30).
+5. Escribe una calculadora de IMC: peso (kg) / altura² (m). Clasifica como bajo peso (< 18.5), normal (18.5 a 24.9), sobrepeso (25 a 29.9), obeso (≥ 30).
 
 
 6. ¿Por qué `0.1 + 0.2 == 0.3` devuelve False? ¿Cómo compararías resultados de coma flotante de forma segura?
@@ -380,7 +380,7 @@ Escribe un programa que:
   question="¿Qué devuelve la expresión 5 // 2 en Python?"
   moduleSlug="python"
   lessonSlug="lesson05_operators"
-  blockId="choice-python-l05-conceptos-1"
+  blockId="choice python l05 conceptos 1"
   allowContinueOnIncorrect
   explanation="// es división entera, por lo que 5 // 2 = 2."
   options={[

@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 13: Fundamentos de NumPy
-# -------------------------------------------------------------------------
+# -
 # Practicamos la creacion de arrays, el indexado y rebanado, las funciones
 # universales (ufunc), el broadcasting y las operaciones estadisticas.
 # =========================================================================
@@ -30,7 +30,7 @@ print(f"Aleatorios normal (3x3), primeros valores: {g[0, :2].round(2)}")
 matrix = np.arange(16).reshape(4, 4)
 print(f"\nMatriz 4x4:\n{matrix}")
 print(f"Elemento [2, 3]: {matrix[2, 3]}")
-print(f"Primeras 2 filas, columnas 1-3:\n{matrix[:2, 1:4]}")
+print(f"Primeras 2 filas, columnas 1 a 3:\n{matrix[:2, 1:4]}")
 print(f"Cada dos elementos: {matrix[::2, ::2]}")
 print(f"Ultima columna: {matrix[:, -1]}")
 
@@ -67,18 +67,18 @@ print(f"Desviacion estandar por columna: {data.std(axis=0).round(3)}")
 print(f"Media global: {data.mean():.3f}")
 
 # Centramos los datos restando la media de cada columna.
-centered = data - data.mean(axis=0)
+centered = data data.mean(axis=0)
 print(f"Media de los datos centrados (~0): {centered.mean(axis=0).round(12)}")
 
-# PASO 6: Aplicacion biotecnologica - normalizacion de expresion genica.
-# Normalizamos mediciones de expresion a z-scores: (x - media) / desviacion.
+# PASO 6: Aplicacion biotecnologica normalizacion de expresion genica.
+# Normalizamos mediciones de expresion a z scores: (x media) / desviacion.
 expr = np.array([2.5, 4.1, 3.3, 7.8, 5.0])
-z = (expr - expr.mean()) / expr.std()
+z = (expr expr.mean()) / expr.std()
 print(f"\nExpresion: {expr}")
-print(f"Z-scores: {z.round(2)}")
+print(f"Z scores: {z.round(2)}")
 
 # PASO 7: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Creamos arrays con array, zeros, ones, eye, arange y linspace.")
 print("Indexamos y rebanamos en multiples dimensiones.")
 print("Las ufunc y el broadcasting operan sin bucles explicitos.")

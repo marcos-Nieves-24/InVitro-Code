@@ -10,19 +10,19 @@
 
 1. Carga el dataset `diamonds` de seaborn
 2. Completa el EDA siguiendo este flujo de trabajo:
-   - Vista general de los datos (forma, columnas, tipos, memoria)
-   - Análisis de valores faltantes (cantidad, porcentaje, patrones)
-   - Estadísticos descriptivos para todas las columnas numéricas
-   - Análisis univariado: histogramas + KDE para `price`, `carat`, `depth`, `table`
-   - Análisis bivariado: heatmap de la matriz de correlación, scatter matrix
-   - Detección de valores atípicos: método IQR en `price` y `carat`
-   - Análisis agrupado: distribución de precios por cut, color, clarity
+   Vista general de los datos (forma, columnas, tipos, memoria)
+   Análisis de valores faltantes (cantidad, porcentaje, patrones)
+   Estadísticos descriptivos para todas las columnas numéricas
+   Análisis univariado: histogramas + KDE para `price`, `carat`, `depth`, `table`
+   Análisis bivariado: heatmap de la matriz de correlación, scatter matrix
+   Detección de valores atípicos: método IQR en `price` y `carat`
+   Análisis agrupado: distribución de precios por cut, color, clarity
 
 3. Crea una función `eda_pipeline(df)` que automatice los pasos anteriores
 
-4. Escribe un informe (2-3 párrafos):
-   - ¿Cuáles son las características clave de los precios de los diamantes?
-   - ¿Qué features están más correlacionados con el precio?
-   - ¿Hay valores atípicos? ¿Deberían eliminarse?
-   - ¿Qué preprocesamiento recomendarías antes del modelado?
+4. Escribe un informe (2 a 3 párrafos):
+   ¿Cuáles son las características clave de los precios de los diamantes?
+   ¿Qué features están más correlacionados con el precio?
+   ¿Hay valores atípicos? ¿Deberían eliminarse?
+   ¿Qué preprocesamiento recomendarías antes del modelado?
 

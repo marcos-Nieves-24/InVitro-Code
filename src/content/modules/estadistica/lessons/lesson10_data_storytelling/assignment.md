@@ -22,7 +22,7 @@ Crea una narrativa con estos elementos:
 1. **Gancho**: ¿Por qué es importante este análisis? (1 párrafo)
 2. **Contexto**: ¿Qué datos se usaron? (1 párrafo)
 3. **Pregunta**: ¿Qué pregunta específica estás respondiendo?
-4. **Análisis**: 3-4 visualizaciones que construyan la respuesta
+4. **Análisis**: 3 a 4 visualizaciones que construyan la respuesta
 5. **Resolución**: ¿Qué encontraste? ¿Qué debería hacer alguien con esta información?
 
 ### Parte 3: Galería de visualizaciones

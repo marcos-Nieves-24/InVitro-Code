@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
-# LAB 4: Casos reales - pipeline de clasificacion en diagnostico medico
-# -------------------------------------------------------------------------
+# LAB 4: Casos reales pipeline de clasificacion en diagnostico medico
+# -
 # Comparamos dos modelos (regresion logistica y bosque aleatorio) sobre el
 # dataset Breast Cancer Wisconsin y elegimos el mejor para el contexto.
 # =========================================================================
@@ -43,11 +43,11 @@ print(f"RandomForest train_acc:       {accuracy_score(y_train, rf.predict(X_trai
 # PASO 3: Metricas de evaluacion para cada modelo.
 # La matriz de confusion muestra los errores, el reporte resume precision,
 # recall y f1 por clase. En diagnostico, el recall evita falsos negativos.
-print("\n--- LogisticRegression ---")
+print("\n LogisticRegression ")
 print(confusion_matrix(y_test, y_pred_lr))
 print(classification_report(y_test, y_pred_lr, target_names=data.target_names))
 
-print("\n--- RandomForest ---")
+print("\n RandomForest ")
 print(confusion_matrix(y_test, y_pred_rf))
 print(classification_report(y_test, y_pred_rf, target_names=data.target_names))
 
@@ -81,7 +81,7 @@ fig.show()
 # En un screening de cancer priorizamos el recall (menos falsos negativos).
 best = max([("LogisticRegression", lr.score(X_test, y_test)),
             ("RandomForest", rf.score(X_test, y_test))], key=lambda t: t[1])
-print("\n--- RESUMEN ---")
+print("\n RESUMEN ")
 print(f"Mejor accuracy en test: {best[0]} ({best[1]:.3f})")
 print("En diagnostico conviene revisar recall y matriz de confusion.")
 print("El pipeline completo es reutilizable para otros datasets.")

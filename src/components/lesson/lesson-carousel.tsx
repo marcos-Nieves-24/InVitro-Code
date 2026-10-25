@@ -152,18 +152,20 @@ export function LessonCarousel({
             text below it and the rail + "N / M" pair in the footer. Position is
             now stated exactly once (this text) plus the intra-slide "Paso x de y"
             rendered by the reveal itself. */}
-        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-3 py-1">
-          <p className="text-center font-mono text-xs uppercase tracking-widest text-storm">
+        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-4 py-2">
+          <p className="text-center font-mono text-sm uppercase tracking-widest text-storm">
             {lessonTitle ? `${lessonTitle} — ` : ""}Escena {current + 1} de {total}
           </p>
         </div>
 
-        {/* Slide area — no click zones, no rails. ALL advance is via footer Continuar only. */}
+        {/* Slide area — no click zones, no rails. ALL advance is via footer Continuar only.
+            Scrollbar mejorado: más visible y grueso para expediciones amplias. */}
         <div
           ref={slideAreaRef}
-          className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0"
+          className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden p-0 scrollbar-thin scrollbar-track-surface scrollbar-thumb-brand-300 hover:scrollbar-thumb-brand-400"
           role="group"
           aria-label="Área de la diapositiva"
+          style={{ scrollbarWidth: "thin", scrollbarColor: "var(--color-brand-300) transparent" } as React.CSSProperties}
         >
 
           {/* Center stage — no click-owner; events only on its interactive children. */}
@@ -197,17 +199,15 @@ export function LessonCarousel({
           </div>
         </div>
 
-        {/* Footer — Atrás / Continuar + single dot rail (compact).
-            Grid instead of justify-between so the centre rail stays centred
-            when the advance slot renders nothing. */}
-        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-3 py-1">
+        {/* Footer — Atrás / Continuar + single dot rail — fuente ampliada */}
+        <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center border-t border-outline-variant bg-surface-card px-4 py-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={goPrev}
             disabled={current === 0}
             aria-label="Diapositiva anterior"
-            className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_SECONDARY} justify-self-start px-4`}
+            className={`focus-ring ${NAV_TOKEN} text-base font-medium justify-self-start px-6 py-2`}
           >
             ← Atrás
           </Button>
@@ -219,16 +219,16 @@ export function LessonCarousel({
               shows remaining distance, and it stays aria-hidden here so the
               header text remains the single announced source of truth. */}
           <div className="flex items-center gap-3" aria-hidden="true">
-            <div className="hidden items-center gap-1.5 sm:flex">
+            <div className="hidden items-center gap-2 sm:flex">
               {Array.from({ length: total }, (_, i) => (
                 <span
                   key={`dot-${i}`}
-                  className={`h-1.5 rounded-full transition-all duration-200 motion-reduce:transition-none ${
+                  className={`h-2 rounded-full transition-all duration-200 motion-reduce:transition-none ${
                     i === current
-                      ? "w-6 bg-brand-500"
+                      ? "w-8 bg-brand-500"
                       : i < current
-                        ? "w-1.5 bg-success"
-                        : "w-1.5 bg-surface-raised"
+                        ? "w-2 bg-success"
+                        : "w-2 bg-surface-raised"
                   }`}
                 />
               ))}
@@ -242,7 +242,7 @@ export function LessonCarousel({
             <Button
               variant="secondary"
               size="sm"
-              className={`${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end !border-teal-600 !bg-teal-600 px-5 !text-white shadow-teal-600/20 hover:!bg-teal-700`}
+              className={`${NAV_TOKEN} text-base font-semibold justify-self-end !border-teal-600 !bg-teal-600 px-6 py-2 !text-white shadow-teal-600/20 hover:!bg-teal-700`}
               onClick={handleFinish}
               disabled={state === "loading" || isRevealBlocked}
               aria-label="Finalizar lección"
@@ -268,7 +268,7 @@ export function LessonCarousel({
                   ? "Completa el contenido para continuar"
                   : undefined
               }
-              className={`focus-ring ${NAV_TOKEN} ${NAV_TEXT_PRIMARY} justify-self-end px-5 ${isRevealBlocked ? "opacity-50" : ""}`}
+              className={`focus-ring ${NAV_TOKEN} text-base font-semibold justify-self-end px-6 py-2 ${isRevealBlocked ? "opacity-50" : ""}`}
             >
               Continuar →
             </Button>

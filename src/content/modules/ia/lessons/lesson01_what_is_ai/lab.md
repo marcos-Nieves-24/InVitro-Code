@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 1: Exploracion de features con Breast Cancer Wisconsin
-# -------------------------------------------------------------------------
+# -
 # Aplicamos los conceptos de features y reconocimiento de patrones a un
 # dataset real de diagnostico medico. Cada figura termina con fig.show().
 # =========================================================================
@@ -31,7 +31,7 @@ fig.show()
 # PASO 2: Estadisticas de las features y exploracion con histogramas.
 # Comparar la distribucion de una feature entre clases revela si esa
 # feature ayuda a separar maligno de benigno.
-print("\n--- Estadisticas de las primeras 5 features ---")
+print("\n Estadisticas de las primeras 5 features ")
 for i in range(5):
     col = X[:, i]
     print(f"{feature_names[i]}: media={col.mean():.2f}, std={col.std():.2f}, "
@@ -59,7 +59,7 @@ mal_mean = X[y == 0].mean(axis=0)
 ben_mean = X[y == 1].mean(axis=0)
 differences = []
 for i, name in enumerate(feature_names):
-    pct = abs(mal_mean[i] - ben_mean[i]) / ben_mean[i] * 100
+    pct = abs(mal_mean[i] ben_mean[i]) / ben_mean[i] * 100
     differences.append((name, pct))
 differences.sort(key=lambda t: t[1], reverse=True)
 print("\nTop 4 features con mayor diferencia relativa:")
@@ -74,7 +74,7 @@ fig = px.box(df_melt, x="feature", y="valor", color="clase",
              labels={"feature": "Feature", "valor": "Valor", "clase": "Clase"})
 fig.show()
 # PASO 5: Reporte final del laboratorio.
-print("\n--- REPORTE FINAL ---")
+print("\n REPORTE FINAL ")
 print("Las features con mayor diferencia entre clases son las mas discriminativas.")
 print("Histogramas y box plots muestran clases con poca superposicion.")
 print("Esa separacion es la base de lo que aprende un clasificador.")

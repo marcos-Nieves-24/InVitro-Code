@@ -50,7 +50,7 @@ d) Que los datos se distribuyen normalmente
 - Calcule las correlaciones de Pearson y Spearman
 - Explique por qué difieren
 
----
+
 
 # Clave de respuestas
 

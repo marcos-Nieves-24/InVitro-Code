@@ -31,7 +31,7 @@ b) Porque el modelo funciona bien en datos de entrenamiento pero mal en datos nu
 c) Porque usa demasiada memoria RAM
 d) Porque solo funciona con redes neuronales
 
----
+
 ## Clave de respuestas
 
 1. **b)** La frontera separa clases. En 2D es una línea, en 3D es un plano, en más dimensiones es un hiperplano.

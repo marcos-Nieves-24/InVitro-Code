@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 5: Relaciones entre variables
-# -------------------------------------------------------------------------
+# -
 # Calculamos covarianza y correlaciones de Pearson y Spearman, aplicamos
 # una regresion OLS manual y analizamos el cuarteto de Anscombe (datos muy
 # distintos con la misma correlacion). Cada figura termina con fig.show().
@@ -52,7 +52,7 @@ diabetes = load_diabetes(as_frame=True)
 dfd = diabetes.data
 dfd["target"] = diabetes.target
 
-print("\nCovarianza bmi-target:\n", dfd[["bmi", "target"]].cov())
+print("\nCovarianza bmi target:\n", dfd[["bmi", "target"]].cov())
 
 # PASO 5: Comparar Pearson vs Spearman en pares seleccionados.
 print("\nPearson y Spearman para pares seleccionados:")
@@ -69,7 +69,7 @@ fig = px.imshow(corr_pearson, text_auto=".2f", color_continuous_scale="RdBu_r",
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 7: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Las 4 series de Anscombe tienen casi el mismo r, pero son muy distintas.")
 print("Pearson mide linealidad; Spearman mide monotonia; correlacion no es causalidad.")
 ```

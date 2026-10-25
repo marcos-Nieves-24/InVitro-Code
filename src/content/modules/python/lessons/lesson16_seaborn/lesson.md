@@ -1,23 +1,23 @@
----
+
 Module: 2
 Lesson Number: 16
 Lesson Title: Seaborn
 Estimated Duration: 60 minutos
-Prerequisites: L15 — Matplotlib
+Prerequisites: L15   Matplotlib
 Learning Objectives:
-  - Crear visualizaciones estadísticas usando Seaborn
-  - Usar pairplot y heatmap para exploración multivariable
-  - Crear box plots y violin plots para comparación de distribuciones
-  - Aplicar temas y paletas de colores de Seaborn
-  - Personalizar gráficos de Seaborn con integración de Matplotlib
+  Crear visualizaciones estadísticas usando Seaborn
+  Usar pairplot y heatmap para exploración multivariable
+  Crear box plots y violin plots para comparación de distribuciones
+  Aplicar temas y paletas de colores de Seaborn
+  Personalizar gráficos de Seaborn con integración de Matplotlib
 Keywords: Seaborn, pairplot, heatmap, boxplot, violinplot, paleta, tema
-Difficulty: Beginner-Intermediate
+Difficulty: Beginner Intermediate
 Programming Concepts: Visualización estadística, exploración de datos
 Datasets Used: None (datos sintéticos)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Seaborn
 
@@ -37,10 +37,10 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Seaborn es una librería de visualización estadística construida sobre Matplotlib que facilita crear gráficos informativos y atractivos con código mínimo. Está diseñada específicamente para explorar y entender datos.
 
-En la lección anterior aprendiste Matplotlib — la base para la visualización en Python. Seaborn se basa en Matplotlib para proporcionar gráficos de más alto nivel enfocados en estadística. Combinado con Pandas para manipulación de datos, estas tres librerías (Pandas, Matplotlib, Seaborn) forman el kit de herramientas esencial de ciencia de datos. A lo largo de los módulos de ML, vas a usar Seaborn para EDA y visualización de resultados.
+En la lección anterior aprendiste Matplotlib   la base para la visualización en Python. Seaborn se basa en Matplotlib para proporcionar gráficos de más alto nivel enfocados en estadística. Combinado con Pandas para manipulación de datos, estas tres librerías (Pandas, Matplotlib, Seaborn) forman el kit de herramientas esencial de ciencia de datos. A lo largo de los módulos de ML, vas a usar Seaborn para EDA y visualización de resultados.
 </ConceptCard>
 
 - Seaborn facilita gráficos estadísticos con código mínimo.
@@ -87,7 +87,7 @@ import seaborn as sns
 
 **Seaborn vs Matplotlib** (candidato a tabla → ConceptCard+bullets):
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 - **Nivel**: Matplotlib bajo nivel, Seaborn alto nivel
 - **Estilo por defecto**: Matplotlib básico, Seaborn profesional
 - **Soporte Pandas**: Matplotlib manual, Seaborn nativo
@@ -378,15 +378,15 @@ plt.show()
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel con defaults inteligentes, agregación incorporada y trabajo directo sobre DataFrames.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
     { id: "visualizaciones", label: "Visualizaciones", detail: "Provee visualizaciones estadísticas de alto nivel." },
-    { id: "graficos-clave", label: "Gráficos clave", detail: "scatterplot, boxplot, violinplot, pairplot y heatmap." },
-    { id: "integracion-pandas", label: "Integración Pandas", detail: "Integración nativa con Pandas — funciona directamente con DataFrames." },
+    { id: "graficos clave", label: "Gráficos clave", detail: "scatterplot, boxplot, violinplot, pairplot y heatmap." },
+    { id: "integracion pandas", label: "Integración Pandas", detail: "Integración nativa con Pandas   funciona directamente con DataFrames." },
     { id: "temas", label: "Temas y paletas", detail: "Temas profesionales y paletas de colores predeterminados." },
     { id: "agregacion", label: "Agregación estadística", detail: "Incorporada (intervalos de confianza, etc.)." },
     { id: "personalizacion", label: "Personalización", detail: "Fácilmente personalizable con funciones de Matplotlib." },
@@ -399,8 +399,8 @@ Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel co
     { id: "hue", label: "Hue", detail: "Variable categórica codificada por color." },
     { id: "pairplot", label: "Pairplot", detail: "Matriz de gráficos de dispersión para todos los pares de variables." },
     { id: "heatmap", label: "Heatmap", detail: "Matriz de valores codificada por color." },
-    { id: "box-plot", label: "Box plot", detail: "Resumen estadístico de distribución (cuartiles, outliers)." },
-    { id: "violin-plot", label: "Violin plot", detail: "Box plot + estimación de densidad kernel." },
+    { id: "box plot", label: "Box plot", detail: "Resumen estadístico de distribución (cuartiles, outliers)." },
+    { id: "violin plot", label: "Violin plot", detail: "Box plot + estimación de densidad kernel." },
     { id: "facet", label: "Facet", detail: "Subgráfico basado en valores de variables." },
     { id: "paleta", label: "Paleta", detail: "Esquema de colores para datos categóricos o continuos." },
   ]}
@@ -410,7 +410,7 @@ Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel co
   question="¿Qué codifica el parámetro `hue` en un gráfico de Seaborn?"
   moduleSlug="python"
   lessonSlug="lesson16_seaborn"
-  blockId="choice-python-l16-resumen-1"
+  blockId="choice python l16 resumen 1"
   allowContinueOnIncorrect
   explanation="`hue` asigna un color distinto a cada categoría de una variable, útil para comparar grupos."
   options={[
@@ -422,7 +422,7 @@ Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel co
 />
 
 <MascotMessage mood="celebrating">
-¡EDA visual dominada! Plotly añade interactividad a estos gráficos — la próxima lección.
+¡EDA visual dominada! Plotly añade interactividad a estos gráficos   la próxima lección.
 </MascotMessage>
 
 </RevealSequence>
@@ -452,7 +452,7 @@ Seaborn es el atajo estadístico de Matplotlib: visualizaciones de alto nivel co
 **Desafío de código**
 
 Crea un **reporte EDA integral** de un dataset sintético de clientes usando Seaborn:
-1. Genera un dataset con 300 clientes y características: `age`, `income`, `spending_score` (1-100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regiones), `segment` (Low/Medium/High)
+1. Genera un dataset con 300 clientes y características: `age`, `income`, `spending_score` (1 a 100), `membership_years`, `num_purchases`, `avg_order_value`, `region` (4 regiones), `segment` (Low/Medium/High)
 2. Crea las siguientes visualizaciones: pairplot de variables numéricas coloreado por segment; heatmap de correlaciones entre todas las variables numéricas; box plots de spending_score por región; violin plot de income por segment; count plot de segments por región; histograma de age con superposición KDE coloreado por segment
 3. Aplica un tema profesional de Seaborn y una paleta de colores personalizada
 4. Organiza múltiples gráficos en una sola figura usando `plt.subplots()` con ejes de Seaborn
@@ -468,7 +468,7 @@ Crea un **reporte EDA integral** de un dataset sintético de clientes usando Sea
   question="¿Cuál es la principal ventaja de Seaborn sobre Matplotlib?"
   moduleSlug="python"
   lessonSlug="lesson16_seaborn"
-  blockId="choice-python-l16-tema-1"
+  blockId="choice python l16 tema 1"
   allowContinueOnIncorrect
   explanation="Seaborn añade visualizaciones estadísticas de alto nivel y defaults inteligentes sobre el motor de Matplotlib."
   options={[
@@ -483,7 +483,7 @@ Crea un **reporte EDA integral** de un dataset sintético de clientes usando Sea
   question="¿Qué muestra sns.pairplot()?"
   moduleSlug="python"
   lessonSlug="lesson16_seaborn"
-  blockId="choice-python-l16-tema-2"
+  blockId="choice python l16 tema 2"
   allowContinueOnIncorrect
   explanation="Pairplot genera una matriz de dispersión para todos los pares de variables, con diagonal KDE o histograma."
   options={[

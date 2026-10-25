@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 12: Conjuntos y operaciones de conjuntos
-# -------------------------------------------------------------------------
+# -
 # Practicamos la creacion de conjuntos (sets), las operaciones de algebra
 # de conjuntos, la eliminacion de duplicados, la prueba de pertenencia y
 # las relaciones entre conjuntos.
@@ -29,8 +29,8 @@ print(f"\nA: {a}")
 print(f"B: {b}")
 print(f"Union (A | B): {a | b}")
 print(f"Interseccion (A & B): {a & b}")
-print(f"Diferencia (A - B): {a - b}")
-print(f"Diferencia (B - A): {b - a}")
+print(f"Diferencia (A B): {a b}")
+print(f"Diferencia (B A): {b a}")
 print(f"Diferencia simetrica (A ^ B): {a ^ b}")
 
 # PASO 3: Eliminacion de duplicados.
@@ -66,16 +66,16 @@ print(f"\nB es subconjunto de A: {b.issubset(a)}")
 print(f"A es superconjunto de B: {a.issuperset(b)}")
 print(f"A y C son disjuntos: {a.isdisjoint(c)}")
 
-# PASO 6: Aplicacion biotecnologica - genes compartidos.
+# PASO 6: Aplicacion biotecnologica genes compartidos.
 # Comparar dos conjuntos de genes expresados es tarea tipica en
-# transcriptomica: los genes comunes son los co-expresados.
+# transcriptomica: los genes comunes son los co expresados.
 genes_cancer = {"TP53", "BRCA1", "EGFR", "MYC"}
 genes_normal = {"BRCA1", "MYC", "ACTB", "GAPDH"}
-print("\nGenes co-expresados:", genes_cancer & genes_normal)
-print("Genes solo en cancer:", genes_cancer - genes_normal)
+print("\nGenes co expresados:", genes_cancer & genes_normal)
+print("Genes solo en cancer:", genes_cancer genes_normal)
 
 # PASO 7: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Los conjuntos eliminan duplicados y soportan algebra de conjuntos.")
 print("La prueba de pertenencia con 'in' es O(1).")
 print("issubset, issuperset e isdisjoint definen relaciones entre sets.")

@@ -1,16 +1,16 @@
----
+
 Module: 4
 Lesson Number: 5
 Lesson Title: Bosque Aleatorio
 Estimated Duration: 75 minutos
 Prerequisites: L4 (Árboles de Decisión)
 Learning Objectives:
-  - Explicar cómo el bagging reduce la varianza en modelos ensemble
-  - Entrenar y evaluar clasificadores de Bosque Aleatorio con scikit-learn
-  - Calcular e interpretar la importancia de características de Bosques Aleatorios
-  - Comparar el rendimiento del Bosque Aleatorio con árboles de decisión individuales
-  - Ajustar hiperparámetros del Bosque Aleatorio
-Keywords: bosque aleatorio, ensemble, bagging, bootstrap, importancia de características, out-of-bag
+  Explicar cómo el bagging reduce la varianza en modelos ensemble
+  Entrenar y evaluar clasificadores de Bosque Aleatorio con scikit learn
+  Calcular e interpretar la importancia de características de Bosques Aleatorios
+  Comparar el rendimiento del Bosque Aleatorio con árboles de decisión individuales
+  Ajustar hiperparámetros del Bosque Aleatorio
+Keywords: bosque aleatorio, ensemble, bagging, bootstrap, importancia de características, out of bag
 Difficulty: Intermedio
 Programming Concepts: sklearn.ensemble.RandomForestClassifier, n_estimators, oob_score
 Mathematical Concepts: bagging, muestreo bootstrap, votación mayoritaria
@@ -19,7 +19,7 @@ Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Bosque Aleatorio
 
@@ -43,7 +43,7 @@ Quiz: quiz.md
 El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La razón? Funciona bien casi siempre, sin requerir mucho ajuste. Es el "caballo de batalla" del ML supervisado.
 </MascotMessage>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Bagging (Bootstrap Aggregating):** Tomas muchas muestras bootstrap de tus datos, entrenas un árbol en cada una, y promedias (regresión) o haces votación mayoritaria (clasificación). La magia: cada árbol tiene varianza alta, pero el promedio de B árboles reduce la varianza ~B veces sin aumentar el sesgo.
 </ConceptCard>
 
@@ -66,8 +66,8 @@ El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La r
   ]}
 />
 
-{/* candidate-player: comparison-fuentes-aleatoriedad */}
-<ConceptCard variant="key-idea">
+{/* candidate player: comparison fuentes aleatoriedad */}
+<ConceptCard variant="key idea">
 **Dos fuentes de aleatoriedad**
 - Aleatoriedad 1: cada árbol se entrena con una muestra bootstrap diferente (~63% de los datos, con reemplazo).
 - Aleatoriedad 2: en cada división del árbol, solo se considera un subconjunto aleatorio de features (√p para clasificación, p/3 para regresión).
@@ -76,7 +76,7 @@ El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La r
 </ConceptCard>
 
 <ConceptCard variant="definition">
-**OOB (Out-of-Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out-of-bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtienes una estimación de rendimiento sin necesidad de dividir train/test.
+**OOB (Out of Bag):** Cada muestra bootstrap deja fuera ~37% de los datos. Esas muestras "out of bag" sirven como conjunto de validación gratuito. Con `oob_score=True` en sklearn, obtienes una estimación de rendimiento sin necesidad de dividir train/test.
 </ConceptCard>
 
 </RevealSequence>
@@ -98,17 +98,17 @@ El Bosque Aleatorio es uno de los algoritmos más usados en la industria. ¿La r
   ]}
 />
 
-El Bosque Aleatorio no solo predice — te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclas aleatoriamente cada feature:
+El Bosque Aleatorio no solo predice   te dice **qué features importan**. Calcula cuánto empeora el modelo cuando mezclas aleatoriamente cada feature:
 
 <CalloutCheck>
-La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top-3 en 100 árboles distintos, puedes confiar en que realmente importa.
+La importancia por permutación del RF es más confiable que la importancia de un solo árbol porque promedia sobre cientos de árboles. Si una feature sale consistentemente como top 3 en 100 árboles distintos, puedes confiar en que realmente importa.
 </CalloutCheck>
 
 <ChoiceQuestion
   question="Dos features tienen importancia similar según el RF. ¿Significa que son igualmente importantes para tu problema?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson05_random_forest"
-  blockId="reflection-l05-feature-importance"
+  blockId="reflection l05 feature importance"
   allowContinueOnIncorrect
   explanation="No necesariamente: si están correlacionadas, el RF reparte la importancia entre ambas y ninguna parece dominante. Elimina una y reentrena para verificar. Además, importancia mide utilidad predictiva, no causalidad."
   options={[
@@ -176,8 +176,8 @@ tree.fit(X_train, y_train)
 rf = RandomForestClassifier(n_estimators=100, random_state=42)
 rf.fit(X_train, y_train)
 
-print(f"Árbol individual — Test: {tree.score(X_test, y_test):.3f}")
-print(f"Bosque Aleatorio — Test: {rf.score(X_test, y_test):.3f}")
+print(f"Árbol individual   Test: {tree.score(X_test, y_test):.3f}")
+print(f"Bosque Aleatorio   Test: {rf.score(X_test, y_test):.3f}")
 
 # Compare top features
 tree_imp = pd.DataFrame({
@@ -188,7 +188,7 @@ tree_imp = pd.DataFrame({
 print(tree_imp.sort_values('forest', ascending=False).head(10))
 ```
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El RF casi siempre supera al árbol individual. La diferencia es más notable cuando hay mucho ruido en los datos. Si el RF no mejora significativamente al árbol, probablemente tus datos son muy simples o tienes pocas features.
 </ConceptCard>
 
@@ -214,8 +214,8 @@ El RF casi siempre supera al árbol individual. La diferencia es más notable cu
 En descubrimiento de fármacos, tienes datos de expresión de miles de genes pero solo cientos de pacientes. El RF brilla en este escenario:
 
 - **Maneja p >> n** (más features que muestras) mejor que la regresión
-- **Selecciona features automáticamente** — identificas qué genes predicen respuesta al tratamiento
-- **Robusto a features irrelevantes** — la aleatoriedad en cada split ignora features ruidosas
+- **Selecciona features automáticamente**   identificas qué genes predicen respuesta al tratamiento
+- **Robusto a features irrelevantes**   la aleatoriedad en cada split ignora features ruidosas
 
 <CalloutInfo>
 En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para identificar variantes genéticas asociadas a enfermedades sin asumir linealidad. Un modelo lineal te dice "el gen A aumenta el riesgo en 20%". Un RF te dice "el gen A importa, pero su efecto depende de los genes B y C".
@@ -247,12 +247,12 @@ En estudios de asociación genómica (GWAS), los Bosques Aleatorios se usan para
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria de features. Reduce la varianza drásticamente sin aumentar el sesgo. El OOB da validación gratis. La feature importance es confiable. Es el algoritmo "default" para problemas tabulares supervisados.
 </ConceptCard>
 
-{/* candidate-player: interactive-table-glosario-random-forest */}
-<ConceptCard variant="key-idea">
+{/* candidate player: interactive table glosario random forest */}
+<ConceptCard variant="key idea">
 **Glosario**
 - **Ensemble:** combinar múltiples modelos para superar a cualquiera individual.
 - **Bagging:** bootstrap + agregación: entrenar en muestras bootstrap y promediar.
@@ -266,33 +266,33 @@ El Bosque Aleatorio entrena muchos árboles con bootstrap + selección aleatoria
     { id: "bagging", label: "Bagging", detail: "Entrenar en muestras bootstrap y promediar o votar para reducir varianza." },
     { id: "bootstrap", label: "Bootstrap", detail: "Muestreo con reemplazo que deja ~63% de los datos en cada árbol." },
     { id: "oob", label: "OOB", detail: "Validación gratis con las muestras que quedaron fuera del bootstrap." },
-    { id: "n-estimators", label: "n_estimators", detail: "Cantidad de árboles del bosque; la mejora se estabiliza tras ~500." },
-    { id: "max-features", label: "max_features", detail: "Features candidatas por split: √p (clasificación) o p/3 (regresión)." },
-    { id: "feature-importance", label: "Importancia de features", detail: "Cuánto empeora el modelo al mezclar aleatoriamente una feature." },
+    { id: "n estimators", label: "n_estimators", detail: "Cantidad de árboles del bosque; la mejora se estabiliza tras ~500." },
+    { id: "max features", label: "max_features", detail: "Features candidatas por split: √p (clasificación) o p/3 (regresión)." },
+    { id: "feature importance", label: "Importancia de features", detail: "Cuánto empeora el modelo al mezclar aleatoriamente una feature." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss-ensemble", label: "Ensemble", detail: "Combinar varios modelos para superar a cualquiera individual." },
-    { id: "gloss-bagging", label: "Bagging", detail: "Bootstrap + agregación: reduce varianza promediando." },
-    { id: "gloss-bootstrap", label: "Bootstrap", detail: "Muestreo con reemplazo de tamaño n." },
-    { id: "gloss-oob", label: "OOB", detail: "Muestras no usadas en el bootstrap de cada árbol." },
-    { id: "gloss-n-estimators", label: "n_estimators", detail: "Número de árboles del ensemble." },
-    { id: "gloss-max-features", label: "max_features", detail: "Subconjunto aleatorio de features considerado por split." },
-    { id: "gloss-feature-importance", label: "Importancia de features", detail: "Medida de utilidad predictiva de una feature." },
+    { id: "gloss ensemble", label: "Ensemble", detail: "Combinar varios modelos para superar a cualquiera individual." },
+    { id: "gloss bagging", label: "Bagging", detail: "Bootstrap + agregación: reduce varianza promediando." },
+    { id: "gloss bootstrap", label: "Bootstrap", detail: "Muestreo con reemplazo de tamaño n." },
+    { id: "gloss oob", label: "OOB", detail: "Muestras no usadas en el bootstrap de cada árbol." },
+    { id: "gloss n estimators", label: "n_estimators", detail: "Número de árboles del ensemble." },
+    { id: "gloss max features", label: "max_features", detail: "Subconjunto aleatorio de features considerado por split." },
+    { id: "gloss feature importance", label: "Importancia de features", detail: "Medida de utilidad predictiva de una feature." },
   ]}
 />
 
 <ChoiceQuestion
   question="¿Qué porcentaje aproximado de los datos queda fuera del muestreo bootstrap en cada árbol de un Bosque Aleatorio?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson05_random_forest"
-  blockId="choice-ml-l05-resumen-1"
+  blockId="choice ml l05 resumen 1"
   allowContinueOnIncorrect
-  explanation="El muestreo bootstrap con reemplazo deja fuera aproximadamente 1/e ≈ 37% de las muestras, que se usan como conjunto out-of-bag (OOB) para validar el árbol sin un split adicional."
+  explanation="El muestreo bootstrap con reemplazo deja fuera aproximadamente 1/e ≈ 37% de las muestras, que se usan como conjunto out of bag (OOB) para validar el árbol sin un split adicional."
   options={[
-    { id: "a", label: "Aproximadamente el 37%", correct: true, feedback: "¡Correcto! Esas muestras out-of-bag sirven como validación gratuita." },
+    { id: "a", label: "Aproximadamente el 37%", correct: true, feedback: "¡Correcto! Esas muestras out of bag sirven como validación gratuita." },
     { id: "b", label: "Aproximadamente el 63%", correct: false, feedback: "Ese es el porcentaje que entra al bootstrap, no el que queda fuera." },
     { id: "c", label: "Aproximadamente el 50%", correct: false, feedback: "El bootstrap no es un split 50/50; la fracción fuera es ~37%." },
     { id: "d", label: "Aproximadamente el 10%", correct: false, feedback: "Demasiado bajo; el bootstrap retiene ~63% y deja fuera ~37%." },
@@ -313,9 +313,9 @@ Bosque Aleatorio dominado. Ya puedes entrenar un ensemble robusto, validar con O
 
 <ChoiceQuestion
   question="¿Por qué un Bosque Aleatorio con 500 árboles de profundidad 3 puede tener mejor rendimiento que un solo árbol de profundidad 15?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson05_random_forest"
-  blockId="reflection-l05-bagging-vs-single"
+  blockId="reflection l05 bagging vs single"
   allowContinueOnIncorrect
   explanation="Porque el RF reduce la varianza promediando. Un árbol profundo (15) tiene varianza alta y memoriza ruido; 500 árboles shallow (profundidad 3) promedian para quedarse con la señal real. Es mejor tener 500 estudiantes mediocres que votan que un solo genio inestable."
   options={[
@@ -326,7 +326,7 @@ Bosque Aleatorio dominado. Ya puedes entrenar un ensemble robusto, validar con O
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Desafío:** Analiza cómo mejora el OOB score al aumentar árboles. ¿Dónde deja de valer la pena?
 </ConceptCard>
 
@@ -359,8 +359,8 @@ plt.show()
 
 # ¿Dónde se aplana la mejora?
 for i in range(1, len(oob_scores)):
-    improvement = oob_scores[i] - oob_scores[i-1]
-    print(f"{n_trees[i-1]} → {n_trees[i]}: mejora = {improvement:.5f}")`}
+    improvement = oob_scores[i] oob_scores[i 1]
+    print(f"{n_trees[i 1]} → {n_trees[i]}: mejora = {improvement:.5f}")`}
   height="380px"
 />
 

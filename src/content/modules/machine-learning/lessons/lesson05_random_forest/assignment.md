@@ -13,7 +13,7 @@ Usa `make_classification` para simular un **dataset de expresión génica** con:
 - 500 samples
 - 5000 features (genes)
 - 10 features informativas
-- Resultado binario (responder / non-responder)
+- Resultado binario (responder / non responder)
 
 ```python
 from sklearn.datasets import make_classification
@@ -32,6 +32,6 @@ Eres un bioinformático analizando datos de expresión génica de un ensayo clí
 3. **Entrena un bosque aleatorio** con parámetros por defecto
 4. **Ajusta los hiperparámetros:** n_estimators, max_depth, min_samples_leaf
 5. **Identifica los 10 genes principales** del mejor bosque aleatorio
-6. **Reentrena** usando solo los 10, 50 y 100 genes principales — ¿cambia el rendimiento?
+6. **Reentrena** usando solo los 10, 50 y 100 genes principales   ¿cambia el rendimiento?
 7. **Evaluación final** en el set de prueba
 

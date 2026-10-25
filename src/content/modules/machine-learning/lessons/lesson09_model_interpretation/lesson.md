@@ -1,14 +1,14 @@
----
+
 Module: 4
 Lesson Number: 9
 Lesson Title: Interpretación de Modelos
 Estimated Duration: 75 minutos
 Prerequisites: L5 (Bosque Aleatorio), L8 (Gradient Boosting)
 Learning Objectives:
-  - Explicar por qué la interpretabilidad es importante en aplicaciones de alto riesgo
-  - Calcular e interpretar la importancia por permutación
-  - Generar e interpretar gráficos de dependencia parcial (PDP)
-  - Comparar importancia por impureza vs. importancia por permutación
+  Explicar por qué la interpretabilidad es importante en aplicaciones de alto riesgo
+  Calcular e interpretar la importancia por permutación
+  Generar e interpretar gráficos de dependencia parcial (PDP)
+  Comparar importancia por impureza vs. importancia por permutación
 Keywords: interpretabilidad, importancia por permutación, dependencia parcial, SHAP, LIME, caja negra
 Difficulty: Avanzado
 Programming Concepts: sklearn.inspection.permutation_importance, PartialDependenceDisplay
@@ -18,9 +18,9 @@ Datasets Used: breast cancer, California Housing
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
 
-<Section number={1} title="No basta con predecir bien — hay que explicar por qué" eyebrow="INICIO">
+
+<Section number={1} title="No basta con predecir bien   hay que explicar por qué" eyebrow="INICIO">
 
 <RevealSequence mode="appear">
 
@@ -35,11 +35,11 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Los modelos complejos (Random Forest, Gradient Boosting) son cajas negras: funcionan muy bien pero no te dicen por qué. En biotecnología necesitas saber qué genes predicen una enfermedad. En SaaS necesitas saber qué comportamientos predicen abandono. La **interpretabilidad** cierra esa brecha.
 </ConceptCard>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Interpretar no es solo mirar feature importance del modelo. Es responder: ¿qué features importan? ¿en qué dirección? ¿el efecto es lineal o no lineal? ¿esta predicción individual por qué se hizo?
 </ConceptCard>
 
@@ -63,29 +63,29 @@ Interpretar no es solo mirar feature importance del modelo. Es responder: ¿qué
 />
 
 <ConceptCard variant="definition">
-**Importancia por impureza:** Cuánto reduce Gini/Entropía cada feature durante el entrenamiento. Rápida pero sesgada — favorece features con muchos valores únicos y features correlacionadas.
+**Importancia por impureza:** Cuánto reduce Gini/Entropía cada feature durante el entrenamiento. Rápida pero sesgada   favorece features con muchos valores únicos y features correlacionadas.
 
 **Importancia por permutación:** Mezcla aleatoriamente una feature y mide cuánto empeora el modelo. Si la feature era importante, el rendimiento cae. Si era irrelevante, no cambia nada. Mucho más confiable.
 </ConceptCard>
 
-{/* candidate-player: comparison-impurity-vs-permutation */}
-<ConceptCard variant="key-idea">
+{/* candidate player: comparison impurity vs permutation */}
+<ConceptCard variant="key idea">
 **Impureza vs Permutación**
 - Basada en: datos de entrenamiento (cómo se construyó el árbol) vs datos de validación (cómo se comporta el modelo terminado)
 - Sesgo: favorece features con alta cardinalidad vs sin ese sesgo
-- Costo: gratis (viene con el modelo) vs costoso (re-evaluar el modelo N veces)
+- Costo: gratis (viene con el modelo) vs costoso (re evaluar el modelo N veces)
 </ConceptCard>
 
 <ChoiceQuestion
   question="¿Para cuál de estos casos la importancia por permutación es preferible a la de impureza, y por qué?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson09_model_interpretation"
-  blockId="choice-ml-l09-e2-1"
+  blockId="choice ml l09 e2 a 1"
   allowContinueOnIncorrect
   explanation="La importancia por impureza se calcula durante el entrenamiento y sesga hacia features de alta cardinalidad o correlacionadas. La permutación evalúa el modelo terminado sobre datos de validación, por lo que es menos sesgada y más confiable cuando las features están correlacionadas o son categóricas de alta cardinalidad."
   options={[
     { id: "a", label: "Cuando tienes features correlacionadas o de alta cardinalidad", correct: true, feedback: "¡Correcto! La permutación evita el sesgo de la impureza." },
-    { id: "b", label: "Cuando necesitas importancia instantánea sin costo adicional", correct: false, feedback: "Falso: eso es mejor con impureza; la permutación cuesta N re-evaluaciones." },
+    { id: "b", label: "Cuando necesitas importancia instantánea sin costo adicional", correct: false, feedback: "Falso: eso es mejor con impureza; la permutación cuesta N re evaluaciones." },
     { id: "c", label: "Siempre porque la impureza es engañosa", correct: false, feedback: "Falso: la impureza sirve como proxy rápido y barato." },
     { id: "d", label: "Solo con modelos lineales", correct: false, feedback: "Falso: la permutación es agnóstica al modelo." },
   ]}
@@ -148,10 +148,10 @@ Limitación del PDP: asume que las features son independientes. Si "edad" y "añ
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **SHAP (SHapley Additive exPlanations):** Basado en teoría de juegos cooperativos. Asigna a cada feature un "aporte" a la predicción, garantizando que los aportes sumen exactamente la diferencia entre la predicción y el promedio. Explica predicciones individuales.
 
-**LIME (Local Interpretable Model-agnostic Explanations):** Entrena un modelo simple y local alrededor de una predicción específica para explicarla. Más rápido que SHAP pero menos preciso.
+**LIME (Local Interpretable Model agnostic Explanations):** Entrena un modelo simple y local alrededor de una predicción específica para explicarla. Más rápido que SHAP pero menos preciso.
 </ConceptCard>
 
 <CalloutCheck>
@@ -177,7 +177,7 @@ En medicina: "Este paciente fue clasificado como alto riesgo porque tiene biomar
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La importancia por permutación es más confiable que la de impureza. Los PDP muestran el efecto marginal de cada feature. SHAP explica predicciones individuales con fundamentos de teoría de juegos. En aplicaciones de alto riesgo (medicina, finanzas, justicia), interpretar el modelo no es opcional.
 </ConceptCard>
 
@@ -188,27 +188,27 @@ La importancia por permutación es más confiable que la de impureza. Los PDP mu
     { id: "pdp", label: "Partial Dependence Plot", detail: "Efecto marginal de una feature sobre la predicción, promediando el resto." },
     { id: "ice", label: "Ice plots", detail: "PDP por instancia: una curva por muestra, para ver heterogeneidad." },
     { id: "shap", label: "SHAP", detail: "Descompone cada predicción en contribuciones de cada feature." },
-    { id: "local-global", label: "Local vs global", detail: "SHAP explica una predicción; la importancia global explica el modelo entero." },
+    { id: "local global", label: "Local vs global", detail: "SHAP explica una predicción; la importancia global explica el modelo entero." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss-impureza", label: "Importancia por impureza", detail: "Métrica de árboles de decisión basada en Gini o entropía." },
-    { id: "gloss-permutacion", label: "Importancia por permutación", detail: "Variación del desempeño al permutar una variable." },
-    { id: "gloss-pdp", label: "PDP", detail: "Curva del efecto marginal promedio de una feature." },
-    { id: "gloss-ice", label: "Ice plot", detail: "PDP individualizado por instancia." },
-    { id: "gloss-shap", label: "Valor SHAP", detail: "Contribución de una feature a una predicción concreta." },
-    { id: "gloss-local", label: "Explicación local", detail: "Razonamiento de una sola predicción." },
-    { id: "gloss-global", label: "Explicación global", detail: "Comportamiento agregado del modelo." },
+    { id: "gloss impureza", label: "Importancia por impureza", detail: "Métrica de árboles de decisión basada en Gini o entropía." },
+    { id: "gloss permutacion", label: "Importancia por permutación", detail: "Variación del desempeño al permutar una variable." },
+    { id: "gloss pdp", label: "PDP", detail: "Curva del efecto marginal promedio de una feature." },
+    { id: "gloss ice", label: "Ice plot", detail: "PDP individualizado por instancia." },
+    { id: "gloss shap", label: "Valor SHAP", detail: "Contribución de una feature a una predicción concreta." },
+    { id: "gloss local", label: "Explicación local", detail: "Razonamiento de una sola predicción." },
+    { id: "gloss global", label: "Explicación global", detail: "Comportamiento agregado del modelo." },
   ]}
 />
 
 <ChoiceQuestion
   question="Un árbol tiene 2000 observaciones y 40 features. La importancia por impureza marca 'id_de_paciente' como la feature más importante. ¿Qué está pasando?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson09_model_interpretation"
-  blockId="choice-ml-l09-resumen-1"
+  blockId="choice ml l09 resumen 1"
   allowContinueOnIncorrect
   explanation="La importancia por impureza premia las features con muchos valores distintos, porque cada una puede partir el nodo en grupos casi puros. Un id único por paciente parte el árbol perfectamente y no aporta nada. La importancia por permutación no sufre ese sesgo: al barajar el id, el desempeño no cae."
   options={[
@@ -242,7 +242,7 @@ Interpretación dominada. Ahora podés abrir un modelo y decir qué feature pesa
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Desafío:** Compara importancia por impureza vs permutación en un Random Forest.
 </ConceptCard>
 
@@ -276,9 +276,9 @@ df = pd.DataFrame({
     'permutation': imp_permutation
 })
 
-print("Top 5 — Impureza:")
+print("Top 5   Impureza:")
 print(df.sort_values('impurity', ascending=False).head(5)[['feature','impurity']])
-print("\\nTop 5 — Permutación:")
+print("\\nTop 5   Permutación:")
 print(df.sort_values('permutation', ascending=False).head(5)[['feature','permutation']])
 `}
   height="380px"

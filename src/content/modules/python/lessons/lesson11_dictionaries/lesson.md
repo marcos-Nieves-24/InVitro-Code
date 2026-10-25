@@ -1,23 +1,23 @@
----
+
 Module: 2
 Lesson Number: 11
 Lesson Title: Diccionarios
 Estimated Duration: 60 minutos
-Prerequisites: L9 — Listas
+Prerequisites: L9   Listas
 Learning Objectives:
-  - Crear diccionarios con pares clave-valor
-  - Acceder, agregar, actualizar y eliminar entradas de diccionarios
-  - "Usar métodos de diccionarios: keys(), values(), items(), get()"
-  - Escribir dictionary comprehensions
-  - Usar diccionarios para agregación y conteo de datos
+  Crear diccionarios con pares clave valor
+  Acceder, agregar, actualizar y eliminar entradas de diccionarios
+  "Usar métodos de diccionarios: keys(), values(), items(), get()"
+  Escribir dictionary comprehensions
+  Usar diccionarios para agregación y conteo de datos
 Keywords: diccionario, clave, valor, mapeo, tabla hash, comprehension
 Difficulty: Beginner
-Programming Concepts: Pares clave-valor, tablas hash, mapeo
+Programming Concepts: Pares clave valor, tablas hash, mapeo
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Diccionarios
 
@@ -36,8 +36,8 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
-Un diccionario almacena pares **clave-valor**. La clave debe ser inmutable y hashable (string, número, tupla); el valor puede ser cualquier cosa.
+<ConceptCard variant="key idea">
+Un diccionario almacena pares **clave valor**. La clave debe ser inmutable y hashable (string, número, tupla); el valor puede ser cualquier cosa.
 </ConceptCard>
 
 - Después de listas (ordenadas, indexadas por posición) y tuplas (inmutables), los diccionarios introducen una nueva organización: **por clave** en lugar de por posición.
@@ -47,7 +47,7 @@ Un diccionario almacena pares **clave-valor**. La clave debe ser inmutable y has
 </RevealSequence>
 </Section>
 
-<Section number={2} title="Pares Clave-Valor" eyebrow="CONCEPTO">
+<Section number={2} title="Pares Clave Valor" eyebrow="CONCEPTO">
 <RevealSequence mode="appear">
 
 <DialogueBox
@@ -85,7 +85,7 @@ Agregar y actualizar:
 
 ```python
 student = {"name": "Alice"}
-student["age"] = 22          # Agregar nuevo par clave-valor
+student["age"] = 22          # Agregar nuevo par clave valor
 student["name"] = "Bob"      # Actualizar valor existente
 student.update({"grade": "A", "year": 2024})  # Múltiples actualizaciones
 ```
@@ -93,7 +93,7 @@ student.update({"grade": "A", "year": 2024})  # Múltiples actualizaciones
 Eliminar entradas:
 
 ```python
-del student["grade"]          # Eliminar par clave-valor
+del student["grade"]          # Eliminar par clave valor
 popped = student.pop("age")   # Eliminar y devolver valor
 student.clear()               # Eliminar todas las entradas
 ```
@@ -149,11 +149,11 @@ combined = {k: v for k, v in zip(keys, values)}
 Operaciones con diccionarios:
 
 ```python
-len(d)            # Cantidad de pares clave-valor
+len(d)            # Cantidad de pares clave valor
 "key" in d        # Test de pertenencia sobre claves
 "key" not in d    # No pertenencia
 d1 | d2           # Fusión (Python 3.9+)
-d1 |= d2          # Actualización in-place (Python 3.9+)
+d1 |= d2          # Actualización in place (Python 3.9+)
 ```
 
 Referencia visual de la tabla hash:
@@ -185,7 +185,7 @@ La búsqueda por clave es O(1): muy rápida.
   typing={true}
   lines={[
     "Teoría lista; ahora expresión génica y secuencias de ADN.",
-    "El patrón contar-con-diccionario es uno de los más útiles en bioinformática.",
+    "El patrón contar con diccionario es uno de los más útiles en bioinformática.",
     "También verás aggregation por usuario en un log de actividad.",
   ]}
 />
@@ -258,7 +258,7 @@ print(dict(by_status))
 # {'up': ['BRCA1', 'EGFR', 'MYC', 'ALK'], 'down': ['TP53', 'KRAS']}
 ```
 
-Ejemplo de biotecnología — traducción de ADN a proteína:
+Ejemplo de biotecnología   traducción de ADN a proteína:
 
 ```python
 # Tabla de codones (parcial)
@@ -273,7 +273,7 @@ codon_table = {
 def translate_dna(dna_sequence):
     """Traducir secuencia de ADN a proteína."""
     protein = []
-    for i in range(0, len(dna_sequence) - 2, 3):
+    for i in range(0, len(dna_sequence) 2, 3):
         codon = dna_sequence[i:i+3].upper()
         amino_acid = codon_table.get(codon, "?")
         protein.append(amino_acid)
@@ -287,7 +287,7 @@ print(f"ADN: {dna}")
 print(f"Proteína: {protein}")
 ```
 
-Ejemplo SaaS — agregación de actividad de usuarios:
+Ejemplo SaaS   agregación de actividad de usuarios:
 
 ```python
 # Log de actividad de usuarios
@@ -307,7 +307,7 @@ for user, event in activity_log:
 print("Resumen de actividad de usuarios:")
 for user, events in sorted(user_events.items()):
     total = sum(events.values())
-    print(f"  {user}: {total} eventos - {events}")
+    print(f"  {user}: {total} eventos {events}")
 ```
 
 </RevealSequence>
@@ -336,7 +336,7 @@ Errores comunes:
 - Confundir `in` para claves vs valores: `"key" in d` verifica claves, no valores.
 </ConceptCard>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Buenas prácticas:
 - Usa `get()` con valores por defecto para acceso seguro.
 - Usa `defaultdict` para diccionarios anidados o de conteo.
@@ -352,13 +352,13 @@ Buenas prácticas:
 <Section number={6} title="Resumen y Conceptos Clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con seguridad usando `get()`, recorré con `items()` y generá con comprehensions; `defaultdict` y `Counter` cubren conteos y claves faltantes.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
-    { id: "diccionario", label: "Diccionario", detail: "Almacena pares clave-valor usando `{}`." },
+    { id: "diccionario", label: "Diccionario", detail: "Almacena pares clave valor usando `{}`." },
     { id: "acceso", label: "Acceso", detail: "`d[clave]` es inseguro; `d.get(clave)` es seguro." },
     { id: "claves", label: "Claves", detail: "Deben ser inmutables y hashables (strings, números, tuplas)." },
     { id: "metodos", label: "Métodos", detail: "`keys()`, `values()`, `items()`, `get()`, `update()`, `pop()`." },
@@ -370,13 +370,13 @@ Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con 
 
 <FeatureButtonList
   features={[
-    { id: "gloss-diccionario", label: "Diccionario", detail: "Mapeo de claves a valores (sin orden, ordenado por inserción en 3.7+)." },
-    { id: "gloss-clave", label: "Clave", detail: "Identificador inmutable usado para búsqueda." },
-    { id: "gloss-valor", label: "Valor", detail: "Dato asociado a una clave." },
-    { id: "gloss-hash", label: "Tabla hash", detail: "Estructura de datos subyacente de los diccionarios." },
-    { id: "gloss-keyerror", label: "KeyError", detail: "Excepción al acceder a una clave inexistente." },
-    { id: "gloss-defaultdict", label: "defaultdict", detail: "Diccionario que provee valores por defecto para claves faltantes." },
-    { id: "gloss-counter", label: "Counter", detail: "Subclase de diccionario para contar objetos hashables." },
+    { id: "gloss diccionario", label: "Diccionario", detail: "Mapeo de claves a valores (sin orden, ordenado por inserción en 3.7+)." },
+    { id: "gloss clave", label: "Clave", detail: "Identificador inmutable usado para búsqueda." },
+    { id: "gloss valor", label: "Valor", detail: "Dato asociado a una clave." },
+    { id: "gloss hash", label: "Tabla hash", detail: "Estructura de datos subyacente de los diccionarios." },
+    { id: "gloss keyerror", label: "KeyError", detail: "Excepción al acceder a una clave inexistente." },
+    { id: "gloss defaultdict", label: "defaultdict", detail: "Diccionario que provee valores por defecto para claves faltantes." },
+    { id: "gloss counter", label: "Counter", detail: "Subclase de diccionario para contar objetos hashables." },
   ]}
 />
 
@@ -384,7 +384,7 @@ Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con 
   question="¿Qué devuelve {'a': 1}.get('b', 0)?"
   moduleSlug="python"
   lessonSlug="lesson11_dictionaries"
-  blockId="choice-python-l11-resumen-1"
+  blockId="choice python l11 resumen 1"
   allowContinueOnIncorrect
   explanation="get() devuelve el valor por defecto 0 cuando la clave no existe, sin lanzar KeyError."
   options={[
@@ -396,7 +396,7 @@ Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con 
 />
 
 <MascotMessage mood="celebrating">
-¡Diccionarios dominados! Ya mapeás claves a valores — los sets del próximo bloque completan las colecciones.
+¡Diccionarios dominados! Ya mapeás claves a valores   los sets del próximo bloque completan las colecciones.
 </MascotMessage>
 
 </RevealSequence>
@@ -415,20 +415,20 @@ Un diccionario mapea claves hashables a valores con búsqueda O(1): accedé con 
   ]}
 />
 
-Nivel 1 — Básico:
+Nivel 1   Básico:
 1. ¿Qué pasa si intentas acceder a una clave que no existe usando `d["missing"]`?
 2. ¿Qué tipos se pueden usar como claves de diccionarios?
 3. ¿Qué devuelve `d.get("key", default)` si `"key"` no está en el diccionario?
 
-Nivel 2 — Implementación:
+Nivel 2   Implementación:
 4. Escribe una función `word_count(texto)` que devuelva un diccionario contando frecuencias de palabras en un string.
 5. Dado un diccionario de calificaciones de estudiantes, escribe una función que devuelva el estudiante con el promedio más alto.
 
-Nivel 3 — Pensamiento Crítico:
+Nivel 3   Pensamiento Crítico:
 6. ¿Cómo logran los diccionarios de Python un tiempo de búsqueda O(1)? ¿Qué es una colisión de hash y cómo se resuelve?
 7. ¿Cuándo usarías un `defaultdict` en lugar de un diccionario común con `get()`? Proporciona un ejemplo concreto.
 
-Desafío de Código — almacén clave-valor en memoria:
+Desafío de Código   almacén clave valor en memoria:
 1. Empieza con un diccionario vacío.
 2. Implementa funciones: `put(key, value)`, `get(key)`, `delete(key)`, `keys()`, `values()`, `search(campo, valor)`.
 3. Almacena datos estructurados: cada valor debe ser un diccionario con campos como `{"name": "...", "age": ..., "city": "..."}`.
@@ -446,7 +446,7 @@ Desafío de Código — almacén clave-valor en memoria:
   question={"¿Qué devuelve d.get(\"missing\", 0) si la clave no existe?"}
   moduleSlug="python"
   lessonSlug="lesson11_dictionaries"
-  blockId="choice-python-l11-diccionarios-1"
+  blockId="choice python l11 diccionarios 1"
   allowContinueOnIncorrect
   explanation="`get` devuelve el valor por defecto (0) sin lanzar KeyError cuando la clave no existe."
   options={[
@@ -461,7 +461,7 @@ Desafío de Código — almacén clave-valor en memoria:
   question="¿Cuál de estos tipos NO puede ser clave de un diccionario?"
   moduleSlug="python"
   lessonSlug="lesson11_dictionaries"
-  blockId="choice-python-l11-diccionarios-2"
+  blockId="choice python l11 diccionarios 2"
   allowContinueOnIncorrect
   explanation="Las claves deben ser hashables e inmutables; las listas son mutables y no hashables."
   options={[

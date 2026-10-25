@@ -27,7 +27,7 @@ b) Detección de cáncer (perderse un caso de cáncer es mortal)
 c) Recomendación de productos (mostrar productos irrelevantes perjudica la experiencia de usuario)
 d) Detección de fraude con tarjetas (los falsos positivos bloquean compras legítimas)
 
-<details><summary>Respuesta</summary>b) Detección de cáncer — los falsos negativos (perderse un caso de cáncer) tienen un costo mucho mayor que los falsos positivos</details>
+<details><summary>Respuesta</summary>b) Detección de cáncer   los falsos negativos (perderse un caso de cáncer) tienen un costo mucho mayor que los falsos positivos</details>
 
 **Q4.** ¿Qué significa un AUC de 0.50?
 
@@ -51,11 +51,11 @@ d) La suma de la precisión y la sensibilidad
 
 **Q6.** Explica por qué la exactitud es una métrica pobre para problemas de clasificación desbalanceados. Da un ejemplo concreto.
 
-<details><summary>Respuesta</summary>La exactitud es engañosa cuando las clases están desbalanceadas porque un modelo que siempre predice la clase mayoritaria logra una exactitud alta sin aprender nada. Ejemplo: detección de cáncer con 1% de prevalencia — un modelo que siempre predice "sin cáncer" logra 99% de exactitud pero se pierde todos los casos de cáncer. La precisión, la sensibilidad y el F1 ofrecen una evaluación más honesta.</details>
+<details><summary>Respuesta</summary>La exactitud es engañosa cuando las clases están desbalanceadas porque un modelo que siempre predice la clase mayoritaria logra una exactitud alta sin aprender nada. Ejemplo: detección de cáncer con 1% de prevalencia   un modelo que siempre predice "sin cáncer" logra 99% de exactitud pero se pierde todos los casos de cáncer. La precisión, la sensibilidad y el F1 ofrecen una evaluación más honesta.</details>
 
 **Q7.** Un modelo de regresión logística da coeficientes: β₁ = 2.5 (feature A), β₂ = -0.8 (feature B). ¿Cómo interpretas estos valores?
 
-<details><summary>Respuesta</summary>Los coeficientes están en unidades de log-odds. Un aumento de una unidad en la feature A multiplica las probabilidades (odds) de ser positivo por exp(2.5) ≈ 12.2 (efecto positivo fuerte). Un aumento de una unidad en la feature B multiplica las probabilidades por exp(-0.8) ≈ 0.45 (efecto negativo). Como están en log-odds, no en probabilidad, la magnitud no es directamente interpretable como un cambio en la probabilidad.</details>
+<details><summary>Respuesta</summary>Los coeficientes están en unidades de log odds. Un aumento de una unidad en la feature A multiplica las probabilidades (odds) de ser positivo por exp(2.5) ≈ 12.2 (efecto positivo fuerte). Un aumento de una unidad en la feature B multiplica las probabilidades por exp(-0.8) ≈ 0.45 (efecto negativo). Como están en log odds, no en probabilidad, la magnitud no es directamente interpretable como un cambio en la probabilidad.</details>
 
 ## Pregunta de código (1 pregunta)
 

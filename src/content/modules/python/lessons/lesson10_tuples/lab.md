@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 10: Trabajando con tuplas
-# -------------------------------------------------------------------------
+# -
 # Practicamos la creacion de tuplas, el desempaquetado, la inmutabilidad,
 # el uso de tuplas como claves de diccionarios y la devolucion de
 # multiples valores desde una funcion.
@@ -81,7 +81,7 @@ print(f"\nDatos: {data}")
 print(f"Min: {minimum}, Max: {maximum}, Media: {mean:.2f}, Total: {count}")
 
 # PASO 6: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Las tuplas son inmutables: no se modifican, se recrean.")
 print("Se desempaquetan en variables y sirven como claves de diccionarios.")
 print("Las funciones devuelven multiples valores como tuplas.")

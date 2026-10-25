@@ -13,22 +13,22 @@
 Crea un script de Python `ecommerce_analysis.py` que:
 
 1. **Cree datos sintéticos** (o los cargue desde CSV): genera tres DataFrames:
-   - `customers`: customer_id, name, age, city, signup_date
-   - `orders`: order_id, customer_id, order_date, amount, product_category
-   - `products`: product_id, product_name, category, price, stock
+   `customers`: customer_id, name, age, city, signup_date
+   `orders`: order_id, customer_id, order_date, amount, product_category
+   `products`: product_id, product_name, category, price, stock
 
 2. **Limpieza de datos**:
-   - Revisa los valores nulos y manéjalos
-   - Elimina los pedidos duplicados
-   - Convierte las columnas de fecha a datetime
-   - Elimina los pedidos con amount ≤ 0
+   Revisa los valores nulos y manéjalos
+   Elimina los pedidos duplicados
+   Convierte las columnas de fecha a datetime
+   Elimina los pedidos con amount ≤ 0
 
 3. **Análisis**:
-   - Ingresos totales por categoría de producto
-   - Tendencia de ingresos mensual
-   - Top 10 de clientes por gasto total
-   - Valor promedio de pedido por ciudad
-   - Segmentación de clientes (nuevo/regular/vip según la cantidad de pedidos)
+   Ingresos totales por categoría de producto
+   Tendencia de ingresos mensual
+   Top 10 de clientes por gasto total
+   Valor promedio de pedido por ciudad
+   Segmentación de clientes (nuevo/regular/vip según la cantidad de pedidos)
 
 4. **Fusión**: une los clientes con los pedidos para crear una vista completa
 

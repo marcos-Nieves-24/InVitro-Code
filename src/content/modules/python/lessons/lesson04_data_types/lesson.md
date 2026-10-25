@@ -1,15 +1,15 @@
----
+
 Module: 2
 Lesson Number: 4
 Lesson Title: Tipos de Datos
 Estimated Duration: 60 minutos
-Prerequisites: L3 — Variables
+Prerequisites: L3   Variables
 Learning Objectives:
-  - "Identificar los cuatro tipos de datos básicos: int, float, str, bool"
-  - Usar type() para inspeccionar tipos de variables
-  - Convertir entre tipos de datos usando int(), float(), str(), bool()
-  - Explicar la diferencia entre tipos mutables e inmutables
-  - Manejar errores de tipo adecuadamente
+  "Identificar los cuatro tipos de datos básicos: int, float, str, bool"
+  Usar type() para inspeccionar tipos de variables
+  Convertir entre tipos de datos usando int(), float(), str(), bool()
+  Explicar la diferencia entre tipos mutables e inmutables
+  Manejar errores de tipo adecuadamente
 Keywords: int, float, str, bool, conversión de tipos, casting de tipos, type()
 Difficulty: Beginner
 Programming Concepts: Tipos primitivos, conversión de tipos, verificación de tipos
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 <Section number={1} title="Tipos de Datos" eyebrow="INICIO">
 <RevealSequence>
@@ -65,21 +65,21 @@ Quiz: quiz.md
 Python tiene cuatro tipos de datos primitivos:
 
 1. **int** (entero): Números enteros sin punto decimal
-   - Ejemplos: `42`, `-7`, `0`, `1_000_000`
-   - Precisión arbitraria (sin desbordamiento)
+   Ejemplos: `42`, `-7`, `0`, `1_000_000`
+   Precisión arbitraria (sin desbordamiento)
 
 2. **float** (coma flotante): Números con punto decimal
-   - Ejemplos: `3.14`, `-0.001`, `1.5e10`
-   - Sigue el estándar IEEE 754 de doble precisión
-   - Precisión limitada (~15-17 dígitos decimales)
+   Ejemplos: `3.14`, `-0.001`, `1.5e10`
+   Sigue el estándar IEEE 754 de doble precisión
+   Precisión limitada (~15 a 17 dígitos decimales)
 
 3. **str** (string): Secuencia de caracteres entre comillas
-   - Ejemplos: `"Hello"`, `'DNA'`, `"ATGCTGA"`, `""` (string vacío)
-   - Puede usar comillas simples, dobles o triples para multilínea
+   Ejemplos: `"Hello"`, `'DNA'`, `"ATGCTGA"`, `""` (string vacío)
+   Puede usar comillas simples, dobles o triples para multilínea
 
 4. **bool** (booleano): Valores lógicos
-   - Solo dos valores: `True` y `False`
-   - Internamente, `True` = 1 y `False` = 0
+   Solo dos valores: `True` y `False`
+   Internamente, `True` = 1 y `False` = 0
 
 
 ```python
@@ -121,8 +121,8 @@ bool("hello")        # True (string no vacío)
 ```
 
 
-- **Inmutables**: int, float, bool, str — no se pueden modificar después de creados
-- **Mutables**: list, dict, set — se pueden modificar (se ven en lecciones posteriores)
+- **Inmutables**: int, float, bool, str   no se pueden modificar después de creados
+- **Mutables**: list, dict, set   se pueden modificar (se ven en lecciones posteriores)
 
 ```python
 name = "BRCA1"
@@ -197,7 +197,7 @@ print(int(3.001))   # 3
 # Conversión booleana
 print(bool(1))      # True
 print(bool(0))      # False
-print(bool(-1))     # True (cualquier no-cero es True)
+print(bool(-1))     # True (cualquier no cero es True)
 print(bool(""))     # False
 print(bool("abc"))  # True
 print(bool([]))     # False (lista vacía)
@@ -227,7 +227,7 @@ sample_count = 48            # int: cantidad de muestras
 
 print(f"Gene: {gene_name}")
 print(f"Expression ratio: {expression_ratio:.2f}")
-print(f"p-value: {p_value}")
+print(f"p value: {p_value}")
 print(f"Significant: {is_significant}")
 print(f"Sample size: {sample_count}")
 
@@ -247,7 +247,7 @@ is_premium = True
 discount_rate = 0.15
 
 annual_revenue = monthly_revenue * 12
-discounted_revenue = annual_revenue * (1 - discount_rate)
+discounted_revenue = annual_revenue * (1 discount_rate)
 
 print(f"Customer: {customer_name} (premium: {is_premium})")
 print(f"Active users: {active_users}")
@@ -259,7 +259,7 @@ print(f"After discount: ${discounted_revenue:,.2f}")
   question="¿Qué ocurre al pasar el texto 3.14 a int() en Python?"
   moduleSlug="python"
   lessonSlug="lesson04_data_types"
-  blockId="choice-python-l04-dens-1"
+  blockId="choice python l04 dens 1"
   allowContinueOnIncorrect
   explanation="int() espera un literal entero en texto; 3.14 con punto no es válido."
   options={[
@@ -277,7 +277,7 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 <Section number={5} title="Errores Comunes y Buenas Prácticas" eyebrow="CRÍTICO">
 <RevealSequence>
 
-1. **Concatenar strings con no-strings**: `"count: " + 5` lanza TypeError
+1. **Concatenar strings con no strings**: `"count: " + 5` lanza TypeError
 2. **Perder precisión con float**: `0.1 + 0.2 != 0.3` exactamente (aritmética de coma flotante)
 3. **División entera en Python 3**: `5 / 2 = 2.5` (float), pero `5 // 2 = 2` (entero)
 4. **Confundir `=` y `==`**: Asignación vs comparación de igualdad
@@ -297,18 +297,18 @@ print(f"After discount: ${discounted_revenue:,.2f}")
 
 <RevealSequence>
 
-<ConceptCard variant="key-idea">
-Python tiene cuatro tipos primitivos —int, float, str, bool— más `None`; el tipo define qué operaciones tienen sentido y cómo se almacena el valor.
+<ConceptCard variant="key idea">
+Python tiene cuatro tipos primitivos  int, float, str, bool  más `None`; el tipo define qué operaciones tienen sentido y cómo se almacena el valor.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
-    { id: "cuatro-tipos", label: "Cuatro primitivos", detail: "Python tiene cuatro tipos primitivos: int, float, str, bool." },
+    { id: "cuatro tipos", label: "Cuatro primitivos", detail: "Python tiene cuatro tipos primitivos: int, float, str, bool." },
     { id: "type", label: "type()", detail: "Usa `type()` para verificar el tipo de un valor." },
     { id: "conversion", label: "Conversión de tipos", detail: "La conversión de tipos usa funciones que llevan el nombre del tipo: `int()`, `float()`, `str()`, `bool()`." },
-    { id: "strings-inmutables", label: "Strings inmutables", detail: "Los strings son inmutables — no se pueden modificar en su lugar." },
+    { id: "strings inmutables", label: "Strings inmutables", detail: "Los strings son inmutables   no se pueden modificar en su lugar." },
     { id: "none", label: "None", detail: "`None` representa la ausencia de un valor." },
-    { id: "errores-tipo", label: "Errores de tipo", detail: "Los errores de tipo son comunes y generalmente involucran mezclar strings con números." },
+    { id: "errores tipo", label: "Errores de tipo", detail: "Los errores de tipo son comunes y generalmente involucran mezclar strings con números." },
   ]}
 />
 
@@ -318,9 +318,9 @@ Python tiene cuatro tipos primitivos —int, float, str, bool— más `None`; el
     { id: "float", label: "float", detail: "Tipo de coma flotante para números decimales." },
     { id: "str", label: "str", detail: "Tipo string para texto." },
     { id: "bool", label: "bool", detail: "Tipo booleano para valores True/False." },
-    { id: "conversion-term", label: "Conversión de tipos", detail: "Cambiar un valor de un tipo a otro." },
-    { id: "inmutable-term", label: "Inmutable", detail: "No se puede modificar después de su creación." },
-    { id: "none-term", label: "None", detail: "Valor nulo de Python." },
+    { id: "conversion term", label: "Conversión de tipos", detail: "Cambiar un valor de un tipo a otro." },
+    { id: "inmutable term", label: "Inmutable", detail: "No se puede modificar después de su creación." },
+    { id: "none term", label: "None", detail: "Valor nulo de Python." },
     { id: "typeerror", label: "TypeError", detail: "Excepción que se lanza al operar con tipos incompatibles." },
   ]}
 />
@@ -329,7 +329,7 @@ Python tiene cuatro tipos primitivos —int, float, str, bool— más `None`; el
   question="¿Qué tipo de dato representa el valor 3.14 en Python?"
   moduleSlug="python"
   lessonSlug="lesson04_data_types"
-  blockId="choice-python-l04-resumen-1"
+  blockId="choice python l04 resumen 1"
   allowContinueOnIncorrect
   explanation="3.14 es un número con decimales, por lo que es de tipo float."
   options={[
@@ -385,7 +385,7 @@ Escribe un programa que:
   question="¿Qué tipo de dato representa el valor 3.14 en Python?"
   moduleSlug="python"
   lessonSlug="lesson04_data_types"
-  blockId="choice-python-l04-conceptos-1"
+  blockId="choice python l04 conceptos 1"
   allowContinueOnIncorrect
   explanation="3.14 es un número con decimales, por lo que es de tipo float."
   options={[

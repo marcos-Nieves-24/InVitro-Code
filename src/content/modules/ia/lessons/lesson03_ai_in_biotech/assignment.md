@@ -22,11 +22,11 @@ y = data.target
 2. Separa los datos en entrenamiento (70%) y prueba (30%) usando `train_test_split` con `stratify=y` y `random_state=42`.
 
 3. Entrena un clasificador `KNeighborsClassifier` con `k=5`. Predice sobre el conjunto de prueba y calcula:
-   - Matriz de confusión (TP, FP, FN, TN)
-   - Accuracy
-   - Precision
-   - Recall
-   - F1-score
+   Matriz de confusión (TP, FP, FN, TN)
+   Accuracy
+   Precision
+   Recall
+   F1 score
 
 4. Implementa un clasificador baseline basado en una regla simple. Por ejemplo, predecir siempre la clase mayoritaria, o usar un solo feature threshold:
 
@@ -43,11 +43,11 @@ print("Matriz de confusión baseline:")
 print(confusion_matrix(y_test, y_baseline))
 ```
 
-5. Compara KNN vs baseline en una tabla con accuracy, precision, recall y F1-score.
+5. Compara KNN vs baseline en una tabla con accuracy, precision, recall y F1 score.
 
 6. Responde en una celda de markdown:
-   - ¿Cuál modelo tiene mejor F1-score? ¿Por qué?
-   - ¿Cuántos falsos negativos comete KNN? ¿Qué implicaría eso si el modelo se usara como ayuda al diagnóstico?
-   - ¿Cuándo una regla simple puede ser útil y cuándo preferirías un modelo de ML?
-   - ¿Qué métrica elegirías para priorizar si un falso negativo es más costoso que un falso positivo?
+   ¿Cuál modelo tiene mejor F1 score? ¿Por qué?
+   ¿Cuántos falsos negativos comete KNN? ¿Qué implicaría eso si el modelo se usara como ayuda al diagnóstico?
+   ¿Cuándo una regla simple puede ser útil y cuándo preferirías un modelo de ML?
+   ¿Qué métrica elegirías para priorizar si un falso negativo es más costoso que un falso positivo?
 

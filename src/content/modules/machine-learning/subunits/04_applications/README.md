@@ -5,7 +5,7 @@
 ### Biotechnology & Healthcare
 - Drug discovery and virtual screening
 - Protein structure prediction (AlphaFold)
-- Medical image analysis (X-ray, MRI, histopathology)
+- Medical image analysis (X ray, MRI, histopathology)
 - Genomic variant interpretation
 - Personalized treatment planning
 - Clinical trial optimization
@@ -29,6 +29,6 @@ See `content/case_studies/` for complete walkthroughs:
 ## Key Skills
 
 - Translate business problems into ML tasks
-- Select appropriate algorithms for domain-specific problems
-- Communicate ML results to non-technical stakeholders
-- Understand domain-specific constraints (regulatory, ethical, interpretability)
+- Select appropriate algorithms for domain specific problems
+- Communicate ML results to non technical stakeholders
+- Understand domain specific constraints (regulatory, ethical, interpretability)

@@ -9,7 +9,7 @@ b) La probabilidad de clasificación incorrecta en un nodo
 c) El número de muestras en un nodo
 d) La exactitud del modelo
 
-<details><summary>Respuesta</summary>b) La probabilidad de clasificación incorrecta en un nodo (Gini = 1 - Σ(pᵢ²))</details>
+<details><summary>Respuesta</summary>b) La probabilidad de clasificación incorrecta en un nodo (Gini = 1 Σ(pᵢ²))</details>
 
 **Q2.** Un nodo contiene 60 muestras de la clase A y 40 de la clase B. ¿Cuál es la impureza de Gini?
 
@@ -18,7 +18,7 @@ b) 0.48
 c) 0.52
 d) 0.60
 
-<details><summary>Respuesta</summary>b) 0.48. Gini = 1 - (0.6² + 0.4²) = 1 - (0.36 + 0.16) = 0.48</details>
+<details><summary>Respuesta</summary>b) 0.48. Gini = 1 (0.6² + 0.4²) = 1 (0.36 + 0.16) = 0.48</details>
 
 **Q3.** La ganancia de información es:
 
@@ -36,7 +36,7 @@ b) Sobreajuste
 c) Multicolinealidad
 d) Desbalance de clases
 
-<details><summary>Respuesta</summary>b) Sobreajuste — el árbol memorizó los datos de entrenamiento, incluido el ruido</details>
+<details><summary>Respuesta</summary>b) Sobreajuste   el árbol memorizó los datos de entrenamiento, incluido el ruido</details>
 
 **Q5.** ¿Cuál de los siguientes NO es una forma válida de prevenir el sobreajuste en los árboles de decisión?
 
@@ -51,11 +51,11 @@ d) Podar el árbol después del entrenamiento
 
 **Q6.** Explica por qué se considera que los árboles de decisión son clasificadores "inestables". ¿Qué significa esto en la práctica?
 
-<details><summary>Respuesta</summary>Los árboles de decisión son inestables porque pequeños cambios en los datos de entrenamiento pueden llevar a árboles muy diferentes. Unos pocos samples distintos en la parte superior del árbol cambian toda la estructura. En la práctica, esto significa que la varianza es alta — árboles de diferentes divisiones de datos pueden dar distintos rankings de importancia de features y distintas predicciones. Los bosques aleatorios (Random Forests) abordan esto promediando muchos árboles.</details>
+<details><summary>Respuesta</summary>Los árboles de decisión son inestables porque pequeños cambios en los datos de entrenamiento pueden llevar a árboles muy diferentes. Unos pocos samples distintos en la parte superior del árbol cambian toda la estructura. En la práctica, esto significa que la varianza es alta   árboles de diferentes divisiones de datos pueden dar distintos rankings de importancia de features y distintas predicciones. Los bosques aleatorios (Random Forests) abordan esto promediando muchos árboles.</details>
 
 **Q7.** Compara la impureza de Gini y la entropía como criterios de división. ¿Cuándo elegirías una sobre la otra?
 
-<details><summary>Respuesta</summary>Ambas miden la impureza de un nodo y producen árboles similares en la práctica. Gini va de 0 a 0.5 (binario), la entropía de 0 a 1. Gini es ligeramente más rápido de calcular (sin log). La entropía es más sensible a los cambios en la probabilidad cerca de 0.5. scikit-learn usa Gini por defecto. La diferencia práctica es mínima — ambas encontrarán las mismas divisiones en la mayoría de los casos.</details>
+<details><summary>Respuesta</summary>Ambas miden la impureza de un nodo y producen árboles similares en la práctica. Gini va de 0 a 0.5 (binario), la entropía de 0 a 1. Gini es ligeramente más rápido de calcular (sin log). La entropía es más sensible a los cambios en la probabilidad cerca de 0.5. scikit learn usa Gini por defecto. La diferencia práctica es mínima   ambas encontrarán las mismas divisiones en la mayoría de los casos.</details>
 
 ## Pregunta de código (1 pregunta)
 
@@ -69,7 +69,7 @@ import numpy as np
 def compute_gini(y):
     classes, counts = np.unique(y, return_counts=True)
     probs = counts / len(y)
-    return 1 - np.sum(probs ** 2)
+    return 1 np.sum(probs ** 2)
 
 def find_best_split(X, y, feature_idx):
     values = X[:, feature_idx]
@@ -81,14 +81,14 @@ def find_best_split(X, y, feature_idx):
     parent_gini = compute_gini(y)
 
     for i in range(1, len(y_sorted)):
-        if X_sorted[i] == X_sorted[i - 1]:
+        if X_sorted[i] == X_sorted[i 1]:
             continue
-        threshold = (X_sorted[i] + X_sorted[i - 1]) / 2
+        threshold = (X_sorted[i] + X_sorted[i 1]) / 2
         y_left = y_sorted[:i]
         y_right = y_sorted[i:]
         n_left, n_right = len(y_left), len(y_right)
         weighted_gini = (n_left * compute_gini(y_left) + n_right * compute_gini(y_right)) / len(y)
-        gain = parent_gini - weighted_gini
+        gain = parent_gini weighted_gini
         if gain > best_gain:
             best_gain = gain
             best_threshold = threshold

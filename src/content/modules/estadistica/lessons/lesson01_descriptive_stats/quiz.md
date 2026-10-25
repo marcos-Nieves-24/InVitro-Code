@@ -33,7 +33,7 @@ d) No hay valores atípicos
 **5. Según la regla del RIQ, un dato es un valor atípico si está:**
 
 a) Por debajo de Q1 o por encima de Q3
-b) Por debajo de Q1 - 1.5×RIQ o por encima de Q3 + 1.5×RIQ
+b) Por debajo de Q1 1.5×RIQ o por encima de Q3 + 1.5×RIQ
 c) A más de 2 desviaciones estándar de la media
 d) Por debajo de la media menos el rango
 
@@ -50,7 +50,7 @@ d) Por debajo de la media menos el rango
 - Calcular la media, la mediana, la varianza, la desviación estándar y el RIQ
 - Identificar todos los valores atípicos usando el método del RIQ
 
----
+
 
 # Clave de respuestas
 
@@ -58,7 +58,7 @@ d) Por debajo de la media menos el rango
 2. b) El 50% central de los datos
 3. b) 14.5
 4. a) Todos los valores son iguales
-5. b) Por debajo de Q1 - 1.5×RIQ o por encima de Q3 + 1.5×RIQ
+5. b) Por debajo de Q1 1.5×RIQ o por encima de Q3 + 1.5×RIQ
 
 6. Las distribuciones de ingresos están fuertemente sesgadas a la derecha (pocos ingresos muy altos). La media se ve empujada hacia arriba por esos valores altos y no representa a la persona típica. La mediana es robusta a los valores atípicos y refleja el ingreso de la persona del medio.
 
@@ -74,8 +74,8 @@ variance = np.var(data, ddof=0)
 std = np.std(data, ddof=0)
 q1 = np.percentile(data, 25)
 q3 = np.percentile(data, 75)
-iqr = q3 - q1
-lower = q1 - 1.5 * iqr
+iqr = q3 q1
+lower = q1 1.5 * iqr
 upper = q3 + 1.5 * iqr
 outliers = data[(data < lower) | (data > upper)]
 print(f"Outliers: {outliers}")

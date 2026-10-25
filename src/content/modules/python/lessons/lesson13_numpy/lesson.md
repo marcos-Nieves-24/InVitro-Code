@@ -1,24 +1,24 @@
----
+
 Module: 2
 Lesson Number: 13
 Lesson Title: NumPy
 Estimated Duration: 90 minutos
-Prerequisites: L9-L12 — Listas, Tuplas, Diccionarios, Conjuntos
+Prerequisites: L9 L12   Listas, Tuplas, Diccionarios, Conjuntos
 Learning Objectives:
-  - Crear arrays de NumPy desde listas de Python y con funciones incorporadas
-  - Acceder y modificar elementos de arrays usando indexación y slicing
-  - Realizar operaciones elemento a elemento con funciones universales
-  - Usar broadcasting para operar sobre arrays de diferentes formas
-  - Realizar operaciones básicas de álgebra lineal
+  Crear arrays de NumPy desde listas de Python y con funciones incorporadas
+  Acceder y modificar elementos de arrays usando indexación y slicing
+  Realizar operaciones elemento a elemento con funciones universales
+  Usar broadcasting para operar sobre arrays de diferentes formas
+  Realizar operaciones básicas de álgebra lineal
 Keywords: NumPy, array, ndarray, broadcasting, función universal, álgebra lineal
-Difficulty: Beginner-Intermediate
+Difficulty: Beginner Intermediate
 Programming Concepts: Cómputo con arrays, vectorización, broadcasting, álgebra lineal
 Mathematical Concepts: Operaciones con matrices, broadcasting, álgebra lineal
 Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # NumPy
 
@@ -31,20 +31,20 @@ Quiz: quiz.md
   typing={true}
   lines={[
     "Las listas de Python son flexibles pero lentas para números: cada elemento es un objeto.",
-    "NumPy (Numerical Python) es la base del cómputo científico y la columna vertebral de Pandas, scikit-learn y TensorFlow.",
+    "NumPy (Numerical Python) es la base del cómputo científico y la columna vertebral de Pandas, scikit learn y TensorFlow.",
     "En biotecnología los arrays de NumPy representan matrices de expresión génica, codificaciones de secuencias y datos de imágenes médicas.",
     "En SaaS almacenan matrices de features, series temporales y vectores de embeddings de usuarios.",
     "Esta lección conecta los fundamentos de Python con las librerías de ciencia de datos que usarás después.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 NumPy provee el ndarray: array multidimensional, rápido, eficiente en memoria y con operaciones vectorizadas a velocidad C.
 </ConceptCard>
 
 - En lecciones anteriores aprendiste listas, tuplas, diccionarios y conjuntos.
 - Las listas pueden almacenar datos multidimensionales, pero son lentas para operaciones numéricas.
-- Los arrays de NumPy resuelven eso con vectorización y broadcasting, y se conectan directamente con Pandas, Matplotlib y scikit-learn.
+- Los arrays de NumPy resuelven eso con vectorización y broadcasting, y se conectan directamente con Pandas, Matplotlib y scikit learn.
 
 </RevealSequence>
 </Section>
@@ -98,11 +98,11 @@ Atributos de arrays:
 
 ```python
 arr = np.array([[1, 2, 3], [4, 5, 6]])
-arr.shape      # (2, 3) — dimensiones
-arr.ndim       # 2 — cantidad de dimensiones
-arr.size       # 6 — total de elementos
-arr.dtype      # dtype('int64') — tipo de elemento
-arr.itemsize   # 8 — bytes por elemento
+arr.shape      # (2, 3)   dimensiones
+arr.ndim       # 2   cantidad de dimensiones
+arr.size       # 6   total de elementos
+arr.dtype      # dtype('int64')   tipo de elemento
+arr.itemsize   # 8   bytes por elemento
 ```
 
 </RevealSequence>
@@ -122,7 +122,7 @@ arr.itemsize   # 8 — bytes por elemento
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Indexación desde 0 y slicing `[inicio:fin:paso]` por eje; las ufuncs operan elemento a elemento y son el atajo frente a los bucles.
 </ConceptCard>
 
@@ -131,11 +131,11 @@ Indexación y slicing:
 ```python
 arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 
-arr[0, 1]       # 2 — fila 0, col 1
-arr[1]          # [4, 5, 6] — fila 1
-arr[:, 1]       # [2, 5, 8] — columna 1
-arr[0:2, 0:2]   # [[1, 2], [4, 5]] — submatriz
-arr[arr > 3]    # [4, 5, 6, 7, 8, 9] — indexación booleana
+arr[0, 1]       # 2   fila 0, col 1
+arr[1]          # [4, 5, 6]   fila 1
+arr[:, 1]       # [2, 5, 8]   columna 1
+arr[0:2, 0:2]   # [[1, 2], [4, 5]]   submatriz
+arr[arr > 3]    # [4, 5, 6, 7, 8, 9]   indexación booleana
 ```
 
 Funciones universales (ufuncs):
@@ -181,7 +181,7 @@ Broadcasting permite operaciones entre arrays de diferentes formas:
 ```python
 arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 row_mean = np.mean(arr, axis=1).reshape(-1, 1)  # Vector columna
-centered = arr - row_mean  # Broadcasting en acción
+centered = arr row_mean  # Broadcasting en acción
 ```
 
 Álgebra lineal:
@@ -230,8 +230,8 @@ objeto Python → lento       → cómputo rápido
   ]}
 />
 
-<ConceptCard variant="key-idea">
-Imprimir shape y dtype es el equivalente del print-debug para arrays: barato y evita la mayoría de los errores de operación.
+<ConceptCard variant="key idea">
+Imprimir shape y dtype es el equivalente del print debug para arrays: barato y evita la mayoría de los errores de operación.
 </ConceptCard>
 
 ```python
@@ -311,13 +311,13 @@ print(f"Determinante: {np.linalg.det(a):.1f}")
   variant="scientist"
   typing={true}
   lines={[
-    "Dos casos reales: normalizar una matriz de expresión génica con z-score y analizar engagement de usuarios en SaaS.",
+    "Dos casos reales: normalizar una matriz de expresión génica con z score y analizar engagement de usuarios en SaaS.",
     "Ambos usan los mismos bloques: creación, operación vectorizada, broadcasting por eje y estadísticas resumen.",
     "Observa cómo `reshape(-1, 1)` convierte una media en vector columna para broadcasting.",
   ]}
 />
 
-**Escenario biotecnología** — analizando datos de expresión génica como matriz de NumPy:
+**Escenario biotecnología**   analizando datos de expresión génica como matriz de NumPy:
 
 ```python
 import numpy as np
@@ -339,19 +339,19 @@ for i, gene in enumerate(gene_names):
         print(f"{val:>10.2f}", end=" ")
     print()
 
-# Normalizar: z-score por gen
+# Normalizar: z score por gen
 means = expression.mean(axis=1).reshape(-1, 1)
 stds = expression.std(axis=1).reshape(-1, 1)
-z_scores = (expression - means) / stds
+z_scores = (expression means) / stds
 
-print(f"\nExpresión normalizada (z-score):\n{z_scores}")
+print(f"\nExpresión normalizada (z score):\n{z_scores}")
 
-# Encontrar genes altamente expresados (z-score > 1.5)
+# Encontrar genes altamente expresados (z score > 1.5)
 high_expr = np.where(z_scores > 1.5)
 print(f"\nÍndices de alta expresión: {list(zip(high_expr[0], high_expr[1]))}")
 ```
 
-**Escenario SaaS** — analizando métricas de engagement de usuarios:
+**Escenario SaaS**   analizando métricas de engagement de usuarios:
 
 ```python
 import numpy as np
@@ -407,7 +407,7 @@ Errores comunes:
 
 - **Confundir `np.array()` con listas de Python**: los arrays soportan operaciones elemento a elemento; las listas no.
 - **Precisión de coma flotante**: `np.float64` tiene precisión limitada como los floats de Python.
-- **Confundir copia vs vista**: el slicing devuelve una vista, no una copia — usa `.copy()` para datos independientes.
+- **Confundir copia vs vista**: el slicing devuelve una vista, no una copia   usa `.copy()` para datos independientes.
 - **Errores de broadcasting**: formas incompatibles lanzan ValueError; verifica las formas con `.shape`.
 - **Usar `==` con floats**: mismos problemas de precisión que Python; usa `np.isclose()`.
 - **Olvidar el dtype**: tipos mixtos en lista → dtype string (todos los elementos se vuelven strings).
@@ -419,7 +419,7 @@ Buenas prácticas:
 - Usa `.copy()` cuando necesites modificar un slice de forma independiente.
 - Usa `np.isclose()` para comparaciones de coma flotante.
 - Usa el parámetro `axis=` para operaciones por fila/columna.
-- Perfila el código: NumPy vectorizado es 10-100x más rápido que bucles de Python.
+- Perfila el código: NumPy vectorizado es 10 a 100x más rápido que bucles de Python.
 
 </RevealSequence>
 </Section>
@@ -433,12 +433,12 @@ Buenas prácticas:
   typing={true}
   lines={[
     "NumPy es el vocabulario común de la ciencia de datos en Python: ndarray, shape, broadcasting, ufuncs, linalg.",
-    "Si los dominas, la transición a Pandas y scikit-learn será natural.",
+    "Si los dominas, la transición a Pandas y scikit learn será natural.",
     "Nunca subestimes un buen `.shape` impreso en pantalla.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete que combina `ndarray` multidimensional, broadcasting, ufuncs y álgebra lineal con rendimiento cercano a C.
 </ConceptCard>
 
@@ -449,22 +449,22 @@ NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete
     { id: "indexacion", label: "Indexación", detail: "Slicing similar a listas, pero con capacidades multidimensionales." },
     { id: "ufuncs", label: "Ufuncs", detail: "Funciones universales que operan elemento a elemento a velocidad C." },
     { id: "broadcasting", label: "Broadcasting", detail: "Reglas para operar sobre arrays con diferentes formas." },
-    { id: "algebra-lineal", label: "Álgebra lineal", detail: "Operador @ y np.linalg.inv, np.linalg.eig para matrices." },
+    { id: "algebra lineal", label: "Álgebra lineal", detail: "Operador @ y np.linalg.inv, np.linalg.eig para matrices." },
     { id: "vectorizacion", label: "Vectorización", detail: "Preferir operaciones vectorizadas sobre bucles de Python." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "ndarray-g", label: "ndarray", detail: "Objeto array multidimensional de NumPy." },
+    { id: "ndarray g", label: "ndarray", detail: "Objeto array multidimensional de NumPy." },
     { id: "shape", label: "Shape", detail: "Tupla de las dimensiones del array." },
     { id: "eje", label: "Eje", detail: "Dimensión de un array (0=filas, 1=columnas)." },
-    { id: "vectorizacion-g", label: "Vectorización", detail: "Usar operaciones de arrays en lugar de bucles." },
-    { id: "broadcasting-g", label: "Broadcasting", detail: "Reglas para operar sobre arrays con diferentes formas." },
+    { id: "vectorizacion g", label: "Vectorización", detail: "Usar operaciones de arrays en lugar de bucles." },
+    { id: "broadcasting g", label: "Broadcasting", detail: "Reglas para operar sobre arrays con diferentes formas." },
     { id: "ufunc", label: "Función universal (ufunc)", detail: "Función elemento a elemento sobre arrays." },
     { id: "dtype", label: "Dtype", detail: "Tipo de dato de los elementos del array." },
     { id: "vista", label: "Vista", detail: "Acceso alternativo a los mismos datos (sin copia)." },
-    { id: "fancy-indexing", label: "Fancy indexing", detail: "Indexación con arrays booleanos o listas de enteros." },
+    { id: "fancy indexing", label: "Fancy indexing", detail: "Indexación con arrays booleanos o listas de enteros." },
   ]}
 />
 
@@ -472,7 +472,7 @@ NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete
   question="¿Qué devuelve np.array([10, 20, 30]).shape?"
   moduleSlug="python"
   lessonSlug="lesson13_numpy"
-  blockId="choice-python-l13-resumen-1"
+  blockId="choice python l13 resumen 1"
   allowContinueOnIncorrect
   explanation="`.shape` devuelve la tupla de dimensiones: un array de 3 elementos tiene forma (3,)."
   options={[
@@ -484,7 +484,7 @@ NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete
 />
 
 <MascotMessage mood="celebrating">
-¡NumPy dominado! Los arrays son la base de Pandas y scikit-learn — la próxima lección los envuelve en DataFrames.
+¡NumPy dominado! Los arrays son la base de Pandas y scikit learn   la próxima lección los envuelve en DataFrames.
 </MascotMessage>
 
 </RevealSequence>
@@ -503,23 +503,23 @@ NumPy es el vocabulario común de la ciencia de datos en Python: un solo paquete
   ]}
 />
 
-Nivel 1 — Básico:
+Nivel 1   Básico:
 
 1. Crea un array 4×4 de ceros. ¿Cómo crearías su versión de matriz identidad?
 2. ¿Cuál es la diferencia entre `arr[1]` y `arr[:, 1]` para un array 2D?
 3. ¿Qué devuelve `np.arange(2, 10, 3)`?
 
-Nivel 2 — Implementación:
+Nivel 2   Implementación:
 
 4. Escribe una función que normalice una matriz para que tenga media=0 y std=1 en cada columna.
 5. Implementa multiplicación de matrices manualmente (con bucles) y luego con `@`. Compara el rendimiento en matrices de 100×100.
 
-Nivel 3 — Pensamiento Crítico:
+Nivel 3   Pensamiento Crítico:
 
 6. ¿Cómo logra NumPy su ventaja de velocidad sobre las listas de Python? ¿Cuál es el rol de la memoria contigua y la vectorización?
 7. ¿Cuándo fallaría el broadcasting? Da un ejemplo de formas incompatibles y explica cómo solucionarlo.
 
-Desafío de Código — PCA desde cero con NumPy:
+Desafío de Código   PCA desde cero con NumPy:
 
 1. Genera un dataset aleatorio (100 muestras, 5 características).
 2. Centra los datos (resta la media de cada columna).
@@ -528,7 +528,7 @@ Desafío de Código — PCA desde cero con NumPy:
 5. Ordena los autovectores por autovalores (descendente).
 6. Proyecta los datos sobre las primeras 2 componentes principales.
 7. Verifica tu resultado comparando con el error de reconstrucción (reconstruye el original desde los datos reducidos).
-8. Usa solo NumPy — nada de scikit-learn.
+8. Usa solo NumPy   nada de scikit learn.
 
 </RevealSequence>
 </Section>
@@ -540,7 +540,7 @@ Desafío de Código — PCA desde cero con NumPy:
   question="¿Qué devuelve `np.arange(2, 10, 3)`?"
   moduleSlug="python"
   lessonSlug="lesson13_numpy"
-  blockId="choice-python-l13-arrays-1"
+  blockId="choice python l13 arrays 1"
   allowContinueOnIncorrect
   explanation="`arange(inicio, fin, paso)` genera valores desde 2 hasta (sin incluir) 10 con paso 3: 2, 5, 8."
   options={[
@@ -555,7 +555,7 @@ Desafío de Código — PCA desde cero con NumPy:
   question="¿Por qué las operaciones vectorizadas de NumPy son más rápidas que los bucles de Python?"
   moduleSlug="python"
   lessonSlug="lesson13_numpy"
-  blockId="choice-python-l13-broadcasting-2"
+  blockId="choice python l13 broadcasting 2"
   allowContinueOnIncorrect
   explanation="Porque operan sobre memoria contigua con código compilado (C/Fortran) y evitan la sobrecarga de objetos Python por elemento."
   options={[

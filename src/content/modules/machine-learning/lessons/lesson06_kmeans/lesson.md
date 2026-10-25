@@ -1,27 +1,27 @@
----
+
 Module: 4
 Lesson Number: 6
-Lesson Title: Clustering K-Means
+Lesson Title: Clustering K Means
 Estimated Duration: 75 minutos
 Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  - Explicar el algoritmo K-Means y sus pasos
-  - Determinar el número óptimo de clústeres usando el método del codo y el puntaje de silueta
-  - Implementar clustering K-Means con scikit-learn
-  - Interpretar centros de clúster y asignaciones
-  - Distinguir entre aprendizaje supervisado y no supervisado
-Keywords: K-Means, clustering, método del codo, puntaje de silueta, inercia, aprendizaje no supervisado
+  Explicar el algoritmo K Means y sus pasos
+  Determinar el número óptimo de clústeres usando el método del codo y el puntaje de silueta
+  Implementar clustering K Means con scikit learn
+  Interpretar centros de clúster y asignaciones
+  Distinguir entre aprendizaje supervisado y no supervisado
+Keywords: K Means, clustering, método del codo, puntaje de silueta, inercia, aprendizaje no supervisado
 Difficulty: Intermedio
 Programming Concepts: sklearn.cluster.KMeans, sklearn.metrics.silhouette_score
-Mathematical Concepts: distancia euclidiana, inercia, suma de cuadrados intra-clúster
+Mathematical Concepts: distancia euclidiana, inercia, suma de cuadrados intra clúster
 Machine Learning Concepts: aprendizaje no supervisado, clustering, centroide
 Datasets Used: make_blobs, iris (no supervisado), segmentación de clientes sintético
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
 
-# Clustering K-Means
+
+# Clustering K Means
 
 <Section number={1} title="Descubrir grupos sin etiquetas" eyebrow="INICIO">
 
@@ -34,19 +34,19 @@ Quiz: quiz.md
   lines={[
     "Hasta ahora siempre tenías etiquetas: sabías qué era maligno y qué benigno.",
     "Pero si no tienes etiquetas, los datos igual guardan estructura.",
-    "K-Means encuentra grupos sin una respuesta correcta conocida.",
+    "K Means encuentra grupos sin una respuesta correcta conocida.",
     "Es pura exploración, sin supervisión.",
   ]}
 />
 
 <MascotMessage mood="thinking">
-Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tienes etiquetas? K-Means encuentra estructura donde no hay respuestas correctas — pura exploración.
+Hasta ahora siempre tenías etiquetas: sabías qué era un tumor maligno, qué cliente abandonó. Pero, ¿y si no tienes etiquetas? K Means encuentra estructura donde no hay respuestas correctas   pura exploración.
 </MascotMessage>
 
 Hasta aquí todo fue **aprendizaje supervisado**: tenías features (X) y etiquetas (y), y el modelo aprendía a predecir. Ahora entramos al territorio del **no supervisado**: solo tienes X. No hay "respuesta correcta". El objetivo es descubrir patrones, grupos, estructura oculta.
 
-<ConceptCard variant="key-idea">
-K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, rápido, y sorprendentemente efectivo para segmentación de clientes, descubrimiento de subtipos de enfermedades, y compresión de imágenes.
+<ConceptCard variant="key idea">
+K Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, rápido, y sorprendentemente efectivo para segmentación de clientes, descubrimiento de subtipos de enfermedades, y compresión de imágenes.
 </ConceptCard>
 
 </RevealSequence>
@@ -63,7 +63,7 @@ K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, r
   typing={true}
   lines={[
     "No supervisado significa solo features, sin etiquetas.",
-    "K-Means asigna puntos al centroide más cercano y actualiza centros.",
+    "K Means asigna puntos al centroide más cercano y actualiza centros.",
     "Repite hasta que los centroides se estabilizan.",
   ]}
 />
@@ -72,17 +72,17 @@ K-Means responde: "Dame K grupos y te digo qué puntos van juntos." Es simple, r
 2. **Inicializa:** Pon K centroides en posiciones aleatorias
 3. **Asigna:** Cada punto va al centroide más cercano (distancia euclidiana)
 4. **Actualiza:** Mueve cada centroide al promedio de los puntos que le asignaste
-5. **Repite 3-4** hasta que los centroides dejen de moverse
+5. **Repite 3 a 4** hasta que los centroides dejen de moverse
 
 <CalloutInfo>
-K-Means garantiza convergencia (los centroides eventualmente se estabilizan), pero el resultado depende de dónde empezaron los centroides. Por eso sklearn corre el algoritmo varias veces con inicializaciones distintas (`n_init=10`) y se queda con la mejor.
+K Means garantiza convergencia (los centroides eventualmente se estabilizan), pero el resultado depende de dónde empezaron los centroides. Por eso sklearn corre el algoritmo varias veces con inicializaciones distintas (`n_init=10`) y se queda con la mejor.
 </CalloutInfo>
 
-$$d(\mathbf{x}, \boldsymbol{\mu}_k) = \sqrt{\sum_{j=1}^{p}(x_j - \mu_{kj})^2}$$
+$$d(\mathbf{x}, \boldsymbol{\mu}_k) = \sqrt{\sum_{j=1}^{p}(x_j \mu_{kj})^2}$$
 
 El algoritmo minimiza la **inercia** (suma de distancias al cuadrado dentro de cada clúster):
 
-$$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$
+$$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i \boldsymbol{\mu}_k\|^2$$
 
 <EquationTour caption="La inercia mide qué tan compactos son los clústeres y guía la elección de K.">
   <EquationStep label="Clusters">
@@ -94,7 +94,7 @@ $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\
     Suma de los puntos asignados al clúster k.
   </EquationStep>
   <EquationStep label="Distancia">
-    $\|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$
+    $\|\mathbf{x}_i \boldsymbol{\mu}_k\|^2$
     Distancia al cuadrado entre el punto y el centroide de su clúster.
   </EquationStep>
   <EquationStep label="Objetivo">
@@ -122,27 +122,27 @@ $$\text{Inercia} = \sum_{k=1}^{K}\sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\
   ]}
 />
 
-{/* candidate-player: comparison-codo-vs-silueta */}
-<ConceptCard variant="key-idea">
+{/* candidate player: comparison codo vs silueta */}
+<ConceptCard variant="key idea">
 **Método del codo vs puntaje de silueta**
 - Método del codo: graficas inercia vs K. Donde la curva hace "codo" (la mejora marginal se aplana), ese es tu K. Fácil de explicar, pero a veces el codo no es claro.
 - Puntaje de silueta: mide qué tan similar es cada punto a su propio clúster vs. el clúster más cercano. Varía de -1 a 1. Más alto = mejor separación. Más objetivo que el codo.
 </ConceptCard>
 
-$$s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}$$
+$$s(i) = \frac{b(i) a(i)}{\max\{a(i), b(i)\}}$$
 
 - $a(i)$: distancia promedio a puntos del mismo clúster (quieres que sea chica)
 - $b(i)$: distancia promedio al clúster vecino más cercano (quieres que sea grande)
 
 <CalloutCheck>
-Regla práctica: prueba K desde 2 hasta ~10, calcula silueta para cada uno, y elige el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen — tus datos no tienen estructura de grupos.
+Regla práctica: prueba K desde 2 hasta ~10, calcula silueta para cada uno, y elige el K que maximice el puntaje. Si silueta < 0.25, los clústeres probablemente no existen   tus datos no tienen estructura de grupos.
 </CalloutCheck>
 
 </RevealSequence>
 
 </Section>
 
-<Section number={4} title="Visualiza K-Means en acción" eyebrow="INTERACTIVA">
+<Section number={4} title="Visualiza K Means en acción" eyebrow="INTERACTIVA">
 
 <RevealSequence mode="appear">
 
@@ -163,7 +163,7 @@ for i, k in enumerate([2, 4, 6]):
                     c='red', marker='X', s=200, edgecolors='black')
     axes[i].set_title(f'K = {k}')
 
-plt.suptitle('K-Means con distintos valores de K')
+plt.suptitle('K Means con distintos valores de K')
 plt.tight_layout()
 plt.show()
 ```
@@ -227,16 +227,16 @@ plt.tight_layout(); plt.show()
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Biotecnología:** Agrupa pacientes por perfiles de expresión génica para descubrir subtipos de cáncer que responden distinto a tratamientos.
 
 **SaaS:** Segmenta usuarios por comportamiento (frecuencia de uso, features usadas, gasto) para campañas de marketing personalizadas.
 
-**Genómica:** Agrupa genes por patrones de co-expresión para inferir funciones biológicas compartidas.
+**Genómica:** Agrupa genes por patrones de co expresión para inferir funciones biológicas compartidas.
 </ConceptCard>
 
 <CalloutCheck>
-La gran ventaja del no supervisado: no necesitas datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K-Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
+La gran ventaja del no supervisado: no necesitas datos etiquetados. En biotecnología, etiquetar muestras requiere ensayos de laboratorio caros. K Means te deja explorar los datos crudos y generar hipótesis antes de gastar en experimentos.
 </CalloutCheck>
 
 </RevealSequence>
@@ -247,17 +247,17 @@ La gran ventaja del no supervisado: no necesitas datos etiquetados. En biotecnol
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key-idea">
-K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamente. El método del codo y la silueta ayudan a elegir K. Es el algoritmo de clustering más usado por su simplicidad y velocidad. No necesita etiquetas — descubre estructura por sí mismo.
+<ConceptCard variant="key idea">
+K Means agrupa puntos por proximidad a centroides que se actualizan iterativamente. El método del codo y la silueta ayudan a elegir K. Es el algoritmo de clustering más usado por su simplicidad y velocidad. No necesita etiquetas   descubre estructura por sí mismo.
 </ConceptCard>
 
-{/* candidate-player: interactive-table-glosario-kmeans */}
-<ConceptCard variant="key-idea">
+{/* candidate player: interactive table glosario kmeans */}
+<ConceptCard variant="key idea">
 **Glosario**
-- **Centroide:** punto central de un clúster — promedio de todos sus miembros.
+- **Centroide:** punto central de un clúster   promedio de todos sus miembros.
 - **Inercia:** suma de distancias al cuadrado dentro de cada clúster. Menos = mejor.
 - **Silueta:** puntaje de -1 a 1 que mide calidad de agrupamiento.
-- **No supervisado:** aprendizaje sin etiquetas — solo características (X).
+- **No supervisado:** aprendizaje sin etiquetas   solo características (X).
 </ConceptCard>
 
 <FeatureButtonList
@@ -265,36 +265,36 @@ K-Means agrupa puntos por proximidad a centroides que se actualizan iterativamen
     { id: "centroides", label: "Centroide", detail: "Punto central de un clúster, promedio de todos sus miembros." },
     { id: "inercia", label: "Inercia", detail: "Suma de distancias al cuadrado dentro de cada clúster; menos es mejor." },
     { id: "silueta", label: "Silueta", detail: "Puntaje de -1 a 1 que mide la calidad del agrupamiento." },
-    { id: "metodo-codo", label: "Método del codo", detail: "Gráfica de inercia vs K; el 'codo' sugiere el K óptimo." },
-    { id: "n-init", label: "n_init", detail: "Inicializaciones aleatorias; sklearn se queda con la mejor." },
-    { id: "no-supervisado", label: "No supervisado", detail: "Aprendizaje sin etiquetas: solo características (X)." },
+    { id: "metodo codo", label: "Método del codo", detail: "Gráfica de inercia vs K; el 'codo' sugiere el K óptimo." },
+    { id: "n init", label: "n_init", detail: "Inicializaciones aleatorias; sklearn se queda con la mejor." },
+    { id: "no supervisado", label: "No supervisado", detail: "Aprendizaje sin etiquetas: solo características (X)." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss-clustering", label: "Clustering", detail: "Agrupar datos sin etiquetas por similitud." },
-    { id: "gloss-centroide", label: "Centroide", detail: "Centro (promedio) de un clúster." },
-    { id: "gloss-inercia", label: "Inercia", detail: "Suma de cuadrados intra-clúster." },
-    { id: "gloss-silueta", label: "Silueta", detail: "Métrica de calidad de agrupamiento (-1 a 1)." },
-    { id: "gloss-kmeans", label: "K-Means", detail: "Algoritmo que asigna puntos al centroide más cercano." },
-    { id: "gloss-euclidiana", label: "Distancia euclidiana", detail: "Distancia usada para asignar puntos a centroides." },
-    { id: "gloss-no-supervisado", label: "Aprendizaje no supervisado", detail: "Aprendizaje a partir de datos sin etiquetas." },
+    { id: "gloss clustering", label: "Clustering", detail: "Agrupar datos sin etiquetas por similitud." },
+    { id: "gloss centroide", label: "Centroide", detail: "Centro (promedio) de un clúster." },
+    { id: "gloss inercia", label: "Inercia", detail: "Suma de cuadrados intra clúster." },
+    { id: "gloss silueta", label: "Silueta", detail: "Métrica de calidad de agrupamiento (-1 a 1)." },
+    { id: "gloss kmeans", label: "K Means", detail: "Algoritmo que asigna puntos al centroide más cercano." },
+    { id: "gloss euclidiana", label: "Distancia euclidiana", detail: "Distancia usada para asignar puntos a centroides." },
+    { id: "gloss no supervisado", label: "Aprendizaje no supervisado", detail: "Aprendizaje a partir de datos sin etiquetas." },
   ]}
 />
 
 <ChoiceQuestion
-  question="¿Qué mide la inercia en K-Means?"
-  moduleSlug="machine-learning"
+  question="¿Qué mide la inercia en K Means?"
+  moduleSlug="machine learning"
   lessonSlug="lesson06_kmeans"
-  blockId="choice-ml-l06-resumen-1"
+  blockId="choice ml l06 resumen 1"
   allowContinueOnIncorrect
   explanation="La inercia es la suma de las distancias al cuadrado entre cada punto y el centroide de su clúster; cuanto menor, más compactos son los grupos."
   options={[
     { id: "a", label: "La suma de distancias al cuadrado dentro de cada clúster", correct: true, feedback: "¡Correcto! Menor inercia implica clústeres más compactos." },
     { id: "b", label: "La distancia entre centroides", correct: false, feedback: "Eso mide separación entre centros, no la compactación interna." },
     { id: "c", label: "El número de puntos asignados a cada clúster", correct: false, feedback: "Los tamaños de clúster no son la inercia." },
-    { id: "d", label: "La varianza total del dataset", correct: false, feedback: "La inercia es intra-clúster, no la varianza global." },
+    { id: "d", label: "La varianza total del dataset", correct: false, feedback: "La inercia es intra clúster, no la varianza global." },
   ]}
 />
 
@@ -312,9 +312,9 @@ Clustering dominado. Ya sabes descubrir grupos sin etiquetas y elegir K con el c
 
 <ChoiceQuestion
   question="El método del codo sugiere K=3, pero la silueta es más alta para K=5. ¿Cuál eliges y por qué?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson06_kmeans"
-  blockId="reflection-l06-elbow-vs-silhouette"
+  blockId="reflection l06 elbow vs silhouette"
   allowContinueOnIncorrect
   explanation="Depende del contexto: K=5 si buscás clústeres mejor definidos (silueta más alta) y exploración; K=3 si el objetivo es comunicación/simplicidad para stakeholders. Inspeccioná ambos: K=5 puede revelar un grupo pequeño pero relevante que K=3 esconde."
   options={[
@@ -325,7 +325,7 @@ Clustering dominado. Ya sabes descubrir grupos sin etiquetas y elegir K con el c
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Desafío:** Encuentra el K óptimo para un dataset sintético usando inercia y silueta.
 </ConceptCard>
 

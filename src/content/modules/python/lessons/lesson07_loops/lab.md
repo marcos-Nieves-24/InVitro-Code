@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 7: Bucles e iteracion
-# -------------------------------------------------------------------------
+# -
 # Practicamos bucles for, bucles while, range(), break/continue, bucles
 # anidados y la clausula else asociada a un bucle.
 # =========================================================================
@@ -78,7 +78,7 @@ for i, base in enumerate(dna):
     print(f"  posicion {i}: {base}")
 
 # PASO 8: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Repasamos for, while, range, break, continue y bucles anidados.")
 print("El else de un bucle corre solo cuando NO se ejecuta break.")
 ```

@@ -1,25 +1,25 @@
----
+
 Module: 3
 Lesson Number: 6
 Lesson Title: Análisis Exploratorio de Datos (EDA)
 Estimated Duration: 90 minutos
-Prerequisites: Lecciones 1-5
+Prerequisites: Lecciones 1 a 5
 Learning Objectives:
-  - Detectar y manejar valores faltantes en un conjunto de datos
-  - Identificar valores atípicos usando múltiples métodos
-  - Crear visualizaciones efectivas para la exploración de datos
-  - Generar reportes EDA automatizados con pandas-profiling
-  - Diseñar un flujo de trabajo EDA sistemático
+  Detectar y manejar valores faltantes en un conjunto de datos
+  Identificar valores atípicos usando múltiples métodos
+  Crear visualizaciones efectivas para la exploración de datos
+  Generar reportes EDA automatizados con pandas profiling
+  Diseñar un flujo de trabajo EDA sistemático
 Keywords: EDA, valores faltantes, valores atípicos, visualización, pandas profiling, exploración de features
 Difficulty: Intermedio
-Programming Concepts: pandas, matplotlib, seaborn, pandas-profiling
+Programming Concepts: pandas, matplotlib, seaborn, pandas profiling
 Mathematical Concepts: IQR, puntajes Z, análisis de distribución
 Machine Learning Concepts: calidad de datos, comprensión de features, preprocesamiento
 Datasets Used: pingüinos, titanic, California housing
 Notebook: 06_exploratory_data_analysis.ipynb
 Assignment: eda_assignment.md
 Quiz: eda_quiz.md
----
+
 
 <Section number={1} title="La fase más importante del ML" eyebrow="INICIO">
 
@@ -36,7 +36,7 @@ Quiz: eda_quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El EDA revisa estructura, calidad, distribuciones y relaciones antes de modelar; evita que el modelo aprenda de datos sucios.
 </ConceptCard>
 
@@ -44,7 +44,7 @@ El EDA revisa estructura, calidad, distribuciones y relaciones antes de modelar;
   question="¿Qué harías primero al recibir un dataset nuevo de un hospital?"
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  blockId="choice-estadistica-l06-s1-1"
+  blockId="choice estadistica l06 s1 a 1"
   allowContinueOnIncorrect
   explanation="Explorar los datos primero detecta faltantes, outliers y sesgos antes de entrenar cualquier modelo."
   options={[
@@ -135,15 +135,15 @@ Nunca imputes sin entender POR QUÉ faltan los datos. Si los valores faltan por 
   typing={true}
   lines={[
     "Un outlier puede ser un error o el descubrimiento del año.",
-    "IQR y Z-Score miran los extremos desde ángulos distintos.",
+    "IQR y Z Score miran los extremos desde ángulos distintos.",
     "Investigar antes de eliminar es parte de un EDA responsable.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Comparación de métodos de detección:
-- **IQR (1.5×)**: robusto a distribución no normal; datos sesgados o desconocidos; $Q_1 - 1.5\times\text{IQR}$, $Q_3 + 1.5\times\text{IQR}$.
-- **Z-Score ($|Z| > 3$)**: asume distribución normal; datos aproximadamente normales; $|x - \mu| / \sigma > 3$.
+- **IQR (1.5×)**: robusto a distribución no normal; datos sesgados o desconocidos; $Q_1 1.5\times\text{IQR}$, $Q_3 + 1.5\times\text{IQR}$.
+- **Z Score ($|Z| > 3$)**: asume distribución normal; datos aproximadamente normales; $|x \mu| / \sigma > 3$.
 </ConceptCard>
 
 <ConceptCard variant="warning">
@@ -169,14 +169,14 @@ Un outlier NO siempre es basura. En genómica, un outlier puede ser el descubrim
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Visualizaciones esenciales para EDA:
-- **Histograma**: distribución de una variable — siempre, primer paso del EDA.
-- **Boxplot**: mediana, IQR, outliers — comparar distribuciones entre grupos.
-- **Scatter plot**: relación entre dos variables numéricas — buscar correlaciones/patrones.
-- **Heatmap de correlación**: matriz de correlaciones — identificar multicolinealidad.
-- **Pairplot**: todos los scatter plots posibles — EDA inicial en datasets pequeños.
-- **Bar plot**: frecuencias de categorías — variables categóricas.
+- **Histograma**: distribución de una variable   siempre, primer paso del EDA.
+- **Boxplot**: mediana, IQR, outliers   comparar distribuciones entre grupos.
+- **Scatter plot**: relación entre dos variables numéricas   buscar correlaciones/patrones.
+- **Heatmap de correlación**: matriz de correlaciones   identificar multicolinealidad.
+- **Pairplot**: todos los scatter plots posibles   EDA inicial en datasets pequeños.
+- **Bar plot**: frecuencias de categorías   variables categóricas.
 </ConceptCard>
 
 </RevealSequence>
@@ -213,7 +213,7 @@ print(df.isnull().sum())
 
 # 3. Visualización de faltantes
 sns.heatmap(df.isnull(), cbar=False, cmap='viridis')
-plt.title('Patrón de Valores Faltantes - Titanic')
+plt.title('Patrón de Valores Faltantes Titanic')
 plt.show()
 
 # 4. Distribuciones
@@ -272,7 +272,7 @@ expression_filled = expression.fillna(expression.median())
   question="¿Cuándo es seguro imputar con la mediana y cuándo es peligroso? Da un ejemplo de cada caso en biotecnología."
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  blockId="reflection-l06-gene-missing"
+  blockId="reflection l06 gene missing"
   allowContinueOnIncorrect
   explanation="Seguro cuándo MCAR (errores aleatorios): mediana representa la distribución. Peligroso cuándo MNAR: genes con expresión extrema no medible; imputar enmascara casos anormales (posible cáncer)."
   options={[
@@ -306,7 +306,7 @@ expression_filled = expression.fillna(expression.median())
   question="¿Por qué haces EDA ANTES de modelar y no después? ¿Qué podría salir mal si modelas primero?"
   moduleSlug="estadistica"
   lessonSlug="lesson06_exploratory_data_analysis"
-  blockId="reflection-l06-eda-flow"
+  blockId="reflection l06 eda flow"
   allowContinueOnIncorrect
   explanation="Los modelos asumen normalidad, no multicolinealidad y sin outliers extremos, verificables sólo con EDA; modelar primero da métricas falsamente optimistas, transformaciones inadvertidas y features redundantes."
   options={[
@@ -336,14 +336,14 @@ expression_filled = expression.fillna(expression.median())
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Términos clave del EDA:
 - **EDA**: Análisis Exploratorio de Datos: entender datos antes de modelar.
-- **Valor Faltante (NaN)**: dato ausente — clasificado cómo MCAR, MAR o MNAR.
+- **Valor Faltante (NaN)**: dato ausente   clasificado cómo MCAR, MAR o MNAR.
 - **Imputación**: reemplazar valores faltantes con estimaciones.
-- **Outlier**: valor atípico — detectado con IQR o Z-Score.
-- **MCAR**: Missing Completely At Random — falta totalmente al azar.
-- **MNAR**: Missing Not At Random — la ausencia es informativa.
+- **Outlier**: valor atípico   detectado con IQR o Z Score.
+- **MCAR**: Missing Completely At Random   falta totalmente al azar.
+- **MNAR**: Missing Not At Random   la ausencia es informativa.
 - **df.describe()**: resumen estadístico rápido de todas las columnas numéricas.
 - **df.isnull().sum()**: conteo de valores faltantes por columna.
 </ConceptCard>

@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 9: Evaluacion de modelos de regresion
-# -------------------------------------------------------------------------
+# -
 # Entrenamos una regresion lineal sobre el dataset de diabetes y evaluamos
 # con MAE, MSE, RMSE y R2 (train y test), validacion cruzada de 5 y 10
 # folds, analisis de residuos e importancia de features. Cada figura
@@ -44,7 +44,7 @@ print("\nMAE (test):", round(mean_absolute_error(y_test, y_pred), 2))
 print("MSE (test):", round(mse_test, 2))
 print("RMSE (test):", round(rmse_test, 2))
 print("R2 (train):", round(r2_train, 4), "| R2 (test):", round(r2_test, 4))
-print("Diferencia train-test:", round(r2_train - r2_test, 4),
+print("Diferencia train test:", round(r2_train r2_test, 4),
       "(un valor alto sugiere sobreajuste)")
 
 # PASO 4: Predicciones vs valores reales.
@@ -68,9 +68,9 @@ print("CV 10 folds: R2 medio =", round(cv10.mean(), 4),
 print("El modelo es estable si la desviacion entre folds es pequena.")
 
 # PASO 6: Analisis de residuos.
-# Los residuos (real - prediccion) deberian centrarse en 0 y dispersarse
+# Los residuos (real prediccion) deberian centrarse en 0 y dispersarse
 # al azar; un patron sistematico indica que el modelo no captura algo.
-residuos = y_test - y_pred
+residuos = y_test y_pred
 print("\nResiduos: media =", round(residuos.mean(), 4),
       "| desv =", round(residuos.std(), 4))
 
@@ -100,7 +100,7 @@ fig = px.bar(importancias, x="Feature", y="Coef",
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Regresion lineal evaluada con MAE, MSE, RMSE y R2 en train/test.")
 print("Validacion cruzada (5 y 10 folds) confirma estabilidad del modelo.")
 print("Los residuos centrados en 0 indican un ajuste razonable.")

@@ -1,21 +1,21 @@
----
+
 Module: 1
 Lesson Number: 3
 Lesson Title: IA en Biotecnología
 Estimated Duration: 60 minutos
-Prerequisites: Lección 2 — ¿Cómo aprende la IA?
+Prerequisites: Lección 2   ¿Cómo aprende la IA?
 Learning Objectives:
-  - Reconocer las etapas de un pipeline de machine learning en biotecnología
-  - Entender cómo AlphaFold predice estructuras de proteínas
-  - Experimentar con visualización 3D de moléculas
-  - Identificar fuentes y limitaciones de datos biológicos (PDB)
+  Reconocer las etapas de un pipeline de machine learning en biotecnología
+  Entender cómo AlphaFold predice estructuras de proteínas
+  Experimentar con visualización 3D de moléculas
+  Identificar fuentes y limitaciones de datos biológicos (PDB)
 Keywords: pipeline ML, AlphaFold, PDB, proteínas, estructura terciaria, RMSD, folding
 Difficulty: Principiante
 Programming Concepts: Ninguno
 Mathematical Concepts: Espacio tridimensional, distancias
 Machine Learning Concepts: Pipeline ML, datos de entrenamiento, embeddings, PDB como dataset, RMSD como métrica de error
 Datasets Used: PDB (Protein Data Bank), AF2, "module01_predict_effect.parquet"
----
+
 
 <Section number={1} title="De la teoría a la práctica" eyebrow="INICIO">
 
@@ -40,7 +40,7 @@ Datasets Used: PDB (Protein Data Bank), AF2, "module01_predict_effect.parquet"
 La biotecnología moderna genera cantidades astronómicas de datos: secuencias masivas de ADN, micrografías electrónicas de alta resolución y mapas conformacionales. El aprendizaje automático es el microscopio digital que nos permite descifrar patrones que escapan a la vista humana.
 </div>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 En biotecnología computacional, la computación no reemplaza al ensayo de laboratorio: convierte meses de ensayo y error empírico en predicciones enfocadas y verificables.
 </ConceptCard>
 
@@ -81,7 +81,7 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
 
 <Section number={3} title="Laboratorio: Exploración molecular 3D" eyebrow="INTERACTIVA">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Explora:</strong> Rota la molécula arrastrando con el cursor. Alterna entre vistas de cintas (ribbon) y esferas para reconocer hélices alfa, láminas beta y loops desordenados.
 </div>
 
@@ -97,7 +97,7 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
   question="Al rotar la proteína en 3D, ¿cómo distingues hélices alfa de regiones desordenadas (loops)?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-visualizador-1"
+  blockId="choice l03 visualizador 1"
   allowContinueOnIncorrect
   explanation="Las hélices alfa se ven como tirabuzones, las láminas beta como flechas planas y los loops como fideos sin estructura fija."
   options={[
@@ -108,7 +108,7 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Cada átomo en el visualizador posee coordenadas continuas $(x, y, z)$ en ángstroms ($10^{-10}\text{ m}$). Para un sistema de inteligencia artificial, predecir la posición tridimensional de miles de átomos interconectados es un monumental problema de **regresión continua**.
 </ConceptCard>
 
@@ -134,7 +134,7 @@ Cada átomo en el visualizador posee coordenadas continuas $(x, y, z)$ en ángst
   question="AlphaFold predice la posición (x, y, z) de cada átomo. ¿Es clasificación o regresión y cómo se mide el error?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-alphafold-desafio-1"
+  blockId="choice l03 alphafold desafio 1"
   allowContinueOnIncorrect
   explanation="Es regresión: coordenadas continuas. El error se mide con RMSD, que es el ECM en 3D: distancia promedio entre átomos equivalentes."
   options={[
@@ -167,26 +167,26 @@ El **RMSD (Root Mean Square Deviation)** mide la distancia cuadrática media ent
   ]}
 />
 
-<div className="grid gap-2.5 sm:grid-cols-2 my-2 text-xs">
-  <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3">
-    <strong className="text-blue-900 block mb-1">1. Embedding de secuencia</strong>
-    Convierte las letras de los 20 aminoácidos estándar en vectores multidimensionales densos que capturan propiedades físico-químicas.
+<div className="grid gap 2.5 sm:grid cols 2 my 2 text xs">
+  <div className="rounded lg border border blue 200 bg blue 50/70 p 3">
+    <strong className="text blue 900 block mb 1">1. Embedding de secuencia</strong>
+    Convierte las letras de los 20 aminoácidos estándar en vectores multidimensionales densos que capturan propiedades físico químicas.
   </div>
-  <div className="rounded-lg border border-teal-200 bg-teal-50/70 p-3">
-    <strong className="text-teal-900 block mb-1">2. Perfiles evolutivos (MSA)</strong>
+  <div className="rounded lg border border teal 200 bg teal 50/70 p 3">
+    <strong className="text teal 900 block mb 1">2. Perfiles evolutivos (MSA)</strong>
     Compara miles de secuencias homólogas en distintas especies. Las mutaciones correlacionadas revelan qué aminoácidos deben tocarse en 3D para mantener la estabilidad.
   </div>
-  <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-3">
-    <strong className="text-indigo-900 block mb-1">3. Atención espacial (Transformers)</strong>
+  <div className="rounded lg border border indigo 200 bg indigo 50/70 p 3">
+    <strong className="text indigo 900 block mb 1">3. Atención espacial (Transformers)</strong>
     Calcula simultáneamente las interacciones espaciales entre pares de residuos, reconociendo que el aminoácido #5 y el #180 pueden estar en contacto directo al plegarse.
   </div>
-  <div className="rounded-lg border border-emerald-200 bg-emerald-50/70 p-3">
-    <strong className="text-emerald-900 block mb-1">4. Refinamiento iterativo</strong>
+  <div className="rounded lg border border emerald 200 bg emerald 50/70 p 3">
+    <strong className="text emerald 900 block mb 1">4. Refinamiento iterativo</strong>
     Proyecta las rotaciones del esqueleto polipeptídico y ajusta ángulos diédricos en múltiples ciclos hasta minimizar las tensiones estéricas.
   </div>
 </div>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La gran innovación fue tratar el plegamiento como **reconocimiento de patrones evolutivos y geométricos**, logrando en segundos lo que la física clásica no podía simular en años.
 </ConceptCard>
 
@@ -202,7 +202,7 @@ La gran innovación fue tratar el plegamiento como **reconocimiento de patrones 
   question="AlphaFold predijo 200 millones de estructuras. ¿Qué aplicaciones desbloquea y cuál es su limitación principal?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-alphafold-1"
+  blockId="choice l03 alphafold 1"
   allowContinueOnIncorrect
   explanation="Desbloquea docking, ingeniería de enzimas y estudio de malplegamiento. Limitación: predice la conformación más probable, pero las proteínas son dinámicas y no modela bien interacciones ni estados transitorios."
   options={[
@@ -247,7 +247,7 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
 
 <Section number={9} title="Laboratorio: Simulación de pipeline" eyebrow="INTERACTIVA">
 <RevealSequence showHistory>
-<div className="mb-2 text-xs text-gray-500">
+<div className="mb 2 text xs text gray 500">
 <strong>Explora:</strong> Modifica los parámetros de entrada y observa cómo las decisiones de calibración y preprocesamiento repercuten en el rendimiento final del modelo.
 </div>
 
@@ -263,7 +263,7 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
   question="En un pipeline de conidias, ¿qué etapa consume más tiempo y cuál genera más errores silenciosos?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-pipeline-1"
+  blockId="choice l03 pipeline 1"
   allowContinueOnIncorrect
   explanation="Limpieza consume >60% del tiempo. Feature engineering genera errores silenciosos: si el microscopio está mal calibrado, el modelo aprende el artefacto y falla al transferirse."
   options={[
@@ -278,7 +278,7 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
   question="Con datos de 3 laboratorios con distintos microscopios, ¿dónde entrenas y pruebas para evitar sobreajuste al equipamiento?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-pipeline-real-1"
+  blockId="choice l03 pipeline real 1"
   allowContinueOnIncorrect
   explanation="Entrenar con 2 laboratorios y probar en el 3° (validación cruzada por laboratorio). Mezclar todo hace que el modelo aprenda el microscopio en lugar de la conidia."
   options={[
@@ -317,53 +317,53 @@ El error más común en bioinformática es el **data leakage** (fuga de datos): 
 Evaluamos <strong>100 conidias</strong> analizadas por el clasificador, donde la etiqueta positiva es *Aspergillus* (patógeno de alto riesgo clínico) y la negativa es *Penicillium*:
 </div>
 
-<div className="my-3 grid grid-cols-2 gap-3 max-w-xl mx-auto">
-  <div className="rounded-xl border-2 border-emerald-500/50 bg-emerald-50/90 p-3.5 shadow-xs">
-    <div className="flex items-center justify-between mb-1">
-      <span className="font-mono text-xs font-bold text-emerald-800 uppercase tracking-wider">Verdadero Positivo (TP)</span>
-      <span className="text-2xl font-extrabold text-emerald-700">35</span>
+<div className="my 3 grid grid cols 2 gap 3 max w xl mx auto">
+  <div className="rounded xl border 2 border emerald 500/50 bg emerald 50/90 p 3.5 shadow xs">
+    <div className="flex items center justify between mb 1">
+      <span className="font mono text xs font bold text emerald 800 uppercase tracking wider">Verdadero Positivo (TP)</span>
+      <span className="text 2xl font extrabold text emerald 700">35</span>
     </div>
-    <div className="text-xs text-emerald-950 font-medium leading-relaxed">
+    <div className="text xs text emerald 950 font medium leading relaxed">
       Real: <em>Aspergillus</em> | Predicción: <em>Aspergillus</em>
     </div>
-    <span className="inline-block mt-1 text-[11px] text-emerald-700 font-semibold">Diagnóstico certero del patógeno</span>
+    <span className="inline block mt 1 text-[11px] text emerald 700 font semibold">Diagnóstico certero del patógeno</span>
   </div>
 
-  <div className="rounded-xl border-2 border-rose-500/60 bg-rose-50/90 p-3.5 shadow-xs">
-    <div className="flex items-center justify-between mb-1">
-      <span className="font-mono text-xs font-bold text-rose-800 uppercase tracking-wider">Falso Negativo (FN)</span>
-      <span className="text-2xl font-extrabold text-rose-700">10</span>
+  <div className="rounded xl border 2 border rose 500/60 bg rose 50/90 p 3.5 shadow xs">
+    <div className="flex items center justify between mb 1">
+      <span className="font mono text xs font bold text rose 800 uppercase tracking wider">Falso Negativo (FN)</span>
+      <span className="text 2xl font extrabold text rose 700">10</span>
     </div>
-    <div className="text-xs text-rose-950 font-medium leading-relaxed">
+    <div className="text xs text rose 950 font medium leading relaxed">
       Real: <em>Aspergillus</em> | Predicción: <em>Penicillium</em>
     </div>
-    <span className="inline-block mt-1 text-[11px] text-rose-700 font-bold">Peligro clínico: paciente infectado no tratado</span>
+    <span className="inline block mt 1 text-[11px] text rose 700 font bold">Peligro clínico: paciente infectado no tratado</span>
   </div>
 
-  <div className="rounded-xl border-2 border-amber-500/50 bg-amber-50/90 p-3.5 shadow-xs">
-    <div className="flex items-center justify-between mb-1">
-      <span className="font-mono text-xs font-bold text-amber-800 uppercase tracking-wider">Falso Positivo (FP)</span>
-      <span className="text-2xl font-extrabold text-amber-700">5</span>
+  <div className="rounded xl border 2 border amber 500/50 bg amber 50/90 p 3.5 shadow xs">
+    <div className="flex items center justify between mb 1">
+      <span className="font mono text xs font bold text amber 800 uppercase tracking wider">Falso Positivo (FP)</span>
+      <span className="text 2xl font extrabold text amber 700">5</span>
     </div>
-    <div className="text-xs text-amber-950 font-medium leading-relaxed">
+    <div className="text xs text amber 950 font medium leading relaxed">
       Real: <em>Penicillium</em> | Predicción: <em>Aspergillus</em>
     </div>
-    <span className="inline-block mt-1 text-[11px] text-amber-700 font-semibold">Falsa alarma: medicación preventiva innecesaria</span>
+    <span className="inline block mt 1 text-[11px] text amber 700 font semibold">Falsa alarma: medicación preventiva innecesaria</span>
   </div>
 
-  <div className="rounded-xl border-2 border-blue-500/40 bg-blue-50/90 p-3.5 shadow-xs">
-    <div className="flex items-center justify-between mb-1">
-      <span className="font-mono text-xs font-bold text-blue-800 uppercase tracking-wider">Verdadero Negativo (TN)</span>
-      <span className="text-2xl font-extrabold text-blue-700">50</span>
+  <div className="rounded xl border 2 border blue 500/40 bg blue 50/90 p 3.5 shadow xs">
+    <div className="flex items center justify between mb 1">
+      <span className="font mono text xs font bold text blue 800 uppercase tracking wider">Verdadero Negativo (TN)</span>
+      <span className="text 2xl font extrabold text blue 700">50</span>
     </div>
-    <div className="text-xs text-blue-950 font-medium leading-relaxed">
+    <div className="text xs text blue 950 font medium leading relaxed">
       Real: <em>Penicillium</em> | Predicción: <em>Penicillium</em>
     </div>
-    <span className="inline-block mt-1 text-[11px] text-blue-700 font-semibold">Descarte correcto de patogenicidad</span>
+    <span className="inline block mt 1 text-[11px] text blue 700 font semibold">Descarte correcto de patogenicidad</span>
   </div>
 </div>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Total aciertos: $35 + 50 = 85$ conidias correctas de 100 ($85\%$ accuracy). Sin embargo, los **10 falsos negativos** representan un riesgo clínico inaceptable en pacientes inmunodeprimidos.
 </ConceptCard>
 
@@ -375,20 +375,20 @@ Total aciertos: $35 + 50 = 85$ conidias correctas de 100 ($85\%$ accuracy). Sin 
 
 <RevealSequence showHistory>
 
-<div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3.5 text-xs text-gray-800">
-<strong className="text-teal-900 block mb-1">1. Precisión (Precision): Confiabilidad de las alertas</strong>
+<div className="rounded lg border border teal 200 bg teal 50/80 p 3.5 text xs text gray 800">
+<strong className="text teal 900 block mb 1">1. Precisión (Precision): Confiabilidad de las alertas</strong>
 $$\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{35}{35 + 5} = \frac{35}{40} = 0.875\ (87.5\%)$$
 <em>De cada 100 conidias que el clasificador declaró como Aspergillus, 87.5 realmente lo eran y 12.5 fueron falsas alarmas.</em>
 </div>
 
-<div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3.5 text-xs text-gray-800">
-<strong className="text-rose-900 block mb-1">2. Recall o Sensibilidad: Capacidad de detección</strong>
+<div className="rounded lg border border rose 200 bg rose 50/80 p 3.5 text xs text gray 800">
+<strong className="text rose 900 block mb 1">2. Recall o Sensibilidad: Capacidad de detección</strong>
 $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{35}{35 + 10} = \frac{35}{45} \approx 0.778\ (77.8\%)$$
 <em>De los 45 casos reales de Aspergillus existentes en la muestra, el modelo capturó el 77.8%, un 22.2% de infecciones escapó al radar.</em>
 </div>
 
-<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3.5 text-xs text-gray-800">
-<strong className="text-blue-900 block mb-1">3. F1-Score: Media armónica de balance</strong>
+<div className="rounded lg border border blue 200 bg blue 50/80 p 3.5 text xs text gray 800">
+<strong className="text blue 900 block mb 1">3. F1 Score: Media armónica de balance</strong>
 $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + \text{Recall}} = 2 \times \frac{0.875 \times 0.778}{0.875 + 0.778} \approx 0.824\ (82.4\%)$$
 <em>La media armónica penaliza drásticamente los desbalances extremos entre falsos positivos y falsos negativos.</em>
 </div>
@@ -397,7 +397,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="¿Por qué la matriz de confusión es más útil que solo el porcentaje de aciertos?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-confusion-1"
+  blockId="choice l03 confusion 1"
   allowContinueOnIncorrect
   explanation="Desagrega los errores: falso negativo (patógeno no detectado) y falso positivo (falso alarma) tienen costos clínicos distintos. Accuracy solo los oculta."
   options={[
@@ -422,7 +422,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="¿Qué mide el RMSD en el contexto de AlphaFold?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-check-1"
+  blockId="choice l03 check 1"
   explanation="RMSD es el ECM en 3D: distancia promedio entre átomos equivalentes. RMSD < 1Å es excelente."
   options={[
     { id: "a", label: "La cantidad de proteínas predichas por segundo", correct: false, feedback: "Eso sería velocidad de inferencia, no RMSD." },
@@ -436,7 +436,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="¿Por qué AlphaFold fue un avance tan significativo?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-check-2"
+  blockId="choice l03 check 2"
   explanation="Reformuló el plegamiento como aprendizaje a partir de 170k estructuras, sin simulaciones físicas costosas."
   options={[
     { id: "a", label: "Porque fue el primer modelo de deep learning", correct: false, feedback: "Hubo muchos antes, lo disruptivo fue el enfoque aplicado al plegamiento." },
@@ -450,7 +450,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="¿Cuál es la principal limitación del PDB como dataset para entrenar modelos como AlphaFold?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-check-3"
+  blockId="choice l03 check 3"
   explanation="Solo ~200k estructuras resueltas vs millones de secuencias conocidas, por eso predecir las faltantes era tan valioso."
   options={[
     { id: "a", label: "Es demasiado grande para descargarlo", correct: false, feedback: "El tamaño es manejable, el problema es la cobertura." },
@@ -464,7 +464,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="En un pipeline de ML, ¿cuál etapa consume más tiempo en proyectos biotecnológicos?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-check-4"
+  blockId="choice l03 check 4"
   explanation="La limpieza y preparación de datos consume más del 60% del tiempo, además es donde aparecen errores silenciosos."
   options={[
     { id: "a", label: "El entrenamiento del modelo", correct: false, feedback: "El entreno es rápido comparado con conseguir y limpiar datos biológicos." },
@@ -478,7 +478,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
   question="¿Qué es un embedding de secuencia?"
   moduleSlug="ia"
   lessonSlug="lesson03_ai_in_biotech"
-  blockId="choice-l03-check-5"
+  blockId="choice l03 check 5"
   explanation="Convierte letras (aminoácidos) en vectores numéricos que el modelo puede procesar, es el paso inicial de AlphaFold."
   options={[
     { id: "a", label: "Una imagen de la proteína", correct: false, feedback: "No es visual, es una representación numérica." },
@@ -498,6 +498,6 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
 ¡Estructuras 3D conquistadas, pipelines dominados y matrices de confusión interpretadas con rigor clínico! Estás a las puertas de los casos del mundo real.
 </MascotMessage>
 
-En la última lección del módulo exploraremos aplicaciones reales que impactaron al planeta: cómo la IA aceleró la formulación de nanopartículas para la vacuna del COVID-19, el reposicionamiento exprés de moléculas terapéuticas y los nuevos modelos fundacionales de ADN como **Evo**.
+En la última lección del módulo exploraremos aplicaciones reales que impactaron al planeta: cómo la IA aceleró la formulación de nanopartículas para la vacuna del COVID 19, el reposicionamiento exprés de moléculas terapéuticas y los nuevos modelos fundacionales de ADN como **Evo**.
 </RevealSequence>
 </Section>

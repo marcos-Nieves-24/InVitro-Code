@@ -14,11 +14,11 @@ Crea un script de Python `sales_analyzer.py` que:
 1. **Datos de ventas**: Crea un diccionario con los nombres de los productos como claves y una lista de ventas mensuales como valores.
 
 2. **Funciones de análisis**:
-   - `total_sales(sales_data)` — devuelve un dict de producto → ventas totales
-   - `average_sales(sales_data)` — devuelve un dict de producto → promedio de ventas mensuales
-   - `top_product(sales_data)` — devuelve el nombre del producto con mayores ventas totales
-   - `monthly_totals(sales_data)` — devuelve una lista de ventas totales por mes
-   - `products_above_threshold(sales_data, threshold)` — devuelve una lista de productos por encima del umbral
+   `total_sales(sales_data)`   devuelve un dict de producto → ventas totales
+   `average_sales(sales_data)`   devuelve un dict de producto → promedio de ventas mensuales
+   `top_product(sales_data)`   devuelve el nombre del producto con mayores ventas totales
+   `monthly_totals(sales_data)`   devuelve una lista de ventas totales por mes
+   `products_above_threshold(sales_data, threshold)`   devuelve una lista de productos por encima del umbral
 
 3. **Informe**: Genera un informe formateado con todas las estadísticas.
 

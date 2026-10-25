@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 6: Analisis exploratorio de datos (EDA)
-# -------------------------------------------------------------------------
+# -
 # Exploramos el dataset de diabetes: vista general, valores faltantes,
 # distribuciones univariadas, relaciones multivariadas y outliers.
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -68,15 +68,15 @@ fig.show()                                 # Mostrar grafico interactivo
 for col in ["bmi", "bp", "target"]:
     q1 = df_eda[col].quantile(0.25)
     q3 = df_eda[col].quantile(0.75)
-    iqr = q3 - q1
-    n_out = int(((df_eda[col] < q1 - 1.5 * iqr) | (df_eda[col] > q3 + 1.5 * iqr)).sum())
+    iqr = q3 q1
+    n_out = int(((df_eda[col] < q1 1.5 * iqr) | (df_eda[col] > q3 + 1.5 * iqr)).sum())
     print(f"\nColumna {col}: {n_out} valores atipicos (regla del RIQ)")
 
 fig = px.box(df_eda, y="target", title="Boxplot del target")
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 9: Hallazgos clave del EDA.
-print("\n--- Hallazgos del EDA ---")
+print("\n Hallazgos del EDA ")
 print("Las features de diabetes estan normalizadas (medias ~0, std ~1).")
 print("El target correlaciona mas con bmi y bp que con age.")
 print("La imputacion con mediana dejo el dataset sin valores faltantes.")

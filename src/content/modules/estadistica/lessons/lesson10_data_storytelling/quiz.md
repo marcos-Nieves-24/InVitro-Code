@@ -2,7 +2,7 @@
 
 ## Opción múltiple (5 preguntas)
 
-**1. El ratio data-ink mide:**
+**1. El ratio data ink mide:**
 
 a) Cuánta tinta usa una impresora
 b) La proporción de tinta dedicada a los datos vs la decoración
@@ -52,7 +52,7 @@ d) Abajo a la izquierda
 - Valores anotados encima de cada barra
 - Un solo color consistente para todas las barras
 
----
+
 
 # Clave de respuestas
 

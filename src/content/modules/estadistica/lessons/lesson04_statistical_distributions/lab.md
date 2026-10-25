@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 4: Distribuciones estadisticas con scipy.stats
-# -------------------------------------------------------------------------
+# -
 # Trabajamos con norm, t, chi2, expon y binom: calculamos probabilidades,
 # graficamos pdf/pmf teoricas y las comparamos con muestras empiricas.
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -79,7 +79,7 @@ fig = px.histogram(medias, nbins=40, title="Medias muestrales (Teorema central d
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 9: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("scipy.stats calcula pdf/pmf, cuantiles y probabilidades exactas.")
 print("Las muestras empiricas convergen a las distribuciones teoricas.")
 ```

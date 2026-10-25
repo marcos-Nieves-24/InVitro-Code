@@ -1,15 +1,15 @@
----
+
 Module: 4
 Lesson Number: 10
 Lesson Title: Aplicaciones
 Estimated Duration: 90 minutos
-Prerequisites: L1-L9 (todas las lecciones anteriores)
+Prerequisites: L1 L9 (todas las lecciones anteriores)
 Learning Objectives:
-  - Construir un pipeline de ML de extremo a extremo desde datos crudos hasta evaluación
-  - Aplicar regresión a un problema de predicción de calidad de productos biotecnológicos
-  - Aplicar clustering + clasificación a un problema de análisis de clientes SaaS
-  - Seleccionar modelos y métricas apropiados para diferentes contextos de negocio
-  - Comunicar resultados de ML a interesados no técnicos
+  Construir un pipeline de ML de extremo a extremo desde datos crudos hasta evaluación
+  Aplicar regresión a un problema de predicción de calidad de productos biotecnológicos
+  Aplicar clustering + clasificación a un problema de análisis de clientes SaaS
+  Seleccionar modelos y métricas apropiados para diferentes contextos de negocio
+  Comunicar resultados de ML a interesados no técnicos
 Keywords: pipeline, extremo a extremo, biotecnología, SaaS, calidad de producto, segmentación de clientes, despliegue
 Difficulty: Avanzado
 Programming Concepts: Pipeline, ColumnTransformer, GridSearchCV
@@ -19,7 +19,7 @@ Datasets Used: calidad biotecnológica sintética, datos SaaS de clientes sinté
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 <Section number={1} title="Todo junto: del dato a la decisión" eyebrow="INICIO">
 
@@ -36,7 +36,7 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Un pipeline de ML completo tiene 5 etapas: (1) entender el problema y los datos, (2) preprocesar y limpiar, (3) seleccionar y entrenar modelos, (4) evaluar con las métricas correctas, (5) comunicar resultados. Los algoritmos son solo la etapa 3.
 </ConceptCard>
 
@@ -54,12 +54,12 @@ Un pipeline de ML completo tiene 5 etapas: (1) entender el problema y los datos,
   typing={true}
   lines={[
     "Una empresa produce proteínas terapéuticas y mide variables del biorreactor.",
-    "El objetivo: predecir el puntaje de calidad (0-100) para aprobar o descartar lotes.",
+    "El objetivo: predecir el puntaje de calidad (0 a 100) para aprobar o descartar lotes.",
     "Features numéricas → StandardScaler; comparar LR, RF, GBR; métrica RMSE.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Pipeline biomanufactura**
 - Caso: temperatura, pH, nutrientes, tiempo de fermentación, velocidad de agitación
 - Features numéricas → `StandardScaler`
@@ -69,7 +69,7 @@ Un pipeline de ML completo tiene 5 etapas: (1) entender el problema y los datos,
 </ConceptCard>
 
 <CalloutCheck>
-En manufactura real, cada lote descartado cuesta miles de dólares. Un modelo con RMSE de 3 puntos en una escala de 0-100 puede ahorrar millones al año evitando descartar lotes buenos o aprobar lotes malos. La métrica de negocio no es RMSE — es plata ahorrada.
+En manufactura real, cada lote descartado cuesta miles de dólares. Un modelo con RMSE de 3 puntos en una escala de 0 a 100 puede ahorrar millones al año evitando descartar lotes buenos o aprobar lotes malos. La métrica de negocio no es RMSE   es plata ahorrada.
 </CalloutCheck>
 
 </RevealSequence>
@@ -86,25 +86,25 @@ En manufactura real, cada lote descartado cuesta miles de dólares. Un modelo co
   typing={true}
   lines={[
     "Una empresa SaaS tiene datos de 5000 clientes y busca segmentos accionables.",
-    "PCA reduce métricas a componentes; K-Means descubre segmentos; Random Forest predice churn.",
+    "PCA reduce métricas a componentes; K Means descubre segmentos; Random Forest predice churn.",
     "SHAP explica qué distingue a cada segmento.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Pipeline SaaS**
 - 5000 clientes: frecuencia de uso, features utilizadas, tickets de soporte, MRR, antigüedad
 - PCA para reducir 15 métricas de comportamiento a 3 componentes
-- K-Means sobre las componentes para descubrir segmentos naturales
+- K Means sobre las componentes para descubrir segmentos naturales
 - Random Forest para clasificar riesgo de abandono dentro de cada segmento
 - Interpretación con SHAP para entender qué distingue a cada segmento
 </ConceptCard>
 
 <ChoiceQuestion
   question="El modelo de abandono tiene 85% de accuracy. El CEO quiere saber: '¿cuánta plata nos ahorra esto?' ¿Cómo traducirías accuracy a impacto de negocio?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson10_applications"
-  blockId="reflection-l10-metrics-business"
+  blockId="reflection l10 metrics business"
   allowContinueOnIncorrect
   explanation="Convertí predicciones en acciones y acciones en dinero: si el modelo identifica 100 en riesgo y contactás 50, retenés ~40% (20 clientes) × $500/mes = $10k/mes. La accuracy es irrelevante para el CEO; importa cuántos abandonos prevenís y cuánto vale cada uno."
   options={[
@@ -134,8 +134,8 @@ En manufactura real, cada lote descartado cuesta miles de dólares. Un modelo co
   ]}
 />
 
-{/* candidate-player: comparison-elegir-modelo */}
-<ConceptCard variant="key-idea">
+{/* candidate player: comparison elegir modelo */}
+<ConceptCard variant="key idea">
 **Elegir el modelo correcto**
 - ¿Interpretabilidad crítica?: Regresión lineal, Árbol de decisión, Regresión logística vs Random Forest, Gradient Boosting, XGBoost
 - ¿Datos pequeños (menos de 1000 filas)?: Regresión lineal/logística, Árboles shallow vs cualquiera con regularización
@@ -166,12 +166,12 @@ La pregunta más importante no es "¿qué modelo es mejor?" sino "¿qué modelo 
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Completaste el módulo de Machine Learning. Sabes predecir números (regresión), clasificar categorías (clasificación), agrupar sin etiquetas (clustering), reducir dimensiones (PCA), y construir ensembles (Random Forest, Gradient Boosting). Lo que sigue es practicar con datos reales. El ML se aprende haciendo.
 </ConceptCard>
 
 <CalloutCheck>
-**Próximo paso:** Proyecto final donde apliques estos pipelines a un dataset de tu interés — biotecnología, SaaS, o lo que te apasione. Elige el problema, los datos, el modelo, y cuenta la historia. Eso es lo que hace un Data Scientist de verdad.
+**Próximo paso:** Proyecto final donde apliques estos pipelines a un dataset de tu interés   biotecnología, SaaS, o lo que te apasione. Elige el problema, los datos, el modelo, y cuenta la historia. Eso es lo que hace un Data Scientist de verdad.
 </CalloutCheck>
 
 </RevealSequence>
@@ -193,7 +193,7 @@ Completaste el módulo de Machine Learning. Sabes predecir números (regresión)
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Desafío final:** Construye un pipeline completo: desde datos crudos hasta selección de modelo.
 </ConceptCard>
 

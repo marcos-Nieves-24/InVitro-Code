@@ -1,25 +1,25 @@
----
+
 Module: 4
 Lesson Number: 3
 Lesson Title: Clasificación
 Estimated Duration: 90 minutos
 Prerequisites: L1 (Fundamentos de ML)
 Learning Objectives:
-  - Explicar la clasificación binaria y la función logística
-  - Entrenar y evaluar modelos de regresión logística con scikit-learn
-  - Interpretar una matriz de confusión y derivar precisión, recall, F1
-  - Graficar e interpretar curvas ROC y puntajes AUC
-  - Comparar métricas de clasificación para diferentes contextos de negocio
+  Explicar la clasificación binaria y la función logística
+  Entrenar y evaluar modelos de regresión logística con scikit learn
+  Interpretar una matriz de confusión y derivar precisión, recall, F1
+  Graficar e interpretar curvas ROC y puntajes AUC
+  Comparar métricas de clasificación para diferentes contextos de negocio
 Keywords: clasificación binaria, regresión logística, matriz de confusión, precisión, recall, F1, ROC, AUC, frontera de decisión
 Difficulty: Principiante
 Programming Concepts: sklearn.linear_model.LogisticRegression, sklearn.metrics
-Mathematical Concepts: función sigmoide, log-odds, pérdida de entropía cruzada
+Mathematical Concepts: función sigmoide, log odds, pérdida de entropía cruzada
 Machine Learning Concepts: frontera de decisión, umbral, curva ROC, AUC
 Datasets Used: breast cancer, make_classification
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Clasificación
 
@@ -42,7 +42,7 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La regresión logística toma una combinación lineal de features, la pasa por una función sigmoide, y produce una probabilidad entre 0 y 1. Con un umbral (típicamente 0.5), decides la clase.
 </ConceptCard>
 
@@ -99,9 +99,9 @@ La sigmoide tiene forma de S: comprime $(-\infty, +\infty)$ al rango $(0, 1)$. V
 **Regla de decisión:** si $\hat{p} \geq 0.5$, predices clase 1. Si $\hat{p} < 0.5$, clase 0. La **frontera de decisión** es el hiperplano donde $\hat{p} = 0.5$, es decir, $z = 0$.
 
 <ConceptCard variant="definition">
-**Log Loss (Entropía Cruzada):** La función de pérdida que optimiza la regresión logística. Penaliza fuertemente las predicciones incorrectas con alta confianza — si el modelo dice "99% seguro que es clase 1" y resulta ser clase 0, el castigo es enorme.
+**Log Loss (Entropía Cruzada):** La función de pérdida que optimiza la regresión logística. Penaliza fuertemente las predicciones incorrectas con alta confianza   si el modelo dice "99% seguro que es clase 1" y resulta ser clase 0, el castigo es enorme.
 
-$$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$$
+$$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1 y_i)\log(1-\hat{p}_i)]$$
 </ConceptCard>
 
 <EquationTour caption="Log Loss: cada parte penaliza el error según la clase real y la confianza predicha.">
@@ -110,11 +110,11 @@ $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$
     Si el real es 1, castiga cuando la probabilidad predicha es baja.
   </EquationStep>
   <EquationStep label="Clase negativa">
-    $(1-y_i)\log(1-\hat{p}_i)$
+    $(1 y_i)\log(1-\hat{p}_i)$
     Si el real es 0, castiga cuando la probabilidad predicha es alta.
   </EquationStep>
   <EquationStep label="Suma y signo">
-    $y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)$
+    $y_i\log(\hat{p}_i) + (1 y_i)\log(1-\hat{p}_i)$
     Sólo uno de los términos activa por cada ejemplo.
   </EquationStep>
   <EquationStep label="Promedio">
@@ -131,23 +131,23 @@ $$L = -\frac{1}{n}\sum_{i=1}^{n}[y_i\log(\hat{p}_i) + (1-y_i)\log(1-\hat{p}_i)]$
 
 <RevealSequence mode="appear">
 
-{/* candidate-player: comparison-matriz-confusion */}
+{/* candidate player: comparison matriz confusion */}
 <ConfusionMatrixVisual caption="Recorré las cuatro celdas y después cambiá de lente: precisión, recall y F1 leen la misma matriz desde perspectivas distintas." />
 
 De la matriz salen todas las métricas:
 
 <ConceptCard variant="definition">
-**Exactitud (Accuracy):** $\frac{VP + VN}{\text{Total}}$ — ¿qué porcentaje acerté? No uses accuracy solo si las clases están desbalanceadas.
+**Exactitud (Accuracy):** $\frac{VP + VN}{\text{Total}}$   ¿qué porcentaje acerté? No uses accuracy solo si las clases están desbalanceadas.
 
-**Precisión (Precision):** $\frac{VP}{VP + FP}$ — de todo lo que dije que era positivo, ¿cuánto era realmente positivo?
+**Precisión (Precision):** $\frac{VP}{VP + FP}$   de todo lo que dije que era positivo, ¿cuánto era realmente positivo?
 
-**Recall (Sensibilidad):** $\frac{VP}{VP + FN}$ — de todos los positivos reales, ¿cuántos detecté?
+**Recall (Sensibilidad):** $\frac{VP}{VP + FN}$   de todos los positivos reales, ¿cuántos detecté?
 
-**F1:** $2 \times \frac{P \times R}{P + R}$ — media armónica de precisión y recall. El equilibrio cuando ambas importan.
+**F1:** $2 \times \frac{P \times R}{P + R}$   media armónica de precisión y recall. El equilibrio cuando ambas importan.
 </ConceptCard>
 
-{/* candidate-player: comparison-precision-vs-recall */}
-<ConceptCard variant="key-idea">
+{/* candidate player: comparison precision vs recall */}
+<ConceptCard variant="key idea">
 **Precisión vs Recall: cuándo priorizar**
 - Priorizas precisión cuando el costo del falso positivo es alto (notificación push molesta a quien no iba a abandonar).
 - Priorizas recall cuando el costo del falso negativo es alto (no detectar un tumor maligno).
@@ -170,7 +170,7 @@ La **curva ROC** grafica TPR (Recall) vs FPR (1 − Especificidad) mientras var�
 <RocBuilder caption="Mové el umbral y seguí el punto sobre la curva: cada paso hacia la derecha gana recall (menos FN) y paga con falsos positivos." />
 
 <CalloutCheck>
-La curva ROC es independiente del umbral — te dice qué tan bien separa el modelo las clases sin importar dónde pongas la línea. Es la métrica preferida para comparar modelos de clasificación.
+La curva ROC es independiente del umbral   te dice qué tan bien separa el modelo las clases sin importar dónde pongas la línea. Es la métrica preferida para comparar modelos de clasificación.
 </CalloutCheck>
 
 </RevealSequence>
@@ -203,7 +203,7 @@ plt.contour(xx, yy, Z, levels=[0.5], colors='k', linewidths=2)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap='RdBu', edgecolors='k', alpha=0.7)
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
-plt.title('Frontera de Decisión — Regresión Logística')
+plt.title('Frontera de Decisión   Regresión Logística')
 plt.colorbar(label='Probabilidad')
 plt.show()
 ```
@@ -257,16 +257,16 @@ plt.plot(fpr, tpr, label=f'ROC (AUC = {roc_auc:.3f})')
 plt.plot([0, 1], [0, 1], 'k--', label='Aleatorio')
 plt.xlabel('Tasa de Falsos Positivos')
 plt.ylabel('Tasa de Verdaderos Positivos (Recall)')
-plt.title('Curva ROC — Cáncer de Mama')
+plt.title('Curva ROC   Cáncer de Mama')
 plt.legend()
 plt.show()
 ```
 
 <ChoiceQuestion
   question="En detección de cáncer, ¿preferirías un modelo con alta precisión o alto recall? ¿Por qué?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson03_classification"
-  blockId="reflection-l03-metrics-tradeoff"
+  blockId="reflection l03 metrics tradeoff"
   allowContinueOnIncorrect
   explanation="Alto recall: en diagnóstico médico, un falso negativo (cáncer no detectado) puede ser fatal. Se prefieren falsas alarmas descartables con más estudios. En recomendación de contenido, en cambio, conviene alta precisión."
   options={[
@@ -298,7 +298,7 @@ plt.show()
 
 - **Features:** niveles de 50 proteínas en sangre
 - **Etiqueta:** respondedor (1) o no respondedor (0)
-- **Prioridad:** Alto recall — no quieres dejar a ningún paciente que podría beneficiarse sin tratamiento
+- **Prioridad:** Alto recall   no quieres dejar a ningún paciente que podría beneficiarse sin tratamiento
 
 <CalloutInfo>
 En medicina personalizada, la clasificación permite evitar tratamientos costosos e invasivos en pacientes que no se beneficiarían. Un modelo con AUC > 0.85 se considera clínicamente útil.
@@ -325,10 +325,10 @@ En medicina personalizada, la clasificación permite evitar tratamientos costoso
 
 - **Features:** días desde último login, tickets de soporte, uso de features premium, tipo de plan
 - **Etiqueta:** abandonó (1) o se quedó (0)
-- **Prioridad:** Alta precisión — no quieres molestar con descuentos a usuarios que no iban a abandonar
+- **Prioridad:** Alta precisión   no quieres molestar con descuentos a usuarios que no iban a abandonar
 
-<ConceptCard variant="key-idea">
-El mismo algoritmo, métricas distintas según el contexto. En salud priorizas recall (no dejar escapar ningún caso). En negocio priorizas precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta — la estrategia cambia según el problema.
+<ConceptCard variant="key idea">
+El mismo algoritmo, métricas distintas según el contexto. En salud priorizas recall (no dejar escapar ningún caso). En negocio priorizas precisión (no gastar recursos en falsas alarmas). El ML es la misma herramienta   la estrategia cambia según el problema.
 </ConceptCard>
 
 </RevealSequence>
@@ -344,7 +344,7 @@ El mismo algoritmo, métricas distintas según el contexto. En salud priorizas r
 
 2. **Elegir el umbral 0.5 sin pensar.** El umbral óptimo depende del costo relativo de FP vs FN. En detección de fraude quizás quieres umbral 0.3 para ser más sensible.
 
-3. **Interpretar coeficientes como en regresión lineal.** En regresión logística, un coeficiente $\beta$ significa que por cada unidad de aumento en $x$, los *log-odds* aumentan en $\beta$. No es un efecto directo sobre la probabilidad.
+3. **Interpretar coeficientes como en regresión lineal.** En regresión logística, un coeficiente $\beta$ significa que por cada unidad de aumento en $x$, los *log odds* aumentan en $\beta$. No es un efecto directo sobre la probabilidad.
 
 4. **Confiar en AUC sin ver la curva.** Dos curvas ROC pueden tener el mismo AUC pero comportarse muy distinto en diferentes regiones.
 </CalloutInfo>
@@ -360,13 +360,13 @@ El mismo algoritmo, métricas distintas según el contexto. En salud priorizas r
 <CalloutCheck>
 Siempre mira la matriz de confusión, no solo un número. Accuracy = 0.92 suena bien hasta que ves que todos los falsos negativos son casos de cáncer.
 
-Elige tu métrica principal según el problema de negocio. No existe "la mejor métrica" — existe la métrica correcta para tu contexto.
+Elige tu métrica principal según el problema de negocio. No existe "la mejor métrica"   existe la métrica correcta para tu contexto.
 
 Grafica la curva ROC y reporta AUC. Es independiente del umbral y del balance de clases.
 
 Ajusta el umbral de decisión según el costo de cada tipo de error. No tiene por qué ser 0.5.
 
-Con clases desbalanceadas, usa `class_weight='balanced'` en scikit-learn para que el modelo preste atención a la clase minoritaria.
+Con clases desbalanceadas, usa `class_weight='balanced'` en scikit learn para que el modelo preste atención a la clase minoritaria.
 </CalloutCheck>
 
 </RevealSequence>
@@ -377,52 +377,52 @@ Con clases desbalanceadas, usa `class_weight='balanced'` en scikit-learn para qu
 
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 La regresión logística convierte una combinación lineal en una probabilidad mediante la sigmoide. La matriz de confusión es la base de precisión, recall y F1. La curva ROC con AUC es la métrica estándar para comparar clasificadores. Elige tu métrica según el costo de equivocarte en cada dirección.
 </ConceptCard>
 
-{/* candidate-player: interactive-table-glosario-clasificacion */}
-<ConceptCard variant="key-idea">
+{/* candidate player: interactive table glosario clasificacion */}
+<ConceptCard variant="key idea">
 **Glosario**
 - Sigmoide: función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ).
 - VP (TP): positivo real clasificado como positivo.
-- FP: negativo real clasificado como positivo — falsa alarma.
-- FN: positivo real clasificado como negativo — omisión.
-- Precisión: VP/(VP+FP) — pureza de las predicciones positivas.
-- Recall: VP/(VP+FN) — cobertura de los positivos reales.
+- FP: negativo real clasificado como positivo   falsa alarma.
+- FN: positivo real clasificado como negativo   omisión.
+- Precisión: VP/(VP+FP)   pureza de las predicciones positivas.
+- Recall: VP/(VP+FN)   cobertura de los positivos reales.
 - F1: media armónica de precisión y recall: 2PR/(P+R).
 - AUC: área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
-    { id: "regresion-logistica", label: "Regresión logística", detail: "Convierte una combinación lineal en probabilidad con la sigmoide." },
+    { id: "regresion logistica", label: "Regresión logística", detail: "Convierte una combinación lineal en probabilidad con la sigmoide." },
     { id: "sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real al intervalo (0,1)." },
-    { id: "matriz-confusion", label: "Matriz de confusión", detail: "Tabla de VP, VN, FP y FN." },
-    { id: "precision-recall", label: "Precisión y recall", detail: "Pureza de positivos predichos vs cobertura de positivos reales." },
-    { id: "f1", label: "F1-score", detail: "Media armónica de precisión y recall." },
-    { id: "auc-roc", label: "AUC-ROC", detail: "Área bajo la curva ROC para comparar clasificadores." },
+    { id: "matriz confusion", label: "Matriz de confusión", detail: "Tabla de VP, VN, FP y FN." },
+    { id: "precision recall", label: "Precisión y recall", detail: "Pureza de positivos predichos vs cobertura de positivos reales." },
+    { id: "f1", label: "F1 score", detail: "Media armónica de precisión y recall." },
+    { id: "auc roc", label: "AUC ROC", detail: "Área bajo la curva ROC para comparar clasificadores." },
   ]}
 />
 
 <FeatureButtonList
   features={[
-    { id: "gloss-sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)." },
-    { id: "gloss-vp", label: "VP (TP)", detail: "Positivo real clasificado como positivo." },
-    { id: "gloss-fp", label: "FP", detail: "Negativo real clasificado como positivo — falsa alarma." },
-    { id: "gloss-fn", label: "FN", detail: "Positivo real clasificado como negativo — omisión." },
-    { id: "gloss-precision", label: "Precisión", detail: "VP/(VP+FP) — pureza de las predicciones positivas." },
-    { id: "gloss-recall", label: "Recall", detail: "VP/(VP+FN) — cobertura de los positivos reales." },
-    { id: "gloss-f1", label: "F1", detail: "Media armónica de precisión y recall: 2PR/(P+R)." },
-    { id: "gloss-auc", label: "AUC", detail: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio." },
+    { id: "gloss sigmoide", label: "Sigmoide", detail: "Función que comprime cualquier real a (0,1): σ(z) = 1/(1+e⁻ᶻ)." },
+    { id: "gloss vp", label: "VP (TP)", detail: "Positivo real clasificado como positivo." },
+    { id: "gloss fp", label: "FP", detail: "Negativo real clasificado como positivo   falsa alarma." },
+    { id: "gloss fn", label: "FN", detail: "Positivo real clasificado como negativo   omisión." },
+    { id: "gloss precision", label: "Precisión", detail: "VP/(VP+FP)   pureza de las predicciones positivas." },
+    { id: "gloss recall", label: "Recall", detail: "VP/(VP+FN)   cobertura de los positivos reales." },
+    { id: "gloss f1", label: "F1", detail: "Media armónica de precisión y recall: 2PR/(P+R)." },
+    { id: "gloss auc", label: "AUC", detail: "Área bajo la curva ROC. 1 = perfecto, 0.5 = aleatorio." },
   ]}
 />
 
 <ChoiceQuestion
   question="En un problema donde un falso negativo es muy costoso, como no detectar una enfermedad, ¿qué métrica conviene priorizar?"
-  moduleSlug="machine-learning"
+  moduleSlug="machine learning"
   lessonSlug="lesson03_classification"
-  blockId="choice-ml-l03-resumen-1"
+  blockId="choice ml l03 resumen 1"
   allowContinueOnIncorrect
   explanation="Un falso negativo (omisión) es muy costoso cuando se trata de enfermedad. El recall mide la cobertura de los positivos reales, por lo que priorizarlo reduce las omisiones. La precisión, en cambio, cuida las falsas alarmas."
   options={[
@@ -446,10 +446,10 @@ Ya lees una matriz de confusión como un mapa de costos. El siguiente paso son l
 <RevealSequence mode="appear">
 
 <ChoiceQuestion
-  question="Nivel 1 — Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
-  moduleSlug="machine-learning"
+  question="Nivel 1   Tienes 1000 emails: 950 son normales, 50 son spam. Un modelo que siempre dice 'no es spam' tiene 95% de accuracy. ¿Es buen modelo?"
+  moduleSlug="machine learning"
   lessonSlug="lesson03_classification"
-  blockId="reflection-l03-accuracy-trap"
+  blockId="reflection l03 accuracy trap"
   allowContinueOnIncorrect
   explanation="No: 95% de accuracy pero 0% de recall para spam, no detecta ningún spam. En datasets desbalanceados la accuracy engaña; conviene mirar precisión y recall por clase, o promedio macro F1."
   options={[
@@ -460,7 +460,7 @@ Ya lees una matriz de confusión como un mapa de costos. El siguiente paso son l
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 **Desafío:** Implementa regresión logística con descenso por gradiente desde cero.
 </ConceptCard>
 
@@ -477,7 +477,7 @@ def logistic_regression_from_scratch(X, y, lr=0.01, epochs=1000):
     for _ in range(epochs):
         z = X_b @ theta
         h = sigmoid(z)
-        gradient = X_b.T @ (h - y) / len(y)
+        gradient = X_b.T @ (h y) / len(y)
         theta -= lr * gradient
     
     return theta[0], theta[1:]  # intercept, coefs

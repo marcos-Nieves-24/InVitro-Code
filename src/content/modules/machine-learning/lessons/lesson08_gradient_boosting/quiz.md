@@ -32,11 +32,11 @@ d) Ningún cambio en la configuración de los árboles
 **Q4.** ¿Cuál de las siguientes afirmaciones es VERDADERA sobre los árboles en gradient boosting?
 
 a) Los árboles deberían ser profundos (profundidad 10+) para capturar patrones complejos
-b) Los árboles suelen ser poco profundos (profundidad 2-5), actuando como weak learners
+b) Los árboles suelen ser poco profundos (profundidad 2 a 5), actuando como weak learners
 c) En boosting solo se usa un árbol
 d) Los árboles siempre son más profundos que en el bosque aleatorio
 
-<details><summary>Respuesta</summary>b) Los árboles suelen ser poco profundos (profundidad 2-5). El boosting funciona combinando muchos weak learners, no usando árboles individuales fuertes.</details>
+<details><summary>Respuesta</summary>b) Los árboles suelen ser poco profundos (profundidad 2 a 5). El boosting funciona combinando muchos weak learners, no usando árboles individuales fuertes.</details>
 
 **Q5.** XGBoost mejora el gradient boosting básico agregando:
 
@@ -55,7 +55,7 @@ d) El reemplazo de los árboles por redes neuronales
 
 **Q7.** Compara los roles de la tasa de aprendizaje y n_estimators en gradient boosting. ¿Cuál es la relación entre ellos?
 
-<details><summary>Respuesta</summary>La tasa de aprendizaje (η) reduce la contribución de cada árbol al conjunto. Un η más bajo significa que cada árbol tiene menos impacto, requiriendo más árboles (n_estimators más alto) para lograr un buen rendimiento. La relación es aproximadamente: n_estimators óptimo × 1 / tasa de aprendizaje. Una estrategia común: establece learning_rate = 0.01-0.1 y usa early stopping para determinar n_estimators. Las tasas de aprendizaje más bajas con más árboles generalmente generalizan mejor que las tasas más altas con menos árboles.</details>
+<details><summary>Respuesta</summary>La tasa de aprendizaje (η) reduce la contribución de cada árbol al conjunto. Un η más bajo significa que cada árbol tiene menos impacto, requiriendo más árboles (n_estimators más alto) para lograr un buen rendimiento. La relación es aproximadamente: n_estimators óptimo × 1 / tasa de aprendizaje. Una estrategia común: establece learning_rate = 0.01 a 0.1 y usa early stopping para determinar n_estimators. Las tasas de aprendizaje más bajas con más árboles generalmente generalizan mejor que las tasas más altas con menos árboles.</details>
 
 ## Pregunta de código (1 pregunta)
 

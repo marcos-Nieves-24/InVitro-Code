@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
-# LAB 2: Como aprende la IA - entrenamiento, validacion y generalizacion
-# -------------------------------------------------------------------------
+# LAB 2: Como aprende la IA entrenamiento, validacion y generalizacion
+# -
 # Aplicamos la division train/test y medimos si un modelo generaliza o
 # memoriza comparando el accuracy de entrenamiento con el de prueba.
 # =========================================================================
@@ -71,8 +71,8 @@ fig = px.bar(df_res, x="dataset", y=["train_acc", "test_acc"],
 fig.show()
 
 # PASO 5: Resumen del laboratorio.
-print("\n--- RESUMEN ---")
+print("\n RESUMEN ")
 print("El modelo se entrena solo con datos de train.")
-print("La brecha train-test pequena indica buena generalizacion.")
+print("La brecha train test pequena indica buena generalizacion.")
 print("Una brecha grande indica sobreajuste (memorizar, no aprender).")
 ```

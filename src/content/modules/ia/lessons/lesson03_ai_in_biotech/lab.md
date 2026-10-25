@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
-# LAB 3: La IA en biotecnologia - analisis local de proteinas
-# -------------------------------------------------------------------------
+# LAB 3: La IA en biotecnologia analisis local de proteinas
+# -
 # Simulamos el analisis de una proteina SIN conexion a internet: secuencia,
 # composicion de aminoacidos, hidrofobicidad y un modelo de ML que predice
 # si un residuo esta enterrado (buried) o expuesto (exposed).
@@ -33,20 +33,20 @@ fig = px.bar(df_comp, x="aminoacido", y="cantidad",
              title="Composicion de aminoacidos de la secuencia",
              labels={"aminoacido": "Aminoacido", "cantidad": "Cantidad"})
 fig.show()
-# PASO 3: Hidrofobicidad de ejemplo (escala de Kyte-Doolittle).
+# PASO 3: Hidrofobicidad de ejemplo (escala de Kyte Doolittle).
 # La hidrofobicidad ayuda a predecir si un residuo tiende a estar en el
 # interior (enterrado) o en la superficie (expuesto) de la proteina.
 hydro = {"A": 1.8, "I": 4.5, "L": 3.8, "V": 4.2, "F": 2.8, "W": -0.9,
          "M": 1.9, "Y": -1.3, "S": -0.8, "T": -0.7, "D": -3.5, "E": -3.5,
          "N": -3.5, "Q": -3.5, "H": -3.2, "K": -3.9, "R": -4.5, "C": 2.5,
          "G": -0.4, "P": -1.6}
-print("\nHidrofobicidad (Kyte-Doolittle) de 5 residuos:")
+print("\nHidrofobicidad (Kyte Doolittle) de 5 residuos:")
 for aa in ["I", "L", "V", "E", "K"]:
     print(f"  {aa}: {hydro[aa]:+.2f} (positivo = hidrofobico)")
 df_hydro = pd.DataFrame({"aminoacido": list(hydro.keys()),
                          "hidrofobicidad": list(hydro.values())})
 fig = px.bar(df_hydro, x="aminoacido", y="hidrofobicidad",
-             title="Escala de hidrofobicidad de Kyte-Doolittle",
+             title="Escala de hidrofobicidad de Kyte Doolittle",
              labels={"aminoacido": "Aminoacido",
                      "hidrofobicidad": "Hidrofobicidad"})
 fig.show()
@@ -80,7 +80,7 @@ fig = px.bar(df_acc, x="conjunto", y="accuracy",
              labels={"conjunto": "Conjunto", "accuracy": "Accuracy"})
 fig.show()
 # PASO 5: Resumen del laboratorio.
-print("\n--- RESUMEN ---")
+print("\n RESUMEN ")
 print("Sin conexion a internet analizamos secuencia y composicion.")
 print("La hidrofobicidad es una feature clave de la estructura.")
 print("El ML predice el entorno del residuo a partir de sus features.")

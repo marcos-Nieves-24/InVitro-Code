@@ -14,11 +14,11 @@ Crea un script de Python `clinical_triage.py` que implemente un sistema de triaj
 1. **Evaluación de signos vitales**: Dada la frecuencia cardíaca (bpm), la presión arterial sistólica, la presión arterial diastólica, la temperatura (°C) y la saturación de oxígeno (%), clasifica cada uno como normal o anormal.
 
 2. **Nivel de triaje**: Asigna un nivel de triaje según la cantidad y la gravedad de los signos vitales anormales:
-   - Nivel 1 (Reanimación): Cualquier anormalidad que ponga en riesgo la vida (por ejemplo, O2 < 85%, FC > 140 o < 40)
-   - Nivel 2 (Emergencia): 2+ signos vitales anormales o cualquier anormalidad grave aislada
-   - Nivel 3 (Urgente): 1 signo vital anormal
-   - Nivel 4 (No urgente): Todos los signos vitales normales
-   - Nivel 5 (Rutina): Solo seguimiento
+   Nivel 1 (Reanimación): Cualquier anormalidad que ponga en riesgo la vida (por ejemplo, O2 < 85%, FC > 140 o < 40)
+   Nivel 2 (Emergencia): 2+ signos vitales anormales o cualquier anormalidad grave aislada
+   Nivel 3 (Urgente): 1 signo vital anormal
+   Nivel 4 (No urgente): Todos los signos vitales normales
+   Nivel 5 (Rutina): Solo seguimiento
 
 3. **Recomendación**: Según el nivel de triaje, emite una recomendación.
 
@@ -32,7 +32,7 @@ def assess_vitals(hr, sbp, dbp, temp, spo2):
 
 
 def determine_triage(vitals):
-    """Returns triage level 1-5."""
+    """Returns triage level 1 a 5."""
 
 
 def get_recommendation(triage_level):

@@ -1,15 +1,15 @@
----
+
 Module: 2
 Lesson Number: 6
 Lesson Title: Funciones
 Estimated Duration: 60 minutos
-Prerequisites: L5 — Operadores
+Prerequisites: L5   Operadores
 Learning Objectives:
-  - Definir funciones usando la palabra clave def
-  - Pasar argumentos y devolver valores desde funciones
-  - Distinguir entre ámbito local y global
-  - Crear funciones lambda (anónimas)
-  - Escribir docstrings siguiendo PEP 257
+  Definir funciones usando la palabra clave def
+  Pasar argumentos y devolver valores desde funciones
+  Distinguir entre ámbito local y global
+  Crear funciones lambda (anónimas)
+  Escribir docstrings siguiendo PEP 257
 Keywords: función, parámetro, argumento, retorno, ámbito, lambda, docstring
 Difficulty: Beginner
 Programming Concepts: Definición de funciones, paso de parámetros, ámbito, expresiones lambda, documentación
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Funciones
 
@@ -59,7 +59,7 @@ Quiz: quiz.md
   typing={true}
   lines={[
     "Una clínica registra dosis por paciente: si copias el cálculo en cada hoja, un cambio de protocolo obliga a editar decenas de lugares.",
-    "Una función encapsula ese cálculo una sola vez y permite actualizarlo en un solo lugar — principio DRY aplicado al laboratorio.",
+    "Una función encapsula ese cálculo una sola vez y permite actualizarlo en un solo lugar   principio DRY aplicado al laboratorio.",
     "Predice: si `compute_dose(weight, factor=2.0)` devuelve 140.0, ¿qué devuelve con factor=0.5? Y si la llamas sin `weight`, ¿qué falla?",
     "El `return` es la respuesta que vuelve al llamador; sin él, la función entrega `None` aunque haga todo el trabajo.",
   ]}
@@ -143,14 +143,14 @@ def calculate_bmi(weight, height):
     Calculate Body Mass Index.
 
     Parameters
-    ----------
+    -
     weight : float
         Weight in kilograms.
     height : float
         Height in meters.
 
     Returns
-    -------
+    -
     float
         BMI value.
     """
@@ -321,7 +321,7 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
   question="Tienes `def compute_dose(weight, factor=2.0): return weight * factor`. Predice `compute_dose(70)` y explica qué ocurre con `compute_dose()` sin argumentos."
   moduleSlug="python"
   lessonSlug="lesson06_functions"
-  blockId="choice-python-l06-dens-1"
+  blockId="choice python l06 dens 1"
   allowContinueOnIncorrect
   explanation="Los argumentos por defecto aplican sólo si el parámetro se omite; `weight` es obligatorio, por eso faltarle lanza TypeError."
   options={[
@@ -341,7 +341,7 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 1. **Olvidar los paréntesis al llamar**: `result = my_func` (referencia a la función) vs `result = my_func()` (la llama)
 2. **Modificar variables globales dentro de funciones**: Usa la palabra clave `global` si es necesario, pero prefiere pasar parámetros
-3. **Argumentos mutables por defecto**: `def f(x=[])` — la lista se comparte entre llamadas. Usa `def f(x=None)` en su lugar.
+3. **Argumentos mutables por defecto**: `def f(x=[])`   la lista se comparte entre llamadas. Usa `def f(x=None)` en su lugar.
 4. **No devolver un valor**: Las funciones sin `return` devuelven `None`
 5. **Sombrear funciones incorporadas**: No nombres variables `list`, `str`, `print`
 
@@ -349,7 +349,7 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 - Las funciones deberían hacer una sola cosa bien (Principio de Responsabilidad Única)
 - Usa nombres descriptivos que indiquen lo que hace la función
 - Escribe docstrings para todas las funciones públicas
-- Mantén las funciones cortas (típicamente < 20-30 líneas)
+- Mantén las funciones cortas (típicamente < 20 a 30 líneas)
 - Usa type hints para mejor legibilidad (Python 3.5+)
 - Prefiere devolver valores en lugar de imprimir dentro de las funciones
 </RevealSequence>
@@ -360,7 +360,7 @@ print(f"Contains EcoRI site (GAATTC): {has_site}")`}
 
 <RevealSequence>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Una función empaqueta lógica reutilizable: define parámetros, computa y devuelve un valor; el ámbito local mantiene el estado separado del resto del programa.
 </ConceptCard>
 
@@ -381,9 +381,9 @@ Una función empaqueta lógica reutilizable: define parámetros, computa y devue
     { id: "parametro", label: "Parámetro", detail: "Variable en la definición de la función." },
     { id: "argumento", label: "Argumento", detail: "Valor pasado al llamar una función." },
     { id: "retorno", label: "Valor de retorno", detail: "Salida enviada de vuelta a quien llamó." },
-    { id: "ambito-term", label: "Ámbito", detail: "Región donde una variable es accesible." },
-    { id: "lambda-term", label: "Lambda", detail: "Función anónima en línea." },
-    { id: "docstring-term", label: "Docstring", detail: "String de documentación para funciones." },
+    { id: "ambito term", label: "Ámbito", detail: "Región donde una variable es accesible." },
+    { id: "lambda term", label: "Lambda", detail: "Función anónima en línea." },
+    { id: "docstring term", label: "Docstring", detail: "String de documentación para funciones." },
     { id: "dry", label: "DRY", detail: "Principio Don't Repeat Yourself." },
   ]}
 />
@@ -392,7 +392,7 @@ Una función empaqueta lógica reutilizable: define parámetros, computa y devue
   question="¿Qué devuelve una función que no tiene sentencia `return`?"
   moduleSlug="python"
   lessonSlug="lesson06_functions"
-  blockId="choice-python-l06-resumen-1"
+  blockId="choice python l06 resumen 1"
   allowContinueOnIncorrect
   explanation="Sin `return` explícito, Python devuelve `None` al finalizar la función."
   options={[
@@ -450,7 +450,7 @@ print(f"GC: {gc_content('AAAAATTT'):.1f}%")`}
   question="¿Qué palabra clave define una función en Python?"
   moduleSlug="python"
   lessonSlug="lesson06_functions"
-  blockId="choice-python-l06-conceptos-1"
+  blockId="choice python l06 conceptos 1"
   allowContinueOnIncorrect
   explanation="Se usa def seguido del nombre y parámetros."
   options={[

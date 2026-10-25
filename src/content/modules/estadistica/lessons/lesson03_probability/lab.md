@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 3: Fundamentos de probabilidad
-# -------------------------------------------------------------------------
+# -
 # Simulamos monedas, dados, el problema de Monty Hall y la ley de los
 # grandes numeros; verificamos Bayes y la binomial con numpy.
 # Cada figura termina con fig.show() para capturarla en la consola.
@@ -30,7 +30,7 @@ fig.show()                                 # Mostrar grafico interactivo
 # PASO 3: Variable aleatoria X = suma de dos dados.
 # PMF teorica: hay 36 combinaciones equiprobables (2..12).
 sumas = np.arange(2, 13)
-pmf_teorica = np.array([min(i - 1, 13 - i) for i in sumas]) / 36
+pmf_teorica = np.array([min(i 1, 13 i) for i in sumas]) / 36
 print("\nPMF teorica de la suma de dos dados:")
 for s, p in zip(sumas, pmf_teorica):
     print(f"  P(X={s}) = {p:.4f}")
@@ -76,7 +76,7 @@ n = 100000
 enfermos = np.random.rand(n) < prevalencia
 positivo = np.where(enfermos,
                     np.random.rand(n) < sensibilidad,
-                    np.random.rand(n) < (1 - especificidad))
+                    np.random.rand(n) < (1 especificidad))
 print(f"\nP(positivo) = {np.mean(positivo):.4f}")
 print(f"P(enfermedad | positivo) = {np.mean(enfermos[positivo]):.4f}")
 
@@ -88,7 +88,7 @@ fig = px.histogram(exitos, nbins=31, title="Distribucion binomial(n=30, p=0.7)")
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("La simulacion verifica las probabilidades teoricas (LLN, dados, Bayes).")
 print("En Monty Hall conviene cambiar de puerta: gana en 2/3 de las veces.")
 ```

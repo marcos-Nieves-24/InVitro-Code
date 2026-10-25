@@ -14,10 +14,10 @@ Crea un script de Python `gene_set_analysis.py` que:
 1. **Conjuntos de genes**: Crea al menos 5 conjuntos que representen genes expresados en distintos tejidos o experimentos.
 
 2. **Funciones**:
-   - `jaccard(set1, set2)` — calcula la similitud de Jaccard
-   - `common_genes(*sets)` — encuentra los genes comunes a todos los conjuntos de entrada
-   - `unique_genes(*sets)` — encuentra los genes exclusivos de cada conjunto (devuelve una lista de conjuntos)
-   - `gene_recommendations(known_genes, all_sets, threshold=0.5)` — dado un conjunto de genes conocidos, encuentra qué otros conjuntos comparten al menos `threshold` de similitud de Jaccard
+   `jaccard(set1, set2)`   calcula la similitud de Jaccard
+   `common_genes(*sets)`   encuentra los genes comunes a todos los conjuntos de entrada
+   `unique_genes(*sets)`   encuentra los genes exclusivos de cada conjunto (devuelve una lista de conjuntos)
+   `gene_recommendations(known_genes, all_sets, threshold=0.5)`   dado un conjunto de genes conocidos, encuentra qué otros conjuntos comparten al menos `threshold` de similitud de Jaccard
 
 3. **Análisis**: Imprime una matriz de similitud que muestre la similitud de Jaccard entre todos los pares.
 
@@ -26,8 +26,8 @@ Crea un script de Python `gene_set_analysis.py` que:
 ```python
 brain = {"BRCA1", "TP53", "EGFR", "MYC", "ALK", "GATA2", "FOXA1"}
 liver = {"TP53", "KRAS", "MYC", "FOXA1", "HNF4A", "ALB", "CYP3A4"}
-heart = {"BRCA1", "MYC", "GATA2", "NKX2-5", "TBX5", "MYH6", "MYH7"}
+heart = {"BRCA1", "MYC", "GATA2", "NKX2 a 5", "TBX5", "MYH6", "MYH7"}
 kidney = {"TP53", "EGFR", "KRAS", "GATA2", "FOXA1", "HNF4A", "UMOD"}
-lung = {"BRCA1", "TP53", "EGFR", "KRAS", "ALK", "MYC", "NKX2-1"}
+lung = {"BRCA1", "TP53", "EGFR", "KRAS", "ALK", "MYC", "NKX2 a 1"}
 ```
 

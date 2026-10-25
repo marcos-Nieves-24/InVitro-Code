@@ -1,15 +1,15 @@
----
+
 Module: 2
 Lesson Number: 10
 Lesson Title: Tuplas
 Estimated Duration: 30 minutos
-Prerequisites: L9 — Listas
+Prerequisites: L9   Listas
 Learning Objectives:
-  - Crear tuplas y explicar su inmutabilidad
-  - Usar desempaquetado de tuplas para asignación múltiple
-  - Comparar tuplas con listas y elegir apropiadamente
-  - Usar tuplas como claves de diccionarios
-  - Devolver múltiples valores desde funciones usando tuplas
+  Crear tuplas y explicar su inmutabilidad
+  Usar desempaquetado de tuplas para asignación múltiple
+  Comparar tuplas con listas y elegir apropiadamente
+  Usar tuplas como claves de diccionarios
+  Devolver múltiples valores desde funciones usando tuplas
 Keywords: tupla, inmutable, desempaquetado, hashable, secuencia
 Difficulty: Beginner
 Programming Concepts: Secuencias inmutables, empaquetado/desempaquetado, tipos hashables
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Tuplas
 
@@ -36,7 +36,7 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Una tupla es una secuencia ordenada e inmutable: ideal para registros fijos, coordenadas y valores de retorno múltiples.
 </ConceptCard>
 
@@ -44,13 +44,13 @@ Una tupla es una secuencia ordenada e inmutable: ideal para registros fijos, coo
   question="¿Qué elegirías para guardar la posición de un gen sin que nadie la altere?"
   moduleSlug="python"
   lessonSlug="lesson10_tuples"
-  blockId="choice-python-l10-s1-1"
+  blockId="choice python l10 s1 a 1"
   allowContinueOnIncorrect
   explanation="La tupla es inmutable; una lista podría modificarse por accidente."
   options={[
     { id: "a", label: "tuple", correct: true, feedback: "¡Correcto! La tupla protege el dato de cambios." },
     { id: "b", label: "list", correct: false, feedback: "Las listas se pueden modificar, arriesgando el registro." },
-    { id: "c", label: "dict", correct: false, feedback: "Es útil para pares clave-valor, no para un registro ordenado fijo." },
+    { id: "c", label: "dict", correct: false, feedback: "Es útil para pares clave valor, no para un registro ordenado fijo." },
     { id: "d", label: "set", correct: false, feedback: "Los sets no mantienen orden ni protegen por posición." },
   ]}
 />
@@ -137,7 +137,7 @@ t.index(2)    # 1 (primera ocurrencia)
 
 ### Comparación Tupla vs Lista
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Tupla o lista, elegí por inmutabilidad: datos fijos y claves → tupla `()`; datos que cambian → lista `[]`. Las tuplas son hashables (sirven de clave); las listas no.
 </ConceptCard>
 
@@ -175,7 +175,7 @@ print(f"Expresión: {gene_data[1]}")
 
 ```python
 # Desempaquetado de tuplas
-patient = ("P-0042", "John Doe", 45, "Hypertension")
+patient = ("P 0042", "John Doe", 45, "Hypertension")
 pid, name, age, diagnosis = patient
 print(f"{pid}: {name}, {age} años, {diagnosis}")
 
@@ -268,7 +268,7 @@ for ts, uid, event_type, meta in events:
   question="Un registro de variante es `(cromosoma, posicion, base_ref, base_alt, calidad)`. ¿Qué estructura debes usar si otra parte del pipeline necesita usarlo como clave de diccionario y garantizar que no se modifique?"
   moduleSlug="python"
   lessonSlug="lesson10_tuples"
-  blockId="choice-python-l10-dens-1"
+  blockId="choice python l10 dens 1"
   allowContinueOnIncorrect
   explanation="Las tuplas son inmutables y hashables (si sus elementos lo son), por eso sirven como clave; las listas no."
   options={[
@@ -307,14 +307,14 @@ for ts, uid, event_type, meta in events:
 
 <RevealSequence>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Las tuplas son secuencias ordenadas e **inmutables**: el contenedor ideal para registros fijos y valores de retorno múltiples. Una tupla de un solo elemento lleva coma: `(42,)`.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
     { id: "tupla", label: "Tupla", detail: "Secuencia ordenada inmutable creada con (). Protege los datos de modificaciones accidentales." },
-    { id: "inmutable", label: "Inmutable", detail: "No se puede cambiar después de creada — a diferencia de las listas." },
+    { id: "inmutable", label: "Inmutable", detail: "No se puede cambiar después de creada   a diferencia de las listas." },
     { id: "desempaquetado", label: "Desempaquetado", detail: "Asigna elementos de una tupla a múltiples variables de una vez." },
     { id: "hashable", label: "Hashable", detail: "Se puede usar como clave de diccionario (tupla sí, lista no)." },
     { id: "empaquetado", label: "Empaquetado", detail: "Crea una tupla a partir de múltiples valores." },
@@ -325,7 +325,7 @@ Las tuplas son secuencias ordenadas e **inmutables**: el contenedor ideal para r
   question="¿Qué devuelve esta función: return (gen, posicion)?"
   moduleSlug="python"
   lessonSlug="lesson10_tuples"
-  blockId="choice-python-l10-resumen-1"
+  blockId="choice python l10 resumen 1"
   allowContinueOnIncorrect
   explanation="Devuelve una tupla con dos valores: el patrón clásico de retorno múltiple."
   options={[
@@ -336,7 +336,7 @@ Las tuplas son secuencias ordenadas e **inmutables**: el contenedor ideal para r
 />
 
 <MascotMessage mood="celebrating">
-¡Tuplas dominadas! Ya distinguís mutable de inmutable — la base de diccionarios, la próxima lección.
+¡Tuplas dominadas! Ya distinguís mutable de inmutable   la base de diccionarios, la próxima lección.
 </MascotMessage>
 
 </RevealSequence>

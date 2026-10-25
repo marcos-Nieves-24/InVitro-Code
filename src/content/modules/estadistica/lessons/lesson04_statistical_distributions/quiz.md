@@ -23,7 +23,7 @@ b) 2.0
 c) 2.5
 d) 0.5
 
-**4. Según la regla 68-95-99.7, ¿aproximadamente qué porcentaje de los datos cae dentro de 2 desviaciones estándar de la media?**
+**4. Según la regla 68 a 95 a 99.7, ¿aproximadamente qué porcentaje de los datos cae dentro de 2 desviaciones estándar de la media?**
 
 a) 68%
 b) 95%
@@ -51,7 +51,7 @@ d) La varianza es igual a la media para todas las distribuciones
 - Calcular P(X ≤ 5)
 - Generar 100 muestras aleatorias
 
----
+
 
 # Clave de respuestas
 
@@ -63,7 +63,7 @@ d) La varianza es igual a la media para todas las distribuciones
 
 6. Distribución de Poisson (λ = 20). P(X=15) = e^(-20) × 20^15 / 15!. Usando Python: `stats.poisson(20).pmf(15)` ≈ 0.052.
 
-7. La estandarización transforma los datos para que tengan media = 0 y desviación estándar = 1 usando Z = (X - μ)/σ. Es importante porque muchos algoritmos de ML (SVM, K-Means, PCA, regresión logística) asumen que los features están en la misma escala; de lo contrario, los features con mayores magnitudes dominan.
+7. La estandarización transforma los datos para que tengan media = 0 y desviación estándar = 1 usando Z = (X μ)/σ. Es importante porque muchos algoritmos de ML (SVM, K Means, PCA, regresión logística) asumen que los features están en la misma escala; de lo contrario, los features con mayores magnitudes dominan.
 
 8. 
 ```python

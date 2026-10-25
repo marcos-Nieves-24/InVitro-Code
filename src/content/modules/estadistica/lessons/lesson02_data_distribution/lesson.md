@@ -1,15 +1,15 @@
----
+
 Module: 3
 Lesson Number: 2
 Lesson Title: Distribución de Datos
 Estimated Duration: 60 minutos
 Prerequisites: Lección 1 (Estadística Descriptiva)
 Learning Objectives:
-  - Construir histogramas y gráficos de densidad usando matplotlib y seaborn
-  - Interpretar valores de asimetría y curtosis
-  - Distinguir entre distribuciones simétricas, con asimetría izquierda y con asimetría derecha
-  - Elegir el ancho de bin adecuado para histogramas
-  - Explicar cómo la forma de la distribución afecta la elección de estadísticos de resumen
+  Construir histogramas y gráficos de densidad usando matplotlib y seaborn
+  Interpretar valores de asimetría y curtosis
+  Distinguir entre distribuciones simétricas, con asimetría izquierda y con asimetría derecha
+  Elegir el ancho de bin adecuado para histogramas
+  Explicar cómo la forma de la distribución afecta la elección de estadísticos de resumen
 Keywords: histograma, gráfico de densidad, asimetría, curtosis, KDE, forma de distribución
 Difficulty: Principiante
 Programming Concepts: matplotlib, seaborn, numpy, pandas
@@ -19,7 +19,7 @@ Datasets Used: Datos sintéticos, dataset de pingüinos
 Notebook: 02_data_distribution.ipynb
 Assignment: data_distribution_assignment.md
 Quiz: data_distribution_quiz.md
----
+
 
 <Section number={1} title="Más allá de los números" eyebrow="INICIO">
 <RevealSequence mode="appear">
@@ -30,7 +30,7 @@ En la Lección 1 aprendiste a resumir datos con números. Pero dos datasets con 
 
 Dos conjuntos de datos muy diferentes pueden tener medias y desviaciones estándar idénticas. Visualizar la distribución revela patrones qué los estadísticos de resumen no muestran: multimodalidad, huecos, agrupaciones y valores extremos.
 
-En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log-normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo qué afecta cómo calculamos promedios y detectamos anomalías.
+En biotecnología, las formas de las distribuciones revelan si la expresión génica sigue un patrón normal o log normal. En SaaS, los datos de actividad de usuarios suelen seguir una distribución de ley de potencias, lo qué afecta cómo calculamos promedios y detectamos anomalías.
 
 </RevealSequence>
 </Section>
@@ -40,7 +40,7 @@ En biotecnología, las formas de las distribuciones revelan si la expresión gé
 
 La Lección 1 enseñó resúmenes numéricos; esta lección enseña resúmenes visuales. Aprenderás a **ver** la forma de tus datos.
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Entender la distribución de los datos es crítico antes de aplicar cualquier modelo de machine learning, ya qué muchos algoritmos asumen qué las features siguen una distribución normal.
 </ConceptCard>
 
@@ -60,7 +60,7 @@ La cantidad de bins afecta drásticamente la interpretación:
 
 - Regla de Sturges: $k = \lceil \log_2 n + 1 \rceil$
 - Regla de la raíz cuadrada: $k = \lceil \sqrt{n} \rceil$
-- Regla de Freedman-Diaconis: $h = 2 \times \text{IQR} \times n^{-1/3}$
+- Regla de Freedman Diaconis: $h = 2 \times \text{IQR} \times n^{-1/3}$
 
 <ConceptCard variant="warning">
 Muy pocos bins ocultan detalles importantes. Demasiados bins crean ruido qué parece estructura pero no lo es. Probar varios anchos es parte del análisis exploratorio.
@@ -76,7 +76,7 @@ Muy pocos bins ocultan detalles importantes. Demasiados bins crean ruido qué pa
 Una estimación de densidad por kernel (KDE) traza una versión suavizada del histograma colocando un "bache" (kernel) en cada punto de datos y sumándolos.
 </ConceptCard>
 
-$$\hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right)$$
+$$\hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x x_i}{h}\right)$$
 
 El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$ chico → más detalle.
 
@@ -88,27 +88,27 @@ El ancho de banda $h$ controla la suavidad: $h$ grande → curva más suave, $h$
 
 <EquationTour caption="La asimetría estandariza cada dato y promedia cubos para medir la cola.">
   <EquationStep label="Centrado y escalado">
-    $\frac{x_i - \bar{x}}{\sigma}$
+    $\frac{x_i \bar{x}}{\sigma}$
     Lleva cada dato a unidades de desviación estándar.
   </EquationStep>
   <EquationStep label="Cubo">
-    $\left(\frac{x_i - \bar{x}}{\sigma}\right)^3$
+    $\left(\frac{x_i \bar{x}}{\sigma}\right)^3$
     El cubo conserva el signo de la cola.
   </EquationStep>
   <EquationStep label="Promedio">
-    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^3$
+    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i \bar{x}}{\sigma}\right)^3$
     Promedio de los cubos: signo y magnitud de la asimetría.
   </EquationStep>
 </EquationTour>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 - **Valor**: Asimetría = 0 → Distribución simétrica (ej. normal)
 - **Dirección**: Asimetría > 0 → Cola larga a la derecha → media > mediana
 - **Caso típico**: Asimetría < 0 → Cola larga a la izquierda → media < mediana
 - **Ejemplo**: Precios de casas (cola derecha) → Notas de examen fácil (cola izquierda)
 </ConceptCard>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 En una distribución con asimetría a la derecha, la media es mayor que la mediana, porque los valores extremos altos arrastran la media. Por eso, en estos casos conviene reportar también la mediana, que es más robusta a los valores atípicos.
 </ConceptCard>
 
@@ -120,20 +120,20 @@ En una distribución con asimetría a la derecha, la media es mayor que la media
 
 <EquationTour caption="La curtosis eleva a la cuarta para hacer visibles las colas extremas.">
   <EquationStep label="Centrado y escalado">
-    $\frac{x_i - \bar{x}}{\sigma}$
+    $\frac{x_i \bar{x}}{\sigma}$
     Estandariza cada dato.
   </EquationStep>
   <EquationStep label="Cuarta potencia">
-    $\left(\frac{x_i - \bar{x}}{\sigma}\right)^4$
+    $\left(\frac{x_i \bar{x}}{\sigma}\right)^4$
     Los extremos pesan mucho más que en la asimetría.
   </EquationStep>
   <EquationStep label="Promedio y ajuste">
-    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{\sigma}\right)^4 - 3$
+    $\frac{1}{n}\sum_{i=1}^{n} \left(\frac{x_i \bar{x}}{\sigma}\right)^4 3$
     Resta 3 para que la normal tenga curtosis 0.
   </EquationStep>
 </EquationTour>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 - **Curtosis = 0**: Mesocúrtica → Similar a la distribución normal
 - **Curtosis > 0**: Leptocúrtica → Colas pesadas → más outliers. Ej: retornos financieros
 - **Curtosis < 0**: Platicúrtica → Colas livianas → menos outliers. Ej: distribución uniforme
@@ -172,9 +172,9 @@ axes[2].set_title('Asimétrica a la Izquierda')
 plt.tight_layout()
 plt.show()
 
-print(f"Simétrica - Asimetría: {skew(symmetric):.3f}, Curtosis: {kurtosis(symmetric):.3f}")
-print(f"Der. - Asimetría: {skew(right_skewed):.3f}, Curtosis: {kurtosis(right_skewed):.3f}")
-print(f"Izq. - Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_skewed):.3f}")
+print(f"Simétrica Asimetría: {skew(symmetric):.3f}, Curtosis: {kurtosis(symmetric):.3f}")
+print(f"Der. Asimetría: {skew(right_skewed):.3f}, Curtosis: {kurtosis(right_skewed):.3f}")
+print(f"Izq. Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_skewed):.3f}")
 ```
 
 <DistributionShape caption="Cambiá la forma y seguí la media, la mediana y la moda: con la cola a la derecha, la media se corre y deja de representar al sujeto típico." />
@@ -185,7 +185,7 @@ print(f"Izq. - Asimetría: {skew(left_skewed):.3f}, Curtosis: {kurtosis(left_ske
 <Section number={8} title="Caso real: pingüinos" eyebrow="INTERACTIVA">
 <RevealSequence mode="appear">
 
-Analicemos la masa corporal de pingüinos — ¿es simétrica?
+Analicemos la masa corporal de pingüinos   ¿es simétrica?
 
 ```python
 import seaborn as sns
@@ -208,7 +208,7 @@ print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
   question="La masa corporal de los pingüinos muestra múltiples picos en el histograma. ¿Qué podría explicar esto biológicamente?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  blockId="reflection-l02-penguins"
+  blockId="reflection l02 penguins"
   allowContinueOnIncorrect
   explanation="Múltiples especies (Adelie, Gentoo, Chinstrap) con rangos de masa distintos generan multimodalidad: la distribución general es una mezcla por especie. Es señal para segmentar por especie antes de analizar."
   options={[
@@ -222,10 +222,10 @@ print(f"Mediana: {penguins['body_mass_g'].median():.0f} g")
 </RevealSequence>
 </Section>
 
-<Section number={9} title="Biotecnología: expresión génica log-normal" eyebrow="INTERACTIVA">
+<Section number={9} title="Biotecnología: expresión génica log normal" eyebrow="INTERACTIVA">
 <RevealSequence mode="appear">
 
-Los datos de expresión génica suelen seguir una distribución log-normal. Una transformación logarítmica los vuelve aproximadamente normales:
+Los datos de expresión génica suelen seguir una distribución log normal. Una transformación logarítmica los vuelve aproximadamente normales:
 
 ```python
 np.random.seed(42)
@@ -233,7 +233,7 @@ gene_expression = np.random.lognormal(mean=2.0, sigma=0.8, size=1000)
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 axes[0].hist(gene_expression, bins=30, edgecolor='black', color='steelblue')
-axes[0].set_title('Expresión Génica Original (Log-Normal)')
+axes[0].set_title('Expresión Génica Original (Log Normal)')
 log_transformed = np.log1p(gene_expression)
 axes[1].hist(log_transformed, bins=30, edgecolor='black', color='coral')
 axes[1].set_title('Transformación Logarítmica (Aprox. Normal)')
@@ -274,7 +274,7 @@ plt.show()
   question="La distribución de duraciones de sesión es asimétrica a la derecha. ¿Qué métrica reportarías al equipo de producto: media o mediana? ¿Por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  blockId="reflection-l02-session-skew"
+  blockId="reflection l02 session skew"
   allowContinueOnIncorrect
   explanation="Reporta mediana: pocas sesiones extremadamente largas inflan la media. La mediana refleja la duración típica; además, segmenta por tipo de usuario (power vs casual), cuyas distribuciones difieren."
   options={[
@@ -294,10 +294,10 @@ plt.show()
 <ConceptCard variant="warning">
 **Cuatro errores frecuentes:**
 
-1. **Usar muy pocos bins** — oculta la forma real de la distribución.
-2. **Ignorar la multimodalidad** — múltiples picos sugieren subgrupos (diferentes especies, tipos de usuarios).
-3. **Asumir normalidad sin verificar** — muchos datasets del mundo real son asimétricos.
-4. **Confundir la dirección de la asimetría** — asimetría derecha = cola a la derecha, media > mediana.
+1. **Usar muy pocos bins**   oculta la forma real de la distribución.
+2. **Ignorar la multimodalidad**   múltiples picos sugieren subgrupos (diferentes especies, tipos de usuarios).
+3. **Asumir normalidad sin verificar**   muchos datasets del mundo real son asimétricos.
+4. **Confundir la dirección de la asimetría**   asimetría derecha = cola a la derecha, media > mediana.
 </ConceptCard>
 
 <CalloutInfo>
@@ -319,7 +319,7 @@ plt.show()
   question="Un histograma de precios de casas muestra una cola larga a la derecha. ¿Esta distribución es simétrica, asimétrica a la izquierda o a la derecha? ¿Qué implica sobre la media vs la mediana?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  blockId="reflection-l02-checkpoint"
+  blockId="reflection l02 checkpoint"
   allowContinueOnIncorrect
   explanation="Asimétrica a la derecha: las casas muy caras jalan la media por encima de la mediana. Para un precio típico usa la mediana; la media se distorsiona por un puñado de mansiones."
   options={[
@@ -334,7 +334,7 @@ plt.show()
   question="¿Qué valor de curtosis esperarías para una distribución normal?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  blockId="choice-estadistica-l02-rev-1"
+  blockId="choice estadistica l02 rev 1"
   allowContinueOnIncorrect
   explanation="Curtosis en exceso = 0 (restando 3); la distribución normal es el punto de referencia: ni colas pesadas ni colas livianas."
   options={[
@@ -349,7 +349,7 @@ plt.show()
   question="¿Por qué una empresa SaaS preferiría la mediana sobre la media para reportar LTV?"
   moduleSlug="estadistica"
   lessonSlug="lesson02_data_distribution"
-  blockId="choice-estadistica-l02-rev-2"
+  blockId="choice estadistica l02 rev 2"
   allowContinueOnIncorrect
   explanation="El Lifetime Value suele tener cola derecha: unos pocos clientes enterprise con LTV enorme inflan la media; la mediana refleja mejor el valor de un cliente típico."
   options={[
@@ -366,14 +366,14 @@ plt.show()
 <Section number={13} title="Términos clave" eyebrow="CIERRE">
 <RevealSequence mode="appear">
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 - **Histograma**: Gráfico de barras de frecuencias de datos agrupados en bins
 - **KDE**: Estimación suave de la densidad de probabilidad usando kernels
 - **Asimetría**: Medida de la falta de simetría (0 = simétrico)
 - **Curtosis**: Medida del peso de las colas (0 = similar a la normal)
 - **Leptocúrtica**: Distribución con colas pesadas (más outliers de lo esperado)
 - **Platicúrtica**: Distribución con colas livianas (menos outliers)
-- **Multimodal**: Distribución con múltiples picos — sugiere subgrupos
+- **Multimodal**: Distribución con múltiples picos   sugiere subgrupos
 </ConceptCard>
 
 </RevealSequence>
@@ -392,7 +392,7 @@ Ya sabes leer la forma de los datos. Esto es fundamental: sin entender la distri
 - Curtosis alta = riesgo de outliers extremos
 - La transformación logarítmica normaliza datos con cola derecha
 
-**En la Lección 3** vamos a formalizar todo esto con la teoría de probabilidad: axiomas, Bayes, y variables aleatorias. Porque hasta ahora describimos datos del pasado — la probabilidad nos permite razonar sobre el futuro.
+**En la Lección 3** vamos a formalizar todo esto con la teoría de probabilidad: axiomas, Bayes, y variables aleatorias. Porque hasta ahora describimos datos del pasado   la probabilidad nos permite razonar sobre el futuro.
 
 </RevealSequence>
 </Section>

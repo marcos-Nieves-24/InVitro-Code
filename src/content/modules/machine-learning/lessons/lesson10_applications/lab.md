@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 10: Pipeline de extremo a extremo
-# -------------------------------------------------------------------------
+# -
 # Construimos un pipeline completo (StandardScaler + LogisticRegression)
 # sobre cancer de mama: entrenamiento, metricas, matriz de confusion y un
 # tablero final con make_subplots que resume el modelo.
@@ -28,14 +28,14 @@ pipeline = Pipeline([
 ])
 pipeline.fit(X_train, y_train)
 y_pred = pipeline.predict(X_test)
-print("PASO 1 - Pipeline entrenado")
+print("PASO 1 Pipeline entrenado")
 print(f"Exactitud en prueba: {accuracy_score(y_test, y_pred):.3f}")
 print(f"AUC: {roc_auc_score(y_test, pipeline.predict_proba(X_test)[:, 1]):.3f}")
 
 # PASO 2: Matriz de confusion.
 # La diagonal concentra los aciertos; fuera de ella estan los errores.
 matriz = confusion_matrix(y_test, y_pred)
-print("PASO 2 - Matriz de confusion:")
+print("PASO 2 Matriz de confusion:")
 print(matriz)
 
 import plotly.express as px                # Graficos interactivos
@@ -52,7 +52,7 @@ fig.show()                                 # Mostrar grafico interactivo
 coef = pipeline.named_steps["logit"].coef_[0]
 importancias = np.abs(coef)
 orden = np.argsort(importancias)[::-1][:10]
-print("PASO 3 - Top 5 features por |coeficiente|:")
+print("PASO 3 Top 5 features por |coeficiente|:")
 for i in orden[:5]:
     print(f"  {cancer.feature_names[i]}: {coef[i]:.3f}")
 
@@ -80,7 +80,7 @@ fig.add_trace(go.Heatmap(z=matriz, colorscale="Blues", showscale=False),
 fig.add_trace(go.Bar(x=cancer.feature_names[orden[:5]],
                      y=coef[orden[:5]]), row=1, col=3)
 fig.update_layout(height=420, width=1000, showlegend=False,
-                  title_text="Dashboard del pipeline - cancer de mama")
+                  title_text="Dashboard del pipeline cancer de mama")
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 4 - Tablero final generado con make_subplots.")
+print("PASO 4 Tablero final generado con make_subplots.")
 ```

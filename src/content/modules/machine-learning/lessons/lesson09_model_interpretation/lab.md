@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 9: Interpretacion de modelos
-# -------------------------------------------------------------------------
+# -
 # Entrenamos un bosque aleatorio sobre cancer de mama y comparamos la
 # importancia por impureza con la importancia por permutacion. Cerramos
 # con una curva de dependencia parcial para la feature principal.
@@ -20,7 +20,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 bosque = RandomForestClassifier(n_estimators=100, random_state=42)
 bosque.fit(X_train, y_train)
-print("PASO 1 - Bosque entrenado")
+print("PASO 1 Bosque entrenado")
 print(f"Exactitud en prueba: {accuracy_score(y_test, bosque.predict(X_test)):.3f}")
 
 # PASO 2: Importancia por permutacion.
@@ -31,7 +31,7 @@ from sklearn.inspection import permutation_importance  # Inspeccion de modelos
 resultado = permutation_importance(bosque, X_test, y_test,
                                    n_repeats=10, random_state=42)
 perm_mean = resultado.importances_mean
-print("PASO 2 - Top 5 features por permutacion:")
+print("PASO 2 Top 5 features por permutacion:")
 for i in np.argsort(perm_mean)[::-1][:5]:
     print(f"  {cancer.feature_names[i]}: {perm_mean[i]:.4f}")
 
@@ -47,7 +47,7 @@ fig = px.bar(x=cancer.feature_names[orden],
 fig.add_bar(x=cancer.feature_names[orden], y=perm_mean[orden], name="Permutacion")
 fig.update_layout(barmode="group", xaxis_tickangle=-45)
 fig.show()                                 # Mostrar grafico interactivo
-print("PASO 3 - Ambas tecnicas coinciden en la feature principal.")
+print("PASO 3 Ambas tecnicas coinciden en la feature principal.")
 
 # PASO 4: Dependencia parcial de la feature mas importante.
 # Variamos la feature sobre su rango y vemos como cambia la probabilidad
@@ -66,5 +66,5 @@ fig.update_layout(title=f"PDP de {cancer.feature_names[mejor]}",
                   xaxis_title=cancer.feature_names[mejor],
                   yaxis_title="Probabilidad de maligno")
 fig.show()                                 # Mostrar grafico interactivo
-print(f"PASO 4 - A mayor {cancer.feature_names[mejor]}, mayor riesgo predicho.")
+print(f"PASO 4 A mayor {cancer.feature_names[mejor]}, mayor riesgo predicho.")
 ```

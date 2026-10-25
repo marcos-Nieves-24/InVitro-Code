@@ -21,7 +21,7 @@ d) El modelo tiene un rendimiento negativo
 a) 0 veces
 b) 1 vez
 c) k veces
-d) k-1 veces
+d) k 1 veces
 
 **4. ¿Qué métrica penaliza más fuertemente los errores grandes?**
 
@@ -50,7 +50,7 @@ d) No se usa validación cruzada
 - Entrene un LinearRegression
 - Calcule e imprima MAE, RMSE y R² sobre el set de prueba
 
----
+
 
 # Clave de respuestas
 

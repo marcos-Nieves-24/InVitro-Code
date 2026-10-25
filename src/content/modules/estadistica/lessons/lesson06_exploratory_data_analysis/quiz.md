@@ -19,7 +19,7 @@ d) Isolation Forest
 **3. Según la regla del IQR, un punto es un valor atípico si:**
 
 a) Está por debajo del Q1 o por encima del Q3
-b) Está por debajo de Q1 - 1.5×IQR o por encima de Q3 + 1.5×IQR
+b) Está por debajo de Q1 1.5×IQR o por encima de Q3 + 1.5×IQR
 c) Está a más de 2 desviaciones estándar de la media
 d) Está por debajo del percentil 10
 
@@ -50,13 +50,13 @@ d) Todos son igualmente problemáticos
 - Cree un heatmap de los valores faltantes
 - Impute los valores faltantes de `age` con la mediana
 
----
+
 
 # Clave de respuestas
 
 1. a) Missing Completely At Random
 2. c) Imputación por la media
-3. b) Por debajo de Q1 - 1.5×IQR o por encima de Q3 + 1.5×IQR
+3. b) Por debajo de Q1 1.5×IQR o por encima de Q3 + 1.5×IQR
 4. b) Vista general de los datos (forma, columnas, tipos)
 5. c) MNAR
 

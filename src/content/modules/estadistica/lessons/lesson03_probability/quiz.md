@@ -52,7 +52,7 @@ d) P(A) + P(B) = 1
 
 Calcula la probabilidad empírica de que un paciente tenga la enfermedad dado un test positivo.
 
----
+
 
 # Clave de respuestas
 

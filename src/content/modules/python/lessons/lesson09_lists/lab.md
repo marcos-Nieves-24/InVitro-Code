@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 9: Trabajando con listas
-# -------------------------------------------------------------------------
+# -
 # Practicamos la creacion de listas, el acceso por indices y rebanadas,
 # los metodos de listas, las listas por comprension, matrices 2D y la
 # combinacion de zip() con enumerate().
@@ -70,7 +70,7 @@ for i, (gene, expr, p) in enumerate(zip(genes, expressions, p_values)):
     print(f"{i}. {gene}: expr={expr}, p={p} ({status})")
 
 # PASO 6: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Accedimos con indices y rebanadas, ordenamos y usamos metodos.")
 print("Construimos listas con comprensiones y filtros.")
 print("Combinamos zip(), enumerate() y condicionales en contexto real.")

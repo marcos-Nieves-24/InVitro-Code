@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 2: Distribucion de datos
-# -------------------------------------------------------------------------
+# -
 # Analizamos distribuciones sinteticas (normal, sesgada y bimodal) y
 # columnas reales de diabetes con histogramas, boxplots y estadisticos
 # de forma (skewness y curtosis). Cada figura termina con fig.show().
@@ -76,7 +76,7 @@ fig = px.histogram(log_sesgada, nbins=40,
 fig.show()                                 # Mostrar grafico interactivo
 
 # PASO 8: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("El histograma y el boxplot revelan la forma de la distribucion.")
 print("skew y kurtosis cuantifican la asimetria; log1p reduce el sesgo positivo.")
 ```

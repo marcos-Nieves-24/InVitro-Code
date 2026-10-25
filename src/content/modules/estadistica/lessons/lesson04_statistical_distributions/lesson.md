@@ -1,14 +1,14 @@
----
+
 Module: 3
 Lesson Number: 4
 Lesson Title: Distribuciones Estadísticas
 Estimated Duration: 75 minutos
 Prerequisites: Lección 3 (Fundamentos de Probabilidad)
 Learning Objectives:
-  - Describir las distribuciones Bernoulli, Binomial, Poisson y Normal
-  - Calcular probabilidades usando PMF, PDF y CDF con scipy.stats
-  - Estandarizar una distribución normal a puntajes Z
-  - Elegir la distribución adecuada para un escenario de datos dado
+  Describir las distribuciones Bernoulli, Binomial, Poisson y Normal
+  Calcular probabilidades usando PMF, PDF y CDF con scipy.stats
+  Estandarizar una distribución normal a puntajes Z
+  Elegir la distribución adecuada para un escenario de datos dado
 Keywords: Bernoulli, Binomial, Poisson, Normal, Gaussiana, puntaje Z, estandarización, scipy.stats, PMF, PDF, CDF
 Difficulty: Intermedio
 Programming Concepts: scipy.stats, numpy, matplotlib
@@ -18,7 +18,7 @@ Datasets Used: Datos sintéticos, dataset iris
 Notebook: 04_statistical_distributions.ipynb
 Assignment: statistical_distributions_assignment.md
 Quiz: statistical_distributions_quiz.md
----
+
 
 <Section number={1} title="Las distribuciones con nombre y apellido" eyebrow="INICIO">
 
@@ -37,7 +37,7 @@ Quiz: statistical_distributions_quiz.md
 />
 
 <MascotMessage mood="thinking">
-Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log-normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
+Todo proceso generador de datos en la naturaleza sigue alguna distribución de probabilidad. La expresión génica es log normal, las llegadas de clientes son Poisson, los resultados binarios son Bernoulli. Conocer estas distribuciones con nombre te permite modelar datos de forma realista.
 </MascotMessage>
 
 </RevealSequence>
@@ -62,8 +62,8 @@ Todo proceso generador de datos en la naturaleza sigue alguna distribución de p
 <ConceptCard variant="definition">
 **Distribución Bernoulli**: Modela un único resultado binario (éxito/fracaso, 1/0).
 - Parámetro: $p$ (probabilidad de éxito)
-- PMF: $P(X = 1) = p$, $P(X = 0) = 1 - p$
-- Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1-p)$
+- PMF: $P(X = 1) = p$, $P(X = 0) = 1 p$
+- Media: $E[X] = p$, Varianza: $\text{Var}(X) = p(1 p)$
 </ConceptCard>
 
 <EquationTour caption="Bernoulli: un solo ensayo binario gobernado por p.">
@@ -72,16 +72,16 @@ Todo proceso generador de datos en la naturaleza sigue alguna distribución de p
     Probabilidad de éxito en el único ensayo.
   </EquationStep>
   <EquationStep label="PMF">
-    $P(X = 1) = p,\ P(X = 0) = 1 - p$
+    $P(X = 1) = p,\ P(X = 0) = 1 p$
     Toda la probabilidad se reparte entre éxito y fracaso.
   </EquationStep>
   <EquationStep label="Media y varianza">
-    $E[X] = p,\ \text{Var}(X) = p(1-p)$
+    $E[X] = p,\ \text{Var}(X) = p(1 p)$
     El promedio es p; la dispersión es máxima cuando p=1/2.
   </EquationStep>
 </EquationTour>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Intuición:
 - Un solo lanzamiento de moneda.
 - Cada paciente responde al tratamiento o no.
@@ -110,8 +110,8 @@ Intuición:
 <ConceptCard variant="definition">
 **Distribución Binomial**: Cantidad de éxitos en $n$ ensayos Bernoulli independientes.
 - Parámetros: $n$ (ensayos), $p$ (probabilidad de éxito)
-- PMF: $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
-- Media: $E[X] = np$, Varianza: $\text{Var}(X) = np(1-p)$
+- PMF: $P(X = k) = \binom{n}{k} p^k (1 p)^{n k}$
+- Media: $E[X] = np$, Varianza: $\text{Var}(X) = np(1 p)$
 </ConceptCard>
 
 <EquationTour caption="Binomial: n ensayos Bernoulli independientes con probabilidad p.">
@@ -128,12 +128,12 @@ Intuición:
     Probabilidad de éxito en cada ensayo.
   </EquationStep>
   <EquationStep label="PMF">
-    $\binom{n}{k} p^k (1-p)^{n-k}$
+    $\binom{n}{k} p^k (1 p)^{n k}$
     Combina cuántas formas con la probabilidad de cada una.
   </EquationStep>
 </EquationTour>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Intuición:
 - Lanzar una moneda 10 veces y contar caras.
 - De 100 pacientes tratados, ¿cuántos responden?
@@ -185,11 +185,11 @@ Intuición:
   </EquationStep>
 </EquationTour>
 
-<ConceptCard variant="key-idea">
-Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión — necesitas un modelo más complejo.
+<ConceptCard variant="key idea">
+Lo fascinante de Poisson es qué la media y la varianza son iguales ($\lambda$). Si tus datos de conteo tienen varianza mucho mayor qué la media, hay sobredispersión   necesitas un modelo más complejo.
 </ConceptCard>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Ejemplos:
 - Mutaciones en una secuencia de ADN.
 - Llegadas de clientes por hora.
@@ -240,11 +240,11 @@ Ejemplos:
   </EquationStep>
 </EquationTour>
 
-**Regla 68-95-99.7**: ~68% de los datos dentro de 1σ, ~95% dentro de 2σ, ~99.7% dentro de 3σ.
+**Regla 68 a 95 a 99.7**: ~68% de los datos dentro de 1σ, ~95% dentro de 2σ, ~99.7% dentro de 3σ.
 
-**Estandarización** (puntaje Z): $Z = \frac{X - \mu}{\sigma}$ transforma cualquier normal a $N(0, 1)$.
+**Estandarización** (puntaje Z): $Z = \frac{X \mu}{\sigma}$ transforma cualquier normal a $N(0, 1)$.
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 El **Teorema Central del Límite** explica por qué la normal es ubicua: la suma de muchas variables independientes converge a una normal, sin importar la distribución original. Incluso si tus datos no son normales, los promedios de muestras grandes sí lo son.
 </ConceptCard>
 
@@ -267,12 +267,12 @@ El **Teorema Central del Límite** explica por qué la normal es ubicua: la suma
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Comparativa rápida:
-- **Bernoulli** — discreta (0 o 1), parámetro $p$, media $p$, varianza $p(1-p)$, ejemplo: ¿responde al tratamiento? — `scipy.stats.bernoulli(p)`.
-- **Binomial** — discreta (0 a n), parámetros $n, p$, media $np$, varianza $np(1-p)$, ejemplo: ¿cuántos de 50 responden? — `scipy.stats.binom(n, p)`.
-- **Poisson** — discreta (0 a ∞), parámetro $\lambda$, media $\lambda$, varianza $\lambda$, ejemplo: mutaciones por gen — `scipy.stats.poisson(lam)`.
-- **Normal** — continua ($-\infty$ a $\infty$), parámetros $\mu, \sigma^2$, media $\mu$, varianza $\sigma^2$, ejemplo: altura de personas — `scipy.stats.norm(mu, sigma)`.
+- **Bernoulli**   discreta (0 o 1), parámetro $p$, media $p$, varianza $p(1 p)$, ejemplo: ¿responde al tratamiento?   `scipy.stats.bernoulli(p)`.
+- **Binomial**   discreta (0 a n), parámetros $n, p$, media $np$, varianza $np(1 p)$, ejemplo: ¿cuántos de 50 responden?   `scipy.stats.binom(n, p)`.
+- **Poisson**   discreta (0 a ∞), parámetro $\lambda$, media $\lambda$, varianza $\lambda$, ejemplo: mutaciones por gen   `scipy.stats.poisson(lam)`.
+- **Normal**   continua ($-\infty$ a $\infty$), parámetros $\mu, \sigma^2$, media $\mu$, varianza $\sigma^2$, ejemplo: altura de personas   `scipy.stats.norm(mu, sigma)`.
 </ConceptCard>
 
 </RevealSequence>
@@ -305,7 +305,7 @@ print(f"P(responde) = {ber.pmf(1):.2f}")
 # Binomial: de 10 pacientes, ¿cuántos responden?
 bin = stats.binom(n=10, p=0.3)
 print(f"P(exactamente 3) = {bin.pmf(3):.3f}")
-print(f"P(al menos 5) = {1 - bin.cdf(4):.3f}")
+print(f"P(al menos 5) = {1 bin.cdf(4):.3f}")
 
 # Poisson: mutaciones por gen (λ=3)
 poi = stats.poisson(3)
@@ -314,11 +314,11 @@ print(f"P(2 mutaciones) = {poi.pmf(2):.3f}")
 # Normal: expresión génica (μ=50, σ=10)
 norm = stats.norm(50, 10)
 print(f"P(X < 60) = {norm.cdf(60):.3f}")
-print(f"P(40 < X < 60) = {norm.cdf(60) - norm.cdf(40):.3f}")
+print(f"P(40 < X < 60) = {norm.cdf(60) norm.cdf(40):.3f}")
 ```
 
 <CalloutInfo>
-**PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$ — siempre usa CDF para rangos.
+**PMF** (discretas): probabilidad puntual. **PDF** (continuas): densidad (integrar para probabilidad). **CDF** (ambas): $P(X \leq x)$   siempre usa CDF para rangos.
 </CalloutInfo>
 
 </RevealSequence>
@@ -346,14 +346,14 @@ Las mutaciones en secuencias de ADN siguen Poisson. Si la tasa promedio es 2.5 m
 lam = 2.5
 poi = stats.poisson(lam)
 print(f"P(0 mutaciones) = {poi.pmf(0):.3f}")  # gen intacto
-print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
+print(f"P(más de 5 mutaciones) = {1 poi.cdf(5):.3f}")  # gen muy dañado
 ```
 
 <ChoiceQuestion
   question="¿Por qué Poisson modela bien las mutaciones genéticas? ¿Qué supuestos hace?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  blockId="reflection-l04-poisson-genes"
+  blockId="reflection l04 poisson genes"
   allowContinueOnIncorrect
   explanation="Poisson asume eventos independientes a tasa constante λ; en ADN cada posición muta independientemente con tasa ≈ constante por región. En hotspots (λ variable) subestima la varianza y se prefiere binomial negativa."
   options={[
@@ -387,7 +387,7 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   question="Tienes datos de cantidad de clientes qué entran a un sitio web por minuto. La media es 5. ¿Qué distribución usarías y por qué?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  blockId="reflection-l04-choose-dist"
+  blockId="reflection l04 choose dist"
   allowContinueOnIncorrect
   explanation="Poisson con λ=5: llegadas por unidad de tiempo son caso clásico Poisson. Verificar: si varianza empírica ≫ 5 (sobredispersión) → binomial negativa; si hay patrones temporales (hora pico) → Poisson no homogéneo λ(t)."
   options={[
@@ -402,7 +402,7 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   question="¿Cuándo usarías Bernoulli vs Binomial?"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  blockId="choice-estadistica-l04-rev-1"
+  blockId="choice estadistica l04 rev 1"
   allowContinueOnIncorrect
   explanation="Bernoulli modela UN evento (¿este paciente responde?); Binomial cuenta éxitos en n eventos (de 50 pacientes, ¿cuántos responden?) y es la suma de n Bernoullis."
   options={[
@@ -414,12 +414,12 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
 />
 
 <ChoiceQuestion
-  question="¿Qué hace el puntaje Z? ($Z = (X - \mu) / \sigma$)"
+  question="¿Qué hace el puntaje Z? ($Z = (X \mu) / \sigma$)"
   moduleSlug="estadistica"
   lessonSlug="lesson04_statistical_distributions"
-  blockId="choice-estadistica-l04-rev-2"
+  blockId="choice estadistica l04 rev 2"
   allowContinueOnIncorrect
-  explanation="$Z = (X - \mu) / \sigma$ estandariza cualquier normal a N(0,1); un Z=2 indica 2 desviaciones estándar de la media y permite comparar valores de distintas distribuciones."
+  explanation="$Z = (X \mu) / \sigma$ estandariza cualquier normal a N(0,1); un Z=2 indica 2 desviaciones estándar de la media y permite comparar valores de distintas distribuciones."
   options={[
     { id: "a", label: "Estandariza cualquier normal a N(0,1): Z=2 significa a 2 desviaciones estándar de la media", correct: true, feedback: "¡Correcto! Facilita comparar valores de distintas distribuciones." },
     { id: "b", label: "Traslada la media a cero pero deja la varianza original", correct: false, feedback: "También divide por sigma: la varianza resultante es 1." },
@@ -443,20 +443,20 @@ print(f"P(más de 5 mutaciones) = {1 - poi.cdf(5):.3f}")  # gen muy dañado
   lines={[
     "Estos términos son la base del resto del módulo.",
     "Guardalos como tu vocabulario de distribuciones.",
-    "Volveremos a ellos al elegir features y calcular Z-Scores.",
+    "Volveremos a ellos al elegir features y calcular Z Scores.",
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Términos clave:
 - **Bernoulli**: un ensayo binario con probabilidad $p$ de éxito.
 - **Binomial**: cantidad de éxitos en $n$ ensayos Bernoulli independientes.
 - **Poisson**: cantidad de eventos en un intervalo fijo, tasa constante $\lambda$.
 - **Normal (Gaussiana)**: distribución campana simétrica $N(\mu, \sigma^2)$.
-- **Puntaje Z**: estandarización: $Z = (X - \mu) / \sigma \sim N(0,1)$.
-- **PMF**: Probability Mass Function — para variables discretas.
-- **PDF**: Probability Density Function — para variables continuas.
-- **CDF**: Cumulative Distribution Function — $F(x) = P(X \leq x)$.
+- **Puntaje Z**: estandarización: $Z = (X \mu) / \sigma \sim N(0,1)$.
+- **PMF**: Probability Mass Function   para variables discretas.
+- **PDF**: Probability Density Function   para variables continuas.
+- **CDF**: Cumulative Distribution Function   $F(x) = P(X \leq x)$.
 - **TCL**: Teorema Central del Límite: promedios convergen a normal.
 </ConceptCard>
 
@@ -483,7 +483,7 @@ Cuatro distribuciones fundamentales cubiertas: Bernoulli, Binomial, Poisson y No
   ]}
 />
 
-**En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento — todo está conectado.
+**En la Lección 5** vamos a estudiar cómo se relacionan las variables entre sí: covarianza, correlación de Pearson y Spearman, y matrices de correlación. Porque en el mundo real, nada ocurre en aislamiento   todo está conectado.
 
 </RevealSequence>
 

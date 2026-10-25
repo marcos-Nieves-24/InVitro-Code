@@ -500,11 +500,6 @@ export function RevealSequence({
             shows Paso x de y + blocked hint + helper text; no buttons. */}
         {hasMore ? (
           <div className="mt-4 flex flex-col items-center gap-2 pt-2 pb-1">
-            {total > 1 && (
-              <p className={STEP_LABEL}>
-                Paso {revealedCount} de {total}
-              </p>
-            )}
             {showHint && revealedCount === initialRevealed && (
               <div
                 role="status"
@@ -532,12 +527,6 @@ export function RevealSequence({
                 Responde correctamente para continuar
               </p>
             ) : null}
-          </div>
-        ) : total > 1 ? (
-          <div className="mt-4 flex flex-col items-center gap-2 pt-2 pb-1">
-            <p className={STEP_LABEL}>
-              Paso {revealedCount} de {total}
-            </p>
           </div>
         ) : null}
 

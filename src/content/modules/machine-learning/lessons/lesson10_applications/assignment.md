@@ -1,4 +1,4 @@
-# Assignment 10: Aplicaciones — Integración final
+# Assignment 10: Aplicaciones   Integración final
 
 ## Objetivos
 
@@ -11,7 +11,7 @@
 
 **Elige UNA de las siguientes dos opciones y completa todas las tareas.**
 
-### Opción A: Biotecnología — Predicción de rendimiento de cultivo celular
+### Opción A: Biotecnología   Predicción de rendimiento de cultivo celular
 
 Una empresa biotecnológica produce anticuerpos monoclonales. Tienes datos de proceso de 800 lotes. Predice el **titer (g/L)** final e identifica qué parámetros de proceso afectan más al rendimiento.
 
@@ -30,8 +30,8 @@ biotech = pd.DataFrame({
 
 titer = (
     2.5
-    - 0.3 * np.abs(biotech['temperature'] - 36.5)
-    - 2.0 * np.abs(biotech['ph'] - 7.0)
+    0.3 * np.abs(biotech['temperature'] 36.5)
+    2.0 * np.abs(biotech['ph'] 7.0)
     + 0.5 * biotech['seeding_density']
     + 0.1 * biotech['glutamine_mM']
     + 0.05 * biotech['culture_days']
@@ -40,9 +40,9 @@ titer = (
 biotech['titer'] = titer.clip(0)
 ```
 
-### Opción B: SaaS — Customer Health Scoring
+### Opción B: SaaS   Customer Health Scoring
 
-Una empresa SaaS quiere un **customer health score** (0-100) que prediga el riesgo de churn. Tienes datos de uso de 2000 cuentas.
+Una empresa SaaS quiere un **customer health score** (0 a 100) que prediga el riesgo de churn. Tienes datos de uso de 2000 cuentas.
 
 ```python
 np.random.seed(42)
@@ -61,9 +61,9 @@ health = (
     70
     + 0.2 * saas['active_users']
     + 0.05 * saas['monthly_usage_hours']
-    - 2 * saas['support_tickets_30d']
+    2 * saas['support_tickets_30d']
     + 0.2 * saas['feature_adoption_pct']
-    - 1.5 * saas['days_since_last_login']
+    1.5 * saas['days_since_last_login']
     + np.random.normal(0, 5, n)
 )
 saas['health_score'] = health.clip(0, 100)

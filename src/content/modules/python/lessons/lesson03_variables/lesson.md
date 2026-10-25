@@ -1,15 +1,15 @@
----
+
 Module: 2
 Lesson Number: 3
 Lesson Title: Variables
 Estimated Duration: 45 minutos
-Prerequisites: L2 — Jupyter Notebook
+Prerequisites: L2   Jupyter Notebook
 Learning Objectives:
-  - Asignar valores a variables usando el operador de asignación
-  - Seguir las convenciones de nomenclatura de Python para variables
-  - Explicar el tipado dinámico y la inferencia de tipos
-  - Usar entrada/salida básica con print() y input()
-  - Reasignar variables y entender el estado mutable
+  Asignar valores a variables usando el operador de asignación
+  Seguir las convenciones de nomenclatura de Python para variables
+  Explicar el tipado dinámico y la inferencia de tipos
+  Usar entrada/salida básica con print() y input()
+  Reasignar variables y entender el estado mutable
 Keywords: variable, asignación, convención de nomenclatura, tipado dinámico, E/S, print
 Difficulty: Beginner
 Programming Concepts: Asignación de variables, nomenclatura, ámbito, inferencia de tipos
@@ -17,7 +17,7 @@ Datasets Used: None
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 <Section number={1} title="Variables" eyebrow="INICIO">
 <RevealSequence>
@@ -92,7 +92,7 @@ print(genome_size)`}
 />
 
 
-Python tiene **tipado dinámico** — las variables pueden cambiar de tipo durante la ejecución. El tipo se infiere del valor:
+Python tiene **tipado dinámico**   las variables pueden cambiar de tipo durante la ejecución. El tipo se infiere del valor:
 
 <CodeEditor
   defaultValue={`value = 10
@@ -115,7 +115,7 @@ print(value, type(value))`}
 
 
 Los nombres de variables en Python deben seguir estas reglas:
-- Pueden contener letras (a-z, A-Z), dígitos (0-9) y guiones bajos (_)
+- Pueden contener letras (a z, A Z), dígitos (0 a 9) y guiones bajos (_)
 - No pueden empezar con un dígito
 - Distinguen mayúsculas y minúsculas (`age` ≠ `Age`)
 - No pueden ser palabras clave de Python (`if`, `for`, `while`, `class`, etc.)
@@ -141,7 +141,7 @@ a, b, c = 1, 2, 3
 x = y = z = 0  # Las tres variables reciben el valor 0
 ```
 
-**Prueba el swapping de variables** — una forma pitónica de intercambiar valores:
+**Prueba el swapping de variables**   una forma pitónica de intercambiar valores:
 
 <CodeEditor
   defaultValue={`# Variable swapping
@@ -166,7 +166,7 @@ print(f"Después: a={a}, b={b}")`}
 print("Hello, World!")
 print("Value:", 42)
 
-# Entrada — siempre devuelve un string
+# Entrada   siempre devuelve un string
 name = input("Enter your name: ")
 ```
 
@@ -249,7 +249,7 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
   question="Asignas `b = a` y luego haces `a = 99`. ¿Qué contiene `b`?"
   moduleSlug="python"
   lessonSlug="lesson03_variables"
-  blockId="choice-python-l03-dens-1"
+  blockId="choice python l03 dens 1"
   allowContinueOnIncorrect
   explanation="La asignación reenlaza `a` a un nuevo objeto; `b` sigue apuntando al valor original."
   options={[
@@ -288,14 +288,14 @@ print(f"{sequence_id}: GC content = {gc_percent:.1f}%")`}
 
 <RevealSequence>
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Una variable es un nombre que referencia un valor en memoria; Python la tipa dinámicamente a partir del valor que se le asigna.
 </ConceptCard>
 
 <FeatureButtonList
   features={[
     { id: "almacenar", label: "Almacenar valores", detail: "Las variables almacenan valores en ubicaciones de memoria nombradas." },
-    { id: "tipado-dinamico", label: "Tipado dinámico", detail: "Python tiene tipado dinámico: los tipos se infieren a partir del valor." },
+    { id: "tipado dinamico", label: "Tipado dinámico", detail: "Python tiene tipado dinámico: los tipos se infieren a partir del valor." },
     { id: "asignacion", label: "Asignación", detail: "Usa `=` para asignación y `print()` para salida." },
     { id: "nombres", label: "Nombres válidos", detail: "Los nombres de variables deben seguir reglas: letras, dígitos y guiones bajos; no empezar con dígito." },
     { id: "pep8", label: "PEP 8", detail: "PEP 8 recomienda nomenclatura `snake_case`." },
@@ -306,10 +306,10 @@ Una variable es un nombre que referencia un valor en memoria; Python la tipa din
 <FeatureButtonList
   features={[
     { id: "variable", label: "Variable", detail: "Ubicación de almacenamiento nombrada para un valor." },
-    { id: "asignacion-term", label: "Asignación", detail: "Usar `=` para darle un valor a una variable." },
-    { id: "tipado-dinamico-term", label: "Tipado dinámico", detail: "Las variables pueden cambiar de tipo en tiempo de ejecución." },
-    { id: "pep8-term", label: "PEP 8", detail: "Guía de estilo de Python." },
-    { id: "snake-case", label: "snake_case", detail: "Convención de nomenclatura que usa guiones bajos." },
+    { id: "asignacion term", label: "Asignación", detail: "Usar `=` para darle un valor a una variable." },
+    { id: "tipado dinamico term", label: "Tipado dinámico", detail: "Las variables pueden cambiar de tipo en tiempo de ejecución." },
+    { id: "pep8 term", label: "PEP 8", detail: "Guía de estilo de Python." },
+    { id: "snake case", label: "snake_case", detail: "Convención de nomenclatura que usa guiones bajos." },
     { id: "inferencia", label: "Inferencia de tipos", detail: "Python deduce el tipo a partir del valor." },
     { id: "nameerror", label: "NameError", detail: "Excepción que se lanza al usar una variable no definida." },
   ]}
@@ -319,7 +319,7 @@ Una variable es un nombre que referencia un valor en memoria; Python la tipa din
   question="¿Qué excepción lanza Python al usar una variable no definida?"
   moduleSlug="python"
   lessonSlug="lesson03_variables"
-  blockId="choice-python-l03-resumen-1"
+  blockId="choice python l03 resumen 1"
   allowContinueOnIncorrect
   explanation="NameError se lanza cuando se referencia un nombre que no está definido."
   options={[
@@ -378,7 +378,7 @@ dna = "ATCGGCTAGCTAGCATGCGATCGATCGATCGATCG"
   question="¿Qué es una variable en Python?"
   moduleSlug="python"
   lessonSlug="lesson03_variables"
-  blockId="choice-python-l03-conceptos-1"
+  blockId="choice python l03 conceptos 1"
   allowContinueOnIncorrect
   explanation="Una variable es una ubicación nombrada en memoria que almacena un valor."
   options={[

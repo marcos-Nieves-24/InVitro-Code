@@ -41,7 +41,7 @@ d) Los residuos después de la transformación
 
 **6.** Explica por qué PCA se considera una técnica no supervisada.
 
-**7.** Un dataset con 100 features se reduce a 3 PCs que explican el 85% de la varianza. Interpreta este resultado y discutí el trade-off.
+**7.** Un dataset con 100 features se reduce a 3 PCs que explican el 85% de la varianza. Interpreta este resultado y discutí el trade off.
 
 ## Pregunta de código (1 pregunta)
 
@@ -51,7 +51,7 @@ d) Los residuos después de la transformación
 - Aplique PCA y conserve 2 componentes
 - Imprima las proporciones de varianza explicada y la varianza acumulada
 
----
+
 
 # Clave de respuestas
 
@@ -63,7 +63,7 @@ d) Los residuos después de la transformación
 
 6. PCA no usa ninguna información de etiquetas. Encuentra patrones (direcciones de máxima varianza) únicamente a partir de la matriz de features X, sin referencia a una variable target y. Esto lo convierte en un método de aprendizaje no supervisado.
 
-7. 3 PCs capturan el 85% de la variabilidad en 100 features: los datos tienen una estructura de baja dimensionalidad. Trade-off: perdemos el 15% de la información pero ganamos una representación mucho más simple, un cómputo más rápido y un menor riesgo de overfitting.
+7. 3 PCs capturan el 85% de la variabilidad en 100 features: los datos tienen una estructura de baja dimensionalidad. Trade off: perdemos el 15% de la información pero ganamos una representación mucho más simple, un cómputo más rápido y un menor riesgo de overfitting.
 
 8. 
 ```python

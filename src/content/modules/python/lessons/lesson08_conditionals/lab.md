@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 8: Condicionales y toma de decisiones
-# -------------------------------------------------------------------------
+# -
 # Practicamos if/elif/else, valores truthy/falsy, expresiones ternarias,
 # la sentencia match de Python 3.10+ y los condicionales anidados.
 # =========================================================================
@@ -76,7 +76,7 @@ else:
     print("\nUsuario desconocido")
 
 # PASO 6: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Clasificamos numeros con if/elif/else.")
 print("Reconocimos valores truthy/falsy.")
 print("Usamos ternarios, la sentencia match y condicionales anidados.")

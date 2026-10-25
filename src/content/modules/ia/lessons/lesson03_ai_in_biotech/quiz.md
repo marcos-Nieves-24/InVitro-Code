@@ -3,7 +3,7 @@
 
 **1. ¿Qué representa cada punto en el visualizador 3D de proteínas?**
 a) Un átomo de hidrógeno
-b) Un carbono alfa (Cα) — un aminoácido de la cadena
+b) Un carbono alfa (Cα)   un aminoácido de la cadena
 c) Una molécula de agua
 d) Un enlace peptídico
 
@@ -25,10 +25,10 @@ b) El desglose detallado de predicciones correctas e incorrectas por clase
 c) Los parámetros internos del modelo
 d) El tiempo que tardó el entrenamiento
 
----
+
 ## Clave de respuestas
 
 1. **b)** Cada Cα representa un aminoácido. La nube de puntos forma el esqueleto de la proteína.
 2. **b)** La velocidad y accesibilidad. AlphaFold predice en horas lo que antes tomaba meses.
 3. **b)** Preparar datos (limpiar, etiquetar, manejar valores faltantes) es ~80% del trabajo.
-4. **b)** La matriz de confusión muestra TP, FP, FN, TN — mucho más informativo que solo el accuracy.
+4. **b)** La matriz de confusión muestra TP, FP, FN, TN   mucho más informativo que solo el accuracy.

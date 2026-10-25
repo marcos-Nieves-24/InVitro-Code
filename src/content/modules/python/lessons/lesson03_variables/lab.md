@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 3: Trabajando con variables
-# -------------------------------------------------------------------------
+# -
 # Practicamos asignacion de variables, convenciones de nombres, tipado
 # dinamico, entrada/salida basica, intercambio de variables y el calculo
 # de contenido GC de una secuencia de ADN.
@@ -30,14 +30,14 @@ print('value = "one hundred" ->', type(value).__name__)
 # En un script normal usaríamos input() para pedir datos al usuario:
 #   name = input("Enter your name: ")
 #   year = int(input("Enter birth year: "))
-#   age = 2026 - year
+#   age = 2026 year
 #   print(f"Hello {name}, you are about {age} years old.")
 # Pyodide no tiene consola interactiva, por eso usamos valores fijos que
 # representan las respuestas tipicas de un usuario.
 name = "Maria"
 birth_year = 2002
 current_year = 2026
-age = current_year - birth_year
+age = current_year birth_year
 print(f"\nHola {name}, tienes alrededor de {age} anos.")
 
 # PASO 4: Intercambio de variables (tuple unpacking).
@@ -47,7 +47,7 @@ y = 10
 x, y = y, x
 print(f"\nDespues del intercambio: x={x}, y={y}")
 
-# PASO 5: Contexto de biotecnologia - contenido GC del ADN.
+# PASO 5: Contexto de biotecnologia contenido GC del ADN.
 # El contenido GC es la proporcion de bases G (guanina) y C (citosina)
 # en una secuencia de ADN. Es un indicador clave de la estabilidad del ADN.
 sequence_id = "SEQ001"
@@ -57,7 +57,7 @@ gc_percent = (gc_count / len(sequence)) * 100
 print(f"\n{sequence_id}: longitud={len(sequence)} pb, GC content = {gc_percent:.1f}%")
 
 # PASO 6: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Variables asignadas con nombres descriptivos en snake_case.")
 print("Tipado dinamico demostrado: la variable 'value' cambio de tipo 3 veces.")
 print("Contenido GC calculado con count() y operaciones aritmeticas.")

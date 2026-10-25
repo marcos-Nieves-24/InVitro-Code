@@ -1,7 +1,7 @@
 ```python
 # =========================================================================
 # LAB 11: Diccionarios en la practica
-# -------------------------------------------------------------------------
+# -
 # Practicamos la creacion, el acceso, la actualizacion de diccionarios,
 # los diccionarios por comprension, el conteo de palabras y los
 # diccionarios anidados.
@@ -11,9 +11,9 @@
 # Un diccionario asocia claves (keys) con valores (values). Aqui cada
 # contacto es un diccionario anidado dentro de otro diccionario.
 contacts = {
-    "Alice": {"phone": "555-0101", "email": "alice@example.com"},
-    "Bob": {"phone": "555-0102", "email": "bob@example.com"},
-    "Charlie": {"phone": "555-0103", "email": "charlie@example.com"},
+    "Alice": {"phone": "555 a 0101", "email": "alice@example.com"},
+    "Bob": {"phone": "555 a 0102", "email": "bob@example.com"},
+    "Charlie": {"phone": "555 a 0103", "email": "charlie@example.com"},
 }
 
 print(f"Email de Alice: {contacts['Alice']['email']}")
@@ -21,8 +21,8 @@ print(f"Telefono de Bob: {contacts['Bob'].get('phone', 'N/A')}")
 
 # PASO 2: Agregar y actualizar.
 # Se agrega una clave nueva por asignacion y se actualiza con [] o get().
-contacts["Diana"] = {"phone": "555-0104", "email": "diana@example.com"}
-contacts["Alice"]["phone"] = "555-0199"  # actualizacion
+contacts["Diana"] = {"phone": "555 a 0104", "email": "diana@example.com"}
+contacts["Alice"]["phone"] = "555 a 0199"  # actualizacion
 
 print("\nTodos los contactos:")
 for name, info in contacts.items():
@@ -70,7 +70,7 @@ for quarter, products in sales.items():
 print(f"\nVentas totales por producto: {dict(product_totals)}")
 
 # PASO 6: Resumen del laboratorio.
-print("\n--- Resumen ---")
+print("\n Resumen ")
 print("Creamos, accedimos y actualizamos diccionarios (incluidos anidados).")
 print("Construimos diccionarios por comprension y contamos con get/defaultdict.")
 ```

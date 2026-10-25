@@ -1,23 +1,23 @@
----
+
 Module: 2
 Lesson Number: 15
 Lesson Title: Matplotlib
 Estimated Duration: 75 minutos
-Prerequisites: L14 — Pandas
+Prerequisites: L14   Pandas
 Learning Objectives:
-  - "Crear gráficos básicos usando pyplot: líneas, dispersión, barras, histogramas"
-  - Personalizar gráficos con títulos, etiquetas, leyendas y colores
-  - Usar la interfaz figure/axes para gráficos multi-panel
-  - Guardar figuras a archivos en varios formatos
-  - Aplicar diferentes estilos de gráfico y mapas de colores
+  "Crear gráficos básicos usando pyplot: líneas, dispersión, barras, histogramas"
+  Personalizar gráficos con títulos, etiquetas, leyendas y colores
+  Usar la interfaz figure/axes para gráficos multi panel
+  Guardar figuras a archivos en varios formatos
+  Aplicar diferentes estilos de gráfico y mapas de colores
 Keywords: Matplotlib, pyplot, figure, axes, plot, scatter, histograma, gráfico de barras
-Difficulty: Beginner-Intermediate
+Difficulty: Beginner Intermediate
 Programming Concepts: Visualización de datos, graficación, personalización
 Datasets Used: None (datos sintéticos)
 Notebook: notebook.ipynb
 Assignment: assignment.md
 Quiz: quiz.md
----
+
 
 # Matplotlib
 
@@ -37,7 +37,7 @@ Quiz: quiz.md
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 En la lección anterior aprendiste Pandas para manipulación de datos. Ahora visualizas esos datos con Matplotlib. La próxima lección sobre Seaborn se basa en Matplotlib para crear visualizaciones estadísticas con menos código; en los módulos de ML usarás Matplotlib a diario para entender modelos, evaluar rendimiento y presentar resultados.
 </ConceptCard>
 
@@ -161,7 +161,7 @@ Estructura de una Figura de Matplotlib
   variant="scientist"
   typing={true}
   lines={[
-    "De la teoría a la práctica: líneas, dispersión, barras, histogramas y multi-panel.",
+    "De la teoría a la práctica: líneas, dispersión, barras, histogramas y multi panel.",
     "Cada bloque es independiente; ejecútalo y observa cómo cambia la figura.",
     "El primer gráfico que hagas siempre debería tener título, ejes etiquetados y leyenda.",
   ]}
@@ -279,7 +279,7 @@ plt.show()
   ]}
 />
 
-**Escenario biotecnología** — visualizando datos de expresión génica en diferentes condiciones:
+**Escenario biotecnología**   visualizando datos de expresión génica en diferentes condiciones:
 
 ```python
 import matplotlib.pyplot as plt
@@ -298,7 +298,7 @@ width = 0.25
 colors = ["steelblue", "coral", "seagreen"]
 
 for i, (cond, color) in enumerate(zip(conditions, colors)):
-    offset = (i - 1) * width
+    offset = (i 1) * width
     ax.bar(x + offset, expression[:, i], width, label=cond, color=color, alpha=0.8)
 
 ax.set_xlabel("Gen")
@@ -312,7 +312,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-**Escenario SaaS** — visualizando un dashboard de métricas SaaS:
+**Escenario SaaS**   visualizando un dashboard de métricas SaaS:
 
 ```python
 import matplotlib.pyplot as plt
@@ -402,7 +402,7 @@ plt.show()
   ]}
 />
 
-<ConceptCard variant="key-idea">
+<ConceptCard variant="key idea">
 Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subplots permiten crear, personalizar y exportar cualquier gráfico científico con control total.
 </ConceptCard>
 
@@ -410,11 +410,11 @@ Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subpl
   features={[
     { id: "pyplot", label: "pyplot", detail: "Provee gráficos estilo MATLAB a través de pyplot." },
     { id: "interfaces", label: "Interfaces", detail: "Dos interfaces: pyplot (simple) y OO (flexible)." },
-    { id: "graficos-basicos", label: "Gráficos básicos", detail: "Líneas, dispersión, barras e histograma." },
+    { id: "graficos basicos", label: "Gráficos básicos", detail: "Líneas, dispersión, barras e histograma." },
     { id: "personalizacion", label: "Personalización", detail: "Personaliza con títulos, etiquetas, leyendas y colores." },
-    { id: "subplots", label: "Subplots", detail: "Permiten figuras multi-panel en una sola figure." },
+    { id: "subplots", label: "Subplots", detail: "Permiten figuras multi panel en una sola figure." },
     { id: "guardado", label: "Guardado", detail: "Guarda en formatos PNG, PDF y SVG." },
-    { id: "buenas-practicas", label: "Buenas prácticas", detail: "Siempre etiqueta los ejes e incluye leyendas." },
+    { id: "buenas practicas", label: "Buenas prácticas", detail: "Siempre etiqueta los ejes e incluye leyendas." },
   ]}
 />
 
@@ -422,12 +422,12 @@ Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subpl
   features={[
     { id: "figure", label: "Figure", detail: "El contenedor de nivel superior (ventana completa)." },
     { id: "axes", label: "Axes", detail: "El área de graficación real (una figura puede tener varios)." },
-    { id: "pyplot-g", label: "pyplot", detail: "Interfaz tipo MATLAB para graficación rápida." },
+    { id: "pyplot g", label: "pyplot", detail: "Interfaz tipo MATLAB para graficación rápida." },
     { id: "subplot", label: "Subplot", detail: "Múltiples gráficos en una sola figura." },
     { id: "leyenda", label: "Leyenda", detail: "Etiquetas que identifican elementos del gráfico." },
-    { id: "tight-layout", label: "Tight layout", detail: "Ajuste automático de espaciado." },
-    { id: "vectorial", label: "Formato vectorial", detail: "SVG/PDF — escalable sin pérdida de calidad." },
-    { id: "raster", label: "Formato raster", detail: "PNG — basado en píxeles, calidad depende del DPI." },
+    { id: "tight layout", label: "Tight layout", detail: "Ajuste automático de espaciado." },
+    { id: "vectorial", label: "Formato vectorial", detail: "SVG/PDF   escalable sin pérdida de calidad." },
+    { id: "raster", label: "Formato raster", detail: "PNG   basado en píxeles, calidad depende del DPI." },
   ]}
 />
 
@@ -435,7 +435,7 @@ Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subpl
   question="¿Por qué conviene guardar figuras en formato vectorial (SVG/PDF) para publicaciones?"
   moduleSlug="python"
   lessonSlug="lesson15_matplotlib"
-  blockId="choice-python-l15-resumen-1"
+  blockId="choice python l15 resumen 1"
   allowContinueOnIncorrect
   explanation="Los formatos vectoriales escalan sin pérdida de calidad y son los preferidos en revistas científicas."
   options={[
@@ -447,7 +447,7 @@ Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subpl
 />
 
 <MascotMessage mood="celebrating">
-¡Gráficos listos! Seaborn te dará atajos estadísticos sobre el mismo motor — la próxima lección.
+¡Gráficos listos! Seaborn te dará atajos estadísticos sobre el mismo motor   la próxima lección.
 </MascotMessage>
 
 </RevealSequence>
@@ -458,16 +458,16 @@ Matplotlib es el motor de visualización de Python: figure, axes, pyplot y subpl
 
 **Ejercicios**
 
-Nivel 1 — Básico:
+Nivel 1   Básico:
 1. ¿Cuál es la diferencia entre `plt.plot()` y `plt.scatter()`?
 2. ¿Cómo guardas una figura como archivo PNG?
 3. ¿Qué crea `fig, ax = plt.subplots(2, 3)`?
 
-Nivel 2 — Implementación:
+Nivel 2   Implementación:
 4. Grafica la función f(x) = x² de -10 a 10 con ejes etiquetados y un título.
 5. Crea un gráfico de barras mostrando las 5 palabras más frecuentes en un texto dado.
 
-Nivel 3 — Pensamiento Crítico:
+Nivel 3   Pensamiento Crítico:
 6. ¿Cuándo elegirías un gráfico de líneas sobre uno de dispersión, y viceversa?
 7. ¿Por qué es importante guardar figuras en formato vectorial (SVG/PDF) para publicaciones?
 
@@ -478,7 +478,7 @@ Crea un **reporte de datos integral** con los siguientes gráficos:
 2. **Gráfico de dispersión**: genera 200 puntos (x, y) aleatorios con una tendencia lineal clara, agrega una línea de regresión
 3. **Gráfico de barras**: muestra la distribución de letras en una secuencia de ADN (conteo de A, C, G, T)
 4. **Histograma**: grafica la distribución de 10.000 valores aleatorios y superpon una curva de distribución normal
-5. **Figura multi-panel**: crea un subplot 2×2 combinando lo anterior en una sola figura
+5. **Figura multi panel**: crea un subplot 2×2 combinando lo anterior en una sola figura
 6. **Estilo**: usa un estilo profesional, incluye líneas de cuadrícula y guarda como PDF
 
 </RevealSequence>
@@ -491,7 +491,7 @@ Crea un **reporte de datos integral** con los siguientes gráficos:
   question="¿Qué crea `fig, ax = plt.subplots(2, 3)`?"
   moduleSlug="python"
   lessonSlug="lesson15_matplotlib"
-  blockId="choice-python-l15-tema-1"
+  blockId="choice python l15 tema 1"
   allowContinueOnIncorrect
   explanation="`subplots(2, 3)` crea una figura con una cuadrícula de 2 filas y 3 columnas de axes."
   options={[
@@ -506,7 +506,7 @@ Crea un **reporte de datos integral** con los siguientes gráficos:
   question="¿Cuál es la diferencia entre las interfaces pyplot y OO de Matplotlib?"
   moduleSlug="python"
   lessonSlug="lesson15_matplotlib"
-  blockId="choice-python-l15-tema-2"
+  blockId="choice python l15 tema 2"
   allowContinueOnIncorrect
   explanation="pyplot ofrece funciones de nivel superior estilo MATLAB; OO expone fig/ax para control fino en gráficos complejos."
   options={[

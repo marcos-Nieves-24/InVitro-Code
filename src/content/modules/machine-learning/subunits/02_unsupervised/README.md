@@ -7,16 +7,16 @@ Cuando no tienes etiquetas, necesitas que el modelo descubra estructura por sí 
 ## Lecciones
 
 | # | Lección | Tema principal |
-|---|---------|---------------|
-| L6 | Clustering K-Means | Agrupar datos sin etiquetas, método del codo, puntaje de silueta |
+||||
+| L6 | Clustering K Means | Agrupar datos sin etiquetas, método del codo, puntaje de silueta |
 | L7 | PCA | Reducir dimensiones preservando varianza, componentes principales |
 
 ## Temas complementarios
 
-- **K-Means++:** Inicialización inteligente de centroides para mejor convergencia
+- **K Means++:** Inicialización inteligente de centroides para mejor convergencia
 - **Clustering Jerárquico:** Dendrogramas, criterios de enlace (Ward, complete, average)
 - **DBSCAN:** Clustering basado en densidad, detección de outliers
-- **t-SNE / UMAP:** Reducción de dimensionalidad no lineal para visualización
+- **t SNE / UMAP:** Reducción de dimensionalidad no lineal para visualización
 - **Detección de anomalías:** Isolation Forest, LOF
 
 ## Habilidades clave
@@ -30,4 +30,4 @@ Cuando no tienes etiquetas, necesitas que el modelo descubra estructura por sí 
 
 - **Biotecnología:** Descubrimiento de subtipos de cáncer por perfiles de expresión génica
 - **SaaS:** Segmentación de usuarios por comportamiento para marketing personalizado
-- **Genómica:** Agrupación de genes por patrones de co-expresión
+- **Genómica:** Agrupación de genes por patrones de co expresión

@@ -55,7 +55,7 @@ d) El primer componente siempre separa las clases
 
 **Q7.** Un colega corre PCA sobre un dataset y los 20 componentes tienen una varianza explicada aproximadamente igual (~5% cada uno). ¿Qué sugiere esto?
 
-<details><summary>Respuesta</summary>Esto sugiere que no hay estructura dominante de baja dimensionalidad en los datos — la varianza está distribuida uniformemente en todas las dimensiones. Esto podría significar que los datos son aproximadamente esféricos (isotrópicos) sin correlaciones fuertes entre las features. En este caso, PCA puede no ser útil para la reducción de dimensionalidad. Posibles causas: features mal elegidas, datos ya no correlacionados o ruido aleatorio dominando.</details>
+<details><summary>Respuesta</summary>Esto sugiere que no hay estructura dominante de baja dimensionalidad en los datos   la varianza está distribuida uniformemente en todas las dimensiones. Esto podría significar que los datos son aproximadamente esféricos (isotrópicos) sin correlaciones fuertes entre las features. En este caso, PCA puede no ser útil para la reducción de dimensionalidad. Posibles causas: features mal elegidas, datos ya no correlacionados o ruido aleatorio dominando.</details>
 
 ## Pregunta de código (1 pregunta)
 

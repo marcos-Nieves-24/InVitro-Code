@@ -51,7 +51,7 @@ d) Que los coeficientes son negativos
 
 **Q6.** Un colega ajusta una regresión lineal y obtiene R² = 0.92 en los datos de entrenamiento y R² = 0.15 en los de prueba. ¿Qué está pasando y cómo lo arreglarías?
 
-<details><summary>Respuesta</summary>El modelo está sobreajustado — memoriza los datos de entrenamiento pero no logra generalizar. Posibles soluciones: reducir la complejidad del modelo (menos features, menor grado polinómico), aplicar regularización (Ridge/Lasso), obtener más datos de entrenamiento o simplificar el conjunto de features.</details>
+<details><summary>Respuesta</summary>El modelo está sobreajustado   memoriza los datos de entrenamiento pero no logra generalizar. Posibles soluciones: reducir la complejidad del modelo (menos features, menor grado polinómico), aplicar regularización (Ridge/Lasso), obtener más datos de entrenamiento o simplificar el conjunto de features.</details>
 
 **Q7.** Explica por qué la solución OLS de forma cerrada $\boldsymbol{\beta} = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$ es problemática cuando $\mathbf{X}^\top\mathbf{X}$ no es invertible. ¿Cuándo ocurre esto?
 
@@ -82,7 +82,7 @@ X, y = data.data, data.target
 int_s, coef_s = ridge_regression_scratch(X, y, lambda_val=1.0)
 ridge = Ridge(alpha=1.0).fit(X, y)
 
-print(f"Intercept match: {np.abs(int_s - ridge.intercept_) < 1e-8}")
-print(f"Coefficients match: {np.allclose(coef_s, ridge.coef_, atol=1e-8)}")
+print(f"Intercept match: {np.abs(int_s ridge.intercept_) < 1e 8}")
+print(f"Coefficients match: {np.allclose(coef_s, ridge.coef_, atol=1e 8)}")
 ```
 </details>
