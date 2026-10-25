@@ -78,8 +78,8 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 </div>
 
 <SpeciesCompare
-  leftLabel="*Aspergillus*"
-  rightLabel="*Penicillium*"
+  leftLabel="Aspergillus"
+  rightLabel="Penicillium"
   caption="Cada atributo se resalta sobre las dos conidias a la vez"
   rows={[
     { feature: "Forma", left: "Más redondeada", right: "Más alargada" },

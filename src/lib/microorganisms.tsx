@@ -3,8 +3,9 @@
 import type { ReactNode } from "react";
 
 // Cursivas para microorganismos: envuelve nombres científicos en <em>
-// Usado en expediciones (ia) para Aspergillus, Penicillium y genéricos frecuentes.
-const MICRO_RE = /(Aspergillus|Penicillium|Escherichia\s+coli|E\.\s*coli|Bacillus|Staphylococcus|Candida|Saccharomyces|Salmonella|Lactobacillus)/g;
+// Consume los marcadores markdown adyacentes (* o **) para no dejar
+// asteriscos literales cuando el origen ya venía con *Nombre* o **Nombre**.
+const MICRO_RE = /\*{0,2}(Aspergillus|Penicillium|Escherichia\s+coli|E\.\s*coli|Bacillus|Staphylococcus|Candida|Saccharomyces|Salmonella|Lactobacillus)\*{0,2}/g;
 
 export function renderWithMicroorganismItalics(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
@@ -19,8 +20,8 @@ export function renderWithMicroorganismItalics(text: string): ReactNode[] {
       parts.push(text.slice(lastIndex, start));
     }
     parts.push(
-      <em key={`${start}-${match[0]}`} className="italic">
-        {match[0]}
+      <em key={`${start}-${match[1]}`} className="italic">
+        {match[1]}
       </em>,
     );
     lastIndex = end;

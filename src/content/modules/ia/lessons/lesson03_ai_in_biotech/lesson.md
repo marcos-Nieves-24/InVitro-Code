@@ -371,13 +371,13 @@ Total aciertos: $35 + 50 = 85$ conidias correctas de 100 ($85\%$ accuracy). Sin 
 <div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3.5 text-xs text-gray-800">
 <strong className="text-teal-900 block mb-1">1. Precisión (Precision): Confiabilidad de las alertas</strong>
 $$\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{35}{35 + 5} = \frac{35}{40} = 0.875\ (87.5\%)$$
-<em>De cada 100 conidias que el clasificador declaró como *Aspergillus*, 87.5 realmente lo eran y 12.5 fueron falsas alarmas.</em>
+<em>De cada 100 conidias que el clasificador declaró como Aspergillus, 87.5 realmente lo eran y 12.5 fueron falsas alarmas.</em>
 </div>
 
 <div className="rounded-lg border border-rose-200 bg-rose-50/80 p-3.5 text-xs text-gray-800">
 <strong className="text-rose-900 block mb-1">2. Recall o Sensibilidad: Capacidad de detección</strong>
 $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{35}{35 + 10} = \frac{35}{45} \approx 0.778\ (77.8\%)$$
-<em>De los 45 casos reales de *Aspergillus* existentes en la muestra, el modelo capturó el 77.8%, un 22.2% de infecciones escapó al radar.</em>
+<em>De los 45 casos reales de Aspergillus existentes en la muestra, el modelo capturó el 77.8%, un 22.2% de infecciones escapó al radar.</em>
 </div>
 
 <div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3.5 text-xs text-gray-800">

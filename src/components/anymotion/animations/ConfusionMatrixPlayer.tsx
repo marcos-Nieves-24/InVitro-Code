@@ -189,7 +189,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.9}
           >
-            Predicho Aspergillus
+            Predicho <tspan font-style="italic">Aspergillus</tspan>
           </text>
           <text
             x={GRID_X + CELL_W + CELL_GAP + CELL_W / 2}
@@ -201,7 +201,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.9}
           >
-            Predicho Penicillium
+            Predicho <tspan font-style="italic">Penicillium</tspan>
           </text>
 
           {/* Row headers */}
@@ -215,7 +215,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.9}
           >
-            Real Aspergillus
+            Real <tspan font-style="italic">Aspergillus</tspan>
           </text>
           <text
             x={GRID_X - 14}
@@ -238,7 +238,7 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
             fontWeight={700}
             opacity={0.9}
           >
-            Real Penicillium
+            Real <tspan font-style="italic">Penicillium</tspan>
           </text>
           <text
             x={GRID_X - 14}
@@ -307,7 +307,11 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
                   fontSize={13}
                   fontFamily="monospace"
                 >
-                  {cell.row === 0 ? "Real: Aspergillus" : "Real: Penicillium"}
+                  {cell.row === 0 ? (
+                    <>Real: <tspan font-style="italic">Aspergillus</tspan></>
+                  ) : (
+                    <>Real: <tspan font-style="italic">Penicillium</tspan></>
+                  )}
                 </text>
                 <text
                   x={cx}
@@ -317,7 +321,11 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
                   fontSize={13}
                   fontFamily="monospace"
                 >
-                  {cell.col === 0 ? "Pred: Aspergillus" : "Pred: Penicillium"}
+                  {cell.col === 0 ? (
+                    <>Pred: <tspan font-style="italic">Aspergillus</tspan></>
+                  ) : (
+                    <>Pred: <tspan font-style="italic">Penicillium</tspan></>
+                  )}
                 </text>
               </g>
             );
@@ -441,14 +449,14 @@ export function ConfusionMatrixPlayer({ caption }: ConfusionMatrixPlayerProps) {
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="font-mono text-sm font-semibold text-brand-600">
-            {lens.title}
+            {renderWithMicroorganismItalics(lens.title)}
           </span>
           <span className="rounded-md bg-brand-50 px-2.5 py-1 font-mono text-sm font-semibold text-brand-700">
             {lens.formula}  {lens.calculation}
           </span>
         </div>
-        <p className="mt-1.5 text-sm text-ink">{lens.meaning}</p>
-        <p className="mt-1 text-sm text-storm">{lens.clinicalNote}</p>
+        <p className="mt-1.5 text-sm text-ink">{renderWithMicroorganismItalics(lens.meaning)}</p>
+        <p className="mt-1 text-sm text-storm">{renderWithMicroorganismItalics(lens.clinicalNote)}</p>
       </div>
 
       {caption && (

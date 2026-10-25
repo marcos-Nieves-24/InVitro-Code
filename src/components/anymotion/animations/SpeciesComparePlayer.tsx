@@ -375,7 +375,7 @@ function Specimen({ cx, cy, baseR, state, label, value, showCaliper, reduced }: 
         </g>
       )}
 
-      {/* Species label */}
+      {/* Species label — siempre en cursiva, sin marcadores literales */}
       <text
         x={cx}
         y={LABEL_Y}
@@ -384,9 +384,10 @@ function Specimen({ cx, cy, baseR, state, label, value, showCaliper, reduced }: 
         fontSize={16}
         fontFamily="sans-serif"
         fontWeight={700}
+        fontStyle="italic"
         opacity={0.95}
       >
-        {label}
+        {label.replaceAll("*", "")}
       </text>
 
       {/* Value of the selected attribute for this side */}

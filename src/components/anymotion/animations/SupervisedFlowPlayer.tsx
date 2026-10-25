@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnymotionStage } from "../AnymotionStage";
 import { AnymotionControls } from "../AnymotionControls";
 import { useAnymotionTimeline } from "../hooks/useAnymotionTimeline";
+import { renderWithMicroorganismItalics } from "@/lib/microorganisms";
 
 interface SupervisedFlowPlayerProps {
   caption?: string;
@@ -471,7 +472,7 @@ export function SupervisedFlowPlayer({
           <span className="font-mono text-sm font-semibold text-brand-600">
             Etapa {activeIndex + 1} de {COUNT}: {current.title}
           </span>
-          <p className="mt-0.5 text-sm text-ink">{current.biotechDetail}</p>
+          <p className="mt-0.5 text-sm text-ink">{renderWithMicroorganismItalics(current.biotechDetail)}</p>
         </div>
         <div className="shrink-0 rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm text-amber-900">
           <span className="font-semibold">Analogía:</span> {current.analogy}

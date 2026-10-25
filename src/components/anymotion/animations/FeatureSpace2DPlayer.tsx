@@ -152,11 +152,11 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           <g opacity={label2DO}>
             <g transform="translate(540,400)">
               <circle cx={0} cy={0} r={6} fill="#f59e0b" />
-              <text x={12} y={4} fill="white" fontSize={13} fontFamily="monospace" opacity={0.85}>
+              <text x={12} y={4} fill="white" fontSize={13} fontFamily="monospace" fontStyle="italic" opacity={0.85}>
                 Aspergillus
               </text>
               <circle cx={110} cy={0} r={6} fill="#38bdf8" />
-              <text x={122} y={4} fill="white" fontSize={13} fontFamily="monospace" opacity={0.85}>
+              <text x={122} y={4} fill="white" fontSize={13} fontFamily="monospace" fontStyle="italic" opacity={0.85}>
                 Penicillium
               </text>
             </g>
