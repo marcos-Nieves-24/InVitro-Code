@@ -145,39 +145,68 @@ export default async function ComunidadPage() {
               </a>
             </div>
 
-            {/* Active researchers (real) */}
+            {/* Leaderboard Mejorado — reemplaza Investigadores Activos */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-ink">
-                Investigadores Activos
+                Leaderboard Mejorado
               </h2>
-              {researchers.length > 0 ? (
-                <div className="glass-card divide-y divide-outline-variant/30 rounded-2xl">
-                  {researchers.map((researcher) => (
-                    <div
-                      key={researcher.id}
-                        className="flex items-center gap-4 p-4 transition-colors hover:bg-surface-card"
-                    >
-                      <UserAvatar username={researcher.name} avatarUrl={researcher.avatar_url} size="md" className="border-2 border-mint/20" />
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold text-ink">
-                          {researcher.name}
-                        </p>
-                        <p className="flex items-center gap-1 truncate text-xs text-storm">
-                          <Flame className="h-3.5 w-3.5 text-error" />
-                          Racha de {researcher.streak}{" "}
-                          {researcher.streak !== 1 ? "días" : "día"}
-                        </p>
-                      </div>
-                      {researcher.xp !== null ? (
-                        <span className="rounded-full bg-fog/20 px-2.5 py-0.5 text-[10px] font-bold text-mint">
-                          {rankTitle(calcLevel(researcher.xp).level)}
-                        </span>
-                      ) : null}
-                    </div>
-                  ))}
+              <p className="text-sm text-storm">Top investigadores por XP — avatar, nivel y progreso vs líder.</p>
+              {entries.length > 0 ? (
+                <div className="space-y-3">
+                  {/* Podio Top 3 */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {entries.slice(0, 3).map((row, idx) => {
+                      const isMe = row.userId === userId;
+                      const level = calcLevel(row.totalXp ?? 0).level;
+                      return (
+                        <div
+                          key={row.userId}
+                          className={`flex flex-col items-center gap-2 rounded-2xl border p-4 text-center ${
+                            idx === 0 ? "border-mint bg-mint/10" : idx === 1 ? "border-fog bg-fog/10" : "border-storm/20 bg-surface-card"
+                          } ${isMe ? "ring-2 ring-mint" : ""}`}
+                        >
+                          <div className="relative">
+                            <UserAvatar username={row.username ?? "Investigador"} avatarUrl={row.avatar_url} size="md" className="border-2 border-white" />
+                            <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-surface-raised text-[10px] font-black">
+                              {idx === 0 ? <Medal className="h-3.5 w-3.5 text-mint" fill="currentColor" /> : idx + 1}
+                            </span>
+                          </div>
+                          <p className="truncate text-xs font-bold text-ink max-w-[80px]">{row.username ?? "Investigador"}{isMe ? " (tú)" : ""}</p>
+                          <p className="text-[10px] font-bold text-mint">{rankTitle(level)} · Lv {level}</p>
+                          <p className="text-xs font-black text-ink">{(row.totalXp ?? 0).toLocaleString("es")} XP</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* Lista 4-10 con barra progreso vs líder */}
+                  <div className="glass-card divide-y divide-outline-variant/30 rounded-2xl">
+                    {entries.slice(3, 10).map((row, i) => {
+                      const idx = i + 3;
+                      const isMe = row.userId === userId;
+                      const leaderXp = entries[0]?.totalXp ?? 1;
+                      const pct = Math.round(((row.totalXp ?? 0) / leaderXp) * 100);
+                      const level = calcLevel(row.totalXp ?? 0).level;
+                      return (
+                        <div key={row.userId} className={`flex items-center gap-3 p-3 ${isMe ? "bg-mint/5" : ""}`}>
+                          <span className="w-6 text-center text-xs font-black text-storm">{idx + 1}</span>
+                          <UserAvatar username={row.username ?? "Investigador"} avatarUrl={row.avatar_url} size="sm" />
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-bold text-ink">{row.username ?? "Investigador"}{isMe ? " (tú)" : ""}</p>
+                            <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-surface-raised">
+                              <div className="h-full bg-mint" style={{ width: `${pct}%` }} />
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-xs font-bold text-ink">{(row.totalXp ?? 0).toLocaleString("es")} XP</p>
+                            <p className="text-[10px] text-storm">{rankTitle(level)}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
-                <EmptyState icon={Users} {...EMPTY_STATES.activeUsers} />
+                <EmptyState icon={Trophy} {...EMPTY_STATES.leaderboard} />
               )}
             </div>
           </div>
