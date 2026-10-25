@@ -154,7 +154,7 @@ export function LessonCarousel({
             rendered by the reveal itself. */}
         <div className="shrink-0 border-b border-outline-variant bg-surface-card px-4 py-2">
           <p className="text-center font-mono text-sm uppercase tracking-widest text-storm">
-            {lessonTitle ? `${lessonTitle} — ` : ""}Escena {current + 1} de {total}
+            {lessonTitle ? `${lessonTitle} ` : ""}Escena {current + 1} de {total}
           </p>
         </div>
 

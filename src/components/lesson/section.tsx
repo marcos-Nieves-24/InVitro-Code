@@ -16,10 +16,9 @@ export function Section({
   return (
     <section className="px-4 py-3 sm:px-6 md:py-4 lg:px-8 lg:py-6">
       <div className="w-full">
-        {/* Eyebrow — ampliada */}
+        {/* Eyebrow — sin guión, solo número y etiqueta */}
         <div className="eyebrow mb-2 flex items-center gap-2 text-sm font-semibold text-brand-600">
           <span>{String(number).padStart(2, "0")}</span>
-          <span className="h-px w-8 bg-gray-300" />
           <span>{eyebrow}</span>
         </div>
 
