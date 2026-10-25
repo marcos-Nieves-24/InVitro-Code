@@ -17,11 +17,11 @@ Implementa un notebook que ejecute el siguiente flujo:
 2. **División**: separar en `train` y `test` con `train_test_split` (20% de prueba, `stratify` por clase, `random_state=42`).
 3. **Preprocesamiento**: escalar las features con `StandardScaler`.
 4. **Entrenamiento**: entrenar dos modelos:
-   - `KNeighborsClassifier(n_neighbors=5)`
-   - `LogisticRegression(max_iter=1000, random_state=42)`
+   `KNeighborsClassifier(n_neighbors=5)`
+   `LogisticRegression(max_iter=1000, random_state=42)`
 5. **Evaluación**: para cada modelo, calcular:
-   - Matriz de confusión
-   - Accuracy, precision, recall, F1-score
+   Matriz de confusión
+   Accuracy, precision, recall, F1 score
 6. **Comparación**: crear una tabla comparativa con las métricas de ambos modelos.
 
 ### Tarea 2: Escribir un reporte de análisis

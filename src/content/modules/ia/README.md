@@ -6,15 +6,15 @@ Introducir la Inteligencia Artificial desde cero, usando como hilo narrativo la 
 
 ## Lecciones
 
-1. **¿Qué es la IA?** — Features, patrones visuales, reglas fijas vs aprendizaje automático
-2. **¿Cómo aprende la IA?** — Frontera de decisión, KNN, regresión lineal, subajuste y sobreajuste
-3. **IA en la Biotecnología** — Visualización 3D de proteínas, pipeline completo de ML
-4. **Casos Reales en la Investigación** — AlphaFold (Nobel 2024), Rentosertib (Nature Medicine 2025), Evo
+1. **¿Qué es la IA?**   Features, patrones visuales, reglas fijas vs aprendizaje automático
+2. **¿Cómo aprende la IA?**   Frontera de decisión, KNN, regresión lineal, subajuste y sobreajuste
+3. **IA en la Biotecnología**   Visualización 3D de proteínas, pipeline completo de ML
+4. **Casos Reales en la Investigación**   AlphaFold (Nobel 2024), Rentosertib (Nature Medicine 2025), Evo
 
 ## Demos interactivos (8)
 
 | # | Demo | Tema |
-|---|---|---|
+||||
 | 1 | features | Visualización de características de conidias (scatter biplot) |
 | 2 | patterns | Reconocimiento visual de patrones (heatmaps 5×5) |
 | 3 | rules | Reglas fijas vs IA (clasificador por umbrales) |

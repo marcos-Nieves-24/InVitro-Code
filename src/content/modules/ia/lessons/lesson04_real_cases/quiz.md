@@ -25,10 +25,10 @@ b) Un modelo de lenguaje para genomas completos
 c) Un fármaco aprobado por la FDA
 d) Un método experimental para determinar estructuras
 
----
+
 ## Clave de respuestas
 
-1. **c)** 92.4 — un salto enorme respecto al score ~40 de AlphaFold 1 en 2018.
-2. **b)** 18 meses hasta PCC, comparado con 2.5-4 años del método tradicional.
+1. **c)** 92.4   un salto enorme respecto al score ~40 de AlphaFold 1 en 2018.
+2. **b)** 18 meses hasta PCC, comparado con 2.5 a 4 años del método tradicional.
 3. **c)** Predecir estructuras con precisión atómica es justo lo que AlphaFold logra, no una limitación.
-4. **b)** Evo es un modelo fundacional genómico. Evo 1 (Science 2024) demostró diseño funcional de CRISPR-Cas.
+4. **b)** Evo es un modelo fundacional genómico. Evo 1 (Science 2024) demostró diseño funcional de CRISPR Cas.
