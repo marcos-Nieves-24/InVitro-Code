@@ -81,7 +81,7 @@ export function ProfileHero({
             <p className="text-xs font-semibold uppercase tracking-wider text-storm">
               Fecha de unión
             </p>
-            <p className="truncate text-base font-semibold text-ink">
+            <p className="text-base font-semibold text-ink">
               {joinDate ?? "—"}
             </p>
           </div>
@@ -93,7 +93,7 @@ export function ProfileHero({
             <p className="text-xs font-semibold uppercase tracking-wider text-storm">
               Posición en leaderboard
             </p>
-            <p className="truncate text-base font-semibold text-ink">
+            <p className="text-base font-semibold text-ink">
               {leaderboardRank != null ? `#${leaderboardRank}` : "—"}
             </p>
           </div>
