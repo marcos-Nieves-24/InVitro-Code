@@ -63,11 +63,9 @@ export default async function LaboratoriosPage() {
     (progressRes.data ?? []).map((row) => `${row.module_slug}/${row.lesson_slug}`),
   );
 
-  // Prefer lab_progress when rows exist
+  // Labs only mark done via lab_progress — never fallback to lesson progress (expediciones)
   const labCompletedKeys = new Set<string>();
-  let hasLabProgress = false;
   if (Array.isArray(labProgressRes.data) && labProgressRes.data.length > 0) {
-    hasLabProgress = true;
     for (const row of labProgressRes.data as Array<{
       module_slug: string;
       lesson_slug: string;
@@ -78,7 +76,7 @@ export default async function LaboratoriosPage() {
       }
     }
   }
-  const effectiveCompletedKeys = hasLabProgress ? labCompletedKeys : completedLessonKeys;
+  const effectiveCompletedKeys = labCompletedKeys;
 
   // ── Build module groups for LabHub ──
   const modules = getModules();

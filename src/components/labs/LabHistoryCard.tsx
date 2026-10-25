@@ -117,7 +117,7 @@ export function LabHistoryCard({
         </span>
       )}
       {!isRepasar && status !== "completed" && status !== "not_started" && (
-        <span className="mt-1 text-xs font-medium text-storm">Continuar →</span>
+        <span className="mt-1 text-xs font-medium text-storm">Continuar </span>
       )}
     </Link>
   );

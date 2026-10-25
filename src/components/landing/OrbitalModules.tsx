@@ -54,7 +54,7 @@ export function OrbitalModules({ modules }: { modules: ModuleData[] }) {
   const viewportRef = useRef<HTMLDivElement>(null);
 
   // ── Hooks (ALL of them run before the empty-state return below) ──
-  // The early return used to precede three useCallback hooks, so a 0→N modules
+  // The early return used to precede three useCallback hooks, so a 0N modules
   // transition changed the hook order and threw. Keep every hook up here.
   useEffect(() => {
     if (len === 0) return;

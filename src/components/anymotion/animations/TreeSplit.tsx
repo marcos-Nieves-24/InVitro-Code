@@ -386,7 +386,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
             y={SY1 + 16}
             textAnchor="middle"
             fill="white"
-            fontSize={10}
+            fontSize={13}
             fontFamily="monospace"
             opacity={0.6}
           >
@@ -397,7 +397,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
             y={(SY0 + SY1) / 2}
             textAnchor="middle"
             fill="white"
-            fontSize={10}
+            fontSize={13}
             fontFamily="monospace"
             opacity={0.6}
             transform={`rotate(-90 ${SX0 - 12} ${(SY0 + SY1) / 2})`}
@@ -484,7 +484,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
                   y={-2}
                   textAnchor="middle"
                   fill="white"
-                  fontSize={9}
+                  fontSize={12}
                   fontFamily="monospace"
                   fontWeight={700}
                 >
@@ -521,7 +521,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
       <div className="mt-3 flex flex-col gap-3 rounded-b-card bg-surface-card px-4 py-3 text-storm">
         {/* Selector de característica */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide opacity-70">
+          <span className="text-sm font-semibold uppercase tracking-wide opacity-70">
             Característica
           </span>
           <div role="group" aria-label="Selector de característica" className="flex gap-2">
@@ -534,7 +534,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
                   type="button"
                   onClick={() => setFeature(f)}
                   aria-pressed={active}
-                  className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                  className={`rounded-full border px-3 py-1 text-sm font-semibold transition-colors ${
                     active
                       ? "border-mint bg-mint/15 text-mint"
                       : "border-gray-200 bg-white text-storm hover:bg-mint/10 hover:text-mint"
@@ -549,7 +549,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
 
         {/* Umbral */}
         <div className="flex flex-wrap items-center gap-3">
-          <label htmlFor="treesplit-threshold" className="font-mono text-xs whitespace-nowrap text-storm">
+          <label htmlFor="treesplit-threshold" className="font-mono text-sm whitespace-nowrap text-storm">
             Umbral{" "}
             <span className="font-semibold text-mint">{threshold.toFixed(2)}</span>
           </label>
@@ -567,7 +567,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
         </div>
 
         {/* Lectura viva */}
-        <div className="grid grid-cols-1 gap-1 font-mono text-xs sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-1 font-mono text-sm sm:grid-cols-3">
           <span>
             Gini padre: <span className="text-mint">{parentImp.toFixed(3)}</span>
           </span>
@@ -580,13 +580,13 @@ export function TreeSplit({ caption }: TreeSplitProps) {
             (n={rightIdx.length})
           </span>
         </div>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-sm">
           <span>
             Reducción de impureza:{" "}
             <span className="text-mint">{currentGain.toFixed(4)}</span>
           </span>
           <span
-            className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+            className={`rounded-full border px-3 py-1 text-sm font-semibold ${
               isBest
                 ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
                 : "border-amber-400/40 bg-amber-400/10 text-amber-300"
@@ -606,22 +606,22 @@ export function TreeSplit({ caption }: TreeSplitProps) {
             type="button"
             onClick={handleSplit}
             disabled={!canSplit || leftIdx.length === 0 || rightIdx.length === 0}
-            className="rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-xs font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-full border border-mint bg-mint/15 px-4 py-1.5 text-sm font-semibold text-mint transition-colors hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Dividir
           </button>
           <button
             type="button"
             onClick={handleReset}
-            className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint"
+            className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-semibold text-storm transition-colors hover:bg-mint/10 hover:text-mint"
           >
             Reiniciar
           </button>
-          <span className="font-mono text-xs tabular-nums">
+          <span className="font-mono text-sm tabular-nums">
             Nodo activo: {activeNode.id} (nivel {activeNode.depth + 1})
           </span>
           {!isLeaf ? (
-            <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-300">
+            <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-sm font-semibold text-sky-300">
               Nodo ya dividido (elige otra hoja)
             </span>
           ) : null}
@@ -629,7 +629,7 @@ export function TreeSplit({ caption }: TreeSplitProps) {
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {caption}
         </figcaption>
       )}

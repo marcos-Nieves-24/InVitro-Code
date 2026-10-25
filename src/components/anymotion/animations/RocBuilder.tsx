@@ -213,7 +213,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
           {[0, 0.25, 0.5, 0.75, 1].map((v) => (
             <g key={`tx-${v}`}>
               <line x1={xPx(v)} y1={PLOT_B} x2={xPx(v)} y2={PLOT_B + 6} stroke="white" strokeWidth={1} opacity={0.5} />
-              <text x={xPx(v)} y={PLOT_B + 20} textAnchor="middle" fill="white" fontSize={11} fontFamily="monospace" opacity={0.7}>
+              <text x={xPx(v)} y={PLOT_B + 20} textAnchor="middle" fill="white" fontSize={14} fontFamily="monospace" opacity={0.7}>
                 {v.toFixed(2)}
               </text>
             </g>
@@ -221,7 +221,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
           {[0, 0.25, 0.5, 0.75, 1].map((v) => (
             <g key={`ty-${v}`}>
               <line x1={PLOT_L - 6} y1={yPx(v)} x2={PLOT_L} y2={yPx(v)} stroke="white" strokeWidth={1} opacity={0.5} />
-              <text x={PLOT_L - 10} y={yPx(v) + 4} textAnchor="end" fill="white" fontSize={11} fontFamily="monospace" opacity={0.7}>
+              <text x={PLOT_L - 10} y={yPx(v) + 4} textAnchor="end" fill="white" fontSize={14} fontFamily="monospace" opacity={0.7}>
                 {v.toFixed(2)}
               </text>
             </g>
@@ -255,7 +255,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
             strokeWidth={1.2}
             strokeDasharray="6 5"
           />
-          <text x={xPx(0.55)} y={yPx(0.55) - 8} fill="rgba(255,255,255,0.6)" fontSize={11} fontFamily="monospace">
+          <text x={xPx(0.55)} y={yPx(0.55) - 8} fill="rgba(255,255,255,0.6)" fontSize={14} fontFamily="monospace">
             azar
           </text>
 
@@ -278,7 +278,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
             x={Math.min(PLOT_R - 8, xPx(opPoint.fpr) + 12)}
             y={Math.max(PLOT_T + 12, yPx(opPoint.tpr) - 10)}
             fill="#f59e0b"
-            fontSize={11}
+            fontSize={14}
             fontFamily="monospace"
             fontWeight={700}
           >
@@ -294,7 +294,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
           </g>
 
           {/* Leyenda */}
-          <g fontFamily="monospace" fontSize={10} opacity={0.85}>
+          <g fontFamily="monospace" fontSize={13} opacity={0.85}>
             <line x1={PLOT_L} y1={PLOT_B + 62} x2={PLOT_L + 24} y2={PLOT_B + 62} stroke="#45dcc6" strokeWidth={2.2} />
             <text x={PLOT_L + 30} y={PLOT_B + 66} fill="white">curva ROC</text>
             <rect x={PLOT_L + 130} y={PLOT_B + 56} width={12} height={12} rx={2} fill="rgba(69,220,198,0.18)" stroke="#45dcc6" strokeWidth={1} />
@@ -312,7 +312,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
         className="mt-2 flex flex-col gap-2 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm"
       >
         <div className="flex flex-wrap items-center gap-3">
-          <label htmlFor="roc-threshold" className="font-mono text-xs whitespace-nowrap text-storm">
+          <label htmlFor="roc-threshold" className="font-mono text-sm whitespace-nowrap text-storm">
             Umbral{" "}
             <span className="font-semibold text-mint">{threshold.toFixed(2)}</span>
           </label>
@@ -336,7 +336,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
           <button
             type="button"
             onClick={applyYouden}
-            className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
             aria-label="Fijar mejor umbral según Youden J"
           >
             Mejor umbral (Youden J)
@@ -345,13 +345,13 @@ export function RocBuilder({ caption }: RocBuilderProps) {
             <button
               type="button"
               onClick={resetPinned}
-              className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
+              className="min-h-11 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-storm transition-colors hover:border-mint/60 hover:text-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 motion-reduce:transition-none"
               aria-label="Liberar umbral fijado"
             >
               Liberar
             </button>
           )}
-          <span className="font-mono text-xs text-storm" aria-live="polite">
+          <span className="font-mono text-sm text-storm" aria-live="polite">
             {pinned ? "Umbral fijado en el óptimo de Youden J." : "Mueve el deslizador para explorar el trade-off."}
           </span>
         </div>
@@ -359,7 +359,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
         {/* Lectura viva */}
         <div
           aria-live="polite"
-          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-xs text-storm sm:grid-cols-4"
+          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-sm text-storm sm:grid-cols-4"
         >
           <span>TP = {counts.tp}</span>
           <span>FP = {counts.fp}</span>
@@ -373,7 +373,7 @@ export function RocBuilder({ caption }: RocBuilderProps) {
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">{caption}</figcaption>
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">{caption}</figcaption>
       )}
     </figure>
   );

@@ -22,7 +22,7 @@ import type { ReactNode } from "react";
 
 /**
  * Strip the first h1 that starts with "Assignment" so the page keeps a single h1
- * (page title). Keeps h1→h2→h3 order and removes duplicate "Assignment 9: ..." text.
+ * (page title). Keeps h1h2h3 order and removes duplicate "Assignment 9: ..." text.
  */
 function rehypeStripFirstH1() {
   return (tree: unknown) => {
@@ -88,7 +88,7 @@ interface Props {
 /**
  * REQ-PROJ-01/04/05: Project detail route. Server component — auth gate,
  * existence check, compile of assignment.md through the same MDX pipeline
- * as labs (pre: LabCodeBlock → PyodideRunner consoles), NotebookActions
+ * as labs (pre: LabCodeBlock  PyodideRunner consoles), NotebookActions
  * gated on hasNotebook.
  */
 export default async function ProjectDetailPage({ params }: Props) {

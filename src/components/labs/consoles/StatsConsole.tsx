@@ -179,7 +179,7 @@ export function StatsConsole() {
               ))}
             </g>
 
-            {/* Y axis ticks + labels 0→0.4 */}
+            {/* Y axis ticks + labels 00.4 */}
             <g>
               {yTicks.map((t) => (
                 <g key={`yt-${t.label}`}>

@@ -45,7 +45,7 @@ export default function LegalLayout({ children }: { children: React.ReactNode })
           <span className="hidden h-3 w-px bg-surface-raised md:block" />
           <span className="text-storm">Jurisdicción: Colombia · LATAM · +18</span>
           <Link href="/privacidad" className="ml-auto hidden text-xs font-semibold text-brand-800 underline decoration-mint/40 underline-offset-4 hover:text-ink md:inline">
-            Ver Política de Privacidad →
+            Ver Política de Privacidad 
           </Link>
         </div>
       </div>

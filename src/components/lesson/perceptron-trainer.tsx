@@ -543,7 +543,7 @@ export function PerceptronTrainer() {
                       <span className="font-mono">
                         ({h.x.toFixed(1)}, {h.y.toFixed(1)})
                       </span>{" "}
-                      → Predicción:{" "}
+                       Predicción:{" "}
                       <span
                         className={`font-medium ${
                           h.prediction === 1 ? "text-[#3525cd]" : "text-[#14b8a6]"

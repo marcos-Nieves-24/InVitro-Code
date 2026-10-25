@@ -274,7 +274,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
                 y={PLOT_B + 18}
                 textAnchor="middle"
                 fill="white"
-                fontSize={10}
+                fontSize={13}
                 fontFamily="monospace"
                 opacity={0.7}
               >
@@ -356,7 +356,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
                   y={yPx(d) - 10}
                   textAnchor="middle"
                   fill="#f43f5e"
-                  fontSize={10}
+                  fontSize={13}
                   fontFamily="monospace"
                   fontWeight={700}
                 >
@@ -413,7 +413,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
           })()}
 
           {/* Etiqueta de diferencia media - mediana */}
-          <g fontFamily="monospace" fontSize={11}>
+          <g fontFamily="monospace" fontSize={14}>
             <rect
               x={PLOT_R - 200}
               y={PLOT_T + 4}
@@ -436,7 +436,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
           </g>
 
           {/* Leyenda */}
-          <g fontFamily="monospace" fontSize={10} opacity={0.85}>
+          <g fontFamily="monospace" fontSize={13} opacity={0.85}>
             <line
               x1={PLOT_L}
               y1={PLOT_B + 26}
@@ -501,7 +501,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
       <div className="mt-2 flex flex-col gap-3 rounded-card border border-white/10 bg-surface-card px-4 py-3 text-storm">
         {/* Selector de forma */}
         <div className="flex flex-col gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide opacity-70">
+          <span className="text-sm font-semibold uppercase tracking-wide opacity-70">
             Forma de la distribución
           </span>
           <div role="group" aria-label="Selector de forma de la distribución" className="flex flex-wrap gap-2">
@@ -516,7 +516,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
                     if (sh === "sym") setS(0);
                   }}
                   aria-pressed={active}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
                     active
                       ? "border-mint bg-mint/15 text-mint"
                       : "border-gray-200 bg-white text-storm hover:bg-mint/10 hover:text-mint"
@@ -533,7 +533,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
         <div className="flex flex-wrap items-center gap-3">
           <label
             htmlFor="dist-shape-strength"
-            className="font-mono text-xs whitespace-nowrap text-storm"
+            className="font-mono text-sm whitespace-nowrap text-storm"
           >
             Fuerza de la cola (asimetría){" "}
             <span className="font-semibold text-mint">{s.toFixed(2)}</span>
@@ -555,7 +555,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
         {/* Etiqueta de simetría */}
         <div className="flex flex-wrap items-center gap-2">
           <span
-            className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+            className={`rounded-full border px-3 py-1 text-sm font-semibold ${
               isSym
                 ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
                 : "border-amber-400/40 bg-amber-400/10 text-amber-300"
@@ -563,7 +563,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
           >
             {isSym ? "Simétrica" : "Asimétrica"}
           </span>
-          <span className="font-mono text-xs text-storm/80">
+          <span className="font-mono text-sm text-storm/80">
             coeficiente de asimetría = {stats.skew.toFixed(3)}
           </span>
         </div>
@@ -571,7 +571,7 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
         {/* Lectura viva */}
         <div
           aria-live="polite"
-          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-xs text-storm sm:grid-cols-3"
+          className="grid grid-cols-2 gap-x-4 gap-y-1 rounded-card border border-gray-200 bg-white px-3 py-2 font-mono text-sm text-storm sm:grid-cols-3"
         >
           <span>
             Media = <span className="text-amber-600">{stats.mean.toFixed(3)}</span>
@@ -600,13 +600,13 @@ export function DistributionShape({ caption }: DistributionShapeProps) {
         </div>
 
         {/* Explicación en lenguaje llano */}
-        <p className="rounded-card border border-gray-200 bg-white px-3 py-2 text-xs text-storm">
+        <p className="rounded-card border border-gray-200 bg-white px-3 py-2 text-sm text-storm">
           {explanation}
         </p>
       </div>
 
       {caption && (
-        <figcaption className="mt-2 text-center font-mono text-xs text-storm">
+        <figcaption className="mt-2 text-center font-mono text-sm text-storm">
           {caption}
         </figcaption>
       )}
