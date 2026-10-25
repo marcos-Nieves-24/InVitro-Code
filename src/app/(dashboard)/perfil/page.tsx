@@ -90,12 +90,13 @@ export default async function ProfilePage() {
     const { validateAvatar } = await import("@/lib/profile/validateAvatar");
     const { ext } = await validateAvatar(file);
     const admin = createAdminClient();
+    let oldPath: string | null = null;
     try {
       const { data: existing } = await admin.from("profiles").select("avatar_url").eq("id", uid).maybeSingle();
       const oldUrl: string | null | undefined = existing?.avatar_url;
       if (oldUrl && oldUrl.includes("/avatars/")) {
-        const oldPath = oldUrl.split("/avatars/")[1]?.split("?")[0];
-        if (oldPath) await admin.storage.from("avatars").remove([oldPath]);
+        oldPath = oldUrl.split("/avatars/")[1]?.split("?")[0] ?? null;
+        if (oldPath && !oldPath.startsWith("avatars/")) oldPath = `avatars/${oldPath}`;
       }
     } catch {}
     const fileName = `${uid}-${Date.now()}.${ext}`;
@@ -104,7 +105,15 @@ export default async function ProfilePage() {
     if (uploadError) throw new Error(uploadError.message);
     const { data: urlData } = admin.storage.from("avatars").getPublicUrl(filePath);
     const { error: avatarUpdateError } = await admin.from("profiles").update({ avatar_url: urlData.publicUrl }).eq("id", uid);
-    if (avatarUpdateError) throw new Error(avatarUpdateError.message);
+    if (avatarUpdateError) {
+      await admin.storage.from("avatars").remove([filePath]);
+      throw new Error(avatarUpdateError.message);
+    }
+    if (oldPath && oldPath !== filePath) {
+      try {
+        await admin.storage.from("avatars").remove([oldPath]);
+      } catch {}
+    }
     const { revalidatePath } = await import("next/cache");
     revalidatePath("/perfil");
   }
