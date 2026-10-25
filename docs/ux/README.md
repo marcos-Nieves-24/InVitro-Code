@@ -27,6 +27,8 @@ docs/ux/excalidraw/
   08-laboratorios-module.excalidraw
   08-laboratorios-module-ia.excalidraw
   08-laboratorios-module-python.excalidraw
+  08-laboratorios-module-estadistica.excalidraw
+  08-laboratorios-module-ml.excalidraw
   09-laboratorios-lesson.excalidraw
   10-proyectos-index.excalidraw
   11-proyectos-module.excalidraw
