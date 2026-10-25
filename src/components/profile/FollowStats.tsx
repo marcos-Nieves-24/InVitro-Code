@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { SocialUser } from "@/domain/profile/social";
+import { FollowButton } from "./FollowButton";
 
 interface FollowStatsProps {
   following: SocialUser[];
@@ -10,30 +11,20 @@ interface FollowStatsProps {
   onOpenConecta?: () => void;
 }
 
-function UserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: string) => void }) {
-  const initials = user.username
-    .slice(0, 2)
-    .toUpperCase();
+function UserRow({ user }: { user: SocialUser }) {
+  const initials = user.username.slice(0, 2).toUpperCase();
   return (
     <div className="flex items-center gap-3 py-3">
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-fog text-sm font-bold text-ink">
         {initials}
       </div>
       <span className="flex-1 truncate text-sm font-semibold text-ink">{user.username}</span>
-      {onConnect && (
-        <button
-          type="button"
-          onClick={() => onConnect(user.id)}
-          className="shrink-0 rounded-btn bg-mint px-3 py-1.5 text-xs font-bold text-ink hover:bg-fog"
-        >
-          Conectar
-        </button>
-      )}
+      <FollowButton targetUserId={user.id} />
     </div>
   );
 }
 
-export function FollowStats({ following, followers, onConnect, onOpenConecta }: FollowStatsProps) {
+export function FollowStats({ following, followers, onOpenConecta }: FollowStatsProps) {
   const [activeTab, setActiveTab] = useState<"following" | "followers">("following");
   const list = activeTab === "following" ? following : followers;
 
@@ -70,7 +61,7 @@ export function FollowStats({ following, followers, onConnect, onOpenConecta }: 
         </p>
         <div className="space-y-2">
           {list.slice(0, 5).map((u) => (
-            <UserRow key={u.id} user={u} onConnect={onConnect} />
+            <UserRow key={u.id} user={u} />
           ))}
           {list.length === 0 && (
             <p className="py-4 text-center text-sm text-storm">Aún no hay usuarios aquí.</p>

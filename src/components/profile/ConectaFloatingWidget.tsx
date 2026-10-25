@@ -79,22 +79,7 @@ export function ConectaFloatingWidget({ suggested, isOpen, onClose, onConnect }:
 
           <div className="space-y-2">
             {suggested.slice(0, 4).map((u) => {
-              const initials = u.username.slice(0, 2).toUpperCase();
-              return (
-                <div key={u.id} className="flex items-center gap-3 rounded-btn bg-surface px-3 py-2">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fog text-[10px] font-bold text-ink">
-                    {initials}
-                  </div>
-                  <span className="flex-1 truncate text-sm font-medium text-ink">{u.username}</span>
-                  <button
-                    type="button"
-                    onClick={() => onConnect?.(u.id)}
-                    className="shrink-0 rounded-btn bg-mint px-3 py-1 text-xs font-semibold text-ink hover:bg-fog focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
-                  >
-                    Conectar
-                  </button>
-                </div>
-              );
+              return <ConectaUserRow key={u.id} user={u} onConnect={onConnect} />;
             })}
           </div>
         </div>
@@ -133,27 +118,65 @@ export function ConectaFloatingWidget({ suggested, isOpen, onClose, onConnect }:
             </div>
             <div className="space-y-2">
               {suggested.slice(0, 4).map((u) => {
-                const initials = u.username.slice(0, 2).toUpperCase();
-                return (
-                  <div key={u.id} className="flex items-center gap-3 rounded-btn bg-surface px-3 py-2">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fog text-[10px] font-bold text-ink">
-                      {initials}
-                    </div>
-                    <span className="flex-1 truncate text-sm font-medium text-ink">{u.username}</span>
-                    <button
-                      type="button"
-                      onClick={() => onConnect?.(u.id)}
-                      className="shrink-0 rounded-btn bg-mint px-3 py-1 text-xs font-semibold text-ink hover:bg-fog"
-                    >
-                      Conectar
-                    </button>
-                  </div>
-                );
+                return <ConectaUserRow key={u.id} user={u} onConnect={onConnect} />;
               })}
             </div>
           </div>
         </>
       )}
     </>
+  );
+}
+
+function ConectaUserRow({ user, onConnect }: { user: SocialUser; onConnect?: (id: string) => void }) {
+  const [status, setStatus] = useState<"idle" | "pending" | "sent" | "friends">("idle");
+  const [loading, setLoading] = useState(false);
+  const initials = user.username.slice(0, 2).toUpperCase();
+
+  const handleConnect = async () => {
+    if (onConnect) {
+      onConnect(user.id);
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/friend-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ receiverId: user.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error");
+      setStatus("sent");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Error";
+      if (msg.includes("Ya enviaste")) setStatus("pending");
+      else alert(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-3 rounded-btn bg-surface px-3 py-2">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fog text-[10px] font-bold text-ink">
+        {initials}
+      </div>
+      <span className="flex-1 truncate text-sm font-medium text-ink">{user.username}</span>
+      {status === "sent" || status === "pending" ? (
+        <span className="shrink-0 rounded-btn bg-surface px-3 py-1 text-xs font-semibold text-storm">Enviada</span>
+      ) : status === "friends" ? (
+        <span className="shrink-0 rounded-btn bg-fog px-3 py-1 text-xs font-semibold text-ink">Amigos</span>
+      ) : (
+        <button
+          type="button"
+          onClick={handleConnect}
+          disabled={loading}
+          className="shrink-0 rounded-btn bg-mint px-3 py-1 text-xs font-semibold text-ink hover:bg-fog focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint disabled:opacity-50"
+        >
+          {loading ? "..." : "Conectar"}
+        </button>
+      )}
+    </div>
   );
 }

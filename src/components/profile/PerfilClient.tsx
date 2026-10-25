@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { ProfileHero } from "./ProfileHero";
 import { FollowStats } from "./FollowStats";
 import { ConectaFloatingWidget } from "./ConectaFloatingWidget";
+import { FriendsSection } from "./FriendsSection";
 import { AvatarUpload } from "./AvatarUpload";
 import { ProfileForm } from "./ProfileForm";
 import type { SocialUser } from "@/domain/profile/social";
@@ -69,6 +70,10 @@ export function PerfilClient({
         onClose={() => setConectaOpen(false)}
       />
 
+      <div className="mt-8">
+        <FriendsSection />
+      </div>
+
       {/* Edit modal */}
       {editOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -103,7 +108,16 @@ export function PerfilClient({
                 <AvatarUpload
                   currentAvatar={profile.avatar_url}
                   onUpload={async (file) => {
-                    await onAvatarUpload(file);
+                    const formData = new FormData();
+                    formData.append("avatar", file);
+                    const res = await fetch("/api/profile/avatar", {
+                      method: "POST",
+                      body: formData,
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {
+                      throw new Error(data.error || "Error al subir la foto");
+                    }
                     router.refresh();
                   }}
                 />
