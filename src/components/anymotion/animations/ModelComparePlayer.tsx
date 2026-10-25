@@ -272,17 +272,20 @@ export function ModelComparePlayer({ caption }: ModelComparePlayerProps) {
             );
           })}
 
-          {/* Bottom synthesis bar */}
-          <text
-            x={VB_W / 2}
-            y={VB_H - 28}
-            textAnchor="middle"
-            fill="rgba(255,255,255,0.75)"
-            fontSize={14}
-            fontFamily="monospace"
-          >
-            {currentDim.takeaway}
-          </text>
+          {/* Bottom synthesis bar — wrapped to 55 chars so it never bleeds */}
+          {wrapText(currentDim.takeaway, 55).map((line, li) => (
+            <text
+              key={`takeaway-${li}`}
+              x={VB_W / 2}
+              y={VB_H - 36 + li * 16}
+              textAnchor="middle"
+              fill="rgba(255,255,255,0.75)"
+              fontSize={13}
+              fontFamily="monospace"
+            >
+              {line}
+            </text>
+          ))}
         </svg>
       </AnymotionStage>
 

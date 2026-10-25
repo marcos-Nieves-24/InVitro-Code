@@ -66,7 +66,7 @@ function wrapText(text: string, maxChars: number): string[] {
   return lines;
 }
 
-const DETAIL_CHARS_PER_LINE = 22;
+const DETAIL_CHARS_PER_LINE = 17;
 const DETAIL_LINES = STAGES.map((s) => wrapText(s.detail, DETAIL_CHARS_PER_LINE));
 
 // ---------------------------------------------------------------------------
