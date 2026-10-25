@@ -5,7 +5,7 @@
  */
 export const ALLOWED_EXTS = ["jpg", "jpeg", "png", "webp"] as const;
 export const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp"] as const;
-export const MAX_SIZE = 2 * 1024 * 1024; // 2MB
+export const MAX_SIZE = 5 * 1024 * 1024; // 5MB (was 2MB, increased for user screenshots like 2.1M PNG)
 
 type AllowedExt = (typeof ALLOWED_EXTS)[number];
 type AllowedMime = (typeof ALLOWED_MIME)[number];
