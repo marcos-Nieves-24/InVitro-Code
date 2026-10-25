@@ -145,12 +145,11 @@ export default async function ComunidadPage() {
               </a>
             </div>
 
-            {/* Leaderboard Mejorado — reemplaza Investigadores Activos */}
+            {/* Leaderboard de estudiantes */}
             <div className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-ink">
-                Leaderboard Mejorado
+                Leaderboard de estudiantes
               </h2>
-              <p className="text-sm text-storm">Top investigadores por XP — avatar, nivel y progreso vs líder.</p>
               {entries.length > 0 ? (
                 <div className="space-y-3">
                   {/* Podio Top 3 */}
@@ -211,64 +210,8 @@ export default async function ComunidadPage() {
             </div>
           </div>
 
-          {/* Right column: real global leaderboard */}
+          {/* Right column: Tu posición */}
           <div className="space-y-6 lg:col-span-4">
-            <h2 className="font-display text-2xl font-bold text-ink">
-              Global Leaderboard
-            </h2>
-            {entries.length > 0 ? (
-              <div className="glass-card space-y-4 rounded-2xl p-6">
-                <div className="space-y-4">
-                  {entries.slice(0, 10).map((row, index) => {
-                    const isMe = row.userId === userId;
-                    return (
-                      <div
-                        key={`${row.userId}-${index}`}
-                        className={`flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-surface-card ${
-                          isMe
-                            ? "border border-mint/30 bg-fog/20"
-                            : ""
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-raised text-xs font-black text-storm">
-                            {index < 3 ? (
-                              <Medal
-                                className={`h-4 w-4 ${
-                                  index === 0
-                                    ? "text-mint"
-                                    : index === 1
-                                      ? "text-fog"
-                                      : "text-storm"
-                                }`}
-                                fill="currentColor"
-                              />
-                            ) : (
-                              index + 1
-                            )}
-                          </span>
-                          <UserAvatar username={row.username ?? "Investigador"} avatarUrl={row.avatar_url} size="sm" />
-                          <span
-                            className={`text-sm font-bold ${
-                              isMe ? "text-mint" : "text-ink"
-                            }`}
-                          >
-                            {row.username ?? "Investigador"}
-                            {isMe ? " (tú)" : ""}
-                          </span>
-                        </div>
-                        <span className="text-xs font-bold text-mint">
-                          {(row.totalXp ?? 0).toLocaleString("es")} XP
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : (
-              <EmptyState icon={Trophy} {...EMPTY_STATES.leaderboard} />
-            )}
-
             {/* Tu posición — real rank + XP comparado */}
             <div className="rounded-2xl border-t-4 border-t-mint glass-card space-y-4 p-6">
               <div className="flex items-center gap-2">
