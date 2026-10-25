@@ -1,0 +1,22 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff",
+    "currentItemFontFamily": 5,
+    "currentItemFontSize": 20,
+    "currentItemStrokeColor": "#1e1e1e",
+    "currentItemBackgroundColor": "transparent",
+    "currentItemFillStyle": "solid",
+    "currentItemStrokeWidth": 4,
+    "currentItemRoughness": 1,
+    "currentItemOpacity": 100,
+    "currentItemRoundness": "round"
+  },
+  "files": {}
+}
