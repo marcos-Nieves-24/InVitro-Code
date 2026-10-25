@@ -44,56 +44,56 @@ export function ProfileHero({
   const joinDate = formatJoinDate(created_at);
 
   return (
-    <div className="rounded-card border border-surface-raised bg-surface-card p-6 shadow-sm md:p-8">
-      {/* Avatar row — mirrors Excalidraw left column: large avatar centered */}
+    <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md md:p-10">
+      {/* Avatar row — mirrors Excalidraw left column: large avatar centered - AMPLIFIED */}
       <div className="flex flex-col items-center text-center">
         <div className="relative">
           {avatar_url ? (
             <img
               src={avatar_url}
               alt={displayName}
-              className="h-24 w-24 rounded-full object-cover ring-2 ring-surface-raised md:h-[120px] md:w-[120px]"
+              className="h-32 w-32 rounded-full object-cover ring-2 ring-surface-raised md:h-[140px] md:w-[140px]"
             />
           ) : (
-            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-fog text-2xl font-bold text-ink ring-2 ring-surface-raised md:h-[120px] md:w-[120px] md:text-3xl">
+            <div className="flex h-32 w-32 items-center justify-center rounded-full bg-fog text-3xl font-bold text-ink ring-2 ring-surface-raised md:h-[140px] md:w-[140px] md:text-4xl">
               {initials}
             </div>
           )}
         </div>
 
-        <h2 className="mt-4 font-display text-2xl font-bold text-ink md:text-[28px]">
+        <h2 className="mt-6 font-display text-3xl font-bold text-ink md:text-[32px]">
           {displayName}
         </h2>
-        {email && <p className="text-sm text-storm">{email}</p>}
+        {email && <p className="mt-1 text-sm text-storm md:text-[15px]">{email}</p>}
 
         {bio && (
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-graphite">
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-graphite md:text-[15px]">
             {bio}
           </p>
         )}
       </div>
 
       {/* Meta row: Fecha de unión + Posición en leaderboard — as in wireframe bottom */}
-      <div className="mt-6 grid grid-cols-1 gap-3 border-t border-surface-raised pt-6 sm:grid-cols-2">
-        <div className="flex items-center gap-3 rounded-btn bg-surface px-4 py-3">
-          <Calendar className="h-5 w-5 shrink-0 text-storm" aria-hidden="true" />
+      <div className="mt-8 grid grid-cols-1 gap-4 border-t border-surface-raised pt-8 sm:grid-cols-2">
+        <div className="flex items-center gap-4 rounded-btn bg-surface px-5 py-4">
+          <Calendar className="h-6 w-6 shrink-0 text-storm" aria-hidden="true" />
           <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-wider text-storm">
               Fecha de unión
             </p>
-            <p className="truncate text-sm font-medium text-ink">
+            <p className="truncate text-base font-semibold text-ink">
               {joinDate ?? "—"}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-btn bg-surface px-4 py-3">
-          <Trophy className="h-5 w-5 shrink-0 text-storm" aria-hidden="true" />
+        <div className="flex items-center gap-4 rounded-btn bg-surface px-5 py-4">
+          <Trophy className="h-6 w-6 shrink-0 text-storm" aria-hidden="true" />
           <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-wider text-storm">
               Posición en leaderboard
             </p>
-            <p className="truncate text-sm font-medium text-ink">
+            <p className="truncate text-base font-semibold text-ink">
               {leaderboardRank != null ? `#${leaderboardRank}` : "—"}
             </p>
           </div>
@@ -102,14 +102,14 @@ export function ProfileHero({
 
       {/* Optional XP/Level row — kept for gamification continuity */}
       {(level !== undefined || totalXp !== undefined) && (
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           {level !== undefined && (
-            <span className="rounded-full bg-fog/20 px-3 py-1.5 text-sm font-bold text-ink">
+            <span className="rounded-full bg-fog/20 px-4 py-2 text-sm font-bold text-ink">
               Nivel {level}
             </span>
           )}
           {totalXp !== undefined && (
-            <span className="rounded-full bg-fog/20 px-3 py-1.5 text-sm font-bold text-ink">
+            <span className="rounded-full bg-fog/20 px-4 py-2 text-sm font-bold text-ink">
               {totalXp.toLocaleString("es")} XP
             </span>
           )}

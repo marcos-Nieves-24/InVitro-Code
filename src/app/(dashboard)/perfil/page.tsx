@@ -53,9 +53,6 @@ export default async function ProfilePage() {
       <div className="p-6 md:p-8">
         <div className="mx-auto max-w-[1379px]">
           <h1 className="font-display text-3xl font-bold text-ink">Mi Perfil</h1>
-          <p className="mt-1 text-sm text-storm">
-            Tu identidad, progreso y comunidad — tal como en el wireframe Excalidraw.
-          </p>
 
           {profile?.consent_status === "pending" && (
             <div className="mt-6">
@@ -76,8 +73,8 @@ export default async function ProfilePage() {
                 leaderboardRank={leaderboardRank}
               />
 
-              <div className="rounded-card border border-surface-raised bg-surface-card p-6 shadow-sm">
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-storm">
+              <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md">
+                <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-storm">
                   Foto de perfil
                 </h2>
                 <AvatarUpload
@@ -122,8 +119,8 @@ export default async function ProfilePage() {
                 />
               </div>
 
-              <div className="rounded-card border border-surface-raised bg-surface-card p-6 shadow-sm">
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-storm">
+              <div className="rounded-card border border-surface-raised bg-surface-card p-8 shadow-md">
+                <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-storm">
                   Información personal
                 </h2>
                 <ProfileForm
