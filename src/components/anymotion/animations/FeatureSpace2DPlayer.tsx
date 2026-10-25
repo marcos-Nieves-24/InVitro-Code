@@ -100,7 +100,7 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
           <g opacity={yAxisO}>
             <line x1={AXIS_X0} y1={AXIS_Y1} x2={AXIS_X0} y2={AXIS_Y0} stroke="white" strokeWidth={1.2} opacity={0.9} />
             <polygon points={`${AXIS_X0},${AXIS_Y0} ${AXIS_X0 - 4},${AXIS_Y0 + 8} ${AXIS_X0 + 4},${AXIS_Y0 + 8}`} fill="white" opacity={0.9} />
-            <text x={32} y={88} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} transform="rotate(-90 32 88)">
+            <text x={34} y={220} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} textAnchor="middle" transform="rotate(-90 34 220)">
               circularidad
             </text>
             <g fontSize={8} fontFamily="monospace" fill="white" opacity={0.35} textAnchor="middle">
