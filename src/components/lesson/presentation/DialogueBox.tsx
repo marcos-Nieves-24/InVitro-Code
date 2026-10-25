@@ -278,15 +278,15 @@ export function DialogueBox({
       role="region"
       aria-live="polite"
       aria-label={`Diálogo de ${resolvedSpeaker}`}
-      className="relative flex w-full items-start gap-3 md:gap-3.5"
+      className="relative flex w-full max-w-[720px] items-start gap-3 md:gap-3.5"
     >
       {/* Avatar */}
       <div className="shrink-0 pt-1">
         {variant === "scientist" ? <ScientistAvatar mood={mood} /> : <ConiAvatar mood={mood} />}
       </div>
 
-      {/* Bubble wrapper for tail positioning */}
-      <div className="relative min-w-0 flex-1">
+      {/* Bubble wrapper for tail positioning — recortado */}
+      <div className="relative min-w-0 flex-1 max-w-[640px]">
         {/* Tail — 45deg square clipped as triangle */}
         <div
           aria-hidden="true"

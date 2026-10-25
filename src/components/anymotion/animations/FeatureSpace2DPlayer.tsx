@@ -81,11 +81,11 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
             {p < 0.4 ? "solo area" : "area x circularidad"}
           </text>
 
-          {/* X axis (always) */}
+          {/* X axis (always) — inset para no desplazarse */}
           <g opacity={show1D}>
             <line x1={AXIS_X0} y1={AXIS_Y1} x2={AXIS_X1} y2={AXIS_Y1} stroke="white" strokeWidth={1.2} opacity={0.9} />
             <polygon points={`${AXIS_X1},${AXIS_Y1} ${AXIS_X1 - 8},${AXIS_Y1 - 4} ${AXIS_X1 - 8},${AXIS_Y1 + 4}`} fill="white" opacity={0.9} />
-            <text x={AXIS_X1 + 6} y={AXIS_Y1 + 4} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7}>
+            <text x={AXIS_X1 - 12} y={AXIS_Y1 - 8} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} textAnchor="end">
               area
             </text>
             {/* ticks */}
@@ -96,11 +96,11 @@ export function FeatureSpace2DPlayer({ caption, autoPlay = true }: FeatureSpace2
             </g>
           </g>
 
-          {/* Y axis (appears at 0.4) */}
+          {/* Y axis (appears at 0.4) — inset */}
           <g opacity={yAxisO}>
             <line x1={AXIS_X0} y1={AXIS_Y1} x2={AXIS_X0} y2={AXIS_Y0} stroke="white" strokeWidth={1.2} opacity={0.9} />
             <polygon points={`${AXIS_X0},${AXIS_Y0} ${AXIS_X0 - 4},${AXIS_Y0 + 8} ${AXIS_X0 + 4},${AXIS_Y0 + 8}`} fill="white" opacity={0.9} />
-            <text x={22} y={88} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} transform="rotate(-90 22 88)">
+            <text x={32} y={88} fill="white" fontSize={14} fontFamily="monospace" opacity={0.7} transform="rotate(-90 32 88)">
               circularidad
             </text>
             <g fontSize={8} fontFamily="monospace" fill="white" opacity={0.35} textAnchor="middle">

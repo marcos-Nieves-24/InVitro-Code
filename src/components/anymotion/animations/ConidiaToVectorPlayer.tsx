@@ -92,13 +92,13 @@ export function ConidiaToVectorPlayer({ caption, autoPlay = true }: ConidiaToVec
               </text>
             </g>
 
-            {/* Circularidad — dashed outline + label */}
+            {/* Circularidad — dashed outline + label — separada de la conidia */}
             <g opacity={circO}>
               <circle cx={170} cy={190} r={82} fill="none" stroke="#a78bfa" strokeWidth={1.3} strokeDasharray="7 5" opacity={0.9} />
-              <text x={170} y={128} textAnchor="middle" fill="#a78bfa" fontSize={14} fontFamily="monospace" fontWeight={600}>
+              <text x={170} y={108} textAnchor="middle" fill="#a78bfa" fontSize={14} fontFamily="monospace" fontWeight={600}>
                 Circularidad
               </text>
-              <text x={170} y={140} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.55}>
+              <text x={170} y={120} textAnchor="middle" fill="white" fontSize={12} fontFamily="monospace" opacity={0.55}>
                 0.87
               </text>
             </g>

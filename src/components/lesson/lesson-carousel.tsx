@@ -146,17 +146,7 @@ export function LessonCarousel({
         aria-live="polite"
         className="fixed inset-y-0 left-0 right-0 z-30 flex flex-col overflow-hidden bg-surface lg:left-[var(--sidebar-offset)]"
       >
-        {/* Top bar — the ONE slide-position indicator.
-            The dot rail (LabProgress) that used to sit here was removed: it
-            stated slide position a second time alongside the "Diapositiva N de M"
-            text below it and the rail + "N / M" pair in the footer. Position is
-            now stated exactly once (this text) plus the intra-slide "Paso x de y"
-            rendered by the reveal itself. */}
-        <div className="shrink-0 border-b border-outline-variant bg-surface-card px-4 py-2">
-          <p className="text-center font-mono text-sm uppercase tracking-widest text-storm">
-            {lessonTitle ? `${lessonTitle} ` : ""}Escena {current + 1} de {total}
-          </p>
-        </div>
+
 
         {/* Slide area — no click zones, no rails. ALL advance is via footer Continuar only.
             Scrollbar mejorado: más visible y grueso para expediciones amplias. */}
