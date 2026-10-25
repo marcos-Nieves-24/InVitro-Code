@@ -33,11 +33,11 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
             </span>
           </div>
 
-          {/* Center arrow — loop */}
+          {/* Center arrow */}
           <div className="flex flex-col items-center gap-1">
-            <div className="h-0.5 w-14 bg-gradient-to-r from-mint to-brand-500 sm:w-20" style={{ animation: "draw-line 1.8s ease-in-out infinite" }} />
+            <div className="h-0.5 w-14 bg-gradient-to-r from-mint to-brand-500 sm:w-20" style={{ animation: "draw-line 1s ease-out both" }} />
             <span className="font-mono text-sm tracking-widest text-white/50">convierte</span>
-            <div className="h-2 w-2 rotate-45 border-r-2 border-t-2 border-brand-400" style={{ animation: "fade-in 1.8s ease-in-out infinite" }} aria-hidden />
+            <div className="h-2 w-2 rotate-45 border-r-2 border-t-2 border-brand-400" style={{ animation: "fade-in 0.6s 0.9s both" }} aria-hidden />
           </div>
 
           {/* Right: matrix */}
@@ -49,7 +49,7 @@ export function MatrixPlayer({ caption }: MatrixPlayerProps) {
                     key={i}
                     className="flex h-8 w-10 items-center justify-center rounded bg-brand-500/15 font-mono text-sm font-semibold text-brand-300 sm:h-9 sm:w-12 sm:text-sm"
                     style={{
-                      animation: `matrix-cell 1.8s ease-in-out ${i * 0.12}s both infinite`,
+                      animation: `matrix-cell 1.8s ease-in-out ${i * 0.12}s both`,
                     }}
                   >
                     {val}

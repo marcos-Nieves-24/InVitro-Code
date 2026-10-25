@@ -75,7 +75,7 @@ function usePrefersReducedMotion(): boolean {
 export function useAnymotionTimeline({
   duration,
   autoPlay = false,
-  loop = true,
+  loop = false,
 }: AnymotionTimelineOptions): AnymotionTimeline {
   const prefersReducedMotion = usePrefersReducedMotion();
   // When the user prefers reduced motion, never auto-play: the timeline rests

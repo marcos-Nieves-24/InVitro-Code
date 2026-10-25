@@ -335,28 +335,7 @@ export function DialogueBox({
               <span />
             )}
 
-            {hasLines && !isLastLine ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
-              >
-                Usa Continuar → del pie
-              </span>
-            ) : hasLines && isLastLine && !(showContinueResolved && onNext) ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
-              >
-                Usa Continuar → del pie
-              </span>
-            ) : showContinueResolved && onNext ? (
-              <span
-                aria-hidden="true"
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600"
-              >
-                Usa Continuar → del pie
-              </span>
-            ) : null}
+            {null}
           </div>
         </div>
       </div>

@@ -499,7 +499,7 @@ export function RevealSequence({
         {/* Indicator area — single Continuar lives in the footer. This block only
             shows Paso x de y + blocked hint + helper text; no buttons. */}
         {hasMore ? (
-          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
+          <div className="mt-4 flex flex-col items-center gap-2 pt-2 pb-1">
             {total > 1 && (
               <p className={STEP_LABEL}>
                 Paso {revealedCount} de {total}
@@ -510,7 +510,7 @@ export function RevealSequence({
                 role="status"
                 className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-brand-200 bg-white/90 px-4 py-2 text-xs font-medium text-storm shadow-sm backdrop-blur"
               >
-                <span>Tip: usa Continuar y Atrás del pie para navegar</span>
+                <span>Tip: avanza paso a paso</span>
                 <button
                   type="button"
                   onClick={(e) => {
@@ -531,17 +531,10 @@ export function RevealSequence({
               >
                 Responde correctamente para continuar
               </p>
-            ) : (
-              <p
-                aria-hidden="true"
-                className="text-xs font-medium text-storm"
-              >
-                Usa Continuar → del pie
-              </p>
-            )}
+            ) : null}
           </div>
         ) : total > 1 ? (
-          <div className="sticky bottom-0 z-10 flex flex-col items-center gap-2 bg-surface/95 pt-2 pb-3 backdrop-blur-sm">
+          <div className="mt-4 flex flex-col items-center gap-2 pt-2 pb-1">
             <p className={STEP_LABEL}>
               Paso {revealedCount} de {total}
             </p>

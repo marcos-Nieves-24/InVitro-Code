@@ -15,7 +15,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section className="px-3 py-2 sm:px-5 md:py-2.5 lg:px-6 lg:py-3.5">
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="w-full">
         {/* Eyebrow */}
         <div className="eyebrow mb-1.5 flex items-center gap-2 text-xs font-semibold text-brand-600">
           <span>{String(number).padStart(2, "0")}</span>

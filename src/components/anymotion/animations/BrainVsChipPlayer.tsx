@@ -27,15 +27,15 @@ export function BrainVsChipPlayer({ caption }: BrainVsChipPlayerProps) {
             </span>
           </div>
 
-          {/* Center: animated connection — loop */}
+          {/* Center: animated connection */}
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center gap-1">
-              <div className="h-0.5 w-14 origin-left bg-gradient-to-r from-mint to-brand-500 sm:w-20" style={{ animation: "draw-line 1.8s ease-in-out infinite" }} />
-              <div className="h-2 w-2 rotate-45 border-r-2 border-t-2 border-brand-400" style={{ animation: "fade-in 1.8s ease-in-out infinite" }} aria-hidden />
+              <div className="h-0.5 w-14 origin-left bg-gradient-to-r from-mint to-brand-500 sm:w-20" style={{ animation: "draw-line 1s ease-out both" }} />
+              <div className="h-2 w-2 rotate-45 border-r-2 border-t-2 border-brand-400" style={{ animation: "fade-in 0.6s 0.9s both" }} aria-hidden />
             </div>
             <div className="flex items-center gap-1 opacity-60">
-              <div className="h-2 w-2 rotate-45 border-b-2 border-l-2 border-white/40" style={{ animation: "fade-in 1.8s ease-in-out infinite" }} aria-hidden />
-              <div className="h-px w-14 origin-left bg-gradient-to-l from-white/30 to-transparent sm:w-20" style={{ animation: "draw-line 1.8s ease-in-out 0.3s infinite" }} />
+              <div className="h-2 w-2 rotate-45 border-b-2 border-l-2 border-white/40" style={{ animation: "fade-in 0.6s 0.9s both" }} aria-hidden />
+              <div className="h-px w-14 origin-left bg-gradient-to-l from-white/30 to-transparent sm:w-20" style={{ animation: "draw-line 1s 0.3s ease-out both" }} />
             </div>
             <span className="font-mono text-sm text-white/40">vs</span>
           </div>
