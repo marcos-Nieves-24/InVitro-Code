@@ -15,13 +15,13 @@ d) El accuracy siempre mejora
 
 **3. ¿Cuál es la diferencia entre clasificación y regresión?**
 a) Clasificación es más precisa que regresión
-b) Clasificación predice categorías discretas; regresión predice valores continuos
+b) Clasificación predice categorías discretas, regresión predice valores continuos
 c) No hay diferencia, son sinónimos
 d) Regresión solo funciona con datos biológicos
 
 **4. ¿Qué diferencia al subajuste (underfitting) del sobreajuste (overfitting)?**
-a) En subajuste ambos errores son altos; en sobreajuste el error train es bajo pero el test es alto
-b) En subajuste el error train es bajo; en sobreajuste ambos errores son altos
+a) En subajuste ambos errores son altos, en sobreajuste el error train es bajo pero el test es alto
+b) En subajuste el error train es bajo, en sobreajuste ambos errores son altos
 c) Son lo mismo visto desde distintos ángulos
 d) El subajuste solo ocurre con KNN, el sobreajuste solo con regresión
 
@@ -31,11 +31,11 @@ b) Porque el modelo funciona bien en datos de entrenamiento pero mal en datos nu
 c) Porque usa demasiada memoria RAM
 d) Porque solo funciona con redes neuronales
 
----
+
 ## Clave de respuestas
 
-1. **b)** La frontera separa clases. En 2D es una línea; en 3D es un plano; en más dimensiones es un hiperplano.
+1. **b)** La frontera separa clases. En 2D es una línea, en 3D es un plano, en más dimensiones es un hiperplano.
 2. **b)** k grande suaviza la frontera pero puede perder detalle local. Es un balance.
-3. **b)** Clasificación → categorías (*Aspergillus*/*Penicillium*). Regresión → números continuos (concentración, peso, temperatura).
+3. **b)** Clasificación  categorías (*Aspergillus*/*Penicillium*). Regresión  números continuos (concentración, peso, temperatura).
 4. **a)** Subajuste: el modelo es demasiado simple (ambos errores altos). Sobreajuste: el modelo es demasiado complejo (train bajo, test alto).
 5. **b)** El modelo memoriza los datos de entrenamiento y no generaliza. Es el problema más común en ML.

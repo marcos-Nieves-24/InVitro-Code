@@ -2,7 +2,7 @@
 
 ## Objetivos
 
-- Cargar el dataset Breast Cancer Wisconsin usando scikit-learn
+- Cargar el dataset Breast Cancer Wisconsin usando scikit learn
 - Analizar la correlación entre features para detectar redundancia
 - Identificar y justificar las 3 features más discriminativas entre maligno y benigno
 - Comunicar los hallazgos con visualizaciones y argumentos escritos
@@ -25,12 +25,12 @@ feature_names = data.feature_names
 4. Separando por clase (maligno vs benigno), calcula la **diferencia relativa de medias** por feature (como en el laboratorio) y arma un ranking de discriminación. Elige las **3 features más discriminativas**.
 
 5. Crea las siguientes visualizaciones:
-   - **Heatmap de correlación**: matriz 30×30 con barra de color
-   - **Scatter plot 2D**: las 2 features más discriminativas, coloreadas por clase
-   - **Histogramas comparativos**: para las 3 features elegidas, superponiendo maligno vs benigno
+   **Heatmap de correlación**: matriz 30×30 con barra de color
+   **Scatter plot 2D**: las 2 features más discriminativas, coloreadas por clase
+   **Histogramas comparativos**: para las 3 features elegidas, superponiendo maligno vs benigno
 
 6. Responde en una celda de markdown:
-   - ¿Cómo elegiste las 3 features más discriminativas? Muestra el criterio numérico
-   - ¿Qué revela la matriz de correlación sobre la redundancia del dataset?
-   - ¿Por qué es importante explorar y seleccionar features antes de entrenar un modelo de IA?
+   ¿Cómo elegiste las 3 features más discriminativas? Muestra el criterio numérico
+   ¿Qué revela la matriz de correlación sobre la redundancia del dataset?
+   ¿Por qué es importante explorar y seleccionar features antes de entrenar un modelo de IA?
 
