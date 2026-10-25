@@ -207,16 +207,6 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
   ]}
 />
 
-<div className="rounded-lg border border-blue-200 bg-blue-50/80 p-3 text-xs text-gray-700">
-<strong>En el laboratorio interactivo:</strong> Vas a poder variar <em>k</em> desde 1 hasta 15 sobre 569 biopsias reales y hacer clic en cualquier sector del gráfico para clasificar una muestra hipotética.
-</div>
-
-</RevealSequence>
-
-</Section>
-
-<Section number={7} title="Laboratorio: KNN en acción" eyebrow="ENTRENADOR">
-<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Objetivo:</strong> Modifica el valor de <em>k</em> con el slider y haz clic en el plano para posicionar un punto de prueba. Observa la votación de los vecinos más cercanos, la frontera sombreada y la curva de accuracy vs <em>k</em>.
 </div>
@@ -225,7 +215,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 </RevealSequence>
 </Section>
 
-<Section number={8} title="Clasificación vs regresión" eyebrow="CONCEPTO">
+<Section number={7} title="Clasificación vs regresión" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -280,7 +270,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 
 </Section>
 
-<Section number={9} title="Laboratorio: Regresión lineal" eyebrow="ENTRENADOR">
+<Section number={8} title="Laboratorio: Regresión lineal" eyebrow="ENTRENADOR">
 <RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Objetivo:</strong> Ajusta la pendiente y el intercepto con los sliders para minimizar la distancia a los 569 puntos reales del dataset de biopsias. Pulsa <em>Calcular mejor recta</em> para obtener la solución por mínimos cuadrados.
@@ -290,7 +280,7 @@ No todos los problemas de la naturaleza se pueden segmentar con una línea recta
 </RevealSequence>
 </Section>
 
-<Section number={10} title="Mínimos cuadrados y dispersión biológica" eyebrow="CONCEPTO">
+<Section number={9} title="Mínimos cuadrados y dispersión biológica" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -321,7 +311,7 @@ En biología experimental, un coeficiente $R^2$ modesto no implica un fallo del 
 
 </Section>
 
-<Section number={11} title="El peligro del sobreajuste (overfitting)" eyebrow="CONCEPTO">
+<Section number={10} title="El peligro del sobreajuste (overfitting)" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -355,12 +345,6 @@ En biología experimental, un coeficiente $R^2$ modesto no implica un fallo del 
 El objetivo del aprendizaje automático no es conseguir un error nulo memorizando los datos ya observados, sino maximizar la exactitud ante datos **nuevos y no vistos**.
 </ConceptCard>
 
-</RevealSequence>
-
-</Section>
-
-<Section number={12} title="Laboratorio: Grados de ajuste polinomial" eyebrow="INTERACTIVA">
-<RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Explora:</strong> Arrastra el grado del polinomio y observa la brecha creciente entre el error en los datos de entrenamiento (azul) y el error en las muestras de validación (rojo).
 </div>
@@ -369,7 +353,7 @@ El objetivo del aprendizaje automático no es conseguir un error nulo memorizand
 </RevealSequence>
 </Section>
 
-<Section number={13} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
+<Section number={11} title="Tres regímenes de complejidad" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -396,7 +380,7 @@ El equilibrio entre sesgo y varianza es el principio rector del machine learning
 
 </Section>
 
-<Section number={14} title="Analogía de laboratorio y defensas" eyebrow="CONCEPTO">
+<Section number={12} title="Analogía de laboratorio y defensas" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -433,7 +417,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
 
 </Section>
 
-<Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
@@ -513,7 +497,7 @@ Un modelo sobreajustado es idéntico a un protocolo de PCR que solo amplifica en
 
 </Section>
 
-<Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 <RevealSequence showHistory>
 <MascotMessage mood="celebrating">
 ¡Tres algoritmos dominados, el dilema del sobreajuste clarificado y las salvaguardas metodológicas listas! Ya entiendes los engranajes del aprendizaje automático.

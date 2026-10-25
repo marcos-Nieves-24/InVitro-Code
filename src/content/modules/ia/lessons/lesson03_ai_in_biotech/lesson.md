@@ -86,12 +86,6 @@ El cuello de botella experimental: Mientras que secuenciar ADN o aminoácidos es
 </div>
 
 <InteractiveFrame src="/interactives/demo_07_protein_3d.html" height="480px" caption="Visualización interactiva de coordenadas reales del Protein Data Bank (PDB)" />
-</RevealSequence>
-</Section>
-
-<Section number={4} title="De coordenadas 3D a regresión espacial" eyebrow="CONCEPTO">
-
-<RevealSequence showHistory>
 
 <ChoiceQuestion
   question="Al rotar la proteína en 3D, ¿cómo distingues hélices alfa de regiones desordenadas (loops)?"
@@ -113,10 +107,9 @@ Cada átomo en el visualizador posee coordenadas continuas $(x, y, z)$ en ángst
 </ConceptCard>
 
 </RevealSequence>
-
 </Section>
 
-<Section number={5} title="AlphaFold: El hito de los 50 años" eyebrow="CONCEPTO">
+<Section number={4} title="AlphaFold: El hito de los 50 años" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -153,7 +146,7 @@ El **RMSD (Root Mean Square Deviation)** mide la distancia cuadrática media ent
 
 </Section>
 
-<Section number={6} title="AlphaFold: La arquitectura por dentro" eyebrow="CONCEPTO">
+<Section number={5} title="AlphaFold: La arquitectura por dentro" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -194,7 +187,7 @@ La gran innovación fue tratar el plegamiento como **reconocimiento de patrones 
 
 </Section>
 
-<Section number={7} title="AlphaFold: Impacto y limitaciones" eyebrow="CONCEPTO">
+<Section number={6} title="AlphaFold: Impacto y limitaciones" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -221,7 +214,7 @@ Las proteínas no son monumentos de piedra: oscilan, respiran conformacionalment
 
 </Section>
 
-<Section number={8} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
+<Section number={7} title="Pipeline de ML en biotecnología" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -245,7 +238,7 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
 
 </Section>
 
-<Section number={9} title="Laboratorio: Simulación de pipeline" eyebrow="INTERACTIVA">
+<Section number={8} title="Laboratorio: Simulación de pipeline" eyebrow="INTERACTIVA">
 <RevealSequence showHistory>
 <div className="mb-2 text-xs text-gray-500">
 <strong>Explora:</strong> Modifica los parámetros de entrada y observa cómo las decisiones de calibración y preprocesamiento repercuten en el rendimiento final del modelo.
@@ -255,7 +248,7 @@ Un **pipeline de machine learning** es la cadena secuencial estandarizada que tr
 </RevealSequence>
 </Section>
 
-<Section number={10} title="Calibración y prevención de contaminación" eyebrow="CONCEPTO">
+<Section number={9} title="Calibración y prevención de contaminación" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -297,7 +290,7 @@ El error más común en bioinformática es el **data leakage** (fuga de datos): 
 
 </Section>
 
-<Section number={11} title="Matriz de confusión: Anatomía de los 4 cuadrantes" eyebrow="CONCEPTO">
+<Section number={10} title="Matriz de confusión: Anatomía de los 4 cuadrantes" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -371,7 +364,7 @@ Total aciertos: $35 + 50 = 85$ conidias correctas de 100 ($85\%$ accuracy). Sin 
 
 </Section>
 
-<Section number={12} title="Métricas clínicas: Precisión, Recall y F1" eyebrow="CONCEPTO">
+<Section number={11} title="Métricas clínicas: Precisión, Recall y F1" eyebrow="CONCEPTO">
 
 <RevealSequence showHistory>
 
@@ -412,7 +405,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
 
 </Section>
 
-<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={12} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
@@ -492,7 +485,7 @@ $$\text{F1} = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Preci
 
 </Section>
 
-<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={13} title="Para la próxima lección" eyebrow="CIERRE">
 <RevealSequence showHistory>
 <MascotMessage mood="celebrating">
 ¡Estructuras 3D conquistadas, pipelines dominados y matrices de confusión interpretadas con rigor clínico! Estás a las puertas de los casos del mundo real.

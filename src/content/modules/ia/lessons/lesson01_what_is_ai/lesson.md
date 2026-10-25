@@ -58,14 +58,6 @@ Tradicionalmente, esto requiere un ojo entrenado y tiempo. ¿Y si una computador
 **Intuición**: Cuando ves una foto y reconoces que es un gato, tu cerebro está haciendo un procesamiento increíblemente complejo en milisegundos. La IA intenta que las computadoras hagan ese mismo tipo de procesamiento.
 </ConceptCard>
 
-</RevealSequence>
-
-</Section>
-
-<Section number={3} title="IA no piensa" eyebrow="CONCEPTO">
-
-<RevealSequence>
-
 <ConceptCard variant="key-idea">
 La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento real. **Procesa datos numéricos y encuentra patrones estadísticos.** Eso es todo. Y es suficiente para ser extraordinariamente útil.
 </ConceptCard>
@@ -74,7 +66,7 @@ La IA no "piensa" como nosotros. No tiene conciencia, emociones ni entendimiento
 
 </Section>
 
-<Section number={4} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
+<Section number={3} title="Features: el idioma de la máquina" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -105,7 +97,7 @@ Un micólogo entrenado reconoce estas diferencias visualmente. Pero una computad
 
 </Section>
 
-<Section number={5} title="De la imagen a los números" eyebrow="CONCEPTO">
+<Section number={4} title="De la imagen al vector" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -118,17 +110,9 @@ En IA, llamamos **features** (características o atributos) a las propiedades me
     { id: "area", label: "Área (µm²)", detail: "Qué tan grande es la conidia" },
     { id: "circularidad", label: "Circularidad (0 a 1)", detail: "Qué tan redonda es (1 = círculo perfecto)" },
     { id: "textura", label: "Textura (índice)", detail: "Qué tan rugosa es la superficie" },
-    { id: "intensidad", label: "Intensidad (0-255)", detail: "Qué tan clara u oscura es al microscopio" },
+    { id: "intensidad", label: "Intensidad (0 a 255)", detail: "Qué tan clara u oscura es al microscopio" },
   ]}
 />
-
-</RevealSequence>
-
-</Section>
-
-<Section number={6} title="Cada conidia es un vector" eyebrow="CONCEPTO">
-
-<RevealSequence>
 
 <ConidiaToVector caption="De imagen a números: así habla la máquina" />
 
@@ -140,7 +124,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 </Section>
 
-<Section number={7} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
+<Section number={5} title="Comprueba: ¿qué es una feature?" eyebrow="EVALUACIÓN">
 
 <RevealSequence>
 
@@ -163,7 +147,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 </Section>
 
-<Section number={8} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
+<Section number={6} title="Diagnóstico visual con datos reales" eyebrow="INTERACTIVA">
 
 <RevealSequence>
 
@@ -194,7 +178,7 @@ Cada conidia se convierte en un **vector de números**. La IA no "ve" imágenes 
 
 </Section>
 
-<Section number={9} title="Dos features > una" eyebrow="CONCEPTO">
+<Section number={7} title="Dos features > una" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -218,7 +202,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={10} title="Tú como clasificador" eyebrow="INTERACTIVA">
+<Section number={8} title="Tú como clasificador" eyebrow="INTERACTIVA">
 
 <RevealSequence>
 
@@ -249,7 +233,7 @@ Cada característica que agregamos es una nueva dimensión que ayuda a separar l
 
 </Section>
 
-<Section number={11} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
+<Section number={9} title="Los humanos clasifican por patrones" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -270,7 +254,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={12} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
+<Section number={10} title="Reglas fijas vs ML" eyebrow="INTERACTIVA">
 
 <RevealSequence>
 
@@ -301,7 +285,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={13} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
+<Section number={11} title="¿Por qué fallan las reglas fijas?" eyebrow="CONCEPTO">
 
 <RevealSequence>
 
@@ -322,7 +306,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={14} title="Conceptos clave" eyebrow="CIERRE">
+<Section number={12} title="Conceptos clave" eyebrow="CIERRE">
 
 <RevealSequence>
 
@@ -350,7 +334,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={15} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
+<Section number={13} title="Checkpoint de conceptos" eyebrow="EVALUACIÓN">
 
 <RevealSequence blockOnQuiz>
 
@@ -405,7 +389,7 @@ Los humanos clasificamos por intuición visual. La IA clasifica con matemática.
 
 </Section>
 
-<Section number={16} title="Para la próxima lección" eyebrow="CIERRE">
+<Section number={14} title="Para la próxima lección" eyebrow="CIERRE">
 
 <RevealSequence>
 
