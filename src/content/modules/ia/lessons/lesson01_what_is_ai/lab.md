@@ -59,7 +59,7 @@ mal_mean = X[y == 0].mean(axis=0)
 ben_mean = X[y == 1].mean(axis=0)
 differences = []
 for i, name in enumerate(feature_names):
-    pct = abs(mal_mean[i] ben_mean[i]) / ben_mean[i] * 100
+    pct = abs(mal_mean[i] - ben_mean[i]) / ben_mean[i] * 100
     differences.append((name, pct))
 differences.sort(key=lambda t: t[1], reverse=True)
 print("\nTop 4 features con mayor diferencia relativa:")
