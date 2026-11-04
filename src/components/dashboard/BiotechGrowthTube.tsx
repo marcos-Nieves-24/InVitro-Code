@@ -69,7 +69,7 @@ export function BiotechGrowthTube({
         @keyframes bgt-complete { 0%{filter:brightness(1)} 45%{filter:brightness(1.38) drop-shadow(0 0 13px #67f7ff)} 100%{filter:brightness(1)} }
         @media (prefers-reduced-motion: reduce) { .bgt-root * { animation:none!important; transition:none!important; } }
       `}</style>
-      <svg className="bgt-root" viewBox="0 100 420 420" role="img" aria-labelledby={`bgt-title-${id} bgt-desc-${id}`}>
+      <svg className="bgt-root" viewBox="0 60 420 460" role="img" aria-labelledby={`bgt-title-${id} bgt-desc-${id}`}>
         <title id={`bgt-title-${id}`}>{label}</title>
         <desc id={`bgt-desc-${id}`}>A glass laboratory tube with a cyan nutrient solution and a seedling whose growth reflects experience progress.</desc>
         <defs>
