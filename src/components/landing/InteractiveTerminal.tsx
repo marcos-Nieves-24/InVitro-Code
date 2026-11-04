@@ -185,9 +185,12 @@ export function InteractiveTerminal() {
   }, [phase]);
 
   // Auto-scroll terminal body to the bottom as content is typed/output shown.
+  // Only when content actually overflows: otherwise a short transcript plus
+  // min-height leaves a black void (mobile start looked broken).
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    const el = scrollRef.current;
+    if (el && el.scrollHeight > el.clientHeight + 20) {
+      el.scrollTop = el.scrollHeight;
     }
   }, [displayedLines, currentLine, outputDisplayed]);
 
@@ -236,10 +239,10 @@ export function InteractiveTerminal() {
       </div>
 
       {/* Terminal body — code OR dendrogram */}
-      <div ref={scrollRef} className="relative min-h-[460px] overflow-y-auto p-5 font-mono text-sm text-white/80">
+      <div ref={scrollRef} className="relative min-h-[320px] overflow-y-auto p-5 font-mono text-sm text-white/80 md:min-h-[460px]">
         {/* Code output (typing + output phases) */}
         <div
-          className={`transition-opacity duration-300 ${
+          className={`overflow-x-auto pb-2 transition-opacity duration-300 ${
             phase === "dendrogram" ? "pointer-events-none absolute inset-0 opacity-0" : ""
           }`}
         >
