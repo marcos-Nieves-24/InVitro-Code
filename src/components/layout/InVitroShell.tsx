@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { Flame, LogOut, Menu, Search, X } from "lucide-react";
+import { Flame, LogOut, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { UserAvatar, UserAvatarPlaceholder } from "@/components/ui/UserAvatar";
 import { useAvatar } from "@/lib/avatar/AvatarContext";
@@ -32,16 +32,39 @@ export function InVitroShell({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { signOut } = useClerk();
 
+  // Effective color mode. SSR-safe default is light (matches base tokens);
+  // resolved from the profile prop on mount and whenever it changes.
+  // An explicit toggle always wins and is persisted to the profile.
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
   useEffect(() => {
-    if (!theme) return;
-    document.documentElement.classList.remove("light", "dark");
-    if (theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.classList.add(prefersDark ? "dark" : "light");
-    } else {
-      document.documentElement.classList.add(theme);
+    if (theme === "dark") setMode("dark");
+    else if (theme === "light") setMode("light");
+    else if (typeof window !== "undefined") {
+      setMode(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     }
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(mode);
+  }, [mode]);
+
+  const toggleTheme = useCallback(async () => {
+    const next = mode === "dark" ? "light" : "dark";
+    const prev = mode;
+    setMode(next);
+    try {
+      const res = await fetch("/api/account", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ theme: next }),
+      });
+      if (!res.ok) setMode(prev);
+    } catch {
+      setMode(prev);
+    }
+  }, [mode]);
 
   const { avatarUrl: contextAvatarUrl, isLoading: avatarLoading } = useAvatar();
   // Use context avatar if available, otherwise fallback to prop (for SSR)
@@ -130,6 +153,15 @@ export function InVitroShell({
                 <p className="text-xs font-bold text-ink">{userName}</p>
               </div>
             </Link>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={mode === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              title={mode === "dark" ? "Modo claro" : "Modo oscuro"}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-storm transition-colors hover:bg-surface-raised hover:text-ink"
+            >
+              {mode === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <button
               onClick={() => signOut()}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-storm transition-colors hover:bg-red-500/10 hover:text-red-500"

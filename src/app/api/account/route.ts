@@ -45,3 +45,24 @@ export async function DELETE() {
   console.log(`[account:DELETE] purged ${userId}`);
   return NextResponse.json({ deleted: true }, { status: 200 });
 }
+
+// PATCH /api/account — update own profile preferences (theme only).
+// Auth via Clerk auth(); service-role update scoped to the caller row.
+export async function PATCH(request: Request) {
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+  const theme = (body as { theme?: unknown } | null)?.theme;
+  if (theme !== "light" && theme !== "dark" && theme !== "system") {
+    return NextResponse.json({ error: "Invalid theme" }, { status: 400 });
+  }
+  const admin = createAdminClient();
+  const { error } = await admin.from("profiles").update({ theme }).eq("id", userId);
+  if (error) return NextResponse.json({ error: "Update failed" }, { status: 500 });
+  return NextResponse.json({ theme });
+}

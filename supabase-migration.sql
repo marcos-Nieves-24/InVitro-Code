@@ -43,6 +43,10 @@ END $$;
 -- New accounts start in light mode (idempotent; existing rows keep their value)
 ALTER TABLE profiles ALTER COLUMN theme SET DEFAULT 'light';
 
+-- Opcion A: existing undecided accounts (system/NULL) adopt light.
+-- Users who explicitly chose dark keep their choice. Safe to re-run.
+UPDATE profiles SET theme = 'light' WHERE theme IS NULL OR theme = 'system';
+
 -- Admin check function
 CREATE OR REPLACE FUNCTION is_admin(user_id TEXT)
 RETURNS BOOLEAN AS $$
