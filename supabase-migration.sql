@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS profiles (
   role TEXT DEFAULT 'user',
   avatar_url TEXT,
   bio TEXT,
-  theme TEXT DEFAULT 'system' CHECK (theme IN ('light','dark','system')),
+  theme TEXT DEFAULT 'light' CHECK (theme IN ('light','dark','system')),
   notification_prefs JSONB DEFAULT '{"email": true, "streak": true}'::jsonb,
   is_banned BOOLEAN DEFAULT false,
   last_active_at TIMESTAMPTZ,
@@ -39,6 +39,9 @@ BEGIN
     ALTER TABLE profiles ADD CONSTRAINT profiles_theme_check CHECK (theme IN ('light','dark','system'));
   END IF;
 END $$;
+
+-- New accounts start in light mode (idempotent; existing rows keep their value)
+ALTER TABLE profiles ALTER COLUMN theme SET DEFAULT 'light';
 
 -- Admin check function
 CREATE OR REPLACE FUNCTION is_admin(user_id TEXT)

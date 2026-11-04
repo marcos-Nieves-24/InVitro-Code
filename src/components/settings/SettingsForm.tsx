@@ -18,7 +18,7 @@ export function SettingsForm({
   onSave,
 }: SettingsFormProps) {
   const [formData, setFormData] = useState({
-    theme: theme || "system",
+    theme: theme || "light",
     notification_prefs: {
       email: notification_prefs?.email ?? true,
       streak: notification_prefs?.streak ?? true,
