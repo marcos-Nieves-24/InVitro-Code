@@ -20,6 +20,8 @@ export default function SignUpPage() {
       >
         <AuthForm mode="signup" onStatusChange={setStatus} />
         <SocialButtons />
+        {/* Bot protection: Clerk Smart CAPTCHA mounts here (custom flow) */}
+        <div id="clerk-captcha" />
       </AuthCard>
     </AuthShell>
   );
