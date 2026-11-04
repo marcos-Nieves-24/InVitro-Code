@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { UserAvatar, UserAvatarPlaceholder } from "@/components/ui/UserAvatar";
 import { useAvatar } from "@/lib/avatar/AvatarContext";
 
@@ -20,6 +21,17 @@ interface HeaderUser {
 export function Header({ user }: { user?: HeaderUser | null }) {
   const [scrolled, setScrolled] = useState(false);
   const { avatarUrl: contextAvatarUrl, isLoading: avatarLoading } = useAvatar();
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -111,7 +123,64 @@ export function Header({ user }: { user?: HeaderUser | null }) {
             </a>
           )}
         </nav>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-expanded={mobileOpen}
+          aria-controls="landing-mobile-nav"
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden ${
+            scrolled ? "text-ink hover:bg-surface-raised" : "text-white hover:bg-white/10"
+          }`}
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+
+      {mobileOpen && (
+        <nav
+          id="landing-mobile-nav"
+          aria-label="Navegación móvil"
+          className={`mx-4 mb-4 rounded-2xl border p-2 shadow-xl md:hidden ${
+            scrolled
+              ? "border-surface-raised bg-surface-card/95 backdrop-blur-sm"
+              : "border-white/10 bg-[#111439]/95 backdrop-blur-sm"
+          }`}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
+                scrolled
+                  ? "text-slate hover:bg-surface-raised hover:text-ink"
+                  : "text-white/80 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+          {isAuthed ? (
+            <a
+              href="/dashboard"
+              onClick={() => setMobileOpen(false)}
+              className="mt-1 block rounded-xl bg-mint px-4 py-3 text-center text-base font-semibold text-ink"
+            >
+              Ir al Dashboard
+            </a>
+          ) : (
+            <a
+              href="/sign-up"
+              onClick={() => setMobileOpen(false)}
+              className="mt-1 block rounded-xl bg-mint px-4 py-3 text-center text-base font-semibold text-ink"
+            >
+              Comenzar
+            </a>
+          )}
+        </nav>
+      )}
     </header>
   );
 }

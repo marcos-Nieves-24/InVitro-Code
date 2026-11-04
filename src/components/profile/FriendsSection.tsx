@@ -24,16 +24,27 @@ export function FriendsSection() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    try {
-      const res = await fetch("/api/friend-request?type=friends");
-      const data = await res.json();
-      if (res.ok) setFriends(data.friends ?? []);
-    } catch {}
-    try {
-      const res2 = await fetch("/api/friend-request?type=pending_received");
-      const data2 = await res2.json();
-      if (res2.ok) setPending(data2.list ?? []);
-    } catch {}
+    // Parallel with timeout: sequential cold-start roundtrips kept the
+    // skeleton on screen for seconds on mobile networks.
+    const get = async (url: string) => {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
+      try {
+        const res = await fetch(url, { signal: ctrl.signal });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch {
+        return null;
+      } finally {
+        clearTimeout(t);
+      }
+    };
+    const [data, data2] = await Promise.all([
+      get("/api/friend-request?type=friends"),
+      get("/api/friend-request?type=pending_received"),
+    ]);
+    setFriends(data?.friends ?? []);
+    setPending(data2?.list ?? []);
     setLoading(false);
   };
 

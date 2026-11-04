@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { InVitroShell } from "@/components/layout/InVitroShell";
 import { InVitroTopBar } from "@/components/layout/InVitroTopBar";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { LevelMapScroller } from "@/components/levels/LevelMapScroller";
 import { calcLevel, rankIndexForXp, RANK_THRESHOLDS } from "@/lib/gamification/utils";
 import { getTotalXp, getDisplayName } from "@/lib/gamification/user";
 import {
@@ -150,7 +151,7 @@ export default async function NivelesPage() {
         </header>
 
         {/* Horizontal timeline */}
-        <section className="relative mb-16 overflow-x-auto px-4 scroll-hide">
+        <LevelMapScroller currentIndex={currentRankIndex}>
           <div className="timeline-connector absolute left-0 top-1/2 z-0 h-[2px] w-full -translate-y-1/2" />
           <div
             className="absolute left-0 top-1/2 z-0 h-[2px] -translate-y-1/2 bg-mint transition-all"
@@ -165,7 +166,8 @@ export default async function NivelesPage() {
               return (
                 <div
                   key={rank.name}
-                  className={`flex w-40 flex-col items-center gap-4 ${
+                  data-rank-index={i}
+                  className={`flex w-40 snap-start flex-col items-center gap-4 ${
                     locked ? "opacity-50 grayscale transition-all hover:grayscale-0" : ""
                   } ${current ? "w-48" : ""}`}
                 >
@@ -241,7 +243,7 @@ export default async function NivelesPage() {
               );
             })}
           </div>
-        </section>
+        </LevelMapScroller>
 
         {/* Current level detail + rewards */}
         <div className="grid grid-cols-12 gap-6">
