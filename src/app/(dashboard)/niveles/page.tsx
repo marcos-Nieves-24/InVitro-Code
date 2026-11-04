@@ -167,7 +167,7 @@ export default async function NivelesPage() {
                 <div
                   key={rank.name}
                   data-rank-index={i}
-                  className={`flex w-40 snap-start flex-col items-center gap-4 ${
+                  className={`flex w-40 flex-col items-center gap-4 ${
                     locked ? "opacity-50 grayscale transition-all hover:grayscale-0" : ""
                   } ${current ? "w-48" : ""}`}
                 >
