@@ -109,12 +109,12 @@ export function ProgressCharts({ timeline, modules, daily, overallProgress }: Pr
 
   return (
     <div className="glass-card flex min-h-[380px] flex-col rounded-2xl p-6">
-      <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-sm font-bold uppercase tracking-wider text-storm">Tu Evolución</h3>
           <p className="mt-1 text-xs text-storm">Explora tu ritmo, distribución y constancia</p>
         </div>
-        <div role="tablist" aria-label="Selector de gráfica" className="flex gap-2">
+        <div role="tablist" aria-label="Selector de gráfica" className="flex max-w-full flex-wrap gap-2">
           <button
             role="tab"
             aria-selected={active === "ritmo"}

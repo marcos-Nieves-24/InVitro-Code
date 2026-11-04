@@ -147,7 +147,7 @@ function HeroComic({ startHref, gender }: HeroBannerProps) {
       </div>
 
       <div className="relative z-[2] flex items-end gap-0 p-8 pb-0 lg:p-12 lg:pb-0">
-        <div className="relative z-[1] flex w-[420px] shrink-0 flex-col gap-4 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
+        <div className="relative z-[1] flex w-full max-w-[420px] min-w-0 flex-col gap-4 rounded-3xl border border-[var(--color-comic-border)] bg-[var(--color-comic-bg)]/85 p-8 backdrop-blur-sm">
           <div className="font-mono rounded-lg bg-black/80 border border-white/10 p-4">
             <TypingText
               text="> Bienvenido, investigador"

@@ -130,7 +130,7 @@ export async function DashboardContainer() {
           <section className="scroll-mt-20">
             <div className="grid gap-6 md:grid-cols-2 items-stretch">
               <div className="glass-card flex h-full min-h-0 flex-col p-5 md:p-6">
-                <div className="flex flex-row items-center justify-between gap-6">
+                <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
                   <div>
                     <div className="mb-4 flex items-center">
                       <h3 className="font-display text-2xl font-bold">Tu Progreso</h3>
